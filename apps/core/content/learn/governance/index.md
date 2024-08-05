@@ -77,6 +77,6 @@ To create a governance proposal:
 
 4. Wait for the voting period and participate in voting. As well, ask the
 
-For a detailed guide on creating a governance proposal programmatically, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/rewards-vault-tutorial).
+At the time of this writing, the Bera DAO is not using a frontend service like Tally to manage our Governance process on-chain. Everything is happening programmatically. You can see a detailed guide on creating a governance proposal programmatically, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/rewards-vault-tutorial).
 
 > Note: The ability to request BGT delegation from the Berachain team is primarily for testnet purposes. On mainnet, acquiring sufficient BGT will be through active participation in the ecosystem.
