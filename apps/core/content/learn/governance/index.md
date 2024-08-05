@@ -80,11 +80,3 @@ To create a governance proposal:
 For a detailed guide on creating a governance proposal programmatically, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/rewards-vault-tutorial).
 
 > Note: The ability to request BGT delegation from the Berachain team is primarily for testnet purposes. On mainnet, acquiring sufficient BGT will be through active participation in the ecosystem.
-
-## Governance 
-
-Berachain governance proposals must be submitted programmatically on-chain. There is no separate governance platform or user interface for this process at this time.
-
-For a detailed guide on how to create and submit governance proposals programmatically, please refer to our tutorial on the [Berachain blog](https://blog.berachain.com/).
-
-This tutorial provides step-by-step instructions, code examples, and best practices for interacting with Berachain's on-chain governance system.
