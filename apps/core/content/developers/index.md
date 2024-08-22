@@ -1,4 +1,4 @@
-# Proof of Liquidity Architecture
+# Proof of Liquidity Architecture 🌐
 
 ![PoL Overview For Devs](/assets/pol-overview-devs.png)
 
