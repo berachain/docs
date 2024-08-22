@@ -1,4 +1,4 @@
-# Berachain Monorepo Docs
+# 🐻 Berachain Monorepo Docs
 
 This is a monolithic repository that contains all the documentation for Berachain, Berps, Bend, and BEX.
 
