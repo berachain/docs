@@ -1,0 +1,31 @@
+{
+  "name": "@berachain/bend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vitepress dev --port 5176",
+    "build": "vitepress build",
+    "serve": "vitepress serve",
+    "clean": "rm -rf .turbo; rm -rf .vitepress/cache; rm -rf .vitepress/dist; rm -rf node_modules;",
+    "format": "prettier . --write",
+    "changeset": "changeset"
+  },
+  "dependencies": {
+    "@berachain/config": "workspace:^",
+    "@berachain/ui": "workspace:^",
+    "@heroicons/vue": "^2.0.18",
+    "@mdit/plugin-figure": "^0.4.8",
+    "@mdit/plugin-tab": "^0.4.8",
+    "@rive-app/canvas": "^2.2.0",
+    "@tabler/icons-vue": "^3.7.0",
+    "@types/node": "^20.5.9",
+    "@vueuse/core": "^10.4.1",
+    "markdown-it-conditional-render": "^0.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^1.2.3",
+    "vue": "^3.3.4"
+  },
+  "type": "module",
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}

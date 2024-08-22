@@ -1,0 +1,329 @@
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+ :root {
+    /* --vp-c-brand: #c28f0e; */
+    --vp-c-brand-light: #ddad32;
+    --vp-c-brand-lighter: #9499ff;
+    --vp-c-brand-lightest: #bcc0ff;
+    --vp-c-brand-dark: #56f253;
+    --vp-c-brand-darker: #45e174;
+    --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
+  
+    /* --vp-c-text-1: #EBE9E7; */
+    --vp-c-text-2: #908984;
+    /* --vp-c-text-3: #00ff2a; */
+  
+    --vp-c-brand-1: #292524;
+    --vp-c-brand-2: #cf9f23;
+    --vp-c-brand-3: #00ff2a;
+    --vp-c-brand-soft: #b1cfe0;
+  }
+  
+  .dark {
+    --vp-c-text-1: #ebe9e7;
+    --vp-c-brand-1: #fbbf24;
+    --vp-c-brand-2: #cf9f23;
+    --vp-c-brand-soft: #12394f;
+  }
+  
+  /**
+    * Background Colors
+    * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-c-bg: #fafaf9;
+    --vp-c-bg-alt: #f5f5f4;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-bg-soft: #ffffff;
+  }
+  
+  .dark {
+    --vp-c-bg: #0e0803;
+    --vp-c-bg-alt: #1e1b19;
+    --vp-c-bg-elv: #202127;
+    --vp-c-bg-soft: #1e1b19;
+  }
+  
+  /**
+    * Component: Nav
+    * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-nav-height: 64px;
+    --vp-nav-bg-color: #f5f5f4;
+    --vp-nav-screen-bg-color: var(--vp-c-bg);
+    --vp-nav-logo-height: 24px;
+    --vp-local-nav-bg-color: var(--vp-c-bg);
+  }
+  
+  .dark {
+    --vp-nav-height: 64px;
+    --vp-nav-bg-color: #1e1b19;
+    --vp-nav-screen-bg-color: var(--vp-c-bg);
+    --vp-nav-logo-height: 24px;
+    --vp-local-nav-bg-color: var(--vp-c-bg);
+  }
+  
+  /**
+    * Component: Sidebar
+    * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-sidebar-width: 248px;
+  }
+  
+  /**
+   * Component: Button
+   * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-white);
+    --vp-button-brand-bg: var(--vp-c-brand);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-white);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-white);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+  
+    --vp-feature-button-border: #e7e5e4;
+  }
+  
+  .dark {
+    --vp-feature-button-border: #373332;
+  }
+  
+  /**
+   * Component: Home
+   * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(
+      117deg,
+      #ff8a00f5,
+      #ffc738
+    );
+  
+    --vp-home-hero-image-background-image: -webkit-linear-gradient(
+      117deg,
+      #faba70f5,
+      #ffe4a0
+    );
+    --vp-home-hero-image-filter: blur(40px);
+  }
+  
+  .dark {
+    --vp-home-hero-image-background-image: -webkit-linear-gradient(
+      117deg,
+      #72532cf5,
+      #6a5a32
+    );
+  }
+  
+  @media (min-width: 640px) {
+    :root {
+      --vp-home-hero-image-filter: blur(56px);
+    }
+  }
+  
+  @media (min-width: 960px) {
+    :root {
+      --vp-home-hero-image-filter: blur(72px);
+    }
+  }
+  
+  @media (min-width: 960px) {
+    :root {
+      --vp-z-index-sidebar: 25;
+    }
+  }
+  
+  /**
+   * Component: Custom Block
+   * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-custom-block-font-size: 14px;
+    --vp-custom-block-code-font-size: 13px;
+  
+    --vp-custom-block-info-border: #afabab;
+    --vp-custom-block-info-text: #afabab;
+    --vp-custom-block-info-bg: #fafaf9;
+    --vp-custom-block-info-code-bg: var(--vp-c-default-soft);
+  
+    --vp-custom-block-tip-border: #0284c7;
+    --vp-custom-block-tip-text: #0284c7;
+    --vp-custom-block-tip-bg: #f0f9ff;
+    --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+  
+    --vp-custom-block-warning-border: #ca8a04;
+    --vp-custom-block-warning-text: #ca8a04;
+    --vp-custom-block-warning-bg: #fefce8;
+    --vp-custom-block-warning-code-bg: var(--vp-c-warning-soft);
+  
+    --vp-custom-block-danger-border: #dc2626;
+    --vp-custom-block-danger-text: #dc2626;
+    --vp-custom-block-danger-bg: #fef2f2;
+    --vp-custom-block-danger-code-bg: var(--vp-c-danger-soft);
+  
+    --vp-custom-block-details-border: #afabab;
+    --vp-custom-block-details-text: #afabab;
+    --vp-custom-block-details-bg: #fafaf9;
+    --vp-custom-block-details-code-bg: var(--vp-custom-block-info-code-bg);
+  }
+  
+  .dark {
+    --vp-custom-block-font-size: 14px;
+    --vp-custom-block-code-font-size: 13px;
+  
+    --vp-custom-block-info-border: #afabab;
+    --vp-custom-block-info-text: #afabab;
+    --vp-custom-block-info-bg: #0e0803;
+    --vp-custom-block-info-code-bg: var(--vp-c-default-soft);
+  
+    --vp-custom-block-tip-border: #0284c7;
+    --vp-custom-block-tip-text: #0284c7;
+    --vp-custom-block-tip-bg: #141c23;
+    --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+  
+    --vp-custom-block-warning-border: #ca8a04;
+    --vp-custom-block-warning-text: #ca8a04;
+    --vp-custom-block-warning-bg: #231d14;
+    --vp-custom-block-warning-code-bg: var(--vp-c-warning-soft);
+  
+    --vp-custom-block-danger-border: #dc2626;
+    --vp-custom-block-danger-text: #dc2626;
+    --vp-custom-block-danger-bg: #241515;
+    --vp-custom-block-danger-code-bg: var(--vp-c-danger-soft);
+  
+    --vp-custom-block-details-border: #afabab;
+    --vp-custom-block-details-text: #afabab;
+    --vp-custom-block-details-bg: #0e0803;
+    --vp-custom-block-details-code-bg: var(--vp-custom-block-info-code-bg);
+  }
+  
+  /**
+   * Component: LocalSearch
+   * -------------------------------------------------------------------------- */
+  :root {
+    --vp-local-search-highlight-bg: var(--vp-c-brand-light);
+  }
+  
+  /**
+   * Component: Algolia
+   * -------------------------------------------------------------------------- */
+  
+  .DocSearch {
+    --docsearch-primary-color: var(--vp-c-brand) !important;
+  }
+  
+  /**
+   * Fonts
+   * -------------------------------------------------------------------------- */
+  
+  :root {
+    --vp-font-family-base: "IBM Plex Sans", sans-serif;
+    /* normal text font */
+    --vp-font-family-mono: "IBM Plex Mono", monospace;
+    /* code font */
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.ttf");
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.ttf");
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("/fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.ttf");
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/IBM_Plex_Mono/IBMPlexMono-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/IBM_Plex_Mono/IBMPlexMono-Italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/IBM_Plex_Mono/IBMPlexMono-SemiBold.ttf");
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/IBM_Plex_Mono/IBMPlexMono-SemiBoldItalic.ttf");
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  /**
+   * Custom
+   * -------------------------------------------------------------------------- */
+  .dark li {
+    color: #f9f6f4;
+  }
+  

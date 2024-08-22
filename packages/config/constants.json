@@ -1,0 +1,626 @@
+{
+  "testnet": {
+    "chainId": 80084,
+    "rpcUrl": "https://bartio.rpc.berachain.com/",
+    "currencySymbol": "BERA",
+    "currencyName": "BERA Token",
+    "chainName": "Berachain bArtio",
+    "name": "berachainbArtio",
+    "decimals": 18,
+    "dapps": {
+      "faucet": {
+        "name": "Berachain Testnet Faucet",
+        "url": "https://bartio.faucet.berachain.com/"
+      },
+      "bex": {
+        "name": "Berachain BEX",
+        "url": "https://bartio.bex.berachain.com/"
+      },
+      "honeySwap": {
+        "name": "Berachain $HONEY Swap",
+        "url": "https://bartio.honey.berachain.com/"
+      },
+      "bend": {
+        "name": "Berachain Bend",
+        "url": "https://bartio.bend.berachain.com/"
+      },
+      "berps": {
+        "name": "Berachain Berps",
+        "url": "https://bartio.berps.berachain.com/"
+      },
+      "beratrail": {
+        "name": "Beratrail Block Explorer",
+        "url": "https://bartio.beratrail.io/",
+        "apiUrl": "https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api/",
+        "apiKey": "xxxxx"
+      },
+      "foundation": {
+        "name": "Berachain Foundation",
+        "url": "https://www.berachain.com/"
+      },
+      "bgtStation": {
+        "name": "Berachain BGT Station",
+        "url": "https://bartio.station.berachain.com/"
+      }
+    },
+    "thirdparty": {
+      "routescan": {
+        "name": "Routescan",
+        "url": "https://bartio.beratrail.io/"
+      },
+      "quickNodeRpc": {
+        "name": "QuickNode RPC",
+        "url": "https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1"
+      },
+      "layerzero": {
+        "name": "LayerZero",
+        "url": "https://docs.layerzero.network/v2/developers/evm/technical-reference/deployed-contracts#bartio"
+      }
+    }
+  },
+  "devnet": {
+    "chainId": 80087,
+    "rpcUrl": "http://127.0.0.1:51208",
+    "currencySymbol": "BERA",
+    "currencyName": "BERA Token",
+    "chainName": "Berachain Local Devnet",
+    "name": "berachainLocalDevnet",
+    "decimals": 18,
+    "dapps": {
+      "blockExplorer": {
+        "name": "Devnet Blockscout",
+        "url": "http://127.0.0.1:53414",
+        "apiUrl": "https://localhost:4000/api ",
+        "apiKey": "xxxxx"
+      }
+    }
+  },
+  "contracts": {
+    "berachef": {
+      "name": "Berachef",
+      "address": "0xfb81E39E3970076ab2693fA5C45A07Cc724C93c2",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeraChef.json",
+      "docsUrl": "/developers/contracts/berachef"
+    },
+    "bgt": {
+      "name": "BGT Token",
+      "address": "0xbDa130737BDd9618301681329bF2e46A016ff9Ad",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGT.json",
+      "docsUrl": "/developers/contracts/bgt-token"
+    },
+    "bgtStaker": {
+      "name": "BGT Staker",
+      "address": "0x791fb53432eED7e2fbE4cf8526ab6feeA604Eb6d",
+      "abi": "",
+      "docsUrl": "/developers/contracts/bgt-staker"
+    },
+    "blockRewardsController": {
+      "name": "Block Rewards Controller",
+      "address": "0x696C296D320beF7b3148420bf2Ff4a378c0a209B",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BlockRewardController.json",
+      "docsUrl": "/developers/contracts/block-rewards-controller"
+    },
+    "create2": {
+      "name": "CREATE2",
+      "address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+      "abi": "",
+      "docsUrl": "/developers/contracts/create2"
+    },
+    "distributor": {
+      "name": "Distributor",
+      "address": "0x2C1F148Ee973a4cdA4aBEce2241DF3D3337b7319",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/Distributor.json",
+      "docsUrl": "/developers/contracts/distributor"
+    },
+    "feeCollector": {
+      "name": "Fee Collector",
+      "address": "0x9B6F83a371Db1d6eB2eA9B33E84f3b6CB4cDe1bE",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/FeeCollector.json",
+      "docsUrl": "/developers/contracts/fee-collector"
+    },
+    "governance": {
+      "name": "Governance",
+      "address": "0xE3EDa03401Cf32010a9A9967DaBAEe47ed0E1a0b",
+      "abi": "",
+      "docsUrl": "/developers/contracts/governance"
+    },
+    "honeyFactory": {
+      "name": "Honey Factory",
+      "address": "0xAd1782b2a7020631249031618fB1Bd09CD926b31",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactory.json",
+      "docsUrl": "/developers/contracts/honey-factory"
+    },
+    "honey": {
+      "name": "Honey Token",
+      "address": "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/HONEY.json",
+      "docsUrl": "/developers/contracts/honey-token"
+    },
+    "bHoney": {
+      "name": "bHoney Token",
+      "address": "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03",
+      "abi": "",
+      "docsUrl": "/learn/tokens/bhoney"
+    },
+    "multicall3": {
+      "name": "Multicall3",
+      "address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/Multicall3.json",
+      "docsUrl": "/developers/contracts/multicall3"
+    },
+    "permit2": {
+      "name": "Permit2",
+      "address": "0xA4Bf80b2CFBd80C00cB0Cc3d74C8762Ff4762770",
+      "abi": "",
+      "docsUrl": "/developers/contracts/permit2"
+    },
+    "rewardsVault": {
+      "name": "Rewards Vault",
+      "address": "",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVault.json",
+      "docsUrl": "/developers/contracts/rewards-vault"
+    },
+    "rewardsVaultFactory": {
+      "name": "Rewards Vault Factory",
+      "address": "0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVaultFactory.json",
+      "docsUrl": "/developers/contracts/rewards-vault-factory"
+    },
+    "timelock": {
+      "name": "Timelock",
+      "address": "0xcB364028856f2328148Bb32f9D6E7a1F86451b1c",
+      "abi": "http://localhost:5173/developers/deployed-contracts#TimeLock",
+      "docsUrl": "/developers/contracts/timelock"
+    },
+    "usdc": {
+      "name": "USDC Token",
+      "address": "0xd6D83aF58a19Cd14eF3CF6fe848C9A4d21e5727c",
+      "abi": "",
+      "docsUrl": "/developers/contracts/usdc-token"
+    },
+    "wbera": {
+      "name": "WBERA Token",
+      "address": "0x7507c1dc16935B82698e4C63f2746A2fCf994dF8",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERA.json",
+      "docsUrl": "/developers/contracts/wbera-token"
+    },
+    "wbtc": {
+      "name": "WBTC Token",
+      "address": "0x286F1C3f0323dB9c91D1E8f45c8DF2d065AB5fae",
+      "abi": "",
+      "docsUrl": "/developers/contracts/wbtc-token"
+    },
+    "weth": {
+      "name": "WETH Token",
+      "address": "0x6E1E9896e93F7A71ECB33d4386b49DeeD67a231A",
+      "abi": "",
+      "docsUrl": "/developers/contracts/weth-token"
+    },
+    "entrypoint": {
+      "name": "Entrypoint",
+      "address": "0xb3395EeeA7701E0037bBC6Ab52953C6fB0c3326c",
+      "abi": "",
+      "docsUrl": "/developers/contracts/entrypoint"
+    },
+    "orders": {
+      "name": "Orders",
+      "address": "0xB87196E95A7C38192D57087D54b3a5F996D17F1A",
+      "abi": "",
+      "docsUrl": "/developers/contracts/orders"
+    },
+    "feesMarkets": {
+      "name": "FeesMarkets",
+      "address": "0xd8c63AA3B1dCBA8a8781bf9C4E3F8F06305a459d",
+      "abi": "",
+      "docsUrl": "/developers/contracts/fees-markets"
+    },
+    "vault": {
+      "name": "Vault",
+      "address": "0x1306D3c36eC7E38dd2c128fBe3097C2C2449af64",
+      "abi": "",
+      "docsUrl": "/developers/contracts/vault"
+    },
+    "feesAccrued": {
+      "name": "FeesAccrued",
+      "address": "0x0B92C464a41e515559064A737F6A165d43F01d43",
+      "abi": "",
+      "docsUrl": "/developers/contracts/fees-accrued"
+    },
+    "markets": {
+      "name": "Markets",
+      "address": "0x61C3ADb0a2c48B80F8fFcF51551d20053f686aCF",
+      "abi": "",
+      "docsUrl": "/developers/contracts/markets"
+    },
+    "settlement": {
+      "name": "Settlement",
+      "address": "0x49a15D0610906886f4F8eC06C1Ae2fB42BE0321F",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "referrals": {
+      "name": "Referrals",
+      "address": "0x50023e115ead2111e29AFf61DBd8BE04F0CC94A6",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "vaultSafetyModule": {
+      "name": "VaultSafetyModule",
+      "address": "0x3E5a8617a089e3320a40Cb4622831A71044E4f9a",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolAddressesProviderRegistry": {
+      "name": "PoolAddressesProviderRegistry",
+      "address": "0x195D270de99aAEc5A215569A8165e065ad5F125D",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "supplyLogic": {
+      "name": "SupplyLogic",
+      "address": "0x87534893C96567Be17ee64FEef213F9CD1FD4beD",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "borrowLogic": {
+      "name": "BorrowLogic",
+      "address": "0x4185C3108387556bCDE4dEDA5E89a84F9031F164",
+      "abi": "",
+      "docsUrl": ""
+    }, 
+    "liquidationLogic": {
+      "name": "LiquidationLogic",
+      "address": "0x6Fd945f1E17d3f4776250E9a94b87F9672A3A638",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "bridgeLogic": {
+      "name": "BridgeLogic",
+      "address": "0x1620Ad70Ed188b58B22b02E413230DEA3BB88813",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "configuratorLogic": {
+      "name": "ConfiguratorLogic",
+      "address": "0x09839E816F907154cb367CfAc67eB66c6b6001Ad",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolLogic": {
+      "name": "PoolLogic",
+      "address": "0xCcEF5B5bB3d17B4e37f4EB36caC2f09615b5940d",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "treasuryProxy": {
+      "name": "TreasuryProxy",
+      "address": "0x09d8569895e6EC8a19DC199CBE4d5CBB134765D1",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "treasuryController": {
+      "name": "Treasury-Controller",
+      "address": "0xC04342314ADB8Cf32eadB008f6a47b7055012Bca",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "treasuryImplementation": {
+      "name": "Treasury-Implementation",
+      "address": "0xF1390F98C75A20aE7160Df87e024B7b46bA89Ed9",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "faucet": {
+      "name": "Faucet",
+      "address": "0x31D641AeC975FEaA2655bbF75D484E2f28a99EE8",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolAddressesProvider": {
+      "name": "PoolAddressesProvider",
+      "address": "0x8297A07f87a8576b88d46e636c05B84E4Ea8265D",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolDataProvider": {
+      "name": "PoolDataProvider",
+      "address": "0x6F71E53C46336b4D3C26Ea973613262B4B3782B8",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "honeyTestnetPriceAggregator": {
+      "name": "HONEY-TestnetPriceAggregator",
+      "address": "0x4663C80f678dcbB8E1De721abD3841049939c71E",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wbtcTestnetPriceAggregator": {
+      "name": "WBTC-TestnetPriceAggregator",
+      "address": "0xF323ac99EE604a14EA3C1Db3fC2407820889f2A2",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wethTestnetPriceAggregator": {
+      "name": "WETH-TestnetPriceAggregator",
+      "address": "0x236A806B0C557083A854FeA2eE89C4340729408F",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolImplementation": {
+      "name": "Pool-Implementation",
+      "address": "0xeB0De9A7Aee6ADC46A596d7b6BaA286af685cAfa",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolConfiguratorImplementation": {
+      "name": "PoolConfigurator-Implementation",
+      "address": "0xe26410757B94A2945f0C9F344Ae7b74b2825ccd5",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "reservesSetupHelper": {
+      "name": "ReservesSetupHelper",
+      "address": "0xbF80C6D2D3281911087321a2711E0EafEA68aae9",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "aclManager": {
+      "name": "ACLManager",
+      "address": "0x7d6bdCfa2Af1ad827EcB732FFb0B4a7F07FFd715",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "bendOracle": {
+      "name": "BendOracle",
+      "address": "0x18fDa978e01196B2D5037dF9a9c0C9d3ab843344",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolProxy": {
+      "name": "Pool-Proxy",
+      "address": "0x30A3039675E5b5cbEA49d9a5eacbc11f9199B86D",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "poolConfiguratorProxy": {
+      "name": "PoolConfigurator-Proxy",
+      "address": "0xd1c987F76FDeC8D940F2FFafeF73F1795A19421E",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "emissionManager": {
+      "name": "EmissionManager",
+      "address": "0xc2Ac49e7B88c06DC08aBB2c86E2C614428E272a0",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "incentivesV2Implementation": {
+      "name": "IncentivesV2-Implementation",
+      "address": "0xA20086e8b96F4A3f518dfD1353b06e8F2462f936",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "incentivesProxy": {
+      "name": "IncentivesProxy",
+      "address": "0x25479a8Eac9ef427EeC1B48d21260672E1597f40",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "pullRewardsTransferStrategy": {
+      "name": "PullRewardsTransferStrategy",
+      "address": "0x76f00eDF6cc3566c35A3B1BF13a85f36E3eEC574",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "aToken": {
+      "name": "AToken",
+      "address": "0x9d311511306c2A9162a7aa66731bC2617fa28188",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "delegationAwareAToken": {
+      "name": "DelegationAwareAToken",
+      "address": "0xF72f3C07E754081E8F1EeF9F80604351A645334a",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "variableDebtToken": {
+      "name": "VariableDebtToken",
+      "address": "0x0e8E67089DEfea50241a3A50A0C5447A2813639F",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "honeyAToken": {
+      "name": "HONEY-AToken",
+      "address": "0xD08391c5977ebF1a09bB5915908EF5cd95Edb7E0",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "honeyVariableDebtToken": {
+      "name": "HONEY-VariableDebtToken",
+      "address": "0x0bF0Eb9aE016A624E2149D4C5F47fD9276285C82",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wbtcAToken": {
+      "name": "WBTC-AToken",
+      "address": "0x0ddb38F7D473e8040985Fa3B4116FDeEF89778bc",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wbtcVariableDebtToken": {
+      "name": "WBTC-VariableDebtToken",
+      "address": "0xFB93ff5EfA67926C5AA4A096ef62041B7931E102",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wethAToken": {
+      "name": "WETH-AToken",
+      "address": "0x8Ce5C1c42CD58B7aE61512790e514a82d84375Ed",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wethVariableDebtToken": {
+      "name": "WETH-VariableDebtToken",
+      "address": "0x5F25f4397469F8120dB6E72E948FF5EcAf9D93B4",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "mockFlashLoanReceiver": {
+      "name": "MockFlashLoanReceiver",
+      "address": "0x8A14F6E9FD53710Cf1239e498a27146ea4c1475f",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "wrappedTokenGatewayV3": {
+      "name": "WrappedTokenGatewayV3",
+      "address": "0x4EF762451e74bD725d866B3708e73281718d4Dfd",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "walletBalanceProvider": {
+      "name": "WalletBalanceProvider",
+      "address": "0x3056e598BCe1709A99A9bF3d76160B9A547947ac",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "peripheryDebtToken": {
+      "name": "PeripheryDebtToken",
+      "address": "0x1339503343be5626B40Ee3Aee12a4DF50Aa4C0B9",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "rewardVault": {
+      "name": "RewardVault",
+      "address": "0x2E8410239bB4b099EE2d5683e3EF9d6f04E321CC",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "uiDataProvider": {
+      "name": "UIDataProvider",
+      "address": "0xa0f2eA8A4D77c7055BfddDC434C65f17868Dfaca",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "crocSwapDex": {
+      "name": "CrocSwapDex",
+      "address": "0xAB827b1Cc3535A9e549EE387A6E9C3F02F481B49",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocSwapDex.json",
+      "docsUrl": ""
+    },
+    "coldPath": {
+      "name": "ColdPath",
+      "address": "0x039fb2fce7Afa77a1f7B045162B34b9037BD2B53",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "warmPath": {
+      "name": "WarmPath",
+      "address": "0x8DE058ec8F64B60431EB9AAee95C7266d0d5C311",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "longPath": {
+      "name": "LongPath",
+      "address": "0xC3b125e7608C15E3E44692D826ebe9D058cF3E4E",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "microPaths": {
+      "name": "MicroPaths",
+      "address": "0xD65371d89E4fC1775CA96676197D70895A2297B7",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "multiPath": {
+      "name": "MultiPath",
+      "address": "0xaC6a0430517E078b48b41De9736e4652B35DF5c2",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "hotProxy": {
+      "name": "HotProxy",
+      "address": "0xD7FD66351B8a7D5fc466EeC3e466fB4cEAC0D740",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "knockoutLiqPath": {
+      "name": "KnockoutLiqPath",
+      "address": "0xa6b7A06558E8ECF1B8893C2E42eC84bF77A10515",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "knockoutFlagPath": {
+      "name": "KnockoutFlagPath",
+      "address": "0x4eC7f56A627567255A814A93f1C447Ab77De9eff",
+      "abi": "",
+      "docsUrl": ""
+    },
+    "crocPolicy": {
+      "name": "CrocPolicy",
+      "address": "0x0F440004c3F8809c32CF9A3F98144E188c4Ad2e5",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocPolicy.json",
+      "docsUrl": ""
+    },
+    "crocQuery": {
+      "name": "CrocQuery",
+      "address": "0x8685CE9Db06D40CBa73e3d09e6868FE476B5dC89",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocQuery.json",
+      "docsUrl": ""
+    },
+    "crocImpact": {
+      "name": "CrocImpact",
+      "address": "0xCfEa3579a06e2e9a596D311486D12B3a49a919Cd",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocImpact.json",
+      "docsUrl": ""
+    },
+    "beraCrocMultiSwap": {
+      "name": "BeraCrocMultiSwap",
+      "address": "0x21e2C0AFd058A89FCf7caf3aEA3cB84Ae977B73D",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/BeraCrocMultiSwap.json",
+      "docsUrl": ""
+    }
+  },
+  "websites": {
+    "foundation": {
+      "name": "Berachain Foundation",
+      "url": "https://berachain.com/"
+    },
+    "docsCore": {
+      "name": "Berachain Core Docs",
+      "url": "https://docs.berachain.com/",
+      "description": "Berachain protocol core docs for learning how the blockchain works, developer guides, and understanding how to manage nodes."
+    },
+    "docsBex": {
+      "name": "Berachain BEX Docs",
+      "url": "https://docs.bex.berachain.com/",
+      "description": "Official documentation for BEX, Berachain's Decentralized Exchange."
+    },
+    "docsBerps": {
+      "name": "Berachain Berps Docs",
+      "url": "https://docs.berps.berachain.com/",
+      "description": "Official documentation for Berps, Berachain's Perpetual Future Contracts"
+    },
+    "docsBend": {
+      "name": "Berachain Bend Docs",
+      "url": "https://docs.bend.berachain.com/",
+      "description": "Official documentation for Bend, Berachain's Lending Protocol."
+    },
+    "careers": {
+      "name": "Berachain Careers",
+      "url": "https://careers.berachain.com/"
+    },
+    "beaconkit": {
+      "name": "BeaconKit",
+      "url": "https://github.com/berachain/beacon-kit"
+    }
+  },
+  "socials": {
+    "twitter": "https://x.com/berachain",
+    "twitterDevs": "https://x.com/berachaindevs",
+    "github": "https://github.com/berachain",
+    "discord": "https://discord.gg/berachain",
+    "telegram": "https://t.me/BerachainPortal",
+    "telegramBuilders": "https://t.me/BerachainEco"
+  }
+}

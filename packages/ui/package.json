@@ -1,0 +1,41 @@
+{
+  "name": "@berachain/ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./",
+    "./CopyToClipboard": "./CopyToClipboard.vue",
+    "./AddNetwork": "./AddNetwork.vue",
+    "./Feature": "./Feature.vue",
+    "./Fidget": "./Fidget.vue",
+    "./NavBar": "./NavBar.vue",
+    "./NavBarMenu": "./NavBarMenu.vue",
+    "./NavBarMenuLink": "./NavBarMenuLink.vue",
+    "./NavScreenMenuGroup": "./NavScreenMenuGroup.vue",
+    "./Flyout": "./Flyout.vue",
+    "./Sidebar": "./Sidebar.vue",
+    "./Token": "./Token.vue",
+    "./style": "./style.css"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf .turbo; rm -rf node_modules;"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@heroicons/vue": "^2.0.18",
+    "@rive-app/canvas": "^2.2.0",
+    "@vueuse/core": "^10.4.1",
+    "ethers": "^6.13.1",
+    "vitepress": "1.0.0-rc.10",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.2",
+    "vue-tsc": "^2.0.21"
+  }
+}

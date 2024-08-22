@@ -1,0 +1,80 @@
+{
+  "github": {
+    "silent": true
+  },
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/faq/",
+      "destination": "/learn/help/faqs"
+    },
+    {
+      "source": "/faq",
+      "destination": "/learn/help/faqs"
+    },
+    {
+      "source": "/learn/bex/pools",
+      "destination": "/learn/dapps/bex"
+    },
+    {
+      "source": "/learn/how-to-connect-a-wallet-with-berachain",
+      "destination": "/learn/connect-to-berachain"
+    },
+    {
+      "source": "/community/",
+      "destination": "/"
+    },
+    {
+      "source": "/community",
+      "destination": "/"
+    },
+    {
+      "source": "/learn/bex/",
+      "destination": "/learn/dapps/bex"
+    },
+    {
+      "source": "/learn/bex",
+      "destination": "/learn/dapps/bex"
+    },
+    {
+      "source": "/learn/protocol/bgt-station",
+      "destination": "/learn/dapps/bgt-station"
+    },
+    {
+      "source": "/learn/protocol/",
+      "destination": "/learn/pol/"
+    },
+    {
+      "source": "/learn/protocol/pol-participants",
+      "destination": "/learn/pol/participants"
+    },
+    {
+      "source": "/learn/protocol/incentives",
+      "destination": "/learn/pol/incentives"
+    },
+    {
+      "source": "/learn/protocol/tokens/",
+      "destination": "/learn/pol/tokens/bera"
+    },
+    {
+      "source": "/learn/protocol/tokens/bera",
+      "destination": "/learn/pol/tokens/bera"
+    },
+    {
+      "source": "/learn/protocol/tokens/bgt",
+      "destination": "/learn/pol/tokens/bgt"
+    },
+    {
+      "source": "/learn/protocol/tokens/honey",
+      "destination": "/learn/pol/tokens/honey"
+    },
+    {
+      "source": "/developers/beratrail-block-explorer",
+      "destination": "https://bartio.beratrail.io"
+    },
+    {
+      "source": "/learn/pol/gauges",
+      "destination": "/learn/pol/rewardvaults"
+    }
+  ]
+}

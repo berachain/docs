@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "with-env": "dotenv -e ./.env --",
+    "deploy:berachain": "pnpm with-env turbo run deploy:berachain",
+    "clean": "turbo run clean; rm -rf .turbo; rm -rf node_modules;",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.7",
+    "@turbo/gen": "^1.10.14",
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^7.32.0",
+    "prettier": "^2.8.8",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@7.15.0",
+  "name": "docs-monorepo",
+  "engines": {
+    "node": ">=20"
+  }
+}
