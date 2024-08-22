@@ -78,8 +78,8 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
+            text: `${constants.websites.docsBex.name}`,
+            link: `${constants.websites.docsBex.url}`,
           },
           {
             text: `${constants.websites.docsBerps.name}`,
