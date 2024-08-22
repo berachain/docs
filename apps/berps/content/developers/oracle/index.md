@@ -11,7 +11,7 @@ head:
       content: Explanation of how Berps leverages Pyth Network for on-chain price feeds.
 ---
 
-# Berps Oracle Overview
+# Berps Oracle Overview 🔮
 
 Berps relies on spot oracle price feeds for computing execution prices for trades. This contrasts with perpetual futures exchange that rely on limit order books to determine execution price (e.g. dYdX). Prices on Berps are provided by [Pyth Network](https://pyth.network/), a decentralized oracle network that provides real-time on-chain price feeds for various assets.
 

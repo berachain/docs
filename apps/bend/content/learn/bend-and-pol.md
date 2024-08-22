@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# Bend And Proof Of Liquidity
+# Bend And Proof-Of-Liquidity 🤝
 
 [Proof-of-Liquidity](http://docs.berachain.com/learn/what-is-proof-of-liquidity/) (PoL) is Berachain's unique consensus mechanism. This mechanism revolves around the idea that the chain's economic incentives (`$BGT`) should flow to active users providing productive liquidity to the chain.
 

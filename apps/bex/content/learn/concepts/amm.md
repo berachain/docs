@@ -11,7 +11,7 @@ head:
       content: BEX uses an automated market maker (AMM) mechanism based on the constant product formula to provide liquidity and enable token swaps
 ---
 
-# Automated Market Makers (AMMs)
+# Automated Market Makers (AMMs) 📈
 
 Liquidity in BEX is provided through an automated market maker (AMM) mechanism. Unlike traditional limit order books (LOBs), liquidity is not provided by individual orders but by an aggregate pool of liquidity with capital provided by liquidity providers (LPs).
 
