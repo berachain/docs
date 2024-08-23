@@ -12,6 +12,9 @@ Closes #1
 
 ## Contribution
 
+- [ ] I have followed the [Development Workflow](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#development-workflow)
+- [ ] I have read the [CODE OF CONDUCT](https://github.com/berachain/docs/blob/main/CODE_OF_CONDUCT.md)
+
 Let us know your wallet address/ENS:
 
 ```

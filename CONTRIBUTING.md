@@ -8,7 +8,7 @@ Berachain Foundation has adopted the [Contributor Covenant](https://www.contribu
 
 ## Open Development
 
-All work on Berachain Docs happens directly on [GitHub](https//github.com/berachain/docs). Both core team members and external contributors send pull requests which go through the same review process.
+All work on Berachain Docs happens directly on [GitHub](https://github.com/berachain/docs). Both core team members and external contributors send pull requests which go through the same review process.
 
 ## Semantic Versioning
 
@@ -16,7 +16,7 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
 
 ### TL;DR SemVer
 
-**Version Bump Required**
+**Typical Version Bump Scenarios**
 
 - Changes to components `./packages/ui`
 - Changes to constatns `./packages/config`
@@ -24,15 +24,15 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
   - `./apps/*/.vitepress/*`
   - `./apps/*/content/public/*`
 
-**_NO_ Version Bump Required**
+**_Minor_ Version Bump Scenario**
 
 - Text and typo changes in markdown files (\*.md)
 
 ## Branch Organization
 
-Submit all changes directly to the [main branch](https://github.com/berachain/docs/tree/main). We don't use separate branches for development or for upcoming releases. We do our best to keep main in good shape, with all tests passing. Please always make sure to fork the repository for external contributions.
+Submit all changes as a pull request directly to the [main branch](https://github.com/berachain/docs/tree/main). We don't use separate branches for development or for upcoming releases. We do our best to keep main in good shape. Please always make sure to fork the repository for external contributions.
 
-Code that lands in main must be compatible with the latest stable release. It may contain additional features, but no breaking changes. We should be able to release a new minor version from the tip of main at any time.
+Code that lands in main must be compatible with all apps and packages. It may contain additional features, but no breaking changes. We should be able to release a new minor version from the tip of main at any time.
 
 ## Bugs / Issues
 
@@ -55,7 +55,7 @@ Berachain Foundation has a process for the safe disclosure of security bugs. Wit
 
 ## Proposing a Change
 
-If you intend to change the core frontend, or make any non-trivial changes to the implementation, we recommend [filing an issue](https://github.com/berachain/docs/issues/new). This lets us reach an agreement on your proposal before you put significant effort into it.
+If you intend to change the core frontend, or make any non-trivial changes to the implementation, we recommend [filing an issue](https://github.com/berachain/docs/issues/new/choose). This lets us reach an agreement on your proposal before you put significant effort into it.
 
 If you're only fixing a bug or a typo, it's fine to submit a pull request right away but we still recommend to file an issue detailing what you're fixing. This is helpful in case we don't accept that specific fix but want to keep track of the issue.
 
@@ -65,7 +65,7 @@ Working on your first Pull Request? You can learn how from this free video serie
 
 [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
-To help you get your feet wet and get you familiar with our contribution process, we have a list of good first issues that contain bugs that have a relatively limited scope. This is a great place to get started.
+To help you get familiar with our contribution process, we have a list of good first issues that contain bugs that have a relatively limited scope. This is a great place to get started.
 
 If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If nobody is working on it at the moment, please leave a comment stating that you intend to work on it so other people don't accidentally duplicate your effort.
 
@@ -75,11 +75,7 @@ If somebody claims an issue but doesn't follow up for more than two weeks, it's 
 
 The core team is monitoring for pull requests. We will review your pull request and either merge it, request changes to it, or close it with an explanation. We'll do our best to provide updates and feedback throughout the process.
 
-**Before submitting a pull request**, please make sure the following is done:
-
-1. Fork [the repository](https://github.com/berachain/docs) and create your branch from main.
-2. Run `pnpm` in the repository root to install dependencies.
-3. Format your code with prettier (`pnpm format`) from the root.
+**Before submitting a pull request**, please make sure to see [Development Workflow](#development-workflow).
 
 ## Contribution Prerequisites
 
@@ -131,9 +127,9 @@ pnpm -v;
 If the versions are not correct or you don't have Node.js or Pnpm installed, download and follow their setup instructions:
 
 - Install Node.js using [fnm](https://github.com/Schniz/fnm) or from the [official website](https://nodejs.org/)
-- Install[Pnpm](https://pnpm.io/installation)
+- Install [Pnpm](https://pnpm.io/installation)
 
-With `nvm` or `fnm`
+To install the required Node.js version use `nvm` or `fnm`:
 
 ```bash
 # FROM: ./docs
@@ -152,11 +148,11 @@ This will install all dependencies in all `./apps` and `./packages` folders.
 pnpm install;
 ```
 
-> **NOTE:** Alternatively you if you have `node_modules` conflicts, you can run `pnpm clean` which will remove all node_modules, caching, and turbo folders, for a fresh install.
+> **NOTE:** Alternatively if you have `node_modules` conflicts, you can run `pnpm clean` which will remove all node modules, caching, and turbo folders, for a fresh install.
 
 ### Running different sites
 
-To run all sites at once, you simply run the following command.
+To run all sites at once, you can simply run the following command.
 
 ```bash
 # FROM: ./docs

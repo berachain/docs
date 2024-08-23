@@ -35,7 +35,7 @@ const multiPathArgs = [2, 3, initPoolCalldata, 128, mintCalldata];
 
 const multiCmd = encodeAbiParameters(
   parseAbiParameters("uint8, uint8, bytes, uint8, bytes"),
-  multiPathArgs as any[5]
+  multiPathArgs as any[5],
 );
 write({
   address: crocDexAddress,

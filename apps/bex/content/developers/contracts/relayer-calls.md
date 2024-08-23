@@ -144,7 +144,7 @@ const value = {
 };
 
 const signature = (await signer._signTypedData(domain, types, value)).substring(
-  2
+  2,
 );
 
 const r = "0x" + signature.substring(0, 64);
@@ -154,6 +154,6 @@ const v = parseInt(signature.substring(128, 130), 16);
 const abiCoder = new ethers.utils.AbiCoder();
 const encodedSignature = abiCoder.encode(
   ["uint8", "bytes32", "bytes32"],
-  [v, r, s]
+  [v, r, s],
 );
 ```

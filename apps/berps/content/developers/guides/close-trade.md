@@ -43,7 +43,7 @@ const signer = new ethers.Wallet(YOUR_PRIVATE_KEY, ETHERS_PROVIDER);
 const tradingContract = new ethers.Contract(
   ENTRYPOINT_CONTRACT_ADDRESS,
   EntrypointContractABI,
-  signer
+  signer,
 );
 const pythConnection = new EvmPriceServiceConnection(PYTH_ENDPOINT);
 ```
@@ -63,7 +63,7 @@ const priceUpdateData = await pythConnection.getPriceFeedsUpdateData([
 const tx = await tradingContract.closeTradeMarket(
   TRADE_INDEX, // Index of the trade to close
   priceUpdateData,
-  { value: 2 }
+  { value: 2 },
 );
 ```
 

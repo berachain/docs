@@ -182,7 +182,7 @@ Open `bb.ts` and add the following code:
 export function calculateBollingerBands(
   prices: number[],
   period: number,
-  multiplier: number
+  multiplier: number,
 ) {
   const sma = calculateSMA(prices, period);
   const stdDev = calculateStdDev(prices, period);
@@ -240,7 +240,7 @@ export class PythConnection {
   async getHistoricalPriceFeeds(
     priceId: string,
     intervalSeconds: number,
-    periods: number
+    periods: number,
   ): Promise<number[]> {
     const endTime = Math.floor(Date.now() / 1000 - 5);
     const startTime = endTime - (periods + 1) * intervalSeconds;
@@ -253,7 +253,7 @@ export class PythConnection {
     ) {
       const priceFeed = await this.connection.getPriceFeed(
         priceId,
-        publishTime
+        publishTime,
       );
       prices.push(this.normalizeToTenDec(priceFeed));
     }
@@ -262,15 +262,14 @@ export class PythConnection {
 
   async subscribePriceFeedUpdates(
     priceIds: string[],
-    callback: (priceFeed: PriceFeed) => void
+    callback: (priceFeed: PriceFeed) => void,
   ): Promise<void> {
     await this.connection.subscribePriceFeedUpdates(priceIds, callback);
   }
 
   async getPriceUpdateData(priceIds: string[]): Promise<string[]> {
-    const priceUpdates = await this.connection.getPriceFeedsUpdateData(
-      priceIds
-    );
+    const priceUpdates =
+      await this.connection.getPriceFeedsUpdateData(priceIds);
 
     return priceUpdates;
   }
@@ -337,7 +336,7 @@ export class TradingBot {
     this.tradingContract = new ethers.Contract( // [!code focus]
       CONFIG.ENTRYPOINT_CONTRACT_ADDRESS, // [!code focus]
       EntrypointABI, // [!code focus]
-      wallet // [!code focus]
+      wallet, // [!code focus]
     ); // [!code focus]
     this.honeyContract = new ethers.Contract(HONEY, Erc20ABI, wallet); // [!code focus]
   } // [!code focus]
@@ -361,14 +360,14 @@ export class TradingBot {
     const ordersContract = await this.tradingContract.orders();
     const allowance = await this.honeyContract.allowance(
       this.wallet.address,
-      ordersContract
+      ordersContract,
     );
 
     if (allowance < ethers.parseEther("99999999999")) {
       console.log("Approving honey allowance");
       const tx = await this.honeyContract.approve(
         ordersContract,
-        ethers.MaxUint256
+        ethers.MaxUint256,
       );
       await tx.wait();
     }
@@ -378,7 +377,7 @@ export class TradingBot {
       await this.pythConnection.getHistoricalPriceFeeds(
         CONFIG.PRICE_ID,
         CONFIG.DATA_INTERVAL,
-        CONFIG.BOLLINGER_PERIOD
+        CONFIG.BOLLINGER_PERIOD,
       );
     this.prices = historicalPriceFeeds;
 
@@ -393,9 +392,9 @@ export class TradingBot {
         console.log(
           `${new Date().toISOString()}: Checking for trade at price: $${(
             price * Math.pow(10, -10)
-          ).toFixed(4)}`
+          ).toFixed(4)}`,
         );
-      }, CONFIG.DATA_INTERVAL * 1000) // limit updates to period interval
+      }, CONFIG.DATA_INTERVAL * 1000), // limit updates to period interval
     );
   }
 
@@ -451,7 +450,7 @@ export class TradingBot {
       const { upperBand, lowerBand } = calculateBollingerBands(
         this.prices,
         CONFIG.BOLLINGER_PERIOD,
-        CONFIG.BOLLINGER_MULTIPLIER
+        CONFIG.BOLLINGER_MULTIPLIER,
       );
 
       const currentPrice = this.prices[this.prices.length - 1]!;
@@ -502,7 +501,7 @@ export class TradingBot {
             tradeType,
             slippage,
             priceUpdateData,
-            { value: "2" }
+            { value: "2" },
           );
 
           await tx.wait();
