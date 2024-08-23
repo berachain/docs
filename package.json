@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -19,7 +20,7 @@
     "prettier": "^2.8.8",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@7.15.0",
+  "packageManager": "pnpm@8.15.0",
   "name": "docs-monorepo",
   "engines": {
     "node": ">=20"
