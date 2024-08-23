@@ -17,6 +17,7 @@
     "./Flyout": "./Flyout.vue",
     "./Sidebar": "./Sidebar.vue",
     "./Token": "./Token.vue",
+    "./AskCookbook": "./AskCookbook.vue",
     "./style": "./style.css"
   },
   "scripts": {
