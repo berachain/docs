@@ -6,6 +6,8 @@ body:
       value: |
         Thank you for submitting a documentation request. It helps make Berachain better.
 
+        PLEASE make sure you've read [Development Workflow](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#development-workflow) and have read and understood the [CODE OF CONDUCT](https://github.com/berachain/docs/blob/main/CODE_OF_CONDUCT.md).
+
         If it's a small change, like misspelling or example that needs updating, feel free to submit a PR instead of creating this issue.
 
   - type: dropdown

@@ -31,7 +31,7 @@ To prevent spam and ensure the creation of meaningful pools, BEX requires users 
 
 ## Selecting the Ratio
 
-During pool creation, the price/ratio of the tokens is set based on amount of "quote" tokens per "base" token. Using the above scenario as an example, and assuming that the price of `$WETH` is $3000, the initial price of `$HONEY` is set from the initial `3000` ratio, that is:
+During pool creation, the price/ratio of the tokens is set based on amount of "quote" tokens per "base" token. Using the above scenario as an example, and assuming that the price of `$WETH` is $3000, the initial price of `$HONEY`is set from the initial`3000` ratio, that is:
 
 - Each `$WETH` is worth `3000` `$HONEY`
 - Each `$HONEY` is worth `0.000333` `$WETH`

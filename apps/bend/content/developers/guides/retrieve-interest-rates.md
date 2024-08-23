@@ -18,7 +18,7 @@ Below is an example for fetching interest rates on Bend
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com"
+  "https://bartio.rpc.berachain.com",
 );
 const poolAddressesProvider = "0x8297A07f87a8576b88d46e636c05B84E4Ea8265D";
 
@@ -138,7 +138,7 @@ async function fetchInterestRates() {
   const poolAddressesProvider = new ethers.Contract(
     poolAddressesProvider,
     poolAddressesProviderAbi,
-    provider
+    provider,
   );
   const lendingPoolAddress = await poolAddressesProvider.getPool();
   const lendingPool = new ethers.Contract(poolAddress, poolAbi, provider);
@@ -147,10 +147,10 @@ async function fetchInterestRates() {
     await lendingPool.getReserveData(assetAddress);
 
   console.log(
-    `$HONEY Supply APY: ${ethers.utils.formatUnits(liquidityRate, 27)}%`
+    `$HONEY Supply APY: ${ethers.utils.formatUnits(liquidityRate, 27)}%`,
   );
   console.log(
-    `$HONEY Borrow APY: ${ethers.utils.formatUnits(variableBorrowRate, 27)}%`
+    `$HONEY Borrow APY: ${ethers.utils.formatUnits(variableBorrowRate, 27)}%`,
   );
 }
 
