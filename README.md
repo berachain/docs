@@ -4,14 +4,16 @@ This is a monolithic repository that contains all the documentation for Berachai
 
 ## Requirements
 
-- NVM or Node `v18.18.2+`
+- NVM or Node `v20.11.0` or greater
 - pnpm (recommended)
 
 ## Turborepo Folder Structure
 
 This Turborepo includes the following packages/apps:
 
-### Apps
+### Docs
+
+All docs are built with [Vitepress](https://vitepress.dev) - Vite & Vue Powered Static Site Generator.
 
 - `apps/bend`- Main docs repository for [https://docs.bend.berachain.com](https://docs.bend.berachain.com)
 - `apps/berps`- Main docs repository for [https://docs.berps.berachain.com](https://docs.berps.berachain.com)
@@ -20,7 +22,7 @@ This Turborepo includes the following packages/apps:
 
 ### Packages
 
-A series of packages that are shared with various `apps`.
+A series of packages that are shared with various `apps` (doc sites).
 
 - `packages/ui`: All Vitepress vue components used by the different doc apps.
 - `packages/config`: All configurations and constants
@@ -60,11 +62,11 @@ pnpm dev --filter @berachain/core;
 
 ### Code Of Conduct
 
-Plesae see [Code of Conduct](CODE_OF_CONDUCT.md)
+Please see [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ### Contributing Guide
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute and also see the [development workflow](CONTRIBUTING.md#development-workflow).
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) on how to contribute and also see the [development workflow](CONTRIBUTING.md#development-workflow).
 
 ## License
 

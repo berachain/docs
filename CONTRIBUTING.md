@@ -115,7 +115,7 @@ cd docs;
 
 ### Installing Node.js and Pnpm
 
-Berachain docs uses Pnpm workspaces to manage multiple projects. You need to install Node.js v18 or higher and Pnpm v8.15.0 or higher.
+Berachain docs uses Pnpm workspaces to manage multiple projects. You need to install Node.js v20 or higher and Pnpm v8.15.0 or higher.
 
 You can run the following commands in your terminal to check your local Node.js and Pnpm versions:
 

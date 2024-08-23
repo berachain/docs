@@ -45,3 +45,7 @@ yarn-error.log*
 .chatgpt-md-translator
 .prompt.md
 translate.sh
+
+# other package manager lock files
+package-lock.json
+yarn.lock
