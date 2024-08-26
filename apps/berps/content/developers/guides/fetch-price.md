@@ -42,7 +42,7 @@ Using the SDK, price updates can be fetched using `getLatestPriceFeeds` as follo
 import { EvmPriceServiceConnection } from "@pythnetwork/pyth-evm-js";
 
 const pythConnection = new EvmPriceServiceConnection(
-  "https://hermes.pyth.network",
+  "https://hermes.pyth.network"
 );
 
 const priceIds = [
@@ -70,7 +70,7 @@ const provider = ethers.getDefaultProvider("https://bartio.rpc.berachain.com/");
 const pythContract = new ethers.Contract(contractAddress, PythAbi, provider);
 
 const pythConnection = new EvmPriceServiceConnection(
-  "https://hermes.pyth.network",
+  "https://hermes.pyth.network"
 );
 
 const priceIds = [
@@ -87,7 +87,7 @@ const tx = await tradingContract.openTrade(
   orderType,
   slippage,
   priceUpdateData,
-  { value: updateFee },
+  { value: updateFee }
 );
 ```
 

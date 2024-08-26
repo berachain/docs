@@ -15,7 +15,7 @@ import { ethers } from "ethers";
 
 // Connect to Berachain using the provided RPC URL
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "https://bartio.rpc.berachain.com"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
@@ -45,7 +45,7 @@ async function repayLoan() {
       honeyAddress,
       repayAmount,
       2, // variable interest rate
-      signer.address, // repaying loan on behalf of this user
+      signer.address // repaying loan on behalf of this user
     );
     await tx.wait();
     console.log(`Repaid: ${tx.hash}`);

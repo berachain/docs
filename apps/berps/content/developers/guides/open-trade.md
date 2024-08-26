@@ -43,7 +43,7 @@ const signer = new ethers.Wallet(YOUR_PRIVATE_KEY, ETHERS_PROVIDER);
 const tradingContract = new ethers.Contract(
   ENTRYPOINT_CONTRACT_ADDRESS,
   EntrypointContractABI,
-  signer,
+  signer
 );
 const pythConnection = new EvmPriceServiceConnection(PYTH_ENDPOINT);
 ```
@@ -87,7 +87,7 @@ const tx = await tradingContract.openTrade(
   orderType,
   slippage,
   priceUpdateData,
-  { value: "2" },
+  { value: "2" }
 );
 ```
 

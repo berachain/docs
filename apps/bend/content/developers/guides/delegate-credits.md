@@ -30,7 +30,7 @@ To approve delegation, the approveDelegation method of the debt token contract i
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "https://bartio.rpc.berachain.com"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
@@ -44,14 +44,14 @@ const debtTokenAbi = [
 const debtTokenContract = new ethers.Contract(
   debtTokenAddress,
   debtTokenAbi,
-  signer,
+  signer
 );
 
 async function approveDelegation() {
   try {
     const tx = await debtTokenContract.approveDelegation(
       delegationAddress,
-      amount,
+      amount
     );
     await tx.wait();
     console.log(`Delegation approved: ${tx.hash}`);
@@ -81,7 +81,7 @@ The borrower's available credit is reduced by the borrowed amount.
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "https://bartio.rpc.berachain.com"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
@@ -100,7 +100,7 @@ async function getPoolAddress(): Promise<string> {
   const lendingPoolAddressesProvider = new ethers.Contract(
     poolAddressesProvider,
     poolAddressesProviderAbi,
-    provider,
+    provider
   );
   return await lendingPoolAddressesProvider.getPool();
 }
@@ -111,7 +111,7 @@ async function borrow() {
     const lendingPoolContract = new ethers.Contract(
       lendingPoolAddress,
       lendingPoolAbi,
-      signer,
+      signer
     );
 
     const tx = await lendingPoolContract.borrow(
@@ -119,7 +119,7 @@ async function borrow() {
       borrowAmount,
       2, // variable interest rate
       0,
-      DELEGATOR_ADDRESS,
+      DELEGATOR_ADDRESS
     );
     await tx.wait();
     console.log(`Borrowed: ${tx.hash}`);

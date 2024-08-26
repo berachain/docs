@@ -53,7 +53,7 @@ import { ethers } from "ethers";
 
 // connect to Berachain using the provided rpc url
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "https://bartio.rpc.berachain.com"
 );
 
 // replace with your wallet's private key
@@ -83,12 +83,12 @@ async function liquidateLoan() {
       debtAssetAddress, // the debt asset we're covering
       userAddress, // the user whose loan is being liquidated
       debtToCover, // amount of debt to cover
-      false, // set to true if you want to receive aTokens instead of the underlying asset
+      false // set to true if you want to receive aTokens instead of the underlying asset
     );
 
     await tx.wait();
     console.log(
-      `liquidation performed successfully! transaction hash: ${tx.hash}`,
+      `liquidation performed successfully! transaction hash: ${tx.hash}`
     );
   } catch (error) {
     console.error("there was an error performing the liquidation:", error);
