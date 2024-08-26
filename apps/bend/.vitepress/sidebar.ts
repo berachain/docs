@@ -1,6 +1,7 @@
 // Imports
 // ========================================================
 import { DefaultTheme } from "vitepress";
+import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
@@ -14,12 +15,16 @@ const SIDEBAR = {
       items: [
         { text: "What Is Bend?", link: "/learn/" },
         {
+          text: "How Does Bend Work?",
+          link: "/learn/how-does-bend-work",
+        },
+        {
           text: "Bend & Proof Of Liquidity",
           link: "/learn/bend-and-pol",
         },
         {
-          text: "Bend dApp",
-          link: "https://bartio.bend.berachain.com",
+          text: `${constants.testnet.dapps.bend.name}`,
+          link: `${constants.testnet.dapps.bend.url}`,
           target: "_blank",
           rel: "no-referrer",
         },

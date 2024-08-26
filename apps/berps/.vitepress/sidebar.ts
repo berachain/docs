@@ -1,6 +1,7 @@
 // Imports
 // ========================================================
 import { DefaultTheme } from "vitepress";
+import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
@@ -19,8 +20,8 @@ const SIDEBAR = {
           link: "/learn/berps-proof-of-liquidity",
         },
         {
-          text: "Berps dApp",
-          link: "https://bartio.berps.berachain.com",
+          text: `${constants.testnet.dapps.berps.name}`,
+          link: `${constants.testnet.dapps.berps.url}`,
           target: "_blank",
           rel: "no-referrer",
         },

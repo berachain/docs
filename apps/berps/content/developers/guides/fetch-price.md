@@ -11,6 +11,10 @@ head:
       content: Guide for Using Pyth Prices.
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Berps Developer Guides: Using Pyth Prices
 
 Pyth exposes a number of methods for retrieving pricing data. This page demonstrates a few options for doing so, but is not exhaustive. See [Pyth's documentation](https://docs.pyth.network/price-feeds/fetch-price-updates) for the full list.
@@ -59,14 +63,14 @@ Berps trading actions expect a signed price update to refresh its internal state
 
 In order to prepare the necessary data for the trade, we first call the Pyth SDK's `getPriceFeedsUpdateData` to obtain the price update data. Next, `getUpdateFee` is called to obtain the fee required to update the price feed on-chain.
 
-```typescript
+```typescript-vue
 import { ethers } from "ethers";
 import { EvmPriceServiceConnection } from "@pythnetwork/pyth-evm-js";
 import PythAbi from "@pythnetwork/pyth-sdk-solidity/abis/IPyth.json" assert { type: "json" };
 
 // Berachain Artio
 const contractAddress = "0x8D254a21b3C86D32F7179855531CE99164721933";
-const provider = ethers.getDefaultProvider("https://bartio.rpc.berachain.com/");
+const provider = ethers.getDefaultProvider("{{config.testnet.rpcUrl}}");
 const pythContract = new ethers.Contract(contractAddress, PythAbi, provider);
 
 const pythConnection = new EvmPriceServiceConnection(

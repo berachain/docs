@@ -11,6 +11,10 @@ head:
       content: Creating an automated trading bot for Berps using a Bollinger Band strategy
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Berps Developer Guides: Simple Trading Bot in TypeScript
 
 > See the full [GitHub Project Code Repository](https://github.com/berachain/guides/tree/main/apps/berps-bot)
@@ -27,7 +31,7 @@ By the end of the tutorial, you will have created a bot that will automatically 
 Before beginning, make sure you have the following installed and setup:
 
 - NMV or Node `v20.11.0` or greater
-- Wallet with testnet `$HONEY` tokens - See the [Berachain bArtio Faucet](https://bartio.faucet.berachain.com), receive `$BERA` and trade for `$HONEY` on [BEX](https://bartio.bex.berachain.com/swap)
+- Wallet with testnet `$HONEY` tokens - See the <a :href="config.testnet.dapps.faucet.url">{{config.testnet.dapps.faucet.name}}</a>, receive `$BERA` and trade for `$HONEY` on <a :href="config.testnet.dapps.bex.url + 'swap'">BEX</a>
 
 ## Trading Bot Project Setup
 
@@ -68,7 +72,7 @@ Populate environment variables (current environment variables are for testnet an
 
 **File:** `.env`
 
-```bash
+```bash-vue
 PYTH_ENDPOINT=https://hermes.pyth.network
 PRICE_ID=0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace
 USDC_PRICE_ID=0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a
@@ -77,7 +81,7 @@ BOLLINGER_PERIOD=20
 BOLLINGER_MULTIPLIER=2
 ENTRYPOINT_CONTRACT_ADDRESS=0xb3395EeeA7701E0037bBC6Ab52953C6fB0c3326c
 PRIVATE_KEY=YOUR_WALLET_PRIVATE_KEY
-RPC_PROVIDER=https://bartio.rpc.berachain.com/
+RPC_PROVIDER={{config.testnet.rpcUrl}}
 ```
 
 Replace `PRIVATE_KEY` with your actual wallet private key.

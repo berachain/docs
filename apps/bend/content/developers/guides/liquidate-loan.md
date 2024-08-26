@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Liquidations
 
 The health of Bend is dependent on the 'health' of the positions within the protocol, also known as the 'health factor'. When the 'health factor' of an account's total loans is below 1, anyone can make a [liquidationCall()](/developers/contracts/pool#liquidationcall) to the `Pool` contract, pay back part of the debt owed and receive discounted collateral in return (also known as the liquidation bonus).
@@ -46,21 +50,21 @@ Only accounts with `HF < 1` can be liquidated. To get a user's health factor **o
 
 ### Liquidation Example
 
-```typescript
+```typescript-vue
 //Note: Please don't treat this code as a working solution and the usage should be more as a "template" to suit your specific needs.
 
 import { ethers } from "ethers";
 
 // connect to Berachain using the provided rpc url
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com"
+  "{{config.testnet.rpcUrl}}"
 );
 
 // replace with your wallet's private key
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
 // addresses for the contracts and assets involved
-const poolAddress = "0x30A3039675E5b5cbEA49d9a5eacbc11f9199B86D"; // pool contract address on bArtio
+const poolAddress = "{{config.contracts.poolProxy.address}}"; // pool contract address on bArtio
 const collateralAssetAddress = "0xCollateralAssetAddress"; // replace with the actual collateral asset address
 const debtAssetAddress = "0xDebtAssetAddress"; // replace with the actual debt asset address
 const userAddress = "0xUserAddress"; // address of the user whose loan is being liquidated

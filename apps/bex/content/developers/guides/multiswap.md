@@ -11,6 +11,10 @@ head:
       content: Example showing use of the MultiSwap router for multihop swaps
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Using The MultiSwap Router
 
 The `BeraCrocMultiSwap` contract is a periphery contract which serves as a router for conveniently performing a series of swaps between one or more pools. This contract abstracts many of the more advanced parameters from the `swap()` and `userCmd()` DEX functions.
@@ -19,7 +23,7 @@ It is anticipated that the MultiSwap router be used in conjunction with some for
 
 The contract is deployed at
 
-bArtio: `0x21e2C0AFd058A89FCf7caf3aEA3cB84Ae977B73D`
+bArtio Testnet: `{{config.contracts.beraCrocMultiSwap.address}}`
 
 ### multiSwap
 
@@ -59,11 +63,11 @@ struct SwapStep {
 
 Multihop swap of `HONEY -> WBERA -> WETH` using testnet addresses
 
-```solidity
-address ROUTER = 0x21e2C0AFd058A89FCf7caf3aEA3cB84Ae977B73D;
-address HONEY = 0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03;
-address WBERA = 0x7507c1dc16935B82698e4C63f2746A2fCf994dF8;
-address WETH = 0x6E1E9896e93F7A71ECB33d4386b49DeeD67a231A;
+```solidity-vue
+address ROUTER = {{config.contracts.beraCrocMultiSwap.address}};
+address HONEY = {{config.contracts.honey.address}};
+address WBERA = {{config.contracts.wbera.address}};
+address WETH = {{config.contracts.weth.address}};
 
 MultiSwap.SwapStep[] memory swap = new MultiSwap.SwapStep[](2);
 swap[0] = MultiSwap.SwapStep(36000, HONEY, WBERA, true);
@@ -74,7 +78,7 @@ MultiSwap(ROUTER).multiSwap(swap, 1 ether, 0);
 
 ### JavaScript Example
 
-```js
+```js-vue
 const { ethers } = require("ethers");
 
 async function main() {
@@ -82,12 +86,12 @@ async function main() {
 
   const multiSwapABI = ... // see below
 
-  const routerAddress = "0x21e2C0AFd058A89FCf7caf3aEA3cB84Ae977B73D";
+  const routerAddress = "{{config.contracts.beraCrocMultiSwap.address}}";
   const multiSwap = new ethers.Contract(routerAddress, multiSwapABI, provider);
 
-  const HONEY = "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03";
-  const WBERA = "0x7507c1dc16935B82698e4C63f2746A2fCf994dF8";
-  const WETH = "0x6E1E9896e93F7A71ECB33d4386b49DeeD67a231A";
+  const HONEY = "{{config.contracts.honey.address}}";
+  const WBERA = "{{config.contracts.wbera.address}}";
+  const WETH = "{{config.contracts.weth.address}}";
 
   const swapSteps = [
     {

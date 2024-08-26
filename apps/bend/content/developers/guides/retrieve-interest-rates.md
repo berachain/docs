@@ -2,6 +2,10 @@
 title: Interest Rates in Bend
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Interest Rates
 
 Interest rates on Bend are dynamic, adjusting based on the utilization rate of `$HONEY` in the lending pool. See the article on [Interest Rates](/learn/lending-protocol/interest-rates) for details on how interest rates are calculated.
@@ -12,15 +16,15 @@ All rates and indeces queried on-chain or from subgraphs are expressed in RAY un
 
 Below is an example for fetching interest rates on Bend
 
-```typescript
+```typescript-vue
 // Note: Please don't treat this code as a working solution and the usage should be more as a "template" to suit your needs.
 
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com"
+  "{{config.testnet.rpcUrl}}"
 );
-const poolAddressesProvider = "0x8297A07f87a8576b88d46e636c05B84E4Ea8265D";
+const poolAddressesProvider = "{{config.contracts.poolAddressesProvider.address}}";
 
 const poolAddressesProviderAbi = [
   "function getPool() external view returns (address)",

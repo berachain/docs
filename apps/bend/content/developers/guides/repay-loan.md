@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Repay $HONEY Loan
 
 Repaying a loan in Berachain Bend involves using the `repay()` or `repayWithATokens` method of the Pool contract. This guide provides TypeScript examples for using these methods .
@@ -8,19 +12,19 @@ Repaying a loan in Berachain Bend involves using the `repay()` or `repayWithATok
 
 This example illustrates a user repaying a loan with `$HONEY` using the `repay()` method.
 
-```typescript
+```typescript-vue
 //Note: Please don't treat this code as a working solution and the usage should be more as a "template" to suit your needs.
 
 import { ethers } from "ethers";
 
 // Connect to Berachain using the provided RPC URL
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com"
+  "{{config.testnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
-const poolAddress = "0x30A3039675E5b5cbEA49d9a5eacbc11f9199B86D";
-const honeyAddress = "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03";
+const poolAddress = "{{config.contracts.poolProxy.address}}";
+const honeyAddress = "{{config.contracts.honey.address}}";
 const repayAmount = ethers.utils.parseUnits("1000.0", 18); // Amount to repay
 
 const poolAbi = [

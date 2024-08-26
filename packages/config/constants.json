@@ -14,7 +14,8 @@
       },
       "bex": {
         "name": "Berachain BEX",
-        "url": "https://bartio.bex.berachain.com/"
+        "url": "https://bartio.bex.berachain.com/",
+        "apiUrl": "https://bartio-bex-router.berachain-devnet.com/"
       },
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
@@ -192,7 +193,7 @@
     },
     "weth": {
       "name": "WETH Token",
-      "address": "0x6E1E9896e93F7A71ECB33d4386b49DeeD67a231A",
+      "address": "0xE28AfD8c634946833e89ee3F122C06d7C537E8A8",
       "abi": "",
       "docsUrl": "/developers/contracts/weth-token"
     },
