@@ -83,7 +83,7 @@ Let's modify out index.html to show something in the meantime.
 **File:** `./app/index.html`
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -145,7 +145,7 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
 **File:** `./app/index.html`
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -313,7 +313,7 @@ const connect = async () => {
       error?.message ?? "Unknown wallet connection error.";
     devErrorConnect.classList = devErrorConnect.classList.value.replaceAll(
       "hidden",
-      "",
+      ""
     );
   }
   console.groupEnd();
@@ -361,7 +361,7 @@ const onSubmitEthBlockNumber = async (event) => {
 
     preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(
       result,
-      16,
+      16
     )}`;
   } catch (error) {
     console.log({ error });

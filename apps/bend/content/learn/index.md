@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # What Is Berachain Bend? 🐻⛓️
 
 Bend is Berachain's non-custodial lending protocol. Bend is centered around providing `$HONEY` utility to the Berachain ecosystem.
@@ -8,7 +12,7 @@ Here's an illustration of user interactions with Bend:
 
 ![Berachain Bend Overview](/assets/bend-overview.png)
 
-> Berachain Bend can be found at https://bartio.bend.berachain.com
+> Berachain Bend can be found at <a :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a>
 
 :::tip
 <b>`$HONEY` is the only asset that can be borrowed</b>

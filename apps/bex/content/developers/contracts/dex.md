@@ -11,11 +11,15 @@ head:
       content: Technical reference of main BEX contract interface.
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # DEX Contract Interface
 
 The DEX contract (`CrocSwapDex`) is the main entrypoint for interacting with BEX. It acts as a proxy to the various sidecar contracts that implement the different functionalities.
 
-The contract is deployed on bArtio Testnet at: [0xAB827b1Cc3535A9e549EE387A6E9C3F02F481B49](https://bartio.beratrail.io/address/0xAB827b1Cc3535A9e549EE387A6E9C3F02F481B49)
+The contract is deployed on bArtio Testnet at: <a :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.crocSwapDex.address">{{config.contracts.crocSwapDex.address}}</a>
 
 The `CrocSwapDex` ABI exposes six Solidity methods:
 

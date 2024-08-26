@@ -11,6 +11,10 @@ head:
       content: How to use BEX liquidity in Proof of Liquidity
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Proof of Liquidity
 
 Proof of liquidity (PoL) is a mechanism that rewards users for their liquidity contributions to the Berachain ecosystem through native chain rewards, `$BGT`. As the native dApp powering trading liquidity in the Berachain ecosystem, a number of BEX pools will be eligible for `$BGT` rewards.
@@ -25,7 +29,8 @@ The process for earning `$BGT` through BEX is as follows:
 3. Stake the LP token returned from step 2 in the appropriate PoL reward vault
 
 The list of reward vaults for earning `$BGT` rewards can be seen here:
-https://bartio.station.berachain.com/gauge
+
+{{config.testnet.dapps.bgtStation.url}}gauge
 
 ## Whitelisting Pools for PoL Rewards
 

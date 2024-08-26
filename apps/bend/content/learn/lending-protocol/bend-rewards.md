@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Bend Rewards
 
 In addition to providing a venue for users to seek leverage on crypto positions using `$HONEY`, Bend also provides a variety of ways for users to earn, including:
@@ -24,7 +28,7 @@ Borrowers with open `$HONEY` loans enjoy `$BGT` as an extra incentive for borrow
 Borrowers earn based on the `$HONEY` borrowed, and not the value of supplied collateral. Be mindful of your health factor when trying to maximize `$BGT` earning.
 :::
 
-Earning `$BGT` on Bend is unique, because Borrowers can easily claim their `$BGT` rewards on Bend, rather than visiting the portal for depositing in [reward Vaults](https://bartio.station.berachain.com/gauge) (required for BEX deposits, for example).
+Earning `$BGT` on Bend is unique, because Borrowers can easily claim their `$BGT` rewards on Bend, rather than visiting the portal for depositing in <a :href="config.testnet.dapps.bgtStation.url + 'gauge'">Reward Vaults</a> (required for BEX deposits, for example).
 
 ![Claim $BGT](/assets/claim-bgt.png)
 

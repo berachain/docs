@@ -11,13 +11,17 @@ head:
       content: The BEX Impact contract allows users to calculate the price impact and resulting token flows associated with a hypothetical swap on the BEX DEX.
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # CrocImpact Contract
 
 The `CrocImpact` contract provides a convenient way to calculate the price impact and resulting token flows associated with a hypothetical swap on the BEX DEX.
 
 The contract is deployed at
 
-Testnet: `0xCfEa3579a06e2e9a596D311486D12B3a49a919Cd`
+bArtio Testnet: `{{config.contracts.crocImpact.address}}`
 
 Note that calling this contract does not execute an actual swap. It simply returns the token quantities that would be paid or received if a swap were to be executed at the current chain state. When calculating off-chain, keep in mind that the state of the curve may change between the time the function is called and the time the actual swap transaction executes on-chain.
 

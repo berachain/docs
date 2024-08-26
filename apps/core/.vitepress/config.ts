@@ -155,10 +155,7 @@ export default defineConfig({
         {
           find: /^.*\/VPNavBar\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBar.vue",
-              import.meta.url,
-            ),
+            new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
           ),
         },
         {
@@ -166,8 +163,8 @@ export default defineConfig({
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/NavBarMenu.vue",
-              import.meta.url,
-            ),
+              import.meta.url
+            )
           ),
         },
         {
@@ -175,8 +172,8 @@ export default defineConfig({
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/NavBarMenuLink.vue",
-              import.meta.url,
-            ),
+              import.meta.url
+            )
           ),
         },
         {
@@ -184,17 +181,14 @@ export default defineConfig({
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
-              import.meta.url,
-            ),
+              import.meta.url
+            )
           ),
         },
         {
           find: /^.*\/VPFlyout\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/Flyout.vue",
-              import.meta.url,
-            ),
+            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
           ),
         },
         {
@@ -202,8 +196,8 @@ export default defineConfig({
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/Sidebar.vue",
-              import.meta.url,
-            ),
+              import.meta.url
+            )
           ),
         },
       ],

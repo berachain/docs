@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # How Does Bend Work?
 
 Bend's design is inspired by [Aave](https://app.aave.com/), a highly battle-tested and efficient lending protocol. This article describes key concepts and how participants interact with one another.
@@ -8,7 +12,11 @@ There are three main participants in Bend:
 2. **Borrowers** borrowing `$HONEY` and paying lending fees
 3. **Liquidators** ensuring that the protocol remains solvent
 
-[![Berachain Bend](/assets/how-bend-works-2.png)](https://bartio.bend.berachain.com/)
+<a :href="config.testnet.dapps.bend.url">
+
+![Berachain Bend](/assets/how-bend-works-2.png)
+
+</a>
 
 Berachain itself may also be considered a Bend participant, as it's the entity providing `$BGT` incentives to promote Bend usage.
 

@@ -11,6 +11,10 @@ head:
       content: How to understand the MultiPath callpath
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Understanding the MultiPath Callpath
 
 The [MultiPath](/developers/contracts/multipath) callpath provides a callpath enabling users to sequence arbitrary commands in a single transaction.
@@ -20,7 +24,7 @@ We walk through an example BEX transaction to see how MultiPath performs the mul
 1. Creating a new pool.
 2. Adding liquidity to this pool.
 
-https://bartio.beratrail.io/tx/0x113c50e59148c06aeac42a91ab11df4436a2c9b1b0febaebad93f9d905ff9256
+{{config.testnet.dapps.beratrail.url}}/tx/0x113c50e59148c06aeac42a91ab11df4436a2c9b1b0febaebad93f9d905ff9256
 
 In particular, we make sense of the input calldata of this transaction.
 
@@ -35,7 +39,7 @@ const multiPathArgs = [2, 3, initPoolCalldata, 128, mintCalldata];
 
 const multiCmd = encodeAbiParameters(
   parseAbiParameters("uint8, uint8, bytes, uint8, bytes"),
-  multiPathArgs as any[5],
+  multiPathArgs as any[5]
 );
 write({
   address: crocDexAddress,
@@ -117,7 +121,7 @@ The second command (code 128) calls the WarmPath contract to mint liquidity (the
 
 ## Appendix - Calldata Decoded
 
-We provide the decoded calldata shown in the [example transaction](https://bartio.beratrail.io/tx/0x113c50e59148c06aeac42a91ab11df4436a2c9b1b0febaebad93f9d905ff9256):
+We provide the decoded calldata shown in the <a :href="config.testnet.dapps.beratrail.url + 'tx/0x113c50e59148c06aeac42a91ab11df4436a2c9b1b0febaebad93f9d905ff9256'">example transaction</a>:
 
 ```
 Function: userCmd(uint16, bytes)

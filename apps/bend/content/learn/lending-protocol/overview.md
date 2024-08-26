@@ -16,7 +16,11 @@ There are three main participants in Bend:
 
 **Borrowers** earn `$BGT` in Bend through Berachain's Proof of Liquidity (PoL) mechanism. Head over to the main docs to [learn more about PoL](https://docs.berachain.com/learn/what-is-proof-of-liquidity).
 
-[![Berachain Bend](/assets/how-bend-works-2.png)](https://bartio.bend.berachain.com/)
+<a :href="config.testnet.dapps.bend.url">
+
+![Berachain Bend](/assets/how-bend-works-2.png)
+
+</a>
 
 Berachain itself may also be considered a Bend participant, as the entity providing `$BGT` incentives to promote Bend usage through PoL.
 

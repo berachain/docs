@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Credit Delegation
 
 Credit delegation allows a depositor to deposit funds in the protocol to earn interest, and delegate borrowing power (i.e. their credit) to other users.
@@ -24,13 +28,13 @@ This is done for each debt token that needs to be delegated.
 
 To approve delegation, the approveDelegation method of the debt token contract is used. The supplier (delegator) allows the borrower (delegatee) a certain amount.
 
-```typescript
+```typescript-vue
 // Note: Please don't treat this code as a working solution and the usage should be more as a "template" to suit your dApp's needs.
 
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "{{config.testnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
@@ -44,14 +48,14 @@ const debtTokenAbi = [
 const debtTokenContract = new ethers.Contract(
   debtTokenAddress,
   debtTokenAbi,
-  signer,
+  signer
 );
 
 async function approveDelegation() {
   try {
     const tx = await debtTokenContract.approveDelegation(
       delegationAddress,
-      amount,
+      amount
     );
     await tx.wait();
     console.log(`Delegation approved: ${tx.hash}`);
@@ -76,16 +80,16 @@ The borrower's available credit is reduced by the borrowed amount.
 
 ### Example
 
-```typescript
+```typescript-vue
 // Note: Please don't treat this code as a working solution and the usage should be more as a "template" to suit your dApp's needs.
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://bartio.rpc.berachain.com",
+  "{{config.testnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
-const poolAddressesProvider = "0x8297A07f87a8576b88d46e636c05B84E4Ea8265D";
+const poolAddressesProvider = "{{config.contracts.poolAddressesProvider.address}}";
 const lendingPoolAbi = [
   "function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf) external",
 ];
@@ -100,7 +104,7 @@ async function getPoolAddress(): Promise<string> {
   const lendingPoolAddressesProvider = new ethers.Contract(
     poolAddressesProvider,
     poolAddressesProviderAbi,
-    provider,
+    provider
   );
   return await lendingPoolAddressesProvider.getPool();
 }
@@ -111,7 +115,7 @@ async function borrow() {
     const lendingPoolContract = new ethers.Contract(
       lendingPoolAddress,
       lendingPoolAbi,
-      signer,
+      signer
     );
 
     const tx = await lendingPoolContract.borrow(
@@ -119,7 +123,7 @@ async function borrow() {
       borrowAmount,
       2, // variable interest rate
       0,
-      DELEGATOR_ADDRESS,
+      DELEGATOR_ADDRESS
     );
     await tx.wait();
     console.log(`Borrowed: ${tx.hash}`);

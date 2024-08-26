@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Bend & $HONEY
 
 $HONEY is Berachain's native stablecoin. It is an standard [ERC20 Token](#contract-address) and represents the equivalent of 1 USDC.
@@ -10,6 +14,6 @@ Note: Other assests deposited into bend act only as a collateral.
 
 ## Where Can I Get $HONEY?
 
-$HONEY can be swapped for other assets through [Berachain's Honey DApp](https://bartio.honey.berachain.com) or the [Beracahin BEX](https://bartio.bex.berachain.com).
+`$HONEY` can be swapped for other assets through <a :href="config.testnet.dapps.honeySwap.url">{{config.testnet.dapps.honeySwap.name}} dApp</a> or the <a :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.name}}</a>.
 
 Additional means to buy $HONEY are coming soon, and users can use Berachain's canonical bridge ([LayerZero](https://layerzero.network)) to bridge over assets.

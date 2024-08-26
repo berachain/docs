@@ -17,7 +17,7 @@ head:
 
 # CrocQuery Example
 
-Say for example you wanted to query the price of `WBERA` relative to `HONEY` in this pool: https://bartio.bex.berachain.com/pool/0xd28d852cbcc68dcec922f6d5c7a8185dbaa104b7.
+Say for example you wanted to query the price of `WBERA` relative to `HONEY` in this pool: <a :href="config.testnet.dapps.bex.url + 'pool/0xd28d852cbcc68dcec922f6d5c7a8185dbaa104b7'">{{config.testnet.dapps.bex.url}}pool/0xd28d852cbcc68dcec922f6d5c7a8185dbaa104b7</a>.
 
 Let's walk through the steps to accomplish this using the [CrocQuery](/developers/query-contracts/query) contract, using [Foundry's](https://book.getfoundry.sh/getting-started/installation) `cast` CLI. Specifically, we will be calling the `queryPrice` method.
 

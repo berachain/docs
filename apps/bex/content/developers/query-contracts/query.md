@@ -11,13 +11,17 @@ head:
       content: View functions to query state of pool parameters and prices
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # CrocQuery Contract
 
 The `CrocQuery` contract provides a set of view functions for querying various aspects of the DEX contract, including pool parameters, liquidity curves, user LP positions, and user surplus collateral positions.
 
 The contract is deployed at
 
-Testnet: `0x8685CE9Db06D40CBa73e3d09e6868FE476B5dC89`
+bArtio Testnet: `{{config.contracts.crocQuery.address}}`
 
 ## Pool Price Functions
 

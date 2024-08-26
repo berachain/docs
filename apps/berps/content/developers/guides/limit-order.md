@@ -89,7 +89,7 @@ If the conditions have been met for the limit order to execute, the `executeLimi
 const tx = await tradingContract.executeLimitOrder(
   TRADE_INDEX, // Index of the trade to execute
   priceUpdateData,
-  { value: 2 },
+  { value: 2 }
 );
 ```
 
