@@ -1,5 +1,11 @@
 # @berachain/berps
 
+## 1.1.0
+
+### Minor Changes
+
+- Updated constants variables
+
 ## 1.0.1
 
 ### Patch Changes
