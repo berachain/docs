@@ -75,6 +75,10 @@
     {
       "source": "/learn/pol/gauges",
       "destination": "/learn/pol/rewardvaults"
+    },
+    {
+      "source": "/learn/protocol/bgt-emissions",
+      "destination": "/learn/pol/"
     }
   ]
 }
