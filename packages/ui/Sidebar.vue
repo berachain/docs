@@ -91,7 +91,6 @@ Styles
 
 @media (min-width: 960px) {
   .VPSidebar {
-    z-index: 1;
     padding-top: var(--vp-nav-height);
     padding-bottom: 128px;
     width: var(--vp-sidebar-width);
