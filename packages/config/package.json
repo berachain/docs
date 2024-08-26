@@ -1,6 +1,6 @@
 {
   "name": "@berachain/config",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Main configuration file for all configs for the docs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

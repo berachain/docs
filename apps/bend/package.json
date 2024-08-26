@@ -1,6 +1,6 @@
 {
   "name": "@berachain/bend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "vitepress dev --port 5176",
     "build": "vitepress build",
