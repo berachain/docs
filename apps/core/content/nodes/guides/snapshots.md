@@ -12,12 +12,9 @@ head:
 ---
 
 <script setup>
-    import config from '@berachain/config/constants.json';
-    import AddNetwork from '@berachain/ui/AddNetwork';
-    import CopyToClipboard from '@berachain/ui/CopyToClipboard';
 </script>
 
-# Node Snapshots
+# Restoring Nodes from Snapshots
 
 This guide will walk you through the process of using node snapshots to quickly restore a node.
 
@@ -126,6 +123,5 @@ Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of 
 Now you're good to start your node back up!
 
 
-## Snapshot Providers
 
 You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md).

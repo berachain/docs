@@ -195,7 +195,7 @@ const SIDEBAR = {
           link: "/nodes/guides/kurtosis",
         },
         {
-          text: "Snapshots",
+          text: "Restoring Nodes from Snapshots",
           link: "/nodes/guides/snapshots",
         },
       ],
