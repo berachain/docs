@@ -61,7 +61,7 @@ Different snapshot providers may have different instructions for using their sna
 
 ### Step 1 - Backup your Beacon-Kit Config Folder
 
-Some snapshots may include the config folder in their zip file, so it's important to backup your current config folder before using a snapshot. This ensures that you can easily keep your node's configuration settings and, most importantly, *your validator keys*.
+Some snapshots may include the config folder in their zip file, so it's important to backup your current config folder before using a snapshot. This ensures that you can easily keep your node's configuration settings and, most importantly, _your validator keys_.
 
 ### Step 2 - Download the Snapshot
 
@@ -105,7 +105,6 @@ lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $BEACOND_HOME
 
 Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. Something like `/root/.beacond/` on Linux, unless you've configured it differently.
 
-
 ### Execution Client Extraction
 
 The steps will differ depending on the Execution Client you are using, however, the general process is the same.
@@ -121,7 +120,5 @@ Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of 
 ### Step 5 - Start your Node
 
 Now you're good to start your node back up!
-
-
 
 You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md).
