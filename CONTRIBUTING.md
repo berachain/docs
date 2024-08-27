@@ -520,10 +520,10 @@ pnpm changeset;
 #   ◯ @berachain/bend
 #   ◯ @berachain/core
 #   ◯ @berachain/bex
-# 
+#
 # NOTE: REMEMBER major is for breaking changes, minor is for new features/sections, and patch is for small text changes
 # If not a major change don't select anything and press `Enter`
-# 
+#
 # 🦋  Which packages should have a major bump? …
 # ◉ all packages
 #   ◉ @berachain/config@0.0.0
