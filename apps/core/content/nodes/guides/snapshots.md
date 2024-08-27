@@ -63,6 +63,14 @@ Different snapshot providers may have different instructions for using their sna
 
 Some snapshots may include the config folder in their zip file, so it's important to backup your current config folder before using a snapshot. This ensures that you can easily keep your node's configuration settings and, most importantly, _your validator keys_.
 
+An example of this is as follows:
+
+```bash
+cp -r $BEACOND_HOME/config $HOME/beacond-config-backup
+```
+
+Where `$BEACOND_HOME` is the directory of your beacond config and `$HOME` is your home directory (or some other directory you choose to backup to).
+
 ### Step 2 - Download the Snapshot
 
 Select which snapshot provider you would like to use and download the snapshot. Then run the following command to download the snapshot:
@@ -117,7 +125,16 @@ lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $GETH_DATA_DIR
 
 Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data. Something like `/root/.ethereum/data/geth`.
 
-### Step 5 - Start your Node
+
+### Step 5 - Restore your Validator Config
+
+Now that you have extracted the snapshot, you can restore your validator config by copying the backup you created in Step 1.
+
+```bash
+cp -r $HOME/beacond-config-backup $BEACOND_HOME/config
+```
+
+### Step 6 - Start your Node
 
 Now you're good to start your node back up!
 
