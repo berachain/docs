@@ -16,7 +16,7 @@ The following sequence diagram represents the different steps that Proof-of-Liqu
 4. With the rewarded governance token, the _Active Validator_ distributes to various _Reward Vaults_, decided by the validator in the Berachef contract (A list of addresses and distribution percentages to different Reward Vaults).
 5. A _Liquidity Provider_ may perform a liquidity action like depositing a certain token with a BEX pool. Ex: Providing `$HONEY` and `$BERA` to a liquidity pool
 6. For providing liquidity, the _Liquidity Provider_ receives a receipt token. Ex: `$HONEY-WBERA`.
-7. The _Liquidity Provider_ stakes the receipt token with the _Reward Vault_ making them eligible to receive `$BGT` based on their contribution.
+7. The _Liquidity Provider_ stakes the receipt token with the _Reward Vault_ making them eligible to recieve `$BGT` based on their contribution.
 8. The `$BGT` that was distributed to the reward vault is now eligible to be claimed by the _Liquidity Provider_, making them a _BGT Holder_
 9. A BGT Holder can now delegate their `$BGT` to an _Active Validator_, making that validator a _Boosted Validator_, and increases the rewards a validator is alloted to distribute when they propose a block
 
