@@ -103,6 +103,92 @@ The result will be a hash that you can compare to the checksum provided by the s
 
 ### Step 4 - Extract the Snapshot(s)
 
+Your extracted snapshot will look something like this:
+
+:::info
+The config folder may or may not be included in the snapshot, depending on the snapshot provider. This is why it's important to backup your config folder before using a snapshot.
+:::
+
+```bash
+> tree $EXTRACTED_SNAPSHOT_DIR
+
+/root/tmp_snapshot_extraction
+├── config
+│   ├── addrbook.json
+│   ├── app.toml
+│   ├── client.toml
+│   ├── config.toml
+│   ├── genesis.json
+│   ├── kzg-trusted-setup.json
+│   ├── node_key.json
+│   └── priv_validator_key.json
+├── data
+    ├── application.db
+    │   ├── 000056.sst
+    │   ├── ...
+    │   ├── CURRENT
+    │   ├── LOCK
+    │   ├── MANIFEST-014039
+    │   ├── MANIFEST-014065
+    │   └── OPTIONS-014066
+    ├── blockstore.db
+    │   ├── 002506.sst
+    │   ├── ...
+    │   ├── CURRENT
+    │   ├── LOCK
+    │   ├── MANIFEST-047787
+    │   ├── MANIFEST-047831
+    │   └── OPTIONS-047832
+    ├── cs.wal
+    │   ├── wal
+    │   ├── wal.3565
+    │   ├── ...
+    ├── deposits.db
+    │   ├── 001142.log
+    │   ├── ...
+    │   ├── CURRENT
+    │   ├── LOCK
+    │   ├── MANIFEST-001125
+    │   ├── MANIFEST-001131
+    │   └── OPTIONS-001132
+    ├── evidence.db
+    │   ├── 000075.sst
+    │   ├── 000076.sst
+    │   ├── 000077.log
+    │   ├── CURRENT
+    │   ├── LOCK
+    │   ├── MANIFEST-000073
+    │   ├── MANIFEST-000078
+    │   └── OPTIONS-000079
+    ├── priv_validator_state.json
+    ├── snapshots
+    │   └── metadata.db
+    │       ├── 000052.log
+    │       ├── CURRENT
+    │       ├── LOCK
+    │       ├── MANIFEST-000050
+    │       ├── MANIFEST-000053
+    │       └── OPTIONS-000054
+    ├── state.db
+    │   ├── 001750.sst
+    │   ├── ...
+    │   ├── CURRENT
+    │   ├── LOCK
+    │   ├── MANIFEST-008554
+    │   ├── MANIFEST-008576
+    │   └── OPTIONS-008577
+    └── tx_index.db
+        ├── 002680.sst
+        ├── ...
+        ├── CURRENT
+        ├── LOCK
+        ├── MANIFEST-018865
+        ├── MANIFEST-018892
+        └── OPTIONS-018893
+
+13 directories, 4804 files
+```
+
 :::warning
 If you are already running a node, make sure to stop the node before extracting the snapshot. Otherwise, you may end up with data corruption.
 :::
