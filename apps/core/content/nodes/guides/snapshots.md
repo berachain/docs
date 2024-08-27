@@ -18,6 +18,10 @@ head:
 
 This guide will walk you through the process of using node snapshots to quickly restore a node.
 
+## Snapshot Providers
+
+You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md).
+
 ## What are Node Snapshots?
 
 Snapshots are a way to quickly restore a node without having to re-sync the entire chain from scratch. Without them, the node would have to start from the genesis block and download every single block from the network. Instead, snapshots can save days or even weeks of syncing time.
@@ -73,7 +77,7 @@ Where `$BEACOND_HOME` is the directory of your beacond config and `$HOME` is you
 
 ### Step 2 - Download the Snapshot
 
-Select which snapshot provider you would like to use and download the snapshot. Then run the following command to download the snapshot:
+Select which [snapshot provider](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md) you would like to use and download the snapshot. Then run the following command to download the snapshot:
 
 ```bash
 wget -O $CUSTOM_SNAPSHOT_NAME $SNAPSHOT_URL
@@ -103,7 +107,7 @@ The result will be a hash that you can compare to the checksum provided by the s
 If you are already running a node, make sure to stop the node before extracting the snapshot. Otherwise, you may end up with data corruption.
 :::
 
-### Consensus Client Extraction
+### Consensus Client Snapshot Configuration
 
 Let's first extract the Beacon-Kit snapshot. This can be done with the following command:
 
@@ -113,7 +117,7 @@ lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $BEACOND_HOME
 
 Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. Something like `/root/.beacond/` on Linux, unless you've configured it differently.
 
-### Execution Client Extraction
+### Execution Client Snapshot Configuration
 
 The steps will differ depending on the Execution Client you are using, however, the general process is the same.
 
@@ -137,5 +141,3 @@ cp -r $HOME/beacond-config-backup $BEACOND_HOME/config
 ### Step 6 - Start your Node
 
 Now you're good to start your node back up!
-
-You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md).
