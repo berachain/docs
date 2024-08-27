@@ -26,7 +26,7 @@ Berachain itself may also be considered a Bend participant, as the entity provid
 
 ## How do I Use Bend? 🤔
 
-Interacting with Bend can be done via the the Bend dApp using <a target="_blank" :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a> or the [contracts](/developers/deployed-contracts). Below are specific considerations for borrowers and lenders.
+Interacting with Bend can be done via the Bend dApp using <a target="_blank" :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a> or the [contracts](/developers/deployed-contracts). Below are specific considerations for borrowers and lenders.
 
 ### Borrowers
 
