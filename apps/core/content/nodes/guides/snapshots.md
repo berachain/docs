@@ -199,6 +199,8 @@ Let's first extract the Beacon-Kit snapshot. This can be done with the following
 
 ```bash
 lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $BEACOND_HOME
+
+# $BEACOND_HOME example: /root/.beacond/
 ```
 
 Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. Something like `/root/.beacond/` on Linux, unless you've configured it differently.
