@@ -41,6 +41,6 @@ Using `$USDC` as an example for an Incentive:
 
 ## How To Whitelist Incentive Assets 📝
 
-Incentives can only be create via successful via governance proposal. Ecosystem, users and foundation decide on proposals based on the their own due-diligence.
+Incentives can only be created via successful governance proposals. Ecosystem, users and foundation decide on proposals based on the their own due-diligence.
 
 Incentives assets can be either be proposed at the same time as a new Reward Vault or modified as a separate governance proposal.
