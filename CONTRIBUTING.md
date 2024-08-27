@@ -26,6 +26,10 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
 
 **_Minor_ Version Bump Scenario**
 
+- Whole new sections or large modifications to markdown files (\*.md)
+
+**_Patch_ Version Bump Scenario**
+
 - Text and typo changes in markdown files (\*.md)
 
 ## Branch Organization
