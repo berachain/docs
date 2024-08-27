@@ -127,7 +127,7 @@ MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
 You should be able to see the newly created files in the `./build/bin/config` folder:
 
 :::warning
-**IMPORTANT:** Make sure to securely backup your `priv_validator_key.json` file if running a **validator** node. This is the file that contains your validator's private key and is needed to sign blocks as your validator. If you lose this file, you may have issues recovering your validator and its funds.
+**IMPORTANT:** Make sure to securely backup your `priv_validator_key.json` file if running a **validator** node. This is the file that contains your validator's private key and is needed to sign blocks as your validator. If you lose this file, WE CANNOT HELP and you will have issues recovering your validator and its funds.
 :::
 
 ```bash
