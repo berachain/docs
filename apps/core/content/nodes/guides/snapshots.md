@@ -228,4 +228,4 @@ cp -r $HOME/beacond-config-backup $BEACOND_HOME/config
 
 ### Step 6 - Start your Node
 
-Now you're good to start your node back up!
+Now you're good to start your node back up! Run the appropriate binary command, systemd service or other custom configuration to start your beacon node back up, as well as the same for your execution client.
