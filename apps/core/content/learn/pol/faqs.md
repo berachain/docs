@@ -37,7 +37,7 @@ Being a validator is currently permissioned, but this is expected to open up in 
 
 ## Is there any difference between the ability for native dApps (BEX, Bend Berps) and external dApps to participate in PoL?
 
-No, all rewards vaults must be approved through governance to be eligible to start recieving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
+No, all rewards vaults must be approved through governance to be eligible to start receiving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
 
 ## What is the difference between a “pool” and a “rewards vault”?
 
@@ -49,7 +49,7 @@ Technically, the creation of rewards vaults is permissionless, but for validator
 
 ## Can you give me an example of BGT voting power in relation to BGT emissions?
 
-Validator rewards will be proportional to the voting power. On Bartio, inflation is fixed at is ~1500 BGT per block. If a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to rewards vaults. Those rewards vaults pay an incentive per BGT emitted to it. So validator rewards are a function of its BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to rewards vaults.
+Validator rewards will be proportional to the voting power. On Bartio, inflation is fixed at ~1500 BGT per block. If a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to rewards vaults. Those rewards vaults pay an incentive per BGT emitted to it. So validator rewards are a function of its BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to rewards vaults.
 
 ## I have concerns about hyperinflation of BGT. How does Berachain manage this?
 
@@ -57,17 +57,17 @@ Traditional PoS systems have some percentage of inflation per year. Berachain ju
 1 - Baseline yield for the block produced by a validator with just BERA stake and no BGT delegation.
 2- A stake weight multiplier based on the amount of BGT delegated to that validator.
 
-Where that PoS inflation = (1) + (2), basically where (2) is a weighted average of all valdiator’s BGT delegation, as it converges on the average emissions rate
+Where that PoS inflation = (1) + (2), basically where (2) is a weighted average of all validator’s BGT delegation, as it converges on the average emissions rate
 
 The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated differently
 
-## How do you manage to price the LP token, which in this case BGT? Does Berachain limit the number of pools recieving BGT to blue chips for security right?
+## How do you manage to price the LP token, which in this case BGT? Does Berachain limit the number of pools receiving BGT to blue chips for security right?
 
-BGT isnt priced and its not an LP token. Its a soulbound token that you earn by providing DeFi liquidity on Berachain. After whitelisting from BGT governance, free market dynamics dictate how much BGT is going to the pools. So it is likely that blue chips receive more BGT (as liquidity coalesces there), while long-tail assets receive less without incentives, all things being equal.
+BGT isn't priced and it's not an LP token. It's a soulbound token that you earn by providing DeFi liquidity on Berachain. After whitelisting from BGT governance, free market dynamics dictate how much BGT is going to the pools. So it is likely that blue chips receive more BGT (as liquidity coalesces there), while long-tail assets receive less without incentives, all things being equal.
 
 ## Why are incentives emission defined per BGT instead of being pool-based?
 
-Incentives are denominated in BGT– ultimately users want to be able to calculate per BGT im delegating/staking, so its more of a choice of UI to facilitate understanding the value BGT drives.
+Incentives are denominated in BGT– ultimately users want to be able to calculate per BGT im delegating/staking, so it's more of a choice of UI to facilitate understanding the value BGT drives.
 
 ## Can only Validators vote on or create proposals?
 
@@ -75,7 +75,7 @@ No. Anyone with BGT can create or vote on proposals.
 
 ## Can validator deposits ever be withdrawn, ie. if someone wants to “spin down” their validator? Do depositors earn yield / tips on their initial deposit of BERA?
 
-Validator deposits cannot be withdrawal until we enable EIP-7002. By waiting for the next hard fork we save a ton of engineering time and code complexity. Deposits are just to activate the validator--“depositing” in itself earns no yield.
+Validator deposits cannot be withdrawn until we enable EIP-7002. By waiting for the next hard fork we save a ton of engineering time and code complexity. Deposits are just to activate the validator--“depositing” in itself earns no yield.
 
 ## Can validators with no BGT delegated to them build blocks? What kind of rewards will those validators earn when they build a block?
 

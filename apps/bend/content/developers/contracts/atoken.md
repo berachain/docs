@@ -23,9 +23,9 @@ Mints `amount` aTokens to `user`
 
 #### Return Values
 
-| Name | Type | Description                                          |
-| ---- | ---- | ---------------------------------------------------- |
-| [0]  | bool | `true` if the the previous balance of the user was 0 |
+| Name | Type | Description                                      |
+| ---- | ---- | ------------------------------------------------ |
+| [0]  | bool | `true` if the previous balance of the user was 0 |
 
 ### burn
 

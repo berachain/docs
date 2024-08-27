@@ -6,7 +6,7 @@ A simplified way to look at the whole incentive system where validators can pick
 
 ## Incentives For Validators 💰
 
-`$BGT` emissions are distributed to liquidity providers via [Reward Vaults](/learn/pol/rewardvaults). Below is an expanded view of the diagram in the Reward Vaults section, which additionally show protocols providing incentives to Reward Vaults.
+`$BGT` emissions are distributed to liquidity providers via [Reward Vaults](/learn/pol/rewardvaults). Below is an expanded view of the diagram in the Reward Vaults section, which additionally shows protocols providing incentives to Reward Vaults.
 
 ![Reward Vault Incentives](/assets/reward-vault-incentives.png)
 
@@ -41,6 +41,6 @@ Using `$USDC` as an example for an Incentive:
 
 ## How To Whitelist Incentive Assets 📝
 
-Incentives can only be create via successful via governance proposal. Ecosystem, users and foundation decide on proposals based on the their own due-diligence.
+Incentives can only be created via successful governance proposals. Ecosystem, users and foundation decide on proposals based on their own due-diligence.
 
-Incentives assets can be either be proposed at the same time as a new Reward Vault or modified as a separate governance proposal.
+Incentives assets can either be proposed at the same time as a new Reward Vault or modified as a separate governance proposal.

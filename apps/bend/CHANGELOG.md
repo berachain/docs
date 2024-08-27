@@ -1,5 +1,11 @@
 # @berachain/bend
 
+## 1.1.2
+
+### Patch Changes
+
+- Typo fixes
+
 ## 1.1.1
 
 ### Patch Changes
