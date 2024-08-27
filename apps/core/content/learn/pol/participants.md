@@ -55,7 +55,7 @@ Now that I have `$BGT`, different factors may influence how I choose to delegate
 
 ## Bera Foundation 🏛️
 
-The Foundation plays a role in operating default dApps (Bex, Bend, Berps) which produces fees that are distributed to `$BGT` holders (such that there is native demand for earning `$BGT`, independent of reward vault incentives).
+The Foundation plays a role in operating default dApps (Bex, Bend, Berps) which produce fees that are distributed to `$BGT` holders (such that there is native demand for earning `$BGT`, independent of reward vault incentives).
 
 Liquidity in these default dApps also serve as default Reward Vaults for users to provide liquidity on and earn `$BGT`, until other protocols' Reward Vaults are plugged into PoL through governance.
 
