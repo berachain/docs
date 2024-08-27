@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.1.3
+
+### Patch Changes
+
+- Clarification on priv_validator_key
+
 ## 1.1.2
 
 ### Patch Changes
