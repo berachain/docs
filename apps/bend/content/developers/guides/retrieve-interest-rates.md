@@ -10,7 +10,7 @@ title: Interest Rates in Bend
 
 Interest rates on Bend are dynamic, adjusting based on the utilization rate of `$HONEY` in the lending pool. See the article on [Interest Rates](/learn/lending-protocol/interest-rates) for details on how interest rates are calculated.
 
-All rates and indeces queried on-chain or from subgraphs are expressed in RAY units i.e. `10^27`.
+All rates and indices queried on-chain or from subgraphs are expressed in RAY units i.e. `10^27`.
 
 ## Fetching Current Interest Rates
 

@@ -26,6 +26,10 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
 
 **_Minor_ Version Bump Scenario**
 
+- Whole new sections or large modifications to markdown files (\*.md)
+
+**_Patch_ Version Bump Scenario**
+
 - Text and typo changes in markdown files (\*.md)
 
 ## Branch Organization
@@ -496,6 +500,8 @@ Whenver submitting a pull request, make sure that it's from a forked repository 
 
 See [semantic versioning section](#semantic-versioning) to see when to update versioning.
 
+> **NOTE:** Make sure to commit your changes prior to doing the version bump.
+
 If the versioning criteria is met, run the following in the respective `apps` or `packages` folder.
 
 When adding new features or fixing bugs, we'll need to bump the package versions. We use [Changesets](https://github.com/changesets/changesets) to do this.
@@ -518,6 +524,9 @@ pnpm changeset;
 #   ◯ @berachain/bend
 #   ◯ @berachain/core
 #   ◯ @berachain/bex
+#
+# NOTE: REMEMBER major is for breaking changes, minor is for new features/sections, and patch is for small text changes
+# If not a major change don't select anything and press `Enter`
 #
 # 🦋  Which packages should have a major bump? …
 # ◉ all packages
@@ -569,6 +578,10 @@ tree package/config;
 ```
 
 Seeing as `packages/config` is a dependency, you will see an `minor` update in the CHANGELOG.md for `apps/(bend|berps|bex|core)` as well, but not in `packages/ui`.
+
+#### 4 - Commit Changes
+
+Once the version changes are done, make a commit with a chore-like commit.
 
 ## License
 

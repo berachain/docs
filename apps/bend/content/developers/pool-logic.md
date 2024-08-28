@@ -1,6 +1,6 @@
 # Pool Contract
 
-At the center of Bend is the the [Pool smart contract](/developers/contracts/pool). This smart contract serves as the **main user facing contract** of the protocol and it coordinates with subsidiary logic contracts to carry out the execution. The main user functions of `Pool.sol` are illustrated below:
+At the center of Bend is the [Pool smart contract](/developers/contracts/pool). This smart contract serves as the **main user facing contract** of the protocol and it coordinates with subsidiary logic contracts to carry out the execution. The main user functions of `Pool.sol` are illustrated below:
 
 ## Core Functions
 

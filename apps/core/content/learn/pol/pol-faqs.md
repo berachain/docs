@@ -27,11 +27,11 @@ Rewards are determined by two things:
 
 ## Is the amount of BGT rewarded to a reward vault proportional at all to the amount of liquidity (e.g. TVL) of that reward vault?
 
-No. There could be some proportion that the market could trend towards over time, but its not something that is enforced.
+No. There could be some proportion that the market could trend towards over time, but it's not something that is enforced.
 
 ## Is the size of the BGT emission linear to the amount of BGT delegated to a validator?
 
-The relatiobship between BGT delegated to a validator and BGT emissions are linear. There is a baseline BGT emission, even for validators with 0 delegation, and after that it scales linearly based on the amount of BGT delegated.
+The relationship between BGT delegated to a validator and BGT emissions are linear. There is a baseline BGT emission, even for validators with 0 delegation, and after that it scales linearly based on the amount of BGT delegated.
 
 ## Can anyone stake BERA to become a validator?
 
@@ -39,7 +39,7 @@ Being a validator is currently permissioned, but this is expected to open up in 
 
 ## Is there any difference between the ability for native dApps (BEX, Bend Berps) and external dApps to participate in PoL?
 
-No, all reward vaults must be approved through governance to be eligible to start recieving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
+No, all reward vaults must be approved through governance to be eligible to start receiving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
 
 ## What is the difference between a “pool” and a “reward vault”?
 
@@ -49,24 +49,24 @@ Generally, pools are referred to as deposits in DeFi protocols on Berachain. Thi
 
 Technically, the creation of reward vaults is permissionless, but for validators to direct BGT emissions to those reward vaults, a governance proposal for whitelisting the reward vault must pass
 
-## On Bartio, it seems the fixed inflation is ~1500 BGT per block, so if a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to reward vaults. Those reward vaults pay an incentive per BGT emitted to it. So validator rewards are a function of it's BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to reward vaults.
+## On Bartio, it seems the fixed inflation is ~1500 BGT per block, so if a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to reward vaults. Those reward vaults pay an incentive per BGT emitted to it. So validator rewards are a function of its BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to reward vaults.
 
 Correct. Validator rewards will be proportional to the voting power.
 
-## I have concerns about hyperinflation of BGT. How does Berachain manages this?
+## I have concerns about hyperinflation of BGT. How does Berachain manage this?
 
 Traditional PoS systems have some percentage of inflation per year. Berachain just takes that PoS inflation and splits it into two components:
 1 - Baseline yield for the block produced by a validator with just BERA stake and no BGT delegation.
 2- A stake weight multiplier based on the amount of BGT delegated to that validator.
 
-Where that PoS inflation = (1) + (2), basically where (2) is a weighted average of all valdiator’s BGT delegation, as it converges on the average emissions rate
+Where that PoS inflation = (1) + (2), basically where (2) is a weighted average of all validator’s BGT delegation, as it converges on the average emissions rate
 
 The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated differently
 
-## How do you manage to price the LP token, which in this case bgt? Does Berachain limit the number of pools recieving BGT to blue chips for security right?
+## How do you manage to price the LP token, which in this case bgt? Does Berachain limit the number of pools receiving BGT to blue chips for security right?
 
-BGT isnt priced and its not an LP token. Its a soulbound token that you earn by LP’ing. After whitelisting from BGT governance, free market dynamics dictate how much BGT is going to the pools. So it is likely that blue chips receive more BGT (as liquidity coalesces there), while long-tail assets receive less.
+BGT isn't priced and it's not an LP token. It's a soulbound token that you earn by LP’ing. After whitelisting from BGT governance, free market dynamics dictate how much BGT is going to the pools. So it is likely that blue chips receive more BGT (as liquidity coalesces there), while long-tail assets receive less.
 
 ## Why are incentives emission defined per BGT instead of being pool-based?
 
-Incentives are denominated in BGT– ultimately users want to be able to calculate per BGT im delegating/staking, so its more of a choice of UI to facilitate understanding the value BGT drives.
+Incentives are denominated in BGT– ultimately users want to be able to calculate per BGT im delegating/staking, so it's more of a choice of UI to facilitate understanding the value BGT drives.
