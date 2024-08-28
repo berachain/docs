@@ -11,72 +11,42 @@ head:
       content: How Berachain's Governance Works
 ---
 
-<script setup>
-  import config from '@berachain/config/constants.json';
-</script>
-
 # Berachain Governance
 
-Governance on Berachain is dictated by BGT (Bera Governance Token) voting. Berachain's governance mechanism is styled after OpenZeppelin's [Governance](https://docs.openzeppelin.com/contracts/5.x/governance) module and is a crucial part of the 'Proof of Liquidity' consensus mechanism.
+Berachain utilizes a governance system that allows token holders to participate in decision-making processes for the network. This system is particularly important for managing the Proof-of-Liquidity (PoL) consensus mechanism and the distribution of Berachain Governance Tokens ($BGT) through Reward Vaults.
 
-The Berachain governance module has a wide scope of powers, including control over:
+## Governance Process
 
-- PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
-- $HONEY minting parameters (e.g., eligible collateral assets, minting rates)
-- Native dApp governance (e.g., changes to Bend's interest rate model)
-  - Berps
-  - Bend
-  - Bex
-- Whitelisting Rewards Vaults as "friends of the chef"
+The governance process on Berachain follows several stages:
 
-## Rewards Vaults and BGT Emissions
+1. **Proposal Creation**: Any user with sufficient voting power (at least 1000 $BGT) can create a governance proposal.
 
-One of the biggest perks of Berachain's 'Proof of Liquidity' consensus mechanism is the ability for protocols to bootstrap their liquidity by getting BGT emissions. This is done through Reward Vaults, represented by the RewardsVaults smart contract.
+2. **Pending State**: Once created, the proposal enters a 3-hour waiting period before becoming active for voting.
 
-When validators build blocks, they are awarded BGT proportional to their staked amount. Validators have three options for their BGT rewards:
-1. Use BGT to participate in governance
-2. Exchange BGT for Bera
-3. Share BGT rewards with protocols in exchange for incentive tokens
+3. **Active Voting**: The voting period lasts for 3 hours. During this time, $BGT holders can cast their votes.
 
-![Berachain Testnet Faucet](/assets/gauges-incentives.png)
+4. **Proposal Outcome**: After the voting period, the proposal is either marked as Succeeded or Defeated. A quorum of 2 billion $BGT is required for a proposal to pass.
 
-## Proposal Lifecycle
+5. **Timelock**: If the proposal succeeds, it enters a queue with a 3-hour timelock delay.
 
-The lifecycle of a governance proposal follows these steps:
-
-1. **Creation**: A proposal is created (requires at least 1000 BGT)
-2. **Waiting Period**: 3 hours before becoming active for voting
-3. **Active Voting**: 3 hours for BGT holders to cast votes
-4. **Execution**: If passed, enters a queue with a 2-day timelock delay before execution
+6. **Execution**: After the timelock period, the proposal can be executed, implementing the proposed changes.
 
 ![Governance Process](/assets/governance-process.png)
 
-## BGT Voting
-
-BGT token balances in users' wallets determine voting power:
-`1 BGT = 1 vote`
-
-Key points about BGT voting:
-- BGT holders can delegate their voting power to arbitrary addresses
-- Delegation transfers voting rights, not the actual BGT tokens (which are non-transferrable)
-- A quorum of 2B BGT votes is required for a proposal to pass
-
 ## Creating a Governance Proposal
 
-To create a governance proposal:
+To create a governance proposal on Berachain:
 
-1. Ensure you have at least 1000 BGT. This can be achieved through:
-   - Acquiring BGT by participating in PoL on native dapps at [BGT Station](https://bartio.station.berachain.com/gauge)
-   - Requesting BGT delegation from the Berachain team (for testnet purposes)
+1. **Ensure Sufficient Voting Power**: You need at least 1000 $BGT, either owned directly or delegated to you by other token holders.
 
-2. Once you have sufficient BGT (either owned or delegated):
-   - Delegate BGT to yourself if you own it
-   - If delegated by the Berachain team, it's already set up for voting
+2. **Delegate $BGT**: Even if you own the required $BGT, you must delegate it to yourself (or have it delegated by others) to gain voting power.
 
-3. Submit the proposal on-chain
+3. **Prepare Your Proposal**: Clearly define the changes you want to implement. For example, to add a Reward Vault to the BeraChef contract, you would need to specify the vault address and the function call to update the "friends of the chef."
 
-4. Wait for the voting period and participate in voting. As well, ask the
+4. **Submit the Proposal**: Use the governance contract to submit your proposal on-chain. This typically involves calling a `propose` function with the necessary parameters.
 
-At the time of this writing, the Bera DAO is not using a frontend service like Tally to manage our Governance process on-chain. Everything is happening programmatically. You can see a detailed guide on creating a governance proposal programmatically, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/rewards-vault-tutorial).
+5. **Monitor and Participate**: Once submitted, monitor your proposal's progress through the various stages. Encourage other $BGT holders to vote and participate in discussions about your proposal.
 
-> Note: The ability to request BGT delegation from the Berachain team is primarily for testnet purposes. On mainnet, acquiring sufficient BGT will be through active participation in the ecosystem.
+6. **Execute if Passed**: If your proposal passes and completes the timelock period, you or another user can execute it to implement the changes.
+
+For a detailed walkthrough of creating a governance proposal, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/rewards-vault-tutorial).
