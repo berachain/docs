@@ -47,6 +47,29 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
+      ],
+    },
+    {
+      text: "Governance",
+      items: [
+        { text: "Governance Overview", link: "/learn/governance/" },
+        { text: "Gauge Whitelisting", link: "/learn/governance/gauges" },
+        { text: "Text Proposals", link: "/learn/governance/text-proposals" },
+      ],
+    },
+    {
+      text: "Guide",
+      items: [
+        {
+          text: "Delegate BGT To Validator ",
+          link: "/learn/guides/delegate-bgt-to-validator",
+        },
+        {
+          text: "Create PoL Gauge Proposal  ",
+          link: "/learn/guides/create-pol-guage-proposal",
+        },
+        { text: "Create Incentive", link: "/learn/guides/create-incentive" },
+        { text: "Burn $BGT", link: "/learn/guides/burn-bgt" },
         { text: "PoL FAQs", link: "/learn/pol/faqs" },
       ],
     },
