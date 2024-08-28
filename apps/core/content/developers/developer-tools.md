@@ -44,6 +44,10 @@ Since Berachain is EVM-compatible, if you're familiar with creating Dapps on oth
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [Alchemy](https://www.alchemy.com/)
 
+### Data Indexers
+
+- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
+
 ### Wallets
 
 - [Metamask](https://metamask.io/)
