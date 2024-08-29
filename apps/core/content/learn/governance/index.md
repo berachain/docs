@@ -13,7 +13,17 @@ head:
 
 # Berachain Governance
 
-Berachain utilizes a governance system that allows token holders to participate in decision-making processes for the network. This system is particularly important for managing the Proof-of-Liquidity (PoL) consensus mechanism and the distribution of Berachain Governance Tokens ($BGT) through Reward Vaults.
+Berachain's Governance system uses BGT to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
+
+- PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
+- $HONEY minting parameters (e.g., eligible collateral assets, minting rates)
+- Native dApp governance (e.g., changes to Bend's interest rate model)
+  - Berps
+  - Bend
+  - Bex
+- Whitelisting Rewards Vaults for BGT emissions
+
+
 
 ## Governance Process
 
