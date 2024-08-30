@@ -18,10 +18,10 @@ The above diagram only conceptually illustrates the flow of assets to and from r
 
 In summary, the asset & user flow in reward vaults can be described as follows:
 
-1. Users stake the pre-selected asset into a given Reward Vault
-2. Protocols offer Incentives in exchange for directing BGT to their Reward Vault
+1. Users stake a pre-selected asset into a given Reward Vault
+2. Protocols offer Incentives in exchange for directing `$BGT` to their Reward Vault
 3. Validators direct `$BGT` emissions to Reward Vaults
-4. Reward Vaults allow `$BGT` to be claimed by users staking the asset
+4. Reward Vaults allow `$BGT` to be claimed by users who staked the pre-selected asset
 5. Reward Vaults distribute Incentives to validators for emitting `$BGT`
 
 ## Incentive Assets 🏦
