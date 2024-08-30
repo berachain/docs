@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.1.6
+
+### Patch Changes
+
+- Add GoldRush (by Covalent) link to Developer Tools
+
 ## 1.1.5
 
 ### Patch Changes
