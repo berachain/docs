@@ -21,17 +21,13 @@ Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted 
 
 No, any dApp can deploy a Reward Vault and submit it as a governance proposal to have it whitelisted.
 
-## Does PoL affect consensus?
+## Can dApps that don't have a token still participate in PoL?
 
-No, proof of liqudity happens on execution layer so even if a PoL operation reverts, blocks go on. This is by design- validators should always be able to arrive at a valid chain state, regardless of what’s happening in the PoL incentive market. 
+Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token.
 
-## Can dapps that don't have a token still participate in PoL?
+## Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
 
-Yes. In order to have a whitelisted reward vault, the protocol just needs to be able to iussue a receipt token. This is different from a native token and can be thought of as a bookeeping token used under the hood. For example, when a user LP's into BEX, they recieve a receipt token in the form of an LP token. 
-
-## Are there restrictions on what kinds of dapps can have whitelisted reward vaults?
-
-No. Any dapp can deploy a reward vault and submit for the vault to be approved through governance, regardless of the type of dapp.
+No, any dApp can deploy a Reward Vault and submit it as a governance proposal to have it whitelisted.
 
 ## What determines the APY for pools in BEX?
 
@@ -120,5 +116,3 @@ There is no hard cap, but any additional bonded BERA wouldn't affect weight to p
 ## What asset is at risk to be slashed for validators?
 
 BERA is the security asset and is at risk to be slashed.
-
-
