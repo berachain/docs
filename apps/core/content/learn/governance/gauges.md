@@ -18,15 +18,18 @@ While creating a Reward Vault is permissionless, for it to receive BGT emissions
 
 ### Governance Process for Whitelisting
 
-1. **Meet BGT Requirements**: 
+1. **Meet BGT Requirements**:
+
    - Minimum 1000 BGT needed to create a proposal
    - BGT can be acquired through participation in PoL on native dApps
 
 2. **Create and Submit Proposal**:
+
    - Proposals are submitted on-chain
    - 3-hour waiting period before voting begins
 
 3. **Voting Period**:
+
    - 3-hour active voting window
    - BGT holders cast votes (quorum: 2B BGT)
 
