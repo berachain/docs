@@ -61,30 +61,16 @@ There are two types of snapshot sizes:
 
 Different snapshot providers may have different instructions for using their snapshots, however, here we provide an overview for how to use snapshots from the Berachain Foundation.
 
-### Step 1 - Backup your Beacon-Kit Config Folder
-
-Some snapshots may include the config folder in their zip file, so it's important to backup your current config folder before using a snapshot. This ensures that you can easily keep your node's configuration settings and, most importantly, _your validator keys_.
-
-An example of backing up the config folder:
-
-```bash
-# $BEACOND_HOME example is /root/.beacond/
-# $HOME example is /root/
-cp -r $BEACOND_HOME/config $HOME/beacond-config-backup;
-```
-
-Where `$BEACOND_HOME` is the directory of your beacond config and `$HOME` is your home directory (or some other directory you choose to backup to).
-
-### Step 2 - Download Snapshots
+### Step 1 - Download Snapshots
 
 Select which beacon client snapshot, based on your region and preferred snapshot type, you would like to use from the Berachain Foundation. The following options are available:
 
-| Region     | Snapshot Type    | Link                                                       |
-| ---------- | ---------------- | ---------------------------------------------------------- |
-| **Global** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/)    |
-| **EU**     | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
+| Region            | Snapshot Type    | Link                                                       |
+| ----------------- | ---------------- | ---------------------------------------------------------- |
+| **North America** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/)    |
+| **Europe**            | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
 
-#### Step 2A - Downloading Beacon Client Snapshot
+#### Step 1A - Downloading Beacon Client Snapshot
 
 In the snapshot folder, you will find beacon snapshots under the following paths:
 
@@ -103,7 +89,7 @@ Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download.
 `curl`, `aria2c` and other downloaders also work if you prefer to use them for downloading the snapshot.
 :::
 
-#### Step 2B - Downloading Execution Client Snapshot
+#### Step 1B - Downloading Execution Client Snapshot
 
 In the snapshot folder, you will find execution snapshots under the following paths:
 
@@ -115,7 +101,7 @@ In the snapshot folder, you will find execution snapshots under the following pa
 Execution client snapshots coming soon. They are not required to run a node.
 :::
 
-### Step 3 - Verify Snapshot (Optional)
+### Step 2 - Verify Snapshot (Optional)
 
 You can verify the snapshot against the checksum to ensure the snapshot downloaded is valid. The checksum is a hash of the snapshot file that can be used to verify the snapshot's integrity.
 
@@ -143,7 +129,7 @@ Where `$SNAPSHOT_CHECKSUM_FILE` is the name of the checksum file you downloaded.
 It's important to ensure that the filename of the snapshot file is the same as the filename inside the checksum file, otherwise `sha256sum` will not be able to verify the snapshot. Additionally, the snapshot file and its checksum file must be located in the same directory.
 :::
 
-### Step 4 - Extract Snapshot(s)
+### Step 3 - Extract Snapshot(s)
 
 Your extracted snapshot will look similar to the following folders and files:
 
@@ -153,15 +139,6 @@ tree $EXTRACTED_SNAPSHOT_DIR;
 
 # [Expected Equivalent Output]:
 # /root/beacon-snapshot
-# ├── config
-# │   ├── addrbook.json
-# │   ├── app.toml
-# │   ├── client.toml
-# │   ├── config.toml
-# │   ├── genesis.json
-# │   ├── kzg-trusted-setup.json
-# │   ├── node_key.json
-# │   └── priv_validator_key.json
 # ├── data
 #     ├── application.db
 #     │   ├── 000056.sst
@@ -179,10 +156,6 @@ tree $EXTRACTED_SNAPSHOT_DIR;
 #     │   ├── MANIFEST-047787
 #     │   ├── MANIFEST-047831
 #     │   └── OPTIONS-047832
-#     ├── cs.wal
-#     │   ├── wal
-#     │   ├── wal.3565
-#     │   ├── ...
 #     ├── deposits.db
 #     │   ├── 001142.log
 #     │   ├── ...
@@ -201,30 +174,14 @@ tree $EXTRACTED_SNAPSHOT_DIR;
 #     │   ├── MANIFEST-000078
 #     │   └── OPTIONS-000079
 #     ├── priv_validator_state.json
-#     ├── snapshots
-#     │   └── metadata.db
-#     │       ├── 000052.log
-#     │       ├── CURRENT
-#     │       ├── LOCK
-#     │       ├── MANIFEST-000050
-#     │       ├── MANIFEST-000053
-#     │       └── OPTIONS-000054
 #     ├── state.db
-#     │   ├── 001750.sst
-#     │   ├── ...
-#     │   ├── CURRENT
-#     │   ├── LOCK
-#     │   ├── MANIFEST-008554
-#     │   ├── MANIFEST-008576
-#     │   └── OPTIONS-008577
-#     └── tx_index.db
-#         ├── 002680.sst
+#         ├── 001750.sst
 #         ├── ...
 #         ├── CURRENT
 #         ├── LOCK
-#         ├── MANIFEST-018865
-#         ├── MANIFEST-018892
-#         └── OPTIONS-018893
+#         ├── MANIFEST-008554
+#         ├── MANIFEST-008576
+#         └── OPTIONS-008577
 #
 # 13 directories, 4804 files
 ```
@@ -233,7 +190,7 @@ tree $EXTRACTED_SNAPSHOT_DIR;
 If you are already running a node, make sure to stop the node before extracting the snapshot. Otherwise, you may end up with data corruption.
 :::
 
-#### Step 4A - Consensus Client Snapshot Configuration
+#### Step 3A - Consensus Client Snapshot Configuration
 
 Let's first extract the Beacon-Kit snapshot. Extracting can be done with the following command:
 
@@ -246,7 +203,7 @@ lz4 -d $BEACOND_SNAPSHOT_FILE | tar -xvf - --strip-components=2 -C $BEACOND_HOME
 
 In the above command, the `$BEACOND_SNAPSHOT_FILE` variable points to the name of the beacon snapshot file you downloaded. Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config.
 
-#### Step 4B - Execution Client Snapshot Configuration
+#### Step 3B - Execution Client Snapshot Configuration (Optional)
 
 The steps will differ depending on the Execution Client you are using, however, the general process is the same.
 
@@ -260,14 +217,6 @@ lz4 -c -d $GETH_SNAPSHOT_FILE | tar -x -C $GETH_DATA_DIR;
 
 In the above command, the `$GETH_SNAPSHOT_FILE` variable points to the name of the geth snapshot file you downloaded. Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data.
 
-### Step 5 - Restore Your Validator Config
-
-Now that you have extracted the snapshot, you can restore your validator config by copying the backup you created in [Step 1](#step-1---backup-your-beacon-kit-config-folder).
-
-```bash
-cp -r $HOME/beacond-config-backup $BEACOND_HOME/config;
-```
-
-### Step 6 - Start Your Node
+### Step 4 - Start Your Node
 
 Now you're good to start your node back up! Run the appropriate binary command, systemd service or other custom configuration to start your beacon node back up, as well as the same for your execution client.
