@@ -68,7 +68,8 @@ Some snapshots may include the config folder in their zip file, so it's importan
 An example of backing up the config folder:
 
 ```bash
-# $BECOND_HOME default is /root/.beacond/
+# $BEACOND_HOME example is /root/.beacond/
+# $HOME example is /root/
 cp -r $BEACOND_HOME/config $HOME/beacond-config-backup;
 ```
 
@@ -92,10 +93,11 @@ In the snapshot folder, you will find beacon snapshots under the following paths
 
 Download the snapshot you would like to use with the following command:
 ```bash
+# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4
 wget $SNAPSHOT_URL;
 ```
 
-Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download. For example, `https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4`.
+Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download.
 
 :::info
 `curl`, `aria2c` and other downloaders also work if you prefer to use them for downloading the snapshot.
@@ -123,17 +125,19 @@ The following is an example of how to download and verify the checksum for the b
 
 ```bash
 # Download the checksum file
+# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4
 wget $SNAPSHOT_URL.sha256;
 
 # Verify the checksum
 # The following command will check the hash against the snapshot file as long as the filename matches
+# $SNAPSHOT_CHECKSUM_FILE example: beacond-pruned-snapshot-202408292106.tar.lz4.sha256
 sha256sum -c $SNAPSHOT_CHECKSUM_FILE;
 
 # [Expected Equivalent Output]:
 # beacond-pruned-snapshot-202408292106.tar.lz4: OK
 ```
 
-Where `$SNAPSHOT_CHECKSUM_FILE` is the name of the checksum file you downloaded. For example: `beacond-pruned-snapshot-202408292106.tar.lz4.sha256`.
+Where `$SNAPSHOT_CHECKSUM_FILE` is the name of the checksum file you downloaded.
 
 :::warning
 It's important to ensure that the filename of the snapshot file is the same as the filename inside the checksum file, otherwise `sha256sum` will not be able to verify the snapshot. Additionally, the snapshot file and its checksum file must be located in the same directory.
@@ -144,6 +148,7 @@ It's important to ensure that the filename of the snapshot file is the same as t
 Your extracted snapshot will look similar to the following folders and files:
 
 ```bash
+# $EXTRACTED_SNAPSHOT_DIR example: /root/beacon-snapshot
 tree $EXTRACTED_SNAPSHOT_DIR;
 
 # [Expected Equivalent Output]:
@@ -234,12 +239,12 @@ Let's first extract the Beacon-Kit snapshot. Extracting can be done with the fol
 
 ```bash
 # Ensure that you have `lz4` installed on your system
-lz4 -d $BEACOND_SNAPSHOT_FILE | tar -xvf - --strip-components=2 -C $BEACOND_HOME;
-
+# $BEACOND_SNAPSHOT_FILE example: beacond-pruned-snapshot-202408292106.tar.lz4
 # $BEACOND_HOME example: /root/.beacond/
+lz4 -d $BEACOND_SNAPSHOT_FILE | tar -xvf - --strip-components=2 -C $BEACOND_HOME;
 ```
 
-In the above command, the `$BEACOND_SNAPSHOT_FILE` variable points to the name of the beacon snapshot file you downloaded. Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. The default on Linux is `/root/.beacond/`, unless you've configured it differently.
+In the above command, the `$BEACOND_SNAPSHOT_FILE` variable points to the name of the beacon snapshot file you downloaded. Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config.
 
 #### Step 4B - Execution Client Snapshot Configuration
 
@@ -248,10 +253,12 @@ The steps will differ depending on the Execution Client you are using, however, 
 For example, if you are using `geth`, you can expect a command similar to the following:
 
 ```bash
+# $GETH_SNAPSHOT_FILE example: geth-pruned-snapshot-202408292106.tar.lz4
+# $GETH_DATA_DIR example: /root/.ethereum/data/geth
 lz4 -c -d $GETH_SNAPSHOT_FILE | tar -x -C $GETH_DATA_DIR;
 ```
 
-In the above command, the `$GETH_SNAPSHOT_FILE` variable points to the name of the geth snapshot file you downloaded. Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data (Example `/root/.ethereum/data/geth`).
+In the above command, the `$GETH_SNAPSHOT_FILE` variable points to the name of the geth snapshot file you downloaded. Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data.
 
 ### Step 5 - Restore Your Validator Config
 
