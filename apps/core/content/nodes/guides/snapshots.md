@@ -95,7 +95,7 @@ Download the snapshot you would like to use with the following command:
 wget $SNAPSHOT_URL;
 ```
 
-Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download. For example, https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.
+Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download. For example, `https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4`.
 
 :::info
 `curl`, `aria2c` and other downloaders also work if you prefer to use them for downloading the snapshot.
@@ -117,7 +117,7 @@ Execution client snapshots coming soon. They are not required to run a node.
 
 You can verify the snapshot against the checksum to ensure the snapshot downloaded is valid. The checksum is a hash of the snapshot file that can be used to verify the snapshot's integrity.
 
-Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.sha256.
+Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is `https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.sha256`.
 
 The following is an example of how to download and verify the checksum for the beacon snapshot:
 
@@ -234,7 +234,7 @@ Let's first extract the Beacon-Kit snapshot. Extracting can be done with the fol
 
 ```bash
 # Ensure that you have `lz4` installed on your system
-lz4 -c -d $BEACOND_SNAPSHOT_FILE | tar -x -C $BEACOND_HOME;
+lz4 -d $BEACOND_SNAPSHOT_FILE | tar -xvf - --strip-components=2 -C $BEACOND_HOME;
 
 # $BEACOND_HOME example: /root/.beacond/
 ```
