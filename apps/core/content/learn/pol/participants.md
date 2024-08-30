@@ -1,11 +1,5 @@
 # PoL Participants 👥
 
-One of the main [shortcomings](/learn/what-is-proof-of-liquidity#shortcomings-of-pos) in Proof-of-Stake is that there is little incentive for different ecosystem players to collaborate. Validators have little reason to interact with protocols and end-users they are ultimately running infrastructure for, yet they receive the majority of economic incentives. On the opposite end, projects launch on the infrastructure but keep the majority of the project tokens to themselves.
-
-A healthier equilibrium can come between projects, validators and chain when all actors are sharing in all growth of the network.
-
-Proof-of-Liquidity (PoL), involves influence from all of the chain's participants. PoL requires different stakeholders to work in-sync to maximize liquidity on the chain in order and receive the greatest benefit.
-
 The following diagram shows a breakdown of the different participants in the PoL ecosystem.
 
 ![PoL Stakeholders](/assets/val-stakeholder-overview.png)
@@ -17,13 +11,13 @@ Validators earn through three primary means:
 
 1. Gas fees and priority fees
 2. Collecting incentives provided by protocols for directing `$BGT` rewards to their [Reward Vaults](/learn/pol/rewardvaults)
-3. Setting a commission on `$BGT` distribution
+3. Taking a commission on the total `$BGT` earned from building a block
 
 Point 1 is straightforward, and is the same as in Ethereum PoS. Point 2 is where interesting PoL mechanics come into play.
 
 ### Validator Incentives 💎
 
-As discussed in [$BGT](/learn/pol/tokens/bgt), emissions are distributed per block based on the `$BGT` delegation weight of the validator selected to propose the block. Each block's proposing validator has the right to distribute the block's `$BGT` rewards to any Reward Vault they choose, and collect any associated incentives provided by protocols. There is an equal chance for any validator to propose a block.
+As discussed in [$BGT](/learn/pol/tokens/bgt), emissions are distributed per block based on the `$BGT` delegation weight of the validator selected to propose the block. Each block's proposing validator has the right to distribute the block's `$BGT` rewards to any Reward Vault(s) they choose, and collect any associated incentives provided by protocols. There is an equal chance for any validator to propose a block.
 
 Validators' `$BGT` delegation weight initially starts at 0, such that validators do not distribute `$BGT` to Reward Vaults when proposing blocks. However, by demonstrating that they are seeking out the most profitable Reward Vaults to direct `$BGT` to, and by passing on a portion of these rewards to `$BGT` delegators, they can attract a greater delegation.
 
