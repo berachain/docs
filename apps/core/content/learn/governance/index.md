@@ -23,8 +23,6 @@ Berachain's Governance system uses BGT to allow token holders to make important 
   - Bex
 - Whitelisting Rewards Vaults for BGT emissions
 
-
-
 ## Governance Process
 
 The governance process on Berachain follows several stages:

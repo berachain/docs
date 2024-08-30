@@ -13,10 +13,11 @@ The BeraChef contract is responsible for storing the preferences of validators f
 
 ### Key Functions
 
-`queueNewCuttingBoard`: This function allows validators to set a cutting board distribution for a future block. This is callable only by the validator. `activateQueuedCuttingBoard` is called by the `Distributor` contract the next time the validator is selected to propose a block, activating it.
+`queueNewCuttingBoard`: This function allows validators to set a cutting board distribution for a future block. This is callable only by the validator.
+
+`activateQueuedCuttingBoard` is called by the `Distributor` contract the next time the validator is selected to propose a block, activating it.
 
 `getActiveCuttingBoard`/`getQueuedCuttingBoard`: These functions return the active/queued cutting board for a given validator.
-
 
 `updateFriendsOfTheChef`: This function updates the status of whether a $BGT receiver/gauge is whitelisted or not. This is callable only by the governance module, which is why a governance proposal is required to whitelist new Reward Vaults or make changes to existing ones.
 

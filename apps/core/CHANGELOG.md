@@ -1,5 +1,17 @@
 # @berachain/core
 
+## 1.1.5
+
+### Patch Changes
+
+- 3b1e7d1: small edits for clarity
+
+## 1.1.4
+
+### Patch Changes
+
+- new questions in PoL FAQ
+
 ## 1.1.3
 
 ### Patch Changes

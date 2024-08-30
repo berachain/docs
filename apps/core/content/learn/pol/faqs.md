@@ -2,7 +2,7 @@
 head:
   - - meta
     - property: og:title
-      content: Proof of Liquidity Frequently Asked Questions
+      content: Proof-of-Liquidity Frequently Asked Questions
   - - meta
     - name: description
       content: PoL FAQs
@@ -11,7 +11,15 @@ head:
       content: PoL FAQs
 ---
 
-# Proof of Liquidity Frequently Asked Questions ❓
+# Proof-of-Liquidity Frequently Asked Questions ❓
+
+## Can dApps that don't have a token still participate in PoL?
+
+Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token.
+
+## Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
+
+No, any dApp can deploy a Reward Vault and submit it as a governance proposal to have it whitelisted.
 
 ## What determines the APY for pools in BEX?
 
