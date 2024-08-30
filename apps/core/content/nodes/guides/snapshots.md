@@ -68,7 +68,7 @@ Select which beacon client snapshot, based on your region and preferred snapshot
 | Region            | Snapshot Type    | Link                                                       |
 | ----------------- | ---------------- | ---------------------------------------------------------- |
 | **North America** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/)    |
-| **Europe**            | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
+| **Europe**        | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
 
 #### Step 1A - Downloading Beacon Client Snapshot
 
@@ -78,6 +78,7 @@ In the snapshot folder, you will find beacon snapshots under the following paths
 - `beacon/archive/`
 
 Download the snapshot you would like to use with the following command:
+
 ```bash
 # $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4
 wget $SNAPSHOT_URL;
