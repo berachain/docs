@@ -22,7 +22,7 @@ This guide will walk you through the process of using node snapshots to quickly 
 
 Snapshots are provided and managed by the community.
 
-You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md).
+You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md). Instructions for restoring Berachain Foundation snapshots are available below.
 
 ## What are Node Snapshots?
 
@@ -59,7 +59,7 @@ There are two types of snapshot sizes:
 
 ## How To Import Node Snapshots
 
-Different snapshot providers may have different instructions for using their snapshots, however, here is an overview on the general process for using snapshots:
+Different snapshot providers may have different instructions for using their snapshots, however, here we provide an overview for how to use snapshots from the Berachain Foundation.
 
 ### Step 1 - Backup your Beacon-Kit Config Folder
 
@@ -74,45 +74,80 @@ cp -r $BEACOND_HOME/config $HOME/beacond-config-backup;
 
 Where `$BEACOND_HOME` is the directory of your beacond config and `$HOME` is your home directory (or some other directory you choose to backup to).
 
-### Step 2 - Download the Snapshot
+### Step 2 - Download Snapshots
 
-Select which [snapshot provider](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md) you would like to use and download the snapshot. Then run the following command to download the snapshot:
+Select which beacon client snapshot, based on your region and preferred snapshot type, you would like to use from the Berachain Foundation. The following options are available:
 
+| Region     | Snapshot Type    | Link                                                       |
+| ---------- | ---------------- | ---------------------------------------------------------- |
+| **Global** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/)    |
+| **EU**     | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
+
+#### Step 2A - Downloading Beacon Client Snapshot
+
+In the snapshot folder, you will find beacon snapshots under the following paths:
+
+- `beacon/pruned/`
+- `beacon/archive/`
+
+Download the snapshot you would like to use with the following command:
 ```bash
-wget -O $CUSTOM_SNAPSHOT_NAME $SNAPSHOT_URL;
+wget $SNAPSHOT_URL;
 ```
 
-Where `$CUSTOM_SNAPSHOT_NAME` is the name you would like to give to the snapshot file (with file extension) and `$SNAPSHOT_URL` is the URL of the snapshot you would like to download.
+Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download. For example, https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.
 
 :::info
-`curl` also works if you prefer to use it for downloading the snapshot.
+`curl`, `aria2c` and other downloaders also work if you prefer to use them for downloading the snapshot.
 :::
 
-Don't forget to do retrieve the snapshots for both the Consensus Client and the Execution Client if you are restoring both, otherwise just the Consensus Client snapshot is fine.
+#### Step 2B - Downloading Execution Client Snapshot
+
+In the snapshot folder, you will find execution snapshots under the following paths:
+
+- `execution/geth/pruned/`
+- `execution/geth/archive/`
+- etc... for each execution client
+
+::: info
+Execution client snapshots coming soon. They are not required to run a node.
+:::
 
 ### Step 3 - Verify Snapshot (Optional)
 
-You can verify the snapshot against the checksum (if provided by the snapshot provider) to ensure the snapshot downloaded is valid.
+You can verify the snapshot against the checksum to ensure the snapshot downloaded is valid. The checksum is a hash of the snapshot file that can be used to verify the snapshot's integrity.
+
+Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.sha256.
+
+The following is an example of how to download and verify the checksum for the beacon snapshot:
 
 ```bash
-sha256sum $CUSTOM_SNAPSHOT_NAME;
+# Download the checksum file
+wget $SNAPSHOT_URL.sha256;
+
+# Verify the checksum
+# The following command will check the hash against the snapshot file as long as the filename matches
+sha256sum -c $SNAPSHOT_CHECKSUM_FILE;
+
+# [Expected Equivalent Output]:
+# beacond-pruned-snapshot-202408292106.tar.lz4: OK
 ```
 
-The result will be a hash that you can compare to the checksum provided by the snapshot provider. If the hashes match, the snapshot is valid meaning it was not corrupted during the download process.
+Where `$SNAPSHOT_CHECKSUM_FILE` is the name of the checksum file you downloaded. For example: `beacond-pruned-snapshot-202408292106.tar.lz4.sha256`.
+
+:::warning
+It's important to ensure that the filename of the snapshot file is the same as the filename inside the checksum file, otherwise `sha256sum` will not be able to verify the snapshot. Additionally, the snapshot file and its checksum file must be located in the same directory.
+:::
 
 ### Step 4 - Extract Snapshot(s)
 
 Your extracted snapshot will look similar to the following folders and files:
 
-:::warning
-The config folder may or may not be included in the snapshot, depending on the snapshot provider. To avoid your files being overwritten or becoming corrupt, it's important to backup your config folder before using a snapshot.
-:::
-
 ```bash
 tree $EXTRACTED_SNAPSHOT_DIR;
 
 # [Expected Equivalent Output]:
-# /root/tmp_snapshot_extraction
+# /root/beacon-snapshot
 # ├── config
 # │   ├── addrbook.json
 # │   ├── app.toml
@@ -199,12 +234,12 @@ Let's first extract the Beacon-Kit snapshot. Extracting can be done with the fol
 
 ```bash
 # Ensure that you have `lz4` installed on your system
-lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $BEACOND_HOME;
+lz4 -c -d $BEACOND_SNAPSHOT_FILE | tar -x -C $BEACOND_HOME;
 
 # $BEACOND_HOME example: /root/.beacond/
 ```
 
-Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. The default on Linux is `/root/.beacond/`, unless you've configured it differently.
+In the above command, the `$BEACOND_SNAPSHOT_FILE` variable points to the name of the beacon snapshot file you downloaded. Make sure that the `$BEACOND_HOME` variable points to the correct directory of your beacond config. The default on Linux is `/root/.beacond/`, unless you've configured it differently.
 
 #### Step 4B - Execution Client Snapshot Configuration
 
@@ -213,10 +248,10 @@ The steps will differ depending on the Execution Client you are using, however, 
 For example, if you are using `geth`, you can expect a command similar to the following:
 
 ```bash
-lz4 -c -d $CUSTOM_SNAPSHOT_NAME | tar -x -C $GETH_DATA_DIR;
+lz4 -c -d $GETH_SNAPSHOT_FILE | tar -x -C $GETH_DATA_DIR;
 ```
 
-Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data (Example `/root/.ethereum/data/geth`).
+In the above command, the `$GETH_SNAPSHOT_FILE` variable points to the name of the geth snapshot file you downloaded. Make sure that the `$GETH_DATA_DIR` variable points to the correct directory of your geth data (Example `/root/.ethereum/data/geth`).
 
 ### Step 5 - Restore Your Validator Config
 
