@@ -14,11 +14,11 @@ Over-Collateralized describes a situation where the value of the collateral prov
 
 ## Under-Collateralized
 
-Under-Collateralized refers to a scenario where the value of the collateral is less than the value of the loan it secures. At an individual user's level, if the ratio of the value of the collateral to the value of the loan falls below (the Loan-to-Value ratio e.g. `80%` for `WETH`), then the loan is eligible for liquidation.
+Under-Collateralized refers to a scenario where the value of the collateral is less than the value of the loan it secures. At an individual user's level, if the ratio of the value of the collateral to the value of the loan falls below the Loan-to-Value ratio (e.g., `80%` for `WETH`), then the loan is eligible for liquidation.
 
 ## Loan-To-Value (LTV)
 
-The maximum borrowing power of a specific collateral. If `WETH` has an LTV of 80%, for every 1 `WETH` worth of collateral the user will be able to borrow a maximum of 0.8 `WETH` worth of `$HONEY`.
+The maximum borrowing power of specific collateral. If `WETH` has an LTV of 80%, for every 1 `WETH` worth of collateral, the user will be able to borrow a maximum of 0.8 `WETH` worth of `$HONEY`.
 
 ## Flash Loans
 

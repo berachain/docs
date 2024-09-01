@@ -6,9 +6,9 @@
 
 In addition to providing a venue for users to seek leverage on crypto positions using `$HONEY`, Bend also provides a variety of ways for users to earn, including:
 
-1. Lending fees for `$HONEY` suppliers
-2. `$BGT` rewards for borrowers
-3. Liquidation fees for liquidators
+1. Lending fees for `$HONEY` suppliers.
+2. `$BGT` rewards for borrowers.
+3. Liquidation fees for liquidators.
 
 ## 1. Lending Fees
 
@@ -18,14 +18,14 @@ When borrowers take out `$HONEY` loans using the deposited assets, they pay inte
 
 ### What is `$BGT`?
 
-Berachain uses the [Berachain Governance Token](https://docs.berachain.com/learn/protocol/tokens/bgt) (`$BGT`) as the native governance token through which the economic incentives of Berachain are administered. `$BGT` is non-transferrable and can only be acquired by providing liquidity through the [Proof of Liquidity](https://docs.berachain.com/learn/what-is-proof-of-liquidity) system.
+Berachain uses the [Berachain Governance Token](https://docs.berachain.com/learn/protocol/tokens/bgt) (`$BGT`) as its native governance token through which the economic incentives of Berachain are administered. `$BGT` is non-transferrable and can only be acquired by providing liquidity through the [Proof of Liquidity](https://docs.berachain.com/learn/what-is-proof-of-liquidity) system.
 
 ### Borrowing to earn `$BGT`
 
-Borrowers with open `$HONEY` loans enjoy `$BGT` as an extra incentive for borrowing. This incentive encourages borrowing activity, which in turn increases the utility and demand for Berachain's native stablecoin `$HONEY`, and which drives fees for `$BGT` holders.
+Borrowers with open `$HONEY` loans receive `$BGT` as an extra incentive for borrowing. This incentive encourages borrowing activity, which in turn increases the utility and demand for Berachain's native stablecoin `$HONEY`, and which drives fees for `$BGT` holders.
 
 :::tip
-Borrowers earn based on the `$HONEY` borrowed, and not the value of supplied collateral. Be mindful of your health factor when trying to maximize `$BGT` earning.
+Borrowers earn based on the amount of `$HONEY` borrowed, and not the value of the supplied collateral. Be mindful of your health factor when trying to maximize `$BGT` earning.
 :::
 
 Earning `$BGT` on Bend is unique, because Borrowers can easily claim their `$BGT` rewards on Bend, rather than visiting the portal for depositing in <a :href="config.testnet.dapps.bgtStation.url + 'gauge'">Reward Vaults</a> (required for BEX deposits, for example).

@@ -4,7 +4,7 @@
 
 ## Why Does Bend Exist?
 
-Bend is berachain’s native lending platform. It allows for users to gain exposure to honey while using their other blue chip assets as collateral.
+Bend is Berachain’s native lending platform. It allows for users to gain exposure to honey while using their other blue chip assets as collateral.
 
 ### Capital Efficiency
 
@@ -20,7 +20,7 @@ Bend brings a greatly improved set risk parameters and new features to protect t
 Bend governance can now configure Borrow and Supply Caps.
 
 - **Borrow Caps**: allow modulating how much of each asset can be borrowed, which reduces insolvency risk.
-- **Supply Caps**: allow limiting how much of a certain asset is supplied to Bend. This helps reducing exposure to a certain asset and mitigate attacks like infinite minting or price oracle manipulation.
+- **Supply Caps**: allow limiting how much of a certain asset is supplied to Bend. This helps reduce exposure to a certain asset and mitigate attacks like infinite minting or price oracle manipulation.
 
 ### Granular Borrowing Power Control
 
@@ -38,5 +38,5 @@ In Bend, the liquidation mechanism has been improved to allow the position to be
 
 :::warning
 <b>Warning</b><br />
-Most of the features above are under constant improvement and might change as the we get close to public testnet. Please make sure to check latest feature announcements for up to date information.
+Most of the features above are under constant improvement and might change as we get close to the public testnet. Please make sure to check latest feature announcements for up to date information.
 :::

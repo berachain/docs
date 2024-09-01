@@ -6,7 +6,7 @@ This guide is for `$HONEY` holders who want to supply their tokens to earn passi
 
 ### Initiate Supply
 
-1. Click on Dashboard section on the top left corner and then **_Supply_** button should be visible under "Supply Honey" section as shown below.
+1. Click on the Dashboard section on the top left corner and then **_Supply_** button should be visible under "Supply Honey" section as shown below.
    ![How To Supply 1/6](/assets/how_to_supply_screenshot_1.png)
 
 ### Set Supply Amount
@@ -25,9 +25,9 @@ This guide is for `$HONEY` holders who want to supply their tokens to earn passi
 
 ### Confirm Supply Transaction
 
-4. Confirm the transaction on metamask. Once the transaction is confirmed, your supply is successfully registered and you begin earning interest.
+4. Confirm the transaction on MetaMask. Once the transaction is confirmed, your supply is successfully registered, and you begin earning interest.
 
-![Deposite_d8](/assets/how_to_deposit_8.png)
+![Deposit_d8](/assets/how_to_deposit_8.png)
 
 ### Supply Successful
 

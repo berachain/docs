@@ -1,16 +1,16 @@
 # Supplying & Earning $HONEY
 
-On Bend, users can deposit a variety of blue-chip assets which acts as a collateral and increase their borrowing capacity. The primary assets that can be supplied include:
+On Bend, users can deposit a variety of blue-chip assets which act as a collateral and increase their borrowing capacity. The primary assets that can be supplied include:
 
-- Ethereum (wETH)
-- Bitcoin (wBTC)
-- $HONEY (Berachain’s native stablecoin)
+- Ethereum (wETH).
+- Bitcoin (wBTC).
+- $HONEY (Berachain’s native stablecoin).
 
-The list of assets available for supplying will be decided decided via foundation and governance.
+The list of assets available for supplying will be decided via foundation and governance.
 
-**Note:** In the Bend dApp, "Supplying" and "Deposit" are used for seperate tasks. Exaple - Only $HONEY can be *supplied*, and other assets can be *deposited* acting as a collateral to *borrow* `$HONEY`.
+**Note:** In the Bend dApp, "Supplying" and "Deposit" are used for separate tasks. Example - Only $HONEY can be *supplied*, and other assets can be *deposited* acting as collateral to *borrow* `$HONEY`.
 
-To learn more on depositing assets, check out [Depositing](/learn/guides/depositing-collateral#how-do-i-deposit) guide.
+To learn more about depositing assets, check out [Depositing](/learn/guides/depositing-collateral#how-do-i-deposit) guide.
 
 ## Supply Logic
 

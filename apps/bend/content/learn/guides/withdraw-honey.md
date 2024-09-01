@@ -6,7 +6,7 @@ If you wish to stop supplying your `$HONEY` and withdraw it back to your wallet,
 
 ### Initiate Withdraw
 
-1. To withdraw the `$HONEY` you deposited earlier, you need to go to the "Supply Honey" section and click on **_Withdraw_** button.
+1. To withdraw the `$HONEY` you deposited earlier, you need to go to the "Supply Honey" section and click on the **_Withdraw_** button.
 
 ![Withdraw_S1](/assets/withdraw_honey_1.png)
 
@@ -17,12 +17,14 @@ If you wish to stop supplying your `$HONEY` and withdraw it back to your wallet,
 ![Supply_S5](/assets/withdraw_honey_2.png)
 
 :::warning
-You would need to make sure there is enough liquidity (not borrowed) in order to withdraw, if this is not the case you would need to wait for more liquidity from suppliers or borrowers repaying.
+You need to make sure there is enough liquidity (not borrowed) in order to withdraw, if this is not the case, you would need to wait for more liquidity from suppliers or borrowers repaying.
 :::
 
 ### Confirm Withdrawal Transaction
 
-3. Confirm the transaction ![Supply_S5](/assets/how_to_withdraw_3.png)
+3. Confirm the transaction.
+
+![Supply_S5](/assets/how_to_withdraw_3.png)
 
 ### Withdrawal Complete
 

@@ -10,13 +10,13 @@ This guide walks through the process of depositing crypto assets as collateral t
 
 ![Deposit_d1](/assets/how_to_deposit_1.png)
 
-2. For this example we will be supplying WETH collateral. Choose the amount of WETH you wish to supply.
+2. For this example, we will be supplying WETH collateral. Choose the amount of WETH you wish to supply.
 
 ![Deposit_d2](/assets/how_to_deposit_2.png)
 
 ### Confirm Asset Amount
 
-3. Confirm the amount of asset you want to supply and then select either `Approve TOKEN` or `Approve Infinite`. Selecting `Approve Infinite` will help avoid recurring approvals when depositing again in the future.
+3. Confirm the amount of the asset you want to supply and then select either `Approve TOKEN` or `Approve Infinite`. Selecting `Approve Infinite` will help avoid recurring approvals when depositing again in the future.
 
 ![Deposit_d3](/assets/how_to_deposit_3.png)
 
@@ -30,24 +30,24 @@ This guide walks through the process of depositing crypto assets as collateral t
 
 5. The UI will inform you once your transaction is successfully processed.
 
-![Deposite_d6](/assets/how_to_deposit_6.png)
+![Deposit_d6](/assets/how_to_deposit_6.png)
 
 ### Confirm Supply Transaction
 
 6. Click on the "Supply" button.
 
-![Deposite_d7](/assets/how_to_deposit_7.png)
+![Deposit_d7](/assets/how_to_deposit_7.png)
 
 7. Confirm the transaction in your wallet.
 
-![Deposite_d8](/assets/how_to_deposit_8.png)
+![Deposit_d8](/assets/how_to_deposit_8.png)
 
 8. Wait for the transaction to get processed. When successful, a checkmark ✅ will be displayed.
 
-![Deposite_d8](/assets/how_to_deposit_9.png)
+![Deposit_d8](/assets/how_to_deposit_9.png)
 
 ### Deposit Complete
 
 9. You can confirm your deposit by checking the "Your Deposits" section.
 
-![Deposite_d8](/assets/how_to_deposit_10.png)
+![Deposit_d8](/assets/how_to_deposit_10.png)

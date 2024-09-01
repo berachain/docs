@@ -1,6 +1,6 @@
 # Governance
 
-Bend is governed by Berachain Governance Token (`$BGT`) holders. `$BGT` holders are empowered to broad governance powers over Bend, such as adding new asset markets, changing risk parameters, or upgrading certain protocol contracts.
+Bend is governed by Berachain Governance Token (`$BGT`) holders. `$BGT` holders are empowered with broad governance powers over Bend, such as adding new asset markets, changing risk parameters, or upgrading certain protocol contracts.
 
 In this section, we describe the key Bend governance contracts.
 ![Bend Architecture - Pool Operation](/assets/bend-architecture-poolOperation.png)
