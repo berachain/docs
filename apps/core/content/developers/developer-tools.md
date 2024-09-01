@@ -52,10 +52,11 @@ Since Berachain is EVM-compatible, if you're familiar with creating Dapps on oth
 
 and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-with-geth/rpc) for calling the chain.
 
-### Subgraphs
+### Subgraphs & Data Indexers
 
 - [Goldsky](https://goldsky.com)
 - [Ghost Graph](https://ghostgraph.xyz)
+- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
 
 ### Oracles
 

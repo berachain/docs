@@ -36,6 +36,10 @@ Stability is a desirable property in a medium of exchange, in contrast to transa
 
 Alternatively, `$HONEY` can be obtained by trading other assets on the [Berachain Bex](https://artio.bex.berachain.com).
 
+## What determines which assets collateralize $HONEY?
+
+Governance determines which assets can be used to mint $HONEY.
+
 ## How is $HONEY Used?
 
 $HONEY shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. However, `$HONEY` also has a number of unique use cases within the Berachain ecosystem, including:

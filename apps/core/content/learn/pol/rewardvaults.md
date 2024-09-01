@@ -3,7 +3,7 @@
 Reward vaults are smart contracts in which users can stake their Proof of Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward vaults are the only way in which anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
 
 :::tip
-A different reward vault contract exists for each PoL eligible asset
+A different reward vault contract exists for each PoL-eligible asset
 :::
 
 ![Reward Vaults](/assets/reward-vaults.png)
@@ -27,6 +27,6 @@ To understand why validators would choose to emit `$BGT` to a particular reward 
 
 ## Creation of New Reward Vaults
 
-New reward vaults are created through the Reward Vaults Whitelisting process, conducted by `$BGT` governance. Developers or protocols can submit a proposal to create a new reward vault for a specific PoL-eligible asset. If the proposal passes, the new reward vault is created and its address is added to the list of approved reward vaults that validators can direct `$BGT` emissions to.
+New Reward Vaults can be created permissionlessely, but must go through the Reward Vaults Whitelisting process, conducted by `$BGT` governance in order to be eligible to recieve `$BGT` from validators. Developers or protocols can submit a proposal to whitelist a new reward vault for a specific PoL-eligible asset. If the proposal passes, the vault address is added to the list of approved reward vaults that validators can direct `$BGT` emissions to.
 
 More information will be provided on how to submit a proposal for whitelisting in the near future.
