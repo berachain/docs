@@ -1,15 +1,15 @@
 # Interest Rates
 
-> The Bend protocol mitigates risk by controlling borrowing interest rates
+> The Bend protocol mitigates risk by controlling borrowing interest rates.
 
-Bend's variable interest rates are determined primarily by the protocol's **utilization ratio** $U$, which is the ratio of borrowed`$HONEY` to the total supplied `$HONEY`:
+Bend's variable interest rates are determined primarily by the protocol's **utilization ratio** $U$, which is the ratio of borrowed `$HONEY` to the total supplied `$HONEY`:
 
 `U = Total Borrowed / Total Supplied`
 
 There is an **Interest Rate Model** which controls the borrowing costs of `$HONEY` on Bend:
 
-- The model incentivizes users to borrow `$HONEY` with low interest rates when the protocol is underutilized
-- The model disincentivzes borrowing `$HONEY` when the protocol is overutilized (with high interest rates)
+- The model incentivizes users to borrow `$HONEY` with low interest rates when the protocol is underutilized.
+- The model disincentivizes borrowing `$HONEY` when the protocol is overutilized (with high interest rates).
 
 The interest rate is calculated using the following formula:
 

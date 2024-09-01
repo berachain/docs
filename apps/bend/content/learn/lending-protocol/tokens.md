@@ -5,7 +5,7 @@
 
 # Tokens
 
-In the Bend protocol we're typically dealing with 3 main categories of tokens:
+In the Bend protocol, we're typically dealing with three  main categories of tokens:
 
 1. **aTokens**
 2. **Variable Debt Tokens**
@@ -23,7 +23,7 @@ Users receive a corresponding amount of aTokens in return when depositing a toke
 
 aTokens are pegged to the value of the corresponding supplied asset at a 1:1 ratio. For example, a user deposits 100 `$HONEY`, receiving 100 `$aHONEY`. Over time, the position appreciates to 102 `$aHONEY`, which is redeemable for 102 `$HONEY`.
 
-Where no borrowing market exists for an asset (e.g. `$WETH`), users' corresponding aToken balances remain static (because no interest accrues).
+Where no borrowing market exists for an asset (e.g., `$WETH`), users' corresponding aToken balances remain static (because no interest accrues).
 
 ### Transfers
 

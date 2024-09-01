@@ -6,7 +6,7 @@ After you have repaid your borrowed `$HONEY` (or if you are comfortable with low
 
 ### Initiate Withdraw
 
-1. To withdraw the collateral assets you deposited earlier, you need to go to the "Your Deposits" section and click on **_Withdraw_** button beside the desired asset.
+1. To withdraw the collateral assets you deposited earlier, you need to go to the "Your Deposits" section and click on the **_Withdraw_** button beside the desired asset.
 
 ![Supply_S5](/assets/how_to_withdraw_1.png)
 
@@ -22,7 +22,7 @@ You cannot withdraw an amount that would cause your Health Factor to fall below 
 
 ### Confirm Withdrawal Transaction
 
-3. Confirm the transaction
+3. Confirm the transaction.
 
 ![Supply_S5](/assets/how_to_withdraw_3.png)
 
