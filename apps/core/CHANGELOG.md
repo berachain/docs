@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.1.7
+
+### Patch Changes
+
+- Add Chronicle to Oracles list
+
 ## 1.1.6
 
 ### Patch Changes
