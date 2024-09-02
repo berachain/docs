@@ -61,6 +61,7 @@ and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-
 ### Oracles
 
 - [API3](https://api3.org)
+- [Chronicle](https://chroniclelabs.org/)
 - [Pyth](https://pyth.network/)
 - [Redstone](https://docs.redstone.finance/docs/introduction)
 - [Stork](https://www.stork.network)
