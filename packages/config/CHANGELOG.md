@@ -1,5 +1,11 @@
 # @berachain/config
 
+## 1.1.1
+
+### Patch Changes
+
+- Updates debt token addresses
+
 ## 1.1.0
 
 ### Minor Changes

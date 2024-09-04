@@ -1,5 +1,13 @@
 # @berachain/bend
 
+## 1.1.3
+
+### Patch Changes
+
+- Updates debt token addresses
+- Updated dependencies
+  - @berachain/config@1.1.1
+
 ## 1.1.2
 
 ### Patch Changes

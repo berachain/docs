@@ -187,7 +187,7 @@
     },
     "wbtc": {
       "name": "WBTC Token",
-      "address": "0x286F1C3f0323dB9c91D1E8f45c8DF2d065AB5fae",
+      "address": "0x2577D24a26f8FA19c1058a8b0106E2c7303454a4",
       "abi": "",
       "docsUrl": "/developers/contracts/wbtc-token"
     },
@@ -425,12 +425,6 @@
       "abi": "",
       "docsUrl": ""
     },
-    "variableDebtToken": {
-      "name": "VariableDebtToken",
-      "address": "0x0e8E67089DEfea50241a3A50A0C5447A2813639F",
-      "abi": "",
-      "docsUrl": ""
-    },
     "honeyAToken": {
       "name": "HONEY-AToken",
       "address": "0xD08391c5977ebF1a09bB5915908EF5cd95Edb7E0",
@@ -449,21 +443,9 @@
       "abi": "",
       "docsUrl": ""
     },
-    "wbtcVariableDebtToken": {
-      "name": "WBTC-VariableDebtToken",
-      "address": "0xFB93ff5EfA67926C5AA4A096ef62041B7931E102",
-      "abi": "",
-      "docsUrl": ""
-    },
     "wethAToken": {
       "name": "WETH-AToken",
       "address": "0x8Ce5C1c42CD58B7aE61512790e514a82d84375Ed",
-      "abi": "",
-      "docsUrl": ""
-    },
-    "wethVariableDebtToken": {
-      "name": "WETH-VariableDebtToken",
-      "address": "0x5F25f4397469F8120dB6E72E948FF5EcAf9D93B4",
       "abi": "",
       "docsUrl": ""
     },
