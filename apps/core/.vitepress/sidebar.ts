@@ -60,11 +60,11 @@ const SIDEBAR = {
       text: "Guide",
       items: [
         {
-          text: "Delegate BGT To Validator ",
+          text: "Delegate BGT To Validator",
           link: "/learn/guides/delegate-bgt-to-validator",
         },
         {
-          text: "Create PoL Gauge Proposal  ",
+          text: "Create PoL Gauge Proposal",
           link: "/learn/guides/create-pol-guage-proposal",
         },
         { text: "Create Incentive", link: "/learn/guides/create-incentive" },

@@ -13,21 +13,17 @@ head:
 
 # Berachain Governance
 
-Berachain's Governance system uses BGT to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
+Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof-of-Liquidity & our core dapps. Here are a few examples of what governance can be used for:
 
-- PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
-- $HONEY minting parameters (e.g., eligible collateral assets, minting rates)
-- Native dApp governance (e.g., changes to Bend's interest rate model)
-  - Berps
-  - Bend
-  - Bex
-- Whitelisting Rewards Vaults for BGT emissions
+1. `$HONEY` minting parameters (e.g., eligible collateral assets, minting rates)
+2. Native dApp governance for BEX, Berps, & Bend (e.g., changes to Bend's interest rate model)
+3. Whitelisting Rewards Vaults for `$BGT` emissions
 
 ## Governance Process
 
 The governance process on Berachain follows several stages:
 
-1. **Proposal Creation**: Any user with sufficient voting power (at least 1000 $BGT) can create a governance proposal.
+1. **Proposal Creation**: Any user with sufficient voting power (meeting a minimum amount of `$BGT`) can create a governance proposal.
 
 2. **Pending State**: Once created, the proposal enters a 3-hour waiting period before becoming active for voting.
 

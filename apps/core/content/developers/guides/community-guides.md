@@ -84,7 +84,7 @@ These are a list of community developer guides for Berachain.
 
 | Project Name                  | Git Repository                                                                             |
 | ----------------------------- | ------------------------------------------------------------------------------------------ |
-| Berachain Governance Proposal | [GitHub](https://github.com/berachain/guides/tree/main/apps/berachain-governance-proposal) |
+| Berachain Governance Proposal For Reward Vaults | [GitHub](https://github.com/berachain/guides/tree/main/apps/berachain-governance-proposal) |
 
 ## Storage
 
