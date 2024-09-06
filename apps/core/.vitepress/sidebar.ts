@@ -194,6 +194,10 @@ const SIDEBAR = {
           text: "Run Local Devnet With Kurtosis",
           link: "/nodes/guides/kurtosis",
         },
+        {
+          text: "Restoring Nodes from Snapshots",
+          link: "/nodes/guides/snapshots",
+        },
       ],
     },
   ],

@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.2.0
+
+### Minor Changes
+
+- New Node Snapshot Guide
+
 ## 1.1.8
 
 ### Patch Changes
