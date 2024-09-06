@@ -1,6 +1,6 @@
 {
   "name": "@berachain/core",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "scripts": {
     "dev": "vitepress dev --port 5173",
     "build": "vitepress build",
