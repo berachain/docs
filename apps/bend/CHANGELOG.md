@@ -1,5 +1,11 @@
 # @berachain/bend
 
+## 1.1.4
+
+### Patch Changes
+
+- Bend docs grammar fixes
+
 ## 1.1.3
 
 ### Patch Changes
