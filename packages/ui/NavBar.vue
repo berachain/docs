@@ -16,6 +16,7 @@ import VPNavBarSearch from 'vitepress/dist/client/theme-default/components/VPNav
 import VPNavBarSocialLinks from 'vitepress/dist/client/theme-default/components/VPNavBarSocialLinks.vue';
 import VPNavBarTitle from 'vitepress/dist/client/theme-default/components/VPNavBarTitle.vue';
 import VPNavBarTranslations from 'vitepress/dist/client/theme-default/components/VPNavBarTranslations.vue';
+import AskCookbook from '@berachain/ui/AskCookbook';
 
 // Instances
 defineProps<{ isScreenOpen: boolean }>();
@@ -34,6 +35,8 @@ watchPostEffect(() => {
     top: frontmatter.value.layout === 'home' && y.value === 0,
   }
 })
+
+
 </script>
 
 <!-- 
@@ -70,6 +73,7 @@ Template
       </div>
     </div>
   </div>
+  <AskCookbook />
 </template>
 
 <!-- 

@@ -1,5 +1,11 @@
 # @berachain/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- Adds CookBook AI button to all docs navigation
+
 ## 1.0.1
 
 ### Patch Changes

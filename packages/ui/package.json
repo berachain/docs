@@ -1,6 +1,6 @@
 {
   "name": "@berachain/ui",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -17,6 +17,7 @@
     "./Flyout": "./Flyout.vue",
     "./Sidebar": "./Sidebar.vue",
     "./Token": "./Token.vue",
+    "./AskCookbook": "./AskCookbook.vue",
     "./style": "./style.css"
   },
   "scripts": {

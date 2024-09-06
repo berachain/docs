@@ -1,5 +1,12 @@
 # @berachain/core
 
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/ui@1.1.0
+
 ## 1.2.0
 
 ### Minor Changes

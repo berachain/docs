@@ -1,5 +1,12 @@
 # @berachain/bex
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/ui@1.1.0
+
 ## 1.1.2
 
 ### Patch Changes
