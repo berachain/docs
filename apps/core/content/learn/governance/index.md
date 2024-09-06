@@ -63,12 +63,12 @@ For a detailed walkthrough of creating a governance proposal, including code exa
 
 For the current testnet, the following values apply:
 
-| State | Criteria |
-|-------|----------|
-| Proposal Creation | 1000 `$BGT` Required |
-| Pending State | 3-hour waiting period |
-| Active Voting | 3-hour voting period |
-| Proposal Outcome | 2 billion `$BGT` required to reach quorum |
-| Timelock | 3-hour delay |
+| State             | Criteria                                  |
+| ----------------- | ----------------------------------------- |
+| Proposal Creation | 1000 `$BGT` Required                      |
+| Pending State     | 3-hour waiting period                     |
+| Active Voting     | 3-hour voting period                      |
+| Proposal Outcome  | 2 billion `$BGT` required to reach quorum |
+| Timelock          | 3-hour delay                              |
 
-Note: These values are specific to the testnet and may change for the mainnet launch. You will have to reach out to the Berachain team to get your proposal whitelisted on testnet. 
+Note: These values are specific to the testnet and may change for the mainnet launch. You will have to reach out to the Berachain team to get your proposal whitelisted on testnet.

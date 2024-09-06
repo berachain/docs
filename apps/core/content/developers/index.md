@@ -19,7 +19,7 @@ The BeraChef contract is responsible for storing the preferences of validators f
 
 `getActiveCuttingBoard`/`getQueuedCuttingBoard`: These functions return the active/queued cutting board for a given validator.
 
-`updateFriendsOfTheChef`: This function updates the status of whether a $BGT receiver/gauge is whitelisted or not. This is callable only by the governance module, which is why a governance proposal is required to whitelist new Reward Vaults or make changes to existing ones.
+`updateFriendsOfTheChef`: This function updates the status of whether a `$BGT` receiver/Reward Vault is whitelisted or not. This is callable only by the governance module, which is why a governance proposal is required to whitelist new Reward Vaults or make changes to existing ones.
 
 ## Distributor.sol
 

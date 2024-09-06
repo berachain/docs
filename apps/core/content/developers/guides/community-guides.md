@@ -62,18 +62,16 @@ These are a list of community developer guides for Berachain.
 | Using Gelato VRF                     | [GitHub](https://github.com/berachain/guides/tree/main/apps/gelato-vrf)   |
 | Provably Fair NFTs with Pyth Entropy | [GitHub](https://github.com/berachain/guides/tree/main/apps/pyth-entropy) |
 
-
 ## Oracles
 
 | Project Name | Git Repository                                                           |
 | ------------ | ------------------------------------------------------------------------ |
 | Pyth Oracle  | [GitHub](https://github.com/berachain/guides/tree/main/apps/pyth-oracle) |
 
-
 ## Governance
 
-| Project Name                  | Git Repository                                                                             |
-| ----------------------------- | ------------------------------------------------------------------------------------------ |
+| Project Name                                    | Git Repository                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Berachain Governance Proposal For Reward Vaults | [GitHub](https://github.com/berachain/guides/tree/main/apps/berachain-governance-proposal) |
 
 ## Storage

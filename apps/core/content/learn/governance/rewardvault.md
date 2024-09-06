@@ -1,9 +1,6 @@
 # Creating a Governance Proposal for Berachain Reward Vaults
 
-
 > **Note:** For a detailed guide on how to create a reward vault, please see this blog post: [Creating a Governance Proposal for Berachain Reward Vaults](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults) where you can learn how to create your own Reward Vaults.
-
-
 
 Berachain's Proof of Liquidity (PoL) consensus mechanism allows protocols to bootstrap their liquidity by receiving Berachain Governance Token (`$BGT`) emissions from validators. This process is facilitated through Reward Vaults, which play a crucial role in the governance and incentive structure of the Berachain ecosystem.
 
@@ -24,14 +21,17 @@ While creating a Reward Vault is permissionless, for it to receive `$BGT` emissi
 ### Governance Process for Whitelisting
 
 1. **Meet `$BGT` Requirements**:
+
    - Minimum 1000 `$BGT` needed to create a proposal
    - `$BGT` can be acquired through participation in PoL on native dApps
 
 2. **Create and Submit Proposal**:
+
    - Proposals are submitted on-chain
    - 3-hour waiting period before voting begins
 
 3. **Voting Period**:
+
    - 3-hour active voting window
    - `$BGT` holders cast votes (quorum: 2B `$BGT`)
 
