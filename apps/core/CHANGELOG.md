@@ -37,8 +37,6 @@
 
 - new questions in PoL FAQ
 
-=======
->>>>>>> b6802f9 (fix: 🐛 Reverted changelog)
 ## 1.1.3
 
 ### Patch Changes
