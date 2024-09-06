@@ -1,8 +1,8 @@
 # Creating a Governance Proposal for Berachain Reward Vaults
 
-> **Note:** For a detailed guide on how to create a reward vault, please see this blog post: [Creating a Governance Proposal for Berachain Reward Vaults](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults) where you can learn how to create your own Reward Vaults.
+> **NOTE:** For a detailed guide on how to create a reward vault, please see this blog post: [Creating a Governance Proposal for Berachain Reward Vaults](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults) where you can learn how to create your own Reward Vaults.
 
-Berachain's Proof of Liquidity (PoL) consensus mechanism allows protocols to bootstrap their liquidity by receiving Berachain Governance Token (`$BGT`) emissions from validators. This process is facilitated through Reward Vaults, which play a crucial role in the governance and incentive structure of the Berachain ecosystem.
+Berachain's Proof-of-Liquidity (PoL) consensus mechanism allows protocols to bootstrap their liquidity by receiving Berachain Governance Token (`$BGT`) emissions from validators. This process is facilitated through Reward Vaults, which play a crucial role in the governance and incentive structure of the Berachain ecosystem.
 
 ## Understanding Reward Vaults in PoL
 
