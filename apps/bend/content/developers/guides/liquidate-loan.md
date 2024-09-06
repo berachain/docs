@@ -37,7 +37,7 @@ When making a [liquidationCall()](/developers/contracts/pool#liquidationcall), y
 
   - You must already have sufficient balance of the debt asset, which will be used by the `liquidationCall` to pay back the debt.
 
-- Know the collateral asset `collateralAsset` you closing, i.e. the asset that the user has `backing` their outstanding loan that you will receive as a `bonus`.
+- Know the collateral asset `collateralAsset` you are closing, i.e. the asset that the user has `backing` their outstanding loan that you will receive as a `bonus`.
 
 - Whether you want to receive _aTokens_ or the underlying asset after a successful `liquidationCall()`.
 

@@ -4,8 +4,8 @@ Liquidation is initiated when a **borrower's health factor falls below 1**, indi
 
 To avoid liquidation, users should seek to maintain a high health factor. Users may raise their health factor by either:
 
-1. depositing more collateral; or
-2. repaying part of their debt
+1. Depositing more collateral, or
+2. Repaying part of their debt
 
 The Bend UI provides a visual health factor indicator to help users monitor their health factor and take appropriate action.
 

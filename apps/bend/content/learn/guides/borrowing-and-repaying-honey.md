@@ -8,7 +8,7 @@ Borrowing `$HONEY` requires you to have deposited crypto collateral. If you have
 
 ### Familiarize Yourself with the Dashboard
 
-1. Head to the dashboard and see the familiarize yourself with the "Borrow" section. Note information such as the `$BGT` earning APY, borrowing APY, etc.
+1. Head to the dashboard and familiarize yourself with the "Borrow" section. Note information such as the `$BGT` earning APY, borrowing APY, etc.
    ![How To Borrow 1/4](/assets/how_to_borrow_1.png)
 
 ### Set Borrow
@@ -33,7 +33,7 @@ Confirm the amount of `$HONEY` to borrow, then click on **_Borrow_**.
 
 ### Initiate Repayment
 
-1. To repay, navigate to the "Dashboard" section and scroll down to "Borrow Honey" section. Click on **_Repay_**
+1. To repay, navigate to the "Dashboard" section and scroll down to the "Borrow Honey" section. Click on **_Repay_**
    ![Repay_r1](/assets/how_to_repay_1.png)
 
 ### Select Amount

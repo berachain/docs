@@ -29,7 +29,7 @@ Although the most rewards are earned by borrowing maximal amounts of `$HONEY`, u
 
 ## PoL Interactions
 
-Those familiar with PoL may realize that earning `$BGT` on Bend is diferent from the usual flow of depositing on <a target="_blank" :href="config.testnet.dapps.bgtStation.url">BGT Station</a>. The following diagram illustrates the unique sequence of interactions between Bend and PoL:
+Those familiar with PoL may realize that earning `$BGT` on Bend is different from the usual flow of depositing on <a target="_blank" :href="config.testnet.dapps.bgtStation.url">BGT Station</a>. The following diagram illustrates the unique sequence of interactions between Bend and PoL:
 
 ![Bend & Proof Of Liquidity](/assets/bend-bgt-flow.png)
 

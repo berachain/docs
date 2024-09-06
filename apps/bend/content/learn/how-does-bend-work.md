@@ -8,9 +8,9 @@ Bend's design is inspired by [Aave](https://app.aave.com/), a highly battle-test
 
 There are three main participants in Bend:
 
-1. **Suppliers** providing `$HONEY` liquidity
-2. **Borrowers** borrowing `$HONEY` and paying lending fees
-3. **Liquidators** ensuring that the protocol remains solvent
+1. **Suppliers** providing `$HONEY` liquidity.
+2. **Borrowers** borrowing `$HONEY` and paying lending fees.
+3. **Liquidators** ensuring that the protocol remains solvent.
 
 <a :href="config.testnet.dapps.bend.url">
 
@@ -22,7 +22,7 @@ Berachain itself may also be considered a Bend participant, as it's the entity p
 
 ## Suppliers
 
-Suppliers have two main tasks that can be performed in Bend, they get to _deposit_ assets as a collateral, and _supply_ `$HONEY` to the Bend platform and earn interest from the `$HONEY` borrowed by borrowers. By supplying liquidity, they help maintain a robust lending pool, ensuring that there is always available capital for borrowers. This activity directly supports the overall liquidity and efficiency of the Berachain ecosystem, contributing to its stability and security.
+Suppliers have two main tasks that can be performed in Bend, they get to _deposit_ assets as collateral, and _supply_ `$HONEY` to the Bend platform and earn interest from the `$HONEY` borrowed by borrowers. By supplying liquidity, they help maintain a robust lending pool, ensuring that there is always available capital for borrowers. This activity directly supports the overall liquidity and efficiency of the Berachain ecosystem, contributing to its stability and security.
 
 ## Borrowers
 
@@ -34,6 +34,6 @@ Liquidators, often referred to as liquidation bots, monitor the health of loans 
 
 ## Berachain
 
-Bend opens up the oppurtunity for users to borrow `$HONEY`, which starts the cycle for supplying -> borrowing -> earning `$BGT` rewards.
+Bend opens up the opportunity for users to borrow `$HONEY`, which starts the cycle for supplying -> borrowing -> earning `$BGT` rewards.
 
-The same `$BGT` can be then be used to increase validator's `$BGT` weight, increasing the power to produce more `$BGT` rewards per-block. Read more in the next section - [Bend & Proof Of Liquidity](/learn/bend-and-pol).
+The same `$BGT` can then be used to increase validator's `$BGT` weight, increasing the power to produce more `$BGT` rewards per block. Read more in the next section - [Bend & Proof Of Liquidity](/learn/bend-and-pol).

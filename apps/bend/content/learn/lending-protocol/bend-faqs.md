@@ -32,7 +32,7 @@ Instructions for connecting your wallet to the bArtio Testnet can be found here:
 
 No, flash loans are not available on Bend.
 
-### What is the cost of interacting with Bend?
+### What are the costs of interacting with Bend?
 
 Interacting with Bend requires on-chain transactions and therefore transaction (gas) fees for Berachain Blockchain usage, paid in `$BERA` tokens.
 
@@ -46,15 +46,15 @@ No platform can be considered entirely risk free. The risks related to Bend are 
 
 More specifically, different categories of risk include:
 
-- **Oracle risks**: oracles are used to price assets on Bend. If the oracle is manipulated or is otherwise incorrect, accounting errors to the protocol can occur.
+- **Oracle risks**: oracles are used to price assets on Bend. If the oracle is manipulated or is otherwise incorrect, accounting errors in the protocol can occur.
 - **Smart contract risks**: despite the codebase being battle-tested, there is always a risk that a bug in the code can lead to a loss of funds.
-- **Governance risks**: `$BGT` governance has a wide scope of powers
+- **Governance risks**: `$BGT` governance has a wide scope of powers.
 - **Liquidation risks**: users' positions can be liquidated if there are large price fluctuations.
 - **Solvency risks**: If liquidations do not occur in a timely manner, the protocol may be left undercollateralized, and lenders may not be able to fully withdraw their collateral.
 
 ### Scams
 
-Be careful with where you try interacting with Bend. Bend doesn't have any downloadable mobile applications available, and if you find one, it is a scam. Bend would not ask for your seed passphrase ever. Bend never advertises on any social media or search engine. If you see any advertisement, those are scams and phishing sites.
+Be careful where you try interacting with Bend. Bend doesn't have any downloadable mobile applications available, and if you find one, it is a scam. Bend would not ask for your seed passphrase ever. Bend never advertises on any social media or search engine. If you see any advertisement, those are scams and phishing sites.
 
 The only UI for accessing Bend is at <a target="_blank" :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a>.
 
@@ -62,7 +62,7 @@ The only UI for accessing Bend is at <a target="_blank" :href="config.testnet.da
 
 ### Why would I borrow instead of selling my assets?
 
-Selling requires exiting your position and reducing exposure that particular asset, potentially carrying taxable events or tax implications. Bend helps those users who wish to maintain long exposure to a crypto-asset (leaving potential for upside gains) but wanted stablecoin capital to work with. Borrowing, provides a means to access liquidity without liquidating your assets. Users typically borrow for unforeseen expenses, leverage their holdings, or explore new investment opportunities.
+Selling requires exiting your position and reducing exposure that particular asset, potentially carrying taxable events or tax implications. Bend helps those users who wish to maintain long exposure to a crypto-asset (leaving potential for upside gains) but wanted stablecoin capital to work with. Borrowing provides a means to access liquidity without liquidating your assets. Users typically borrow for unforeseen expenses, leverage their holdings, or explore new investment opportunities.
 
 ### How much I can borrow?
 
