@@ -21,7 +21,7 @@ For liquidation calls to be profitable, you must take into account the gas cost 
 Bend protocol allows 100% of debt (i.e. `MAX_LIQUIDATION_CLOSE_FACTOR`) to be liquidated in single `liquidationCall()` if: `HF < CLOSE_FACTOR_HF_THRESHOLD`
 :::
 
-## Before Making a Liquidation Call
+## Before Making Liquidation Call
 
 When making a [liquidationCall()](/developers/contracts/pool#liquidationcall), you must:
 

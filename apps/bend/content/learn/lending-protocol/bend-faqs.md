@@ -32,7 +32,7 @@ Instructions for connecting your wallet to the bArtio Testnet can be found here:
 
 No, flash loans are not available on Bend.
 
-### What is the costs of interacting with Bend?
+### What are the costs of interacting with Bend?
 
 Interacting with Bend requires on-chain transactions and therefore transaction (gas) fees for Berachain Blockchain usage, paid in `$BERA` tokens.
 

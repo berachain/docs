@@ -33,7 +33,7 @@ Those familiar with PoL may realize that earning `$BGT` on Bend is different fro
 
 ![Bend & Proof Of Liquidity](/assets/bend-bgt-flow.png)
 
-When borrowing `$HONEY`, an equivalent amount of [`$vdHONEY`](/learn/lending-protocol/tokens#variable-debt-tokens) tokens is minted, representing the user's growing debt obligations. These two tokens are sent to users' wallets.
+When borrowing `$HONEY`, an equivalent amount of [`$vdHONEY`](/learn/lending-protocol/tokens#variable-debt-tokens) tokens are minted, representing the user's growing debt obligations. These two tokens are sent to users' wallets.
 
 ### PoL Reward Vault
 
