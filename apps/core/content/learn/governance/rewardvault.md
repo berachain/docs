@@ -22,22 +22,24 @@ While creating a Reward Vault is permissionless, for it to receive `$BGT` emissi
 
 1. **Meet `$BGT` Requirements**:
 
-   - Minimum 1000 `$BGT` needed to create a proposal
+   - A minimum amount of `$BGT` is needed to create a proposal
    - `$BGT` can be acquired through participation in PoL on native dApps
 
 2. **Create and Submit Proposal**:
 
    - Proposals are submitted on-chain
-   - 3-hour waiting period before voting begins
+   - There's a waiting period before voting begins
 
 3. **Voting Period**:
 
-   - 3-hour active voting window
-   - `$BGT` holders cast votes (quorum: 2B `$BGT`)
+   - Active voting window
+   - `$BGT` holders cast votes (quorum required)
 
 4. **Proposal Outcome**:
-   - If passed: Enters a 2-day timelock queue
+   - If passed: Enters a timelock queue
    - If declined: Marked as defeated, allowing for a new proposal after addressing concerns
+
+> **NOTE:** For specific testnet values such as required $BGT amounts, voting periods, and quorum requirements, please refer to the [Governance Overview](/learn/governance/) section.
 
 ![Governance Process](/assets/governance-process.png)
 
