@@ -5,7 +5,7 @@
 
 # Tokens
 
-In the Bend protocol, we're typically dealing with three  main categories of tokens:
+In the Bend protocol, we're typically dealing with three main categories of tokens:
 
 1. **aTokens**
 2. **Variable Debt Tokens**
