@@ -1,5 +1,12 @@
 # @berachain/bend
 
+## 1.1.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/ui@1.1.0
+
 ## 1.1.4
 
 ### Patch Changes
