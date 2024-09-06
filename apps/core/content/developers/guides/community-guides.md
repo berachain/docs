@@ -15,16 +15,6 @@ head:
 
 These are a list of community developer guides for Berachain.
 
-## Authentication and Wallet Connection
-
-| Project Name                                                   | Git Repository                                                                    |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| NextJS WalletConnect WAGMI + Viem Frontend Contract Deployment | [GitHub](https://github.com/berachain/guides/tree/main/apps/walletconnect-nextjs) |
-| ThirdWeb ConnectWallet NextJS                                  | [GitHub](https://github.com/berachain/guides/tree/main/apps/thirdweb-connectwallet-nextjs) |
-| Particle Auth Core Vite                                        | [GitHub](https://github.com/berachain/guides/tree/main/apps/particle-auth-core-vite) |
-| RainbowKit Vite                                                | [GitHub](https://github.com/berachain/guides/tree/main/apps/rainbowkit-vite) |
-| WalletConnect Expo                                             | [GitHub](https://github.com/berachain/guides/tree/main/apps/walletconnect-expo) |
-
 ## Wallet Connections
 
 | Project Name                                                   | Git Repository                                                                             |
