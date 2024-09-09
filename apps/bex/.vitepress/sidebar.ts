@@ -165,6 +165,46 @@ const SIDEBAR = {
             { text: "Swap", link: "/developers/sdk/swap" },
           ],
         },
+        {
+          text: "Joins and Exits",
+          items: [
+            {
+              text: "Pool Joins",
+              link: "/developers/advanced-concepts/joins-exits/joins",
+            },
+            {
+              text: "Pool Exits",
+              link: "/developers/advanced-concepts/joins-exits/exits",
+            },
+          ],
+        },
+        {
+          text: "LP Tokens",
+          items: [
+            {
+              text: "Underlying Tokens",
+              link: "/developers/advanced-concepts/lp-tokens/underlying",
+            },
+            {
+              text: "Valuing",
+              link: "/developers/advanced-concepts/lp-tokens/valuing",
+            },
+          ],
+        },
+        {
+          text: "Flash Loans",
+          link: "/developers/advanced-concepts/flash-loans",
+        },
+      ],
+    },
+    {
+      text: "Help",
+      items: [
+        { text: "Smart Order Router", link: "/developers/guides/sor" },
+        {
+          text: "Get Spot Prices",
+          link: "/developers/guides/spot-prices",
+        },
       ],
     },
     {
@@ -172,7 +212,7 @@ const SIDEBAR = {
       items: [
         {
           text: "Error Codes",
-          link: "/developers/help/error-codes",
+          link: "/developers/error-codes",
         },
       ],
     },
