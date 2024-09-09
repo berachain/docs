@@ -27,6 +27,21 @@ const SIDEBAR = {
       items: [
         { text: "AMMs", link: "/learn/concepts/amm" },
         { text: "Governance", link: "/learn/concepts/governance" },
+        {
+          text: "Pools",
+          link: "/learn/concepts/pools",
+          items: [
+            {
+              text: "Weighted Pools",
+              link: "/learn/concepts/pools/weighted-pools",
+            },
+            {
+              text: "Stable Pools",
+              link: "/learn/concepts/pools/stable-pools",
+            },
+          ],
+        },
+        { text: "Smart Order Router", link: "/learn/concepts/sor" },
       ],
     },
     {
@@ -43,6 +58,10 @@ const SIDEBAR = {
           ],
         },
         { text: "Pool Creation", link: "/learn/guides/pool-creation" },
+        {
+          text: "Pool Configuration",
+          link: "/learn/guides/pool-configuration",
+        },
       ],
     },
   ],
@@ -54,85 +73,103 @@ const SIDEBAR = {
       text: "Berachain BEX For Devs",
       items: [
         { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Type Conventions", link: "/developers/type-conventions" },
-      ],
-    },
-    {
-      text: "Advanced Concepts",
-      items: [
-        {
-          text: "Surplus Collateral",
-          link: "/developers/advanced-concepts/surplus-collateral",
-        },
-        {
-          text: "Permissioned Pools",
-          link: "/developers/advanced-concepts/permissioned-pools",
-        },
-        {
-          text: "Account Abstraction",
-          link: "/developers/advanced-concepts/aa",
-        },
-        {
-          text: "External Routers",
-          link: "/developers/advanced-concepts/external-routers",
-        },
+        { text: "BEX Migration Guide", link: "/developers/migration-guide" },
       ],
     },
     {
       text: "Contracts References",
       items: [
         {
-          text: "DEX Contract",
-          link: "/developers/contracts/dex",
+          text: "Vault Contract",
+          link: "/developers/contracts/vault",
+        },
+        {
+          text: "Query Contract",
+          link: "/developers/contracts/query",
+        },
+        {
+          text: "Pool Factory Contracts",
           items: [
             {
-              text: "DEX Interface",
-              link: "/developers/contracts/dex",
+              text: "WeightedPoolFactory",
+              link: "/developers/contracts/factory/weighted-pool-factory",
             },
             {
-              text: "Using userCmd",
-              link: "/developers/contracts/usercmd",
-              items: [
-                { text: "Swaps", link: "/developers/contracts/swaps" },
-                {
-                  text: "LP Operations",
-                  link: "/developers/contracts/lp-operations",
-                },
-                {
-                  text: "Surplus Collateral",
-                  link: "/developers/contracts/surplus-collateral",
-                },
-                {
-                  text: "Relayer Calls",
-                  link: "/developers/contracts/relayer-calls",
-                },
-                {
-                  text: "MultiPath Calls",
-                  link: "/developers/contracts/multipath",
-                },
-              ],
+              text: "StablePoolFactory",
+              link: "/developers/contracts/factory/stable-pool-factory",
             },
           ],
         },
-
+      ],
+    },
+    {
+      text: "Advanced Concepts",
+      items: [
         {
-          text: "Query Contracts",
-          link: "/developers/query-contracts/",
+          text: "Pool Interfacing",
+          link: "/developers/advanced-concepts/pool-interfacing",
+        },
+        {
+          text: "Swaps",
           items: [
-            { text: "CrocQuery", link: "/developers/query-contracts/query" },
-            { text: "CrocImpact", link: "/developers/query-contracts/impact" },
+            {
+              text: "Single Swap",
+              link: "/developers/advanced-concepts/swaps/single-swap",
+            },
+            {
+              text: "Batch Swap",
+              link: "/developers/advanced-concepts/swaps/batch-swap",
+            },
           ],
+        },
+        {
+          text: "Joins and Exits",
+          items: [
+            {
+              text: "Pool Joins",
+              link: "/developers/advanced-concepts/joins-exits/joins",
+            },
+            {
+              text: "Pool Exits",
+              link: "/developers/advanced-concepts/joins-exits/exits",
+            },
+          ],
+        },
+        {
+          text: "LP Tokens",
+          items: [
+            {
+              text: "Underlying Tokens",
+              link: "/developers/advanced-concepts/lp-tokens/underlying",
+            },
+            {
+              text: "Valuing",
+              link: "/developers/advanced-concepts/lp-tokens/valuing",
+            },
+          ],
+        },
+        {
+          text: "Flash Loans",
+          link: "/developers/advanced-concepts/flash-loans",
         },
       ],
     },
     {
       text: "Developer Guides",
       items: [
-        { text: "Multiswap Router", link: "/developers/guides/multiswap" },
-        { text: "MultiPath", link: "/developers/guides/multipath-example" },
+        { text: "Smart Order Router", link: "/developers/guides/sor" },
         {
-          text: "CrocQuery",
-          link: "/developers/guides/query-example",
+          text: "Get Spot Prices",
+          link: "/developers/guides/spot-prices",
+        },
+      ],
+    },
+    {
+      text: "Help",
+      items: [
+        {
+          text: "Error Codes",
+          link: "/developers/error-codes",
         },
       ],
     },
