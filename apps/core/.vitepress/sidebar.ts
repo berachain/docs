@@ -47,8 +47,21 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
-        { text: "PoL FAQs", link: "/learn/pol/faqs" },
       ],
+    },
+    {
+      text: "Governance",
+      items: [
+        { text: "Governance Overview", link: "/learn/governance/" },
+        {
+          text: "Reward Vault Whitelisting",
+          link: "/learn/governance/rewardvault",
+        },
+      ],
+    },
+    {
+      text: "Guide",
+      items: [{ text: "PoL FAQs", link: "/learn/pol/faqs" }],
     },
     {
       text: "Native dApps",
