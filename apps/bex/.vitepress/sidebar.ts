@@ -42,7 +42,6 @@ const SIDEBAR = {
             },
           ],
         },
-        { text: "Smart Order Router", link: "/learn/concepts/sor" },
       ],
     },
     {
@@ -170,7 +169,7 @@ const SIDEBAR = {
       items: [
         {
           text: "Error Codes",
-          link: "/developers/error-codes",
+          link: "/developers/help/error-codes",
         },
       ],
     },
