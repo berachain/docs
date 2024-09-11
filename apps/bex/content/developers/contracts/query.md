@@ -1,3 +1,16 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: BEX Pool Interfacing
+  - - meta
+    - name: description
+      content: Obtain quotes on pool swaps, joins and exits
+  - - meta
+    - property: og:description
+      content: Obtain quotes on pool swaps, joins and exits
+---
+
 # BalancerQueries
 
 This contract provides quotes on swaps, joins and exits, simulating these operations and returning the exact
@@ -52,4 +65,42 @@ function queryJoin(bytes32 poolId, address sender, address recipient, IVault.Joi
 function queryExit(bytes32 poolId, address sender, address recipient, IVault.ExitPoolRequest memory request)
     external
     returns (uint256 bptIn, uint256[] memory amountsOut);
+```
+
+## Structs
+
+These structs do not belong to the Query contract, but are used as parameters in the functions above and provided for convenience below:
+
+```solidity
+enum SwapKind { GIVEN_IN, GIVEN_OUT }
+
+struct SingleSwap {
+    bytes32 poolId;
+    SwapKind kind;
+    IAsset assetIn;
+    IAsset assetOut;
+    uint256 amount;
+    bytes userData; // 0x for most swaps
+}
+
+struct FundManagement {
+    address sender;
+    bool fromInternalBalance;
+    address payable recipient;
+    bool toInternalBalance;
+}
+
+struct JoinPoolRequest {
+    address[] assets,
+    uint256[] maxAmountsIn,
+    bytes userData,
+    bool fromInternalBalance
+}
+
+struct ExitPoolRequest {
+    address[] assets,
+    uint256[] minAmountsOut,
+    bytes userData,
+    bool toInternalBalance
+}
 ```

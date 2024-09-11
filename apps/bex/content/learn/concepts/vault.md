@@ -23,8 +23,8 @@ BEX's Vault and Pool architecture separates the token accounting and management 
 
 As a simplified example, a swap transaction might involve the following steps:
 
-1. A user sends a swap request to the Vault, specifying the poolID to swap through, and the amount to swap
-2. The Vault looks up the pool contract for the specified poolID
+1. A user sends a swap request to the Vault, specifying the poolId to swap through, and the amount to swap
+2. The Vault looks up the pool contract for the specified poolId
 3. The pool contract calculates the balance changes from the swap, returning those amounts to the Vault
 4. The Vault updates the token balances in the Vault based on the pool contract's calculations, and sends the output tokens to the user
 
