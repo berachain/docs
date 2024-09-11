@@ -144,10 +144,6 @@ const SIDEBAR = {
             },
           ],
         },
-        {
-          text: "Flash Loans",
-          link: "/developers/advanced-concepts/flash-loans",
-        },
       ],
     },
     {
