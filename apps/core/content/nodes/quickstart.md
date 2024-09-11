@@ -112,13 +112,13 @@ Next, initialize your node with all the standard data.
 
 # Replace <YOUR_MONIKER_NAME> with a name of your choice.
 MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
-./build/bin/beacond init $MONIKER_NAME --chain-id bartio-80084 --consensus-key-algo bls12_381 --home ./build/bin/config/beacond;
-# Ex: ./build/bin/beacond init BingBongNode --chain-id bartio-80084 --consensus-key-algo bls12_381 --home ./build/bin/config/beacond;
+./build/bin/beacond init $MONIKER_NAME --chain-id bartio-beacon-80084 --consensus-key-algo bls12_381 --home ./build/bin/config/beacond;
+# Ex: ./build/bin/beacond init BingBongNode --chain-id bartio-beacon-80084 --consensus-key-algo bls12_381 --home ./build/bin/config/beacond;
 
 # [Expected Output]:
 # {
 #  "moniker": "BingBongNode", // <YOUR_MONIKER_NAME>
-#  "chain_id": "bartio-80084",
+#  "chain_id": "bartio-beacon-80084",
 #  "node_id": "72e2e6f9d667898d32ede54de9b9299eb567f692",
 #  "gentxs_dir": "",
 # ...
