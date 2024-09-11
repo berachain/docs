@@ -106,19 +106,15 @@ const SIDEBAR = {
       text: "Advanced Concepts",
       items: [
         {
-          text: "Pool Interfacing",
-          link: "/developers/advanced-concepts/pool-interfacing",
-        },
-        {
           text: "Swaps",
           items: [
             {
               text: "Single Swap",
-              link: "/developers/advanced-concepts/swaps/single-swap",
+              link: "/developers/contracts/swaps/single_swap",
             },
             {
               text: "Batch Swap",
-              link: "/developers/advanced-concepts/swaps/batch-swap",
+              link: "/developers/contracts/swaps/batch_swap",
             },
           ],
         },
@@ -127,11 +123,11 @@ const SIDEBAR = {
           items: [
             {
               text: "Pool Joins",
-              link: "/developers/advanced-concepts/joins-exits/joins",
+              link: "/developers/contracts/pools/joins.md",
             },
             {
               text: "Pool Exits",
-              link: "/developers/advanced-concepts/joins-exits/exits",
+              link: "/developers/contracts/pools/exit.md",
             },
           ],
         },
@@ -140,11 +136,11 @@ const SIDEBAR = {
           items: [
             {
               text: "Underlying Tokens",
-              link: "/developers/advanced-concepts/lp-tokens/underlying",
+              link: "/developers/contracts/lp_tokens/underlying",
             },
             {
               text: "Valuing",
-              link: "/developers/advanced-concepts/lp-tokens/valuing",
+              link: "/developers/contracts/lp_tokens/valuing",
             },
           ],
         },
