@@ -168,7 +168,7 @@ Double check the genesis file to make sure it resembles the following:
 ```bash
 # FROM: ./beacon-kit
 
-cat ./build/bin/config/beacond/genesis.json;
+cat ./build/bin/config/beacond/config/genesis.json;
 
 # [Expected Output]:
 # {
