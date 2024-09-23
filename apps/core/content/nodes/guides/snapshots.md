@@ -95,8 +95,8 @@ Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download.
 
 In the snapshot folder, you will find execution snapshots under the following paths:
 
-- `eth/geth/pruned/`
-- `eth/geth/archive/`
+- `exec/geth/pruned/`
+- `exec/geth/archive/`
 - etc... for each execution client
 
 ::: info
