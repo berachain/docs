@@ -107,7 +107,7 @@ Execution client snapshots coming soon. They are not required to run a node.
 
 You can verify the snapshot against the checksum to ensure the snapshot downloaded is valid. The checksum is a hash of the snapshot file that can be used to verify the snapshot's integrity.
 
-Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is `https://storage.googleapis.com/bartio-snapshot/beacon%2Ffull%2Fsnapshot_beacond_full_20240913200045.tar.lz4.sha256`.
+Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is `https://storage.googleapis.com/bartio-snapshot/beacon/full/snapshot_beacond_full_20240913200045.tar.lz4.sha256`.
 
 The following is an example of how to download and verify the checksum for the beacon snapshot:
 
