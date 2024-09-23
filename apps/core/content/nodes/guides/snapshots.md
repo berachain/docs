@@ -81,7 +81,7 @@ In the snapshot folder, you will find beacon snapshots under the following paths
 Download the snapshot you would like to use with the following command:
 
 ```bash
-# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon%2Ffull%2Fsnapshot_beacond_full_20240913200045.tar.lz4
+# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/full/snapshot_beacond_full_20240913200045.tar.lz4
 wget $SNAPSHOT_URL;
 ```
 
