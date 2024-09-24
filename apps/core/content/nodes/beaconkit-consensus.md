@@ -17,7 +17,7 @@ head:
 
 [BeaconKit](/learn/what-is-beaconkit) is both a consensus client and framework for building EVM chains.
 
-BeaconKit is a forked implementation of the Golang Cosmos SDK which takes advantage mostly of CometBFT for its consensus algorithm. As a consensus client it allows the network (an EVM blockchain like Berachain) to come to an agreement based on the data provided by the execution client.
+BeaconKit leverages the CometBFT for its consensus algorithm, wrapped to interface with any EVM-compatible execution environment. As a consensus client it allows the network (an EVM blockchain like Berachain) to come to an agreement based on the data provided by the execution client.
 
 By conforming to Eth2 modularity, where it separates consensus and execution, BeaconKit is able to leverage all the benefits that come with EVM execution clients. It is able to do this by adhering to the [Engine API](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md), which is JSON-RPC API that allows for communication between consensus and execution clients.
 
