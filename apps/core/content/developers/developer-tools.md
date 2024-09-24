@@ -17,9 +17,9 @@ head:
 
 # Developer Tools
 
-This section provides an overview of the developer tools that are available for the Polaris Ethereum EVM.
+This section provides an overview of the developer tools that are available on the Berachain network.
 
-Since Berachain is EVM-compatible, if you're familiar with creating Dapps on other EVM chains then you'll feel right at home building on Berachain.
+Since Berachain is EVM-compatible, if you're familiar with creating dApps on other EVM chains then you'll feel right at home building on Berachain.
 
 ### Smart Contract Programming Languages Such As:
 

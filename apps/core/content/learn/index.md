@@ -43,6 +43,6 @@ Read more in [What Is Proof-of-Liquidity](/learn/what-is-proof-of-liquidity).
 
 ## BeaconKit ⛵✨
 
-BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of the Cosmos SDK, including increased composability, single slot finality (SSF), and more.
+BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, single slot finality (SSF), and more.
 
 Read more in [What Is BeaconKit](/learn/what-is-beaconkit).

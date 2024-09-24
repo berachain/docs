@@ -21,7 +21,7 @@ V2 is an implementation of the `BeaconKit` framework, which separates the execut
 
 ## Main Changes from V1 to V2 🐻
 
-Berachain's V1 testnet (`Artio`) was built on top of [Polaris](https://github.com/berachain/polaris), which tightly coupled EVM execution with Cosmos consensus and introduced a monolithic framework for building highly optimized precompiles.
+Berachain's V1 testnet (`Artio`) was built on top of [Polaris](https://github.com/berachain/polaris), which tightly coupled EVM execution with the Cosmos SDK and introduced a monolithic framework for building highly optimized precompiles.
 
 Despite this optimization, Cosmos could not handle the volume of transactions that Berachain received, alongside the compatibility challenges that came with precompiles and supporting a forked EVM execution client.
 
