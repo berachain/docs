@@ -1,6 +1,6 @@
 # Proof-of-Liquidity Overview 📓
 
-One of the main [shortcomings](/learn/what-is-proof-of-liquidity#shortcomings-of-pos) of Proof-of-Stake is the lack of incentive for different ecosystem players to collaborate. Validators have little reason to interact with the protocols and end-users for whom they are ultimately running the infrastructure, yet they receive the majority of the economic incentives. On the other hand, projects launch on this infrastructure but retain the majority of the project tokens for themselves.
+One of the main [shortcomings](/apps/core/content/learn/what-is-proof-of-liquidity.md#shortcomings-of-pos) of Proof-of-Stake is the lack of incentive for different ecosystem players to collaborate. Validators have little reason to interact with the protocols and end-users for whom they are ultimately running the infrastructure, yet they receive the majority of the economic incentives. On the other hand, projects launch on this infrastructure but retain the majority of the project tokens for themselves.
 
 A healthier equilibrium can be achieved between projects, validators, and the chain when all actors share in the network's growth.
 
