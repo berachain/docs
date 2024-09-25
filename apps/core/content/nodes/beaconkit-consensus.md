@@ -15,7 +15,7 @@ head:
 
 ![Berachain BeaconKit](/assets/beaconkit-banner.png)
 
-[BeaconKit](/learn/what-is-beaconkit) is both a consensus client and framework for building EVM chains.
+[BeaconKit](/apps/core/content/learn/what-is-beaconkit.md) is both a consensus client and framework for building EVM chains.
 
 BeaconKit leverages the CometBFT for its consensus algorithm, wrapped to interface with any EVM-compatible execution environment. As a consensus client it allows the network (an EVM blockchain like Berachain) to come to an agreement based on the data provided by the execution client.
 
