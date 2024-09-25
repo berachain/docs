@@ -46,7 +46,7 @@ On Beacon-Kit, it's possible to run your node with different databases. The defa
 
 **Chosen Execution Client**
 
-Each [Execution Client](/learn/help/glossary#execution-client) saves their data differently, so it's important to make sure the snapshot you are using was made with the same Execution Client as your node. Remember, if you can't find a snapshot for your Execution Client, you can always sync your execution client from the paired Consensus Client.
+Each [Execution Client](/apps/core/content/learn/help/glossary.md#execution-client) saves their data differently, so it's important to make sure the snapshot you are using was made with the same Execution Client as your node. Remember, if you can't find a snapshot for your Execution Client, you can always sync your execution client from the paired Consensus Client.
 
 ### Different Snapshot Size Types
 
