@@ -39,7 +39,7 @@ Berachain's native [decentralized exchange](#dex-decentralized-exchange), rename
 
 ## Berps
 
-Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps > Berps](/learn/dapps/berps).
+Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps > Berps](/apps/core/content/learn/dapps/berps.md).
 
 ## Block Time
 
