@@ -32,6 +32,6 @@ Protocols can also convince Validators to start directing rewards to them by off
 
 The following are implementations of existing Reward Vaults:
 
-1. [BEX](/learn/dapps/bex) - Specific BEX Pools
+1. [BEX](/apps/core/content/learn/dapps/bex.md) - Specific BEX Pools
 2. [Berps](/learn/dapps/berps) - Depositing `$HONEY` into Berps Honey Vault
 3. [Bend](/learn/dapps/bend) - Borrow `$HONEY`
