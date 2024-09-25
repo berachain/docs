@@ -31,7 +31,7 @@ A data unit containing a list of transactions, which is permanently added to the
 
 ## Bend
 
-Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps > Bend](/learn/dapps/bend).
+Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps > Bend](/apps/core/content/learn/dapps/bend.md).
 
 ## BEX
 
