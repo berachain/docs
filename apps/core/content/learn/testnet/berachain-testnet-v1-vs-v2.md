@@ -15,7 +15,7 @@ head:
 
 > On June 9, 2024, Berachain officially launched version 2 of its testnet called `bArtio`.
 
-The Berachain `bArtio` network is a re-architecture of the chain to make it more modular and EVM-aligned. In order to achieve these goals, an entirely new framework was needed and [**BeaconKit**](/learn/what-is-beaconkit) was born.
+The Berachain `bArtio` network is a re-architecture of the chain to make it more modular and EVM-aligned. In order to achieve these goals, an entirely new framework was needed and [**BeaconKit**](/apps/core/content/learn/what-is-beaconkit.md) was born.
 
 V2 is an implementation of the `BeaconKit` framework, which separates the execution and consensus, and focuses on implementing an consensus client that can be paired with any EVM execution client (Ex: Geth, Reth, etc).
 
