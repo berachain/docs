@@ -25,7 +25,7 @@ head:
 
 > <small><a :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.url}}</a></small>
 
-Berachain's native decentralized exchange (DEX) is called BEX, which allows for trading of any arbitrary pair of crypto assets via swapping and providing liquidity into [liquidity pools](/learn/help/glossary#liquidity-pool).
+Berachain's native decentralized exchange (DEX) is called BEX, which allows for trading of any arbitrary pair of crypto assets via swapping and providing liquidity into [liquidity pools](/apps/core/content/learn/help/glossary.md#liquidity-pool).
 
 In addition, pools in BEX can be upgraded to [Proof-of-Liquidity Reward Vaults](/learn/pol/rewardvaults) via governance to become eligible for [`$BGT`](/learn/pol/tokens/bgt) emissions & incentivization.
 
