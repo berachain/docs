@@ -31,7 +31,7 @@ Validators in PoL are more than just "validating" the network, they have the opp
 This example examines the value flow from a validator's perspective. All numbers are for illustrative purposes only. In our example, 5% of emissions are given to validators (configured globally at the chain level), and a _Validator A_ takes a 7% commission on incentives (configured at the validator level)
 
 1. _Validator A_ proposes a block, and 1000 `$BGT` is minted
-2. _Validator A_ receives 5% 1000 `$BGT` (50 `$BGT`)
+2. _Validator A_ receives 5% of the 1000 `$BGT` (50 `$BGT`), according to the commission elected by the validator
 3. _Validator A_ distributes the remainder (950 `$BGT`) to Reward Vaults according to their _Cutting Board_ distribution
 4. _Validator A_ receives _incentives_ from protocols for directing `$BGT` to their Reward Vaults (e.g. 10,000 `$HONEY`)
 5. _Validator A_ takes a 7% commission on the incentives (e.g. 700 `$HONEY`), and distributes the remainder (e.g. 9,300 `$HONEY`) to their `$BGT` delegators pro-rata
