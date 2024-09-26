@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.1
+
+### Patch Changes
+
+- Update URLs and examples used for snapshots
+
 ## 1.3.0
 
 ### Minor Changes
@@ -8,7 +14,7 @@
 
 ### Patch Changes
 
-- Update URLs and examples used for snapshots
+- Replace mentions of Cosmos with CometBFT
 - bbfa6ee: add detail to reward vault section
 
 ## 1.2.1

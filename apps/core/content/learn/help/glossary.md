@@ -23,7 +23,7 @@ head:
 
 ## BeaconKit
 
-BeaconKit is a modular and customizable consensus layer framework, based on Cosmos SDK, for building Ethereum based blockchains.
+BeaconKit is a modular and customizable consensus layer framework, leveraging the CometBFT consensus algorithm, for building Ethereum based blockchains.
 
 ## Block
 
@@ -116,7 +116,7 @@ The primary network where real transactions occur on the Berachain blockchain, a
 
 ## Polaris EVM
 
-An implementation of the Ethereum Virtual Machine used by Berachain's Eng team to provide compatibility with Ethereum-based smart contracts built on top of Cosmos's CometBFT.
+A monolithic implementation of the Ethereum Virtual Machine used by the Berachain team to provide compatibility with Ethereum-based smart contracts, built on top of the Cosmos SDK. This implementation has been deprecated in favor of the modular BeaconKit architecture.
 
 ## Proof-of-Liquidity
 
