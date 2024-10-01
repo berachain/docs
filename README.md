@@ -1,11 +1,11 @@
 # 🐻 Berachain Monorepo Docs
 
-This is a monolithic repository that contains all the documentation for Berachain, Berps, Bend, and BEX.
+This is a monolithic repository that contains all the documentation for [Berachain](https://www.berachain.com/), Berps, Bend, and BEX.
 
 ## Requirements
 
 - NVM or Node `v20.11.0` or greater
-- pnpm (recommended)
+- [pnpm](https://pnpm.io/) (recommended)
 
 ## Turborepo Folder Structure
 
