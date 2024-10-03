@@ -1,5 +1,11 @@
 # @berachain/bend
 
+## 1.1.6
+
+### Patch Changes
+
+- Various typo fixes for Bend
+
 ## 1.1.5
 
 ### Patch Changes
