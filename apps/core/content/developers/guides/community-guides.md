@@ -79,3 +79,15 @@ These are a list of community developer guides for Berachain.
 | Project Name                                | Git Repository                                                                |
 | ------------------------------------------- | ----------------------------------------------------------------------------- |
 | Irys NodeJS Upload Script With $BERA Tokens | [GitHub](https://github.com/berachain/guides/tree/main/apps/irys-bera-nodejs) |
+
+## Relayers/Gasless Transactions
+
+| Project Name       | Git Repository                                                                                                       |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| Using Gelato Relay | [Guide](https://docs.google.com/document/d/1dsSGGYZ4IIE8EAhrMH8SOQFmIygcaibRYHiar2Vj2Kw/edit#heading=h.mllfr822cht7) |
+
+## Automation
+
+| Project Name                | Git Repository                                                                                |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| Using Gelato Web3 Functions | [Guide](https://docs.google.com/document/d/1kUuvYwUH6tyLM4mNJYNu22jS6lPynvSSF_x8NDAZzRg/edit) |
