@@ -14,6 +14,7 @@ Closes #1
 
 - [ ] I have followed the [Development Workflow](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#development-workflow)
 - [ ] I have read the [CODE OF CONDUCT](https://github.com/berachain/docs/blob/main/CODE_OF_CONDUCT.md)
+- [ ] I HAVE MADE SURE TO ALLOW MAINTAINERS TO EDIT THIS PULL REQUEST
 
 Let us know your wallet address/ENS:
 
