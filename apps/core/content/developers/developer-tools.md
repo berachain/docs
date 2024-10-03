@@ -43,6 +43,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [Alchemy](https://www.alchemy.com/)
+- [Envio](https://envio.dev) (optimized read-only)
 
 ### Wallets
 
@@ -57,6 +58,7 @@ and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-
 - [Goldsky](https://goldsky.com)
 - [Ghost Graph](https://ghostgraph.xyz)
 - [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
+- [Envio](https://envio.dev)
 
 ### Oracles
 
