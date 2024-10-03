@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.2
+
+### Patch Changes
+
+- Developer Tools Envio as RPC and Indexer
+
 ## 1.3.1
 
 ### Patch Changes
