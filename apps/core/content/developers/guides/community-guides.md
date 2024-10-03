@@ -84,12 +84,12 @@ These are a list of community developer guides for Berachain.
 
 ## Relayers/Gasless Transactions
 
-| Project Name       | Git Repository                                                                           |
+| Project Name       | Source                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------------------- |
 | Using Gelato Relay | [Guide](https://docs.google.com/document/d/1dsSGGYZ4IIE8EAhrMH8SOQFmIygcaibRYHiar2Vj2Kw) |
 
 ## Automation
 
-| Project Name                | Git Repository                                                                           |
+| Project Name                | Source                                                                                   |
 | --------------------------- | ---------------------------------------------------------------------------------------- |
 | Using Gelato Web3 Functions | [Guide](https://docs.google.com/document/d/1kUuvYwUH6tyLM4mNJYNu22jS6lPynvSSF_x8NDAZzRg) |
