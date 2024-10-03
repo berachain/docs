@@ -12,7 +12,7 @@ All work on Berachain Docs happens directly on [GitHub](https://github.com/berac
 
 ## Semantic Versioning
 
-Berachain Docs follows [semantic versioning](https://semver.org). We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in our versioning policy.
+Berachain Docs follows [semantic versioning](https://semver.org). We release patch versions for critical bug fixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in our versioning policy.
 
 ### TL;DR SemVer
 
@@ -492,7 +492,7 @@ pnpm dlx git-cz;
 
 ### Submitting a pull request
 
-Whenver submitting a pull request, make sure that it's from a forked repository and create a pull request to `main`.
+Whenever submitting a pull request, make sure that it's from a forked repository and create a pull request to `main`.
 
 [New Pull Request](https://github.com/berachain/docs/compare)
 

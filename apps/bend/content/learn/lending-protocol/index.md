@@ -12,7 +12,7 @@ We allow users to optimize their assets supplied to Bend in terms of yield gener
 
 ### Risk Management
 
-Bend brings a greatly improved set risk parameters and new features to protect the protocol from insolvency.
+Bend brings a greatly improved set of risk parameters and new features to protect the protocol from insolvency.
 ​​
 
 ### Supply and Borrow Caps
