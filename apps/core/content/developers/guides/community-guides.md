@@ -24,6 +24,7 @@ These are a list of community developer guides for Berachain.
 | Particle Auth Core Vite                                        | [GitHub](https://github.com/berachain/guides/tree/main/apps/particle-auth-core-vite)       |
 | RainbowKit Vite                                                | [GitHub](https://github.com/berachain/guides/tree/main/apps/rainbowkit-vite)               |
 | WalletConnect Expo                                             | [GitHub](https://github.com/berachain/guides/tree/main/apps/walletconnect-expo)            |
+| RPC Provider Guide                                             | [Guide](https://blog.berachain.com/blog/your-berachain-rpc-guide)                          |
 
 ## Bridging
 
@@ -41,6 +42,7 @@ These are a list of community developer guides for Berachain.
 | Hardhat Ethers6 Contract Verification           | [GitHub](https://github.com/berachain/guides/tree/main/apps/hardhat-contract-verification) |
 | Hardhat Ethers6 ERC1155                         | [GitHub](https://github.com/berachain/guides/tree/main/apps/hardhat-ethers6-erc1155)       |
 | Create ERC20 Contract Using Foundry             | [GitHub](https://github.com/berachain/guides/tree/main/apps/foundry-erc20)                 |
+| Deploy Upgradeable Contracts                    | [GitHub](https://github.com/berachain/guides/tree/main/apps/openzeppelin-upgrades)         |
 
 ## Trading Bots
 
@@ -79,3 +81,15 @@ These are a list of community developer guides for Berachain.
 | Project Name                                | Git Repository                                                                |
 | ------------------------------------------- | ----------------------------------------------------------------------------- |
 | Irys NodeJS Upload Script With $BERA Tokens | [GitHub](https://github.com/berachain/guides/tree/main/apps/irys-bera-nodejs) |
+
+## Relayers/Gasless Transactions
+
+| Project Name       | Source                                                                                   |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| Using Gelato Relay | [Guide](https://docs.google.com/document/d/1dsSGGYZ4IIE8EAhrMH8SOQFmIygcaibRYHiar2Vj2Kw) |
+
+## Automation
+
+| Project Name                | Source                                                                                   |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| Using Gelato Web3 Functions | [Guide](https://docs.google.com/document/d/1kUuvYwUH6tyLM4mNJYNu22jS6lPynvSSF_x8NDAZzRg) |
