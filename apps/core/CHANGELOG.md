@@ -1,9 +1,16 @@
 # @berachain/core
 
+## 1.3.3
+
+### Patch Changes
+
+- Minor FAQ fixes
+
 ## 1.3.2
 
 ### Patch Changes
 
+- # Minor FAQ fixes
 - Developer Tools Envio as RPC and Indexer
 
 ## 1.3.1
