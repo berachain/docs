@@ -1,6 +1,6 @@
 # PoolAddressesProvider Contract Interface
 
-The registry of addresses which comprise the Bend logic.
+The registry of addresses which comprises the Bend logic.
 
 ### getMarketId
 

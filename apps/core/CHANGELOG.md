@@ -4,7 +4,11 @@
 
 ### Patch Changes
 
+<<<<<<< HEAD
 - Minor FAQ fixes
+=======
+- Developer Tools Envio as RPC and Indexer
+>>>>>>> main
 
 ## 1.3.1
 
