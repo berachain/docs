@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.2
+
+### Patch Changes
+
+- Minor FAQ fixes
+
 ## 1.3.1
 
 ### Patch Changes
