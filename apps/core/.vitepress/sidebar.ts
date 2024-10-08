@@ -37,7 +37,14 @@ const SIDEBAR = {
       items: [
         { text: "PoL Overview", link: "/learn/pol/" },
         { text: "Participants", link: "/learn/pol/participants" },
-        { text: "Reward Vaults", link: "/learn/pol/rewardvaults" },
+        { 
+          text: "Reward Vaults", 
+          link: "/learn/pol/rewardvaults",
+          items: [
+            { text: "Overview", link: "/learn/pol/rewardvaults" },
+            { text: "Reward Vault Models", link: "/learn/pol/rewardvaults/models" }
+          ]
+        }, 
         { text: "Incentives", link: "/learn/pol/incentives" },
         {
           text: "Tokens",
