@@ -6,7 +6,7 @@
 
 Leveraged trading is a strategy that involves using borrowed money to increase the potential rewards. In the case of Berps, traders use leverage to amplify their buying power, allowing them to make larger trades than their own capital would normally permit. However, while it can magnify rewards, it also increases the potential for significant losses, making it a high-risk trading strategy.
 
-<a target="_blank" :href="config.testnet.dapps.berps.url">![Berchain Native Perps](/assets/berachain-berps-dashboard.png)</a>
+<a target="_blank" :href="config.testnet.dapps.berps.url">![Berachain Native Perps](/assets/berachain-berps-dashboard.png)</a>
 
 > {{config.testnet.dapps.berps.name}} can be found at <a target="_blank" :href="config.testnet.dapps.berps.url">{{config.testnet.dapps.berps.url}}</a>
 
