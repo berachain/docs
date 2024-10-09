@@ -449,7 +449,7 @@ pnpm deploy:localhost;
 
 Now that we can see that the contract can be successfully deployed for a local node, let's configure our deployment script to take advantage of deploying directly to Berachain.
 
-> <b>NOTE:</b> Custom configurations are needed for viem to support custom chains. This will show how set that up with Berchain. When Berachain is public, these extra configurations might not be needed.
+> <b>NOTE:</b> Custom configurations are needed for viem to support custom chains. This will show how set that up with Berachain. When Berachain is public, these extra configurations might not be needed.
 
 **File:** `./scripts/deploy.ts`
 
