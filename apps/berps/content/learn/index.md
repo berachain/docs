@@ -4,7 +4,7 @@
 
 # What Is Berachain Berps 🐻⛓️
 
-Berachain Berps is a native Berchain dApp that is a decentralized leveraged trading platform which allows for perpetual futures contract trading.
+Berachain Berps is a native Berachain dApp that is a decentralized leveraged trading platform which allows for perpetual futures contract trading.
 
 Berps allows for low trading fees on a vartiery of pairs (e.g. ETH-USDC) with leverages of up to 100x. This means with 10 `$HONEY` you can place a trade up to 100x which would equate to a position size of 1000 `$HONEY` (excluding fees).
 
