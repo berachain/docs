@@ -44,6 +44,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [Envio](https://envio.dev) (optimized read-only)
+- [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 
 ### Wallets
 
