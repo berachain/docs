@@ -22,7 +22,7 @@ To activatge One-Click Trading:
 
 ![Berps 1CT Step1](/assets/berps-1ct-01.png)
 
-1. Select the trading mode for 1CT
+2. Select the trading mode for 1CT
 
 ![Berps 1CT Step2](/assets/berps-1ct-02.png)
 
@@ -36,7 +36,7 @@ To activatge One-Click Trading:
 
 ![Berps 1CT Step4](/assets/berps-1ct-04.png)
 
-1. Click the **Fund** tab, specify an amount, and click **Fundt** button to add `$BERA` to the wallet
+5. Click the **Fund** tab, specify an amount, and click **Fundt** button to add `$BERA` to the wallet
 
 ![Berps 1CT Step5](/assets/berps-1ct-05.png)
 
@@ -48,7 +48,7 @@ To withdraw funds from your 1CT wallet to your connected EOA:
 
 ![Berps 1CT Manage 1CT Wallet](/assets/berps-1ct-06.png)
 
-1. In the modal, click the **withdraw** tab, specify the amount (or max), and click **withdraw**.
+2. In the modal, click the **withdraw** tab, specify the amount (or max), and click **withdraw**.
 
 ![Berps 1CT Withdraw](/assets/berps-1ct-07.png)
 

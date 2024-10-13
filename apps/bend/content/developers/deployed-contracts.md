@@ -17,7 +17,7 @@ head:
 
 # Bend Deployed Contracts
 
-The following is a list of contract address in order to interact with Berachain Bend.
+The following is a list of contract addresses in order to interact with Berachain Bend.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
 

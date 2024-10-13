@@ -65,22 +65,23 @@ Different snapshot providers may have different instructions for using their sna
 
 Select which beacon client snapshot, based on your region and preferred snapshot type, you would like to use from the Berachain Foundation. The following options are available:
 
-| Region            | Snapshot Type    | Link                                                       |
-| ----------------- | ---------------- | ---------------------------------------------------------- |
-| **North America** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/)    |
-| **Europe**        | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/) |
+| Region            | Snapshot Type    | Link                                                                 |
+| ----------------- | ---------------- | -------------------------------------------------------------------- |
+| **North America** | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot/index.html)    |
+| **Europe**        | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-eu/index.html) |
+| **Asia**          | Archive / Pruned | [Link](https://storage.googleapis.com/bartio-snapshot-as/index.html) |
 
 #### Step 1A - Downloading Beacon Client Snapshot
 
 In the snapshot folder, you will find beacon snapshots under the following paths:
 
 - `beacon/pruned/`
-- `beacon/archive/`
+- `beacon/full/`
 
 Download the snapshot you would like to use with the following command:
 
 ```bash
-# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4
+# $SNAPSHOT_URL example: https://storage.googleapis.com/bartio-snapshot/beacon/full/snapshot_beacond_full_20240913200045.tar.lz4
 wget $SNAPSHOT_URL;
 ```
 
@@ -94,8 +95,8 @@ Where `$SNAPSHOT_URL` is the URL of the snapshot you would like to download.
 
 In the snapshot folder, you will find execution snapshots under the following paths:
 
-- `execution/geth/pruned/`
-- `execution/geth/archive/`
+- `exec/geth/pruned/`
+- `exec/geth/archive/`
 - etc... for each execution client
 
 ::: info
@@ -106,7 +107,7 @@ Execution client snapshots coming soon. They are not required to run a node.
 
 You can verify the snapshot against the checksum to ensure the snapshot downloaded is valid. The checksum is a hash of the snapshot file that can be used to verify the snapshot's integrity.
 
-Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is `https://storage.googleapis.com/bartio-snapshot/beacon/pruned/beacond-pruned-snapshot-202408292106.tar.lz4.sha256`.
+Checksum files are provided by the Berachain Foundation with the file extension `.sha256` added to the end of the snapshot file name. For example, if you would like the sha256sum for the snapshot file example above, it is `https://storage.googleapis.com/bartio-snapshot/beacon/full/snapshot_beacond_full_20240913200045.tar.lz4.sha256`.
 
 The following is an example of how to download and verify the checksum for the beacon snapshot:
 

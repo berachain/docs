@@ -1,5 +1,11 @@
 # @berachain/berps
 
+## 1.1.4
+
+### Patch Changes
+
+- Typo for bullet numbers
+
 ## 1.1.3
 
 ### Patch Changes
