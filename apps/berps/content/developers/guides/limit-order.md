@@ -97,7 +97,7 @@ Traders and bot operators are incentivized to execute limit orders to collect fe
 
 ### Trade Index
 
-Every trade and and open limit order has a unique identifier, called the "trade index". Executing a limit order on an open trade requires knowing the index of the trade to execute. That is - take profit, stop loss, and liquidation orders are executed on the same trade index. The price will dictate which type of order is executed.
+Every trade and open limit order has a unique identifier, called the "trade index". Executing a limit order on an open trade requires knowing the index of the trade to execute. That is - take profit, stop loss, and liquidation orders are executed on the same trade index. The price will dictate which type of order is executed.
 
 Presently, the list of trade indexes can be queried by iterating over [`Orders.getOpenTrades()`](/developers/contracts/orders#getopentrades), or indexed off-chain by monitoring for the events emitted through opened trades:
 
