@@ -126,11 +126,11 @@ function repay(address asset, uint256 amount, uint256 interestRateMode, address 
 
 **Parameters**
 
-| Name               | Type      | Description                                                                                                                                                                                                                              |
-| ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `asset`            | `address` | The address of the borrowed underlying asset previously borrowed                                                                                                                                                                         |
-| `amount`           | `uint256` | The amount to repay - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`                                                                                                           |
-| `interestRateMode` | `uint256` | The interest rate mode at of the debt the user wants to repay: 1 for Stable, 2 for Variable                                                                                                                                              |
+| Name               | Type      | Description                                                                                                                                                                                                                        |
+| ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `asset`            | `address` | The address of the borrowed underlying asset previously borrowed                                                                                                                                                                   |
+| `amount`           | `uint256` | The amount to repay - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`                                                                                                     |
+| `interestRateMode` | `uint256` | The interest rate mode at of the debt the user wants to repay: 1 for Stable, 2 for Variable                                                                                                                                        |
 | `onBehalfOf`       | `address` | The address of the user who will get his debt reduced/removed. Should be the address of the user calling the function if he wants to reduce/remove his own debt, or the address of any other borrower whose debt should be removed |
 
 **Returns**
@@ -159,16 +159,16 @@ function repayWithPermit(
 
 **Parameters**
 
-| Name               | Type      | Description                                                                                                                                                                                                                          |
-| ------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `asset`            | `address` | The address of the borrowed underlying asset previously borrowed                                                                                                                                                                     |
-| `amount`           | `uint256` | The amount to repay - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`                                                                                                       |
-| `interestRateMode` | `uint256` | The interest rate mode at of the debt the user wants to repay: 1 for Stable, 2 for Variable                                                                                                                                          |
+| Name               | Type      | Description                                                                                                                                                                                                                    |
+| ------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `asset`            | `address` | The address of the borrowed underlying asset previously borrowed                                                                                                                                                               |
+| `amount`           | `uint256` | The amount to repay - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`                                                                                                 |
+| `interestRateMode` | `uint256` | The interest rate mode at of the debt the user wants to repay: 1 for Stable, 2 for Variable                                                                                                                                    |
 | `onBehalfOf`       | `address` | Address of the user who will get his debt reduced/removed. Should be the address of the user calling the function if he wants to reduce/remove his own debt, or the address of any other borrower whose debt should be removed |
-| `deadline`         | `uint256` | The deadline timestamp that the permit is valid                                                                                                                                                                                      |
-| `permitV`          | `uint8`   | The V parameter of ERC712 permit sig                                                                                                                                                                                                 |
-| `permitR`          | `bytes32` | The R parameter of ERC712 permit sig                                                                                                                                                                                                 |
-| `permitS`          | `bytes32` | The S parameter of ERC712 permit sig                                                                                                                                                                                                 |
+| `deadline`         | `uint256` | The deadline timestamp that the permit is valid                                                                                                                                                                                |
+| `permitV`          | `uint8`   | The V parameter of ERC712 permit sig                                                                                                                                                                                           |
+| `permitR`          | `bytes32` | The R parameter of ERC712 permit sig                                                                                                                                                                                           |
+| `permitS`          | `bytes32` | The S parameter of ERC712 permit sig                                                                                                                                                                                           |
 
 **Returns**
 
