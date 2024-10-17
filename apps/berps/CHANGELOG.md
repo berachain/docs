@@ -1,5 +1,11 @@
 # @berachain/berps
 
+## 1.1.5
+
+### Patch Changes
+
+- Typo correction for Berachain
+
 ## 1.1.4
 
 ### Patch Changes
