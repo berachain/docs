@@ -209,6 +209,10 @@ curl -o "./build/bin/config/beacond/config/config.toml" "https://raw.githubuserc
 
 Modify the configurations by adding back the moniker name and peers.
 
+:::tip
+Replace `-i ''` with just `-i` if you're not on MacOS.
+:::
+
 ```bash
 # FROM: ./beacon-kit
 
@@ -230,10 +234,6 @@ sed -i '' "s/^seeds = \".*\"/seeds = \"$seeds\"/" "$PWD/build/bin/config/beacond
 # - Comma separated list of nodes to keep persistent connections to
 sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 ```
-
-:::warning
-Replace `-i ''` with just `-i` if you're not on MacOS.
-:::
 
 ### Step 3 - Generate JWT Token
 
