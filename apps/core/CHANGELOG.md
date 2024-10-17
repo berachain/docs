@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 466899d (chore: 🤖 Version bump)
 ## 1.3.7
@@ -19,6 +20,8 @@
 >>>>>>> acbfe53 (chore: 🤖 Version bump)
 =======
 >>>>>>> 466899d (chore: 🤖 Version bump)
+=======
+>>>>>>> de34b28 (chore: 🤖 Version bump)
 ## 1.3.6
 
 ### Patch Changes
@@ -26,12 +29,15 @@
 - Adjusted bash cat command for correct directory for running node
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
 =======
 >>>>>>> acbfe53 (chore: 🤖 Version bump)
 =======
 >>>>>>> de5d9d7 (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> de34b28 (chore: 🤖 Version bump)
 ## 1.3.5
 
 ### Patch Changes
