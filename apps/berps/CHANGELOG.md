@@ -1,5 +1,11 @@
 # @berachain/berps
 
+## 1.1.6
+
+### Patch Changes
+
+- Various grammar and typo fixes for Berps
+
 ## 1.1.5
 
 ### Patch Changes
