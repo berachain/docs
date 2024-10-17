@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.6
+
+### Patch Changes
+
+- Adjusted bash cat command for correct directory for running node
+
 ## 1.3.5
 
 ### Patch Changes
