@@ -5,6 +5,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 466899d (chore: 🤖 Version bump)
 ## 1.3.7
@@ -29,6 +30,8 @@
 >>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
 =======
 >>>>>>> acbfe53 (chore: 🤖 Version bump)
+=======
+>>>>>>> de5d9d7 (chore: 🤖 Bumped versioning)
 ## 1.3.5
 
 ### Patch Changes
@@ -36,12 +39,15 @@
 - New RPC Validation Cloud Added
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b457b09 (chore: 🤖 Bumped versioning)
 =======
 >>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
 =======
 >>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> de5d9d7 (chore: 🤖 Bumped versioning)
 ## 1.3.4
 
 ### Patch Changes
