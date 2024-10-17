@@ -34,7 +34,7 @@ The difference between Limit and Market is Limit order may not execute right awa
 
 An additional parameter that traders can put in place to ensure that their trade sells at a certain profit threshold automatically.
 
-> **NOTE:** Automatically means that the community of liquidition bots will execute the trade for a fee.
+> **NOTE:** Automatically means that the community of liquidation bots will execute the trade for a fee.
 
 ## Stop Loss
 
