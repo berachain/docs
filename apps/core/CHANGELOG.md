@@ -2,20 +2,26 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 1.3.7
 
 ### Patch Changes
 
 - Node Quickstart Tip For Non-MacOS Sed Commands
 
+=======
+>>>>>>> acbfe53 (chore: 🤖 Version bump)
 ## 1.3.6
 
 ### Patch Changes
 
 - Adjusted bash cat command for correct directory for running node
 
+<<<<<<< HEAD
 =======
 >>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> acbfe53 (chore: 🤖 Version bump)
 ## 1.3.5
 
 ### Patch Changes
