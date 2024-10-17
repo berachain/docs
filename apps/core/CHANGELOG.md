@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 466899d (chore: 🤖 Version bump)
 ## 1.3.7
@@ -39,6 +40,8 @@
 >>>>>>> b457b09 (chore: 🤖 Bumped versioning)
 =======
 >>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
 ## 1.3.4
 
 ### Patch Changes

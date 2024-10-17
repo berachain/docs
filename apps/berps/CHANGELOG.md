@@ -1,6 +1,7 @@
 # @berachain/berps
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 1.1.6
 
 ### Patch Changes
@@ -9,6 +10,8 @@
 
 =======
 >>>>>>> b457b09 (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
 ## 1.1.5
 
 ### Patch Changes
