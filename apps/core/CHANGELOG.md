@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.8
+
+### Patch Changes
+
+- Added Alchemy RPC, Binance Web3 Wallet, & Keplr Wallet
+
 ## 1.3.7
 
 ### Patch Changes
