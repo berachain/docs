@@ -3,14 +3,20 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 466899d (chore: 🤖 Version bump)
 ## 1.3.7
 
 ### Patch Changes
 
 - Node Quickstart Tip For Non-MacOS Sed Commands
 
+<<<<<<< HEAD
 =======
 >>>>>>> acbfe53 (chore: 🤖 Version bump)
+=======
+>>>>>>> 466899d (chore: 🤖 Version bump)
 ## 1.3.6
 
 ### Patch Changes
