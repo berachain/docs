@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.4
+
+### Patch Changes
+
+- Typo correction for Berachain
+
 ## 1.3.3
 
 ### Patch Changes
