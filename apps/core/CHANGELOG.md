@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.5
+
+### Patch Changes
+
+- New RPC Validation Cloud Added
+
 ## 1.3.4
 
 ### Patch Changes
