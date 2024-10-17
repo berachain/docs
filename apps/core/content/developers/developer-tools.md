@@ -42,7 +42,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
-- [Alchemy](https://www.alchemy.com/)
+- [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [Envio](https://envio.dev) (optimized read-only)
 - [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 
@@ -51,6 +51,8 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Metamask](https://metamask.io/)
 - [Frame](https://frame.sh/)
 - [Rabby](https://rabby.io/)
+- [Binance Web3 Wallet](https://www.binance.com/en/web3wallet)
+- [Keplr](https://keplr.app/)
 
 and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-with-geth/rpc) for calling the chain.
 
