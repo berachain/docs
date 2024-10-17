@@ -14,12 +14,11 @@ A different reward vault contract exists for each PoL-eligible asset
 
 ![Reward Vaults](/assets/reward-vaults.png)
 
-In order to receive BGT, a user must be staking the PoL-eligible asset in its reward vault. The protocol that deployed the reward vault is able to decide how the user acquires the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault. 
+In order to receive BGT, a user must be staking the PoL-eligible asset in its reward vault. The protocol that deployed the reward vault is able to decide how the user acquires the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
 
 1. The user takes some action that results in receiving a PoL-eligible asset, generally referred to as a receipt token.
 2. The user stakes the PoL-eligible asset in the corresponding vault.
 3. The user earns a portion of all the BGT emitted to that vault.
-
 
 **Earning BGT**
 
