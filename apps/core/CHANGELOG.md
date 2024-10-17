@@ -1,5 +1,6 @@
 # @berachain/core
 
+<<<<<<< HEAD
 ## 1.3.7
 
 ### Patch Changes
@@ -18,6 +19,8 @@
 
 - New RPC Validation Cloud Added
 
+=======
+>>>>>>> b457b09 (chore: 🤖 Bumped versioning)
 ## 1.3.4
 
 ### Patch Changes

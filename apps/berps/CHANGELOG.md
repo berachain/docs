@@ -1,11 +1,14 @@
 # @berachain/berps
 
+<<<<<<< HEAD
 ## 1.1.6
 
 ### Patch Changes
 
 - Various grammar and typo fixes for Berps
 
+=======
+>>>>>>> b457b09 (chore: 🤖 Bumped versioning)
 ## 1.1.5
 
 ### Patch Changes
