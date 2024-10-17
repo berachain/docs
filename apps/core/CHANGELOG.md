@@ -1,6 +1,7 @@
 # @berachain/core
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 1.3.7
 
 ### Patch Changes
@@ -13,14 +14,19 @@
 
 - Adjusted bash cat command for correct directory for running node
 
+=======
+>>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
 ## 1.3.5
 
 ### Patch Changes
 
 - New RPC Validation Cloud Added
 
+<<<<<<< HEAD
 =======
 >>>>>>> b457b09 (chore: 🤖 Bumped versioning)
+=======
+>>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
 ## 1.3.4
 
 ### Patch Changes
