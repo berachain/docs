@@ -1,29 +1,5 @@
 # @berachain/core
 
-## 1.3.8
-
-### Patch Changes
-
-- Added Alchemy RPC, Binance Web3 Wallet, & Keplr Wallet
-
-## 1.3.7
-
-### Patch Changes
-
-- Node Quickstart Tip For Non-MacOS Sed Commands
-
-## 1.3.6
-
-### Patch Changes
-
-- Adjusted bash cat command for correct directory for running node
-
-## 1.3.5
-
-### Patch Changes
-
-- New RPC Validation Cloud Added
-
 ## 1.3.4
 
 ### Patch Changes
