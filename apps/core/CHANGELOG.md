@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.3.7
+
+### Patch Changes
+
+- Node Quickstart Tip For Non-MacOS Sed Commands
+
 ## 1.3.6
 
 ### Patch Changes
