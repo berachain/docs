@@ -718,5 +718,5 @@ Go back to [step 2](#step-2-run-node).
 ```bash
 # FROM: ./berachain-docker-node
 
-docker compose logs -f --tail 100
+docker compose logs -f --tail 100;
 ```
