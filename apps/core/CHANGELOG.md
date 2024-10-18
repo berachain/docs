@@ -1,5 +1,13 @@
 # @berachain/core
 
+## 1.3.9
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
 ## 1.3.8
 
 ### Patch Changes

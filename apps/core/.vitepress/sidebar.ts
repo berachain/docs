@@ -223,5 +223,5 @@ export const sidebar: DefaultTheme.Sidebar = {
   "/developers": SIDEBAR.DEVELOPERS,
   "/nodes": SIDEBAR.NODES,
   // NOTE: This has to be the last in order to prevent it overriding all pages
-  "/": SIDEBAR.LEARN,
+  // "/": SIDEBAR.LEARN,
 };

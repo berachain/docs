@@ -1,5 +1,11 @@
 # @berachain/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated Feature component to allow for alts and images
+
 ## 1.1.0
 
 ### Minor Changes

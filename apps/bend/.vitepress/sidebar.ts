@@ -197,5 +197,5 @@ export const sidebar: DefaultTheme.Sidebar = {
   "/learn": SIDEBAR.LEARN,
   "/developers": SIDEBAR.DEVELOPERS,
   // NOTE: This has to be the last in order to prevent it overriding all pages
-  "/": SIDEBAR.LEARN,
+  // "/": SIDEBAR.LEARN,
 };

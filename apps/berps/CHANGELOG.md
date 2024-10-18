@@ -1,5 +1,13 @@
 # @berachain/berps
 
+## 1.1.7
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
 ## 1.1.6
 
 ### Patch Changes
