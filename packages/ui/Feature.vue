@@ -7,9 +7,20 @@ const props = defineProps({
     title: String,
     description: String,
     link: String,
-    icon: Function,
+    icon: {
+      type: Function,
+      default: null
+    },
+    image: {
+      type: String,
+      default: null
+    },
     stroke: Boolean,
     fill: Boolean,
+    type: {
+      type: String,
+      default: 'default'
+    }
 });
 </script>
 
@@ -18,9 +29,12 @@ Template
 ========================================================
 -->
 <template>
-  <a class="VPFeature" :href=props.link>
+  <a :class="`VPFeature VPFeature-${props.type}`" :href=props.link>
     <span v-if="icon" class="VPFeature-Icon-BG">
       <icon class="VPFeature-Icon" stroke="1.5" size="36" />
+    </span>
+    <span v-if="image" class="VPFeature-Icon-BG">
+      <img :src="image" />
     </span>
     <span>
       <h3 class="title">{{ props.title }}</h3>
@@ -74,5 +88,17 @@ Styles
 
 .VPFeature .description {
   margin: 0px;
+}
+
+.VPFeature-alt {
+  background: none;
+}
+
+.VPFeature-alt .VPFeature-Icon {
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  stroke: var(--vp-c-brand-1);
 }
 </style>
