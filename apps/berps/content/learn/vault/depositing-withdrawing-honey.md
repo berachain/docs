@@ -16,7 +16,7 @@ Users can contribute `$HONEY` to the Berps Vault by going to <a target="_blank" 
 
 Any user can deposit any amount of `$HONEY` to the vault.
 
-When `$HONEY` is depositted, `$bHONEY` is minted and given to the user in the place of the `$HONEY` depositted.
+When `$HONEY` is deposited, `$bHONEY` is minted and given to the user in the place of the `$HONEY` deposited.
 
 Learn more here about [`$bHONEY`](/learn/tokens/bhoney).
 
@@ -24,7 +24,7 @@ Learn more here about [`$bHONEY`](/learn/tokens/bhoney).
 
 ![Berps Vault Withdrawing $HONEY](/assets/berps-vault-withdraw.png)
 
-Once `$HONEY` is depositted, a user cannot withdraw their `$HONEY` until 1-3 epochs have past.
+Once `$HONEY` is deposited, a user cannot withdraw their `$HONEY` until 1-3 epochs have passed.
 
 When the epoch threshold has been met, a user can request a withdrawal which will burn the equivalent in `$bHONEY` for the `$HONEY` deposited and any gains.
 
@@ -34,4 +34,4 @@ When the epoch threshold has been met, a user can request a withdrawal which wil
 
 ## Staking $bHONEY
 
-When a user has `$bHONEY`, they can stake their `$bHONEY` into a Rewards Vault to be elligible to earn `$BGT` from emissions directed to the Berps `$bHoney` Vault.
+When a user has `$bHONEY`, they can stake their `$bHONEY` into a Rewards Vault to be eligible to earn `$BGT` from emissions directed to the Berps `$bHoney` Vault.
