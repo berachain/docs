@@ -6,7 +6,7 @@
 
 Berachain Berps is a native Berachain dApp that is a decentralized leveraged trading platform which allows for perpetual futures contract trading.
 
-Berps allows for low trading fees on a vartiery of pairs (e.g. ETH-USDC) with leverages of up to 100x. This means with 10 `$HONEY` you can place a trade up to 100x which would equate to a position size of 1000 `$HONEY` (excluding fees).
+Berps allows for low trading fees on a variety of pairs (e.g. ETH-USDC) with leverages of up to 100x. This means with 10 `$HONEY` you can place a trade up to 100x which would equate to a position size of 1000 `$HONEY` (excluding fees).
 
 The base token for Berps is Berachain's native ERC20 stablecoin called [$HONEY](/learn/tokens/honey) for all trades, payouts, and deposits. It is the main and only token used to open any positions. If you'd like to get `$HONEY`, you can do so by getting it at the main <a target="_blank" :href="config.testnet.dapps.honeySwap.url">{{config.testnet.dapps.honeySwap.name}}</a>
 

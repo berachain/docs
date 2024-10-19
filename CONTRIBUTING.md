@@ -19,7 +19,7 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
 **Typical Version Bump Scenarios**
 
 - Changes to components `./packages/ui`
-- Changes to constatns `./packages/config`
+- Changes to constants `./packages/config`
 - Changes to docs structure via sidebar, theme, images, vercel configs, etc
   - `./apps/*/.vitepress/*`
   - `./apps/*/content/public/*`
@@ -478,7 +478,7 @@ pnpm build;
 
 ### Git commit format (recommended)
 
-Whenver you're ready to create a commit, stage the file, and then run the following [commitzen](https://commitizen-tools.github.io/commitizen/) commands to make it easier to run through commit formatting.
+Whenever you're ready to create a commit, stage the file, and then run the following [commitzen](https://commitizen-tools.github.io/commitizen/) commands to make it easier to run through commit formatting.
 
 ```bash
 # FROM: ./docs
