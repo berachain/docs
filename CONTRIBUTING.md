@@ -608,6 +608,13 @@ git fetch upstream;
 
 ```bash
 git merge upstream/main;
+# Follow instructions
+#
+# [Expected Example Output]:
+# Auto-merging CONTRIBUTING.md
+# Merge made by the 'ort' strategy.
+# CONTRIBUTING.md | 36 ++++++++++++++++++++++++++++++++++++
+# 1 file changed, 36 insertions(+)
 ```
 
 #### 4 - Make, Commit, and Push Changes
