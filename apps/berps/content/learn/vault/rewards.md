@@ -14,7 +14,7 @@ The `$HONEY` amount earned is proportional to the contribution from the deposite
 
 $BGT is earned through staking `$bHONEY` into a vault, and is distributed over time.
 
-If a validator is directing emissions to the Berps Vault, every `$bHONEY` staker is elligible to receive a portion of that `$BGT`.
+If a validator is directing emissions to the Berps Vault, every `$bHONEY` staker is eligible to receive a portion of that `$BGT`.
 
 ## How Do I Claim $BGT
 
