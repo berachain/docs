@@ -586,3 +586,39 @@ Once the version changes are done, make a commit with a chore-like commit.
 ## License
 
 By contributing to Berachain Foundation Docs, you agree that your contributions will be licensed under its MIT license.
+
+### Modifying Contributors Pull Request As Maintainer
+
+If you are a maintainer, you can modify the contributors of a pull request by following the steps below.
+
+#### 1 - Clone Contributors Repository
+
+Clone the repository and checkout to the branch of the pull request.
+
+```bash
+git clone https://github.com/<CONTRIBUTOR_GITHUB_USERNAME>/docs;
+cd docs;
+git checkout <REPO_BRANCH>;
+```
+
+#### 2 - Add Remote
+
+```bash
+git remote add upstream https://github.com/berachain/docs;
+git fetch upstream;
+```
+
+#### 3 - Merge Upstream
+
+```bash
+git merge upstream/main;
+```
+
+#### 4 - Make, Commit, and Push Changes
+
+```bash
+git add .;
+pnpm dlx git-cz;
+# Follow instructions
+git push origin <REPO_BRANCH>;
+```
