@@ -583,10 +583,6 @@ Seeing as `packages/config` is a dependency, you will see an `minor` update in t
 
 Once the version changes are done, make a commit with a chore-like commit.
 
-## License
-
-By contributing to Berachain Foundation Docs, you agree that your contributions will be licensed under its MIT license.
-
 ### Modifying Contributors Pull Request As Maintainer
 
 If you are a maintainer, you can modify the contributors of a pull request by following the steps below.
@@ -622,3 +618,7 @@ pnpm dlx git-cz;
 # Follow instructions
 git push origin <REPO_BRANCH>;
 ```
+
+## License
+
+By contributing to Berachain Foundation Docs, you agree that your contributions will be licensed under its MIT license.
