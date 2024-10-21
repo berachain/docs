@@ -204,6 +204,10 @@ const SIDEBAR = {
       text: "Node Guides",
       items: [
         {
+          text: "Run Testnet Node With Docker",
+          link: "/nodes/guides/docker",
+        },
+        {
           text: "Run Local Devnet With Kurtosis",
           link: "/nodes/guides/kurtosis",
         },

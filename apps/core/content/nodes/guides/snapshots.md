@@ -11,9 +11,6 @@ head:
       content: How to use node snapshots in Berachain
 ---
 
-<script setup>
-</script>
-
 # Restoring Berachain Nodes from Snapshots
 
 This guide will walk you through the process of using node snapshots to quickly restore a node.
