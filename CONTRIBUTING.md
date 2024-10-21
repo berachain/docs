@@ -19,7 +19,7 @@ Berachain Docs follows [semantic versioning](https://semver.org). We release pat
 **Typical Version Bump Scenarios**
 
 - Changes to components `./packages/ui`
-- Changes to constatns `./packages/config`
+- Changes to constants `./packages/config`
 - Changes to docs structure via sidebar, theme, images, vercel configs, etc
   - `./apps/*/.vitepress/*`
   - `./apps/*/content/public/*`
@@ -478,7 +478,7 @@ pnpm build;
 
 ### Git commit format (recommended)
 
-Whenver you're ready to create a commit, stage the file, and then run the following [commitzen](https://commitizen-tools.github.io/commitizen/) commands to make it easier to run through commit formatting.
+Whenever you're ready to create a commit, stage the file, and then run the following [commitzen](https://commitizen-tools.github.io/commitizen/) commands to make it easier to run through commit formatting.
 
 ```bash
 # FROM: ./docs
@@ -582,6 +582,49 @@ Seeing as `packages/config` is a dependency, you will see an `minor` update in t
 #### 4 - Commit Changes
 
 Once the version changes are done, make a commit with a chore-like commit.
+
+### Modifying Contributors Pull Request As Maintainer
+
+If you are a maintainer, you can modify the contributors of a pull request by following the steps below.
+
+#### 1 - Clone Contributors Repository
+
+Clone the repository and checkout to the branch of the pull request.
+
+```bash
+git clone https://github.com/<CONTRIBUTOR_GITHUB_USERNAME>/docs;
+cd docs;
+git checkout <REPO_BRANCH>;
+```
+
+#### 2 - Add Remote
+
+```bash
+git remote add upstream https://github.com/berachain/docs;
+git fetch upstream;
+```
+
+#### 3 - Merge Upstream
+
+```bash
+git merge upstream/main;
+# Follow instructions
+#
+# [Expected Example Output]:
+# Auto-merging CONTRIBUTING.md
+# Merge made by the 'ort' strategy.
+# CONTRIBUTING.md | 36 ++++++++++++++++++++++++++++++++++++
+# 1 file changed, 36 insertions(+)
+```
+
+#### 4 - Make, Commit, and Push Changes
+
+```bash
+git add .;
+pnpm dlx git-cz;
+# Follow instructions
+git push origin <REPO_BRANCH>;
+```
 
 ## License
 

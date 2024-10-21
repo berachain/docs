@@ -32,7 +32,7 @@ Vault Liquidity Providers deposit `$HONEY`, which stores the cumulative sum in t
 
 For users that deposit their `$HONEY`, they receive a corresponding token amount of [`$bHONEY`](/learn/tokens/bhoney).
 
-If a trader gets liquidated in `$HONEY`, that amount is distributed to the `$bHONEY` Vault (minus a small fee to the liquidator) and a small percentage of that liquiditation goes to the foundation.
+If a trader gets liquidated in `$HONEY`, that amount is distributed to the `$bHONEY` Vault (minus a small fee to the liquidator) and a small percentage of that liquidation goes to the foundation.
 
 $HONEY is the only asset that Berps accepts to place a trade.
 

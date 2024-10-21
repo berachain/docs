@@ -16,7 +16,7 @@ Users who deposit can expect to be rewarded in `$HONEY` from any of the fees gen
 
 When a user depositors `$HONEY`, they are automatically given a corresponding amount of `$bHONEY` to represent ownership of `$HONEY` in the Berps Vault.
 
-As long as a user has `$bHONEY`, any trading fees will be distributed to to depositors at the time that they withdraw their `$HONEY`, which burns their equivalent in `$bHONEY` previously received.
+As long as a user has `$bHONEY`, any trading fees will be distributed to depositors at the time that they withdraw their `$HONEY`, which burns their equivalent in `$bHONEY` previously received.
 
 If a depositor would like to qualify for `$BGT` rewards, they would need to stake their `$bHONEY` into another contract which would qualify them to receive `$BGT` whenever emissions is directed to the Berps Vault.
 
@@ -24,4 +24,4 @@ Learn more here about [Depositing & Withdrawing `$HONEY`](/learn/vault/depositin
 
 ## Berps Vault & PoL
 
-The Berps Vault is also an elligible reward vault for Validators to distribute `$BGT` emissions to and is one of a few native Berachain dApps elligible at the start to receive `$BGT` emissions.
+The Berps Vault is also an eligible reward vault for Validators to distribute `$BGT` emissions to and is one of a few native Berachain dApps eligible at the start to receive `$BGT` emissions.

@@ -1,5 +1,25 @@
 # @berachain/berps
 
+## 1.1.8
+
+### Patch Changes
+
+- Berps typo errors
+
+## 1.1.7
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
+## 1.1.6
+
+### Patch Changes
+
+- Various grammar and typo fixes for Berps
+
 ## 1.1.5
 
 ### Patch Changes

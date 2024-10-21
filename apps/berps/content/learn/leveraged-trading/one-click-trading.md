@@ -1,6 +1,6 @@
 # One-Click Trading (1CT)
 
-One-Click Trading or 1CT is a way expedite trades by improving the user experience for traders on Berps.
+One-Click Trading or 1CT is a way to expedite trades by improving the user experience for traders on Berps.
 
 It allows for traders to create a generated EOA wallet within Berps which can be funded and used to execute trades without the need for an EOA wallet to approve every transaction (approvals, confirmations, etc).
 
@@ -16,7 +16,7 @@ It is highly recommended to copy the generated _Private Keys_ generated to avoid
 
 ## How To Activate 1CT?
 
-To activatge One-Click Trading:
+To activate One-Click Trading:
 
 1. Start by clicking **Approve One-Click Trade Wallet**
 
@@ -36,7 +36,7 @@ To activatge One-Click Trading:
 
 ![Berps 1CT Step4](/assets/berps-1ct-04.png)
 
-5. Click the **Fund** tab, specify an amount, and click **Fundt** button to add `$BERA` to the wallet
+5. Click the **Fund** tab, specify an amount, and click **Fund** button to add `$BERA` to the wallet
 
 ![Berps 1CT Step5](/assets/berps-1ct-05.png)
 
@@ -54,7 +54,7 @@ To withdraw funds from your 1CT wallet to your connected EOA:
 
 ## How To Deactivate 1CT?
 
-To deactive the 1CT:
+To deactivate the 1CT:
 
 1. Start by clicking **Manage One-Click Trade Wallet**
 

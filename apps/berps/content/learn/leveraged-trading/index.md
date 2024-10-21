@@ -12,7 +12,7 @@ Leveraged trading is a strategy that involves using borrowed money to increase t
 
 ## Berps User Interface Overview
 
-The Berps UI is split up into the folowing section.
+The Berps UI is split up into the following section.
 
 ![Berps UI Sections](/assets/berps-ui-sections.png)
 
@@ -27,7 +27,7 @@ Different key pairs that a user can choose to speculate on that is always paired
 
 ### 3. Trade Parameters
 
-Based othe quantity of `$HONEY` they want to use, a trader can increase their leverage from 2x-100x using the **Leverage Slider**.
+Based on the quantity of `$HONEY` they want to use, a trader can increase their leverage from 2x-100x using the **Leverage Slider**.
 
 Optionally, a trader can also decrease their risk of losing their entire deposit by putting in parameters where a given threshold would be met for it sell off a trade when it reaches a certain profit **(Take Profit)** or sell off a trade when it reaches a certain loss percentage **(Stop Loss)**.
 

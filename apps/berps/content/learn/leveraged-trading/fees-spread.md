@@ -12,7 +12,7 @@ Spread is enforced on oracle prices to ensure the protocol does not get into uns
 4. Limit Fee
 
 :::tip
-You can save on limit fees if you close the orders yourself instread of a liquidation bot doing it for you via TP or SL.
+You can save on limit fees if you close the orders yourself instead of a liquidation bot doing it for you via TP or SL.
 :::
 
 ### Opening Fees
