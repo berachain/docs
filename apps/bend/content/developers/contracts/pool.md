@@ -33,7 +33,7 @@ function supply(address asset, uint256 amount, address onBehalfOf, uint16 referr
 ### supplyWithPermit
 
 Supply with transfer approval of asset to be supplied done via permit function
-see: https://eips.ethereum.org/EIPS/eip-2612 and https://eips.ethereum.org/EIPS/eip-713
+see: https://eips.ethereum.org/EIPS/eip-2612 and https://eips.ethereum.org/EIPS/eip-712
 
 ```solidity
 function supplyWithPermit(
