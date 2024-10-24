@@ -53,7 +53,16 @@ If running as docker containers, make sure each docker container sufficient reso
 
 ## Build & Run From Source 🛠️
 
-For this quickstart, we'll be building the consensus client from source.
+For this quickstart, we'll be building the consensus client from source. **If you do not wish to build from source:**
+1. Download a [pre-built binary from here](https://github.com/berachain/beacon-kit/releases).
+2. Move the binary to beacon-kit build directory.
+
+```
+git clone https://github.com/berachain/beacon-kit;
+cd beacon-kit;
+mv /path/to/download/beacond-xxxxx build/bin/beacond;
+chmod +x build/bin/beacond
+```
 
 :::tip
 **NOTE:** Avoid running the execution client and/or consensus client in Vscode as it will be prone to crash. Please use a dedicated shell terminal.
