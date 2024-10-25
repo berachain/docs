@@ -106,8 +106,10 @@ Just set `true` for `BEACOND_SNAPSHOT_ENABLED` and `RETH_SNAPSHOT_ENABLED` in th
 #                          ↓ SNAPSHOTS ↓                                #
 #########################################################################
 
-# Snapshot metadata
-SNAPSHOT_METADATA_URL="https://storage.googleapis.com/upnode/berachain/snapshots/metadata.json"
+# Snapshot source configuration (bera-snap)
+SNAPSHOT_SOURCE="api" # Possible values: "gcs" or "api"
+# SNAPSHOT_METADATA_URL="https://storage.googleapis.com/yourbucket/berachain/snapshots/metadata.json" # EXAMPLE GCS URL!
+SNAPSHOT_METADATA_URL="http://bera-api.upnode.org/snapshots"
 
 # Beacond
 BEACOND_SNAPSHOT_ENABLED=true
