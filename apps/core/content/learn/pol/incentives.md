@@ -1,6 +1,6 @@
 # Incentives 💎
 
-Incentives in PoL can be defined as a creative and customizable marketplace for Validator's `$BGT` emissions.
+Incentives in Proof-of-Liquidity (PoL) can be defined as a creative and customizable marketplace for Validator's `$BGT` emissions.
 
 A simplified way to look at the whole incentive system where validators can pick and choose which incentives from _Reward Vaults_ are worthy of their `$BGT` emissions, acquired via proposing a block.
 
