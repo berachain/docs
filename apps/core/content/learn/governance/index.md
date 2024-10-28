@@ -49,7 +49,7 @@ To create a governance proposal on Berachain:
 
 2. **Delegate `$BGT`**: Even if you own the required `$BGT`, you must delegate it to yourself (or have it delegated by others) to gain voting power.
 
-3. **Prepare Your Proposal**: Clearly define the changes you want to implement. For example, to add a Reward Vault to the BeraChef contract, you would need to specify the vault address and the function call to update the "friends of the chef."
+3. **Prepare Your Proposal**: Clearly define the changes you want to implement. For example, to add a Reward Vault to the BeraChef contract, you would need to specify the vault address and the function call to update the whitelisted vaults.
 
 4. **Submit the Proposal**: Use the governance contract to submit your proposal on-chain. This typically involves calling a `propose` function with the necessary parameters.
 

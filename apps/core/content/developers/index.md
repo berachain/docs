@@ -8,28 +8,28 @@ The above diagram gives an overview of how the main Proof of Liquidity (PoL) con
 
 The BeraChef contract is responsible for storing the preferences of validators for distributing `$BGT` emissions to reward vaults. A few key terms are important to understand in the BeraChef contract:
 
-- `CuttingBoard`: Every validator has their own cutting board, which is used to store their preferences and weights for the reward vaults to which `$BGT` is distributed when selected to propose a block.
-- `FriendsOfTheChef`: These are addresses that are eligible to receive weights from cutting boards. In other words, this is the set of whitelisted [Reward vaults](/learn/pol/rewardvaults)
+- `RewardAllocation`: Every validator has their own reward allocation, which is used to store their preferences and weights for the reward vaults to which `$BGT` is distributed when selected to propose a block.
+- `WhitelistedVaults`: These are addresses that are eligible to receive weights from reward allocations. In other words, this is the set of whitelisted [Reward vaults](/learn/pol/rewardvaults)
 
 ### Key Functions
 
-`queueNewCuttingBoard`: This function allows validators to set a cutting board distribution for a future block. This is callable only by the validator.
+`queueNewRewardAllocation`: This function allows validators to set a reward allocation distribution for a future block. This is callable only by the validator.
 
-`activateQueuedCuttingBoard` is called by the `Distributor` contract the next time the validator is selected to propose a block, activating it.
+`activateQueuedRewardAllocation` is called by the `Distributor` contract the next time the validator is selected to propose a block, activating it.
 
-`getActiveCuttingBoard`/`getQueuedCuttingBoard`: These functions return the active/queued cutting board for a given validator.
+`getActiveRewardAllocation`/`getQueuedRewardAllocation`: These functions return the active/queued reward allocation for a given validator.
 
-`updateFriendsOfTheChef`: This function updates the status of whether a `$BGT` receiver/Reward Vault is whitelisted or not. This is callable only by the governance module, which is why a governance proposal is required to whitelist new Reward Vaults or make changes to existing ones.
+`updateWhitelistedVaults`: This function updates the status of whether a `$BGT` receiver/Reward Vault is whitelisted or not. This is callable only by the governance module, which is why a governance proposal is required to whitelist new Reward Vaults or make changes to existing ones.
 
 ## Distributor.sol
 
-The Distributor contract is responsible for distributing the block rewards from the reward controller. Each coinbase has its own cutting board, if it does not exist, a default cutting board is used. And if governance has not set the default cutting board, the rewards are not minted and distributed.
+The Distributor contract is responsible for distributing the block rewards from the reward controller. Each coinbase has its own reward allocation, if it does not exist, a default reward allocation is used. And if governance has not set the default reward allocation, the rewards are not minted and distributed.
 
 ### Key Functions
 
-`distributeFor`: Is called for distributing `$BGT` rewards to the cutting board receivers of the given validator. The prover serves the purpose of proving that the given validator has indeed proposed a given block to the `Distributor` contract to correspondingly distribute rewards.
+`distributeFor`: Is called for distributing `$BGT` rewards to the reward allocation receivers of the given validator. The prover serves the purpose of proving that the given validator has indeed proposed a given block to the `Distributor` contract to correspondingly distribute rewards.
 
-## BerachainRewardsVault.sol
+## RewardVault.sol
 
 Colloquially known as _Reward Vaults_. Reward Vaults are contracts in which users can stake their Proof of Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward Vaults additionally store incentives provided by protocols to distribute to validators upon receiving `$BGT`.
 

@@ -92,11 +92,11 @@ This contract creates a dummy ERC20 token that will be used for staking in PoL v
 pragma solidity ^0.8.19;
 
 import "./StakingToken.sol";
-import {IBerachainRewardsVault, IBerachainRewardsVaultFactory} from "./interfaces/IRewardVaults.sol";
+import {IRewardVault, IRewardVaultFactory} from "./interfaces/IRewardVaults.sol";
 
 contract ProtocolContract {
     StakingToken public stakingToken;
-    IBerachainRewardsVault public rewardVault;
+    IRewardVault public rewardVault;
 
     mapping(address => uint256) public userActivity;
 
@@ -105,10 +105,10 @@ contract ProtocolContract {
         stakingToken = new StakingToken();
 
         // Create vault for newly created token
-        address vaultAddress = IBerachainRewardsVaultFactory(_vaultFactory)
+        address vaultAddress = IRewardVaultFactory(_vaultFactory)
             .createRewardsVault(address(stakingToken));
 
-        rewardVault = IBerachainRewardsVault(vaultAddress);
+        rewardVault = IRewardVault(vaultAddress);
     }
 
     function addActivity(address user, uint256 amount) external {
@@ -147,7 +147,7 @@ This contract is a simple representation of an arbitrary protocol's contract:
 ```solidity
 pragma solidity ^0.8.19;
 
-interface IBerachainRewardsVault {
+interface IRewardVault {
     function delegateStake(address account, uint256 amount) external;
 
     function delegateWithdraw(address account, uint256 amount) external;
@@ -159,7 +159,7 @@ interface IBerachainRewardsVault {
     function balanceOf(address account) external returns (uint256);
 }
 
-interface IBerachainRewardsVaultFactory {
+interface IRewardVaultFactory {
     function createRewardsVault(
         address stakingToken
     ) external returns (address);
@@ -181,17 +181,17 @@ pragma solidity ^0.8.19;
 
 import "forge-std/Test.sol";
 import "../src/ProtocolContract.sol";
-import {IBerachainRewardsVault, IBerachainRewardsVaultFactory} from "../src/interfaces/IRewardVaults.sol";
+import {IRewardVault, IRewardVaultFactory} from "../src/interfaces/IRewardVaults.sol";
 
 contract ProtocolContractTest is Test {
     ProtocolContract public protocol;
-    IBerachainRewardsVault public rewardVault;
+    IRewardVault public rewardVault;
 
     address public user1 = address(0x1);
     address public user2 = address(0x2);
 
     function setUp() public {
-        IBerachainRewardsVaultFactory vaultFactory = IBerachainRewardsVaultFactory(
+        IRewardVaultFactory vaultFactory = IRewardVaultFactory(
                 0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B
             );
         protocol = new ProtocolContract(address(vaultFactory));
