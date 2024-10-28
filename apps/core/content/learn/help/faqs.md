@@ -93,16 +93,10 @@ Delegating `$BGT` allows you to participate in Proof of Liquidity while helping 
 
 Rewards are the main reason.
 
-With Proof of Liquidity, you can earn many different types of rewards. More rewards than you can earn on basically any other chain:
+With Proof of Liquidity, you can earn many different types of rewards:
 
-- `$BGT` Inflation
-- Block Captured Value
-  - DEX Fees
-  - $HONEY Fees
-  - Perps Fees
-- Gas Fees
-
-Learn more about all of these rewards in Protocol Rewards page.
+- A share of protocol-provided [incentives](/learn/pol/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
+- A share of Berachain core dApp fees, namely fees from Bend, BEX and Berps
 
 ## How do I get `$BGT`?
 
@@ -122,7 +116,8 @@ Anyone with `$BGT` can propose and vote on proposals.
 
 ## What is the actual staking token of the network, `$BERA` or `$BGT`?
 
-Staking -> `$BERA`, Rewards -> `$BGT`
+- Validators stake `$BERA`
+- Network incentives are received in `$BGT`
 
 ## Can validators with `$BERA` alone build blocks and what are the rewards?
 
@@ -132,6 +127,6 @@ Yes, validators would get transaction fees and a `$BGT` base rate sent to their 
 
 Incentives going to the validator are adjusted for the amount of `$BGT` the validator distributes.
 
-## Can reward vaults route emissions to a single pool within a dApp, or only the whole dApp?
+## Can Reward Vaults route emissions to a single pool within a dApp, or only the whole dApp?
 
-The dapp can request a PoLVault for any encapsulated thing they want. The encapsulated thing just requires a representative ERC-20 token that users can stake in the vault.
+The dapp can request a Reward Vault for any encapsulated thing they want. The encapsulated thing just requires a representative ERC-20 token that users can stake in the vault. Developers also have the ability to stake in Vaults on [behalf of users](/developers/guides/advanced-pol).
