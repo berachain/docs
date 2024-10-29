@@ -19,7 +19,7 @@ head:
 
 # Berachain Run A Node Quickstart ⚡
 
-This will walk you through on setting up a testnet `bArtio` RPC archive node with `beacond` consensus client and a `reth` execution client.
+This will walk you through on setting up a testnet `bArtio` node with `beacond` consensus client and a `reth` execution client.
 
 :::tip
 **NOTE:**
@@ -30,9 +30,10 @@ At this time, testnet validator nodes need to be whitelisted and are onboarded w
 
 Before we begin, please make sure to have the following installed on your computer:
 
-1. [Golang](https://go.dev/dl/) `v1.22.0` or greater
-2. Meet the minimum system requirements
+1. [Golang](https://go.dev/dl/) `v1.23.0` or greater
+2. Meet the minimum system requirements (see below)
 3. [Foundry](https://book.getfoundry.sh/getting-started/installation) (For Tests)
+4. Docker, if running as container
 
 **Minimum Requirements:**
 
@@ -65,11 +66,12 @@ chmod +x build/bin/beacond
 ```
 
 :::tip
-**NOTE:** Avoid running the execution client and/or consensus client in Vscode as it will be prone to crash. Please use a dedicated shell terminal.
+**NOTE:** Avoid running the execution client and/or consensus client in Vscode as it will be prone to crashing. Please use a dedicated shell terminal.
 :::
 
 ### Clone Repo & Verify Built Binary
 
+You can skip this step if you downloaded a pre-built binary.
 First, start off by cloning the BeaconKit repository and then building it.
 
 ```bash
@@ -100,7 +102,7 @@ Test that it's working correctly, with the following command:
 
 ## Configure Consensus Client 🤝
 
-This will walk the steps for setting up a `BeaconKit` consensus client.
+This will walk the steps for setting up the `BeaconKit` consensus client.
 
 ### Step 1 - Initializing Beacon Node
 
@@ -135,10 +137,6 @@ MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
 
 You should be able to see the newly created files in the `./build/bin/config` folder:
 
-:::warning
-**IMPORTANT:** Make sure to securely backup your `priv_validator_key.json` file if running a **validator** node. This is the file that contains your validator's private key and is needed to sign blocks as your validator. If you lose this file, WE CANNOT HELP and you will have issues recovering your validator and its funds.
-:::
-
 ```bash
 # FROM: ./beacon-kit
 
@@ -157,6 +155,11 @@ tree build/bin/config/beacond;
 #     └── priv_validator_state.json
 ```
 
+:::warning
+**IMPORTANT:** Make sure to securely backup your `priv_validator_key.json` file if running a **validator** node. This is the file that contains your validator's private key and is needed to sign blocks as your validator. If you lose this file, WE CANNOT HELP and you will have issues recovering your validator and its funds.
+:::
+
+
 ### Step 2 - Add Configuration Files
 
 Retrieve the genesis file by downloading it into the `config` folder:
@@ -172,7 +175,7 @@ curl -o "./build/bin/config/beacond/config/genesis.json" "https://raw.githubuser
 # 100 46860  100 46860    0     0   295k      0 --:--:-- --:--:-- --:--:--  293k
 ```
 
-Double check the genesis file to make sure it resembles the following:
+Double check the genesis file to make sure it resembles the following. Specifically, verify that the chain id is `bartio-beacon-80084` in order to join the bartio testnet.
 
 ```bash
 # FROM: ./beacon-kit
@@ -218,35 +221,36 @@ curl -o "./build/bin/config/beacond/config/config.toml" "https://raw.githubuserc
 
 Modify the configurations by adding back the moniker name and peers.
 
-:::tip
-Replace `-i ''` with just `-i` if you're not on MacOS.
-:::
-
 ```bash
 # FROM: ./beacon-kit
 
 # Rename the moniker
 MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
-sed -i '' "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # set jwt.hex path
 JWT_PATH=$PWD/build/bin/config/beacond/jwt.hex; # generating in next step
-sed -i '' "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # seeds
 # - Comma separated list of seeds
 seeds_url="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/cl-seeds.txt";
 seeds=$(curl -s "$seeds_url" | tail -n +2 | tr '\n' ',' | sed 's/,$//');
-sed -i '' "s/^seeds = \".*\"/seeds = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^seeds = \".*\"/seeds = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # persistent peers
 # - Comma separated list of nodes to keep persistent connections to
-sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 ```
+
+:::tip
+MacOS users need to add an extra set of quotes for `sed`: `sed -i` becomes `sed -i ''`
+:::
+
 
 ### Step 3 - Generate JWT Token
 
-This will create a JSON Web Token that will allow the BeaconKit consensus client to communicate with EVM Execution Client.
+This will create a JSON Web Token that will allow the BeaconKit consensus client to communicate with EVM Execution Client. This is not you private key, however it must be still stored securely. You may chose to regenerate it at a later time.
 
 To create a jwt token, run the following command:
 
@@ -295,7 +299,7 @@ sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/bu
 
 ### Step 4 - Download Snapshot (Recommended)
 
-This step is highly recommended to avoid waiting long sync times.
+This step is highly recommended to avoid waiting long sync times. Using a snapshot ensures that your node quickly reaches close to the current block height.
 
 :::warning
 Syncing from genesis can take multiple hours (potentially a few days), depending on your connection speed and number of peers.
