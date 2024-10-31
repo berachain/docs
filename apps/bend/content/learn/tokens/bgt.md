@@ -8,7 +8,7 @@ The Berachain Governance Token `$BGT` is the native governance token that is typ
 
 `$BGT` can be accumulated only via keeping open borrow positions on Bend.
 
-Reward vaults are created after pools are whitelisted, which users can deposit in to earn $BGT. To learn more about guages check out our core docs on [Bend & Proof Of Liquidity](https://docs.berachain.com/learn/pol/rewardvaults#reward-vaults).
+Reward vaults are created after pools are whitelisted, which users can deposit in to earn $BGT. To learn more about gauges check out our core docs on [Bend & Proof Of Liquidity](https://docs.berachain.com/learn/pol/rewardvaults#reward-vaults).
 
 Here are a few examples of how $BGT is earned across Berachain's native DApps:
 
@@ -16,7 +16,7 @@ Here are a few examples of how $BGT is earned across Berachain's native DApps:
 - Borrowing `$HONEY` on Bend.
 - Providing `$HONEY` in the `HONEY` vault for Berps.
 
-Make sure to also read how the whole interaction works with Bend's $HONEY vaul t[here](/learn/bend-and-pol#bend-honey-vault-bgt)
+Make sure to also read how the whole interaction works with Bend's $HONEY vault [here](/learn/bend-and-pol#bend-honey-vault-bgt)
 
 ## What can you do with $BGT?
 

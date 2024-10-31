@@ -30,7 +30,7 @@ By the end of the tutorial, you will have created a bot that will automatically 
 
 Before beginning, make sure you have the following installed and setup:
 
-- NMV or Node `v20.11.0` or greater
+- NVM or Node `v20.11.0` or greater
 - Wallet with testnet `$HONEY` tokens - See the <a :href="config.testnet.dapps.faucet.url">{{config.testnet.dapps.faucet.name}}</a>, receive `$BERA` and trade for `$HONEY` on <a :href="config.testnet.dapps.bex.url + 'swap'">BEX</a>
 
 ## Trading Bot Project Setup
@@ -218,7 +218,7 @@ Bollinger Bands provide an upper and lower band around the current price as show
 
 ![Bollinger Band Example](/assets/bollinger-band-example.png)
 
-The basic idea behind a BB strategy is that when the price moves above the price moves above the upper band, it suggests overbought conditions, and to consider selling. Conversely, when the price moves below the lower band, it suggests oversold conditions and to consider buying.
+The basic idea behind a BB strategy is that when the price moves above the upper band, it suggests overbought conditions, and to consider selling. Conversely, when the price moves below the lower band, it suggests oversold conditions and to consider buying.
 
 #### BB Calculations
 

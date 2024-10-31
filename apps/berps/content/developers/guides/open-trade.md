@@ -13,7 +13,7 @@ head:
 
 # Berps Developer Guides: Open a Trade
 
-This guide walks through the process of programatically executing trades on Berps, using TypeScript and Ethers.js. This article assumes usage on the Berachain V2 Testnet - please adapt contract addresses and providers to your specific environment.
+This guide walks through the process of programmatically executing trades on Berps, using TypeScript and Ethers.js. This article assumes usage on the Berachain V2 Testnet - please adapt contract addresses and providers to your specific environment.
 
 ## Step 1: Import Dependencies & Define Constants
 
