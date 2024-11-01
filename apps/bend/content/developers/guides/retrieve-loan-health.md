@@ -31,7 +31,7 @@ The `getUserAccountData()` function returns the following:
 | `totalDebtBase`               | `uint256` | The total debt of the user in the base currency used by the price feed           |
 | `availableBorrowsBase`        | `uint256` | The borrowing power left of the user in the base currency used by the price feed |
 | `currentLiquidationThreshold` | `uint256` | The liquidation threshold of the user                                            |
-| `ltv`                         | `uint256` | The loan to value of The user                                                    |
+| `ltv`                         | `uint256` | The loan to value of the user                                                    |
 | `healthFactor`                | `uint256` | The current health factor of the user                                            |
 
 ### Health Parameters Explained

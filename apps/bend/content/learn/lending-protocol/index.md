@@ -4,7 +4,7 @@
 
 ## Why Does Bend Exist?
 
-Bend is Berachain’s native lending platform. It allows for users to gain exposure to honey while using their other blue chip assets as collateral.
+Bend is Berachain’s native lending platform. It allows for users to gain exposure to `$HONEY` while using their other blue chip assets as collateral.
 
 ### Capital Efficiency
 

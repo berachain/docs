@@ -17,7 +17,7 @@ In the Bend protocol, we're typically dealing with three main categories of toke
   <Token title="$aHONEY" image="/assets/ahoney.png" />
 </p>
 
-aTokens are tokens minted and burnt upon supply and withdraw of assets to a Bend market.
+aTokens are tokens minted and burnt upon supply and withdrawal of assets to a Bend market.
 
 Users receive a corresponding amount of aTokens in return when depositing a token, e.g. deposit `$HONEY` and get `$aHONEY`. These aTokens accrue interest over time through an increasing (rebasing) token balance.
 

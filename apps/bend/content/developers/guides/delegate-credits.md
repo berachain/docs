@@ -137,4 +137,4 @@ borrow();
 
 ## Repaying the credit
 
-Anyone can repay the debt _OnBehalf_ of the user, by calling one of the methods - [repay()](/developers/contracts/pool#repay) or [repayWithPermit()](/developers/contracts/pool#repaywithpermit) The supplier (aka creditor) can also use [repayWithATokens()](/developers/contracts/pool#repaywithatokens) method to repay debt with their _aTokens_ of the underlying debt asset in the same pool.
+Anyone can repay the debt _OnBehalf_ of the user, by calling one of the methods - [repay()](/developers/contracts/pool#repay) or [repayWithPermit()](/developers/contracts/pool#repaywithpermit). The supplier (aka creditor) can also use [repayWithATokens()](/developers/contracts/pool#repaywithatokens) method to repay debt with their _aTokens_ of the underlying debt asset in the same pool.

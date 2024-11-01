@@ -20,7 +20,7 @@ The diagram above captures the sequence of function calls that occurs when a use
 
 Debt tokens are interest-accruing tokens that are minted and burned through `borrow()` and `repay()`, representing the debt owed by the token holder.
 
-There are 2 types of debt tokens — Stable Debt Tokens (stable interest rate) and Variable Debt Tokens (variable interest rate). Although debt tokens are modelled on the ERC20/EIP20 standard, they are non-transferrable. Therefore they do not implement any of the standard ERC20/EIP20 functions relating to `transfer()` and `allowance()`. ("transfer()" function is not accessible/usable)
+There are 2 types of debt tokens — Stable Debt Tokens (stable interest rate) and Variable Debt Tokens (variable interest rate). Although debt tokens are modelled on the ERC20/EIP20 standard, they are non-transferable. Therefore they do not implement any of the standard ERC20/EIP20 functions relating to `transfer()` and `allowance()`. ("transfer()" function is not accessible/usable)
 
 :::warning
 <b>Warning</b><br/>
@@ -38,7 +38,7 @@ The diagram above captures the sequence of function calls that occurs when a use
 1. The user repays their loan by calling Pool.sol’s `repay()` function and transferring the repayment amount along with the transaction. Note that the repayment amount = principal amount borrowed + interest.
 2. After the repayment is made, HONEY-VariableDebtToken.sol will `burn()` the amount of debt tokens that belongs to this user. This makes sense since the user has cleared this particular debt with the protocol.
 
-Note that the debt tokens aren’t transferred from the user to Pool.sol since these tokens aren’t transferrable. They are instead burned directly from the debt token smart contract.
+Note that the debt tokens aren’t transferred from the user to Pool.sol since these tokens aren’t transferable. They are instead burned directly from the debt token smart contract.
 
 ## Length of Loan & Repayment
 

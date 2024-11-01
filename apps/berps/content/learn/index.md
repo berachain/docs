@@ -30,7 +30,7 @@ The Berps dApp contributes to Proof-of-Liquidity by allowing users to deposit th
 
 ## Who Should Use Berps?
 
-Berps is designed for both speculative trading and strategic hedging. While it offers the potential for high rewards, it also serves as a valuable tool for those looking to manage and mitigate risk in their portfolios. With the right knowledge and risk management strategies, users can effectively utilize Berps to hedge against market volatility and protect their investments, while still understanding that the risk of liquidation remains a possibility..
+Berps is designed for both speculative trading and strategic hedging. While it offers the potential for high rewards, it also serves as a valuable tool for those looking to manage and mitigate risk in their portfolios. With the right knowledge and risk management strategies, users can effectively utilize Berps to hedge against market volatility and protect their investments, while still understanding that the risk of liquidation remains a possibility.
 
 :::warning
 The information provided here is intended for general informational purposes only and should not be considered legal advice. Users are advised to comply with all applicable local, state, and federal laws and regulations. It is the user's responsibility to ensure that their actions are lawful in their respective jurisdictions. The provider of this information is not liable for any actions taken by users based on the content provided. Users should consult with a qualified legal professional for specific legal guidance related to their circumstances.
