@@ -45,7 +45,7 @@ OS: Linux / MacOS
 CPU Architecture: AMD64 or ARM64 / ARM64 Darwin
 CPU: 8 Physical Cores
 RAM: 48GB
-Storage: 1TB
+Storage: 1TB. NVMe SSD highly recommended. 
 ```
 
 :::tip
@@ -250,7 +250,7 @@ MacOS users need to add an extra set of quotes for `sed`: `sed -i` becomes `sed 
 
 ### Step 3 - Generate JWT Token
 
-This will create a JSON Web Token that will allow the BeaconKit consensus client to communicate with EVM Execution Client. This is not you private key, however it must be still stored securely. You may chose to regenerate it at a later time.
+This will create a JSON Web Token that will allow the BeaconKit consensus client to communicate with EVM Execution Client. This is not your private key, however it must be still stored securely. You may chose to regenerate it at a later time.
 
 To create a jwt token, run the following command:
 
@@ -299,7 +299,7 @@ sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/bu
 
 ### Step 4 - Download Snapshot (Recommended)
 
-This step is highly recommended to avoid waiting long sync times. Using a snapshot ensures that your node quickly reaches close to the current block height.
+This step is highly recommended to avoid waiting long sync times. Using a snapshot ensures that your node quickly reaches close to the current block height. If running a validator, you can use pruned snapshots; otherwise the full snapshots are required for archive nodes.
 
 :::warning
 Syncing from genesis can take multiple hours (potentially a few days), depending on your connection speed and number of peers.
@@ -621,3 +621,11 @@ curl --location 'http://localhost:8545' \
 #     "id": 83
 # }
 ```
+
+## Operational Considerations 🚂
+
+While out of the scope of this quickstart, we encourage you to think along these lines in order to make the most of your Berachain node:
+- This document outlines the process to deploy both your execution and consensus clients on the same host. While that's feasible, consider deploying them seperately to prevent resource bottlenecks and isolate issues.
+- Monitoring and alerting is indepensible, particularly if you're running a validator. At the minimum, ensure that the chain height continues to grow on both clients and you're signing non-empty blocks.
+- For validators, additional precuations - such as avoiding double-signing, must be taken. Also ensure that you have 24x7 coverage for any incidents.
+- [Join our Discord](https://discord.com/invite/berachain) to stay informed on product updates and get troubleshooting help.
