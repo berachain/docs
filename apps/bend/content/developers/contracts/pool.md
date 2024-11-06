@@ -601,7 +601,7 @@ function deposit(address asset, uint256 amount, address onBehalfOf, uint16 refer
 ### mintToPOLFeeCollector
 
 ```solidity
-function mintToPOLFeeCollector(address[] assets) external virtual
+function mintToPOLFeeCollector(address[] calldata assets) external virtual
 ```
 
 Mints the assets accrued through the reserve factor to the POL fee collector in the form of aTokens
