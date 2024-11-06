@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 1.4.0
+
+### Minor Changes
+
+- quickstart guide updated based on user feedback
+
 ## 1.3.9
 
 ### Patch Changes
