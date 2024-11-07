@@ -2,7 +2,7 @@
 
 **aTokens** are tokens minted and burnt upon supply and withdraw of assets to a Bend market.
 
-Users receive a corresponding amount of aTokens in return when depositing a token, e.g., deposit `$HONEY` and get `a$HONEY`. These aTokens represent the user’s share of the total pool deposit and accrue interest over time.
+Users receive a corresponding amount of aTokens in return when depositing a token, e.g., deposit `$HONEY` and get `$aHONEY`. These aTokens represent the user’s share of the total pool deposit and accrue interest over time.
 
 Users can hold, transfer, or even use these aTokens as collateral for borrowing additional assets within the Bend ecosystem.
 

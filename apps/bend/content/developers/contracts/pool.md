@@ -15,7 +15,7 @@ Users can:
 
 Supplies an `amount` of underlying asset into the reserve, receiving in return overlying aTokens.
 
-- E.g. User supplies 100 `$HONEY` and gets in return 100 `a$HONEY`
+- E.g. User supplies 100 `$HONEY` and gets in return 100 `$aHONEY`
 
 ```solidity
 function supply(address asset, uint256 amount, address onBehalfOf, uint16 referralCode) public virtual override;
@@ -64,7 +64,7 @@ function supplyWithPermit(
 ### withdraw
 
 Withdraws an `amount` of underlying asset from the reserve, burning the equivalent aTokens owned
-E.g. User has 100 `a$HONEY`, calls withdraw() and receives 100 `$HONEY`, burning the 100 `$aHONEY`
+E.g. User has 100 `$aHONEY`, calls withdraw() and receives 100 `$HONEY`, burning the 100 `$aHONEY`
 
 ```solidity
 function withdraw(address asset, uint256 amount, address to) public virtual override returns (uint256);

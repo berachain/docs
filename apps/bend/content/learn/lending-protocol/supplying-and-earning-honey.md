@@ -21,8 +21,8 @@ To learn more about depositing assets, check out [Depositing](/learn/guides/depo
 The diagram above captures the sequence of function calls that occurs when a user **adds liquidity** to Bend:
 
 1. User supplies liquidity (e.g 100 `$HONEY`) to the protocol via the `supply()` function of Pool.sol
-2. The `supply()` function then calls the `mint()` function of the corresponding receipt token smart contract, which following our example will be `a$HONEY`.sol
-3. The `mint()` function then mints the same amount of receipt tokens (e.g. 100 `a$HONEY`) to the user. Note that the amount of aTokens minted is always 1:1 with the amount supplied.
+2. The `supply()` function then calls the `mint()` function of the corresponding receipt token smart contract, which following our example will be `$aHONEY`.sol
+3. The `mint()` function then mints the same amount of receipt tokens (e.g. 100 `$aHONEY`) to the user. Note that the amount of aTokens minted is always 1:1 with the amount supplied.
 
 This is why the aTokens are referred to as the receipt tokens. They are receipts that the user has indeed provided X amount of tokens to token Y’s liquidity pool.
 
@@ -32,9 +32,9 @@ This is why the aTokens are referred to as the receipt tokens. They are receipts
 
 The diagram above captures the sequence of function calls that occurs when a user **removes liquidity** from Bend:
 
-1. User removes liquidity (e.g. 100 `a$HONEY`) from the protocol via the `withdraw()` function of Pool.sol
+1. User removes liquidity (e.g. 100 `$aHONEY`) from the protocol via the `withdraw()` function of Pool.sol
 2. The `withdraw()` function then calls the `burn()` function of the receipt token
-3. The `burn()` function burns the receipt tokens received (100 `a$HONEY`) and transfers the underlying asset (`$HONEY`) to the user.
+3. The `burn()` function burns the receipt tokens received (100 `$aHONEY`) and transfers the underlying asset (`$HONEY`) to the user.
 
 ### Recap
 
