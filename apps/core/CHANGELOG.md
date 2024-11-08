@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 2.0.0
+
+### Major Changes
+
+- Fix BGT fee sources in faq
+
 ## 1.4.0
 
 ### Minor Changes
