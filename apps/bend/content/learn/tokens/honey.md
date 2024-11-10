@@ -4,13 +4,13 @@
 
 # Bend & $HONEY
 
-$HONEY is Berachain's native stablecoin. It is an standard [ERC20 Token](#contract-address) and represents the equivalent of 1 USDC.
+$HONEY is Berachain's native stablecoin. It is a standard [ERC20 Token](#contract-address) and represents the equivalent of 1 USDC.
 
 ## How Does Bend Use $HONEY?
 
 Bend lets $HONEY suppliers earn interest on it. It's the only asset on Bend that can earn interest by supplying.
 
-Note: Other assests deposited into bend act only as a collateral.
+Note: Other assets deposited into bend act only as a collateral.
 
 ## Where Can I Get $HONEY?
 
