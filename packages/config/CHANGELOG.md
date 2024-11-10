@@ -16,4 +16,4 @@
 
 ### Major Changes
 
-- Initial packagee for both ui and config for berachain docs
+- Initial package for both ui and config for berachain docs
