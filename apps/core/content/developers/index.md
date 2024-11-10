@@ -27,7 +27,7 @@ The Distributor contract is responsible for distributing the block rewards from 
 
 ### Key Functions
 
-`distributeFor`: Is called for distributing `$BGT` rewards to the cutting board receivers of the given validator. The prover serves the purpose of proving that the given validator has indeed proposed a given block to the `Distributor` contract to correspondingly distribute rewards.
+`distributeFor`: Is called for distributing `$BGT` rewards to the cutting board receivers of the given validator. The provider serves the purpose of proving that the given validator has indeed proposed a given block to the `Distributor` contract to correspondingly distribute rewards.
 
 ## BerachainRewardsVault.sol
 
