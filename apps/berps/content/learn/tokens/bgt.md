@@ -28,7 +28,7 @@ Berachain Governance Token (`$BGT`) is a soulbound <a target="_blank" :href="con
 
 ## How Does Berps Use $BGT
 
-Berps is a native Berachain dApp that is an elligible reward vault for validators to distribute `$BGT` emissions to.
+Berps is a native Berachain dApp that is an eligible reward vault for validators to distribute `$BGT` emissions to.
 
 ## How Do I Get $BGT?
 
