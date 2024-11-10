@@ -67,7 +67,7 @@ If templated correctly, we should see the following structure:
     └── Counter.t.sol
 ```
 
-Now that all the code has been setup, install the dependencies needed for an ERC20 contract from [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts), by funning the following:
+Now that all the code has been setup, install the dependencies needed for an ERC20 contract from [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts), by running the following:
 
 ```bash
 # FROM: ./create-erc20-contract-using-foundry
@@ -110,7 +110,7 @@ contract BingBongToken is ERC20 {
 }
 ```
 
-Confirm that this compiles correctly by running the following:
+Confirm that this compile correctly by running the following:
 
 ```bash
 # FROM: ./create-erc20-contract-using-foundry
@@ -165,7 +165,7 @@ forge compile;
 
 With our newly renamed `BingBongToken.t.sol` file, add the following tests that cover a wide range of ERC20 tests.
 
-Feel free to look at each individual test to get a better idea on how revert and successful scenarios are handled.
+Feel free to look at each individual test to get a better idea on how reverts and successful scenarios are handled.
 
 **File:** `./test/BingBongToken.t.sol`
 
@@ -400,7 +400,7 @@ forge test -vvv; # v stands for verbose and multiple vvv allow for more details 
 
 ## Configuring Foundry for Berachain Contract Deployment
 
-Now that the code and tests have all be defined, the next step is to create the deployment script needed to deploy the `BingBongToken.sol` file. To accomplish this, simply repurpose the script file `Course.s.sol` file as our new `BingBongToken.s.sol`.
+Now that the code and tests have all been defined, the next step is to create the deployment script needed to deploy the `BingBongToken.sol` file. To accomplish this, simply repurpose the script file `Course.s.sol` file as our new `BingBongToken.s.sol`.
 
 ```bash
 # FROM: ./create-erc20-contract-using-foundry
@@ -408,7 +408,7 @@ Now that the code and tests have all be defined, the next step is to create the 
 mv script/Counter.s.sol script/BingBongToken.s.sol;
 ```
 
-Next, replace the existing code the following to handle importing the wallet private key, and deploying the contract.
+Next, replace the existing code the following to handle importing the wallet's private key, and deploying the contract.
 
 **File:** `./script/BingBongToken.s.sol`
 

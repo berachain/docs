@@ -161,7 +161,7 @@ pnpm compile; # npm run compile or yarn run compil;
 
 ## Testing the HelloWorld Contract
 
-Now that we have our contract, let's make sure it's working correctly by writting some tests.
+Now that we have our contract, let's make sure it's working correctly by writing some tests.
 
 Hardhat already created a test file in our `/test` directory, and we're going to rename it.
 
@@ -169,7 +169,7 @@ Hardhat already created a test file in our `/test` directory, and we're going to
 # FROM ./create-helloworld-contract-using-hardhat;
 
 # Renames `Lock.ts` to `HelloWorld.test.ts`
-mv test/Lock.ts test/HellWorld.test.ts;
+mv test/Lock.ts test/HelloWorld.test.ts;
 ```
 
 In our new `HelloWorld.test.ts` file, we'll replace the existing code with the following:
