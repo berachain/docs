@@ -29,6 +29,6 @@ Bend is Berachain's non-custodial lending protocol. Lenders participate by depos
 
 Berachain's native stablecoin [`$HONEY`](/learn/pol/tokens/honey), serves as the primary and exclusive token available for borrowing.
 
-In addition, Bend is an implementation of [Proof-of-Liquidity Reward Vaults](/learn/pol/rewardvaults) which which allows borrowers to become eligible to receive [`$BGT`](/learn/pol/tokens/bgt) emissions. It also demonstrates how PoL can incentivize users to take different types of liquidity actions with dApps.
+In addition, Bend is an implementation of [Proof-of-Liquidity Reward Vaults](/learn/pol/rewardvaults) which allows borrowers to become eligible to receive [`$BGT`](/learn/pol/tokens/bgt) emissions. It also demonstrates how PoL can incentivize users to take different types of liquidity actions with dApps.
 
 > To learn more, check out the <a :href="config.websites.docsBend.name">{{config.websites.docsBend.name}}</a>.
