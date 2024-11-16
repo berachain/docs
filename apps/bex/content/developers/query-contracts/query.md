@@ -25,7 +25,7 @@ bArtio Testnet: `{{config.contracts.crocQuery.address}}`
 
 ## Pool Price Functions
 
-The below functions are used to query a pool's instantenous price and prick tick respectively.
+The below functions are used to query a pool's instantaneous price and price tick respectively.
 
 ### queryPrice:
 
@@ -58,7 +58,7 @@ function queryCurveTick (
 ) public view returns (int24)
 ```
 
-**Parameters**;
+**Parameters**
 | Parameter | Type | Description |
 | --------- | ------- | ---------------------------------------------------------------------------------- |
 | base | address | The address of the base-side token in the pool's pair (always the smaller address) |
