@@ -55,7 +55,7 @@ userCmd(1, abi.encode(
 | inBaseQty    | bool    | If true, the qty parameter is denominated in base tokens. If false, it's denominated in quote tokens                                                         |
 | qty          | uint128 | The quantity of tokens to swap                                                                                                                               |
 | tip          | uint16  | The tip amount for the relayer executing the swap                                                                                                            |
-| limitPrice   | uint128 | Represents the worse possible price the user is willing to accept. If buying this represents an upper bound.                                                 |
+| limitPrice   | uint128 | Represents the worst possible price the user is willing to accept. If buying this represents an upper bound.                                                 |
 | minOut       | uint128 | The minimum amount of output tokens the user is willing to receive                                                                                           |
 | reserveFlags | uint8   | Flags indicating whether to use the user's surplus collateral balance for the base and/or quote token (see [Type Conventions](/developers/type-conventions)) |
 
