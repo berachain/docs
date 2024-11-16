@@ -81,7 +81,7 @@ This command is routed through `WarmPath.sol` and decoded as follows:
 
 ```solidity
 (uint8 code, address base, address quote, uint256 poolIdx,
-int24 bidTick, int24 askTick, uint128 liq, uint128,limitLower, uint128 limitHigher,
+int24 bidTick, int24 askTick, uint128 liq, uint128 limitLower, uint128 limitHigher,
 uint8 reserveFlags, address lpConduit) =
   abi.decode(input, (uint8,address,address,uint256,int24,int24,uint128,uint128,uint128,uint8,address));
 ```
