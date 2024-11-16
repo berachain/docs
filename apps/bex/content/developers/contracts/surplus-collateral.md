@@ -81,7 +81,7 @@ userCmd(3, abi.encode(
 | Name  | Type    | Description                                                                   |
 | ----- | ------- | ----------------------------------------------------------------------------- |
 | recv  | address | The address to which the surplus collateral will be credited                  |
-| value | uint128 | The total amount to be deposited                                              |
+| value | uint128 | The total amount to be withdrawn                                              |
 | token | address | The address of the ERC20 token being deposited, or address(0) for native BERA |
 
 ## Transfer
@@ -102,5 +102,5 @@ userCmd(3, abi.encode(
 | Name  | Type    | Description                                                                   |
 | ----- | ------- | ----------------------------------------------------------------------------- |
 | recv  | address | The address to which the surplus collateral will be credited                  |
-| value | uint128 | The total amount to be deposited                                              |
+| value | uint128 | The total amount to be transferred                                            |
 | token | address | The address of the ERC20 token being deposited, or address(0) for native BERA |
