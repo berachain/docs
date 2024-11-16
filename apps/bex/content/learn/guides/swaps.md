@@ -27,7 +27,7 @@ Users can swap tokens on BEX on bArtio here: {{config.testnet.dapps.bex.url}}/sw
 
 If adequate liquidity exists in a given pair, a swap will most likely be executed as a _single hop_. Single-hop swaps incur less exchange and gas fees, making them the preferred method.
 
-However, When a trade between the input and output token does not provide the best overall price (or the trading pair does not exist as a single pool), BEX can perform a _multi-hop swap_. Multi-hop swaps involve chaining swaps across multiple pools to find the best overall price. The process of finding a cost-efficient multi-hop path is called _routing_.
+However, when a trade between the input and output token does not provide the best overall price (or the trading pair does not exist as a single pool), BEX can perform a _multi-hop swap_. Multi-hop swaps involve chaining swaps across multiple pools to find the best overall price. The process of finding a cost-efficient multi-hop path is called _routing_.
 
 BEX provides an off-chain API for approximately optimal routing. See an <a target="_blank" rel="no-referrer" :href="config.testnet.dapps.bex.apiUrl + 'dex/route?fromAsset=0x7507c1dc16935B82698e4C63f2746A2fCf994dF8&toAsset=0xd6D83aF58a19Cd14eF3CF6fe848C9A4d21e5727c&amount=1000000000000000000'">example here</a>.
 
