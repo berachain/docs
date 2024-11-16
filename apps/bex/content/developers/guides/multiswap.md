@@ -46,7 +46,7 @@ struct SwapStep {
 
 | Name     | Type    | Description                                                                                                                         |
 | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| poolIdx  | uin256  | The index of the pool to use for the swap                                                                                           |
+| poolIdx  | uint256 | The index of the pool to use for the swap                                                                                           |
 | base     | address | The token to swap from                                                                                                              |
 | quote    | address | The token to swap to                                                                                                                |
 | isBuy    | bool    | True if the user wants to pay base token and receive quote token. False if the user wants to receive base token and pay quote token |
