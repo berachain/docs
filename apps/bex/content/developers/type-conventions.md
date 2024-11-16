@@ -52,7 +52,7 @@ Signed token quantities indicate the direction of the flow relative to the pool:
 
 All curve prices are represented on-chain as fixed-point Q64.64 representations of the square root. Curve prices always represent the instantaneous exchange rate between the raw tokens and do not account for ERC20 token decimals.
 
-A [TypeScript Library](https://github.com/CrocSwap/sdk/blob/main/src/utils/price.ts) is available for converted between Q64.64 and human-readable prices.
+A [TypeScript Library](https://github.com/CrocSwap/sdk/blob/main/src/utils/price.ts) is available for converting between Q64.64 and human-readable prices.
 
 ### Pool Liquidity Fees
 
