@@ -63,7 +63,7 @@ pnpm add @web3modal/wagmi wagmi viem @tanstack/react-query;
 
 ## Getting WalletConnect Project ID
 
-Got to [https://cloud.walletconnect.com/](https://cloud.walletconnect.com/), sign up for an account and create a new project to generate a **Project ID**.
+Go to [https://cloud.walletconnect.com/](https://cloud.walletconnect.com/), sign up for an account and create a new project to generate a **Project ID**.
 
 We'll first need to create a new project.
 
@@ -402,7 +402,7 @@ mkdir components/Account;
 touch components/Account/index.tsx;
 ```
 
-We're going to create a component that checks if the account is connected or now.
+We're going to create a component that checks if the account is connected or not.
 
 **File:** `./components/Account/index.tsx`
 
@@ -645,7 +645,7 @@ touch components/Deploy/index.tsx;
 ```
 
 :::tip
-**ByteCode:** If you're curious aboutt the bytecode, it's the compiled bytecode from the [Create HelloWorld Contract](/developers/guides/create-helloworld-contract-using-hardhat).
+**ByteCode:** If you're curious about the bytecode, it's the compiled bytecode from the [Create HelloWorld Contract](/developers/guides/create-helloworld-contract-using-hardhat).
 :::
 
 **File:** `./components/Deploy.tsx`
