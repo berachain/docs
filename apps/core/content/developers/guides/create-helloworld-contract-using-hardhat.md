@@ -153,7 +153,7 @@ We can take advantage of compiling with the following command:
 ```bash
 # FROM ./create-helloworld-contract-using-hardhat;
 
-pnpm compile; # npm run compile or yarn run compil;
+pnpm compile; # npm run compile or yarn run compile;
 
 # [Expected Output]:
 # Nothing to compile
@@ -437,7 +437,7 @@ Copy the Private Key and paste it our `.env` file for the `WALLET_PRIVATE_KEY`
 WALLET_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
 ```
 
-**Teminal 2**
+**Terminal 2**
 
 ```bash
 # FROM ./create-helloworld-contract-using-hardhat;
