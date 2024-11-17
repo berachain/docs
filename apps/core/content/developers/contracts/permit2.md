@@ -64,7 +64,7 @@ function permitTransferFrom(
 
 Transfers a token using a signed permit message
 
-_The witness type string must follow EIP712 ordering of nested structs and must include the TokenPermissions type definition_
+_The witness type string must follow EIP-712 ordering of nested structs and must include the TokenPermissions type definition_
 
 ```solidity
 function permitWitnessTransferFrom(
@@ -140,7 +140,7 @@ function permitTransferFrom(
 
 Transfers a token using a signed permit message
 
-_The witness type string must follow EIP712 ordering of nested structs and must include the TokenPermissions type definition_
+_The witness type string must follow EIP-712 ordering of nested structs and must include the TokenPermissions type definition_
 
 ```solidity
 function permitWitnessTransferFrom(
@@ -385,7 +385,7 @@ function invalidateNonces(address token, address spender, uint48 newNonce) exter
 
 Sets the new values for amount, expiration, and nonce.
 
-_Will check that the signed nonce is equal to the current nonce and then incrememnt the nonce value by 1._
+_Will check that the signed nonce is equal to the current nonce and then increment the nonce value by 1._
 
 _Emits a Permit event._
 
