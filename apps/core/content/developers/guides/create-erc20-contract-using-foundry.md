@@ -23,7 +23,7 @@ This developer guide will walk you through setting up a new Solidity contract, c
 
 ## Requirements
 
-Before beginning, make sure you have the following installed or setup on your computer before hand.
+Before beginning, make sure you have the following installed or setup on your computer beforehand.
 
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
@@ -125,7 +125,7 @@ forge compile;
 ```
 
 This error happens because it references a file that no longer exists.
-To fix this, we'll rename it to `BingBongToken.t.sol` and replace it some placeholder code.
+To fix this, we'll rename it to `BingBongToken.t.sol` and replace it with some placeholder code.
 
 ```bash
 # FROM: ./create-erc20-contract-using-foundry
@@ -195,14 +195,14 @@ contract BingBongTokenTest is Test {
     }
 
     /**
-     * @dev Test initiatted token name
+     * @dev Test initialized token name
      */
     function test_name() public {
         assertEq(token.name(), "BingBong Token");
     }
 
     /**
-     * @dev Test initiatted token symbol
+     * @dev Test initialized token symbol
      */
     function test_symbol() public {
         assertEq(token.symbol(), "BBT");
@@ -408,7 +408,7 @@ Now that the code and tests have all be defined, the next step is to create the 
 mv script/Counter.s.sol script/BingBongToken.s.sol;
 ```
 
-Next, replace the existing code the following to handle importing the wallet private key, and deploying the contract.
+Next, replace the existing code with the following to handle importing the wallet private key, and deploying the contract.
 
 **File:** `./script/BingBongToken.s.sol`
 
