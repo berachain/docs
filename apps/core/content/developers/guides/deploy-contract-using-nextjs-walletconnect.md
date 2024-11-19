@@ -114,7 +114,7 @@ In the config folder, add the following code:
 // ========================================================
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { cookieStorage, createStorage } from "wagmi";
-import { berachainTestnetbArtio } from "wagmi/chains";
+import { berachainTestnetArtio } from "wagmi/chains";
 
 // Constants
 // ========================================================
@@ -190,7 +190,7 @@ if (!projectId) throw new Error("Project ID is not defined");
 
 // Create modal
 createWeb3Modal({
-  wagmiConfig: config,
+  config: wasmiConfig,
   projectId,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
 });
