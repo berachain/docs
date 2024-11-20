@@ -158,13 +158,13 @@
     "rewardsVault": {
       "name": "Rewards Vault",
       "address": "",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVault.json",
       "docsUrl": "/developers/contracts/rewards-vault"
     },
     "rewardsVaultFactory": {
       "name": "Rewards Vault Factory",
       "address": "0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVaultFactory.json",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVaultFactory.json",
       "docsUrl": "/developers/contracts/rewards-vault-factory"
     },
     "timelock": {
