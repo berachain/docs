@@ -12,7 +12,7 @@ Interface of the Distributor contract.
 
 ### distributeFor
 
-Distribute the rewards to the reward allocation receivers.
+Distribute the rewards to the cutting board receivers.
 
 _This is only callable by the `prover` contract._
 

@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# IRewardVaultFactory
+# IBerachainRewardsVaultFactory
 
 > <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.rewardsVaultFactory.address">{{config.contracts.rewardsVaultFactory.address}}</a><span v-if="config.contracts.rewardsVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.rewardsVaultFactory.abi">ABI JSON</a></span></small>
 
