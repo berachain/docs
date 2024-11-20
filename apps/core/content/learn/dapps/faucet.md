@@ -31,6 +31,8 @@ The {{config.testnet.dapps.faucet.name}} is a tool that easily allows for develo
 
 The following are third-party faucets:
 
+- [Validation Cloud Faucet](https://www.validationcloud.io/berachain-faucet)
+
 - [The Honey Jar Faucet](https://faucet.0xhoneyjar.xyz)
 
 - [QuickNode Berachain Faucet](https://faucet.quicknode.com/berachain)
