@@ -74,6 +74,5 @@ Where:
 
 ## Commission Structure
 Validators can charge commission on emissions with the following rules:
-- Applies only to reward emission component
 - Maximum commission rate: 20%
 - Does not affect base emission
