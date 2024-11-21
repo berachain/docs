@@ -70,7 +70,7 @@ function tryAggregate(bool requireSuccess, Call[] calldata calls) public payable
 
 Backwards-compatible with Multicall2
 
-Aggregate calls and allow failures using tryAggregate
+Aggregate calls and allow failures using tryBlockAndAggregate
 
 ```solidity
 function tryBlockAndAggregate(bool requireSuccess, Call[] calldata calls)
@@ -98,7 +98,7 @@ function tryBlockAndAggregate(bool requireSuccess, Call[] calldata calls)
 
 Backwards-compatible with Multicall2
 
-Aggregate calls and allow failures using tryAggregate
+Aggregate calls and allow failures using blockAndAggregate
 
 ```solidity
 function blockAndAggregate(Call[] calldata calls)
@@ -206,7 +206,7 @@ function getCurrentBlockDifficulty() public view returns (uint256 difficulty);
 Returns the block gas limit
 
 ```solidity
-function getCurrentBlockGasLimit() public view returns (uint256 gaslimit);
+function getCurrentBlockGasLimit() public view returns (uint256 gasLimit);
 ```
 
 ### getCurrentBlockTimestamp
@@ -245,10 +245,10 @@ function getBasefee() public view returns (uint256 basefee);
 
 ### getChainId
 
-Returns the chain id
+Returns the chain ID
 
 ```solidity
-function getChainId() public view returns (uint256 chainid);
+function getChainId() public view returns (uint256 chainId);
 ```
 
 ## Structs
