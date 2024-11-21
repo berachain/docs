@@ -16,7 +16,7 @@ The network maintains an active set of N validators who are eligible for block p
 When a validator proposes a block, they receive BGT tokens through two emission components:
 
 1. **Base Emission**
-   - Fixed amount equal to base rate parameter (B)
+   - Fixed amount equal to base rate parameter of 1 BGT (B)
    - Paid directly to block-proposing validator
 
 2. **Reward Emission**
@@ -60,7 +60,7 @@ Where:
 
 | Parameter | Description | Impact |
 |-----------|-------------|---------|
-| B (base rate) | Fixed BGT amount for block production | Determines baseline validator rewards |
+| B (base rate) | Fixed amount of 1 BGT for block production | Determines baseline validator rewards |
 | R (reward rate) | Base BGT amount for reward vaults | Sets foundation for reward emissions |
 | a (boost multiplier) | Boost impact coefficient | Higher values increase boost importance |
 | b (convexity parameter) | Boost impact curve steepness | Higher values penalize low boost more severely |
@@ -71,8 +71,3 @@ Where:
   ```
   max E[emission] = B + max(m, (a + 1)/(1 + a) - 1)R
   ```
-
-## Commission Structure
-Validators can charge commission on emissions with the following rules:
-- Maximum commission rate: 20%
-- Does not affect base emission
