@@ -87,7 +87,7 @@ But move the files to the shared `data` directory.
 # FROM: ./berachain-docker-node
 
 # beacond
-mv ./snapshots/tmp/beacond/data ./data/beacond/config/data;
+mv ./snapshots/tmp/beacond/data ./data/beacond/data;
 
 # reth
 mv ./snapshots/tmp/reth/blobstore ./data/reth;
