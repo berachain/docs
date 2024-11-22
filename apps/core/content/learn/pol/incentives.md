@@ -1,46 +1,61 @@
-# Incentives 💎
+# Incentive Marketplace
 
-Incentives in Proof-of-Liquidity (PoL) can be defined as a creative and customizable marketplace for Validator's `$BGT` emissions.
-
-A simplified way to look at the whole incentive system where validators can pick and choose which incentives from _Reward Vaults_ are worthy of their `$BGT` emissions, acquired via proposing a block.
-
-## Incentives For Validators 💰
-
-`$BGT` emissions are distributed to liquidity providers via [Reward Vaults](/learn/pol/rewardvaults). Below is an expanded view of the diagram in the Reward Vaults section, which additionally shows protocols providing incentives to Reward Vaults.
+## Overview
+Berachain's incentive marketplace enables protocols to bid for validator emissions using whitelisted tokens. Validators can direct emissions to protocols through reward vaults, with the option to redistribute received incentives to their BGT delegators.
 
 ![Reward Vault Incentives](/assets/reward-vault-incentives.png)
 
-Once an active validator produces a block and emits `$BGT`, it gets to decide which reward vaults to emit their rewards to. Protocols' incentives provided to reward vaults are then rewarded to the validator proportional for the amount of `$BGT` emitted to the reward vault.
+## Vault Whitelisting
+Protocols must complete these steps to whitelist a vault:
 
-:::tip
-The above diagram only conceptually illustrates the flow of assets to and from reward vaults. It is not a contract-based overview.
-:::
+1. Deploy vault through factory contract
+  - Specify single staking token
+  - One vault per staking token allowed
+2. Submit governance proposal for whitelisting
+3. Upon approval, vault becomes eligible for emissions
 
-In summary, the asset & user flow in reward vaults can be described as follows:
+## Token Whitelisting
+To whitelist an incentive token:
 
-1. Users stake a pre-selected asset into a given Reward Vault
-2. Protocols offer Incentives in exchange for directing `$BGT` to their Reward Vault
-3. Validators direct `$BGT` emissions to Reward Vaults
-4. Reward Vaults allow `$BGT` to be claimed by users who staked the pre-selected asset
-5. Reward Vaults distribute Incentives to validators for emitting `$BGT`
+1. Submit governance proposal containing:
+  - Token address
+  - Minimum incentive rate - Lowest allowed exchange rate between protocol token and BGT
+  - Token manager address - Account that will control incentive parameters
+2. Note:
+  - Each vault maintains separate whitelisted tokens
+  - Tokens can be removed via governance
+  - Token managers can be updated through governance
 
-## Incentive Assets 🏦
+## Marketplace Operations
 
-Each Reward Vault can have a maximum of 3 assets that can be used as Incentives in exchange for `$BGT`. This also means that each Reward Vault can have up to 3 active Incentives at a time, meaning that if there is an active `$USDC` Incentive, this can be the only Incentive for this asset until it has been fulfilled.
+### Incentive Management
+Token managers control incentive parameters:
+- Set incentive rate (p) and deposit tokens
+- Example: Setting rate p=10 means:
+ - 10 protocol tokens exchanged per 1 BGT
+ - 1000 protocol tokens deposited enables 100 BGT worth of incentives
+- Minimum rate ensures fair value for BGT emissions
+ - Managers cannot set rates below this floor
+ - Protects validators from undervalued incentives
 
-### Reward Vault Incentive Example 💡
+### Rate Adjustments
+Rate modifications follow these rules:
+1. Empty vault:
+  - Can update to any rate ≥ minimum rate
+2. Non-empty vault:
+  - Can only increase rate (p* > p)
+  - Must provide sufficient liquidity
+  - Cannot decrease rate until vault depletes
 
-Using `$USDC` as an example for an Incentive:
+### Distribution Flow
+1. Validator emits BGT to protocol vault
+2. Validator receives (p × BGT) protocol tokens
+3. Validator expected to share portion with delegates
+4. Creates alignment between validators, protocols, and users
 
-```
-- User X creates Incentive: 100 `$USDC` for 1 `$BGT` (100:1 Ratio)
-- User Y adds 10 `$USDC` Incentive: 110 `$USDC` (100 + 10) for 1.1 `$BGT` (100:1 Ratio)
-- Validator Z distributes 1.1 `$BGT` to Reward Vault to fulfill Incentive and receives 110 `$USDC`
-- User N create new Incentive: 300 `$USDC` for 1 `$BGT` (300:1 Ratio)
-```
-
-## How To Whitelist Incentive Assets 📝
-
-Incentives can only be created via successful governance proposals. Ecosystem, users and foundation decide on proposals based on their own due-diligence.
-
-Incentives assets can either be proposed at the same time as a new Reward Vault or modified as a separate governance proposal.
+## Parameters
+| Parameter | Description |
+|-----------|-------------|
+| p | Incentive rate - Protocol tokens given per BGT |
+| minIncentiveRate | Minimum allowed exchange rate between protocol token and BGT |
+| p* | New incentive rate (when updating) |
