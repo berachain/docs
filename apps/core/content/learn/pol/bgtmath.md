@@ -49,7 +49,6 @@ When a validator produces a block, they receive BGT tokens through two emission 
 The total BGT emitted per block is calculated using the following formula:
 
 ```
-math
 emission = B + max(m, (a + 1)/(1 + ax^b) - 1)R
 ```
 
@@ -70,7 +69,6 @@ Where:
 ## Inflation Mechanics
 - Maximum theoretical block emission occurs at 100% boost:
   ```
-  math
   max E[emission] = B + max(m, (a + 1)/(1 + a) - 1)R
   ```
   
