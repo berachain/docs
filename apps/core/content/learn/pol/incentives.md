@@ -41,11 +41,14 @@ Token managers control incentive parameters:
 ### Rate Adjustments
 Rate modifications follow these rules:
 1. Empty vault:
-  - Can update to any rate ≥ minimum rate
+Can update to any rate 
+$$r \geq r_{min}$$
+
 2. Non-empty vault:
-  - Can only increase rate (p* > p)
-  - Must provide sufficient liquidity
-  - Cannot decrease rate until vault depletes
+Can only increase rate 
+$$p^* > p$$
+Must provide sufficient liquidity
+Cannot decrease rate until vault depletes
 
 ### Distribution Flow
 1. Validator emits BGT to protocol vault
