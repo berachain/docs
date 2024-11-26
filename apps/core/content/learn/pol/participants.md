@@ -6,57 +6,63 @@ The following diagram shows a breakdown of the different participants in the PoL
 
 ## Validators ✅
 
-Validators coordinate with one another to reach consensus on the state of the blockchain. In exchange for earning network rewards, validators must put assets at stake and can be penalized for misbehavior. Staking `$BERA` tokens is required for becoming an active validator.
-Validators earn through three primary means:
+Validators coordinate with one another to reach consensus on the state of the blockchain. The active validator set consists of the top N validators ordered by BERA staked, with a 250K floor and 2.5M BERA cap per validator. Validators earn through three primary means:
 
 1. Gas fees and priority fees
-2. Collecting incentives provided by protocols for directing `$BGT` rewards to their [Reward Vaults](/learn/pol/rewardvaults)
-3. Taking a commission on the total `$BGT` earned from building a block
+2. Collecting incentives provided by protocols for directing BGT rewards to their [Reward Vaults](/learn/pol/rewardvaults)
+3. A base block reward (parameter B) for successfully proposing a block
 
-Point 1 is straightforward, and is the same as in Ethereum PoS. Point 2 is where interesting PoL mechanics come into play.
+## Validator Incentives 💎
 
-### Validator Incentives 💎
+When a validator directs BGT emissions to a reward vault, they receive Incentives from the protocol that owns that vault. These Incentives can be in the form of the protocol's native token or any other whitelisted ERC20 token.
 
-As discussed in [$BGT](/learn/pol/tokens/bgt), emissions are distributed per block based on the `$BGT` delegation weight of the validator selected to propose the block. Each block's proposing validator has the right to distribute the block's `$BGT` rewards to any Reward Vault(s) they choose, and collect any associated incentives provided by protocols. There is an equal chance for any validator to propose a block.
+Here's how Incentives work:
+1. A protocol sets an incentive rate for their reward vault (e.g., 10 protocol tokens per 1 BGT)
+2. When a validator directs BGT emissions to this vault, they receive the corresponding amount of Incentives (e.g., 10 protocol tokens)
+3. Validators can take a commission on these Incentives before distributing the remainder to their BGT delegators
+4. The amount of BGT a validator can direct (and thus Incentives they can earn) depends on their delegation weight
 
-Validators' `$BGT` delegation weight initially starts at 0, such that validators do not distribute `$BGT` to Reward Vaults when proposing blocks. However, by demonstrating that they are seeking out the most profitable Reward Vaults to direct `$BGT` to, and by passing on a portion of these rewards to `$BGT` delegators, they can attract a greater delegation.
+Protocols compete for BGT emissions by offering attractive Incentive rates in their reward vaults, creating a marketplace where validators can optimize their returns by choosing the most profitable vaults.
 
-### Ecosystem Alignment ⚖️
+## Ecosystem Alignment ⚖️
 
-Validators in PoL are more than just "validating" the network, they have the opportunity to partner with protocols to promote their liquidity on Berachain. Lastly, they must earn the favor of users (i.e. `$BGT` holders and farmers) in order to effectively distribute `$BGT` rewards to Reward Vaults and earn incentives.
+Successful validators in PoL optimize for:
+- Securing BGT delegation to increase their block rewards
+- Efficiently exchanging BGT block rewards for application incentives
+- Distributing value back to their BGT delegators
 
-## `$BGT` Holders & Farmers 🥕
+## BGT Holders & Farmers 🥕
 
-`$BGT` holders play a crucial role in the following:
+BGT holders play crucial roles in:
+- Voting on governance proposals
+- Influencing economic incentives through delegation
+- Staking in reward vaults to earn more BGT
 
-1. Influencing ecosystem decisions through Governance
-2. Influencing where Berachain's economic incentives are directed (by delegating to validators)
-
-:::warning
-**Note:** `$BGT` that is delegated to validators is not subject to slashing. Only validators' `$BERA` stakes can be slashed.
+::: warning
+BGT that is delegated to validators is not subject to slashing. Only validators' BERA stakes can be slashed.
 :::
 
-### Earning `$BGT` ⬇️
+## Earning BGT ⬇️
 
-As a farmer seeking to earn `$BGT`, I would look for the most profitable Reward Vaults to farm, given my risk and asset exposure profile. This means that I would look for the Reward Vaults that are receiving the most `$BGT` emissions from validators meeting my criteria. For example, if I only wanted stablecoin exposure, I may elect to earn `$BGT` by providing `$HONEY` liquidity to the Berps protocol.
+Users can earn BGT by:
+- Staking BERA as a validator
+- Staking PoL-eligible receipt tokens in reward vaults
 
-### Delegating `$BGT` ⬆️
+## Delegating BGT ⬆️
 
-Now that I have `$BGT`, different factors may influence how I choose to delegate it:
+When delegating BGT, users typically consider:
+- Which reward vaults validators direct emissions to
+- Validator commission rates and incentive distribution strategies
+- Validator uptime and performance
 
-- I may delegate `$BGT` to validators who are directing `$BGT` rewards to the Reward Vaults I am farming (to increase my earning rate).
-- I may delegate `$BGT` to validators who maximize reward vault incentive earning, and pass the maximum value back to their delegators.
+# Ecosystem Projects 🧸
 
-## Bera Foundation 🏛️
+Projects can participate in PoL by:
+1. Creating a reward vault through the factory contract
+2. Submitting a governance proposal to whitelist the vault
+3. Specifying accepted staking tokens and incentive rates
+4. Managing incentive tokens and rates in their vault
 
-The Foundation plays a role in operating default dApps (Bex, Bend, Berps) which produce fees that are distributed to `$BGT` holders (such that there is native demand for earning `$BGT`, independent of reward vault incentives).
+The incentives marketplace allows protocols to bid for validators' emissions using whitelisted tokens, creating alignment between validators, protocols, and users. Projects must earn favor of BGT holders to have their Reward Vaults whitelisted into the PoL system.
 
-Liquidity in these default dApps also serve as default Reward Vaults for users to provide liquidity on and earn `$BGT`, until other protocols' Reward Vaults are plugged into PoL through governance.
-
-## Ecosystem Projects 🧸
-
-PoL represents a novel way for protocols to bootstrap deposits, versus the traditional approach of incentivizing liquidity through liquidity mining. By plugging into PoL, protocols can promote liquidity by incentivizing `$BGT` rewards (from validators) to be directed to their Reward Vaults.
-
-All of the chain's participants are aligned in increasing the overall value of the network, since all rewards coalesce around `$BGT`. If the value of `$BGT` incentives go up, projects' tokens (which are provided as incentives on Reward Vaults) may also corresponding increase in value with an increase in deposits.
-
-Lastly, new ecosystem projects will have to become active participants and earn the favor of `$BGT` holders and delegates, in order to have their Reward Vaults be whitelisted into the PoL system.
+This ecosystem alignment ensures that chain participants are incentivized to increase the overall value of the network, as rewards center around BGT while maintaining chain security through BERA staking.
