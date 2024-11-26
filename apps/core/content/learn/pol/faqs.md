@@ -13,15 +13,55 @@ head:
 
 # Proof-of-Liquidity Frequently Asked Questions ❓
 
-## Can dApps that don't have a token still participate in PoL?
+## Validator Requirements & Operations
+
+### Can anyone stake BERA to become a validator?
+
+While anyone can stake BERA to try to become a validator in the active set, there are specific staking requirements:
+
+There is a minimum floor of 250K BERA required to be a validator. There is a maximum cap of 2.5M BERA for any validator's stake. Only the top N validators (ordered by BERA staked) can be in the active validator set. Even if someone stakes above the minimum 250K BERA, they would still need to have enough stake to be within the top N validators to be part of the active validator set that can produce blocks.
+
+### Can validator deposits ever be withdrawn, ie. if someone wants to “spin down” their validator? Do depositors earn yield / tips on their initial deposit of BERA?
+
+Validator deposits cannot be withdrawn until we enable EIP-7002. By waiting for the next hard fork we save a ton of engineering time and code complexity. Deposits are just to activate the validator--“depositing” in itself earns no yield.
+
+### Can validators with no BGT delegated to them build blocks? What kind of rewards will those validators earn when they build a block?
+
+The ability to build blocks is determined by BERA stake, not BGT delegation. As long as a validator has enough BERA staked and is in the active set, they can produce blocks regardless of how much BGT is delegated to them.
+
+### Is there a cap for the number of active validators?
+
+There will be a mechanism for capping validators to a safe level.
+
+### The docs say that a validator node needs "69,420 BERA" to stake. Is this accurate?
+
+69,420 BERA is just a placeholder for now. We'll be finalizing the value closer to mainnet.
+
+### What asset is at risk to be slashed for validators?
+
+BERA is the security asset and is at risk to be slashed.
+
+## dApps & Reward Vaults
+
+### Can dApps that don't have a token still participate in PoL?
 
 Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token.
 
-## Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
+### Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
 
 No, any dApp can deploy a Reward Vault and submit it as a governance proposal to have it whitelisted.
 
-## What determines the APY for pools in BEX?
+### Are rewards vaults created only by whitelisting governance proposals?
+
+Technically, the creation of rewards vaults is permissionless, but for validators to direct BGT emissions to those rewards vaults, a governance proposal for whitelisting the rewards vault must pass.
+
+### Is there any difference between the ability for native dApps (BEX, Bend Berps) and external dApps to participate in PoL?
+
+No, all rewards vaults must be approved through governance to be eligible to start receiving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
+
+## Rewards and Emissions
+
+### What determines the APY for pools in BEX?
 
 Rewards are determined by three things:
 
@@ -31,80 +71,32 @@ Rewards are determined by three things:
 
 3. The amount a user has staked in that pool's rewards vault: `$BGT` directed to the pool is distributed pro-rata to all of those staking that pool token for `$BGT`.
 
-## Is the amount of BGT rewarded to a rewards vault proportional at all to the amount of liquidity (e.g. TVL) of that rewards vault?
+### Is the amount of BGT rewarded to a rewards vault proportional at all to the amount of liquidity (e.g. TVL) of that rewards vault?
 
 No. There could be some proportion that the market could trend towards over time, but it's not something that is enforced.
 
-## Is the size of the BGT emission linear to the amount of BGT delegated to a validator?
+### Is the size of the BGT emission linear to the amount of BGT delegated to a validator?
 
-The relationship between BGT delegated to a validator and BGT emissions is linear. There is a baseline BGT emission, even for validators with 0 delegation, and after that it scales linearly based on the amount of BGT delegated.
+No, the BGT emission is not linear to the amount of BGT delegated to a validator. The emission formula is:
+$$emission = B + max(m, \frac{a + 1}{1 + ax^b} - 1R)$$
+Where x is the boost (the percentage of BGT delegation the validator has out of total BGT delegated). The relationship between boost and emissions is governed by two parameters:
+a (boost multiplier): determines impact of boost on emissions
+b (convexity parameter): determines how quickly boost impacts emissions
 
-## Can anyone stake BERA to become a validator?
-
-Being a validator is currently permissioned, but this is expected to open up in the future.
-
-## Is there any difference between the ability for native dApps (BEX, Bend Berps) and external dApps to participate in PoL?
-
-No, all rewards vaults must be approved through governance to be eligible to start receiving BGT emissions. For example, not all BEX pools will be able to earn BGT (by default, they're not whitelisted).
-
-## What is the difference between a “pool” and a “rewards vault”?
-
-Generally, pools are referred to as deposits in DeFi protocols on Berachain. This might be receipt tokens representing LP on Dexes, lending positions, etc. rewards vaults are separate smart contracts which allow users to stake those pool tokens to earn BGT rewards (after being whitelisted for PoL).
-
-## Are rewards vaults created only by whitelisting governance proposals?
-
-Technically, the creation of rewards vaults is permissionless, but for validators to direct BGT emissions to those rewards vaults, a governance proposal for whitelisting the rewards vault must pass
-
-## Can you give me an example of BGT voting power in relation to BGT emissions?
+### Can you give me an example of BGT voting power in relation to BGT emissions?
 
 Validator rewards will be proportional to the voting power. On Bartio, inflation is fixed at ~1500 BGT per block. If a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to rewards vaults. Those rewards vaults pay an incentive per BGT emitted to it. So validator rewards are a function of its BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to rewards vaults.
 
-## I have concerns about hyperinflation of BGT. How does Berachain manage this?
+### I have concerns about hyperinflation of BGT. How does Berachain manage this?
 
-Traditional PoS systems have some percentage of inflation per year. Berachain just takes that PoS inflation and splits it into two components:
-1 - Baseline yield for the block produced by a validator with just BERA stake and no BGT delegation.
-2- A stake weight multiplier based on the amount of BGT delegated to that validator.
-
-Where that PoS inflation = (1) + (2), basically where (2) is a weighted average of all validator’s BGT delegation, as it converges on the average emissions rate
+Traditional PoS systems have some percentage of inflation per year. Berachain just takes that PoS inflation and distributes it between a validator and reward vaults.
 
 The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated differently
 
-## How do you manage to price the LP token, which in this case BGT? Does Berachain limit the number of pools receiving BGT to blue chips for security right?
-
-BGT isn't priced and it's not an LP token. It's a soulbound token that you earn by providing DeFi liquidity on Berachain. After whitelisting from BGT governance, free market dynamics dictate how much BGT is going to the pools. So it is likely that blue chips receive more BGT (as liquidity coalesces there), while long-tail assets receive less without incentives, all things being equal.
-
-## Why are incentives emission defined per BGT instead of being pool-based?
+### Why are incentives emission defined per BGT instead of being pool-based?
 
 Incentives are denominated in BGT– ultimately users want to be able to calculate per BGT im delegating/staking, so it's more of a choice of UI to facilitate understanding the value BGT drives.
 
-## Can only Validators vote on or create proposals?
+### Can only validators vote on or create proposals?
 
 No. Anyone with BGT can create or vote on proposals.
-
-## Can validator deposits ever be withdrawn, ie. if someone wants to “spin down” their validator? Do depositors earn yield / tips on their initial deposit of BERA?
-
-Validator deposits cannot be withdrawn until we enable EIP-7002. By waiting for the next hard fork we save a ton of engineering time and code complexity. Deposits are just to activate the validator--“depositing” in itself earns no yield.
-
-## Can validators with no BGT delegated to them build blocks? What kind of rewards will those validators earn when they build a block?
-
-Yes, they can still build blocks. Those validators would only earn priority fees, they wouldn't earn any BGT.
-
-## Can rewards vaults route emissions to a single pool within a dApp, or only the whole dApp?
-
-The dapp can request a PoL vault for any encapsulated thing they want. The encapsulated thing just requires a representative ERC-20 token that users can stake in the vault.
-
-## Do we cap the number of active validators (e.g. at 256). Is there a queue for entering the active set?
-
-There will be a mechanism for capping validators to a safe level.
-
-## It claims that a validator node needs "69,420 BERA" to stake. Is this accurate?
-
-69,420 BERA is just a placeholder for now. We'll be finalizing the value a bit closer to mainnet.
-
-## Is there a maximum staking amount with a validator node?
-
-There is no hard cap, but any additional bonded BERA wouldn't affect weight to proposal a new block.
-
-## What asset is at risk to be slashed for validators?
-
-BERA is the security asset and is at risk to be slashed.
