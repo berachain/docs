@@ -30,7 +30,7 @@ Boost (x) is a crucial metric that determines a validator's reward emissions:
 - Calculated as the percentage of BGT delegation a validator has compared to the total BGT delegated in the network
 - Expressed as a decimal between 0 and 1
 - Example: If a validator has 1000 BGT delegated and the network has 10000 total BGT delegated, their boost would be 0.1 (10%)
-H- igher boost leads to higher reward emissions, subject to the emission formula
+Higher boost leads to higher reward emissions, subject to the emission formula
 
 ## Emissions Structure
 When a validator produces a block, they receive BGT tokens through two emission components:
@@ -42,15 +42,15 @@ When a validator produces a block, they receive BGT tokens through two emission 
 2. Reward Emission
 
 - Variable amount dependent on validator's boost (x)
-- Distributed to (reward vaults)[/learn/pol/rewardvaults] selected by validator
+- Distributed to [reward vaults](/learn/pol/rewardvaults) selected by validator
 - Proportional to reward vault weights in reward allocation
 
 ## Emission Formula
+![chart showing how emissions scale with BGT delegation](/public/assets/emission.jpg)
+
 The total BGT emitted per block is calculated using the following formula:
 
-```
-emission = B + max(m, (a + 1)/(1 + ax^b) - 1)R
-```
+$$emission = B + max(m, \frac{a + 1}{1 + ax^b} - 1R)$$
 
 Where:
 - x = validator's boost (range: [0,1])
@@ -68,7 +68,5 @@ Where:
 
 ## Inflation Mechanics
 - Maximum theoretical block emission occurs at 100% boost:
-  ```
-  max E[emission] = B + max(m, (a + 1)/(1 + a) - 1)R
-  ```
+$$max\space E[emission] = B + max(m, \frac{a + 1}{1 + a} - 1R)$$
   
