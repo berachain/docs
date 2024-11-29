@@ -34,4 +34,4 @@ The list of reward vaults for earning `$BGT` rewards can be seen here:
 
 ## Whitelisting Pools for PoL Rewards
 
-If you are a project that uses BEX for for your tokens' liquidity, you can apply to have your pool(s) whitelisted for `$BGT` rewards. This process is conducted through Berachain governance, requiring a proposal to be submitted and voted on by `$BGT` holders. More information will be provided on how to submit a proposal for whitelisting in the near future.
+If you are a project that uses BEX for your tokens' liquidity, you can apply to have your pool(s) whitelisted for `$BGT` rewards. This process is conducted through Berachain governance, requiring a proposal to be submitted and voted on by `$BGT` holders. More information will be provided on how to submit a proposal for whitelisting in the near future.
