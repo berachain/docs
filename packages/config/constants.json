@@ -268,7 +268,7 @@
       "address": "0x4185C3108387556bCDE4dEDA5E89a84F9031F164",
       "abi": "",
       "docsUrl": ""
-    }, 
+    },
     "liquidationLogic": {
       "name": "LiquidationLogic",
       "address": "0x6Fd945f1E17d3f4776250E9a94b87F9672A3A638",
@@ -547,7 +547,7 @@
     },
     "crocQuery": {
       "name": "CrocQuery",
-      "address": "0x8685CE9Db06D40CBa73e3d09e6868FE476B5dC89",
+      "address": "0x31DAc06019D983f79cEAc819fAAC0612518597D7",
       "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocQuery.json",
       "docsUrl": ""
     },
