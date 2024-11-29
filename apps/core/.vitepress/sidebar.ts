@@ -37,7 +37,7 @@ const SIDEBAR = {
       items: [
         { text: "PoL Overview", link: "/learn/pol/" },
         { text: "Participants", link: "/learn/pol/participants" },
-        {text: "Block production", link: "/learn/pol/bgtmath"},
+        { text: "Block Production/Emissions", link: "/learn/pol/bgtmath" },
         { text: "Reward Vaults", link: "/learn/pol/rewardvaults" },
         { text: "Incentives", link: "/learn/pol/incentives" },
         {
