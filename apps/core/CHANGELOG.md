@@ -1,5 +1,11 @@
 # @berachain/core
 
+## 2.0.1
+
+### Patch Changes
+
+- Update incentives logic
+
 ## 2.0.0
 
 ### Major Changes
