@@ -13,10 +13,11 @@ Here's how PoL works:
 2. An _Active Validator_ is chosen to propose a block with probability proportional to their staked BERA amount.
 
 3. For proposing a block, the validator receives BGT emissions determined by two components:
-  - Base emission (B): A fixed amount for building the block
-  - Reward emission: A variable amount based on the validator's boost (percentage of BGT delegated to them)
 
-4. The validator can direct their reward emissions to whitelisted _Reward Vaults_ in exchange for protocol Incentives. The amount they can direct is determined by the amount of BGT delegated to them.
+   - Base emission (B): A fixed amount for building the block
+   - Reward emission: A variable amount based on the validator's boost (percentage of BGT delegated to them)
+
+4. The validator can direct their BGT emissions to whitelisted _Reward Vaults_ in exchange for protocol Incentives. The amount they can direct is determined by the amount of BGT delegated to them.
 
 5. A _Liquidity Provider_ performs an action that generates a receipt token (e.g., providing liquidity to a BEX pool and receiving LP tokens)
 
@@ -26,9 +27,9 @@ Here's how PoL works:
 
 8. By earning BGT, the _Liquidity Provider_ becomes a _BGT Holder_
 
-9. BGT Holders can delegate their BGT to validators, increasing that validator's boost (x). Higher boost means larger BGT emissions when that validator proposes blocks
+9. BGT Holders can delegate their BGT to validators, increasing that validator's boost (x). Higher boost means larger BGT emissions when that validator proposes blocks. Validators are expected to share received protocol Incentives with their delegators.
 
-## Aligning Protocols and Validators 🤝
+## Incentive Alignment 🤝
 
 PoL creates alignment between:
 
@@ -37,22 +38,24 @@ PoL creates alignment between:
 - **Users**: Earn BGT by providing liquidity, then delegate to validators who maximize returns
 
 Protocols can attract BGT emissions by:
+
 1. Creating a reward vault
 2. Getting it whitelisted through governance
 3. Setting competitive Incentive rates
 4. Maintaining sufficient Incentive token liquidity
 
-## Reward Vault System 🏦
+## Reward Vaults 🏦
 
 Reward vaults are smart contracts where:
+
 - Users stake receipt tokens to earn BGT
 - Validators direct BGT emissions in exchange for protocol Incentives
-- Protocols manage Incentive rates and token whitelisting
+- Protocols manage Incentive rates (defined as a ratio of Incentive tokens per BGT emitted to the vault)
 
 Key points:
-- Vault creation is permissionless but requires governance approval for BGT emissions
+
+- Vault creation is permissionless but requires governance approval to receive BGT emissions
 - Each vault can accept multiple whitelisted Incentive tokens
-- Incentive rates can be updated under specific conditions
-- Rates can only be increased while tokens remain in the vault
+- Incentive rates can only be increased while tokens remain in the vault
 
 This system ensures that chain growth benefits all participants while maintaining security through BERA staking.
