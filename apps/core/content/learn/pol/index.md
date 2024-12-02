@@ -1,6 +1,6 @@
 # Proof-of-Liquidity Overview 📓
 
-Proof-of-Liquidity (PoL) is an extension of delegated Proof-of-Stake (dPoS) that realigns economic incentives between validators, applications, and users. The key innovation is separating the chain's security (BERA) from its governance and rewards (BGT).
+Proof-of-Liquidity (PoL) is an extension of delegated Proof-of-Stake (dPoS) that realigns economic incentives between validators, applications, and users. The key innovation is separating the chain's security ($BERA) from its governance and rewards ($BGT).
 
 The Berachain active set is determined by a validator's BERA stake, with a 250K floor and 2.5M cap. Within the active set, each validator's probability of winning a block is proportional to their staked BERA. The size of their block reward in BGT is determined by their boost - the percentage of total BGT delegated to them.
 
