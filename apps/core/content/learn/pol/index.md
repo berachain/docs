@@ -17,7 +17,7 @@ If Validator A proposes a block, then they would receive (on top of the base $BG
 
 ![Berachain Proof-of-Liquidity Steps](/assets/proof-of-liquidity-steps.png)
 
-Here's how PoL works:
+Here's how PoL works from the perspective of a validator:
 
 1. A _Prospective Validator_ stakes a minimum of 250K BERA (with a maximum cap of 2.5M) to secure the network. Only the top N validators by BERA staked become part of the active set.
 
