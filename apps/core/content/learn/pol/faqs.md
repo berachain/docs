@@ -21,10 +21,6 @@ While anyone can stake BERA to try to become a validator in the active set, ther
 
 There is a minimum floor of 250K BERA required to be a validator. There is a maximum cap of 2.5M BERA for any validator's stake. Only the top N validators (ordered by BERA staked) can be in the active validator set. Even if someone stakes above the minimum 250K BERA, they would still need to have enough stake to be within the top N validators to be part of the active validator set that can produce blocks.
 
-### Can validator deposits ever be withdrawn, ie. if someone wants to “spin down” their validator? Do depositors earn yield / tips on their initial deposit of BERA?
-
-Validator deposits cannot be withdrawn until we enable EIP-7002. By waiting for the next hard fork we save a ton of engineering time and code complexity. Deposits are just to activate the validator--“depositing” in itself earns no yield.
-
 ### Can validators with no BGT delegated to them build blocks? What kind of rewards will those validators earn when they build a block?
 
 The ability to build blocks is determined by BERA stake, not BGT delegation. As long as a validator has enough BERA staked and is in the active set, they can produce blocks regardless of how much BGT is delegated to them.
@@ -32,10 +28,6 @@ The ability to build blocks is determined by BERA stake, not BGT delegation. As 
 ### Is there a cap for the number of active validators?
 
 There will be a mechanism for capping validators to a safe level.
-
-### The docs say that a validator node needs "69,420 BERA" to stake. Is this accurate?
-
-69,420 BERA is just a placeholder for now. We'll be finalizing the value closer to mainnet.
 
 ### What asset is at risk to be slashed for validators?
 
@@ -73,7 +65,7 @@ Rewards are determined by three things:
 
 ### Is the amount of BGT rewarded to a rewards vault proportional at all to the amount of liquidity (e.g. TVL) of that rewards vault?
 
-No. There could be some proportion that the market could trend towards over time, but it's not something that is enforced.
+No. There could be some proportion that the market could trend towards over time, but it's not something that is enforced. Different factors dictating this include token incentives provided to that reward vault and validator preferences.
 
 ### Is the size of the BGT emission linear to the amount of BGT delegated to a validator?
 
@@ -83,15 +75,11 @@ Where x is the boost (the percentage of BGT delegation the validator has out of 
 a (boost multiplier): determines impact of boost on emissions
 b (convexity parameter): determines how quickly boost impacts emissions
 
-### Can you give me an example of BGT voting power in relation to BGT emissions?
-
-Validator rewards will be proportional to the voting power. On Bartio, inflation is fixed at ~1500 BGT per block. If a validator w/ 25% of BGT voting power produces a block, they direct ~375 BGT to rewards vaults. Those rewards vaults pay an incentive per BGT emitted to it. So validator rewards are a function of its BGT delegation, because if a validator w/ 10% VP produces the block, they only get 150 BGT to distribute to rewards vaults.
-
 ### I have concerns about hyperinflation of BGT. How does Berachain manage this?
 
 Traditional PoS systems have some percentage of inflation per year. Berachain just takes that PoS inflation and distributes it between a validator and reward vaults.
 
-The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated differently
+The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated in a manner that better aligns the interests of validators, protocols and users.
 
 ### Why are incentives emission defined per BGT instead of being pool-based?
 
@@ -99,4 +87,4 @@ Incentives are denominated in BGT– ultimately users want to be able to calcula
 
 ### Can only validators vote on or create proposals?
 
-No. Anyone with BGT can create or vote on proposals.
+No. Anyone who holds enough BGT can vote on proposals. Anyone who meets the threshold of 1000 BGT can create a proposal. 
