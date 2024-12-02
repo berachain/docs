@@ -1,10 +1,10 @@
 # @berachain/core
 
-## 2.1.0
+## 2.0.1
 
-### Minor Changes
+### Patch Changes
 
-- Add block production/bgt math section
+- Update incentives logic
 
 ## 2.0.0
 
