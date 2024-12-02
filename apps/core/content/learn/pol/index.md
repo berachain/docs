@@ -19,7 +19,7 @@ If Validator A proposes a block, then they would receive (on top of the base $BG
 
 Here's how PoL works from the perspective of a validator:
 
-1. A _Prospective Validator_ stakes a minimum of 250K BERA (with a maximum cap of 2.5M) to secure the network. Only the top N validators by BERA staked become part of the active set.
+1. A _Prospective Validator_ stakes a minimum of 250K $BERA (with a maximum cap of 2.5M) to secure the network. Only the top N validators by $BERA staked become part of the Active Set, which would eligible to receive block rewards.
 
 2. An _Active Validator_ is chosen to propose a block with probability proportional to their staked BERA amount.
 
