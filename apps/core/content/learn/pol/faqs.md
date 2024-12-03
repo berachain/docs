@@ -21,9 +21,9 @@ While anyone can stake $BERA to try to become a validator in the active set, the
 
 There is a minimum floor of 250K $BERA required to be a validator. There is a maximum cap of 2.5M $BERA for any validator's stake. Only the top N validators (ordered by $BERA staked) can be in the active validator set. Even if someone stakes above the minimum 250K $BERA, they would still need to have enough stake to be within the top N validators to be part of the active validator set that can produce blocks.
 
-### Can validators with no BGT delegated to them build blocks? What kind of rewards will those validators earn when they build a block?
+### Can validators with no $BGT delegated to them build blocks and earn rewards?
 
-The ability to build blocks is determined by $BERA stake, not BGT delegation. As long as a validator has enough $BERA staked and is in the active set, they can produce blocks regardless of how much BGT is delegated to them.
+The ability to build blocks is determined by $BERA stake, not $BGT delegation. As long as a validator has enough $BERA staked and is in the active set, they can produce blocks regardless of how much $BGT is delegated to them. For every block a validator proposes, that validator recieves a reward. 
 
 ### Is there a cap for the number of active validators?
 
@@ -33,7 +33,7 @@ There will be a mechanism for capping validators to a safe level. The validators
 
 ### Can dApps that don't have a token still participate in PoL?
 
-Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token.
+Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token. That LP token can be staked with a Reward Vault to earn $BGT from emissions directed from validators.
 
 ### Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
 
@@ -63,9 +63,9 @@ Where x is the boost (the percentage of $BGT delegation the validator has out of
 a (boost multiplier): determines impact of boost on emissions
 b (convexity parameter): determines how quickly boost impacts emissions
 
-### I have concerns about hyperinflation of $BGT. How does Berachain manage this?
+### How does Berachain manage hyperinflation of $BGT?
 
-Traditional PoS systems have some percentage of inflation per year. Berachain just takes that PoS inflation and distributes it between a validator and reward vaults.
+The inflation of $BGT is equivalent to traditional PoS systems having some percentage of inflation per year. Berachain just takes that PoS inflation and distributes it between a validator and reward vaults.
 
 The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated in a manner that better aligns the interests of validators, protocols and users.
 
@@ -75,4 +75,4 @@ Incentives are denominated in $BGT– ultimately users, validators, and protocol
 
 ### Can only validators vote on or create governance proposals?
 
-No. Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal. 
+Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal. 
