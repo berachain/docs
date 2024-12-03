@@ -73,6 +73,6 @@ The end result is that the inflation cadence should effectively mirror an equiva
 
 Incentives are denominated in $BGT– ultimately users, validators, and protocols want to be able to calculate per $BGT they're earning, so it's more of a choice of UI to facilitate understanding the value $BGT drives.
 
-### Can only validators vote on or create proposals?
+### Can only validators vote on or create governance proposals?
 
 No. Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal. 
