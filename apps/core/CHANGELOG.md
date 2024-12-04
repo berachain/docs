@@ -1,5 +1,16 @@
 # @berachain/core
 
+## 2.1.0
+
+### Minor Changes
+
+- Update contract interfaces and migration guide
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
 ## 2.0.1
 
 ### Patch Changes
