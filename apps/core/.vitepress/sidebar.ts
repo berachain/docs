@@ -151,6 +151,7 @@ const SIDEBAR = {
     {
       text: "Contract References",
       items: [
+        { text: "BeaconDeposit", link: "/developers/contracts/berachef" },
         { text: "Berachef", link: "/developers/contracts/berachef" },
         { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },

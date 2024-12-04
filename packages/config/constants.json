@@ -77,6 +77,12 @@
     }
   },
   "contracts": {
+    "beaconDeposit": {
+      "name": "BeaconDeposit",
+      "address": "0x0000000000000000000000000000000000000000",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
+      "docsUrl": "/developers/contracts/beacondeposit"
+    },
     "berachef": {
       "name": "Berachef",
       "address": "0xfb81E39E3970076ab2693fA5C45A07Cc724C93c2",
