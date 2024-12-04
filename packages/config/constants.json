@@ -131,6 +131,12 @@
       "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactory.json",
       "docsUrl": "/developers/contracts/honey-factory"
     },
+    "honeyFactoryReader": {
+      "name": "Honey Factory Reader",
+      "address": "0xAd1782b2a7020631249031618fB1Bd09CD926b31",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactoryReader.json",
+      "docsUrl": "/developers/contracts/honey-factory-reader"
+    },
     "honey": {
       "name": "Honey Token",
       "address": "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03",
@@ -155,17 +161,17 @@
       "abi": "",
       "docsUrl": "/developers/contracts/permit2"
     },
-    "rewardsVault": {
-      "name": "Rewards Vault",
+    "rewardVault": {
+      "name": "Reward Vault",
       "address": "",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVault.json",
-      "docsUrl": "/developers/contracts/rewards-vault"
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
+      "docsUrl": "/developers/contracts/reward-vault"
     },
-    "rewardsVaultFactory": {
-      "name": "Rewards Vault Factory",
+    "rewardVaultFactory": {
+      "name": "Reward Vault Factory",
       "address": "0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVaultFactory.json",
-      "docsUrl": "/developers/contracts/rewards-vault-factory"
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVaultFactory.json",
+      "docsUrl": "/developers/contracts/reward-vault-factory"
     },
     "timelock": {
       "name": "Timelock",
@@ -268,7 +274,7 @@
       "address": "0x4185C3108387556bCDE4dEDA5E89a84F9031F164",
       "abi": "",
       "docsUrl": ""
-    }, 
+    },
     "liquidationLogic": {
       "name": "LiquidationLogic",
       "address": "0x6Fd945f1E17d3f4776250E9a94b87F9672A3A638",
