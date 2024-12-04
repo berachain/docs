@@ -47,6 +47,7 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
+        { text: "PoL FAQs", link: "/learn/pol/faqs" }
       ],
     },
     {
@@ -58,10 +59,6 @@ const SIDEBAR = {
           link: "/learn/governance/rewardvault",
         },
       ],
-    },
-    {
-      text: "Guide",
-      items: [{ text: "PoL FAQs", link: "/learn/pol/faqs" }],
     },
     {
       text: "Native dApps",
