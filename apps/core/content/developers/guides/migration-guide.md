@@ -123,7 +123,6 @@ event IncentiveTokenWhitelisted(
 Summary of changes made to the `BeraChef.sol` contract:
 
 - Renamed `CuttingBoard` to `RewardAllocation` for clarity
-- Added vault whitelisting and factory validation
 - Replaced `FriendOfTheChef` with `WhitelistedVault`
 
 ### Reward Allocation Management
@@ -190,7 +189,7 @@ function deposit(
 
 ### Operator Management
 
-New functions are provided for validators to manage their `operator` address:
+New functions are provided for validators to manage their `operator` address. The process for changing operators is to first request the change, then accept the change, or cancel the change.
 
 ```solidity
 function requestOperatorChange(bytes calldata pubkey, address newOperator);
