@@ -17,7 +17,7 @@ Point 1 is straightforward, and is the same as in Ethereum PoS. Point 2 is where
 
 ### Validator Incentives 💎
 
-As discussed in [$BGT](/learn/pol/tokens/bgt), emissions are distributed per block based on the `$BGT` delegation weight of the validator selected to propose the block. Each block's proposing validator has the right to distribute the block's `$BGT` rewards to any Reward Vault(s) they choose, and collect any associated incentives provided by protocols. There is an equal chance for any validator to propose a block.
+As discussed in [`$BGT`](/learn/pol/tokens/bgt), emissions are distributed per block based on the `$BGT` delegation weight of the validator selected to propose the block. Each block's proposing validator has the right to distribute the block's `$BGT` rewards to any Reward Vault(s) they choose, and collect any associated incentives provided by protocols. There is an equal chance for any validator to propose a block.
 
 Validators' `$BGT` delegation weight initially starts at 0, such that validators do not distribute `$BGT` to Reward Vaults when proposing blocks. However, by demonstrating that they are seeking out the most profitable Reward Vaults to direct `$BGT` to, and by passing on a portion of these rewards to `$BGT` delegators, they can attract a greater delegation.
 

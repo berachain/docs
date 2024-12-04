@@ -28,11 +28,11 @@ Stability is a desirable property in a medium of exchange, in contrast to transa
 
 ## What is $HONEY?
 
-`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) a diverse range of crypto collateral. This multi-collateral approach to `$HONEY`'s backing enhances its stability and resilience.
+`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) stgUSDC, and in the future governance could approve other assets.
 
 ## How to Get $HONEY?
 
-`$HONEY` can minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. Different assets eligible as `$HONEY` collateral are stored in different vault contracts. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
+`$HONEY` can be minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
 
 Alternatively, `$HONEY` can be obtained by trading other assets on the [Berachain Bex](https://artio.bex.berachain.com).
 
@@ -42,25 +42,7 @@ Governance determines which assets can be used to mint $HONEY.
 
 ## How is $HONEY Used?
 
-$HONEY shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. However, `$HONEY` also has a number of unique use cases within the Berachain ecosystem, including:
-
-### Lending - Bend
-
-Bend uses `$HONEY` by letting users add to the bend's `$HONEY` liquidity pool and it earns interest on it by supplying.
-
-For users that supply their `$HONEY`, they receive an equivalent token as <a target="_blank" rel="no-referrer" :href="config.websites.docsBend.url + '/learn/lending-protocol/tokens#atokens'">`$aHONEY`</a>.
-
-`$HONEY` is the only asset that Bend accepts to earn an interest on.
-
-### Borrowing - Bend
-
-Bend also uses `$HONEY` as the base token that users can borrow against assets they provide as collateral.
-
-### Perpetual Futures - Berps
-
-Berps uses `$HONEY` as the base token for all trading collateral, payouts, and deposits. For example, in order to enter a levered long position in ETH, they must first deposit an appropriate amount of `$HONEY`.
-
-Alternatively, `$HONEY` holders can passively earn by providing trading liquidity in the `$bHONEY` vault. `$bHONEY` vault depositors earn trading fees generated from Berps and serve as the counterparty to traders' positions. For example, if a trader gets liquidated, the `$HONEY` collateral of that position is distributed to those staking in the `$bHONEY` vault.
+$HONEY shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. `$HONEY` could be used within the Berachain ecosystem via native and ecosystem apps. 
 
 ## Minting $HONEY
 

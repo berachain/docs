@@ -27,12 +27,4 @@ head:
 The `$BERA` token serves two main purposes on the Berachain network:
 
 1. Paying for transactions on the blockchain ($BERA also referred to as the "gas token")
-2. Staking for activating validator nodes. The economic value of all `$BERA` tokens staked adds up to form the base layer the security of the chain with [`$BGT`](/learn/pol/tokens/bgt) building on-top of it for enhanced security.
-
-## How To Get $BERA
-
-Testnet `$BERA` tokens are offered through various [Berachain Testnet Faucets](/learn/dapps/faucet).
-
-:::warning
-**NOTE:** The `$BERA` token and Mainnet are _NOT_ live. Anything suggesting otherwise is a scam.
-:::
+2. Staking for activating validator nodes. The more `$BERA` a validator has staked, the more frequently they are chosen to propose blocks. The economic value of all `$BERA` tokens staked adds up to form the base layer the security of the chain with [`$BGT`](/learn/pol/tokens/bgt) building on-top of it for enhanced security.

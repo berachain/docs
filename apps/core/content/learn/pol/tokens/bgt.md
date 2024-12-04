@@ -32,7 +32,7 @@ However, because of Berachain's three-token Proof of Liquidity model, the functi
 
 ## Earning $BGT
 
-`$BGT` can be accumulated by performing certain actions in authorized dApps. Reward vaults correspond to some form of liquidity provided on Berachain, and are created after those pools are whitelisted (by `$BGT` governance). Users can subsequently deposit that liquidity in reward vaults to earn `$BGT`. Some examples include:
+`$BGT` can be accumulated by performing certain actions in authorized dApps. Most of the time, this is related to providing liquidity, but it is not limited to this. Reward vaults correspond to some form of productive activity provided on Berachain, and are created after being whitelisted (by `$BGT` governance). Users can subsequently stake the indicated token in reward vaults to earn `$BGT`. Some examples include:
 
 - Depositing liquidity in the native Bex for an LP pair that is earning `$BGT` emissions
 - Borrowing `$HONEY` on Bend
@@ -42,13 +42,13 @@ However, because of Berachain's three-token Proof of Liquidity model, the functi
 
 ### Governance
 
-`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions, discussed in Governance. `$BGT` holders can either vote on proposals themselves or delegate their voting power to any other address. This governance delegation operates independently of delegating to validators for controlling `$BGT` emissions.
+`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions, discussed in Governance. `$BGT` holders can either vote on proposals themselves or delegate their voting power to any other address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
 
 ### Earning Rewards
 
 Protocols can provide [Incentives](/learn/pol/incentives) to attract `$BGT` emissions from validators. The amount that validators can earn in protocol incentives is determined by the amount of `$BGT` that is delegated to them. Thus, validators that return the maximum value to their `$BGT` delegators are likely to receive the most delegations.
 
-Furthermore `$BGT` delegators collect a share of Berachain core dApp fees, namely fees from Bend, BEX and Berps.
+Furthermore users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BEX and Berps.
 
 ### Burning for `$BERA`
 

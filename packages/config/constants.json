@@ -1,4 +1,12 @@
 {
+  "mainnet" : {
+    "chainId": 80094, 
+    "currencySymbol": "BERA",
+    "currencyName": "BERA Token",
+    "chainName": "Berachain Mainnet",
+    "name": "berachainmainnet",
+    "decimals": 18
+  },
   "testnet": {
     "chainId": 80084,
     "rpcUrl": "https://bartio.rpc.berachain.com/",
