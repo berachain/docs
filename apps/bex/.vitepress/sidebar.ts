@@ -77,7 +77,7 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Contracts References",
+      text: "Contract References",
       items: [
         {
           text: "Vault Contract",
@@ -103,7 +103,7 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Advanced Concepts",
+      text: "Concepts",
       items: [
         {
           text: "Swaps",
@@ -147,12 +147,23 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Developer Guides",
+      text: "SDK",
       items: [
-        { text: "Smart Order Router", link: "/developers/guides/sor" },
+        { text: "Introduction", link: "/developers/sdk" },
         {
-          text: "Get Spot Prices",
-          link: "/developers/guides/spot-prices",
+          text: "SDK API Reference",
+          link: "/developers/sdk/reference",
+        },
+        {
+          text: "SDK Guides",
+          items: [
+            { text: "Add Liquidity", link: "/developers/sdk/add-liquidity" },
+            {
+              text: "Remove Liquidity",
+              link: "/developers/sdk/remove-liquidity",
+            },
+            { text: "Swap", link: "/developers/sdk/swap" },
+          ],
         },
       ],
     },
