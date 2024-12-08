@@ -15,11 +15,26 @@ head:
 
 ## BERA Token
 
-`$BERA` is the native gas token of the Berachain ecosystem, initial validator staking token used to secure the network, and used for paying transaction fees. Read more in [Tokens > $BERA](/learn/pol/tokens/bera).
+`$BERA` is the native gas token of Berachain's L1 and it serves multiple purposes:
+- Used for paying transaction fees
+- Initial validator staking token to secure the network
+   - More BERA staked = more blocks proposed
+   - Validators earn base emissions and transaction fees(ie MEV) for each block proposed
+- Can be obtained by burning BGT (one-way conversion)
 
-## BGT Token
+Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
 
-`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by participating in [Proof of Liquidity](#proof-of-liquidity), can be burned for `$BERA`, used to propose and/or vote on governance proposals, and delegate to validators to increase their weight to be selected to propose a block. Read more in [Tokens > $BGT](/learn/pol/tokens/bgt).
+## BGT(Bera Governance Token) 
+
+`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by 
+participating in [Proof of Liquidity](#proof-of-liquidity):
+- Validator delegation and rewards
+   - More BGT delegated = more reward emissions for reward vaults s
+- Governance participation (proposals and voting 
+- Can be burned for `$BERA` (one-way conversion)
+- Can only be earned through participating in [Proof of Liquidity](#proof-of-liquidity)
+
+Read more in [Tokens - $BGT](/learn/pol/tokens/bgt).
 
 ## BeaconKit
 
@@ -31,15 +46,15 @@ A data unit containing a list of transactions, which is permanently added to the
 
 ## Bend
 
-Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps > Bend](/learn/dapps/bend).
+Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps - Bend](/learn/dapps/bend).
 
 ## BEX
 
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _DEX_ to _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _DEX_ to _BEX_. Read more in [Native dApps - BEX](/learn/dapps/bex).
 
 ## Berps
 
-Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps > Berps](/learn/dapps/berps).
+Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps - Berps](/learn/dapps/berps).
 
 ## Block Time
 
@@ -88,11 +103,11 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes, often using BGT tokens for participation.
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BEX,Berps,Bend, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
 ## HONEY
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem, pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens > $HONEY](/learn/pol/tokens/honey).
+`$HONEY` is the native stablecoin of the Berachain ecosystem, pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - $HONEY](/learn/pol/tokens/honey).
 
 ## IBC
 
@@ -120,7 +135,7 @@ A monolithic implementation of the Ethereum Virtual Machine used by the Berachai
 
 ## Proof-of-Liquidity
 
-A consensus mechanism utilized by Berachain, where validators have an equal random chance of selection and reward weights change based on the amount of `$BGT` boosts (`$BGT` delegations) they have from users.
+A consensus mechanism utilized by Berachain, where validators have varying chances of selection based on their BERA staked and the amount of their block rewards, which are BGT emissions, change based on the amount of `$BGT` delegated, which we also call boosts they have from users.
 
 ## Single Slot Finality
 
