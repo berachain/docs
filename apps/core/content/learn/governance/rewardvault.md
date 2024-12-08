@@ -47,7 +47,7 @@ While creating a Reward Vault is permissionless, for it to receive `$BGT` emissi
 
 Whitelisting a Reward Vault through governance has significant implications:
 
-1. **Liquidity Incentives**: Approved vaults can receive `$BGT` emissions, incentivizing liquidity provision.
+1. **Incentivize Anything In Your App**: Approved vaults can receive `$BGT` emissions, incentivizing liquidity provision, taking our loans, purchasing assets in a video game, etc. [See an example application here](https://blog.berachain.com/blog/onlypaws-bearing-it-all-for-proof-of-liquidity)
 2. **Protocol Growth**: Protocols can use accumulated `$BGT` to bootstrap liquidity or participate in governance.
 3. **Ecosystem Alignment**: The governance process ensures that whitelisted vaults align with the community's interests.
 
