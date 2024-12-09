@@ -20,44 +20,15 @@ export default defineConfig({
   description: `${constants.websites.docsBend.description}`,
   cleanUrls: true,
   srcDir: "content",
-  markdown: {
-    math: true,
+
+  // Redirect all pages to root
+  rewrites: {
+    'learn/(.*)': '/',
+    'developers/(.*)': '/',
+    ':page(.*)': '/'
   },
-  head: [
-    ["meta", { name: "og:type", content: "website" }],
-    ["meta", { name: "og:locale", content: "en" }],
-    [
-      "meta",
-      { name: "og:site_name", content: `${constants.websites.docsBend.name}` },
-    ],
-    [
-      "meta",
-      {
-        name: "og:image",
-        content: `${constants.websites.docsBend.url}previewDocs.jpg`,
-      },
-    ],
-    [
-      "script",
-      { id: "va" },
-      `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`,
-    ],
-    IS_PRODUCTION
-      ? ["script", { src: "/_vercel/insights/script.js", defer: "true" }]
-      : [
-          "meta",
-          {
-            name: "environment",
-            content: "development",
-          },
-        ],
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
-  ],
-  sitemap: {
-    hostname: `${constants.websites.docsBend.url}`,
-  },
+
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     returnToTopLabel: "Up Only",
     nav: [
       {
@@ -82,42 +53,22 @@ export default defineConfig({
             link: `${constants.websites.docsBex.url}`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsBerps.name} (Coming Soon)`,
+            link: '#'
           },
         ],
-      },
-      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
-      {
-        text: "Developers",
-        link: "developers/index",
-        activeMatch: "/developers/",
-      },
+      }
     ],
-    outline: [2, 3],
-    search: {
-      provider: "local",
-      options: {
-        miniSearch: {
-          /**
-           * @type {Pick<import('minisearch').Options, 'extractField' | 'tokenize' | 'processTerm'>}
-           */
-          options: {
-            /* ... */
-          },
-          /**
-           * @type {import('minisearch').SearchOptions}
-           * @default
-           * { fuzzy: 0.2, prefix: true, boost: { title: 4, text: 2, titles: 1 } }
-           */
-          searchOptions: {
-            /* ... */
-          },
-        },
-        detailedView: true,
-      },
+    sidebar: {
+      "/": [
+        {
+          text: "Introduction",
+          items: [
+            { text: "Overview", link: "/" }
+          ]
+        }
+      ]
     },
-    sidebar,
     siteTitle: `🐻⛓️ ${constants.websites.docsBend.name}`,
     socialLinks: [
       { icon: "twitter", link: `${constants.socials.twitter}` },

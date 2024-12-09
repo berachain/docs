@@ -75,46 +75,26 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
-          },
-          {
             text: `${constants.websites.docsBex.name}`,
             link: `${constants.websites.docsBex.url}`,
           },
+          {
+            text: `${constants.websites.docsBend.name} (Coming Soon)`,
+            link: '#',
+          },
         ],
-      },
-      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
-      {
-        text: "Developers",
-        link: "developers/index",
-        activeMatch: "/developers/",
-      },
+      }
     ],
-    outline: [2, 3],
-    search: {
-      provider: "local",
-      options: {
-        miniSearch: {
-          /**
-           * @type {Pick<import('minisearch').Options, 'extractField' | 'tokenize' | 'processTerm'>}
-           */
-          options: {
-            /* ... */
-          },
-          /**
-           * @type {import('minisearch').SearchOptions}
-           * @default
-           * { fuzzy: 0.2, prefix: true, boost: { title: 4, text: 2, titles: 1 } }
-           */
-          searchOptions: {
-            /* ... */
-          },
-        },
-        detailedView: true,
-      },
+    sidebar: {
+      "/": [
+        {
+          text: "Introduction",
+          items: [
+            { text: "Overview", link: "/" }
+          ]
+        }
+      ]
     },
-    sidebar,
     siteTitle: `🐻⛓️ ${constants.websites.docsBerps.name}`,
     socialLinks: [
       { icon: "twitter", link: `${constants.socials.twitter}` },
@@ -183,4 +163,11 @@ export default defineConfig({
       ],
     },
   },
+  
+  rewrites: {
+    'learn/(.*)': '/',
+    'developers/(.*)': '/',
+    ':page(.*)': '/'
+  },
+
 });
