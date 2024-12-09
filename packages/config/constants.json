@@ -39,9 +39,9 @@
         "name": "Berachain Foundation",
         "url": "https://www.berachain.com/"
       },
-      "bgtStation": {
-        "name": "Berachain BGT Station",
-        "url": "https://bartio.station.berachain.com/"
+      "berahub": {
+        "name": "Berachain Bera Hub",
+        "url": "https://hub.berachain.com/"
       }
     },
     "thirdparty": {
