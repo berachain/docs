@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - Update on validator system requirements
+- Update incentives logic
 
 ## 2.0.0
 
