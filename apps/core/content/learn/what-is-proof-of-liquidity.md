@@ -15,7 +15,7 @@ head:
 
 Proof-of-Liquidity (PoL) is a novel consensus mechanism that aligns and increases the security of the chain by increased liquidity deployed on chain.
 
-PoL borrows from the Proof-of-Stake (PoS) concept of securing a chain by providing an initial stake with the native gas token. PoL builds upon PoS by introducing an additional soulbound governance token that both determines the potential reward weight for a staker, through delegation by others, and is rewarded to parties that have provided liquidity to the chain through governed reward vaults.
+PoL borrows from the Proof-of-Stake (PoS) concept of securing a chain by providing an initial stake with the native gas token. PoL builds upon PoS by introducing an additional soulbound governance token that both determines the potential reward weight for a staker, through delegation by others, and is rewarded to parties that have provided liquidity, or otherwise productive activity, to the chain through governed [Reward Vaults](./pol/rewardvaults.md).
 
 ![Proof-of-Liquidity Flywheel](/assets/proof-of-liquidity-flywheel.png)
 

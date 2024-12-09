@@ -25,7 +25,7 @@ Here's how PoL works from the perspective of a validator:
 
 3. For proposing a block, the validator receives BGT emissions determined by two components:
 
-   - Base emission (B): A fixed amount for building the block
+   - Base emission: A fixed amount for building the block
    - Reward emission: A variable amount based on the validator's boost (percentage of BGT delegated to them)
 
 4. The validator can direct their BGT emissions to whitelisted _Reward Vaults_ in exchange for protocol Incentives. The amount they can direct is determined by the amount of BGT delegated to them.
@@ -38,7 +38,7 @@ Here's how PoL works from the perspective of a validator:
 
 8. By earning BGT, the _Liquidity Provider_ becomes a _BGT Holder_
 
-9. BGT Holders can delegate their BGT to validators, increasing that validator's boost (x). Higher boost means larger BGT emissions when that validator proposes blocks. Validators are expected to share received protocol Incentives with their delegators.
+9. BGT Holders can delegate their BGT to validators, increasing that validator's boost. Higher boost means larger BGT emissions when that validator proposes blocks. Validators are expected to share received protocol Incentives with their delegators.
 
 ## Incentive Alignment 🤝
 
