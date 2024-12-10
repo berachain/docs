@@ -72,7 +72,7 @@ console.log(
   ethers.formatUnits(queryOutput.amountsOut[0].amount, queryOutput.amountsOut[0].token.decimals),
   queryOutput.amountsOut[0].token.symbol
 );
-console.log("Price Impact:", priceImpact.toString(), "%");
+console.log("Price Impact:", priceImpact.percentage, "%");
 
 // Build transaction with 1% slippage
 const slippage = Slippage.fromPercentage("1");
