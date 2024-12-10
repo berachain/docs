@@ -24,7 +24,7 @@ Proof of liquidity (PoL) is a mechanism that rewards users for their liquidity c
 The process for earning `$BGT` through BEX is as follows:
 
 1. Review the list of PoL-eligible BEX pools and select a desired pool
-   ![Bex Reward Vault](/assets/bex-gauge.png)
+   ![Bex Reward Vault](/assets/reward_vaults.png)
 2. [Deposit liquidity](/learn/guides/liquidity/intro) into the desired pool on Bex
 3. Stake the LP token returned from step 2 in the appropriate PoL reward vault
 

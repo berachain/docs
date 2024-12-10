@@ -5,41 +5,38 @@ head:
       content: What is BEX?
   - - meta
     - name: description
-      content: BEX is the native decentralized exchange (DEX) protocol of Berachain, allowing users to trade between pairs of crypto assets
+      content: BEX is a fork of Balancer V2, enabling efficient trading and liquidity provision on Berachain
   - - meta
     - property: og:description
-      content: BEX is the native decentralized exchange (DEX) protocol of Berachain, allowing users to trade between pairs of crypto assets
+      content: BEX is a fork of Balancer V2, enabling efficient trading and liquidity provision on Berachain
 ---
 
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# What is BEX? 🐻 ⛓️
+# What is BEX?
 
-BEX (Berachain Exchange) is the native decentralized exchange (DEX) protocol of Berachain, enabling trading of any arbitrary pair of crypto assets without the need for intermediaries.
+BEX (Berachain Exchange) is the native decentralized exchange (DEX) protocol of Berachain, built as a fork of Balancer V2. BEX enables trading between any combination of tokens through weighted and stable pools.
 
-<a target="_blank" :href="config.testnet.dapps.bex.url">
-
-![BEX Splash](/assets/bex-splash.png)
-
-</a>
+![BEX All Pools](/assets/all_pools.png)
 
 > <small>BEX can be accessed on {{config.testnet.chainName}} here: <a target="_blank" :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.url}}</a></small>
 
-## How BEX Works ⚙️
+## How BEX Works
 
-BEX is powered by an AMM. Buy and sell orders in traditional order book markets are instead replaced with liquidity pools of different pairs of assets. As one asset is traded for the other, the relative prices of the two assets shift, and a new market rate for both is determined.
+BEX uses an AMM model where traditional order book markets are replaced with liquidity pools. Users can create and provide liquidity to two types of pools:
+- Weighted pools with up to 8 tokens and customizable weights
+- Stable pools optimized for tokens of similar value
 
-BEX is run entirely within a single smart contract, making BEX extremely efficient and lightweight. The design of BEX is inspired by the innovations pioneered by [Ambient Finance](https://ambient.finance/).
+![Add Liquidity Interface](/assets/add_liquidity.png)
 
 ## Key Features
 
-BEX's architecture choices confer a number of core advantages over other DEXs:
+BEX's architecture choices provide several core advantages:
 
-- Significant gas savings
-- Utilizes full-range (i.e., "Uniswap V2 style") liquidity within each pool, providing a simple and efficient trading experience
-- Allows users to pre-fund tokens as "surplus collateral", increasing efficiency for active traders by deferring token transfers until settlement
-- Supports "gasless" transactions through EIP-712 off-chain standard, where users can pay in the swapped token instead of gas
-- Implements account abstraction, allowing users to submit off-chain orders and set up custom logic for fulfillment by relayers
-- Offers unique "permissioned pool" primitive, enabling the ability to govern and restrict a pool using general purpose smart contract oracles
+- Support for multi-token pools (up to 8 tokens)
+- Flexible pool weights and configurations
+- Smart Order Routing for optimal trade execution
+- Integration with Berachain's Proof of Liquidity system
+- Protocol fees that benefit BGT stakers

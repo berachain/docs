@@ -25,13 +25,13 @@ LPs on BEX provide full-range liquidity, meaning that users' liquidity is always
 
 Users can provide BEX liquidity and review available options on bArtio here: {{config.testnet.dapps.bex.url}}pools
 
-![BEX pools](/assets/bex-pools.png)
+![BEX pools](/assets/all_pools.png)
 
 ### Adding Liquidity
 
 _Adding Liquidity_ is the process of providing the two constituent tokens of a liquidity pool to either 1) create a new LP position, or 2) commit additional capital to a pre-existing LP position.
 
-![Adding Liquidity](/assets/adding-liquidity.png)
+![Adding Liquidity](/assets/add_liquidity.png)
 
 When adding liquidity to an LP position, users have the following parameters to choose from:
 

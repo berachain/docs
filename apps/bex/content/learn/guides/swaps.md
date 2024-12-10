@@ -19,7 +19,7 @@ head:
 
 The core functionality of BEX is to allow users to exchange one type of token for another. If liquidity exists for a given pair in the DEX contract, users will be able to swap between tokens. The BEX web app provides an interface for general-purpose swaps.
 
-![BEX Swaps Modal](/assets/bex-swap.png)
+![BEX Swaps Modal](/assets/swap_route.png)
 
 Users can swap tokens on BEX on bArtio here: {{config.testnet.dapps.bex.url}}/swap
 
@@ -41,6 +41,6 @@ When initiating a swap, users can define the following parameters (sensible defa
 
 - **Quantity**: The amount of tokens to swap, which can be specified as either a fixed input quantity or a fixed output quantity.
 - **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact the user is willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert. Slippage can be specified by selecting the gear icon on the swap page:
-  ![BEX Swaps Modal](/assets/bex-slippage.png)
+  ![BEX Swaps Modal](/assets/swap_slippage.png)
 
 - **Settlement**: Advanced users interacting with the BEX contract can settle swaps directly with ERC20 token transfers or using their surplus collateral balance. A mix-and-match approach is possible, such as paying the input as an ERC20 token transfer and receiving the output as surplus collateral.
