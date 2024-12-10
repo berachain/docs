@@ -543,7 +543,7 @@ BOOTNODES=$(curl -s "$BOOTNODES_URL" | grep '^enode://' | tr '\n' ',' | sed 's/,
 
 ## Check Sync Status 🔄
 
-To check on the sync status, in another terminal run the following:
+To check on the sync status of the consensus layer, in another terminal run the following which will retrieve the current block height from the consensus client:
 
 ```bash
 # Don't have jq? `brew install jq`;
@@ -600,7 +600,7 @@ Now that we have our now, let's go through a few steps to verify that the networ
 Make sure that your node is fully synced before proceeding with these steps.
 :::
 
-### Get Current Block Number
+### Get Current Execution Block Number
 
 ```bash
 curl --location 'http://localhost:8545' \
@@ -620,6 +620,15 @@ curl --location 'http://localhost:8545' \
 # }
 ```
 
+### Get Current Consensus Block Number
+
+```bash
+curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_height';
+
+# [Expected Output]:
+# 1653733
+```
+
 ## Become A Validator ⚖️
 
-If you want to become a validator, please refer to the [Run A Validator Node](/nodes/guides/validator) guide.
+If you want to become a validator, please refer to the **Run A Validator Node** guide.
