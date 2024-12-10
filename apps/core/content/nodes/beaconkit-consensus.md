@@ -29,7 +29,7 @@ Some of the benefits that come with BeaconKit are:
 2. **Promotes Execution Client Diversity** - Any EVM execution upgrades can be supported out of the box, avoiding the need to run and maintain a custom forked EVM execution client to work with the chain
 3. **CometBFT** - Leverages a trusted consensus algorithm
 4. **Instant Finality** - Achieves [Single Slot Finality / Instant Finality](/learn/help/glossary#single-slot-finality), compared to Ethereum's finality of ~13 minutes
-5. **Leverages EVM Tooling** - All existing EVM tooling is supported; if a tool is supported by Ethereum, it is supported by BeaconKit
+5. **Leverages EVM Tooling** - The majority of all EVM tooling is supported.
 6. **Modular** - BeaconKit is also a modular framework that can allow for the potential implementation of a custom block builder, rollup, data availability layer, and more
 
 ![Berachain BeaconKit vs Ethereum](/assets/berachain-ethereum-vs-beaconkit.png)
