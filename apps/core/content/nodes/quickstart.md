@@ -19,7 +19,7 @@ head:
 
 # Berachain Run A Node Quickstart ⚡
 
-This will walk you through on setting up a testnet `bArtio` RPC archive node with `beacond` consensus client and a `reth` execution client.
+This will walk you through on setting up a testnet `bArtio` RPC archive node with `beacond` consensus client, by building it from source, and a `reth` execution client.
 
 :::tip
 **NOTE:**
@@ -216,23 +216,31 @@ Replace `-i ''` with just `-i` if you're not on MacOS.
 ```bash
 # FROM: ./beacon-kit
 
-# Rename the moniker
+# Rename the moniker in `config.toml`
 MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
 sed -i '' "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
-# set jwt.hex path
+# set rpc dial url in `app.toml`
+RPC_DIAL_URL=http://localhost:8551; # Adjust as needed
+sed -i '' "s|^rpc-dial-url = \".*\"|rpc-dial-url = \"$RPC_DIAL_URL\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+
+# set jwt.hex path in `app.toml`
 JWT_PATH=$PWD/build/bin/config/beacond/jwt.hex; # generating in next step
 sed -i '' "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
-# seeds
-# - Comma separated list of seeds
-seeds_url="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/cl-seeds.txt";
-seeds=$(curl -s "$seeds_url" | tail -n +2 | tr '\n' ',' | sed 's/,$//');
-sed -i '' "s/^seeds = \".*\"/seeds = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+# set suggested fee recipient wallet address in `app.toml`
+WALLET_ADDRESS_FEE_RECIPIENT=<0xYOUR_WALLET_ADDRESS>;
+sed -i '' "s|^suggested-fee-recipient = \".*\"|suggested-fee-recipient = \"$WALLET_ADDRESS_FEE_RECIPIENT\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
-# persistent peers
+# seeds in `config.toml`
+# - Comma separated list of seeds
+SEEDS_URL="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/cl-seeds.txt";
+SEEDS=$(curl -s "$SEEDS_URL" | tail -n +2 | tr '\n' ',' | sed 's/,$//');
+sed -i '' "s/^seeds = \".*\"/seeds = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+
+# persistent peers in `config.toml`
 # - Comma separated list of nodes to keep persistent connections to
-sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$seeds\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 ```
 
 ### Step 3 - Generate JWT Token
@@ -424,6 +432,7 @@ In a new Terminal sessions, start by downloading the binary for MacOS (Apple Sil
 ```bash
 # FROM: ./beacon-kit
 
+# Remember to download the correct version of Reth that works with you CPU architecture at https://github.com/paradigmxyz/reth/releases
 curl -L https://github.com/paradigmxyz/reth/releases/download/v1.0.3/reth-v1.0.3-x86_64-apple-darwin.tar.gz > reth-v1.0.3-x86_64-apple-darwin.tar.gz;
 tar -xzvf reth-v1.0.3-x86_64-apple-darwin.tar.gz;
 
@@ -496,8 +505,8 @@ Generate the remaining reth configuration files with the following:
 
 ```bash
 # retrieve bootnode
-bootnodes_url="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/el-bootnodes.txt";
-bootnodes=$(curl -s "$bootnodes_url" | grep '^enode://' | tr '\n' ',' | sed 's/,$//');
+BOOTNODES_URL="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/el-bootnodes.txt";
+BOOTNODES=$(curl -s "$BOOTNODES_URL" | grep '^enode://' | tr '\n' ',' | sed 's/,$//');
 
 # run reth
 ./reth node --authrpc.jwtsecret=./build/bin/config/beacond/jwt.hex \
@@ -509,8 +518,8 @@ bootnodes=$(curl -s "$bootnodes_url" | grep '^enode://' | tr '\n' ',' | sed 's/,
 --http.api="eth,net,web3,txpool,debug" \
 --http.port=8545 \
 --http.corsdomain="*" \
---bootnodes=$bootnodes \
---trusted-peers=$bootnodes \
+--bootnodes=$BOOTNODES \
+--trusted-peers=$BOOTNODES \
 --ws \
 --ws.addr=0.0.0.0 \
 --ws.port=8546 \
@@ -581,6 +590,8 @@ To check on the sync status, in another terminal run the following:
 # }
 ```
 
+If `catching_up` is set to `true`, it is still syncing.
+
 ## Testing Local RPC Node ✅
 
 Now that we have our now, let's go through a few steps to verify that the network is working currently but performing a few RPC requests, and deploying a contract.
@@ -608,3 +619,7 @@ curl --location 'http://localhost:8545' \
 #     "id": 83
 # }
 ```
+
+## Become A Validator ⚖️
+
+If you want to become a validator, please refer to the [Run A Validator Node](/nodes/guides/validator) guide.
