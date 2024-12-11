@@ -125,6 +125,7 @@ const SIDEBAR = {
     {
       text: "Developer Guides",
       items: [
+        { text: "Migration Guide", link: "/developers/guides/migration-guide" },
         {
           text: "Create HelloWorld Contract Using Hardhat",
           link: "/developers/guides/create-helloworld-contract-using-hardhat",
@@ -150,6 +151,7 @@ const SIDEBAR = {
     {
       text: "Contract References",
       items: [
+        { text: "BeaconDeposit", link: "/developers/contracts/berachef" },
         { text: "Berachef", link: "/developers/contracts/berachef" },
         { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
@@ -162,22 +164,23 @@ const SIDEBAR = {
         { text: "Fee Collector", link: "/developers/contracts/fee-collector" },
         { text: "Governance", link: "/developers/contracts/governance" },
         { text: "Honey Factory", link: "/developers/contracts/honey-factory" },
+        {
+          text: "Honey Factory Reader",
+          link: "/developers/contracts/honey-factory-reader",
+        },
         { text: "Honey Token", link: "/developers/contracts/honey-token" },
         { text: "Multicall3", link: "/developers/contracts/multicall3" },
         { text: "Permit2", link: "/developers/contracts/permit2" },
         {
-          text: "Rewards Vault",
-          link: "/developers/contracts/rewards-vault",
+          text: "Reward Vault",
+          link: "/developers/contracts/reward-vault",
         },
         {
-          text: "Rewards Vault Factory",
-          link: "/developers/contracts/rewards-vault-factory",
+          text: "Reward Vault Factory",
+          link: "/developers/contracts/reward-vault-factory",
         },
         { text: "TimeLock", link: "/developers/contracts/timelock" },
-        { text: "USDC Token", link: "/developers/contracts/usdc-token" },
         { text: "WBERA Token", link: "/developers/contracts/wbera-token" },
-        { text: "WBTC Token", link: "/developers/contracts/wbtc-token" },
-        { text: "WETH Token", link: "/developers/contracts/weth-token" },
       ],
     },
   ],
