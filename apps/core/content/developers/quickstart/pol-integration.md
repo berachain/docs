@@ -210,11 +210,11 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
 }
 ```
 
-Integration Process:
+Integration:
 
-- Deploy TraderScore contract with your BerachainRewardsVault address (note: must implement IBerachainRewardsVault interface)
-- After each trade, call recordTrade() with trader's address and trade size
-- Contract automatically mints tokens to itself and delegates stakes to users via BerachainRewardsVault when thresholds are met
+- Deploy `TraderScore` contract with your `BerachainRewardsVault` address (note: must implement `IBerachainRewardsVault` interface)
+- After each trade, call `recordTrade` with trader's address and trade size
+- Contract automatically mints tokens to itself and delegates stakes to users via `BerachainRewardsVault` when thresholds are met
 - The contract holds the tokens and delegates them to users, rather than users directly staking
 
 
@@ -432,12 +432,190 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
 
 Integration:
 
-- Game server calls recordGameSession() periodically during gameplay
-- recordLevelUp() called when player completes a new level
+- Game server calls `recordGameSession` periodically during gameplay
+- `recordLevelUp` called when player completes a new level
 
 When players are eligible, tokens are:
 - Minted to the contract
-- Automatically delegated to players via BerachainRewardsVault
+- Automatically delegated to players via `BerachainRewardsVault`
 
 Daily reset ensures players must come back each day to maintain their streak
 Players accumulate score progressively rather than receiving the full amount each mint
+
+### Example #3 - Incentivizing Trading Positions
+
+Here's how this system works:
+
+- Creates an ERC20 token representing healthy perps positions
+- Token is automatically staked in RewardVault to earn BGT
+
+
+Token Minting Based On:
+- Position Size: 1 token per $1000 in position size
+- Health Ratio: Must maintain at least 110% collateral
+- Duration: Bonus for longer-held positions
+- Optimal Maintenance: 50% bonus for keeping 150%+ health ratio
+
+
+``` solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "./IRewardVault.sol";
+
+/**
+ * @title PerpsStakingToken
+ * @notice Mints tokens based on perpetual futures position health, automatically staking them for BGT rewards
+ */
+contract PerpsStakingToken is ERC20, Ownable, ReentrancyGuard {
+    struct Position {
+        uint256 size;           // Position size in USD
+        uint256 collateral;     // Collateral amount in USD
+        uint256 openTimestamp;  // When position was opened
+        bool isLong;           // Long or short position
+        bool isActive;         // Position status
+        uint256 lastTokenMintTimestamp; // Last time tokens were minted
+    }
+
+    uint256 public constant MIN_HEALTH_RATIO = 110;    // 1.1x minimum health ratio (110%)
+    uint256 public constant OPTIMAL_HEALTH_RATIO = 150; // 1.5x optimal health ratio (150%)
+    uint256 public constant MIN_POSITION_SIZE = 100e18; // Minimum $100 position
+    uint256 public constant MINT_INTERVAL = 1 days;    // How often tokens can be minted
+
+    IRewardVault public immutable rewardVault;
+    mapping(address => mapping(uint256 => Position)) public positions; // user => positionId => Position
+    mapping(address => uint256) public positionCount;
+
+    event PositionOpened(address indexed user, uint256 indexed positionId, uint256 size, bool isLong);
+    event PositionModified(address indexed user, uint256 indexed positionId, uint256 newSize, uint256 newCollateral);
+    event PositionClosed(address indexed user, uint256 indexed positionId);
+    event TokensStaked(address indexed user, uint256 amount);
+
+    constructor(address _rewardVault) ERC20("Perps Position Token", "pPOS") {
+        rewardVault = IRewardVault(_rewardVault);
+    }
+
+    /**
+     * @notice Called by perps platform when a new position is opened
+     */
+    function openPosition(
+        address user,
+        uint256 size,
+        uint256 collateral,
+        bool isLong
+    ) external onlyOwner nonReentrant {
+        require(size >= MIN_POSITION_SIZE, "Position too small");
+        require(collateral > 0, "No collateral");
+
+        uint256 positionId = positionCount[user];
+        positions[user][positionId] = Position({
+            size: size,
+            collateral: collateral,
+            openTimestamp: block.timestamp,
+            isLong: isLong,
+            isActive: true,
+            lastTokenMintTimestamp: block.timestamp
+        });
+
+        positionCount[user]++;
+        emit PositionOpened(user, positionId, size, isLong);
+    }
+
+    /**
+     * @notice Called when position size or collateral changes
+     */
+    function modifyPosition(
+        address user,
+        uint256 positionId,
+        uint256 newSize,
+        uint256 newCollateral
+    ) external onlyOwner nonReentrant {
+        Position storage position = positions[user][positionId];
+        require(position.isActive, "Position not active");
+
+        // Mint tokens before updating position
+        _mintTokensForPosition(user, positionId);
+
+        position.size = newSize;
+        position.collateral = newCollateral;
+
+        emit PositionModified(user, positionId, newSize, newCollateral);
+    }
+
+    /**
+     * @notice Called when position is closed
+     */
+    function closePosition(
+        address user,
+        uint256 positionId
+    ) external onlyOwner nonReentrant {
+        Position storage position = positions[user][positionId];
+        require(position.isActive, "Position not active");
+
+        // Final token minting before closing
+        _mintTokensForPosition(user, positionId);
+        position.isActive = false;
+
+        emit PositionClosed(user, positionId);
+    }
+
+    /**
+     * @notice Mints tokens based on position health and duration and stakes them for the user
+     */
+    function _mintTokensForPosition(address user, uint256 positionId) internal {
+        Position storage position = positions[user][positionId];
+        
+        if (!position.isActive || 
+            block.timestamp < position.lastTokenMintTimestamp + MINT_INTERVAL) {
+            return;
+        }
+
+        // Calculate health ratio
+        uint256 healthRatio = (position.collateral * 100) / position.size;
+        
+        if (healthRatio >= MIN_HEALTH_RATIO) {
+            // Base token amount is 1 token per $1000 in position size per day
+            uint256 tokens = (position.size) / 1000e18;
+            
+            // Bonus for optimal health ratio
+            if (healthRatio >= OPTIMAL_HEALTH_RATIO) {
+                tokens = (tokens * 150) / 100; // 50% bonus
+            }
+            
+            // Time multiplier (up to 2x for positions held 10+ days)
+            uint256 daysOpen = (block.timestamp - position.openTimestamp) / 1 days;
+            if (daysOpen > 0) {
+                uint256 timeMultiplier = 100 + (daysOpen * 10); // +10% per day
+                timeMultiplier = timeMultiplier > 200 ? 200 : timeMultiplier;
+                tokens = (tokens * timeMultiplier) / 100;
+            }
+
+            // Mint tokens to this contract
+            _mint(address(this), tokens);
+            
+            // Approve and delegate stake to the user
+            approve(address(rewardVault), tokens);
+            rewardVault.delegateStake(user, tokens);
+            
+            emit TokensStaked(user, tokens);
+        }
+
+        position.lastTokenMintTimestamp = block.timestamp;
+    }
+
+    /**
+     * @notice Allows users to manually mint tokens for their positions
+     */
+    function mintPositionTokens(uint256 positionId) external nonReentrant {
+        _mintTokensForPosition(msg.sender, positionId);
+    }
+}
+```
+Integration:
+- Perps platform calls openPosition when positions are created
+- `modifyPosition` on size/collateral changes
+- `closePosition` when positions are closed
+- Users can trigger their own minting via mintPositionTokens
