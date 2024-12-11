@@ -1,14 +1,6 @@
 {
   "name": "@berachain/berps",
-<<<<<<< HEAD
-<<<<<<< HEAD
   "version": "1.1.6",
-=======
-  "version": "1.1.5",
->>>>>>> b457b09 (chore: 🤖 Bumped versioning)
-=======
-  "version": "1.1.5",
->>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
   "scripts": {
     "dev": "vitepress dev --port 5175",
     "build": "vitepress build",
