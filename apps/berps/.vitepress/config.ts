@@ -75,7 +75,7 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
+            text: `${constants.websites.docsBend.name}(Coming Soon)`,
             link: `${constants.websites.docsBend.url}`,
           },
           {

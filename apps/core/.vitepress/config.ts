@@ -82,11 +82,11 @@ export default defineConfig({
             link: `${constants.websites.docsBex.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
+            text: `${constants.websites.docsBend.name}(Coming Soon)`,
             link: `${constants.websites.docsBend.url}`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
+            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
             link: `${constants.websites.docsBerps.url}`,
           },
         ],
