@@ -27,6 +27,8 @@ The [Berancer SDK](https://github.com/berachain-foundation/berancer-sdk) include
 
 In this example, we use the Berancer SDK and [Ethers.js](https://docs.ethers.org/v6/) to perform a multi-hop swap from HONEY to WBTC using the optimal path.
 
+Note that the SOR is access via `balancerApi.sorSwapPaths.fetchSorSwapPaths`:
+
 ```js-vue
 import { ethers } from "ethers";
 import {

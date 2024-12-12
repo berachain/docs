@@ -13,7 +13,7 @@ head:
 
 # Error Codes
 
-All error codes for BEX core contracts are defined in `BalancerErrors.sol` [TODO: link]. Comments and context for errors are provided below:
+All error codes for BEX core contracts are defined in `BalancerErrors.sol`. Comments and context for errors are provided below:
 
 ## Math
 

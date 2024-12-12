@@ -11,6 +11,10 @@ head:
       content: Nuances of interacting with different BEX pools
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Pool Interfacing
 
 Different pool types (e.g. Weighted, Stable) have different interfaces for interacting with them, where the underlying logic can vary widely. This document outlines the common interfaces for interacting with BEX pools.
@@ -30,8 +34,8 @@ To interface with a pool, you will need its `poolId`, which is its unique identi
 
 You can get a `poolId` from:
 
-- A pool's URL [TODO: change link]: https://app.balancer.fi/#/pool/0x5c6ee304399dbdb9c8ef030ab642b10820db8f56000200000000000000000014
-- The [Subgraph](TODO: link)
+- A pool's URL: https://hub.berachain.com/pools/0x4a782a6ba2e47367a4b2a1551815c27dc15f479500020000000000000000000e/details/
+- The <a target="_blank" :href="config.testnet.dapps.bex.balancerSubgraphUrl">Subgraph</a>
 - Calling `getPoolId()` on the pool contract itself if you already have it
 
 ## Common Pool Interfaces

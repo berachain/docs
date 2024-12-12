@@ -98,6 +98,10 @@ const SIDEBAR = {
               text: "StablePoolFactory",
               link: "/developers/contracts/factory/stable-pool-factory",
             },
+            {
+              text: "PoolCreationHelper",
+              link: "/developers/contracts/factory/pool-creation-helper",
+            },
           ],
         },
       ],
@@ -119,8 +123,12 @@ const SIDEBAR = {
           ],
         },
         {
-          text: "Joins and Exits",
+          text: "Pools",
           items: [
+            {
+              text: "Pool Interfacing",
+              link: "/developers/contracts/pools/pool-interfacing.md",
+            },
             {
               text: "Pool Joins",
               link: "/developers/contracts/pools/joins.md",
@@ -143,6 +151,15 @@ const SIDEBAR = {
               link: "/developers/contracts/lp_tokens/valuing",
             },
           ],
+        },
+      ],
+    },
+    {
+      text: "Developer Guides",
+      items: [
+        {
+          text: "Pool Creation",
+          link: "/developers/guides/pool-creation",
         },
       ],
     },
@@ -173,7 +190,7 @@ const SIDEBAR = {
       items: [
         {
           text: "Error Codes",
-          link: "/developers/error-codes",
+          link: "/developers/help/error-codes",
         },
       ],
     },
