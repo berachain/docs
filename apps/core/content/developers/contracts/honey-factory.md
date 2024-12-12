@@ -826,9 +826,9 @@ function setPOLFeeCollectorFeeRate(uint256 _polFeeCollectorFeeRate) external;
 
 **Parameters**
 
-| Name                     | Type      | Description                                          |
-| ------------------------ | --------- | ---------------------------------------------------- |
-| `_polFeeCollectorFeeRate`| `uint256` | New fee rate (1e18 = 100% to POL, 0 = 100% to fee receiver) |
+| Name                      | Type      | Description                                          |
+| ------------------------- | --------- | ---------------------------------------------------- |
+| `_polFeeCollectorFeeRate` | `uint256` | Fee rate (1e18 = 100% to POL, 0 = 100% to fee receiver) |
 
 ### _authorizeUpgrade
 

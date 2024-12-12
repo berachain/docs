@@ -6,23 +6,7 @@
 
 > <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a><span v-if="config.contracts.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honey.abi">ABI JSON</a></span></small>
 
-This is the ERC20 token representation of Berachain's native stablecoin, Honey. The contract implements upgradeable ERC20 functionality with access control and error handling.
-
-## Inheritance
-
-- ERC20 (Solady implementation)
-- AccessControlUpgradeable
-- UUPSUpgradeable
-- IHoneyErrors
-
-## Interfaces
-
-### IHoneyErrors
-
-```solidity
-error ZeroAddress();
-error NotFactory();
-```
+This is the ERC20 token representation of Berachain's native stablecoin, Honey. 
 
 ## State Variables
 
