@@ -35,7 +35,7 @@ constructor(address honeyFactory_);
 
 ### previewMint
 
-Get the amount of Honey that can be minted with a given ERC20 token.
+Get the amount of Honey that can be minted with a given stablecoin collateral.
 
 ```solidity
 function previewMint(
@@ -46,10 +46,10 @@ function previewMint(
 
 **Parameters**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
-| `asset`  | `address` | The ERC20 to mint with         |
-| `amount` | `uint256` | The amount of ERC20 to mint with |
+| Name     | Type      | Description                                |
+| -------- | --------- | ------------------------------------------ |
+| `asset`  | `address` | The stablecoin collateral to mint with     |
+| `amount` | `uint256` | The amount of stablecoin to mint with      |
 
 **Returns**
 
@@ -59,7 +59,7 @@ function previewMint(
 
 ### previewRedeem
 
-Get the amount of ERC20 that can be redeemed with a given amount of Honey.
+Get the amount of stablecoin collateral that can be redeemed with a given amount of Honey.
 
 ```solidity
 function previewRedeem(
@@ -70,20 +70,20 @@ function previewRedeem(
 
 **Parameters**
 
-| Name          | Type      | Description                    |
-| ------------- | --------- | ------------------------------ |
-| `asset`       | `address` | The ERC20 to redeem           |
-| `honeyAmount` | `uint256` | The amount of Honey to redeem  |
+| Name          | Type      | Description                          |
+| ------------- | --------- | ------------------------------------ |
+| `asset`       | `address` | The stablecoin collateral to redeem  |
+| `honeyAmount` | `uint256` | The amount of Honey to redeem        |
 
 **Returns**
 
 | Name     | Type      | Description                          |
 | -------- | --------- | ------------------------------------ |
-| `<none>` | `uint256` | The amount of ERC20 that can be redeemed |
+| `<none>` | `uint256` | The amount of stablecoin collateral that can be redeemed |
 
 ### previewRequiredCollateral
 
-Preview the amount of ERC20 required to mint an exact amount of Honey.
+Preview the amount of stablecoin collateral required to mint an exact amount of Honey.
 
 ```solidity
 function previewRequiredCollateral(
@@ -96,7 +96,7 @@ function previewRequiredCollateral(
 
 | Name              | Type      | Description                         |
 | ----------------- | --------- | ----------------------------------- |
-| `asset`           | `address` | The ERC20 asset to use              |
+| `asset`           | `address` | The stablecoin collateral asset to use              |
 | `exactHoneyAmount`| `uint256` | The exact amount of Honey to mint   |
 
 **Returns**
@@ -107,7 +107,7 @@ function previewRequiredCollateral(
 
 ### previewHoneyToRedeem
 
-Preview the amount of Honey required to redeem an exact amount of target ERC20 asset.
+Preview the amount of Honey required to redeem an exact amount of the target stablecoin collateral asset.
 
 ```solidity
 function previewHoneyToRedeem(
@@ -120,7 +120,7 @@ function previewHoneyToRedeem(
 
 | Name          | Type      | Description                           |
 | ------------- | --------- | ------------------------------------- |
-| `asset`       | `address` | The ERC20 asset to receive            |
+| `asset`       | `address` | The stablecoin collateral asset to receive            |
 | `exactAmount` | `uint256` | The exact amount of assets to receive |
 
 **Returns**
