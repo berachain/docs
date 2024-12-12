@@ -23,8 +23,6 @@ This rebalancing can impose a cost on LPs in the form of _impermanent loss_ (IL)
 
 LPs on BEX provide full-range liquidity, meaning that users' liquidity is always active at every possible price point in the pool.
 
-Users can provide BEX liquidity and review available options on bArtio here: {{config.testnet.dapps.bex.url}}pools
-
 ![BEX pools](/assets/all_pools.png)
 
 ### Adding Liquidity
@@ -41,6 +39,12 @@ When adding liquidity to an LP position, users have the following parameters to 
 
 ### Managing LP Positions
 
-Users can view their existing LP positions through the BEX web app.
+Users can view their existing LP positions through BeraSwap on BeraHub.
+![Manage Liquidity](/assets/manage_lp.png)
 
-To remove liquidity from a specific position, users can _burn_ their LP tokens. This removes the liquidity from the pool and returns the underlying collateral (based on the current token prices) to the user.
+
+To remove liquidity from a specific position, users can withdraw their LP tokens. This removes the liquidity from the pool and returns the underlying collateral (based on the current token prices) to the user.
+
+![Withdraw Liquidity](/assets/withdraw_lp.png)
+
+

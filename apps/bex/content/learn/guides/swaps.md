@@ -21,7 +21,6 @@ The core functionality of BEX is to allow users to exchange one type of token fo
 
 ![BEX Swaps Modal](/assets/swap_route.png)
 
-Users can swap tokens on BEX on bArtio here: {{config.testnet.dapps.bex.url}}/swap
 
 ## Single-Hop and Multi-Hop Swaps
 
@@ -29,18 +28,19 @@ If adequate liquidity exists in a given pair, a swap will most likely be execute
 
 However, When a trade between the input and output token does not provide the best overall price (or the trading pair does not exist as a single pool), BEX can perform a _multi-hop swap_. Multi-hop swaps involve chaining swaps across multiple pools to find the best overall price. The process of finding a cost-efficient multi-hop path is called _routing_.
 
-BEX provides an off-chain API for approximately optimal routing. See an <a target="_blank" rel="no-referrer" :href="config.testnet.dapps.bex.apiUrl + 'dex/route?fromAsset=0x7507c1dc16935B82698e4C63f2746A2fCf994dF8&toAsset=0xd6D83aF58a19Cd14eF3CF6fe848C9A4d21e5727c&amount=1000000000000000000'">example here</a>.
-
 ### Intermediate Tokens
 
 In a multi-hop swap, _intermediate tokens_ are the tokens held temporarily when swapping through a sequence of pairs. Intermediate tokens in BEX are never transferred because settlement occurs based on the net debit against the entire BEX protocol.
 
+You can see an example of a multi-hop swap here in this screenshot(circled in red):
+
+![BEX Swaps Modal](/assets/route.png)
+
 ## Swap Parameters
 
-When initiating a swap, users can define the following parameters (sensible defaults are chosen by the BEX app):
+When initiating a swap, users can define the following parameters:
 
 - **Quantity**: The amount of tokens to swap, which can be specified as either a fixed input quantity or a fixed output quantity.
 - **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact the user is willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert. Slippage can be specified by selecting the gear icon on the swap page:
   ![BEX Swaps Modal](/assets/swap_slippage.png)
 
-- **Settlement**: Advanced users interacting with the BEX contract can settle swaps directly with ERC20 token transfers or using their surplus collateral balance. A mix-and-match approach is possible, such as paying the input as an ERC20 token transfer and receiving the output as surplus collateral.
