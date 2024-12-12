@@ -14,7 +14,7 @@ The dev work for all PoL integrations essentially boil down to:
 2. Design an ERC20 token that is minted when users perform actions you would like to incentivize
 3. Have these ERC20 positions staked in your Reward Vault
 
-All `RewardVault` contracts are deployed using the `RewardVaultFactory` contract and therefore follow a standardized implementation. Teams can't modify the RewardVault logic. This means all reward customization needs to happen at the staking token level, **not the vault level**. This means determining allocation of rewards must happen at the staking token level, fully defined by your app. The vault only uses the ERC20 balances of the staking token to distribute BGT proportionally.
+All `RewardVault` contracts are deployed using the `RewardVaultFactory` contract and therefore follow a standardized implementation. Teams can't modify the RewardVault logic. This means all reward customization needs to happen at the staking token level, **not the vault level**. Determining allocation of rewards must happen at the staking token level, fully defined by your app. The vault only uses the ERC20 balances of the staking token to distribute BGT proportionally.
 
 Below are some examples of this pattern. If you wanted to incentivize:
 
@@ -446,7 +446,7 @@ Players accumulate score progressively rather than receiving the full amount eac
 
 Here's how this system works:
 
-- Creates an ERC20 token representing healthy perps positions
+- Creates an ERC20 token representing healthy perps positions, as described below
 - Token is automatically staked in RewardVault to earn BGT
 
 
@@ -615,7 +615,7 @@ contract PerpsStakingToken is ERC20, Ownable, ReentrancyGuard {
 }
 ```
 Integration:
-- Perps platform calls openPosition when positions are created
+- Perps platform calls `openPosition` when positions are created
 - `modifyPosition` on size/collateral changes
 - `closePosition` when positions are closed
-- Users can trigger their own minting via mintPositionTokens
+- Users can trigger their own minting via `mintPositionTokens`
