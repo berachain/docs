@@ -36,7 +36,7 @@ There are two primary ways to obtain `$HONEY`:
 
 1. **Minting**: Users can mint `$HONEY` by depositing whitelisted collateral into specialized vaults. The minting process maintains price stability through dynamic rates and collateral management.
 
-2. **Trading**: `$HONEY` can be obtained by trading other assets on the [Berachain Bex](https://artio.bex.berachain.com).
+2. **Trading**: `$HONEY` can be obtained by trading other assets on BeraSwap
 
 ## Collateral Management
 
