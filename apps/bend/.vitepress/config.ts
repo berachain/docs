@@ -83,7 +83,7 @@ export default defineConfig({
           },
           {
             text: `${constants.websites.docsBerps.name}(Coming Soon)`,
-            link: `${constants.websites.docsBerps.url}`,
+            link: `#`,
           },
         ],
       },
