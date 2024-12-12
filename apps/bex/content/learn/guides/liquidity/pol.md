@@ -30,7 +30,7 @@ The process for earning `$BGT` through BEX is as follows:
 
 The list of reward vaults for earning `$BGT` rewards can be seen here:
 
-{{config.testnet.dapps.bgtStation.url}}gauge
+{{config.testnet.dapps.berahub.url}}gauge
 
 ## Whitelisting Pools for PoL Rewards
 
