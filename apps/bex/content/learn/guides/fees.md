@@ -5,15 +5,15 @@ head:
       content: Fees
   - - meta
     - name: description
-      content: Learn how to execute transactions on BEX without the need for gas, using EIP-712 off-chain signing and relayer tips.
+      content: Learn how to execute transactions on BeraSwap without the need for gas, using EIP-712 off-chain signing and relayer tips.
   - - meta
     - property: og:description
-      content: Learn how to execute transactions on BEX without the need for gas, using EIP-712 off-chain signing and relayer tips.
+      content: Learn how to execute transactions on BeraSwap without the need for gas, using EIP-712 off-chain signing and relayer tips.
 ---
 
 # Fees
 
-Fees are collected on every trade conducted on BEX. A portion of these fees will go to 1) liquidity providers (LPs), and 2) BGT stakers.
+Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) BGT stakers.
 
 ### LP Fee
 
@@ -21,7 +21,7 @@ Trading fees for LPs are directly compounded inside the pool such that LPs don't
 
 The portion of fees going to LPs is set at the time of pool creation, the available options being 0.3%, 0.5%, and 1%. The lower fee tiers are generally more appropriate for stable pairings (e.g. stablecoins and blue-chip assets), while the higher fee tiers may be more appropriate for exotic assets, offsetting the risk of LPs holding volatile assets for the duration fo their position.
 
-![BEX Fees](/assets/swap_fee.png)
+![BeraSwap Fees](/assets/swap_fee.png)
 
 ### BGT Fee
 

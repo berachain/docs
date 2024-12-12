@@ -5,10 +5,10 @@ head:
       content: Weighted Composable Pools
   - - meta
     - name: description
-      content: Learn how to create and manage weighted composable pools on BEX
+      content: Learn how to create and manage weighted composable pools on BeraSwap
   - - meta
     - property: og:description
-      content: Learn how to create and manage weighted composable pools on BEX
+      content: Learn how to create and manage weighted composable pools on BeraSwap
 ---
 
 <script setup>
@@ -17,7 +17,7 @@ head:
 
 # Weighted Composable Pools
 
-Weighted composable pools are the most flexible pool type on BEX, allowing you to create pools with up to 8 different tokens. These pools enable you to create custom token indexes or manage diversified portfolios with precise weight allocations.
+Weighted composable pools are the most flexible pool type on BeraSwap, allowing you to create pools with up to 8 different tokens. These pools enable you to create custom token indexes or manage diversified portfolios with precise weight allocations.
 
 ## Creating a Weighted Pool
 

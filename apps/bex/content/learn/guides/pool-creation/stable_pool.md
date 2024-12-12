@@ -5,10 +5,10 @@ head:
       content: Stable Pools
   - - meta
     - name: description
-      content: Learn how to create and manage stable pools on BeraHub
+      content: Learn how to create and manage stable pools on BeraSwap
   - - meta
     - property: og:description
-      content: Learn how to create and manage stable pools on BeraHub
+      content: Learn how to create and manage stable pools on BeraSwap
 ---
 
 <script setup>

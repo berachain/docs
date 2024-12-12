@@ -24,7 +24,7 @@ Proof of liquidity (PoL) is a mechanism that rewards users for their liquidity c
 The process for earning `$BGT` through BeraSwap involves three simple steps:
 
 1. **Provide Liquidity**: First, deposit liquidity into your chosen BeraSwap pool
-   ![Bex Reward Vault](/assets/reward_vaults.png)
+   ![BeraSwap Reward Vault](/assets/reward_vaults.png)
 
 2. **Stake LP Tokens**: After providing liquidity, you'll receive LP tokens. Stake these tokens in the pool's staking contract
    ![Pool Stake](/assets/pool_stake_pol.png)

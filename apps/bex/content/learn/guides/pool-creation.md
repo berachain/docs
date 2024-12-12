@@ -5,10 +5,10 @@ head:
       content: Initializing Pools
   - - meta
     - name: description
-      content: Learn how to create new liquidity pools on BEX.
+      content: Learn how to create new liquidity pools on BeraSwap.
   - - meta
     - property: og:description
-      content: Learn how to create new liquidity pools on BEX.
+      content: Learn how to create new liquidity pools on BeraSwap.
 ---
 
 <script setup>
@@ -17,21 +17,21 @@ head:
 
 # Initializing Pools
 
-On BEX, any user can initialize a liquidity pool for an arbitrary pair of tokens. The user who initializes the pool has the ability to select the starting price ratio between the two tokens.
+On BeraSwap, any user can initialize a liquidity pool for an arbitrary pair of tokens. The user who initializes the pool has the ability to select the starting price ratio between the two tokens.
 
-Users can create new BEX liquidity pools here: {{config.testnet.dapps.bex.url}}/pools/create
+Users can create new BeraSwap liquidity pools here: {{config.testnet.dapps.bex.url}}/pools/create
 
-To prevent spam and ensure the creation of meaningful pools, BEX requires users to permanently burn a small, economically insignificant quantity of both tokens when initializing a new pool.
+To prevent spam and ensure the creation of meaningful pools, BeraSwap requires users to permanently burn a small, economically insignificant quantity of both tokens when initializing a new pool.
 
 ## Pool Initialization Steps
 
-1. Navigate to the "Pool" section of the BEX app and select "Create a Pool"
+1. Navigate to the "Pool" section of the BeraSwap app and select "Create a Pool"
 2. Select the two tokens you wish to create a pool for
 3. Specify the pool fees, collected on each swap
 4. Set initial pool token ratios and amount of liquidity to add
 5. Confirm the pool creation transaction
 
-![BEX Pool Creation](/assets/bex-set-prices.png)
+![BeraSwap Pool Creation](/assets/bex-set-prices.png)
 
 ## Selecting the Ratio
 
