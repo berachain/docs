@@ -4,8 +4,6 @@
 
 # HoneyFactoryReader
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.honeyFactoryReader.address">{{config.contracts.honeyFactoryReader.address}}</a><span v-if="config.contracts.honeyFactoryReader.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honeyFactoryReader.abi">ABI JSON</a></span></small>
-
 This is a helper contract that provides view functions for previewing mint and redeem operations for the Honey Factory.
 
 ## State Variables
