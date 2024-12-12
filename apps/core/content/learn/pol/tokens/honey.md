@@ -36,7 +36,6 @@ Stability is a desirable property in a medium of exchange, in contrast to transa
 
 Alternatively, `$HONEY` can be obtained by trading other assets on the [Berachain Bex](https://artio.bex.berachain.com).
 
-2. **Trading**: `$HONEY` can be obtained by trading other assets on BeraSwap
 ## What determines which assets collateralize $HONEY?
 
 Governance determines which assets can be used to mint $HONEY.
