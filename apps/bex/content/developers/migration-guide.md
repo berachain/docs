@@ -5,43 +5,33 @@ head:
       content: BEX Migration Guide
   - - meta
     - name: description
-      content: Guide for migrating to the Balancer implementation of BEX
+      content: Guide for migrating to the current BEX implementation
   - - meta
     - property: og:description
-      content: Guide for migrating to the Balancer implementation of BEX
+      content: Guide for migrating to the current BEX implementation
 ---
 
-# BEX Migration Guide: v1 to v2
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
 
-## TODO
+# BEX Migration Guide
 
-- Replace Balancer mentions
-- Replace SDK import
-
-## Introduction
-
-This guide assists developers in migrating their code from the Ambient Finance implementation of BEX (v1 BEX, launched with bArtio Testnet) to the most recent Balancer-based implementation (v2 BEX).
-
-## Contents [TODO: provide links]
-
-1. Swaps using a) the `BeraCrocMultiSwap` router; and b) `userCmd`
-2. Pool Creation
-3. Adding Liquidity
-4. Subgraph Queries
+This guide assists developers in migrating their code from the bArtio implementation of BEX (launched with bArtio Testnet) to the current Balancer-based BEX implementation.
 
 ## General Notes
 
-- v1 BEX: Required off-chain logic for finding `poolIndex` and determining `base` and `quote` tokens, which dictate the `isBuy` parameter.
-- v2 BEX: Requires off-chain logic for finding the `poolId` (a 32-byte identifier).
-  - Utilizes the Smart Order Router (SOR) [Link TODO] for this purpose.
+- bArtio BEX: Required off-chain logic for finding `poolIndex` and determining `base` and `quote` tokens, which dictate the `isBuy` parameter.
+- Current BEX: Requires off-chain logic for finding the `poolId` (a 32-byte identifier).
+  - Utilizes the Smart Order Router (SOR) for this purpose.
 
 ## 1. Swaps
 
 ### Migrating from `BeraCrocMultiSwap`
 
-`BeraCrocMultiSwap` was a convenience router for executing swaps in v1 BEX.
+`BeraCrocMultiSwap` was a convenience router for executing swaps in bArtio BEX.
 
-#### v1 BEX Example:
+#### bArtio BEX:
 
 ```javascript
 const steps = [
@@ -58,60 +48,60 @@ const minOut = ethers.utils.parseUnits("0.99", 18);
 await swapRouter.multiSwap(steps, amount, minOut);
 ```
 
-#### v2 BEX Example:
+#### Current Implementation:
 
-In v2 BEX, we leverage the SOR [Link TODO] to construct our swap:
+In the current implementation, we leverage the SOR to construct our swap:
 
 ```js
-import { BalancerSDK } from '@balancer-labs/sdk'
+import {
+  BalancerApi,
+  SwapKind,
+  TokenAmount,
+} from "@berachain-foundation/berancer-sdk";
+const balancerApi = new BalancerApi(apiUrl, CHAIN_ID);
+const honeyToken = new Token(CHAIN_ID, HONEY_ADDRESS, 18, "HONEY");
 
-const balancer = new BalancerSDK({
-  network: 80084,
-  rpcUrl: 'https://bartio.rpc.berachain.com'
+// Create swap amount (e.g., 1 HONEY)
+const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, "1");
+// Fetch optimal swap paths
+const { paths: sorPaths } = await balancerApi.sorSwapPaths.fetchSorSwapPaths({
+  chainId: chainId,
+  tokenIn: tokenInAddress,
+  tokenOut: tokenOutAddress,
+  swapKind: SwapKind.GivenIn,
+  swapAmount: tokenAmount,
 });
-
-const { swaps } = balancer;
-
-const swapInfo = await swaps.findRouteGivenIn({
-  tokenIn: 'tokenToSell',
-  tokenOut: 'tokenToBuy',
-  amount: parseEther('1'),
-  gasPrice: parseFixed('1', 9),
-  maxPools: 4, // number of pools included in path
+const swap = new Swap({
+  chainId: chainId,
+  paths: sorPaths,
+  swapKind: SwapKind.GivenIn,
+  userData: "0x",
 });
+// Query current rates
+const queryOutput = await swap.query(rpcUrl);
 
-const tx = this.buildSwap({
-  userAddress: 'senderAddress',
-  recipient: 'recipientAddress',
-  swapInfo,
-  kind: SwapType.SwapExactIn,
-  deadline: blockTimestamp,
-  maxSlippage: maxSlippage, // in basis points (e.g., 100 = 1%)
+// Build transaction with 1% slippage
+const slippage = Slippage.fromPercentage("1");
+const deadline = BigInt(Math.floor(Date.now() / 1000) + 60);
+const callData = swap.buildCall({
+  slippage,
+  deadline,
+  queryOutput,
+  sender: walletAddress,
+  recipient: walletAddress,
+  wethIsEth: false,
 });
-
-const signer = balancer.provider.getSigner();
-await signer.sendTransaction({
-  to: tx.to,
-  data: tx.data,
-  value: tx.value
+// Send transaction
+const tx = await wallet.sendTransaction({
+  to: callData.to,
+  data: callData.callData,
+  value: callData.value,
 });
-});
-
-// Broadcast Transaction
-
-const signer = balancer.provider.getSigner()
-await signer.sendTransaction({
-  to: tx.to,
-  data: tx.data,
-  value: tx.value
-})
 ```
-
-[TODO share example `swapInfo` output]
 
 ### Migrating from `userCmd` (Solidity)
 
-If the `poolId` is known, the **v2 BEX** swap transaction can be encoded as follows:
+If the `poolId` is known, the BEX swap transaction can be encoded as follows:
 
 ```solidity=
 import "@balancer-labs/v2-interfaces/contracts/vault/IVault.sol";
@@ -149,11 +139,9 @@ contract YourContract {
 
 ## 2. Pool Creation
 
-In **v1 BEX**, pool types are defined by the `poolIdx` parameter (e.g.`36001`).
+#### bArtio BEX:
 
-In **v2 BEX**, pool creation is accomplished through different **pool factories**, depending on the pool type ([Weighted](/developers/contracts/factory/weighted-pool-factory) or [Stable](/developers/contracts/factory/stable-pool-factory)).
-
-#### v1 BEX Example (full-range liquidity):
+In the bArtio BEX implementation, pool types were defined by the `poolIdx` parameter (e.g.`36001`).
 
 ```solidity
 bytes memory initPoolCmd =
@@ -162,27 +150,47 @@ bytes memory initPoolCmd =
 dex.userCmd(3, initPoolCmd); // ColdPath callpath
 ```
 
-#### v2 BEX Weighted Pool Creation:
+#### Current BEX:
 
-```solidity=
-import "@balancer-labs/v2-pool-weighted/contracts/WeightedPoolFactory.sol";
+In the current BEX implementation, pools are created through the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract, which simplifies the pool creation process by allowing pools to be created and joined in a single transaction.
 
-IWeightedPoolFactory factory = IWeightedPoolFactory(factoryAddress);
-address pool = factory.create(
-    "Pool Name", // Name
-    "POOL", // Symbol
-    [token1Address, token2Address],
-    [weight1, weight2], // Adds up to 1e18
-    [address(0), address(0)], // Rate provider addresses
-    swapFeePercentage, // e.g. 1e16 == 1% [uint256]
-    ownerAddress // Owner can set parameters like swap fee
-    salt // For determinstic deploys [bytes32]
+> The `PoolCreationHelper` must first be approved as a relayer in the Vault contract
+
+```js
+const POOL_CREATION_HELPER_ABI = [
+  "function createAndJoinWeightedPool(string name, string symbol, address[] createPoolTokens, address[] joinPoolTokens, uint256[] normalizedWeights, address[] rateProviders, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt) payable returns (address pool)",
+  "function createAndJoinStablePool(string name, string symbol, address[] createPoolTokens, uint256 amplificationParameter, address[] rateProviders, uint256[] tokenRateCacheDurations, bool exemptFromYieldProtocolFeeFlag, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt, bool joinWBERAPoolWithBERA) payable returns (address pool)",
+];
+
+// Approve PoolCreationHelper as relayer
+await vault.setRelayerApproval(
+  wallet.address,
+  POOL_CREATION_HELPER_ADDRESS,
+  true
+);
+// Create pool with initial liquidity
+const poolCreationHelper = new ethers.Contract(
+  POOL_CREATION_HELPER_ADDRESS,
+  POOL_CREATION_HELPER_ABI,
+  wallet
+);
+const tx = await poolCreationHelper.createAndJoinWeightedPool(
+  "Pool Name", // name
+  "POOL", // symbol
+  [token1Address, token2Address],
+  [token1Address, token2Address],
+  [weight1, weight2], // Must add up to 1e18
+  [address(0), address(0)], // No rate providers
+  ethers.parseUnits("0.01", 18), // 1% swap fee
+  amountsIn, // Array of initial liquidity amounts
+  wallet.address, // Owner
+  salt // For deterministic deploys
 );
 ```
 
 ## 3. Adding Liquidity
 
-#### v1 BEX Example
+#### bArtio BEX:
 
 ```solidity=
 bytes memory addToPoolCmd = abi.encode(
@@ -235,7 +243,7 @@ IVault(vaultAddress).joinPool(
 
 ## 4. Subgraph
 
-**v2 BEX** provides a subraph [link TODO] indexing smart contract data with a GraphQL interface.
+The current BEX implementation provides a <a :href="config.testnet.dapps.bex.balancerSubgraphUrl" target="_blank">subgraph</a> indexing smart contract data with a GraphQL interface.
 
 ### Querying Pools Containing Tokens
 
@@ -247,8 +255,8 @@ A user seeking the `poolIds` of a pool containing two different tokens, might ex
     first: 5
     where: {
       tokensList_contains: [
-        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-        "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        "0xd137593CDB341CcC78426c54Fb98435C60Da193c"
+        "0x015fd589F4f1A33ce4487E12714e1B15129c9329"
       ]
     }
   ) {
