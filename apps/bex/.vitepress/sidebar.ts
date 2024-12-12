@@ -152,6 +152,10 @@ const SIDEBAR = {
             },
           ],
         },
+        {
+          text: "Relayers",
+          link: "/developers/contracts/relayers",
+        },
       ],
     },
     {

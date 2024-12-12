@@ -17,7 +17,7 @@ head:
 
 # Pool Creation Guide
 
-This guide demonstrates how to create a new BEX pool using the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract. The PoolCreationHelper allows pools to be created and joined in a single transaction, simplifying the pool creation process.
+This guide demonstrates how to create a new BEX pool using the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract. The PoolCreationHelper is a [Relayer](/developers/contracts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ for (const [i, tokenAddress] of createPoolTokens.entries()) {
 
 ### Step 3: Create and Join Pool
 
-Finally, create and join the pool in a single transaction:
+Finally, create and join the pool in a single transaction. We leverage the function [`createAndJoinWeightedPool`](/developers/contracts/factory/pool-creation-helper#createandjoinweightedpool).
 
 ```js
 const poolCreationHelper = new ethers.Contract(
