@@ -160,8 +160,9 @@ const SIDEBAR = {
         { text: "Distributor", link: "/developers/contracts/distributor" },
         { text: "Fee Collector", link: "/developers/contracts/fee-collector" },
         { text: "Governance", link: "/developers/contracts/governance" },
-        { text: "Honey Factory", link: "/developers/contracts/honey-factory" },
         { text: "Honey Token", link: "/developers/contracts/honey-token" },
+        { text: "Honey Factory", link: "/developers/contracts/honey-factory" },
+        { text: "Honey Factory Reader", link: "/developers/contracts/honey-factory-reader" },
         { text: "Multicall3", link: "/developers/contracts/multicall3" },
         { text: "Permit2", link: "/developers/contracts/permit2" },
         {
