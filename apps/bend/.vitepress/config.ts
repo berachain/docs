@@ -87,12 +87,6 @@ export default defineConfig({
           },
         ],
       },
-      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
-      {
-        text: "Developers",
-        link: "developers/index",
-        activeMatch: "/developers/",
-      },
     ],
     outline: [2, 3],
     search: {
