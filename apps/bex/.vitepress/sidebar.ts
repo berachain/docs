@@ -42,6 +42,7 @@ const SIDEBAR = {
             },
           ],
         },
+        { text: "Flash Loans", link: "/learn/concepts/flash-loans" },
       ],
     },
     {
@@ -73,7 +74,7 @@ const SIDEBAR = {
       text: "Berachain BEX For Devs",
       items: [
         { text: "Deployed Contracts", link: "/developers/" },
-        { text: "BEX Migration Guide", link: "/developers/migration-guide" },
+        { text: "Migration Guide", link: "/developers/migration-guide" },
       ],
     },
     {

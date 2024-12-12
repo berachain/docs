@@ -15,7 +15,7 @@ head:
   import config from '@berachain/config/constants.json';
 </script>
 
-# BEX Migration Guide
+# Migration Guide
 
 This guide assists developers in migrating their code from the bArtio implementation of BEX (launched with bArtio Testnet) to the current Balancer-based BEX implementation.
 
