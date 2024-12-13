@@ -5,10 +5,10 @@ head:
       content: Initializing Pools
   - - meta
     - name: description
-      content: Learn how to create new liquidity pools on BEX.
+      content: Learn how to create new liquidity pools on BeraSwap.
   - - meta
     - property: og:description
-      content: Learn how to create new liquidity pools on BEX.
+      content: Learn how to create new liquidity pools on BeraSwap.
 ---
 
 <script setup>
@@ -17,28 +17,60 @@ head:
 
 # Initializing Pools
 
-On BEX, any user can initialize a liquidity pool for an arbitrary pair of tokens. The user who initializes the pool has the ability to select the starting price ratio between the two tokens.
+On BeraSwap, any user can initialize a liquidity pool. BeraSwap offers two main types of pools: Weighted Pools and Stable Pools, each optimized for different trading scenarios.
 
-Users can create new BEX liquidity pools here: {{config.testnet.dapps.bex.url}}/pools/create
+Create a new BeraSwap liquidity pool <a href="{{config.testnet.dapps.bex.url}}/pools/create" target="_blank">here</a>.
 
-To prevent spam and ensure the creation of meaningful pools, BEX requires users to permanently burn a small, economically insignificant quantity of both tokens when initializing a new pool.
+To prevent spam and ensure the creation of meaningful pools, BEX requires users to 
+permanently burn a small, economically insignificant quantity of both tokens when 
+initializing a new pool.
+## Pool Types
 
-## Pool Initialization Steps
+### Weighted Pools
+- Support up to 8 different tokens
+- Customizable weight distribution for each token
+- Suitable for most token pairs
+- Common fee tiers: 0.3%, 0.5%, and 1%
 
-1. Navigate to the "Pool" section of the BEX app and select "Create a Pool"
-2. Select the two tokens you wish to create a pool for
-3. Specify the pool fees, collected on each swap
-4. Set initial pool token ratios and amount of liquidity to add
-5. Confirm the pool creation transaction
+### Stable Pools
+- Designed for tokens that maintain similar prices
+- Optimal for stablecoin pairs (like USDC/USDT)
+- Lower fees and better pricing for similar-value assets
+- Typical fee range: 0.01% to 0.1%
 
-![BEX Pool Creation](/assets/bex-set-prices.png)
+## Creating a Pool
 
-## Selecting the Ratio
+1. Navigate to the "Pool" section and click "Create a Pool"
+2. Select your pool type based on your tokens:
+   - Weighted Pool for standard token pairs
+   - Stable Pool for similar-valued tokens
 
-During pool creation, the price/ratio of the tokens is set based on amount of "quote" tokens per "base" token. Using the above scenario as an example, and assuming that the price of `$WETH` is $3000, the initial price of `$HONEY`is set from the initial`3000` ratio, that is:
+![Pool Type Selection](/assets/create_pool_stable.png)
 
-- Each `$WETH` is worth `3000` `$HONEY`
-- Each `$HONEY` is worth `0.000333` `$WETH`
-- The initial price of `$HONEY` is `$3000 * 0.000333 = $1`
+In this example we're creating a Stable Pool.
+3. Choose the tokens you want to include:
+   - For Stable pools: Select tokens with similar values (e.g., USDT/STGUSDC)
+   - For Weighted pools: Add tokens and set custom weights (e.g., 25% WBERA / 75% STGUSDC)
 
-If there is a known price to both tokens, pool creators should endeavour to set the initial price ratio to match the known prices. If the price ratio is set too high or too low, arbitrageurs will quickly correct the price to match the market.
+4. Set your pool parameters:
+   - For Stable pools: Choose swap fees between 0.01% to 0.1%, optimal for stablecoin pairs
+   - For Weighted pools: Select from 0.3%, 0.5%, or 1% fees based on token volatility
+
+5. Add initial liquidity for each token
+6. Review and confirm the pool creation
+
+## Setting Initial Prices
+
+When adding initial liquidity, the ratio between tokens determines their starting price:
+
+For Weighted Pools:
+- If you add 160 WBERA and 10000 STGUSDC (as shown in the image)
+- The initial price will reflect this ratio along with the weights (25%/75%)
+
+For Stable Pools:
+- Add similar amounts in terms of value (e.g., 10000 USDT and 10000 STGUSDC)
+- The pool assumes these tokens should maintain roughly equal prices
+
+It's important to set prices close to market rates to prevent immediate arbitrage.
+
+To prevent spam and ensure meaningful pools, BeraSwap requires users to permanently burn a small quantity of tokens when initializing a new pool.
