@@ -7,18 +7,13 @@
  * Colors
  * -------------------------------------------------------------------------- */
  :root {
-    /* --vp-c-brand: #c28f0e; */
     --vp-c-brand-light: #ddad32;
     --vp-c-brand-lighter: #9499ff;
     --vp-c-brand-lightest: #bcc0ff;
     --vp-c-brand-dark: #56f253;
     --vp-c-brand-darker: #45e174;
     --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
-  
-    /* --vp-c-text-1: #EBE9E7; */
     --vp-c-text-2: #908984;
-    /* --vp-c-text-3: #00ff2a; */
-  
     --vp-c-brand-1: #292524;
     --vp-c-brand-2: #cf9f23;
     --vp-c-brand-3: #00ff2a;
@@ -323,6 +318,10 @@
   /**
    * Custom
    * -------------------------------------------------------------------------- */
+  .VPContent:not(.has-sidebar)  {
+    max-width: 1140px;
+  }
+  
   .dark li {
     color: #f9f6f4;
   }

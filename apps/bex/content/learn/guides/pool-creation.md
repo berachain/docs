@@ -17,6 +17,7 @@ head:
 
 # Initializing Pools
 
+
 On BeraSwap, any user can initialize a liquidity pool. BeraSwap offers two main types of pools: Weighted Pools and Stable Pools, each optimized for different trading scenarios.
 
 Create a new BeraSwap liquidity pool <a href="{{config.testnet.dapps.bex.url}}/pools/create" target="_blank">here</a>.
@@ -31,6 +32,7 @@ initializing a new pool.
 - Customizable weight distribution for each token
 - Suitable for most token pairs
 - Common fee tiers: 0.3%, 0.5%, and 1%
+
 
 ### Stable Pools
 - Designed for tokens that maintain similar prices

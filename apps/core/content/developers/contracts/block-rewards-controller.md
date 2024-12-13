@@ -2,9 +2,11 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# IBlockRewardController
+# BlockRewardController
 
 > <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.blockRewardsController.address">{{config.contracts.blockRewardsController.address}}</a><span v-if="config.contracts.blockRewardsController.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.blockRewardsController.abi">ABI JSON</a></span></small>
+
+The BlockRewardController contract is responsible for managing the reward rate of BGT. Owned by the governance module, It is the only contract that can mint the BGT token.
 
 ## Functions
 
@@ -50,23 +52,87 @@ function minBoostedRewardRate() external view returns (uint256);
 | -------- | --------- | ------------------------------------------------------------ |
 | `<none>` | `uint256` | The minimum amount of BGT to be minted in the current block. |
 
-### processRewards
+### boostMultiplier
 
-processes the rewards for the specified block and mints the BGT to the distributor and commissions to
-coinbase.
-
-_This function can only be called by the distributor._
+Returns the boost mutliplier param in the reward function.
 
 ```solidity
-function processRewards(address coinbase, uint256 blockNumber) external returns (uint256);
+function boostMultiplier() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                                      |
+| -------- | --------- | ------------------------------------------------ |
+| `<none>` | `uint256` | The parameter that determines the inflation cap. |
+
+### rewardConvexity
+
+Returns the reward convexity param in the reward function.
+
+```solidity
+function rewardConvexity() external view returns (int256);
+```
+
+**Returns**
+
+| Name     | Type     | Description                                                               |
+| -------- | -------- | ------------------------------------------------------------------------- |
+| `<none>` | `int256` | The parameter that determines how fast the function converges to its max. |
+
+### computeReward
+
+Computes the reward given specified parameters, according to the formula.
+r := (1 + mul) _ (1 - 1 / (1 + mul _ boost^conv)) _ rewardRate ∈ [0, mul _ rewardRate]
+
+_Returns 0 for boost == 0 even if conv == 0, since contract enforces conv > 0._
+
+```solidity
+function computeReward(
+    uint256 boostPower,
+    uint256 _rewardRate,
+    uint256 _boostMultiplier,
+    int256 _rewardConvexity
+)
+    external
+    pure
+    returns (uint256);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                                     |
-| ------------- | --------- | ----------------------------------------------- |
-| `coinbase`    | `address` | The validator's coinbase address for the block. |
-| `blockNumber` | `uint256` | The block number to process rewards for.        |
+| Name               | Type      | Description                     |
+| ------------------ | --------- | ------------------------------- |
+| `boostPower`       | `uint256` | the normalized boost.           |
+| `_rewardRate`      | `uint256` | the reward rate parameter.      |
+| `_boostMultiplier` | `uint256` | the boost multiplier parameter. |
+| `_rewardConvexity` | `int256`  | the reward convexity parameter. |
+
+**Returns**
+
+| Name     | Type      | Description        |
+| -------- | --------- | ------------------ |
+| `<none>` | `uint256` | the reward amount. |
+
+### processRewards
+
+Processes the rewards for the specified block and mints BGT to validator's operator and distributor.
+
+_This function can only be called by the distributor._
+
+_If in genesis only base rate for validators is minted._
+
+```solidity
+function processRewards(bytes calldata pubkey, uint64 nextTimestamp, bool isReady) external returns (uint256);
+```
+
+**Parameters**
+
+| Name            | Type     | Description                                                                     |
+| --------------- | -------- | ------------------------------------------------------------------------------- |
+| `pubkey`        | `bytes`  | The validator's pubkey.                                                         |
+| `nextTimestamp` | `uint64` | The timestamp of the next beacon block that was processed.                      |
+| `isReady`       | `bool`   | The flag to enable reward minting to distributor (true when BeraChef is ready). |
 
 **Returns**
 
@@ -121,6 +187,38 @@ function setMinBoostedRewardRate(uint256 _minBoostedRewardRate) external;
 | Name                    | Type      | Description                      |
 | ----------------------- | --------- | -------------------------------- |
 | `_minBoostedRewardRate` | `uint256` | The new min boosted reward rate. |
+
+### setBoostMultiplier
+
+Sets the boost multiplier parameter for the reward formula.
+
+_This function can only be called by the owner, which is the governance address._
+
+```solidity
+function setBoostMultiplier(uint256 _boostMultiplier) external;
+```
+
+**Parameters**
+
+| Name               | Type      | Description               |
+| ------------------ | --------- | ------------------------- |
+| `_boostMultiplier` | `uint256` | The new boost multiplier. |
+
+### setRewardConvexity
+
+Sets the reward convexity parameter for the reward formula.
+
+_This function can only be called by the owner, which is the governance address._
+
+```solidity
+function setRewardConvexity(uint256 _rewardConvexity) external;
+```
+
+**Parameters**
+
+| Name               | Type      | Description               |
+| ------------------ | --------- | ------------------------- |
+| `_rewardConvexity` | `uint256` | The new reward convexity. |
 
 ### setDistributor
 
@@ -185,6 +283,36 @@ event MinBoostedRewardRateChanged(uint256 oldMinBoostedRewardRate, uint256 newMi
 | `oldMinBoostedRewardRate` | `uint256` | The old min boosted reward rate. |
 | `newMinBoostedRewardRate` | `uint256` | The new min boosted reward rate. |
 
+### BoostMultiplierChanged
+
+Emitted when the boostMultiplier parameter has changed.
+
+```solidity
+event BoostMultiplierChanged(uint256 oldBoostMultiplier, uint256 newBoostMultiplier);
+```
+
+**Parameters**
+
+| Name                 | Type      | Description                         |
+| -------------------- | --------- | ----------------------------------- |
+| `oldBoostMultiplier` | `uint256` | The old boost multiplier parameter. |
+| `newBoostMultiplier` | `uint256` | The new boost multiplier parameter. |
+
+### RewardConvexityChanged
+
+Emitted when the reward formula convexity parameter has changed.
+
+```solidity
+event RewardConvexityChanged(uint256 oldRewardConvexity, uint256 newRewardConvexity);
+```
+
+**Parameters**
+
+| Name                 | Type      | Description                                 |
+| -------------------- | --------- | ------------------------------------------- |
+| `oldRewardConvexity` | `uint256` | The old reward formula convexity parameter. |
+| `newRewardConvexity` | `uint256` | The new reward formula convexity parameter. |
+
 ### SetDistributor
 
 Emitted when the distributor is set.
@@ -198,14 +326,14 @@ event SetDistributor(address indexed rewardDistribution);
 Emitted when the rewards for the specified block have been processed.
 
 ```solidity
-event BlockRewardProcessed(uint256 blockNumber, uint256 baseRate, uint256 commissionRate, uint256 rewardRate);
+event BlockRewardProcessed(bytes indexed pubkey, uint64 nextTimestamp, uint256 baseRate, uint256 rewardRate);
 ```
 
 **Parameters**
 
-| Name             | Type      | Description                                                                          |
-| ---------------- | --------- | ------------------------------------------------------------------------------------ |
-| `blockNumber`    | `uint256` | The block number that was processed.                                                 |
-| `baseRate`       | `uint256` | The base amount of BGT minted to either the coinbase or the coinbase operator.       |
-| `commissionRate` | `uint256` | The commission amount of BGT minted to either the coinbase or the coinbase operator. |
-| `rewardRate`     | `uint256` | The amount of BGT minted to the distributor.                                         |
+| Name            | Type      | Description                                                |
+| --------------- | --------- | ---------------------------------------------------------- |
+| `pubkey`        | `bytes`   | The validator's pubkey.                                    |
+| `nextTimestamp` | `uint64`  | The timestamp of the next beacon block that was processed. |
+| `baseRate`      | `uint256` | The base amount of BGT minted to the validator's operator. |
+| `rewardRate`    | `uint256` | The amount of BGT minted to the distributor.               |

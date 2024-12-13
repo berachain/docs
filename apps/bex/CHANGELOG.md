@@ -1,5 +1,20 @@
 # @berachain/bex
 
+## 1.1.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
+## 1.1.4
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
 ## 1.1.3
 
 ### Patch Changes

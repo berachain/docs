@@ -1,17 +1,33 @@
 # @berachain/berps
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
+## 1.1.8
+
+### Patch Changes
+
+- Berps typo errors
+
+## 1.1.7
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
+>>>>>>> origin/next
 ## 1.1.6
 
 ### Patch Changes
 
 - Various grammar and typo fixes for Berps
 
-=======
->>>>>>> b457b09 (chore: 🤖 Bumped versioning)
-=======
->>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
 ## 1.1.5
 
 ### Patch Changes
