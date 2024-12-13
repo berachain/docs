@@ -1,6 +1,6 @@
 # Single Swap
 
-A single swap in BEX allows users to exchange one token for another within a single liquidity pool by calling the `swap` function on the BEX Vault.
+A single swap in BeraSwap allows users to exchange one token for another within a single liquidity pool by calling the `swap` function on the BeraSwap Vault. This function is implemented in the [Vault contract](/developers/contracts/vault), which serves as the main entry point for all BeraSwap operations.
 
 ## Swap
 
