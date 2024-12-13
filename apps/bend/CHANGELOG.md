@@ -1,5 +1,20 @@
 # @berachain/bend
 
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
+## 1.1.7
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
 ## 1.1.6
 
 ### Patch Changes

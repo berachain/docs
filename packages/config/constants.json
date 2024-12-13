@@ -80,6 +80,12 @@
     }
   },
   "contracts": {
+    "beaconDeposit": {
+      "name": "BeaconDeposit",
+      "address": "0x0000000000000000000000000000000000000000",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
+      "docsUrl": "/developers/contracts/beacondeposit"
+    },
     "berachef": {
       "name": "Berachef",
       "address": "0xfb81E39E3970076ab2693fA5C45A07Cc724C93c2",
@@ -134,6 +140,12 @@
       "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactory.json",
       "docsUrl": "/developers/contracts/honey-factory"
     },
+    "honeyFactoryReader": {
+      "name": "Honey Factory Reader",
+      "address": "0xAd1782b2a7020631249031618fB1Bd09CD926b31",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactoryReader.json",
+      "docsUrl": "/developers/contracts/honey-factory-reader"
+    },
     "honey": {
       "name": "Honey Token",
       "address": "0x0E4aaF1351de4c0264C5c7056Ef3777b41BD8e03",
@@ -158,17 +170,17 @@
       "abi": "",
       "docsUrl": "/developers/contracts/permit2"
     },
-    "rewardsVault": {
-      "name": "Rewards Vault",
+    "rewardVault": {
+      "name": "Reward Vault",
       "address": "",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVault.json",
-      "docsUrl": "/developers/contracts/rewards-vault"
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
+      "docsUrl": "/developers/contracts/reward-vault"
     },
-    "rewardsVaultFactory": {
-      "name": "Rewards Vault Factory",
+    "rewardVaultFactory": {
+      "name": "Reward Vault Factory",
       "address": "0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/core/BerachainRewardsVaultFactory.json",
-      "docsUrl": "/developers/contracts/rewards-vault-factory"
+      "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVaultFactory.json",
+      "docsUrl": "/developers/contracts/reward-vault-factory"
     },
     "timelock": {
       "name": "Timelock",
@@ -550,7 +562,7 @@
     },
     "crocQuery": {
       "name": "CrocQuery",
-      "address": "0x8685CE9Db06D40CBa73e3d09e6868FE476B5dC89",
+      "address": "0x31DAc06019D983f79cEAc819fAAC0612518597D7",
       "abi": "https://github.com/berachain/doc-abis/blob/main/bex/CrocQuery.json",
       "docsUrl": ""
     },

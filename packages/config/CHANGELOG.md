@@ -1,5 +1,11 @@
 # @berachain/config
 
+## 1.2.0
+
+### Minor Changes
+
+- Update contract interfaces and migration guide
+
 ## 1.1.1
 
 ### Patch Changes

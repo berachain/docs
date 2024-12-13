@@ -47,7 +47,33 @@ layout: page
   />
 </section>
 
-## More Berachain Resources
+## More Berachain Docs
+
+<section class="features">
+  <Feature
+    title="Core Docs"
+    description="Berachain Core Docs"
+    :link="config.websites.docsCore.url"
+    image="/assets/BERA.png"
+    type="alt"
+  />
+  <Feature
+    title="Bend Docs"
+    description="Berachain Native Lending Docs"
+    :link="config.websites.docsBend.url"
+    image="/assets/BEND.png"
+    type="alt"
+  />
+  <Feature
+    title="BEX Docs"
+    description="Berachain Native DEX Docs"
+    :link="config.websites.docsBex.url"
+    image="/assets/BEX.png"
+    type="alt"
+  />
+</section>
+
+## Other Berachain Resources
 
 <section class="features">
   <Feature
@@ -55,54 +81,63 @@ layout: page
     description="BeaconKit Repo"
     link="https://github.com/berachain/beacon-kit"
     :icon="IconBrandGithub"
+    type="alt"
   />
   <Feature
     title="Beratrail"
     description="Block Explorer"
     :link="config.testnet.dapps.beratrail.url"
     :icon="IconSearch"
+    type="alt"
   />
   <Feature
     title="Faucet"
     description="Get Testnet Tokens"
     :link="config.testnet.dapps.faucet.url"
     :icon="IconDroplet"
+    type="alt"
   />
   <Feature
     title="BGT Station"
     description="Manage $BGT"
     :link="config.testnet.dapps.bgtStation.url"
     :icon="IconGavel"
+    type="alt"
   />
   <Feature
     title="BEX"
     description="Berachain Native DEX"
     :link="config.testnet.dapps.bex.url"
     :icon="IconRefresh"
+    type="alt"
   />
   <Feature
     title="Berps"
     description="Berachain Native Perps"
     :link="config.testnet.dapps.berps.url"
     :icon="IconChartHistogram"
+    type="alt"
   />
   <Feature
     title="Bend"
     description="Berachain Native Lending"
     :link="config.testnet.dapps.bend.url"
     :icon="IconCoins"
+    type="alt"
   />
   <Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
     :link="config.testnet.dapps.honeySwap.url"
     :icon="IconMoneybag"
+    type="alt"
   />
   <Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
     :link="config.testnet.dapps.foundation.url"
     :icon="IconWorld"
+    type="alt"
   />
 </section>
 

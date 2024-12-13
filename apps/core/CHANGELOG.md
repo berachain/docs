@@ -1,59 +1,61 @@
 # @berachain/core
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 466899d (chore: 🤖 Version bump)
+## 2.1.0
+
+### Minor Changes
+
+- Update contract interfaces and migration guide
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
+## 2.0.1
+
+### Patch Changes
+
+- Update on validator system requirements
+- Update incentives logic
+
+## 2.0.0
+
+### Major Changes
+
+- Fix BGT fee sources in faq
+
+## 1.3.9
+
+### Patch Changes
+
+- Revised homepages to remove sidebar and emphasize other docs
+- Updated dependencies
+  - @berachain/ui@1.1.1
+
+## 1.3.8
+
+### Patch Changes
+
+- Added Alchemy RPC, Binance Web3 Wallet, & Keplr Wallet
+
 ## 1.3.7
 
 ### Patch Changes
 
 - Node Quickstart Tip For Non-MacOS Sed Commands
 
-<<<<<<< HEAD
-=======
->>>>>>> acbfe53 (chore: 🤖 Version bump)
-=======
->>>>>>> 466899d (chore: 🤖 Version bump)
-=======
->>>>>>> de34b28 (chore: 🤖 Version bump)
 ## 1.3.6
 
 ### Patch Changes
 
 - Adjusted bash cat command for correct directory for running node
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
-=======
->>>>>>> acbfe53 (chore: 🤖 Version bump)
-=======
->>>>>>> de5d9d7 (chore: 🤖 Bumped versioning)
-=======
->>>>>>> de34b28 (chore: 🤖 Version bump)
 ## 1.3.5
 
 ### Patch Changes
 
 - New RPC Validation Cloud Added
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b457b09 (chore: 🤖 Bumped versioning)
-=======
->>>>>>> 05a2b1c (chore: 🤖 Bumped versioning)
-=======
->>>>>>> f5392d4 (chore: 🤖 Bumped versioning)
-=======
->>>>>>> de5d9d7 (chore: 🤖 Bumped versioning)
 ## 1.3.4
 
 ### Patch Changes
