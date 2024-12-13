@@ -1,12 +1,12 @@
 # Pool Exits in BeraSwap
 
 > **Important:** Calls to `exitPool()` must be made on the BeraSwap Vault contract! You cannot send this command directly to a pool.
-
 ## ExitPool Function
+
 
 ```solidity
 exitPool(
-    bytes32 poolId,
+    bytes32 poolId,s
     address sender,
     address recipient,
     ExitPoolRequest request
