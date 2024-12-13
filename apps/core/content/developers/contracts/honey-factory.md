@@ -296,7 +296,7 @@ function redeem(
 
 ### liquidate
 
-_Swap good collateral for blacklisted/bad collateral at a premium rate._
+_Swap good collateral for restricted collateral at a premium rate._
 
 ```solidity
 function liquidate(
@@ -605,7 +605,7 @@ function _getCollateralWeights(bool filterBadCollaterals) internal view returns 
 
 | Name                 | Type    | Description                                    |
 | ------------------- | ------- | ---------------------------------------------- |
-| `filterBadCollaterals` | `bool` | Whether to exclude blacklisted collateral     |
+| `filterBadCollaterals` | `bool` | Whether to exclude restricted collateral     |
 
 **Returns**
 
