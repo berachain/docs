@@ -70,7 +70,7 @@ const SIDEBAR = {
         { text: "BEX", link: "/learn/dapps/bex" },
         { text: "Bend", link: "/learn/dapps/bend" },
         { text: "Berps", link: "/learn/dapps/berps" },
-        { text: "BeraHub", link: "/learn/dapps/beraswap" },
+        { text: "BeraHub", link: "/learn/dapps/berahub" },
         { text: "Faucet", link: "/learn/dapps/faucet" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
