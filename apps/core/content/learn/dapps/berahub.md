@@ -2,24 +2,24 @@
 head:
   - - meta
     - property: og:title
-      content: Berachain BGT Station
+      content: Berachain's BeraHub
   - - meta
     - name: description
-      content: Berachain BGT Station is the place to manage all things $BGT
+      content: Berachain's BeraHub is the place to manage all things $BGT
   - - meta
     - property: og:description
-      content: Berachain BGT Station is the place to manage all things $BGT
+      content: Berachain's BeraHub is the place to manage all things $BGT
 ---
 
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# Berachain BGT Station 🐻⛓️
+# Berachain's BeraHub 🐻⛓️
 
 <a :href="config.testnet.dapps.bgtStation.url">
 
-![Berachain BGT Station dApp](/assets/dapp-bgtstation.png)
+![Berachain BGT Station dApp](/assets/berahub.png)
 
 </a>
 
