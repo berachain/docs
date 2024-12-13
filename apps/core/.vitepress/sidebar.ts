@@ -67,7 +67,7 @@ const SIDEBAR = {
     {
       text: "Native dApps",
       items: [
-        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
+        { text: "BEX", link: "/learn/dapps/bex" },
         { text: "Bend", link: "/learn/dapps/bend" },
         { text: "Berps", link: "/learn/dapps/berps" },
         { text: "BGT Station", link: "/learn/dapps/bgt-station" },
