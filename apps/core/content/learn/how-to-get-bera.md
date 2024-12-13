@@ -16,7 +16,7 @@ head:
 
 # How To Get $BERA 🐻
 
-$BERA is the network token used to send transactions on the blockchain, which is why it's sometimes called the "gas token." It's what pays for the transaction's gas.
+`$BERA` is the network token used to send transactions on the blockchain, which is why it's sometimes called the "gas token." It's what pays for the transaction's gas.
 
 Learn more about [$BERA Token](/learn/pol/tokens/bera).
 
@@ -40,12 +40,6 @@ Bridging services allow transferring tokens from one blockchain to another.
 
 ### LayerZero
 
-<a :href="config.testnet.thirdparty.layerzero.url">
-
 ![Berachain Bridging LayerZero](/assets/berachain-bridging-layerzero.png)
-
-</a>
-
-> <small><a :href="config.testnet.thirdparty.layerzero.url">{{config.testnet.thirdparty.layerzero.url}}</a></small>
 
 Bera can eventually be bridged from Ethereum Mainnet and other chains via LayerZero.
