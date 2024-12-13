@@ -1,23 +1,23 @@
-# Underlying Tokens in BEX
+# Underlying Tokens in BeraSwap
 
 ## Overview
 
-It's common to want to know what underlying tokens a BEX LP token represents. This documentation explains how to query this information directly from the BEX contract and LP tokens.
+It's common to want to know what underlying tokens a BeraSwap LP token represents. This documentation explains how to query this information directly from the BeraSwap contract and LP tokens.
 
-## Querying the BEX Contract and LP Tokens
+## Querying the BeraSwap Contract and LP Tokens
 
-The BEX contract can provide the exact number of tokens in a pool. By querying this information and calculating your share of the pool, you can determine your underlying token balances.
+The BeraSwap contract can provide the exact number of tokens in a pool. By querying this information and calculating your share of the pool, you can determine your underlying token balances.
 
 ### Step-by-Step Process
 
-1. Query the BEX contract for pool tokens and balances
+1. Query the BeraSwap contract for pool tokens and balances
 2. Calculate your pool share
 3. Calculate your underlying token balances
 
 ### Pseudocode
 
 ```solidity
-(tokens, balances, lastChangeBlock) = bex.getPoolTokens(poolId);
+(tokens, balances, lastChangeBlock) = beraswap.getPoolTokens(poolId);
 yourPoolShare = lpToken.balanceOf(yourAddress) / lpToken.totalSupply();
 uint256[] yourUnderlyingBalances = new uint256[](balances.length);
 for (i = 0; i < balances.length; i++) {
@@ -30,7 +30,7 @@ return (tokens, yourUnderlyingBalances);
 
 ### Pre-minted LP Tokens
 
-Some pools in BEX might have pre-minted LP tokens. In such cases:
+Some pools in BeraSwap might have pre-minted LP tokens. In such cases:
 
 1. Use `lpToken.getVirtualSupply()` instead of `lpToken.totalSupply()`
 2. If you've staked your LP tokens, calculate your total LP token balance as:
@@ -44,7 +44,7 @@ Let's say you want to know your underlying BERA and HONEY balances for a BERA/HO
 
 | Step | Action | Result |
 |------|--------|--------|
-| 1 | Query BEX | tokens = [BERA, HONEY], balances = [1000 BERA, 10000 HONEY] |
+| 1 | Query BeraSwap | tokens = [BERA, HONEY], balances = [1000 BERA, 10000 HONEY] |
 | 2 | Get LP token balance | yourLpTokens = 100 |
 | 3 | Get total LP supply | totalLpSupply = 1000 |
 | 4 | Calculate pool share | yourPoolShare = 100 / 1000 = 0.1 (10%) |
