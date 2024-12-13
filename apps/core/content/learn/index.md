@@ -37,7 +37,7 @@ Proof-of-Liquidity is a [consensus mechanism](/learn/help/glossary#consensus-mec
 
 This framework makes it possible to strongly align the incentives of key stakeholders / [PoL participants](/learn/pol/participants) (validator, protocols, users) and contributes to the overall long-term health of the chain.
 
-Beyond providing a great day-one dApp experience, the native dApps, such as [BEX](/learn/dapps/bex), [Bend](/learn/dapps/bend) and [Berps](/learn/dapps/berps), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
+Beyond providing a great day-one dApp experience, the native dApps, such as [BeraSwap](/learn/dapps/beraswap), [Bend](/learn/dapps/bend) and [Berps](/learn/dapps/berps), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
 
 Read more in [What Is Proof-of-Liquidity](/learn/what-is-proof-of-liquidity).
 
