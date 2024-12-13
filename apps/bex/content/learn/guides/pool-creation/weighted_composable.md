@@ -59,7 +59,6 @@ An additional 0.1% protocol fee is automatically added to each swap and directed
    - Ensure complementary token relationships
 
 2. **Weight Distribution**
-   - Align weights with your investment strategy
    - Consider market capitalization
    - Account for token volatility
 
