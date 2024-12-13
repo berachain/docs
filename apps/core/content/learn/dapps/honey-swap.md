@@ -19,7 +19,7 @@ head:
 
 <a :href="config.testnet.dapps.honeySwap.url">
 
-![Beracahin Honey Swap dApp](/assets/dapp-honeyswap.png)
+![Beracahin Honey Swap dApp](/assets/honey_swap.png)
 
 </a>
 
