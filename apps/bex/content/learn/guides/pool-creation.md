@@ -72,5 +72,3 @@ For Stable Pools:
 - The pool assumes these tokens should maintain roughly equal prices
 
 It's important to set prices close to market rates to prevent immediate arbitrage.
-
-To prevent spam and ensure meaningful pools, BeraSwap requires users to permanently burn a small quantity of tokens when initializing a new pool.
