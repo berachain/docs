@@ -71,7 +71,6 @@ const SIDEBAR = {
         { text: "Bend", link: "/learn/dapps/bend" },
         { text: "Berps", link: "/learn/dapps/berps" },
         { text: "BGT Station", link: "/learn/dapps/bgt-station" },
-        { text: "Faucet", link: "/learn/dapps/faucet" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
           text: `${constants.testnet.dapps.beratrail.name}`,

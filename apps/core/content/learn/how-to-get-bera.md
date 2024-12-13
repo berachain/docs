@@ -20,20 +20,6 @@ head:
 
 Learn more about [$BERA Token](/learn/pol/tokens/bera).
 
-## Faucet 💧
-
-A Faucet is a tool that easily allows for developers to gain access to Testnet Tokens in the form of `$BERA` for Berachain's Testnet at no cost.
-
-<a :href="config.testnet.dapps.faucet.url">
-
-![Berachain Testnet Faucet](/assets/berachain-testnet-faucet.png)
-
-</a>
-
-> <small><a :href="config.testnet.dapps.faucet.url">{{config.testnet.dapps.faucet.url}}</a></small>
-
-See more faucets in [Native dApps > Faucet](/learn/dapps/faucet).
-
 ## Bridging 🤝
 
 Bridging services allow transferring tokens from one blockchain to another.
