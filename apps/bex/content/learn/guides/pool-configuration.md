@@ -41,7 +41,6 @@ Stable pools are specifically designed for tokens that maintain similar values, 
 
 - Add similar amounts of each token
 - Maintain balanced ratios (e.g., 1:1 for stablecoin pairs)
-- Minimum liquidity requirements apply to prevent spam
 
 ![Set Initial Liquidity](/assets/stable_set_liquidity.png)
 
