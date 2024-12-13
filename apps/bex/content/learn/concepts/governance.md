@@ -13,32 +13,37 @@ head:
 
 # Governance
 
-Governance in BEX is administered through the `CrocPolicy` contract. Within this contract, there are three several governance roles:
+Governance in BEX is administered through the `TimelockAuthorizer` contract. Within this system, there are three primary governance roles:
 
-- Operations
-- Treasury
-- Emergency
+- Admin
+- Authorizer Adaptor
+- Coordinator
 
-During the testnet, these roles are run by a Berachain Foundation multi-sig wallet. At mainnet launch, these roles will be divided amongst multi-sig wallets, and BGT governance.
+On testnet, these roles are managed by the Berachain Foundation multi-sig wallet. During mainnet, these roles will be transferred to a combination of protocol-owned multi-sigs and BGT governance.
 
-## Operations
+## Admin
+The admin role is responsible for managing the day-to-day operations of the BEX protocol, and has the most direct control over protocol parameters. Its powers include:
 
-The operations role is responsible for managing the day-to-day operations of the BEX protocol, and has a more limited scope of powers compared to the other roles. Its powers include:
+- Managing protocol parameters
+- Implementing governance decisions
+- Executing emergency actions
+- Overseeing operational changes
 
-- Enabling or disabling new pool types
-- Setting protocol fees
-- Set a minimum initial liquidity value for all new pools
+## Authorizer Adaptor
+The authorizer adaptor role serves as the permission management interface for the protocol. Its powers include:
 
-## Treasury
+- Controlling access to protocol functions
+- Managing role assignments and permissions
+- Enforcing permission checks on all actions
+- Adapting between single-admin and multi-admin systems
+- Interfacing with the timelock system
 
-The treasury role is the most privileged role within the BEX protocol. Its powers include:
+## Coordinator
+The coordinator role handles the execution of governance actions and ensures proper sequencing. Its powers include:
 
-- All the powers of the operations role
-- Ability to upgrade BEX proxy contracts
-- Collecting accumulated protocol fees
-- Disabling or enabling the `swap()` hot path flag
-- Disabling or enabling safe mode, which freezes all user activities and funds
+- Managing staged governance actions
+- Controlling execution timing and delays
+- Ensuring proper order of operations
+- Verifying successful completion of changes
+- Handling emergency cancellations when needed
 
-## Emergency
-
-The emergency role has all of the powers of the operations role, including the ability to disable or enabling safe mode, which freezes all user activities and funds.
