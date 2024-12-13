@@ -42,7 +42,13 @@ const SIDEBAR = {
             { text: "Proof of Liquidity", link: "/learn/guides/liquidity/pol" },
           ],
         },
-        { text: "Pool Creation", link: "/learn/guides/pool-creation" },
+        {
+          text: "Pool Creation",
+          items: [
+            { text: "Weighted Composable", link: "/learn/guides/pool-creation/weighted_composable" },
+            { text: "Stable Pools", link: "/learn/guides/pool-creation/stable_pool" },
+          ],
+        },
       ],
     },
   ],
