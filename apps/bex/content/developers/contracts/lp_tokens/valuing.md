@@ -14,7 +14,7 @@ The Net Asset Value (NAV) of an LP token is calculated as:
 
 Where:
 - Balance₍ᵢ₎ is the balance of token i in the pool
-- Price₍ᵢ₎ is the price of token i
+- Price₍ᵢ₎ is the market price of token i (e.g., from an oracle or price feed)
 - Supply₍ₗₚ₎ is the total supply of LP tokens
 
 ### Pseudocode
