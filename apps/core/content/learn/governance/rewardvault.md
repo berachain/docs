@@ -14,7 +14,7 @@ Reward Vaults are smart contracts that enable validators to share their `$BGT` r
 
 This mechanism is central to Berachain's [Reward Vaults](/developers/contracts/reward-vault) system.
 
-[More about Reward Vaults](/developers/contracts/rewards-vault)
+[More about Reward Vaults](/developers/contracts/reward-vault)
 
 ## Governance and Reward Vaults
 

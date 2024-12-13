@@ -10,7 +10,7 @@ From the perspective of an application on Berachain, the PoL system is fundament
 
 The dev work for all PoL integrations essentially boil down to:
 
-1. Deploying a Reward Vault from the [factory contract](../contracts/rewards-vault-factory.md)
+1. Deploying a Reward Vault from the [factory contract](../contracts/reward-vault-factory.md)
 2. Design an ERC20 token that is minted when users perform actions you would like to incentivize
 3. Have these ERC20 positions staked in your Reward Vault
 
