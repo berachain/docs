@@ -1,11 +1,12 @@
-# Batch Swaps in BEX
-BEX allows multi-hop swaps, or "batch swaps", which can optimize routes across multiple liquidity pools to find the best prices.
+# Batch Swaps in BeraSwap
 
-The BEX Vault contract exposes the `batchSwap` function to allow multi-hop swaps.
+BeraSwap allows multi-hop swaps, or "batch swaps", which can optimize routes across multiple liquidity pools to find the best prices.
+
+The BeraSwap Vault contract exposes the `batchSwap` function to allow multi-hop swaps.
 
 ## Functions
 
-### BatchSwap Function
+### BatchSwap 
 
 ```solidity
 function batchSwap(SwapKind kind,
@@ -29,7 +30,7 @@ function batchSwap(SwapKind kind,
 |---------|------|-------------|
 | assetDeltas | int256[] | Net token balances resulting from the swap |
 
-### QueryBatchSwap Function
+### QueryBatchSwap 
 
 ```solidity
 function queryBatchSwap(SwapKind kind,
@@ -67,17 +68,7 @@ struct BatchSwapStep {
 | amount | uint256 | The amount to swap, interpretation depends on `kind` |
 | userData | bytes | Additional data required by the pool for the swap |
 
-**Important:** When `amount` is set to 0 in a multi-hop swap, BEX will use the full output of the previous step as input.
-
-> **Note:** The `SwapKind` parameter in the `batchSwap` function determines how swap amounts are interpreted:
-> 
-> - **GIVEN_IN**: Specify the exact amount of tokens to swap in. The function calculates and returns the amount of tokens you'll receive.
->   Example: "Swap exactly 100 USDC for as much ETH as possible."
-> 
-> - **GIVEN_OUT**: Specify the exact amount of tokens to receive. The function calculates and returns the amount of tokens you need to swap in.
->   Example: "Receive exactly 1 ETH, how much USDC do I need to swap?"
-> 
-> The choice between GIVEN_IN and GIVEN_OUT affects how the `amount` field in the `BatchSwapStep` struct is interpreted and how swap calculations are performed.
+**Important:** When `amount` is set to 0 in a multi-hop swap, BeraSwap will use the full output of the previous step as input.
 
 ### FundManagement
 
@@ -97,65 +88,71 @@ struct FundManagement {
 | recipient | address payable | The address receiving tokens after the swap |
 | toInternalBalance | bool | Whether to send tokens to internal balance |
 
+> **Note:** The `SwapKind` parameter in the `batchSwap` function determines how swap amounts are interpreted:
+> 
+> - **GIVEN_IN**: Specify the exact amount of tokens to swap in. The function calculates and returns the amount of tokens you'll receive.
+>   Example: "Swap exactly 100 USDC for as much ETH as possible."
+> 
+> - **GIVEN_OUT**: Specify the exact amount of tokens to receive. The function calculates and returns the amount of tokens you need to swap in.
+>   Example: "Receive exactly 1 ETH, how much USDC do I need to swap?"
+> 
+> The choice between GIVEN_IN and GIVEN_OUT affects how the `amount` field in the `BatchSwapStep` struct is interpreted and how swap calculations are performed.
 
-## Multi-hop Examples
+## Examples
 
-In these examples, we're swapping between `$USDC`, `$HONEY`, and `$DAI`. These tokens could be in different pools or the same pool.
+The following examples demonstrate different ways to use batch swaps in BeraSwap. These patterns can help developers optimize their trading strategies and reduce gas costs by combining multiple operations into single transactions.
 
-### Example 1: GIVEN_IN (`$USDC` -> `$HONEY` -> `$DAI`)
+### Multi-hop Examples
 
-In this "Given In" Batch Swap, a user wants to swap 1000 `$USDC` and find out how much `$DAI` they'll receive.
+Multi-hop swaps allow trading between tokens that don't have direct liquidity pools by routing through intermediate tokens. This can often result in better pricing than direct swaps.
 
-| Swap # | Amount | Token In | Token Out |
-|--------|--------|----------|-----------|
-| 0      | 1000   | `$USDC`  | `$HONEY`  |
-| 1      | 0      | `$HONEY` | `$DAI`    |
+#### Example 1: GIVEN_IN ($USDC -> $HONEY -> $DAI)
 
-The swap kind is `GIVEN_IN`, and the amount for the first swap is 1000. This will produce some amount of `$HONEY`, but we don't know exactly how much in advance.
+In this example, we want to swap 1000 $USDC through $HONEY to get $DAI. The swap is executed in two steps:
 
-The amount in the second swap is set to 0, which tells the multi-hop logic to use all of the `$HONEY` received from the first swap as input to the second swap.
+| Step | Amount | Token In | Token Out | Description |
+|------|---------|-----------|-----------|-------------|
+| 0    | 1000    | $USDC    | $HONEY   | Swap exact 1000 $USDC for $HONEY |
+| 1    | 0       | $HONEY   | $DAI     | Swap all received $HONEY for $DAI |
 
-### Example 2: GIVEN_OUT (`$USDC` -> `$HONEY` -> `$DAI`)
+By setting the second step's amount to 0, we ensure all $HONEY received from step 0 is used in step 1.
 
-In this "Given Out" Batch Swap, a user wants to receive exactly 500 `$DAI` and find out how much `$USDC` they need to provide.
+#### Example 2: GIVEN_OUT ($USDC -> $HONEY -> $DAI)
 
-| Swap # | Amount | Token Out | Token In |
-|--------|--------|-----------|----------|
-| 0      | 500    | `$DAI`    | `$HONEY` |
-| 1      | 0      | `$HONEY`  | `$USDC`  |
+Here we want exactly 500 $DAI, and BeraSwap will calculate backwards how much $USDC we need:
 
-The swap kind is `GIVEN_OUT`, and the amount for the first swap is 500 `$DAI`. This will calculate how much `$HONEY` is needed, but we don't know the exact amount in advance.
+| Step | Amount | Token Out | Token In | Description |
+|------|---------|-----------|-----------|-------------|
+| 0    | 500     | $DAI     | $HONEY   | Request exact 500 $DAI output |
+| 1    | 0       | $HONEY   | $USDC    | Calculate required $USDC input |
 
-The amount in the second swap is set to 0, which tells the multi-hop logic to use the calculated amount of `$HONEY` from the first swap to determine how much `$USDC` is needed.
+The swap calculates first how much $HONEY is needed for 500 $DAI, then how much $USDC is needed for that amount of $HONEY.
 
-## Parallel Swap Examples
+### Parallel Swap Examples
 
-Parallel swaps are batch swaps with unrelated swaps being performed in parallel. This allows for executing multiple swaps in a single transaction, which can be more gas-efficient and convenient for users.
+Parallel swaps are batch swaps where multiple unrelated swaps are executed in parallel within a single transaction. This allows for efficient execution of multiple trades by batching them together, reducing overall gas costs compared to executing them separately.
 
-### Example 3: Parallel GIVEN_IN Swaps
+#### Example 3: Parallel GIVEN_IN Swaps
 
-Multiple unrelated swaps performed in parallel with known input amounts:
+Execute multiple independent swaps in a single transaction:
 
-| Swap # | Amount | Token In | Token Out |
-|--------|--------|----------|-----------|
-| 0      | 1000   | `$USDC`  | `$HONEY`  |
-| 1      | 0.5    | `$WETH`  | `$DAI`    |
-| 2      | 0.01   | `$WBTC`  | `$USDC`   |
+| Step | Amount | Token In | Token Out | Description |
+|------|---------|-----------|-----------|-------------|
+| 0    | 1000    | $USDC    | $HONEY   | Swap 1000 $USDC for $HONEY |
+| 1    | 0.5     | $WETH    | $DAI     | Swap 0.5 $WETH for $DAI |
+| 2    | 0.01    | $WBTC    | $USDC    | Swap 0.01 $WBTC for $USDC |
 
-User provides specified amounts of input tokens and receives computed amounts of output tokens.
+Each swap is independent and executes in parallel, optimizing gas usage.
 
-### Example 4: Combined GIVEN_OUT Swaps
+#### Example 4: Combined GIVEN_OUT Swaps
 
-Combination of multi-hop and single-hop swaps with specified output amounts:
+Mix multi-hop and single-hop swaps in one transaction:
 
-| Swap # | Amount | Token Out | Token In |
-|--------|--------|-----------|----------|
-| 0      | 100    | `$DAI`    | `$HONEY` |
-| 1      | 0      | `$HONEY`  | `$USDC`  |
-| 2      | 0.05   | `$WETH`   | `$USDC`  |
-| 3      | 0.005  | `$WBTC`   | `$USDC`  |
+| Step | Amount | Token Out | Token In | Description |
+|------|---------|-----------|-----------|-------------|
+| 0    | 100     | $DAI     | $HONEY   | Multi-hop: Request 100 $DAI |
+| 1    | 0       | $HONEY   | $USDC    | Multi-hop: Calculate $USDC needed |
+| 2    | 0.05    | $WETH    | $USDC    | Single-hop: Get 0.05 $WETH |
+| 3    | 0.005   | $WBTC    | $USDC    | Single-hop: Get 0.005 $WBTC |
 
-Swaps 0-1: Multi-hop ($USDC -> $HONEY -> $DAI)
-Swaps 2-3: Single-hop ($USDC -> $WETH, $USDC -> $WBTC)
-
-User specifies desired output amounts; protocol computes required $USDC input.
+Steps 0-1 form a multi-hop swap ($USDC -> $HONEY -> $DAI), while steps 2-3 are independent single-hop swaps. All execute in a single transaction.
