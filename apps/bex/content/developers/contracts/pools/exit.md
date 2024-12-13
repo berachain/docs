@@ -2,7 +2,7 @@
 
 > **Important:** Calls to `exitPool()` must be made on the BeraSwap Vault contract! You cannot send this command directly to a pool.
 
-## API
+## ExitPool Function
 
 ```solidity
 exitPool(
