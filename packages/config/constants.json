@@ -15,7 +15,10 @@
       "bex": {
         "name": "Berachain BEX",
         "url": "https://bartio.bex.berachain.com/",
-        "apiUrl": "https://bartio-bex-router.berachain-devnet.com/"
+        "apiUrl": "https://bartio-bex-router.berachain-devnet.com/",
+        "balancerSubgraphUrl": "https://api.goldsky.com/api/public/project_clq1h5ct0g4a201x18tfte5iv/subgraphs/bex-subgraph/cartio-v0.0.3/gn",
+        "balancerApiUrl": "https://cartio-bexapi.berachain.com/graphql",
+        "examplePoolId": "0x3ad1699779ef2c5a4600e649484402dfbd3c503c000200000000000000000004"
       },
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
