@@ -10,9 +10,10 @@ It's common to want to know the value of a BeraSwap LP token. This generally com
 
 The Net Asset Value (NAV) of an LP token is calculated as:
 
-![LP Token Price Equation](/assets/equation.png)
+$$Price_{LP\ token} = \frac{\sum_i(Balance_i \times Price_i)}{Supply_{LP\ Tokens}}$$
 
 Where:
+
 - Balance₍ᵢ₎ is the balance of token i in the pool
 - Price₍ᵢ₎ is the market price of token i (e.g., from an oracle or price feed)
 - Supply₍ₗₚ₎ is the total supply of LP tokens
@@ -53,12 +54,12 @@ myLpTokenValueUsd = myLpTokens * lpTokenPriceUsd;
 
 Let's value LP tokens for a `$BERA/$HONEY` pool:
 
-| Step | Action | Result |
-|------|--------|--------|
-| 1 | Query BeraSwap | tokens = [`$BERA`, `$HONEY`], balances = [1000 BERA, 10000 HONEY] |
-| 2 | Fetch prices | prices = [$10 (BERA), $1 (HONEY)] |
-| 3 | Calculate pool value | poolValueUsd = (1000 * $10) + (10000 * $1) = $20,000 |
-| 4 | Get total LP supply | totalLpSupply = 1000 |
-| 5 | Calculate LP token price | lpTokenPriceUsd = $20,000 / 1000 = $20 |
+| Step | Action                   | Result                                                            |
+| ---- | ------------------------ | ----------------------------------------------------------------- |
+| 1    | Query BeraSwap           | tokens = [`$BERA`, `$HONEY`], balances = [1000 BERA, 10000 HONEY] |
+| 2    | Fetch prices             | prices = [$10 (BERA), $1 (HONEY)]                                 |
+| 3    | Calculate pool value     | poolValueUsd = (1000 _ $10) + (10000 _ $1) = $20,000              |
+| 4    | Get total LP supply      | totalLpSupply = 1000                                              |
+| 5    | Calculate LP token price | lpTokenPriceUsd = $20,000 / 1000 = $20                            |
 
 In this example, each LP token is worth $20.
