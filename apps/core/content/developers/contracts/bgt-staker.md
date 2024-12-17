@@ -6,108 +6,112 @@
 
 > <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.bgtStaker.address">{{config.contracts.bgtStaker.address}}</a><span v-if="config.contracts.bgtStaker.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bgtStaker.abi">ABI JSON</a></span></small>
 
-## State Variables
-
-### FEE_COLLECTOR
-
-The fee collector contract that is allowed to notify rewards.
-
-```solidity
-address public FEE_COLLECTOR;
-```
+A contract for staking BGT tokens without transferring them. BGT delegators stake in this contract and receive dApp fees.
 
 ## Functions
 
-### constructor
-
-```solidity
-constructor();
-```
-
-### initialize
-
-```solidity
-function initialize(
-    address _bgt,
-    address _feeCollector,
-    address _governance,
-    address _rewardToken
-)
-    external
-    initializer;
-```
-
-### onlyBGT
-
-```solidity
-modifier onlyBGT();
-```
-
-### onlyFeeCollector
-
-```solidity
-modifier onlyFeeCollector();
-```
-
-### \_authorizeUpgrade
-
-```solidity
-function _authorizeUpgrade(address newImplementation) internal override onlyOwner;
-```
-
 ### notifyRewardAmount
 
+Notify the staker of a new reward amount.
+
+_Can only be called by the fee collector._
+
 ```solidity
-function notifyRewardAmount(uint256 reward) external onlyFeeCollector;
+function notifyRewardAmount(uint256 reward) external;
 ```
+
+**Parameters**
+
+| Name     | Type      | Description                     |
+| -------- | --------- | ------------------------------- |
+| `reward` | `uint256` | The amount of reward to notify. |
 
 ### recoverERC20
 
+Recover ERC20 tokens.
+
+_Revert if the tokenAddress is the reward token._
+
+_Can only be called by the owner._
+
 ```solidity
-function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyOwner;
+function recoverERC20(address tokenAddress, uint256 tokenAmount) external;
 ```
+
+**Parameters**
+
+| Name           | Type      | Description                          |
+| -------------- | --------- | ------------------------------------ |
+| `tokenAddress` | `address` | The address of the token to recover. |
+| `tokenAmount`  | `uint256` | The amount of token to recover.      |
 
 ### setRewardsDuration
 
+Set the rewards duration.
+
+_Revert if the reward cycle has started._
+
+_Can only be called by the owner._
+
 ```solidity
-function setRewardsDuration(uint256 _rewardsDuration) external onlyOwner;
+function setRewardsDuration(uint256 _rewardsDuration) external;
 ```
+
+**Parameters**
+
+| Name               | Type      | Description           |
+| ------------------ | --------- | --------------------- |
+| `_rewardsDuration` | `uint256` | The rewards duration. |
 
 ### stake
 
+Stake BGT tokens.
+
+_Can only be called by the BGT contract._
+
 ```solidity
-function stake(address account, uint256 amount) external onlyBGT;
+function stake(address account, uint256 amount) external;
 ```
+
+**Parameters**
+
+| Name      | Type      | Description                 |
+| --------- | --------- | --------------------------- |
+| `account` | `address` | The account to stake for.   |
+| `amount`  | `uint256` | The amount of BGT to stake. |
 
 ### withdraw
 
+Withdraw BGT tokens.
+
+_Can only be called by the BGT contract._
+
 ```solidity
-function withdraw(address account, uint256 amount) external onlyBGT;
+function withdraw(address account, uint256 amount) external;
 ```
+
+**Parameters**
+
+| Name      | Type      | Description                    |
+| --------- | --------- | ------------------------------ |
+| `account` | `address` | The account to withdraw for.   |
+| `amount`  | `uint256` | The amount of BGT to withdraw. |
 
 ### getReward
 
-Claim the reward of the caller.
+Get the reward.
+
+_Get the reward for the caller._
 
 ```solidity
 function getReward() external returns (uint256);
 ```
 
-### \_safeTransferFromStakeToken
+**Returns**
 
-_Override the internal function to prevent transferring BGT._
-
-```solidity
-function _safeTransferFromStakeToken(address from, uint256 amount) internal override;
-```
-
-### \_safeTransferStakeToken
-
-_Override the internal function to prevent transferring BGT._
-
-```solidity
-function _safeTransferStakeToken(address to, uint256 amount) internal override;
-```
+| Name     | Type      | Description        |
+| -------- | --------- | ------------------ |
+| `<none>` | `uint256` | The reward amount. |
 
 ## Events
 
