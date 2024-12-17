@@ -19,13 +19,13 @@ head:
 
 <a :href="config.testnet.dapps.bgtStation.url">
 
-![Berachain BGT Station dApp](/assets/berahub.png)
+![Berachain BeraHub dApp](/assets/berahub.png)
 
 </a>
 
 > <small><a :href="config.testnet.dapps.bgtStation.url">{{config.testnet.dapps.bgtStation.url}}</a></small>
 
-BGT Station is the place to manage all things `$BGT`.
+BeraHub is the place to manage all things `$BGT`.
 
 Users can expect to:
 
