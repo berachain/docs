@@ -24,43 +24,25 @@ head:
   <Token title="$HONEY" image="/assets/HONEY.png" />
 </ClientOnly>
 
-Stability is a desirable property in a medium of exchange, in contrast to transacting with volatile crypto assets. `$HONEY` is Berachain's native stablecoin, designed to provide a stable and reliable means of exchange within the Berachain ecosystem and beyond. `$HONEY` aims to maintain a peg 1 USD.
+Stability is a desirable property in a medium of exchange, in contrast to transacting with volatile crypto assets. `$HONEY` is Berachain's native stablecoin, designed to provide a stable and reliable means of exchange within the Berachain ecosystem and beyond. `$HONEY` aims to maintain a soft peg 1 USD.
 
 ## What is $HONEY?
 
-`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) a diverse range of crypto collateral. This multi-collateral approach to `$HONEY`'s backing enhances its stability and resilience.
+`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) stgUSDC and Bee (PYUSD), and in the future governance could approve other assets.
 
 ## How to Get $HONEY?
 
-`$HONEY` can minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. Different assets eligible as `$HONEY` collateral are stored in different vault contracts. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
+`$HONEY` can be minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
 
-Alternatively, `$HONEY` can be obtained by trading other assets on the [Berachain Bex](https://artio.bex.berachain.com).
+Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain Bex, or borrowed on Bend.
 
 ## What determines which assets collateralize $HONEY?
 
-Governance determines which assets can be used to mint $HONEY.
+The initial collateral options will be `stgUSDC` and `BEE` (`$pyUSD`). New assets used to mint `$HONEY` can be added via governance.
 
 ## How is $HONEY Used?
 
-$HONEY shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. However, `$HONEY` also has a number of unique use cases within the Berachain ecosystem, including:
-
-### Lending - Bend
-
-Bend uses `$HONEY` by letting users add to the bend's `$HONEY` liquidity pool and it earns interest on it by supplying.
-
-For users that supply their `$HONEY`, they receive an equivalent token as <a target="_blank" rel="no-referrer" :href="config.websites.docsBend.url + '/learn/lending-protocol/tokens#atokens'">`$aHONEY`</a>.
-
-`$HONEY` is the only asset that Bend accepts to earn an interest on.
-
-### Borrowing - Bend
-
-Bend also uses `$HONEY` as the base token that users can borrow against assets they provide as collateral.
-
-### Perpetual Futures - Berps
-
-Berps uses `$HONEY` as the base token for all trading collateral, payouts, and deposits. For example, in order to enter a levered long position in ETH, they must first deposit an appropriate amount of `$HONEY`.
-
-Alternatively, `$HONEY` holders can passively earn by providing trading liquidity in the `$bHONEY` vault. `$bHONEY` vault depositors earn trading fees generated from Berps and serve as the counterparty to traders' positions. For example, if a trader gets liquidated, the `$HONEY` collateral of that position is distributed to those staking in the `$bHONEY` vault.
+`$HONEY` shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. `$HONEY` could be used within the Berachain ecosystem via native and ecosystem apps. 
 
 ## Minting $HONEY
 
@@ -71,13 +53,32 @@ A flow diagram of the `$HONEY` minting process is shown below:
 
 `$HONEY` is minted by depositing eligible collateral into specialized smart contracts called `$HONEY` vaults. Each vault is specific to a particular collateral type, with its own unique mint and redemption rate.
 
-In the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault in interacted with, and not the `$USDT` vault.
+In the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault in interacted with, and not the `$pyUSD` vault.
 
 ### Vault Router
 
 At the heart of the `$HONEY` minting process is the Vault Router contract. This contract acts as a central hub, connecting all the different `$HONEY` Vaults and is responsible for minting new `$HONEY` tokens.
 
 As shown in the diagram, users' deposits are routed through the Vault Router contract to the appropriate vault. The Vault Router custodies the shares minted by the vault (corresponding to users' deposit) and mints `$HONEY` tokens to the user.
+
+## Depegging and Basket Mode
+
+Basket Mode is a safety mechanism that activates when when collateral assets become unstable. It affects both minting and redemption of Honey tokens in specific ways:
+
+**For Redemption:**
+
+- When any collateral asset depegs, Basket Mode automatically activates.
+- In this mode, users can't choose which asset they want to redeem their `$HONEY` for.
+- Instead, they must redeem for a proportional share of ALL collateral assets in the basket
+- For example, if you redeem 1 Honey token, you'll get:
+  - Some USDC based on its proportion in the vault
+  - Some pyUSD based on its proportion in the vault
+  - The proportions are calculated based on the current balance of each asset in the vault
+
+**For Minting:**
+
+- Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or blacklisted
+- In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
 
 ### Fees
 
@@ -87,13 +88,13 @@ Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` hol
 
 Let's consider an example with the following parameters:
 
-- User wishes to deposit `1,000 $USDC`
-- Mint rate for `$USDC` is set at `0.995` (`99.5%`)
+- User wishes to deposit `1,000 $stgUSD`
+- Mint rate for `$stgUSD` is set at `0.995` (`99.5%`)
 
 Here's how the minting process would work:
 
-1. The user deposits `1,000 $USDC` into the VaultRouter contract
-2. The VaultRouter transfers `1,000 $USDC` to the $USDC Vault and receives `1,000` vault shares in return
+1. The user deposits `1,000 $stgUSD` into the VaultRouter contract
+2. The VaultRouter transfers `1,000 $stgUSD` to the $stgUSD Vault and receives `1,000` vault shares in return
 3. The VaultRouter calculates the amount of $HONEY to mint:
 
 - `$HONEY` to mint = Vault shares × Mint rate

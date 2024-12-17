@@ -112,7 +112,7 @@ Each eligible (whitelisted) pool on BEX has an associated LP token. Once liquidi
 
 ## Can only Validators vote on or create proposals?
 
-Anyone with `$BGT` can propose and vote on proposals.
+Anyone with the required minimum amounts of `$BGT` can propose and vote on proposals.
 
 ## What is the actual staking token of the network, `$BERA` or `$BGT`?
 
@@ -121,11 +121,11 @@ Anyone with `$BGT` can propose and vote on proposals.
 
 ## Can validators with `$BERA` alone build blocks and what are the rewards?
 
-Yes, validators would get transaction fees and a `$BGT` base rate sent to their validator address.
+Yes, validators only need to stake `$BERA` to within the designated min and max range of 250K and 2.5M, and once in the active set they will propose blocks. Validators recieve rewards in `$BGT`.
 
 ## Do incentives only go to the validators with `$BGT` delegated to them?
 
-Incentives going to the validator are adjusted for the amount of `$BGT` the validator distributes.
+Incentives the validator recieves depends solely on the amount of incentives offered on any given reward vault that validator is choosing to fill.
 
 ## Can Reward Vaults route emissions to a single pool within a dApp, or only the whole dApp?
 

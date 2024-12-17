@@ -31,7 +31,7 @@ When a validator produces a block, BGT tokens are emitted through two emission c
 
 ## Validator Boosts
 
-Boost (x) is a crucial metric that determines a validator's reward emissions:
+Boost is a crucial metric that determines a validator's reward emissions:
 
 - Calculated as the percentage of BGT delegation a validator has compared to the total BGT delegated in the network
 - Expressed as a decimal between 0 and 1
@@ -42,7 +42,7 @@ Boost (x) is a crucial metric that determines a validator's reward emissions:
 
 The total BGT emitted per block is calculated using the following formula:
 
-$$emission = B + max(m, \frac{a + 1}{1 + ax^b} - 1R)$$
+$$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\right)\right]$$
 
 Where:
 
@@ -51,21 +51,21 @@ Where:
 
 ### Parameters
 
-| Parameter               | Description                                | Impact                                         |
-| ----------------------- | ------------------------------------------ | ---------------------------------------------- |
-| B (base rate)           | Fixed amount of 1 BGT for block production | Determines baseline validator rewards          |
-| R (reward rate)         | Base BGT amount for reward vaults          | Sets foundation for reward emissions           |
-| a (boost multiplier)    | Boost impact coefficient                   | Higher values increase boost importance        |
-| b (convexity parameter) | Boost impact curve steepness               | Higher values penalize low boost more severely |
-| m (minimum reward)      | Floor for reward vault emissions           | Higher values benefit low-boost validators     |
+| Parameter | Description | Impact |
+| --- | --- | --- |
+| B (base rate) | Fixed amount of 1 BGT for block production | Determines baseline validator rewards |
+| R (reward rate) | Base BGT amount for reward vaults | Sets foundation for reward emissions |
+| a (boost multiplier) | Boost impact coefficient | Higher values increase boost importance |
+| b (convexity parameter) | Boost impact curve steepness | Higher values penalize low boost more severely |
+| m (minimum boosted reward rate) | Floor for reward vault emissions | Higher values benefit low-boost validators |
 
 ### Sample Emissions Chart
 
 Using the following sample parameters, we can visualize how emissions scale with BGT delegation:
-$$B=1.5, R=1.5, a=3, b=0.5, m=0$$
-![chart showing how emissions scale with BGT delegation](/public/assets/emission.jpg)
+$$B = 0.5, R = 1.5, a = 3.5, b = 0.5, m = 1$$
+![chart showing how emissions scale with BGT delegation](/public/assets/updatedemission.png)
 
 ## Max Block Inflation
 
 BGT emissions grow with the amount of boost a validator has, up to a cap. The Maximum theoretical block emission occurs at 100% boost:
-$$max\space E[emission] = B + max(m, \frac{a + 1}{1 + a} - 1R)$$
+$$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$

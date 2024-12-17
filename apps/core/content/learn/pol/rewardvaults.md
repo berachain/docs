@@ -31,11 +31,15 @@ The amount of `$BGT` rewards a user earns from a reward vault is a function of:
 
 After staking assets in a reward vault, users are free to claim the earned rewards, add to their deposits, or withdraw their assets whenever they wish.
 
-$BGT farming with reward vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry for regular users.
+`$BGT` farming with reward vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry for regular users.
 
 ## How `$BGT` Ends up in Reward Vaults
 
-![Reward Vaults](/assets/cuttingboard.png)
+When a validator is chosen to propose a block, they direct some portion of their `$BGT` emissions to specific reward vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [emissions](./bgtmath.md).
+
+To understand why validators would choose to emit `$BGT` to a particular reward vault over another, refer to [Incentives](./incentives.md) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
+
+![Reward Vaults](/assets/rewardallocation.png)
 
 Validators direct some portion of their `$BGT` emissions to specific reward vaults of their choice.
 

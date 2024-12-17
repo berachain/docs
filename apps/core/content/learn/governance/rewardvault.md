@@ -23,14 +23,17 @@ While creating a Reward Vault is permissionless, for it to receive `$BGT` emissi
 ### Governance Process for Whitelisting
 
 1. **Meet `$BGT` Requirements**:
+
    - A minimum amount of `$BGT` is needed to create a proposal
    - `$BGT` can be acquired through participation in PoL on native dApps
 
 2. **Create and Submit Proposal**:
+
    - Proposals are submitted on-chain
    - There's a waiting period before voting begins
 
 3. **Voting Period**:
+
    - Active voting window
    - `$BGT` holders cast votes (quorum required)
 
@@ -39,23 +42,23 @@ While creating a Reward Vault is permissionless, for it to receive `$BGT` emissi
    - If declined: Marked as defeated, allowing for a new proposal after addressing concerns
 
 > **NOTE:** For specific testnet values such as required $BGT amounts, voting periods, and quorum requirements, please refer to the [Governance Overview](/learn/governance/) section.
-![Governance Process](/assets/governance-process.png)
+> ![Governance Process](/assets/governance-process.png)
 
 ## Reward Vault Models
 
 Different implementation patterns that protocols can use for their Reward Vaults:
 
-| Model | Description | User Flow | Protocol Benefits | Example Applications |
-|-------|-------------|-----------|-------------------|---------------------|
-| **Liquidity Staking/Vesting** | Users deposit/stake assets and receive receipt tokens for BGT eligibility | 1. Deposit assets<br>2. Receive receipt tokens<br>3. Stake in Reward Vault | - Increased liquidity depth<br>- Locked value<br>- User retention | - BEX LP staking<br>- Supply & Borrow from a lending protocol |
-| **Purchase Actions** | Incentivizes purchases in your application | 1. Purchase item in app<br>2. Recieve reciept tokens and stake into Reward Vault<br>3. Receive BGT rewards |- Reward users for more specific actions | - Purchasing assets in a game<br>- Participating in NFT mints |
-| **Retroactive Actions** | Rewards historical participation and loyalty | 1. Track participation<br>2. Meet criteria<br>3. Claim BGT rewards |  Community loyalty<br>- Historical recognition<br>- Long-term engagement | - OG NFT holder rewards<br>- Early user benefits |
-| **Self-Funding** | Community-driven initiatives | 1. Contribute to initiative<br>2. Receive reciept tokens representing your contribution<br>3. Stake for BGT rewards | Sustainable funding<br> Community alignment| - Public goods funding<br>- L2 bridge incentives |
-
+| Model                         | Description                                                               | User Flow                                                                                                           | Protocol Benefits                                                       | Example Applications                                          |
+| ----------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Liquidity Staking/Vesting** | Users deposit/stake assets and receive receipt tokens for BGT eligibility | 1. Deposit assets<br>2. Receive receipt tokens<br>3. Stake in Reward Vault                                          | - Increased liquidity depth<br>- Locked value<br>- User retention       | - BEX LP staking<br>- Supply & Borrow from a lending protocol |
+| **Purchase Actions**          | Incentivizes purchases in your application                                | 1. Purchase item in app<br>2. Recieve reciept tokens and stake into Reward Vault<br>3. Receive BGT rewards          | - Reward users for more specific actions                                | - Purchasing assets in a game<br>- Participating in NFT mints |
+| **Retroactive Actions**       | Rewards historical participation and loyalty                              | 1. Track participation<br>2. Meet criteria<br>3. Claim BGT rewards                                                  | Community loyalty<br>- Historical recognition<br>- Long-term engagement | - OG NFT holder rewards<br>- Early user benefits              |
+| **Self-Funding**              | Community-driven initiatives                                              | 1. Contribute to initiative<br>2. Receive reciept tokens representing your contribution<br>3. Stake for BGT rewards | Sustainable funding<br> Community alignment                             | - Public goods funding<br>- L2 bridge incentives              |
 
 ### Implementation Details
 
 Each model can be customized with:
+
 - Time-based rewards
 - Amount restrictions
 - Usage velocity metrics
