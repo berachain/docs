@@ -1,8 +1,8 @@
-# Pool Joins in BEX
+# Pool Joins in BeraSwap
 
-> Note: In this document, LP refers to the LP token of the pool, which represents a user's share of the liquidity pool.
+> **Important:** Calls to `joinPool()` must be made on the BeraSwap Vault contract! You cannot send this command directly to a pool.
 
-To add liquidity to a pool, you must call the `joinPool` function to the BEX Vault.
+To add liquidity to a pool, you must call the `joinPool` function on the BeraSwap Vault.
 
 ## JoinPool Function
 
@@ -15,6 +15,8 @@ joinPool(
 )
 ```
 
+### Arguments Explained
+
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | poolId | bytes32 | ID of the pool you're joining |
@@ -22,7 +24,7 @@ joinPool(
 | recipient | address | Address receiving LP tokens (usually the same as sender) |
 | request | JoinPoolRequest | Struct containing join details (see below) |
 
-## JoinPoolRequest Struct
+### JoinPoolRequest Struct
 
 ```solidity
 struct JoinPoolRequest {
@@ -36,9 +38,26 @@ struct JoinPoolRequest {
 | Field | Type | Description |
 |-------|------|-------------|
 | assets | address[] | Sorted list of all tokens in pool |
-| maxAmountsIn | uint256[] | Maximum token send amounts |
+| maxAmountsIn | uint256[] | Maximum token amounts to send |
 | userData | bytes | Custom bytes field for join parameters |
 | fromInternalBalance | bool | True if sending from internal token balances, false if sending ERC20 |
+
+### Token Ordering
+
+When providing assets, tokens must be sorted numerically by address. The values in `maxAmountsIn` correspond to the same index in `assets`, so these arrays must be created in parallel after sorting.
+
+### Maximum Amounts
+
+The `maxAmountsIn` parameter sets upper limits for tokens to send. This protects against price changes between transaction submission and execution.
+
+Best practice:
+1. Use `queryJoin` to calculate current token amounts needed
+2. Add slippage tolerance (e.g., multiply by 1.01 for 1% slippage)
+3. Use these adjusted amounts as `maxAmountsIn`
+
+### userData Encoding
+
+The `userData` field encodes the join type and parameters. Different pool types support different join kinds.
 
 ## JoinKind Enum
 
@@ -57,6 +76,8 @@ enum JoinKind {
 | EXACT_TOKENS_IN_FOR_LP_OUT | Send precise token quantities, receive estimated LP tokens |
 | TOKEN_IN_FOR_EXACT_LP_OUT | Send estimated single token quantity, receive precise LP tokens |
 | ALL_TOKENS_IN_FOR_EXACT_LP_OUT | Send estimated token quantities proportionally, receive precise LP tokens |
+
+> **Note:** When encoding `userData` for pools that include their own LP token, the LP tokens are not included except for `INIT` joins.
 
 ## userData Encoding
 
