@@ -29,7 +29,7 @@ The Distributor contract is responsible for distributing the block rewards from 
 
 `distributeFor`: Is called for distributing `$BGT` rewards to the cutting board receivers of the given validator. The prover serves the purpose of proving that the given validator has indeed proposed a given block to the `Distributor` contract to correspondingly distribute rewards.
 
-## BerachainRewardsVault.sol
+## RewardVault.sol
 
 Colloquially known as _Reward Vaults_. Reward Vaults are contracts in which users can stake their Proof of Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward Vaults additionally store incentives provided by protocols to distribute to validators upon receiving `$BGT`.
 

@@ -50,7 +50,8 @@ Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in
 
 ## BEX
 
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _DEX_ to _BEX_. Read more in [Native dApps - BEX](/learn/dapps/bex).
+
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _BEX_ to _BeraSwap_. Read more in [Native dApps > BeraSwap](/learn/dapps/beraswap).
 
 ## Berps
 

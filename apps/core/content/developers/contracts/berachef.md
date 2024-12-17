@@ -2,108 +2,110 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# IBeraChef
+# BeraChef
 
 > <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.berachef.address">{{config.contracts.berachef.address}}</a><span v-if="config.contracts.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.berachef.abi">ABI JSON</a></span></small>
 
-Interface of the BeraChef module which decides where Validators are directing their `$BGT` emissions to different Reward Vaults.
+Interface of the BeraChef module for configuring where Validators are directing their `$BGT` emissions to different Reward Vaults.
 
 ## Functions
 
-### getActiveCuttingBoard
+### getActiveRewardAllocation
 
-Returns the active cutting board for validator with given coinbase address
+Returns the active reward allocation for validator with given pubkey
 
 ```solidity
-function getActiveCuttingBoard(address valCoinbase) external view returns (CuttingBoard memory);
+function getActiveRewardAllocation(bytes calldata valPubkey) external view returns (RewardAllocation memory);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `valCoinbase` | `address` | The coinbase address of the validator. |
+| Name        | Type    | Description             |
+| ----------- | ------- | ----------------------- |
+| `valPubkey` | `bytes` | The validator's pubkey. |
 
 **Returns**
 
-| Name     | Type           | Description                            |
-| -------- | -------------- | -------------------------------------- |
-| `<none>` | `CuttingBoard` | cuttingBoard The active cutting board. |
+| Name     | Type               | Description                                    |
+| -------- | ------------------ | ---------------------------------------------- |
+| `<none>` | `RewardAllocation` | rewardAllocation The active reward allocation. |
 
-### getQueuedCuttingBoard
+### getQueuedRewardAllocation
 
-Returns the queued cutting board for a validator with given coinbase address
+Returns the queued reward allocation for a validator with given pubkey
 
 ```solidity
-function getQueuedCuttingBoard(address valCoinbase) external view returns (CuttingBoard memory);
+function getQueuedRewardAllocation(bytes calldata valPubkey) external view returns (RewardAllocation memory);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `valCoinbase` | `address` | The coinbase address of the validator. |
+| Name        | Type    | Description             |
+| ----------- | ------- | ----------------------- |
+| `valPubkey` | `bytes` | The validator's pubkey. |
 
 **Returns**
 
-| Name     | Type           | Description                            |
-| -------- | -------------- | -------------------------------------- |
-| `<none>` | `CuttingBoard` | cuttingBoard The queued cutting board. |
+| Name     | Type               | Description                                    |
+| -------- | ------------------ | ---------------------------------------------- |
+| `<none>` | `RewardAllocation` | rewardAllocation The queued reward allocation. |
 
-### getOperator
+### getSetActiveRewardAllocation
 
-Returns the operator address for a validator.
+Returns the active reward allocation set by the validator with given pubkey.
+
+_This will return active reward allocation set by validators even if its not valid._
 
 ```solidity
-function getOperator(address valCoinbase) external view returns (address);
+function getSetActiveRewardAllocation(bytes calldata valPubkey) external view returns (RewardAllocation memory);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `valCoinbase` | `address` | The coinbase address of the validator. |
+| Name        | Type    | Description             |
+| ----------- | ------- | ----------------------- |
+| `valPubkey` | `bytes` | The validator's pubkey. |
 
 **Returns**
 
-| Name     | Type      | Description                           |
-| -------- | --------- | ------------------------------------- |
-| `<none>` | `address` | operatorAddress the operator address. |
+| Name     | Type               | Description                             |
+| -------- | ------------------ | --------------------------------------- |
+| `<none>` | `RewardAllocation` | rewardAllocation The reward allocation. |
 
-### getDefaultCuttingBoard
+### getDefaultRewardAllocation
 
-Returns the default cutting board for validators that do not have a cutting board.
+Returns the default reward allocation for validators that do not have a reward allocation.
 
 ```solidity
-function getDefaultCuttingBoard() external view returns (CuttingBoard memory);
+function getDefaultRewardAllocation() external view returns (RewardAllocation memory);
 ```
 
 **Returns**
 
-| Name     | Type           | Description                             |
-| -------- | -------------- | --------------------------------------- |
-| `<none>` | `CuttingBoard` | cuttingBoard The default cutting board. |
+| Name     | Type               | Description                                     |
+| -------- | ------------------ | ----------------------------------------------- |
+| `<none>` | `RewardAllocation` | rewardAllocation The default reward allocation. |
 
-### isQueuedCuttingBoardReady
+### isQueuedRewardAllocationReady
 
-Returns the status of whether a queued cutting board is ready to be activated.
+Returns the status of whether a queued reward allocation is ready to be activated.
 
 ```solidity
-function isQueuedCuttingBoardReady(address valCoinbase, uint256 blockNumber) external view returns (bool);
+function isQueuedRewardAllocationReady(bytes calldata valPubkey, uint256 blockNumber) external view returns (bool);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `valCoinbase` | `address` | The coinbase address of the validator. |
-| `blockNumber` | `uint256` | The block number to be queried.        |
+| Name          | Type      | Description                     |
+| ------------- | --------- | ------------------------------- |
+| `valPubkey`   | `bytes`   | The validator's pubkey.         |
+| `blockNumber` | `uint256` | The block number to be queried. |
 
 **Returns**
 
-| Name     | Type   | Description                                                                         |
-| -------- | ------ | ----------------------------------------------------------------------------------- |
-| `<none>` | `bool` | isReady True if the queued cutting board is ready to be activated, false otherwise. |
+| Name     | Type   | Description                                                                             |
+| -------- | ------ | --------------------------------------------------------------------------------------- |
+| `<none>` | `bool` | isReady True if the queued reward allocation is ready to be activated, false otherwise. |
 
 ### isReady
 
@@ -111,7 +113,7 @@ Returns the status of whether the BeraChef contract is ready to be used.
 
 _This function should be used by all contracts that depend on a system call._
 
-_This will return false if the governance module has not set a default cutting board yet._
+_This will return false if the governance module has not set a default reward allocation yet._
 
 ```solidity
 function isReady() external view returns (bool);
@@ -123,218 +125,224 @@ function isReady() external view returns (bool);
 | -------- | ------ | ------------------------------------------------------------------ |
 | `<none>` | `bool` | isReady True if the BeraChef is ready to be used, false otherwise. |
 
-### setMaxNumWeightsPerCuttingBoard
+### setMaxNumWeightsPerRewardAllocation
 
-Sets the maximum number of weights per cutting board.
-
-```solidity
-function setMaxNumWeightsPerCuttingBoard(uint8 _maxNumWeightsPerCuttingBoard) external;
-```
-
-### setCuttingBoardBlockDelay
-
-Sets the delay in blocks before a new cutting board can be queued.
+Sets the maximum number of weights per reward allocation.
 
 ```solidity
-function setCuttingBoardBlockDelay(uint64 _cuttingBoardBlockDelay) external;
+function setMaxNumWeightsPerRewardAllocation(uint8 _maxNumWeightsPerRewardAllocation) external;
 ```
 
-### updateFriendsOfTheChef
+### setRewardAllocationBlockDelay
 
-Updates the friends of the chef, the status of whether a receiver is whitelisted or not.
+Sets the delay in blocks before a new reward allocation can be queued.
+
+```solidity
+function setRewardAllocationBlockDelay(uint64 _rewardAllocationBlockDelay) external;
+```
+
+### setVaultWhitelistedStatus
+
+Updates the vault's whitelisted status
 
 The caller of this function must be the governance module account.
 
 ```solidity
-function updateFriendsOfTheChef(address receiver, bool isFriend) external;
+function setVaultWhitelistedStatus(address receiver, bool isWhitelisted, string memory metadata) external;
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                                                                       |
-| ---------- | --------- | --------------------------------------------------------------------------------- |
-| `receiver` | `address` | The address to remove or add as a friend of the chef.                             |
-| `isFriend` | `bool`    | The whitelist status; true if the receiver is being whitelisted, false otherwise. |
+| Name            | Type      | Description                                                                       |
+| --------------- | --------- | --------------------------------------------------------------------------------- |
+| `receiver`      | `address` | The address to remove or add as whitelisted vault.                                |
+| `isWhitelisted` | `bool`    | The whitelist status; true if the receiver is being whitelisted, false otherwise. |
+| `metadata`      | `string`  | The metadata of the vault.                                                        |
 
-### setDefaultCuttingBoard
+### updateWhitelistedVaultMetadata
 
-Sets the default cutting board for validators that do not have a cutting board.
+Updates the metadata of a whitelisted vault, reverts if vault is not whitelisted.
+
+The caller of this function must be the governance module account.
+
+```solidity
+function updateWhitelistedVaultMetadata(address receiver, string memory metadata) external;
+```
+
+**Parameters**
+
+| Name       | Type      | Description                                                                    |
+| ---------- | --------- | ------------------------------------------------------------------------------ |
+| `receiver` | `address` | The address of the whitelisted vault.                                          |
+| `metadata` | `string`  | The metadata of the vault, to associate info with the vault in the events log. |
+
+### setDefaultRewardAllocation
+
+Sets the default reward allocation for validators that do not have a reward allocation.
 
 _The caller of this function must be the governance module account._
 
 ```solidity
-function setDefaultCuttingBoard(CuttingBoard calldata cuttingBoard) external;
+function setDefaultRewardAllocation(RewardAllocation calldata rewardAllocation) external;
 ```
 
 **Parameters**
 
-| Name           | Type           | Description                |
-| -------------- | -------------- | -------------------------- |
-| `cuttingBoard` | `CuttingBoard` | The default cutting board. |
+| Name               | Type               | Description                    |
+| ------------------ | ------------------ | ------------------------------ |
+| `rewardAllocation` | `RewardAllocation` | The default reward allocation. |
 
-### queueNewCuttingBoard
+### queueNewRewardAllocation
 
-Add a new cutting board to the queue for validator with given coinbase address.
+Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of
+existing queued reward allocation.
 
-_The weights of the cutting board must add up to 100% or 1e4. Only whitelisted pools may be used as well._
+_The weights of the reward allocation must add up to 100% or 1e4.
+Only whitelisted pools may be used as well._
 
 ```solidity
-function queueNewCuttingBoard(address valCoinbase, uint64 startBlock, Weight[] calldata weights) external;
+function queueNewRewardAllocation(bytes calldata valPubkey, uint64 startBlock, Weight[] calldata weights) external;
 ```
 
 **Parameters**
 
-| Name          | Type       | Description                                        |
-| ------------- | ---------- | -------------------------------------------------- |
-| `valCoinbase` | `address`  | The coinbase address of the validator.             |
-| `startBlock`  | `uint64`   | The block that the cutting board goes into effect. |
-| `weights`     | `Weight[]` | The weights of the cutting board.                  |
+| Name         | Type       | Description                                            |
+| ------------ | ---------- | ------------------------------------------------------ |
+| `valPubkey`  | `bytes`    | The validator's pubkey.                                |
+| `startBlock` | `uint64`   | The block that the reward allocation goes into effect. |
+| `weights`    | `Weight[]` | The weights of the reward allocation.                  |
 
-### activateQueuedCuttingBoard
+### activateReadyQueuedRewardAllocation
 
-Activates the queued cutting board for a validator.
+Activates the queued reward allocation for a validator if its ready for the current block.
 
 _Should be called by the distribution contract._
 
 ```solidity
-function activateQueuedCuttingBoard(address valCoinbase, uint256 blockNumber) external;
+function activateReadyQueuedRewardAllocation(bytes calldata valPubkey) external;
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `valCoinbase` | `address` | The coinbase address of the validator. |
-| `blockNumber` | `uint256` | The block number being processed.      |
-
-### setOperator
-
-Sets an address that can set cutting boards on a validator's behalf.
-
-```solidity
-function setOperator(address operatorAddress) external;
-```
-
-**Parameters**
-
-| Name              | Type      | Description                                                      |
-| ----------------- | --------- | ---------------------------------------------------------------- |
-| `operatorAddress` | `address` | The address that can set cutting boards on a validator's behalf. |
+| Name        | Type    | Description             |
+| ----------- | ------- | ----------------------- |
+| `valPubkey` | `bytes` | The validator's pubkey. |
 
 ## Events
 
-### MaxNumWeightsPerCuttingBoardSet
+### MaxNumWeightsPerRewardAllocationSet
 
-Emitted when the maximum number of weights per cutting board has been set.
+Emitted when the maximum number of weights per reward allocation has been set.
 
 ```solidity
-event MaxNumWeightsPerCuttingBoardSet(uint8 maxNumWeightsPerCuttingBoard);
+event MaxNumWeightsPerRewardAllocationSet(uint8 maxNumWeightsPerRewardAllocation);
 ```
 
 **Parameters**
 
-| Name                           | Type    | Description                                      |
-| ------------------------------ | ------- | ------------------------------------------------ |
-| `maxNumWeightsPerCuttingBoard` | `uint8` | The maximum number of weights per cutting board. |
+| Name                               | Type    | Description                                          |
+| ---------------------------------- | ------- | ---------------------------------------------------- |
+| `maxNumWeightsPerRewardAllocation` | `uint8` | The maximum number of weights per reward allocation. |
 
-### CuttingBoardBlockDelaySet
+### RewardAllocationBlockDelaySet
 
-Emitted when the delay in blocks before a new cutting board can go into effect has been set.
+Emitted when the delay in blocks before a new reward allocation can go into effect has been set.
 
 ```solidity
-event CuttingBoardBlockDelaySet(uint64 cuttingBoardBlockDelay);
+event RewardAllocationBlockDelaySet(uint64 rewardAllocationBlockDelay);
 ```
 
 **Parameters**
 
-| Name                     | Type     | Description                                                        |
-| ------------------------ | -------- | ------------------------------------------------------------------ |
-| `cuttingBoardBlockDelay` | `uint64` | The delay in blocks before a new cutting board can go into effect. |
+| Name                         | Type     | Description                                                            |
+| ---------------------------- | -------- | ---------------------------------------------------------------------- |
+| `rewardAllocationBlockDelay` | `uint64` | The delay in blocks before a new reward allocation can go into effect. |
 
-### FriendsOfTheChefUpdated
+### VaultWhitelistedStatusUpdated
 
-Emitted when the friends of the chef have been updated.
+Emitted when the vault's whitelisted status have been updated.
 
 ```solidity
-event FriendsOfTheChefUpdated(address indexed receiver, bool indexed isFriend);
+event VaultWhitelistedStatusUpdated(address indexed receiver, bool indexed isWhitelisted, string metadata);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                                                                       |
-| ---------- | --------- | --------------------------------------------------------------------------------- |
-| `receiver` | `address` | The address to remove or add as a friend of the chef.                             |
-| `isFriend` | `bool`    | The whitelist status; true if the receiver is being whitelisted, false otherwise. |
+| Name            | Type      | Description                                                                       |
+| --------------- | --------- | --------------------------------------------------------------------------------- |
+| `receiver`      | `address` | The address to remove or add as whitelisted vault.                                |
+| `isWhitelisted` | `bool`    | The whitelist status; true if the receiver is being whitelisted, false otherwise. |
+| `metadata`      | `string`  | The metadata of the vault.                                                        |
 
-### QueueCuttingBoard
+### WhitelistedVaultMetadataUpdated
 
-Emitted when a new cutting board has been queued.
+Emitted when the metadata of a whitelisted vault has been updated.
 
 ```solidity
-event QueueCuttingBoard(address indexed valCoinbase, uint64 startBlock, Weight[] weights);
+event WhitelistedVaultMetadataUpdated(address indexed receiver, string metadata);
 ```
 
 **Parameters**
 
-| Name          | Type       | Description                                        |
-| ------------- | ---------- | -------------------------------------------------- |
-| `valCoinbase` | `address`  | The validator's coinbase address.                  |
-| `startBlock`  | `uint64`   | The block that the cutting board goes into effect. |
-| `weights`     | `Weight[]` | The weights of the cutting board.                  |
+| Name       | Type      | Description                           |
+| ---------- | --------- | ------------------------------------- |
+| `receiver` | `address` | The address of the whitelisted vault. |
+| `metadata` | `string`  | The metadata of the vault.            |
 
-### ActivateCuttingBoard
+### QueueRewardAllocation
 
-Emitted when a new cutting board has been activated.
+Emitted when a new reward allocation has been queued.
 
 ```solidity
-event ActivateCuttingBoard(address indexed valCoinbase, uint64 startBlock, Weight[] weights);
+event QueueRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weight[] weights);
 ```
 
 **Parameters**
 
-| Name          | Type       | Description                                        |
-| ------------- | ---------- | -------------------------------------------------- |
-| `valCoinbase` | `address`  | The validator's coinbase address.                  |
-| `startBlock`  | `uint64`   | The block that the cutting board goes into effect. |
-| `weights`     | `Weight[]` | The weights of the cutting board.                  |
+| Name         | Type       | Description                                            |
+| ------------ | ---------- | ------------------------------------------------------ |
+| `valPubkey`  | `bytes`    | The validator's pubkey.                                |
+| `startBlock` | `uint64`   | The block that the reward allocation goes into effect. |
+| `weights`    | `Weight[]` | The weights of the reward allocation.                  |
 
-### SetOperator
+### ActivateRewardAllocation
 
-Emitted when a operator address has been set for a validator.
+Emitted when a new reward allocation has been activated.
 
 ```solidity
-event SetOperator(address indexed valCoinbase, address indexed operatorAddress);
+event ActivateRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weight[] weights);
 ```
 
 **Parameters**
 
-| Name              | Type      | Description                       |
-| ----------------- | --------- | --------------------------------- |
-| `valCoinbase`     | `address` | The validator's coinbase address. |
-| `operatorAddress` | `address` | The operator address.             |
+| Name         | Type       | Description                                            |
+| ------------ | ---------- | ------------------------------------------------------ |
+| `valPubkey`  | `bytes`    | The validator's pubkey.                                |
+| `startBlock` | `uint64`   | The block that the reward allocation goes into effect. |
+| `weights`    | `Weight[]` | The weights of the reward allocation.                  |
 
-### SetDefaultCuttingBoard
+### SetDefaultRewardAllocation
 
-Emitted when the governance module has set a new default cutting board.
+Emitted when the governance module has set a new default reward allocation.
 
 ```solidity
-event SetDefaultCuttingBoard(CuttingBoard cuttingBoard);
+event SetDefaultRewardAllocation(RewardAllocation rewardAllocation);
 ```
 
 **Parameters**
 
-| Name           | Type           | Description                |
-| -------------- | -------------- | -------------------------- |
-| `cuttingBoard` | `CuttingBoard` | The default cutting board. |
+| Name               | Type               | Description                    |
+| ------------------ | ------------------ | ------------------------------ |
+| `rewardAllocation` | `RewardAllocation` | The default reward allocation. |
 
 ## Structs
 
-### CuttingBoard
+### RewardAllocation
 
-Represents a CuttingBoard entry
+Represents a RewardAllocation entry
 
 ```solidity
-struct CuttingBoard {
+struct RewardAllocation {
     uint64 startBlock;
     Weight[] weights;
 }

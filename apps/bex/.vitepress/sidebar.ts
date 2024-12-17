@@ -27,6 +27,22 @@ const SIDEBAR = {
       items: [
         { text: "AMMs", link: "/learn/concepts/amm" },
         { text: "Governance", link: "/learn/concepts/governance" },
+        { text: "Vault", link: "/learn/concepts/vault" },
+        {
+          text: "Pools",
+          link: "/learn/concepts/pools",
+          items: [
+            {
+              text: "Weighted Pools",
+              link: "/learn/concepts/pools/weighted-pools",
+            },
+            {
+              text: "Stable Pools",
+              link: "/learn/concepts/pools/stable-pools",
+            },
+          ],
+        },
+        { text: "Flash Loans", link: "/learn/concepts/flash-loans" },
       ],
     },
     {
@@ -43,6 +59,10 @@ const SIDEBAR = {
           ],
         },
         { text: "Pool Creation", link: "/learn/guides/pool-creation" },
+        {
+          text: "Pool Configuration",
+          link: "/learn/guides/pool-configuration",
+        },
       ],
     },
   ],
@@ -54,85 +74,128 @@ const SIDEBAR = {
       text: "Berachain BEX For Devs",
       items: [
         { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Type Conventions", link: "/developers/type-conventions" },
+        { text: "Migration Guide", link: "/developers/migration-guide" },
       ],
     },
     {
-      text: "Advanced Concepts",
+      text: "Contract References",
       items: [
         {
-          text: "Surplus Collateral",
-          link: "/developers/advanced-concepts/surplus-collateral",
+          text: "Vault Contract",
+          link: "/developers/contracts/vault",
         },
         {
-          text: "Permissioned Pools",
-          link: "/developers/advanced-concepts/permissioned-pools",
+          text: "Query Contract",
+          link: "/developers/contracts/query",
         },
         {
-          text: "Account Abstraction",
-          link: "/developers/advanced-concepts/aa",
-        },
-        {
-          text: "External Routers",
-          link: "/developers/advanced-concepts/external-routers",
+          text: "Pool Factory Contracts",
+          items: [
+            {
+              text: "WeightedPoolFactory",
+              link: "/developers/contracts/factory/weighted-pool-factory",
+            },
+            {
+              text: "StablePoolFactory",
+              link: "/developers/contracts/factory/stable-pool-factory",
+            },
+            {
+              text: "PoolCreationHelper",
+              link: "/developers/contracts/factory/pool-creation-helper",
+            },
+          ],
         },
       ],
     },
     {
-      text: "Contracts References",
+      text: "Concepts",
       items: [
         {
-          text: "DEX Contract",
-          link: "/developers/contracts/dex",
+          text: "Swaps",
           items: [
             {
-              text: "DEX Interface",
-              link: "/developers/contracts/dex",
+              text: "Single Swap",
+              link: "/developers/contracts/swaps/single_swap",
             },
             {
-              text: "Using userCmd",
-              link: "/developers/contracts/usercmd",
-              items: [
-                { text: "Swaps", link: "/developers/contracts/swaps" },
-                {
-                  text: "LP Operations",
-                  link: "/developers/contracts/lp-operations",
-                },
-                {
-                  text: "Surplus Collateral",
-                  link: "/developers/contracts/surplus-collateral",
-                },
-                {
-                  text: "Relayer Calls",
-                  link: "/developers/contracts/relayer-calls",
-                },
-                {
-                  text: "MultiPath Calls",
-                  link: "/developers/contracts/multipath",
-                },
-              ],
+              text: "Batch Swap",
+              link: "/developers/contracts/swaps/batch_swap",
             },
           ],
         },
-
         {
-          text: "Query Contracts",
-          link: "/developers/query-contracts/",
+          text: "Pools",
           items: [
-            { text: "CrocQuery", link: "/developers/query-contracts/query" },
-            { text: "CrocImpact", link: "/developers/query-contracts/impact" },
+            {
+              text: "Pool Interfacing",
+              link: "/developers/contracts/pools/pool-interfacing.md",
+            },
+            {
+              text: "Pool Joins",
+              link: "/developers/contracts/pools/joins.md",
+            },
+            {
+              text: "Pool Exits",
+              link: "/developers/contracts/pools/exit.md",
+            },
           ],
+        },
+        {
+          text: "LP Tokens",
+          items: [
+            {
+              text: "Underlying Tokens",
+              link: "/developers/contracts/lp_tokens/underlying",
+            },
+            {
+              text: "Valuing",
+              link: "/developers/contracts/lp_tokens/valuing",
+            },
+          ],
+        },
+        {
+          text: "Relayers",
+          link: "/developers/contracts/relayers",
         },
       ],
     },
     {
       text: "Developer Guides",
       items: [
-        { text: "Multiswap Router", link: "/developers/guides/multiswap" },
-        { text: "MultiPath", link: "/developers/guides/multipath-example" },
         {
-          text: "CrocQuery",
-          link: "/developers/guides/query-example",
+          text: "Pool Creation",
+          link: "/developers/guides/pool-creation",
+        },
+      ],
+    },
+    {
+      text: "SDK",
+      items: [
+        { text: "Introduction", link: "/developers/sdk" },
+        {
+          text: "SDK API Reference",
+          link: "/developers/sdk/reference",
+        },
+        {
+          text: "SDK Guides",
+          items: [
+            { text: "Add Liquidity", link: "/developers/sdk/add-liquidity" },
+            {
+              text: "Remove Liquidity",
+              link: "/developers/sdk/remove-liquidity",
+            },
+            { text: "Swap", link: "/developers/sdk/swap" },
+            { text: "Smart Order Router", link: "/developers/sdk/sor" },
+          ],
+        },
+      ],
+    },
+    {
+      text: "Help",
+      items: [
+        {
+          text: "Error Codes",
+          link: "/developers/help/error-codes",
         },
       ],
     },

@@ -8,95 +8,16 @@
 
 This is the router contract for minting and redeeming Honey.
 
-## State Variables
-
-### ONE_HUNDRED_PERCENT_RATE
-
-_The constant representing 100% of mint/redeem rate._
-
-```solidity
-uint256 private constant ONE_HUNDRED_PERCENT_RATE = 1e18;
-```
-
-### honey
-
-The Honey token contract.
-
-```solidity
-Honey public honey;
-```
-
-### mintRates
-
-Mint rate of Honey for each asset, 60.18-decimal fixed-point number representation
-
-```solidity
-mapping(ERC20 asset => uint256 rate) internal mintRates;
-```
-
-### redeemRates
-
-Redemption rate of Honey for each asset, 60.18-decimal fixed-point number representation
-
-```solidity
-mapping(ERC20 asset => uint256 rate) internal redeemRates;
-```
-
 ## Functions
-
-### constructor
-
-```solidity
-constructor();
-```
-
-### initialize
-
-```solidity
-function initialize(address _governance, Honey _honey) external initializer;
-```
-
-### setMintRate
-
-Set the mint rate of Honey for an asset.
-
-```solidity
-function setMintRate(ERC20 asset, uint256 mintRate) external onlyOwner;
-```
-
-### setRedeemRate
-
-Set the redemption rate of Honey for an asset.
-
-```solidity
-function setRedeemRate(ERC20 asset, uint256 redeemRate) external onlyOwner;
-```
-
-### checkInvariants
-
-_Check the invariant of the vault to ensure_
-
-_that assets are always sufficient to redeem._
-
-```solidity
-modifier checkInvariants(ERC20 asset);
-```
 
 ### mint
 
-_Mint Honey by sending ERC20 to this contract._
+Mint Honey by sending ERC20 to this contract.
+
+_Assest must be registered and must be a good collateral._
 
 ```solidity
-function mint(
-    address asset,
-    uint256 amount,
-    address receiver
-)
-    external
-    onlyRegisteredAsset(ERC20(asset))
-    whenNotPaused
-    checkInvariants(ERC20(asset))
-    returns (uint256);
+function mint(address asset, uint256 amount, address receiver) external returns (uint256);
 ```
 
 **Parameters**
@@ -115,19 +36,10 @@ function mint(
 
 ### redeem
 
-_Redeem assets by sending Honey in to burn._
+Redeem assets by sending Honey in to burn.
 
 ```solidity
-function redeem(
-    address asset,
-    uint256 honeyAmount,
-    address receiver
-)
-    external
-    onlyRegisteredAsset(ERC20(asset))
-    whenNotPaused
-    checkInvariants(ERC20(asset))
-    returns (uint256);
+function redeem(address asset, uint256 honeyAmount, address receiver) external returns (uint256[] memory);
 ```
 
 **Parameters**
@@ -140,154 +52,294 @@ function redeem(
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
-| `<none>` | `uint256` | The amount of assets redeemed. |
+| Name     | Type        | Description                    |
+| -------- | ----------- | ------------------------------ |
+| `<none>` | `uint256[]` | The amount of assets redeemed. |
 
-### previewMint
+### liquidate
 
-_Get the amount of Honey that can be minted with the given ERC20._
+Liquidate a bad collateral asset.
 
 ```solidity
-function previewMint(address asset, uint256 amount) external view returns (uint256 honeyAmount);
+function liquidate(
+    address badCollateral,
+    address goodCollateral,
+    uint256 goodAmount
+)
+    external
+    returns (uint256 badAmount);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                       |
-| -------- | --------- | --------------------------------- |
-| `asset`  | `address` | The ERC20 to mint with.           |
-| `amount` | `uint256` | The amount of ERC20 to mint with. |
+| Name             | Type      | Description                          |
+| ---------------- | --------- | ------------------------------------ |
+| `badCollateral`  | `address` | The ERC20 asset to liquidate.        |
+| `goodCollateral` | `address` | The ERC20 asset to provide in place. |
+| `goodAmount`     | `uint256` | The amount provided.                 |
 
 **Returns**
+
+| Name        | Type      | Description          |
+| ----------- | --------- | -------------------- |
+| `badAmount` | `uint256` | The amount obtained. |
+
+### recapitalize
+
+Recapitalize a collateral vault.
+
+```solidity
+function recapitalize(address asset, uint256 amount) external;
+```
+
+**Parameters**
+
+| Name     | Type      | Description                      |
+| -------- | --------- | -------------------------------- |
+| `asset`  | `address` | The ERC20 asset to recapitalize. |
+| `amount` | `uint256` | The amount provided.             |
+
+## Events
+
+### MintRateSet
+
+Emitted when a mint rate is set for an asset.
+
+```solidity
+event MintRateSet(address indexed asset, uint256 rate);
+```
+
+### RedeemRateSet
+
+Emitted when a redemption rate is set for an asset.
+
+```solidity
+event RedeemRateSet(address indexed asset, uint256 rate);
+```
+
+### POLFeeCollectorFeeRateSet
+
+Emitted when the POLFeeCollector fee rate is set.
+
+```solidity
+event POLFeeCollectorFeeRateSet(uint256 rate);
+```
+
+### HoneyMinted
+
+Emitted when honey is minted
+
+```solidity
+event HoneyMinted(
+    address indexed from, address indexed to, address indexed asset, uint256 assetAmount, uint256 mintAmount
+);
+```
+
+**Parameters**
+
+| Name          | Type      | Description                                            |
+| ------------- | --------- | ------------------------------------------------------ |
+| `from`        | `address` | The account that supplied assets for the minted honey. |
+| `to`          | `address` | The account that received the honey.                   |
+| `asset`       | `address` | The asset used to mint the honey.                      |
+| `assetAmount` | `uint256` | The amount of assets supplied for minting the honey.   |
+| `mintAmount`  | `uint256` | The amount of honey that was minted.                   |
+
+### HoneyRedeemed
+
+Emitted when honey is redeemed
+
+```solidity
+event HoneyRedeemed(
+    address indexed from, address indexed to, address indexed asset, uint256 assetAmount, uint256 redeemAmount
+);
+```
+
+**Parameters**
+
+| Name           | Type      | Description                                            |
+| -------------- | --------- | ------------------------------------------------------ |
+| `from`         | `address` | The account that redeemed the honey.                   |
+| `to`           | `address` | The account that received the assets.                  |
+| `asset`        | `address` | The asset for redeeming the honey.                     |
+| `assetAmount`  | `uint256` | The amount of assets received for redeeming the honey. |
+| `redeemAmount` | `uint256` | The amount of honey that was redeemed.                 |
+
+### BasketModeForced
+
+Emitted when the basked mode is forced.
+
+```solidity
+event BasketModeForced(bool forced);
+```
+
+**Parameters**
+
+| Name     | Type   | Description                                     |
+| -------- | ------ | ----------------------------------------------- |
+| `forced` | `bool` | The flag that represent the forced basket mode. |
+
+### DepegOffsetsSet
+
+Emitted when the depeg offsets are changed.
+
+```solidity
+event DepegOffsetsSet(address asset, uint256 lower, uint256 upper);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                                   |
+| ------- | --------- | --------------------------------------------- |
+| `asset` | `address` | The asset that the depeg offsets are changed. |
+| `lower` | `uint256` | The lower depeg offset.                       |
+| `upper` | `uint256` | The upper depeg offset.                       |
+
+### LiquidationStatusSet
+
+Emitted when the liquidation is enabled or disabled.
+
+```solidity
+event LiquidationStatusSet(bool enabled);
+```
+
+**Parameters**
+
+| Name      | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| `enabled` | `bool` | The flag that represent the liquidation status. |
+
+### ReferenceCollateralSet
+
+Emitted when the reference collateral is set.
+
+```solidity
+event ReferenceCollateralSet(address old, address asset);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                   |
+| ------- | --------- | ----------------------------- |
+| `old`   | `address` | The old reference collateral. |
+| `asset` | `address` | The new reference collateral. |
+
+### RecapitalizeBalanceThresholdSet
+
+Emitted when the recapitalize balance threshold is set.
+
+```solidity
+event RecapitalizeBalanceThresholdSet(address asset, uint256 target);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                                               |
+| -------- | --------- | --------------------------------------------------------- |
+| `asset`  | `address` | The asset that the recapitalize balance threshold is set. |
+| `target` | `uint256` | The target balance threshold.                             |
+
+### MinSharesToRecapitalizeSet
+
+Emitted when the min shares to recapitalize is set.
+
+```solidity
+event MinSharesToRecapitalizeSet(uint256 minShareAmount);
+```
+
+**Parameters**
+
+| Name             | Type      | Description                     |
+| ---------------- | --------- | ------------------------------- |
+| `minShareAmount` | `uint256` | The min shares to recapitalize. |
+
+### MaxFeedDelaySet
+
+Emitted when the max feed delay is set.
+
+```solidity
+event MaxFeedDelaySet(uint256 maxFeedDelay);
+```
+
+**Parameters**
+
+| Name           | Type      | Description         |
+| -------------- | --------- | ------------------- |
+| `maxFeedDelay` | `uint256` | The max feed delay. |
+
+### LiquidationRateSet
+
+Emitted when the liquidation rate is set.
+
+```solidity
+event LiquidationRateSet(address asset, uint256 rate);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                                 |
+| ------- | --------- | ------------------------------------------- |
+| `asset` | `address` | The asset that the liquidation rate is set. |
+| `rate`  | `uint256` | The liquidation rate.                       |
+
+### GlobalCapSet
+
+Emitted when the global cap is set.
+
+```solidity
+event GlobalCapSet(uint256 globalCap);
+```
+
+**Parameters**
+
+| Name        | Type      | Description     |
+| ----------- | --------- | --------------- |
+| `globalCap` | `uint256` | The global cap. |
+
+### RelativeCapSet
+
+Emitted when the relative cap is set.
+
+```solidity
+event RelativeCapSet(address asset, uint256 relativeCap);
+```
+
+**Parameters**
 
 | Name          | Type      | Description                             |
 | ------------- | --------- | --------------------------------------- |
-| `honeyAmount` | `uint256` | The amount of Honey that can be minted. |
+| `asset`       | `address` | The asset that the relative cap is set. |
+| `relativeCap` | `uint256` | The relative cap.                       |
 
-### previewRedeem
+### Liquidated
 
-_Get the amount of ERC20 that can be redeemed with the given Honey._
+Emitted when the liquidate is performed.
 
 ```solidity
-function previewRedeem(address asset, uint256 honeyAmount) external view returns (uint256);
+event Liquidated(address badAsset, address goodAsset, uint256 amount, address sender);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                    |
-| ------------- | --------- | ------------------------------ |
-| `asset`       | `address` | The ERC20 to redeem.           |
-| `honeyAmount` | `uint256` | The amount of Honey to redeem. |
+| Name        | Type      | Description                                 |
+| ----------- | --------- | ------------------------------------------- |
+| `badAsset`  | `address` | The bad asset that is liquidated.           |
+| `goodAsset` | `address` | The good asset that is provided.            |
+| `amount`    | `uint256` | The amount of good asset provided.          |
+| `sender`    | `address` | The account that performed the liquidation. |
 
-**Returns**
+### Recapitalized
 
-| Name     | Type      | Description                               |
-| -------- | --------- | ----------------------------------------- |
-| `<none>` | `uint256` | The amount of ERC20 that can be redeemed. |
-
-### previewRequiredCollateral
-
-_Previews the amount of ERC20 required to mint an exact amount of honey._
+Emitted when the collateral vault is recapitalized.
 
 ```solidity
-function previewRequiredCollateral(address asset, uint256 exactHoneyAmount) external view returns (uint256);
+event Recapitalized(address asset, uint256 amount, address sender);
 ```
 
 **Parameters**
 
-| Name               | Type      | Description                        |
-| ------------------ | --------- | ---------------------------------- |
-| `asset`            | `address` | The ERC20 asset to use.            |
-| `exactHoneyAmount` | `uint256` | The exact amount of honey to mint. |
-
-### previewHoneyToRedeem
-
-_Previews the amount of honey required to redeem an exact amount of target ERC20 asset._
-
-```solidity
-function previewHoneyToRedeem(address asset, uint256 exactAmount) external view returns (uint256);
-```
-
-**Parameters**
-
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `asset`       | `address` | The ERC20 asset to receive.            |
-| `exactAmount` | `uint256` | The exact amount of assets to receive. |
-
-### getMintRate
-
-_Get the mint rate of the asset._
-
-```solidity
-function getMintRate(address asset) external view returns (uint256);
-```
-
-**Parameters**
-
-| Name    | Type      | Description                           |
-| ------- | --------- | ------------------------------------- |
-| `asset` | `address` | The ERC20 asset to get the mint rate. |
-
-**Returns**
-
-| Name     | Type      | Description                 |
-| -------- | --------- | --------------------------- |
-| `<none>` | `uint256` | The mint rate of the asset. |
-
-### getRedeemRate
-
-_Get the redeem rate of the asset._
-
-```solidity
-function getRedeemRate(address asset) external view returns (uint256);
-```
-
-**Parameters**
-
-| Name    | Type      | Description                             |
-| ------- | --------- | --------------------------------------- |
-| `asset` | `address` | The ERC20 asset to get the redeem rate. |
-
-**Returns**
-
-| Name     | Type      | Description                   |
-| -------- | --------- | ----------------------------- |
-| `<none>` | `uint256` | The redeem rate of the asset. |
-
-### \_getHoneyMintedFromShares
-
-```solidity
-function _getHoneyMintedFromShares(
-    ERC20 asset,
-    uint256 shares
-)
-    internal
-    view
-    returns (uint256 honeyAmount, uint256 feeShares);
-```
-
-### \_getSharesRedeemedFromHoney
-
-```solidity
-function _getSharesRedeemedFromHoney(
-    ERC20 asset,
-    uint256 honeyAmount
-)
-    internal
-    view
-    returns (uint256 shares, uint256 feeShares);
-```
-
-### \_getMintRate
-
-```solidity
-function _getMintRate(ERC20 asset) internal view returns (uint256);
-```
-
-### \_getRedeemRate
-
-```solidity
-function _getRedeemRate(ERC20 asset) internal view returns (uint256);
-```
+| Name     | Type      | Description                                      |
+| -------- | --------- | ------------------------------------------------ |
+| `asset`  | `address` | The asset that is recapitalized.                 |
+| `amount` | `uint256` | The amount of asset provided.                    |
+| `sender` | `address` | The account that performed the recapitalization. |

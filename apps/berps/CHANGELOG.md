@@ -1,5 +1,12 @@
 # @berachain/berps
 
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @berachain/config@1.2.0
+
 ## 1.1.8
 
 ### Patch Changes
@@ -14,6 +21,7 @@
 - Updated dependencies
   - @berachain/ui@1.1.1
 
+>>>>>>> origin/next
 ## 1.1.6
 
 ### Patch Changes

@@ -138,6 +138,7 @@ export default defineConfig({
     ],
   },
   markdown: {
+    math: true,
     config: (md) => {
       // @ts-ignore
       md.use(markdownItConditionalRender, {
