@@ -31,7 +31,7 @@ To prevent spam and ensure the creation of meaningful pools, BeraSwap requires u
 4. Set initial pool token ratios and amount of liquidity to add
 5. Confirm the pool creation transaction
 
-![BeraSwap Pool Creation](/assets/bex-set-prices.png)
+![BeraSwap Pool Creation](/assets/create_pool_stable.png)
 
 ## Selecting the Ratio
 

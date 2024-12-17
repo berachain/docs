@@ -48,9 +48,9 @@ A data unit containing a list of transactions, which is permanently added to the
 
 Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps - Bend](/learn/dapps/bend).
 
-## BEX
+## BeraSwap
 
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _DEX_ to _BEX_. Read more in [Native dApps > BEX](/learn/dapps/beraswap).
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BeraSwap_. Read more in [Native dApps > BeraSwap](/learn/dapps/beraswap).
 
 ## Berps
 
