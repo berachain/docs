@@ -21,6 +21,7 @@
 - Updated dependencies
   - @berachain/ui@1.1.1
 
+>>>>>>> origin/next
 ## 1.1.6
 
 ### Patch Changes

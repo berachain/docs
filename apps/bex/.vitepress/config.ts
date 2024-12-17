@@ -27,6 +27,9 @@ export default defineConfig({
   description: `${constants.websites.docsBex.description}`,
   cleanUrls: true,
   srcDir: "content",
+  markdown: {
+    math: true,
+  },
   head: [
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "en" }],
@@ -82,12 +85,12 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
+            text: `${constants.websites.docsBend.name}(Coming Soon)`,
+            link: `#`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
+            link: `#`,
           },
         ],
       },
@@ -135,18 +138,6 @@ export default defineConfig({
         ariaLabel: "Berachain Portal",
       },
     ],
-  },
-  markdown: {
-    config: (md) => {
-      // @ts-ignore
-      md.use(markdownItConditionalRender, {
-        // This is where we check if the flag is enabled / disabled
-        evaluate: function (condition: string, value: any) {
-          let flag = condition.trim().toLowerCase();
-          return ENABLED_FLAGS.includes(flag);
-        },
-      });
-    },
   },
   vite: {
     resolve: {

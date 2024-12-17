@@ -37,12 +37,12 @@ Proof-of-Liquidity is a [consensus mechanism](/learn/help/glossary#consensus-mec
 
 This framework makes it possible to strongly align the incentives of key stakeholders / [PoL participants](/learn/pol/participants) (validator, protocols, users) and contributes to the overall long-term health of the chain.
 
-Beyond providing a great day-one dApp experience, the native dApps, such as [BEX](/learn/dapps/bex), [Bend](/learn/dapps/bend) and [Berps](/learn/dapps/berps), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
+Beyond providing a great day-one dApp experience, the native dApps, such as [BeraSwap](/learn/dapps/beraswap), [Bend](/learn/dapps/bend) and [Berps](/learn/dapps/berps), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
 
 Read more in [What Is Proof-of-Liquidity](/learn/what-is-proof-of-liquidity).
 
 ## BeaconKit ⛵✨
 
-BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, single slot finality (SSF), and more.
+BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, [single slot finality (SSF)](https://ethereum.org/en/roadmap/single-slot-finality/), and more.
 
 Read more in [What Is BeaconKit](/learn/what-is-beaconkit).

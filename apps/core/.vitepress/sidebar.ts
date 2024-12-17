@@ -48,6 +48,7 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
+        { text: "PoL FAQs", link: "/learn/pol/faqs" }
       ],
     },
     {
@@ -61,16 +62,13 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Guide",
-      items: [{ text: "PoL FAQs", link: "/learn/pol/faqs" }],
-    },
-    {
       text: "Native dApps",
       items: [
-        { text: "BEX", link: "/learn/dapps/bex" },
+        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
         { text: "Bend", link: "/learn/dapps/bend" },
         { text: "Berps", link: "/learn/dapps/berps" },
-        { text: "BGT Station", link: "/learn/dapps/bgt-station" },
+        { text: "BeraHub", link: "/learn/dapps/berahub" },
+        { text: "Faucet", link: "/learn/dapps/faucet" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
           text: `${constants.testnet.dapps.beratrail.name}`,
