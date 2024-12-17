@@ -50,7 +50,6 @@ Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in
 
 ## BeraSwap
 
-
 Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BeraSwap_. Read more in [Native dApps > BeraSwap](/learn/dapps/beraswap).
 
 ## Berps
