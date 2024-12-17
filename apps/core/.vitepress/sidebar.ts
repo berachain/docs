@@ -48,7 +48,7 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
-        { text: "PoL FAQs", link: "/learn/pol/faqs" }
+        { text: "PoL FAQs", link: "/learn/pol/faqs" },
       ],
     },
     {
@@ -91,7 +91,7 @@ const SIDEBAR = {
     {
       text: "Berachain For Developers",
       items: [
-        { text: "PoL Architecture Overview", link: "/developers/" },
+        { text: "Proof of Liquidity Overview", link: "/developers/" },
         {
           text: "Network Configurations",
           link: "/developers/network-configurations",
@@ -117,7 +117,10 @@ const SIDEBAR = {
       items: [
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
-        {text: "Integrating your app with PoL", link: "/developers/quickstart/pol-integration",}
+        {
+          text: "Integrating your app with PoL",
+          link: "/developers/quickstart/pol-integration",
+        },
       ],
     },
     {
@@ -154,8 +157,8 @@ const SIDEBAR = {
         { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
         {
-          text: "Block Rewards Controller",
-          link: "/developers/contracts/block-rewards-controller",
+          text: "Block Reward Controller",
+          link: "/developers/contracts/block-reward-controller",
         },
         { text: "CREATE2", link: "/developers/contracts/create2" },
         { text: "Distributor", link: "/developers/contracts/distributor" },
