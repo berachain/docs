@@ -44,7 +44,7 @@ OS: Linux / MacOS
 CPU Architecture: AMD64 or ARM64 / ARM64 Darwin
 CPU: 8 Physical Cores
 RAM: 48GB
-Storage: 4TB (SSD with high IOPS)
+Storage: 1TB
 ```
 
 :::tip

@@ -82,16 +82,10 @@ export default defineConfig({
             link: `${constants.websites.docsBex.url}`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
+            link: `#`,
           },
         ],
-      },
-      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
-      {
-        text: "Developers",
-        link: "developers/index",
-        activeMatch: "/developers/",
       },
     ],
     outline: [2, 3],
