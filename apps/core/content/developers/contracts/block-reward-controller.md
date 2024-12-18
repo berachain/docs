@@ -83,7 +83,7 @@ function rewardConvexity() external view returns (int256);
 ### computeReward
 
 Computes the reward given specified parameters, according to the formula.
-r := (1 + mul) _ (1 - 1 / (1 + mul _ boost^conv)) _ rewardRate ∈ [0, mul _ rewardRate]
+$$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\right)\right]$$
 
 _Returns 0 for boost == 0 even if conv == 0, since contract enforces conv > 0._
 

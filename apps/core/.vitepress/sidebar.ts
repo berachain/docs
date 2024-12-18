@@ -91,7 +91,7 @@ const SIDEBAR = {
     {
       text: "Berachain For Developers",
       items: [
-        { text: "PoL Architecture Overview", link: "/developers/" },
+        { text: "Proof of Liquidity Overview", link: "/developers/" },
         {
           text: "Network Configurations",
           link: "/developers/network-configurations",
@@ -152,13 +152,13 @@ const SIDEBAR = {
     {
       text: "Contract References",
       items: [
-        { text: "BeaconDeposit", link: "/developers/contracts/berachef" },
+        { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
         { text: "Berachef", link: "/developers/contracts/berachef" },
         { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
         {
-          text: "Block Rewards Controller",
-          link: "/developers/contracts/block-rewards-controller",
+          text: "Block Reward Controller",
+          link: "/developers/contracts/block-reward-controller",
         },
         { text: "CREATE2", link: "/developers/contracts/create2" },
         { text: "Distributor", link: "/developers/contracts/distributor" },

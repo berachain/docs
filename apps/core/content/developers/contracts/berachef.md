@@ -194,8 +194,7 @@ function setDefaultRewardAllocation(RewardAllocation calldata rewardAllocation) 
 
 ### queueNewRewardAllocation
 
-Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of
-existing queued reward allocation.
+Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of existing queued reward allocation.
 
 _The weights of the reward allocation must add up to 100% or 1e4.
 Only whitelisted pools may be used as well._

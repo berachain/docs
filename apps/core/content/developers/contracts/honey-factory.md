@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# VaultRouter
+# HoneyFactory
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.honeyFactory.address">{{config.contracts.honeyFactory.address}}</a><span v-if="config.contracts.honeyFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honeyFactory.abi">ABI JSON</a></span></small>
 
@@ -98,6 +98,19 @@ function recapitalize(address asset, uint256 amount) external;
 | -------- | --------- | -------------------------------- |
 | `asset`  | `address` | The ERC20 asset to recapitalize. |
 | `amount` | `uint256` | The amount provided.             |
+
+### isBasketModeEnabled
+
+Get the status of the basket mode.
+
+_On mint, basket mode is enabled if all collaterals are either depegged or bad._
+
+_On redeem, basket mode is enabled if at least one asset is deppegged
+except for the collateral assets that have been fully liquidated._
+
+```solidity
+function isBasketModeEnabled(bool isMint) public view returns (bool basketMode);
+```
 
 ## Events
 
