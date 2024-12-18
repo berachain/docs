@@ -140,12 +140,16 @@ const SIDEBAR = {
           link: "/developers/guides/deploy-contract-using-nextjs-walletconnect",
         },
         {
-          text: "Community Guides",
-          link: "/developers/guides/community-guides",
-        },
-        {
           text: "Non-ERC20 PoL Integration",
           link: "/developers/guides/advanced-pol",
+        },
+        {
+          text: "Mint & Redeem Honey",
+          link: "/developers/guides/mint-redeem-honey",
+        },
+        {
+          text: "Community Guides",
+          link: "/developers/guides/community-guides",
         },
       ],
     },

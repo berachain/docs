@@ -77,7 +77,7 @@ Basket Mode is a safety mechanism that activates when when collateral assets bec
 
 **For Minting:**
 
-- Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or blacklisted
+- Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or de-whitelisted
 - In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
 
 ### Fees
