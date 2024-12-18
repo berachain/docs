@@ -51,9 +51,9 @@ layout: page
 
 <section class="features">
   <Feature
-    title="BEX Docs"
+    title="Swap Docs"
     description="Berachain Native DEX Docs"
-    :link="config.websites.docsBex.url"
+    :link="config.websites.docsSwap.url"
     image="/assets/BEX.png"
     type="alt"
   />
@@ -86,7 +86,7 @@ layout: page
   <Feature
     title="Beratrail"
     description="Block Explorer"
-    :link="config.testnet.dapps.beratrail.url"
+    :link="config.mainnet.dapps.berascan.url"
     :icon="IconSearch"
     type="alt"
   />
@@ -100,42 +100,42 @@ layout: page
   <Feature
     title="BGT Station"
     description="Manage $BGT"
-    :link="config.testnet.dapps.bgtStation.url"
+    :link="config.mainnet.dapps.hub.url"
     :icon="IconGavel"
       type="alt"
   />
   <Feature
     title="BEX"
     description="Berachain Native DEX"
-    :link="config.testnet.dapps.bex.url"
+    :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
       type="alt"
     />
   <Feature
     title="Berps"
     description="Berachain Native Perps"
-    :link="config.testnet.dapps.berps.url"
+    :link="config.mainnet.dapps.berps.url"
     :icon="IconChartHistogram"
       type="alt"
   />
   <Feature
     title="Bend"
     description="Berachain Native Lending"
-    :link="config.testnet.dapps.bend.url"
+    :link="config.mainnet.dapps.bend.url"
     :icon="IconCoins"
       type="alt"
     />
   <Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
-    :link="config.testnet.dapps.honeySwap.url"
+    :link="config.mainnet.dapps.honeySwap.url"
     :icon="IconMoneybag"
     type="alt"
     />
   <Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
-    :link="config.testnet.dapps.foundation.url"
+    :link="config.mainnet.dapps.foundation.url"
     :icon="IconWorld"
     type="alt"
   />

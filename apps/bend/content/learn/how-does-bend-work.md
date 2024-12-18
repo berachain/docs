@@ -12,7 +12,7 @@ There are three main participants in Bend:
 2. **Borrowers** borrowing `$HONEY` and paying lending fees.
 3. **Liquidators** ensuring that the protocol remains solvent.
 
-<a :href="config.testnet.dapps.bend.url">
+<a :href="config.mainnet.dapps.bend.url">
 
 ![Berachain Bend](/assets/how-bend-works-2.png)
 

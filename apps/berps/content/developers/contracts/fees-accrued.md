@@ -17,7 +17,7 @@ head:
 
 # FeesAccrued Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.feesAccrued.address">{{config.contracts.feesAccrued.address}}</a><span v-if="config.contracts.feesAccrued.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.feesAccrued.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.feesAccrued.address">{{config.contracts.feesAccrued.address}}</a><span v-if="config.contracts.feesAccrued.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.feesAccrued.abi">ABI JSON</a></span></small>
 
 `FeesAccrued.sol` calculates and manages borrowing fees.
 

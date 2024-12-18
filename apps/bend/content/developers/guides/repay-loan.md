@@ -19,7 +19,7 @@ import { ethers } from "ethers";
 
 // Connect to Berachain using the provided RPC URL
 const provider = new ethers.providers.JsonRpcProvider(
-  "{{config.testnet.rpcUrl}}"
+  "{{config.mainnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 

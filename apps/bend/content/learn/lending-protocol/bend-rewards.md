@@ -28,7 +28,7 @@ Borrowers with open `$HONEY` loans receive `$BGT` as an extra incentive for borr
 Borrowers earn based on the amount of `$HONEY` borrowed, and not the value of the supplied collateral. Be mindful of your health factor when trying to maximize `$BGT` earning.
 :::
 
-Earning `$BGT` on Bend is unique, because Borrowers can easily claim their `$BGT` rewards on Bend, rather than visiting the portal for depositing in <a :href="config.testnet.dapps.bgtStation.url + 'gauge'">Reward Vaults</a> (required for BEX deposits, for example).
+Earning `$BGT` on Bend is unique, because Borrowers can easily claim their `$BGT` rewards on Bend, rather than visiting the portal for depositing in <a :href="config.mainnet.dapps.hub.url + 'gauge'">Reward Vaults</a> (required for BEX deposits, for example).
 
 ![Claim $BGT](/assets/claim-bgt.png)
 

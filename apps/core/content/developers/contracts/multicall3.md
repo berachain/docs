@@ -4,7 +4,7 @@
 
 # Multicall3
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.multicall3.address">{{config.contracts.multicall3.address}}</a><span v-if="config.contracts.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.multicall3.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.multicall3.address">{{config.contracts.multicall3.address}}</a><span v-if="config.contracts.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.multicall3.abi">ABI JSON</a></span></small>
 
 The Multicall3 contract is a Solidity contract implemented by the MakerDAO team. Its primary purpose is to aggregate results from multiple function calls in a single transaction, which can help reduce gas costs and improve efficiency when interacting with multiple contracts or making multiple calls to the same contracts.
 

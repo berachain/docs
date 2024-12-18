@@ -4,7 +4,7 @@
 
 # RewardVault
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.rewardVault.address">{{config.contracts.rewardVault.address}}</a><span v-if="config.contracts.rewardVault.abi"><a target="_blank" :href="config.contracts.rewardVault.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.rewardVault.address">{{config.contracts.rewardVault.address}}</a><span v-if="config.contracts.rewardVault.abi"><a target="_blank" :href="config.contracts.rewardVault.abi">ABI JSON</a></span></small>
 
 This contract is the vault for the Berachain rewards, it handles the staking and rewards accounting of BGT.
 

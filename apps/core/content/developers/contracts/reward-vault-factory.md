@@ -4,7 +4,7 @@
 
 # RewardVaultFactory
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.rewardVaultFactory.address">{{config.contracts.rewardVaultFactory.address}}</a><span v-if="config.contracts.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.rewardVaultFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.rewardVaultFactory.address">{{config.contracts.rewardVaultFactory.address}}</a><span v-if="config.contracts.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.rewardVaultFactory.abi">ABI JSON</a></span></small>
 
 ## Functions
 

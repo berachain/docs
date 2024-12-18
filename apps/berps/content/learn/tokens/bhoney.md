@@ -18,9 +18,9 @@ head:
 
 # Berps & $bHONEY
 
-> <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.bHoney.address">{{config.contracts.bHoney.address}}</a>
+> <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.bHoney.address">{{config.contracts.bHoney.address}}</a>
 
-`$bHONEY` is a standard <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.bHoney.address">ERC20 Token</a> that is minted at the time that `$HONEY` is deposited into the Berps `$bHONEY` Vault.
+`$bHONEY` is a standard <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.bHoney.address">ERC20 Token</a> that is minted at the time that `$HONEY` is deposited into the Berps `$bHONEY` Vault.
 
 > **NOTE:** that `$bHONEY` is burned when `$HONEY` is withdrawn from the Berps Vault.
 

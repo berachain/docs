@@ -31,7 +31,7 @@ By the end of the tutorial, you will have created a bot that will automatically 
 Before beginning, make sure you have the following installed and setup:
 
 - NMV or Node `v20.11.0` or greater
-- Wallet with testnet `$HONEY` tokens - See the <a :href="config.testnet.dapps.faucet.url">{{config.testnet.dapps.faucet.name}}</a>, receive `$BERA` and trade for `$HONEY` on <a :href="config.testnet.dapps.bex.url + 'swap'">BEX</a>
+- Wallet with testnet `$HONEY` tokens - See the <a :href="config.testnet.dapps.faucet.url">{{config.testnet.dapps.faucet.name}}</a>, receive `$BERA` and trade for `$HONEY` on <a :href="config.mainnet.dapps.swap.url + 'swap'">BEX</a>
 
 ## Trading Bot Project Setup
 
@@ -81,7 +81,7 @@ BOLLINGER_PERIOD=20
 BOLLINGER_MULTIPLIER=2
 ENTRYPOINT_CONTRACT_ADDRESS=0xb3395EeeA7701E0037bBC6Ab52953C6fB0c3326c
 PRIVATE_KEY=YOUR_WALLET_PRIVATE_KEY
-RPC_PROVIDER={{config.testnet.rpcUrl}}
+RPC_PROVIDER={{config.mainnet.rpcUrl}}
 ```
 
 Replace `PRIVATE_KEY` with your actual wallet private key.

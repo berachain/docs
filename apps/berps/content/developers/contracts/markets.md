@@ -17,7 +17,7 @@ head:
 
 # Markets Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.markets.address">{{config.contracts.markets.address}}</a><span v-if="config.contracts.markets.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.markets.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.markets.address">{{config.contracts.markets.address}}</a><span v-if="config.contracts.markets.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.markets.abi">ABI JSON</a></span></small>
 
 `Markets.sol` stores trading pair parameters and limits.
 

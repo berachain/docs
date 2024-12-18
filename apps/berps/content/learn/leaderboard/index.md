@@ -8,4 +8,4 @@ The [Berps Leaderboard](https://artio.berps.berachain.com/leaderboard) shows acc
 
 ![Berps Leaderboard](/assets/berps-leaderboard.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.berps.url + 'leaderboard/'">{{config.testnet.dapps.berps.url}}leaderboard/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berps.url + 'leaderboard/'">{{config.mainnet.dapps.berps.url}}leaderboard/</a></small>

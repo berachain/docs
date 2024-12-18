@@ -4,11 +4,11 @@
 
 # Depositing & Withdrawing $HONEY
 
-Users can contribute `$HONEY` to the Berps Vault by going to <a target="_blank" :href="config.testnet.dapps.berps.url + 'vault/'">Berachain bHoney Vault</a> and depositing any amount of `$HONEY`.
+Users can contribute `$HONEY` to the Berps Vault by going to <a target="_blank" :href="config.mainnet.dapps.berps.url + 'vault/'">Berachain bHoney Vault</a> and depositing any amount of `$HONEY`.
 
 ![Interacting With Berps Vault](/assets/berps-vault-instructions.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.berps.url + 'vault/'">{{config.testnet.dapps.berps.url}}vault/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berps.url + 'vault/'">{{config.mainnet.dapps.berps.url}}vault/</a></small>
 
 ## Depositing $HONEY
 

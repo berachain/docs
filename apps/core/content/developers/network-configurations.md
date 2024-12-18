@@ -27,13 +27,13 @@ Click the button below to add the network to your MetaMask in one click.
 
 <ClientOnly>
   <AddNetwork
-    :chainId="config.testnet.chainId"
-    :chainName="config.testnet.chainName"
-    :nativeCurrencyName="config.testnet.currencyName"
-    :nativeCurrencySymbol="config.testnet.currencySymbol"
-    :nativeCurrencyDecimals="config.testnet.decimals"
-    :rpcUrl="config.testnet.rpcUrl"
-    :blockExplorerUrl="config.testnet.dapps.beratrail.url"
+    :chainId="config.mainnet.chainId"
+    :chainName="config.mainnet.chainName"
+    :nativeCurrencyName="config.mainnet.currencyName"
+    :nativeCurrencySymbol="config.mainnet.currencySymbol"
+    :nativeCurrencyDecimals="config.mainnet.decimals"
+    :rpcUrl="config.mainnet.rpcUrl"
+    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
   />
 </ClientOnly>
 
@@ -43,11 +43,11 @@ To add the network manually, insert the network details below into your wallet o
 
 | Key                | Value                                                                                   |
 | ------------------ | --------------------------------------------------------------------------------------- |
-| Network            | {{config.testnet.chainName}}                                                            |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.testnet.rpcUrl" /></ClientOnly>              |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="config.testnet.chainId" /></ClientOnly>             |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.testnet.currencySymbol" /></ClientOnly>      |
-| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.testnet.dapps.beratrail.url" /></ClientOnly> |
+| Network            | {{config.mainnet.chainName}}                                                            |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>              |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>             |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>      |
+| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
 ### RPC Providers
 

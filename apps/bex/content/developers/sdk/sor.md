@@ -40,10 +40,10 @@ import {
 } from "@berachain-foundation/berancer-sdk";
 
 // Initialize provider and wallet
-const RPC_URL = "{{config.testnet.rpcUrl}}";
+const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.testnet.dapps.bex.balancerApiUrl}}", {{config.testnet.chainId}});
+const balancerApi = new BalancerApi("{{config.mainnet.dapps.swap.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Create swap amount (e.g., 1 HONEY)
 const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, '1');

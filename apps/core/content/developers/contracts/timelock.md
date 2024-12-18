@@ -4,7 +4,7 @@
 
 # TimeLock
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.timelock.address">{{config.contracts.timelock.address}}</a><span v-if="config.contracts.timelock.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.timelock.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.timelock.address">{{config.contracts.timelock.address}}</a><span v-if="config.contracts.timelock.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.timelock.abi">ABI JSON</a></span></small>
 
 **Inherits:**
 UUPSUpgradeable, [TimelockControllerUpgradeable](https://docs.openzeppelin.com/contracts/5.x/api/governance#TimelockController)

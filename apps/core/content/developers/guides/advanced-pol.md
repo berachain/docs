@@ -227,7 +227,7 @@ Finally, we run the test to check that the integration works as expected:
 ```bash-vue
 # FROM: ./pol-smart-stake
 
-forge test --rpc-url {{config.testnet.rpcUrl}};
+forge test --rpc-url {{config.mainnet.rpcUrl}};
 
 # [Expected Output]:
 # [⠊] Compiling...x

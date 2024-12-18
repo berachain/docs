@@ -33,7 +33,7 @@ The process for earning `$BGT` through BeraSwap involves three simple steps:
    ![Stake Reward Vault](/assets/stake_reward_vault.png)
 
 You can view and manage your staked positions in the reward vaults here:
-{{config.testnet.dapps.bgtStation.url}}gauge
+{{config.mainnet.dapps.hub.url}}gauge
 
 ## Whitelisting Pools for PoL Rewards
 

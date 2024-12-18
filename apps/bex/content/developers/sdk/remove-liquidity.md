@@ -37,13 +37,13 @@ import {
 } from "@berachain-foundation/berancer-sdk";
 
 // Initialize provider and wallet
-const RPC_URL = "{{config.testnet.rpcUrl}}";
+const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.testnet.dapps.bex.balancerApiUrl}}", {{config.testnet.chainId}});
+const balancerApi = new BalancerApi("{{config.mainnet.dapps.swap.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
-const poolId = "{{config.testnet.dapps.bex.examplePoolId}}";
+const poolId = "{{config.mainnet.dapps.swap.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 // Prepare remove liquidity input for single token exit
@@ -115,11 +115,11 @@ The main helper classes we use from the SDK are:
 After initializing the `BalancerApi` class, we can fetch current pool data using `fetchPoolState`.
 
 ```js-vue
-const balancerApi = new BalancerApi("{{config.testnet.dapps.bex.balancerApiUrl}}", {{config.testnet.chainId}});
+const balancerApi = new BalancerApi("{{config.mainnet.dapps.swap.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
 const poolId =
-  "{{config.testnet.dapps.bex.examplePoolId}}";
+  "{{config.mainnet.dapps.swap.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 ```
 

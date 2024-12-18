@@ -18,9 +18,9 @@ head:
 
 # Berps & $BGT
 
-> <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.bgt.address">{{config.contracts.bgt.address}}</a>
+> <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.bgt.address">{{config.contracts.bgt.address}}</a>
 
-Berachain Governance Token (`$BGT`) is a soulbound <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.bgt.address">ERC20 Token</a>, that is used for validator delegation, governance proposals and voting, and can be exchanged for `$BERA` by burning it.
+Berachain Governance Token (`$BGT`) is a soulbound <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.bgt.address">ERC20 Token</a>, that is used for validator delegation, governance proposals and voting, and can be exchanged for `$BERA` by burning it.
 
 <ClientOnly>
   <Token title="$BGT" image="/assets/BGT.png" />
