@@ -4,9 +4,7 @@
 
 # RewardVault
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.rewardVault.address">{{config.contracts.rewardVault.address}}</a><span v-if="config.contracts.rewardVault.abi"><a target="_blank" :href="config.contracts.rewardVault.abi">ABI JSON</a></span></small>
-
-This contract is the vault for the Berachain rewards, it handles the staking and rewards accounting of BGT.
+The RewardVault contract is the main Proof of Liquidity integration point for network incentives, handling the staking (of LP tokens) and rewards accounting of $BGT.
 
 Rewards calculation is inspired by the battle-tested [Synthetix StakingRewards Contract](https://github.com/Synthetixio/synthetix/blob/develop/contracts/StakingRewards.sol).
 

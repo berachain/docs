@@ -55,12 +55,12 @@ function deposit(
 
 **Parameters**
 
-| Name          | Type      | Description                                                                                                                                                            |
-| ------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pubkey`      | `bytes`   | is the consensus public key of the validator. If subsequent deposit, its ignored.                                                                                      |
-| `credentials` | `bytes`   | is the staking credentials of the validator. If this is the first deposit it is validator operator public key, if subsequent deposit it is the depositor's public key. |
-| `signature`   | `bytes`   | is the signature used only on the first deposit.                                                                                                                       |
-| `operator`    | `address` | is the address of the operator.                                                                                                                                        |
+| Name          | Type      | Description                                              |
+| ------------- | --------- | -------------------------------------------------------- |
+| `pubkey`      | `bytes`   | is the consensus public key of the validator.            |
+| `credentials` | `bytes`   | is the withdrawal credentials of the validator.          |
+| `signature`   | `bytes`   | is the signature used only on the first deposit.         |
+| `operator`    | `address` | is the address of the operator used for `POL` mechanics. |
 
 ### requestOperatorChange
 
@@ -125,13 +125,13 @@ event Deposit(bytes pubkey, bytes credentials, uint64 amount, bytes signature, u
 
 **Parameters**
 
-| Name          | Type     | Description                                                                        |
-| ------------- | -------- | ---------------------------------------------------------------------------------- |
-| `pubkey`      | `bytes`  | the public key of the validator who is being deposited for if not a new validator. |
-| `credentials` | `bytes`  | the public key of the operator if new validator or the depositor if top up.        |
-| `amount`      | `uint64` | the amount of stake being deposited, in Gwei.                                      |
-| `signature`   | `bytes`  | the signature of the deposit message, only checked when creating a new validator.  |
-| `index`       | `uint64` | the index of the deposit.                                                          |
+| Name          | Type     | Description                                     |
+| ------------- | -------- | ----------------------------------------------- |
+| `pubkey`      | `bytes`  | the public key of the validator.                |
+| `credentials` | `bytes`  | is the withdrawal credentials of the validator. |
+| `amount`      | `uint64` | the amount of stake being deposited, in Gwei.   |
+| `signature`   | `bytes`  | the signature of the deposit message.           |
+| `index`       | `uint64` | the index of the deposit.                       |
 
 ### OperatorChangeQueued
 
