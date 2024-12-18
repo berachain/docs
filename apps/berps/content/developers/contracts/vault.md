@@ -17,7 +17,7 @@ head:
 
 # Vault Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.vault.address">{{config.contracts.vault.address}}</a><span v-if="config.contracts.vault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.vault.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.vault.address">{{config.contracts.vault.address}}</a><span v-if="config.contracts.vault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.vault.abi">ABI JSON</a></span></small>
 
 `Vault.sol` serves as the Honey vault which provides trading liquidity, and to which protocol fees accrue.
 

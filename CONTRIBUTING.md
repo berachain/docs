@@ -283,7 +283,7 @@ In some cases, links cannot be setup with traditional markdown, and here is the 
 <a :href="config.websites.foundation.url" target="_blank" rel="no-referrer">{{config.websites.foundation.name}}</a>
 
 ✅ Correct way combining variables
-<a :href="config.testnet.dapps.berps.url + 'vault'" target="_blank" rel="no-referrer">{{config.testnet.dapps.berps.name}}</a>
+<a :href="config.mainnet.dapps.berps.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.berps.name}}</a>
 ```
 
 #### Code Snippets
@@ -306,7 +306,7 @@ _Example:_
 ````bash
 # remove \
 \```js-vue
-const hello = "{{config.testnet.dapps.beratrail.name}}";
+const hello = "{{config.mainnet.dapps.berascan.name}}";
 \```
 ````
 

@@ -17,7 +17,7 @@ head:
 
 # Entrypoint Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.entrypoint.address">{{config.contracts.entrypoint.address}}</a><span v-if="config.contracts.entrypoint.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.entrypoint.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.entrypoint.address">{{config.contracts.entrypoint.address}}</a><span v-if="config.contracts.entrypoint.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.entrypoint.abi">ABI JSON</a></span></small>
 
 `Entrypoint.sol` serves as the entrypoint for all trading actions
 

@@ -70,7 +70,7 @@ import PythAbi from "@pythnetwork/pyth-sdk-solidity/abis/IPyth.json" assert { ty
 
 // Berachain Artio
 const contractAddress = "0x8D254a21b3C86D32F7179855531CE99164721933";
-const provider = ethers.getDefaultProvider("{{config.testnet.rpcUrl}}");
+const provider = ethers.getDefaultProvider("{{config.mainnet.rpcUrl}}");
 const pythContract = new ethers.Contract(contractAddress, PythAbi, provider);
 
 const pythConnection = new EvmPriceServiceConnection(

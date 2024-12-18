@@ -49,6 +49,6 @@ Unlike `aTokens`, debt tokens are non-transferable.
 
 ### How can I get $HONEY?
 
-To acquire `$HONEY`, you can visit the decentralized exchange at <a target="_blank" :href="config.testnet.dapps.bex.url">BEX</a>, or mint it at <a target="_blank" :href="config.testnet.dapps.honeySwap.url">Honey Swap</a>.
+To acquire `$HONEY`, you can visit the decentralized exchange at <a target="_blank" :href="config.mainnet.dapps.swap.url">BEX</a>, or mint it at <a target="_blank" :href="config.mainnet.dapps.honeySwap.url">Honey Swap</a>.
 
-If you require funds, you can acquire testnet `$BERA` through the <a target="_blank" :href="config.testnet.faucetUrl">Berachain Testnet Faucet</a>.
+If you require funds, you can acquire testnet `$BERA` through the <a target="_blank" :href="config.mainnet.faucetUrl">Berachain Testnet Faucet</a>.

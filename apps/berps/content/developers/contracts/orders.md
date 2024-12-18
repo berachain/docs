@@ -17,7 +17,7 @@ head:
 
 # Orders Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.orders.address">{{config.contracts.orders.address}}</a><span v-if="config.contracts.orders.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.orders.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.orders.address">{{config.contracts.orders.address}}</a><span v-if="config.contracts.orders.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.orders.abi">ABI JSON</a></span></small>
 
 `Orders.sol` manages open trades, limit orders, and stores user funds.
 

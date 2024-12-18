@@ -12,7 +12,7 @@ Here's an illustration of user interactions with Bend:
 
 ![Berachain Bend Overview](/assets/bend-overview.png)
 
-> Berachain Bend can be found at <a :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a>
+> Berachain Bend can be found at <a :href="config.mainnet.dapps.bend.url">{{config.mainnet.dapps.bend.url}}</a>
 
 :::tip
 <b>`$HONEY` is the only asset that can be borrowed</b>

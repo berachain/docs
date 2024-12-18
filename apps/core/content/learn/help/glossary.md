@@ -16,21 +16,23 @@ head:
 ## BERA Token
 
 `$BERA` is the native gas token of Berachain's L1 and it serves multiple purposes:
+
 - Used for paying transaction fees
 - Initial validator staking token to secure the network
-   - More BERA staked = more blocks proposed
-   - Validators earn base emissions and transaction fees(ie MEV) for each block proposed
+  - More BERA staked = more blocks proposed
+  - Validators earn base emissions and transaction fees(ie MEV) for each block proposed
 - Can be obtained by burning BGT (one-way conversion)
 
 Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
 
-## BGT(Bera Governance Token) 
+## BGT(Bera Governance Token)
 
-`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by 
+`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by
 participating in [Proof of Liquidity](#proof-of-liquidity):
+
 - Validator delegation and rewards
-   - More BGT delegated = more reward emissions for reward vaults s
-- Governance participation (proposals and voting 
+  - More BGT delegated = more reward emissions for reward vaults s
+- Governance participation (proposals and voting
 - Can be burned for `$BERA` (one-way conversion)
 - Can only be earned through participating in [Proof of Liquidity](#proof-of-liquidity)
 

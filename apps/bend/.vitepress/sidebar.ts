@@ -9,9 +9,7 @@ const SIDEBAR = {
   LEARN: [
     {
       text: "Introduction",
-      items: [
-        { text: "Coming Soon", link: "/" },
-      ],
+      items: [{ text: "Coming Soon", link: "/" }],
     },
   ],
 };

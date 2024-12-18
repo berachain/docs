@@ -20,8 +20,8 @@ const SIDEBAR = {
           link: "/learn/berps-proof-of-liquidity",
         },
         {
-          text: `${constants.testnet.dapps.berps.name}`,
-          link: `${constants.testnet.dapps.berps.url}`,
+          text: `${constants.mainnet.dapps.berps.name}`,
+          link: `${constants.mainnet.dapps.berps.url}`,
           target: "_blank",
           rel: "no-referrer",
         },

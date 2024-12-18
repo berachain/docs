@@ -56,7 +56,7 @@ YOUR_ETH_RPC_URL="http://localhost:8545" # OPTIONAL - Depends on your local RPC
 # Wallet address - Can be the same from private key
 YOUR_VALIDATOR_OPERATOR_ADDRESS="<0xYOUR_ETH_WALLET_ADDRESS>" # CHANGE THIS
 
-# This can be the same as your wallet address for the VALIDATOR_OPERATOR_ADDRESS 
+# This can be the same as your wallet address for the VALIDATOR_OPERATOR_ADDRESS
 YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>" # CHANGE THIS
 
 # Genesis Configurations - DO NOT CHANGE THESE
@@ -94,21 +94,21 @@ cast send "$DEPOSIT_CONTRACT_ADDRESS" \
 # [Expected Successful Output]:
 # blockHash               0xf70...
 # blockNumber             1542...
-# contractAddress         
+# contractAddress
 # cumulativeGasUsed       1817228
 # effectiveGasPrice       5247018757
 # from                    0xYOUR_VALIDATOR_OPERATOR_ADDRESS
 # gasUsed                 69241
 # logs                    [{"address":"0x4242424242424242424242424242424242424242","topics":
 # # ...
-# root                    
+# root
 # status                  1 (success)
 # transactionHash         0x...
 # transactionIndex        4
 # type                    2
-# blobGasPrice            
-# blobGasUsed             
-# authorizationList       
+# blobGasPrice
+# blobGasUsed
+# authorizationList
 # to                      0x4242424242424242424242424242424242424242
 ```
 
@@ -161,9 +161,9 @@ You can get this by looking at the file or running the following:
 ```bash
 # FROM: /
 
-# OR /path/to/$HOME/config/priv_validator_key.json 
+# OR /path/to/$HOME/config/priv_validator_key.json
 cat ./.beacond/config/priv_validator_key.json | jq -r ".address";
 
 # [Expected Similat Address]
-# A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0 
+# A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0
 ```

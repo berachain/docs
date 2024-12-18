@@ -14,6 +14,6 @@ Note: Other assests deposited into bend act only as a collateral.
 
 ## Where Can I Get $HONEY?
 
-`$HONEY` can be swapped for other assets through <a :href="config.testnet.dapps.honeySwap.url">{{config.testnet.dapps.honeySwap.name}} dApp</a> or the <a :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.name}}</a>.
+`$HONEY` can be swapped for other assets through <a :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.name}} dApp</a> or the <a :href="config.mainnet.dapps.swap.url">{{config.mainnet.dapps.swap.name}}</a>.
 
 Additional means to buy $HONEY are coming soon, and users can use Berachain's canonical bridge ([LayerZero](https://layerzero.network)) to bridge over assets.

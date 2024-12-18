@@ -48,7 +48,7 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
-        { text: "PoL FAQs", link: "/learn/pol/faqs" }
+        { text: "PoL FAQs", link: "/learn/pol/faqs" },
       ],
     },
     {
@@ -71,8 +71,8 @@ const SIDEBAR = {
         { text: "Faucet", link: "/learn/dapps/faucet" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
-          text: `${constants.testnet.dapps.beratrail.name}`,
-          link: `/learn/dapps/beratrail`,
+          text: `${constants.mainnet.dapps.berascan.name}`,
+          link: `/learn/dapps/berascan`,
         },
       ],
     },
@@ -99,8 +99,8 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
         {
-          text: `${constants.testnet.dapps.beratrail.name}`,
-          link: `${constants.testnet.dapps.beratrail.url}`,
+          text: `${constants.mainnet.dapps.berascan.name}`,
+          link: `${constants.mainnet.dapps.berascan.url}`,
           target: "_blank",
           rel: "no-referrer",
         },
@@ -117,7 +117,10 @@ const SIDEBAR = {
       items: [
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
-        {text: "Integrating your app with PoL", link: "/developers/quickstart/pol-integration",}
+        {
+          text: "Integrating your app with PoL",
+          link: "/developers/quickstart/pol-integration",
+        },
       ],
     },
     {

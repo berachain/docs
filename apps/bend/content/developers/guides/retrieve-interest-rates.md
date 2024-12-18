@@ -22,7 +22,7 @@ Below is an example for fetching interest rates on Bend
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "{{config.testnet.rpcUrl}}"
+  "{{config.mainnet.rpcUrl}}"
 );
 const poolAddressesProvider = "{{config.contracts.poolAddressesProvider.address}}";
 

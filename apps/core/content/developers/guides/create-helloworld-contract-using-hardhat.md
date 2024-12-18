@@ -294,20 +294,20 @@ In our new `.env` let's enter the following information:
 
 ```bash-vue
 # Chain Configurations
-CHAIN_ID={{config.testnet.chainId}}
-NETWORK_NAME="{{config.testnet.name}}"
-CURRENCY_DECIMALS={{config.testnet.decimals}}
-CURRENCY_NAME="{{config.testnet.currencyName}}"
-CURRENCY_SYMBOL="{{config.testnet.currencySymbol}}"
+CHAIN_ID={{config.mainnet.chainId}}
+NETWORK_NAME="{{config.mainnet.name}}"
+CURRENCY_DECIMALS={{config.mainnet.decimals}}
+CURRENCY_NAME="{{config.mainnet.currencyName}}"
+CURRENCY_SYMBOL="{{config.mainnet.currencySymbol}}"
 
 # API key for Beratrail Block Explorer, can be any value for now
-BLOCK_EXPLORER_NAME={{config.testnet.dapps.beratrail.name}}
-BLOCK_EXPLORER_API_KEY={{config.testnet.dapps.beratrail.apiKey}}
-BLOCK_EXPLORER_API_URL={{config.testnet.dapps.beratrail.apiUrl}}
-BLOCK_EXPLORER_URL={{config.testnet.dapps.beratrail.url}}
+BLOCK_EXPLORER_NAME={{config.mainnet.dapps.berascan.name}}
+BLOCK_EXPLORER_API_KEY={{config.mainnet.dapps.berascan.apiKey}}
+BLOCK_EXPLORER_API_URL={{config.mainnet.dapps.berascan.apiUrl}}
+BLOCK_EXPLORER_URL={{config.mainnet.dapps.berascan.url}}
 
 # Wallet + RPC configurations
-RPC_URL={{config.testnet.rpcUrl}}
+RPC_URL={{config.mainnet.rpcUrl}}
 # Private key generated from Hardhat local - replace with Berachain
 # NEVER SHARE THIS WITH ANYONE AND AVOID COMMITTING THIS WITH YOUR GIT REPOSITORY
 WALLET_PRIVATE_KEY=0xYOUR_WALLET_PRIVATE_KEY
@@ -579,7 +579,7 @@ pnpm deploy:berachain;
 We can also see our deployed contract in the Berachain Beratrail Block Explorer by going to the following address:
 
 ```bash-vue
-open {{config.testnet.dapps.beratrail.url}}address/0x38f8423cc4390938c01616d7a9f761972e7f116a
+open {{config.mainnet.dapps.berascan.url}}address/0x38f8423cc4390938c01616d7a9f761972e7f116a
 
 # [Expected Result Should Open Your Browser]
 ```
@@ -683,7 +683,7 @@ pnpm verify 0x38f8423cc4390938c01616d7a9f761972e7f116a "Hello From Deployed Cont
 # for verification on the block explorer. Waiting for verification result...
 #
 # Successfully verified contract HelloWorld on the block explorer.
-# {{config.testnet.dapps.beratrail.url}}address/0x38f8423cc4390938c01616d7a9f761972e7f116a#code
+# {{config.mainnet.dapps.berascan.url}}address/0x38f8423cc4390938c01616d7a9f761972e7f116a#code
 ```
 
 We should now see on Beratail that the contract is verified and that the Solidity code is now showing.

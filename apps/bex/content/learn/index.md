@@ -21,7 +21,7 @@ BEX (Berachain Exchange) is the native decentralized exchange (DEX) protocol of 
 
 ![BEX All Pools](/assets/all_pools.png)
 
-> <small>BEX can be accessed on {{config.testnet.chainName}} here: <a target="_blank" :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.url}}</a></small>
+> <small>BEX can be accessed on {{config.mainnet.chainName}} here: <a target="_blank" :href="config.mainnet.dapps.swap.url">{{config.mainnet.dapps.swap.url}}</a></small>
 
 ## How BEX Works
 

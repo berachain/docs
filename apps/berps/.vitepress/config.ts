@@ -79,8 +79,8 @@ export default defineConfig({
             link: `#`,
           },
           {
-            text: `${constants.websites.docsBex.name}`,
-            link: `${constants.websites.docsBex.url}`,
+            text: `${constants.websites.docsSwap.name}`,
+            link: `${constants.websites.docsSwap.url}`,
           },
         ],
       },

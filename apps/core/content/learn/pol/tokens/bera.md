@@ -18,7 +18,7 @@ head:
 
 # $BERA
 
-> `$WBERA`: <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.wbera.address">{{config.contracts.wbera.address}}</a>
+> `$WBERA`: <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.wbera.address">{{config.contracts.wbera.address}}</a>
 
 <ClientOnly>
   <Token title="$BERA" image="/assets/BERA.png" />

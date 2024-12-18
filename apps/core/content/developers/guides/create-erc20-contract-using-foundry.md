@@ -521,7 +521,7 @@ With a local node configure, the deployment to Berachain Testnet should be the s
 ```bash-vue
 # FROM ./create-erc20-contract-using-foundry
 
-forge script script/BingBongToken.s.sol --rpc-url {{config.testnet.rpcUrl}} --broadcast;
+forge script script/BingBongToken.s.sol --rpc-url {{config.mainnet.rpcUrl}} --broadcast;
 
 # [Expected Output]:
 # Compiler run successful!
@@ -545,11 +545,11 @@ forge script script/BingBongToken.s.sol --rpc-url {{config.testnet.rpcUrl}} --br
 # FROM ./create-erc20-contract-using-foundry
 
 forge verify-contract 0xYOUR_DEPLOYED_CONTRACT_ADDRESS BingBongToken \
-    --etherscan-api-key={{config.testnet.dapps.beratrail.apiKey}} \
+    --etherscan-api-key={{config.mainnet.dapps.berascan.apiKey}} \
     --watch \
     --constructor-args $(cast abi-encode "constructor(string,string,uint256)" "BingBongToken" "BBT" 5678) \
     --retries=2 \
-    --verifier-url={{config.testnet.dapps.beratrail.apiUrl}};
+    --verifier-url={{config.mainnet.dapps.berascan.apiUrl}};
 ```
 
 ## Full Code Repository

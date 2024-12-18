@@ -17,13 +17,13 @@ head:
 
 # Berachain Berps 🐻⛓️
 
-<a :href="config.testnet.dapps.berps.url">
+<a :href="config.mainnet.dapps.berps.url">
 
 ![Berachain Berps Native dApp](/assets/berps-dapp.png)
 
 </a>
 
-> <small><a :href="config.testnet.dapps.berps.url">{{config.testnet.dapps.berps.url}}</a></small>
+> <small><a :href="config.mainnet.dapps.berps.url">{{config.mainnet.dapps.berps.url}}</a></small>
 
 Berachain Berps is a decentralized leveraged trading platform which allows for perpetual futures contract trading.
 

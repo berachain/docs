@@ -18,9 +18,9 @@ head:
 
 # Berps & `$HONEY`
 
-> <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>
+> <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>
 
-$HONEY is Berachain's native stablecoin. It is an standard <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.honey.address">ERC20 Token</a> and represents the equivalent of 1 `$USDC`.
+$HONEY is Berachain's native stablecoin. It is an standard <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.honey.address">ERC20 Token</a> and represents the equivalent of 1 `$USDC`.
 
 <ClientOnly>
   <Token title="$HONEY" image="/assets/HONEY.png" />
@@ -42,10 +42,10 @@ $HONEY is the only asset that Berps accepts to place a trade.
 
 ![Berachain Honey Swap](/assets/berachain-honey-swap.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.honeySwap.url">{{config.testnet.dapps.honeySwap.url}}/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.url}}/</a></small>
 
 ![Berachain BEX Swap](/assets/berachain-bex-swap.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.bex.url">{{config.testnet.dapps.bex.url}}/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.swap.url">{{config.mainnet.dapps.swap.url}}/</a></small>
 
 Additional means to buy `$HONEY` are coming soon, and users can use Berachain's canonical bridge ([LayerZero](https://layerzero.network)) to bridge over assets.

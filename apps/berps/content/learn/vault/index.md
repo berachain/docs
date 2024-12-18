@@ -8,7 +8,7 @@ The Berps Vault, or `$bHONEY` Vault, is a [Tokenized Vault](https://eips.ethereu
 
 ![Berps Vault](/assets/berps-vault.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.berps.url + 'vault/'">{{config.testnet.dapps.berps.url}}vault/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berps.url + 'vault/'">{{config.mainnet.dapps.berps.url}}vault/</a></small>
 
 ## bHoney Vault Rewards
 

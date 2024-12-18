@@ -23,7 +23,7 @@ There is a minimum floor of 250K $BERA required to be a validator. There is a ma
 
 ### Can validators with no $BGT delegated to them build blocks and earn rewards?
 
-The ability to build blocks is determined by $BERA stake, not $BGT delegation. As long as a validator has enough $BERA staked and is in the active set, they can produce blocks regardless of how much $BGT is delegated to them. For every block a validator proposes, that validator recieves a reward. 
+The ability to build blocks is determined by $BERA stake, not $BGT delegation. As long as a validator has enough $BERA staked and is in the active set, they can produce blocks regardless of how much $BGT is delegated to them. For every block a validator proposes, that validator recieves a reward.
 
 ### Is there a cap for the number of active validators?
 
@@ -52,6 +52,7 @@ All rewards vaults are treated equally and is determined solely by validators di
 ### How much $BGT could any given reward vault earn?
 
 The amount of $BGT a given reward vault can earn is a function of following:
+
 1. How many validators are directing emissions to those vaults
 2. How much $BGT is delegated to the validators directing emissions to those vaults
 
@@ -75,4 +76,4 @@ Incentives are denominated in $BGT– ultimately users, validators, and protocol
 
 ### Can only validators vote on or create governance proposals?
 
-Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal. 
+Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal.

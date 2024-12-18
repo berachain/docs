@@ -182,7 +182,7 @@ Next step is to use forge script to deploy this contract to Berachain.
 ```bash-vue
 # FROM: ./my_token
 
-forge create --rpc-url {{config.testnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY> src/MyToken.sol:MyToken --legacy;
+forge create --rpc-url {{config.mainnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY> src/MyToken.sol:MyToken --legacy;
 
 # [Expected Output]:
 # Deployer: 0x852Fc561Fd842ef1Af923ABfc64acC8A5624fe80
@@ -197,7 +197,7 @@ The last step is now verify that contract that was successfully deployed.
 <!-- https://api.routescan.io/v2/network/testnet/evm/80084/etherscan -->
 
 ```bash-vue
-forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.testnet.dapps.beratrail.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
+forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.mainnet.dapps.berascan.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
 
 # [Expected Output]:
 # Start verifying contract `0x53E365fE5fDF332dD475E90bA8383B7F9853a49F` deployed on mainnet
@@ -208,7 +208,7 @@ forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol
 # GUID: `321091ec-e529-5a11-a75c-cf1ffc6987d7`
 # URL: https://etherscan.io/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 #
-# !NOTE: Should be {{config.testnet.dapps.beratrail.url}}/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# !NOTE: Should be {{config.mainnet.dapps.berascan.url}}/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 ```
 
 ## Next Steps

@@ -243,7 +243,7 @@ IVault(vaultAddress).joinPool(
 
 ## 4. Subgraph
 
-The current BEX implementation provides a <a :href="config.testnet.dapps.bex.balancerSubgraphUrl" target="_blank">subgraph</a> indexing smart contract data with a GraphQL interface.
+The current BEX implementation provides a <a :href="config.mainnet.dapps.swap.balancerSubgraphUrl" target="_blank">subgraph</a> indexing smart contract data with a GraphQL interface.
 
 ### Querying Pools Containing Tokens
 
