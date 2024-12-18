@@ -19,7 +19,7 @@ This guide will walk you through the process of running a validator node on Bera
 
 - Run Full Node & Fully Synced - See [Quickstart](/nodes/quickstart)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
-- Ethereum Wallet Address with a minimum of 250,000 $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
+- Berachain Wallet Address with a minimum of 250,000 $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
 
 ## Becoming A Validator
 
@@ -45,16 +45,16 @@ Replace the correct values in this new `env` file.
 
 ```bash
 # Wallet Configuration
-YOUR_ETH_WALLET_PRIVATE_KEY="<YOUR_ETH_WALLET_PRIVATE_KEY>" # CHANGE THIS
+YOUR_BERA_WALLET_PRIVATE_KEY="<YOUR_BERA_WALLET_PRIVATE_KEY>" # CHANGE THIS
 
 # BeaconKit Configuration - Example `$HOME/.beacond` or `/.beacond`
 YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>" # CHANGE THIS
 
 # Your RPC URL - typically localhost if in the same instance / enviroment
-YOUR_ETH_RPC_URL="http://localhost:8545" # OPTIONAL - Depends on your local RPC
+YOUR_BERA_RPC_URL="http://localhost:8545" # OPTIONAL - Depends on your local RPC
 
 # Wallet address - Can be the same from private key
-YOUR_VALIDATOR_OPERATOR_ADDRESS="<0xYOUR_ETH_WALLET_ADDRESS>" # CHANGE THIS
+YOUR_VALIDATOR_OPERATOR_ADDRESS="<0xYOUR_BERA_WALLET_ADDRESS>" # CHANGE THIS
 
 # This can be the same as your wallet address for the VALIDATOR_OPERATOR_ADDRESS
 YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>" # CHANGE THIS
@@ -66,7 +66,7 @@ VAL_DEPOSIT_GWEI_AMOUNT=32000000000
 DEPOSIT_CONTRACT_ADDRESS="0x4242424242424242424242424242424242424242"
 
 # Validator Configuration - DO NOT CHANGE THESE
-OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --private-key $YOUR_ETH_WALLET_PRIVATE_KEY --home $YOUR_BEACOND_HOME_DIR);
+OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --private-key $YOUR_BERA_WALLET_PRIVATE_KEY --home $YOUR_BEACOND_HOME_DIR);
 VAL_PUB_KEY=$(echo "$OUTPUT" | awk -F'pubkey=' '{print $2}' | awk '{print $1}' |
  sed -r 's/\x1B\[[0-9;]*[mK]//g');
 SEND_DEPOSIT_SIGNATURE=$(echo "$output" | awk -F'signature=' '{print $2}' | awk '{print $1}' | sed -r 's/\x1B\[[0-9;]*[mK]//g');
@@ -87,9 +87,9 @@ cast send "$DEPOSIT_CONTRACT_ADDRESS" \
 "$VAL_WITHDRAW_CREDENTIAL" \
 "$SEND_DEPOSIT_SIGNATURE" \
 "$YOUR_VALIDATOR_OPERATOR_ADDRESS" \
---private-key "$YOUR_ETH_WALLET_PRIVATE_KEY" \
+--private-key "$YOUR_BERA_WALLET_PRIVATE_KEY" \
 --value 32ether \
--r $YOUR_ETH_RPC_URL;
+-r $YOUR_BERA_RPC_URL;
 
 # [Expected Successful Output]:
 # blockHash               0xf70...
@@ -117,7 +117,7 @@ You can double check that your validator has become an operator by running the f
 ```bash
 # FROM: /
 
-cast call 0x4242424242424242424242424242424242424242 "getOperator(bytes calldata pubkey)" "$VAL_PUB_KEY" --rpc-url $YOUR_ETH_RPC_URL;
+cast call 0x4242424242424242424242424242424242424242 "getOperator(bytes calldata pubkey)" "$VAL_PUB_KEY" --rpc-url $YOUR_BERA_RPC_URL;
 
 # [Expected Similar Output]:
 # 0xYOUR_VALIDATOR_OPERATOR_ADDRESS
