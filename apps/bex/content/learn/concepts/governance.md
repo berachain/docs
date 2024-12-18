@@ -22,6 +22,7 @@ Governance in BeraSwap is administered through the `TimelockAuthorizer` contract
 On testnet, these roles are managed by the Berachain Foundation multi-sig wallet. During mainnet, these roles will be transferred to a combination of protocol-owned multi-sigs and BGT governance.
 
 ## Admin
+
 The admin role is responsible for managing the day-to-day operations of the BeraSwap protocol, and has the most direct control over protocol parameters. Its powers include:
 
 - Managing protocol parameters
@@ -30,6 +31,7 @@ The admin role is responsible for managing the day-to-day operations of the Bera
 - Overseeing operational changes
 
 ## Authorizer Adaptor
+
 The authorizer adaptor role serves as the permission management interface for the protocol. Its powers include:
 
 - Controlling access to protocol functions
@@ -39,6 +41,7 @@ The authorizer adaptor role serves as the permission management interface for th
 - Interfacing with the timelock system
 
 ## Coordinator
+
 The coordinator role handles the execution of governance actions and ensures proper sequencing. Its powers include:
 
 - Managing staged governance actions
@@ -46,4 +49,3 @@ The coordinator role handles the execution of governance actions and ensures pro
 - Ensuring proper order of operations
 - Verifying successful completion of changes
 - Handling emergency cancellations when needed
-

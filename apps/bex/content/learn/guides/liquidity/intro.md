@@ -42,9 +42,6 @@ When adding liquidity to an LP position, users have the following parameters to 
 Users can view their existing LP positions through BeraSwap on BeraSwap.
 ![Manage Liquidity](/assets/manage_lp.png)
 
-
 To remove liquidity from a specific position, users can withdraw their LP tokens. This removes the liquidity from the pool and returns the underlying collateral (based on the current token prices) to the user.
 
 ![Withdraw Liquidity](/assets/withdraw_lp.png)
-
-

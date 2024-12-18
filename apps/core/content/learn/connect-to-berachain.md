@@ -38,12 +38,12 @@ Quickly add Berachain's network to your wallet with one-click.
   />
  </ClientOnly>
 
-| Key                | Value                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>           |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>              |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>   |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>      |
+| Key                | Value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>          |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>  |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
 ## Supported Wallets 👛

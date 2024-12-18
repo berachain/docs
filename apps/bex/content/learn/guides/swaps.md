@@ -42,4 +42,3 @@ When initiating a swap, users can define the following parameters:
 - **Quantity**: The amount of tokens to swap, which can be specified as either a fixed input quantity or a fixed output quantity.
 - **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact the user is willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert. Slippage can be specified by selecting the gear icon on the swap page:
   ![BeraSwap Swaps Modal](/assets/swap_slippage.png)
-

@@ -49,12 +49,12 @@ export default defineConfig({
     IS_PRODUCTION
       ? ["script", { src: "/_vercel/insights/script.js", defer: "true" }]
       : [
-        "meta",
-        {
-          name: "environment",
-          content: "development",
-        },
-      ],
+          "meta",
+          {
+            name: "environment",
+            content: "development",
+          },
+        ],
     ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
   ],
   sitemap: {

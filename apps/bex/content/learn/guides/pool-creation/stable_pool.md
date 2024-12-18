@@ -22,6 +22,7 @@ Stable pools are designed specifically for tokens that are expected to maintain 
 ## When to Use Stable Pools
 
 Ideal use cases for stable pools include:
+
 - Stablecoin pairs (USDC/USDT/DAI)
 - Liquid staking tokens (stETH/ETH)
 - Synthetic/wrapped asset pairs (WBTC/renBTC)
@@ -29,10 +30,13 @@ Ideal use cases for stable pools include:
 ## Creating a Stable Pool
 
 ### 1. Select Pool Type
+
 From the pool creation interface, select "Stable" as your pool type. This type is specifically optimized for tokens that maintain similar prices.
 
 ### 2. Choose Tokens
+
 Select the tokens you want to include in your stable pool. Remember:
+
 - All tokens should have similar prices
 - Maximum of 5 tokens per stable pool
 - All tokens must have the same decimals
@@ -40,7 +44,9 @@ Select the tokens you want to include in your stable pool. Remember:
 ![Stable Pool Token Selection](/assets/stable_select_tokens.png)
 
 ### 3. Set Initial Liquidity
+
 Provide the initial liquidity amounts for each token. For stable pools, it's recommended to:
+
 - Add similar amounts of each token
 - Ensure proper price alignment
 - Consider market demand
@@ -52,7 +58,9 @@ If the values are significantly different, you may see an error warning about pr
 ![Liquidity Error Warning](/assets/stable_set_liq_error.png)
 
 ### 4. Set Pool Parameters
+
 Configure your pool settings:
+
 - **Swap Fee**: Choose between 0.01% to 0.1% (lower fees are typical for stable pools)
 - **Amplification Parameter**: Determines how stable the pool remains around the ideal price
   - Higher values (100-5000) = better price stability but lower flexibility

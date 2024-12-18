@@ -25,7 +25,6 @@ layout: page
   </div>
 </section>
 
-
 <style>
   .VPPage {
     padding: 32px 24px 96px 24px;

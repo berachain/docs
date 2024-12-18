@@ -41,12 +41,12 @@ Click the button below to add the network to your MetaMask in one click.
 
 To add the network manually, insert the network details below into your wallet of choice:
 
-| Key                | Value                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| Network            | {{config.mainnet.chainName}}                                                            |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>              |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>             |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>      |
+| Key                | Value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Network            | {{config.mainnet.chainName}}                                                           |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>            |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
 ### RPC Providers

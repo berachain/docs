@@ -48,7 +48,7 @@ const SIDEBAR = {
             { text: "$HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
-        { text: "PoL FAQs", link: "/learn/pol/faqs" }
+        { text: "PoL FAQs", link: "/learn/pol/faqs" },
       ],
     },
     {
@@ -117,7 +117,10 @@ const SIDEBAR = {
       items: [
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
-        {text: "Integrating your app with PoL", link: "/developers/quickstart/pol-integration",}
+        {
+          text: "Integrating your app with PoL",
+          link: "/developers/quickstart/pol-integration",
+        },
       ],
     },
     {
