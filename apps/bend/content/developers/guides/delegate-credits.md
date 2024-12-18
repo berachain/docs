@@ -34,7 +34,7 @@ To approve delegation, the approveDelegation method of the debt token contract i
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "{{config.testnet.rpcUrl}}"
+  "{{config.mainnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 
@@ -85,7 +85,7 @@ The borrower's available credit is reduced by the borrowed amount.
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "{{config.testnet.rpcUrl}}"
+  "{{config.mainnet.rpcUrl}}"
 );
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 

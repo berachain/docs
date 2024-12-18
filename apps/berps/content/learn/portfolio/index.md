@@ -10,4 +10,4 @@ The goal of the portofolio is to best represent how well a trader is performing 
 
 ![Berps Portfolio](/assets/berps-portfolio.png)
 
-> <small><a target="_blank" :href="config.testnet.dapps.berps.url + 'portfolio/'">{{config.testnet.dapps.berps.url}}/portfolio/</a></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berps.url + 'portfolio/'">{{config.mainnet.dapps.berps.url}}/portfolio/</a></small>

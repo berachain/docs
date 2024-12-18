@@ -16,7 +16,7 @@ const SIDEBAR = {
         { text: "What is BEX?", link: "/learn/" },
         {
           text: "BEX dApp",
-          link: `${constants.testnet.dapps.bex.url}`,
+          link: `${constants.mainnet.dapps.swap.url}`,
           target: "_blank",
           rel: "no-referrer",
         },

@@ -18,7 +18,7 @@ head:
 
 # $HONEY
 
-> <a target="_blank" :href="config.testnet.dapps.beratrail.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>
+> <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>
 
 <ClientOnly>
   <Token title="$HONEY" image="/assets/HONEY.png" />
@@ -42,7 +42,7 @@ The initial collateral options will be `stgUSDC` and `BEE` (`$pyUSD`). New asset
 
 ## How is $HONEY Used?
 
-`$HONEY` shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. `$HONEY` could be used within the Berachain ecosystem via native and ecosystem apps. 
+`$HONEY` shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. `$HONEY` could be used within the Berachain ecosystem via native and ecosystem apps.
 
 ## Minting $HONEY
 

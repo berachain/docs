@@ -4,7 +4,7 @@
 
 # Honey
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a><span v-if="config.contracts.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honey.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a><span v-if="config.contracts.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honey.abi">ABI JSON</a></span></small>
 
 This is the ERC20 token representation of Berachain's native stablecoin, HONEY.
 

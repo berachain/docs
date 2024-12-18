@@ -2,18 +2,7 @@
 
 Proof-of-Liquidity (PoL) is an extension of delegated Proof-of-Stake (dPoS) that realigns economic incentives between validators, applications, and users. The key innovation is separating the chain's security ($BERA) from its governance and rewards ($BGT).
 
-Berachain's Validator Active Set is determined by each validator's $BERA stake, with a minimum of 250,000 $BERA and a maximum cap of 2,500,000 $BERA. Within the Active Set, a validator's probability of winning a block is proportional to their staked $BERA—more $BERA staked increases the likelihood of proposing a block. The size of a validator's block reward in $BGT is determined by their Boost, which is a percentage of a capped amount of $BGT where the percentage is determined by a validator's $BGT delegation out of the total $BGT delegated to all validators.
-
-### Example
-
-Given the following:
-- 1500 Max $BGT Rewards Per Block
-- 200 $BGT Delegated To Validator A
-- 1000 Total $BGT Delegated To All Validators
-
-Validator A has 20% of all $BGT delegated.
-If Validator A proposes a block, then they would receive (on top of the base $BGT rate):
-1500 x 0.2 = 300 $BGT to use towards their Reward Allocations
+Berachain's Validator Active Set is determined by each validator's $BERA stake, with a minimum of 250,000 $BERA and a maximum cap of 2,500,000 $BERA. Within the Active Set, a validator's probability of winning a block is proportional to their staked $BERA—more $BERA staked increases the likelihood of proposing a block. The size of a validator's block reward in $BGT is determined by their Boost, which is a percentage of a capped amount of $BGT where the percentage is determined by a validator's $BGT delegation out of the total $BGT delegated to all validators. Learn more about how emissions are calculated on the [emissions page](./bgtmath.md)
 
 ![Berachain Proof-of-Liquidity Steps](/assets/proof-of-liquidity-steps.png)
 
@@ -25,7 +14,7 @@ Here's how PoL works from the perspective of a validator:
 
 3. For proposing a block, the validator receives BGT emissions determined by two components:
 
-   - Base emission (B): A fixed amount for building the block
+   - Base emission: A fixed amount for building the block
    - Reward emission: A variable amount based on the validator's boost (percentage of BGT delegated to them)
 
 4. The validator can direct their BGT emissions to whitelisted _Reward Vaults_ in exchange for protocol Incentives. The amount they can direct is determined by the amount of BGT delegated to them.
@@ -38,7 +27,7 @@ Here's how PoL works from the perspective of a validator:
 
 8. By earning BGT, the _Liquidity Provider_ becomes a _BGT Holder_
 
-9. BGT Holders can delegate their BGT to validators, increasing that validator's boost (x). Higher boost means larger BGT emissions when that validator proposes blocks. Validators are expected to share received protocol Incentives with their delegators.
+9. BGT Holders can delegate their BGT to validators, increasing that validator's boost. Higher boost means larger BGT emissions when that validator proposes blocks. Validators are expected to share received protocol Incentives with their delegators.
 
 ## Incentive Alignment 🤝
 

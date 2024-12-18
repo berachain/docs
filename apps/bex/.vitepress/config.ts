@@ -13,7 +13,7 @@ import { constants } from "@berachain/config/constants";
 // ::if testnet
 // <your content>
 // ::endif
-const ENABLED_FLAGS = ["testnet" /*"mainnet"*/];
+const ENABLED_FLAGS = ["testnet", "mainnet"];
 /**
  *
  */
@@ -23,25 +23,22 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 // ========================================================
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: `${constants.websites.docsBex.name}`,
-  description: `${constants.websites.docsBex.description}`,
+  title: `${constants.websites.docsSwap.name}`,
+  description: `${constants.websites.docsSwap.description}`,
   cleanUrls: true,
   srcDir: "content",
-  markdown: {
-    math: true,
-  },
   head: [
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "en" }],
     [
       "meta",
-      { name: "og:site_name", content: `${constants.websites.docsBex.name}` },
+      { name: "og:site_name", content: `${constants.websites.docsSwap.name}` },
     ],
     [
       "meta",
       {
         name: "og:image",
-        content: `${constants.websites.docsBex.url}/previewDocs.jpg`,
+        content: `${constants.websites.docsSwap.url}/previewDocs.jpg`,
       },
     ],
     [
@@ -61,7 +58,7 @@ export default defineConfig({
     ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
   ],
   sitemap: {
-    hostname: `${constants.websites.docsBex.url}`,
+    hostname: `${constants.websites.docsSwap.url}`,
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -85,12 +82,12 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
+            text: `${constants.websites.docsBend.name}(Coming Soon)`,
+            link: `#`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
+            link: `#`,
           },
         ],
       },
@@ -125,7 +122,7 @@ export default defineConfig({
       },
     },
     sidebar,
-    siteTitle: `🐻⛓️ ${constants.websites.docsBex.name}`,
+    siteTitle: `🐻⛓️ ${constants.websites.docsSwap.name}`,
     socialLinks: [
       { icon: "twitter", link: `${constants.socials.twitter}` },
       { icon: "discord", link: `${constants.socials.discord}` },
@@ -138,6 +135,19 @@ export default defineConfig({
         ariaLabel: "Berachain Portal",
       },
     ],
+  },
+  markdown: {
+    math: true,
+    config: (md) => {
+      // @ts-ignore
+      md.use(markdownItConditionalRender, {
+        // This is where we check if the flag is enabled / disabled
+        evaluate: function (condition: string, value: any) {
+          let flag = condition.trim().toLowerCase();
+          return ENABLED_FLAGS.includes(flag);
+        },
+      });
+    },
   },
   vite: {
     resolve: {

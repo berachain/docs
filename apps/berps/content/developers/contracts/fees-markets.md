@@ -17,7 +17,7 @@ head:
 
 # FeesMarkets Contract Interface
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.feesMarkets.address">{{config.contracts.feesMarkets.address}}</a><span v-if="config.contracts.feesMarkets.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.feesMarkets.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.feesMarkets.address">{{config.contracts.feesMarkets.address}}</a><span v-if="config.contracts.feesMarkets.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.feesMarkets.abi">ABI JSON</a></span></small>
 
 `FeesMarkets.sol` calculates and manages fees related to trading pairs.
 

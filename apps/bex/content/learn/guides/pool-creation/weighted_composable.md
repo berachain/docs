@@ -22,7 +22,9 @@ Weighted composable pools are the most flexible pool type on BeraSwap, allowing 
 ## Creating a Weighted Pool
 
 ### 1. Select Pool Type
+
 From the pool creation interface, select "Weighted" as your pool type. This allows you to:
+
 - Add up to 8 different tokens
 - Set custom weights for each token
 - Choose from multiple fee tiers
@@ -30,7 +32,9 @@ From the pool creation interface, select "Weighted" as your pool type. This allo
 ![Weighted Pool Creation](/assets/weighted_pool.png)
 
 ### 2. Set Initial Liquidity
+
 For each token in your pool:
+
 - Input the desired token amounts
 - Balance the values according to your target weights
 - Review USD values to ensure proper ratios
@@ -40,7 +44,9 @@ For each token in your pool:
 ### 3. Configure Pool Settings
 
 #### Swap Fees
+
 Choose between three fee tiers:
+
 - 0.3%: Standard fee for most token pairs
 - 0.5%: Medium fee for less liquid tokens
 - 1.0%: High fee for exotic tokens or volatile pairs
@@ -48,17 +54,20 @@ Choose between three fee tiers:
 An additional 0.1% protocol fee is automatically added to each swap and directed to BGT stakers.
 
 #### Pool Name and Symbol
+
 - Pool Name: Automatically generated based on included tokens
 - Pool Symbol: Generated with weights (e.g., "33WBERA-33STGUSDC-33WETH-WEIGHTED")
 
 ## Best Practices
 
 1. **Token Selection**
+
    - Include tokens with reliable price feeds
    - Consider market liquidity of each token
    - Ensure complementary token relationships
 
 2. **Weight Distribution**
+
    - Align weights with your investment strategy
    - Consider market capitalization
    - Account for token volatility

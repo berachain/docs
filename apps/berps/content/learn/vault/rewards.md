@@ -18,4 +18,4 @@ If a validator is directing emissions to the Berps Vault, every `$bHONEY` staker
 
 ## How Do I Claim $BGT
 
-$BGT can be claimed on <a :href="config.testnet.dapps.bgtStation.url">BGT station</a>.
+$BGT can be claimed on <a :href="config.mainnet.dapps.hub.url">BGT station</a>.

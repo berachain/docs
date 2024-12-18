@@ -18,13 +18,13 @@ All `RewardVault` contracts are deployed using the `RewardVaultFactory` contract
 
 Below are some examples of this pattern. If you wanted to incentivize:
 
-| Activity to incentivize    | ERC20 minting logic |
-| -------- | ------- |
-| Trading activity  | minting based on trading frequency/volume   |
-| Content creation | minting based on post engagement metrics     |
-| Gaming    | minting based on playtime/achievements    |
-| NFT usage    | minting based on time NFTs are actively used   |
-| Education   | minting based on course completion   |
+| Activity to incentivize | ERC20 minting logic                          |
+| ----------------------- | -------------------------------------------- |
+| Trading activity        | minting based on trading frequency/volume    |
+| Content creation        | minting based on post engagement metrics     |
+| Gaming                  | minting based on playtime/achievements       |
+| NFT usage               | minting based on time NFTs are actively used |
+| Education               | minting based on course completion           |
 
 The creativity comes in:
 
@@ -34,9 +34,10 @@ The creativity comes in:
 - How you make the rewards meaningful enough to drive behavior while being sustainable
 
 ## Examples
+
 Here are different examples that showcase how to think about using PoL to incentivize activity on your application:
 
-- Trading activity rewards 
+- Trading activity rewards
 - Gameplay progression rewards
 - DeFi positions rewards
 
@@ -45,18 +46,18 @@ Here are different examples that showcase how to think about using PoL to incent
 In this example we'll consider an example where an application wants to incentivize users to make trades often while still considering the size of the trades to reduce spam. The core idea would be to create a staking token that represents active trading participation.
 
 Here's how it works:
+
 - ERC20 token representing active trading participation
 - Tracks trades within a 7-day rolling window
 - Awards points based on trading frequency and size
 
-
 Core Mechanics:
+
 - Minimum 5 trades required in the window for rewards
 - Daily cap of 20 trades to prevent gaming
 - 24-hour cooling period between score mints
 - Score calculation considers both trade frequency and size
 - Automatic staking of newly minted tokens in the reward vault
-
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -96,10 +97,10 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
 
     mapping(address => TraderInfo) public traderInfo;
     IBerachainRewardsVault public immutable rewardVault;
-    
+
     event TradeRecorded(address indexed trader, uint256 tradeSize, uint256 timestamp);
     event ScoreMinted(address indexed trader, uint256 score, uint256 timestamp);
-    
+
     constructor(address _rewardVault) ERC20("Trader Score", "SCORE") {
         rewardVault = IBerachainRewardsVault(_rewardVault);
     }
@@ -121,18 +122,18 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
         uint256 activeTradeCount = getActiveTradeCount(trader);
 
         // Check if eligible for scoring
-        if (activeTradeCount >= MIN_TRADES_FOR_REWARD && 
+        if (activeTradeCount >= MIN_TRADES_FOR_REWARD &&
             currentTime - info.lastMintTimestamp >= 1 days) {
-            
+
             uint256 newScore = _calculateScore(info, tradeSize, activeTradeCount);
-            
+
             if (newScore > 0) {
                 // Mint and stake following the correct pattern
                 _mintAndDelegateStake(trader, newScore);
-                
+
                 info.lastMintTimestamp = currentTime;
                 info.currentScore = newScore;
-                
+
                 emit ScoreMinted(trader, newScore, currentTime);
             }
         }
@@ -142,8 +143,8 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
      * @notice Calculates trading score based on frequency and size
      */
     function _calculateScore(
-        TraderInfo storage info, 
-        uint256 tradeSize, 
+        TraderInfo storage info,
+        uint256 tradeSize,
         uint256 activeTradeCount
     ) internal view returns (uint256) {
         // Calculate daily average trades
@@ -155,7 +156,7 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
         // Score based on trade frequency and size
         uint256 frequencyMultiplier = avgDailyTrades * BASE_POINTS_PER_TRADE;
         uint256 sizeMultiplier = (tradeSize * BASE_POINTS_PER_TRADE) / (1 ether);
-        
+
         return (frequencyMultiplier + sizeMultiplier) / BASE_POINTS_PER_TRADE;
     }
 
@@ -165,7 +166,7 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
     function _mintAndDelegateStake(address trader, uint256 newScore) internal {
     uint256 currentScore = traderInfo[trader].currentScore;
     uint256 scoreIncrease = newScore - currentScore;  // Calculate only the increase
-    
+
     if (scoreIncrease > 0) {
         _mint(address(this), scoreIncrease);  // Mint only the difference
         approve(address(rewardVault), scoreIncrease);
@@ -180,13 +181,13 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
         TraderInfo storage info = traderInfo[trader];
         uint256 cutoffTime = block.timestamp - TRADE_WINDOW;
         uint256 count = 0;
-        
+
         for (uint256 i = 0; i < info.tradeTimes.length; i++) {
             if (info.tradeTimes[i] >= cutoffTime) {
                 count++;
             }
         }
-        
+
         return count;
     }
 
@@ -203,8 +204,8 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
     function isEligibleForScoring(address trader) external view returns (bool) {
         TraderInfo storage info = traderInfo[trader];
         uint256 activeTradeCount = getActiveTradeCount(trader);
-        
-        return activeTradeCount >= MIN_TRADES_FOR_REWARD && 
+
+        return activeTradeCount >= MIN_TRADES_FOR_REWARD &&
                block.timestamp - info.lastMintTimestamp >= 1 days;
     }
 }
@@ -216,7 +217,6 @@ Integration:
 - After each trade, call `recordTrade` with trader's address and trade size
 - Contract automatically mints tokens to itself and delegates stakes to users via `BerachainRewardsVault` when thresholds are met
 - The contract holds the tokens and delegates them to users, rather than users directly staking
-
 
 ### Example #2 - Gameplay Progression Rewards
 
@@ -241,12 +241,13 @@ This system incentivizes three key engagement metrics:
 - Encourages both regular play and advancement
 
 The scoring system:
+
 - Base daily score for meeting minimum playtime (1000 points)
 - Level bonus (100 points per level)
 - Streak multiplier (up to 70% bonus for 7-day streak)
 - Extra playtime bonus (up to 2x for hitting max daily time)
 
-``` solidity
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -304,7 +305,7 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
     function recordGameSession(address player, uint256 duration) external onlyOwner nonReentrant {
         PlayerStats storage stats = playerStats[player];
         uint256 currentTime = block.timestamp;
-        
+
         // Check if we need to reset daily stats
         if (block.timestamp >= stats.lastDailyReset + 1 days) {
             _resetDailyStats(stats);
@@ -313,12 +314,12 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
         // Update play time (cap at max daily)
         uint256 newDailyTime = stats.dailyPlayTime + duration;
         stats.dailyPlayTime = newDailyTime > MAX_DAILY_PLAYTIME ? MAX_DAILY_PLAYTIME : newDailyTime;
-        
+
         // Update streak if this is their first session of the day
         if (stats.lastPlayTimestamp < stats.lastDailyReset) {
             stats.playStreak++;
         }
-        
+
         stats.lastPlayTimestamp = currentTime;
         emit SessionRecorded(player, duration, currentTime);
 
@@ -334,12 +335,12 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
     function recordLevelUp(address player, uint256 newLevel) external onlyOwner nonReentrant {
         PlayerStats storage stats = playerStats[player];
         require(newLevel > stats.currentLevel, "Invalid level");
-        
+
         uint256 currentTime = block.timestamp;
         stats.currentLevel = newLevel;
-        
+
         emit LevelCompleted(player, newLevel, currentTime);
-        
+
         // Try to mint score if eligible
         _checkAndMintScore(player, stats);
     }
@@ -349,7 +350,7 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
         if (stats.lastPlayTimestamp < stats.lastDailyReset) {
             stats.playStreak = 0;
         }
-        
+
         stats.dailyPlayTime = 0;
         stats.lastDailyReset = block.timestamp;
     }
@@ -379,21 +380,21 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
     function _calculateScore(PlayerStats memory stats) private pure returns (uint256) {
         // Base score for meeting daily target
         uint256 score = BASE_DAILY_POINTS;
-        
+
         // Add points for current level
         score += stats.currentLevel * POINTS_PER_LEVEL;
-        
+
         // Multiply by streak bonus (cap at 7 days)
         uint256 streakBonus = stats.playStreak > 7 ? 7 : stats.playStreak;
         score += (score * streakBonus * STREAK_MULTIPLIER) / 100;
-        
+
         // Bonus for exceeding daily target (up to 2x for max playtime)
         if (stats.dailyPlayTime > DAILY_SESSION_TARGET) {
             uint256 extraTime = stats.dailyPlayTime - DAILY_SESSION_TARGET;
             uint256 maxExtraTime = MAX_DAILY_PLAYTIME - DAILY_SESSION_TARGET;
             score += (score * extraTime) / maxExtraTime;
         }
-        
+
         return score;
     }
 
@@ -436,6 +437,7 @@ Integration:
 - `recordLevelUp` called when player completes a new level
 
 When players are eligible, tokens are:
+
 - Minted to the contract
 - Automatically delegated to players via `BerachainRewardsVault`
 
@@ -449,15 +451,14 @@ Here's how this system works:
 - Creates an ERC20 token representing healthy perps positions
 - Token is automatically staked in RewardVault to earn BGT
 
-
 Token Minting Based On:
+
 - Position Size: 1 token per $1000 in position size
 - Health Ratio: Must maintain at least 110% collateral
 - Duration: Bonus for longer-held positions
 - Optimal Maintenance: 50% bonus for keeping 150%+ health ratio
 
-
-``` solidity
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -567,24 +568,24 @@ contract PerpsStakingToken is ERC20, Ownable, ReentrancyGuard {
      */
     function _mintTokensForPosition(address user, uint256 positionId) internal {
         Position storage position = positions[user][positionId];
-        
-        if (!position.isActive || 
+
+        if (!position.isActive ||
             block.timestamp < position.lastTokenMintTimestamp + MINT_INTERVAL) {
             return;
         }
 
         // Calculate health ratio
         uint256 healthRatio = (position.collateral * 100) / position.size;
-        
+
         if (healthRatio >= MIN_HEALTH_RATIO) {
             // Base token amount is 1 token per $1000 in position size per day
             uint256 tokens = (position.size) / 1000e18;
-            
+
             // Bonus for optimal health ratio
             if (healthRatio >= OPTIMAL_HEALTH_RATIO) {
                 tokens = (tokens * 150) / 100; // 50% bonus
             }
-            
+
             // Time multiplier (up to 2x for positions held 10+ days)
             uint256 daysOpen = (block.timestamp - position.openTimestamp) / 1 days;
             if (daysOpen > 0) {
@@ -595,11 +596,11 @@ contract PerpsStakingToken is ERC20, Ownable, ReentrancyGuard {
 
             // Mint tokens to this contract
             _mint(address(this), tokens);
-            
+
             // Approve and delegate stake to the user
             approve(address(rewardVault), tokens);
             rewardVault.delegateStake(user, tokens);
-            
+
             emit TokensStaked(user, tokens);
         }
 
@@ -614,7 +615,9 @@ contract PerpsStakingToken is ERC20, Ownable, ReentrancyGuard {
     }
 }
 ```
+
 Integration:
+
 - Perps platform calls openPosition when positions are created
 - `modifyPosition` on size/collateral changes
 - `closePosition` when positions are closed

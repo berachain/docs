@@ -13,7 +13,7 @@ import { constants } from "@berachain/config/constants";
 // ::if testnet
 // <your content>
 // ::endif
-const ENABLED_FLAGS = ["testnet" /*"mainnet"*/];
+const ENABLED_FLAGS = ["testnet", "mainnet"];
 /**
  *
  */
@@ -78,16 +78,16 @@ export default defineConfig({
           </span>`,
         items: [
           {
-            text: `${constants.websites.docsBex.name}`,
-            link: `${constants.websites.docsBex.url}`,
+            text: `${constants.websites.docsSwap.name}`,
+            link: `${constants.websites.docsSwap.url}`,
           },
           {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
+            text: `${constants.websites.docsBend.name}(Coming Soon)`,
+            link: `#`,
           },
           {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
+            link: `#`,
           },
         ],
       },

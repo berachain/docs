@@ -2,18 +2,18 @@
 head:
   - - meta
     - property: og:title
-      content: BEX Governance
+      content: BeraSwap Governance
   - - meta
     - name: description
-      content: Description of how Bex governance is conducted
+      content: Description of how BeraSwap governance is conducted
   - - meta
     - property: og:description
-      content: Description of how Bex governance is conducted
+      content: Description of how BeraSwap governance is conducted
 ---
 
 # Governance
 
-Governance in BEX is administered through the `TimelockAuthorizer` contract. Within this system, there are three primary governance roles:
+Governance in BeraSwap is administered through the `TimelockAuthorizer` contract. Within this system, there are three primary governance roles:
 
 - Admin
 - Authorizer Adaptor
@@ -22,7 +22,8 @@ Governance in BEX is administered through the `TimelockAuthorizer` contract. Wit
 On testnet, these roles are managed by the Berachain Foundation multi-sig wallet. During mainnet, these roles will be transferred to a combination of protocol-owned multi-sigs and BGT governance.
 
 ## Admin
-The admin role is responsible for managing the day-to-day operations of the BEX protocol, and has the most direct control over protocol parameters. Its powers include:
+
+The admin role is responsible for managing the day-to-day operations of the BeraSwap protocol, and has the most direct control over protocol parameters. Its powers include:
 
 - Managing protocol parameters
 - Implementing governance decisions
@@ -30,6 +31,7 @@ The admin role is responsible for managing the day-to-day operations of the BEX 
 - Overseeing operational changes
 
 ## Authorizer Adaptor
+
 The authorizer adaptor role serves as the permission management interface for the protocol. Its powers include:
 
 - Controlling access to protocol functions
@@ -39,6 +41,7 @@ The authorizer adaptor role serves as the permission management interface for th
 - Interfacing with the timelock system
 
 ## Coordinator
+
 The coordinator role handles the execution of governance actions and ensures proper sequencing. Its powers include:
 
 - Managing staged governance actions
@@ -46,4 +49,3 @@ The coordinator role handles the execution of governance actions and ensures pro
 - Ensuring proper order of operations
 - Verifying successful completion of changes
 - Handling emergency cancellations when needed
-

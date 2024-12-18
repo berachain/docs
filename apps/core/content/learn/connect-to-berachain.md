@@ -30,21 +30,21 @@ Quickly add Berachain's network to your wallet with one-click.
   <AddNetwork
     :chainId="config.mainnet.chainId"
     :chainName="config.mainnet.chainName"
-    :nativeCurrencyName="config.testnet.currencyName"
-    :nativeCurrencySymbol="config.testnet.currencySymbol"
-    :nativeCurrencyDecimals="config.testnet.decimals"
-    :rpcUrl="config.testnet.rpcUrl"
-    :blockExplorerUrl="config.testnet.dapps.beratrail.url"
+    :nativeCurrencyName="config.mainnet.currencyName"
+    :nativeCurrencySymbol="config.mainnet.currencySymbol"
+    :nativeCurrencyDecimals="config.mainnet.decimals"
+    :rpcUrl="config.mainnet.rpcUrl"
+    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
   />
  </ClientOnly>
 
-| Key                | Value                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>           |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.testnet.rpcUrl" /></ClientOnly>              |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>   |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>      |
-| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.testnet.dapps.beratrail.url" /></ClientOnly> |
+| Key                | Value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>          |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>  |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
 ## Supported Wallets 👛
 
@@ -97,11 +97,11 @@ Click the button below to add the network to your MetaMask in one click.
   <AddNetwork
     :chainId="config.mainnet.chainId"
     :chainName="config.mainnet.chainName"
-    :nativeCurrencyName="config.testnet.currencyName"
-    :nativeCurrencySymbol="config.testnet.currencySymbol"
-    :nativeCurrencyDecimals="config.testnet.decimals"
-    :rpcUrl="config.testnet.rpcUrl"
-    :blockExplorerUrl="config.testnet.dapps.beratrail.url"
+    :nativeCurrencyName="config.mainnet.currencyName"
+    :nativeCurrencySymbol="config.mainnet.currencySymbol"
+    :nativeCurrencyDecimals="config.mainnet.decimals"
+    :rpcUrl="config.mainnet.rpcUrl"
+    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
   />
  </ClientOnly>
 

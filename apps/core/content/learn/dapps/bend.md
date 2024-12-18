@@ -17,13 +17,13 @@ head:
 
 # Berachain Bend 🐻⛓️
 
-<a :href="config.testnet.dapps.bend.url">
+<a :href="config.mainnet.dapps.bend.url">
 
 ![Berachain Bend Native dApp](/assets/bend-dapp.png)
 
 </a>
 
-> <small><a :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a></small>
+> <small><a :href="config.mainnet.dapps.bend.url">{{config.mainnet.dapps.bend.url}}</a></small>
 
 Bend is Berachain's non-custodial lending protocol. Lenders participate by depositing stablecoins to earn transaction fees when users borrow their tokens. Meanwhile, borrowers can deposit crypto collateral (e.g. wBTC) to access these stablecoins whilst maintaining exposure to their collateral assets.
 

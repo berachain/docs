@@ -8,9 +8,9 @@
 
 ### How do I acquire testnet `$HONEY`?
 
-To acquire `$HONEY`, you can visit the decentralized exchange at <a target="_blank" :href="config.testnet.dapps.bex.url">BEX</a>, or mint it at <a target="_blank" :href="config.testnet.dapps.honeySwap.url">Honey Swap</a>.
+To acquire `$HONEY`, you can visit the decentralized exchange at <a target="_blank" :href="config.mainnet.dapps.swap.url">BEX</a>, or mint it at <a target="_blank" :href="config.mainnet.dapps.honeySwap.url">Honey Swap</a>.
 
-If you require funds, you can acquire testnet `$BERA` through the <a target="_blank" :href="config.testnet.faucetUrl">Berachain Testnet Faucet</a>.
+If you require funds, you can acquire testnet `$BERA` through the <a target="_blank" :href="config.mainnet.faucetUrl">Berachain Testnet Faucet</a>.
 
 ### How can I test Bend?
 
@@ -56,7 +56,7 @@ More specifically, different categories of risk include:
 
 Be careful where you try interacting with Bend. Bend doesn't have any downloadable mobile applications available, and if you find one, it is a scam. Bend would not ask for your seed passphrase ever. Bend never advertises on any social media or search engine. If you see any advertisement, those are scams and phishing sites.
 
-The only UI for accessing Bend is at <a target="_blank" :href="config.testnet.dapps.bend.url">{{config.testnet.dapps.bend.url}}</a>.
+The only UI for accessing Bend is at <a target="_blank" :href="config.mainnet.dapps.bend.url">{{config.mainnet.dapps.bend.url}}</a>.
 
 ## Borrowing - FAQs
 

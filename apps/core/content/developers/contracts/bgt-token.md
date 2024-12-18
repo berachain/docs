@@ -4,7 +4,7 @@
 
 # BGT
 
-> <small><a target="_blank" :href="config.testnet.dapps.beratrail.url + 'address/' + config.contracts.bgt.address">{{config.contracts.bgt.address}}</a><span v-if="config.contracts.bgt.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bgt.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.bgt.address">{{config.contracts.bgt.address}}</a><span v-if="config.contracts.bgt.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bgt.abi">ABI JSON</a></span></small>
 
 The Berachain Governance Token (`$BGT`) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for `$BERA`.
 
