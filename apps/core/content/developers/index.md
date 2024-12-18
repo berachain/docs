@@ -49,4 +49,4 @@ Validators are incentivized to allocate $BGT to vaults offering higher protocol 
 ::: tip
 RewardVault creation is permissionless, but vaults must be approved by [governance](/learn/governance/rewardvault) to be included in validators' reward allocations.
 :::
-The [RewardVaultFactory](/developers/contracts/reward-vault-factory) contract deploys standardized RewardVault contracts and maintains a registry of approved vaults
+The [RewardVaultFactory](/developers/contracts/reward-vault-factory) contract deploys standardized RewardVault contracts and maintains a registry of approved vaults.

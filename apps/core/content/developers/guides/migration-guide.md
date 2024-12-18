@@ -13,7 +13,7 @@ head:
 
 # Migration Guide
 
-Significant changes have been made to the Proof of Liquidity (PoL) contracts between the bArtio testnet and the upcoming Berachain mainnet. This guide will help you migrate your code to the new version.
+This guide aims to capture high-level differences in Proof of Liquidity (PoL) contracts between the bArtio testnet and Berachain mainnet, with the aim of helping developers migrate their code to the new version.
 
 ## Contents
 
