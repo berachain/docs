@@ -1,4 +1,10 @@
-# Integrating your dapp with Proof of Liquidity
+# Integrating your dApp with Proof of Liquidity
+
+This page showcases creative ways to leverage PoL for incentivizing user activity, illustrated with code samples:
+
+- [Trading activity rewards](#example-1-activity-frequency-rewards)
+- [Gameplay progression rewards](#example-2-gameplay-progression-rewards)
+- [DeFi positions rewards](#example-3-incentivizing-trading-positions)
 
 ## Flexible Design
 
@@ -10,7 +16,7 @@ From the perspective of an application on Berachain, the PoL system is fundament
 
 The dev work for all PoL integrations essentially boil down to:
 
-1. Deploying a Reward Vault from the [factory contract](../contracts/reward-vault-factory.md)
+1. Deploying a Reward Vault from the [Factory](../contracts/reward-vault-factory.md)
 2. Design an ERC20 token that is minted when users perform actions you would like to incentivize
 3. Have these ERC20 positions staked in your Reward Vault
 
@@ -35,11 +41,7 @@ The creativity comes in:
 
 ## Examples
 
-Here are different examples that showcase how to think about using PoL to incentivize activity on your application:
-
-- Trading activity rewards
-- Gameplay progression rewards
-- DeFi positions rewards
+The following example leverages the [`delegateStake`](/developers/contracts/reward-vault#delegatestake) functionality of the RewardVault contract. This [guide](/developers/guides/advanced-pol) explains its use in detail.
 
 ### Example #1 - Activity-frequency rewards
 
@@ -68,7 +70,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "./IRewardVault.sol";
 
-interface IBerachainRewardsVault {
+interface IRewardVault {
     function delegateStake(address user, uint256 amount) external;
     function delegateWithdraw(address user, uint256 amount) external;
     function getDelegateStake(
@@ -96,13 +98,13 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
     }
 
     mapping(address => TraderInfo) public traderInfo;
-    IBerachainRewardsVault public immutable rewardVault;
+    IRewardVault public immutable rewardVault;
 
     event TradeRecorded(address indexed trader, uint256 tradeSize, uint256 timestamp);
     event ScoreMinted(address indexed trader, uint256 score, uint256 timestamp);
 
     constructor(address _rewardVault) ERC20("Trader Score", "SCORE") {
-        rewardVault = IBerachainRewardsVault(_rewardVault);
+        rewardVault = IRewardVault(_rewardVault);
     }
 
     /**
@@ -213,9 +215,9 @@ contract TraderScore is ERC20, Ownable, ReentrancyGuard {
 
 Integration:
 
-- Deploy `TraderScore` contract with your `BerachainRewardsVault` address (note: must implement `IBerachainRewardsVault` interface)
+- Deploy `TraderScore` contract with your `RewardVault` address (note: must implement `IRewardVault` interface)
 - After each trade, call `recordTrade` with trader's address and trade size
-- Contract automatically mints tokens to itself and delegates stakes to users via `BerachainRewardsVault` when thresholds are met
+- Contract automatically mints tokens to itself and delegates stakes to users via `RewardVault` when thresholds are met
 - The contract holds the tokens and delegates them to users, rather than users directly staking
 
 ### Example #2 - Gameplay Progression Rewards
@@ -255,7 +257,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-interface IBerachainRewardsVault {
+interface IRewardVault {
     function delegateStake(address user, uint256 amount) external;
     function delegateWithdraw(address user, uint256 amount) external;
     function getDelegateStake(
@@ -287,14 +289,14 @@ contract GameEngagement is ERC20, Ownable, ReentrancyGuard {
     }
 
     mapping(address => PlayerStats) public playerStats;
-    IBerachainRewardsVault public immutable rewardVault;
+    IRewardVault public immutable rewardVault;
 
     event SessionRecorded(address indexed player, uint256 duration, uint256 timestamp);
     event LevelCompleted(address indexed player, uint256 level, uint256 timestamp);
     event EngagementScoreMinted(address indexed player, uint256 score, uint256 timestamp);
 
     constructor(address _rewardVault) ERC20("Game Engagement Score", "PLAY") {
-        rewardVault = IBerachainRewardsVault(_rewardVault);
+        rewardVault = IRewardVault(_rewardVault);
     }
 
     /**
@@ -439,7 +441,7 @@ Integration:
 When players are eligible, tokens are:
 
 - Minted to the contract
-- Automatically delegated to players via `BerachainRewardsVault`
+- Automatically delegated to players via `RewardVault`
 
 Daily reset ensures players must come back each day to maintain their streak
 Players accumulate score progressively rather than receiving the full amount each mint

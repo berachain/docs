@@ -117,7 +117,7 @@ You can double check that your validator has become an operator by running the f
 ```bash
 # FROM: /
 
-cast call 0x4242424242424242424242424242424242424242 "getOperator(bytes calldata pubkey)" "$VAL_PUB_KEY" $YOUR_ETH_RPC_URL;
+cast call 0x4242424242424242424242424242424242424242 "getOperator(bytes calldata pubkey)" "$VAL_PUB_KEY" --rpc-url $YOUR_ETH_RPC_URL;
 
 # [Expected Similar Output]:
 # 0xYOUR_VALIDATOR_OPERATOR_ADDRESS

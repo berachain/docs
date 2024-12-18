@@ -25,8 +25,8 @@ In this guide, we'll walk through how to create an ERC-20 token using Solidity a
 
 Before you start, make sure you have the following:
 
-- Foundry
-- A text editor of your choice
+- [Foundry](https://github.com/foundry-rs/foundry)
+- A code editor of your choice
 
 ## Initialize Repository
 

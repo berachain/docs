@@ -93,3 +93,10 @@ These are a list of community developer guides for Berachain.
 | Project Name                | Source                                                                                   |
 | --------------------------- | ---------------------------------------------------------------------------------------- |
 | Using Gelato Web3 Functions | [Guide](https://docs.google.com/document/d/1kUuvYwUH6tyLM4mNJYNu22jS6lPynvSSF_x8NDAZzRg) |
+
+## Proof of Liquidity Examples
+
+| Project Name         | Source                                                                                  |
+| -------------------- | --------------------------------------------------------------------------------------- |
+| SocialFi             | [Guide](https://blog.berachain.com/blog/poltech-proof-of-liquidity-goes-social)         |
+| Time-limited Rewards | [Guide](https://blog.berachain.com/blog/onlypaws-bearing-it-all-for-proof-of-liquidity) |
