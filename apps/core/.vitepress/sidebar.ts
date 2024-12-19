@@ -64,12 +64,10 @@ const SIDEBAR = {
     {
       text: "Native dApps",
       items: [
-        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
-        { text: "Bend", link: "/learn/dapps/bend" },
-        { text: "Berps", link: "/learn/dapps/berps" },
         { text: "BeraHub", link: "/learn/dapps/berahub" },
-        { text: "Faucet", link: "/learn/dapps/faucet" },
+        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
+        { text: "Faucet", link: "/learn/dapps/faucet" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `/learn/dapps/berascan`,
