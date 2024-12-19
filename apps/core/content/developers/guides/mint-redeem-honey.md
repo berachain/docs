@@ -104,7 +104,6 @@ pragma solidity ^0.8.19;
 import {ERC20} from "solady/src/tokens/ERC20.sol";
 import {HoneyFactory} from "../lib/contracts-monorepo/src/honey/HoneyFactory.sol";
 import {Honey} from "../lib/contracts-monorepo/src/honey/Honey.sol";
-
 /// @title HoneyMinter
 /// @notice A simple contract demonstrating how to interact with Berachain's Honey stablecoin
 /// @dev This is for educational purposes only not for production use
@@ -249,7 +248,7 @@ contract HoneyMinter {
 
 ## Testing the Integration
 
-Create a test file at `test/HoneyMinter.t.sol`:
+Create a test file at `test/HoneyMinterTest.t.sol`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -289,7 +288,7 @@ contract HoneyTutorialTest is Test {
         factoryReader = HoneyFactoryReader(FACTORY_READER);
         honey = Honey(HONEY);
         
-        // Deploy our tutorial contract
+        // Deploy our minter contract
         minter = new HoneyMinter(HONEY_FACTORY, HONEY);
 
         // Deal some tokens to our test user
@@ -309,7 +308,7 @@ contract HoneyTutorialTest is Test {
         uint256 expectedHoney = factoryReader.previewMint(USDT, mintAmount);
         console2.log("Expected Honey from mint:", expectedHoney);
         
-        // Approve the tutorial contract to spend both USDT and USDC
+        // Approve the minter contract to spend both USDT and USDC
         ERC20(USDT).approve(address(minter), mintAmount);
         ERC20(USDC).approve(address(minter), mintAmount);
 
@@ -354,7 +353,7 @@ contract HoneyTutorialTest is Test {
             console2.log("Expected USDT from redeem:", expectedRedeemAmounts[0]);
         }
 
-        // Approve tutorial to spend Honey
+        // Approve minter to spend Honey
         honey.approve(address(minter), honeyBalance);
 
         // Redeem Honey
