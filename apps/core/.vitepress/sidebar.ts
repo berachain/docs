@@ -218,6 +218,10 @@ const SIDEBAR = {
           text: "Restoring Nodes from Snapshots",
           link: "/nodes/guides/snapshots",
         },
+        {
+          text: "Change Operator Address",
+          link: "/nodes/guides/operator-address",
+        },
       ],
     },
   ],
