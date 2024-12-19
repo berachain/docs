@@ -53,9 +53,7 @@ const SIDEBAR = {
     },
     {
       text: "Governance",
-      items: [
-        { text: "Governance Overview", link: "/learn/governance/" },
-      ],
+      items: [{ text: "Governance Overview", link: "/learn/governance/" }],
     },
     {
       text: "Native dApps",
@@ -217,6 +215,10 @@ const SIDEBAR = {
         {
           text: "Change Operator Address",
           link: "/nodes/guides/operator-address",
+        },
+        {
+          text: "Manage Reward Allocations",
+          link: "/nodes/guides/reward-allocation",
         },
       ],
     },
