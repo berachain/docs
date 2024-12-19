@@ -388,6 +388,8 @@ Run the tests:
 forge test -vvv
 ```
 
-## Full Code Repository
+Your all set! You've now implemented a HoneyMinter contract that allows you to mint and redeem Honey using both basic and basket modes.
 
-The full github code repository can be found in the [guides section](https://github.com/berachain/guides/) under [Honey Minter](https://github.com/berachain/guides/tree/main/apps/honey-minter).
+## More about Honey
+
+You can learn more about Honey in the [Honey Learn Section](/learn/pol/tokens/honey).
