@@ -45,31 +45,32 @@ Replace the correct values in this new `env` file.
 
 ```bash
 # Wallet Configuration
-YOUR_BERA_WALLET_PRIVATE_KEY="<YOUR_BERA_WALLET_PRIVATE_KEY>" # CHANGE THIS
+YOUR_ETH_WALLET_PRIVATE_KEY="<YOUR_ETH_WALLET_PRIVATE_KEY>"
 
 # BeaconKit Configuration - Example `$HOME/.beacond` or `/.beacond`
-YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>" # CHANGE THIS
+YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>"
 
 # Your RPC URL - typically localhost if in the same instance / enviroment
-YOUR_BERA_RPC_URL="http://localhost:8545" # OPTIONAL - Depends on your local RPC
+YOUR_ETH_RPC_URL="http://localhost:8545"
 
 # Wallet address - Can be the same from private key
-YOUR_VALIDATOR_OPERATOR_ADDRESS="<0xYOUR_BERA_WALLET_ADDRESS>" # CHANGE THIS
+YOUR_VALIDATOR_OPERATOR_ADDRESS="<0xYOUR_ETH_WALLET_ADDRESS>"
 
 # This can be the same as your wallet address for the VALIDATOR_OPERATOR_ADDRESS
-YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>" # CHANGE THIS
+YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>"
 
 # Genesis Configurations - DO NOT CHANGE THESE
 GENESIS_VALIDATORS_ROOT="0x053397d1ddb01f3910e91ef762070a075e4b17ba3472c3c4dd391a68bd5d95a1"
 GENESIS_FORK_VERSION="0x04000000"
-VAL_DEPOSIT_GWEI_AMOUNT=32000000000
+VAL_DEPOSIT_GWEI_AMOUNT=32000000000 # Adjust this amount to be the minimum amount of $BERA mentioned in Requirements
 DEPOSIT_CONTRACT_ADDRESS="0x4242424242424242424242424242424242424242"
 
 # Validator Configuration - DO NOT CHANGE THESE
-OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --private-key $YOUR_BERA_WALLET_PRIVATE_KEY --home $YOUR_BEACOND_HOME_DIR);
+OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --home $YOUR_BEACOND_HOME_DIR);
 VAL_PUB_KEY=$(echo "$OUTPUT" | awk -F'pubkey=' '{print $2}' | awk '{print $1}' |
  sed -r 's/\x1B\[[0-9;]*[mK]//g');
 SEND_DEPOSIT_SIGNATURE=$(echo "$output" | awk -F'signature=' '{print $2}' | awk '{print $1}' | sed -r 's/\x1B\[[0-9;]*[mK]//g');
+VAL_WITHDRAW_CREDENTIAL=$(echo "$OUTPUT" | awk -F'credentials=' '{print $2}' | awk '{print $1}' | sed -r 's/\x1B\[[0-9;]*[mK]//g');
 ```
 
 ### Step 2 - Perform Deposit To Become Active Validator
@@ -87,9 +88,9 @@ cast send "$DEPOSIT_CONTRACT_ADDRESS" \
 "$VAL_WITHDRAW_CREDENTIAL" \
 "$SEND_DEPOSIT_SIGNATURE" \
 "$YOUR_VALIDATOR_OPERATOR_ADDRESS" \
---private-key "$YOUR_BERA_WALLET_PRIVATE_KEY" \
+--private-key "$YOUR_ETH_WALLET_PRIVATE_KEY" \
 --value 32ether \
--r $YOUR_BERA_RPC_URL;
+-r $YOUR_ETH_RPC_URL;
 
 # [Expected Successful Output]:
 # blockHash               0xf70...
