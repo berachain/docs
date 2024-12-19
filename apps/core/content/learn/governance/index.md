@@ -19,7 +19,7 @@ Berachain's Governance system uses `$BGT` to allow token holders to make importa
 - Native dApp governance (e.g., changes to Bend's interest rate model)
   - Berps
   - Bend
-  - Bex
+  - BeraSwap
 - Whitelisting Rewards Vaults for `$BGT` emissions
 
 ## Governance Process

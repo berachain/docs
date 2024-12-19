@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX Pool Interfacing
+      content: BeraSwap Pool Interfacing
   - - meta
     - name: description
-      content: Nuances of interacting with different BEX pools
+      content: Nuances of interacting with different BeraSwap pools
   - - meta
     - property: og:description
-      content: Nuances of interacting with different BEX pools
+      content: Nuances of interacting with different BeraSwap pools
 ---
 
 <script setup>
@@ -17,13 +17,13 @@ head:
 
 # Pool Interfacing
 
-Different pool types (e.g. Weighted, Stable) have different interfaces for interacting with them, where the underlying logic can vary widely. This document outlines the common interfaces for interacting with BEX pools.
+Different pool types (e.g. Weighted, Stable) have different interfaces for interacting with them, where the underlying logic can vary widely. This document outlines the common interfaces for interacting with BeraSwap pools.
 
 In general, users will interface with the [Vault](/developers/contracts/vault) contract to obtain information on pools. Specific nuances of interacting with different pool types are also detailed below.
 
 ## Using `poolId`
 
-To interface with a pool, you will need its `poolId`, which is its unique identifier in BEX (32 bytes in length).
+To interface with a pool, you will need its `poolId`, which is its unique identifier in BeraSwap (32 bytes in length).
 
 #### Example:
 

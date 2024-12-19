@@ -5,15 +5,15 @@ head:
       content: Error Codes
   - - meta
     - name: description
-      content: BEX smart contract error codes
+      content: BeraSwap smart contract error codes
   - - meta
     - property: og:description
-      content: BEX smart contract error codes
+      content: BeraSwap smart contract error codes
 ---
 
 # Error Codes
 
-All error codes for BEX core contracts are defined in `BalancerErrors.sol`. Comments and context for errors are provided below:
+All error codes for BeraSwap core contracts are defined in `BalancerErrors.sol`. Comments and context for errors are provided below:
 
 ## Math
 

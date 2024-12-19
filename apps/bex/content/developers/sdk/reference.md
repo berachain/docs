@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX SDK API Reference
+      content: BeraSwap SDK API Reference
   - - meta
     - name: description
-      content: BEX SDK API Reference
+      content: BeraSwap SDK API Reference
   - - meta
     - property: og:description
-      content: BEX SDK API Reference
+      content: BeraSwap SDK API Reference
 ---
 
 # SDK API Reference

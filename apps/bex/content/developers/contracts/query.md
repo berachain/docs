@@ -2,7 +2,7 @@
 head:
   - - meta
     - property: og:title
-      content: BEX Pool Interfacing
+      content: BeraSwap Pool Interfacing
   - - meta
     - name: description
       content: Obtain quotes on pool swaps, joins and exits

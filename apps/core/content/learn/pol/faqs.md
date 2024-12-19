@@ -33,7 +33,7 @@ There will be a mechanism for capping validators to a safe level. The validators
 
 ### Can dApps that don't have a token still participate in PoL?
 
-Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token. That LP token can be staked with a Reward Vault to earn $BGT from emissions directed from validators.
+Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BeraSwap pool, they receive a receipt token in the form of an LP token. That LP token can be staked with a Reward Vault to earn $BGT from emissions directed from validators.
 
 ### Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
 

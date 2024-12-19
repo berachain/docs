@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX SDK Remove Liquidity
+      content: BeraSwap SDK Remove Liquidity
   - - meta
     - name: description
-      content: BEX SDK Remove Liquidity
+      content: BeraSwap SDK Remove Liquidity
   - - meta
     - property: og:description
-      content: BEX SDK Remove Liquidity
+      content: BeraSwap SDK Remove Liquidity
 ---
 
 <script setup>

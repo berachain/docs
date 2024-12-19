@@ -28,13 +28,13 @@ Proof of Stake blockchains have a governance token that is used to secure the ne
 
 However, because of Berachain's three-token Proof of Liquidity model, the functions of governance and economic incentives are separated into its own token. This token is `$BGT` (Bera Governance Token).
 
-`$BGT` is non-transferrable and can only be acquired by providing liquidity in PoL-eligible assets (e.g. liquidity on Bex).
+`$BGT` is non-transferrable and can only be acquired by providing liquidity in PoL-eligible assets (e.g. liquidity on BeraSwap).
 
 ## Earning `$BGT`
 
 `$BGT` can be accumulated by performing certain actions in dApps with whitelisted [Reward Vaults](../rewardvaults.md). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward vaults correspond to some form of productive activity provided on Berachain, and are created after being whitelisted (by `$BGT` governance). Users can subsequently stake the indicated token in reward vaults to earn `$BGT`. Some examples include:
 
-- Depositing liquidity in the native Bex for an LP pair that is earning `$BGT` emissions
+- Depositing liquidity in the native BeraSwap for an LP pair that is earning `$BGT` emissions
 - Borrowing `$HONEY` on Bend
 - Providing `$HONEY` in the `bHONEY` vault for Berps
 
@@ -48,7 +48,7 @@ However, because of Berachain's three-token Proof of Liquidity model, the functi
 
 Protocols can provide [Incentives](/learn/pol/incentives) to attract `$BGT` emissions from validators. The amount that validators can earn in protocol incentives is determined by the amount of `$BGT` that is boosting them. Thus, validators that return the maximum value to those boosting them are likely to receive the most boost.
 
-Furthermore users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BEX and Berps.
+Furthermore users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps.
 
 ### Burning for `$BERA`
 
