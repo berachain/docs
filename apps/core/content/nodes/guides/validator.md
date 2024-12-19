@@ -50,7 +50,7 @@ YOUR_ETH_WALLET_PRIVATE_KEY="<YOUR_ETH_WALLET_PRIVATE_KEY>"
 # BeaconKit Configuration - Example `$HOME/.beacond` or `/.beacond`
 YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>"
 
-# Your RPC URL - typically localhost if in the same instance / enviroment
+# Your RPC URL - typically localhost if in the same instance / environment
 YOUR_ETH_RPC_URL="http://localhost:8545"
 
 # Wallet address - Can be the same from private key
