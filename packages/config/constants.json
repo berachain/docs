@@ -7,6 +7,9 @@
     "chainName": "Berachain bArtio",
     "name": "berachainbArtio",
     "decimals": 18,
+    "genesisRoot": "0x053397d1ddb01f3910e91ef762070a075e4b17ba3472c3c4dd391a68bd5d95a1",
+    "genesisForkVersion": "0x04000000",
+    "validatorDepositGweiAmount": 32000000000,
     "dapps": {
       "faucet": {
         "name": "Berachain Testnet Faucet",
@@ -22,6 +25,9 @@
     "chainName": "Berachain Mainnet",
     "name": "berachainMainnet",
     "decimals": 18,
+    "genesisRoot": "0x053397d1ddb01f3910e91ef762070a075e4b17ba3472c3c4dd391a68bd5d95a1",
+    "genesisForkVersion": "0x04000000",
+    "validatorDepositGweiAmount": 32000000000,
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
@@ -93,7 +99,7 @@
   "contracts": {
     "beaconDeposit": {
       "name": "BeaconDeposit",
-      "address": "0x0000000000000000000000000000000000000000",
+      "address": "0x4242424242424242424242424242424242424242",
       "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
       "docsUrl": "/developers/contracts/beacondeposit"
     },
