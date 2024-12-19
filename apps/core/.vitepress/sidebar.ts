@@ -55,10 +55,6 @@ const SIDEBAR = {
       text: "Governance",
       items: [
         { text: "Governance Overview", link: "/learn/governance/" },
-        {
-          text: "Reward Vault Whitelisting",
-          link: "/learn/governance/rewardvault",
-        },
       ],
     },
     {
