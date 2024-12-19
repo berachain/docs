@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX Pool Creation Guide
+      content: BeraSwap Pool Creation Guide
   - - meta
     - name: description
-      content: Guide for creating Berachain BEX pools
+      content: Guide for creating Berachain BeraSwap pools
   - - meta
     - property: og:description
-      content: Guide for creating Berachain BEX pools
+      content: Guide for creating Berachain BeraSwap pools
 ---
 
 <script setup>
@@ -17,7 +17,7 @@ head:
 
 # Pool Creation Guide
 
-This guide demonstrates how to create a new BEX pool using the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract. The PoolCreationHelper is a [Relayer](/developers/contracts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
+This guide demonstrates how to create a new BeraSwap pool using the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract. The PoolCreationHelper is a [Relayer](/developers/contracts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
 
 ## Prerequisites
 

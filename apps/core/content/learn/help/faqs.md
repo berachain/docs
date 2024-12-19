@@ -51,7 +51,7 @@ Liquidity providers are users who deposit tokens into a liquidity pool. They are
 
 ## What is APY?
 
-APY stands for annual perentage yield. In the context of BEX pools, this refers to the current APY for a given pool.
+APY stands for annual perentage yield. In the context of BeraSwap pools, this refers to the current APY for a given pool.
 
 ## What is $HONEY?
 
@@ -96,7 +96,7 @@ Rewards are the main reason.
 With Proof of Liquidity, you can earn many different types of rewards:
 
 - A share of protocol-provided [incentives](/learn/pol/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
-- A share of Berachain core dApp fees, namely fees from Bend, BEX and Berps
+- A share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps
 
 ## How do I get `$BGT`?
 
@@ -106,9 +106,9 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 Governance is the process by which the community decides what changes are made to the Berachain protocol. This includes how the node is upgraded and what parameters are set for various components on the chain.
 
-## Once you’ve provided liquidity into an eligible pool in BEX (or some other BGT-generating action like bend etc) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
+## Once you’ve provided liquidity into an eligible pool in BeraSwap (or some other BGT-generating action like bend etc) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
 
-Each eligible (whitelisted) pool on BEX has an associated LP token. Once liquidity is depositted into a BEX pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user.
+Each eligible (whitelisted) pool on BeraSwap has an associated LP token. Once liquidity is depositted into a BeraSwap pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user.
 
 ## Can only Validators vote on or create proposals?
 

@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX SDK Swap
+      content: BeraSwap SDK Swap
   - - meta
     - name: description
-      content: BEX SDK Swap
+      content: BeraSwap SDK Swap
   - - meta
     - property: og:description
-      content: BEX SDK Swap
+      content: BeraSwap SDK Swap
 ---
 
 <script setup>

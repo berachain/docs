@@ -11,11 +11,11 @@ const SIDEBAR = {
    */
   LEARN: [
     {
-      text: "Introduction To BEX",
+      text: "Introduction To BeraSwap",
       items: [
-        { text: "What is BEX?", link: "/learn/" },
+        { text: "What is BeraSwap?", link: "/learn/" },
         {
-          text: "BEX dApp",
+          text: "BeraSwap dApp",
           link: `${constants.mainnet.dapps.swap.url}`,
           target: "_blank",
           rel: "no-referrer",
@@ -71,7 +71,7 @@ const SIDEBAR = {
    */
   DEVELOPERS: [
     {
-      text: "Berachain BEX For Devs",
+      text: "BeraSwap For Devs",
       items: [
         { text: "Deployed Contracts", link: "/developers/" },
         { text: "Migration Guide", link: "/developers/migration-guide" },

@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX SDK Add Liquidity
+      content: BeraSwap SDK Add Liquidity
   - - meta
     - name: description
-      content: BEX SDK Add Liquidity
+      content: BeraSwap SDK Add Liquidity
   - - meta
     - property: og:description
-      content: BEX SDK Add Liquidity
+      content: BeraSwap SDK Add Liquidity
 ---
 
 <script setup>
@@ -17,14 +17,14 @@ head:
 
 # Add Liquidity Guide
 
-Using the [Berancer SDK](https://github.com/berachain-foundation/berancer-sdk), users can add liquidity using two primary methods (see [AddLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/addLiquidity/types.ts#L12)):
+Using the [BeraSwap SDK](https://github.com/berachain-foundation/berasher-sdk), users can add liquidity using two primary methods (see [AddLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/addLiquidity/types.ts#L12)):
 
 1. _Unbalanced_ - add liquidity with arbitrary amounts of each token
 2. _Proportional_ - add liquidity with proportional amount of both tokens
 
 ## Example: Adding Unbalanced Liquidity
 
-In this example, we use the Berancer SDK and [Ethers.js](https://docs.ethers.org/v6/) to add single-token `BERA` liquidity to a given pool.
+In this example, we use the BeraSwap SDK and [Ethers.js](https://docs.ethers.org/v6/) to add single-token `BERA` liquidity to a given pool.
 
 ```js-vue
 import { ethers } from "ethers";

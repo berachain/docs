@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX SDK Smart Order Router
+      content: BeraSwap SDK Smart Order Router
   - - meta
     - name: description
-      content: BEX SDK Smart Order Router
+      content: BeraSwap SDK Smart Order Router
   - - meta
     - property: og:description
-      content: BEX SDK Smart Order Router
+      content: BeraSwap SDK Smart Order Router
 ---
 
 <script setup>

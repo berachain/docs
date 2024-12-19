@@ -5,21 +5,21 @@ head:
       content: Vault
   - - meta
     - name: description
-      content: The Vault is a smart contract that holds and manages all tokens in each BEX pool. It is also the portal through which most BEX operations take place
+      content: The Vault is a smart contract that holds and manages all tokens in each BeraSwap pool. It is also the portal through which most BeraSwap operations take place
   - - meta
     - property: og:description
-      content: The Vault is a smart contract that holds and manages all tokens in each BEX pool. It is also the portal through which most BEX operations take place
+      content: The Vault is a smart contract that holds and manages all tokens in each BeraSwap pool. It is also the portal through which most BeraSwap operations take place
 ---
 
 # Vault
 
-The Vault is the central component of BEX, acting as a unified smart contract that manages all tokens across liquidity pools. It serves as the primary interface for most protocol operations, including swaps, joins, and exits.
+The Vault is the central component of BeraSwap, acting as a unified smart contract that manages all tokens across liquidity pools. It serves as the primary interface for most protocol operations, including swaps, joins, and exits.
 
 ## Separating Token Accounting and Pool Logic
 
-BEX's Vault and Pool architecture separates the token accounting and management from the pool logic and AMM math . The responsibility for calculating amounts for swaps, joins and exits is delegated to the pool contracts, while the Vault holds all of the tokens within the various pools (which can even be of different types!).
+BeraSwap's Vault and Pool architecture separates the token accounting and management from the pool logic and AMM math . The responsibility for calculating amounts for swaps, joins and exits is delegated to the pool contracts, while the Vault holds all of the tokens within the various pools (which can even be of different types!).
 
-![BEX Vault](/assets/vault.png)
+![BeraSwap Vault](/assets/vault.png)
 
 As a simplified example, a swap transaction might involve the following steps:
 
