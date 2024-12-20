@@ -152,6 +152,34 @@ function version() external view returns (string memory);
 | -------- | ------------------------------------- |
 | `string` | The version of the governor instance |
 
+### clock
+
+Returns the current timepoint according to the mode the contract is operating in.
+
+```solidity
+function clock() public view returns (uint48);
+```
+
+**Returns**
+
+| Type     | Description                            |
+| -------- | -------------------------------------- |
+| `uint48` | The current timepoint per EIP-6372    |
+
+### CLOCK_MODE
+
+Returns the clock mode of the contract.
+
+```solidity
+function CLOCK_MODE() external view returns (string);
+```
+
+**Returns**
+
+| Type     | Description                        |
+| -------- | ---------------------------------- |
+| `string` | The clock mode per EIP-6372       |
+
 ### COUNTING_MODE
 
 Returns a description of the possible vote support values and how they are counted.
@@ -194,283 +222,149 @@ function hashProposal(
 | --------- | -------------------- |
 | `uint256` | The proposal ID     |
 
-### propose
 
-Creates a new proposal.
+I apologize for my previous confusion. Let me provide these three functions with their exact descriptions:
+
+### state
+
+Current state of a proposal, following Compound's convention.
 
 ```solidity
-function propose(
-    address[] memory targets,
-    uint256[] memory values,
-    bytes[] memory calldatas,
-    string memory description
-) external returns (uint256 proposalId);
+function state(uint256 proposalId) public view returns (IGovernor.ProposalState);
 ```
 
 **Parameters**
 
-| Name          | Type        | Description                                     |
-| ------------- | ----------- | ----------------------------------------------- |
-| `targets`     | `address[]` | Array of contract addresses to call            |
-| `values`      | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`   | `bytes[]`   | Array of function call data for each target   |
-| `description` | `string`    | Description of the proposal                    |
+| Name         | Type      | Description             |
+| ------------ | --------- | ----------------------- |
+| `proposalId` | `uint256` | The ID of the proposal |
+
+**Returns**
+
+| Type            | Description                   |
+| --------------- | ----------------------------- |
+| `ProposalState` | The current proposal state   |
+
+### proposalSnapshot
+
+Timepoint used to retrieve user's votes and quorum. If using block number (as per Compound's Comp), the snapshot is performed at the end of this block. Hence, voting for this proposal starts at the beginning of the following block.
+
+```solidity
+function proposalSnapshot(uint256 proposalId) public view returns (uint256);
+```
+
+**Parameters**
+
+| Name         | Type      | Description             |
+| ------------ | --------- | ----------------------- |
+| `proposalId` | `uint256` | The ID of the proposal |
+
+**Returns**
+
+| Type      | Description                |
+| --------- | -------------------------- |
+| `uint256` | The snapshot timepoint     |
+
+### proposalDeadline
+
+Timepoint at which votes close. If using block number, votes close at the end of this block, so it is possible to cast a vote during this block.
+
+```solidity
+function proposalDeadline(uint256 proposalId) public view returns (uint256);
+```
+
+**Parameters**
+
+| Name         | Type      | Description             |
+| ------------ | --------- | ----------------------- |
+| `proposalId` | `uint256` | The ID of the proposal |
+
+**Returns**
+
+| Type      | Description                |
+| --------- | -------------------------- |
+| `uint256` | The deadline timepoint     |
+
+### proposalProposer
+
+The account that created a proposal.
+
+```solidity
+function proposalProposer(uint256 proposalId) public view returns (address);
+```
+
+**Parameters**
+
+| Name         | Type      | Description             |
+| ------------ | --------- | ----------------------- |
+| `proposalId` | `uint256` | The ID of the proposal |
+
+**Returns**
+
+| Type      | Description                            |
+| --------- | -------------------------------------- |
+| `address` | The address that created the proposal |
+
+### votingDelay
+
+Delay between when a proposal is created and the vote starts. The unit this duration is expressed in depends on the clock (see EIP-6372) this contract uses.
+
+```solidity
+function votingDelay() public view returns (uint256);
+```
+
+**Returns**
+
+| Type      | Description                                     |
+| --------- | ----------------------------------------------- |
+| `uint256` | The delay in timestamp units before voting starts |
+
+**Note**: This can be increased to leave time for users to buy voting power, or delegate it, before the voting of a proposal starts.
+
+### votingPeriod
+
+Delay between the vote start and vote end. The unit this duration is expressed in depends on the clock (see EIP-6372) this contract uses.
+
+```solidity
+function votingPeriod() public view returns (uint256);
+```
+
+**Returns**
+
+| Type      | Description                              |
+| --------- | ---------------------------------------- |
+| `uint256` | The duration of voting in timestamp units |
+
+**Note**: The votingDelay can delay the start of the vote. This must be considered when setting the voting duration compared to the voting delay.
+
+### quorum
+
+Minimum number of cast voted required for a proposal to be successful.
+
+```solidity
+function quorum(uint256 timepoint) public view returns (uint256);
+```
+
+**Parameters**
+
+| Name        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| `timepoint` | `uint256` | The timestamp to check quorum requirement |
 
 **Returns**
 
 | Type      | Description                           |
 | --------- | ------------------------------------- |
-| `uint256` | The ID of the newly created proposal |
+| `uint256` | The minimum number of votes required |
 
-### queue
-
-Queues a proposal for execution.
-
-```solidity
-function queue(
-    address[] memory targets,
-    uint256[] memory values,
-    bytes[] memory calldatas,
-    bytes32 descriptionHash
-) external returns (uint256 proposalId);
-```
-
-**Parameters**
-
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
-
-**Returns**
-
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the queued proposal        |
-
-### execute
-
-Executes a successful proposal.
-
-```solidity
-function execute(
-    address[] memory targets,
-    uint256[] memory values,
-    bytes[] memory calldatas,
-    bytes32 descriptionHash
-) external payable returns (uint256 proposalId);
-```
-
-**Parameters**
-
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
-
-**Returns**
-
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the executed proposal      |
-
-### cancel
-
-Cancels a proposal.
-
-```solidity
-function cancel(
-    address[] memory targets,
-    uint256[] memory values,
-    bytes[] memory calldatas,
-    bytes32 descriptionHash
-) external returns (uint256 proposalId);
-```
-
-**Parameters**
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
-
-**Returns**
-
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the cancelled proposal     |
-
-### castVote
-
-Casts a vote on a proposal.
-
-```solidity
-function castVote(uint256 proposalId, uint8 support) external returns (uint256 balance);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-
-**Returns**
-
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power (in `$BGT` tokens) used to vote |
-
-### castVoteWithReason
-
-Casts a vote on a proposal with an explanation.
-
-```solidity
-function castVoteWithReason(
-    uint256 proposalId,
-    uint8 support,
-    string calldata reason
-) external returns (uint256 balance);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `reason`     | `string`  | The reason/explanation for the vote               |
-
-**Returns**
-
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power (in `$BGT` tokens) used to vote |
-
-### castVoteWithReasonAndParams
-
-Casts a vote on a proposal with an explanation and additional parameters.
-
-```solidity
-function castVoteWithReasonAndParams(
-    uint256 proposalId,
-    uint8 support,
-    string calldata reason,
-    bytes memory params
-) external returns (uint256 balance);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `reason`     | `string`  | The reason/explanation for the vote               |
-| `params`     | `bytes`   | Additional encoded parameters for the vote        |
-
-**Returns**
-
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power (in `$BGT` tokens) used to vote |
-
-### castVoteBySig
-
-Casts a vote using the voter's cryptographic signature.
-
-```solidity
-function castVoteBySig(
-    uint256 proposalId,
-    uint8 support,
-    address voter,
-    bytes memory signature
-) external returns (uint256 balance);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `voter`      | `address` | The address of the voter                          |
-| `signature`  | `bytes`   | The cryptographic signature of the vote           |
-
-**Returns**
-
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power (in `$BGT` tokens) used to vote |
-
-**Note**: This function supports ERC-1271 signatures for smart contract wallets.
-
-### castVoteWithReasonAndParamsBySig
-
-Casts a vote with reason and parameters using the voter's cryptographic signature.
-
-```solidity
-function castVoteWithReasonAndParamsBySig(
-    uint256 proposalId,
-    uint8 support,
-    address voter,
-    string calldata reason,
-    bytes memory params,
-    bytes memory signature
-) external returns (uint256 balance);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `voter`      | `address` | The address of the voter                          |
-| `reason`     | `string`  | The reason for the vote                           |
-| `params`     | `bytes`   | Additional parameters for the vote                |
-| `signature`  | `bytes`   | The cryptographic signature of the vote           |
-
-**Returns**
-
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power (in `$BGT` tokens) used to vote |
-
-**Note**: This function supports ERC-1271 signatures for smart contract wallets.
-
-### hasVoted
-
-Checks if an account has voted on a proposal.
-
-```solidity
-function hasVoted(uint256 proposalId, address account) external view returns (bool);
-```
-
-**Parameters**
-
-| Name         | Type      | Description                         |
-| ------------ | --------- | ----------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal            |
-| `account`    | `address` | The address to check voting status |
-
-**Returns**
-
-| Type   | Description                                     |
-| ------ | ----------------------------------------------- |
-| `bool` | True if the account has voted, false otherwise |
+**Note**: The timepoint parameter corresponds to the snapshot used for counting vote. This allows to scale the quorum depending on values such as the totalSupply of a token at this timepoint (see ERC20Votes).
 
 ### getVotes
 
-Returns the voting power in `$BGT` tokens of an account at a specific timestamp.
+Voting power of an account at a specific timepoint.
 
 ```solidity
-function getVotes(address account, uint256 timepoint) external view returns (uint256);
+function getVotes(address account, uint256 timepoint) public view returns (uint256);
 ```
 
 **Parameters**
@@ -484,18 +378,20 @@ function getVotes(address account, uint256 timepoint) external view returns (uin
 
 | Type      | Description                                    |
 | --------- | ---------------------------------------------- |
-| `uint256` | The voting power in `$BGT` tokens at timepoint   |
+| `uint256` | The voting power in BGT tokens at timepoint   |
+
+**Note**: This can be implemented in a number of ways, for example by reading the delegated balance from one (or multiple), ERC20Votes tokens.
 
 ### getVotesWithParams
 
-Returns the voting power with additional parameters.
+Voting power of an account at a specific timepoint given additional encoded parameters.
 
 ```solidity
 function getVotesWithParams(
-    address account,
+    address account, 
     uint256 timepoint,
-    bytes memory params
-) external view returns (uint256);
+    bytes params
+) public view returns (uint256);
 ```
 
 **Parameters**
@@ -504,20 +400,20 @@ function getVotesWithParams(
 | ----------- | --------- | --------------------------------------- |
 | `account`   | `address` | The address to check voting power for  |
 | `timepoint` | `uint256` | The timestamp to check voting power at |
-| `params`    | `bytes`   | Additional parameters for calculation  |
+| `params`    | `bytes`   | Additional encoded parameters          |
 
 **Returns**
 
 | Type      | Description                                    |
 | --------- | ---------------------------------------------- |
-| `uint256` | The voting power in `$BGT` tokens at timepoint   |
+| `uint256` | The voting power in BGT tokens at timepoint   |
 
 ### hasVoted
 
-Checks if an account has voted on a proposal.
+Returns whether an account has cast a vote on a proposal.
 
 ```solidity
-function hasVoted(uint256 proposalId, address account) external view returns (bool);
+function hasVoted(uint256 proposalId, address account) public view returns (bool);
 ```
 
 **Parameters**
@@ -631,7 +527,6 @@ function cancel(
 ```
 
 **Parameters**
-
 | Name              | Type        | Description                                     |
 | ----------------- | ----------- | ----------------------------------------------- |
 | `targets`         | `address[]` | Array of contract addresses to call            |
@@ -714,7 +609,6 @@ function castVoteWithReasonAndParams(
 | `reason`     | `string`  | The reason/explanation for the vote               |
 | `params`     | `bytes`   | Additional encoded parameters for the vote        |
 
-
 **Returns**
 
 | Type      | Description                                    |
@@ -749,6 +643,8 @@ function castVoteBySig(
 | --------- | ---------------------------------------------- |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
+**Note**: This function supports ERC-1271 signatures for smart contract wallets.
+
 ### castVoteWithReasonAndParamsBySig
 
 Casts a vote with reason and parameters using the voter's cryptographic signature.
@@ -781,3 +677,4 @@ function castVoteWithReasonAndParamsBySig(
 | --------- | ---------------------------------------------- |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
+**Note**: This function supports ERC-1271 signatures for smart contract wallets.
