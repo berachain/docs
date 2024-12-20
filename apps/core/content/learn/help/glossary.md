@@ -105,7 +105,7 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BEX,Berps,Bend, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BeraSwap,Berps,Bend, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
 ## HONEY
 

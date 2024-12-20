@@ -34,7 +34,7 @@ Stability is a desirable property in a medium of exchange, in contrast to transa
 
 `$HONEY` can be minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
 
-Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain Bex, or borrowed on Bend.
+Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain BeraSwap, or borrowed on Bend.
 
 ## What determines which assets collateralize $HONEY?
 

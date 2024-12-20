@@ -5,19 +5,19 @@ head:
       content: Deployed Contracts
   - - meta
     - name: description
-      content: Registry of deployed BEX contract addresses.
+      content: Registry of deployed BeraSwap contract addresses.
   - - meta
     - property: og:description
-      content: Registry of deployed BEX contract addresses.
+      content: Registry of deployed BeraSwap contract addresses.
 ---
 
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# BEX Deployed Contracts
+# BeraSwap Deployed Contracts
 
-The following is a list of contract address in order to interact with Berachain BEX.
+The following is a list of contract address in order to interact with Berachain BeraSwap.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
 

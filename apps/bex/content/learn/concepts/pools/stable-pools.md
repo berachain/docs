@@ -21,7 +21,7 @@ Stable Pools are optimized for assets expected to trade at or near parity, or at
 
 ## Composability
 
-Stable Pools on BEX are composable with other pool types. That is, Stable Pools' LP tokens can be "nested" into other pools, and swaps on that pool would route through the the underlying Stable Pool liquidity. This facilitates deeper liquidity and improved pricing.
+Stable Pools on BeraSwap are composable with other pool types. That is, Stable Pools' LP tokens can be "nested" into other pools, and swaps on that pool would route through the the underlying Stable Pool liquidity. This facilitates deeper liquidity and improved pricing.
 
 As an example:
 

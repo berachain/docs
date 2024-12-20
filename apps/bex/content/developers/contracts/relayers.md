@@ -55,4 +55,4 @@ await vault.setRelayerApproval(
 );
 ```
 
-> Note: Only approve relayers that have been audited and are part of the official BEX deployment.
+> Note: Only approve relayers that have been audited and are part of the official BeraSwap deployment.

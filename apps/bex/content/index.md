@@ -14,13 +14,13 @@ layout: page
   <div class="container">
     <div>
       <div class="VPImageBackground"></div>
-      <img class="VPImage" src="/DocsBear.png" alt="Berachain BEX Docs" />
+      <img class="VPImage" src="/DocsBear.png" alt="BeraSwap Docs" />
     </div>
     <div>
       <span class="logo">
         <img src="/assets/berachain-icon.svg" />
       </span>
-      <h1 class="title">Berachain BEX Docs</h1>
+      <h1 class="title">BeraSwap Docs</h1>
       <p class="description">Learn about Berachain's decentralized exchange.</p>
     </div>
   </div>
@@ -28,21 +28,21 @@ layout: page
 
 <section class="features">
   <Feature
-    title="BEX User Guides"
-    description="Onboarding guide for new BEX users"
+    title="BeraSwap User Guides"
+    description="Onboarding guide for new BeraSwap users"
     link="/learn/guides/swaps"
     :icon="IconVocabulary"
   />
   <Feature
     title="Developers"
-    description="Get up and running and building with BEX"
+    description="Get up and running and building with BeraSwap"
     link="/developers/"
     :icon="IconTerminal"
   />
   <Feature
     title="Berachain Faucet"
-      description="Fund your testnet wallet with $BERA"
-      :link=config.testnet.dapps.faucet.url
+    description="Fund your testnet wallet with $BERA"
+    :link=config.testnet.dapps.faucet.url
     :icon="IconDroplet"
   />
 </section>
@@ -105,7 +105,7 @@ layout: page
     type="alt"
   />
   <Feature
-    title="BEX"
+    title="BeraSwap"
     description="Berachain Native DEX"
     :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"

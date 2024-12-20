@@ -5,15 +5,15 @@ head:
       content: Pools
   - - meta
     - name: description
-      content: BEX pools contain the logic and math for swapping tokens and for liquidity operations
+      content: BeraSwap pools contain the logic and math for swapping tokens and for liquidity operations
   - - meta
     - property: og:description
-      content: BEX pools contain the logic and math for swapping tokens and for liquidity operations
+      content: BeraSwap pools contain the logic and math for swapping tokens and for liquidity operations
 ---
 
 # Pools
 
-BEX pools contain the logic and math for swapping tokens and for liquidity operations. There are several types of pools, each with its own unique characteristics and use cases.
+BeraSwap pools contain the logic and math for swapping tokens and for liquidity operations. There are several types of pools, each with its own unique characteristics and use cases.
 
 ## Pool Types
 

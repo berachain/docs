@@ -19,7 +19,7 @@ Here's how PoL works from the perspective of a validator:
 
 4. The validator can direct their BGT emissions to whitelisted _Reward Vaults_ in exchange for protocol Incentives. The amount they can direct is determined by the amount of BGT delegated to them.
 
-5. A _Liquidity Provider_ performs an action that generates a receipt token (e.g., providing liquidity to a BEX pool and receiving LP tokens)
+5. A _Liquidity Provider_ performs an action that generates a receipt token (e.g., providing liquidity to a BeraSwap pool and receiving LP tokens)
 
 6. The _Liquidity Provider_ stakes their receipt token in a whitelisted _Reward Vault_
 

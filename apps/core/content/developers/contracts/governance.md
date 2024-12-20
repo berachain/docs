@@ -4,7 +4,7 @@
 
 # BerachainGovernance
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.governance.address">{{config.contracts.governance.address}}</a><span v-if="config.contracts.governance.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.governance.abi">ABI JSON</a></span></small>
+<small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.governance.address">{{config.contracts.governance.address}}</a><span v-if="config.contracts.governance.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.governance.abi">ABI JSON</a></span></small>
 
 The Berachain Governance contract extends [OpenZeppelin's governor contracts](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/governance). It uses the `$BGT` token as its governance token, which determines voting power in the governance system. Users must hold `$BGT` tokens to participate in governance activities such as creating proposals and voting.
 
@@ -124,6 +124,8 @@ Emitted when a vote is cast with additional parameters.
 
 Returns the name of the governor instance.
 
+Initializes the governance contract.
+
 ```solidity
 function name() external view returns (string memory);
 ```
@@ -137,6 +139,8 @@ function name() external view returns (string memory);
 ### version
 
 Returns the version of the governor instance.
+
+Initializes the governance contract with the voting token and timelock controller.
 
 ```solidity
 function version() external view returns (string memory);
@@ -288,7 +292,6 @@ function cancel(
 ```
 
 **Parameters**
-
 | Name              | Type        | Description                                     |
 | ----------------- | ----------- | ----------------------------------------------- |
 | `targets`         | `address[]` | Array of contract addresses to call            |
@@ -711,6 +714,7 @@ function castVoteWithReasonAndParams(
 | `reason`     | `string`  | The reason/explanation for the vote               |
 | `params`     | `bytes`   | Additional encoded parameters for the vote        |
 
+
 **Returns**
 
 | Type      | Description                                    |
@@ -776,3 +780,4 @@ function castVoteWithReasonAndParamsBySig(
 | Type      | Description                                    |
 | --------- | ---------------------------------------------- |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
+

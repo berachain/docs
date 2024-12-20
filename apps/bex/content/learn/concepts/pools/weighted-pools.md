@@ -13,7 +13,7 @@ head:
 
 # Weighted Pools
 
-Weighted Pools are an extension of traditional AMM pools (i.e. Uniswap V2's 50/50 `x = y * k` pools). Weighted Pools are suitable for very generalized use cases, particularly for pairs of tokens without price correlation (e.g., HONEY/WETH). BEX Weighted Pools allow users to create pools with multiple tokens and custom weight distributions, such as `80/20` or `60/20/20` ratios.
+Weighted Pools are an extension of traditional AMM pools (i.e. Uniswap V2's 50/50 `x = y * k` pools). Weighted Pools are suitable for very generalized use cases, particularly for pairs of tokens without price correlation (e.g., HONEY/WETH). BeraSwap Weighted Pools allow users to create pools with multiple tokens and custom weight distributions, such as `80/20` or `60/20/20` ratios.
 
 Following is an example with three tokens:
 

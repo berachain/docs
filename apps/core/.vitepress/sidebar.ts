@@ -55,21 +55,15 @@ const SIDEBAR = {
       text: "Governance",
       items: [
         { text: "Governance Overview", link: "/learn/governance/" },
-        {
-          text: "Reward Vault Whitelisting",
-          link: "/learn/governance/rewardvault",
-        },
       ],
     },
     {
       text: "Native dApps",
       items: [
-        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
-        { text: "Bend", link: "/learn/dapps/bend" },
-        { text: "Berps", link: "/learn/dapps/berps" },
         { text: "BeraHub", link: "/learn/dapps/berahub" },
-        { text: "Faucet", link: "/learn/dapps/faucet" },
+        { text: "BeraSwap", link: "/learn/dapps/beraswap" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
+        { text: "Faucet", link: "/learn/dapps/faucet" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `/learn/dapps/berascan`,
@@ -118,7 +112,7 @@ const SIDEBAR = {
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
         {
-          text: "Integrating your app with PoL",
+          text: "Integrating with PoL",
           link: "/developers/quickstart/pol-integration",
         },
       ],
@@ -219,6 +213,10 @@ const SIDEBAR = {
         {
           text: "Restoring Nodes from Snapshots",
           link: "/nodes/guides/snapshots",
+        },
+        {
+          text: "Change Operator Address",
+          link: "/nodes/guides/operator-address",
         },
       ],
     },

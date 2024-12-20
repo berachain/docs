@@ -25,8 +25,8 @@ In this guide, we'll walk through how to create an ERC-20 token using Solidity a
 
 Before you start, make sure you have the following:
 
-- Foundry
-- A text editor of your choice
+- [Foundry](https://github.com/foundry-rs/foundry)
+- A code editor of your choice
 
 ## Initialize Repository
 
@@ -144,7 +144,7 @@ contract MyToken is ERC20 {
 The `1 ether` is an easy way to make a unit conversion. The default `decimals` for the ERC-20 token standard is 18, so this will mint 1 million tokens with 18 decimal places. To learn more, check out [this article on decimals](https://docs.openzeppelin.com/contracts/3.x/erc20#a-note-on-decimals).
 :::
 
-Technically, this is all you need to create your own token contract! If satisfied, you could take this contract and deploy it. It would then mint 1 million tokens to your wallet that deployed the contract (`msg.sender`). This would allow you to do whatever with the supply that you want, for example pairing those tokens with another token in the Berachain BEX so others can acquire it.
+Technically, this is all you need to create your own token contract! If satisfied, you could take this contract and deploy it. It would then mint 1 million tokens to your wallet that deployed the contract (`msg.sender`). This would allow you to do whatever with the supply that you want, for example pairing those tokens with another token in the Berachain BeraSwap so others can acquire it.
 
 However, we usually want to make a token that's a little more interesting so it stands out. Let's add some more functionality to our token contract.
 

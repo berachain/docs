@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: BEX Migration Guide
+      content: BeraSwap Migration Guide
   - - meta
     - name: description
-      content: Guide for migrating to the current BEX implementation
+      content: Guide for migrating to the current BeraSwap implementation
   - - meta
     - property: og:description
-      content: Guide for migrating to the current BEX implementation
+      content: Guide for migrating to the current BeraSwap implementation
 ---
 
 <script setup>
@@ -17,21 +17,21 @@ head:
 
 # Migration Guide
 
-This guide assists developers in migrating their code from the bArtio implementation of BEX (launched with bArtio Testnet) to the current Balancer-based BEX implementation.
+This guide assists developers in migrating their code from the bArtio implementation of BeraSwap (launched with bArtio Testnet) to the current Balancer-based BeraSwap implementation.
 
 ## General Notes
 
-- bArtio BEX: Required off-chain logic for finding `poolIndex` and determining `base` and `quote` tokens, which dictate the `isBuy` parameter.
-- Current BEX: Requires off-chain logic for finding the `poolId` (a 32-byte identifier).
+- bArtio BeraSwap: Required off-chain logic for finding `poolIndex` and determining `base` and `quote` tokens, which dictate the `isBuy` parameter.
+- Current BeraSwap: Requires off-chain logic for finding the `poolId` (a 32-byte identifier).
   - Utilizes the Smart Order Router (SOR) for this purpose.
 
 ## 1. Swaps
 
 ### Migrating from `BeraCrocMultiSwap`
 
-`BeraCrocMultiSwap` was a convenience router for executing swaps in bArtio BEX.
+`BeraCrocMultiSwap` was a convenience router for executing swaps in bArtio BeraSwap.
 
-#### bArtio BEX:
+#### bArtio BeraSwap:
 
 ```javascript
 const steps = [
@@ -101,7 +101,7 @@ const tx = await wallet.sendTransaction({
 
 ### Migrating from `userCmd` (Solidity)
 
-If the `poolId` is known, the BEX swap transaction can be encoded as follows:
+If the `poolId` is known, the BeraSwap swap transaction can be encoded as follows:
 
 ```solidity=
 import "@balancer-labs/v2-interfaces/contracts/vault/IVault.sol";
@@ -139,9 +139,9 @@ contract YourContract {
 
 ## 2. Pool Creation
 
-#### bArtio BEX:
+#### bArtio BeraSwap:
 
-In the bArtio BEX implementation, pool types were defined by the `poolIdx` parameter (e.g.`36001`).
+In the bArtio BeraSwap implementation, pool types were defined by the `poolIdx` parameter (e.g.`36001`).
 
 ```solidity
 bytes memory initPoolCmd =
@@ -150,9 +150,9 @@ bytes memory initPoolCmd =
 dex.userCmd(3, initPoolCmd); // ColdPath callpath
 ```
 
-#### Current BEX:
+#### Current BeraSwap:
 
-In the current BEX implementation, pools are created through the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract, which simplifies the pool creation process by allowing pools to be created and joined in a single transaction.
+In the current BeraSwap implementation, pools are created through the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract, which simplifies the pool creation process by allowing pools to be created and joined in a single transaction.
 
 > The `PoolCreationHelper` must first be approved as a relayer in the Vault contract
 
@@ -190,7 +190,7 @@ const tx = await poolCreationHelper.createAndJoinWeightedPool(
 
 ## 3. Adding Liquidity
 
-#### bArtio BEX:
+#### bArtio BeraSwap:
 
 ```solidity=
 bytes memory addToPoolCmd = abi.encode(
@@ -210,7 +210,7 @@ bytes memory addToPoolCmd = abi.encode(
 dex.userCmd(128, addToPoolCmd); // WarmPath callpath
 ```
 
-#### v2 BEX Example:
+#### v2 BeraSwap Example:
 
 ```solidity=
 import "@balancer-labs/v2-interfaces/contracts/vault/IVault.sol";
@@ -243,7 +243,7 @@ IVault(vaultAddress).joinPool(
 
 ## 4. Subgraph
 
-The current BEX implementation provides a <a :href="config.mainnet.dapps.swap.balancerSubgraphUrl" target="_blank">subgraph</a> indexing smart contract data with a GraphQL interface.
+The current BeraSwap implementation provides a <a :href="config.mainnet.dapps.swap.balancerSubgraphUrl" target="_blank">subgraph</a> indexing smart contract data with a GraphQL interface.
 
 ### Querying Pools Containing Tokens
 
