@@ -1,34 +1,10 @@
----
-head:
-  - - meta
-    - property: og:title
-      content: $Honey Stablecoin
-  - - meta
-    - name: description
-      content: What Is $Honey Stablecoin
-  - - meta
-    - property: og:description
-      content: What Is $Honey Stablecoin
----
-
-<script setup>
-  import Token from '@berachain/ui/Token';
-  import config from '@berachain/config/constants.json';
-</script>
-
 # $HONEY
-
-> <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>
-
-<ClientOnly>
-  <Token title="$HONEY" image="/assets/HONEY.png" />
-</ClientOnly>
 
 Stability is a desirable property in a medium of exchange, in contrast to transacting with volatile crypto assets. `$HONEY` is Berachain's native stablecoin, designed to provide a stable and reliable means of exchange within the Berachain ecosystem and beyond. `$HONEY` aims to maintain a soft peg 1 USD.
 
 ## What is $HONEY?
 
-`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) stgUSDC and Bee (PYUSD), and in the future governance could approve other assets.
+`$HONEY` is a fully collateralized stablecoin which is soft-pegged to the US Dollar. `$HONEY` can be backed by (and minted from) `$USDC` and `$BEE` (`$pyUSD`), and in the future governance could approve other assets.
 
 ## How to Get $HONEY?
 
@@ -38,16 +14,11 @@ Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain
 
 ## What determines which assets collateralize $HONEY?
 
-The initial collateral options will be `stgUSDC` and `BEE` (`$pyUSD`). New assets used to mint `$HONEY` can be added via governance.
+The initial collateral options will be `$USDC` and `$BEE` (`$pyUSD`). New assets used to mint `$HONEY` can be added via governance.
 
 ## How is $HONEY Used?
 
 `$HONEY` shares the same uses as other stablecoins, such as for payments/remittances, and as a hedge against market volatility. `$HONEY` could be used within the Berachain ecosystem via native and ecosystem apps.
-
-## Minting $HONEY
-
-A flow diagram of the `$HONEY` minting process is shown below:
-![HONEY Minting](/assets/honey-minting.png)
 
 ### $HONEY Vaults
 
@@ -69,8 +40,8 @@ Basket Mode is a safety mechanism that activates when when collateral assets bec
 - In this mode, users can't choose which asset they want to redeem their `$HONEY` for.
 - Instead, they must redeem for a proportional share of ALL collateral assets in the basket
 - For example, if you redeem 1 Honey token, you'll get:
-  - Some USDC based on its proportion in the vault
-  - Some pyUSD based on its proportion in the vault
+  - Some `$USDC` based on its proportion in the vault
+  - Some `$pyUSD` based on its proportion in the vault
   - The proportions are calculated based on the current balance of each asset in the vault
 
 **For Minting:**
@@ -86,8 +57,8 @@ Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` hol
 
 Let's consider an example with the following parameters:
 
-- User wishes to deposit `1,000 $stgUSD`
-- Mint rate for `$stgUSD` is set at `0.995` (`99.5%`)
+- User wishes to deposit `1,000 $USDC`
+- Mint rate for `$USDC` is set at `0.995` (`99.5%`)
 
 Here's how the minting process works:
 
