@@ -6,353 +6,885 @@
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.honeyFactory.address">{{config.contracts.honeyFactory.address}}</a><span v-if="config.contracts.honeyFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.honeyFactory.abi">ABI JSON</a></span></small>
 
-This is the router contract for minting and redeeming Honey.
+This is the factory contract for minting and redeeming Honey.
+
+## Constants
+
+### ONE_HUNDRED_PERCENT_RATE
+
+_The constant representing 100% for rate calculations, in 60.18-decimal fixed-point._
+
+```solidity
+uint256 private constant ONE_HUNDRED_PERCENT_RATE = 1e18;
+```
+
+### NINETY_EIGHT_PERCENT_RATE
+
+_The constant representing 98% for minimum rate validation, in 60.18-decimal fixed-point._
+
+```solidity
+uint256 private constant NINETY_EIGHT_PERCENT_RATE = 98e16;
+```
+
+### DEFAULT_PEG_OFFSET
+
+_The constant representing the default symmetrical offset (0.2%) for USD peg monitoring._
+
+```solidity
+uint256 private constant DEFAULT_PEG_OFFSET = 0.002e18;
+```
+
+### DEFAULT_MINT_REDEEM_RATE
+
+_The constant representing the default mint/redeem rate (99.8%), in 60.18-decimal fixed-point._
+
+```solidity
+uint256 private constant DEFAULT_MINT_REDEEM_RATE = 0.998e18;
+```
+
+### MAX_PEG_OFFSET
+
+_The maximum allowed peg offset (2 cents)._
+
+```solidity
+uint256 private constant MAX_PEG_OFFSET = 0.02e18;
+```
+
+### MAX_PRICE_FEED_DELAY
+
+_The maximum allowed price feed staleness._
+
+```solidity
+uint256 private constant MAX_PRICE_FEED_DELAY = 60 seconds;
+```
+
+## State Variables
+
+### Core Contracts
+
+#### honey
+
+The Honey token contract.
+
+```solidity
+Honey public honey;
+```
+
+#### pyth
+
+The Pyth price oracle contract for monitoring asset pegs.
+
+```solidity
+IPyth public pyth;
+```
+
+### Fee Configuration
+
+#### polFeeCollectorFeeRate
+
+The rate of POL fee collection, in 60.18-decimal fixed-point. 1e18 means all fees go to POLFeeCollector, 0 means all go to feeReceiver.
+
+```solidity
+uint256 public polFeeCollectorFeeRate;
+```
+
+#### mintRates
+
+Mint rate per asset, in 60.18-decimal fixed-point.
+
+```solidity
+mapping(address asset => uint256 rate) public mintRates;
+```
+
+#### redeemRates
+
+Redemption rate per asset, in 60.18-decimal fixed-point.
+
+```solidity
+mapping(address asset => uint256 rate) public redeemRates;
+```
+
+### Price Monitoring
+
+#### feeds
+
+Mapping of collateral asset to Pyth price feed ID.
+
+```solidity
+mapping(address asset => bytes32 id) internal feeds;
+```
+
+#### priceFeedMaxDelay
+
+Maximum staleness allowed for price feeds.
+
+```solidity
+uint256 public priceFeedMaxDelay;
+```
+
+#### lowerPegOffsets
+
+Lower bound offset from $1 for peg monitoring.
+
+```solidity
+mapping(address asset => uint256 lowerPegOffset) internal lowerPegOffsets;
+```
+
+#### upperPegOffsets
+
+Upper bound offset from $1 for peg monitoring.
+
+```solidity
+mapping(address asset => uint256 upperPegOffset) internal upperPegOffsets;
+```
+
+### Basket Mode & Liquidation
+
+#### forcedBasketMode
+
+Whether basket mode is forced regardless of price feeds.
+
+```solidity
+bool public forcedBasketMode;
+```
+
+#### liquidationEnabled
+
+Whether liquidation functionality is enabled.
+
+```solidity
+bool public liquidationEnabled;
+```
+
+#### liquidationRates
+
+Premium rate applied when liquidating bad collateral.
+
+```solidity
+mapping(address asset => uint256 rate) internal liquidationRates;
+```
+
+### Collateral Management
+
+#### referenceCollateral
+
+The reference collateral asset for relative caps.
+
+```solidity
+address public referenceCollateral;
+```
+
+#### relativeCap
+
+Maximum ratio of an asset relative to reference collateral.
+
+```solidity
+mapping(address asset => uint256 limit) public relativeCap;
+```
+
+#### globalCap
+
+Maximum percentage any single asset can be of total collateral.
+
+```solidity
+uint256 public globalCap;
+```
+
+### Recapitalization
+
+#### recapitalizeBalanceThreshold
+
+Target balance that must be reached during recapitalization.
+
+```solidity
+mapping(address asset => uint256 targetBalance) public recapitalizeBalanceThreshold;
+```
+
+#### minSharesToRecapitalize
+
+Minimum amount of shares required for recapitalization.
+
+```solidity
+uint256 public minSharesToRecapitalize;
+```
 
 ## Functions
 
-### mint
-
-Mint Honey by sending ERC20 to this contract.
-
-_Assest must be registered and must be a good collateral._
+### constructor
 
 ```solidity
-function mint(address asset, uint256 amount, address receiver) external returns (uint256);
+constructor();
+```
+
+### initialize
+
+```solidity
+function initialize(
+    address _governance,
+    address _honey,
+    address _polFeeCollector,
+    address _feeReceiver,
+    address _pythOracle
+) external initializer;
+```
+
+**Parameters**
+
+| Name              | Type      | Description                                |
+| ----------------- | --------- | ------------------------------------------ |
+| `_governance`     | `address` | The governance address                     |
+| `_honey`          | `address` | The Honey token address                    |
+| `_polFeeCollector`| `address` | The POL fee collector address             |
+| `_feeReceiver`    | `address` | The fee receiver address                   |
+| `_pythOracle`     | `address` | The Pyth oracle address                   |
+
+### User Functions
+
+> Note: These functions can be called by any user interacting with the protocol.
+
+### mint
+
+_Mint Honey by depositing backing assets._
+
+```solidity
+function mint(
+    address asset,
+    uint256 amount,
+    address receiver
+) external returns (uint256);
 ```
 
 **Parameters**
 
 | Name       | Type      | Description                          |
 | ---------- | --------- | ------------------------------------ |
-| `asset`    | `address` |                                      |
-| `amount`   | `uint256` | The amount of ERC20 to mint with.    |
-| `receiver` | `address` | The address that will receive Honey. |
+| `asset`    | `address` | The backing asset to deposit         |
+| `amount`   | `uint256` | The amount of backing asset          |
+| `receiver` | `address` | The address to receive Honey         |
 
 **Returns**
 
-| Name     | Type      | Description                 |
-| -------- | --------- | --------------------------- |
-| `<none>` | `uint256` | The amount of Honey minted. |
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of Honey minted           |
 
 ### redeem
 
-Redeem assets by sending Honey in to burn.
+_Redeem backing assets by burning Honey._
 
 ```solidity
-function redeem(address asset, uint256 honeyAmount, address receiver) external returns (uint256[] memory);
+function redeem(
+    address asset,
+    uint256 honeyAmount,
+    address receiver
+) external returns (uint256);
 ```
 
 **Parameters**
 
 | Name          | Type      | Description                           |
 | ------------- | --------- | ------------------------------------- |
-| `asset`       | `address` |                                       |
-| `honeyAmount` | `uint256` | The amount of Honey to redeem.        |
-| `receiver`    | `address` | The address that will receive assets. |
+| `asset`       | `address` | The backing asset to receive          |
+| `honeyAmount` | `uint256` | The amount of Honey to redeem         |
+| `receiver`    | `address` | The address to receive backing assets |
 
 **Returns**
 
-| Name     | Type        | Description                    |
-| -------- | ----------- | ------------------------------ |
-| `<none>` | `uint256[]` | The amount of assets redeemed. |
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of assets redeemed        |
 
 ### liquidate
 
-Liquidate a bad collateral asset.
+_Swap good collateral for restricted collateral at a premium rate._
 
 ```solidity
 function liquidate(
-    address badCollateral,
-    address goodCollateral,
-    uint256 goodAmount
-)
-    external
-    returns (uint256 badAmount);
+    address goodAsset,
+    uint256 amount,
+    address badAsset
+) external returns (uint256);
 ```
 
 **Parameters**
 
-| Name             | Type      | Description                          |
-| ---------------- | --------- | ------------------------------------ |
-| `badCollateral`  | `address` | The ERC20 asset to liquidate.        |
-| `goodCollateral` | `address` | The ERC20 asset to provide in place. |
-| `goodAmount`     | `uint256` | The amount provided.                 |
+| Name        | Type      | Description                           |
+| ----------- | --------- | ------------------------------------- |
+| `goodAsset` | `address` | The good asset to provide             |
+| `amount`    | `uint256` | The amount of good asset to provide   |
+| `badAsset`  | `address` | The bad asset to receive              |
 
 **Returns**
 
-| Name        | Type      | Description          |
-| ----------- | --------- | -------------------- |
-| `badAmount` | `uint256` | The amount obtained. |
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of bad asset received     |
 
-### recapitalize
+### Getter Functions
 
-Recapitalize a collateral vault.
+> Note: These view functions can be called by anyone to read protocol state.
+
+### getMintRate
+
+_Get the mint rate for an asset._
 
 ```solidity
-function recapitalize(address asset, uint256 amount) external;
+function getMintRate(address asset) external view returns (uint256);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                      |
-| -------- | --------- | -------------------------------- |
-| `asset`  | `address` | The ERC20 asset to recapitalize. |
-| `amount` | `uint256` | The amount provided.             |
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to get mint rate for |
 
-### isBasketModeEnabled
+**Returns**
 
-Get the status of the basket mode.
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The mint rate for the asset         |
 
-_On mint, basket mode is enabled if all collaterals are either depegged or bad._
+### getRedeemRate
 
-_On redeem, basket mode is enabled if at least one asset is deppegged
-except for the collateral assets that have been fully liquidated._
-
-```solidity
-function isBasketModeEnabled(bool isMint) public view returns (bool basketMode);
-```
-
-## Events
-
-### MintRateSet
-
-Emitted when a mint rate is set for an asset.
+_Get the redeem rate for an asset._
 
 ```solidity
-event MintRateSet(address indexed asset, uint256 rate);
-```
-
-### RedeemRateSet
-
-Emitted when a redemption rate is set for an asset.
-
-```solidity
-event RedeemRateSet(address indexed asset, uint256 rate);
-```
-
-### POLFeeCollectorFeeRateSet
-
-Emitted when the POLFeeCollector fee rate is set.
-
-```solidity
-event POLFeeCollectorFeeRateSet(uint256 rate);
-```
-
-### HoneyMinted
-
-Emitted when honey is minted
-
-```solidity
-event HoneyMinted(
-    address indexed from, address indexed to, address indexed asset, uint256 assetAmount, uint256 mintAmount
-);
+function getRedeemRate(address asset) external view returns (uint256);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                                            |
-| ------------- | --------- | ------------------------------------------------------ |
-| `from`        | `address` | The account that supplied assets for the minted honey. |
-| `to`          | `address` | The account that received the honey.                   |
-| `asset`       | `address` | The asset used to mint the honey.                      |
-| `assetAmount` | `uint256` | The amount of assets supplied for minting the honey.   |
-| `mintAmount`  | `uint256` | The amount of honey that was minted.                   |
+| Name    | Type      | Description                      |
+| ------- | --------- | -------------------------------- |
+| `asset` | `address` | The asset to get redeem rate for |
 
-### HoneyRedeemed
+**Returns**
 
-Emitted when honey is redeemed
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The redeem rate for the asset       |
+
+### isBasketMode
+
+_Check if the system is currently in basket mode._
 
 ```solidity
-event HoneyRedeemed(
-    address indexed from, address indexed to, address indexed asset, uint256 assetAmount, uint256 redeemAmount
-);
+function isBasketMode() public view returns (bool);
+```
+
+**Returns**
+
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `<none>` | `bool` | True if system is in basket mode              |
+
+### previewMint
+
+_Preview the amount of Honey that would be minted for given assets._
+
+```solidity
+function previewMint(address asset, uint256 amount) external view returns (uint256);
 ```
 
 **Parameters**
 
-| Name           | Type      | Description                                            |
-| -------------- | --------- | ------------------------------------------------------ |
-| `from`         | `address` | The account that redeemed the honey.                   |
-| `to`           | `address` | The account that received the assets.                  |
-| `asset`        | `address` | The asset for redeeming the honey.                     |
-| `assetAmount`  | `uint256` | The amount of assets received for redeeming the honey. |
-| `redeemAmount` | `uint256` | The amount of honey that was redeemed.                 |
+| Name     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
+| `asset`  | `address` | The backing asset to mint with    |
+| `amount` | `uint256` | The amount of asset to mint with  |
 
-### BasketModeForced
+**Returns**
 
-Emitted when the basked mode is forced.
+| Name     | Type      | Description                             |
+| -------- | --------- | --------------------------------------- |
+| `<none>` | `uint256` | The amount of Honey that would be minted|
+
+### previewRedeem
+
+_Preview the amount of assets that would be received for Honey._
 
 ```solidity
-event BasketModeForced(bool forced);
+function previewRedeem(address asset, uint256 honeyAmount) external view returns (uint256);
 ```
 
 **Parameters**
+
+| Name          | Type      | Description                    |
+| ------------- | --------- | ------------------------------ |
+| `asset`       | `address` | The backing asset to redeem    |
+| `honeyAmount` | `uint256` | The amount of Honey to redeem  |
+
+**Returns**
+
+| Name     | Type      | Description                               |
+| -------- | --------- | ----------------------------------------- |
+| `<none>` | `uint256` | The amount of backing asset to be received|
+
+### setMaxFeedDelay
+
+_Set the maximum tolerated staleness for price feeds._
+
+```solidity
+function setMaxFeedDelay(uint256 maxTolerance) external;
+```
+
+**Parameters**
+
+| Name          | Type      | Description                                    |
+| ------------- | --------- | ---------------------------------------------- |
+| `maxTolerance`| `uint256` | Maximum seconds allowed for price feed staleness|
+
+### setDepegOffsets
+
+_Set the allowed deviation range from USD peg for an asset._
+
+```solidity
+function setDepegOffsets(
+    address asset,
+    uint256 lowerOffset,
+    uint256 upperOffset
+) external;
+```
+
+**Parameters**
+
+| Name          | Type      | Description                                     |
+| ------------- | --------- | ----------------------------------------------- |
+| `asset`       | `address` | The asset to set offsets for                    |
+| `lowerOffset` | `uint256` | Lower bound offset from $1 (e.g., 0.002e18)    |
+| `upperOffset` | `uint256` | Upper bound offset from $1 (e.g., 0.002e18)    |
+
+### setReferenceCollateral
+
+_Set the reference collateral for relative caps._
+
+```solidity
+function setReferenceCollateral(address asset) external;
+```
+
+**Parameters**
+
+| Name    | Type      | Description                           |
+| ------- | --------- | ------------------------------------- |
+| `asset` | `address` | The asset to set as reference         |
+
+### setGlobalCap
+
+_Set the global cap limit for any single asset._
+
+```solidity
+function setGlobalCap(uint256 limit) external;
+```
+
+**Parameters**
+
+| Name    | Type      | Description                                          |
+| ------- | --------- | ---------------------------------------------------- |
+| `limit` | `uint256` | Maximum percentage of total collateral (e.g., 1e18 = 100%) |
+
+### setRelativeCap
+
+_Set the relative cap limit for an asset against reference collateral._
+
+```solidity
+function setRelativeCap(address asset, uint256 limit) external;
+```
+
+**Parameters**
+
+| Name    | Type      | Description                                          |
+| ------- | --------- | ---------------------------------------------------- |
+| `asset` | `address` | The asset to set cap for                             |
+| `limit` | `uint256` | Maximum ratio relative to reference (e.g., 1.5e18 = 150%) |
+
+### _isPegged
+
+_Check if an asset is currently pegged to USD within allowed range._
+
+```solidity
+function _isPegged(address asset) internal view returns (bool);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to check peg status  |
+
+**Returns**
+
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `<none>` | `bool` | True if asset is within peg range, false otherwise |
+
+### Internal Functions
+
+#### _getSharesWithoutFees
+
+_Get the amount of shares without considering fees._
+
+```solidity
+function _getSharesWithoutFees(address asset) internal view returns (uint256);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                           |
+| ------- | --------- | ------------------------------------- |
+| `asset` | `address` | The asset to get shares for           |
+
+**Returns**
+
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of shares without fees    |
+
+#### _mint
+
+_Internal mint function with basket mode handling._
+
+```solidity
+function _mint(
+    address asset,
+    uint256 amount,
+    address receiver,
+    bool checkCaps
+) internal returns (uint256);
+```
+
+**Parameters**
+
+| Name        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| `asset`     | `address` | The asset to mint with                     |
+| `amount`    | `uint256` | The amount of asset to mint               |
+| `receiver`  | `address` | The address to receive Honey               |
+| `checkCaps` | `bool`    | Whether to check collateral caps          |
+
+**Returns**
+
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of Honey minted           |
+
+#### _redeem
+
+_Internal redeem function with basket mode handling._
+
+```solidity
+function _redeem(
+    address asset,
+    uint256 amount,
+    address receiver
+) internal returns (uint256);
+```
+
+**Parameters**
+
+| Name       | Type      | Description                           |
+| ---------- | --------- | ------------------------------------- |
+| `asset`    | `address` | The asset to redeem for               |
+| `amount`   | `uint256` | The amount of Honey to redeem         |
+| `receiver` | `address` | The address to receive assets         |
+
+**Returns**
+
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of assets redeemed        |
+
+#### _getCollateralWeights
+
+_Calculate weights of collateral assets in the system._
+
+```solidity
+function _getCollateralWeights(bool filterBadCollaterals) internal view returns (uint256[] memory);
+```
+
+**Parameters**
+
+| Name                 | Type    | Description                                    |
+| ------------------- | ------- | ---------------------------------------------- |
+| `filterBadCollaterals` | `bool` | Whether to exclude restricted collateral     |
+
+**Returns**
+
+| Name     | Type        | Description                                |
+| -------- | ----------- | ------------------------------------------ |
+| `<none>` | `uint256[]` | Array of weights for each collateral asset |
+
+#### _checkCaps
+
+_Check if an asset exceeds its caps._
+
+```solidity
+function _checkCaps(address asset) internal view;
+```
+
+**Parameters**
+
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to check caps for    |
+
+#### _isCappedGlobally
+
+_Check if an asset would exceed its global cap._
+
+```solidity
+function _isCappedGlobally(address asset) internal view returns (bool);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to check             |
+
+**Returns**
+
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `<none>` | `bool` | True if asset would exceed global cap          |
+
+#### _isCappedRelative
+
+_Check if an asset would exceed its relative cap._
+
+```solidity
+function _isCappedRelative(address asset) internal view returns (bool);
+```
+
+**Parameters**
+
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to check             |
+
+**Returns**
 
 | Name     | Type   | Description                                     |
 | -------- | ------ | ----------------------------------------------- |
-| `forced` | `bool` | The flag that represent the forced basket mode. |
+| `<none>` | `bool` | True if asset would exceed relative cap         |
 
-### DepegOffsetsSet
+#### _isPegged
 
-Emitted when the depeg offsets are changed.
+_Check if an asset is within its allowed peg range._
 
 ```solidity
-event DepegOffsetsSet(address asset, uint256 lower, uint256 upper);
+function _isPegged(address asset) internal view returns (bool);
 ```
 
 **Parameters**
 
-| Name    | Type      | Description                                   |
-| ------- | --------- | --------------------------------------------- |
-| `asset` | `address` | The asset that the depeg offsets are changed. |
-| `lower` | `uint256` | The lower depeg offset.                       |
-| `upper` | `uint256` | The upper depeg offset.                       |
+| Name    | Type      | Description                    |
+| ------- | --------- | ------------------------------ |
+| `asset` | `address` | The asset to check peg for     |
 
-### LiquidationStatusSet
+**Returns**
 
-Emitted when the liquidation is enabled or disabled.
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `<none>` | `bool` | True if asset is within peg range              |
+
+### Manager Functions
+
+> Note: All functions in this section require MANAGER_ROLE to execute.
+
+### setMintRate
+
+_Set the mint rate for an asset. Must be between 98% and 100%._
 
 ```solidity
-event LiquidationStatusSet(bool enabled);
+function setMintRate(address asset, uint256 mintRate) external;
 ```
 
 **Parameters**
 
-| Name      | Type   | Description                                     |
-| --------- | ------ | ----------------------------------------------- |
-| `enabled` | `bool` | The flag that represent the liquidation status. |
+| Name      | Type      | Description                                          |
+| --------- | --------- | ---------------------------------------------------- |
+| `asset`   | `address` | The asset to set mint rate for                       |
+| `mintRate`| `uint256` | New mint rate (0.98e18 to 1e18)                     |
 
-### ReferenceCollateralSet
+### setRedeemRate
 
-Emitted when the reference collateral is set.
+_Set the redeem rate for an asset. Must be between 98% and 100%._
 
 ```solidity
-event ReferenceCollateralSet(address old, address asset);
+function setRedeemRate(address asset, uint256 redeemRate) external;
 ```
 
 **Parameters**
 
-| Name    | Type      | Description                   |
-| ------- | --------- | ----------------------------- |
-| `old`   | `address` | The old reference collateral. |
-| `asset` | `address` | The new reference collateral. |
+| Name        | Type      | Description                                          |
+| ----------- | --------- | ---------------------------------------------------- |
+| `asset`     | `address` | The asset to set redeem rate for                     |
+| `redeemRate`| `uint256` | New redeem rate (0.98e18 to 1e18)                   |
 
-### RecapitalizeBalanceThresholdSet
+### setForcedBasketMode
 
-Emitted when the recapitalize balance threshold is set.
+_Force basket mode regardless of price feeds._
 
 ```solidity
-event RecapitalizeBalanceThresholdSet(address asset, uint256 target);
+function setForcedBasketMode(bool forced) external;
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                               |
-| -------- | --------- | --------------------------------------------------------- |
-| `asset`  | `address` | The asset that the recapitalize balance threshold is set. |
-| `target` | `uint256` | The target balance threshold.                             |
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `forced` | `bool` | Whether to force basket mode                    |
 
-### MinSharesToRecapitalizeSet
+### setMaxFeedDelay
 
-Emitted when the min shares to recapitalize is set.
+_Set the maximum tolerated staleness for price feeds._
 
 ```solidity
-event MinSharesToRecapitalizeSet(uint256 minShareAmount);
+function setMaxFeedDelay(uint256 maxTolerance) external;
 ```
 
 **Parameters**
 
-| Name             | Type      | Description                     |
-| ---------------- | --------- | ------------------------------- |
-| `minShareAmount` | `uint256` | The min shares to recapitalize. |
+| Name          | Type      | Description                                          |
+| ------------- | --------- | ---------------------------------------------------- |
+| `maxTolerance`| `uint256` | Maximum seconds allowed for price feed staleness     |
 
-### MaxFeedDelaySet
+### setDepegOffsets
 
-Emitted when the max feed delay is set.
+_Set the allowed deviation range from USD peg for an asset._
 
 ```solidity
-event MaxFeedDelaySet(uint256 maxFeedDelay);
+function setDepegOffsets(
+    address asset,
+    uint256 lowerOffset,
+    uint256 upperOffset
+) external;
 ```
 
 **Parameters**
 
-| Name           | Type      | Description         |
-| -------------- | --------- | ------------------- |
-| `maxFeedDelay` | `uint256` | The max feed delay. |
+| Name          | Type      | Description                                     |
+| ------------- | --------- | ----------------------------------------------- |
+| `asset`       | `address` | The asset to set offsets for                    |
+| `lowerOffset` | `uint256` | Lower bound offset from $1 (e.g., 0.002e18)    |
+| `upperOffset` | `uint256` | Upper bound offset from $1 (e.g., 0.002e18)    |
 
-### LiquidationRateSet
+### setReferenceCollateral
 
-Emitted when the liquidation rate is set.
+_Set the reference collateral for relative caps._
 
 ```solidity
-event LiquidationRateSet(address asset, uint256 rate);
+function setReferenceCollateral(address asset) external;
 ```
 
 **Parameters**
 
-| Name    | Type      | Description                                 |
-| ------- | --------- | ------------------------------------------- |
-| `asset` | `address` | The asset that the liquidation rate is set. |
-| `rate`  | `uint256` | The liquidation rate.                       |
+| Name    | Type      | Description                           |
+| ------- | --------- | ------------------------------------- |
+| `asset` | `address` | The asset to set as reference         |
 
-### GlobalCapSet
+### setGlobalCap
 
-Emitted when the global cap is set.
+_Set the global cap limit for any single asset._
 
 ```solidity
-event GlobalCapSet(uint256 globalCap);
+function setGlobalCap(uint256 limit) external;
 ```
 
 **Parameters**
 
-| Name        | Type      | Description     |
-| ----------- | --------- | --------------- |
-| `globalCap` | `uint256` | The global cap. |
+| Name    | Type      | Description                                          |
+| ------- | --------- | ---------------------------------------------------- |
+| `limit` | `uint256` | Maximum percentage of total collateral (e.g., 1e18 = 100%) |
 
-### RelativeCapSet
+### setRelativeCap
 
-Emitted when the relative cap is set.
+_Set the relative cap limit for an asset against reference collateral._
 
 ```solidity
-event RelativeCapSet(address asset, uint256 relativeCap);
+function setRelativeCap(address asset, uint256 limit) external;
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                             |
-| ------------- | --------- | --------------------------------------- |
-| `asset`       | `address` | The asset that the relative cap is set. |
-| `relativeCap` | `uint256` | The relative cap.                       |
+| Name    | Type      | Description                                          |
+| ------- | --------- | ---------------------------------------------------- |
+| `asset` | `address` | The asset to set cap for                             |
+| `limit` | `uint256` | Maximum ratio relative to reference (e.g., 1.5e18 = 150%) |
 
-### Liquidated
+### Admin Functions
 
-Emitted when the liquidate is performed.
+> Note: All functions in this section require DEFAULT_ADMIN_ROLE (governance) to execute.
+
+### setPOLFeeCollectorFeeRate
+
+_Set the POL fee collector rate for fee distribution._
 
 ```solidity
-event Liquidated(address badAsset, address goodAsset, uint256 amount, address sender);
+function setPOLFeeCollectorFeeRate(uint256 _polFeeCollectorFeeRate) external;
 ```
 
 **Parameters**
 
-| Name        | Type      | Description                                 |
-| ----------- | --------- | ------------------------------------------- |
-| `badAsset`  | `address` | The bad asset that is liquidated.           |
-| `goodAsset` | `address` | The good asset that is provided.            |
-| `amount`    | `uint256` | The amount of good asset provided.          |
-| `sender`    | `address` | The account that performed the liquidation. |
+| Name                      | Type      | Description                                          |
+| ------------------------- | --------- | ---------------------------------------------------- |
+| `_polFeeCollectorFeeRate` | `uint256` | Fee rate (1e18 = 100% to POL, 0 = 100% to fee receiver) |
 
-### Recapitalized
+### _authorizeUpgrade
 
-Emitted when the collateral vault is recapitalized.
+_Authorize an upgrade to a new implementation._
 
 ```solidity
-event Recapitalized(address asset, uint256 amount, address sender);
+function _authorizeUpgrade(address) internal override;
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                      |
-| -------- | --------- | ------------------------------------------------ |
-| `asset`  | `address` | The asset that is recapitalized.                 |
-| `amount` | `uint256` | The amount of asset provided.                    |
-| `sender` | `address` | The account that performed the recapitalization. |
+| Name     | Type      | Description                           |
+| -------- | --------- | ------------------------------------- |
+| `<none>` | `address` | The new implementation address        |
+
+### grantRole
+
+_Grant a role to an account._
+
+```solidity
+function grantRole(bytes32 role, address account) public virtual override;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                           |
+| --------- | --------- | ------------------------------------- |
+| `role`    | `bytes32` | The role to grant (e.g., MANAGER_ROLE)|
+| `account` | `address` | The account to grant the role to      |
+
+### revokeRole
+
+_Revoke a role from an account._
+
+```solidity
+function revokeRole(bytes32 role, address account) public virtual override;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                           |
+| --------- | --------- | ------------------------------------- |
+| `role`    | `bytes32` | The role to revoke                    |
+| `account` | `address` | The account to revoke the role from   |
+
+### renounceRole
+
+_Renounce a role for the calling account._
+
+```solidity
+function renounceRole(bytes32 role, address account) public virtual override;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                           |
+| --------- | --------- | ------------------------------------- |
+| `role`    | `bytes32` | The role to renounce                  |
+| `account` | `address` | Must be the caller's address          |
