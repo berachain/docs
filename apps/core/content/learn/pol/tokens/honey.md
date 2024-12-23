@@ -55,11 +55,9 @@ A flow diagram of the `$HONEY` minting process is shown below:
 
 In the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault in interacted with, and not the `$pyUSD` vault.
 
-### Vault Router
+### $HONEY Vaults
 
-At the heart of the `$HONEY` minting process is the Vault Router contract. This contract acts as a central hub, connecting all the different `$HONEY` Vaults and is responsible for minting new `$HONEY` tokens.
-
-As shown in the diagram, users' deposits are routed through the Vault Router contract to the appropriate vault. The Vault Router custodies the shares minted by the vault (corresponding to users' deposit) and mints `$HONEY` tokens to the user.
+Each collateral type has its own dedicated `CollateralVault`, managed by the `HoneyFactory` contract. These vaults securely store the collateral assets and handle deposits and withdrawals. The `HoneyFactory` contract manages the minting and redemption of `$HONEY` tokens against these collateral deposits.
 
 ## Depegging and Basket Mode
 
@@ -91,18 +89,15 @@ Let's consider an example with the following parameters:
 - User wishes to deposit `1,000 $stgUSD`
 - Mint rate for `$stgUSD` is set at `0.995` (`99.5%`)
 
-Here's how the minting process would work:
+Here's how the minting process works:
 
-1. The user deposits `1,000 $stgUSD` into the VaultRouter contract
-2. The VaultRouter transfers `1,000 $stgUSD` to the $stgUSD Vault and receives `1,000` vault shares in return
-3. The VaultRouter calculates the amount of $HONEY to mint:
+1. The user's deposit is handled by the `HoneyFactory` contract, which extends `VaultAdmin`
+2. The `HoneyFactory` deposits the collateral into the appropriate `CollateralVault`
+3. The mint amount is calculated based on the current mint rate:
+   - `$HONEY` to mint = Collateral amount × Mint rate
+   - `$HONEY` to mint = `1,000` × `0.995` = `995 $HONEY`
+4. Fees are calculated and distributed:
+   - Fee amount = Collateral amount - `$HONEY` minted
+   - Fee amount = `1,000 - 995 = 5` collateral tokens
+   - Fees are split between the fee receiver and POL fee collector based on the `polFeeCollectorFeeRate`
 
-- `$HONEY` to mint = Vault shares × Mint rate
-- `$HONEY` to mint = `1,000` × `0.995` = `995 $HONEY`
-
-4. The VaultRouter mints `995 $HONEY` to the user's address.
-5. The VaultRouter calculates and distributes the fee:
-
-- Fee shares = Vault shares - `$HONEY` to mint
-- Fee shares = `1,000 - 995 = 5 shares`
-- The VaultRouter transfers 5 vault shares to the fee receiver.
