@@ -44,7 +44,7 @@ OS: Linux / MacOS
 CPU Architecture: AMD64 or ARM64 / ARM64 Darwin
 CPU: 8 Physical Cores
 RAM: 48GB
-Storage: 1TB
+Storage: 4TB (SSD with high IOPS)
 ```
 
 :::tip
@@ -53,10 +53,10 @@ If running as docker containers, make sure each docker container sufficient reso
 
 ## Build & Run From Source 🛠️
 
-For this quickstart, we'll be building the consensus client from source.
+For this quickstart, we'll be building the consensus client from source. **If you do not wish to build from source:** download a [pre-built binary from here](https://github.com/berachain/beacon-kit/releases)
 
 :::tip
-**NOTE:** Avoid running the execution client and/or consensus client in Vscode as it will be prone to crash. Please use a dedicated shell terminal.
+**NOTE:** Avoid running the execution client and/or consensus client in Vscode as it will be prone to crashing. Please use a dedicated shell terminal.
 :::
 
 ### Clone Repo & Verify Built Binary
@@ -91,7 +91,7 @@ Test that it's working correctly, with the following command:
 
 ## Configure Consensus Client 🤝
 
-This will walk the steps for setting up a `BeaconKit` consensus client.
+This will walk the steps for setting up the `BeaconKit` consensus client.
 
 ### Step 1 - Initializing Beacon Node
 
@@ -210,7 +210,7 @@ curl -o "./build/bin/config/beacond/config/config.toml" "https://raw.githubuserc
 Modify the configurations by adding back the moniker name and peers.
 
 :::tip
-Replace `-i ''` with just `-i` if you're not on MacOS.
+MacOS users need to add an extra set of quotes for `sed`: `sed -i` becomes `sed -i ''`
 :::
 
 ```bash
@@ -218,29 +218,29 @@ Replace `-i ''` with just `-i` if you're not on MacOS.
 
 # Rename the moniker in `config.toml`
 MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
-sed -i '' "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # set rpc dial url in `app.toml`
 RPC_DIAL_URL=http://localhost:8551; # Adjust as needed
-sed -i '' "s|^rpc-dial-url = \".*\"|rpc-dial-url = \"$RPC_DIAL_URL\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i "s|^rpc-dial-url = \".*\"|rpc-dial-url = \"$RPC_DIAL_URL\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # set jwt.hex path in `app.toml`
 JWT_PATH=$PWD/build/bin/config/beacond/jwt.hex; # generating in next step
-sed -i '' "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # set suggested fee recipient wallet address in `app.toml`
 WALLET_ADDRESS_FEE_RECIPIENT=<0xYOUR_WALLET_ADDRESS>;
-sed -i '' "s|^suggested-fee-recipient = \".*\"|suggested-fee-recipient = \"$WALLET_ADDRESS_FEE_RECIPIENT\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i "s|^suggested-fee-recipient = \".*\"|suggested-fee-recipient = \"$WALLET_ADDRESS_FEE_RECIPIENT\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # seeds in `config.toml`
 # - Comma separated list of seeds
 SEEDS_URL="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/cl-seeds.txt";
 SEEDS=$(curl -s "$SEEDS_URL" | tail -n +2 | tr '\n' ',' | sed 's/,$//');
-sed -i '' "s/^seeds = \".*\"/seeds = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^seeds = \".*\"/seeds = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # persistent peers in `config.toml`
 # - Comma separated list of nodes to keep persistent connections to
-sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i "s/^persistent_peers = \".*\"/persistent_peers = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 ```
 
 ### Step 3 - Generate JWT Token
