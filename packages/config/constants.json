@@ -11,6 +11,9 @@
     "genesisForkVersion": "0x04000000",
     "validatorDepositGweiAmount": 32000000000,
     "rewardDistributionBlockExpiration": 8191,
+    "stakeMinimumIncrease": 32,
+    "validatorActiveSetSize": 69,
+    "stakeMinimumDeadlineEpoch": 1,
     "dapps": {
       "faucet": {
         "name": "Berachain Testnet Faucet",
@@ -31,6 +34,9 @@
     "validatorDepositGweiAmount": 32000000000,
     "blockDelay": 8191,
     "rewardDistributionBlockExpiration": 8191,
+    "stakeMinimumIncrease": 32,
+    "validatorActiveSetSize": 69,
+    "stakeMinimumDeadlineEpoch": 1,
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
