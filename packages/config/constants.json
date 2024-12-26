@@ -37,6 +37,7 @@
     "stakeMinimumIncrease": 32,
     "validatorActiveSetSize": 69,
     "stakeMinimumDeadlineEpoch": 1,
+    "blockDelay": 8191,
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
@@ -511,12 +512,6 @@
     "peripheryDebtToken": {
       "name": "PeripheryDebtToken",
       "address": "0x1339503343be5626B40Ee3Aee12a4DF50Aa4C0B9",
-      "abi": "",
-      "docsUrl": ""
-    },
-    "rewardVault": {
-      "name": "RewardVault",
-      "address": "0x2E8410239bB4b099EE2d5683e3EF9d6f04E321CC",
       "abi": "",
       "docsUrl": ""
     },

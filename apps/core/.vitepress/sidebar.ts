@@ -228,6 +228,10 @@ const SIDEBAR = {
           text: "Increase Validator $BERA Stake",
           link: "/nodes/guides/increase-validator-bera-stake",
         },
+        {
+          text: "Manage Reward Allocations",
+          link: "/nodes/guides/reward-allocation",
+        },
       ],
     },
   ],
