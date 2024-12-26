@@ -18,7 +18,7 @@ The delay between when a proposal is created and when voting begins.
 uint48 internal constant VOTING_DELAY = 6 hours;
 ```
 
-### VOTING_PERIOD 
+### VOTING_PERIOD
 
 The duration of voting on a proposal.
 
@@ -54,6 +54,7 @@ enum ProposalState {
 ## Events
 
 ### ProposalCreated
+
 ```solidity
 event ProposalCreated(
     uint256 proposalId,
@@ -71,6 +72,7 @@ event ProposalCreated(
 Emitted when a new proposal is created.
 
 ### ProposalQueued
+
 ```solidity
 event ProposalQueued(uint256 proposalId, uint256 etaSeconds);
 ```
@@ -78,6 +80,7 @@ event ProposalQueued(uint256 proposalId, uint256 etaSeconds);
 Emitted when a proposal is queued for execution.
 
 ### ProposalExecuted
+
 ```solidity
 event ProposalExecuted(uint256 proposalId);
 ```
@@ -85,6 +88,7 @@ event ProposalExecuted(uint256 proposalId);
 Emitted when a proposal is executed.
 
 ### ProposalCanceled
+
 ```solidity
 event ProposalCanceled(uint256 proposalId);
 ```
@@ -92,6 +96,7 @@ event ProposalCanceled(uint256 proposalId);
 Emitted when a proposal is canceled.
 
 ### VoteCast
+
 ```solidity
 event VoteCast(
     address indexed voter,
@@ -105,6 +110,7 @@ event VoteCast(
 Emitted when a vote is cast without parameters.
 
 ### VoteCastWithParams
+
 ```solidity
 event VoteCastWithParams(
     address indexed voter,
@@ -132,8 +138,8 @@ function name() external view returns (string memory);
 
 **Returns**
 
-| Type     | Description                        |
-| -------- | ---------------------------------- |
+| Type     | Description                       |
+| -------- | --------------------------------- |
 | `string` | The name of the governor instance |
 
 ### version
@@ -148,8 +154,8 @@ function version() external view returns (string memory);
 
 **Returns**
 
-| Type     | Description                           |
-| -------- | ------------------------------------- |
+| Type     | Description                          |
+| -------- | ------------------------------------ |
 | `string` | The version of the governor instance |
 
 ### clock
@@ -162,9 +168,9 @@ function clock() public view returns (uint48);
 
 **Returns**
 
-| Type     | Description                            |
-| -------- | -------------------------------------- |
-| `uint48` | The current timepoint per EIP-6372    |
+| Type     | Description                        |
+| -------- | ---------------------------------- |
+| `uint48` | The current timepoint per EIP-6372 |
 
 ### CLOCK_MODE
 
@@ -176,9 +182,9 @@ function CLOCK_MODE() external view returns (string);
 
 **Returns**
 
-| Type     | Description                        |
-| -------- | ---------------------------------- |
-| `string` | The clock mode per EIP-6372       |
+| Type     | Description                 |
+| -------- | --------------------------- |
+| `string` | The clock mode per EIP-6372 |
 
 ### COUNTING_MODE
 
@@ -190,8 +196,8 @@ function COUNTING_MODE() external view returns (string memory);
 
 **Returns**
 
-| Type     | Description                                                           |
-| -------- | --------------------------------------------------------------------- |
+| Type     | Description                                                         |
+| -------- | ------------------------------------------------------------------- |
 | `string` | URL-encoded string describing vote counting (e.g., "support=bravo") |
 
 ### hashProposal
@@ -209,19 +215,18 @@ function hashProposal(
 
 **Parameters**
 
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
+| Name              | Type        | Description                                 |
+| ----------------- | ----------- | ------------------------------------------- |
+| `targets`         | `address[]` | Array of contract addresses to call         |
+| `values`          | `uint256[]` | Array of BERA values to send with each call |
+| `calldatas`       | `bytes[]`   | Array of function call data for each target |
+| `descriptionHash` | `bytes32`   | Hash of the proposal description            |
 
 **Returns**
 
-| Type      | Description          |
-| --------- | -------------------- |
-| `uint256` | The proposal ID     |
-
+| Type      | Description     |
+| --------- | --------------- |
+| `uint256` | The proposal ID |
 
 I apologize for my previous confusion. Let me provide these three functions with their exact descriptions:
 
@@ -235,15 +240,15 @@ function state(uint256 proposalId) public view returns (IGovernor.ProposalState)
 
 **Parameters**
 
-| Name         | Type      | Description             |
-| ------------ | --------- | ----------------------- |
+| Name         | Type      | Description            |
+| ------------ | --------- | ---------------------- |
 | `proposalId` | `uint256` | The ID of the proposal |
 
 **Returns**
 
-| Type            | Description                   |
-| --------------- | ----------------------------- |
-| `ProposalState` | The current proposal state   |
+| Type            | Description                |
+| --------------- | -------------------------- |
+| `ProposalState` | The current proposal state |
 
 ### proposalSnapshot
 
@@ -255,15 +260,15 @@ function proposalSnapshot(uint256 proposalId) public view returns (uint256);
 
 **Parameters**
 
-| Name         | Type      | Description             |
-| ------------ | --------- | ----------------------- |
+| Name         | Type      | Description            |
+| ------------ | --------- | ---------------------- |
 | `proposalId` | `uint256` | The ID of the proposal |
 
 **Returns**
 
-| Type      | Description                |
-| --------- | -------------------------- |
-| `uint256` | The snapshot timepoint     |
+| Type      | Description            |
+| --------- | ---------------------- |
+| `uint256` | The snapshot timepoint |
 
 ### proposalDeadline
 
@@ -275,15 +280,15 @@ function proposalDeadline(uint256 proposalId) public view returns (uint256);
 
 **Parameters**
 
-| Name         | Type      | Description             |
-| ------------ | --------- | ----------------------- |
+| Name         | Type      | Description            |
+| ------------ | --------- | ---------------------- |
 | `proposalId` | `uint256` | The ID of the proposal |
 
 **Returns**
 
-| Type      | Description                |
-| --------- | -------------------------- |
-| `uint256` | The deadline timepoint     |
+| Type      | Description            |
+| --------- | ---------------------- |
+| `uint256` | The deadline timepoint |
 
 ### proposalProposer
 
@@ -295,14 +300,14 @@ function proposalProposer(uint256 proposalId) public view returns (address);
 
 **Parameters**
 
-| Name         | Type      | Description             |
-| ------------ | --------- | ----------------------- |
+| Name         | Type      | Description            |
+| ------------ | --------- | ---------------------- |
 | `proposalId` | `uint256` | The ID of the proposal |
 
 **Returns**
 
-| Type      | Description                            |
-| --------- | -------------------------------------- |
+| Type      | Description                           |
+| --------- | ------------------------------------- |
 | `address` | The address that created the proposal |
 
 ### votingDelay
@@ -315,8 +320,8 @@ function votingDelay() public view returns (uint256);
 
 **Returns**
 
-| Type      | Description                                     |
-| --------- | ----------------------------------------------- |
+| Type      | Description                                       |
+| --------- | ------------------------------------------------- |
 | `uint256` | The delay in timestamp units before voting starts |
 
 **Note**: This can be increased to leave time for users to buy voting power, or delegate it, before the voting of a proposal starts.
@@ -331,8 +336,8 @@ function votingPeriod() public view returns (uint256);
 
 **Returns**
 
-| Type      | Description                              |
-| --------- | ---------------------------------------- |
+| Type      | Description                               |
+| --------- | ----------------------------------------- |
 | `uint256` | The duration of voting in timestamp units |
 
 **Note**: The votingDelay can delay the start of the vote. This must be considered when setting the voting duration compared to the voting delay.
@@ -347,14 +352,14 @@ function quorum(uint256 timepoint) public view returns (uint256);
 
 **Parameters**
 
-| Name        | Type      | Description                                |
-| ----------- | --------- | ------------------------------------------ |
+| Name        | Type      | Description                               |
+| ----------- | --------- | ----------------------------------------- |
 | `timepoint` | `uint256` | The timestamp to check quorum requirement |
 
 **Returns**
 
-| Type      | Description                           |
-| --------- | ------------------------------------- |
+| Type      | Description                          |
+| --------- | ------------------------------------ |
 | `uint256` | The minimum number of votes required |
 
 **Note**: The timepoint parameter corresponds to the snapshot used for counting vote. This allows to scale the quorum depending on values such as the totalSupply of a token at this timepoint (see ERC20Votes).
@@ -371,14 +376,14 @@ function getVotes(address account, uint256 timepoint) public view returns (uint2
 
 | Name        | Type      | Description                            |
 | ----------- | --------- | -------------------------------------- |
-| `account`   | `address` | The address to check voting power for |
+| `account`   | `address` | The address to check voting power for  |
 | `timepoint` | `uint256` | The timestamp to check voting power at |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power in BGT tokens at timepoint   |
+| Type      | Description                                 |
+| --------- | ------------------------------------------- |
+| `uint256` | The voting power in BGT tokens at timepoint |
 
 **Note**: This can be implemented in a number of ways, for example by reading the delegated balance from one (or multiple), ERC20Votes tokens.
 
@@ -388,7 +393,7 @@ Voting power of an account at a specific timepoint given additional encoded para
 
 ```solidity
 function getVotesWithParams(
-    address account, 
+    address account,
     uint256 timepoint,
     bytes params
 ) public view returns (uint256);
@@ -396,17 +401,17 @@ function getVotesWithParams(
 
 **Parameters**
 
-| Name        | Type      | Description                             |
-| ----------- | --------- | --------------------------------------- |
+| Name        | Type      | Description                            |
+| ----------- | --------- | -------------------------------------- |
 | `account`   | `address` | The address to check voting power for  |
 | `timepoint` | `uint256` | The timestamp to check voting power at |
 | `params`    | `bytes`   | Additional encoded parameters          |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
-| `uint256` | The voting power in BGT tokens at timepoint   |
+| Type      | Description                                 |
+| --------- | ------------------------------------------- |
+| `uint256` | The voting power in BGT tokens at timepoint |
 
 ### hasVoted
 
@@ -418,15 +423,15 @@ function hasVoted(uint256 proposalId, address account) public view returns (bool
 
 **Parameters**
 
-| Name         | Type      | Description                         |
-| ------------ | --------- | ----------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal            |
+| Name         | Type      | Description                        |
+| ------------ | --------- | ---------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal             |
 | `account`    | `address` | The address to check voting status |
 
 **Returns**
 
-| Type   | Description                                     |
-| ------ | ----------------------------------------------- |
+| Type   | Description                                    |
+| ------ | ---------------------------------------------- |
 | `bool` | True if the account has voted, false otherwise |
 
 ### propose
@@ -444,17 +449,17 @@ function propose(
 
 **Parameters**
 
-| Name          | Type        | Description                                     |
-| ------------- | ----------- | ----------------------------------------------- |
-| `targets`     | `address[]` | Array of contract addresses to call            |
-| `values`      | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`   | `bytes[]`   | Array of function call data for each target   |
-| `description` | `string`    | Description of the proposal                    |
+| Name          | Type        | Description                                 |
+| ------------- | ----------- | ------------------------------------------- |
+| `targets`     | `address[]` | Array of contract addresses to call         |
+| `values`      | `uint256[]` | Array of BERA values to send with each call |
+| `calldatas`   | `bytes[]`   | Array of function call data for each target |
+| `description` | `string`    | Description of the proposal                 |
 
 **Returns**
 
-| Type      | Description                           |
-| --------- | ------------------------------------- |
+| Type      | Description                          |
+| --------- | ------------------------------------ |
 | `uint256` | The ID of the newly created proposal |
 
 ### queue
@@ -472,18 +477,18 @@ function queue(
 
 **Parameters**
 
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
+| Name              | Type        | Description                                 |
+| ----------------- | ----------- | ------------------------------------------- |
+| `targets`         | `address[]` | Array of contract addresses to call         |
+| `values`          | `uint256[]` | Array of BERA values to send with each call |
+| `calldatas`       | `bytes[]`   | Array of function call data for each target |
+| `descriptionHash` | `bytes32`   | Hash of the proposal description            |
 
 **Returns**
 
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the queued proposal        |
+| Type      | Description                   |
+| --------- | ----------------------------- |
+| `uint256` | The ID of the queued proposal |
 
 ### execute
 
@@ -500,18 +505,18 @@ function execute(
 
 **Parameters**
 
-| Name              | Type        | Description                                     |
-| ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
+| Name              | Type        | Description                                 |
+| ----------------- | ----------- | ------------------------------------------- |
+| `targets`         | `address[]` | Array of contract addresses to call         |
+| `values`          | `uint256[]` | Array of BERA values to send with each call |
+| `calldatas`       | `bytes[]`   | Array of function call data for each target |
+| `descriptionHash` | `bytes32`   | Hash of the proposal description            |
 
 **Returns**
 
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the executed proposal      |
+| Type      | Description                     |
+| --------- | ------------------------------- |
+| `uint256` | The ID of the executed proposal |
 
 ### cancel
 
@@ -527,18 +532,18 @@ function cancel(
 ```
 
 **Parameters**
-| Name              | Type        | Description                                     |
+| Name | Type | Description |
 | ----------------- | ----------- | ----------------------------------------------- |
-| `targets`         | `address[]` | Array of contract addresses to call            |
-| `values`          | `uint256[]` | Array of BERA values to send with each call   |
-| `calldatas`       | `bytes[]`   | Array of function call data for each target   |
-| `descriptionHash` | `bytes32`   | Hash of the proposal description              |
+| `targets` | `address[]` | Array of contract addresses to call |
+| `values` | `uint256[]` | Array of BERA values to send with each call |
+| `calldatas` | `bytes[]` | Array of function call data for each target |
+| `descriptionHash` | `bytes32` | Hash of the proposal description |
 
 **Returns**
 
-| Type      | Description                           |
-| --------- | ------------------------------------- |
-| `uint256` | The ID of the cancelled proposal     |
+| Type      | Description                      |
+| --------- | -------------------------------- |
+| `uint256` | The ID of the cancelled proposal |
 
 ### castVote
 
@@ -550,15 +555,15 @@ function castVote(uint256 proposalId, uint8 support) external returns (uint256 b
 
 **Parameters**
 
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal to vote on             |
+| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
 ### castVoteWithReason
@@ -575,16 +580,16 @@ function castVoteWithReason(
 
 **Parameters**
 
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `reason`     | `string`  | The reason/explanation for the vote               |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal to vote on             |
+| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain |
+| `reason`     | `string`  | The reason/explanation for the vote           |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
 ### castVoteWithReasonAndParams
@@ -602,17 +607,17 @@ function castVoteWithReasonAndParams(
 
 **Parameters**
 
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `reason`     | `string`  | The reason/explanation for the vote               |
-| `params`     | `bytes`   | Additional encoded parameters for the vote        |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal to vote on             |
+| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain |
+| `reason`     | `string`  | The reason/explanation for the vote           |
+| `params`     | `bytes`   | Additional encoded parameters for the vote    |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
 ### castVoteBySig
@@ -630,17 +635,17 @@ function castVoteBySig(
 
 **Parameters**
 
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `voter`      | `address` | The address of the voter                          |
-| `signature`  | `bytes`   | The cryptographic signature of the vote           |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal to vote on             |
+| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain |
+| `voter`      | `address` | The address of the voter                      |
+| `signature`  | `bytes`   | The cryptographic signature of the vote       |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
 **Note**: This function supports ERC-1271 signatures for smart contract wallets.
@@ -662,19 +667,19 @@ function castVoteWithReasonAndParamsBySig(
 
 **Parameters**
 
-| Name         | Type      | Description                                        |
-| ------------ | --------- | -------------------------------------------------- |
-| `proposalId` | `uint256` | The ID of the proposal to vote on                 |
-| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain     |
-| `voter`      | `address` | The address of the voter                          |
-| `reason`     | `string`  | The reason for the vote                           |
-| `params`     | `bytes`   | Additional parameters for the vote                |
-| `signature`  | `bytes`   | The cryptographic signature of the vote           |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `proposalId` | `uint256` | The ID of the proposal to vote on             |
+| `support`    | `uint8`   | The type of vote: 0=Against, 1=For, 2=Abstain |
+| `voter`      | `address` | The address of the voter                      |
+| `reason`     | `string`  | The reason for the vote                       |
+| `params`     | `bytes`   | Additional parameters for the vote            |
+| `signature`  | `bytes`   | The cryptographic signature of the vote       |
 
 **Returns**
 
-| Type      | Description                                    |
-| --------- | ---------------------------------------------- |
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
 | `uint256` | The voting power (in `$BGT` tokens) used to vote |
 
 **Note**: This function supports ERC-1271 signatures for smart contract wallets.
