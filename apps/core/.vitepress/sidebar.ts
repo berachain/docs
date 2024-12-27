@@ -217,6 +217,10 @@ const SIDEBAR = {
           link: "/nodes/guides/operator-address",
         },
         {
+          text: "Manage Reward Allocations",
+          link: "/nodes/guides/reward-allocation",
+        },
+        {
           text: "Distribute Block Rewards",
           link: "/nodes/guides/distribute-block-rewards",
         },

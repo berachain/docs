@@ -22,7 +22,7 @@
     }
   },
   "mainnet": {
-    "chainId": 80094, 
+    "chainId": 80094,
     "rpcUrl": "https://rpc.berachain.com/",
     "currencySymbol": "BERA",
     "currencyName": "BERA Token",
@@ -32,6 +32,7 @@
     "genesisRoot": "0x053397d1ddb01f3910e91ef762070a075e4b17ba3472c3c4dd391a68bd5d95a1",
     "genesisForkVersion": "0x04000000",
     "validatorDepositGweiAmount": 32000000000,
+    "rewardAllocationBlockDelay": 8191,
     "rewardDistributionBlockExpiration": 8191,
     "stakeMinimumIncrease": 32,
     "validatorActiveSetSize": 69,
@@ -510,12 +511,6 @@
     "peripheryDebtToken": {
       "name": "PeripheryDebtToken",
       "address": "0x1339503343be5626B40Ee3Aee12a4DF50Aa4C0B9",
-      "abi": "",
-      "docsUrl": ""
-    },
-    "rewardVault": {
-      "name": "RewardVault",
-      "address": "0x2E8410239bB4b099EE2d5683e3EF9d6f04E321CC",
       "abi": "",
       "docsUrl": ""
     },
