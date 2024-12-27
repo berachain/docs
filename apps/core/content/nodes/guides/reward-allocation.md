@@ -17,12 +17,13 @@ head:
 
 # Managing Validator Reward Allocations 🧑‍🍳
 
-This guide will walk you through managing your validator's reward allocations using [BeraChef](/developers/contracts/berachef), through 1) command-line interface and 2) the UI.
+This guide will walk you through managing your validator's reward allocations using [BeraChef](/developers/contracts/berachef) via Foundry `cast` and the BeraHub UI.
 
-## Prerequisites
+## Requirements
 
-- Active validator node
-- Validator operator key
+- Active Validator Node
+- Validator Operator Wallet Address & Private Key
+- Validator PubKey
 - [Foundry](https://book.getfoundry.sh/getting-started/installation) using `cast`
 
 ## Understanding Reward Allocations
@@ -34,7 +35,7 @@ Each validator can customize how their rewards are distributed across different 
 - Reward allocations must total 100% (10000 basis points)
 - Only whitelisted vaults can receive allocations
 - Changes require queuing and a delay period before activation
-- Current delay: {{config.mainnet.blockDelay}} blocks
+- Current delay: {{config.mainnet.rewardAllocationBlockDelay}} blocks
 
 ## Option A - Using Foundry CLI
 
@@ -69,10 +70,10 @@ cast --abi-decode "getActiveRewardAllocation(bytes)((uint64,(address,uint96)[]))
 
 The output is your validator's `RewardAllocation` struct, a tuple containing:
 
-1. the allocation start block
-2. an array of tuples, each containing the vault address and the percentage numerator (adding up to `10000`)
+1. The allocation start block
+2. An array of tuples, each containing the vault address and the percentage numerator (adding up to `10000`)
 
-### Step 2 - Queue new allocation
+### Step 2 - Queue New Allocation
 
 An example command to queue a new allocation resembles the following:
 
@@ -82,7 +83,7 @@ cast send {{config.contracts.berachef.address}} \
 "<YOUR_VALIDATOR_PUBKEY>" \
 "$START_BLOCK" \
 "[(0x12345...,5000),(0x56789...,5000)]" \
---private-key <YOUR_OPERATOR_KEY> \
+--private-key <YOUR_VALIDATOR_OPERATOR_ADDRESS_PRIVATE_KEY> \
 --rpc-url {{config.mainnet.rpcUrl}}
 ```
 
@@ -109,8 +110,8 @@ You can also manage your reward allocations through the Berachain Dashboard:
 ![Reward Allocation](/assets/reward-allocation.png)
 
 1. Navigate to <a target="_blank" :href="config.mainnet.dapps.hub.url + 'validators'">Validator Dashboard</a> on {{config.mainnet.dapps.hub.name}}
-2. Connect your wallet containing your operator key
-3. Click "Manage as a validator"
-4. Click the "Configuration" tab
+2. Connect your validator operator wallet
+3. Click **Manage as a validator**
+4. Click the **Configuration** tab
 5. Select your vaults and choose desired allocation percentages (ensuring they add up to 100%)
-6. Click `Queue` and submit the transaction
+6. Click **Queue** and submit the transaction
