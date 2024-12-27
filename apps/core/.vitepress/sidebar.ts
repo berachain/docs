@@ -220,6 +220,10 @@ const SIDEBAR = {
           text: "Manage Reward Allocations",
           link: "/nodes/guides/reward-allocation",
         },
+        {
+          text: "Distribute Block Rewards",
+          link: "/nodes/guides/distribute-block-rewards",
+        },
       ],
     },
   ],

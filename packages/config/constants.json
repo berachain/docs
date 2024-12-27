@@ -10,6 +10,7 @@
     "genesisRoot": "0x053397d1ddb01f3910e91ef762070a075e4b17ba3472c3c4dd391a68bd5d95a1",
     "genesisForkVersion": "0x04000000",
     "validatorDepositGweiAmount": 32000000000,
+    "rewardDistributionBlockExpiration": 8191,
     "dapps": {
       "faucet": {
         "name": "Berachain Testnet Faucet",
@@ -29,6 +30,7 @@
     "genesisForkVersion": "0x04000000",
     "validatorDepositGweiAmount": 32000000000,
     "blockDelay": 8191,
+    "rewardDistributionBlockExpiration": 8191,
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
