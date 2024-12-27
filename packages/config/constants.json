@@ -37,7 +37,6 @@
     "stakeMinimumIncrease": 32,
     "validatorActiveSetSize": 69,
     "stakeMinimumDeadlineEpoch": 1,
-    "blockDelay": 8191,
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
