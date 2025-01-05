@@ -121,7 +121,7 @@ Anyone with the required minimum amounts of `$BGT` can propose and vote on propo
 
 ## Can validators with `$BERA` alone build blocks and what are the rewards?
 
-Yes, validators only need to stake `$BERA` to within the designated min and max range of 250K and 2.5M, and once in the active set they will propose blocks. Validators recieve rewards in `$BGT`.
+Yes, validators only need to stake `$BERA` to within the designated min and max range of 250K and 10M, and once in the active set they will propose blocks. Validators recieve rewards in `$BGT`.
 
 ## Do incentives only go to the validators with `$BGT` delegated to them?
 

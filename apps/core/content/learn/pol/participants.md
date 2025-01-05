@@ -6,7 +6,7 @@ The following diagram shows a breakdown of the different participants in the PoL
 
 ## Validators ✅
 
-Validators coordinate with one another to reach consensus on the state of the blockchain. The active validator set consists of the top N validators ordered by BERA staked, with a 250K floor and 2.5M BERA cap per validator. Validators earn through three primary means:
+Validators coordinate with one another to reach consensus on the state of the blockchain. The active validator set consists of the top N validators ordered by BERA staked, with a 250K floor and 10M BERA cap per validator. Validators earn through three primary means:
 
 1. Gas fees and priority fees
 2. Collecting incentives provided by protocols for directing BGT rewards to their [Reward Vaults](/learn/pol/rewardvaults)

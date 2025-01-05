@@ -50,7 +50,7 @@ Quickly add Berachain's network to your wallet with one-click.
 
 Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that allows `RPC importing` can be configured to work with Berachain.
 
-Compatible Wallets:
+Here are some examples of compatible wallets:
 
 - [MetaMask](https://metamask.io)
 - [Coinbase Wallet](https://www.coinbase.com/wallet)
