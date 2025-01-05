@@ -51,7 +51,7 @@ layout: page
 
 <section class="features">
   <Feature
-    title="Swap Docs"
+    title="BeraSwap Docs"
     description="Berachain Native DEX Docs"
     :link="config.websites.docsSwap.url"
     image="/assets/BEX.png"
@@ -84,7 +84,7 @@ layout: page
     type="alt"
   />
   <Feature
-    title="Beratrail"
+    title="Berascan"
     description="Block Explorer"
     :link="config.mainnet.dapps.berascan.url"
     :icon="IconSearch"
@@ -98,14 +98,14 @@ layout: page
       type="alt"
   />
   <Feature
-    title="BGT Station"
+    title="Bera Hub"
     description="Manage $BGT"
     :link="config.mainnet.dapps.hub.url"
     :icon="IconGavel"
       type="alt"
   />
   <Feature
-    title="BEX"
+    title="BeraSwap"
     description="Berachain Native DEX"
     :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
