@@ -31,6 +31,8 @@ Users can expect to:
 
 1. Review active <a :href="config.mainnet.dapps.hub.url + '/gauge'">reward vaults</a>
 2. Review active <a :href="config.mainnet.dapps.hub.url + '/validators'">validator</a> set
-3. <a :href="config.mainnet.dapps.hub.url + '/delegate'">Delegate or unbond</a> `$BGT` with validators
+3. <a :href="config.mainnet.dapps.hub.url + '/delegate'">Boost </a> validators with `$BGT`
 4. <a :href="config.mainnet.dapps.hub.url + '/redeem'">Redeem `$BGT` for `$BERA`</a>
 5. <a :href="config.mainnet.dapps.hub.url + '/rewards'">Claim earned `$BGT` rewards</a>
+6. <a :href="config.mainnet.dapps.hub.url + '/swap'">Swap assets</a>
+7. <a :href="config.mainnet.dapps.hub.url + '/governance'">Participate in Governance</a>
