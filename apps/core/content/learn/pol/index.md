@@ -1,14 +1,14 @@
 # Proof-of-Liquidity Overview 📓
 
-Proof-of-Liquidity (PoL) is an extension of delegated Proof-of-Stake (dPoS) that realigns economic incentives between validators, applications, and users. The key innovation is separating the chain's security ($BERA) from its governance and rewards ($BGT).
+Proof-of-Liquidity (PoL) is an extension of delegated Proof-of-Stake (dPoS) that realigns economic incentives between validators, applications, and users. The key innovation is separating the chain's security, `$BERA` from its governance and rewards, `$BGT`.
 
-Berachain's Validator Active Set is determined by each validator's $BERA stake, with a minimum of 250,000 $BERA and a maximum cap of 2,500,000 $BERA. Within the Active Set, a validator's probability of winning a block is proportional to their staked $BERA—more $BERA staked increases the likelihood of proposing a block. The size of a validator's block reward in $BGT is determined by their Boost, which is a percentage of a capped amount of $BGT where the percentage is determined by a validator's $BGT delegation out of the total $BGT delegated to all validators. Learn more about how emissions are calculated on the [emissions page](./bgtmath.md)
+Berachain's Validator Active Set is determined by each validator's $BERA stake, with a minimum of 250,000 $BERA and a maximum cap of 10,00,000 $BERA. Within the Active Set, a validator's probability of winning a block is proportional to their staked $BERA—more $BERA staked increases the likelihood of proposing a block. The size of a validator's block reward in $BGT is determined by their Boost, which is a percentage determined by a validator's $BGT boost out of the total $BGT boosted to all validators. Learn more about how emissions are calculated on the [emissions page](./bgtmath.md)
 
 ![Berachain Proof-of-Liquidity Steps](/assets/proof-of-liquidity-steps.png)
 
 Here's how PoL works from the perspective of a validator:
 
-1. A _Prospective Validator_ stakes a minimum of 250K $BERA (with a maximum cap of 2.5M) to secure the network. Only the top N validators by $BERA staked become part of the Active Set, which would eligible to receive block rewards.
+1. A _Prospective Validator_ stakes a minimum of 250K $BERA (with a maximum cap of 10M) to secure the network. Only the top N validators by $BERA staked become part of the Active Set, making them eligible to propose block and thus receive block rewards.
 
 2. An _Active Validator_ is chosen to propose a block with probability proportional to their staked BERA amount.
 
@@ -33,7 +33,7 @@ Here's how PoL works from the perspective of a validator:
 
 PoL creates alignment between:
 
-- **Validators**: Need BGT delegation to maximize their block rewards and must efficiently direct emissions to reward vaults to earn Incentives
+- **Validators**: Need BGT delegation to maximize their block rewards and must efficiently direct emissions to reward vaults to earn Incentives and attract more boost.
 - **Protocols**: Compete for BGT emissions by offering attractive Incentive rates in their reward vaults
 - **Users**: Earn BGT by providing liquidity, then delegate to validators who maximize returns
 

@@ -41,8 +41,6 @@ To understand why validators would choose to emit `$BGT` to a particular reward 
 
 ![Reward Vaults](/assets/rewardallocation.png)
 
-Validators direct some portion of their `$BGT` emissions to specific reward vaults of their choice.
-
 To understand why validators would choose to emit `$BGT` to a particular reward vault over another, refer to [Incentives in PoL](/learn/pol/incentives), which discusses how protocols can influence validator behavior with economic incentives.
 
 ## Creation of New Reward Vaults
