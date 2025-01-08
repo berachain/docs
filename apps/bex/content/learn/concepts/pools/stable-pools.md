@@ -12,7 +12,7 @@ head:
 
 # Stable Pools
 
-Stable Pools are optimized for assets expected to trade at or near parity, or at a predictable exchange rate. These pools employ a stable swap algorithm to allow for substantial swaps with minimal price impact, enhancing capital efficiency for correlated assets.
+Stable Pools are optimized for assets expected to trade at or near parity, or at a predictable exchange rate. The stable swap algorithm that is employed provides swaps with minimal price impact, enhancing capital efficiency for correlated assets.
 
 ## Use Cases
 
@@ -29,6 +29,19 @@ As an example:
 - A user creates a [Weighted Pool](/learn/concepts/pools/weighted-pools) pairing `WETH` against the `[HONEY, USDC and DAI]` pool
 
 This results in deeper liquidity, and eliminates the need to pair `WETH` against the individual stablecoins in separate pools.
+
+## Technical Parameters
+
+### Amplification Coefficient
+
+The amplification coefficient controls how tightly the pool maintains price parity between tokens. It has a minimum value of `1` and a maximum value of `5000`.
+
+- **Lower Amplification**: More price flexibility, allowing for wider price swings
+- **Higher Amplification**: More price stability, reducing price swings
+
+### Rate Providers
+
+For tokens that should trade at non-1:1 ratios (like `iBERA/BERA` or appreciating ERC4626 tokens), rate providers can provide the expected exchange rate between assets. The inclusion of a rate provider results in a Metastable Pool.
 
 ## Pre-minting
 
