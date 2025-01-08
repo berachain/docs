@@ -21,7 +21,7 @@ Stable Pools are optimized for assets expected to trade at or near parity, or at
 
 ## Composability
 
-Stable Pools on BeraSwap are composable with other pool types. That is, Stable Pools' LP tokens can be "nested" into other pools, and swaps on that pool would route through the the underlying Stable Pool liquidity. This facilitates deeper liquidity and improved pricing.
+Stable Pools on BeraSwap are composable with other pool types. That is, Stable Pool LP tokens can be "nested" into other pools, and swaps on that pool would route through the the underlying Stable Pool liquidity. This facilitates deeper liquidity and improved pricing.
 
 As an example:
 
@@ -41,7 +41,7 @@ The amplification coefficient controls how tightly the pool maintains price pari
 
 ### Rate Providers
 
-For tokens that should trade at non-1:1 ratios (like `iBERA/BERA` or appreciating ERC4626 tokens), rate providers can provide the expected exchange rate between assets. The inclusion of a rate provider results in a Metastable Pool.
+For tokens that should trade at non-1:1 ratios (e.g. `iBERA/BERA` or appreciating ERC4626 tokens), rate providers can provide the expected exchange rate between assets. The inclusion of a rate provider results in a Metastable Pool.
 
 ## Pre-minting
 
