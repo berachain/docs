@@ -15,10 +15,6 @@ head:
 
 BeraSwap's governance system allows BGT holders to participate in protocol decision-making, with voting power proportional to their holdings. Governance is responsible for steering the protocol's future direction and overseeing its development. No changes to core protocol features can be made without governance approval.
 
-:::info
-On testnet, these roles are managed by the Berachain Foundation multi-sig wallet. During mainnet, these roles will be transferred to a combination of protocol-owned multi-sigs and BGT governance.
-:::
-
 ## Governance Responsibilities
 
 BeraSwap Governance is the heart and brain of the protocol. The main responsibilities include:
