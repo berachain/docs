@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from "node:url";
 import markdownItConditionalRender from "markdown-it-conditional-render";
 import { sidebar } from "./sidebar";
 import { constants } from "@berachain/config/constants";
+import { vercelToolbar } from '@vercel/toolbar/plugins/vite'; /// @TODO: Remove for production
 
 // Config
 // ========================================================
@@ -151,6 +152,10 @@ export default defineConfig({
     },
   },
   vite: {
+    // @TODO: Remove for production
+    plugins: [
+      vercelToolbar()
+    ],
     resolve: {
       alias: [
         {
