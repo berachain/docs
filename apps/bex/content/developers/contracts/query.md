@@ -11,7 +11,13 @@ head:
       content: Obtain quotes on pool swaps, joins and exits
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # BalancerQueries
+
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.balancerQueries.address">{{config.contracts.beraswap.balancerQueries.address}}</a><span v-if="config.contracts.beraswap.balancerQueries.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.balancerQueries.abi">ABI JSON</a></span></small>
 
 This contract provides quotes on swaps, joins and exits, simulating these operations and returning the exact
 result they would have if called on the `Vault` given the current state.
