@@ -15,7 +15,7 @@ head:
 
 Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) BGT stakers.
 
-### LP Fee
+### Fee Distribution
 
 Trading fees for LPs are directly compounded inside the pool such that LPs don't need to perform a separate claim transaction. For example, if token prices within an LP's pool are unchanged between deposit and withdrawal, but there have been trades in the interim, the LP will see a higher balance upon withdrawal due to the accumulation of fees.
 
@@ -23,6 +23,3 @@ The portion of fees going to LPs is set at the time of pool creation, starting f
 
 ![BeraSwap Fees](/assets/swap_fee.png)
 
-### BGT Fee
-
-An additional fee equal to 50% of the pool's trading fee is levied against traders, which is redirected to BGT stakers as reward for securing the Berachain network.
