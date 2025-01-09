@@ -38,11 +38,17 @@ However, because of Berachain's three-token Proof of Liquidity model, the functi
 - Borrowing `$HONEY` on Bend
 - Providing `$HONEY` in the `bHONEY` vault for Berps
 
+Once a user has accumulated BGT, the user can claim this BGT from Berahub. 
+
+<video src="/assets/videos/claimBGT.mp4" controls></video>
+
 ## What can you do with $BGT?
 
 ### Governance
 
 `$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions, discussed in Governance. `$BGT` holders can either vote on proposals themselves or delegate their voting power to any other address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
+
+<video src="/assets/videos/delegatevotingpower.mp4" controls></video>
 
 ### Earning Rewards
 
@@ -53,3 +59,11 @@ Furthermore users who are boosting validators with their `$BGT` collect a share 
 ### Burning for `$BERA`
 
 `$BGT` can be burned 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
+
+<video src="/assets/videos/burnbgtforbera.mp4" controls></video>
+
+### Boosting a validator
+
+Users can boost a validator with your BGT, allowing that validator to increase its [reward emission](../bgtmath.md) and subsequently push more `$BGT` to Reward Vaults defined in the validator's reward allocation. 
+
+<video src="/assets/videos/boostval.mp4" controls></video>

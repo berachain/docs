@@ -48,3 +48,5 @@ To understand why validators would choose to emit `$BGT` to a particular reward 
 New Reward Vaults can be created permissionlessly, but must go through the Reward Vaults Whitelisting process, conducted by `$BGT` governance in order to be eligible to receive `$BGT` from validators. Developers or protocols can submit a proposal to whitelist a new reward vault for a specific PoL-eligible asset. If the proposal passes, the vault address is added to the list of approved reward vaults that validators can direct `$BGT` emissions to.
 
 Here you can learn about the [Reward Vaults Whitelisting Process](/learn/governance/rewardvault).
+
+<video src="/assets/videos/createrewardvault.mp4" controls></video>
