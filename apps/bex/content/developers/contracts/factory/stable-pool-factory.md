@@ -1,4 +1,10 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # ComposableStablePoolFactory
+
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.stablePoolFactory.address">{{config.contracts.beraswap.stablePoolFactory.address}}</a><span v-if="config.contracts.beraswap.stablePoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.stablePoolFactory.abi">ABI JSON</a></span></small>
 
 ## Functions
 
@@ -14,7 +20,7 @@ function create(
     uint256 amplificationParameter,
     IRateProvider[] memory rateProviders,
     uint256[] memory tokenRateCacheDurations,
-    bool[] memory exemptFromYieldProtocolFeeFlags,
+    bool exemptFromYieldProtocolFeeFlag,
     uint256 swapFeePercentage,
     address owner,
     bytes32 salt
@@ -23,18 +29,18 @@ function create(
 
 **Parameters**
 
-| Name                            | Type            | Description                                                             |
-| ------------------------------- | --------------- | ----------------------------------------------------------------------- |
-| name                            | string          | The name of the pool token                                              |
-| symbol                          | string          | The symbol of the pool token                                            |
-| tokens                          | IERC20[]        | Array of token addresses in the pool                                    |
-| amplificationParameter          | uint256         | The amplification parameter (A factor) for the pool                     |
-| rateProviders                   | IRateProvider[] | Array of rate provider addresses for each token                         |
-| tokenRateCacheDurations         | uint256[]       | Array of cache durations for each token's rate                          |
-| exemptFromYieldProtocolFeeFlags | bool[]          | Array of flags indicating if tokens are exempt from yield protocol fees |
-| swapFeePercentage               | uint256         | The swap fee percentage for the pool                                    |
-| owner                           | address         | The owner address of the pool                                           |
-| salt                            | bytes32         | Unique salt for deterministic pool address creation                     |
+| Name                           | Type            | Description                                                           |
+| ------------------------------ | --------------- | --------------------------------------------------------------------- |
+| name                           | string          | The name of the pool token                                            |
+| symbol                         | string          | The symbol of the pool token                                          |
+| tokens                         | IERC20[]        | Array of token addresses in the pool                                  |
+| amplificationParameter         | uint256         | The amplification parameter (A factor) for the pool                   |
+| rateProviders                  | IRateProvider[] | Array of rate provider addresses for each token                       |
+| tokenRateCacheDurations        | uint256[]       | Array of cache durations for each token's rate                        |
+| exemptFromYieldProtocolFeeFlag | bool            | Boolean flag indicating if tokens are exempt from yield protocol fees |
+| swapFeePercentage              | uint256         | The swap fee percentage for the pool                                  |
+| owner                          | address         | The owner address of the pool                                         |
+| salt                           | bytes32         | Unique salt for deterministic pool address creation                   |
 
 ### isPoolFromFactory
 

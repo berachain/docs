@@ -1,4 +1,10 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # WeightedPoolFactory
+
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.weightedPoolFactory.address">{{config.contracts.beraswap.weightedPoolFactory.address}}</a><span v-if="config.contracts.beraswap.weightedPoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.weightedPoolFactory.abi">ABI JSON</a></span></small>
 
 ## Functions
 

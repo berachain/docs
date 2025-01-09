@@ -13,7 +13,7 @@ head:
 
 # Vault
 
-The Vault is the central component of BeraSwap, acting as a unified smart contract that manages all tokens across liquidity pools. It serves as the primary interface for most protocol operations, including swaps, joins, and exits.
+The Vault contract is a central component of BeraSwap (not to be confused with Reward Vaults in Proof-of-Liquidity), acting as a unified smart contract that manages all tokens across liquidity pools. It serves as the primary interface for most protocol operations, including swaps, joins, and exits.
 
 ## Separating Token Accounting and Pool Logic
 
