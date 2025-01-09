@@ -521,15 +521,57 @@
       "docsUrl": ""
     },
     "beraswap": {
-      "balancerQueries": {
-        "name": "BalancerQueries",
-        "address": "0x48B1A1A28F5600CAD50dB19c6fECBe9F2458cc8a",
-        "abi": "",
-        "docsUrl": ""
-      },
       "vault": {
         "name": "Vault",
         "address": "0x9C8a5c82e797e074Fe3f121B326b140CEC4bcb33",
+        "abi": "",
+        "docsUrl": "/developers/contracts/vault"
+      },
+      "protocolFeesCollector": {
+        "name": "ProtocolFeesCollector",
+        "address": "0x91bBB98F6cf7F8DC6598653c2793B0bC78DfA18B",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "balancerHelpers": {
+        "name": "BalancerHelpers",
+        "address": "0xf3F2d2D5706543Dc17584835647A98C34cE54cc3",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "poolCreationHelper": {
+        "name": "PoolCreationHelper",
+        "address": "0x00b4626883A3b4566A061372C93168fbE2020D8a",
+        "abi": "",
+        "docsUrl": "/developers/contracts/factory/pool-creation-helper"
+      },
+      "protocolFeesWithdrawer": {
+        "name": "ProtocolFeesWithdrawer",
+        "address": "0xdB6E5B0F0465C87049768bD8cD2Cf03d1B6A1242",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "stablePoolFactory": {
+        "name": "ComposableStablePoolFactory",
+        "address": "0xfD772657FC8c4Ed3884AfF151b680883814052FA",
+        "abi": "",
+        "docsUrl": "/developers/contracts/factory/stable-pool-factory"
+      },
+      "batchRelayerLibrary": {
+        "name": "BatchRelayerLibrary",
+        "address": "0x8a8CdE433a5AF656dDAa5E54D1a3D073C172B422",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "batchRelayerQueryLibrary": {
+        "name": "BatchRelayerQueryLibrary",
+        "address": "0x8616628dab93Ac83b9328E31aB0a90aa817c4c95",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "balancerRelayer": {
+        "name": "BalancerRelayer",
+        "address": "0xb6f80CD1053316172e12F35F4235dC9cE998A3B8",
         "abi": "",
         "docsUrl": ""
       },
@@ -537,17 +579,23 @@
         "name": "WeightedPoolFactory",
         "address": "0x09836Ff4aa44C9b8ddD2f85683aC6846E139fFBf",
         "abi": "",
-        "docsUrl": ""
+        "docsUrl": "/developers/contracts/factory/weighted-pool-factory"
       },
-      "stablePoolFactory": {
-        "name": "StablePoolFactory",
-        "address": "0xfD772657FC8c4Ed3884AfF151b680883814052FA",
+      "protocolFeePercentagesProvider": {
+        "name": "ProtocolFeePercentagesProvider",
+        "address": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f",
         "abi": "",
         "docsUrl": ""
       },
-      "poolCreationHelper": {
-        "name": "PoolCreationHelper",
-        "address": "0x00b4626883A3b4566A061372C93168fbE2020D8a",
+      "balancerQueries": {
+        "name": "BalancerQueries",
+        "address": "0x48B1A1A28F5600CAD50dB19c6fECBe9F2458cc8a",
+        "abi": "",
+        "docsUrl": "/developers/contracts/query"
+      },
+      "authorizer": {
+        "name": "Authorizer",
+        "address": "0x010aD13DFa9eFf1241eeEa7bb620278b56E72ebe",
         "abi": "",
         "docsUrl": ""
       }
