@@ -21,20 +21,17 @@ On testnet, these roles are managed by the Berachain Foundation multi-sig wallet
 
 ## Governance Responsibilities
 
-BeraSwap Governance is the heart and brain of the protocol. The main responsibilities include:
-- Managing protocol parameters and fees
-- Approving protocol upgrades and new features
-- Overseeing emergency actions and security measures
+Governance is responsible for making strategic decisions about the protocol's development and operation. This includes setting protocol fees and their distribution, approving protocol upgrades, managing key parameters, and steering the long-term direction of the protocol. All major protocol changes must go through governance approval before implementation.
 
-## Governance Structure
+## Protocol Roles
 
-### Admin Role
+### Manager Role
 
-The admin role is responsible for managing the day-to-day operations of the BeraSwap protocol and has the most direct control over protocol parameters. This role is crucial for implementing governance decisions and maintaining protocol health. When necessary, the admin can execute emergency actions to protect users and assets. They oversee operational changes and ensure the protocol runs smoothly according to the community's wishes.
+The manager role is designed for handling time-sensitive protocol operations that require immediate action. This includes the ability to execute emergency measures like pausing pools or the vault in case of detected issues. The manager can also adjust operational parameters and implement decisions that have been approved through governance, ensuring the protocol can respond quickly to immediate needs while still operating within governance-approved boundaries.
 
 ### Authorizer Role
 
-The authorizer serves as the permission management interface for the protocol, acting as a bridge between governance decisions and their implementation. It controls access to protocol functions and manages role assignments, ensuring that all actions go through proper permission checks. The authorizer is designed to work with both single-admin and multi-admin systems.
+The authorizer serves as BeraSwap's permission management interface, acting as a bridge between governance decisions and their implementation. It maintains protocol security by controlling access to protocol functions and ensuring all operations pass proper permission checks. The authorizer works alongside the governance timelock system to maintain secure and controlled access to protocol functionality.
 
 ### Coordinator Role
 
