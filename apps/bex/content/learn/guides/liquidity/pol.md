@@ -21,19 +21,17 @@ Proof of liquidity (PoL) is a mechanism that rewards users for their liquidity c
 
 ## Earning $BGT
 
+<video src="../../../public/assets/videos/lpandstake.mp4" controls></video>
+
 The process for earning `$BGT` through BeraSwap involves three simple steps:
 
 1. **Provide Liquidity**: First, deposit liquidity into your chosen BeraSwap pool
-   ![BeraSwap Reward Vault](/assets/reward_vaults.png)
 
-2. **Stake LP Tokens**: After providing liquidity, you'll receive LP tokens. Stake these tokens in the pool's staking contract
-   ![Pool Stake](/assets/pool_stake_pol.png)
+2. **Stake LP Tokens in Reward Vault**: After providing liquidity, you'll receive LP tokens. Stake these tokens in the pool's staking contract
 
-3. **Stake in Reward Vault**: Finally, stake your staked LP tokens in the appropriate PoL reward vault to start earning BGT
-   ![Stake Reward Vault](/assets/stake_reward_vault.png)
 
 You can view and manage your staked positions in the reward vaults here:
-{{config.mainnet.dapps.hub.url}}gauge
+{{config.mainnet.dapps.hub.url}}vault
 
 ## Whitelisting Pools for PoL Rewards
 

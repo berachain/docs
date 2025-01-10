@@ -50,11 +50,19 @@ Once a user has accumulated BGT, the user can claim this BGT from Berahub.
 
 <video src="/assets/videos/delegatevotingpower.mp4" controls></video>
 
-### Earning Rewards
+### Incentives
 
 Protocols can provide [Incentives](/learn/pol/incentives) to attract `$BGT` emissions from validators. The amount that validators can earn in protocol incentives is determined by the amount of `$BGT` that is boosting them. Thus, validators that return the maximum value to those boosting them are likely to receive the most boost.
 
-Furthermore users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps.
+### Fees From Native Dapps
+
+Users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps. Berachain's native dapps collect fees to be distributed to those delegating BGT. This is done via a smart contract, `FeeCollector.sol`. 
+
+At a high level, `FeeCollector` does three things:
+
+- Collects fees from Berachain dApps
+- Auctions these fees for a payout token
+- Distributes the payout token to those boosting validators
 
 ### Burning for `$BERA`
 
