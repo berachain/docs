@@ -31,7 +31,7 @@ DEX stands for Decentralized Exchange. It is a place where you can buy and sell 
 
 ## What is a swap?
 
-A swap is the process of exchanging one token for another. This can be thought of as a buy or a sell, depending on which token you're looking at. For example, if you're looking to buy `$BERA` with `$ETH`, you would be swapping `$ETH` for `$BERA`. This is essentially "selling" `$ETH` and "buying" $$BERA.
+A swap is the process of exchanging one token for another. This can be thought of as a buy or a sell, depending on which token you're looking at. For example, if you're looking to buy `$BERA` with `$ETH`, you would be swapping `$ETH` for `$BERA`. This is essentially "selling" `$ETH` and "buying" `$BERA`.
 
 ## How much does it cost to swap?
 
@@ -43,7 +43,7 @@ Liquidity is the term for the amount of a token that is available to be swapped.
 
 ## What is a liquidity pool?
 
-Liquidity pools are pairings of 2 tokens that liquidity providers deposit tokens into. This enables DEX users to swap between any of the tokens in the pool.
+Liquidity pools are pairings of 2 or more tokens that liquidity providers deposit tokens into. This enables DEX users to swap between any of the tokens in the pool.
 
 ## What is a liquidity provider?
 
@@ -51,23 +51,24 @@ Liquidity providers are users who deposit tokens into a liquidity pool. They are
 
 ## What is APY?
 
-APY stands for annual perentage yield. In the context of BeraSwap pools, this refers to the current APY for a given pool.
+APY stands for annual perentage yield. In the context of BeraSwap pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool? 
 
 ## What is $HONEY?
 
-$HONEY is the native stablecoin of the Berachain ecosystem. It is a `$USDC` backed stablecoin, and is used throughout the Berachain ecosystem.
+`$HONEY` is the native stablecoin of the Berachain ecosystem. It is a `$USDC` backed stablecoin, and is used throughout the Berachain ecosystem.
 
 ## Does it cost anything to mint or burn $HONEY?
 
-In order to ensure stability, there is a small fee taken on every mint and burn of `$HONEY`. This fee is currently set to 0.5% of the amount minted or burned and can be changed via governance proposals.
+In order to ensure stability, there is a small fee taken on every mint and burn of `$HONEY`. This fee is currently set to 0.2% of the amount minted or burned and can be changed via governance proposals.
 
 Additionally, because minting & burning requires a transaction, there will be a small gas fee in `$BERA`.
 
 ## What stablecoins can I mint $HONEY with during Testnet?
 
-There are various USD-pegged stablecoins that can be used to mint `$HONEY`. Currently, the following stablecoins are supported in testnet:
+There are various USD-pegged stablecoins that can be used to mint `$HONEY`. Currently, the following stablecoins are supported:
 
 - stgUSDC
+- BYUSD 
 
 More tokens may be added based on governance.
 
@@ -83,13 +84,11 @@ A validator can refer to three things:
 2. The entity that owns and operates the validator node
 3. The blend of points #1 and #2 that manages a portion of Proof of Liquidity & Governance votes
 
-In the case of `$BGT` station, we're referring to the #3, as `$BGT` station is here to help you decide which validators you'd like to delegate to.
-
-## Why should I delegate my `$BGT`?
+## Why should I boost a validator with my `$BGT`?
 
 Delegating `$BGT` allows you to participate in Proof of Liquidity while helping secure the network.
 
-## Why should I delegate my `$BGT` instead of burning it for `$BERA`?
+## Why should I boost my `$BGT` instead of burning it for `$BERA`?
 
 Rewards are the main reason.
 
@@ -108,7 +107,7 @@ Governance is the process by which the community decides what changes are made t
 
 ## Once you’ve provided liquidity into an eligible pool in BeraSwap (or some other BGT-generating action like bend etc) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
 
-Each eligible (whitelisted) pool on BeraSwap has an associated LP token. Once liquidity is depositted into a BeraSwap pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user.
+Each eligible (whitelisted) pool on BeraSwap has an associated LP token. Once liquidity is depositted into a BeraSwap pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user. Users can claim their `$BGT` from any wallet address they choose.
 
 ## Can only Validators vote on or create proposals?
 
@@ -121,11 +120,11 @@ Anyone with the required minimum amounts of `$BGT` can propose and vote on propo
 
 ## Can validators with `$BERA` alone build blocks and what are the rewards?
 
-Yes, validators only need to stake `$BERA` to within the designated min and max range of 250K and 10M, and once in the active set they will propose blocks. Validators recieve rewards in `$BGT`.
+Yes, validators only need to stake `$BERA` within the designated min and max range of 250K and 10M, and once in the active set they will propose blocks. Validators receive rewards in `$BGT`.
 
-## Do incentives only go to the validators with `$BGT` delegated to them?
+## Do incentives only go to the validators with `$BGT` boost?
 
-Incentives the validator recieves depends solely on the amount of incentives offered on any given reward vault that validator is choosing to fill.
+The incentives a validator receives depend solely on the amount of rewards offered in the specific reward vault that the validator chooses to fill.
 
 ## Can Reward Vaults route emissions to a single pool within a dApp, or only the whole dApp?
 
