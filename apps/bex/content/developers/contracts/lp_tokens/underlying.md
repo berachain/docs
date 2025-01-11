@@ -17,7 +17,7 @@ The BeraSwap contract can provide the exact number of tokens in a pool. By query
 ### Pseudocode
 
 ```solidity
-(tokens, balances, lastChangeBlock) = beraswap.getPoolTokens(poolId);
+(tokens, balances, lastChangeBlock) = vault.getPoolTokens(poolId);
 yourPoolShare = lpToken.balanceOf(yourAddress) / lpToken.totalSupply();
 uint256[] yourUnderlyingBalances = new uint256[](balances.length);
 for (i = 0; i < balances.length; i++) {
@@ -28,11 +28,10 @@ return (tokens, yourUnderlyingBalances);
 
 ## Special Considerations
 
-### Pre-minted LP Tokens
+### Stable Pools
 
-Some pools in BeraSwap might have pre-minted LP tokens. In such cases:
-
-1. Use `lpToken.getVirtualSupply()` instead of `lpToken.totalSupply()`
+For stable pools in BeraSwap:
+1. Use `getActualSupply()` instead of `totalSupply()` to get the correct pool supply
 2. If you've staked your LP tokens, calculate your total LP token balance as:
    ```solidity
    myLpTokens = lpToken.balanceOf(yourAddress) + lpStakingContract.balanceOf(yourAddress);
