@@ -16,8 +16,7 @@ head:
 Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
 
 - PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
-- Native dApp governance (e.g., changes to Bend's interest rate model)
-  - BeraSwap
+- Native dApp governance (e.g., changes to BeraSwap's protocol fees)
 
 ## Governance Process
 
