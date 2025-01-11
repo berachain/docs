@@ -45,9 +45,9 @@ Let's say you want to know your underlying BERA and HONEY balances for a BERA/HO
 | ---- | -------------------- | ----------------------------------------------------------- |
 | 1    | Query BeraSwap       | tokens = [BERA, HONEY], balances = [1000 BERA, 10000 HONEY] |
 | 2    | Get LP token balance | yourLpTokens = 100                                          |
-| 3    | Get total LP supply  | totalLpSupply = 1000                                        |
+| 3    | Get total LP supply  | actualSupply = getActualSupply() = 1000                     |
 | 4    | Calculate pool share | yourPoolShare = 100 / 1000 = 0.1 (10%)                      |
-| 5    | Calculate underlying | yourBera = 1000 \* 0.1 = 100 BERA                           |
-| 6    | Calculate underlying | yourHoney = 10000 \* 0.1 = 1000 HONEY                       |
+| 5    | Calculate underlying | yourBera = 1000 * 0.1 = 100 BERA                           |
+| 6    | Calculate underlying | yourHoney = 10000 * 0.1 = 1000 HONEY                       |
 
 In this example, your 100 LP tokens represent 100 BERA and 1000 HONEY.
