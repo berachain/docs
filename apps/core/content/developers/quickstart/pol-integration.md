@@ -11,10 +11,10 @@ This page showcases creative ways to leverage PoL for incentivizing user activit
 From the perspective of an application on Berachain, the PoL system is fundamentally a mechanism that works in the following way:
 
 1. A [Reward Vault](../../learn/pol/rewardvaults.md) smart contract that targets an ERC20 token
-2. Lets users stake that token in the vault
-3. Distributes BGT rewards proportionally to stakers
+2. Users stake the designated ERC20 in this vault
+3. Distributes BGT rewards proportionally to its stakers
 
-The dev work for all PoL integrations essentially boil down to:
+The dev work for all PoL integrations essentially boils down to:
 
 1. Deploying a Reward Vault from the [Factory](../contracts/reward-vault-factory.md)
 2. Design an ERC20 token that is minted when users perform actions you would like to incentivize
@@ -443,8 +443,7 @@ When players are eligible, tokens are:
 - Minted to the contract
 - Automatically delegated to players via `RewardVault`
 
-Daily reset ensures players must come back each day to maintain their streak
-Players accumulate score progressively rather than receiving the full amount each mint
+Daily reset ensures players must come back each day to maintain their streak. Players accumulate score progressively rather than receiving the full amount each mint.
 
 ### Example #3 - Incentivizing Trading Positions
 

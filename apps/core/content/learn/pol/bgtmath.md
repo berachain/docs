@@ -47,7 +47,7 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 Where:
 
 - x = validator's boost (range: [0,1])
-- boost = percentage of BGT delegation relative to total BGT delegated
+- boost = percentage of BGT boosted to a given validator relative to total BGT boosted in the system
 
 ### Parameters
 
@@ -62,7 +62,7 @@ Where:
 ### Sample Emissions Chart
 
 Using the following sample parameters, we can visualize how emissions scale with BGT delegation:
-$$B = 0.5, R = 1.5, a = 3.5, b = 0.5, m = 1$$
+$$B = 0.5, R = 1.5, a = 3.5, b = 0.4, m = 0$$
 ![chart showing how emissions scale with BGT delegation](/public/assets/updatedemission.png)
 
 ## Max Block Inflation

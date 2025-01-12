@@ -21,9 +21,9 @@ While anyone can stake $BERA to try to become a validator in the active set, the
 
 There is a minimum floor of 250K $BERA required to be a validator. There is a maximum cap of 10M $BERA for any validator's stake. Only the top N validators (ordered by $BERA staked) can be in the active validator set. Even if someone stakes above the minimum 250K $BERA, they would still need to have enough stake to be within the top N validators to be part of the active validator set that can produce blocks.
 
-### Can validators with no $BGT delegated to them build blocks and earn rewards?
+### Can validators with no $BGT boosted to them build blocks and earn rewards?
 
-The ability to build blocks is determined by $BERA stake, not $BGT delegation. As long as a validator has enough $BERA staked and is in the active set, they can produce blocks regardless of how much $BGT is delegated to them. For every block a validator proposes, that validator receives a reward.
+The ability to build blocks is determined by `$BERA` stake, not `$BGT` boost. As long as a validator has enough `$BERA` staked and is in the active set, they can produce blocks regardless of how much `$BGT` is boosted to them. For every block a validator proposes, that validator receives a reward.
 
 ### Is there a cap for the number of active validators?
 
@@ -56,13 +56,15 @@ The amount of $BGT a given Reward Vault can earn is a function of following:
 1. How many validators are directing emissions to those vaults
 2. How much $BGT is boosted to the validators directing emissions to those vaults
 
-### Is the size of the $BGT emission linear to the amount of $BGT delegated to a validator?
+### Is the size of the `$BGT` emission linear to the amount of `$BGT` boosted to a validator?
 
-No, the $BGT emission is not linear to the amount of $BGT delegated to a validator. The emission formula is:
-$$emission = [B + max(mc(a+1)(1-1/(1+ax))R)]$$
-Where x is the boost (the percentage of $BGT delegation the validator has out of total $BGT delegated). The relationship between boost and emissions is governed by two parameters:
-a (boost multiplier): determines impact of boost on emissions
-b (convexity parameter): determines how quickly boost impacts emissions
+No, the `$BGT` emission is not linear to the amount of `$BGT` boosted to a validator. The emission formula is:
+$$emission = [B + max(m, (a+1)(1-1/(1+ax^b))R)]$$
+where `B` is the base rate, representing the basic BGT amount that a validator gets for producing a block
+`R` is the reward rate, which is the base BGT amount allocated for reward vaults before any boost is applied
+`a` is the boost multiplier that determines how much impact boost has on emissions toward reward vaults
+`b` is the convexity parameter that controls how quickly boost affects emissions - with high values, validators with low boost get more heavily penalized
+`m` is the minimum reward, acting as a floor for emissions to reward vaults - when this is higher, even validators with low boost are guaranteed more emissions
 
 ### How does Berachain manage hyperinflation of $BGT?
 
