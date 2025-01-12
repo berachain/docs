@@ -52,7 +52,7 @@ A flow diagram of the `$HONEY` minting process is shown below:
 
 `$HONEY` is minted by depositing eligible collateral into specialized smart contracts called `$HONEY` vaults. Each vault is specific to a particular collateral type, with its own unique mint and redemption rate.
 
-In the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault in interacted with, and not the `$pyUSD` vault.
+In the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault is interacted with, and not the `$pyUSD` vault.
 
 ### HoneyFactory
 
@@ -62,7 +62,7 @@ As shown in the diagram, users' deposits are routed through the HoneyFactory con
 
 ## Depegging and Basket Mode
 
-Basket Mode is a safety mechanism that activates when when collateral assets become unstable. It affects both minting and redemption of Honey tokens in specific ways:
+Basket Mode is a safety mechanism that activates when collateral assets become unstable. It affects both minting and redemption of Honey tokens in specific ways:
 
 **For Redemption:**
 
@@ -76,13 +76,13 @@ Basket Mode is a safety mechanism that activates when when collateral assets bec
 
 **For Minting:**
 
-- Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or blacklisted
+- Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or blacklisted. Depegged assets cannot be used to mint `$HONEY`.
 - In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
 - If one asset is depegged you can mint only with the other asset 
 
 ### Fees
 
-Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. Fees are determined based on the mint and redemption rates of each vault. For example, if the mint rate of the `$USDC` vault is 0.995 (1 `$USDC` for 0.995 `$HONEY`), then a fee of 0.005 or 0.1% is collected for every `$USDC` deposited.
+Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. Fees are determined based on the mint and redemption rates of each vault. For example, if the mint rate of the $USDC vault is 0.999 (1 $USDC for 0.999 $HONEY), then a fee of 0.001 or 0.1% is collected for every $USDC deposited.
 
 #### Example
 
@@ -93,16 +93,14 @@ Let's consider an example with the following parameters:
 
 Here's how the minting process would work:
 
-1. The user deposits `1,000 $stgUSD` into the VaultRouter contract
-2. The VaultRouter transfers `1,000 $stgUSD` to the $stgUSD Vault and receives `1,000` vault shares in return
-3. The VaultRouter calculates the amount of $HONEY to mint:
+1. The user deposits `1,000 $stgUSD` into the HoneyFactory contract
+2. The HoneyFactory calculates the amount of $HONEY to mint:
 
 - `$HONEY` to mint = Vault shares × Mint rate
 - `$HONEY` to mint = `1,000` × `0.995` = `995 $HONEY`
 
-4. The VaultRouter mints `995 $HONEY` to the user's address.
-5. The VaultRouter calculates and distributes the fee:
+3. The HoneyFactory transfers 995 $stgUSD to the $stgUSD Vault and receives 995 vault shares in return
 
 - Fee shares = Vault shares - `$HONEY` to mint
 - Fee shares = `1,000 - 995 = 5 shares`
-- The VaultRouter transfers 5 vault shares to the fee receiver.
+- The HoneyFactory transfers 5 vault shares to the fee receiver.
