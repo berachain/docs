@@ -21,7 +21,7 @@ Where:
 ### Pseudocode
 
 ```solidity
-(tokens, balances, lastChangeBlock) = beraswap.getPoolTokens(poolId);
+(tokens, balances, lastChangeBlock) = vault.getPoolTokens(poolId);
 prices = fetchPricesFromPriceProvider(tokens); // e.g., from an oracle
 poolValueUsd = sum(balances[i] * price[i]);
 lpTokenPriceUsd = poolValueUsd / lpToken.totalSupply();
@@ -29,11 +29,10 @@ lpTokenPriceUsd = poolValueUsd / lpToken.totalSupply();
 
 ## Special Considerations
 
-### Pre-minted LP Tokens
+### Stable Pools
 
-Some pools in BeraSwap might have pre-minted LP tokens. In such cases:
-
-- Use `lpToken.getVirtualSupply()` instead of `lpToken.totalSupply()`
+For stable pools, they have pre-minted LP tokens. In such cases:
+- Use `getActualSupply()` instead of `totalSupply()` to get the correct pool supply
 
 ### Calculating Value for a Specific Address
 

@@ -51,9 +51,9 @@ Different implementation patterns that protocols can use for their Reward Vaults
 | Model                         | Description                                                               | User Flow                                                                                                           | Protocol Benefits                                                       | Example Applications                                               |
 | ----------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | **Liquidity Staking/Vesting** | Users deposit/stake assets and receive receipt tokens for BGT eligibility | 1. Deposit assets<br>2. Receive receipt tokens<br>3. Stake in Reward Vault                                          | - Increased liquidity depth<br>- Locked value<br>- User retention       | - BeraSwap LP staking<br>- Supply & Borrow from a lending protocol |
-| **Purchase Actions**          | Incentivizes purchases in your application                                | 1. Purchase item in app<br>2. Recieve reciept tokens and stake into Reward Vault<br>3. Receive BGT rewards          | - Reward users for more specific actions                                | - Purchasing assets in a game<br>- Participating in NFT mints      |
-| **Retroactive Actions**       | Rewards historical participation and loyalty                              | 1. Track participation<br>2. Meet criteria<br>3. Claim BGT rewards                                                  | Community loyalty<br>- Historical recognition<br>- Long-term engagement | - OG NFT holder rewards<br>- Early user benefits                   |
-| **Self-Funding**              | Community-driven initiatives                                              | 1. Contribute to initiative<br>2. Receive reciept tokens representing your contribution<br>3. Stake for BGT rewards | Sustainable funding<br> Community alignment                             | - Public goods funding<br>- L2 bridge incentives                   |
+| **Purchase Actions**          | Incentivizes purchases in your application                                | 1. Purchase item in app<br>2. Receive receipt tokens and stake into Reward Vault<br>3. Receive BGT rewards          | - Reward users for more specific actions                                | - Purchasing assets in a game<br>- Participating in NFT mints      |
+| **Retroactive Actions**       | Rewards historical participation and loyalty                              | 1. Track participation<br>2. Meet criteria<br>3. Claim BGT rewards                                                  | - Community loyalty<br>- Historical recognition<br>- Long-term engagement | - OG NFT holder rewards<br>- Early user benefits                   |
+| **Self-Funding**              | Community-driven initiatives                                              | 1. Contribute to initiative<br>2. Receive receipt tokens representing your contribution<br>3. Stake for BGT rewards | - Sustainable funding<br>- Community alignment                             | - Public goods funding<br>- L2 bridge incentives                   |
 
 ### Implementation Details
 
@@ -62,7 +62,7 @@ Each model can be customized with:
 - Time-based rewards
 - Amount restrictions
 - Usage velocity metrics
-- Delegating mechanisms (`delegateStake`), ie stake reciept tokens into a vault for your users
+- Delegating mechanisms (`delegateStake`), i.e., stake receipt tokens into a vault for your users
 
 For technical implementation guides, see our [Advanced PoL Guide](/developers/guides/advanced-pol).
 
@@ -70,7 +70,7 @@ For technical implementation guides, see our [Advanced PoL Guide](/developers/gu
 
 Whitelisting a Reward Vault through governance has significant implications:
 
-1. **Incentivize Anything In Your App**: Approved vaults can receive `$BGT` emissions, incentivizing liquidity provision, taking our loans, purchasing assets in a video game, etc. [See an example application here](https://blog.berachain.com/blog/onlypaws-bearing-it-all-for-proof-of-liquidity)
+1. **Incentivize Anything in Your App**: Approved vaults can receive `$BGT` emissions, incentivizing liquidity provision, taking out loans, purchasing assets in a video game, etc. [See an example application here](https://blog.berachain.com/blog/onlypaws-bearing-it-all-for-proof-of-liquidity)
 2. **Protocol Growth**: Protocols can use accumulated `$BGT` to bootstrap liquidity or participate in governance.
 3. **Ecosystem Alignment**: The governance process ensures that whitelisted vaults align with the community's interests.
 
