@@ -71,5 +71,5 @@ For the current testnet, the following values apply:
 | Proposal Creation | 1500 `$BGT` Required                      |
 | Pending State     | 3-hour waiting period                     |
 | Active Voting     | 3-hour voting period                      |
-| Proposal Outcome  | 2 billion `$BGT` required to reach quorum |
+| Proposal Outcome  | 20% of total `$BGT` supply required to reach quorum |
 | Timelock          | 3-hour delay                              |
