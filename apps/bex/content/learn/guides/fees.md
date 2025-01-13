@@ -21,7 +21,7 @@ Trading fees for LPs are directly compounded inside the pool such that LPs don't
 
 The portion of fees going to LPs is set at the time of pool creation, starting from 0.01% for stable pools, and ranging up to 0.3%, 0.5%, and 1% for weighted pools. The lower fee tiers are generally more appropriate for stable pairings (e.g. stablecoins and blue-chip assets), while the higher fee tiers may be more appropriate for exotic assets.
 
-Trading fees in BeraSwap are split 50/50 between LPs and BGT stakers.
+Trading fees in BeraSwap are split 50/50 between LPs and the protocol. Protocol fees are collected in the ProtocolFeesCollector contract and are further distributed between BGT stakers and the treasury. The ratio of this distribution is configurable through the polFeeCollectorPercentage parameter in the ProtocolFeesWithdrawer contract, with the majority portion allocated to BGT stakers.
 
 ![BeraSwap Fees](/assets/swap_fee.png)
 

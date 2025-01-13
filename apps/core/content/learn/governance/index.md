@@ -16,11 +16,7 @@ head:
 Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
 
 - PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
-- Native dApp governance (e.g., changes to Bend's interest rate model)
-  - Berps
-  - Bend
-  - BeraSwap
-- Whitelisting Rewards Vaults for `$BGT` emissions
+- Native dApp governance (e.g., changes to BeraSwap's protocol fees)
 
 ## Governance Process
 
@@ -37,6 +33,12 @@ The governance process on Berachain follows several stages:
 5. **Timelock**: If the proposal succeeds, it enters a queue with a timelock delay.
 
 6. **Execution**: After the timelock period, the proposal can be executed, implementing the proposed changes.
+
+## Guardian Oversight
+
+During the timelock period, Berachain's guardian system provides an additional layer of security. Guardians can veto malicious proposals (e.g., hostile takeover, unauthorized code changes) to protect the Berachain ecosystem.
+
+Guardians act through a 5-of-9 multisig with elected signers. Their veto power is enacted as a cancellation of a proposal during the timelock period, serving as a last line of defense against potentially harmful changes.
 
 ![Governance Process](/assets/governance-process.png)
 
@@ -58,13 +60,7 @@ To create a governance proposal on Berachain:
 
 For a detailed walkthrough of creating a governance proposal, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/guides/tree/main/apps/berachain-governance-proposal).
 
-## Testnet Governance Values
-
-For the current testnet, the following values apply:
-
-:::warning
-**NOTE:** These values are specific to the testnet and may change for the mainnet launch. You will have to reach out to the Berachain team to get your proposal whitelisted on testnet.
-:::
+## Governance Values
 
 | State             | Criteria                                  |
 | ----------------- | ----------------------------------------- |

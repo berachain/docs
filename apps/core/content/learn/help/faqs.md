@@ -55,7 +55,7 @@ APY stands for annual perentage yield. In the context of BeraSwap pools, this re
 
 ## What is $HONEY?
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem. It is a `$USDC` backed stablecoin, and is used throughout the Berachain ecosystem.
+`$HONEY` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed stablecoin, and is used throughout the Berachain ecosystem.
 
 ## Does it cost anything to mint or burn $HONEY?
 

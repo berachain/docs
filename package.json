@@ -24,5 +24,8 @@
   "name": "docs-monorepo",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@vercel/toolbar": "^0.1.30"
   }
 }
