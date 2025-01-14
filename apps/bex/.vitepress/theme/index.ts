@@ -23,7 +23,8 @@ export default {
         h(
           "div",
           {
-            class: "custom-block warning mx-6 mt-6",
+            class: "custom-block warning",
+            style: "margin-bottom: 10px;",
           },
           [
             h(

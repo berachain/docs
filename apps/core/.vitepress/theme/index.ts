@@ -19,6 +19,7 @@ export default {
           "div",
           {
             class: "custom-block warning mx-6 mt-6",
+            style: "margin-bottom: 10px;",
           },
           [
             h(

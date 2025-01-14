@@ -63,7 +63,9 @@ const SIDEBAR = {
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `/learn/dapps/berascan`,
+          link: `${constants.mainnet.dapps.berascan.url}`,
+          target: "_blank",
+          rel: "no-referrer",
         },
       ],
     },
@@ -92,12 +94,6 @@ const SIDEBAR = {
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `${constants.mainnet.dapps.berascan.url}`,
-          target: "_blank",
-          rel: "no-referrer",
-        },
-        {
-          text: `${constants.testnet.dapps.faucet.name}`,
-          link: `${constants.testnet.dapps.faucet.url}`,
           target: "_blank",
           rel: "no-referrer",
         },
