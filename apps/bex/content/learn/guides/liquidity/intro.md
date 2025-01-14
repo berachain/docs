@@ -35,7 +35,7 @@ When adding liquidity to an LP position, users have the following parameters to 
 
 - The token pair to provide liquidity for
 - Deposit quantity, which can be fixed in terms of either side of the pair
-- Maximum slippage and transaction deadline
+- Maximum slippage (only applies when providing unbalanced amounts that require rebalancing) and transaction deadline
 
 ### Managing LP Positions
 
