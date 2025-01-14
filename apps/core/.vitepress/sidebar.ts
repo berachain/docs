@@ -61,7 +61,6 @@ const SIDEBAR = {
         { text: "BeraHub", link: "/learn/dapps/berahub" },
         { text: "BeraSwap", link: "/learn/dapps/beraswap" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
-        { text: "Faucet", link: "/learn/dapps/faucet" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `/learn/dapps/berascan`,

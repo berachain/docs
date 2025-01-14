@@ -1,3 +1,0 @@
-# Berps Developer Troubleshooting
-
-...

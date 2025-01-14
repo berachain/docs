@@ -50,14 +50,6 @@
         "name": "Berachain $HONEY Swap",
         "url": "https://honey.berachain.com/"
       },
-      "bend": {
-        "name": "Berachain Bend",
-        "url": "https://REPLACEME"
-      },
-      "berps": {
-        "name": "Berachain Berps",
-        "url": "https://REPLACEME"
-      },
       "berascan": {
         "name": "BeraScan Block Explorer",
         "url": "https://REPLACEME",
@@ -412,12 +404,6 @@
       "abi": "",
       "docsUrl": ""
     },
-    "bendOracle": {
-      "name": "BendOracle",
-      "address": "0x18fDa978e01196B2D5037dF9a9c0C9d3ab843344",
-      "abi": "",
-      "docsUrl": ""
-    },
     "poolProxy": {
       "name": "Pool-Proxy",
       "address": "0x30A3039675E5b5cbEA49d9a5eacbc11f9199B86D",
@@ -615,16 +601,6 @@
       "name": "Berachain Swap Docs",
       "url": "https://docs.swap.berachain.com/",
       "description": "Official documentation for Swap, Berachain's Decentralized Exchange."
-    },
-    "docsBerps": {
-      "name": "Berachain Berps Docs",
-      "url": "https://REPLACEME",
-      "description": "Official documentation for Berps, Berachain's Perpetual Future Contracts"
-    },
-    "docsBend": {
-      "name": "Berachain Bend Docs",
-      "url": "https://REPLACEME",
-      "description": "Official documentation for Bend, Berachain's Lending Protocol."
     },
     "careers": {
       "name": "Berachain Careers",

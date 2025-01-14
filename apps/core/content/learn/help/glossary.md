@@ -46,17 +46,9 @@ BeaconKit is a modular and customizable consensus layer framework, leveraging th
 
 A data unit containing a list of transactions, which is permanently added to the blockchain in a sequential manner.
 
-## Bend
-
-Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps - Bend](/learn/dapps/bend).
-
 ## BeraSwap
 
 Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BeraSwap_. Read more in [Native dApps > BeraSwap](/learn/dapps/beraswap).
-
-## Berps
-
-Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps - Berps](/learn/dapps/berps).
 
 ## Block Time
 
@@ -105,7 +97,7 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BeraSwap,Berps,Bend, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BeraSwap, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
 ## HONEY
 

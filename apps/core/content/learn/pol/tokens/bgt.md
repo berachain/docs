@@ -35,10 +35,8 @@ However, because of Berachain's three-token Proof of Liquidity model, the functi
 `$BGT` can be accumulated by performing certain actions in dApps with whitelisted [Reward Vaults](../rewardvaults.md). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward vaults correspond to some form of productive activity provided on Berachain, and are created after being whitelisted (by `$BGT` governance). Users can subsequently stake the indicated token in reward vaults to earn `$BGT`. Some examples include:
 
 - Depositing liquidity in the native BeraSwap for an LP pair that is earning `$BGT` emissions
-- Borrowing `$HONEY` on Bend
-- Providing `$HONEY` in the `bHONEY` vault for Berps
 
-Once a user has accumulated BGT, the user can claim this BGT from Berahub. 
+Once a user has accumulated BGT, the user can claim this BGT from Berahub.
 
 <video src="/assets/videos/claimBGT.mp4" controls></video>
 
@@ -56,7 +54,7 @@ Protocols can provide [Incentives](/learn/pol/incentives) to attract `$BGT` emis
 
 ### Fees From Native Dapps
 
-Users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps. Berachain's native dapps collect fees to be distributed to those delegating BGT. This is done via a smart contract, `FeeCollector.sol`. 
+Users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees BeraSwap and HoneySwap. Berachain's native dapps collect fees to be distributed to those delegating BGT. This is done via a smart contract, `FeeCollector.sol`.
 
 At a high level, `FeeCollector` does three things:
 
@@ -72,6 +70,6 @@ At a high level, `FeeCollector` does three things:
 
 ### Boosting a validator
 
-Users can boost a validator with your BGT, allowing that validator to increase its [reward emission](../bgtmath.md) and subsequently push more `$BGT` to Reward Vaults defined in the validator's reward allocation. 
+Users can boost a validator with your BGT, allowing that validator to increase its [reward emission](../bgtmath.md) and subsequently push more `$BGT` to Reward Vaults defined in the validator's reward allocation.
 
 <video src="/assets/videos/boostval.mp4" controls></video>

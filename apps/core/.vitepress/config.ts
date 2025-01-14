@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from "node:url";
 import markdownItConditionalRender from "markdown-it-conditional-render";
 import { sidebar } from "./sidebar";
 import { constants } from "@berachain/config/constants";
-import { vercelToolbar } from '@vercel/toolbar/plugins/vite'; /// @TODO: Remove for production
+import { vercelToolbar } from "@vercel/toolbar/plugins/vite"; /// @TODO: Remove for production
 
 // Config
 // ========================================================
@@ -82,14 +82,6 @@ export default defineConfig({
             text: `${constants.websites.docsSwap.name}`,
             link: `${constants.websites.docsSwap.url}`,
           },
-          {
-            text: `${constants.websites.docsBend.name}(Coming Soon)`,
-            link: `#`,
-          },
-          {
-            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
-            link: `#`,
-          },
         ],
       },
       { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
@@ -153,9 +145,7 @@ export default defineConfig({
   },
   vite: {
     // @TODO: Remove for production
-    plugins: [
-      vercelToolbar()
-    ],
+    plugins: [vercelToolbar()],
     resolve: {
       alias: [
         {

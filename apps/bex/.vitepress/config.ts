@@ -82,14 +82,6 @@ export default defineConfig({
             text: `${constants.websites.docsCore.name}`,
             link: `${constants.websites.docsCore.url}`,
           },
-          {
-            text: `${constants.websites.docsBend.name}(Coming Soon)`,
-            link: `#`,
-          },
-          {
-            text: `${constants.websites.docsBerps.name}(Coming Soon)`,
-            link: `#`,
-          },
         ],
       },
       { text: "Learn", link: "learn/index", activeMatch: "/learn/" },

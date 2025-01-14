@@ -57,20 +57,6 @@ layout: page
     image="/assets/BEX.png"
     type="alt"
   />
-  <Feature
-    title="Bend Docs"
-    description="Berachain Native Lending Docs"
-    :link="config.websites.docsBend.url"
-    image="/assets/BEND.png"
-    type="alt"
-  />
-  <Feature
-    title="Berps Docs"
-    description="Berachain Native Perps Docs"
-    :link="config.websites.docsBerps.url"
-    image="/assets/BERPS.png"
-    type="alt"
-  />
 </section>
 
 ## Other Berachain Resources
@@ -109,20 +95,6 @@ layout: page
     description="Berachain Native DEX"
     :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
-      type="alt"
-    />
-  <Feature
-    title="Berps"
-    description="Berachain Native Perps"
-    :link="config.mainnet.dapps.berps.url"
-    :icon="IconChartHistogram"
-      type="alt"
-  />
-  <Feature
-    title="Bend"
-    description="Berachain Native Lending"
-    :link="config.mainnet.dapps.bend.url"
-    :icon="IconCoins"
       type="alt"
     />
   <Feature
