@@ -13,7 +13,7 @@ head:
 
 # Fees
 
-Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) BGT stakers.
+Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) the protocol.
 
 ### Fee Distribution
 
