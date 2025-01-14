@@ -18,6 +18,30 @@ export default {
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      // TODO: remove at mainnet launch
+      "doc-before": () =>
+        h(
+          "div",
+          {
+            class: "custom-block warning mx-6 mt-6",
+          },
+          [
+            h(
+              "p",
+              {
+                class: "custom-block-title",
+              },
+              "🚧 Under Construction"
+            ),
+            h(
+              "p",
+              {
+                class: "",
+              },
+              "Documentation is currently under development. Some pages may be incomplete or subject to change."
+            ),
+          ]
+        ),
       "sidebar-nav-after": () => h(Fidget),
     });
   },
