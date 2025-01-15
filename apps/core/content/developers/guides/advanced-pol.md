@@ -31,7 +31,7 @@ Note that this article provides only one possible workaround for integrating PoL
 
 ## Description of Approach
 
-The described approach involves the creation of a dummy `StakingToken` that is staked in a PoL vault on behalf of users by a protocol. This dummy token is used to track the staked balances of users and is minted and burned by the protocol (operating through `ProtocolContract`) as users provide/withdraw their liquidity from the protocol.
+The described approach involves the creation of a dummy `StakingToken` that is staked in a Reward Vault on behalf of users by a protocol. This dummy token is used to track the staked balances of users and is minted and burned by the protocol (operating through `ProtocolContract`) as users provide/withdraw their liquidity from the protocol.
 
 The staked dummy token balance entitles users to earn `$BGT` as if they had staked an ERC20 receipt token in a PoL vault themselves. This approach is enabled by the `delegateStake` and `delegateWithdraw` methods in the [RewardVault](/developers/contracts/reward-vault) contract.
 
@@ -156,7 +156,6 @@ interface IRewardVault {
         address account
     ) external view returns (uint256);
 
-    function balanceOf(address account) external returns (uint256);
 }
 
 interface IRewardVaultFactory {
@@ -174,8 +173,7 @@ Now, we wire everything together with tests to ensure that the integration works
 
 Feel free to look at each individual test to get a better idea on how successful scenarios are handled.
 
-```solidity
-
+```solidity-vue
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -192,8 +190,8 @@ contract ProtocolContractTest is Test {
 
     function setUp() public {
         IRewardVaultFactory vaultFactory = IRewardVaultFactory(
-                0x2B6e40f65D82A0cB98795bC7587a71bfa49fBB2B
-            );
+            {{config.contracts.rewardVaultFactory.address}}
+        );
         protocol = new ProtocolContract(address(vaultFactory));
         rewardVault = protocol.rewardVault();
     }
@@ -201,21 +199,24 @@ contract ProtocolContractTest is Test {
     function testAddActivity() public {
         protocol.addActivity(user1, 1);
         assertEq(protocol.userActivity(user1), 1);
-        assertEq(rewardVault.balanceOf(user1), 1);
+        assertEq(rewardVault.getTotalDelegateStaked(user1), 1);
     }
 
     function testRemoveActivity() public {
         protocol.addActivity(user1, 2);
+
+        vm.warp(block.timestamp + 1 days);
+
         protocol.removeActivity(user1, 1);
         assertEq(protocol.userActivity(user1), 1);
-        assertEq(rewardVault.balanceOf(user1), 1);
+        assertEq(rewardVault.getTotalDelegateStaked(user1), 1);
     }
 
     function testMultipleUsers() public {
         protocol.addActivity(user1, 1);
         protocol.addActivity(user2, 2);
-        assertEq(rewardVault.balanceOf(user1), 1);
-        assertEq(rewardVault.balanceOf(user2), 2);
+        assertEq(rewardVault.getTotalDelegateStaked(user1), 1);
+        assertEq(rewardVault.getTotalDelegateStaked(user2), 2);
     }
 }
 ```
