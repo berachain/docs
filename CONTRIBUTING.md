@@ -175,18 +175,6 @@ pnpm dev;
 # @berachain/bex:dev:   ➜  Local:   http://localhost:5174/
 # @berachain/bex:dev:   ➜  Network: use --host to expose
 # @berachain/bex:dev:   ➜  press h to show help
-#
-# @berachain/berps:dev:   vitepress v1.3.2
-# @berachain/berps:dev:
-# @berachain/berps:dev:   ➜  Local:   http://localhost:5175/
-# @berachain/berps:dev:   ➜  Network: use --host to expose
-# @berachain/berps:dev:   ➜  press h to show help
-#
-# @berachain/bend:dev:   vitepress v1.3.2
-# @berachain/bend:dev:
-# @berachain/bend:dev:   ➜  Local:   http://localhost:5176/
-# @berachain/bend:dev:   ➜  Network: use --host to expose
-# @berachain/bend:dev:   ➜  press h to show help
 ```
 
 To run individual sites, run the following:
@@ -195,7 +183,7 @@ To run individual sites, run the following:
 # FROM: ./docs
 
 pnpm dev --filter @berachain/core;
-# pnpm dev --filter @berachain/(core|berps|bend|bex)
+# pnpm dev --filter @berachain/(core|bex)
 
 # [Expected Output]:
 # @berachain/core:dev:   vitepress v1.3.2
@@ -207,7 +195,7 @@ pnpm dev --filter @berachain/core;
 
 ### Writing documentation
 
-All documentation modifications can be found in markdown files `.md` in `apps/(bend|berps|bend|core)/content/*`.
+All documentation modifications can be found in markdown files `.md` in `apps/(bex|core)/content/*`.
 
 #### Metatags
 
@@ -283,7 +271,7 @@ In some cases, links cannot be setup with traditional markdown, and here is the 
 <a :href="config.websites.foundation.url" target="_blank" rel="no-referrer">{{config.websites.foundation.name}}</a>
 
 ✅ Correct way combining variables
-<a :href="config.mainnet.dapps.berps.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.berps.name}}</a>
+<a :href="config.mainnet.dapps.swap.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.swap.name}}</a>
 ```
 
 #### Code Snippets
@@ -462,16 +450,6 @@ pnpm build;
 # ✓ building client + server bundles...
 # ✓ rendering pages...
 # ✓ generating sitemap...
-# @berachain/bend:build: build complete in 8.02s.
-# @berachain/bend:build:
-# ✓ building client + server bundles...
-# ✓ rendering pages...
-# ✓ generating sitemap...
-# @berachain/berps:build: build complete in 8.63s.
-# @berachain/berps:build:
-# ✓ building client + server bundles...
-# ✓ rendering pages...
-# ✓ generating sitemap...
 # @berachain/core:build: build complete in 10.43s.
 # @berachain/core:build:
 ```
@@ -520,8 +498,6 @@ pnpm changeset;
 # ◯ changed packages
 #   ◉ @berachain/config
 #   ◯ @berachain/ui
-#   ◯ @berachain/berps
-#   ◯ @berachain/bend
 #   ◯ @berachain/core
 #   ◯ @berachain/bex
 #
@@ -577,7 +553,7 @@ tree package/config;
 # └── package.json
 ```
 
-Seeing as `packages/config` is a dependency, you will see an `minor` update in the CHANGELOG.md for `apps/(bend|berps|bex|core)` as well, but not in `packages/ui`.
+Seeing as `packages/config` is a dependency, you will see an `minor` update in the CHANGELOG.md for `apps/(bex|core)` as well, but not in `packages/ui`.
 
 #### 4 - Commit Changes
 

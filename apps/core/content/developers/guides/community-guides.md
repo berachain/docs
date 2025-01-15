@@ -44,12 +44,6 @@ These are a list of community developer guides for Berachain.
 | Create ERC20 Contract Using Foundry             | [GitHub](https://github.com/berachain/guides/tree/main/apps/foundry-erc20)                 |
 | Deploy Upgradeable Contracts                    | [GitHub](https://github.com/berachain/guides/tree/main/apps/openzeppelin-upgrades)         |
 
-## Trading Bots
-
-| Project Name      | Git Repository                                                         |
-| ----------------- | ---------------------------------------------------------------------- |
-| Berps Trading Bot | [GitHub](https://github.com/berachain/guides/tree/main/apps/berps-bot) |
-
 ## Indexing and Querying
 
 | Project Name                              | Git Repository                                                                   |

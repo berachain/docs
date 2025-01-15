@@ -24,8 +24,8 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 // ========================================================
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: `${constants.websites.docsCore.name}`,
-  description: `${constants.websites.docsCore.description}`,
+  title: `${constants.websites.docsSwap.name}`,
+  description: `${constants.websites.docsSwap.description}`,
   cleanUrls: true,
   srcDir: "content",
   head: [
@@ -33,13 +33,13 @@ export default defineConfig({
     ["meta", { name: "og:locale", content: "en" }],
     [
       "meta",
-      { name: "og:site_name", content: `${constants.websites.docsCore.name}` },
+      { name: "og:site_name", content: `${constants.websites.docsSwap.name}` },
     ],
     [
       "meta",
       {
         name: "og:image",
-        content: `${constants.websites.docsCore.url}/previewDocs.jpg`,
+        content: `${constants.websites.docsSwap.url}/previewDocs.jpg`,
       },
     ],
     [
@@ -59,7 +59,7 @@ export default defineConfig({
     ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
   ],
   sitemap: {
-    hostname: `${constants.websites.docsCore.url}`,
+    hostname: `${constants.websites.docsSwap.url}`,
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -79,8 +79,8 @@ export default defineConfig({
           </span>`,
         items: [
           {
-            text: `${constants.websites.docsSwap.name}`,
-            link: `${constants.websites.docsSwap.url}`,
+            text: `${constants.websites.docsCore.name}`,
+            link: `${constants.websites.docsCore.url}`,
           },
         ],
       },
@@ -90,7 +90,6 @@ export default defineConfig({
         link: "developers/index",
         activeMatch: "/developers/",
       },
-      { text: "Run A Node", link: "nodes/index", activeMatch: "/nodes/" },
     ],
     outline: [2, 3],
     search: {
@@ -116,7 +115,7 @@ export default defineConfig({
       },
     },
     sidebar,
-    siteTitle: `🐻⛓️ ${constants.websites.docsCore.name}`,
+    siteTitle: `🐻⛓️ ${constants.websites.docsSwap.name}`,
     socialLinks: [
       { icon: "twitter", link: `${constants.socials.twitter}` },
       { icon: "discord", link: `${constants.socials.discord}` },

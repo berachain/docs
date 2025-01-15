@@ -23,7 +23,7 @@ Berachain has the following properties:
 
 - Block time: Block times varies, for latest feel free to check it out at <a :href="config.mainnet.dapps.berascan.url">{{config.mainnet.dapps.berascan.name}}</a>.
 - Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
-- Finality: Instant finality
+- Finality: single slot finality
 
 ## What is a DEX?
 
@@ -51,7 +51,7 @@ Liquidity providers are users who deposit tokens into a liquidity pool. They are
 
 ## What is APY?
 
-APY stands for annual perentage yield. In the context of BeraSwap pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool? 
+APY stands for annual perentage yield. In the context of BeraSwap pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool?
 
 ## What is $HONEY?
 
@@ -68,7 +68,7 @@ Additionally, because minting & burning requires a transaction, there will be a 
 There are various USD-pegged stablecoins that can be used to mint `$HONEY`. Currently, the following stablecoins are supported:
 
 - stgUSDC
-- BYUSD 
+- BYUSD
 
 More tokens may be added based on governance.
 
@@ -95,7 +95,7 @@ Rewards are the main reason.
 With Proof of Liquidity, you can earn many different types of rewards:
 
 - A share of protocol-provided [incentives](/learn/pol/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
-- A share of Berachain core dApp fees, namely fees from Bend, BeraSwap and Berps
+- A share of Berachain core dApp fees, namely fees from BeraSwap and HoneySwap
 
 ## How do I get `$BGT`?
 
@@ -105,7 +105,7 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 Governance is the process by which the community decides what changes are made to the Berachain protocol. This includes how the node is upgraded and what parameters are set for various components on the chain.
 
-## Once you’ve provided liquidity into an eligible pool in BeraSwap (or some other BGT-generating action like bend etc) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
+## Once you’ve provided liquidity into an eligible pool in BeraSwap (or some other PoL-eligible pool) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
 
 Each eligible (whitelisted) pool on BeraSwap has an associated LP token. Once liquidity is depositted into a BeraSwap pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user. Users can claim their `$BGT` from any wallet address they choose.
 

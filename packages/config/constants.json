@@ -22,7 +22,7 @@
     }
   },
   "mainnet": {
-    "chainId": 80094,
+    "chainId": "REPLACEME",
     "rpcUrl": "https://rpc.berachain.com/",
     "currencySymbol": "BERA",
     "currencyName": "BERA Token",
@@ -49,14 +49,6 @@
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
         "url": "https://honey.berachain.com/"
-      },
-      "bend": {
-        "name": "Berachain Bend",
-        "url": "https://REPLACEME"
-      },
-      "berps": {
-        "name": "Berachain Berps",
-        "url": "https://REPLACEME"
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
@@ -412,12 +404,6 @@
       "abi": "",
       "docsUrl": ""
     },
-    "bendOracle": {
-      "name": "BendOracle",
-      "address": "0x18fDa978e01196B2D5037dF9a9c0C9d3ab843344",
-      "abi": "",
-      "docsUrl": ""
-    },
     "poolProxy": {
       "name": "Pool-Proxy",
       "address": "0x30A3039675E5b5cbEA49d9a5eacbc11f9199B86D",
@@ -524,37 +510,37 @@
       "vault": {
         "name": "Vault",
         "address": "0x9C8a5c82e797e074Fe3f121B326b140CEC4bcb33",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IVault.abi.json",
         "docsUrl": "/developers/contracts/vault"
       },
       "protocolFeesCollector": {
         "name": "ProtocolFeesCollector",
         "address": "0x91bBB98F6cf7F8DC6598653c2793B0bC78DfA18B",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IProtocolFeesCollector.abi.json",
         "docsUrl": ""
       },
       "balancerHelpers": {
         "name": "BalancerHelpers",
         "address": "0xf3F2d2D5706543Dc17584835647A98C34cE54cc3",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IBalancerHelpers.abi.json",
         "docsUrl": ""
       },
       "poolCreationHelper": {
         "name": "PoolCreationHelper",
         "address": "0x00b4626883A3b4566A061372C93168fbE2020D8a",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IPoolCreationHelper.abi.json",
         "docsUrl": "/developers/contracts/factory/pool-creation-helper"
       },
       "protocolFeesWithdrawer": {
         "name": "ProtocolFeesWithdrawer",
         "address": "0xdB6E5B0F0465C87049768bD8cD2Cf03d1B6A1242",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IProtocolFeesWithdrawer.abi.json",
         "docsUrl": ""
       },
       "stablePoolFactory": {
-        "name": "ComposableStablePoolFactory",
+        "name": "StablePoolFactory",
         "address": "0xfD772657FC8c4Ed3884AfF151b680883814052FA",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IComposableStablePoolFactoryCreateV6.abi.json",
         "docsUrl": "/developers/contracts/factory/stable-pool-factory"
       },
       "batchRelayerLibrary": {
@@ -572,31 +558,31 @@
       "balancerRelayer": {
         "name": "BalancerRelayer",
         "address": "0xb6f80CD1053316172e12F35F4235dC9cE998A3B8",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IBalancerRelayer.abi.json",
         "docsUrl": ""
       },
       "weightedPoolFactory": {
         "name": "WeightedPoolFactory",
         "address": "0x09836Ff4aa44C9b8ddD2f85683aC6846E139fFBf",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IWeightedPoolFactory.abi.json",
         "docsUrl": "/developers/contracts/factory/weighted-pool-factory"
       },
       "protocolFeePercentagesProvider": {
-        "name": "ProtocolFeePercentagesProvider",
+        "name": "FeePercentagesProvider",
         "address": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IProtocolFeePercentagesProvider.abi.json",
         "docsUrl": ""
       },
       "balancerQueries": {
         "name": "BalancerQueries",
         "address": "0x48B1A1A28F5600CAD50dB19c6fECBe9F2458cc8a",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IBalancerQueries.abi.json",
         "docsUrl": "/developers/contracts/query"
       },
       "authorizer": {
         "name": "Authorizer",
         "address": "0x010aD13DFa9eFf1241eeEa7bb620278b56E72ebe",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/beraswap/IAuthorizer.abi.json",
         "docsUrl": ""
       }
     }
@@ -615,16 +601,6 @@
       "name": "Berachain Swap Docs",
       "url": "https://docs.swap.berachain.com/",
       "description": "Official documentation for Swap, Berachain's Decentralized Exchange."
-    },
-    "docsBerps": {
-      "name": "Berachain Berps Docs",
-      "url": "https://REPLACEME",
-      "description": "Official documentation for Berps, Berachain's Perpetual Future Contracts"
-    },
-    "docsBend": {
-      "name": "Berachain Bend Docs",
-      "url": "https://REPLACEME",
-      "description": "Official documentation for Bend, Berachain's Lending Protocol."
     },
     "careers": {
       "name": "Berachain Careers",

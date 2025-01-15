@@ -6,7 +6,7 @@ layout: page
 <script setup>
   import Feature from '@berachain/ui/Feature';
   import config from '@berachain/config/constants.json';
-  import { IconVocabulary, IconTerminal, IconServer, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld, IconMoneybag } from '@tabler/icons-vue';
+  import { IconMoneybag, IconVocabulary, IconTerminal, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld } from '@tabler/icons-vue';
 </script>
 
 <!-- START -->
@@ -14,36 +14,36 @@ layout: page
   <div class="container">
     <div>
       <div class="VPImageBackground"></div>
-      <img class="VPImage" src="/DocsBear.png" alt="Berachain Docs" />
+      <img class="VPImage" src="/DocsBear.png" alt="BeraSwap Docs" />
     </div>
     <div>
       <span class="logo">
         <img src="/assets/berachain-icon.svg" />
       </span>
-      <h1 class="title">Berachain Docs</h1>
-      <p class="description">Learn, integrate, and build on a new modular EVM with Berachain.</p>
+      <h1 class="title">BeraSwap Docs</h1>
+      <p class="description">Learn about Berachain's decentralized exchange.</p>
     </div>
   </div>
 </section>
 
 <section class="features">
   <Feature
-    title="Learn About Berachain"
-    description="Understand the fundamentals of the Berachain protocol"
-    link="/learn/"
+    title="BeraSwap User Guides"
+    description="Onboarding guide for new BeraSwap users"
+    link="/learn/guides/swaps"
     :icon="IconVocabulary"
   />
   <Feature
     title="Developers"
-    description="Get up and running and building with Berachain"
+    description="Get up and running and building with BeraSwap"
     link="/developers/"
     :icon="IconTerminal"
   />
   <Feature
-    title="Run a Node"
-    description="Setup and configure a validator, rpc, and more"
-    link="/nodes/"
-    :icon="IconServer"
+    title="Berachain Faucet"
+    description="Fund your testnet wallet with $BERA"
+    :link=config.testnet.dapps.faucet.url
+    :icon="IconDroplet"
   />
 </section>
 
@@ -51,10 +51,10 @@ layout: page
 
 <section class="features">
   <Feature
-    title="BeraSwap Docs"
-    description="Berachain Native DEX Docs"
-    :link="config.websites.docsSwap.url"
-    image="/assets/BEX.png"
+    title="Core Docs"
+    description="Berachain Core Docs"
+    :link="config.websites.docsCore.url"
+    image="/assets/BERA.png"
     type="alt"
   />
 </section>
@@ -70,7 +70,7 @@ layout: page
     type="alt"
   />
   <Feature
-    title="Berascan"
+    title="Beratrail"
     description="Block Explorer"
     :link="config.mainnet.dapps.berascan.url"
     :icon="IconSearch"
@@ -81,29 +81,29 @@ layout: page
     description="Get Testnet Tokens"
     :link="config.testnet.dapps.faucet.url"
     :icon="IconDroplet"
-      type="alt"
+    type="alt"
   />
   <Feature
-    title="Bera Hub"
+    title="BGT Station"
     description="Manage $BGT"
     :link="config.mainnet.dapps.hub.url"
     :icon="IconGavel"
-      type="alt"
+    type="alt"
   />
   <Feature
     title="BeraSwap"
     description="Berachain Native DEX"
     :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
-      type="alt"
-    />
+    type="alt"
+  />
   <Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
     :link="config.mainnet.dapps.honeySwap.url"
     :icon="IconMoneybag"
     type="alt"
-    />
+  />
   <Feature
     title="Berachain Foundation"
     description="Main Foundation Website"

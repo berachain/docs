@@ -17,6 +17,7 @@ head:
 </script>
 
 # $HONEY
+
 <!-- <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.honey.address">{{config.contracts.honey.address}}</a>-->
 
 <ClientOnly>
@@ -33,7 +34,7 @@ Stability is a desirable property in a medium of exchange, in contrast to transa
 
 `$HONEY` can be minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral.
 
-Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain BeraSwap, or borrowed on Bend.
+Alternatively, `$HONEY` can be obtained by trading other assets on the Berachain BeraSwap.
 
 ## What determines which assets collateralize $HONEY?
 
@@ -78,7 +79,7 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 
 - Basket Mode for minting is considered an edge case which only occurs if ALL collateral assets are either depegged or blacklisted. Depegged assets cannot be used to mint `$HONEY`.
 - In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
-- If one asset is depegged you can mint only with the other asset 
+- If one asset is depegged you can mint only with the other asset
 
 ### Fees
 
