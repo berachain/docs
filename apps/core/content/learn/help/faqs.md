@@ -23,7 +23,7 @@ Berachain has the following properties:
 
 - Block time: Block times varies, for latest feel free to check it out at <a :href="config.mainnet.dapps.berascan.url">{{config.mainnet.dapps.berascan.name}}</a>.
 - Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
-- Finality: Instant finality
+- Finality: single slot finality
 
 ## What is a DEX?
 
