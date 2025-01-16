@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Reward vaults
 
 Reward vaults are smart contracts in which users can stake their Proof of Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward vaults are the only way in which anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
@@ -45,8 +49,8 @@ To understand why validators would choose to emit `$BGT` to a particular reward 
 
 ## Creation of New Reward Vaults
 
-New Reward Vaults can be created permissionlessly, but must go through the Reward Vaults Whitelisting process, conducted by `$BGT` governance in order to be eligible to receive `$BGT` from validators. Developers or protocols can submit a proposal to whitelist a new reward vault for a specific PoL-eligible asset. If the proposal passes, the vault address is added to the list of approved reward vaults that validators can direct `$BGT` emissions to.
+New Reward Vaults can be created permissionlessly, and can be done so at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
 
-Here you can learn about the [Reward Vaults Whitelisting Process](/learn/governance/rewardvault).
+Protocols creating reward vaults must additionally [whitelist their vaults](/learn/governance/rewardvault), conducted by `$BGT` governance in order to be eligible to receive emissions from validators.
 
 <video src="/assets/videos/createrewardvault.mp4" controls></video>

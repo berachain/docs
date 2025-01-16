@@ -53,7 +53,10 @@ const SIDEBAR = {
     },
     {
       text: "Governance",
-      items: [{ text: "Governance Overview", link: "/learn/governance/" }],
+      items: [
+        { text: "Governance Overview", link: "/learn/governance/" },
+        { text: "Reward Vaults", link: "/learn/governance/rewardvault" },
+      ],
     },
     {
       text: "Native dApps",
