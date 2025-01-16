@@ -53,6 +53,7 @@ Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) 
 Here are some examples of compatible wallets:
 
 - [MetaMask](https://metamask.io)
+- [Rabby](https://rabby.io)
 - [Coinbase Wallet](https://www.coinbase.com/wallet)
 - [Brave Wallet](https://brave.com/wallet/)
 - [Frame](https://frame.sh)
