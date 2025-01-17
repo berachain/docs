@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Block Production and Emissions
 
 ## Overview
@@ -11,8 +15,8 @@ The network maintains an active set of N validators who are eligible for block p
 - Only top N validators by BERA stake are included in active set
 - Block proposal probability is proportional to staked BERA and does not affect reward amounts
 - Stake limitations per validator:
-  - Minimum: 250,000 BERA
-  - Maximum: 2,500,000 BERA
+  - Minimum: {{ config.mainnet.minEffectiveBalance }} BERA
+  - Maximum: {{ config.mainnet.maxEffectiveBalance }} BERA
 
 ## BGT Emissions Structure
 

@@ -24,15 +24,6 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Berachain Testnet",
-      items: [
-        {
-          text: "Berachain Testnet V1 vs V2",
-          link: "/learn/testnet/berachain-testnet-v1-vs-v2",
-        },
-      ],
-    },
-    {
       text: "Proof-of-Liquidity",
       items: [
         { text: "PoL Overview", link: "/learn/pol/" },
