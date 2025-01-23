@@ -9,6 +9,11 @@ layout: page
   import { IconVocabulary, IconTerminal, IconServer, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld, IconMoneybag } from '@tabler/icons-vue';
 </script>
 
+<div class="custom-block warning" style="margin-bottom: 10px;">
+  <p class="custom-block-title">🚧 Under Construction</p>
+  <p>Documentation is currently under development. Some pages/links may be incomplete or subject to change.</p>
+</div>
+
 <!-- START -->
 <section class="VPHero">
   <div class="container">
@@ -69,48 +74,52 @@ layout: page
     :icon="IconBrandGithub"
     type="alt"
   />
+  <!-- TODO: remove at mainnet launch -->
+  <!-- Replace link with config.mainnet.dapps.berascan.url -->
   <Feature
     title="Berascan"
+    target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.dapps.berascan.url"
+    :link="config.mainnet.thirdparty.routescan.url"
     :icon="IconSearch"
     type="alt"
   />
-  <Feature
+<Feature
     title="Faucet"
     description="Get Testnet Tokens"
     :link="config.testnet.dapps.faucet.url"
     :icon="IconDroplet"
       type="alt"
   />
-  <Feature
+<Feature
     title="Bera Hub"
     description="Manage $BGT"
     :link="config.mainnet.dapps.hub.url"
     :icon="IconGavel"
       type="alt"
   />
-  <Feature
+<Feature
     title="BeraSwap"
     description="Berachain Native DEX"
     :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
       type="alt"
     />
-  <Feature
+<Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
     :link="config.mainnet.dapps.honeySwap.url"
     :icon="IconMoneybag"
     type="alt"
     />
-  <Feature
+<Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
     :link="config.mainnet.dapps.foundation.url"
     :icon="IconWorld"
     type="alt"
   />
+
 </section>
 
 <style>
