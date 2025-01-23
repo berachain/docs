@@ -78,4 +78,4 @@ Incentives are denominated in $BGT– ultimately users, validators, and protocol
 
 ### Can only validators vote on or create governance proposals?
 
-Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 1000 $BGT can create a proposal.
+Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10000 $BGT can create a proposal.
