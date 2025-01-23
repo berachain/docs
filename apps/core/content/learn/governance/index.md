@@ -70,10 +70,10 @@ For a detailed walkthrough of creating a governance proposal, including code exa
 
 ## Governance Parameters
 
-| State             | Criteria                                            |
-| ----------------- | --------------------------------------------------- |
-| Proposal Creation | 1000 `$BGT` Required                                |
-| Pending State     | 1-hour waiting period                               |
-| Voting Period     | 5-days                                              |
+| State             | Criteria                                  |
+| ----------------- | ----------------------------------------- |
+| Proposal Creation | 10000 `$BGT` Required                      |
+| Pending State     | 1-hour waiting period                     |
+| Voting Period     | 5-days     
 | Proposal Outcome  | 20% of total `$BGT` supply required to reach quorum |
 | Timelock          | 2 days delay                                        |
