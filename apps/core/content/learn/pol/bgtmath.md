@@ -12,7 +12,7 @@ The network maintains an active set of N validators who are eligible for block p
 - Block proposal probability is proportional to staked BERA and does not affect reward amounts
 - Stake limitations per validator:
   - Minimum: 250,000 BERA
-  - Maximum: 2,500,000 BERA
+  - Maximum: 10,000,000 BERA
 
 ## BGT Emissions Structure
 
