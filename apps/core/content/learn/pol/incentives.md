@@ -1,76 +1,55 @@
 # Incentive Marketplace
 
-## Overview
+Proof-of-Liquidity (PoL) enables protocols to bid for validator `$BGT` emissions to Reward Vaults using whitelisted incentive tokens. In doing so, protocols attract users to their protocol with `$BGT` rewards.
 
-Berachain's incentive marketplace enables protocols to bid for validator emissions using whitelisted incentive tokens. In doing so, protocols incentivize user of their protocol with `$BGT` rewards.
+In a nutshell, here's how Incentives work:
 
-Validators can direct emissions to protocols' pools through reward vaults, collecting these incentives in return. Validators are expected to redistribute received incentives to their `$BGT` delegators.
+1. A protocol sets an incentive rate for their reward vault (e.g., 10 protocol tokens per 1 `$BGT`)
+2. When a validator directs `$BGT` emissions to this vault, they receive the corresponding amount of Incentives (e.g. 10 protocol tokens for directing 1 `$BGT`)
+3. Validators can take a commission on these Incentives before distributing the remainder to their `$BGT` delegators
+4. The amount of `$BGT` a validator can direct (and thus Incentives they can earn) depends on their delegation weight
 
 ![Reward Vault Incentives](/assets/reward-vault-incentives.png)
 
-## Reward Vault Whitelisting
-
-Protocols must complete these steps to whitelist a reward vault:
-
-1. Deploy vault through factory contract
-
-   - Specify single staking token
-   - One vault per staking token allowed
-
-2. Submit governance proposal for whitelisting
-
-3. Upon approval, vault becomes eligible for emissions
-
-## Token Whitelisting
-
-To whitelist an incentive token:
-
-1. Submit governance proposal containing:
-   - Token address
-   - Minimum incentive rate - Lowest allowed exchange rate between protocol token and BGT
-     - Ensures fair exchange for BGT emissions
-     - Token managers cannot set incentive rates below this floor
-   - Token manager address - Account that will control incentive parameters
-2. Note:
-   - Each vault maintains separate whitelisted tokens
-   - Tokens can be removed via governance
-   - Token managers can be updated through governance
-
 ## Incentive Marketplace Operations
 
-### Incentive Management
+[Token managers](/learn/governance/rewardvault#token-whitelisting) are the only ones entitled to 1) add incentive tokens and 2) control incentive parameters on a Reward Vault. The key entrypoint is the `addIncentive` function on the Reward Vault contract:
 
-Token managers are the only ones entitled to add incentive tokens and control incentive parameters:
-
-- Set incentive rate (p)
-- Example: Setting rate p=10 means:
-  - 10 protocol tokens exchanged per 1 BGT
-  - 1000 incentive tokens deposited enables 100 BGT worth of emissions flowing to vault
+```solidity
+function addIncentive(address token, uint256 amount, uint256 incentiveRate) external;
+```
 
 ### Rate Adjustments
+
+Each time incentives are added to a Reward Vault, the manager sets the rate (r) for the next distribution (until `$BGT` is depleted).
+
+Example: Setting rate `r=10` means:
+
+- 10 protocol tokens exchanged per 1 `$BGT`
+- 1000 incentive tokens deposited enables 100 `$BGT` worth of emissions flowing to vault
 
 Rate modifications follow these rules:
 
 1. Empty vault:
-   Can update to any rate
+   Can update to any rate above the minimum
    $$r \geq r_{min}$$
 
 2. Non-empty vault:
    Can only increase rate
-   $$p^* > p$$
-   Cannot decrease rate until vault incentives deplete (reverting to scenario #1)
+   $$r^* > r$$
 
-### Distribution Flow
+The rate cannot be decreased until vault incentives deplete (reverting to scenario #1)
 
-1. Validator emits BGT to protocol vault
-2. Validator receives (p × BGT) protocol tokens
-3. Validator expected to share portion with delegates
-4. Creates alignment between validators, protocols, and users
-
-## Parameters
+### Parameters
 
 | Parameter        | Description                                                  |
 | ---------------- | ------------------------------------------------------------ |
 | p                | Incentive rate - Protocol tokens given per BGT               |
 | minIncentiveRate | Minimum allowed exchange rate between protocol token and BGT |
 | p\*              | New incentive rate (when updating)                           |
+
+### Distribution Flow
+
+1. Validator emits `$BGT` to protocol vault
+2. Validator receives (`r × $BGT`) protocol token incentives
+3. Validator expected to share portion of incentives with delegates (this will be an on-chain operation in the future)

@@ -17,7 +17,9 @@ head:
 
 # Berachain BeraSwap 🐻⛓️
 
-<a :href="config.mainnet.dapps.swap.url">
+Berachain's native decentralized exchange (DEX) is called BeraSwap, which allows for trading of any arbitrary pair of crypto assets via swapping and providing liquidity into [liquidity pools](/learn/help/glossary#liquidity-pool).
+
+<a target="_blank" :href="config.mainnet.dapps.swap.url + '/swap'">
 
 ![Berachain BeraSwap Native dApp](/assets/beraswap.png)
 
@@ -25,8 +27,6 @@ head:
 
 > <small><a :href="config.mainnet.dapps.swap.url">{{config.mainnet.dapps.swap.url}}</a></small>
 
-Berachain's native decentralized exchange (DEX) is called BeraSwap, which allows for trading of any arbitrary pair of crypto assets via swapping and providing liquidity into [liquidity pools](/learn/help/glossary#liquidity-pool).
-
-In addition, pools in BeraSwap can be upgraded to [Proof-of-Liquidity Reward Vaults](/learn/pol/rewardvaults) via governance to become eligible for [`$BGT`](/learn/pol/tokens/bgt) emissions & incentivization.
+Pools deposits in BeraSwap can become eligible for [$BGT](https://docs.berachain.com/learn/pol/tokens/bgt) emissions & incentivization by whitelisting associated [Reward Vaults](/learn/pol/rewardvaults) via governance.
 
 > To learn more, check out the <a :href="config.websites.docsSwap.url">{{config.websites.docsSwap.name}}</a>.

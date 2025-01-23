@@ -34,7 +34,7 @@ export default {
               {
                 class: "",
               },
-              "Documentation is currently under development. Some pages may be incomplete or subject to change."
+              "Documentation is currently under development. Some pages/links may be incomplete or subject to change."
             ),
           ]
         ),

@@ -13,7 +13,7 @@ head:
 
 # Fees
 
-Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) the protocol.
+Fees are collected on every trade conducted on BeraSwap. A portion of these fees will go to 1) liquidity providers (LPs), and 2) BGT holders.
 
 ### Fee Distribution
 
@@ -24,4 +24,3 @@ The portion of fees going to LPs is set at the time of pool creation, starting f
 Trading fees in BeraSwap are split 50/50 between LPs and the protocol. Protocol fees are collected in the ProtocolFeesCollector contract and are further distributed between BGT stakers and the treasury. The ratio of this distribution is configurable through the polFeeCollectorPercentage parameter in the ProtocolFeesWithdrawer contract, with the majority portion allocated to BGT stakers.
 
 ![BeraSwap Fees](/assets/swap_fee.png)
-

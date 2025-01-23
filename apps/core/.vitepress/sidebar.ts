@@ -24,18 +24,9 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Berachain Testnet",
-      items: [
-        {
-          text: "Berachain Testnet V1 vs V2",
-          link: "/learn/testnet/berachain-testnet-v1-vs-v2",
-        },
-      ],
-    },
-    {
       text: "Proof-of-Liquidity",
       items: [
-        { text: "PoL Overview", link: "/learn/pol/" },
+        { text: "Overview", link: "/learn/pol/" },
         { text: "Participants", link: "/learn/pol/participants" },
         { text: "Block Production/Emissions", link: "/learn/pol/bgtmath" },
         { text: "Reward Vaults", link: "/learn/pol/rewardvaults" },
@@ -43,9 +34,9 @@ const SIDEBAR = {
         {
           text: "Tokens",
           items: [
-            { text: "$BERA", link: "/learn/pol/tokens/bera" },
-            { text: "$BGT", link: "/learn/pol/tokens/bgt" },
-            { text: "$HONEY", link: "/learn/pol/tokens/honey" },
+            { text: "BERA", link: "/learn/pol/tokens/bera" },
+            { text: "BGT", link: "/learn/pol/tokens/bgt" },
+            { text: "HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
         { text: "PoL FAQs", link: "/learn/pol/faqs" },
@@ -53,7 +44,10 @@ const SIDEBAR = {
     },
     {
       text: "Governance",
-      items: [{ text: "Governance Overview", link: "/learn/governance/" }],
+      items: [
+        { text: "Governance Overview", link: "/learn/governance/" },
+        { text: "Reward Vaults", link: "/learn/governance/rewardvault" },
+      ],
     },
     {
       text: "Native dApps",

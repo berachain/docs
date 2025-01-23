@@ -28,6 +28,7 @@ export default defineConfig({
   description: `${constants.websites.docsSwap.description}`,
   cleanUrls: true,
   srcDir: "content",
+  ignoreDeadLinks: true,
   head: [
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "en" }],

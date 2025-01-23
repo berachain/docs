@@ -17,6 +17,10 @@ head:
 
 # Berachain Honey Swap 🐻⛓️
 
+Honey Swap allows users to trade approved stables/assets for [$HONEY](https://docs.berachain.com/learn/pol/tokens/honey).
+
+Learn more about the mechanics of [$HONEY](/learn/pol/tokens/honey).
+
 <a :href="config.mainnet.dapps.honeySwap.url">
 
 ![Beracahin Honey Swap dApp](/assets/honey_swap.png)
@@ -24,5 +28,3 @@ head:
 </a>
 
 > <small><a :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.url}}</a></small>
-
-HONEY Swap was made to instantly trade approved stables/assets for [`$HONEY`](/learn/pol/tokens/honey). To learn more about the uses of `$HONEY`, head over to [How is $HONEY used?](/learn/pol/tokens/honey#how-is-honey-used)
