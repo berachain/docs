@@ -42,7 +42,7 @@
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
-        "url": "https://hub.berachain.com/",
+        "url": "https://docs.berachain.com/",
         "apiUrl": "https://REPLACEME",
         "balancerSubgraphUrl": "https://REPLACEME",
         "balancerApiUrl": "https://REPLACEME",
@@ -50,7 +50,7 @@
       },
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
-        "url": "https://honey.berachain.com/"
+        "url": "https://docs.berachain.com/"
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
@@ -64,7 +64,7 @@
       },
       "hub": {
         "name": "Berachain Hub",
-        "url": "https://hub.berachain.com/"
+        "url": "https://docs.berachain.com/"
       }
     },
     "thirdparty": {
