@@ -11,14 +11,20 @@ head:
       content: How Berachain's Governance Works
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Berachain Governance
 
 Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
 
-- PoL asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
+- Proof-of-Liquidity asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
 - Native dApp governance (e.g., changes to BeraSwap's protocol fees)
 
 ## Governance Process
+
+![Governance Process](/assets/governance-process.png)
 
 The governance process on Berachain follows several stages:
 
@@ -36,21 +42,23 @@ The governance process on Berachain follows several stages:
 
 ## Guardian Oversight
 
-During the timelock period, Berachain's guardian system provides an additional layer of security. Guardians can veto malicious proposals (e.g., hostile takeover, unauthorized code changes) to protect the Berachain ecosystem.
+During the **Timelock** period, Berachain's guardian system provides an additional layer of security. Guardians can veto malicious proposals (e.g., hostile takeover, unauthorized code changes) to protect the Berachain ecosystem.
 
 Guardians act through a 5-of-9 multisig with elected signers. Their veto power is enacted as a cancellation of a proposal during the timelock period, serving as a last line of defense against potentially harmful changes.
 
-![Governance Process](/assets/governance-process.png)
-
 ## Creating a Governance Proposal
 
-To create a governance proposal on Berachain:
+Governance proposals can be created through <a :href="config.mainnet.dapps.hub.url + 'governance/general/'">
+BeraHub
+</a>.
+
+Generally, creating a governance proposal on Berachain Governance requires adhering to the following:
 
 1. **Ensure Sufficient Voting Power**: You need sufficient `$BGT`, either owned directly or delegated to you by other token holders.
 
 2. **Delegate `$BGT`**: Even if you own the required `$BGT`, you must delegate it to yourself (or have it delegated by others) to gain voting power.
 
-3. **Prepare Your Proposal**: Clearly define the changes you want to implement. For example, to add a Reward Vault to the BeraChef contract, you would need to specify the vault address and the function call to update the "friends of the chef."
+3. **Prepare Your Proposal**: Clearly define the changes you want to implement. For example, to whitelist a Reward Vault to the BeraChef contract, you would need to specify the vault address and encode the correct function signature.
 
 4. **Submit the Proposal**: Use the governance contract to submit your proposal on-chain. This typically involves calling a `propose` function with the necessary parameters.
 
@@ -60,12 +68,12 @@ To create a governance proposal on Berachain:
 
 For a detailed walkthrough of creating a governance proposal, including code examples and step-by-step instructions, please refer to our [full tutorial](https://github.com/berachain/guides/tree/main/apps/berachain-governance-proposal).
 
-## Governance Values
+## Governance Parameters
 
-| State             | Criteria                                  |
-| ----------------- | ----------------------------------------- |
-| Proposal Creation | 1000 `$BGT` Required                      |
-| Pending State     | 1-hour waiting period                     |
-| Voting Period     | 5-days     
+| State             | Criteria                                            |
+| ----------------- | --------------------------------------------------- |
+| Proposal Creation | 1000 `$BGT` Required                                |
+| Pending State     | 1-hour waiting period                               |
+| Voting Period     | 5-days                                              |
 | Proposal Outcome  | 20% of total `$BGT` supply required to reach quorum |
-| Timelock | 2 days delay                          |
+| Timelock          | 2 days delay                                        |

@@ -26,7 +26,9 @@ head:
 
 The `$BERA` token serves two main purposes on the Berachain network:
 
-1. Paying for transactions on the blockchain ($BERA also referred to as the "gas token")
-2. Staking for activating validator nodes. Validators have to stake 250K to 10M BERA to spin up a validator. Within the active set, the more `$BERA` a validator has staked, the more frequently they are chosen to propose blocks. The economic value of all `$BERA` tokens staked adds up to form the base layer the security of the chain with [`$BGT`](/learn/pol/tokens/bgt) building on-top of it for enhanced security.
+1. Paying for transactions on the blockchain (`$BERA` also referred to as the "gas token")
+2. Staking for activating validator nodes
 
-To learn more about how `$BERA` staking affects block production, check out the docs on [block production](../bgtmath.md).
+   Validators have to stake `$BERA` to operate a validator. Within the active set, the more `$BERA` a validator has staked, the more frequently they are chosen to propose blocks. The economic value of all `$BERA` tokens staked forms the economic security of the chain, with [`$BGT`](/learn/pol/tokens/bgt) dynamics controlling its inflation.
+
+To learn more about how `$BERA` staking affects block production and emissions, see [Block Production](/learn/pol/bgtmath.md).

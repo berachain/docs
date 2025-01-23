@@ -13,7 +13,11 @@ In a nutshell, here's how Incentives work:
 
 ## Incentive Marketplace Operations
 
-[Token managers](/learn/governance/rewardvault#token-whitelisting) are the only ones entitled to 1) add incentive tokens and 2) control incentive parameters on a Reward Vault.
+[Token managers](/learn/governance/rewardvault#token-whitelisting) are the only ones entitled to 1) add incentive tokens and 2) control incentive parameters on a Reward Vault. The key entrypoint is the `addIncentive` function on the Reward Vault contract:
+
+```solidity
+function addIncentive(address token, uint256 amount, uint256 incentiveRate) external;
+```
 
 ### Rate Adjustments
 

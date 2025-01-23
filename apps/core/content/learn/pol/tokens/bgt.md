@@ -24,19 +24,22 @@ head:
   <Token title="$BGT" image="/assets/BGT.png" />
 </ClientOnly>
 
-Proof of Stake blockchains have a governance token that is used to secure the network through staking with validators. Oftentimes, this is the main network token and is used for gas, staking, governance and economic incentives.
+Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking, and which is additionally used for gas, governance and economic incentives.
 
-However, because of Berachain's three-token Proof of Liquidity model, the functions of governance and economic incentives are separated into its own token. This token is `$BGT` (Bera Governance Token).
-
-`$BGT` is non-transferrable and can only be acquired by providing liquidity in PoL-eligible assets (e.g. liquidity on BeraSwap).
+Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into its own token. This token is `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
 
 ## Earning `$BGT`
 
-`$BGT` can be accumulated by performing certain actions in dApps with whitelisted [Reward Vaults](../rewardvaults.md). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward vaults correspond to some form of productive activity provided on Berachain, and are created after being whitelisted (by `$BGT` governance). Users can subsequently stake the indicated token in reward vaults to earn `$BGT`. Some examples include:
+`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](../rewardvaults.md). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
 
-- Depositing liquidity in the native BeraSwap for an LP pair that is earning `$BGT` emissions
+The typical flow is for users to supply liquidity and receive a receipt token for that activity, which they can then stake in reward vaults to earn `$BGT`. Some examples include:
 
-Once a user has accumulated BGT, the user can claim this BGT from Berahub.
+- Depositing liquidity in the native BeraSwap for an LP pair whitelisted to earn `$BGT` emissions
+- Supplying assets to a lending market, and staking the interest-bearing receipt tokens in a reward vault
+
+Users can see available earning options at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">{{config.mainnet.dapps.hub.url}}pools</a>.
+
+Users can claim accumulated `$BGT` from Berahub.
 
 <video src="/assets/videos/claimBGT.mp4" controls></video>
 
@@ -44,32 +47,32 @@ Once a user has accumulated BGT, the user can claim this BGT from Berahub.
 
 ### Governance
 
-`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions, discussed in Governance. `$BGT` holders can either vote on proposals themselves or delegate their voting power to any other address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
+`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions (see [Governance](/learn/governance)).
+
+`$BGT` holders can either vote on proposals themselves or delegate their voting power to another address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
 
 <video src="/assets/videos/delegatevotingpower.mp4" controls></video>
 
-### Incentives
+### Earn
 
-Protocols can provide [Incentives](/learn/pol/incentives) to attract `$BGT` emissions from validators. The amount that validators can earn in protocol incentives is determined by the amount of `$BGT` that is boosting them. Thus, validators that return the maximum value to those boosting them are likely to receive the most boost.
+#### Boosting Validators/Incentives
 
-### Fees From Native Dapps
+Users can select validators to "boost" with their `$BGT`, increasing the validator's [reward emission](../bgtmath.md). The amount of [Incentives](/learn/pol/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders that boosted the validator.
 
-Users who are boosting validators with their `$BGT` collect a share of Berachain core dApp fees, namely fees BeraSwap and HoneySwap. Berachain's native dapps collect fees to be distributed to those delegating BGT. This is done via a smart contract, `FeeCollector.sol`.
+<video src="/assets/videos/boostval.mp4" controls></video>
 
-At a high level, `FeeCollector` does three things:
+#### dApp Fees
 
-- Collects fees from Berachain dApps
-- Auctions these fees for a payout token
-- Distributes the payout token to those boosting validators
+`$BGT` holders collect a share of Berachain core dApp fees, namely fees BeraSwap and HoneySwap. Berachain's native dapps collect fees to be distributed to those delegating BGT. This is done via the `FeeCollector` contract.
+
+At a high level, `FeeCollector` auctions those fees collected from dApps for `$HONEY`, and then distributes them pro rata to `$BGT` holders
+
+:::tip
+`$BGT` holders must have boosted a validator to be eligible to receive dApp fees.
+:::
 
 ### Burning for `$BERA`
 
 `$BGT` can be burned 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
 
 <video src="/assets/videos/burnbgtforbera.mp4" controls></video>
-
-### Boosting a validator
-
-Users can boost a validator with your BGT, allowing that validator to increase its [reward emission](../bgtmath.md) and subsequently push more `$BGT` to Reward Vaults defined in the validator's reward allocation.
-
-<video src="/assets/videos/boostval.mp4" controls></video>

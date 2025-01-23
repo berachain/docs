@@ -1,4 +1,4 @@
-# Reward Vaults Governance
+# Reward Vault Governance
 
 > **NOTE:** For a detailed guide on creating reward vaults and associated governance proposals see this [blog post](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults).
 

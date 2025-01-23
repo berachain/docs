@@ -34,9 +34,9 @@ const SIDEBAR = {
         {
           text: "Tokens",
           items: [
-            { text: "$BERA", link: "/learn/pol/tokens/bera" },
-            { text: "$BGT", link: "/learn/pol/tokens/bgt" },
-            { text: "$HONEY", link: "/learn/pol/tokens/honey" },
+            { text: "BERA", link: "/learn/pol/tokens/bera" },
+            { text: "BGT", link: "/learn/pol/tokens/bgt" },
+            { text: "HONEY", link: "/learn/pol/tokens/honey" },
           ],
         },
         { text: "PoL FAQs", link: "/learn/pol/faqs" },
