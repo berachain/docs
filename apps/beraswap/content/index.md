@@ -9,6 +9,11 @@ layout: page
   import { IconMoneybag, IconVocabulary, IconTerminal, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld } from '@tabler/icons-vue';
 </script>
 
+<div class="custom-block warning" style="margin-bottom: 10px;">
+  <p class="custom-block-title">🚧 Under Construction</p>
+  <p>Documentation is currently under development. Some pages/links may be incomplete or subject to change.</p>
+</div>
+
 <!-- START -->
 <section class="VPHero">
   <div class="container">
@@ -69,10 +74,13 @@ layout: page
     :icon="IconBrandGithub"
     type="alt"
   />
+  <!-- TODO: remove at mainnet launch -->
+  <!-- Replace link with config.mainnet.dapps.berascan.url -->
   <Feature
-    title="Beratrail"
+    title="Berascan"
+    target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.dapps.berascan.url"
+    :link="config.mainnet.thirdparty.routescan.url"
     :icon="IconSearch"
     type="alt"
   />
