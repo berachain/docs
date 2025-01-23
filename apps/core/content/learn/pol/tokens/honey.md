@@ -35,7 +35,7 @@ Alternatively, `$HONEY` can be obtained by swapping from other assets on [BeraSw
 
 ### Collateral Assets
 
-The initial collateral options will be `$USDC` and `$BEE` (`$pyUSD`). New assets used to mint `$HONEY` can be added via governance.
+The initial collateral options will be `$USDC` and `$BYUSD` (`$pyUSD`). New assets used to mint `$HONEY` can be added via governance.
 
 ## How is $HONEY Used?
 
