@@ -58,7 +58,7 @@ and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-
 
 ### Subgraphs & Data Indexers
 
-- [Goldsky](https://goldsky.com)
+- [Goldsky](https://docs.goldsky.com/chains/berachain)
 - [Ghost Graph](https://ghostgraph.xyz)
 - [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
 - [Envio](https://envio.dev)
