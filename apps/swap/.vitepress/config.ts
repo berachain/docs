@@ -151,7 +151,7 @@ export default defineConfig({
         {
           find: /^.*\/VPNavBar\.vue$/,
           replacement: fileURLToPath(
-            new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
+            new URL("../node_modules/@berachain/ui/NavBarWarning.vue", import.meta.url)
           ),
         },
         {
@@ -168,6 +168,15 @@ export default defineConfig({
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/NavBarMenuLink.vue",
+              import.meta.url
+            )
+          ),
+        },
+        {
+          find: /^.*\/VPFlyout\.vue$/,
+          replacement: fileURLToPath(
+            new URL(
+              "../node_modules/@berachain/ui/Flyout.vue",
               import.meta.url
             )
           ),

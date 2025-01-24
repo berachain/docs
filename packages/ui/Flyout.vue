@@ -162,5 +162,6 @@ Styles
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
+  z-index: 1000;
 }
 </style>
