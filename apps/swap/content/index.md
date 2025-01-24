@@ -9,10 +9,10 @@ layout: page
   import { IconMoneybag, IconVocabulary, IconTerminal, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld } from '@tabler/icons-vue';
 </script>
 
-<div class="custom-block warning" style="margin-bottom: 10px;">
-  <p class="custom-block-title">🚧 Under Construction</p>
+<aside class="custom-block warning">
+  <h2>🚧 Under Construction</h2>
   <p>Documentation is currently under development. Some pages/links may be incomplete or subject to change.</p>
-</div>
+</aside>
 
 <!-- START -->
 <section class="VPHero">
@@ -122,6 +122,23 @@ layout: page
 </section>
 
 <style>
+  .custom-block.warning {
+    margin-bottom: 24px;
+    padding: 24px;
+  }
+
+  .custom-block.warning h2 {
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    margin-top: 0;
+    color: var(--vp-c-brand-1);
+  }
+
+  .custom-block.warning p {
+    margin: 0;
+  }
+  
   .VPPage {
     padding: 32px 24px 96px 24px;
   }

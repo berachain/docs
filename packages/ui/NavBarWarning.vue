@@ -71,6 +71,9 @@ Template
       </div>
     </div>
   </div>
+  <div class="VPNavBarWarning">
+    <span>🚧 Under Development!</span> <span class="VPNavBarWarningMobile">May be incomplete.</span><span class="VPNavBarWarningDesktop">Some pages/links may be incomplete or subject to change.</span>
+  </div>
   <AskCookbook />
 </template>
 
@@ -79,6 +82,21 @@ Styles
 ========================================================
 -->
 <style>
+.VPNav .VPNavBarWarning {
+  background: var(--vp-c-brand-1);
+  text-align: center;
+  display: block;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-bg);
+  z-index: 0;
+}
+
 .VPNavBarWarning span.VPNavBarWarningDesktop {
   display: none;
 }
@@ -88,6 +106,14 @@ Styles
 }
 
 @media (min-width: 960px) {
+  .VPNavBarWarning span.VPNavBarWarningMobile {
+    display: none;
+  }
+
+  .VPNavBarWarning span.VPNavBarWarningDesktop {
+    display: inline-block;
+  }
+
   .VPNavBarTitle.has-sidebar .title {
     width: var(--vp-sidebar-width);
     padding: 0 24px;
