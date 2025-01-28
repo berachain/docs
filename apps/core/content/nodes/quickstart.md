@@ -218,29 +218,29 @@ MacOS users need to add an extra set of quotes for `sed`: `sed -i` becomes `sed 
 
 # Rename the moniker in `config.toml`
 MONIKER_NAME=<YOUR_NODE_MONIKER>; # Ex: MONIKER_NAME=BingBongNode
-sed -i "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i '' "s/^moniker = \".*\"/moniker = \"$MONIKER_NAME\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # set rpc dial url in `app.toml`
 RPC_DIAL_URL=http://localhost:8551; # Adjust as needed
-sed -i "s|^rpc-dial-url = \".*\"|rpc-dial-url = \"$RPC_DIAL_URL\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i '' "s|^rpc-dial-url = \".*\"|rpc-dial-url = \"$RPC_DIAL_URL\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # set jwt.hex path in `app.toml`
 JWT_PATH=$PWD/build/bin/config/beacond/jwt.hex; # generating in next step
-sed -i "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i '' "s|^jwt-secret-path = \".*\"|jwt-secret-path = \"$JWT_PATH\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # set suggested fee recipient wallet address in `app.toml`
 WALLET_ADDRESS_FEE_RECIPIENT=<0xYOUR_WALLET_ADDRESS>;
-sed -i "s|^suggested-fee-recipient = \".*\"|suggested-fee-recipient = \"$WALLET_ADDRESS_FEE_RECIPIENT\"|" "$PWD/build/bin/config/beacond/config/app.toml";
+sed -i '' "s|^suggested-fee-recipient = \".*\"|suggested-fee-recipient = \"$WALLET_ADDRESS_FEE_RECIPIENT\"|" "$PWD/build/bin/config/beacond/config/app.toml";
 
 # seeds in `config.toml`
 # - Comma separated list of seeds
 SEEDS_URL="https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/80084/cl-seeds.txt";
 SEEDS=$(curl -s "$SEEDS_URL" | tail -n +2 | tr '\n' ',' | sed 's/,$//');
-sed -i "s/^seeds = \".*\"/seeds = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i '' "s/^seeds = \".*\"/seeds = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 
 # persistent peers in `config.toml`
 # - Comma separated list of nodes to keep persistent connections to
-sed -i "s/^persistent_peers = \".*\"/persistent_peers = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
+sed -i '' "s/^persistent_peers = \".*\"/persistent_peers = \"$SEEDS\"/" "$PWD/build/bin/config/beacond/config/config.toml";
 ```
 
 ### Step 3 - Generate JWT Token
