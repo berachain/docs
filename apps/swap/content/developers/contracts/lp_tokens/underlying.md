@@ -31,6 +31,7 @@ return (tokens, yourUnderlyingBalances);
 ### Stable Pools
 
 For stable pools in BeraSwap:
+
 1. Use `getActualSupply()` instead of `totalSupply()` to get the correct pool supply
 2. If you've staked your LP tokens, calculate your total LP token balance as:
    ```solidity
@@ -47,7 +48,7 @@ Let's say you want to know your underlying BERA and HONEY balances for a BERA/HO
 | 2    | Get LP token balance | yourLpTokens = 100                                          |
 | 3    | Get total LP supply  | actualSupply = getActualSupply() = 1000                     |
 | 4    | Calculate pool share | yourPoolShare = 100 / 1000 = 0.1 (10%)                      |
-| 5    | Calculate underlying | yourBera = 1000 * 0.1 = 100 BERA                           |
-| 6    | Calculate underlying | yourHoney = 10000 * 0.1 = 1000 HONEY                       |
+| 5    | Calculate underlying | yourBera = 1000 \* 0.1 = 100 BERA                           |
+| 6    | Calculate underlying | yourHoney = 10000 \* 0.1 = 1000 HONEY                       |
 
 In this example, your 100 LP tokens represent 100 BERA and 1000 HONEY.
