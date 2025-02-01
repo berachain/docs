@@ -147,17 +147,19 @@ Each swap is independent and executes in parallel, optimizing gas usage.
 #### Example 4: Combined GIVEN_OUT Swaps
 
 This example demonstrates how to combine a multi-hop swap with a single-hop swap in parallel, all using GIVEN_OUT mode. It performs two independent swaps:
+
 1. A multi-hop swap A→B→C→D to get exactly 100 D
 2. A single swap E→F to get exactly 50 F
 
-| Step | Amount | Token Out | Token In | Description                       |
-| ---- | ------ | --------- | -------- | --------------------------------- |
-| 0    | 100    | D         | C        | First step: Request exactly 100 D |
-| 1    | 0      | C         | B        | Second step: Use all C from previous step |
-| 2    | 0      | B         | A        | Third step: Calculate required A input |
+| Step | Amount | Token Out | Token In | Description                                 |
+| ---- | ------ | --------- | -------- | ------------------------------------------- |
+| 0    | 100    | D         | C        | First step: Request exactly 100 D           |
+| 1    | 0      | C         | B        | Second step: Use all C from previous step   |
+| 2    | 0      | B         | A        | Third step: Calculate required A input      |
 | 3    | 50     | F         | E        | Independent parallel swap: Get exactly 50 F |
 
 In this example:
+
 - Steps 0-2 form one multi-hop path (A→B→C→D) where we want exactly 100 D
 - Step 3 is a completely independent swap (E→F) where we want exactly 50 F
 - BeraSwap will calculate the required amounts of tokens A and E needed as inputs

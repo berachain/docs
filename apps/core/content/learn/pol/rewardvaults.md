@@ -45,8 +45,6 @@ To understand why validators would choose to emit `$BGT` to a particular reward 
 
 ![Reward Vaults](/assets/rewardallocation.png)
 
-To understand why validators would choose to emit `$BGT` to a particular reward vault over another, refer to [Incentives in PoL](/learn/pol/incentives), which discusses how protocols can influence validator behavior with economic incentives.
-
 ## Vault Creation
 
 New Reward Vaults can be created permissionlessly, and can be done so at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.

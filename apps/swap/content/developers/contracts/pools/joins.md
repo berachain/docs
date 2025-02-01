@@ -35,11 +35,11 @@ struct JoinPoolRequest {
 }
 ```
 
-| Field               | Type      | Description                                                          |
-| ------------------- | --------- | -------------------------------------------------------------------- |
-| assets              | address[] | Sorted list of all tokens in pool                                    |
-| maxAmountsIn        | uint256[] | Maximum token amounts to send                                        |
-| userData            | bytes     | Custom bytes field for join parameters                               |
+| Field               | Type      | Description                                                                                                  |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------ |
+| assets              | address[] | Sorted list of all tokens in pool                                                                            |
+| maxAmountsIn        | uint256[] | Maximum token amounts to send                                                                                |
+| userData            | bytes     | Custom bytes field for join parameters                                                                       |
 | fromInternalBalance | bool      | If `fromInternalBalance` is true, the caller's Internal Balance will be preferred: ERC20 transfers will only |
 
 ### Token Ordering

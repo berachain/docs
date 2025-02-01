@@ -15,12 +15,12 @@ exitPool(
 
 ### Arguments Explained
 
-| Parameter | Type            | Description                                           |
-| --------- | --------------- | ----------------------------------------------------- |
-| poolId    | bytes32         | ID of the pool you're exiting                         |
-| sender    | address         | Address sending LP tokens                             |
-| recipient | address         | Address receiving tokens                              |
-| request   | ExitPoolRequest | Struct containing exit details (see below)            |
+| Parameter | Type            | Description                                |
+| --------- | --------------- | ------------------------------------------ |
+| poolId    | bytes32         | ID of the pool you're exiting              |
+| sender    | address         | Address sending LP tokens                  |
+| recipient | address         | Address receiving tokens                   |
+| request   | ExitPoolRequest | Struct containing exit details (see below) |
 
 ### ExitPoolRequest Struct
 
@@ -33,11 +33,11 @@ struct ExitPoolRequest {
 }
 ```
 
-| Field             | Type      | Description                                                                |
-| ----------------- | --------- | -------------------------------------------------------------------------- |
-| assets            | address[] | Sorted list of all tokens in pool                                          |
-| minAmountsOut     | uint256[] | Minimum token receive amounts                                              |
-| userData          | bytes     | Custom bytes field for exit parameters                                     |
+| Field             | Type      | Description                                                                                                                                          |
+| ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| assets            | address[] | Sorted list of all tokens in pool                                                                                                                    |
+| minAmountsOut     | uint256[] | Minimum token receive amounts                                                                                                                        |
+| userData          | bytes     | Custom bytes field for exit parameters                                                                                                               |
 | toInternalBalance | bool      | True to credit tokens to recipient's internal balance in the Vault (not available for BERA), false to transfer tokens directly to recipient's wallet |
 
 ### Token Ordering

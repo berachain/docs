@@ -32,6 +32,7 @@ lpTokenPriceUsd = poolValueUsd / lpToken.totalSupply();
 ### Stable Pools
 
 For stable pools, they have pre-minted LP tokens. In such cases:
+
 - Use `getActualSupply()` instead of `totalSupply()` to get the correct pool supply
 
 ### Calculating Value for a Specific Address

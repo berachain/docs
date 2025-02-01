@@ -32,4 +32,3 @@ The authorizer serves as BeraSwap's permission management interface, acting as a
 ### Coordinator Role
 
 The coordinator plays a vital role in the execution phase of governance, handling the process of implementing protocol changes. They manage staged governance actions and control the timing of execution, ensuring that changes occur in the correct sequence and with appropriate delays. The coordinator verifies that each change is completed successfully and has the authority to handle emergency cancellations if issues arise during implementation.
-
