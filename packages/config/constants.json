@@ -611,6 +611,14 @@
     "beaconkit": {
       "name": "BeaconKit",
       "url": "https://github.com/berachain/beacon-kit"
+    },
+    "checker": {
+      "name": "Airdrop Checker",
+      "url": "https://checker.berachain.com"
+    },
+    "claim": {
+      "name": "Airdrop Claim",
+      "url": "https://claim.berachain.com"
     }
   },
   "socials": {
