@@ -28,6 +28,7 @@ Quickly add Berachain's network to your wallet with one-click.
 
 <ClientOnly>
   <AddNetwork
+    :testnet="false"
     :chainId="config.mainnet.chainId"
     :chainName="config.mainnet.chainName"
     :nativeCurrencyName="config.mainnet.currencyName"
