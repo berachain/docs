@@ -26,7 +26,7 @@ Ensure you are only checking allocation on **<a :href="config.websites.checker.u
 
 ## Check $BERA Airdrop 🔍
 
-The airdrop checker is a tool to let you learn your allocation on launch day.
+The airdrop checker is a tool to let you learn your allocation on launch day. Your genesis allocation from testnet use, testnet user RFA allocations, and ecosystem NFTs is already in your wallet.
 
 You can check your allocations in two ways:
 
@@ -34,6 +34,8 @@ You can check your allocations in two ways:
 - Connect relevant socials
 
 You will be able to see your tokens available to claim on launch.
+
+The checker reads NFT token allocations from official Bera NFTs on Ethereum mainnet. Recipients of the social airdrop and RFB must use social login, then tie their allocations to a wallet. RFB and social airdrop claims will be distributed on Feb 10th.
 
 <a :href="config.websites.checker.url">
 
