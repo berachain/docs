@@ -50,7 +50,7 @@ Berachain's growth to date is largely driven by an unparalleled community and a 
 
 ##### Airdrop - 79,000,000 (15.8%)
 
-15.8% of Berachain's token supply will be distributed through airdrops, recognizing a variety of parties within the Berachain ecosystem, including testnet users, Berachain NFT holders, ecosystem NFT holders, social supporters, ecosystem dApps, community builders and more. For more information on the airdrop breakdown, please visit the [Blog](https://blog.berachain.com/blog/berachain-airdrop-update).
+15.8% of Berachain's token supply will be distributed through airdrops, recognizing a variety of parties within the Berachain ecosystem, including testnet users, Berachain NFT holders, ecosystem NFT holders, social supporters, ecosystem dApps, community builders and more. For more information on the airdrop breakdown, please visit the [Blog](https://blog.berachain.com/blog/berachain-airdrop-overview).
 
 ##### Future Community Initiatives - 65,500,000 (13.1%)
 
