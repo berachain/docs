@@ -28,7 +28,7 @@ head:
 
 `$BERA` serves as the native gas and staking token of Berachain, the first blockchain powered by Proof-of-Liquidity, whilst `$BGT` facilitates governance and economic incentives.
 
-[Learn more about BERA's role in the network](/learn/pol/tokens/bera)
+[Learn more about BERA's role in the network](/learn/pol/tokens/bera).
 
 ## Distribution and Allocation
 
@@ -50,11 +50,11 @@ Learn more about the airdrop [here](https://blog.berachain.com/blog/berachain-ai
 
 #### Ecosystem & R&D
 
-20% of Berachain’s token supply will be used to support ecosystem development, R&D, growth initiatives, and the operations of the Berachain Foundation. This will largely focus on programs for developers and builders (see [Boyco](https://boyco.berachain.com/)), node operator delegations, and evolutions of Proof of Liquidity and BeaconKit.
+20% of Berachain's token supply will be used to support ecosystem development, R&D, growth initiatives, and the operations of the Berachain Foundation. This will largely focus on programs for developers and builders (see [Boyco](https://boyco.berachain.com/)), node operator delegations, and evolutions of Proof-of-Liquidity and BeaconKit.
 
-At launch, 10% of `$BERA` supply is unlocked from this bucket for ecosystem growth, developer tooling / infrastructure, liquidity provisioning and more.
+_At launch, 10% of `$BERA` supply is unlocked from this bucket for ecosystem growth, developer tooling / infrastructure, liquidity provisioning and more._
 
-## Vesting and Token Release Schedule
+## Token Release Schedule
 
 All parties follow an identical vesting schedule:
 
