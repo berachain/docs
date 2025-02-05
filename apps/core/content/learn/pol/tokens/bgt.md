@@ -63,9 +63,9 @@ Users can select validators to "boost" with their `$BGT`, increasing the validat
 
 #### dApp Fees
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees BeraSwap and HoneySwap. This is done via the `FeeCollector` contract.
+Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BeraSwap and HoneySwap. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
 
-At a high level, `FeeCollector` auctions those fees collected from dApps for `$WBERA`, and then distributes them pro rata to those boosting with their `$BGT` holders
+At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA`, and then distributes them pro rata to `$BGT` holders who have boosted a validator.
 
 ### Burning for `$BERA`
 
