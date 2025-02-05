@@ -34,7 +34,7 @@ head:
 
 The total genesis supply of 500 million `$BERA` is allocated across five categories:
 
-![BERA Allocation](/assets/bera-allocation.png)
+![BERA Allocation](/assets/bera-allocation.jpeg)
 
 ### Category Descriptions
 
@@ -45,6 +45,8 @@ The total genesis supply of 500 million `$BERA` is allocated across five categor
 | **Community Airdrop**            | 79,000,000    | Parties within the Berachain ecosystem, including testnet users, Berachain NFT holders, ecosystem NFT holders, social supporters, ecosystem dApps, community builders |
 | **Ecosystem & R&D**              | 100,000,000   | Tokens distributed to ecosystem and R&D projects - more below                                                                                                         |
 | **Future Community Initiatives** | 65,500,000    | Reserved for applications, developers and users through incentive programs, grants and more, with input from the community itself via Snapshots, RFPs etc.            |
+
+Learn more about the airdrop [here](https://blog.berachain.com/blog/berachain-airdrop-update).
 
 #### Ecosystem & R&D
 
@@ -59,4 +61,4 @@ All parties follow an identical vesting schedule:
 - Initial Unlock: After a one-year cliff, 1/6th of allocated tokens are unlocked
 - Linear Vesting: The remaining 5/6ths of tokens vest linearly over the subsequent 24 months
 
-![BERA Inflation](/assets/bera-inflation.png)
+![BERA Inflation](/assets/bera-inflation.jpeg)
