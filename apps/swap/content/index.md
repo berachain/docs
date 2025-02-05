@@ -9,11 +9,6 @@ layout: page
   import { IconMoneybag, IconVocabulary, IconTerminal, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld } from '@tabler/icons-vue';
 </script>
 
-<aside class="custom-block warning">
-  <h2>🚧 Under Construction</h2>
-  <p>Documentation is currently under development. Some pages/links may be incomplete or subject to change.</p>
-</aside>
-
 <!-- START -->
 <section class="VPHero">
   <div class="container">

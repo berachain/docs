@@ -512,7 +512,7 @@
     }
   },
   "mainnet": {
-    "chainId": "80094",
+    "chainId": 80094,
     "rpcUrl": "https://rpc.berachain.com/",
     "currencySymbol": "BERA",
     "currencyName": "BERA Token",

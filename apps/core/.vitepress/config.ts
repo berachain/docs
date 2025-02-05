@@ -152,10 +152,7 @@ export default defineConfig({
         {
           find: /^.*\/VPNavBar\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBarWarning.vue",
-              import.meta.url
-            )
+            new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
           ),
         },
         {
