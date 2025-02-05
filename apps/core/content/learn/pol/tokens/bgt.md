@@ -24,9 +24,9 @@ head:
   <Token title="$BGT" image="/assets/BGT.png" />
 </ClientOnly>
 
-Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking, and which is additionally used for gas, governance and economic incentives.
+Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking, and which is additionally used for gas, governance and economic incentives. `$BGT` and the two-token model bifurcates the first two functions from the latter two.
 
-Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into its own token. This token is `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
+Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into its own token - `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
 
 ## Earning `$BGT`
 

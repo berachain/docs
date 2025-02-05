@@ -21,6 +21,7 @@ const SIDEBAR = {
         { text: "What Is BeaconKit?", link: "/learn/what-is-beaconkit" },
         { text: "Connect To Berachain", link: "/learn/connect-to-berachain" },
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
+        { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
       ],
     },
     {
@@ -34,6 +35,7 @@ const SIDEBAR = {
         {
           text: "Tokens",
           items: [
+            { text: "Tokenomics", link: "/learn/pol/tokens/tokenomics" },
             { text: "BERA", link: "/learn/pol/tokens/bera" },
             { text: "BGT", link: "/learn/pol/tokens/bgt" },
             { text: "HONEY", link: "/learn/pol/tokens/honey" },
