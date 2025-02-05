@@ -4,7 +4,7 @@
 
 # BGTStaker
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.bgtStaker.address">{{config.contracts.bgtStaker.address}}</a><span v-if="config.contracts.bgtStaker.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bgtStaker.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bgtStaker.address">{{config.mainnet.contracts.bgtStaker.address}}</a><span v-if="config.mainnet.contracts.bgtStaker.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.bgtStaker.abi">ABI JSON</a></span></small>
 
 A contract for staking BGT tokens without transferring them. BGT delegators stake in this contract and receive dApp fees.
 

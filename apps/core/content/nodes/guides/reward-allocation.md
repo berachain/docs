@@ -44,7 +44,7 @@ Each validator can customize how their rewards are distributed across different 
 Start by checking your validator's current reward allocation:
 
 ```bash-vue
-cast call {{config.contracts.berachef.address}} \
+cast call {{config.mainnet.contracts.berachef.address}} \
 "getActiveRewardAllocation(bytes)" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 --rpc-url {{config.mainnet.rpcUrl}};
@@ -78,7 +78,7 @@ The output is your validator's `RewardAllocation` struct, a tuple containing:
 An example command to queue a new allocation resembles the following:
 
 ```bash-vue
-cast send {{config.contracts.berachef.address}} \
+cast send {{config.mainnet.contracts.berachef.address}} \
 "queueNewRewardAllocation(bytes,uint64,tuple(address,uint96)[])" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 "$START_BLOCK" \
@@ -96,7 +96,7 @@ Remember that your `START_BLOCK` must be greater than the current block number +
 Check your new pending allocation:
 
 ```bash-vue
-cast call {{config.contracts.berachef.address}} \
+cast call {{config.mainnet.contracts.berachef.address}} \
 "getQueuedRewardAllocation(bytes)" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 --rpc-url {{config.mainnet.rpcUrl}};

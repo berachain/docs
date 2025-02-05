@@ -544,7 +544,7 @@
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
-        "url": "https://berascan.com",
+        "url": "https://berascan.com/",
         "apiUrl": "https://berascan.com/api",
         "apiKey": "xxxxx"
       },

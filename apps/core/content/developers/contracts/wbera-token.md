@@ -4,7 +4,7 @@
 
 # WBERA
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.wbera.address">{{config.contracts.wbera.address}}</a><span v-if="config.contracts.wbera.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.wbera.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.wbera.address">{{config.mainnet.contracts.wbera.address}}</a><span v-if="config.mainnet.contracts.wbera.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.wbera.abi">ABI JSON</a></span></small>
 
 **Inherits:** [Solady WETH](https://github.com/vectorized/solady/blob/main/src/tokens/WETH.sol)
 

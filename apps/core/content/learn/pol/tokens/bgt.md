@@ -18,7 +18,7 @@ head:
 
 # $BGT
 
-<!-- <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.bgt.address">{{config.contracts.bgt.address}}</a> -->
+<!-- <a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.mainnet.contracts.bgt.address">{{config.mainnet.contracts.bgt.address}}</a> -->
 
 <ClientOnly>
   <Token title="$BGT" image="/assets/BGT.png" />

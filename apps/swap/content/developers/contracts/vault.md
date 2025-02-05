@@ -4,7 +4,7 @@
 
 # Vault
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.vault.address">{{config.contracts.beraswap.vault.address}}</a><span v-if="config.contracts.beraswap.vault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.vault.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.beraswap.vault.address">{{config.mainnet.contracts.beraswap.vault.address}}</a><span v-if="config.mainnet.contracts.beraswap.vault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.beraswap.vault.abi">ABI JSON</a></span></small>
 
 `Vault.sol` serves as the entrypoint for all trading and liquidity operations
 

@@ -4,7 +4,7 @@
 
 # BeaconDeposit
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beaconDeposit.address">{{config.contracts.beaconDeposit.address}}</a><span v-if="config.contracts.beaconDeposit.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beaconDeposit.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.beaconDeposit.address">{{config.mainnet.contracts.beaconDeposit.address}}</a><span v-if="config.mainnet.contracts.beaconDeposit.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.beaconDeposit.abi">ABI JSON</a></span></small>
 
 The contract handling validators deposits. Its events are used by the beacon chain to manage the staking process.
 

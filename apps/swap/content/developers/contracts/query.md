@@ -17,7 +17,7 @@ head:
 
 # BalancerQueries
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.balancerQueries.address">{{config.contracts.beraswap.balancerQueries.address}}</a><span v-if="config.contracts.beraswap.balancerQueries.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.balancerQueries.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.beraswap.balancerQueries.address">{{config.mainnet.contracts.beraswap.balancerQueries.address}}</a><span v-if="config.mainnet.contracts.beraswap.balancerQueries.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.beraswap.balancerQueries.abi">ABI JSON</a></span></small>
 
 This contract provides quotes on swaps, joins and exits, simulating these operations and returning the exact
 result they would have if called on the `Vault` given the current state.

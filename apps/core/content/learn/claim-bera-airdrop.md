@@ -47,7 +47,7 @@ The checker reads NFT token allocations from official Bera NFTs on Ethereum main
 
 ## Claim $BERA Airdrop 🎁
 
-The airdrop claim is a tool to allow you to accept your tokens. Claim your tokens by following the steps below. 
+The airdrop claim is a tool to allow you to accept your tokens. Claim your tokens by following the steps below.
 
 1. Connect to **<a :href="config.websites.claim.url">{{config.websites.claim.url}}</a>**.
 
