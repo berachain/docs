@@ -60,7 +60,7 @@ Berachain's growth to date is largely driven by an unparalleled community and a 
 
 20% of Berachain's token supply will be used to support ecosystem development, R&D, growth initiatives, and the operations of the Berachain Foundation. This will largely focus on programs for developers and builders (see [Boyco](https://boyco.berachain.com/)), node operator delegations, and evolutions of Proof-of-Liquidity and BeaconKit.
 
-_At launch, 10% of `$BERA` supply is unlocked from this bucket for ecosystem growth, developer tooling / infrastructure, liquidity provisioning and more._
+_At launch, 9.5% of `$BERA` supply is unlocked from this bucket for ecosystem growth, developer tooling / infrastructure, liquidity provisioning and more._
 
 ## Token Release Schedule
 
