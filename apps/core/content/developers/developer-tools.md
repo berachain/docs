@@ -45,6 +45,8 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [Envio](https://envio.dev) (optimized read-only)
 - [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
+- [BlockPI](https://blockpi.io/)
+- [Thirdweb](https://thirdweb.com/chainlist)
 - [Tenderly](https://dashboard.tenderly.co/register?redirectTo=testnets)
 
 ### Wallets & Multisigs
@@ -54,9 +56,21 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Rabby](https://rabby.io/)
 - [Binance Web3 Wallet](https://www.binance.com/en/web3wallet)
 - [Keplr](https://keplr.app/)
+- [Rainbow Wallet](https://rainbow.me/en/)
 - [Safe](https://safe.berachain.com/welcome)
 
 and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-with-geth/rpc) for calling the chain.
+
+## Authentication & Account Abstraction
+
+- [Privy](https://www.privy.io/)
+- [Dynamic](https://www.dynamic.xyz/)
+- [Para](https://getpara.com)
+- [Thirdweb](https://thirdweb.com/explore/smart-wallet)
+- [Turnkey](https://www.turnkey.com/)
+- [ZeroDev](https://zerodev.app/)
+- [Particle](https://particle.network/)
+
 
 ### Subgraphs & Data Indexers
 
@@ -65,6 +79,7 @@ and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-
 - [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
 - [Envio](https://envio.dev)
 - [The Graph](https://thegraph.com/)
+- [Thirdweb](https://thirdweb.com/insight?ref=blog.thirdweb.com)
 
 ### Oracles
 
