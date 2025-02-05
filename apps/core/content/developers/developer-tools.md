@@ -47,7 +47,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 - [BlockPI](https://blockpi.io/)
 - [Thirdweb](https://thirdweb.com/chainlist)
-- [Tenderly](https://dashboard.tenderly.co/register?redirectTo=testnets)
+- [Tenderly](https://dashboard.tenderly.co/)
 
 ### Wallets & Multisigs
 
@@ -70,7 +70,6 @@ and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-
 - [Turnkey](https://www.turnkey.com/)
 - [ZeroDev](https://zerodev.app/)
 - [Particle](https://particle.network/)
-
 
 ### Subgraphs & Data Indexers
 
