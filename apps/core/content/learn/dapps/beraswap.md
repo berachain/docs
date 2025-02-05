@@ -33,13 +33,13 @@ Pools deposits in BeraSwap can become eligible for [$BGT](https://docs.berachain
 
 ## Default Reward Allocation
 
-Each validator can customize how their rewards are distributed across different reward vaults. If no custom allocation is set, the following default allocation is used:
+Each validator can customize how their rewards are distributed across different reward vaults. If no custom allocation is set, default allocations are used, benefitting key BeraSwap liquidity pools. The default allocation is as follows:
 
-| Pool assets | Type | Weights | Cutting board weight | Fee | Amplification |
-|-------------|------|---------|---------------------|-----|---------------|
-| Bera - Honey | Weighted | 50-50 | 35.00% | 0.30% | n.a. |
-| Bera - wETH | Weighted | 50-50 | 25.00% | 0.30% | n.a. |
-| Bera - wBTC | Weighted | 50-50 | 25.00% | 0.30% | n.a. |
-| USDC - HONEY | Stable | 50-50 | 7.50% | 0.01% | 2000 |
-| BYUSD (pyUSD) - Honey | Stable | 50-50 | 7.50% | 0.01% | 1000 |
-| **Total** | | | **100.00%** | | |
+| Pool assets           | Type     | Weights | Allocation  | Fee   | Amplification |
+| --------------------- | -------- | ------- | ----------- | ----- | ------------- |
+| BERA - HONEY          | Weighted | 50-50   | 35.00%      | 0.30% | n.a.          |
+| BERA - WETH           | Weighted | 50-50   | 25.00%      | 0.30% | n.a.          |
+| BERA - WBTC           | Weighted | 50-50   | 25.00%      | 0.30% | n.a.          |
+| USDC - HONEY          | Stable   | 50-50   | 7.50%       | 0.01% | 2000          |
+| BYUSD (pyUSD) - HONEY | Stable   | 50-50   | 7.50%       | 0.01% | 1000          |
+| **Total**             |          |         | **100.00%** |       |               |
