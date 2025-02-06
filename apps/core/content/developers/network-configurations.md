@@ -53,13 +53,13 @@ To add the network manually, insert the network details below into your wallet o
 
 See our [RPC partners](/developers/developer-tools#rpc-providers) under Developer Tools.
 
------
+---
 
 # Connecting to Berachain Testnet
 
 Berachain testnets Artio and Bartio are up, but deprecated. We will publish a new testnet to match mainnet in February 2025.
 
-<!-- 
+<!--
 
 ### What is a Testnet?
 

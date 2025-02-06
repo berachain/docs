@@ -109,7 +109,10 @@ const SIDEBAR = {
     {
       text: "Developer Guides",
       items: [
-        { text: "Mainnet Migration Guide", link: "/developers/guides/migration-guide" },
+        {
+          text: "Mainnet Migration Guide",
+          link: "/developers/guides/migration-guide",
+        },
         {
           text: "Create HelloWorld Contract Using Hardhat",
           link: "/developers/guides/create-helloworld-contract-using-hardhat",
@@ -198,10 +201,6 @@ const SIDEBAR = {
         {
           text: "Become A Validator Node",
           link: "/nodes/guides/validator",
-        },
-        {
-          text: "Loading Snapshots",
-          link: "/nodes/guides/snapshots",
         },
         {
           text: "Change Operator Address",

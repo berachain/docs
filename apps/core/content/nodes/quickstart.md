@@ -61,7 +61,7 @@ export BEACOND_BIN=$(pwd)/beacond
 export BEACOND_DATA=$(pwd)/var/beacond
 export BEACOND_CONFIG=$(pwd)/var/beacond/config
 
-export EL_AUTHRPC_PORT=8551  
+export EL_AUTHRPC_PORT=8551
 export RPC_DIAL_URL=http://localhost:$EL_AUTHRPC_PORT
 export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 
@@ -84,7 +84,7 @@ if [ ! -x "$BEACOND_BIN" ]; then
 fi
 
 if [ ! -x "$RETH_BIN" ]; then
-    echo "Error: $RETH_BIN does not exist or is not executable" 
+    echo "Error: $RETH_BIN does not exist or is not executable"
     exit 1
 fi
 ```
@@ -121,10 +121,9 @@ env
 ...
 ```
 
-
 ## Fetch Mainnet Parameters 📥
 
-The key network parameters for Berachain mainnet are downloaded by the following script. 
+The key network parameters for Berachain mainnet are downloaded by the following script.
 
 ```fetch-berachain-params.sh
 #!/bin/bash
@@ -307,7 +306,7 @@ Your genesis block hash **must** agree with the above.
 
 ## Optional: Download Snapshots 💾
 
-Though you can choose to sync the chain from scratch, it will take a while.  
+Though you can choose to sync the chain from scratch, it will take a while.
 
 The following are snapshots provided by the community. Review the [instructions for using these snapshots](https://docs.berachain.com/nodes/guides/snapshots).
 
@@ -461,10 +460,11 @@ Particularly if you are a validator, consult the guide to [Becoming an Awesome V
 
 1. Cause your operating system's startup process to launch beacond and reth at boot. Test with `sudo reboot`.
 
-2. Cause your operating system to rotate logs. 
-   * For beacond, you can turn down the verbosity by revising `config.toml` and `app.toml` to say `log-level = "warn"`.  
-   * For reth, change the invocation to use `reth node -vv` instead of `reth node` for warnings & errors.
+2. Cause your operating system to rotate logs.
 
-3. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection.  Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
+   - For beacond, you can turn down the verbosity by revising `config.toml` and `app.toml` to say `log-level = "warn"`.
+   - For reth, change the invocation to use `reth node -vv` instead of `reth node` for warnings & errors.
 
-4. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("*") set on reth.
+3. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection. Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
+
+4. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("\*") set on reth.
