@@ -50,7 +50,7 @@ You can ask `beacond help` for a list of commands, then `beacond help command` f
 Below is an example of setting up and verifying the environment and establishing that you are operating with a properly-configured beacond installation. It's okay, even encouraged, that when comissioning your validator, you do so on your validator's full node.
 
 ```bash
-# !/binbash
+# !/bin/bash
 
 export BEACOND_HOME=/full/path/to/beacond-data;
 alias beacond="/path/to/beacond --home $BEACOND_HOME";
@@ -67,7 +67,7 @@ The `0xdf6..0bda` address confirms that you have the right mainnet genesis file.
 Your identity on the consensus layer was created by beacond when you initialized your node, and is held in the `priv_validator_key.json` file. You can view the public key for this identity with 
 
 ```bash
-# !/binbash
+# !/bin/bash
 
 beacond deposit validator-keys;
 

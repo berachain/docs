@@ -17,11 +17,11 @@ head:
   import CopyToClipboard from '@berachain/ui/CopyToClipboard';
 </script>
 
-# Connecting to Berachain
+# Connecting to Berachain Mainnet
 
-To start using Berachain, join the testnet below.
+To start using Berachain, join the mainnet below.
 
-### Add the network in One Click
+## Add the network in One Click
 
 Click the button below to add the network to your MetaMask in one click.
 
@@ -37,7 +37,7 @@ Click the button below to add the network to your MetaMask in one click.
   />
 </ClientOnly>
 
-### Add the Network Manually
+## Add the Network Manually
 
 To add the network manually, insert the network details below into your wallet of choice:
 
@@ -49,13 +49,17 @@ To add the network manually, insert the network details below into your wallet o
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
-### RPC Providers
+## RPC Providers
 
 See our [RPC partners](/developers/developer-tools#rpc-providers) under Developer Tools.
 
-:::tip
-**NOTE:** Berachain WebSocket connections are available through our [RPC partners](/developers/developer-tools#rpc-providers)
-:::
+-----
+
+# Connecting to Berachain Testnet
+
+Berachain testnets Artio and Bartio are up, but deprecated. We will publish a new testnet to match mainnet in February 2025.
+
+<!-- 
 
 ### What is a Testnet?
 
@@ -66,7 +70,4 @@ Testnet is an additional blockchain network that runs separately from the Mainne
 - Creating your test address and getting test funds
 - Developing applications to ensure they work properly prior to deploying them on mainnet
 - Testing applications against new upgrades to the Berachain network prior to them being released on mainnet
-
-## Mainnet
-
-Berachain Mainnet is _NOT_ currently live and its official date is still pending.
+ -->

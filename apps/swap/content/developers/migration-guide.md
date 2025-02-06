@@ -17,6 +17,7 @@ head:
 
 # Migration Guide
 
+
 This guide assists developers in migrating their code from the bArtio implementation of BeraSwap (launched with bArtio Testnet) to the current Balancer-based BeraSwap implementation.
 
 ## General Notes

@@ -22,7 +22,18 @@ This guide will walk you through the process of using node snapshots to quickly 
 
 Snapshots are provided and managed by the community.
 
-You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md). Instructions for restoring Berachain Foundation snapshots are available below.
+### beacond snapshots
+| Provider | URL | Database |
+| -------- | --- | -------- |
+| GhostGraph - TryGhost.XYZ | https://public-snapshots.ghostgraph.xyz/bera/snapshot-beacond-mainnet.tgz | pebbledb  |
+| L0vd.com | https://berachain-snapshots.l0vd.com/snapshot-beacond-mainnet.tgz | pebbledb |
+
+
+###  Execution layer snapshots
+| Provider | Client | URL |
+| -------- | --- | -------- |
+| L0vd.com | Geth | https://berachain.snapshots.lgns.net/snapshot-geth-mainnet.tgz |
+
 
 ## What are Node Snapshots?
 

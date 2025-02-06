@@ -307,9 +307,11 @@ Your genesis block hash **must** agree with the above.
 
 ## Optional: Download Snapshots 💾
 
-Though you can choose to sync the chain from scratch, it will take a while.  Check out our  [list of community-supplied snapshots](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md).
+Though you can choose to sync the chain from scratch, it will take a while.  
 
-Carefully place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
+The following are snapshots provided by the community. Review the [instructions for using these snapshots](https://docs.berachain.com/nodes/guides/snapshots).
+
+Place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
 
 ## Run Both Clients 🏃
 
