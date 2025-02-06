@@ -194,8 +194,6 @@ forge create --rpc-url {{config.mainnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY
 
 The last step is now verify that contract that was successfully deployed.
 
-<!-- https://api.routescan.io/v2/network/testnet/evm/80084/etherscan -->
-
 ```bash-vue
 forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.mainnet.dapps.berascan.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
 

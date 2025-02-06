@@ -22,7 +22,7 @@ This guide will walk you through the process of using node snapshots to quickly 
 
 Snapshots are provided and managed by the community.
 
-You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80084/snapshots.md). Instructions for restoring Berachain Foundation snapshots are available below.
+You can find the [latest snapshots for Berachain here](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md). Instructions for restoring Berachain Foundation snapshots are available below.
 
 ## What are Node Snapshots?
 
@@ -40,7 +40,7 @@ In the case of Berachain, snapshots can be found for both the Consensus Client a
 
 **Consensus Database**
 
-On Beacon-Kit, it's possible to run your node with different databases. The default is `pebbledb`, but it's also possible to use others (the full list can be found in the [config.toml](https://github.com/berachain/beacon-kit/blob/2cc8a07618f51edb228c4ee753bbcb970f28ed35/testing/networks/80084/config.toml#L51) file after you initialize your client with beacond).
+On Beacon-Kit, it's possible to run your node with different databases. The default is `pebbledb`, but it's also possible to use others (the full list can be found in the [config.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/app.toml) file after you initialize your client with beacond).
 
 #### Execution Client Snapshots
 
