@@ -46,7 +46,7 @@ cd quickstart
 Create a file called `env.sh` and add the following:
 
 ```env.sh
-#!/bin/bash
+#!/bin/sh
 
 # CHANGE THESE TWO VALUES
 export MONIKER_NAME=camembera
@@ -54,14 +54,15 @@ export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
 
 # CHAIN CONSTANTS
 export CHAIN=mainnet-beacon-80094
-export SEED_DATA_URL=https://raw.githubusercontent.com/berachain/ooga-booga/refs/heads/main/80094/
+export SEED_DATA_URL=https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094
 
 # THESE DEPEND ON YOUR LOCAL SETUP
 export BEACOND_BIN=$(pwd)/beacond
 export BEACOND_DATA=$(pwd)/var/beacond
 export BEACOND_CONFIG=$(pwd)/var/beacond/config
 
-export RPC_DIAL_URL=http://localhost:8551
+export EL_AUTHRPC_PORT=8551  
+export RPC_DIAL_URL=http://localhost:$EL_AUTHRPC_PORT
 export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 
 export RETH_BIN=$(pwd)/reth
@@ -70,7 +71,22 @@ export RETH_GENESIS_PATH=$RETH_DATA/genesis.json
 
 export LOG_DIR=$(pwd)/var/log/
 
-mkdir -p $LOG_DIR
+# Create required directories
+mkdir -p "$BEACOND_DATA"
+mkdir -p "$BEACOND_CONFIG"
+mkdir -p "$RETH_DATA"
+mkdir -p "$LOG_DIR"
+
+# Check executables exist and are executable
+if [ ! -x "$BEACOND_BIN" ]; then
+    echo "Error: $BEACOND_BIN does not exist or is not executable"
+    exit 1
+fi
+
+if [ ! -x "$RETH_BIN" ]; then
+    echo "Error: $RETH_BIN does not exist or is not executable" 
+    exit 1
+fi
 ```
 
 These two constants should be changed:
@@ -105,6 +121,7 @@ env
 ...
 ```
 
+
 ## Fetch genesis, bootnodes, etc
 
 The key network parameters for Berachain mainnet are downloaded by the following script. Note the above env.sh defines `SEED_DATA_URL` to point to the `ooga-booga` repo.
@@ -117,19 +134,17 @@ If you prefer, you can check out `https://github.com/berachain/ooga-booga.git` i
 set -e
 . ./env.sh
 
-if [ ! -d "seed-data" ]; then
+mkdir -p seed-data
+if [ -z "$SEED_DATA_URL" ]; then
+    cp -r ooga-booga/80094/* seed-data/
+else
     mkdir -p seed-data
-    if [ -z "$SEED_DATA_URL" ]; then
-        cp -r ooga-booga/80094/* seed-data/
-    else
-        mkdir -p seed-data
-        curl -s -o seed-data/kzg-trusted-setup.json $SEED_DATA_URL/kzg-trusted-setup.json$SEED_DATA_URL_SUFFIX
-        curl -s -o seed-data/genesis.json $SEED_DATA_URL/genesis.json$SEED_DATA_URL_SUFFIX
-        curl -s -o seed-data/eth-genesis.json $SEED_DATA_URL/eth-genesis.json$SEED_DATA_URL_SUFFIX
-        curl -s -o seed-data/el-peers.txt $SEED_DATA_URL/el-peers.txt$SEED_DATA_URL_SUFFIX
-        curl -s -o seed-data/app.toml $SEED_DATA_URL/app.toml$SEED_DATA_URL_SUFFIX
-        curl -s -o seed-data/config.toml $SEED_DATA_URL/config.toml
-    fi
+    curl -s -o seed-data/kzg-trusted-setup.json $SEED_DATA_URL/kzg-trusted-setup.json$SEED_DATA_URL_SUFFIX
+    curl -s -o seed-data/genesis.json $SEED_DATA_URL/genesis.json$SEED_DATA_URL_SUFFIX
+    curl -s -o seed-data/eth-genesis.json $SEED_DATA_URL/eth-genesis.json$SEED_DATA_URL_SUFFIX
+    curl -s -o seed-data/el-peers.txt $SEED_DATA_URL/el-peers.txt$SEED_DATA_URL_SUFFIX
+    curl -s -o seed-data/app.toml $SEED_DATA_URL/app.toml$SEED_DATA_URL_SUFFIX
+    curl -s -o seed-data/config.toml $SEED_DATA_URL/config.toml
 fi
 
 md5sum seed-data/*
@@ -143,15 +158,12 @@ You can invoke the script as follows. It will print out an md5 hash of the files
 ./fetch-berachain-params.sh
 
 # [Expected Output]:
-# 7578b8b2978d3126b05c7583f7e897cc  app.toml
-# bfb4fc9fc42c9c9b1f0f2b3108cd3207  client.toml
-# 1021d186aae506482deb760e63143ae6  config.toml
-# 3caf21bb2134ed4c1970c904d2128d30  el-peers.txt
-# cd3a642dc78823aea8d80d5239231557  eth-genesis.json
-# c0b7dc21e089f9074d97957526fcd08f  eth-nether-genesis.json
-# c66dbea5ee3889e1d0a11f856f1ab9f0  genesis.json
-# 82583b3a373cca89ae404e972b2fd15c  geth-setup
-# 5d0d482758117af8dfc20e1d52c31eef  kzg-trusted-setup.json
+# 6e4179e38e11696f8402cd5f8e872726  seed-data/app.toml
+# 1021d186aae506482deb760e63143ae6  seed-data/config.toml
+# 3caf21bb2134ed4c1970c904d2128d30  seed-data/el-peers.txt
+# cd3a642dc78823aea8d80d5239231557  seed-data/eth-genesis.json
+# c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data/genesis.json
+# 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
 ```
 
 Check the signatures above with your results, and contact Discord: #bug-reports or your Validator Relations contact if you have a mismatch.
@@ -238,7 +250,7 @@ find var/beacond
 # var/beacond/data/priv_validator_state.json
 ```
 
-Your state root and block hash should agree with the above.
+Your state root and block hash **must** agree with the above.
 
 ## Set up the execution client
 
@@ -291,9 +303,11 @@ find var/reth
 # var/reth/db/mdbx.lck
 ```
 
+Your genesis block hash **must** agree with the above.
+
 ## Optional: Download snapshots
 
-Though you can choose to sync the chain from scratch, it will take a while. Check out our list of (community-supplied snapshots)[https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md].
+Though you can choose to sync the chain from scratch, it will take a while.  Check out our  [list of community-supplied snapshots](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md).
 
 Carefully place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
 
@@ -329,7 +343,6 @@ $RETH_BIN node \
 --port=30303 \
 --http \
 --http.addr=0.0.0.0 \
---http.api="eth,net,web3,txpool,debug" \
 --http.port=8545 \
 --http.corsdomain="*" \
 --bootnodes=$EL_PEERS \
@@ -339,9 +352,8 @@ $RETH_BIN node \
 --ws.port=8546 \
 --ws.origins="*" \
 --authrpc.addr=0.0.0.0 \
---authrpc.port=$PORT \
---log.file.directory=$LOG_DIR \
---metrics=0.0.0.0:6060;
+--authrpc.port=$EL_AUTHRPC_PORT \
+--log.file.directory=$LOG_DIR ;
 ```
 
 Launch two windows. In the first, run the consensus client:
@@ -446,4 +458,7 @@ curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_heigh
 Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main).
 
 1. Cause your operating system's startup process to launch beacond and reth at boot.
-2. Monitor your node's disk space, memory consumption, and service availability.
+
+2. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection.  Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
+
+3. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("*") set on reth.
