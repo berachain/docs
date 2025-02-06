@@ -27,4 +27,4 @@ Learn more about the mechanics of [$HONEY](/learn/pol/tokens/honey).
 
 </a>
 
-> <small><a :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.url}}</a></small>
+> <a :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.url}}</a>

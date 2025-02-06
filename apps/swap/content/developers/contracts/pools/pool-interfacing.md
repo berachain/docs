@@ -34,8 +34,8 @@ To interface with a pool, you will need its `poolId`, which is its unique identi
 
 You can get a `poolId` from:
 
-- A pool's URL: https://hub.berachain.com/pools/0x4a782a6ba2e47367a4b2a1551815c27dc15f479500020000000000000000000e/details/
-- The <a target="_blank" :href="config.mainnet.dapps.swap.balancerSubgraphUrl">Subgraph</a>
+- A pool's URL: <a target="_blank" :href="config.mainnet.dapps.hub.url + '/pools/' + config.mainnet.dapps.swap.examplePoolId + '/details/'">{{config.mainnet.dapps.hub.url + '/pools/' + config.mainnet.dapps.swap.examplePoolId + '/details/'}}</a>
+- The [SDK](/developers/sdk)
 - Calling `getPoolId()` on the pool contract itself if you already have it
 
 ## Common Pool Interfaces

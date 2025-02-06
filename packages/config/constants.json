@@ -532,21 +532,20 @@
     "dapps": {
       "swap": {
         "name": "Berachain Swap",
-        "url": "https://docs.berachain.com/",
-        "apiUrl": "https://REPLACEME",
-        "balancerSubgraphUrl": "https://REPLACEME",
-        "balancerApiUrl": "https://REPLACEME",
-        "examplePoolId": "0x<REPLACEME>"
+        "url": "https://hub.berachain.com/swap",
+        "apiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
+        "balancerApiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
+        "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
       },
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
-        "url": "https://docs.berachain.com/"
+        "url": "https://honey.berachain.com/"
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
         "url": "https://berascan.com/",
         "apiUrl": "https://berascan.com/api",
-        "apiKey": "xxxxx"
+        "apiKey": "YOUR_API_KEY"
       },
       "foundation": {
         "name": "Berachain Foundation",
@@ -554,7 +553,7 @@
       },
       "hub": {
         "name": "Berachain Hub",
-        "url": "https://docs.berachain.com/"
+        "url": "https://hub.berachain.com/"
       }
     },
     "thirdparty": {
