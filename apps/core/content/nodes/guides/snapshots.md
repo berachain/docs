@@ -34,6 +34,7 @@ Snapshots are provided and managed by the community.
 | L0vd.com | Geth | https://berachain.snapshots.lgns.net/snapshot-geth-mainnet.tgz |
 
 
+
 ## What are Node Snapshots?
 
 Snapshots are a way to quickly restore a node without having to re-sync the entire chain from scratch. Without them, the node would have to start from the genesis block and download every single block from the network. Instead, snapshots can save days or even weeks of syncing time.
