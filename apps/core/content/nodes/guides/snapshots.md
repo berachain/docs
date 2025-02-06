@@ -28,7 +28,6 @@ Snapshots are provided and managed by the community.
 | GhostGraph - TryGhost.XYZ | https://public-snapshots.ghostgraph.xyz/bera/snapshot-beacond-mainnet.tgz | pebbledb  |
 | L0vd.com | https://berachain-snapshots.l0vd.com/snapshot-beacond-mainnet.tgz | pebbledb |
 
-
 ###  Execution layer snapshots
 | Provider | Client | URL |
 | -------- | --- | -------- |
