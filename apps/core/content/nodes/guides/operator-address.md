@@ -53,9 +53,9 @@ YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>";
 YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>";
 
 # Genesis Configurations - DO NOT CHANGE THESE
-GENESIS_VALIDATORS_ROOT="{{config.testnet.genesisRoot}}";
-GENESIS_FORK_VERSION="{{config.testnet.genesisForkVersion}}";
-VAL_DEPOSIT_GWEI_AMOUNT="{{config.testnet.validatorDepositGweiAmount}}";
+GENESIS_VALIDATORS_ROOT="{{config.mainnet.genesisRoot}}";
+GENESIS_FORK_VERSION="{{config.mainnet.genesisForkVersion}}";
+VAL_DEPOSIT_GWEI_AMOUNT="{{config.mainnet.validatorDepositGweiAmount}}";
 DEPOSIT_CONTRACT_ADDRESS="{{config.mainnet.contracts.beaconDeposit.address}}";
 
 DEPOSIT_OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --home $YOUR_BEACOND_HOME_DIR);
