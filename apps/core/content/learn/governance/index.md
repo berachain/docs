@@ -48,7 +48,7 @@ Guardians act through a 5-of-9 multisig with elected signers. Their veto power i
 
 ## Creating a Governance Proposal
 
-Governance proposals can be created through <a :href="config.mainnet.dapps.hub.url + 'governance/general/'">
+Governance proposals can be discussed and created on <a :href="config.mainnet.dapps.hub.url + 'governance/general/'">
 BeraHub
 </a>.
 
