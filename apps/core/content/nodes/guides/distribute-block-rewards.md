@@ -23,7 +23,7 @@ The following steps will guide you through the process of distributing block rew
 
 Block rewards are distributed to both a Validator and Reward Vaults defined by the respective Validator's Reward Allocation.
 
-Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + '/address/' + config.contracts.distributor.address" target="_blank">Distributor</a> contract.
+Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + '/address/' + config.mainnet.contracts.distributor.address" target="_blank">Distributor</a> contract.
 
 ## Who Can Distribute Block Rewards?
 
@@ -34,7 +34,7 @@ Anyone can trigger this function, as long as they have access to the proof gener
 There are a few points to consider with distribution:
 
 1. **Distribute At Block N-1** - The Distributor contract can only distribute block rewards for the block that was last created and not the current block.
-2. **Block Rewards Expiration** - If rewards are not distributed before a block span of `{{config.testnet.rewardDistributionBlockExpiration}}`, the rewards are lost.
+2. **Block Rewards Expiration** - If rewards are not distributed before a block span of `{{config.mainnet.rewardDistributionBlockExpiration}}`, the rewards are lost.
 3. **Foundation Trigger Fallback** - The Berachain foundation has set up a service to call the `distributeFor` function periodically, including sometimes in a `multicall` to ensure that block rewards are distributed. However, this fallback should be considered a last resort, and Validators should plan to set up a service to handle triggering the distribution themselves.
 4. **Block Reward Tracking** - It is recommended that node operators track the block rewards they have distributed to ensure that they are not missing any rewards.
 
@@ -94,7 +94,7 @@ echo $TIMESTAMP;
 # Sanity check - isTimestampActionable? Returns true if rewards have not yet been distributed for this block.
 
 # NOTE: Distribute contract may differ
-cast call "{{config.contracts.distributor.address}}" "isTimestampActionable(uint64 timestamp) returns (bool success)" "$TIMESTAMP" --rpc-url http://localhost:8545;
+cast call "{{config.mainnet.contracts.distributor.address}}" "isTimestampActionable(uint64 timestamp) returns (bool success)" "$TIMESTAMP" --rpc-url http://localhost:8545;
 
 # [Expected Output]:
 # true
@@ -115,7 +115,7 @@ VAL_PUBKEY_PROOF=`echo $PROOF_JSON|jq -j '.validator_pubkey_proof'|sed 's/"//g'|
 # Example: Transaction successfully executed. Gas used: 104467
 WALLET_PRIVATE_KEY=<0xYOUR_WALLET_PRIVATE_KEY>;
 
-cast send "{{config.contracts.distributor.address}}" \
+cast send "{{config.mainnet.contracts.distributor.address}}" \
 "distributeFor(uint64 nextTimestamp, uint64 proposerIndex, bytes calldata pubkey, bytes32[] calldata proposerIndexProof, bytes32[] calldata pubkeyProof)" \
 "$TIMESTAMP" \
 "$PROPOSER_INDEX" \

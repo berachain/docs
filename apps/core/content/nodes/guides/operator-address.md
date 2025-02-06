@@ -53,10 +53,10 @@ YOUR_BEACOND_HOME_DIR="<YOUR_BEACOND_HOME_DIRECTORY>";
 YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS="<0xYOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS>";
 
 # Genesis Configurations - DO NOT CHANGE THESE
-GENESIS_VALIDATORS_ROOT="{{config.testnet.genesisRoot}}";
-GENESIS_FORK_VERSION="{{config.testnet.genesisForkVersion}}";
-VAL_DEPOSIT_GWEI_AMOUNT="{{config.testnet.validatorDepositGweiAmount}}";
-DEPOSIT_CONTRACT_ADDRESS="{{config.contracts.beaconDeposit.address}}";
+GENESIS_VALIDATORS_ROOT="{{config.mainnet.genesisRoot}}";
+GENESIS_FORK_VERSION="{{config.mainnet.genesisForkVersion}}";
+VAL_DEPOSIT_GWEI_AMOUNT="{{config.mainnet.validatorDepositGweiAmount}}";
+DEPOSIT_CONTRACT_ADDRESS="{{config.mainnet.contracts.beaconDeposit.address}}";
 
 DEPOSIT_OUTPUT=$(./beacond deposit create-validator $YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS $VAL_DEPOSIT_GWEI_AMOUNT $GENESIS_FORK_VERSION $GENESIS_VALIDATORS_ROOT --home $YOUR_BEACOND_HOME_DIR);
 echo $DEPOSIT_OUTPUT;
@@ -80,7 +80,7 @@ This will double check your current operator address.
 
 ```bash-vue
 # RPC URL assumed to be local but can use {{config.mainnet.rpcUrl}}
-cast call {{config.contracts.beaconDeposit.address}} "getOperator(bytes)" <0xYOUR_VALIDATOR_PUBKEY> --rpc-url http://localhost:8545;
+cast call {{config.mainnet.contracts.beaconDeposit.address}} "getOperator(bytes)" <0xYOUR_VALIDATOR_PUBKEY> --rpc-url http://localhost:8545;
 
 # [Expected Similar Output]:
 # 0x000000000000000000000000YOUR_CURRENT_OPERATOR_ADDRESS
@@ -92,5 +92,5 @@ This will change your operator address.
 
 ```bash-vue
 # RPC URL assumed to be local but can use {{config.mainnet.rpcUrl}}
-cast send {{config.contracts.beaconDeposit.address}} "requestOperatorChange(bytes,address)" <0xYOUR_VALIDATOR_PUBKEY> <0xYOUR_NEW_OPERATOR_ADDRESS> --rpc-url [<rpc_url>](http://localhost:8545) --private-key <0xYOUR_CURRENT_OPERATOR_PRIVATE_KEY>;
+cast send {{config.mainnet.contracts.beaconDeposit.address}} "requestOperatorChange(bytes,address)" <0xYOUR_VALIDATOR_PUBKEY> <0xYOUR_NEW_OPERATOR_ADDRESS> --rpc-url [<rpc_url>](http://localhost:8545) --private-key <0xYOUR_CURRENT_OPERATOR_PRIVATE_KEY>;
 ```

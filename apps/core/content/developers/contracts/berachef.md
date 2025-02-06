@@ -4,7 +4,7 @@
 
 # BeraChef
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.berachef.address">{{config.contracts.berachef.address}}</a><span v-if="config.contracts.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.berachef.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.berachef.address">{{config.mainnet.contracts.berachef.address}}</a><span v-if="config.mainnet.contracts.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.berachef.abi">ABI JSON</a></span></small>
 
 Interface of the BeraChef module for configuring where Validators are directing their `$BGT` emissions to different Reward Vaults.
 

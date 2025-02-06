@@ -190,7 +190,7 @@ contract ProtocolContractTest is Test {
 
     function setUp() public {
         IRewardVaultFactory vaultFactory = IRewardVaultFactory(
-            {{config.contracts.rewardVaultFactory.address}}
+            {{config.mainnet.contracts.rewardVaultFactory.address}}
         );
         protocol = new ProtocolContract(address(vaultFactory));
         rewardVault = protocol.rewardVault();

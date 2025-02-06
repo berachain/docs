@@ -4,7 +4,7 @@
 
 # ComposableStablePoolFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.beraswap.stablePoolFactory.address">{{config.contracts.beraswap.stablePoolFactory.address}}</a><span v-if="config.contracts.beraswap.stablePoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.beraswap.stablePoolFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.beraswap.stablePoolFactory.address">{{config.mainnet.contracts.beraswap.stablePoolFactory.address}}</a><span v-if="config.mainnet.contracts.beraswap.stablePoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.beraswap.stablePoolFactory.abi">ABI JSON</a></span></small>
 
 ## Functions
 

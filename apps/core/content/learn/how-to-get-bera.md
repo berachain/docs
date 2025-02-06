@@ -16,9 +16,9 @@ head:
 
 # How To Get $BERA 🐻
 
-`$BERA` is the network token used to send transactions on the blockchain, which is why it's sometimes called the "gas token." It's what pays for the transaction's gas.
+`$BERA` is the network token used to pay for transactions on Berachain. There are a number of ways for users to obtain `$BERA` to participate in the network.
 
-Learn more about [$BERA Token](/learn/pol/tokens/bera).
+Learn more about the [BERA Token](/learn/pol/tokens/bera).
 
 ## Bridging 🤝
 

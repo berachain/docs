@@ -4,7 +4,7 @@
 
 # Permit2
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.permit2.address">{{config.contracts.permit2.address}}</a><span v-if="config.contracts.permit2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.permit2.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.permit2.address">{{config.mainnet.contracts.permit2.address}}</a><span v-if="config.mainnet.contracts.permit2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.permit2.abi">ABI JSON</a></span></small>
 
 Permit2 handles signature-based transfers in SignatureTransfer and allowance-based transfers in AllowanceTransfer.
 
