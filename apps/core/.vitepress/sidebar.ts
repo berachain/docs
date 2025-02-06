@@ -196,11 +196,11 @@ const SIDEBAR = {
           link: "/nodes/guides/kurtosis",
         },
         {
-          text: "Run A Validator Node",
+          text: "Become A Validator Node",
           link: "/nodes/guides/validator",
         },
         {
-          text: "Restoring Nodes from Snapshots",
+          text: "Loading Snapshots",
           link: "/nodes/guides/snapshots",
         },
         {

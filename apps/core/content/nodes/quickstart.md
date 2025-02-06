@@ -32,7 +32,7 @@ The following requirements are needed to run both the execution and consensus cl
 
 Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
 
-## Getting ready
+## Getting Ready 🚀
 
 Make an area to work in:
 
@@ -122,11 +122,9 @@ env
 ```
 
 
-## Fetch genesis, bootnodes, etc
+## Fetch Mainnet Parameters 📥
 
-The key network parameters for Berachain mainnet are downloaded by the following script. Note the above env.sh defines `SEED_DATA_URL` to point to the `ooga-booga` repo.
-
-If you prefer, you can check out `https://github.com/berachain/ooga-booga.git` into the `quickstart` directory, and the script will copy the files from there instead.
+The key network parameters for Berachain mainnet are downloaded by the following script. 
 
 ```fetch-berachain-params.sh
 #!/bin/bash
@@ -168,9 +166,9 @@ You can invoke the script as follows. It will print out an md5 hash of the files
 
 Check the signatures above with your results, and contact Discord: #bug-reports or your Validator Relations contact if you have a mismatch.
 
-## Set up the consensus client
+## Set up the Consensus Client 🔗
 
-The script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
+The next script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
 then runs runs `beacond init` and `beacond jwt generate`.
 
 ```setup-beacond.sh
@@ -215,7 +213,7 @@ to become a validator_, this file should be kept safe. It cannot be regenerated,
 The other important file generated is `var/beacond/config/jwt.hex`. This contains a secret shared between the consensus client and the execution client so they can
 securely communicate. Protect this file. If you suspect it has been leaked, generate a new one with `beacond jwt generate -o $JWT_PATH`.
 
-Invoke the script:
+Invoke it:
 
 ```bash
 # FROM: ~/quickstart
@@ -252,7 +250,7 @@ find var/beacond
 
 Your state root and block hash **must** agree with the above.
 
-## Set up the execution client
+## Set up the Execution Client 🛠️
 
 Create the following script:
 
@@ -267,7 +265,7 @@ cp seed-data/eth-genesis.json $RETH_GENESIS_PATH
 $RETH_BIN init --chain $RETH_GENESIS_PATH --datadir $RETH_DATA
 ```
 
-Similar to the consensus client, the script puts in place the seed data for the chain downloaded above, and initializes the reth data store in `var/reth/`. Invoke the script:
+Similar to `setup-beacond`, `setup-reth` puts in place the seed data for the chain downloaded above, and initializes the reth data store in `var/reth/`. Invoke the script:
 
 ```bash
 # FROM: ~/quickstart
@@ -284,6 +282,8 @@ Similar to the consensus client, the script puts in place the seed data for the 
 find var/beacond
 
 find var/reth
+
+# [Expected Output]:
 # var/reth
 # var/reth/genesis.json
 # var/reth/reth.toml
@@ -305,13 +305,13 @@ find var/reth
 
 Your genesis block hash **must** agree with the above.
 
-## Optional: Download snapshots
+## Optional: Download Snapshots 💾
 
 Though you can choose to sync the chain from scratch, it will take a while.  Check out our  [list of community-supplied snapshots](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md).
 
 Carefully place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
 
-## Run both clients
+## Run Both Clients 🏃
 
 The following two scripts run the consensus and execution clients.
 
@@ -375,7 +375,7 @@ In the second, run the execution client:
 Initially this will not appear to respond, but within a minute blocks should begin flowing. There should be no significant quantity of error messages, except for
 minor complaints about disconnecting or slow peers from time to time.
 
-## Testing your node
+## Testing Your Node 🧪
 
 ### Check Sync Status 🔄
 
@@ -453,12 +453,16 @@ curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_heigh
 # 1653733
 ```
 
-## Followup steps
+## Followup Steps 📝
 
 Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main).
 
-1. Cause your operating system's startup process to launch beacond and reth at boot.
+1. Cause your operating system's startup process to launch beacond and reth at boot. Test with `sudo reboot`.
 
-2. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection.  Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
+2. Cause your operating system to rotate logs. 
+   * For beacond, you can turn down the verbosity by revising `config.toml` and `app.toml` to say `log-level = "warn"`.  
+   * For reth, change the invocation to use `reth node -vv` instead of `reth node` for warnings & errors.
 
-3. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("*") set on reth.
+3. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection.  Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
+
+4. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("*") set on reth.
