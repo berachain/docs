@@ -25,13 +25,12 @@ This will walk you through on setting up a mainnet full node with `beacond` cons
 
 The following requirements are needed to run both the execution and consensus client.
 
-* **OS**: Linux AMD64, Linux ARM64, MacOS ARM64
-* **CPU**: 8 Physical Cores
-* **RAM**: 48GB
-* **Storage**: 4TB (SSD with high IOPS)
+- **OS**: Linux AMD64, Linux ARM64, MacOS ARM64
+- **CPU**: 8 Physical Cores
+- **RAM**: 48GB
+- **Storage**: 4TB (SSD with high IOPS)
 
-Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed.  Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
-
+Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
 
 ## Getting ready
 
@@ -75,17 +74,20 @@ mkdir -p $LOG_DIR
 ```
 
 These two constants should be changed:
-1. **MONIKER_NAME**: Should be a name of your choice for your node.  This is a name presented on the chain to other nodes and is useful for debugging.
+
+1. **MONIKER_NAME**: Should be a name of your choice for your node. This is a name presented on the chain to other nodes and is useful for debugging.
 2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node.
 
 The following constants should be checked:
-* **BEACOND_BIN** should be the full path to where you placed `beacond`. The value shown above would be used if you placed `beacond` in the `quickstart` directory.
-* **RETH_BIN** should be the full path to where you placed `reth`. The value shown above would be used if you placed `reth` in the `quickstart` directory.
-* **BEACOND_DATA** and **BEACOND_CONFIG** are the directories for the database and configuration files for the consensus client.
-* **RPC_DIAL_URL** is the URL of the execution client. If you choose to arrange beacond and reth to run on different machines, you will need to change this value to the RPC URL of reth.
-* **LOG_DIR** is the directory for the log files, and should be set up with log rotation when in production.
+
+- **BEACOND_BIN** should be the full path to where you placed `beacond`. The value shown above would be used if you placed `beacond` in the `quickstart` directory.
+- **RETH_BIN** should be the full path to where you placed `reth`. The value shown above would be used if you placed `reth` in the `quickstart` directory.
+- **BEACOND_DATA** and **BEACOND_CONFIG** are the directories for the database and configuration files for the consensus client.
+- **RPC_DIAL_URL** is the URL of the execution client. If you choose to arrange beacond and reth to run on different machines, you will need to change this value to the RPC URL of reth.
+- **LOG_DIR** is the directory for the log files, and should be set up with log rotation when in production.
 
 Test env.sh to make sure it works:
+
 ```bash
 # FROM: ~/quickstart
 
@@ -154,11 +156,10 @@ You can invoke the script as follows. It will print out an md5 hash of the files
 
 Check the signatures above with your results, and contact Discord: #bug-reports or your Validator Relations contact if you have a mismatch.
 
-
 ## Set up the consensus client
 
-The script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly, 
-then runs runs `beacond init` and `beacond jwt generate`. 
+The script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
+then runs runs `beacond init` and `beacond jwt generate`.
 
 ```setup-beacond.sh
 #!/bin/bash
@@ -196,13 +197,14 @@ sed $SED_OPT 's|^suggested-fee-recipient = ".*"|suggested-fee-recipient = "'$WAL
 $BEACOND_BIN jwt generate -o $JWT_PATH
 ```
 
-The key result of `beacond init` is the file `var/beacond/config/priv_validator_key.json`.  This contains your node's private key, and *especially if you intend
-to become a validator*, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
+The key result of `beacond init` is the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key, and _especially if you intend
+to become a validator_, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
 
-The other important file generated is `var/beacond/config/jwt.hex`.  This contains a secret shared between the consensus client and the execution client so they can 
+The other important file generated is `var/beacond/config/jwt.hex`. This contains a secret shared between the consensus client and the execution client so they can
 securely communicate. Protect this file. If you suspect it has been leaked, generate a new one with `beacond jwt generate -o $JWT_PATH`.
 
 Invoke the script:
+
 ```bash
 # FROM: ~/quickstart
 
@@ -269,7 +271,7 @@ Similar to the consensus client, the script puts in place the seed data for the 
 
 find var/beacond
 
-find var/reth 
+find var/reth
 # var/reth
 # var/reth/genesis.json
 # var/reth/reth.toml
@@ -291,7 +293,7 @@ find var/reth
 
 ## Optional: Download snapshots
 
-Though you can choose to sync the chain from scratch, it will take a while.  Check out our list of (community-supplied snapshots)[https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md].
+Though you can choose to sync the chain from scratch, it will take a while. Check out our list of (community-supplied snapshots)[https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/snapshots.md].
 
 Carefully place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
 
@@ -304,7 +306,7 @@ The following two scripts run the consensus and execution clients.
 
 set -e
 . ./env.sh
-$BEACOND_BIN start --home $BEACOND_DATA 
+$BEACOND_BIN start --home $BEACOND_DATA
 ```
 
 ```run-reth.sh
@@ -341,7 +343,9 @@ $RETH_BIN node \
 --log.file.directory=$LOG_DIR \
 --metrics=0.0.0.0:6060;
 ```
-Launch two windows.  In the first, run the consensus client:
+
+Launch two windows. In the first, run the consensus client:
+
 ```bash
 # FROM: ~/quickstart
 
@@ -349,16 +353,17 @@ Launch two windows.  In the first, run the consensus client:
 ```
 
 In the second, run the execution client:
+
 ```bash
 # FROM: ~/quickstart
 
 ./run-reth.sh
 ```
 
-Initially this will not appear to respond, but within a minute blocks should begin flowing.  There should be no significant quantity of error messages, except for 
+Initially this will not appear to respond, but within a minute blocks should begin flowing. There should be no significant quantity of error messages, except for
 minor complaints about disconnecting or slow peers from time to time.
 
-## Testing your node 
+## Testing your node
 
 ### Check Sync Status 🔄
 
@@ -399,6 +404,7 @@ To check on the sync status of the consensus layer, in another terminal run the 
 If `catching_up` is set to `true`, it is still syncing.
 
 ### Testing Local RPC Node ✅
+
 Now that we have our RPC running, let's go through a few steps to verify that the network is working currently but performing a few RPC requests.
 
 :::tip
@@ -406,6 +412,7 @@ Make sure that your node is fully synced before proceeding with these steps.
 :::
 
 ### Get current execution block number
+
 ```bash
 curl --location 'http://localhost:8545' \
 --header 'Content-Type: application/json' \
@@ -420,22 +427,19 @@ curl --location 'http://localhost:8545' \
 # [Expected Output]:
 # {
 #     "jsonrpc": "2.0",
-#     "result": "0xfae90",   // [!code ++] <---- compare with block explorer 
+#     "result": "0xfae90",   // [!code ++] <---- compare with block explorer
 #     "id": 83
 # }
 ```
 
 ### Get Current Consensus Block Number
+
 ```bash
 curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_height';
 
 # [Expected Output]:
 # 1653733
 ```
-
-
-
-
 
 ## Followup steps
 
