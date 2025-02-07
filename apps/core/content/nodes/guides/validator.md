@@ -33,11 +33,11 @@ This document explains in detail how to deposit the stake for a validator, and *
 
 If you haven't, please read through the [overview](https://hackmd.io/@berachain/HJLXWhZwJe) that explains the lifecycle of a validator.
 
-# Preliminaries
+## Preliminaries
 
 **Create a new ETH account** that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef). Put that private key in the same safekeeping spot as your beacond private key.
 
-# Step 1: Configure Beacond & Confirm Genesis Validator Root
+## Step 1: Configure Beacond & Confirm Genesis Validator Root
 
 A point of reassurance about `beacond`: it _cannot_ transact on your behalf on either the execution or consensus layers. By invoking `beacond` on the command line you are not playing with TNT strapped to your money.
 
@@ -77,7 +77,7 @@ beacond deposit validator-keys;
 
 This is your **beacon chain public key**.
 
-# Step 1: Prepare registration transaction
+## Step 2: Prepare registration transaction
 
 The first registration transaction is the most important. It establishes the assocation between your validator key and your presence in the consensus layer. Mistakes in this step can result in a permanent loss of funds.
 
@@ -133,7 +133,7 @@ echo $?;
 
 You now have eveything needed to deposit the initial 10,000 BERA.
 
-# Step 2: Send registration transaction
+## Step 3: Send registration transaction
 
 > **NOTE:** Ensure you have the latest foundry installed with `foundryup`
 
@@ -183,7 +183,7 @@ cast send 0x4242424242424242424242424242424242424242 \
 -r $RPC_URL;
 ```
 
-# Step 3: Confirm successful registration
+## Step 4: Confirm successful registration
 
 There are several checks that can be done to establish this was successful:
 
@@ -193,7 +193,7 @@ There are several checks that can be done to establish this was successful:
 4. `curl http://localhost:3500/eth/v2/debug/beacon/states/head | jq .data.validators` will show your validator's public key, likely at the end of the list.
 5. call the `getOperator` function of [BeaconDeposit](https://docs.berachain.com/developers/contracts/beacondeposit), providing your beacon identity public key. This should return your selected operator address.
 
-# Step 4: Activation or top-up
+## Step 5: Activation or top-up
 
 Having completed the registration, you can now deposit additional $BERA. As of February 2025, the floor for becoming a validator is 250,000 BERA, and you must be among the top 69 validators, ordered by $BERA staked.
 
@@ -201,7 +201,7 @@ These subsequent deposits are done by calling the same `deposit` function, only 
 
 When your validator passes the threshold necessary to become an activator, it passes into the **Activation** part of the lifecycle. At the conclusion of **second epoch** after you pass the threshold -- in other words, no sooner than 13 minutes -- you become eligible for minting blocks.
 
-## Post-activation checks:
+## Post-activation checks
 
 After 2+ epochs after your activation deposit, do the following checks:
 
@@ -244,7 +244,7 @@ $ curl  http://localhost:26657/validators?page=1&per_page=100 | jq .
 # }
 ```
 
-## Steps After Becoming A Validator - FIXME needs review
+## Steps After Becoming A Validator
 
 Perform the following steps after becoming a validator.
 

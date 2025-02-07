@@ -17,7 +17,7 @@ head:
   import CopyToClipboard from '@berachain/ui/CopyToClipboard';
 </script>
 
-# Berachain Run A Node Quickstart ⚡
+# Berachain Node Quickstart ⚡
 
 This will walk you through on setting up a mainnet full node with `beacond` consensus client and a `reth` execution client.
 
@@ -32,20 +32,25 @@ The following requirements are needed to run both the execution and consensus cl
 
 Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
 
+Download the latest, appropriate, [reth](https://github.com/paradigmxyz/reth/releases) and [beacond](https://github.com/berachain/beacon-kit/tags) releases from their respective release pages.
+
+
 ## Getting Ready 🚀
 
-Make an area to work in:
+Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.
 
 ```bash
 # FROM: $HOME
 
-mkdir quickstart
-cd quickstart
+mkdir beranode
+cd beranode
 ```
 
 Create a file called `env.sh` and add the following:
 
-```env.sh
+**File:** `./env.sh`
+
+```bash
 #!/bin/sh
 
 # CHANGE THESE TWO VALUES
@@ -96,8 +101,8 @@ These two constants should be changed:
 
 The following constants should be checked:
 
-- **BEACOND_BIN** should be the full path to where you placed `beacond`. The value shown above would be used if you placed `beacond` in the `quickstart` directory.
-- **RETH_BIN** should be the full path to where you placed `reth`. The value shown above would be used if you placed `reth` in the `quickstart` directory.
+- **BEACOND_BIN** should be the full path to where you placed `beacond`. The value shown above would be used if you placed `beacond` in the `beranode` directory.
+- **RETH_BIN** should be the full path to where you placed `reth`. The value shown above would be used if you placed `reth` in the `beranode` directory.
 - **BEACOND_DATA** and **BEACOND_CONFIG** are the directories for the database and configuration files for the consensus client.
 - **RPC_DIAL_URL** is the URL of the execution client. If you choose to arrange beacond and reth to run on different machines, you will need to change this value to the RPC URL of reth.
 - **LOG_DIR** is the directory for the log files, and should be set up with log rotation when in production.
@@ -105,19 +110,19 @@ The following constants should be checked:
 Test env.sh to make sure it works:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 source env.sh
 env
 
 # [Expected Output]:
-# BEACOND_BIN=/Users/camembera/quickstart/beacond
-# BEACOND_DATA=/Users/camembera/quickstart/var/beacond
-# BEACOND_CONFIG=/Users/camembera/quickstart/var/beacond/config
+# BEACOND_BIN=/Users/camembera/beranode/beacond
+# BEACOND_DATA=/Users/camembera/beranode/var/beacond
+# BEACOND_CONFIG=/Users/camembera/beranode/var/beacond/config
 # RPC_DIAL_URL=http://localhost:8551
-# JWT_PATH=/Users/camembera/quickstart/var/beacond/config/jwt.hex
-# RETH_BIN=/Users/camembera/quickstart/reth
-# RETH_DATA=/Users/camembera/quickstart/var/reth
+# JWT_PATH=/Users/camembera/beranode/var/beacond/config/jwt.hex
+# RETH_BIN=/Users/camembera/beranode/reth
+# RETH_DATA=/Users/camembera/beranode/var/reth
 ...
 ```
 
@@ -125,24 +130,21 @@ env
 
 The key network parameters for Berachain mainnet are downloaded by the following script.
 
-```fetch-berachain-params.sh
+**File:** `./fetch-berachain-params.sh`
+
+```bash
 #!/bin/bash
 
 set -e
 . ./env.sh
 
 mkdir -p seed-data
-if [ -z "$SEED_DATA_URL" ]; then
-    cp -r ooga-booga/80094/* seed-data/
-else
-    mkdir -p seed-data
-    curl -s -o seed-data/kzg-trusted-setup.json $SEED_DATA_URL/kzg-trusted-setup.json$SEED_DATA_URL_SUFFIX
-    curl -s -o seed-data/genesis.json $SEED_DATA_URL/genesis.json$SEED_DATA_URL_SUFFIX
-    curl -s -o seed-data/eth-genesis.json $SEED_DATA_URL/eth-genesis.json$SEED_DATA_URL_SUFFIX
-    curl -s -o seed-data/el-peers.txt $SEED_DATA_URL/el-peers.txt$SEED_DATA_URL_SUFFIX
-    curl -s -o seed-data/app.toml $SEED_DATA_URL/app.toml$SEED_DATA_URL_SUFFIX
-    curl -s -o seed-data/config.toml $SEED_DATA_URL/config.toml
-fi
+curl -s -o seed-data/kzg-trusted-setup.json $SEED_DATA_URL/kzg-trusted-setup.json$SEED_DATA_URL_SUFFIX
+curl -s -o seed-data/genesis.json $SEED_DATA_URL/genesis.json$SEED_DATA_URL_SUFFIX
+curl -s -o seed-data/eth-genesis.json $SEED_DATA_URL/eth-genesis.json$SEED_DATA_URL_SUFFIX
+curl -s -o seed-data/el-peers.txt $SEED_DATA_URL/el-peers.txt$SEED_DATA_URL_SUFFIX
+curl -s -o seed-data/app.toml $SEED_DATA_URL/app.toml$SEED_DATA_URL_SUFFIX
+curl -s -o seed-data/config.toml $SEED_DATA_URL/config.toml
 
 md5sum seed-data/*
 ```
@@ -150,7 +152,7 @@ md5sum seed-data/*
 You can invoke the script as follows. It will print out an md5 hash of the files to verify integrity.
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 ./fetch-berachain-params.sh
 
@@ -170,7 +172,9 @@ Check the signatures above with your results, and contact Discord: #bug-reports 
 The next script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
 then runs runs `beacond init` and `beacond jwt generate`.
 
-```setup-beacond.sh
+**File:** `./setup-beacond.sh`
+
+```bash
 #!/bin/bash
 
 set -e
@@ -215,7 +219,7 @@ securely communicate. Protect this file. If you suspect it has been leaked, gene
 Invoke it:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 ./setup-beacond.sh
 
@@ -226,7 +230,7 @@ Invoke it:
 #  "stateRoot": "0x12965ab9cbe2d2203f61d23636eb7e998f167cb79d02e452f532535641e35bcc",
 #  "blockHash": "0xcfff92cd918a186029a847b59aca4f83d3941df5946b06bca8de0861fc5d0850",
 # }
-# Successfully wrote new JSON-RPC authentication secret to: /Users/somebody/quickstart/var/beacond/config/jwt.hex
+# Successfully wrote new JSON-RPC authentication secret to: /Users/somebody/beranode/var/beacond/config/jwt.hex
 
 find var/beacond
 
@@ -253,7 +257,9 @@ Your state root and block hash **must** agree with the above.
 
 Create the following script:
 
-```setup-reth.sh
+**File:** `./setup-reth.sh`
+
+```bash
 #!/bin/bash
 
 set -
@@ -267,14 +273,14 @@ $RETH_BIN init --chain $RETH_GENESIS_PATH --datadir $RETH_DATA
 Similar to `setup-beacond`, `setup-reth` puts in place the seed data for the chain downloaded above, and initializes the reth data store in `var/reth/`. Invoke the script:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 ./setup-reth.sh
 
 # [Expected Output]:
 # INFO Initialized tracing, debug log directory: /Users/camembearbera/Library/Caches/reth/logs/80094
 # INFO reth init starting
-# INFO Opening storage db_path="/Users/camembearbera/src/bera-quickstart/var/reth/db" sf_path="/Users/camembearbera/src/bera-quickstart/var/reth/static_files"
+# INFO Opening storage db_path="/Users/camembearbera/src/bera-beranode/var/reth/db" sf_path="/Users/camembearbera/src/bera-beranode/var/reth/static_files"
 # INFO Verifying storage consistency.
 # INFO Genesis block written hash=0xd57819422128da1c44339fc7956662378c17e2213e669b427ac91cd11dfcfb38
 
@@ -304,19 +310,14 @@ find var/reth
 
 Your genesis block hash **must** agree with the above.
 
-## Optional: Download Snapshots 💾
-
-Though you can choose to sync the chain from scratch, it will take a while.
-
-The following are snapshots provided by the community. Review the [instructions for using these snapshots](https://docs.berachain.com/nodes/guides/snapshots).
-
-Place the snapshots files under `var/beacond/data` and `var/reth/data` respectively.
 
 ## Run Both Clients 🏃
 
 The following two scripts run the consensus and execution clients.
 
-```run-beacond.sh
+**File:** `./run-beacond.sh`
+
+```bash
 #!/bin/bash
 
 set -e
@@ -324,7 +325,9 @@ set -e
 $BEACOND_BIN start --home $BEACOND_DATA
 ```
 
-```run-reth.sh
+**File:** `./run-reth.sh`
+
+```bash
 #!/bin/bash
 
 set -e
@@ -360,7 +363,7 @@ $RETH_BIN node \
 Launch two windows. In the first, run the consensus client:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 ./run-beacond.sh
 ```
@@ -368,7 +371,7 @@ Launch two windows. In the first, run the consensus client:
 In the second, run the execution client:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 ./run-reth.sh
 ```
@@ -383,7 +386,7 @@ minor complaints about disconnecting or slow peers from time to time.
 To check on the sync status of the consensus layer, in another terminal run the following which will retrieve the current block height from the consensus client:
 
 ```bash
-# FROM: ~/quickstart
+# FROM: ~/beranode
 
 # Don't have jq? `brew install jq`;
 ./build/bin/beacond --home=./build/bin/config/beacond status | jq;
