@@ -98,7 +98,7 @@ WITHDRAW_ADDRESS="<YOUR_WITHDRAW_ADDRESS>";
 
 beacond deposit create-validator \
 "$WITHDRAW_ADDRESS" \
-10000000000000 \ # 10,000 BERA in Gwei: 10,000e18 / 1e9 = 10,000e9 (i.e. 10,000 followed by 9 0s)
+10000000000000 \ 
 $BEACOND_HOME/config/genesis.json  | jq .;
 
 # [Expected Output]:
