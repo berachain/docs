@@ -97,7 +97,8 @@ fi
 These two constants should be changed:
 
 1. **MONIKER_NAME**: Should be a name of your choice for your node. This is a name presented on the chain to other nodes and is useful for debugging.
-2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node.
+2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
+
 
 The following constants should be checked:
 
