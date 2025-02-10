@@ -28,7 +28,7 @@
         "docsUrl": "/developers/contracts/beacondeposit"
       },
       "berachef": {
-        "name": "Berachef",
+        "name": "BeraChef",
         "address": "0xfb81E39E3970076ab2693fA5C45A07Cc724C93c2",
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeraChef.json",
         "docsUrl": "/developers/contracts/berachef"
@@ -524,7 +524,7 @@
     "validatorDepositGweiAmount": 32000000000,
     "rewardAllocationBlockDelay": 8191,
     "rewardDistributionBlockExpiration": 8191,
-    "stakeMinimumIncrease": 32,
+    "stakeMinimumIncrease": 10000,
     "validatorActiveSetSize": 69,
     "stakeMinimumDeadlineEpoch": 1,
     "minEffectiveBalance": "250,000",
