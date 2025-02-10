@@ -390,7 +390,7 @@ To check on the sync status of the consensus layer, in another terminal run the 
 # FROM: ~/beranode
 
 # Don't have jq? `brew install jq`;
-./build/bin/beacond --home=./build/bin/config/beacond status | jq;
+beacond --home $BEACOND_DATA status | jq;
 
 # [Expected Output]:
 # {

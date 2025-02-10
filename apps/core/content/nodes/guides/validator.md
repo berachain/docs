@@ -33,6 +33,17 @@ This document explains in detail how to deposit the stake for a validator, and *
 
 If you haven't, please read through the [overview](https://hackmd.io/@berachain/HJLXWhZwJe) that explains the lifecycle of a validator.
 
+If you folllowed our [Quickstart](/nodes/quickstart), you should have the following environment variables set. They will likely be different for you, but the important thing is that you can find the genesis file with it.
+
+```bash
+export BEACOND_HOME=/opt/berachain;
+export BEACOND_DATA=$BEACOND_HOME/var/beacond;
+export BEACOND_CONFIG=$BEACOND_DATA/config;
+
+md5sum $BEACOND_CONFIG/genesis.json
+# [Expected Output]
+# c66dbea5ee3889e1d0a11f856f1ab9f0  /opt/berachain/var/beacond/config/genesis.json
+```
 
 
 ## Preliminaries
@@ -52,9 +63,8 @@ Below is an example of setting up and verifying the environment and establishing
 ```bash
 # !/bin/bash
 
-export BEACOND_HOME=/full/path/to/beacond-data;
-alias beacond="/path/to/beacond --home $BEACOND_HOME";
-beacond genesis validator-root $BEACOND_HOME/config/genesis.json;
+alias beacond="/path/to/beacond --home $BEACOND_DATA";
+beacond genesis validator-root $BEACOND_CONFIG/genesis.json;
 
 # [Expected Output - MUST BE THIS EXACTLY]
 # 0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63ff0bda
@@ -91,7 +101,7 @@ Parameters:
 
 - **withdrawal-addr** is where your stake is returned when you stop being a validator (state 'Exited' on the [lifecycle](https://hackmd.io/@berachain/HJLXWhZwJe)). This can be your funding account address.
 - **10000000000000** this means 10,000 BERA. We recommend this as the initial amount to stake.
-- **genesis-root**: for mainnet, this must be `0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63ff0bda` - the value produced by `genesis validator-root` above; you can also provide `$BEACOND_HOME/config/genesis.json`.
+- **genesis-root**: for mainnet, this must be `0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63ff0bda` - the value produced by `genesis validator-root` above; you can also provide `$BEACOND_CONFIG/genesis.json`.
 
 Example:
 
@@ -101,7 +111,7 @@ WITHDRAW_ADDRESS="<YOUR_WITHDRAW_ADDRESS>";
 beacond deposit create-validator \
 "$WITHDRAW_ADDRESS" \
 10000000000000 \ 
-$BEACOND_HOME/config/genesis.json  | jq .;
+$BEACOND_CONFIG/genesis.json  | jq .;
 
 # [Expected Output]:
 #{
@@ -113,7 +123,7 @@ $BEACOND_HOME/config/genesis.json  | jq .;
 #}
 ```
 
-You can verify that beacond will accept this signature with `beacond deposit validate <pubkey> <credentials> <amount> <signature> $BEACOND_HOME/config/genesis.json` which should produce no error message.
+You can verify that beacond will accept this signature with `beacond deposit validate <pubkey> <credentials> <amount> <signature> $BEACOND_CONFIG/genesis.json` which should produce no error message.
 
 ```bash
 VAL_PUB_KEY="<YOUR_VAL_PUB_KEY>";
@@ -156,8 +166,8 @@ function deposit(
 - **operator** is the address you created in Step 1.
 
 ```bash
-VAL_PUB_KEY="<YOUR_VAL_PUB_KEY>";
-VAL_WITHDRAW_CREDENTIAL="<YOUR_VAL_WITHDRAW_CREDENTIAL>";
+VALIDATOR_PUB_KEY="<YOUR_COMETBFT_PUB_KEY>";
+WITHDRAW_CREDENTIAL="<YOUR_VALIDATOR_WITHDRAW_CREDENTIAL>";
 DEPOSIT_SIGNATURE="<YOUR_DEPOSIT_SIGNATURE>";
 VALIDATOR_OPERATOR_ADDRESS="<YOUR_VALIDATOR_OPERATOR_ADDRESS>";
 RPC_URL="http://localhost:8545";
@@ -165,8 +175,8 @@ RPC_URL="http://localhost:8545";
 # Non-Ledger Version
 cast send 0x4242424242424242424242424242424242424242 \
 'deposit(bytes,bytes,bytes,address)' \
-"$VAL_PUB_KEY" \
-"$VAL_WITHDRAW_CREDENTIAL" \
+"$VALIDATOR_PUB_KEY" \
+"$WITHDRAW_CREDENTIAL" \
 "$DEPOSIT_SIGNATURE" \
 "$VALIDATOR_OPERATOR_ADDRESS" \
 --private-key  \
@@ -176,8 +186,8 @@ cast send 0x4242424242424242424242424242424242424242 \
 # Ledger Version
 cast send 0x4242424242424242424242424242424242424242 \
 'deposit(bytes,bytes,bytes,address)' \
-"$VAL_PUB_KEY" \
-"$VAL_WITHDRAW_CREDENTIAL" \
+"$VALIDATOR_PUB_KEY" \
+"$WITHDRAW_CREDENTIAL" \
 "$DEPOSIT_SIGNATURE" \
 "$VALIDATOR_OPERATOR_ADDRESS" \
 --ledger \
@@ -203,7 +213,35 @@ These subsequent deposits are done by calling the same `deposit` function, only 
 
 When your validator passes the threshold necessary to become an activator, it passes into the **Activation** part of the lifecycle. At the conclusion of **second epoch** after you pass the threshold -- in other words, no sooner than 13 minutes -- you become eligible for minting blocks.
 
-## Post-activation checks
+
+```bash
+VALIDATOR_PUB_KEY="<YOUR_COMETBFT_PUB_KEY>";
+STAKE_AMOUNT=<NUMBER>ether;  # example, 10000
+
+# Non-Ledger Version
+cast send 0x4242424242424242424242424242424242424242 \
+'deposit(bytes,bytes,bytes,address)' \
+"$VALIDATOR_PUB_KEY" \
+"0x0000000000000000000000000000000000000000000000000000000000000000" \
+"0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
+"0x0000000000000000000000000000000000000000" \
+--private-key  \
+--value $STAKE_AMOUNT \
+-r https://rpc.berachain.com;
+
+# Ledger Version
+cast send 0x4242424242424242424242424242424242424242 \
+'deposit(bytes,bytes,bytes,address)' \
+"$VALIDATOR_PUB_KEY" \
+"0x0000000000000000000000000000000000000000000000000000000000000000" \
+"0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
+"0x0000000000000000000000000000000000000000" \
+--ledger \
+--value $STAKE_AMOUNT \
+-r https://rpc.berachain.com;
+```
+
+## Step 6: Post-activation checks
 
 After 2+ epochs after your activation deposit, do the following checks:
 
@@ -250,7 +288,7 @@ $ curl  http://localhost:26657/validators?page=1&per_page=100 | jq .
 
 Perform the following steps after becoming a validator.
 
-### Step 1 - Add To Default Validator List
+### Step 1: Add To Default Validator List
 
 Make a PR to the following Github repository to add your validator to the default validator list.
 
@@ -267,11 +305,11 @@ Make a PR to the following Github repository to add your validator to the defaul
 }
 ```
 
-### Step 2 - Send Berachain Team Wallet Addresses
+### Step 2: Send Berachain Team Wallet Addresses
 
 Reach out to the Berachain team with your `YOUR_VALIDATOR_OPERATOR_ADDRESS` and `YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS` to aid with better metrics.
 
-### Step 3 - Send Berachain Your CometBFT Address
+### Step 3: Send Berachain Your CometBFT Address
 
 Reach out to the Berachain team with your CometBFT address found in your `priv_validator_key.json` file.
 
@@ -283,7 +321,7 @@ You can get this by looking at the file or running the following:
 # FROM: /
 
 # OR /path/to/$HOME/config/priv_validator_key.json
-cat ./.beacond/config/priv_validator_key.json | jq -r ".address";
+cat $BEACOND_CONFIG/priv_validator_key.json | jq -r ".address";
 
 # [Expected Similat Address]
 # A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0
