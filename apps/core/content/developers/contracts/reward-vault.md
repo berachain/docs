@@ -389,6 +389,230 @@ function addIncentive(address token, uint256 amount, uint256 incentiveRate) exte
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
+### balanceOf
+
+Get the balance of the staked tokens for an account.
+
+```solidity
+function balanceOf(address account) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                         |
+| --------- | --------- | ----------------------------------- |
+| `account` | `address` | The account to get the balance for. |
+
+**Returns**
+
+| Name     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
+| `<none>` | `uint256` | The balance of the staked tokens. |
+
+### rewards
+
+Get the reward balance for a specific account.
+
+```solidity
+function rewards(address account) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                                     |
+| --------- | --------- | ----------------------------------------------- |
+| `account` | `address` | The account to retrieve the reward balance for. |
+
+**Returns**
+
+| Name     | Type      | Description                                          |
+| -------- | --------- | ---------------------------------------------------- |
+| `<none>` | `uint256` | The current reward balance of the specified account. |
+
+### userRewardPerTokenPaid
+
+Get the user reward per token paid.
+
+```solidity
+function userRewardPerTokenPaid(address account) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                             |
+| --------- | --------- | --------------------------------------- |
+| `account` | `address` | The account to retrieve the reward for. |
+
+**Returns**
+
+| Name     | Type      | Description                                          |
+| -------- | --------- | ---------------------------------------------------- |
+| `<none>` | `uint256` | The current reward balance of the specified account. |
+
+### earned
+
+Retrieves the amount of reward earned by a specific account.
+
+```solidity
+function earned(address account) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                              |
+| --------- | --------- | ---------------------------------------- |
+| `account` | `address` | The account to calculate the reward for. |
+
+**Returns**
+
+| Name     | Type      | Description                                 |
+| -------- | --------- | ------------------------------------------- |
+| `<none>` | `uint256` | The amount of reward earned by the account. |
+
+### getRewardForDuration
+
+Retrieves the total reward vested over the specified duration.
+
+```solidity
+function getRewardForDuration() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                                |
+| -------- | --------- | ------------------------------------------ |
+| `<none>` | `uint256` | The total reward vested over the duration. |
+
+### lastTimeRewardApplicable
+
+Returns the timestamp of the last reward distribution. This is either the current timestamp (if rewards
+are still being actively distributed) or the timestamp when the reward duration ended (if all rewards have
+already been distributed).
+
+```solidity
+function lastTimeRewardApplicable() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                                    |
+| -------- | --------- | ---------------------------------------------- |
+| `<none>` | `uint256` | The timestamp of the last reward distribution. |
+
+### rewardPerToken
+
+Retrieves the current value of the global reward per token accumulator. This value is the sum of the
+last checkpoint value and the accumulated value since the last checkpoint. It should increase monotonically
+over time as more rewards are distributed.
+
+```solidity
+function rewardPerToken() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                                                                  |
+| -------- | --------- | ---------------------------------------------------------------------------- |
+| `<none>` | `uint256` | The current value of the global reward per token accumulator scaled by 1e18. |
+
+### totalSupply
+
+Get the total supply of the staked tokens in the vault.
+
+```solidity
+function totalSupply() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                                         |
+| -------- | --------- | --------------------------------------------------- |
+| `<none>` | `uint256` | The total supply of the staked tokens in the vault. |
+
+### periodFinish
+
+Get the end of the current reward period.
+
+```solidity
+function periodFinish() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                           |
+| -------- | --------- | ------------------------------------- |
+| `<none>` | `uint256` | The end of the current reward period. |
+
+### rewardRate
+
+Get the reward rate for the current reward period.
+
+```solidity
+function rewardRate() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description      |
+| -------- | --------- | ---------------- |
+| `<none>` | `uint256` | The reward rate. |
+
+### rewardsDuration
+
+Get the time over which the rewards will be distributed.
+
+```solidity
+function rewardsDuration() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                        |
+| -------- | --------- | ---------------------------------- |
+| `<none>` | `uint256` | The duration of the rewards cycle. |
+
+### lastUpdateTime
+
+Get the last time the rewards were updated.
+
+```solidity
+function lastUpdateTime() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                             |
+| -------- | --------- | --------------------------------------- |
+| `<none>` | `uint256` | The last time the rewards were updated. |
+
+### undistributedRewards
+
+Get the amount of undistributed rewards.
+
+```solidity
+function undistributedRewards() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                          |
+| -------- | --------- | ------------------------------------ |
+| `<none>` | `uint256` | The amount of undistributed rewards. |
+
+### rewardPerTokenStored
+
+Get the last updated reward per token scaled.
+
+```solidity
+function rewardPerTokenStored() external view returns (uint256);
+```
+
+**Returns**
+
+| Name     | Type      | Description                        |
+| -------- | --------- | ---------------------------------- |
+| `<none>` | `uint256` | The last updated reward per token. |
+
 ## Events
 
 ### DelegateStaked
@@ -559,3 +783,77 @@ event IncentiveAdded(address indexed token, address sender, uint256 amount, uint
 | `sender`        | `address` | The address that added the incentive.                    |
 | `amount`        | `uint256` | The amount of the incentive.                             |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
+
+### RewardAdded
+
+Emitted when a reward has been added to the vault.
+
+```solidity
+event RewardAdded(uint256 reward);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                                      |
+| -------- | --------- | ------------------------------------------------ |
+| `reward` | `uint256` | The amount of reward added, scaled by PRECISION. |
+
+### Staked
+
+Emitted when the staking balance of an account has increased.
+
+```solidity
+event Staked(address indexed account, uint256 amount);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                  |
+| --------- | --------- | ---------------------------- |
+| `account` | `address` | The account that has staked. |
+| `amount`  | `uint256` | The amount of staked tokens. |
+
+### Withdrawn
+
+Emitted when the staking balance of an account has decreased.
+
+```solidity
+event Withdrawn(address indexed account, uint256 amount);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| `account` | `address` | The account that has withdrawn. |
+| `amount`  | `uint256` | The amount of withdrawn tokens. |
+
+### RewardPaid
+
+Emitted when a reward has been claimed.
+
+```solidity
+event RewardPaid(address indexed account, address to, uint256 reward);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                                                  |
+| --------- | --------- | ------------------------------------------------------------ |
+| `account` | `address` | The account whose reward has been claimed.                   |
+| `to`      | `address` | The address that the reward was sent to. (user or operator). |
+| `reward`  | `uint256` | The amount of reward claimed.                                |
+
+### RewardsDurationUpdated
+
+Emitted when the reward duration has been updated.
+
+```solidity
+event RewardsDurationUpdated(uint256 newDuration);
+```
+
+**Parameters**
+
+| Name          | Type      | Description                     |
+| ------------- | --------- | ------------------------------- |
+| `newDuration` | `uint256` | The new duration of the reward. |
