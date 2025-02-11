@@ -67,6 +67,42 @@ $$B = 0.5, R = 1.5, a = 3.5, b = 0.4, m = 0$$
 
 ## Max Block Inflation
 
-`$BGT` emissions grow with the amount of boost a validator has, up to a cap. The Maximum theoretical block emission occurs at 100% boost:
+`$BGT` emissions grow with the amount of boost a evalidator has, up to a cap. The Maximum theoretical block emission occurs at 100% boost:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
+
+## `$BGT` Distribution
+
+`$BGT` is emitted to reward vaults on a per block basis via the [Distributor](../../developers/contracts/distributor.md#distributefor) by invoking the `distributeFor` function.
+This invocation creates `$BGT` that is then claimable by [Reward Vault](../pol/rewardvaults.md) stakers.
+
+:::tip
+Rewards are created on a per block basis, however the disitribution of rewards is done **over a seven day period.**
+:::
+
+Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts.
+The reward window is reset each time new rewards are added.
+
+### Distribution Example
+
+On Berachain `$BGT` is distributed per block meaning that the seven day disitrubtion period is consistently being pushed to "start" on the current block. Thus this period should be viewed as a weekly sliding window based on the emissions at any given time during the previous week.
+
+A more real world example with simplified numbers can be used to undesrtand distribution currently (taking place over 2 weeks):
+
+- 7 `$BGT` distributed daily, for a total of 98 over 14 days
+- 1 depositor, owning all the deposits
+
+The distribution graph would be as follows:
+
+![Complex Example](../../public/assets//complex-emission.png)
+
+**Legend**
+
+- Emitted: Total number of `$BGT` distributed and available
+- Claimable: Total number of `$BGT` able to be claimed by depositors
+- Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
+
+This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after 7 days where all rewards are actively being distributed.
+Given that rewards are distributed on a frequent basis, the reward rate on a new reward vault should normalize after the initial seven day period.
+
+Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.

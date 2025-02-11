@@ -33,8 +33,6 @@ This document explains in detail how to deposit the stake for a validator, and *
 
 If you haven't, please read through the [overview](https://hackmd.io/@berachain/HJLXWhZwJe) that explains the lifecycle of a validator.
 
-
-
 ## Preliminaries
 
 **Create a new ETH account** that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef). Put that private key in the same safekeeping spot as your beacond private key.
@@ -100,7 +98,7 @@ WITHDRAW_ADDRESS="<YOUR_WITHDRAW_ADDRESS>";
 
 beacond deposit create-validator \
 "$WITHDRAW_ADDRESS" \
-10000000000000 \ 
+10000000000000 \
 $BEACOND_HOME/config/genesis.json  | jq .;
 
 # [Expected Output]:
