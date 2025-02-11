@@ -75,16 +75,9 @@ layout: page
     title="Berascan"
     target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.thirdparty.routescan.url"
+    :link="config.mainnet.dapps.berascan.url"
     :icon="IconSearch"
     type="alt"
-  />
-<Feature
-    title="Faucet"
-    description="Get Testnet Tokens"
-    :link="config.testnet.dapps.faucet.url"
-    :icon="IconDroplet"
-      type="alt"
   />
 <Feature
     title="Bera Hub"
