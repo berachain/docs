@@ -34,7 +34,6 @@ Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. 
 
 Download the latest, appropriate, [reth](https://github.com/paradigmxyz/reth/releases) and [beacond](https://github.com/berachain/beacon-kit/tags) releases from their respective release pages.
 
-
 ## Getting Ready 🚀
 
 Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.
@@ -98,7 +97,6 @@ These two constants should be changed:
 
 1. **MONIKER_NAME**: Should be a name of your choice for your node. This is a name presented on the chain to other nodes and is useful for debugging.
 2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
-
 
 The following constants should be checked:
 
@@ -310,7 +308,6 @@ find var/reth
 ```
 
 Your genesis block hash **must** agree with the above.
-
 
 ## Run Both Clients 🏃
 
