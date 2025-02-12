@@ -18,7 +18,7 @@ head:
 
 # $HONEY
 
-<a target="_blank" :href="config.mainnet.dapps.berascan.url + '/address/' + config.mainnet.contracts.honey.address">{{config.mainnet.contracts.honey.address}}</a>
+<a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.honey.address">{{config.mainnet.contracts.honey.address}}</a>
 
 <ClientOnly>
   <Token title="$HONEY" image="/assets/HONEY.png" />
