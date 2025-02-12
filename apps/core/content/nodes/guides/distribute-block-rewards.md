@@ -23,7 +23,7 @@ The following steps will guide you through the process of distributing block rew
 
 Block rewards are distributed to both a Validator and Reward Vaults defined by the respective Validator's Reward Allocation.
 
-Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + '/address/' + config.mainnet.contracts.distributor.address" target="_blank">Distributor</a> contract.
+Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.distributor.address" target="_blank">Distributor</a> contract.
 
 ## Who Can Distribute Block Rewards?
 

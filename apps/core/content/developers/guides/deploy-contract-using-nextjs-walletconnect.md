@@ -889,7 +889,7 @@ export default function Deploy() {
                 <p>
                   <a
                     className="button"
-                    href={`${BLOCK_EXPLORER}/address/${receipt?.data?.contractAddress}`}
+                    href={`${BLOCK_EXPLORER}address/${receipt?.data?.contractAddress}`}
                     target="_blank"
                   >
                     Beratrail Contract Address Link
