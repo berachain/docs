@@ -271,7 +271,7 @@ In some cases, links cannot be setup with traditional markdown, and here is the 
 <a :href="config.websites.foundation.url" target="_blank" rel="no-referrer">{{config.websites.foundation.name}}</a>
 
 ✅ Correct way combining variables
-<a :href="config.mainnet.dapps.swap.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.swap.name}}</a>
+<a :href="config.mainnet.dapps.bex.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.bex.name}}</a>
 ```
 
 #### Code Snippets
