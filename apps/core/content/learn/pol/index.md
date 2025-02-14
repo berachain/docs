@@ -32,7 +32,7 @@ After collecting the base `$BGT` rewards for themselves, validators direct the r
 
 ### 3. Liquidity Provider Flow
 
-The ecosystem's liquidity providers (i.e. users) play a crucial role in PoL. Users can provide liquidity to protocols like BeraSwap (⑤) and receive receipt tokens as proof of their contribution (⑥). These receipt tokens are then staked in Reward Vaults (⑦), where users earn `$BGT` proportional to their share of the vault (⑧).
+The ecosystem's liquidity providers (i.e. users) play a crucial role in PoL. Users can provide liquidity to protocols like BEX (⑤) and receive receipt tokens as proof of their contribution (⑥). These receipt tokens are then staked in Reward Vaults (⑦), where users earn `$BGT` proportional to their share of the vault (⑧).
 
 ### 4. Delegation Cycle
 

@@ -6,7 +6,7 @@
 
 Reward vaults are smart contracts in which users can stake their Proof-of-Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward vaults are the only way in which anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
 
-Reward vaults are a key piece of infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, BeraSwap can have multiple pools earning `$BGT`, each with its own reward vault and respective PoL-eligible asset.
+Reward vaults are a key piece of infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own reward vault and respective PoL-eligible asset.
 
 :::tip
 A different reward vault contract exists for each PoL-eligible asset

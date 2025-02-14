@@ -31,7 +31,7 @@ head:
 `$HONEY` can be minted by depositing whitelisted collateral into a vault, and minting `$HONEY` against that collateral through the <a :href="config.mainnet.dapps.honeySwap.url">HoneySwap dApp</a>
 . The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
 
-Alternatively, `$HONEY` can be obtained by swapping from other assets on [BeraSwap](/learn/dapps/beraswap) or another decentralized exchange.
+Alternatively, `$HONEY` can be obtained by swapping from other assets on [BEX](/learn/dapps/bex) or another decentralized exchange.
 
 ### Collateral Assets
 

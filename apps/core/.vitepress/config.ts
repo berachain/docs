@@ -80,8 +80,8 @@ export default defineConfig({
           </span>`,
         items: [
           {
-            text: `${constants.websites.docsSwap.name}`,
-            link: `${constants.websites.docsSwap.url}`,
+            text: `${constants.websites.docsBex.name}`,
+            link: `${constants.websites.docsBex.url}`,
           },
         ],
       },
