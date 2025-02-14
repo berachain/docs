@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/learn/dapps/swap",
+      "destination": "/learn/dapps/bex"
+    },
+    {
       "source": "/faq/",
       "destination": "/learn/help/faqs"
     },

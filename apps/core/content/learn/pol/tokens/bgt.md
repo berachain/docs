@@ -34,7 +34,7 @@ Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of g
 
 The typical flow is for users to supply liquidity and receive a receipt token for that activity, which they can then stake in reward vaults to earn `$BGT`. Some examples include:
 
-- Depositing liquidity in the native BeraSwap for an LP pair whitelisted to earn `$BGT` emissions
+- Depositing liquidity in the native BEX for an LP pair whitelisted to earn `$BGT` emissions
 - Supplying assets to a lending market, and staking the interest-bearing receipt tokens in a reward vault
 
 Users can see available earning options at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">{{config.mainnet.dapps.hub.url}}pools</a>.
@@ -63,7 +63,7 @@ Users can select validators to "boost" with their `$BGT`, increasing the validat
 
 #### dApp Fees
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BeraSwap and HoneySwap. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
+Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BEX and HoneySwap. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
 
 At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA`, and then distributes them pro rata to `$BGT` holders who have boosted validators.
 

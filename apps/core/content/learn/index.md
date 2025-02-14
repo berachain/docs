@@ -38,7 +38,7 @@ and applications over validator rewards at baseline. Network incentives go towar
 
 PoL strongly aligns the incentives of [network participants](/learn/pol/participants) (validators, protocols, users) and contributes to the overall long-term health of the chain.
 
-Beyond providing seamless day-one utility, the native dApps, such as [BeraSwap](/learn/dapps/beraswap), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
+Beyond providing seamless day-one utility, the native dApps, such as [BEX](/learn/dapps/bex), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
 
 Read more in [What Is Proof-of-Liquidity](/learn/what-is-proof-of-liquidity).
 

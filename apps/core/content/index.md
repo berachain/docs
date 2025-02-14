@@ -51,9 +51,9 @@ layout: page
 
 <section class="features">
   <Feature
-    title="BeraSwap Docs"
+    title="BEX Docs"
     description="Berachain Native DEX Docs"
-    :link="config.websites.docsSwap.url"
+    :link="config.websites.docsBex.url"
     image="/assets/BEX.png"
     type="alt"
   />
@@ -87,9 +87,9 @@ layout: page
       type="alt"
   />
 <Feature
-    title="BeraSwap"
+    title="BEX"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.swap.url"
+    :link="config.mainnet.dapps.bex.url"
     :icon="IconRefresh"
       type="alt"
     />

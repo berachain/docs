@@ -17,7 +17,7 @@ head:
 
 # Berachain's BeraHub 🐻⛓️
 
-BeraHub is the place to manage all things `$BGT` and access Berachain liquidity through BeraSwap.
+BeraHub is the place to manage all things `$BGT` and access Berachain liquidity through BEX.
 
 <a target="_blank" :href="config.mainnet.dapps.hub.url">
 
@@ -35,5 +35,5 @@ Users can expect to:
 4. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'redeem'">Redeem</a> `$BGT` for `$BERA`
 5. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'rewards'">Claim earned</a> `$BGT` rewards
 6. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'swap'">Swap assets</a>
-7. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">Provide BeraSwap liquidity</a>
+7. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">Provide BEX liquidity</a>
 8. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'governance'">Participate in Governance</a>
