@@ -51,24 +51,10 @@ layout: page
 
 <section class="features">
   <Feature
-    title="BEX Docs"
+    title="BeraSwap Docs"
     description="Berachain Native DEX Docs"
-    :link="config.websites.docsBex.url"
+    :link="config.websites.docsSwap.url"
     image="/assets/BEX.png"
-    type="alt"
-  />
-  <Feature
-    title="Bend Docs"
-    description="Berachain Native Lending Docs"
-    :link="config.websites.docsBend.url"
-    image="/assets/BEND.png"
-    type="alt"
-  />
-  <Feature
-    title="Berps Docs"
-    description="Berachain Native Perps Docs"
-    :link="config.websites.docsBerps.url"
-    image="/assets/BERPS.png"
     type="alt"
   />
 </section>
@@ -83,65 +69,65 @@ layout: page
     :icon="IconBrandGithub"
     type="alt"
   />
+  <!-- TODO: remove at mainnet launch -->
+  <!-- Replace link with config.mainnet.dapps.berascan.url -->
   <Feature
-    title="Beratrail"
+    title="Berascan"
+    target="_blank"
     description="Block Explorer"
-    :link="config.testnet.dapps.beratrail.url"
+    :link="config.mainnet.dapps.berascan.url"
     :icon="IconSearch"
     type="alt"
   />
-  <Feature
-    title="Faucet"
-    description="Get Testnet Tokens"
-    :link="config.testnet.dapps.faucet.url"
-    :icon="IconDroplet"
-      type="alt"
-  />
-  <Feature
-    title="BGT Station"
+<Feature
+    title="Bera Hub"
     description="Manage $BGT"
-    :link="config.testnet.dapps.bgtStation.url"
+    :link="config.mainnet.dapps.hub.url"
     :icon="IconGavel"
       type="alt"
   />
-  <Feature
-    title="BEX"
+<Feature
+    title="BeraSwap"
     description="Berachain Native DEX"
-    :link="config.testnet.dapps.bex.url"
+    :link="config.mainnet.dapps.swap.url"
     :icon="IconRefresh"
       type="alt"
     />
-  <Feature
-    title="Berps"
-    description="Berachain Native Perps"
-    :link="config.testnet.dapps.berps.url"
-    :icon="IconChartHistogram"
-      type="alt"
-  />
-  <Feature
-    title="Bend"
-    description="Berachain Native Lending"
-    :link="config.testnet.dapps.bend.url"
-    :icon="IconCoins"
-      type="alt"
-    />
-  <Feature
+<Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
-    :link="config.testnet.dapps.honeySwap.url"
+    :link="config.mainnet.dapps.honeySwap.url"
     :icon="IconMoneybag"
     type="alt"
     />
-  <Feature
+<Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
-    :link="config.testnet.dapps.foundation.url"
+    :link="config.mainnet.dapps.foundation.url"
     :icon="IconWorld"
     type="alt"
   />
+
 </section>
 
 <style>
+  .custom-block.warning {
+    margin-bottom: 24px;
+    padding: 24px;
+  }
+
+  .custom-block.warning h2 {
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    margin-top: 0;
+    color: var(--vp-c-brand-1);
+  }
+
+  .custom-block.warning p {
+    margin: 0;
+  }
+
   .VPPage {
     padding: 32px 24px 96px 24px;
   }

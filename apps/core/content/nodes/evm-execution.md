@@ -13,9 +13,9 @@ head:
 
 # EVM Execution Layer ⟠
 
-The execution layer has multiple implementation in the form of EVM execution clients that handle transactions, transaction gossiping, state management, and supporting the Ethereum Virtual Machine-not responsible for block building.
+The execution layer has multiple implementations in the form of EVM execution clients that handle transactions, transaction gossiping, state management, and support the Ethereum Virtual Machine - they are not responsible for block building.
 
-The following are Execution Clients that BeaconKit has tested and verified support for:
+The following are the execution clients that BeaconKit has tested and verified support for:
 
 | Client                                                          | Language   | Sync Strategies                    | State Pruning   | Maintainer          |
 | --------------------------------------------------------------- | ---------- | ---------------------------------- | --------------- | ------------------- |

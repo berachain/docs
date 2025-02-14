@@ -1,58 +1,51 @@
-# Creating a Governance Proposal for Berachain Reward Vaults
+# Reward Vault Governance
 
-> **NOTE:** For a detailed guide on how to create a reward vault, please see this blog post: [Creating a Governance Proposal for Berachain Reward Vaults](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults) where you can learn how to create your own Reward Vaults.
+> **NOTE:** For a detailed guide on creating reward vaults and associated governance proposals see this [blog post](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults).
 
-Berachain's Proof-of-Liquidity (PoL) consensus mechanism allows protocols to bootstrap their liquidity by receiving Berachain Governance Token (`$BGT`) emissions from validators. This process is facilitated through Reward Vaults, which play a crucial role in the governance and incentive structure of the Berachain ecosystem.
+While creating a [Reward Vault](/learn/pol/rewardvaults) is permissionless, for it to receive `$BGT` emissions from validators, it must be whitelisted through a governance proposal. This process ensures community oversight and alignment over projects joining the Proof-of-Liquidity (PoL) ecosystem.
 
-## Understanding Reward Vaults in PoL
+There are two components to whitelisting a new Reward Vault:
 
-Reward Vaults are smart contracts that enable validators to share their `$BGT` rewards with protocols. When validators build blocks, they earn `$BGT` proportional to their staked amount. Validators can then:
+1. Whitelisting the Reward Vault
+2. Whitelisting incentive token(s)
 
-1. Use `$BGT` for governance participation
-2. Exchange `$BGT` for `$BERA` (the native gas token)
-3. Share `$BGT` rewards with protocols through Reward Vaults
+These are both typically done concurrently through a single governance proposal.
 
-This mechanism is central to Berachain's [Reward Vaults](/developers/contracts/rewards-vault) system.
+## Reward Vault Whitelisting
 
-## Governance and Reward Vaults
+Reward Vaults are whitelisted on the [BeraChef](/developers/contracts/berachef) contract to make them eligible for receiving `$BGT` emissions:
 
-While creating a Reward Vault is permissionless, for it to receive `$BGT` emissions from validators, it must be whitelisted through a governance proposal. This process ensures community oversight and alignment with the PoL system's goals.
+1. Deploy a reward vault using the [Reward Vault Factory](/developers/contracts/reward-vault-factory), specifying the staking token. This produces a new vault address
 
-### Governance Process for Whitelisting
+2. Submit and pass a governance proposal for whitelisting the vault, using the vault address obtained from the factory deployment:
 
-1. **Meet `$BGT` Requirements**:
+```solidity
+function setVaultWhitelistedStatus(address receiver, bool isWhitelisted, string memory metadata) external;
+```
 
-   - A minimum amount of `$BGT` is needed to create a proposal
-   - `$BGT` can be acquired through participation in PoL on native dApps
+## Token Whitelisting
 
-2. **Create and Submit Proposal**:
+Protocols can supply [Incentives](/learn/pol/incentives) to entice validators to direct emissions to their vaults. Incentive tokens must first be whitelisted on the **particular Reward Vault** being incentivized:
 
-   - Proposals are submitted on-chain
-   - There's a waiting period before voting begins
+1. Prepare the following parameters:
 
-3. **Voting Period**:
+   - Incentive token address
+   - Minimum incentive rate - lowest exchange rate between incentive token and `$BGT`
+     - Incentive rates below this floor are not accepted
+   - Token manager address
+     - Account that will control incentive parameters
+     - Only one entitled to add incentives to a vault
 
-   - Active voting window
-   - `$BGT` holders cast votes (quorum required)
+2. Submit and pass a governance proposal for whitelisting the incentive token, using the vault address obtained from the factory deployment:
 
-4. **Proposal Outcome**:
-   - If passed: Enters a timelock queue
-   - If declined: Marked as defeated, allowing for a new proposal after addressing concerns
+```solidity
+function whitelistIncentiveToken(address token, uint256 minIncentiveRate, address manager) external
+```
 
-> **NOTE:** For specific testnet values such as required $BGT amounts, voting periods, and quorum requirements, please refer to the [Governance Overview](/learn/governance/) section.
+:::tip
+Each reward vault maintains separate incentive token whitelists
+:::
 
-![Governance Process](/assets/governance-process.png)
+### Governance Process
 
-## Impact on the PoL Ecosystem
-
-Whitelisting a Reward Vault through governance has significant implications:
-
-1. **Liquidity Incentives**: Approved vaults can receive `$BGT` emissions, incentivizing liquidity provision.
-2. **Protocol Growth**: Protocols can use accumulated `$BGT` to bootstrap liquidity or participate in governance.
-3. **Ecosystem Alignment**: The governance process ensures that whitelisted vaults align with the community's interests.
-
-You can read more about Reward Vaults in our [Reward Vaults](/learn/pol/rewardvaults) section.
-
-For more information on Berachain's governance system, see the [Governance Overview](/learn/governance/).
-
-[Learn more about creating a governance proposal for Berachain Reward Vaults](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults)
+The above whitelisting procedures are performed through [BGT Governance](/learn/governance/).

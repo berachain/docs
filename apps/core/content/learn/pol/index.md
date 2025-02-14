@@ -1,37 +1,47 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Proof-of-Liquidity Overview 📓
 
-One of the main [shortcomings](/learn/what-is-proof-of-liquidity#shortcomings-of-pos) of Proof-of-Stake is the lack of incentive for different ecosystem players to collaborate. Validators have little reason to interact with the protocols and end-users for whom they are ultimately running the infrastructure, yet they receive the majority of the economic incentives. On the other hand, projects launch on this infrastructure but retain the majority of the project tokens for themselves.
+Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives between validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`).
 
-A healthier equilibrium can be achieved between projects, validators, and the chain when all actors share in the network's growth.
+## Core Components
 
-Proof-of-Liquidity (PoL) involves the participation and influence of all the chain's stakeholders. PoL requires different stakeholders to work in sync to maximize liquidity on the chain, ensuring they receive the greatest benefit.
+### Security Layer ($BERA)
 
-The following sequence diagram represents the different steps that Proof-of-Liquidity (PoL) undergoes from the perspective of a validator and delegator.
+Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of {{ config.mainnet.minEffectiveBalance }} `$BERA` and a maximum cap of {{ config.mainnet.maxEffectiveBalance }}` $BERA`. The top N validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
+
+### Reward Layer ($BGT)
+
+The size of a validator's `$BGT` block reward is determined by their Boost, which is a percentage calculated from the validator's `$BGT` boost out of the total `$BGT` boosted to all validators. Boosts are obtained from `$BGT` holders delegating to validators.
+
+Learn more about how emissions are calculated on the [emissions page](./bgtmath.md).
+
+## PoL Lifecycle
 
 ![Berachain Proof-of-Liquidity Steps](/assets/proof-of-liquidity-steps.png)
 
-1. A _Prospective Validator_ will provide an initial gas token bond (`$BERA`) to secure the network and gain eligibility to produce blocks. All active validators have an equal chance to be selected to propose a block.
-2. An _Active Validator_ is chosen at random and proposes a new block.
-3. For proposing a new block, the chain allots the _Active Validator_ with the governance token (`$BGT`) for distribution
-4. With the rewarded governance token, the _Active Validator_ distributes to various _Reward Vaults_, decided by the validator in the Berachef contract (A list of addresses and distribution percentages to different Reward Vaults).
-5. A _Liquidity Provider_ may perform a liquidity action like depositing a certain token with a BEX pool. Ex: Providing `$HONEY` and `$BERA` to a liquidity pool
-6. For providing liquidity, the _Liquidity Provider_ receives a receipt token. Ex: `$HONEY-WBERA`.
-7. The _Liquidity Provider_ stakes the receipt token with the _Reward Vault_ making them eligible to receive `$BGT` based on their contribution.
-8. The `$BGT` that was distributed to the reward vault is now eligible to be claimed by the _Liquidity Provider_, making them a _BGT Holder_
-9. A BGT Holder can now delegate their `$BGT` to an _Active Validator_, making that validator a _Boosted Validator_, and increases the rewards a validator is alloted to distribute when they propose a block
+### 1. Validator Lifecycle
 
-## Aligning Protocols and Validators 🤝
+The journey begins when a Prospective Validator stakes their `$BERA` as a security bond (①). Validators are chosen to propose blocks with probability proportional to their staked amount (②). For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (③) (see [emissions](./bgtmath.md)).
 
-Because validators are given the responsibility of distributing governance tokens to Reward Vaults, when chosen to propose a block, it introduces a new dynamic where rewards are essentially shared with the ecosystem protocols.
+### 2. Reward Distribution
 
-Validators will share a stronger relationship with protocols, as their reward weight is determined by the governance tokens delegated to them, creating a symbiotic relationship.
+After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted [Reward Vaults](/learn/pol/rewardvaults) of their choosing (④). In exchange for directing their emissions, validators receive protocol-provided [Incentives](/learn/pol/incentives) from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
 
-Protocols can also convince Validators to start directing rewards to them by offering _Incentives_ in exchange for the `$BGT` rewards directed to their specific _Reward Vaults_.
+### 3. Liquidity Provider Flow
 
-## Existing Reward Vault Implementations 🐻
+The ecosystem's liquidity providers (i.e. users) play a crucial role in PoL. Users can provide liquidity to protocols like BeraSwap (⑤) and receive receipt tokens as proof of their contribution (⑥). These receipt tokens are then staked in Reward Vaults (⑦), where users earn `$BGT` proportional to their share of the vault (⑧).
 
-The following are implementations of existing Reward Vaults:
+### 4. Delegation Cycle
 
-1. [BEX](/learn/dapps/bex) - Specific BEX Pools
-2. [Berps](/learn/dapps/berps) - Depositing `$HONEY` into Berps Honey Vault
-3. [Bend](/learn/dapps/bend) - Borrow `$HONEY`
+As `$BGT` Holders accumulate tokens, they can delegate them to validators (⑨), directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
+
+## Ecosystem Alignment 🤝
+
+By integrating the Berachain's native network rewards amongst all ecosystem participants, PoL creates alignment between:
+
+- **Validators**: Need `$BGT` delegation to maximize their block rewards and must efficiently direct emissions to reward vaults to earn Incentives and attract more boost.
+- **Protocols**: Compete for `$BGT` emissions by offering attractive Incentive rates in their reward vaults
+- **Users**: Earn `$BGT` by providing liquidity, then delegate to validators who maximize returns

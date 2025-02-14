@@ -13,15 +13,26 @@ head:
 
 # What is Proof-of-Liquidity? 🤝
 
-Proof-of-Liquidity (PoL) is a novel consensus mechanism that aligns and increases the security of the chain by increased liquidity deployed on chain.
+Proof-of-Liquidity (PoL) is a novel economic mechanism that uses network incentives to align incentives of ecosystem participants and to bolster application-layer alongside chain security.
 
-PoL borrows from the Proof-of-Stake (PoS) concept of securing a chain by providing an initial stake with the native gas token. PoL builds upon PoS by introducing an additional soulbound governance token that both determines the potential reward weight for a staker, through delegation by others, and is rewarded to parties that have provided liquidity to the chain through governed reward vaults.
+## Two Token Model
+
+Berachain consensus borrows from the Proof-of-Stake (PoS) model, containing two key components:
+
+1. [`$BERA`](/learn/pol/tokens/bera) - Validators secure the chain by staking the native gas token
+2. [`$BGT`](/learn/pol/tokens/bgt) - A soulbound governance token distributed by validators for proposing new blocks, which is ultimately rewarded to users providing ecosystem liquidity (see [Reward Vaults](./pol/rewardvaults.md))
+
+A validator's `$BGT` emissions increase with the amount of `$BGT` delegated to them. Protocol-provided [Incentives](/learn/pol/incentives) are received for these emissions, which validators pass to their delegators after collecting a commission.
+
+This model creates meaningful economic alignment between previously isolated groups. Validators that return the maximum value to their `$BGT` delegators are likely to receive more delegations.
 
 ![Proof-of-Liquidity Flywheel](/assets/proof-of-liquidity-flywheel.png)
 
-This separates token responsibility for gas and security from tokens used to govern chain rewards.
+### Separation of Concerns
 
-For Berachain, that is the native gas token [`$BERA`](/learn/pol/tokens/bera), and the non-transferrable Berachain Governance Token ([`$BGT`](/learn/pol/tokens/bgt)).
+Significantly, Proof-of-Liquidity separates the token responsible for gas and security from the token used to govern chain rewards/economic incentives.
+
+The following diagram illustrates the role of tokens in Berachain's PoL compared to Ethereum's PoS:
 
 ![Proof-of-Stake vs Proof-of-Liquidity](/assets/berachain-pos-vs-pol.png)
 

@@ -15,11 +15,28 @@ head:
 
 ## BERA Token
 
-`$BERA` is the native gas token of the Berachain ecosystem, initial validator staking token used to secure the network, and used for paying transaction fees. Read more in [Tokens > $BERA](/learn/pol/tokens/bera).
+`$BERA` is the native gas token of Berachain's L1 and it serves multiple purposes:
 
-## BGT Token
+- Used for paying transaction fees
+- Initial validator staking token to secure the network
+  - More BERA staked = more blocks proposed
+  - Validators earn base emissions and transaction fees(ie MEV) for each block proposed
+- Can be obtained by burning BGT (one-way conversion)
 
-`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by participating in [Proof of Liquidity](#proof-of-liquidity), can be burned for `$BERA`, used to propose and/or vote on governance proposals, and delegate to validators to increase their weight to be selected to propose a block. Read more in [Tokens > $BGT](/learn/pol/tokens/bgt).
+Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
+
+## BGT(Bera Governance Token)
+
+`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by
+participating in [Proof of Liquidity](#proof-of-liquidity) (PoL):
+
+- Validator delegation and rewards
+  - More BGT delegated = more reward emissions for reward vaults s
+- Governance participation (proposals and voting)
+- Can be burned for `$BERA` (one-way conversion)
+- Can only be earned through participating in [Proof of Liquidity](#proof-of-liquidity)
+
+Read more in [Tokens - $BGT](/learn/pol/tokens/bgt).
 
 ## BeaconKit
 
@@ -29,17 +46,9 @@ BeaconKit is a modular and customizable consensus layer framework, leveraging th
 
 A data unit containing a list of transactions, which is permanently added to the blockchain in a sequential manner.
 
-## Bend
+## BeraSwap
 
-Berachain's native lending protocol, renamed from _lend_ to _bend_. Read more in [Native dApps > Bend](/learn/dapps/bend).
-
-## BEX
-
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), renamed from _DEX_ to _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
-
-## Berps
-
-Berachain's native perpetuals exchange, renamed from _perps_ to _berps_. Read more in [Native dApps > Berps](/learn/dapps/berps).
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BeraSwap_. Read more in [Native dApps > BeraSwap](/learn/dapps/beraswap).
 
 ## Block Time
 
@@ -88,11 +97,11 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes, often using BGT tokens for participation.
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BeraSwap, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
 ## HONEY
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem, pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens > $HONEY](/learn/pol/tokens/honey).
+`$HONEY` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - $HONEY](/learn/pol/tokens/honey).
 
 ## IBC
 
@@ -104,23 +113,19 @@ The availability of liquid assets to facilitate trading on the Berachain network
 
 ## Liquidity Pool
 
-A collection of funds locked in a smart contract, used to provide liquidity for decentralized exchanges and other DeFi services. Liquidity pools on Berachain can contain 2 tokens.
+A collection of funds locked in smart contracts, used to facilitate trading on decentralized exchanges and other DeFi services.
 
 ## Liquidity Provider
 
-A user who deposits tokens into a liquidity pool, earning a portion of the fees generated from swaps in the pool.
+A user who deposits tokens into a liquidity pool, earning a portion of fees generated from swaps in the pool, as well as other potential rewards (from PoL or otherwise).
 
 ## Mainnet
 
-The primary network where real transactions occur on the Berachain blockchain, as opposed to test networks used for development.
-
-## Polaris EVM
-
-A monolithic implementation of the Ethereum Virtual Machine used by the Berachain team to provide compatibility with Ethereum-based smart contracts, built on top of the Cosmos SDK. This implementation has been deprecated in favor of the modular BeaconKit architecture.
+The primary network where transactions comprising real value occur on the Berachain blockchain, as opposed to test networks used for development.
 
 ## Proof-of-Liquidity
 
-A consensus mechanism utilized by Berachain, where validators have an equal random chance of selection and reward weights change based on the amount of `$BGT` boosts (`$BGT` delegations) they have from users.
+A consensus mechanism which aligns economic incentives between validators, applications and users. Premised on a two-token model, validators have varying probabilities of being selected based on the amount of `$BERA` they have staked. Block rewards are distributed as `$BGT` tokens, the amount of which is influenced by the amount of `$BGT` delegated to them by users. This `$BGT` is deployed towards liquidity incentives to ecosystem protocols, for which validators receive incentives from the protocols in return.
 
 ## Single Slot Finality
 

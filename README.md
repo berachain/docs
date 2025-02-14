@@ -1,6 +1,6 @@
 # 🐻 Berachain Monorepo Docs
 
-This is a monolithic repository that contains all the documentation for [Berachain](https://www.berachain.com/), Berps, Bend, and BEX.
+This is a monolithic repository that contains all the documentation for [Berachain](https://www.berachain.com/) and BEX.
 
 ## Requirements
 
@@ -15,8 +15,6 @@ This Turborepo includes the following packages/apps:
 
 All docs are built with [Vitepress](https://vitepress.dev) - Vite & Vue Powered Static Site Generator.
 
-- `apps/bend`- Main docs repository for [https://docs.bend.berachain.com](https://docs.bend.berachain.com)
-- `apps/berps`- Main docs repository for [https://docs.berps.berachain.com](https://docs.berps.berachain.com)
 - `apps/bex`- Main docs repository for [https://docs.bex.berachain.com](https://docs.bex.berachain.com)
 - `apps/core`- Main docs repository for [https://docs.berachain.com](https://docs.berachain.com)
 
@@ -45,8 +43,6 @@ If you'd like to run all apps at the same time, run the following:
 pnpm dev;
 
 # @berachain/bex:dev - http://localhost:5173
-# @berachain/bend/:dev - http://localhost:5174
-# @berachain/berps:dev - http://localhost:5175
 # @berachain/core:dev - http://localhost:5176
 ```
 

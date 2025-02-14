@@ -35,8 +35,6 @@ watchPostEffect(() => {
     top: frontmatter.value.layout === 'home' && y.value === 0,
   }
 })
-
-
 </script>
 
 <!-- 
@@ -81,6 +79,10 @@ Styles
 ========================================================
 -->
 <style>
+.VPNavBarWarning span.VPNavBarWarningDesktop {
+  display: none;
+}
+
 .VPNavBarMenu.menu .menu .VPMenu {
   background: var(--vp-c-bg);
 }

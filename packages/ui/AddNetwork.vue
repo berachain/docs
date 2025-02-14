@@ -11,6 +11,7 @@ Scripts
     }
 
     const props = defineProps({
+      testnet: Boolean,
       chainName: String,
       chainId: Number,
       nativeCurrencyName: String,
@@ -27,7 +28,9 @@ Scripts
      * Main function that adds wallet configuration
      */
     const addNetwork = () => {
-      if (!wallet) return;
+      if (!wallet) {
+        return;
+      }
       window?.ethereum.request({
         method: 'wallet_addEthereumChain',
         params: [
@@ -55,7 +58,8 @@ Template
   <button
     class="type-primaryw-iconresting-type-primaryw-iconresting" 
     v-if="wallet" v-on:click="addNetwork">
-    Add Testnet
+    <span v-if="props.testnet">Add Testnet</span>
+    <span v-else">Add Berachain</span>
   </button>
   <button
     class="type-primaryw-iconresting-type-primaryw-iconresting" 

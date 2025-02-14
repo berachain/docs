@@ -25,8 +25,8 @@ In this guide, we'll walk through how to create an ERC-20 token using Solidity a
 
 Before you start, make sure you have the following:
 
-- Foundry
-- A text editor of your choice
+- [Foundry](https://github.com/foundry-rs/foundry)
+- A code editor of your choice
 
 ## Initialize Repository
 
@@ -144,7 +144,7 @@ contract MyToken is ERC20 {
 The `1 ether` is an easy way to make a unit conversion. The default `decimals` for the ERC-20 token standard is 18, so this will mint 1 million tokens with 18 decimal places. To learn more, check out [this article on decimals](https://docs.openzeppelin.com/contracts/3.x/erc20#a-note-on-decimals).
 :::
 
-Technically, this is all you need to create your own token contract! If satisfied, you could take this contract and deploy it. It would then mint 1 million tokens to your wallet that deployed the contract (`msg.sender`). This would allow you to do whatever with the supply that you want, for example pairing those tokens with another token in the Berachain BEX so others can acquire it.
+Technically, this is all you need to create your own token contract! If satisfied, you could take this contract and deploy it. It would then mint 1 million tokens to your wallet that deployed the contract (`msg.sender`). This would allow you to do whatever with the supply that you want, for example pairing those tokens with another token in the Berachain BeraSwap so others can acquire it.
 
 However, we usually want to make a token that's a little more interesting so it stands out. Let's add some more functionality to our token contract.
 
@@ -182,7 +182,7 @@ Next step is to use forge script to deploy this contract to Berachain.
 ```bash-vue
 # FROM: ./my_token
 
-forge create --rpc-url {{config.testnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY> src/MyToken.sol:MyToken --legacy;
+forge create --rpc-url {{config.mainnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY> src/MyToken.sol:MyToken --legacy;
 
 # [Expected Output]:
 # Deployer: 0x852Fc561Fd842ef1Af923ABfc64acC8A5624fe80
@@ -194,10 +194,8 @@ forge create --rpc-url {{config.testnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY
 
 The last step is now verify that contract that was successfully deployed.
 
-<!-- https://api.routescan.io/v2/network/testnet/evm/80084/etherscan -->
-
 ```bash-vue
-forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.testnet.dapps.beratrail.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
+forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.mainnet.dapps.berascan.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
 
 # [Expected Output]:
 # Start verifying contract `0x53E365fE5fDF332dD475E90bA8383B7F9853a49F` deployed on mainnet
@@ -208,7 +206,7 @@ forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol
 # GUID: `321091ec-e529-5a11-a75c-cf1ffc6987d7`
 # URL: https://etherscan.io/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 #
-# !NOTE: Should be {{config.testnet.dapps.beratrail.url}}/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# !NOTE: Should be {{config.mainnet.dapps.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 ```
 
 ## Next Steps

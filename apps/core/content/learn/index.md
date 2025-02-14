@@ -23,26 +23,27 @@ head:
 
 </a>
 
-Berachain is a high-performance [EVM-Identical](#berachain-evm-identical-⟠) Layer 1 (L1) blockchain utilizing [Proof-of-Liquidity](#proof-of-liquidity-🤝) (PoL) as a consensus mechanism, and built on top of a modular evm-focused consensus client framework named [BeaconKit](#beaconkit-⛵✨).
+Berachain is a high-performance [EVM-Identical](#berachain-evm-identical-⟠) Layer 1 blockchain utilizing [Proof-of-Liquidity](#proof-of-liquidity-🤝) (PoL), and built on top of the modular EVM-focused consensus client framework [BeaconKit](#beaconkit-⛵✨).
 
 ## EVM Identical ⟠
 
 Berachain's execution layer is identical to the Ethereum Virtual Machine (EVM) runtime environment seen on Ethereum Mainnet. This means that it uses existing unmodified [execution clients](/learn/help/glossary#execution-client) like Geth, Reth, Erigon, Nethermind, and more to handle executing smart contracts, and supports all the tooling that comes native with the EVM.
 
-Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints and any improvements made to execution clients would give immediate improvements to Berachain.
+Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints and any improvements made to execution clients could be applied immediately to Berachain.
 
 ## Proof-of-Liquidity 🤝
 
-Proof-of-Liquidity is a [consensus mechanism](/learn/help/glossary#consensus-mechanism) that establishes a framework to reward ecosystem liquidity that contributes to efficient trading, price stability, securing the chain, and increasing the network/user growth.
+Proof-of-Liquidity radically changes the way L1 economics are structured, prioritizing users
+and applications over validator rewards at baseline. Network incentives go towards enriching ecosystem liquidity, contributing to efficient trading, price stability, securing the chain, and increasing the network/user growth.
 
-This framework makes it possible to strongly align the incentives of key stakeholders / [PoL participants](/learn/pol/participants) (validator, protocols, users) and contributes to the overall long-term health of the chain.
+PoL strongly aligns the incentives of [network participants](/learn/pol/participants) (validators, protocols, users) and contributes to the overall long-term health of the chain.
 
-Beyond providing a great day-one dApp experience, the native dApps, such as [BEX](/learn/dapps/bex), [Bend](/learn/dapps/bend) and [Berps](/learn/dapps/berps), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
+Beyond providing seamless day-one utility, the native dApps, such as [BeraSwap](/learn/dapps/beraswap), serve as reference implementations of how developers can build on-top of Proof-of-Liquidity.
 
 Read more in [What Is Proof-of-Liquidity](/learn/what-is-proof-of-liquidity).
 
 ## BeaconKit ⛵✨
 
-BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, single slot finality (SSF), and more.
+BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/learn/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, [single slot finality (SSF)](https://ethereum.org/en/roadmap/single-slot-finality/), and more.
 
 Read more in [What Is BeaconKit](/learn/what-is-beaconkit).

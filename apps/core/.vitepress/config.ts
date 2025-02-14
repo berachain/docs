@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from "node:url";
 import markdownItConditionalRender from "markdown-it-conditional-render";
 import { sidebar } from "./sidebar";
 import { constants } from "@berachain/config/constants";
+import { vercelToolbar } from "@vercel/toolbar/plugins/vite"; /// @TODO: Remove for production
 
 // Config
 // ========================================================
@@ -13,7 +14,7 @@ import { constants } from "@berachain/config/constants";
 // ::if testnet
 // <your content>
 // ::endif
-const ENABLED_FLAGS = ["testnet" /*"mainnet"*/];
+const ENABLED_FLAGS = ["testnet", "mainnet"];
 /**
  *
  */
@@ -27,6 +28,7 @@ export default defineConfig({
   description: `${constants.websites.docsCore.description}`,
   cleanUrls: true,
   srcDir: "content",
+  ignoreDeadLinks: true,
   head: [
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "en" }],
@@ -78,16 +80,8 @@ export default defineConfig({
           </span>`,
         items: [
           {
-            text: `${constants.websites.docsBex.name}`,
-            link: `${constants.websites.docsBex.url}`,
-          },
-          {
-            text: `${constants.websites.docsBend.name}`,
-            link: `${constants.websites.docsBend.url}`,
-          },
-          {
-            text: `${constants.websites.docsBerps.name}`,
-            link: `${constants.websites.docsBerps.url}`,
+            text: `${constants.websites.docsSwap.name}`,
+            link: `${constants.websites.docsSwap.url}`,
           },
         ],
       },
@@ -138,6 +132,7 @@ export default defineConfig({
     ],
   },
   markdown: {
+    math: true,
     config: (md) => {
       // @ts-ignore
       md.use(markdownItConditionalRender, {
@@ -150,6 +145,8 @@ export default defineConfig({
     },
   },
   vite: {
+    // @TODO: Remove for production
+    plugins: [vercelToolbar()],
     resolve: {
       alias: [
         {
@@ -174,6 +171,12 @@ export default defineConfig({
               "../node_modules/@berachain/ui/NavBarMenuLink.vue",
               import.meta.url
             )
+          ),
+        },
+        {
+          find: /^.*\/VPFlyout\.vue$/,
+          replacement: fileURLToPath(
+            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
           ),
         },
         {
