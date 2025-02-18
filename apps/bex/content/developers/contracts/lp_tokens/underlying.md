@@ -44,7 +44,7 @@ Let's say you want to know your underlying BERA and HONEY balances for a BERA/HO
 
 | Step | Action               | Result                                                      |
 | ---- | -------------------- | ----------------------------------------------------------- |
-| 1    | Query BEX       | tokens = [BERA, HONEY], balances = [1000 BERA, 10000 HONEY] |
+| 1    | Query BEX            | tokens = [BERA, HONEY], balances = [1000 BERA, 10000 HONEY] |
 | 2    | Get LP token balance | yourLpTokens = 100                                          |
 | 3    | Get total LP supply  | actualSupply = getActualSupply() = 1000                     |
 | 4    | Calculate pool share | yourPoolShare = 100 / 1000 = 0.1 (10%)                      |

@@ -27,8 +27,7 @@ Each of these types of nodes is a pair of both an [execution client](/learn/help
 
 The main difference between an RPC node and a validator node is that a validator can propose blocks and receive block rewards.
 
-An RPC node can become a validator node by joining the [Active Set](#active-set-✅) through interacting with the [`BeaconDeposit`](/developers/contracts/beacondeposit) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements-🔑). 
-
+An RPC node can become a validator node by joining the [Active Set](#active-set-✅) through interacting with the [`BeaconDeposit`](/developers/contracts/beacondeposit) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements-🔑).
 
 ## Active Set ✅
 

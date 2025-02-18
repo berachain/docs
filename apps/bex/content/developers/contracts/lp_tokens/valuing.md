@@ -56,7 +56,7 @@ Let's value LP tokens for a `$BERA/$HONEY` pool:
 
 | Step | Action                   | Result                                                            |
 | ---- | ------------------------ | ----------------------------------------------------------------- |
-| 1    | Query BEX           | tokens = [`$BERA`, `$HONEY`], balances = [1000 BERA, 10000 HONEY] |
+| 1    | Query BEX                | tokens = [`$BERA`, `$HONEY`], balances = [1000 BERA, 10000 HONEY] |
 | 2    | Fetch prices             | prices = [$10 (BERA), $1 (HONEY)]                                 |
 | 3    | Calculate pool value     | poolValueUsd = (1000 _ $10) + (10000 _ $1) = $20,000              |
 | 4    | Get total LP supply      | totalLpSupply = 1000                                              |
