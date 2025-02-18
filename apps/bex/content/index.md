@@ -69,8 +69,6 @@ layout: page
     :icon="IconBrandGithub"
     type="alt"
   />
-  <!-- TODO: remove at mainnet launch -->
-  <!-- Replace link with config.mainnet.dapps.berascan.url -->
   <Feature
     title="Berascan"
     target="_blank"

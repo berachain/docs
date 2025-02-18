@@ -5,7 +5,7 @@ Proof-of-Liquidity (PoL) enables protocols to bid for validator `$BGT` emissions
 In a nutshell, here's how Incentives work:
 
 1. A protocol sets an incentive rate for their reward vault (e.g., 10 protocol tokens per 1 `$BGT`)
-2. When a validator directs `$BGT` emissions to this vault, they receive the corresponding amount of Incentives (e.g. 10 protocol tokens for directing 1 `$BGT`)
+2. When a validator directs `$BGT` emissions to this vault, they receive the corresponding amount of Incentives (e.g., 10 protocol tokens for directing 1 `$BGT`)
 3. Validators can take a commission on these Incentives before distributing the remainder to their `$BGT` delegators
 4. The amount of `$BGT` a validator can direct (and thus Incentives they can earn) depends on their delegation weight
 

@@ -13,15 +13,15 @@ head:
 
 # Build a Frontend
 
-To ensure you can connect to the Berachain blockchain, make sure you have your browser wallet configured to [Connect to Berachain](/developers/network-configurations).
+Before starting, ensure your browser wallet is configured to [Connect to Berachain](/developers/network-configurations).
 
-This walkthrough will show you how to build a frontend that allows for a wallet connection and makes and RPC request to Berachain for the current block number as defined by [JSON-RPC endpoints](https://geth.ethereum.org/docs/interacting-with-geth/rpc).
+This walkthrough demonstrates how to build a frontend that enables wallet connections and makes RPC requests to Berachain to retrieve the current block number, using the standard [JSON-RPC endpoints](https://geth.ethereum.org/docs/interacting-with-geth/rpc).
 
-The goal of this project is use **Vanilla JavaScript** to interact with Berachain and understand the very basics or JSON-RPC requests.
+The goal of this project is to use **Vanilla JavaScript** to interact with Berachain and gain a fundamental understanding of JSON-RPC requests.
 
 ## Requirements
 
-Before beginning, made sure you have the following setup on your computer:
+Before beginning, make sure you have the following set up on your computer:
 
 - VSCode IDE (Recommended)
 - NVM or Node (`v22` or higher)

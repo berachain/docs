@@ -27,13 +27,13 @@ The ability to build blocks is determined by `$BERA` stake, not `$BGT` boost. As
 
 ### Is there a cap for the number of active validators?
 
-There will be a mechanism for capping validators to a safe level. The validators in this cap are known as the 'active set.'
+There will be a mechanism for capping validators to a safe level. The validators within this cap are known as the 'active set.'
 
 ## dApps & Reward Vaults
 
 ### Can dApps that don't have a token still participate in PoL?
 
-Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token. That LP token can be staked in a Reward Vault to earn $BGT from emissions directed from validators.
+Yes, a fundamental aspect of Proof-of-Liquidity (PoL) is the use of whitelisted Reward Vaults. A protocol only needs to issue a receipt token that can be staked in the protocol's respective whitelisted Reward Vault. The receipt token is different from a native token and can be thought of as a form of bookkeeping token. For example, when a user provides liquidity to a BEX pool, they receive a receipt token in the form of an LP token. That LP token can be staked in a Reward Vault to earn $BGT from emissions directed by validators.
 
 ### Are there restrictions on what kinds of dApps can have whitelisted Reward Vaults?
 
@@ -45,13 +45,13 @@ Technically, the creation of rewards vaults is permissionless, but for validator
 
 ### Do native dApps have an advantage over non-native dApps that participate in PoL?
 
-All Reward Vaults are treated equally and their status is determined solely by validators distributing rewards to Reward Vaults. The only exception would be that if a Validator does not specify their Reward Allocation, native dApps are set as default Reward Vaults for Reward Allocation for validators.
+All Reward Vaults are treated equally and their status is determined solely by validators distributing rewards to Reward Vaults. The only exception is that if a Validator does not specify their Reward Allocation, native dApps are set as default Reward Vaults for Reward Allocation for validators.
 
 ## Rewards and Emissions
 
 ### How much $BGT could any given Reward Vault earn?
 
-The amount of $BGT a given Reward Vault can earn is a function of following:
+The amount of $BGT a given Reward Vault can earn is a function of the following:
 
 1. How many validators are directing emissions to those vaults
 2. How much $BGT is boosted to the validators directing emissions to those vaults
@@ -60,22 +60,22 @@ The amount of $BGT a given Reward Vault can earn is a function of following:
 
 No, the `$BGT` emission is not linear to the amount of `$BGT` boosted to a validator. The emission formula is:
 $$emission = [B + max(m, (a+1)(1-1/(1+ax^b))R)]$$
-where `B` is the base rate, representing the basic BGT amount that a validator gets for producing a block
-`R` is the reward rate, which is the base BGT amount allocated for reward vaults before any boost is applied
-`a` is the boost multiplier that determines how much impact boost has on emissions toward reward vaults
-`b` is the convexity parameter that controls how quickly boost affects emissions - with high values, validators with low boost get more heavily penalized
-`m` is the minimum reward, acting as a floor for emissions to reward vaults - when this is higher, even validators with low boost are guaranteed more emissions
+where `B` is the base rate, representing the basic BGT amount that a validator gets for producing a block;
+`R` is the reward rate, which is the base BGT amount allocated for reward vaults before any boost is applied;
+`a` is the boost multiplier that determines how much impact boost has on emissions toward reward vaults;
+`b` is the convexity parameter that controls how quickly boost affects emissions - with high values, validators with low boost get more heavily penalized;
+`m` is the minimum reward, acting as a floor for emissions to reward vaults - when this is higher, even validators with low boost are guaranteed more emissions.
 
 ### How does Berachain manage hyperinflation of $BGT?
 
 The inflation of $BGT is equivalent to traditional PoS systems having some percentage of inflation per year. Berachain just takes that PoS inflation and distributes it between a validator and reward vaults.
 
-The end result is that the inflation cadence should effectively mirror an equivalent PoS platform, it's just allocated in a manner that better aligns the interests of validators, protocols and users.
+The end result is that the inflation cadence should effectively mirror an equivalent PoS platform; it's just allocated in a manner that better aligns the interests of validators, protocols, and users.
 
 ### Why are Incentive emissions defined per $BGT instead of being pool-based?
 
-Incentives are denominated in $BGT– ultimately users, validators, and protocols want to be able to calculate the per $BGT they're earning, so it's more of a choice of UI to facilitate understanding the value $BGT drives.
+Incentives are denominated in $BGT – ultimately users, validators, and protocols want to be able to calculate what they're earning per $BGT, so it's more of a UI choice to facilitate understanding the value $BGT drives.
 
 ### Can only validators vote on or create governance proposals?
 
-Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10000 $BGT can create a proposal.
+Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10,000 $BGT can create a proposal.

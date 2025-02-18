@@ -19,9 +19,9 @@ head:
 
 # Connecting to Berachain Mainnet
 
-To start using Berachain, join the mainnet below.
+To start using Berachain, connect to the mainnet below.
 
-## Add the network in One Click
+## Add the Network in One Click
 
 Click the button below to add the network to your MetaMask in one click.
 
@@ -39,7 +39,7 @@ Click the button below to add the network to your MetaMask in one click.
 
 ## Add the Network Manually
 
-To add the network manually, insert the network details below into your wallet of choice:
+To add the network manually, enter the network details below into your wallet of choice:
 
 | Key                | Value                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------- |
@@ -57,17 +57,14 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
 
 # Connecting to Berachain Testnet
 
-Berachain testnets Artio and Bartio are up, but deprecated. We will publish a new testnet to match mainnet in February 2025.
-
-<!--
+The Berachain testnets Artio and Bartio are up but deprecated. We will publish a new testnet to match mainnet in February 2025.
 
 ### What is a Testnet?
 
-Testnet is an additional blockchain network that runs separately from the Mainnet blockchain and is a test environment that has no economic value associated with the tokens in it
+A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment with no economic value associated with its tokens.
 
 ### What is a Testnet Used for?
 
 - Creating your test address and getting test funds
 - Developing applications to ensure they work properly prior to deploying them on mainnet
-- Testing applications against new upgrades to the Berachain network prior to them being released on mainnet
- -->
+- Testing applications against new upgrades to the Berachain network prior to their release on mainnet

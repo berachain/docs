@@ -17,7 +17,7 @@ head:
 
 # Berachain Governance
 
-Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dapps. Here's a few examples of what governance can be used for:
+Berachain's Governance system uses `$BGT` to allow token holders to make important decisions about core functions of Proof of Liquidity & our core dApps. Here are a few examples of what governance can be used for:
 
 - Proof-of-Liquidity asset whitelisting (e.g., new staking assets, whitelisting incentive assets)
 - Native dApp governance (e.g., changes to BEX's protocol fees)
@@ -52,7 +52,7 @@ Governance proposals can be discussed and created on <a :href="config.mainnet.da
 BeraHub
 </a>.
 
-Generally, creating a governance proposal on Berachain Governance requires adhering to the following:
+Creating a governance proposal on Berachain Governance requires adhering to the following:
 
 1. **Ensure Sufficient Voting Power**: You need sufficient `$BGT`, either owned directly or delegated to you by other token holders.
 

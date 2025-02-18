@@ -21,7 +21,7 @@ head:
 
 Berachain has the following properties:
 
-- Block time: Block times varies, for latest feel free to check it out at <a :href="config.mainnet.dapps.berascan.url">{{config.mainnet.dapps.berascan.name}}</a>.
+- Block time: Block times vary, for the latest feel free to check it out at <a :href="config.mainnet.dapps.berascan.url">{{config.mainnet.dapps.berascan.name}}</a>.
 - Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
 - Finality: single slot finality
 
@@ -35,7 +35,7 @@ A swap is the process of exchanging one token for another. This can be thought o
 
 ## How much does it cost to swap?
 
-Each swap has a fee which varies dependening on the fee that was set when the pool was created. Common fees are 0.05%, 0.1%, 0.3% or 1% but you should always check when performing a swap to ensure you are okay with the fee on that pool.
+Each swap has a fee which varies depending on the fee that was set when the pool was created. Common fees are 0.05%, 0.1%, 0.3% or 1% but you should always check when performing a swap to ensure you are okay with the fee on that pool.
 
 ## What is liquidity?
 
@@ -51,7 +51,7 @@ Liquidity providers are users who deposit tokens into a liquidity pool. They are
 
 ## What is APY?
 
-APY stands for annual perentage yield. In the context of BEX pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool?
+APY stands for annual percentage yield. In the context of BEX pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool.
 
 ## What is $HONEY?
 
@@ -105,9 +105,9 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 Governance is the process by which the community decides what changes are made to the Berachain protocol. This includes how the node is upgraded and what parameters are set for various components on the chain.
 
-## Once you’ve provided liquidity into an eligible pool in BEX (or some other PoL-eligible pool) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
+## Once you've provided liquidity into an eligible pool in BEX (or some other PoL-eligible pool) how do you get `$BGT`? Is `$BGT` automatically sent to recipients?
 
-Each eligible (whitelisted) pool on BEX has an associated LP token. Once liquidity is depositted into a BEX pool, an LP token would be issued relative the users total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user. Users can claim their `$BGT` from any wallet address they choose.
+Each eligible (whitelisted) pool on BEX has an associated LP token. Once liquidity is deposited into a BEX pool, an LP token would be issued relative to the user's total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user. Users can claim their `$BGT` from any wallet address they choose.
 
 ## Can only Validators vote on or create proposals?
 
@@ -128,4 +128,4 @@ The incentives a validator receives depend solely on the amount of rewards offer
 
 ## Can Reward Vaults route emissions to a single pool within a dApp, or only the whole dApp?
 
-The dapp can request a Reward Vault for any encapsulated thing they want. The encapsulated thing just requires a representative ERC-20 token that users can stake in the vault. Developers also have the ability to stake in Vaults on [behalf of users](/developers/guides/advanced-pol).
+The dApp can request a Reward Vault for any encapsulated thing they want. The encapsulated thing just requires a representative ERC-20 token that users can stake in the vault. Developers also have the ability to stake in Vaults on [behalf of users](/developers/guides/advanced-pol).

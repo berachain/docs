@@ -17,11 +17,11 @@ head:
 
 # Build a Smart Contract
 
-The [ERC-20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) provides a common interface for tokens on Berachain. ERC-20s follow a standard interface such that other applications can easily interact with them on-chain, but can be extended to do much, much more. They power everything from simple value transfers to complex DeFi interactions.
+The [ERC-20 token standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) provides a common interface for tokens on Berachain. ERC-20s follow a standard interface so that other applications can easily interact with them on-chain, but they can be extended to do much, much more. They power everything from simple value transfers to complex DeFi interactions.
 
 In this guide, we'll walk through how to create an ERC-20 token using Solidity and deploy it to the Berachain Testnet.
 
-## Pre-requisites
+## Requirements
 
 Before you start, make sure you have the following:
 

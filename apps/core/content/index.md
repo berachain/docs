@@ -35,13 +35,13 @@ layout: page
   />
   <Feature
     title="Developers"
-    description="Get up and running and building with Berachain"
+    description="Get up and running and start building with Berachain"
     link="/developers/"
     :icon="IconTerminal"
   />
   <Feature
     title="Run a Node"
-    description="Setup and configure a validator, rpc, and more"
+    description="Set up and configure a validator, RPC node, and more"
     link="/nodes/"
     :icon="IconServer"
   />
@@ -69,8 +69,6 @@ layout: page
     :icon="IconBrandGithub"
     type="alt"
   />
-  <!-- TODO: remove at mainnet launch -->
-  <!-- Replace link with config.mainnet.dapps.berascan.url -->
   <Feature
     title="Berascan"
     target="_blank"
