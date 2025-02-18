@@ -201,7 +201,6 @@ These subsequent deposits are done by calling the same `deposit` function, only 
 
 When your validator passes the threshold necessary to become an activator, it passes into the **Activation** part of the lifecycle. At the conclusion of **second epoch** after you pass the threshold -- in other words, no sooner than 13 minutes -- you become eligible for minting blocks.
 
-
 ```bash
 cast send "0x4242424242424242424242424242424242424242" \
 'deposit(bytes,bytes,bytes,address)' \
@@ -210,12 +209,11 @@ cast send "0x4242424242424242424242424242424242424242" \
 "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
 "0x0000000000000000000000000000000000000000" \
 --ledger \
---value 10000ether \    
+--value 10000ether \
 -r $RPC_URL;
 ```
 
 Obviously, provide your preferred amount with `--value`.
-
 
 ## Post-activation checks
 
