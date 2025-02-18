@@ -15,23 +15,23 @@ head:
 
 ## BERA Token
 
-`$BERA` is the native gas token of Berachain's L1 and it serves multiple purposes:
+`$BERA` is the native gas token of Berachain's L1 and serves multiple purposes:
 
 - Used for paying transaction fees
 - Initial validator staking token to secure the network
   - More BERA staked = more blocks proposed
-  - Validators earn base emissions and transaction fees(ie MEV) for each block proposed
+  - Validators earn base emissions and transaction fees (i.e. MEV) for each block proposed
 - Can be obtained by burning BGT (one-way conversion)
 
 Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
 
-## BGT(Bera Governance Token)
+## BGT (Bera Governance Token)
 
-`$BGT` is Berachain's staking and governance token, which is non-transferrable, can only be earned by
+`$BGT` is Berachain's staking and governance token, which is non-transferrable and can only be earned by
 participating in [Proof of Liquidity](#proof-of-liquidity) (PoL):
 
 - Validator delegation and rewards
-  - More BGT delegated = more reward emissions for reward vaults s
+  - More BGT delegated = more reward emissions for reward vaults
 - Governance participation (proposals and voting)
 - Can be burned for `$BERA` (one-way conversion)
 - Can only be earned through participating in [Proof of Liquidity](#proof-of-liquidity)
@@ -40,11 +40,11 @@ Read more in [Tokens - $BGT](/learn/pol/tokens/bgt).
 
 ## BeaconKit
 
-BeaconKit is a modular and customizable consensus layer framework, leveraging the CometBFT consensus algorithm, for building Ethereum based blockchains.
+BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
 
 ## Block
 
-A data unit containing a list of transactions, which is permanently added to the blockchain in a sequential manner.
+A data unit containing a list of transactions that is permanently added to the blockchain in a sequential manner.
 
 ## BEX
 
@@ -52,15 +52,15 @@ Berachain's native [decentralized exchange](#dex-decentralized-exchange), called
 
 ## Block Time
 
-The time it takes to create a new block on the blockchain. Berachain has an average block time of < 3 seconds. Note that block time can increase depending on the network congestion.
+The time it takes to create a new block on the blockchain. Berachain has an average block time of < 3 seconds. Note that block time can increase depending on network congestion.
 
 ## CometBFT
 
-A general purpose blockchain consensus engine used by Berachain to achieve high throughput and fast finality in transactions. Read more at [Cometbft.com](https://cometbft.com).
+A general-purpose blockchain consensus engine used by Berachain to achieve high throughput and fast finality in transactions. Read more at [Cometbft.com](https://cometbft.com).
 
 ## Consensus Client
 
-The consensus client is a piece of software that is responsible for achieving agreement among the network nodes about the current state of the blockchain. It handles the process of validating transactions and blocks, ensuring they adhere to network rules, and deciding which blocks get added to the blockchain. The consensus client focuses on network-wide rules and the order of transactions. It is often paired with an [execution client](#execution-client).
+The consensus client is a piece of software responsible for achieving agreement among network nodes about the current state of the blockchain. It handles the process of validating transactions and blocks, ensuring they adhere to network rules, and deciding which blocks get added to the blockchain. The consensus client focuses on network-wide rules and the order of transactions. It is often paired with an [execution client](#execution-client).
 
 ## Consensus Mechanism
 
@@ -72,24 +72,24 @@ The process by which a token holder grants voting or validation power to another
 
 ## DEX (Decentralized Exchange)
 
-A platform that enables the buying and selling of tokens directly on the blockchain, without a centralized intermediary. All liquidity is verifiably owned by smart contracts.
+A platform that enables the buying and selling of tokens directly on the blockchain without a centralized intermediary. All liquidity is verifiably owned by smart contracts.
 
 ## Engine API
 
-The Engine API is the interface that allows communication between the [execution](#execution-client) and the [consensus](#consensus-client) layer of an EVM node. [BeaconKit](#beaconkit), as a consensus layer, leverages this to be easily paired with any execution client.
+The Engine API is the interface that allows communication between the [execution](#execution-client) and [consensus](#consensus-client) layers of an EVM node. [BeaconKit](#beaconkit), as a consensus layer, leverages this to be easily paired with any execution client.
 
 ## Execution Client
 
-An EVM (Ethereum Virtual Machine) execution client (sometimes referred to as the execution layer) is a software application that is responsible for the actual computation of transactions within blocks. It interprets and executes the code of smart contracts using the EVM, manages state changes, and executes the transaction logic. This client ensures that all actions are performed correctly according to the smart contract's code and EVM protocol.
+An EVM (Ethereum Virtual Machine) execution client (sometimes referred to as the execution layer) is a software application responsible for the actual computation of transactions within blocks. It interprets and executes the code of smart contracts using the EVM, manages state changes, and executes the transaction logic. This client ensures that all actions are performed correctly according to the smart contract's code and EVM protocol.
 
 EVM Execution Clients:
 
-- **Geth:** Official Go implementation of the Ethereum protocol.
-- **Erigon:** More performant, feature-rich client forked from go-ethereum.
-- **Nethermind:** .NET based client with full support for Ethereum protocols.
-- **Besu:** Enterprise-grade client, Apache 2.0 licensed, written in Java.
-- **Reth:** Rust-based client focusing on performance and reliability.
-- **Ethereumjs:** Javascript based client managed by the Ethereum Foundation.
+- **Geth:** Official Go implementation of the Ethereum protocol
+- **Erigon:** More performant, feature-rich client forked from go-ethereum
+- **Nethermind:** .NET based client with full support for Ethereum protocols
+- **Besu:** Enterprise-grade client, Apache 2.0 licensed, written in Java
+- **Reth:** Rust-based client focusing on performance and reliability
+- **Ethereumjs:** Javascript-based client managed by the Ethereum Foundation
 
 ## Finality
 
@@ -97,7 +97,7 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps(BEX, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
 ## HONEY
 
@@ -105,7 +105,7 @@ The system by which decisions are made within the Berachain ecosystem. Governanc
 
 ## IBC
 
-Inter-Blockchain Communication protocol that handles transport of data between Cosmos blockchains.
+Inter-Blockchain Communication protocol that handles the transport of data between Cosmos blockchains.
 
 ## Liquidity
 
@@ -125,7 +125,7 @@ The primary network where transactions comprising real value occur on the Berach
 
 ## Proof-of-Liquidity
 
-A consensus mechanism which aligns economic incentives between validators, applications and users. Premised on a two-token model, validators have varying probabilities of being selected based on the amount of `$BERA` they have staked. Block rewards are distributed as `$BGT` tokens, the amount of which is influenced by the amount of `$BGT` delegated to them by users. This `$BGT` is deployed towards liquidity incentives to ecosystem protocols, for which validators receive incentives from the protocols in return.
+A consensus mechanism that aligns economic incentives between validators, applications, and users. Premised on a two-token model, validators have varying probabilities of being selected based on the amount of `$BERA` they have staked. Block rewards are distributed as `$BGT` tokens, the amount of which is influenced by the amount of `$BGT` delegated to them by users. This `$BGT` is deployed towards liquidity incentives to ecosystem protocols, for which validators receive incentives from the protocols in return.
 
 ## Single Slot Finality
 

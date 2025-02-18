@@ -5,9 +5,9 @@ head:
       content: How to Connect a Wallet With Berachain
   - - meta
     - name: description
-      content: Learn to quickly configure your crypto wallet With Berachain
+      content: Learn to quickly configure your crypto wallet with Berachain
     - property: og:description
-      content: Learn to quickly configure your crypto wallet With Berachain
+      content: Learn to quickly configure your crypto wallet with Berachain
 ---
 
 <script setup>
@@ -18,13 +18,13 @@ head:
 
 # How To Connect A Wallet With Berachain 🔌
 
-Blockchain wallets are what allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
+Blockchain wallets allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
 
 ## Berachain Mainnet RPC 🌐
 
 Copy and paste these values into any wallet that supports importing RPCs.
 
-Quickly add Berachain's network to your wallet with one-click.
+Quickly add Berachain's network to your wallet with one click.
 
 <ClientOnly>
   <AddNetwork
@@ -59,21 +59,21 @@ Here are some examples of compatible wallets:
 - [Brave Wallet](https://brave.com/wallet/)
 - [Frame](https://frame.sh)
 
-## How To Setup A MetaMask Wallet With Berachain 🦊
+## How To Set Up A MetaMask Wallet With Berachain 🦊
 
-This will walk you through the steps of setting up and configure a MetaMask wallet with Berachain.
+This will walk you through the steps of setting up and configuring a MetaMask wallet with Berachain.
 
-**NOTE:** Recommended that you set this up through Chrome.
+**NOTE:** It is recommended that you set this up through Chrome.
 
 ### Step 1 - Install MetaMask
 
-Go to Metamask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
+Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
 
 ![Metamask Chrome Store](/assets/metamask-chrome-store.png)
 
 ### Step 2 - Create Your Wallet in MetaMask
 
-Once MetaMask finishes installing as a Chrome extension, the initial prompt still show up. Click the `Create a new wallet` button to start the process.
+Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
 
 ![Metamask Get Started](/assets/metamask-get-started.png)
 
@@ -85,7 +85,7 @@ Next, follow the instructions to secure your wallet phrase. This step is very im
 
 ![Metamask Recovery Phrase](/assets/metamask-recovery-phrase.png)
 
-🎉 Congratulations! You've setup your MetaMask wallet!
+🎉 Congratulations! You've set up your MetaMask wallet!
 
 ## Add Berachain Network To Your Wallet 🐻
 
@@ -113,7 +113,7 @@ To add the network manually, click the drop-down in the top-left of MetaMask.
 
 ![Metamask Add Network Step 1](/assets/metamask-add-network-01.png)
 
-When the modal appears, click `Add network` button.
+When the modal appears, click the `Add network` button.
 
 ![Metamask Add Network Step 2](/assets/metamask-add-network-02.png)
 

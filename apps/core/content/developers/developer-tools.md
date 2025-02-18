@@ -2,7 +2,7 @@
 head:
   - - meta
     - property: og:title
-      content: Developer Tools
+      content: Developer Tools For Berachain
   - - meta
     - name: description
       content: List of Developer Tools
@@ -19,7 +19,7 @@ head:
 
 This section provides an overview of the developer tools that are available on the Berachain network.
 
-Since Berachain is EVM-compatible, if you're familiar with creating dApps on other EVM chains then you'll feel right at home building on Berachain.
+Since Berachain is EVM-compatible, if you're familiar with creating dApps on other EVM chains, then you'll feel right at home building on Berachain.
 
 ### Smart Contract Programming Languages
 
@@ -49,7 +49,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Thirdweb](https://thirdweb.com/chainlist)
 - [Tenderly](https://dashboard.tenderly.co/)
 - [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
-- [RhinoStake](ttps://rhinostake.com/resources/berachain-apis) - 6 global nodes w/websockets
+- [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
 
 ### Wallets & Multisigs
 
@@ -60,8 +60,6 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Keplr](https://keplr.app/)
 - [Rainbow Wallet](https://rainbow.me/en/)
 - [Safe](https://safe.berachain.com/welcome)
-
-and a [full Geth JSON-RPC interface](https://geth.ethereum.org/docs/interacting-with-geth/rpc) for calling the chain.
 
 ## Authentication & Account Abstraction
 

@@ -17,7 +17,7 @@ head:
 
 # Deployed Contract Addresses
 
-These are a list of addresses where contracts can be read or written to.
+This is a list of addresses where contracts can be read from or written to.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
 

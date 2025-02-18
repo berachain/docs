@@ -5,17 +5,17 @@ Berachain's Proof of Liquidity (PoL) mechanism can be broken down into two broad
 1. [**BGT Distribution**](./#_1-bgt-distribution): How $BGT is created from the block production process
 2. [**Incentive Marketplace**](./#_2-incentive-marketplace): How protocols compete for validator $BGT allocations by issuing incentives
 
-The below diagram shows the relationship between the main PoL contracts and how they interact.
+The diagram below shows the relationship between the main PoL contracts and how they interact.
 
 ![PoL Overview For Devs](/assets/pol-architecture.png)
 
 ## 1. BGT Distribution
 
-As discussed in [Block Production](/learn/pol/bgtmath), $BGT emissions stem from the block production process. A variable component $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
+As discussed in [Block Production](/learn/pol/bgtmath), $BGT emissions stem from the block production process. The variable component of $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
 
 ### Distributor
 
-The [Distributor](/developers/contracts/distributor) contract is the entrypoint for BGT distribution. The `distributeFor()` function accepts a Merkle proof that a validator has proposed a certain beacon block. The Distributor then:
+The [Distributor](/developers/contracts/distributor) contract is the entry point for BGT distribution. The `distributeFor()` function accepts a Merkle proof that a validator has proposed a certain beacon block. The Distributor then:
 
 - Receives newly minted BGT from the `BlockRewardController`
 - Processes rewards based on validator-specified allocations via `BeraChef`
@@ -38,13 +38,13 @@ The Incentive Marketplace creates a market-driven liquidity incentive system whe
 
 ### RewardVault
 
-[RewardVaults](/developers/contracts/reward-vault) act as the core PoL integration point, they:
+[RewardVaults](/developers/contracts/reward-vault) act as the core PoL integration point. They:
 
 - Receive $BGT emissions from the `Distributor`
 - Allow protocols to add incentive tokens with a minimum incentive rate per 1 $BGT emitted
 - Manage token staking and $BGT distribution to liquidity providers/users
 
-Validators are incentivized to allocate $BGT to vaults offering higher protocol incentives, as they receive these rewards proportional to the $BGT allocated. This creates the "marketplace" dynamic where protocols compete by offering better incentives to attract more $BGT allocations.
+Validators are incentivized to allocate $BGT to vaults offering higher protocol incentives, as they receive these rewards proportionally to the $BGT allocated. This creates the "marketplace" dynamic where protocols compete by offering better incentives to attract more $BGT allocations.
 
 ::: tip
 RewardVault creation is permissionless, but vaults must be approved by [governance](/learn/governance/rewardvault) to be included in validators' reward allocations.
