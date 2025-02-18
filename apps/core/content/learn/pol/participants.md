@@ -44,7 +44,7 @@ When selecting a validator to delegate `$BGT` to, users typically consider:
 - Validator commission rates and incentive distribution strategies
 - Validator uptime and performance
 
-The primary goal is to earn as much Incentives as possible through delegation.
+The primary goal is to earn as many Incentives as possible through delegation.
 
 ## Ecosystem Projects 🧸
 
@@ -54,4 +54,4 @@ Projects participate in PoL by:
 2. Submitting a governance proposal to whitelist the vault
 3. Supplying incentive tokens and managing rates in their vault
 
-The [Incentives marketplace](/learn/pol/incentives) allows protocols to bid for validators' emissions using whitelisted tokens, creating alignment between all stakeholders to increase the overall value of the network. Projects must earn also gain the favor of `$BGT` holders to enter into the PoL system.
+The [Incentives marketplace](/learn/pol/incentives) allows protocols to bid for validators' emissions using whitelisted tokens, creating alignment between all stakeholders to increase the overall value of the network. Projects must also gain the favor of `$BGT` holders to enter into the PoL system.

@@ -15,9 +15,9 @@ head:
 
 > On June 9, 2024, Berachain officially launched version 2 of its testnet called `bArtio`.
 
-The Berachain `bArtio` network is a re-architecture of the chain to make it more modular and EVM-aligned. In order to achieve these goals, an entirely new framework was needed and [**BeaconKit**](/learn/what-is-beaconkit) was born.
+The Berachain `bArtio` network is a re-architecture of the chain to make it more modular and EVM-aligned. In order to achieve these goals, an entirely new framework was needed, and [**BeaconKit**](/learn/what-is-beaconkit) was born.
 
-V2 is an implementation of the `BeaconKit` framework, which separates the execution and consensus, and focuses on implementing an consensus client that can be paired with any EVM execution client (Ex: Geth, Reth, etc).
+V2 is an implementation of the `BeaconKit` framework, which separates the execution and consensus layers and focuses on implementing a consensus client that can be paired with any EVM execution client (e.g., Geth, Reth, etc.).
 
 ## Main Changes from V1 to V2 🐻
 
@@ -27,7 +27,7 @@ Despite this optimization, Cosmos could not handle the volume of transactions th
 
 ![Polaris vs BeaconKit](/assets/berachain-polaris-vs-beaconkit.png)
 
-V2 introduced a modular architecture of separating the consensus and execution layer. Compared with V1, where validators would run a single [Polaris](https://github.com/berachain/polaris) client, V2 validators would need to run 2 clients, BeaconKit client (for consensus) alongside any EVM execution client (e.g. Geth, Erigon). This modular approach allows for specialization of concerns - for the execution layer to benefit from EVM innovations, and for BeaconKit to provide a highly customizable and performant consensus layer.
+V2 introduced a modular architecture by separating the consensus and execution layers. Compared with V1, where validators would run a single [Polaris](https://github.com/berachain/polaris) client, V2 validators need to run two clients: a BeaconKit client (for consensus) alongside any EVM execution client (e.g., Geth, Erigon). This modular approach allows for specialization of concerns - enabling the execution layer to benefit from EVM innovations and BeaconKit to provide a highly customizable and performant consensus layer.
 
 In addition to the technical changes with BeaconKit, the economic design of Berachain's native tokens has evolved. The following table highlights the main changes between V1 and V2:
 
@@ -36,5 +36,5 @@ In addition to the technical changes with BeaconKit, the economic design of Bera
 Some significant points to note:
 
 1. `$BERA` is staked for activating validators, rather than `$BGT`.
-2. `$BGT` delegators no longer at risk of slashing.
+2. `$BGT` delegators are no longer at risk of slashing.
 3. The execution layer is now EVM identical.

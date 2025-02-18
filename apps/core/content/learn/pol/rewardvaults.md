@@ -2,14 +2,14 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# Reward vaults
+# Reward Vaults
 
-Reward vaults are smart contracts in which users can stake their Proof-of-Liquidity (PoL) eligible assets in order to receive `$BGT` rewards. Reward vaults are the only way in which anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
+Reward Vaults are smart contracts in which users can stake their Proof-of-Liquidity (PoL) eligible assets to receive `$BGT` rewards. Reward Vaults are the only way anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
 
-Reward vaults are a key piece of infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own reward vault and respective PoL-eligible asset.
+Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
 
 :::tip
-A different reward vault contract exists for each PoL-eligible asset
+A different Reward Vault contract exists for each PoL-eligible asset
 :::
 
 ## User Interactions
@@ -18,7 +18,7 @@ A different reward vault contract exists for each PoL-eligible asset
 
 ![Reward Vaults](/assets/reward-vaults.png)
 
-In order to receive `$BGT`, a user must be staking the PoL-eligible asset in its reward vault. The protocol that deployed the reward vault is able to decide how the user acquires the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
+To receive `$BGT`, a user must stake the PoL-eligible asset in its Reward Vault. The protocol that deployed the Reward Vault decides how users acquire the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
 
 1. The user takes some action that results in receiving a PoL-eligible asset, generally referred to as a receipt token.
 2. The user stakes the PoL-eligible asset in the corresponding vault.
@@ -28,27 +28,27 @@ In order to receive `$BGT`, a user must be staking the PoL-eligible asset in its
 
 ![Reward Vaults](/assets/reward-vault-staking.jpg)
 
-The amount of `$BGT` rewards a user earns from a reward vault is a function of:
+The amount of `$BGT` rewards a user earns from a Reward Vault is a function of:
 
-1. The user's share of total assets staked in the reward vault
-2. The amount of `$BGT` rewards emitted to the reward vault
+1. The user's share of total assets staked in the Reward Vault
+2. The amount of `$BGT` rewards emitted to the Reward Vault
 
-After staking assets in a reward vault, users are free to claim the earned rewards, add to their deposits, or withdraw their assets whenever they wish.
+After staking assets in a Reward Vault, users are free to claim their earned rewards, add to their deposits, or withdraw their assets whenever they wish.
 
-`$BGT` farming with reward vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry for regular users.
+`$BGT` farming with Reward Vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry for regular users.
 
 ## $BGT Flow
 
-When a validator is chosen to propose a block, they direct some portion of their `$BGT` emissions to specific reward vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [emissions](./bgtmath.md).
+When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [emissions](./bgtmath.md).
 
-To understand why validators would choose to emit `$BGT` to a particular reward vault over another, refer to [Incentives](./incentives.md) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
+To understand why validators would choose to emit `$BGT` to one Reward Vault over another, refer to [Incentives](./incentives.md) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
 
 ![Reward Vaults](/assets/rewardallocation.png)
 
 ## Vault Creation
 
-New Reward Vaults can be created permissionlessly, and can be done so at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
+New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
 
-Protocols creating reward vaults must additionally [whitelist their vaults](/learn/governance/rewardvault), conducted by `$BGT` governance in order to be eligible to receive emissions from validators.
+Protocols creating Reward Vaults must additionally [whitelist their vaults](/learn/governance/rewardvault) through `$BGT` governance to be eligible to receive emissions from validators.
 
 <video src="/assets/videos/createrewardvault.mp4" controls></video>
