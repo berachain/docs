@@ -52,13 +52,13 @@ await swapRouter.multiSwap(steps, amount, minOut);
 
 In the current implementation, we leverage the SOR to construct our swap:
 
-```js
+```js-vue
 import {
   BalancerApi,
   SwapKind,
   TokenAmount,
 } from "@berachain-foundation/berancer-sdk";
-const balancerApi = new BalancerApi(apiUrl, CHAIN_ID);
+const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 const honeyToken = new Token(CHAIN_ID, HONEY_ADDRESS, 18, "HONEY");
 
 // Create swap amount (e.g., 1 HONEY)
