@@ -217,7 +217,8 @@ const SIDEBAR = {
         {
           text: "Distribute Block Rewards",
           link: "/nodes/guides/distribute-block-rewards",
-        }
+        },
+        { text: "Validator Support", link: "/nodes/validator-support" },
       ],
     },
   ],
