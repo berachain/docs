@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Proof-of-Liquidity Participants 👥
 
 This article explores the different players in the Proof-of-Liquidity (PoL) ecosystem and their roles. The following diagram shows a breakdown of the different participants and their priorities/responsibilities:
@@ -6,7 +10,7 @@ This article explores the different players in the Proof-of-Liquidity (PoL) ecos
 
 ## Validators ✅
 
-The active set of validators consists of the top N validators ordered by BERA staked. Being part of the active set entitles validators to earn block rewards, so a key priority for validators is to obtain sufficient `$BERA` stake to be in the active set. Validators earn through three primary means:
+The active set of validators consists of the top **{{ config.mainnet.validatorActiveSetSize }} validators** ordered by BERA staked. Being part of the active set entitles validators to earn block rewards, so a key priority for validators is to obtain sufficient `$BERA` stake to be in the active set. Validators earn through three primary means:
 
 1. Gas fees and priority fees
 2. Collecting incentives provided by protocols for directing BGT rewards to their [Reward Vaults](/learn/pol/rewardvaults)

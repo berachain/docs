@@ -11,6 +11,11 @@ head:
       content: How to run a validator node on Berachain
 ---
 
+<script setup>
+    import config from '@berachain/config/constants.json';
+</script>
+
+
 # Become a Validator on Berachain
 
 This guide will walk you through the process of becoming a validator node on Berachain.
@@ -19,7 +24,7 @@ This guide will walk you through the process of becoming a validator node on Ber
 
 - Run Full Node & Fully Synced - See [Quickstart](/nodes/quickstart)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
-- Berachain Wallet Address with a minimum of 250,000 $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
+- Berachain Wallet Address with a minimum of {{ config.mainnet.minEffectiveBalance }} $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
 
 :::warning
 You must have a node that is fully synced prior to running these steps.
@@ -131,7 +136,7 @@ echo $?;
 # 0
 ```
 
-You now have eveything needed to deposit the initial 10,000 BERA.
+You now have eveything needed to deposit the initial {{ config.mainnet.stakeMinimumIncrement }} BERA.
 
 ## Step 3: Send registration transaction
 
@@ -195,7 +200,7 @@ There are several checks that can be done to establish this was successful:
 
 ## Step 5: Activation or top-up
 
-Having completed the registration, you can now deposit additional $BERA. As of February 2025, the floor for becoming a validator is 250,000 BERA, and you must be among the top 69 validators, ordered by $BERA staked.
+Having completed the registration, you can now deposit additional $BERA. As of February 2025, the floor for becoming a validator is {{ config.mainnet.minEffectiveBalance }} BERA, and you must be among the top 69 validators, ordered by $BERA staked.
 
 These subsequent deposits are done by calling the same `deposit` function, only the **pubkey** is required; the other elements may be zero, but must still be the right length.
 

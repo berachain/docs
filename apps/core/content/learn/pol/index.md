@@ -10,7 +10,7 @@ Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns e
 
 ### Security Layer ($BERA)
 
-Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of {{ config.mainnet.minEffectiveBalance }} `$BERA` and a maximum cap of {{ config.mainnet.maxEffectiveBalance }}` $BERA`. The top N validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
+Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of `{{ config.mainnet.minEffectiveBalance }} $BERA` and a maximum cap of `{{ config.mainnet.maxEffectiveBalance }} $BERA`. The top {{ config.mainnet.validatorActiveSetSize }} validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
 
 ### Reward Layer ($BGT)
 
