@@ -189,14 +189,18 @@ const SIDEBAR = {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
         },
+        {
+          text: "Quickstart: Local Devnet",
+          link: "/nodes/guides/kurtosis",
+        },
       ],
     },
     {
-      text: "Node Guides",
+      text: "Validator Guides",
       items: [
         {
-          text: "Run Local Devnet With Kurtosis",
-          link: "/nodes/guides/kurtosis",
+          text: "Validator Lifecycle Overview",
+          link: "/nodes/validator-lifecycle",
         },
         {
           text: "Become A Validator Node",
@@ -213,11 +217,7 @@ const SIDEBAR = {
         {
           text: "Distribute Block Rewards",
           link: "/nodes/guides/distribute-block-rewards",
-        },
-        {
-          text: "Increase Validator $BERA Stake",
-          link: "/nodes/guides/increase-validator-bera-stake",
-        },
+        }
       ],
     },
   ],
