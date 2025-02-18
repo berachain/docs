@@ -34,7 +34,6 @@ If a Validator is removed from the Active Set, all `$BERA` staked to that Valida
 There are a few points to consider with staking:
 
 - **Stake Returned To Single Address** - All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address. If there are multiple stakers, an agreement must be put in place with the Validator to ensure that the `$BERA` is returned to the correct addresses.
-- **Minimum Stake Deadline** - The minimum stake deadline is {{config.mainnet.stakeMinimumDeadlineEpoch}} epoch. If the Validator does not meet the minimum stake or the minimum amount to overtake another Validator in that timeframe, the existing `$BERA` will be returned to the Validator's Withdrawal Credentials Address.
 - **Liquid Staking Protocols** - Managing multiple stakers with a single Validator can be difficult. As an alternative, Liquid Staking Protocols are an option.
 
 ## Requirements

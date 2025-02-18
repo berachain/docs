@@ -5,10 +5,10 @@ head:
       content: Berachain Node Quickstart
   - - meta
     - name: description
-      content: Setup a Berachain testnet node
+      content: Setup a Berachain Node
   - - meta
     - property: og:description
-      content: Setup a Berachain testnet node
+      content: Setup a Berachain Node
 ---
 
 <script setup>
@@ -19,22 +19,20 @@ head:
 
 # Berachain Node Quickstart ⚡
 
-This will walk you through on setting up a mainnet full node with `beacond` consensus client and a `reth` execution client.
+This guide will walk you through setting up a mainnet full node with the `beacond` consensus client and a `reth` execution client.
 
-## Requirements ⚙️
+## Requirements 🚀
 
-The following requirements are needed to run both the execution and consensus client.
+The following requirements are needed to run both the execution and consensus clients:
 
 - **OS**: Linux AMD64, Linux ARM64, MacOS ARM64
 - **CPU**: 8 Physical Cores
 - **RAM**: 48GB
 - **Storage**: 4TB (SSD with high IOPS)
 
-Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
+Download the latest appropriate [reth](https://github.com/paradigmxyz/reth/releases) and [beacond](https://github.com/berachain/beacon-kit/tags) releases from their respective release pages.
 
-Download the latest, appropriate, [reth](https://github.com/paradigmxyz/reth/releases) and [beacond](https://github.com/berachain/beacon-kit/tags) releases from their respective release pages.
-
-## Getting Ready 🚀
+## Configurations ⚙️
 
 Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.
 
@@ -53,8 +51,8 @@ Create a file called `env.sh` and add the following:
 #!/bin/sh
 
 # CHANGE THESE TWO VALUES
-export MONIKER_NAME=camembera
-export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
+export MONIKER_NAME=<YOUR_MONIKER_NAME>
+export WALLET_ADDRESS_FEE_RECIPIENT=<YOUR_WALLET_ADDRESS>
 
 # CHAIN CONSTANTS
 export CHAIN=mainnet-beacon-80094
@@ -93,35 +91,35 @@ if [ ! -x "$RETH_BIN" ]; then
 fi
 ```
 
-These two constants should be changed:
+You need to change these two constants:
 
-1. **MONIKER_NAME**: Should be a name of your choice for your node. This is a name presented on the chain to other nodes and is useful for debugging.
+1. **MONIKER_NAME**: Should be a name of your choice for your node.
 2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 
-The following constants should be checked:
+You should verify these constants:
 
-- **BEACOND_BIN** should be the full path to where you placed `beacond`. The value shown above would be used if you placed `beacond` in the `beranode` directory.
-- **RETH_BIN** should be the full path to where you placed `reth`. The value shown above would be used if you placed `reth` in the `beranode` directory.
-- **BEACOND_DATA** and **BEACOND_CONFIG** are the directories for the database and configuration files for the consensus client.
-- **RPC_DIAL_URL** is the URL of the execution client. If you choose to arrange beacond and reth to run on different machines, you will need to change this value to the RPC URL of reth.
-- **LOG_DIR** is the directory for the log files, and should be set up with log rotation when in production.
+- **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The value above assumes you placed `beacond` in the `beranode` directory.
+- **RETH_BIN**: Set this to the full path where you installed `reth`. The value above assumes you placed `reth` in the `beranode` directory.
+- **BEACOND_DATA** and **BEACOND_CONFIG**: These directories store the database and configuration files for the consensus client.
+- **RPC_DIAL_URL**: This is the execution client's URL. If you run beacond and reth on separate machines, update this to reth's RPC URL.
+- **LOG_DIR**: This directory stores log files. Configure log rotation here when running in production.
 
-Test env.sh to make sure it works:
+To verify the environment variables are set correctly:
 
 ```bash
 # FROM: ~/beranode
 
-source env.sh
-env
+source env.sh;
+env;
 
 # [Expected Output]:
-# BEACOND_BIN=/Users/camembera/beranode/beacond
-# BEACOND_DATA=/Users/camembera/beranode/var/beacond
-# BEACOND_CONFIG=/Users/camembera/beranode/var/beacond/config
+# BEACOND_BIN=/path/to/beranode/beacond
+# BEACOND_DATA=/path/to/beranode/var/beacond
+# BEACOND_CONFIG=/path/to/beranode/var/beacond/config
 # RPC_DIAL_URL=http://localhost:8551
-# JWT_PATH=/Users/camembera/beranode/var/beacond/config/jwt.hex
-# RETH_BIN=/Users/camembera/beranode/reth
-# RETH_DATA=/Users/camembera/beranode/var/reth
+# JWT_PATH=/path/to/beranode/var/beacond/config/jwt.hex
+# RETH_BIN=/path/to/beranode/reth
+# RETH_DATA=/path/to/beranode/var/reth
 ...
 ```
 
@@ -148,7 +146,7 @@ curl -s -o seed-data/config.toml $SEED_DATA_URL/config.toml
 md5sum seed-data/*
 ```
 
-You can invoke the script as follows. It will print out an md5 hash of the files to verify integrity.
+Invoke the script as follows to download the files and verify their integrity via MD5 hash:
 
 ```bash
 # FROM: ~/beranode
@@ -164,12 +162,12 @@ You can invoke the script as follows. It will print out an md5 hash of the files
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
 ```
 
-Check the signatures above with your results, and contact Discord: #bug-reports or your Validator Relations contact if you have a mismatch.
+Check the signatures above against your results. If you find any mismatches, contact us in the Discord #bug-reports channel or reach out to your Validator Relations contact.
 
 ## Set up the Consensus Client 🔗
 
-The next script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
-then runs runs `beacond init` and `beacond jwt generate`.
+The next script puts in place the seed data for the chain downloaded above, updates the configuration files for the consensus client to refer to certain paths correctly,
+then runs `beacond init` and `beacond jwt generate`.
 
 **File:** `./setup-beacond.sh`
 
@@ -209,10 +207,10 @@ sed $SED_OPT 's|^suggested-fee-recipient = ".*"|suggested-fee-recipient = "'$WAL
 $BEACOND_BIN jwt generate -o $JWT_PATH
 ```
 
-The key result of `beacond init` is the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key, and _especially if you intend
-to become a validator_, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
+The key result of `beacond init` is the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key, and especially if you intend
+to become a validator, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
 
-The other important file generated is `var/beacond/config/jwt.hex`. This contains a secret shared between the consensus client and the execution client so they can
+The other important file generated is `var/beacond/config/jwt.hex`. This contains a secret shared between the consensus client and execution client so they can
 securely communicate. Protect this file. If you suspect it has been leaked, generate a new one with `beacond jwt generate -o $JWT_PATH`.
 
 Invoke it:
@@ -224,7 +222,7 @@ Invoke it:
 
 # [Expected Output]:
 # {
-#  "moniker": "<your moniker here>",
+#  "moniker": "<YOUR_MONIKER_NAME>",
 #  "chain_id": "mainnet-beacon-80094",
 #  "stateRoot": "0x12965ab9cbe2d2203f61d23636eb7e998f167cb79d02e452f532535641e35bcc",
 #  "blockHash": "0xcfff92cd918a186029a847b59aca4f83d3941df5946b06bca8de0861fc5d0850",
@@ -274,7 +272,7 @@ Similar to `setup-beacond`, `setup-reth` puts in place the seed data for the cha
 ```bash
 # FROM: ~/beranode
 
-./setup-reth.sh
+./setup-reth.sh;
 
 # [Expected Output]:
 # INFO Initialized tracing, debug log directory: /Users/camembearbera/Library/Caches/reth/logs/80094
@@ -283,9 +281,9 @@ Similar to `setup-beacond`, `setup-reth` puts in place the seed data for the cha
 # INFO Verifying storage consistency.
 # INFO Genesis block written hash=0xd57819422128da1c44339fc7956662378c17e2213e669b427ac91cd11dfcfb38
 
-find var/beacond
+find var/beacond;
 
-find var/reth
+find var/reth;
 
 # [Expected Output]:
 # var/reth
@@ -332,7 +330,7 @@ set -e
 . ./env.sh
 
 if [ -f "seed-data/el-bootnodes.txt" ]; then
-    export EL_SEEDS=$(grep '^enode://' "seed-data/el-bootnodes.txt"| tr '\n' ',' | sed 's/,$//')
+    export EL_BOOTNODES=$(grep '^enode://' "seed-data/el-bootnodes.txt"| tr '\n' ',' | sed 's/,$//')
 fi
 if [ -f "seed-data/el-peers.txt" ]; then
     export EL_PEERS=$(grep '^enode://' "seed-data/el-peers.txt"| tr '\n' ',' | sed 's/,$//')
@@ -347,7 +345,7 @@ $RETH_BIN node \
 --http.addr=0.0.0.0 \
 --http.port=8545 \
 --http.corsdomain="*" \
---bootnodes=$EL_PEERS \
+--bootnodes=$EL_BOOTNODES \
 --trusted-peers=$EL_PEERS \
 --ws \
 --ws.addr=0.0.0.0 \
@@ -355,7 +353,7 @@ $RETH_BIN node \
 --ws.origins="*" \
 --authrpc.addr=0.0.0.0 \
 --authrpc.port=$EL_AUTHRPC_PORT \
---log.file.directory=$LOG_DIR ;
+--log.file.directory=$LOG_DIR;
 ```
 
 Launch two windows. In the first, run the consensus client:
@@ -363,7 +361,7 @@ Launch two windows. In the first, run the consensus client:
 ```bash
 # FROM: ~/beranode
 
-./run-beacond.sh
+./run-beacond.sh;
 ```
 
 In the second, run the execution client:
@@ -371,7 +369,7 @@ In the second, run the execution client:
 ```bash
 # FROM: ~/beranode
 
-./run-reth.sh
+./run-reth.sh;
 ```
 
 Initially this will not appear to respond, but within a minute blocks should begin flowing. There should be no significant quantity of error messages, except for
@@ -386,8 +384,11 @@ To check on the sync status of the consensus layer, in another terminal run the 
 ```bash
 # FROM: ~/beranode
 
-# Don't have jq? `brew install jq`;
-./build/bin/beacond --home=./build/bin/config/beacond status | jq;
+set -e
+. ./env.sh
+
+# Don't have jq? `brew install jq`
+$BEACOND_BIN --home=$BEACOND_DATA status | jq;
 
 # [Expected Output]:
 # {
@@ -434,7 +435,7 @@ curl --location 'http://localhost:8545' \
 	"jsonrpc":"2.0",
 	"method":"eth_blockNumber",
 	"params":[],
-	"id":83
+	"id":420
 }';
 
 
@@ -442,7 +443,7 @@ curl --location 'http://localhost:8545' \
 # {
 #     "jsonrpc": "2.0",
 #     "result": "0xfae90",   // [!code ++] <---- compare with block explorer
-#     "id": 83
+#     "id": 420
 # }
 ```
 
