@@ -562,6 +562,10 @@
       "hub": {
         "name": "Berachain Hub",
         "url": "https://hub.berachain.com/"
+      },
+      "nftBridge": {
+        "name": "Berachain NFT Bridge",
+        "url": "https://nftbridge.berachain.com/"
       }
     },
     "thirdparty": {

@@ -22,6 +22,7 @@ const SIDEBAR = {
         { text: "Connect To Berachain", link: "/learn/connect-to-berachain" },
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
         { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
+        { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
       ],
     },
     {
