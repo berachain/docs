@@ -11,6 +11,10 @@ head:
       content: BEX SDK API Reference
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # SDK API Reference
 
 The SDK API Reference is a comprehensive guide to the Berancer SDK's API. It includes all the functions and classes available in the SDK, as well as their parameters and return values.
@@ -25,10 +29,10 @@ The `BalancerApi` class provides helper functions for interacting with the Beran
 const balancerApi = new BalancerApi(apiUrl: string, chainId: ChainId);
 ```
 
-| Name    | Type   | Description                |
-| ------- | ------ | -------------------------- |
-| apiUrl  | string | Url of API                 |
-| chainId | string | Chain that will be queried |
+| Name    | Type   | Description                | Mainnet Value                               |
+| ------- | ------ | -------------------------- | ------------------------------------------- |
+| apiUrl  | string | Url of API                 | {{config.mainnet.dapps.bex.balancerApiUrl}} |
+| chainId | number | Chain that will be queried | {{config.mainnet.chainId}}                  |
 
 ### Properties
 

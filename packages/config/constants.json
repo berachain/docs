@@ -542,7 +542,7 @@
         "name": "Berachain BEX",
         "url": "https://hub.berachain.com/swap",
         "apiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
-        "balancerApiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
+        "balancerApiUrl": "https://api.berachain.com/",
         "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
       },
       "honeySwap": {
