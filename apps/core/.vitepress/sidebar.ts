@@ -180,6 +180,10 @@ const SIDEBAR = {
       items: [
         { text: "Node Architecture Overview", link: "/nodes/" },
         {
+          text: "Validator Lifecycle Overview",
+          link: "/nodes/validator-lifecycle",
+        },
+        {
           text: "BeaconKit Consensus Layer",
           link: "/nodes/beaconkit-consensus",
         },
@@ -188,20 +192,12 @@ const SIDEBAR = {
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
-        },
-        {
-          text: "Quickstart: Local Devnet",
-          link: "/nodes/guides/kurtosis",
-        },
+        }
       ],
     },
     {
       text: "Validator Guides",
       items: [
-        {
-          text: "Validator Lifecycle Overview",
-          link: "/nodes/validator-lifecycle",
-        },
         {
           text: "Become A Validator Node",
           link: "/nodes/guides/validator",
@@ -218,7 +214,20 @@ const SIDEBAR = {
           text: "Distribute Block Rewards",
           link: "/nodes/guides/distribute-block-rewards",
         },
-        { text: "Validator Support", link: "/nodes/validator-support" },
+        {
+          text: "Quickstart: Local Devnet",
+          link: "/nodes/guides/kurtosis",
+        },
+        { 
+          text: "Awesome Validator Tools",
+          link: "https://github.com/chuck-bear/awesome-berachain-validators",
+        }
+      ],
+    },
+    {
+      text: "Help",
+      items: [
+        { text: "Validator Support FAQ", link: "/nodes/faq" },
       ],
     },
   ],
