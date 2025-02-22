@@ -59,7 +59,7 @@ Template
     class="type-primaryw-iconresting-type-primaryw-iconresting" 
     v-if="wallet" v-on:click="addNetwork">
     <span v-if="props.testnet">Add Testnet</span>
-    <span v-else">Add Berachain</span>
+    <span v-else>Add Berachain</span>
   </button>
   <button
     class="type-primaryw-iconresting-type-primaryw-iconresting" 
@@ -77,7 +77,7 @@ Styles
   .type-primaryw-iconresting-type-primaryw-iconresting {
     font-weight: 600;
     text-align: left;
-    color: rgba(41,37,36,1);
+    color: rgb(44, 26, 22);
     border-radius: 8px;
     height: 44px;
     width: auto;
@@ -86,7 +86,7 @@ Styles
     display: inline-flex;
     gap: 4px;
     box-shadow: 0px 0px 0px 1px #dbb180f5 inset;
-    background: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-2);
     padding-right: 16px;
     padding-left: 16px;
     padding-bottom: 8px;
@@ -98,11 +98,11 @@ Styles
 
   .type-primaryw-iconresting-type-primaryw-iconresting[disabled] {
     opacity: 0.3;
-    cursor: no-drop;
+    cursor: not-allowed;
   }
 
   .type-primaryw-iconresting-type-primaryw-iconresting[disabled]:hover {
-    background: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-3);
   }
 
   .type-primaryw-iconresting-type-primaryw-iconresting:hover {

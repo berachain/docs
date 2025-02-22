@@ -39,12 +39,14 @@ layout: page
     link="/developers/"
     :icon="IconTerminal"
   />
+  <template v-if="config.bepolia.dapps?.faucet">
   <Feature
-    title="Berachain Faucet"
-    description="Fund your testnet wallet with $BERA"
-    :link=config.testnet.dapps.faucet.url
-    :icon="IconDroplet"
-  />
+    title="Berachain Bepolia Faucet"
+      description="Fund your testnet wallet with $BERA"
+      :link=config.bepolia.dapps.faucet.url
+      :icon="IconDroplet"
+    />
+  </template>
 </section>
 
 ## More Berachain Docs
@@ -77,13 +79,15 @@ layout: page
     :icon="IconSearch"
     type="alt"
   />
+  <template v-if="config.bepolia.dapps?.faucet">
   <Feature
     title="Faucet"
-    description="Get Testnet Tokens"
-    :link="config.testnet.dapps.faucet.url"
+    description="Get Bepolia Tokens"
+    :link="config.bepolia.dapps.faucet.url"
     :icon="IconDroplet"
-    type="alt"
-  />
+      type="alt"
+    />
+  </template>
   <Feature
     title="BGT Station"
     description="Manage $BGT"

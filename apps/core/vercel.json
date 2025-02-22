@@ -73,10 +73,6 @@
       "destination": "/learn/pol/tokens/honey"
     },
     {
-      "source": "/developers/beratrail-block-explorer",
-      "destination": "https://bartio.beratrail.io"
-    },
-    {
       "source": "/learn/pol/gauges",
       "destination": "/learn/pol/rewardvaults"
     },

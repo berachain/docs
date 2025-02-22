@@ -19,11 +19,7 @@ head:
 
 # Connecting to Berachain Mainnet
 
-To start using Berachain, connect to the mainnet below.
-
-## Add the Network in One Click
-
-Click the button below to add the network to your MetaMask in one click.
+Click the button below to add the network to your MetaMask.
 
 <ClientOnly>
   <AddNetwork
@@ -37,27 +33,35 @@ Click the button below to add the network to your MetaMask in one click.
   />
 </ClientOnly>
 
-## Add the Network Manually
+### Mainnet Connection Parameters
 
 To add the network manually, enter the network details below into your wallet of choice:
 
 | Key                | Value                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------- |
-| Network            | {{config.mainnet.chainName}}                                                           |
+| Network Name       | {{config.mainnet.chainName}}                                                           |
 | RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
 | Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>            |
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
-## RPC Providers
+### MainnetRPC Providers
 
 See our [RPC partners](/developers/developer-tools#rpc-providers) under Developer Tools.
 
----
+## Connecting to Berachain Testnet
 
-# Connecting to Berachain Testnet
-
-The Berachain testnets Artio and Bartio are up but deprecated. We will publish a new testnet to match mainnet in February 2025.
+<ClientOnly>
+  <AddNetwork
+    :chainId="config.bepolia.chainId"
+    :chainName="config.bepolia.chainName"
+    :nativeCurrencyName="config.bepolia.currencyName"
+    :nativeCurrencySymbol="config.bepolia.currencySymbol"
+    :nativeCurrencyDecimals="config.bepolia.decimals"
+    :rpcUrl="config.bepolia.rpcUrl"
+    :testnet="true"
+  />
+</ClientOnly>
 
 ### What is a Testnet?
 
@@ -67,4 +71,29 @@ A testnet is an additional blockchain network that runs separately from the main
 
 - Creating your test address and getting test funds
 - Developing applications to ensure they work properly prior to deploying them on mainnet
-- Testing applications against new upgrades to the Berachain network prior to their release on mainnet
+- Testing applications against new upgrades to the Berachain network prior to them being released on mainnet
+
+### Testnet Connection Parameters
+
+| Key                | Value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Network            | {{config.bepolia.chainName}}                                                           |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>             |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.bepolia.chainId" /></ClientOnly>            |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>     |
+
+<template v-if="Object.keys(config.bepolia.dapps).length > 0">
+### Dapps
+
+<table>
+  <thead><tr><th>Name</th><th>URL</th></tr></thead>
+  <tbody>
+    <template v-for="(dapp, key) in config.bepolia.dapps">
+      <tr>
+        <td><a :href="dapp.url" target="_blank">{{ dapp.name }}</a></td>
+        <td><ClientOnly><CopyToClipboard :text="dapp.url" /></ClientOnly></td>
+      </tr>
+    </template>
+  </tbody>
+</table>
+</template>

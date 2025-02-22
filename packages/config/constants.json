@@ -1,4 +1,20 @@
 {
+  "bepolia": {
+    "chainId": 80094,
+    "rpcUrl": "https://testnet.rpc.berachain.com/",
+    "chainName": "Berachain Bepolia",
+    "currencySymbol": "BERA",
+    "currencyName": "Testnet BERA Token",
+    "decimals": 18,
+    "dapps-maybe": {
+      "berascan": {
+        "name": "BeraScan Block Explorer",
+        "url": "https://bepolia.beratrail.io/"
+      }
+    },
+    "dapps": {
+    }
+  },
   "testnet": {
     "chainId": 80084,
     "rpcUrl": "https://bartio.rpc.berachain.com/",

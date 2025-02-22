@@ -19,7 +19,7 @@ head:
 
 # Berachain Local Devnet With Kurtosis
 
-The following will walk you through setting up a local Berachain devnet-not connected to bArtio.
+The following will walk you through setting up a local Berachain devnet.
 
 :::warning
 Some features like natives dApps, contracts, and more may still be a work in progress.
