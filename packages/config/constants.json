@@ -1,7 +1,7 @@
 {
   "bepolia": {
     "chainId": 80094,
-    "rpcUrl": "https://testnet.rpc.berachain.com/",
+    "rpcUrl": "https://bepolia.rpc.berachain.com/",
     "chainName": "Berachain Bepolia",
     "currencySymbol": "BERA",
     "currencyName": "Testnet BERA Token",
