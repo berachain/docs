@@ -63,15 +63,16 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
   />
 </ClientOnly>
 
-### What is a Testnet?
+### What is the Bepolia Testnet?
 
-A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment with no economic value associated with its tokens.
+A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment, with no economic value associated with its tokens.
 
-### What is a Testnet Used for?
+Our testnet is called `bepolia`, and the testnet ERC20 tokens all start with bb: bbHONEY, bbBTC, bbETH, etc.
 
-- Creating your test address and getting test funds
-- Developing applications to ensure they work properly prior to deploying them on mainnet
-- Testing applications against new upgrades to the Berachain network prior to them being released on mainnet
+With the testnet, you can:
+* Use the faucet to obtain testnet BERA.
+* Develop applications and contracts to ensure they work properly prior to deploying them on mainnet. The complete Proof of Liquidity stack is available on testnet.
+* Experiment with proposed upgrades to mainnet.
 
 ### Testnet Connection Parameters
 
@@ -81,6 +82,7 @@ A testnet is an additional blockchain network that runs separately from the main
 | RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>             |
 | Chain ID           | <ClientOnly><CopyToClipboard :text="config.bepolia.chainId" /></ClientOnly>            |
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>     |
+
 
 <template v-if="Object.keys(config.bepolia.dapps).length > 0">
 ### Dapps

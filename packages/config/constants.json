@@ -1,6 +1,6 @@
 {
   "bepolia": {
-    "chainId": 80094,
+    "chainId": 80069,
     "rpcUrl": "https://bepolia.rpc.berachain.com/",
     "chainName": "Berachain Bepolia",
     "currencySymbol": "BERA",

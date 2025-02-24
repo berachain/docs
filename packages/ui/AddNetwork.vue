@@ -58,8 +58,7 @@ Template
   <button
     class="type-primaryw-iconresting-type-primaryw-iconresting" 
     v-if="wallet" v-on:click="addNetwork">
-    <span v-if="props.testnet">Add Testnet</span>
-    <span v-else>Add Berachain</span>
+    <span>Add {{ props?.chainName }}</span>
   </button>
   <button
     class="type-primaryw-iconresting-type-primaryw-iconresting" 
