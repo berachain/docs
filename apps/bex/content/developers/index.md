@@ -23,6 +23,8 @@ On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their
 
 **Funds currently deposited in BEX are safe, and no action from LPs is needed.** The issue only (potentially) affects tokens that are not live on-chain today. Frontend warnings are displayed on BEX for potentially vulnerable tokens.
 
+Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
+
 For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
 :::
 
