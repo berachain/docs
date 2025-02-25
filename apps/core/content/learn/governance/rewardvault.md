@@ -1,51 +1,38 @@
 # Reward Vault Governance
 
-> **NOTE:** For a detailed guide on creating reward vaults and associated governance proposals, see this [blog post](https://blog.berachain.com/blog/creating-a-governance-proposal-for-berachain-reward-vaults).
+While creating a [Reward Vault](/learn/pol/rewardvaults) is permissionless, they must be whitelisted through governance proposals to receive `$BGT` emissions from validators. This process ensures community oversight and alignment over projects joining the Proof-of-Liquidity (PoL) ecosystem.
 
-While creating a [Reward Vault](/learn/pol/rewardvaults) is permissionless, for it to receive `$BGT` emissions from validators, it must be whitelisted through a governance proposal. This process ensures community oversight and alignment over projects joining the Proof-of-Liquidity (PoL) ecosystem.
+## Request for Reward Vault
 
-There are two components to whitelisting a new Reward Vault:
-
-1. Whitelisting the Reward Vault
-2. Whitelisting incentive token(s)
-
-These components are typically handled concurrently through a single governance proposal.
-
-## Reward Vault Whitelisting
-
-Reward Vaults are whitelisted on the [BeraChef](/developers/contracts/berachef) contract to make them eligible for receiving `$BGT` emissions:
-
-1. Deploy a reward vault using the [Reward Vault Factory](/developers/contracts/reward-vault-factory), specifying the staking token. This produces a new vault address.
-
-2. Submit and pass a governance proposal for whitelisting the vault, using the vault address obtained from the factory deployment:
-
-```solidity
-function setVaultWhitelistedStatus(address receiver, bool isWhitelisted, string memory metadata) external;
-```
-
-## Token Whitelisting
-
-Protocols can supply [Incentives](/learn/pol/incentives) to entice validators to direct emissions to their vaults. Incentive tokens must first be whitelisted on the **particular Reward Vault** being incentivized:
-
-1. Prepare the following parameters:
-
-   - Incentive token address
-   - Minimum incentive rate - lowest exchange rate between incentive token and `$BGT`
-     - Incentive rates below this floor are not accepted
-   - Token manager address
-     - Account that will control incentive parameters
-     - Only one entitled to add incentives to a vault
-
-2. Submit and pass a governance proposal for whitelisting the incentive token, using the vault address obtained from the factory deployment:
-
-```solidity
-function whitelistIncentiveToken(address token, uint256 minIncentiveRate, address manager) external
-```
-
-:::tip
-Each reward vault maintains separate incentive token whitelists
+:::tip Submission Process
+The Reward Vault whitelisting process involves submitting a **Request for Reward Vault** (RFRV) form **AND** on the [Governance Forum](https://hub.forum.berachain.com/c/reward-vaults/6).
 :::
+There are two types of RFRVs:
 
-### Governance Process
+1. **BEX Pool RFRVs**: For token pairs trading on BEX
+2. **General (non-BEX) RFRVs**: For other protocol integrations
 
-The above whitelisting procedures are performed through [BGT Governance](/learn/governance/).
+### 1. BEX Pool RFRVs ([Form](https://tinyurl.com/bdebbjkb))
+
+**Requirements:**
+
+- Pool must be live on BEX
+- Incentive tokens must be active on BEX pool
+- Recommended to pair with major tokens (BERA, HONEY, BYUSD, USDC, wETH, wBTC)
+- Demonstrate economic value through TVL or trading volume
+- Meet security and decentralization criteria
+- Full requirements [here](https://docs.google.com/document/d/1SMYK0SUsVUUSxXTssMkCb_QPHyVMNQh5Juf_rGXO8xM/edit?tab=t.0)
+
+### 2. General (non-BEX) RFRVs ([Form](https://tinyurl.com/3kzv8de7))
+
+**Requirements:**
+
+- Contract must be deployed and live
+- Incentive tokens must be live
+- Demonstrate economic value and ecosystem synergy
+- Meet security and decentralization criteria
+- Full requirements [here](https://docs.google.com/document/d/1gM7KmSK5QJ2jB2m6WvcXhrLYCd-cQDiRNM9s8vLzEaI/edit?tab=t.0)
+
+Proposals are reviewed weekly (deadline Thursday 00:00 UTC) by the BGT Foundation and Guardians.
+
+For technical implementation details of Reward Vaults, please see the [developer documentation](/developers/contracts/reward-vault).
