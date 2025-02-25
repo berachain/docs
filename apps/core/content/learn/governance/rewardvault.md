@@ -5,12 +5,9 @@ While creating a [Reward Vault](/learn/pol/rewardvaults) is permissionless, they
 ## Request for Reward Vault
 
 :::tip Submission Process
-The Reward Vault whitelisting process involves submitting a **Request for Reward Vault** (RFRV) form **AND** on the [Governance Forum](https://hub.forum.berachain.com/c/reward-vaults/6).
+The Reward Vault whitelisting process involves 1) submitting a **Request for Reward Vault** (RFRV) form **AND** 2) posting on the [Governance Forum](https://hub.forum.berachain.com/c/reward-vaults/6).
 :::
-There are two types of RFRVs:
-
-1. **BEX Pool RFRVs**: For token pairs trading on BEX
-2. **General (non-BEX) RFRVs**: For other protocol integrations
+There are two types of RFRVs - ensure you complete the appropriate form based on your use case: **BEX Pool RFRVs** (For token pairs trading on BEX) and **General (non-BEX) RFRVs** (For other protocol integrations).
 
 ### 1. BEX Pool RFRVs ([Form](https://tinyurl.com/bdebbjkb))
 
