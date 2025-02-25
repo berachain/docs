@@ -13,7 +13,6 @@ head:
 
 <script setup>
   import config from '@berachain/config/constants.json';
-  import CopyToClipboard from '@berachain/ui/CopyToClipboard';  
 </script>
 
 # Deployed Contract Addresses
