@@ -1070,6 +1070,38 @@
           "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IAuthorizer.abi.json",
           "docsUrl": ""
         }
+      },
+      "nfts": {
+        "bongBears": {
+          "name": "Bong Bears",
+          "ethereumAddress": "0x1897C001341F81Ca72154b75b882aE708e06bF48",
+          "berachainAddress": "0x141De07E5D4C4759EC9301DA106115D4841f66cD"
+        },
+        "bondBears": {
+          "name": "Bond Bears",
+          "ethereumAddress": "0x6b1C374105467d1fC1090C989BcbbCC172c8a89c",
+          "berachainAddress": "0xA0CF472E6132F6B822a944f6F31aA7b261c7c375"
+        },
+        "booBears": {
+          "name": "Boo Bears",
+          "ethereumAddress": "0x7591992F1a98636C6B7207f30382ca4Bec83D9Be",
+          "berachainAddress": "0xf49ec5db255854C4a567de5AB3826c9AAbaFc7cF"
+        },
+        "babyBears": {
+          "name": "Baby Bears",
+          "ethereumAddress": "0xc48C54e92d135B356DD0CbF50F803A8c8d38968b",
+          "berachainAddress": "0xDDeAf391c4be2d01ca52aBb8C159a06820ef078C"
+        },
+        "bandBears": {
+          "name": "Band Bears",
+          "ethereumAddress": "0x392Faa1b0EF108ded69897Ba5382E909C39Fc09e",
+          "berachainAddress": "0x7711B2Eb2451259dbF211e30157ceB7CFeb79a19"
+        },
+        "bitBears": {
+          "name": "Bit Bears",
+          "ethereumAddress": "0x3EB12398753eEd7E8747321c37C85De30d8E2e94",
+          "berachainAddress": "0x72D876D9cdf4001b836f8E47254d0551EdA2eebB"
+        }
       }
     }
   },
