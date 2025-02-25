@@ -13,6 +13,7 @@ head:
 
 <script setup>
   import config from '@berachain/config/constants.json';
+  import CopyToClipboard from '@berachain/ui/CopyToClipboard';  
 </script>
 
 # Deployed Contract Addresses
@@ -20,6 +21,8 @@ head:
 This is a list of addresses where contracts can be read from or written to.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
+
+## Mainnet Contracts
 
 | Name                                                                                                                            | Address                                                                                                                                                                                             | ABI                                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,3 +45,34 @@ This is a list of addresses where contracts can be read from or written to.
 | <a :href="config.mainnet.contracts.wbera.docsUrl">{{config.mainnet.contracts.wbera.name}}</a>                                   | <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.wbera.address">{{config.mainnet.contracts.wbera.address}}</a>                                   | <a target="_blank" v-if=config.mainnet.contracts.wbera.abi :href="config.mainnet.contracts.wbera.abi">ABI</a>                                   |
 | <a :href="config.mainnet.contracts.wbtc.docsUrl">{{config.mainnet.contracts.wbtc.name}}</a>                                     | <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.wbtc.address">{{config.mainnet.contracts.wbtc.address}}</a>                                     | <a target="_blank" v-if=config.mainnet.contracts.wbtc.abi :href="config.mainnet.contracts.wbtc.abi">ABI</a>                                     |
 | <a :href="config.mainnet.contracts.weth.docsUrl">{{config.mainnet.contracts.weth.name}}</a>                                     | <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.weth.address">{{config.mainnet.contracts.weth.address}}</a>                                     | <a target="_blank" v-if=config.mainnet.contracts.weth.abi :href="config.mainnet.contracts.weth.abi">ABI</a>                                     |
+
+
+
+## Testnet Contracts
+
+<script>
+const render_groups = {
+  "Proof of Liquidity": config.contracts.pol,
+  "Honey": config.contracts.honey,
+}
+</script>
+
+<template v-for="(contracts, title) in render_groups">
+  <h3>{{ title }}</h3>
+  <table>
+    <thead><tr><th>Name</th><th>Bepolia</th><th>ABI</th></tr></thead>
+    <tbody>
+      <template v-for="(sc, key) in contracts">
+        <template v-if="sc['bepolia-address']">
+          <tr>
+            <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else>{{ sc.name }}</template></td>
+            <td>
+              <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + sc['bepolia-address']">{{sc['bepolia-address']}}</a>
+            </td> 
+            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
+          </tr>
+        </template>
+      </template>
+    </tbody>
+  </table>
+</template>
