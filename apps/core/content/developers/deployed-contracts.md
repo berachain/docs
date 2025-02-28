@@ -52,19 +52,21 @@ This is a list of addresses where contracts can be read from or written to.
 <script>
 const render_groups = {
   "Proof of Liquidity": config.contracts.pol,
-  "Honey": config.contracts.honey,
+  "Tokens": config.contracts.tokens,
+  "Other": config.contracts.other
 }
 </script>
 
 <template v-for="(contracts, title) in render_groups">
   <h3>{{ title }}</h3>
+
   <table>
     <thead><tr><th>Name</th><th>Bepolia</th><th>ABI</th></tr></thead>
     <tbody>
       <template v-for="(sc, key) in contracts">
         <template v-if="sc['bepolia-address']">
           <tr>
-            <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else>{{ sc.name }}</template></td>
+            <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else><b>{{ sc.name }}</b></template></td>
             <td>
               <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + sc['bepolia-address']">{{sc['bepolia-address']}}</a>
             </td> 

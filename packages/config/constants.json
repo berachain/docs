@@ -586,6 +586,13 @@
   },
   "contracts": {
     "pol": {
+      "beaconDeposit": {
+        "name": "BeaconDeposit",
+        "bepolia-address": "0x4242424242424242424242424242424242424242",
+        "mainnet-address": "0x4242424242424242424242424242424242424242",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
+        "docsUrl": "/developers/contracts/beacondeposit"
+      },
       "bgt": {
         "name": "BGT Token",
         "bepolia-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
@@ -635,7 +642,7 @@
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/FeeCollector.json",
         "docsUrl": "/developers/contracts/fee-collector"
       }
-    }, "honey": {
+    }, "tokens": {
       "honey": {
         "name": "HONEY Token",
         "mainnet-address": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
@@ -656,8 +663,48 @@
         "bepolia-address": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactoryReader.json",
         "docsUrl": "/developers/contracts/honey-factory-reader"
+      }, 
+      "wbera": {
+        "name": "WBERA Token",
+        "bepolia-address": "0x6969696969696969696969696969696969696969",
+        "mainnet-address": "0x6969696969696969696969696969696969696969",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERA.json",
+        "docsUrl": "/developers/contracts/wbera-token"
+      },
+      "bbUSDC": {
+        "name": "bbUSDC",
+        "bepolia-address": "0x6e8d0eCfCE5c2b7587263923e23d141F6364c7f9"
+      },
+      "bbBYUSDC": {
+        "name": "bbBYUSDC",
+        "bepolia-address": "0xe0037233a4a21c6334CFa67895A4BeaDc87B2c40"
+      },
+      "bbWETH": {
+        "name": "bbWETH",
+        "bepolia-address": "0x4752428217c35c7779b077170529f8d10676f660"
+      },
+      "bbWBTC": {
+        "name": "bbWBTC",
+        "bepolia-address": "0xc7728Db26526Ae7fBc46b99f0EE667Eaba7E6bb9"
       }
+      
     }, "bex": {
+    }, "other": {
+      "create2": {
+        "name": "CREATE2",
+        "bepolia-address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+        "mainnet-address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+        "abi": "",
+        "docsUrl": "/developers/contracts/create2"
+      },
+      "multicall3": {
+        "name": "Multicall3",
+        "bepolia-address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+        "mainnet-address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/Multicall3.json",
+        "docsUrl": "/developers/contracts/multicall3"
+      }
+
     }
   },
   "websites": {
