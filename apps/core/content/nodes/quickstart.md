@@ -71,10 +71,11 @@ Then we have `setup-` and `run-` scripts for various execution clients and `beac
 #!/bin/bash 
 
 # CHANGE THESE VALUES
-export MONIKER_NAME=camembera
-export WALLET_ADDRESS_FEE_RECIPIENT=<PROVIDE YOURS>
-export EL_ARCHIVE_NODE=false
 export CHAIN_SPEC="mainnet"
+export MONIKER_NAME=camembera
+export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
+export EL_ARCHIVE_NODE=false # set to true if you want to run an archive node on CL and EL
+export MY_IPV4=`curl canhazip.com`
 
 # CHAIN CONSTANTS
 if [ "$CHAIN_SPEC" == "bepolia" ]; then
@@ -98,12 +99,20 @@ export RETH_DATA=$(pwd)/var/reth
 export RETH_GENESIS_PATH=$RETH_DATA/genesis.json
 ```
 
-You need to change these two constants:
+You need to set these constants:
 
-1. **MONIKER_NAME**: Should be a name of your choice for your node.
-2. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
-3. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-4. **CHAIN_SPEC**: Set to `bepolia` or `mainnet`.
+# CHANGE THESE VALUES
+export CHAIN_SPEC="mainnet"
+export MONIKER_NAME=camembera
+export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
+export EL_ARCHIVE_NODE=false # set to true if you want to run an archive node on CL and EL
+export MY_IPV4=64.34.22.212
+
+1. **CHAIN_SPEC**: Set to `bepolia` or `mainnet`.
+2. **MONIKER_NAME**: Should be a name of your choice for your node.
+3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
+4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
+5. **MY_IPV4**: This is used to correctly advertise your node's address to other peers on the network. The default looks it up on every script run.  If it will never change, you can hard-code it here.
 
 You should verify these constants:
 
