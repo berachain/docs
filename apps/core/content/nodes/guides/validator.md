@@ -132,7 +132,7 @@ The first registration transaction is the most important. It establishes the ass
    The credentials should contain the withdrawal address verbatim, and the public key confirms the public key matching the private key used to generate the signature. In the above, we have placed the signature and withdraw credentials in variables for the next step.
 
 
-4. Finally, **verify that beacond will accept this signature** with `beacond deposit validate <pubkey> <credentials> <amount> <signature> $BEACOND_HOME/config/genesis.json` which should produce no error message.
+4. Finally, **verify that beacond will accept this signature** with `beacond deposit validate` which should produce no error message.
 
    ```bash
    beacond deposit validate   \
