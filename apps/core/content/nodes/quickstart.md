@@ -35,12 +35,11 @@ The following requirements are needed to run both the execution and consensus cl
 - **Storage**: 4TB (SSD with high IOPS)
 
 ### Software Requirements 💾
-* Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written against v1.1.3 👍.
-* One of the following:
-  * [reth](https://github.com/paradigmxyz/reth/releases) v1.4.5 is 👍 tested. DO NOT USE `op-reth`. 👉 Click 'show all assets' on the Github release page to reveal the `reth` downloads.
-  * [go-ethereum](https://github.com/ethereum/go-ethereum/releases) v1.14.13 👍
-  * [Nethermind](https://github.com/NethermindEth/nethermind/releases) v1.31.1 👍
-
+* Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written against v1.1.3.
+* One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
+  * [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
+  * [go-ethereum](https://github.com/ethereum/go-ethereum/releases) 
+  * [Nethermind](https://github.com/NethermindEth/nethermind/releases) 
 ## Getting started
 
 
@@ -112,7 +111,7 @@ export MY_IPV4=64.34.22.212
 2. **MONIKER_NAME**: Should be a name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-5. **MY_IPV4**: This is used to correctly advertise your node's address to other peers on the network. The default looks it up on every script run.  If it will never change, you can hard-code it here.
+5. **MY_IPV4**: This is used to correctly advertise your node's address to other peers on the network. The default looks it up on every script run.  If it will never change, you can hard-code it here.  Reth and Geth will attempt to identify your public IP if you have UPNP turned on, which is generally only on home networks. Cloud environments do not have this.
 
 You should verify these constants:
 
@@ -121,7 +120,6 @@ You should verify these constants:
 - **BEACOND_DATA**: Set this to where the consensus data and config should be kept. BEACOND_CONFIG must be under BEACOND_PATH as shown. Don't change it.
 - **RETH_DATA**: Set this to where the execution data and config should be kept.
 - **LOG_DIR**: This directory stores log files.
-
 
 ## Fetch Mainnet Parameters 📥
 
@@ -139,9 +137,19 @@ The key network parameters for Berachain mainnet are downloaded by `fetch-berach
 # cd3a642dc78823aea8d80d5239231557  seed-data/eth-genesis.json
 # c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
+
+# [Expected Output for bepolia]
+# 6e4179e38e11696f8402cd5f8e872726  seed-data/app.toml
+# 65313bc44bc810da50bf0dac696219fe  seed-data/config.toml
+# a14b14eca398d857344d1ce86c848352  seed-data/el-peers.txt
+# 7ac0e3756f7e3d0af36d023f9e6cfd0c  seed-data/eth-genesis.json
+# ec67ba1beb73cc9042000e5dd21b5f72  seed-data/eth-nether-genesis.json
+# a24fb9c7ddf3ebd557300e989d44b619  seed-data/genesis.json
+# 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
+
 ```
 
-Check the signatures above against your results.  **Bepolia will obviously differ.**  Further confirmations of the consequences of these signatures are below. 
+Check the signatures above against your results.  Further confirmations of the consequences of these signatures are below. 
 
 ## Set up the Consensus Client 🔗
 

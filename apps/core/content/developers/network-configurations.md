@@ -68,8 +68,6 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
 
 A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment, with no economic value associated with its tokens.
 
-Our testnet is called `bepolia`, and the testnet ERC20 tokens all start with bb: bbHONEY, bbBTC, bbETH, etc.
-
 With the testnet, you can:
 * Use the faucet to obtain testnet BERA.
 * Develop applications and contracts to ensure they work properly prior to deploying them on mainnet. The complete Proof of Liquidity stack is available on testnet.

@@ -89,7 +89,6 @@ EVM Execution Clients:
 - **Nethermind:** .NET based client with full support for Ethereum protocols
 - **Besu:** Enterprise-grade client, Apache 2.0 licensed, written in Java
 - **Reth:** Rust-based client focusing on performance and reliability
-- **Ethereumjs:** Javascript-based client managed by the Ethereum Foundation
 
 ## Finality
 
