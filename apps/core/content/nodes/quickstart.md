@@ -335,16 +335,3 @@ curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_heigh
 # 1653733
 ```
 
-## Followup Steps 📝
-
-Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main).
-
-1. Cause your operating system's startup process to launch beacond and reth at boot. Test with `sudo reboot`.
-
-2. Cause your operating system to rotate logs, and slim the log output.
-   - Read the `beacond` config files to find log verbosity settings.
-   - Consult the instructions for your chosen chain node to adjust logging settings.
-
-3. Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection. Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
-
-4. If you're hosting this for a dapp of your own, you will want to modify the CORS origins ("\*") set on reth.
