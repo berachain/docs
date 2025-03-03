@@ -215,6 +215,10 @@ const SIDEBAR = {
           link: "/nodes/guides/distribute-block-rewards",
         },
         {
+          text: "Increase Validator $BERA Stake",
+          link: "/nodes/guides/increase-validator-bera-stake",
+        },
+        {
           text: "Quickstart: Local Devnet",
           link: "/nodes/guides/kurtosis",
         },
