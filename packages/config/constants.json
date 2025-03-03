@@ -33,7 +33,7 @@
     "genesisForkVersion": "0x04000000",
     "validatorBaseBGTReward": 0.5,
     "validatorDepositGweiAmount": 250000000000000,
-    "validatorDepositAmount": 2500000,
+    "validatorDepositAmount": 250000,
     "rewardAllocationBlockDelay": 8191,
     "registrationMinimum": 10000,
     "stakeMinimumIncrement": 10000,

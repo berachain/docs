@@ -24,7 +24,7 @@ This guide walks you through the process of becoming a validator node on Beracha
 
 - A fully-synced full node - See [Quickstart](/nodes/quickstart)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
-- Berachain Wallet with a minimum of 250,000 $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
+- Berachain Wallet with a minimum of {{ config.mainnet.validatorDepositAmount.toLocaleString() }} $BERA (or the current minimum to meet the Active Set) + gas to process the transaction
 
 If you haven't, please read through the [overview](/nodes/validator-lifecycle) that explains the lifecycle of a validator.
 
@@ -108,7 +108,7 @@ The first registration transaction is the most important. It establishes the ass
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator`.
    - **withdrawal-addr** is described in Step 1
-   - **stake-amount** is the initial stake amount. We strongly recommend the minimum -- 10,000 BERA.
+   - **stake-amount** is the initial stake amount. We strongly recommend using the minimum -- {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA.
    - **genesis-root**: as confirmed in Step 1.
 
    ```bash
@@ -147,7 +147,7 @@ The first registration transaction is the most important. It establishes the ass
    # 0
    ```
 
-You now have everything needed to deposit the initial {{ config.mainnet.registrationMinimum }} BERA.
+You now have everything needed to deposit the initial {{ config.mainnet.registrationMinimum.toLocaleString() }} BERA.
 
 ## Step 3: Send registration transaction
 
@@ -197,13 +197,13 @@ cast send $DEPOSIT_ADDR \
 The following traits denote a successful registration:
 
 1. The deposit contract tx was successful (check block explorer or observe the cast command’s output).
-2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by 10,000 BERA
+2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by the {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA
 3. **Most importantly,** the validator's public key is present in the beacon state.
 The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration reflected in the Beacpm Chain 2 slots after the deposit contract transaction was sent.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
 
 ## Step 5: Activation or top-up
 
-Having completed the registration, you can now deposit additional $BERA. The floor for becoming a validator is `{{ config.mainnet.minEffectiveBalance }} $BERA`, and you must be among the top `{{ config.mainnet.validatorActiveSetSize }}` validators, ordered by $BERA staked.
+Having completed the registration, you can now deposit additional $BERA. The floor for becoming a validator is `{{ config.mainnet.minEffectiveBalance.toLocaleString() }} $BERA`, and you must be among the top `{{ config.mainnet.validatorActiveSetSize }}` validators, ordered by $BERA staked.
 
 These subsequent deposits are done by calling the same `deposit` function, with only the **public key** required; the other elements may be zero, but must still be the right length.
 
