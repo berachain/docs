@@ -199,7 +199,7 @@ The following traits denote a successful registration:
 1. The deposit contract tx was successful (check block explorer or observe the cast command’s output).
 2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by 10,000 BERA
 3. **Most importantly,** the validator's public key is present in the beacon state.
-The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v2/debug/beacon/states/head | jq .data.validators`) should show your validator’s public key, likely at the end of the list. This change will be reflected in the CL 2 slots after the deposit contract tx was finalized. NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
+The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration reflected in the Beacpm Chain 2 slots after the deposit contract transaction was sent.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
 
 ## Step 5: Activation or top-up
 
