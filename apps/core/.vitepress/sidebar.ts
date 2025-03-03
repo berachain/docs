@@ -185,6 +185,7 @@ const SIDEBAR = {
         },
         { text: "EVM Execution Layer", link: "/nodes/evm-execution" },
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
+        { text: "Production Support Checklist", link: "/nodes/production-checklist" },
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
