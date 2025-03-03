@@ -19,7 +19,7 @@ head:
 
 # Berachain Node Quickstart ⚡
 
-This will walk you through on setting up a mainnet full node with `beacond` consensus client and a `reth` execution client.
+This will walk you through setting up a mainnet full node with `beacond` consensus client and a `reth` execution client.
 
 ## Requirements ⚙️
 
@@ -30,7 +30,7 @@ The following requirements are needed to run both the execution and consensus cl
 - **RAM**: 48GB
 - **Storage**: 4TB (SSD with high IOPS)
 
-Ensure you have have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. Recommend to install to `/opt/go/` and add `/opt/go/bin` to your PATH.
+Ensure you have [Golang](https://go.dev/dl/) v1.22.0 or greater installed. We recommend installing to `/opt/go/` and adding `/opt/go/bin` to your PATH.
 
 Download the latest, appropriate, [reth](https://github.com/paradigmxyz/reth/releases) and [beacond](https://github.com/berachain/beacon-kit/tags) releases from their respective release pages.
 
@@ -169,7 +169,7 @@ Check the signatures above with your results, and contact Discord: #bug-reports 
 ## Set up the Consensus Client 🔗
 
 The next script puts in place the seed data for the chain downloaded above, and updates the configuration files for the consensus client to refer to certain paths correctly,
-then runs runs `beacond init` and `beacond jwt generate`.
+then runs `beacond init` and `beacond jwt generate`.
 
 **File:** `./setup-beacond.sh`
 
@@ -374,8 +374,7 @@ In the second, run the execution client:
 ./run-reth.sh
 ```
 
-Initially this will not appear to respond, but within a minute blocks should begin flowing. There should be no significant quantity of error messages, except for
-minor complaints about disconnecting or slow peers from time to time.
+Initially this will not appear to respond, but within a minute blocks should begin flowing. There should not be a significant number of error messages, except for occasional minor complaints about disconnecting or slow peers.
 
 ## Testing Your Node 🧪
 
@@ -457,7 +456,7 @@ curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_heigh
 
 ## Followup Steps 📝
 
-Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main).
+If you are a validator, be sure to consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main).
 
 1. Cause your operating system's startup process to launch beacond and reth at boot. Test with `sudo reboot`.
 
