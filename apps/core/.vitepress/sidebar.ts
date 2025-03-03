@@ -197,7 +197,7 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Validator Guides",
+      text: "Node Guides",
       items: [
         {
           text: "Become A Validator Node",
@@ -220,7 +220,7 @@ const SIDEBAR = {
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {
-          text: "Quickstart: Local Devnet",
+          text: "Local Devnet with Kurtosis",
           link: "/nodes/guides/kurtosis",
         },
         { 
