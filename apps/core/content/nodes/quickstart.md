@@ -40,8 +40,8 @@ The following requirements are needed to run both the execution and consensus cl
   * [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
   * [go-ethereum](https://github.com/ethereum/go-ethereum/releases) 
   * [Nethermind](https://github.com/NethermindEth/nethermind/releases) 
-## Getting started
 
+## Getting started
 
 Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.
 
@@ -253,6 +253,8 @@ In the second, run the execution client (corresponding to the one you chose). He
 # INFO Block added to canonical chain number=49 hash=0xfb2ea... 
 # INFO Canonical chain committed number=49 hash=0xfb2ea...
 ```
+
+Initially this will not appear to respond, but within a minute blocks should begin flowing. There should not be a significant number of error messages, except for occasional minor complaints about disconnecting or slow peers.
 
 ## Testing Your Node 🧪
 

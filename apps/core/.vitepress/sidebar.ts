@@ -180,25 +180,25 @@ const SIDEBAR = {
       items: [
         { text: "Node Architecture Overview", link: "/nodes/" },
         {
+          text: "Validator Lifecycle Overview",
+          link: "/nodes/validator-lifecycle",
+        },
+        {
           text: "BeaconKit Consensus Layer",
           link: "/nodes/beaconkit-consensus",
         },
         { text: "EVM Execution Layer", link: "/nodes/evm-execution" },
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
-        { text: "Production Support Checklist", link: "/nodes/production-checklist" },
+        { text: "Production Checklist", link: "/nodes/production-checklist" },
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
-        },
+        }
       ],
     },
     {
-      text: "Node Guides",
+      text: "Validator Guides",
       items: [
-        {
-          text: "Run Local Devnet With Kurtosis",
-          link: "/nodes/guides/kurtosis",
-        },
         {
           text: "Become A Validator Node",
           link: "/nodes/guides/validator",
@@ -219,6 +219,20 @@ const SIDEBAR = {
           text: "Increase Validator $BERA Stake",
           link: "/nodes/guides/increase-validator-bera-stake",
         },
+        {
+          text: "Quickstart: Local Devnet",
+          link: "/nodes/guides/kurtosis",
+        },
+        { 
+          text: "Awesome Validator Tools",
+          link: "https://github.com/chuck-bear/awesome-berachain-validators",
+        }
+      ],
+    },
+    {
+      text: "Help",
+      items: [
+        { text: "Validator Support FAQ", link: "/nodes/faq" },
       ],
     },
   ],

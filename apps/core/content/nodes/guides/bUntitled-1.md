@@ -25,7 +25,7 @@ This guide assumes that a Validator is already in the Active Set.
 
 Currently, the Active Set consists of `{{config.mainnet.validatorActiveSetSize}}` Validators, which is the number of Validators that can propose blocks.
 
-The Active Set is determined by the amount of `$BERA` staked, where the top stakers are included in the Active Set. To be included in the Active Set, a Validator must stake at least {{config.mainnet.stakeMinimumIncrease}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater).
+The Active Set is determined by the amount of `$BERA` staked, where the top stakers are included in the Active Set. To be included in the Active Set, a Validator must stake at least {{config.mainnet.validatorDepositAmount}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater).
 
 If a Validator is removed from the Active Set, all `$BERA` staked to that Validator will be returned to the Validator's Withdrawal Credentials Address.
 
@@ -42,7 +42,7 @@ Before you begin, ensure you have the following:
 
 - A Validator that is already in the Active Set
 - A Validator's `pubkey` - PubKeys can be found at <a :href="config.mainnet.dapps.url + '/validators'" target="_blank">{{config.mainnet.dapps.hub.name}} Validators</a>
-- A minimum of {{config.mainnet.stakeMinimumIncrease}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater)
+- A minimum of {{config.mainnet.registrationMinimum}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
 ## Steps To Increase A Validator's $BERA Stake
