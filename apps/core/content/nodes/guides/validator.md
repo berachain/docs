@@ -273,28 +273,20 @@ Perform the following steps after becoming a validator.
 
 ### Step 1 - Add To Default Validator List
 
-Make a PR to the following Github repository to add your validator to the default validator list.
+Make a PR to the following Github repository to add your validator to the validator list on the Berachain Hub.
 
-[https://github.com/berachain/default-lists](https://github.com/berachain/default-lists)
+[https://github.com/berachain/metadata](https://github.com/berachain/metadata)
 
-```json
-{
-  "id": "<YOUR_VALIDATOR_PUBKEY>",
-  "logoURI": "<PNG_OR_JPG_URL_OF_YOUR_VALIDATOR>",
-  "name": "<VALIDATOR_NAME>",
-  "description": "<VALIDATOR_DESCRIPTION>",
-  "website": "<VALIDATOR_WEBSITE_URL>",
-  "twitter": "<VALIDATOR_TWITTER_URL>"
-}
-```
+If you have a logo you'd like us to use, attach it to the pull request.
+
 
 ### Step 2 - Send Berachain Team Wallet Addresses
 
-Reach out to the Berachain team with your `YOUR_VALIDATOR_OPERATOR_ADDRESS` and `YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS` to aid with better metrics.
+Reach out to the Berachain validator relations team with your `YOUR_VALIDATOR_OPERATOR_ADDRESS` and `YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS` to aid with better metrics. If you aren't known to us, poke your head up on the #node-support channel on our Discord.
 
 ### Step 3 - Send Berachain Your CometBFT Address
 
-Reach out to the Berachain team with your CometBFT address found in your `priv_validator_key.json` file.
+Reach out to the Berachain validator relations team with your CometBFT address found in your `priv_validator_key.json` file. If you aren't known to us, poke your head up on the #node-support channel on our Discord.
 
 This is the 40 character address found in your `priv_validator_key.json` file.
 

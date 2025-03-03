@@ -216,7 +216,7 @@ const SIDEBAR = {
           link: "/nodes/guides/distribute-block-rewards",
         },
         {
-          text: "Increase Validator $BERA Stake",
+          text: "Increase Validator Stake",
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {

@@ -7,7 +7,6 @@
 
 ## Overview
 
-
 A validator in Berachain is a participant responsible for proposing and attesting to new blocks, helping secure the network and maintain consensus. Validators stake a required amount of the network's native token ($BERA) as collateral, which serves both as an economic incentive to behave honestly and as a mechanism for penalizing malicious behavior.
 
 Validators have several key responsibilities:
@@ -17,11 +16,7 @@ Validators have several key responsibilities:
 - Participating in consensus by voting on the canonical chain
 - Maintaining network security through their staked tokens
 
-<!--
-The validator's performance and adherence to protocol rules directly affects their rewards and their ability to remain in the active validator set. Poor performance or malicious behavior can result in penalties or "slashing" - the partial or complete loss of staked tokens.
--->
-
-The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest `{{ config.mainnet.stakeMinimumIncrement }}``. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
+The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest `{{ constants.mainnet.stakeMinimumIncrement }}`. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
 The limit on the number of active validators, termed in this document the `ValidatorSetCap`, is set in Beacon-Kit, and can only be affected
 by Berachain govenance actions followed by an update to Beacon-Kit. 

@@ -23,6 +23,15 @@ There are several ingredients to successful peering:
 3. **Remember, peers are not the same as bootnodes.**  Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks. Each execution client has separate options to specify bootnodes and peers.  Consult your execution client's documentation for the correct options.
 4. **Indicate your node's external IP address.**  In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at.  Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. This is sometimes done with the `--nat extip:<IP>` option, but check your execution client's documentation for the correct option. For Beacon-Kit this is configured with `p2p.external_addresss` in `config.toml`.
 
+### Let us know who you are
+
+If you have launched a validator on the chain, it's in your interest to let us know who you are, so we know who to contact in case there's trouble with on-chain performance or actions.
+
+Steps to do that:
+1. (Optional) Formulate a pull request to the [Validator Metadata repository](https://github.com/berachain/metadata) with a public handle for your validator. You can use an anon if you want.  Provide a logo attached to the pull request if you would like it posted on your validator profile.
+2. Reach out to us on the `#node-support` channel on our [Discord](https://github.com/berachain). We will set you up with dedicated support, chat, and announcement channels for validators.
+
+
 ### Hygiene
 
 Make sure Beacon-Kit and your execution client are configured to start when your operating system starts. We recommend to start the execution client first, then Beacon-Kit.
