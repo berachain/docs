@@ -7,5 +7,6 @@ Buy BERA on the open market through various DEXs and CEXs, or through <a href="h
 
 ## I need some help with a technical problem.
 
-Visit our [Discord](https://discord.gg/berachain)'s `#node-support` channel. 
+Visit our [Discord](https://discord.gg/berachain)'s `#node-support` channel.  Make sure you have reviewed our [Checklist](/nodes/production-checklist) first.
+
 
