@@ -59,7 +59,7 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
     :nativeCurrencySymbol="config.bepolia.currencySymbol"
     :nativeCurrencyDecimals="config.bepolia.decimals"
     :rpcUrl="config.bepolia.rpcUrl"
-    :blockExplorerUrl="config.testnet.dapps.berascan.url"
+    :blockExplorerUrl="config.bepolia.dapps.berascan.url"
     :testnet="true"
   />
 </ClientOnly>
@@ -95,7 +95,7 @@ With the testnet, you can:
     <template v-for="(dapp, key) in config.bepolia.dapps">
       <tr>
         <td><a :href="dapp.url" target="_blank">{{ dapp.name }}</a></td>
-        <td>{{ dapp.url }}<ClientOnly><CopyToClipboard :text="dapp.url" /></ClientOnly></td>
+        <td><ClientOnly><CopyToClipboard :text="dapp.url" /></ClientOnly></td>
       </tr>
     </template>
   </tbody>
