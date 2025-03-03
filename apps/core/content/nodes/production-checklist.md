@@ -5,7 +5,7 @@ head:
       content: Berachain Operator Checklist
 ---
 
-## Node Operator / Validator Checklist
+# Node Operator / Validator Checklist
 
 Before reaching out for support, here are some steps to check your installation.
 
@@ -19,9 +19,9 @@ Check that you are running a supported version of your [execution client](/nodes
 
 There are several ingredients to successful peering:
 1. **Bootnodes**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
-2. **PEers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client.
+2. **Peers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client.
 3. **Remember, peers are not the same as bootnodes.**  Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks. Each execution client has separate options to specify bootnodes and peers.  Consult your execution client's documentation for the correct options.
-4. **Indicate your node's external IP address.**  Most execution clients try to determine your external IP address, but this is not always reliable. This usually relies on UPnP, which is not available in cloud computing environments. Therefore, for your node to advertise its presence to the network,, you must _tell it_ what your external IP address is. This is sometimes done with the `--nat extip:<IP>` option, but check your execution client's documentation for the correct option.
+4. **Indicate your node's external IP address.**  In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at.  Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. This is sometimes done with the `--nat extip:<IP>` option, but check your execution client's documentation for the correct option. For Beacon-Kit this is configured with `p2p.external_addresss` in `config.toml`.
 
 ### Hygiene
 

@@ -45,7 +45,7 @@ To add the network manually, enter the network details below into your wallet of
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
-### MainnetRPC Providers
+### Mainnet RPC Providers
 
 See our [RPC partners](/developers/developer-tools#rpc-providers) under Developer Tools.
 
