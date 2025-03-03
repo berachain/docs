@@ -47,7 +47,7 @@ This is a list of addresses where contracts can be read from or written to.
 
 
 
-## Testnet Contracts
+## Beplia Testnet Contracts
 
 <script>
 const render_groups = {
