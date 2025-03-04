@@ -42,15 +42,17 @@ The following requirements are needed to run both the execution and consensus cl
 
 ## Getting started
 
-Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.
+Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.  Then, clone the berachain node scripts.
 
 ```bash
 # FROM: $HOME
 
 mkdir beranode;
 cd beranode;
-git clone https://github.com/camembera/bera-quickstart;
-ls bera-quickstart;
+git clone https://github.com/berachain/guides;
+mv guides/apps/berachain-node-scripts/* ./;
+rm -r guides;
+ls;
 
 # [Expected output, edited for clarity]
 # README.md	                  run-geth.sh     setup-geth.sh
@@ -69,32 +71,21 @@ Then we have `setup-` and `run-` scripts for various execution clients and `beac
 #!/bin/bash 
 
 # CHANGE THESE VALUES
-export CHAIN_SPEC="mainnet"
+export CHAIN_SPEC=mainnet   # or "testnet"
 export MONIKER_NAME=camembera
 export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
 export EL_ARCHIVE_NODE=false # set to true if you want to run an archive node on CL and EL
-export MY_IP=`curl canhazip.com`
+export MY_IP=`curl -s canhazip.com`
 
-# CHAIN CONSTANTS
-if [ "$CHAIN_SPEC" == "testnet" ]; then
-    export CHAIN=testnet-beacon-80069
-    export CHAIN_ID=80069
-else
-    export CHAIN=mainnet-beacon-80094
-    export CHAIN_ID=80094
-fi
-export SEED_DATA_URL=https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/$CHAIN_ID
-
-export BEACOND_BIN=`/usr/bin/which beacond`
-export BEACOND_DATA=$(pwd)/var/beacond
-export BEACOND_CONFIG=$BEACOND_DATA/config  # don't change this. sorry.
-export EL_AUTHRPC_PORT=8551
-export RPC_DIAL_URL=http://localhost:$EL_AUTHRPC_PORT
-export JWT_PATH=$BEACOND_CONFIG/jwt.hex
+# VALUES YOU MIGHT WANT TO CHANGE
 export LOG_DIR=$(pwd)/logs
-export RETH_BIN=`/usr/bin/which reth`
-export RETH_DATA=$(pwd)/var/reth
-export RETH_GENESIS_PATH=$RETH_DATA/genesis.json
+export JWT_PATH=$BEACOND_CONFIG/jwt.hex
+export BEACOND_BIN=$(command -v beacond || echo $(pwd)/beacond)
+export BEACOND_DATA=$(pwd)/var/beacond
+export RETH_BIN=$(command -v reth || echo $(pwd)/reth)
+export GETH_BIN=$(command -v geth || echo $(pwd)/geth)
+export NETHERMIND_BIN=$(command -v Nethermind.Runner || echo $(pwd)/Nethermind.Runner)
+export ERIGON_BIN=$(command -v erigon || echo $(pwd)/erigon)
 ```
 
 You need to set these constants:
@@ -103,15 +94,14 @@ You need to set these constants:
 2. **MONIKER_NAME**: Should be a name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-5. **MY_IP**: This is used to correctly advertise your node's address to other peers on the network. The default looks it up on every script run.  If it will never change, you can hard-code it here.  Reth and Geth will attempt to identify your public IP if you have UPNP turned on, which is generally only on home networks. Cloud environments do not have this.
+5. **MY_IP**: This is used to set the IP address your chain clients advertise to other peers on the network. If you leave it blank, `geth` and `reth` will discover the address with UPnP (if you are behind a NAT gateway) or assign the node's ethernet IP (which is OK if your computer is directly on the internet and has a public IP).  In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it, if connections to that address lead back to your instance.
 
 You should verify these constants:
 
-- **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
-- **RETH_BIN**: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
-- **BEACOND_DATA**: Set this to where the consensus data and config should be kept. BEACOND_CONFIG must be under BEACOND_PATH as shown. Don't change it.
-- **RETH_DATA**: Set this to where the execution data and config should be kept.
 - **LOG_DIR**: This directory stores log files.
+- **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
+- **BEACOND_DATA**: Set this to where the consensus data and config should be kept. BEACOND_CONFIG must be under BEACOND_PATH as shown. Don't change it.
+- **RETH_BIN** or other chain client: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
 
 ## Fetch Mainnet Parameters 📥
 
