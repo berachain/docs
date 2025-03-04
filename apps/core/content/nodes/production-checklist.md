@@ -40,7 +40,7 @@ Make sure Beacon-Kit and your execution client are configured to start when your
 Cause your operating system to rotate logs, and slim the log output.
    - Read the `beacond` config files to find log verbosity settings.
    - Consult the instructions for your chosen chain node to adjust logging settings.
-   - Set up the `logrotate` service to rotate logs. Beacon-Kit currently needs a restart to reopen the log file.
+   - Set up the `logrotate` service to rotate logs.
 
 Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable prometheus metrics collection. Specify an internal IP address accessible only to your prometheus server, or ensure this port is firewalled off from the internet.
 Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main) for references to other monitoring tools.
