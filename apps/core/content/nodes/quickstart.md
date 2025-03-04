@@ -50,7 +50,7 @@ Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`
 mkdir beranode;
 cd beranode;
 git clone https://github.com/berachain/guides;
-mv guides/apps/berachain-node-scripts/* ./;
+mv guides/apps/node-scripts/* ./;
 rm -r guides;
 ls;
 
