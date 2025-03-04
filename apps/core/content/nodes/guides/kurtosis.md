@@ -267,13 +267,13 @@ Start by adding the network to your MetaMask wallet.
 **NOTE:** Your port number will be different. Use the port number from the list of services output in Step 1.
 :::
 
-| Key                | Value                                                                                                |
-| ------------------ | ---------------------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.devnet.chainName" /></ClientOnly>                         |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.devnet.rpcUrl" /></ClientOnly>                            |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="config.devnet.chainId" /></ClientOnly>                           |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.devnet.currencySymbol" /></ClientOnly>                    |
-| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.devnet.dapps.blockExplorer.url" /></ClientOnly>           |
+| Key                | Value                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| Network            | <ClientOnly><CopyToClipboard :text="config.devnet.chainName" /></ClientOnly>               |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.devnet.rpcUrl" /></ClientOnly>                  |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.devnet.chainId" /></ClientOnly>                 |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.devnet.currencySymbol" /></ClientOnly>          |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.devnet.dapps.blockExplorer.url" /></ClientOnly> |
 
 Next import one of the private keys defined in [constants.star](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
 
