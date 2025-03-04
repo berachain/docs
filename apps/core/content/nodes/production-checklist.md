@@ -18,10 +18,11 @@ Check that you are running a supported version of your [execution client](/nodes
 ### Peering
 
 There are several ingredients to successful peering:
-1. **Bootnodes**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
-2. **Peers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client.
-3. **Remember, peers are not the same as bootnodes.**  Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks. Each execution client has separate options to specify bootnodes and peers.  Consult your execution client's documentation for the correct options.
-4. **Indicate your node's external IP address.**  In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at.  Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. This is sometimes done with the `--nat extip:<IP>` option, but check your execution client's documentation for the correct option. For Beacon-Kit this is configured with `p2p.external_addresss` in `config.toml`.
+1. **Bootnodes**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).  Both `geth` and `reth` accept `--bootnodes` option.
+2. **Peers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client.  `reth` accepts a `--trusted-peers` option.
+3. **Remember, peers are not the same as bootnodes.**  Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks.  Ensure your firewall allows both UDP and TCP traffic to your chain clients, for both consensus and execution layer, for the ports they are configured to listen on. In the default configurations we provide, this is TCP and UDP 30303 for the execution layer, and TCP 26657 for the consensus layer.
+
+4. **Indicate your node's external IP address.**  In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at.  Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is  done with the `--nat extip:<IP>` option, For Beacon-Kit this is configured with `p2p.external_addresss` in `config.toml`.
 
 ### Let us know who you are
 
@@ -34,7 +35,7 @@ Steps to do that:
 
 ### Hygiene
 
-Make sure Beacon-Kit and your execution client are configured to start when your operating system starts. We recommend to start the execution client first, then Beacon-Kit.
+Make sure Beacon-Kit and your execution client are configured to start when your operating system starts. 
 
 Cause your operating system to rotate logs, and slim the log output.
    - Read the `beacond` config files to find log verbosity settings.
