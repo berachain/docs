@@ -353,6 +353,8 @@ $RETH_BIN node \
 --ws.origins="*" \
 --authrpc.addr=0.0.0.0 \
 --authrpc.port=$EL_AUTHRPC_PORT \
+--engine.persistence-threshold 0 \
+--engine.memory-block-buffer-target 0 \
 --log.file.directory=$LOG_DIR;
 ```
 
