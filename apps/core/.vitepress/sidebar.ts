@@ -196,7 +196,7 @@ const SIDEBAR = {
       ],
     },
     {
-      text: "Validator Guides",
+      text: "Node Guides",
       items: [
         {
           text: "Become A Validator Node",
