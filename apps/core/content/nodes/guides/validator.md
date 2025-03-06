@@ -106,10 +106,10 @@ The first registration transaction is the most important. It establishes the ass
    cast call $DEPOSIT_ADDR 'getOperator(bytes)' $VAL_PUB_KEY -r $RPC_URL;
    ```
 
-3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator`.
-   - **withdrawal-addr** is described in Step 1
-   - **stake-amount** is the initial stake amount. We strongly recommend using the minimum -- {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA.
-   - **genesis-root**: as confirmed in Step 1.
+3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator` which takes:
+   1. **withdrawal-addr** is described in Step 1
+   2. **stake-amount** is the initial stake amount (as GWei). We strongly recommend using the minimum -- {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA.
+   3. **genesis-root**: as confirmed in Step 1.
 
    ```bash
    STAKE_AMOUNT_ETH="10000";
@@ -200,7 +200,7 @@ The following traits denote a successful registration:
 1. The deposit contract tx was successful (check block explorer or observe the cast command’s output).
 2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by the {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA
 3. **Most importantly,** the validator's public key is present in the beacon state.
-The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration reflected in the Beacpm Chain 2 slots after the deposit contract transaction was sent.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
+The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract transaction is processed.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
 
 ## Step 5: Activation or top-up
 
@@ -274,7 +274,7 @@ Perform the following steps after becoming a validator.
 
 ### Step 1 - Add To Default Validator List
 
-Make a PR to the following Github repository to add your validator to the validator list on the Berachain Hub.
+Make a PR to the following GitHub repository to add your validator to the validator list on the Berachain Hub.
 
 [https://github.com/berachain/metadata](https://github.com/berachain/metadata)
 
@@ -283,7 +283,7 @@ If you have a logo you'd like us to use, attach it to the pull request.
 
 ### Step 2 - Send Berachain Team Wallet Addresses
 
-Reach out to the Berachain validator relations team with your `YOUR_VALIDATOR_OPERATOR_ADDRESS` and `YOUR_VALIDATOR_WITHDRAW_CRED_ADDRESS` to aid with better metrics. If you aren't known to us, poke your head up on the #node-support channel on our Discord.
+Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully *before* it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord.
 
 ### Step 3 - Send Berachain Your CometBFT Address
 
@@ -299,6 +299,6 @@ You can get this by looking at the file or running the following:
 # OR /path/to/$HOME/config/priv_validator_key.json
 cat ./.beacond/config/priv_validator_key.json | jq -r ".address";
 
-# [Expected Similat Address]
+# [Expected Similar Address]
 # A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0
 ```
