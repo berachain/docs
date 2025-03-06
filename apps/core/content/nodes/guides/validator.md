@@ -112,11 +112,12 @@ The first registration transaction is the most important. It establishes the ass
    - **genesis-root**: as confirmed in Step 1.
 
    ```bash
-   STAKE_AMOUNT=10000000000000;
+   STAKE_AMOUNT_ETH="10000";
+   STAKE_AMOUNT_GWEI="${STAKE_AMOUNT_ETH}000000000"
 
    beacond deposit create-validator \
      $WITHDRAW_ADDRESS              \
-     $STAKE_AMOUNT                  \
+     $STAKE_AMOUNT_GWEI             \
      $GENESIS_ROOT;
 
    # [Expected Output]:
@@ -138,7 +139,7 @@ The first registration transaction is the most important. It establishes the ass
    beacond deposit validate   \
      $VAL_PUB_KEY             \
      $VAL_WITHDRAW_CREDENTIAL \
-     $STAKE_AMOUNT            \
+     $STAKE_AMOUNT_GWEI       \
      $DEPOSIT_SIGNATURE       \
      $GENESIS_ROOT;
    echo $?;
@@ -177,7 +178,7 @@ cast send $DEPOSIT_ADDR \
 "$DEPOSIT_SIGNATURE" \
 "$VALIDATOR_OPERATOR_ADDRESS" \
 --private-key  \
---value $STAKE_AMOUNT \
+--value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
 
 # Ledger Version
@@ -188,7 +189,7 @@ cast send $DEPOSIT_ADDR \
 "$DEPOSIT_SIGNATURE" \
 "$VALIDATOR_OPERATOR_ADDRESS" \
 --ledger \
---value $STAKE_AMOUNT \
+--value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
 ```
 
@@ -210,7 +211,7 @@ These subsequent deposits are done by calling the same `deposit` function, with 
 When your validator passes the threshold necessary to become active, it passes into the **Activation** part of the lifecycle. At the conclusion of **second epoch** after you pass the threshold -- in other words, no sooner than 13 minutes -- you become eligible for minting blocks.
 
 ```bash
-STAKE_AMOUNT=240000ether;
+STAKE_AMOUNT_ETH=240000;
 
 cast send "0x4242424242424242424242424242424242424242" \
 'deposit(bytes,bytes,bytes,address)' \
@@ -219,7 +220,7 @@ cast send "0x4242424242424242424242424242424242424242" \
 "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
 "0x0000000000000000000000000000000000000000" \
 --ledger \
---value $STAKE_AMOUNT \    
+--value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
 ```
 
