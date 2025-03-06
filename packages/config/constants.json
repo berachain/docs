@@ -527,7 +527,7 @@
     "stakeMinimumIncrease": 10000,
     "validatorActiveSetSize": 69,
     "stakeMinimumDeadlineEpoch": 1,
-    "minEffectiveBalance": "250,000",
+    "minEffectiveBalance": "2,500,000",
     "maxEffectiveBalance": "10,000,000",
     "dapps": {
       "bex": {
