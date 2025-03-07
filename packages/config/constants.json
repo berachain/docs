@@ -8,7 +8,7 @@
     "decimals": 18,
     "dapps": {
       "faucet": {
-        "name": "Official Berachain Bepolia Faucet",
+        "name": "Official Bepolia Faucet",
         "url": "https://bepolia.faucet.berachain.com/"
       },
 
@@ -17,11 +17,11 @@
         "url": "https://bepolia.beratrail.io/"
       },
       "hub": {
-        "name": "Berachain Bepolia Hub",
+        "name": "Bepolia Hub",
         "url": "https://bepolia.hub.berachain.com"
       },
       "honey": {
-        "name": "Berachain Bepolia $HONEY Swap",
+        "name": "Bepolia $HONEY Swap",
         "url": "https://bepolia.honey.berachain.com"
       }
     }
