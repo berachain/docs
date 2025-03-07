@@ -7,6 +7,11 @@
     "currencyName": "Testnet BERA Token",
     "decimals": 18,
     "dapps": {
+      "faucet": {
+        "name": "Official Berachain Bepolia Faucet",
+        "url": "https://bepolia.faucet.berachain.com/"
+      },
+
       "berascan": {
         "name": "Bepolia Routescan Explorer",
         "url": "https://bepolia.beratrail.io/"
