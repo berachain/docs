@@ -602,13 +602,6 @@
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
         "docsUrl": "/developers/contracts/beacondeposit"
       },
-      "bgt": {
-        "name": "BGT Token",
-        "bepolia-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
-        "mainnet-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGT.json",
-        "docsUrl": "/developers/contracts/bgt-token"
-      },
       "berachef": {
         "name": "BeraChef",
         "mainnet-address": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a",
@@ -650,8 +643,29 @@
         "bepolia-address": "0x7bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650",
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/FeeCollector.json",
         "docsUrl": "/developers/contracts/fee-collector"
-      }
+      },
+      "governance": {
+        "name": "Governance",
+        "mainnet-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
+        "bepolia-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
+        "abi": "",
+        "docsUrl": "/developers/contracts/governance"
+      },
+      "timelock": {
+        "name": "TimeLock",
+        "mainnet-address": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
+        "bepolia-address": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
+        "abi": "",
+        "docsUrl": "/learn/governance/#guardian-oversight"
+      },
     }, "tokens": {
+      "bgt": {
+        "name": "BGT Token",
+        "bepolia-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
+        "mainnet-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGT.json",
+        "docsUrl": "/developers/contracts/bgt-token"
+      },
       "honey": {
         "name": "HONEY Token",
         "mainnet-address": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
