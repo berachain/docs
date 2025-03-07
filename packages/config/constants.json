@@ -662,7 +662,7 @@
         "bepolia-address": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
         "abi": "",
         "docsUrl": "/learn/governance/#guardian-oversight"
-      },
+      }
     }, "tokens": {
       "bgt": {
         "name": "BGT Token",
