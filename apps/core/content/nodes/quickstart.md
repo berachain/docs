@@ -33,16 +33,17 @@ The following requirements are needed to run both the execution and consensus cl
 - **Storage**: 4TB (SSD with high IOPS)
 
 ### Software Requirements 💾
-* Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written against v1.1.3.
-* One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
-  * [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
-  * [go-ethereum](https://github.com/ethereum/go-ethereum/releases) 
-  * [Nethermind](https://github.com/NethermindEth/nethermind/releases) 
-  * [Nethermind](https://github.com/NethermindEth/nethermind/releases) 
+
+- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written against v1.1.3.
+- One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
+  - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
+  - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
+  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
+  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
 
 ## Getting started
 
-Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`.  Then, clone the berachain node scripts.
+Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`. Then, clone the berachain node scripts.
 
 ```bash
 # FROM: $HOME
@@ -68,7 +69,7 @@ Then we have `setup-` and `run-` scripts for various execution clients and `beac
 **File:** `./env.sh` (simplified)
 
 ```bash
-#!/bin/bash 
+#!/bin/bash
 
 # CHANGE THESE VALUES
 export CHAIN_SPEC=mainnet   # or "testnet"
@@ -94,7 +95,7 @@ You need to set these constants:
 2. **MONIKER_NAME**: Should be a name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-5. **MY_IP**: This is used to set the IP address your chain clients advertise to other peers on the network. If you leave it blank, `geth` and `reth` will discover the address with UPnP (if you are behind a NAT gateway) or assign the node's ethernet IP (which is OK if your computer is directly on the internet and has a public IP).  In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it, if connections to that address lead back to your instance.
+5. **MY_IP**: This is used to set the IP address your chain clients advertise to other peers on the network. If you leave it blank, `geth` and `reth` will discover the address with UPnP (if you are behind a NAT gateway) or assign the node's ethernet IP (which is OK if your computer is directly on the internet and has a public IP). In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it, if connections to that address lead back to your instance.
 
 You should verify these constants:
 
@@ -110,7 +111,7 @@ The key network parameters for Berachain mainnet are downloaded by `fetch-berach
 ```bash
 # FROM: ~/beranode
 
-./fetch-berachain-params.sh; 
+./fetch-berachain-params.sh;
 
 # [Expected Output for mainnet]:
 # 6e4179e38e11696f8402cd5f8e872726  seed-data/app.toml
@@ -131,11 +132,12 @@ The key network parameters for Berachain mainnet are downloaded by `fetch-berach
 
 ```
 
-Check the signatures above against your results.  Further confirmations of the consequences of these signatures are below. 
+Check the signatures above against your results. Further confirmations of the consequences of these signatures are below.
 
 ## Set up the Consensus Client 🔗
 
-The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`.  This script:
+The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`. This script:
+
 1. Runs `beacond init` to create the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key, and especially if you intend to become a validator, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
 2. Runs `beacond jwt generate` to create the file `jwt.hex`. This contains a secret shared between the consensus client and execution client so they can securely communicate. Protect this file. If you suspect it has been leaked, generate a new one with `beacond jwt generate -o $JWT_PATH`.
 3. Rewrites the beacond configuration files to reflect settings chosen in `env.sh`.
@@ -219,7 +221,7 @@ In the second, run the execution client (corresponding to the one you chose). He
 
 # [EXPECTED OUTPUT]
 # INFO Transaction pool initialized
-# INFO P2P networking initialized 
+# INFO P2P networking initialized
 # INFO StaticFileProducer initialized
 # INFO Pruner initialized
 # INFO Consensus engine initialized
@@ -232,7 +234,7 @@ In the second, run the execution client (corresponding to the one you chose). He
 # [AFTER BLOCKS START FLOWING]
 # INFO Forkchoice updated head_block_hash=0x7f9f131 ...
 # INFO State root task finished ... number: 49, hash: 0xfb2ea8...
-# INFO Block added to canonical chain number=49 hash=0xfb2ea... 
+# INFO Block added to canonical chain number=49 hash=0xfb2ea...
 # INFO Canonical chain committed number=49 hash=0xfb2ea...
 ```
 
@@ -318,4 +320,3 @@ curl -s http://localhost:26657/status | jq '.result.sync_info.latest_block_heigh
 # [Expected Output]:
 # 1653733
 ```
-

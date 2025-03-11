@@ -6,7 +6,7 @@ layout: page
 <script setup>
   import Feature from '@berachain/ui/Feature';
   import config from '@berachain/config/constants.json';
-  import { IconVocabulary, IconTerminal, IconServer, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconChartHistogram, IconCoins, IconWorld, IconMoneybag } from '@tabler/icons-vue';
+  import { IconVocabulary, IconTerminal, IconServer, IconBrandGithub, IconSearch, IconGavel, IconRefresh, IconWorld, IconMoneybag } from '@tabler/icons-vue';
 </script>
 
 <!-- START -->

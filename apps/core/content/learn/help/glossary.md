@@ -82,6 +82,15 @@ The Engine API is the interface that allows communication between the [execution
 
 An EVM (Ethereum Virtual Machine) execution client (sometimes referred to as the execution layer) is a software application responsible for the actual computation of transactions within blocks. It interprets and executes the code of smart contracts using the EVM, manages state changes, and executes the transaction logic. This client ensures that all actions are performed correctly according to the smart contract's code and EVM protocol.
 
+EVM Execution Clients:
+
+- **Geth:** Official Go implementation of the Ethereum protocol
+- **Erigon:** More performant, feature-rich client forked from go-ethereum
+- **Nethermind:** .NET based client with full support for Ethereum protocols
+- **Besu:** Enterprise-grade client, Apache 2.0 licensed, written in Java
+- **Reth:** Rust-based client focusing on performance and reliability
+- **Ethereumjs:** Javascript-based client managed by the Ethereum Foundation
+
 ## Finality
 
 The assurance that once a transaction is confirmed on the blockchain, it cannot be altered or reversed. Berachain provides instant finality for transactions.

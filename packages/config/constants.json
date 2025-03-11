@@ -8,13 +8,16 @@
     "decimals": 18,
     "dapps": {
       "faucet": {
-        "name": "Official Bepolia Faucet",
+        "name": "Bepolia Testnet Faucet",
         "url": "https://bepolia.faucet.berachain.com/"
       },
-
-      "berascan": {
-        "name": "Bepolia Routescan Explorer",
+      "beratrail": {
+        "name": "Bepolia Block Explorer",
         "url": "https://bepolia.beratrail.io/"
+      },
+      "berascan": {
+        "name": "BeraScan Block Explorer",
+        "url": "#"
       },
       "hub": {
         "name": "Bepolia Hub",

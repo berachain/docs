@@ -556,8 +556,9 @@ main().catch((error) => {
 
 Now replace your `WALLET_PRIVATE_KEY` with a wallet that has BERA tokens.
 <template v-if="config.bepolia.dapps?.faucet">
-  You can also get Testnet BERA tokens from the <a href="{{config.bepolia.dapps.faucet.url}}">{{config.bepolia.dapps.faucet.name}}</a>.
+You can also get Testnet BERA tokens from the <a href="{{config.bepolia.dapps.faucet.url}}">{{config.bepolia.dapps.faucet.name}}</a>.
 </template>
+
 **File:** `./.env`
 
 ```bash

@@ -17,10 +17,10 @@ The execution layer consists of multiple implementations in the form of EVM exec
 
 The following execution clients have been tested and verified by BeaconKit:
 
-| Client                                                            | Language | Sync Strategies                      | Recommended Version |
-|-------------------------------------------------------------------|----------|--------------------------------------|----------------------|
-| [Geth](https://github.com/ethereum/go-ethereum)                   | Golang   | Snap, Full                           | v1.14.13, v1.15.x
-| [Reth](https://github.com/paradigmxyz/reth)                       | Rust     | Full                                 | v1.1.5, v1.2.x    
-| [Nethermind](https://github.com/NethermindEth/nethermind)         | C#       | Snap (without serving), Fast, Full   | v1.31.x           
-| [Erigon](https://github.com/ledgerwatch/erigon)                   | Golang   | Full                                 | v2.61.x           
-| [Besu](https://github.com/hyperledger/besu/)                      | Java     | Snap, Fast, Full                     | v25.2.x     
+| Client                                                    | Language | Sync Strategies                    | Recommended Version |
+| --------------------------------------------------------- | -------- | ---------------------------------- | ------------------- |
+| [Geth](https://github.com/ethereum/go-ethereum)           | Golang   | Snap, Full                         | v1.14.x             |
+| [Reth](https://github.com/paradigmxyz/reth)               | Rust     | Full                               | v1.1.x              |
+| [Nethermind](https://github.com/NethermindEth/nethermind) | C#       | Snap (without serving), Fast, Full | v1.31.x             |
+| [Erigon](https://github.com/ledgerwatch/erigon)           | Golang   | Full                               | v2.61.x             |
+| [Besu](https://github.com/hyperledger/besu/)              | Java     | Snap, Fast, Full                   | v25.2.x             |

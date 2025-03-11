@@ -15,7 +15,6 @@ head:
     import config from '@berachain/config/constants.json';
 </script>
 
-
 # Become a Validator on Berachain
 
 This guide walks you through the process of becoming a validator node on Berachain.
@@ -32,7 +31,7 @@ If you haven't, please read through the [overview](/nodes/validator-lifecycle) t
 
 ## Step 1: Check beacond and Set Up Environment
 
-A point of reassurance about `beacond`: it _cannot_ transact on your behalf on either the execution or consensus layers. By invoking `beacond` on the command line you are not playing with TNT strapped to your stake. 
+A point of reassurance about `beacond`: it _cannot_ transact on your behalf on either the execution or consensus layers. By invoking `beacond` on the command line you are not playing with TNT strapped to your stake.
 
 You can ask `beacond help` for a list of commands, then `beacond help command` for help on a certain command. Have a look at `beacond help deposit create-validator`.
 
@@ -44,8 +43,8 @@ Below is an example of setting up and verifying the environment and establishing
 # !/bin/bash
 
 export BEACOND_HOME=/full/path/to/beacond-data;
-export RPC_URL="https://rpc.berachain.com"; # mainnet 
-export DEPOSIT_ADDR="0x4242424242424242424242424242424242424242"; # mainnet 
+export RPC_URL="https://rpc.berachain.com"; # mainnet
+export DEPOSIT_ADDR="0x4242424242424242424242424242424242424242"; # mainnet
 export VAL_PUB_KEY="<YOUR_VAL_PUB_KEY>";
 export VAL_OPERATOR_ADDRESS="<YOUR_VAL_OPERATOR_ADDRESS>";
 export WITHDRAW_ADDRESS="<YOUR_WITHDRAW_ADDRESS>";
@@ -60,16 +59,16 @@ beacond genesis validator-root $BEACOND_HOME/config/genesis.json;
 export GENESIS_ROOT=0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63ff0bda # mainnet
 ```
 
-The `0xdf6..0bda` hash output confirms that you have the right mainnet genesis file. 
+The `0xdf6..0bda` hash output confirms that you have the right mainnet genesis file.
 
-* **BEACOND_HOME**: The path to your beacond data directory.
-* **RPC_URL**: The URL of the RPC endpoint you are using. You can use your own if you want.
-* **DEPOSIT_ADDR**: The address of the deposit contract. 
-* **VAL_PUB_KEY**: The public key of your validator from CometBFT (see below).
-* **VAL_OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef). 
-* **WITHDRAW_ADDRESS**: The address where your deposit stake is returned when you stop being a validator (state 'Exited' on the [lifecycle](/nodes/validator-lifecycle)). This can be an address of your choice, or if you are staking money from investors, they will require a specific address.
+- **BEACOND_HOME**: The path to your beacond data directory.
+- **RPC_URL**: The URL of the RPC endpoint you are using. You can use your own if you want.
+- **DEPOSIT_ADDR**: The address of the deposit contract.
+- **VAL_PUB_KEY**: The public key of your validator from CometBFT (see below).
+- **VAL_OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef).
+- **WITHDRAW_ADDRESS**: The address where your deposit stake is returned when you stop being a validator (state 'Exited' on the [lifecycle](/nodes/validator-lifecycle)). This can be an address of your choice, or if you are staking money from investors, they will require a specific address.
 
-Your **CometBFT identity** was created by beacond when you did `beacond init`, and is held in the `priv_validator_key.json` file. 
+Your **CometBFT identity** was created by beacond when you did `beacond init`, and is held in the `priv_validator_key.json` file.
 You can view the corresponding public key for this identity with `beacond deposit validator-keys`:
 
 ```bash
@@ -85,28 +84,26 @@ beacond deposit validator-keys;
 
 This is your **beacon chain public key**, and in this tutorial is placed in the `VAL_PUB_KEY` environment variable.
 
-
-
-
 ## Step 2: Prepare registration transaction
 
 :::warning
-1. Ensure you calculate a signature for the parameters *and deposit amount* you are going to send to the deposit contract. If you change anything
-after calculating the signature, **the deposit will fail and the funds will be burnt**.
-:::
+
+1. Ensure you calculate a signature for the parameters _and deposit amount_ you are going to send to the deposit contract. If you change anything
+   after calculating the signature, **the deposit will fail and the funds will be burnt**.
+   :::
 
 The first registration transaction is the most important. It establishes the association between your validator key and your presence in the consensus layer. **Mistakes in this step can result in a permanent loss of funds.**
 
-
 1. **Set up and fund your funding account on Berachain.** You should be equipped so that you can use metamask or `cast` to send transactions from the funding account.
 
-2. **Confirm your CometBFT identity has not been used before.**  If your validator has exited the active set or failed a deposit transaction, you will need to create a new identity.  Check for previous use of your identity with the following command. If this returns non-zero, start over with a new beacond identity (as described in the Quickstart).
+2. **Confirm your CometBFT identity has not been used before.** If your validator has exited the active set or failed a deposit transaction, you will need to create a new identity. Check for previous use of your identity with the following command. If this returns non-zero, start over with a new beacond identity (as described in the Quickstart).
 
    ```bash
    cast call $DEPOSIT_ADDR 'getOperator(bytes)' $VAL_PUB_KEY -r $RPC_URL;
    ```
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator` which takes:
+
    1. **withdrawal-addr** is described in Step 1
    2. **stake-amount** is the initial stake amount (as GWei). We strongly recommend using the minimum -- {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA.
    3. **genesis-root**: as confirmed in Step 1.
@@ -131,7 +128,6 @@ The first registration transaction is the most important. It establishes the ass
    ```
 
    The credentials should contain the withdrawal address verbatim, and the public key confirms the public key matching the private key used to generate the signature. In the above, we have placed the signature and withdraw credentials in variables for the next step.
-
 
 4. Finally, **verify that beacond will accept this signature** with `beacond deposit validate` which should produce no error message.
 
@@ -200,7 +196,7 @@ The following traits denote a successful registration:
 1. The deposit contract tx was successful (check block explorer or observe the cast command’s output).
 2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by the {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA
 3. **Most importantly,** the validator's public key is present in the beacon state.
-The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract transaction is processed.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
+   The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract transaction is processed.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
 
 ## Step 5: Activation or top-up
 
@@ -223,7 +219,6 @@ cast send "0x4242424242424242424242424242424242424242" \
 --value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
 ```
-
 
 ## Post-activation checks
 
@@ -280,10 +275,9 @@ Make a PR to the following GitHub repository to add your validator to the valida
 
 If you have a logo you'd like us to use, attach it to the pull request.
 
-
 ### Step 2 - Send Berachain Team Wallet Addresses
 
-Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully *before* it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord.
+Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully _before_ it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord.
 
 ### Step 3 - Send Berachain Your CometBFT Address
 

@@ -88,6 +88,12 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
         {
+          text: `${constants.bepolia.dapps.faucet.name}`,
+          link: `${constants.bepolia.dapps.faucet.url}`,
+          target: "_blank",
+          rel: "no-referrer",
+        },
+        {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `${constants.mainnet.dapps.berascan.url}`,
           target: "_blank",
@@ -193,7 +199,7 @@ const SIDEBAR = {
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
-        }
+        },
       ],
     },
     {
@@ -223,17 +229,15 @@ const SIDEBAR = {
           text: "Local Devnet with Kurtosis",
           link: "/nodes/guides/kurtosis",
         },
-        { 
+        {
           text: "Awesome Validator Tools",
           link: "https://github.com/chuck-bear/awesome-berachain-validators",
-        }
+        },
       ],
     },
     {
       text: "Help",
-      items: [
-        { text: "Validator Support FAQ", link: "/nodes/faq" },
-      ],
+      items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }],
     },
   ],
 };
