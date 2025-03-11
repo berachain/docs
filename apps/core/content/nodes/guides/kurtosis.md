@@ -19,15 +19,15 @@ head:
 
 # Berachain Local Devnet With Kurtosis
 
-The following will walk you through setting up a local Berachain devnet.
+The following guide will walk you through setting up a local Berachain devnet.
 
 :::warning
-Some features like natives dApps, contracts, and more may still be a work in progress.
+Some features like native dApps, contracts, and more may still be a work in progress.
 :::
 
 ## Requirements
 
-Before starting, make sure that you have the following installed on your computer.
+Before starting, emsure that you have the following installed on your computer.
 
 - [Docker](https://docs.docker.com/get-docker/) `version 25.0.2` or greater
 - [Kurtosis](https://docs.kurtosis.com/install) `v0.90.1` or greater
@@ -35,30 +35,30 @@ Before starting, make sure that you have the following installed on your compute
 
 ## Kurtosis Local Devnet
 
-Going through this process will setup and run multiple services and execution clients.
+Going through this process will set up and run multiple services, execution clients, block explorers, databases, and more.
 
 :::warning
-This may require a decent amount of resources to run, and if you run into limits, modify the yaml configuration file to limit the number of node / services.
+This may require a decent amount of resources to run, and if you run into limits, modify the yaml configuration file to limit the number of services.
 :::
 
-If you run the default kurtosis configuration, it will run the following:
+If you run the default Kurtosis configuration, it will run the following:
 
 - 5 validator nodes
 - 3 full nodes
 - 6 additional services
 
-You can modify the [beaconkit-all.yaml](https://github.com/berachain/beacon-kit/blob/main/kurtosis/beaconkit-all.yaml) to fit your system requirements.
+You can modify the [beaconkit-local.yaml](https://github.com/berachain/beacon-kit/blob/main/kurtosis/beaconkit-local.yaml) to fit your system requirements.
 
 ### Step 1 - Clone Repository & Run Nodes
 
-First step is to clone the BeaconKit repository.
+The first step is to clone the Beacon-Kit repository.
 
 ```bash
 git clone https://github.com/berachain/beacon-kit;
 cd beacon-kit;
 ```
 
-After cloning the repository, run the Make script.
+After cloning the repository, run the `make` target **start-devnet**.
 
 :::tip
 If you encounter issues, please see [Debugging Issues](#debugging-issues).
@@ -249,22 +249,22 @@ make start-devnet;
 
 ### Step 2 - Test Devnet
 
-To see that the local devnet is working, one of the services that is run alongside the network is a local blockscout block explorer.
+To verify that the local devnet is working, you can use the local Blockscout block explorer, which runs alongside the network.
 
 ```bash
-open http://127.0.0.1:53414; # NOTE: Port is random so this may vary for yourself
+open http://127.0.0.1:53414; # NOTE: Use the port number for Blockscout from the above output
 ```
 
 ![Berachain Devnet Block Explorer](/assets/berachain-devnet-kurtosis-blockexplorer.png)
 
 ### Step 3 - Configure Wallet
 
-If you want to see a list of all defined wallet addresses and private keys, see [constants.star](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
+If you want to see a list of all defined wallet addresses and private keys, refer to [constants.star](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
 
 Start by adding the network to your MetaMask wallet.
 
 :::tip
-**NOTE:** The port number may vary for yourself, so please check the logs.
+**NOTE:** Your port number will be different. Use the port number from the list of services output in Step 1.
 :::
 
 | Key                | Value                                                                                      |
@@ -298,7 +298,7 @@ If you're successful, you should see the account address `0x20f33ce90a13a4b5e769
 
 ### Step 4 - Deploy Contract
 
-To demonstrate deploying a contract to the local devnet, let's use the [Berachain Guides HelloWorld.sol](https://github.com/berachain/guides/blob/main/apps/hardhat-viem-helloworld/contracts/HelloWorld.sol).
+To demonstrate deploying a contract to the local devnet, we will use the [Berachain Guides HelloWorld.sol](https://github.com/berachain/guides/blob/main/apps/hardhat-viem-helloworld/contracts/HelloWorld.sol).
 
 ```bash
 # FROM: ./beacon-kit;
@@ -339,7 +339,7 @@ contract HelloWorld {
 }
 ```
 
-Let's use a `cast` request to deploy the bytecode.
+We will use a `cast` request to deploy the bytecode.
 
 ```bash-vue
 # FROM: ./
@@ -363,7 +363,7 @@ open http://127.0.0.1:53414/tx/0xf18d36b5aeb9b5acc6711b65944a392fd659f34966156e4
 
 ### Step 5 - Read Contract
 
-Let's read from the contract to verify that the contract was deployed and the initial message was set.
+Next, we will read from the contract to verify that the contract was deployed and the initial message was set.
 
 ```bash-vue
 cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {{config.devnet.rpcUrl}} | xxd -r -p;
@@ -374,7 +374,7 @@ cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {
 
 ### Step 6 - Write Contract
 
-Next, let's write to the contract and read from it again with an updated message.
+Next, we will write to the contract then read from it again with an updated message.
 
 Writing to the contract:
 
@@ -412,7 +412,7 @@ cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {
 
 ### Step 7 - Tear Down
 
-To remove all services and clean up, run the following:
+To remove all services and clean up, run the following commands:
 
 ```bash
 # FROM: ./beacon-kit

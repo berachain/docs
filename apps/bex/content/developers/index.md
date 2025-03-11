@@ -17,6 +17,17 @@ head:
 
 # BEX Deployed Contracts
 
+:::warning ⚠️ Security Notice
+
+On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their V2 Vault implementation. BEX incorporates contract logic from Balancer V2 and shares the same vulnerability. We advise users creating new pools to assess the vulnerability and exercise additional caution, particularly when including **untrusted or newly-created tokens**.
+
+**Funds currently deposited in BEX are safe, and no action from LPs is needed.** The issue only (potentially) affects tokens that are not live on-chain today. Frontend warnings are displayed on BEX for potentially vulnerable tokens.
+
+Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
+
+For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
+:::
+
 The following is a list of contract address in order to interact with Berachain BEX.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis

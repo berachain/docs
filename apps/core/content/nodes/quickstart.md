@@ -187,6 +187,55 @@ Your genesis block hash **must** agree with the above.
 
 ## Run Both Clients 🏃
 
+The following two scripts run the consensus and execution clients.
+
+**File:** `./run-beacond.sh`
+
+```bash
+#!/bin/bash
+
+set -e
+. ./env.sh
+$BEACOND_BIN start --home $BEACOND_DATA
+```
+
+**File:** `./run-reth.sh`
+
+```bash
+#!/bin/bash
+
+set -e
+. ./env.sh
+
+if [ -f "seed-data/el-bootnodes.txt" ]; then
+    export EL_BOOTNODES=$(grep '^enode://' "seed-data/el-bootnodes.txt"| tr '\n' ',' | sed 's/,$//')
+fi
+if [ -f "seed-data/el-peers.txt" ]; then
+    export EL_PEERS=$(grep '^enode://' "seed-data/el-peers.txt"| tr '\n' ',' | sed 's/,$//')
+fi
+
+$RETH_BIN node \
+--authrpc.jwtsecret=$JWT_PATH \
+--chain=$RETH_GENESIS_PATH \
+--datadir=$RETH_DATA \
+--port=30303 \
+--http \
+--http.addr=0.0.0.0 \
+--http.port=8545 \
+--http.corsdomain="*" \
+--bootnodes=$EL_BOOTNODES \
+--trusted-peers=$EL_PEERS \
+--ws \
+--ws.addr=0.0.0.0 \
+--ws.port=8546 \
+--ws.origins="*" \
+--authrpc.addr=0.0.0.0 \
+--authrpc.port=$EL_AUTHRPC_PORT \
+--engine.persistence-threshold 0 \
+--engine.memory-block-buffer-target 0 \
+--log.file.directory=$LOG_DIR;
+```
+
 Launch two windows. In the first, run the consensus client:
 
 ```bash

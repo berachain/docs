@@ -17,6 +17,17 @@ head:
 
 # What is BEX?
 
+:::warning ⚠️ Security Notice
+
+On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their V2 Vault implementation. BEX incorporates contract logic from Balancer V2 and shares the same vulnerability. We advise users creating new pools to assess the vulnerability and exercise additional caution, particularly when including **untrusted or newly-created tokens**.
+
+**Funds currently deposited in BEX are safe, and no action from LPs is needed.** The issue only (potentially) affects tokens that are not live on-chain today. Frontend warnings are displayed on BEX for potentially vulnerable tokens.
+
+Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
+
+For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
+:::
+
 BEX is the native decentralized exchange (DEX) protocol of Berachain, built as a fork of Balancer V2. BEX enables trading between any combination of tokens through weighted and stable pools.
 
 ![BEX All Pools](/assets/all_pools.png)
