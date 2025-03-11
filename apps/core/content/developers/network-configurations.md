@@ -17,13 +17,11 @@ head:
   import CopyToClipboard from '@berachain/ui/CopyToClipboard';
 </script>
 
-# Connecting to Berachain Mainnet
+# Connecting to Berachain
 
-To start using Berachain, connect to the mainnet below.
+## Mainnet Network Configuration
 
-## Add the Network in One Click
-
-Click the button below to add the network to your MetaMask in one click.
+Click the button below to add the network to your MetaMask.
 
 <ClientOnly>
   <AddNetwork
@@ -37,34 +35,59 @@ Click the button below to add the network to your MetaMask in one click.
   />
 </ClientOnly>
 
-## Add the Network Manually
+### Mainnet Connection Parameters
 
 To add the network manually, enter the network details below into your wallet of choice:
 
 | Key                | Value                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------- |
-| Network            | {{config.mainnet.chainName}}                                                           |
+| Network Name       | {{config.mainnet.chainName}}                                                           |
 | RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
 | Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>            |
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
 
-## RPC Providers
+### Mainnet RPC Providers
 
 See our [RPC partners](/developers/developer-tools#rpc-providers) under Developer Tools.
 
----
+## Bepolia Testnet Network Configuration
 
-# Connecting to Berachain Testnet
+<ClientOnly>
+  <AddNetwork
+    :chainId="config.bepolia.chainId"
+    :chainName="config.bepolia.chainName"
+    :nativeCurrencyName="config.bepolia.currencyName"
+    :nativeCurrencySymbol="config.bepolia.currencySymbol"
+    :nativeCurrencyDecimals="config.bepolia.decimals"
+    :rpcUrl="config.bepolia.rpcUrl"
+    :blockExplorerUrl="config.bepolia.dapps.berascan.url"
+    :testnet="true"
+  />
+</ClientOnly>
 
-The Berachain testnets Artio and Bartio are up but deprecated. We will publish a new testnet to match mainnet in February 2025.
+### What is the Bepolia Testnet?
 
-### What is a Testnet?
+A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment, with no economic value associated with its tokens.
 
-A testnet is an additional blockchain network that runs separately from the mainnet blockchain and serves as a test environment with no economic value associated with its tokens.
+With the testnet, you can:
 
-### What is a Testnet Used for?
+- Use the faucet to obtain testnet $BERA.
+- Develop applications and contracts to ensure they work properly prior to deploying them on mainnet. The complete Proof of Liquidity stack is available on testnet.
+- Experiment with proposed upgrades to mainnet.
 
-- Creating your test address and getting test funds
-- Developing applications to ensure they work properly prior to deploying them on mainnet
-- Testing applications against new upgrades to the Berachain network prior to their release on mainnet
+### Testnet Connection Parameters
+
+| Key             | Value                                                                              |
+| --------------- | ---------------------------------------------------------------------------------- |
+| Network         | {{config.bepolia.chainName}}                                                       |
+| RPC URL         | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>         |
+| Chain ID        | <ClientOnly><CopyToClipboard :text="config.bepolia.chainId" /></ClientOnly>        |
+| Currency symbol | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly> |
+
+### Bepolia Testnet dApps
+
+| Name                                                                                                        | URL                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| <a :href="config.bepolia.dapps.faucet.url" target="_blank">{{ config.bepolia.dapps.faucet.name }}</a>       | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.faucet.url" /></ClientOnly>    |
+| <a :href="config.bepolia.dapps.beratrail.url" target="_blank">{{ config.bepolia.dapps.beratrail.name }}</a> | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.beratrail.url" /></ClientOnly> |

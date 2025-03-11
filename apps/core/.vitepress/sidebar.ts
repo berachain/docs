@@ -89,6 +89,12 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
         {
+          text: `${constants.bepolia.dapps.faucet.name}`,
+          link: `${constants.bepolia.dapps.faucet.url}`,
+          target: "_blank",
+          rel: "no-referrer",
+        },
+        {
           text: `${constants.mainnet.dapps.berascan.name}`,
           link: `${constants.mainnet.dapps.berascan.url}`,
           target: "_blank",
@@ -181,11 +187,16 @@ const SIDEBAR = {
       items: [
         { text: "Node Architecture Overview", link: "/nodes/" },
         {
+          text: "Validator Lifecycle Overview",
+          link: "/nodes/validator-lifecycle",
+        },
+        {
           text: "BeaconKit Consensus Layer",
           link: "/nodes/beaconkit-consensus",
         },
         { text: "EVM Execution Layer", link: "/nodes/evm-execution" },
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
+        { text: "Production Checklist", link: "/nodes/production-checklist" },
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
@@ -195,10 +206,6 @@ const SIDEBAR = {
     {
       text: "Node Guides",
       items: [
-        {
-          text: "Run Local Devnet With Kurtosis",
-          link: "/nodes/guides/kurtosis",
-        },
         {
           text: "Become A Validator Node",
           link: "/nodes/guides/validator",
@@ -216,10 +223,22 @@ const SIDEBAR = {
           link: "/nodes/guides/distribute-block-rewards",
         },
         {
-          text: "Increase Validator $BERA Stake",
+          text: "Increase Validator Stake",
           link: "/nodes/guides/increase-validator-bera-stake",
         },
+        {
+          text: "Local Devnet with Kurtosis",
+          link: "/nodes/guides/kurtosis",
+        },
+        {
+          text: "Awesome Validator Tools",
+          link: "https://github.com/chuck-bear/awesome-berachain-validators",
+        },
       ],
+    },
+    {
+      text: "Help",
+      items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }],
     },
   ],
 };

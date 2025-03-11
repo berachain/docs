@@ -41,7 +41,7 @@ There is currently only one way a validator may be removed from the active set: 
 
 The minimum stake requirement depends on whether the active set is completely full.
 
-If the active set is not full, the minimum stake requirement is `{{config.mainnet.validatorDepositAmount}}` `$BERA`.
+If the active set is not full, the minimum stake requirement is `{{config.mainnet.validatorDepositAmount.toLocaleString()}}` `$BERA`.
 
 If the active set is full, the minimum stake requirement is `1` `$BERA` more than the amount staked by the last validator in the active set.
 

@@ -8,9 +8,9 @@ Proof-of-Liquidity governs block rewards and token emissions on Berachain using 
 
 ## Validator Selection
 
-The network maintains an active set of N validators who are eligible for block production. Selection criteria include:
+The network maintains an active set of **{{ config.mainnet.validatorActiveSetSize }} validators** who are eligible for block production. Selection criteria include:
 
-- Only top N validators by `$BERA` stake are included in active set
+- Only top **{{ config.mainnet.validatorActiveSetSize }} validators** by `$BERA` stake are included in active set
 - Block proposal probability is proportional to staked `$BERA` and does not affect reward amounts
 - Stake limitations per validator:
   - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
