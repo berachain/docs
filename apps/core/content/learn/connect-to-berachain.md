@@ -28,7 +28,6 @@ Quickly add Berachain's network to your wallet with one click.
 
 <ClientOnly>
   <AddNetwork
-    :testnet="false"
     :chainId="config.mainnet.chainId"
     :chainName="config.mainnet.chainName"
     :nativeCurrencyName="config.mainnet.currencyName"
@@ -46,6 +45,32 @@ Quickly add Berachain's network to your wallet with one click.
 | Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>  |
 | Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
 | Block explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
+
+## Berachain Bepolia Testnet RPC 🌐
+
+Copy and paste these values into any wallet that supports importing RPCs.
+
+Quickly add Berachain's network to your wallet with one click.
+
+<ClientOnly>
+  <AddNetwork
+    :chainId="config.bepolia.chainId"
+    :chainName="config.bepolia.chainName"
+    :nativeCurrencyName="config.bepolia.currencyName"
+    :nativeCurrencySymbol="config.bepolia.currencySymbol"
+    :nativeCurrencyDecimals="config.bepolia.decimals"
+    :rpcUrl="config.bepolia.rpcUrl"
+    :blockExplorerUrl="config.bepolia.dapps.beratrail.url"
+  />
+ </ClientOnly>
+
+| Key                | Value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.bepolia.chainName" /></ClientOnly>          |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>             |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.bepolia.chainId + ''" /></ClientOnly>  |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>     |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.berascan.url" /></ClientOnly> |
 
 ## Supported Wallets 👛
 

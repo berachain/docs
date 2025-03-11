@@ -11,7 +11,6 @@ Scripts
     }
 
     const props = defineProps({
-      testnet: Boolean,
       chainName: String,
       chainId: Number,
       nativeCurrencyName: String,
