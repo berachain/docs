@@ -64,13 +64,13 @@ Quickly add Berachain's network to your wallet with one click.
   />
  </ClientOnly>
 
-| Key                | Value                                                                                  |
-| ------------------ | -------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.bepolia.chainName" /></ClientOnly>          |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>             |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.bepolia.chainId + ''" /></ClientOnly>  |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>     |
-| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.berascan.url" /></ClientOnly> |
+| Key                | Value                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.bepolia.chainName" /></ClientOnly>           |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>              |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.bepolia.chainId + ''" /></ClientOnly>   |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>      |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.beratrail.url" /></ClientOnly> |
 
 ## Supported Wallets 👛
 
