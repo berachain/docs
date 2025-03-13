@@ -39,7 +39,7 @@ The following requirements are needed to run both the execution and consensus cl
   - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
   - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
   - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
-  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
+  - [Erigon](https://github.com/erigontech/erigon/releases)
 
 ## Getting started
 
