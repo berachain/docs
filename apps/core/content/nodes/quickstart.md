@@ -114,21 +114,16 @@ The key network parameters for Berachain mainnet are downloaded by `fetch-berach
 ./fetch-berachain-params.sh;
 
 # [Expected Output for mainnet]:
-# 6e4179e38e11696f8402cd5f8e872726  seed-data/app.toml
-# 1021d186aae506482deb760e63143ae6  seed-data/config.toml
-# 3caf21bb2134ed4c1970c904d2128d30  seed-data/el-peers.txt
-# cd3a642dc78823aea8d80d5239231557  seed-data/eth-genesis.json
-# c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data/genesis.json
-# 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
+# cd3a642dc78823aea8d80d5239231557  seed-data-80094/eth-genesis.json
+# c0b7dc21e089f9074d97957526fcd08f  seed-data-80094/eth-nether-genesis.json
+# c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data-80094/genesis.json
+# 5d0d482758117af8dfc20e1d52c31eef  seed-data-80094/kzg-trusted-setup.json
 
 # [Expected Output for bepolia]
-# 6e4179e38e11696f8402cd5f8e872726  seed-data/app.toml
-# 65313bc44bc810da50bf0dac696219fe  seed-data/config.toml
-# a14b14eca398d857344d1ce86c848352  seed-data/el-peers.txt
-# 7ac0e3756f7e3d0af36d023f9e6cfd0c  seed-data/eth-genesis.json
-# ec67ba1beb73cc9042000e5dd21b5f72  seed-data/eth-nether-genesis.json
-# a24fb9c7ddf3ebd557300e989d44b619  seed-data/genesis.json
-# 5d0d482758117af8dfc20e1d52c31eef  seed-data/kzg-trusted-setup.json
+# 7ac0e3756f7e3d0af36d023f9e6cfd0c  seed-data-80069/eth-genesis.json
+# ec67ba1beb73cc9042000e5dd21b5f72  seed-data-80069/eth-nether-genesis.json
+# a24fb9c7ddf3ebd557300e989d44b619  seed-data-80069/genesis.json
+# 5d0d482758117af8dfc20e1d52c31eef  seed-data-80069/kzg-trusted-setup.json
 
 ```
 
