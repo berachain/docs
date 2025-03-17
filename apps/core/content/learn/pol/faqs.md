@@ -76,10 +76,6 @@ The inflation of $BGT is equivalent to traditional PoS systems having some perce
 
 The end result is that the inflation cadence should effectively mirror an equivalent PoS platform; it's just allocated in a manner that better aligns the interests of validators, protocols, and users.
 
-### Why are Incentive emissions defined per $BGT instead of being pool-based?
-
-Incentives are denominated in $BGT – ultimately users, validators, and protocols want to be able to calculate what they're earning per $BGT, so it's more of a UI choice to facilitate understanding the value $BGT drives.
-
 ### Can only validators vote on or create governance proposals?
 
 Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10,000 $BGT can create a proposal.
