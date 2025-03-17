@@ -702,7 +702,8 @@
         "abi": "",
         "docsUrl": "/learn/governance/#guardian-oversight"
       }
-    }, "tokens": {
+    },
+    "tokens": {
       "bgt": {
         "name": "BGT Token",
         "bepolia-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
@@ -730,7 +731,7 @@
         "bepolia-address": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactoryReader.json",
         "docsUrl": "/developers/contracts/honey-factory-reader"
-      }, 
+      },
       "wbera": {
         "name": "WBERA Token",
         "bepolia-address": "0x6969696969696969696969696969696969696969",
@@ -754,9 +755,101 @@
         "name": "bbWBTC",
         "bepolia-address": "0xc7728Db26526Ae7fBc46b99f0EE667Eaba7E6bb9"
       }
-      
-    }, "bex": {
-    }, "other": {
+    },
+    "bex": {
+      "vault": {
+        "name": "Vault",
+        "mainnet-address": "0x4Be03f781C497A489E3cB0287833452cA9B9E80B",
+        "bepolia-address": "0x708cA656b68A6b7384a488A36aD33505a77241FE",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IVault.abi.json",
+        "docsUrl": "/developers/contracts/vault"
+      },
+      "protocolFeesCollector": {
+        "name": "ProtocolFeesCollector",
+        "mainnet-address": "0xB8Cf46Cf1b1476E707619913a70B2085d26f1707",
+        "bepolia-address": "0x05A607aCf3548E84DD1E44c3706F850c849058Da",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeesCollector.abi.json",
+        "docsUrl": ""
+      },
+      "balancerHelpers": {
+        "name": "BalancerHelpers",
+        "mainnet-address": "0x5083737EC75a728c265BE578C9d0d5333a2c5951",
+        "bepolia-address": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerHelpers.abi.json",
+        "docsUrl": ""
+      },
+      "poolCreationHelper": {
+        "name": "PoolCreationHelper",
+        "mainnet-address": "0x55dccE8165C88aAd4403a15A9cE3A8E244657dD2",
+        "bepolia-address": "0x0dC9964F6CA33d9EF38DEB4925234766127C6B36",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IPoolCreationHelper.abi.json",
+        "docsUrl": "/developers/contracts/factory/pool-creation-helper"
+      },
+      "protocolFeesWithdrawer": {
+        "name": "ProtocolFeesWithdrawer",
+        "mainnet-address": "0x1635F0E1B3e8A6713d03aE155ba79458Ba3240C7",
+        "bepolia-address": "0x8c2D77f0CfcD4Af9cF41494EfE500FE324012c06",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeesWithdrawer.abi.json",
+        "docsUrl": ""
+      },
+      "stablePoolFactory": {
+        "name": "ComposableStablePoolFactory",
+        "mainnet-address": "0xDfA30BDa0375d4763711AB0CC8D91B20bfCC87E1",
+        "bepolia-address": "0xB60DbBaCEaeC23486a64d12089F467ef949f1bb1",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IComposableStablePoolFactory.abi.json",
+        "docsUrl": "/developers/contracts/factory/stable-pool-factory"
+      },
+      "batchRelayerLibrary": {
+        "name": "BatchRelayerLibrary",
+        "mainnet-address": "0xCB4AE3030bA06F7EEE54A7B96AfcA7457f9525cf",
+        "bepolia-address": "0xfD772657FC8c4Ed3884AfF151b680883814052FA",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "batchRelayerQueryLibrary": {
+        "name": "BatchRelayerQueryLibrary",
+        "mainnet-address": "0x4151083172b2CEFB83A33fD7FC9F6cBabb3Fd08d",
+        "bepolia-address": "0x263a1C5B2c5851beA2177eb8D6caefdfF2A25601",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "balancerRelayer": {
+        "name": "BalancerRelayer",
+        "mainnet-address": "0x6044f181aB5E9C05A4ed9Ce295f3B178d2492EE7",
+        "bepolia-address": "0x343215E156Ff586711a5B8C49Fe3099BAF22624C",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerRelayer.abi.json",
+        "docsUrl": ""
+      },
+      "weightedPoolFactory": {
+        "name": "WeightedPoolFactory",
+        "mainnet-address": "0xa966fA8F2d5B087FFFA499C0C1240589371Af409",
+        "bepolia-address": "0xf1d23276C7b271B2aC595C78977b2312E9954D57",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IWeightedPoolFactory.abi.json",
+        "docsUrl": "/developers/contracts/factory/weighted-pool-factory"
+      },
+      "protocolFeePercentagesProvider": {
+        "name": "ProtocolFeePercentagesProvider",
+        "mainnet-address": "0x33C88ffdEe710ed3908C791137Bd1D4421AabBBf",
+        "bepolia-address": "0x8119E412E00fe3c857739E95dB147817Bf615dB8",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeePercentagesProvider.abi.json",
+        "docsUrl": ""
+      },
+      "balancerQueries": {
+        "name": "BalancerQueries",
+        "mainnet-address": "0x3C612e132624f4Bd500eE1495F54565F0bcc9b59",
+        "bepolia-address": "0xE3723383a0EA73D5c0dE424BAA97F97f86f6cF92",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerQueries.abi.json",
+        "docsUrl": "/developers/contracts/query"
+      },
+      "authorizer": {
+        "name": "Authorizer",
+        "mainnet-address": "0x71047aE39A7aA4f7d923542F459e50B974644Ef2",
+        "bepolia-address": "0x1453b808C88AAa5e5965f8d86123921E96F045Aa",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IAuthorizer.abi.json",
+        "docsUrl": ""
+      }
+    },
+    "other": {
       "create2": {
         "name": "CREATE2",
         "bepolia-address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
