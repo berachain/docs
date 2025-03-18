@@ -17,25 +17,25 @@ head:
 
 # Manage Validator Incentives Commission Rate
 
-A validator has the option to manage what percentage of Incentives they can claim as a commission and what amount is claimable by user's who boost the validator with $BGT. In this guide, we'll walk through the process of changing a validator's commission.
+A validator can configure the commission taken on Incentives distributed to its $BGT boosters - users who Boost a validator with $BGT. In this guide, we'll walk through the process of changing a validator's commission.
 
-![Berachain Change Valiadtor Commission Rate Process](/assets/berachain-change-validator-commission-rate-process.png)
+![Berachain Change Validator Commission Rate Process](/assets/berachain-change-validator-commission-rate-process.png)
 
 ## Requirements
 
 Before you begin, ensure you have the following:
 
 - An RPC endpoint to Berachain
-- `$BERA` to process the transaction\
+- `$BERA` to process the transaction
 - `Operator Address` of the validator wanting to change their commission
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 - BeraChef Contract Address - <a :href="config.mainnet.contracts.berachef.docsUrl">`{{config.mainnet.contracts.berachef.address}}`</a>
 
 ## How Validator Commissions Are Updated
 
-At the time that Incentives have been activated, all commission rates for Validator Incentives have been defaulted to 5% - Validators receive 5% of all Incentives. This is defined by `DEFAULT_COMMISSION_RATE` in `BeraChef.sol`.
+When Incentives are activated, all commission rates for Validator Incentives are defaulted to 5% - meaning Validators receive 5% of all Incentives. This is defined by `DEFAULT_COMMISSION_RATE` in `BeraChef.sol`.
 
-In order for a validator to change their commission rate, they will first need to queue the change, wait the `MAX_COMMISSION_CHANGE_DELAY` of (16,382 Blocks) and then active then the new commission. If a commission rate is already queued, it must be activated before a new commission rate can be proposed as a queue again.
+For a validator to change their commission rate, they must first queue the change, wait for the `MAX_COMMISSION_CHANGE_DELAY` of (16,382 Blocks), and then activate the new commission. If a commission rate is already queued, it must be activated before a new commission rate can be proposed.
 
 :::tip
 **Anyone** can activate a queued commission rate, not just the validator.
@@ -62,7 +62,7 @@ cast call $BERACHEF_CONTRACT_ADDRESS \
 
 ### Step 2 - Queue New Validator Commission Rate
 
-The first step will be to determine the amount you will like to queue:
+The first step will be to determine the amount you would like to queue:
 
 ```bash-vue
 # Env Vars
