@@ -231,6 +231,10 @@ const SIDEBAR = {
           link: "/nodes/guides/kurtosis",
         },
         {
+          text: "Manage Validator Incentives Commission Rate",
+          link: "/nodes/guides/manage-incentives-commission",
+        },
+        {
           text: "Awesome Validator Tools",
           link: "https://github.com/chuck-bear/awesome-berachain-validators",
         },
