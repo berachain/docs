@@ -156,6 +156,7 @@ const SIDEBAR = {
     {
       text: "Contract References",
       items: [
+        { text: "BGTIncentiveDistributor", link: "/developers/contracts/bgtincentivedistributor" },
         { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
         { text: "BeraChef", link: "/developers/contracts/berachef" },
         { text: "BGT Token", link: "/developers/contracts/bgt-token" },
