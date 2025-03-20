@@ -58,29 +58,19 @@ A Reward Vault can offer up to (2) Incentive Tokens simultaneously. Each token o
 
 An Incentive Rate must be defined when the Incentive Token is initially offered and cannot be decreased or reset until the supply of Incentive Token offered has been exhausted by validators directing $BGT emissions. While an Incentive Rate is defined, a Token Manager can increase that rate. When the supply of the Incentive Token offered is exhausted, a Token Manager can set a new Incentive Rate.
 
-_Example A:_
+_Example:_
 
-| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    |
+| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    | 
 | ---------------------------- | ------ | ---------------------------------------------------------- |
-| $USDC                        | 1000   | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ |
+| $USDC                        | 1,000   | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ |
 
 A Token Manager:
 
-- ✅ Can increase the Incentive Rate > 0.2 (e.g. 0.3, 1, 5)
-- ✅ Can increase the Incentive Token supply at the same Incentive Rate (e.g. Adding an additional 1, 3, 1000 $USDC at 0.2)
+- ✅ Can increase the Incentive Supply by any amount, keeping the same rate.
+- ✅ Can increase the Incentive Rate > 0.2 provided they supply more incentive tokens at the same time. With a supply of 1,000 tokens @ 0.2 incentive rate, this incentivizes 5,000 $BGT. If the rate increases to 0.3, this incentivizes 3,333 $BGT. The operator must deposit at least 500 USDC so that 5,000 $BGT is incentivized.
 - ❌ Cannot decrease the Incentive Rate < 0.2 (e.g. 0.199, 0.1, 0.01)
+- ❌ Cannot remove tokens from the Incentive Supply
 
-_Example B:_
-
-| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                 |
-| ---------------------------- | ------ | ------------------------------------------------------- |
-| $WBERA                       | 10     | 1 _(1 $WBERA per 1 $BGT directed towards Reward Vault)_ |
-
-A validator successfully directs 10 $BGT towards the Reward Vault, claiming 10 $WBERA.
-
-A Token Manager:
-
-- ✅ Can add more to the Incentive Token supply at a new Incentive Rate (e.g. 0.1, 5, 10)
 
 ### Validator Incentive Token Commission
 
