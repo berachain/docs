@@ -48,7 +48,7 @@ A Reward Vault can have up to (2) two unique Incentive Tokens whitelisted. Addin
 
 Only Incentive Token Managers of a Reward Vault can offer incentives. One wallet address is responsible for offering an Incentive Token. The same wallet address can be set as a Token Manager for multiple Incentive Tokens.
 
-Governance typically defines Token Managers when proposing an Incentive Token.
+A Governance proposal will specify a Token Managers when proposing an Incentive Token.
 Changing a Token Manager requires passing a governance proposal.
 
 ### Offering Incentives
