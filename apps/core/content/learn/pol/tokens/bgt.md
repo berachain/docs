@@ -30,7 +30,7 @@ Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of g
 
 ## Earning `$BGT`
 
-`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](../rewardvaults.md). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
+`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](/learn/pol/rewardvaults). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
 
 The typical flow is for users to supply liquidity and receive a receipt token for that activity, which they can then stake in reward vaults to earn `$BGT`. Some examples include:
 
@@ -41,8 +41,6 @@ Users can see available earning options at <a target="_blank" :href="config.main
 
 Users can claim accumulated `$BGT` from Berahub.
 
-<video src="/assets/videos/claimBGT.mp4" controls></video>
-
 ## What can you do with $BGT?
 
 ### Governance
@@ -51,24 +49,18 @@ Users can claim accumulated `$BGT` from Berahub.
 
 `$BGT` holders can either vote on proposals themselves or delegate their voting power to another address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
 
-<video src="/assets/videos/delegatevotingpower.mp4" controls></video>
-
 ### Earn
 
-#### Boosting Validators/Incentives
+#### Boost A Validator For Incentives
 
-Users can select validators to "boost" with their `$BGT`, increasing the validator's [reward emission](../bgtmath.md). The amount of [Incentives](/learn/pol/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
-
-<video src="/assets/videos/boostval.mp4" controls></video>
+Users can select validators to "boost" with their `$BGT`, increasing the validator's [reward emission](/learn/pol/bgtmath). The amount of [Incentives](/learn/pol/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
 
 #### dApp Fees
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BEX and HoneySwap. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
+Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from {{config.mainnet.dapps.bex.name}} and {{config.mainnet.dapps.honeySwap.name}}. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
 
 At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
 
-### Burning for `$BERA`
+### Redeem $BGT For `$BERA`
 
-`$BGT` can be burned 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
-
-<video src="/assets/videos/burnbgtforbera.mp4" controls></video>
+`$BGT` can be redeemed (burned) 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
