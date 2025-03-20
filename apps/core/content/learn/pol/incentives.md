@@ -8,7 +8,7 @@ Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct the
 
 ## How Incentives Work
 
-Validators can capture incentives offered by approved Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
+Validators can capture Incentives offered by Whitelisted Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
 
 ![Berachain Reward Vault Incentive Marketplace](/assets/berachain-incentive-marketplace.png)
 
