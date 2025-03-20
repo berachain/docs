@@ -21,7 +21,7 @@ If the Reward Vault Owner wants to change the tokens they can offer, or their mi
 
 The distribution of Incentives follows this process:
 
-1. A **User (Booster) ** associates their $BGT with a validator to increase that validator's block reward $BGT.
+1. A **User** associates their $BGT with a validator to increase that validator's block reward $BGT.
 2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and emissions are directed toward approved Reward Vaults chosen by the validator.
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
