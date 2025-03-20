@@ -100,7 +100,7 @@
     "contracts": {
       "bgtIncentiveDistributor": {
         "name": "BGTIncentiveDistributor",
-        "address": "",
+        "address": "0xBDDba144482049382eC79CadfA02f0fa0F462dE3",
         "abi": "",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
       },
@@ -648,7 +648,7 @@
       "bgtIncentiveDistributor": {
         "name": "BGTIncentiveDistributor",
         "bepolia-address": "",
-        "mainnet-address": "",
+        "mainnet-address": "0xBDDba144482049382eC79CadfA02f0fa0F462dE3",
         "abi": "",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
       },
