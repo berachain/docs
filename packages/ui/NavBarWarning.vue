@@ -16,7 +16,6 @@ import VPNavBarSearch from 'vitepress/dist/client/theme-default/components/VPNav
 import VPNavBarSocialLinks from 'vitepress/dist/client/theme-default/components/VPNavBarSocialLinks.vue';
 import VPNavBarTitle from 'vitepress/dist/client/theme-default/components/VPNavBarTitle.vue';
 import VPNavBarTranslations from 'vitepress/dist/client/theme-default/components/VPNavBarTranslations.vue';
-import AskCookbook from '@berachain/ui/AskCookbook';
 
 // Instances
 defineProps<{ isScreenOpen: boolean }>();
@@ -74,7 +73,6 @@ Template
   <div class="VPNavBarWarning">
     <span>🚧 Under Development!</span> <span class="VPNavBarWarningMobile">May be incomplete.</span><span class="VPNavBarWarningDesktop">Some pages/links may be incomplete or subject to change.</span>
   </div>
-  <AskCookbook />
 </template>
 
 <!-- 
