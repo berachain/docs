@@ -17,7 +17,7 @@ Validators can capture Incentives offered by Whitelisted Reward Vaults by direct
 The distribution of Incentives follows this process:
 
 1. A **User** Boosts (associates their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
-2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and directs emissions toward approved Reward Vaults chosen by the validator.
+2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and directs emissions toward Whitelisted Reward Vaults chosen by the validator.
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
