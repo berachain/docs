@@ -105,7 +105,7 @@ The Incentive Tokens rewarded are based on that user's weight in the total $BGT 
 
 | Party       | $BGT Boost To Validator A | % Boost | Total Incentive Token Rewards         |
 | ----------- | ------------------------- | ------- | ------------------------------------- |
-| Validator A | 20 $BGT                   | 25%     | 28.75 $USDC _(5% of 95 + 25% of 95)   |
+| Validator A | 20 $BGT                   | 25%     | 28.75 $USDC _(5% of 100 + 25% of 95)   |
 | Manny       | 40 $BGT                   | 50%     | 47.5 $USDC _(50% of 95)_              |
 | Cami        | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
 | Jintao      | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
