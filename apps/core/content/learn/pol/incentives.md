@@ -21,9 +21,8 @@ The distribution of Incentives follows this process:
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
-   - A contract manages the distribution and claiming of the remaining Incentive Tokens for users who Boosted the validator.
-5. A user (Booster) wanting to claim their Incentive Token Rewards retrieves a merkle proof from a backend API that tracks all Incentive Token claiming eligibility in a 24-hour period. (NOTE: claim eligibility updates every 24 hours. It does NOT mean that claims expire in 24 hours)
-6. With the merkle proof, the user (Booster) can claim their Incentive Token Rewards through the $BGT Distributor contract.
+   - The remaining incentives  for users who boosted the validator are sent to a contract and backend service that manages the distribution and claiming of these tokens.  The backend API updates proofs of the user's entitlement to incentive tokens every 24 hours. This eligibility never expires.
+5. A user (booster) wanting to claim their incentive token rewards retrieves this proof and claims their incentive token rewards through the $BGT distributor contract. All proof handling is done by the user's browser, by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. 
 
 ### Incentives & Users
 
@@ -72,7 +71,7 @@ A Token Manager:
 - ❌ Cannot remove tokens from the Incentive Supply
 
 
-### Validator Incentive Token Commission
+### Incentive Commission and Distribution
 
 Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
 
@@ -84,29 +83,14 @@ _Example:_
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions towards the Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, and leaves `95 $USDC` for users who boosted the validator.
+From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves.  The amount of Incentive Tokens distributed to each booster is based on that booster's proportion among the total $BGT boosting that validator.
 
-| Party       | $BGT Boost To Validator A | % Boost | Total Incentive Token Rewards         |
-| ----------- | ------------------------- | ------- | ------------------------------------- |
-| Validator A | 20 $BGT                   | 25%     | 28.75 $USDC _(5 $USDC + 23.75 $USDC)_ |
-| Manny       | 40 $BGT                   | 50%     | 47.5 $USDC                            |
-| Cami        | 10 $BGT                   | 12.5%   | 11.875 $USDC                          |
-| Jintao      | 10 $BGT                   | 12.5%   | 11.875 $USDC                          |
+| Party       | $BGT Boost To Val A | % of Total Boost | Total Incentive Token Rewards         |
+| ----------- | -------------------:| ----------------:| -------------------------------------:|
+| Validator A | 20 $BGT             | 25%              |     .05 ⨉100 + .25 ⨉95 = 28.75 $USDC|
+| Manny       | 40 $BGT             | 50%              |                  .5 ⨉ 95 = 47.50 $USDC|
+| Cami        | 10 $BGT             | 12.5%            |               .125 ⨉ 95 = 11.875 $USDC|
+| Jintao      | 10 $BGT             | 12.5%            |               .125 ⨉ 95 = 11.875 $USDC|
 
 A validator can change their commission percentage by first queuing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
 
-### Booster Incentive Token Rewards
-
-Any user that has $BGT and boosts a validator with that $BGT token is eligible to receive Incentive Tokens from the validator boosted.
-The Incentive Tokens rewarded are based on the weight of the $BGT boosted to that validator.
-
-_Example:_
-
-| Party  | $BGT Boost To Validator | % Incentive Token Rewards |
-| ------ | ----------------------- | ------------------------- |
-| Smokey | 25 $BGT                 | 25%                       |
-| Manny  | 50 $BGT                 | 50%                       |
-| Cami   | 20 $BGT                 | 20%                       |
-| Jintao | 5 $BGT                  | 5%                        |
-
-All eligible users of Incentive Tokens from a validator need to claim them (it is not automatic) through <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. Incentive Token eligibility and claiming updates every 24 hours.
