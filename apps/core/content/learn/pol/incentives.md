@@ -29,16 +29,16 @@ The distribution of Incentives follows this process:
    - The remaining amount of Incentive Tokens are sent to a contract which manages distribution and claiming for users who Boosted the validator. A backend API prepares a proof of the user's entitlement to a given number of tokens, updated every 24 hours. This eligibility never expires.
 5. A user (Booster) wanting to claim their Incentive Token Rewards retrieves this proof and claims their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser.
 
-### Incentive Creation and Updating Example
+### Incentive Creation and Distribution Example
 
 A Reward Vault can offer up to (2) Incentive Tokens simultaneously. 
 
 When an quantity of Incentive Token is added to a Vault, the Incentive Rate (of tokens per $BGT) must be specified. This exchange rate must be equal or greater to what was set on the Reward Vault's proposal.  This rate cannot be decreased or reset until the supply of Incentive Token offered has been distributed. A Vault Owner
 can increase the amount of Incentive Tokens at any time.  Further, a Vault Owner can increase the Incentive Rate, provided they increase the supply of Incentive Tokens so that an equal or greater amount of $BGT is incentivized.
 
-| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    |
-| ---------------------------- | ------ | ---------------------------------------------------------- |
-| $USDC                        | 1,000  | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ |
+| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    | $BGT Incentivized |
+| ---------------------------- | ------ | ---------------------------------------------------------- | ---------------- |
+| $USDC                        | 1,000  | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ | 5,000            |
 
 A Token Manager:
 
@@ -46,27 +46,15 @@ A Token Manager:
 - ✅ Can increase the Incentive Token supply at the same Incentive Rate. For instance, by adding another 500 USDC
 - ✅ Can increase the Incentive Rate > 0.2 provided they supply more incentive tokens. With a supply of 1,000 tokens @ 0.2 incentive rate, this incentivizes 5,000 $BGT. If the rate increases to 0.3, this incentivizes 3,333 $BGT. The operator must deposit at least 500 USDC so that 5,000 $BGT is incentivized.
 
+Imagine the validator receives 500 $BGT as a block reward, incentivizing `100 $USDC` according to the 0.2 Incentive Rate.
 
-### Incentive Token Distribution Example
+In this scenario, Validator A has set an Incentive Commission of `5%`. From the `100 $USDC`, the validator would get `5 $USDC`, based on their commission, and leaves `95 $USDC` for users who boosted the validator.
 
-Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
-
-_Example:_
-
-| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    |
-| ---------------------------- | ------ | ---------------------------------------------------------- |
-| $USDC                        | 100    | 100 _(100 $USDC per 1 $BGT directed towards Reward Vault)_ |
-
-Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions towards the Reward Vault.
-
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, and leaves `95 $USDC` for users who boosted the validator.
-
-Any user boosts a validator with their $BGT token (including the validator itself) is eligible to receive Incentive Tokens remaining after the validator's commission.
-The Incentive Tokens rewarded are based on that user's weight in the total $BGT boosted to that validator.
+Here's what the reward distributions look like:
 
 | Party       | $BGT Boost To Validator A | % Boost | Total Incentive Token Rewards         |
 | ----------- | ------------------------- | ------- | ------------------------------------- |
-| Validator A | 20 $BGT                   | 25%     | 28.75 $USDC _(5% of 100 + 25% of 95)   |
+| Validator A | 20 $BGT                   | 25%     | 28.75 $USDC _(5% of 100 + 25% of 95)_ |
 | Manny       | 40 $BGT                   | 50%     | 47.5 $USDC _(50% of 95)_              |
 | Cami        | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
 | Jintao      | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
