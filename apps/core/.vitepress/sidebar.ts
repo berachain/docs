@@ -53,6 +53,17 @@ const SIDEBAR = {
       ],
     },
     {
+      text: "Guides",
+      items: [
+        { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
+        {
+          text: "Add Incentives For Reward Vault",
+          link: "/learn/guides/add-incentives-for-reward-vault",
+        },
+        { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+      ],
+    },
+    {
       text: "Native dApps",
       items: [
         { text: "BeraHub", link: "/learn/dapps/berahub" },
