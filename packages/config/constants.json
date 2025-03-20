@@ -645,6 +645,13 @@
   },
   "contracts": {
     "pol": {
+      "bgtIncentiveDistributor": {
+        "name": "BGTIncentiveDistributor",
+        "bepolia-address": "",
+        "mainnet-address": "",
+        "abi": "",
+        "docsUrl": "/developers/contracts/bgtincentivedistributor"
+      },
       "beaconDeposit": {
         "name": "BeaconDeposit",
         "bepolia-address": "0x4242424242424242424242424242424242424242",
