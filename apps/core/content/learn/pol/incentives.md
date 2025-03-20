@@ -11,11 +11,13 @@ Reward Vaults are established via a [Governance](learn/governance/rewardvault) p
 Once approved by Governance, the Reward Vault operator can add either of its approved Incentive Tokens, specifying an Incentive Rate equal or above the minimum set in their Reward Vault's proposal.  Both Incentive Tokens can have activeincentives at the same time.
 
 Incentive Tokens added by approved Reward Vaults are captured when validators direct their $BGT emissions towards those Reward Vaults.  Validators can direct
-their block reward $BGT to any number of Vaults, specifying a percentage to be sent to the Vaults of their choice.
-
-If the Reward Vault Owner wants to change the tokens they can offer, or their minimum Incentive Rate, this is done via Governance as well.
+their block reward $BGT to any number of Vaults, specifying a percentage to be sent to the Vaults of their choice.  These $BGT receive a specified Incentive Rate of tokens per $BGT. After the Validator takes a commission, the Validator's boosters receive these incentives.
 
 ![Berachain Reward Vault Incentive Marketplace](/assets/berachain-incentive-marketplace.png)
+
+A Validator can change their commission percentage by first queuing the rate to notify users of the upcoming change, waiting `16,384` blocks, and then anyone may activate the new rate for the validator.  A Validator can change their Reward Allocation via a similar process, subject to a delay of `8,192` blocks.
+
+The Reward Vault Owner can change the tokens they can offer, or their minimum Incentive Rate, via Governance.
 
 ### Incentive Distribution Flow
 
@@ -27,7 +29,7 @@ The distribution of Incentives follows this process:
 4. When the $BGT block reward emissions are distributed:
    - A validator's commission (percentage of all the Incentive Tokens captured) is given directly to the validator's operator address.
    - The remaining amount of Incentive Tokens are sent to a contract which manages distribution and claiming for users who Boosted the validator. A backend API prepares a proof of the user's entitlement to a given number of tokens, updated every 24 hours. This eligibility never expires.
-5. A user (Booster) wanting to claim their Incentive Token Rewards retrieves this proof and claims their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser.
+5. A user (Booster) wanting to claim their Incentive Token Rewards retrieves this proof and claims their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser, by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. Incentive Token eligibility is updated every 24 hours.
 
 ### Incentive Creation and Distribution Example
 
@@ -58,7 +60,3 @@ Here's what the reward distributions look like:
 | Manny       | 40 $BGT                   | 50%     | 47.5 $USDC _(50% of 95)_              |
 | Cami        | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
 | Jintao      | 10 $BGT                   | 12.5%   | 11.875 $USDC _(12.5% of 95)_          |
-
-All eligible users of Incentive Tokens from a validator will need to claim them (it is not automatic) through <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. Incentive Token eligibility is updated every 24 hours.
-
-A validator can change their commission percentage by first queuing the rate to notify users of the upcoming change, waiting `16,384` blocks, and then anyone may activate the new rate for the validator.
