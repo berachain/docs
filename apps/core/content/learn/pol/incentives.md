@@ -46,7 +46,7 @@ A Token Manager:
 
 - ❌ Cannot decrease the Incentive Rate < 0.2 
 - ✅ Can increase the Incentive Token supply at the same Incentive Rate. For instance, by adding another 500 USDC
-- ✅ Can increase the Incentive Rate > 0.2 provided they supply more incentive tokens. With a supply of 1,000 tokens @ 0.2 incentive rate, this incentivizes 5,000 $BGT. If the rate increases to 0.3, this incentivizes $3,333 $BGT. The operator must deposit at least 500 USDC so that 5,000 $BGT is incentivized.
+- ✅ Can increase the Incentive Rate > 0.2 provided they supply more incentive tokens. With a supply of 1,000 tokens @ 0.2 incentive rate, this incentivizes 5,000 $BGT. If the rate increases to 0.3, this incentivizes 3,333 $BGT. The operator must deposit at least 500 USDC so that 5,000 $BGT is incentivized.
 
 
 _Example B:_
