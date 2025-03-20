@@ -98,6 +98,12 @@
       }
     },
     "contracts": {
+      "bgtIncentiveDistributor": {
+        "name": "BGTIncentiveDistributor",
+        "address": "0xBDDba144482049382eC79CadfA02f0fa0F462dE3",
+        "abi": "",
+        "docsUrl": "/developers/contracts/bgtincentivedistributor"
+      },
       "beaconDeposit": {
         "name": "BeaconDeposit",
         "address": "0x4242424242424242424242424242424242424242",
@@ -639,6 +645,13 @@
   },
   "contracts": {
     "pol": {
+      "bgtIncentiveDistributor": {
+        "name": "BGTIncentiveDistributor",
+        "bepolia-address": "",
+        "mainnet-address": "0xBDDba144482049382eC79CadfA02f0fa0F462dE3",
+        "abi": "",
+        "docsUrl": "/developers/contracts/bgtincentivedistributor"
+      },
       "beaconDeposit": {
         "name": "BeaconDeposit",
         "bepolia-address": "0x4242424242424242424242424242424242424242",

@@ -53,6 +53,17 @@ const SIDEBAR = {
       ],
     },
     {
+      text: "Guides",
+      items: [
+        { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
+        {
+          text: "Add Incentives For Reward Vault",
+          link: "/learn/guides/add-incentives-for-reward-vault",
+        },
+        { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+      ],
+    },
+    {
       text: "Native dApps",
       items: [
         { text: "BeraHub", link: "/learn/dapps/berahub" },
@@ -229,6 +240,10 @@ const SIDEBAR = {
         {
           text: "Local Devnet with Kurtosis",
           link: "/nodes/guides/kurtosis",
+        },
+        {
+          text: "Manage Validator Incentives Commission Rate",
+          link: "/nodes/guides/manage-incentives-commission",
         },
         {
           text: "Awesome Validator Tools",
