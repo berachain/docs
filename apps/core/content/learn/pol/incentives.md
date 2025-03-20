@@ -40,7 +40,7 @@ Behind Incentives, there are additional mechanics to consider beyond the high-le
 
 ### Whitelisting Incentive Tokens
 
-Only approved Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
+Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
 
 A Reward Vault can have up to (2) two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
 
