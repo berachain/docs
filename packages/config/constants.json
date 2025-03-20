@@ -98,6 +98,12 @@
       }
     },
     "contracts": {
+      "bgtIncentiveDistributor": {
+        "name": "BGTIncentiveDistributor",
+        "address": "",
+        "abi": "",
+        "docsUrl": "/developers/contracts/bgtincentivedistributor"
+      },
       "beaconDeposit": {
         "name": "BeaconDeposit",
         "address": "0x4242424242424242424242424242424242424242",
