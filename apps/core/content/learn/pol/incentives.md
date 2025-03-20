@@ -8,7 +8,7 @@ Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct the
 
 ## How Incentives Work
 
-Validators can capture incentives offered by whitelisted Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
+Validators can capture incentives offered by approved Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
 
 ![Berachain Reward Vault Incentive Marketplace](/assets/berachain-incentive-marketplace.png)
 
@@ -17,7 +17,7 @@ Validators can capture incentives offered by whitelisted Reward Vaults by direct
 The distribution of Incentives follows this process:
 
 1. A **User** Boosts (associates their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
-2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and directs emissions toward whitelisted Reward Vaults chosen by the validator.
+2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and directs emissions toward approved Reward Vaults chosen by the validator.
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
@@ -41,7 +41,7 @@ Behind Incentives, there are additional mechanics to consider beyond the high-le
 
 ### Whitelisting Incentive Tokens
 
-Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
+Only approved Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
 
 A Reward Vault can have up to (2) two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
 
