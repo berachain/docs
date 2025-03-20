@@ -277,6 +277,6 @@ If you have a logo you'd like us to use, attach it to the pull request according
 
 ### Step 2 - Send Berachain Team Wallet Addresses
 
-Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully _before_ it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord. We provide dedicated support channels for mainnet validators. 
+Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully _before_ it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord.
 
 Send us the output of `beacond deposit validator-keys`.
