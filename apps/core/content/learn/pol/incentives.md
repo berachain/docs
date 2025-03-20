@@ -26,8 +26,8 @@ The distribution of Incentives follows this process:
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - A validator's commission (percentage of all the Incentive Tokens captured) is given directly to the validator's operator address.
-   - The remaining amount of Incentive Tokens are sent to a contract which manages distribution and claiming for users who Boosted the validator.
-5. A user (Booster) wanting to claim their Incentive Token Rewards will retrieve a merkle proof from a backend API that tracks all Incentive Token claiming eligibility in a 24-hour period. Claim eligibility is updated every 24 hours. Claims do not expire. With the merkle proof, the user (Booster) can claim their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser.
+   - The remaining amount of Incentive Tokens are sent to a contract which manages distribution and claiming for users who Boosted the validator. A backend API prepares a proof of the user's entitlement to a given number of tokens, updated every 24 hours. This eligibility never expires.
+5. A user (Booster) wanting to claim their Incentive Token Rewards retrieves this proof and claims their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser.
 
 ### Offering Incentives
 
