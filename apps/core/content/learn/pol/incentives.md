@@ -6,11 +6,13 @@
 
 Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct their `$BGT` emissions to a protocol's Reward Vault using whitelisted Incentive tokens. In doing so, protocols attract users to their protocol with `$BGT` rewards.
 
-## How Incentives Work
+Reward Vaults are established via a [Governance](learn/governance/rewardvault) process.  As part of the Governance process, Reward Vaults identify which ERC20 tokens they might like to offer incentives for, and stipulate an absolute minimum exchange rate of tokens paid per $BGT received.  A Reward Vault can have up to two unique Incentive Tokens they may choose from for their incentives.  If the Reward Vault Owner wants to change the tokens on this whitelist, or their minimum rate, this is done via Governance as well.
 
-Reward Vaults are established via a [Governance](learn/governance/rewardvault) process.  As part of the Governance process, Reward Vaults identify which ERC20 tokens they might like to offer incentives for.  Once approved by Governance, the Reward Vault operator can choose to add a quantity of one or both of those tokens, specifying the quantity of tokens paid per $BGT received.
+Once approved by Governance, the Reward Vault operator can add a quantity of one or both of those tokens, at a rate equal or above the minimum set in their Reward Vault's proposal.
 
-Incentives added by approved Reward Vaults are captured when validators direct their $BGT emissions towards those Reward Vaults, by configuring the Reward Allocation. The Reward Allocation can direct $BGT to any number of Reward Vaults, by selecting a percentage to go to each chosen vault.
+Incentive tokens added by approved Reward Vaults are captured when validators direct their $BGT emissions towards those Reward Vaults.  Validators can direct
+their block reward $BGT to any number of Vaults, specifying a percentage to be sent to the Vaults of their choice.
+
 
 ![Berachain Reward Vault Incentive Marketplace](/assets/berachain-incentive-marketplace.png)
 
@@ -18,8 +20,8 @@ Incentives added by approved Reward Vaults are captured when validators direct t
 
 The distribution of Incentives follows this process:
 
-1. A **User** Boosts (associates their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
-2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and emissions are directed toward whitelisted Reward Vaults chosen by the validator.
+1. A **User (Booster) ** associates their $BGT with a validator to increase that validator's block reward $BGT.
+2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and emissions are directed toward approved Reward Vaults chosen by the validator.
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - A validator's commission (percentage of all the Incentive Tokens captured) is given directly to the validator's operator address.
@@ -27,39 +29,12 @@ The distribution of Incentives follows this process:
 5. A user (Booster) wanting to claim their Incentive Token Rewards will retrieve a merkle proof from a backend API that tracks all Incentive Token claiming eligibility in a 24-hour period. Claim eligibility is updated every 24 hours. Claims do not expire.
 6. With the merkle proof, the user (Booster) can claim their Incentive Token Rewards through the $BGT Distributor contract. All proof handling is done by the user's browser.
 
-### Incentives & Users
-
-As an overview, Incentives involve 3 different parties:
-
-| User      | Description & Motivation                                                                                                                                                                                                                     |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Any user that boosts a validator with $BGT for the purpose of increasing a validator's $BGT emissions to capture more Incentives from Reward Vaults, so that the Booster can take a portion of those Incentives.                            |
-| Validator | A node in the Active Set that directs $BGT emissions to different Reward Vaults defined by their Reward Allocation distribution, captures Incentives from Reward Vaults, and takes a percentage (Commission Rate) of the Incentives captured. |
-| Protocol  | An entity, group, or organization that offers Incentive tokens for their respective Reward Vault with the goal of capturing $BGT emissions for their protocol and/or users.                                                                  |
-
-
-## Incentive Mechanics
-
-Behind Incentives, there are additional mechanics to consider beyond the high-level overview of how distribution works.
-
-### Whitelisting Incentive Tokens
-
-Only Whitelisted Reward Vaults can offer Incentives. Each Incentive Token must also be whitelisted through a governance process, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
-
-A Reward Vault can have up to (2) two unique Incentive Tokens whitelisted. If a token needs to be added or replaced, it requires passing a governance proposal.
-
-### Incentive Token Managers
-
-Only Incentive Token Managers of a Reward Vault can offer incentives. This means that one wallet address is responsible for offering an Incentive Token. The same wallet address can be set as a Token Manager for multiple Incentive Tokens.
-
-Token Managers are typically defined when a proposal for an Incentive Token is proposed through governance.
-If a Token Manager needs to be changed, it requires passing a governance proposal.
-
 ### Offering Incentives
 
-A Reward Vault can offer up to (2) Incentive Tokens simultaneously. Each token offered cannot be reverted or taken back. 
+A Reward Vault can offer up to (2) Incentive Tokens simultaneously. 
 
-An Incentive Rate must be defined when the Incentive Token is initially offered and cannot be decreased or reset until the supply of Incentive Token offered has been distributed. While an Incentive Rate is defined, a Token Manager can increase the rate, provided they increase the supply of incentive so that an equal or greater amount of $BGT is incentivized. When the supply of the Incentive Token offered is exhausted, a Token Manager can set a new Incentive Rate.
+When an quantity of Incentive Token is added to a Vault, the Incentive Rate (of tokens per $BGT) must be specified. This exchange rate must be equal or greater to what was set on the Reward Vault's proposal.  This rate cannot be decreased or reset until the supply of Incentive Token offered has been distributed. A Vault Owner
+can increase the amount of Incentive Tokens at any time.  Further, a Vault Owner can increase the Incentive Rate, provided they increase the supply of Incentive Tokens so that an equal or greater amount of $BGT is incentivized.
 
 _Example A:_
 
