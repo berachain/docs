@@ -6,13 +6,14 @@
 
 Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct their `$BGT` emissions to a protocol's Reward Vault using whitelisted Incentive tokens. In doing so, protocols attract users to their protocol with `$BGT` rewards.
 
-Reward Vaults are established via a [Governance](learn/governance/rewardvault) process.  As part of the Governance process, Reward Vaults identify which ERC20 tokens they might like to offer incentives for, and stipulate an absolute minimum exchange rate of tokens paid per $BGT received.  A Reward Vault can have up to two unique Incentive Tokens they may choose from for their incentives.  If the Reward Vault Owner wants to change the tokens on this whitelist, or their minimum rate, this is done via Governance as well.
+Reward Vaults are established via a [Governance](learn/governance/rewardvault) process.  As part of the Governance process, Reward Vaults identify which ERC20 tokens they might like to offer incentives for, and stipulate an absolute minimum Incentive Rate of tokens paid per $BGT received.  A Reward Vault can have up to two unique Incentive Tokens they may choose from for their incentives.  
 
 Once approved by Governance, the Reward Vault operator can add a quantity of one or both of those tokens, at a rate equal or above the minimum set in their Reward Vault's proposal.
 
 Incentive tokens added by approved Reward Vaults are captured when validators direct their $BGT emissions towards those Reward Vaults.  Validators can direct
 their block reward $BGT to any number of Vaults, specifying a percentage to be sent to the Vaults of their choice.
 
+If the Reward Vault Owner wants to change the tokens they can offer, or their minimum Incentive Rate, this is done via Governance as well.
 
 ![Berachain Reward Vault Incentive Marketplace](/assets/berachain-incentive-marketplace.png)
 
