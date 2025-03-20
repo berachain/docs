@@ -8,13 +8,11 @@ Reward Vaults are smart contracts in which users can stake their Proof-of-Liquid
 
 Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
 
-:::tip
-A different Reward Vault contract exists for each PoL-eligible asset
-:::
+It should be noted that only Whitelisted Reward Vaults are elligible to receive `$BGT` emissions from Validators.
 
 ## User Interactions
 
-### Staking in a Reward Vault
+### Staking With A Reward Vault
 
 ![Reward Vaults](/assets/reward-vaults.png)
 
