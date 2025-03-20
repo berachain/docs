@@ -21,7 +21,7 @@ The distribution of Incentives follows this process:
 3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
-   - The remaining incentives  for users who boosted the validator are sent to a contract and backend service that manages the distribution and claiming of these tokens.  The backend API updates proofs of the user's entitlement to incentive tokens every 24 hours. This eligibility never expires.
+   - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
 5. A user (booster) wanting to claim their incentive token rewards retrieves this proof and claims their incentive token rewards through the $BGT distributor contract. All proof handling is done by the user's browser, by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. 
 
 ### Incentives & Users
