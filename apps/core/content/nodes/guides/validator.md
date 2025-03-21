@@ -273,26 +273,10 @@ Make a PR to the following GitHub repository to add your validator to the valida
 
 [https://github.com/berachain/metadata](https://github.com/berachain/metadata)
 
-If you have a logo you'd like us to use, attach it to the pull request.
+If you have a logo you'd like us to use, attach it to the pull request according to the instructions in [https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md](CONTRIBUTING).
 
 ### Step 2 - Send Berachain Team Wallet Addresses
 
 Reach out to the Berachain validator relations team with your validator's CometBFT public keys to help us find you if your node begins having trouble, hopefully _before_ it gets slashed. If you aren't known to the validator relations team, speak up on the #node-support channel on our Discord.
 
-### Step 3 - Send Berachain Your CometBFT Address
-
-Reach out to the Berachain validator relations team with your CometBFT address found in your `priv_validator_key.json` file. If you aren't known to us, poke your head up on the #node-support channel on our Discord.
-
-This is the 40 character address found in your `priv_validator_key.json` file.
-
-You can get this by looking at the file or running the following:
-
-```bash
-# FROM: /
-
-# OR /path/to/$HOME/config/priv_validator_key.json
-cat ./.beacond/config/priv_validator_key.json | jq -r ".address";
-
-# [Expected Similar Address]
-# A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0
-```
+Send us the output of `beacond deposit validator-keys`.
