@@ -61,6 +61,6 @@ Users who are boosting validators with their `$BGT` earn a share of Berachain co
 
 At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
 
-### Redeem $BGT For `$BERA`
+### Redeem $BGT For $BERA
 
 `$BGT` can be redeemed (burned) 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
