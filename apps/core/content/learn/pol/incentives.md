@@ -22,7 +22,7 @@ The distribution of Incentives follows this process:
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
    - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
-5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the [BGTIncentiveDistributor](/developers/contracts/bgtincentivedistributor) contract. All proof handling is done by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>. 
+5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the [BGTIncentiveDistributor](/developers/contracts/bgtincentivedistributor) contract. All proof handling is done by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>.
 
 ### Incentives & Users
 
@@ -30,7 +30,7 @@ As an overview, Incentives involve 3 different parties:
 
 | User      | Description & Motivation                                                                                                                                                                                                                      |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Any user that boosts a validator with $BGT to increase a validator's $BGT emissions to capture more Incentives from Reward Vaults, so that the Booster can take a portion of those Incentives.                              |
+| Booster   | Any user that boosts a validator with $BGT to increase a validator's $BGT emissions to capture more Incentives from Reward Vaults, so that the Booster can take a portion of those Incentives.                                                |
 | Validator | A node in the Active Set that directs $BGT emissions to different Reward Vaults defined by their Reward Allocation distribution, captures Incentives from Reward Vaults, and takes a percentage (Commission Rate) of the Incentives captured. |
 | Protocol  | An entity, group, or organization that offers Incentive tokens for their respective Reward Vault with the goal of capturing $BGT emissions for their protocol and/or users.                                                                   |
 
@@ -59,9 +59,9 @@ The Incentive Token Manager must define an Incentive Rate when initially offerin
 
 _Example:_
 
-| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    | 
+| Reward Vault Incentive Token | Supply | Incentive Rate Per $BGT                                    |
 | ---------------------------- | ------ | ---------------------------------------------------------- |
-| $USDC                        | 1,000   | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ |
+| $USDC                        | 1,000  | 0.2 _(0.2 $USDC per 1 $BGT directed towards Reward Vault)_ |
 
 A Token Manager:
 
@@ -69,7 +69,6 @@ A Token Manager:
 - ✅ Can increase the Incentive Rate > 0.2 provided they supply more incentive tokens at the same time. With a supply of 1,000 tokens @ 0.2 incentive rate, this incentivizes 5,000 $BGT. If the rate increases to 0.3, this incentivizes 3,333 $BGT. The operator must deposit at least 500 USDC so that 5,000 $BGT is incentivized.
 - ❌ Cannot decrease the Incentive Rate < 0.2 (e.g. 0.199, 0.1, 0.01)
 - ❌ Cannot remove tokens from the Incentive Supply
-
 
 ### Incentive Commission and Distribution
 
@@ -83,14 +82,13 @@ _Example:_
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions towards the Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves.  The amount of Incentive Tokens distributed to each booster is based on that booster's proportion among the total $BGT boosting that validator.
+From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on that booster's proportion among the total $BGT boosting that validator.
 
-| Party       | $BGT Boost To Val A | % of Total Boost | Total Incentive Token Rewards         |
-| ----------- | -------------------:| ----------------:| -------------------------------------:|
-| Validator A | 20 $BGT             | 25%              |     .05 ⨉100 + .25 ⨉95 = 28.75 $USDC|
-| Manny       | 40 $BGT             | 50%              |                  .5 ⨉ 95 = 47.50 $USDC|
-| Cami        | 10 $BGT             | 12.5%            |               .125 ⨉ 95 = 11.875 $USDC|
-| Jintao      | 10 $BGT             | 12.5%            |               .125 ⨉ 95 = 11.875 $USDC|
+| Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
+| ----------- | ------------------: | ---------------: | -------------------------------: |
+| Validator A |             20 $BGT |              25% | .05 ⨉100 + .25 ⨉95 = 28.75 $USDC |
+| Manny       |             40 $BGT |              50% |            .5 ⨉ 95 = 47.50 $USDC |
+| Cami        |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
+| Jintao      |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
 
 A validator can change their commission percentage by first queuing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
-
