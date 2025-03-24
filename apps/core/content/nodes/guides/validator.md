@@ -45,8 +45,8 @@ Below is an example of setting up and verifying the environment and establishing
 export BEACOND_HOME=/full/path/to/beacond-data;
 export RPC_URL="https://rpc.berachain.com"; # mainnet
 export DEPOSIT_ADDR="0x4242424242424242424242424242424242424242"; # mainnet
-export VAL_PUB_KEY="<YOUR_VAL_PUB_KEY>";
-export VAL_OPERATOR_ADDRESS="<YOUR_VAL_OPERATOR_ADDRESS>";
+export COMETBFT_PUB_KEY="<YOUR_COMETBFT_PUB_KEY>";
+export OPERATOR_ADDRESS="<YOUR_OPERATOR_ADDRESS>";
 export WITHDRAW_ADDRESS="<YOUR_WITHDRAW_ADDRESS>";
 
 alias beacond="/path/to/beacond --home $BEACOND_HOME";
@@ -64,8 +64,8 @@ The `0xdf6..0bda` hash output confirms that you have the right mainnet genesis f
 - **BEACOND_HOME**: The path to your beacond data directory.
 - **RPC_URL**: The URL of the RPC endpoint you are using. You can use your own if you want.
 - **DEPOSIT_ADDR**: The address of the deposit contract.
-- **VAL_PUB_KEY**: The public key of your validator from CometBFT (see below).
-- **VAL_OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef).
+- **COMETBFT_PUB_KEY**: The public key of your validator from CometBFT (see below).
+- **OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](https://docs.berachain.com/developers/contracts/berachef).
 - **WITHDRAW_ADDRESS**: The address where your deposit stake is returned when you stop being a validator (state 'Exited' on the [lifecycle](/nodes/validator-lifecycle)). This can be an address of your choice, or if you are staking money from investors, they will require a specific address.
 
 Your **CometBFT identity** was created by beacond when you did `beacond init`, and is held in the `priv_validator_key.json` file.
@@ -82,7 +82,7 @@ beacond deposit validator-keys;
 # 0x9308360bb1e8c237c2a4b6734782426e6e42bc7a43008ba5e3d9f3c70143227ea1fb2a08b21cbbedf87cebf27e81669d
 ```
 
-This is your **beacon chain public key**, and in this tutorial is placed in the `VAL_PUB_KEY` environment variable.
+This is your **beacon chain public key**, and in this tutorial is placed in the `COMETBFT_PUB_KEY` environment variable.
 
 ## Step 2: Prepare registration transaction
 
@@ -99,7 +99,7 @@ The first registration transaction is the most important. It establishes the ass
 2. **Confirm your CometBFT identity has not been used before.** If your validator has exited the active set or failed a deposit transaction, you will need to create a new identity. Check for previous use of your identity with the following command. If this returns non-zero, start over with a new beacond identity (as described in the Quickstart).
 
    ```bash
-   cast call $DEPOSIT_ADDR 'getOperator(bytes)' $VAL_PUB_KEY -r $RPC_URL;
+   cast call $DEPOSIT_ADDR 'getOperator(bytes)' $COMETBFT_PUB_KEY -r $RPC_URL;
    ```
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator` which takes:
@@ -115,16 +115,16 @@ The first registration transaction is the most important. It establishes the ass
    beacond deposit create-validator \
      $WITHDRAW_ADDRESS              \
      $STAKE_AMOUNT_GWEI             \
-     $GENESIS_ROOT;
+     -g $GENESIS_ROOT;
 
    # [Expected Output]:
-   #  "pubkey": "<VAL_PUB_KEY>",
+   #  "pubkey": "<COMETBFT_PUB_KEY>",
    #  "credentials": "0x010000000000000000000000<WITHDRAW_ADDRESS>",
    #  "amount": "0x9184e72a000",
    #  "signature": "0x94349ab1...fb4b1d6",
 
    DEPOSIT_SIGNATURE="0x9434...";  # from the above output
-   VAL_WITHDRAW_CREDENTIAL="0x01000..."; # from the above output
+   WITHDRAW_CREDENTIAL="0x01000..."; # from the above output
    ```
 
    The credentials should contain the withdrawal address verbatim, and the public key confirms the public key matching the private key used to generate the signature. In the above, we have placed the signature and withdraw credentials in variables for the next step.
@@ -133,11 +133,11 @@ The first registration transaction is the most important. It establishes the ass
 
    ```bash
    beacond deposit validate   \
-     $VAL_PUB_KEY             \
-     $VAL_WITHDRAW_CREDENTIAL \
+     $COMETBFT_PUB_KEY        \
+     $WITHDRAW_CREDENTIAL     \
      $STAKE_AMOUNT_GWEI       \
      $DEPOSIT_SIGNATURE       \
-     $GENESIS_ROOT;
+     -g $GENESIS_ROOT;
    echo $?;
 
    # [Expected Output]:
@@ -169,23 +169,23 @@ function deposit(
 # Non-Ledger Version
 cast send $DEPOSIT_ADDR \
 'deposit(bytes,bytes,bytes,address)' \
-"$VAL_PUB_KEY" \
-"$VAL_WITHDRAW_CREDENTIAL" \
-"$DEPOSIT_SIGNATURE" \
-"$VALIDATOR_OPERATOR_ADDRESS" \
---private-key  \
---value "${STAKE_AMOUNT_ETH}ether" \
+"$COMETBFT_PUB_KEY"                  \
+"$WITHDRAW_CREDENTIAL"               \
+"$DEPOSIT_SIGNATURE"                 \
+"$OPERATOR_ADDRESS"                  \
+--private-key $PK                    \
+--value "${STAKE_AMOUNT_ETH}ether"   \
 -r $RPC_URL;
 
 # Ledger Version
-cast send $DEPOSIT_ADDR \
+cast send $DEPOSIT_ADDR              \
 'deposit(bytes,bytes,bytes,address)' \
-"$VAL_PUB_KEY" \
-"$VAL_WITHDRAW_CREDENTIAL" \
-"$DEPOSIT_SIGNATURE" \
-"$VALIDATOR_OPERATOR_ADDRESS" \
---ledger \
---value "${STAKE_AMOUNT_ETH}ether" \
+"$COMETBFT_PUB_KEY"                  \
+"$WITHDRAW_CREDENTIAL"               \
+"$DEPOSIT_SIGNATURE"                 \
+"$OPERATOR_ADDRESS"                  \
+--ledger                             \
+--value "${STAKE_AMOUNT_ETH}ether"   \
 -r $RPC_URL;
 ```
 
@@ -211,7 +211,7 @@ STAKE_AMOUNT_ETH=240000;
 
 cast send "0x4242424242424242424242424242424242424242" \
 'deposit(bytes,bytes,bytes,address)' \
-"$VAL_PUB_KEY" \
+"$COMETBFT_PUB_KEY" \
 "0x0000000000000000000000000000000000000000000000000000000000000000" \
 "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
 "0x0000000000000000000000000000000000000000" \
