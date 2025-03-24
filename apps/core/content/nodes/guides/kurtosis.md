@@ -426,6 +426,160 @@ make rm-devnet;
 # ...
 ```
 
+
+
+## Testing deposits
+
+In this section we will elevate one of the full nodes that are 
+part of the default Kurtosis deployment to a full validator.
+
+We will be following the process laid out in the [Become a Validator](/nodes/guides/validator) guide.
+
+Identify a full node from the list of activated containers in the output of `make start-devnet`. Kurtosis tooling will generate a list of port mappings for selected ports.
+
+```bash
+21913e697c20   cl-full-beaconkit-0        cometbft-p2p: 26656/tcp -> 127.0.0.1:50479             RUNNING
+                                          cometbft-pprof: 6060/tcp -> 127.0.0.1:50483
+                                          cometbft-rpc: 26657/tcp -> 127.0.0.1:50480
+                                          metrics: 26660/tcp -> 127.0.0.1:50481
+                                          node-api: 3500/tcp -> 127.0.0.1:50482
+
+2d0220dbce46   el-full-reth-0             engine-rpc: 8551/tcp -> 127.0.0.1:50467                RUNNING
+                                          eth-json-rpc: 8545/tcp -> 127.0.0.1:50465
+                                          eth-json-rpc-ws: 8546/tcp -> 127.0.0.1:50466
+                                          metrics: 9001/tcp -> 127.0.0.1:50468
+                                          tcp-discovery: 30303/tcp -> 127.0.0.1:50469
+                                          udp-discovery: 30303/udp -> 127.0.0.1:49255
+```
+
+We will now log into the beaconkit container, and prepare a transaction that we will send into the reth container, via its json-rpc port on (in this example) port 50465.
+
+```bash
+kurtosis service shell my-local-devnet cl-full-beaconkit-0
+```
+
+We now obtain the validator keys; the last one is the important one.
+
+```bash
+> beacond deposit validator-keys
+...
+
+Eth/Beacon Pubkey (Compressed 48-byte Hex):
+0xa3d9283cdf8fce7a1baab1f5dfca8debf0083521865e1483d8635e101b264de13371f0d4e73681893f36efa507915b85
+```
+
+We will also obtain the genesis root hash used to calculate the deposit signature.
+
+```bash
+> beacond genesis validator-root ~/.beacond/config/genesis.json
+0x9bde7e3b3c4f570c88da2c981cfb9eec6dd3c903372837de9f43c6659e37811b
+```
+
+Now, load those two valueas into environment variables along with a couple of other important ones we are going to use.
+
+```bash
+COMETBFT_PUB_KEY=0xa3d...b85
+GENESIS_ROOT=0x9bd7....811b
+RPC_URL=http://127.0.0.1:50465    # port number from above
+DEPOSIT_ADDR=0x4242424242424242424242424242424242424242
+OPERATOR_ADDRESS=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5  
+WITHDRAW_ADDRESS=$OPERATOR_ADDRESS
+STAKE_AMOUNT_ETH="10000";
+STAKE_AMOUNT_GWEI="${STAKE_AMOUNT_ETH}000000000"
+```
+
+Notes:
+* **RPC_URL** is the `eth-json-rpc` port exposed by Kurtosis for the `reth-0` container, shown above. Yours will be different.
+* **OPERATOR_ADDRESS** can be anything; this is an example.
+* **WITHDRAW_ADDRESS** can be anything; this is an example.
+
+Now calculate the deposit signature, then load the calculated credential and signature to variables:
+
+
+```bash
+> beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT
+✅ Deposit message created successfully!
+
+pubkey: 0xa3d9283cdf8fce7a1baab1f5dfca8debf0083521865e1483d8635e101b264de13371f0d4e73681893f36efa507915b85
+credentials: 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5
+amount: 10000000000000
+signature: 0xa4640dd6f942ea211513b7b396cedbcd633d7fc2b0e6eb80ba697acb02d360e3608f718e2ebf550eb337dd4f32187a090bcf9e1e82212abb711cf50eef8b5f831b54e0c99154b467b4f4a093fbad24e57fe8255d3a4ea4195ed18e82bbc49640
+
+> DEPOSIT_SIGNATURE=0xa64....4640
+> WITHDRAW_CREDENTIAL=0x01000....3ef5
+```
+
+Now verify the calculated signature:
+
+```bash
+> beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_GWEI $DEPOSIT_SIGNATURE -g $GENESIS_ROOT
+✅ Deposit message is valid!
+```
+
+Load the private key for one of the funded accounts found in `beacon-kit/kurtosis/src/constants.star` and generate the command to send the transaction. Note you are **printing** the command in the beacond container, and will copy and paste it to the host operating system.
+
+
+```bash
+> PK=fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306
+> echo cast send $DEPOSIT_ADDR \'deposit(bytes,bytes,bytes,address)\' $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS --value "${STAKE_AMOUNT_ETH}ether" -r $RPC_URL
+cast send 0x4242424242424242424242424242424242424242 deposit(bytes,bytes,bytes,address) 0xa3d9283cdf8fce7a1baab1f5dfca8debf0083521865e1483d8635e101b264de13371f0d4e73681893f36efa507915b85 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5 0xa4640dd6f942ea211513b7b396cedbcd633d7fc2b0e6eb80ba697acb02d360e3608f718e2ebf550eb337dd4f32187a090bcf9e1e82212abb711cf50eef8b5f831b54e0c99154b467b4f4a093fbad24e57fe8255d3a4ea4195ed18e82bbc49640 0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5 --value 10000ether -r http://127.0.0.1:50465
+```
+
+
+echo cast send $DEPOSIT_ADDR 'deposit(bytes,bytes,bytes,address)' $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS --value "${STAKE_AMOUNT_ETH}ether" -r $RPC_URL
+
+"cast send 0x4242424242424242424242424242424242424242 deposit(bytes,bytes,bytes,address) 0xaeacc600de03a13203aa34588117ea3a339eb7939d8373efbb2ec31553b14aef262227af54e482fb379443b6c729f6da 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5 0x85f3efd1b6263a15019caed2891297ef100db4576ac2199d25bfaebf2db0a39863079d60602e9fdad7dce8c8e44ebfe013b1294aa6ce566dc11db814ba353a5dc9ba9b8c6a141c6ce327cb5b289fd90f37441ae43efd153bd1e09cd8390494b7 0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5 --private-key --value 10000ether -r http://127.0.0.1:50465"
+
+
+
+❯ export 
+
+❯ cast send 0x4242424242424242424242424242424242424242 'deposit(bytes,bytes,bytes,address)' 0xaeacc600de03a13203aa34588117ea3a339eb7939d8373efbb2ec31553b14aef262227af54e482fb379443b6c729f6da 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5 0x85f3efd1b6263a15019caed2891297ef100db4576ac2199d25bfaebf2db0a39863079d60602e9fdad7dce8c8e44ebfe013b1294aa6ce566dc11db814ba353a5dc9ba9b8c6a141c6ce327cb5b289fd90f37441ae43efd153bd1e09cd8390494b7 0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5 --private-key $PK --value 10000ether -r http://127.0.0.1:50768
+
+blockHash            0xbeb852df0fba64a483b52e88e56f00468434d518b3a015ff3dda76501449b693
+blockNumber          1098
+contractAddress
+cumulativeGasUsed    7022398
+effectiveGasPrice    69166410
+from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
+gasUsed              70525
+logs                 [{"address":"0x4242424242424242424242424242424242424242","topics":["0x0adffd98d3072c48341843974dffd7a910bb849ba6ca04163d43bb26feb17403","0x9deb4d01fa95661296410663cb6976a6039ed6c73444bea7e88537b53686101b"],"data":"0x0000000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef50000000000000000000000000000000000000000000000000000000000000000","blockHash":"0xbeb852df0fba64a483b52e88e56f00468434d518b3a015ff3dda76501449b693","blockNumber":"0x44a","blockTimestamp":"0x67ddca35","transactionHash":"0x12453305019ac50eca3ec9f1d6326409f37f349889f5bcb30f921bdc666aabb1","transactionIndex":"0x95","logIndex":"0x0","removed":false},{"address":"0x4242424242424242424242424242424242424242","topics":["0x68af751683498a9f9be59fe8b0d52a64dd155255d85cdb29fea30b1e3f891d46"],"data":"0x00000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000009184e72a000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000030aeacc600de03a13203aa34588117ea3a339eb7939d8373efbb2ec31553b14aef262227af54e482fb379443b6c729f6da0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5000000000000000000000000000000000000000000000000000000000000006085f3efd1b6263a15019caed2891297ef100db4576ac2199d25bfaebf2db0a39863079d60602e9fdad7dce8c8e44ebfe013b1294aa6ce566dc11db814ba353a5dc9ba9b8c6a141c6ce327cb5b289fd90f37441ae43efd153bd1e09cd8390494b7","blockHash":"0xbeb852df0fba64a483b52e88e56f00468434d518b3a015ff3dda76501449b693","blockNumber":"0x44a","blockTimestamp":"0x67ddca35","transactionHash":"0x12453305019ac50eca3ec9f1d6326409f37f349889f5bcb30f921bdc666aabb1","transactionIndex":"0x95","logIndex":"0x1","removed":false}]
+logsBloom            0x10000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000002800400000000000000000000000000000000000000000000000000004000000000010000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000020000000008000000008000000000000000
+root
+status               1 (success)
+transactionHash      0x12453305019ac50eca3ec9f1d6326409f37f349889f5bcb30f921bdc666aabb1
+transactionIndex     149
+type                 2
+blobGasPrice
+blobGasUsed
+authorizationList
+to                   0x4242424242424242424242424242424242424242
+
+
+ beacond deposit validate     $COMETBFT_PUB_KEY               $WITHDRAW_CREDENTIAL   $STAKE_AMOUNT_GWEI         $DEPOSIT_SIGNATURE       -g $GENESIS_ROOT
+✅ Deposit message is valid!
+
+
+
+
+
+
+ddb16a19b08a:/# echo cast send "0x4242424242424242424242424242424242424242" 'deposit(bytes,bytes,bytes,address)' $COMETBFT_PUB_KEY   "0x0000000000000000000000000000000000000000000000000000000000000000" "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" "0x0000000000000000000000000000000000000000" --private-key $PK -r $RPC_URL --value  "${STAKE_AMOUNT_ETH}ether"
+
+
+
+
+❯ cast send 0x4242424242424242424242424242424242424242 'deposit(bytes,bytes,bytes,address)' 0xaeacc600de03a13203aa34588117ea3a339eb7939d8373efbb2ec31553b14aef262227af54e482fb379443b6c729f6da 0x0000000000000000000000000000000000000000000000000000000000000000 0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000   0x0000000000000000000000000000000000000000 -r http://127.0.0.1:50465 --value 240000ether --private-key $PK
+
+
+
+
+
+
+
+
+
+
 ## Debugging Issues
 
 There is a possibility that Docker will stop working on MacOS. In those cases, try `kurtosis clean -a` and if the problem still persists try removing all containers and restarting Docker.
