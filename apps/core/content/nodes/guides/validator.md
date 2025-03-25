@@ -189,6 +189,7 @@ cast send $DEPOSIT_ADDR              \
 -r $RPC_URL;
 ```
 
+
 ## Step 4: Confirm successful registration
 
 The following traits denote a successful registration:
