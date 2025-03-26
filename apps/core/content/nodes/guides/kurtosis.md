@@ -450,7 +450,7 @@ Identify a full node from the list of activated containers in the output of `mak
 
 Start a log watcher that will report deposit activity:
 ```bash
-kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | grep num_deposits
+kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | egrep '(slot|deposit)'
 ```
 
 Log into the beaconkit container:
@@ -466,14 +466,14 @@ Obtain the validator keys. The last one is the important one:
 ...
 
 Eth/Beacon Pubkey (Compressed 48-byte Hex):
-0xa3d9283cdf8fce7a1baab1f5dfca8debf0083521865e1483d8635e101b264de13371f0d4e73681893f36efa507915b85
+0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
 ```
 
 Obtain the genesis root hash used to calculate the deposit signature:
 
 ```bash
 > beacond genesis validator-root ~/.beacond/config/genesis.json
-0x9bde7e3b3c4f570c88da2c981cfb9eec6dd3c903372837de9f43c6659e37811b
+0x18373bec1ac58937e25a52ce91622864a7c6ed468440a2d5ad8c617795c507d8
 ```
 
 Load those two values into environment variables along with a couple of other important ones we are going to use:
@@ -485,18 +485,16 @@ GENESIS_ROOT=$(beacond genesis validator-root ~/.beacond/config/genesis.json)
 DEPOSIT_ADDR=0x4242424242424242424242424242424242424242
 OPERATOR_ADDRESS=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5  
 WITHDRAW_ADDRESS=$OPERATOR_ADDRESS
-STAKE_AMOUNT_ETH="10000";
-STAKE_AMOUNT_GWEI="${STAKE_AMOUNT_ETH}000000000"
-STAKE_AMOUNT_ETH_2="2400000";
+STAKE_AMOUNT_GWEI=9000000000
 PK=fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306
-RPC_URL=http://127.0.0.1:50465    # port number from json-rpc above
+RPC_URL=http://127.0.0.1:8547    # port number for a json-rpc in kurtosis
 ```
 
 Notes:
 * **DEPOSIT_ADDR** is the address of the BeaconDeposit contract. It's the same on mainnet.
 * **OPERATOR_ADDRESS** is an example value which you can use for this tutorial.
 * **WITHDRAW_ADDRESS** is an example value which you can use for this tutorial.
-* **STAKE_AMOUNT_ETH** and **STAKE_AMOUNT_ETH_2** are the amounts we are staking in the first and second deposit transactions. **STAKE_AMOUNT_GWEI** is the first amount in gwei, used below.
+* **STAKE_AMOUNT_GWEI** is the amount to be deposited in the depost transactions. This is `9 $BERA`.  In the devnet, a validator is activated above `18 $BERA`.  After depositing this amount a second time, the validator will be activated.
 * **PK** is the wallet address we are going to transact from. This is a private key selected from the [list seeded with the Kurtosis deployment](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
 * **RPC_URL** is the `eth-json-rpc` port exposed by Kurtosis for the `reth-0` container, shown above. Yours will be different.
 
@@ -515,17 +513,17 @@ Calculate the deposit signature, then load the calculated credential and signatu
 > beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT
 ✅ Deposit message created successfully!
 
-pubkey: 0xa3d9283cdf8fce7a1baab1f5dfca8debf0083521865e1483d8635e101b264de13371f0d4e73681893f36efa507915b85
+pubkey: 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
 credentials: 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5
-amount: 10000000000000
-signature: 0xa4640dd6f942ea211513b7b396cedbcd633d7fc2b0e6eb80ba697acb02d360e3608f718e2ebf550eb337dd4f32187a090bcf9e1e82212abb711cf50eef8b5f831b54e0c99154b467b4f4a093fbad24e57fe8255d3a4ea4195ed18e82bbc49640
+amount: 9000000000
+signature: 0x91fabc1d5ea3074ce85c3e2cab7bda0b667311d409eb4d5857171ba8309fa71be6e5e80d2d2d5d5558b43ca706efde7c013f0c6613038546b64c11c1959eaf80163fe40966c43fc7cb2baf2dd6c79837064c5de1d0203753dd7867650ca1ec4e
 
 > WITHDRAW_CREDENTIAL=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/credentials: //p')
 > DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/signature: //p')
 > echo $DEPOSIT_SIGNATURE
-0xa64....4640
+0x91fa....ec4e
 > echo $WITHDRAW_CREDENTIAL
-0x01000....3ef5
+0x0100....3ef5
 ```
 
 Verify the calculated signature:
@@ -540,21 +538,21 @@ Note you are **printing** the command in the beacond container, then will copy a
 
 ```bash
 > echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
- $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS \
- --value "${STAKE_AMOUNT_ETH}ether" \
- --private-key $PK                  \
- --rpc-url $RPC_URL
+    $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS \
+    --value "${STAKE_AMOUNT_GWEI}gwei" \
+    --private-key $PK                  \
+    --rpc-url $RPC_URL
 # [EXAMPLE OUTPUT]
 # cast send 0x4242....
 
 > [paste above 'cast' line into the host OS]
-# [EXAMPLE OUTPUT]
-#...
-#blockHash            0xa6396...
-##rom                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
-#to                   0x4242424242424242424242424242424242424242
-#status               1 (success)
-#transactionHash      0x08ee26360935cfac3727aaea4c9db7e57e1d22e08bbc51863cf1bc757e69901a
+# [EXAMPLE OUTPUT, SIMPLIFIED]
+# blockHash            0xe2157a842f2a793a5adeafa5782db29b8d691f94453ffb10f567f096e4536700
+# from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
+# to                   0x4242424242424242424242424242424242424242
+# status               1 (success)
+# transactionHash      0xca28463117cb8e9f04c3b47b886ab49e95fd9a3f44271de8f2e2c5fce14002a2
+
 ```
 
 At this point, you should be able to confirm in beacond that your validator is in state `pending_initialized`:
@@ -564,26 +562,21 @@ At this point, you should be able to confirm in beacond that your validator is i
 ...
   {
     "index": "5",
-    "balance": "4000000000000",
+    "balance": "9000000000",
     "status": "pending_initialized",
     "validator": {
-      "pubkey": "0xa7ed1d91dac1b9ebc4495cb46fc9359557af39d4db69d4629e7c7adb4bb63fac178169a2e05a19bdc9c9d473c76a0a9d",
+      "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",
       "withdrawal_credentials": "0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5",
-      "effective_balance": "4000000000000",
+      "effective_balance": "9000000000",
       "slashed": false,
       "activation_eligibility_epoch": "18446744073709551615",
       "activation_epoch": "18446744073709551615",
       "exit_epoch": "18446744073709551615",
       "withdrawable_epoch": "18446744073709551615"
     }
-  }
-```
+  }```
 
-FIXME why is balance 4,000,000,000,000?  4k gwei?  it said --value 10000ether
-FIXME then it activated
-
-
-Now we submit a transaction for `240,000 $BERA` to complete the activation of the validator:
+Now we submit a transaction for the same amount to complete the activation of the validator:
 
 ```bash
 > echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
@@ -592,29 +585,46 @@ Now we submit a transaction for `240,000 $BERA` to complete the activation of th
     "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
     "0x0000000000000000000000000000000000000000" \
     --private-key $PK \
-    --value "${STAKE_AMOUNT_ETH}ether" \
+    --value "${STAKE_AMOUNT_GWEI}gwei" \
     --rpc-url $RPC_URL;
 # [EXAMPLE OUTPUT]
 # cast send 0x4242....
 
 > [paste above 'cast' line into the host OS]
-# [EXAMPLE OUTPUT]
-#blockHash            0xa63960481d109ddb9ed65be82a1818271fef0b3f5d4a8cba9cc026dcbb1ae6be
-#from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
-#to                   0x4242424242424242424242424242424242424242
-#status               1 (success)
-#transactionHash      0x8ffc1830eb94a7e555172b4e58a66508164741c2b88388b9cb8297562fbec5ee
+# [EXAMPLE OUTPUT, SIMPLIFIED]
+# blockHash            0x923c626ec44aea46426580ae5e8010f239f37a612c90b35ebc4299d8b75b8383
+# from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
+# to                   0x4242424242424242424242424242424242424242
+# status               1 (success)
 ```
 
-**Wait until the end of the second epoch after the final deposit.**  This is between 12 and 18 minutes of time. Then, check on the beacon client for a list of validators:
+**The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so watch the log output for it to roll from "sloft=...f to ...0" twice.
 
-
+You will see it first showing in the activation queue:
 ```bash
-apk add jq
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
+> curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
+  {
+    "index": "5",
+    "balance": "18000000000",
+    "status": "pending_queued",
+    "validator": {
+        "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",  
+        "activation_eligibility_epoch": "7",
 ```
 
-You should see your validator's `$COMETBFT_PUB_KEY` marked as activated.
+And then, finally, as activated:
+```bash
+> curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
+    {
+      "index": "5",
+      "balance": "18000000000",
+      "status": "active_ongoing",
+      "validator": {
+        "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",
+        "activation_eligibility_epoch": "7",
+        "activation_epoch": "8",
+```
+
 
 ## Debugging Issues
 
