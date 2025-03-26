@@ -419,8 +419,8 @@ Revise `beaconkit-local.yml` to **remove any `tx-fuzz` or `spamoor` instances**:
 ```beaconkit-local.yml - to be removed
 ...
 additional_services:
-  - name: "spamoor"    # remove this
-  - name: "tx-fuzz"    # remove this
+  - name: "spamoor"    // [!code --]
+  - name: "tx-fuzz"    // [!code --]
 ...
 ```
 
@@ -536,7 +536,7 @@ Verify the calculated signature:
 Generate the command to send the registration transaction. This an initial deposit of `10,000 $BERA` to create the association to the CometBFT public key, the selected operator address, and the selected withdrawal address.
 Note you are **printing** the command in the beacond container, then will copy and paste it to the host operating system:
 
-```bash
+```bash{14}
 > echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
     $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS \
     --value "${STAKE_AMOUNT_GWEI}gwei" \
@@ -557,7 +557,7 @@ Note you are **printing** the command in the beacond container, then will copy a
 
 At this point, you should be able to confirm in beacond that your validator is in state `pending_initialized`:
 
-```bash
+```bash{6}
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
 ...
   {
@@ -574,11 +574,12 @@ At this point, you should be able to confirm in beacond that your validator is i
       "exit_epoch": "18446744073709551615",
       "withdrawable_epoch": "18446744073709551615"
     }
-  }```
+  }
+```
 
 Now we submit a transaction for the same amount to complete the activation of the validator:
 
-```bash
+```bash{17}
 > echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
     "$COMETBFT_PUB_KEY" \
     "0x0000000000000000000000000000000000000000000000000000000000000000" \
@@ -601,7 +602,7 @@ Now we submit a transaction for the same amount to complete the activation of th
 **The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so watch the log output for it to roll from "sloft=...f to ...0" twice.
 
 You will see it first showing in the activation queue:
-```bash
+```bash{5}
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
   {
     "index": "5",
@@ -613,7 +614,7 @@ You will see it first showing in the activation queue:
 ```
 
 And then, finally, as activated:
-```bash
+```bash{5}
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
     {
       "index": "5",
