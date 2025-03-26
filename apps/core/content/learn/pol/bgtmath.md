@@ -85,7 +85,7 @@ The reward window is reset each time new rewards are added.
 
 ### Distribution Example
 
-On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a weekly sliding window based on the emissions at any given time during the previous week.
+On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
 
 A more real-world example with simplified numbers can be used to understand distribution currently (taking place over 9 days):
 
