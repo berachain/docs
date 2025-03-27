@@ -523,20 +523,27 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | 
 Calculate the deposit signature, then load the calculated credential and signature to variables:
 
 ```bash
-> beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT
-✅ Deposit message created successfully!
+# FROM: cl-full-beaconkit-0
 
-pubkey: 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
-credentials: 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5
-amount: 9000000000
-signature: 0x91fabc1d5ea3074ce85c3e2cab7bda0b667311d409eb4d5857171ba8309fa71be6e5e80d2d2d5d5558b43ca706efde7c013f0c6613038546b64c11c1959eaf80163fe40966c43fc7cb2baf2dd6c79837064c5de1d0203753dd7867650ca1ec4e
+beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT
 
-> WITHDRAW_CREDENTIAL=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/credentials: //p')
-> DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/signature: //p')
-> echo $DEPOSIT_SIGNATURE
-0x91fa....ec4e
-> echo $WITHDRAW_CREDENTIAL
-0x0100....3ef5
+# [Expected Similar Output]:
+# ✅ Deposit message created successfully!
+# 
+# pubkey: 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
+# credentials: 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5
+# amount: 9000000000
+# signature: 0x91fabc1d5ea3074ce85c3e2cab7bda0b667311d409eb4d5857171ba8309fa71be6e5e80d2d2d5d5558b43ca706efde7c013f0c6613038546b64c11c1959eaf80163fe40966c43fc7cb2baf2dd6c79837064c5de1d0203753dd7867650ca1ec4e
+
+WITHDRAW_CREDENTIAL=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/credentials: //p')
+DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/signature: //p')
+echo $DEPOSIT_SIGNATURE
+# [Expected Similar Output]:
+# 0x91fa....ec4e
+
+echo $WITHDRAW_CREDENTIAL
+# [Expected Similar Output]:
+# 0x0100....3ef5
 ```
 
 Verify the calculated signature:
