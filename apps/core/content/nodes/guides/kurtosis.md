@@ -480,8 +480,12 @@ beacond deposit validator-keys
 Obtain the genesis root hash used to calculate the deposit signature:
 
 ```bash
-> beacond genesis validator-root ~/.beacond/config/genesis.json
-0x18373bec1ac58937e25a52ce91622864a7c6ed468440a2d5ad8c617795c507d8
+# FROM: cl-full-beaconkit-0
+
+beacond genesis validator-root ~/.beacond/config/genesis.json
+
+# [Expected Similar Output]:
+# 0x18373bec1ac58937e25a52ce91622864a7c6ed468440a2d5ad8c617795c507d8
 ```
 
 Load those two values into environment variables along with a couple of other important ones we are going to use:
