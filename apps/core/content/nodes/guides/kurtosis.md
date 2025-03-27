@@ -434,6 +434,9 @@ make start-devnet
 Identify a full node from the list of activated containers in the output of `make start-devnet`. These mappings can be shown again by using `kurtosis enclave inspect my-local-devnet`.
 
 ```bash
+kurtosis enclave inspect my-local-devnet
+
+# [Expected Similar Output]
 21913e697c20   cl-full-beaconkit-0        cometbft-p2p: 26656/tcp -> 127.0.0.1:50479             RUNNING
                                           cometbft-pprof: 6060/tcp -> 127.0.0.1:50483
                                           cometbft-rpc: 26657/tcp -> 127.0.0.1:50480
