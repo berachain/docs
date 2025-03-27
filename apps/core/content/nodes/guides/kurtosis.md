@@ -549,8 +549,12 @@ echo $WITHDRAW_CREDENTIAL
 Verify the calculated signature:
 
 ```bash
-> beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_GWEI $DEPOSIT_SIGNATURE -g $GENESIS_ROOT
-✅ Deposit message is valid!
+# FROM: cl-full-beaconkit-0
+
+beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_GWEI $DEPOSIT_SIGNATURE -g $GENESIS_ROOT
+
+# [Expected Similar Output]:
+# ✅ Deposit message is valid!
 ```
 
 Generate the command to send the registration transaction. This an initial deposit of `10,000 $BERA` to create the association to the CometBFT public key, the selected operator address, and the selected withdrawal address.
