@@ -517,6 +517,8 @@ Confirm that our CometBFT client is not currently a validator:
 # FROM: cl-full-beaconkit-0
 apk add jq
 curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | grep $COMETBFT_PUB_KEY
+
+# SHOULD SHOW NO MATCHES
 ```
 
 
