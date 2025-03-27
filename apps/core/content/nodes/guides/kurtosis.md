@@ -413,7 +413,7 @@ cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {
 ## Testing Deposits
 
 In this section, we will upgrade one of the full nodes from the default Kurtosis deployment to a full validator.
-We will be following the process laid out in the [Become a Validator](/nodes/guides/validator) guide. 
+We will be following the process laid out in the [Become a Validator](/nodes/guides/validator) guide and interacting with the [BeaconDeposit](/developers/contracts/beacondeposit) contract.
 
 Revise `beaconkit-local.yml` to **remove any `tx-fuzz` or `spamoor` instances**:
 **File:** `beacon-kit/kurtosis/beaconkit-local.yml`
