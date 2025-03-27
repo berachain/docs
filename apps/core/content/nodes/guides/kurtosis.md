@@ -467,12 +467,15 @@ kurtosis service shell my-local-devnet cl-full-beaconkit-0
 Obtain the validator keys. The last one is the important one:
 
 ```bash
-> beacond deposit validator-keys
-...
+# FROM: cl-full-beaconkit-0
 
-Eth/Beacon Pubkey (Compressed 48-byte Hex):
-0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
-```
+beacond deposit validator-keys
+
+# [Expected Similar Output]:
+# ...
+# 
+# Eth/Beacon Pubkey (Compressed 48-byte Hex):
+# 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
 
 Obtain the genesis root hash used to calculate the deposit signature:
 
