@@ -416,6 +416,8 @@ In this section, we will upgrade one of the full nodes from the default Kurtosis
 We will be following the process laid out in the [Become a Validator](/nodes/guides/validator) guide. 
 
 Revise `beaconkit-local.yml` to **remove any `tx-fuzz` or `spamoor` instances**:
+**File:** `beacon-kit/kurtosis/beaconkit-local.yml`
+
 ```beaconkit-local.yml - to be removed
 ...
 additional_services:
