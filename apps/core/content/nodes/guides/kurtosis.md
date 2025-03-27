@@ -65,7 +65,7 @@ If you encounter issues, please see [Debugging Issues](#debugging-issues).
 :::
 
 ```bash
-# FROM: ./beacon-kit
+# FROM: ~/beacon-kit (host OS)
 
 make start-devnet;
 
@@ -252,6 +252,8 @@ make start-devnet;
 To verify that the local devnet is working, you can use the local Blockscout block explorer, which runs alongside the network.
 
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 open http://127.0.0.1:53414; # NOTE: Use the port number for Blockscout from the above output
 ```
 
@@ -301,7 +303,7 @@ If successful, you should see the account address `0x20f33ce90a13a4b5e7697e3544c
 To demonstrate deploying a contract to the local devnet, we will use the [Berachain Guides HelloWorld.sol](https://github.com/berachain/guides/blob/main/apps/hardhat-viem-helloworld/contracts/HelloWorld.sol).
 
 ```bash
-# FROM: ./beacon-kit;
+# FROM: ~/beacon-kit (host OS)
 
 mkdir tmp;
 touch tmp/HelloWorld.sol;
@@ -342,7 +344,7 @@ contract HelloWorld {
 We will use a `cast` request to deploy the bytecode.
 
 ```bash-vue
-# FROM: ./
+# FROM: ~/beacon-kit (host OS)
 
 forge create --rpc-url {{config.devnet.rpcUrl}} --private-key fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306 tmp/HelloWorld.sol:HelloWorld --constructor-args "Initial greeting message" --legacy;
 
@@ -366,6 +368,8 @@ open http://127.0.0.1:53414/tx/0xf18d36b5aeb9b5acc6711b65944a392fd659f34966156e4
 Next, we will read from the contract to verify that the contract was deployed and the initial message was set.
 
 ```bash-vue
+# FROM: ~/beacon-kit (host OS)
+
 cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {{config.devnet.rpcUrl}} | xxd -r -p;
 
 # [Expected Output]:
@@ -379,6 +383,8 @@ Next, we will write to the contract then read from it again with an updated mess
 Writing to the contract:
 
 ```bash-vue
+# FROM: ~/beacon-kit (host OS)
+
 cast send 0x4d31F9761DEe0132A17794018143360113575cFE "setGreeting(string)" "Hello From Devnet" --rpc-url {{config.devnet.rpcUrl}} --private-key fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306 --legacy;
 
 # [Expected Output]:
@@ -404,6 +410,8 @@ cast send 0x4d31F9761DEe0132A17794018143360113575cFE "setGreeting(string)" "Hell
 Reading from the contract:
 
 ```bash-vue
+# FROM: ~/beacon-kit (host OS)
+
 cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {{config.devnet.rpcUrl}} | xxd -r -p;
 
 # [Expected Output]:
@@ -429,6 +437,8 @@ additional_services:
 Then, clean and re-launch:
 
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 kurtosis clean -a ; docker rm -f $(docker ps -aq);
 make start-devnet
 ```
@@ -436,38 +446,44 @@ make start-devnet
 Identify a full node from the list of activated containers in the output of `make start-devnet`. These mappings can be shown again by using `kurtosis enclave inspect my-local-devnet`.
 
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 kurtosis enclave inspect my-local-devnet
 
 # [Expected Similar Output]
-21913e697c20   cl-full-beaconkit-0        cometbft-p2p: 26656/tcp -> 127.0.0.1:50479             RUNNING
-                                          cometbft-pprof: 6060/tcp -> 127.0.0.1:50483
-                                          cometbft-rpc: 26657/tcp -> 127.0.0.1:50480
-                                          metrics: 26660/tcp -> 127.0.0.1:50481
-                                          node-api: 3500/tcp -> 127.0.0.1:50482
-
-2d0220dbce46   el-full-reth-0             engine-rpc: 8551/tcp -> 127.0.0.1:50467                RUNNING
-                                          eth-json-rpc: 8545/tcp -> 127.0.0.1:50465
-                                          eth-json-rpc-ws: 8546/tcp -> 127.0.0.1:50466
-                                          metrics: 9001/tcp -> 127.0.0.1:50468
-                                          tcp-discovery: 30303/tcp -> 127.0.0.1:50469
-                                          udp-discovery: 30303/udp -> 127.0.0.1:49255
+# 21913e697c20   cl-full-beaconkit-0        cometbft-p2p: 26656/tcp -> 127.0.0.#1:50479             RUNNING
+#                                           cometbft-pprof: 6060/tcp -> 127.0.0.1:50483
+#                                           cometbft-rpc: 26657/tcp -> 127.0.0.1:50480
+#                                           metrics: 26660/tcp -> 127.0.0.1:50481
+#                                           node-api: 3500/tcp -> 127.0.0.1:50482
+#
+# 2d0220dbce46   el-full-reth-0             engine-rpc: 8551/tcp -> 127.0.0.1:50467                RUNNING
+#                                           eth-json-rpc: 8545/tcp -> 127.0.0.1:50465
+#                                           eth-json-rpc-ws: 8546/tcp -> 127.0.0.1:50466
+#                                           metrics: 9001/tcp -> 127.0.0.1:50468
+#                                           tcp-discovery: 30303/tcp -> 127.0.0.1:50469
+#                                           udp-discovery: 30303/udp -> 127.0.0.1:49255
 ```
 
 Start a log watcher that will report deposit activity:
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | egrep '(slot|deposit)'
 ```
 
 Log into the beaconkit container:
 
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 kurtosis service shell my-local-devnet cl-full-beaconkit-0
 ```
 
 Obtain the validator keys. The last one is the important one:
 
 ```bash
-# FROM: cl-full-beaconkit-0
+# FROM: ~ (cl-full-beaconkit-0 container)
 
 beacond deposit validator-keys
 
@@ -476,11 +492,12 @@ beacond deposit validator-keys
 # 
 # Eth/Beacon Pubkey (Compressed 48-byte Hex):
 # 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
+```
 
 Obtain the genesis root hash used to calculate the deposit signature:
 
 ```bash
-# FROM: cl-full-beaconkit-0
+# FROM: ~ (cl-full-beaconkit-0 container)
 
 beacond genesis validator-root ~/.beacond/config/genesis.json
 
@@ -491,6 +508,8 @@ beacond genesis validator-root ~/.beacond/config/genesis.json
 Load those two values into environment variables along with a couple of other important ones we are going to use:
 
 ```bash
+# FROM: ~ (cl-full-beaconkit-0 container)
+
 COMETBFT_PUB_KEY=$(beacond deposit validator-keys|tail -1)
 GENESIS_ROOT=$(beacond genesis validator-root ~/.beacond/config/genesis.json)
 
@@ -514,7 +533,8 @@ Notes:
 Confirm that our CometBFT client is not currently a validator:
 
 ```bash
-# FROM: cl-full-beaconkit-0
+# FROM: ~ (cl-full-beaconkit-0 container)
+
 apk add jq
 curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | grep $COMETBFT_PUB_KEY
 
@@ -525,7 +545,7 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | 
 Calculate the deposit signature, then load the calculated credential and signature to variables:
 
 ```bash
-# FROM: cl-full-beaconkit-0
+# FROM: ~ (cl-full-beaconkit-0 container)
 
 beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT
 
@@ -539,19 +559,27 @@ beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESI
 
 WITHDRAW_CREDENTIAL=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/credentials: //p')
 DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/signature: //p')
-echo $DEPOSIT_SIGNATURE
-# [Expected Similar Output]:
-# 0x91fa....ec4e
+```
 
-echo $WITHDRAW_CREDENTIAL
-# [Expected Similar Output]:
-# 0x0100....3ef5
+At this point, you have everything you need to calculate a deposit signature. If you would like to preserve this material for later re-use:
+
+```bash
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+rm env.sh
+
+for var in PK RPC_URL COMETBFT_PUB_KEY GENESIS_ROOT DEPOSIT_ADDR WITHDRAW_ADDRESS OPERATOR_ADDRESS WITHDRAW_CREDENTIAL STAKE_AMOUNT_GWEI DEPOSIT_SIGNATURE; do
+    echo "$var=${!var}" >>env.sh
+done
+
+cat env.sh
+# [SHOULD SHOW ALL VARIABLES SET]
 ```
 
 Verify the calculated signature:
 
 ```bash
-# FROM: cl-full-beaconkit-0
+# FROM: ~ (cl-full-beaconkit-0 container)
 
 beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_GWEI $DEPOSIT_SIGNATURE -g $GENESIS_ROOT
 
@@ -562,8 +590,10 @@ beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_G
 Generate the command to send the registration transaction. This an initial deposit of `10,000 $BERA` to create the association to the CometBFT public key, the selected operator address, and the selected withdrawal address.
 Note you are **printing** the command in the beacond container, then will copy and paste it to the host operating system:
 
-```bash{14}
-> echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
+```bash{17}
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
     $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $DEPOSIT_SIGNATURE $OPERATOR_ADDRESS \
     --value "${STAKE_AMOUNT_GWEI}gwei" \
     --private-key $PK                  \
@@ -571,7 +601,8 @@ Note you are **printing** the command in the beacond container, then will copy a
 # [EXAMPLE OUTPUT]
 # cast send 0x4242....
 
-> [paste above 'cast' line into the host OS]
+# FROM: ~/beacon-kit (host OS)
+[paste above 'cast' line into the host OS]
 # [EXAMPLE OUTPUT, SIMPLIFIED]
 # blockHash            0xe2157a842f2a793a5adeafa5782db29b8d691f94453ffb10f567f096e4536700
 # from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
@@ -583,30 +614,32 @@ Note you are **printing** the command in the beacond container, then will copy a
 
 At this point, you should be able to confirm in beacond that your validator is in state `pending_initialized`:
 
-```bash{6}
-> curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
-...
-  {
-    "index": "5",
-    "balance": "9000000000",
-    "status": "pending_initialized",
-    "validator": {
-      "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",
-      "withdrawal_credentials": "0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5",
-      "effective_balance": "9000000000",
-      "slashed": false,
-      "activation_eligibility_epoch": "18446744073709551615",
-      "activation_epoch": "18446744073709551615",
-      "exit_epoch": "18446744073709551615",
-      "withdrawable_epoch": "18446744073709551615"
-    }
-  }
+```bash{8}
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | tail 16
+# [EXAMPLE OUTPUT, SIMPLIFIED]
+# {
+#    "index": "5",
+#    "balance": "9000000000",
+#    "status": "pending_initialized",
+#    "validator": {
+#      "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",
+#      "withdrawal_credentials": "0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5",
+#      "effective_balance": "9000000000",
+#      "slashed": false,
+#      "activation_eligibility_epoch": "18446744073709551615",
+#      "activation_epoch": "18446744073709551615",
+#      "exit_epoch": "18446744073709551615",
+#      "withdrawable_epoch": "18446744073709551615"
 ```
 
 Now we submit a transaction for the same amount to complete the activation of the validator:
 
-```bash{17}
-> echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'      \
+```bash{20}
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'  \
     "$COMETBFT_PUB_KEY" \
     "0x0000000000000000000000000000000000000000000000000000000000000000" \
     "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" \
@@ -617,7 +650,8 @@ Now we submit a transaction for the same amount to complete the activation of th
 # [EXAMPLE OUTPUT]
 # cast send 0x4242....
 
-> [paste above 'cast' line into the host OS]
+# FROM: ~/beacon-kit (host OS)
+[paste above 'cast' line into the host OS]
 # [EXAMPLE OUTPUT, SIMPLIFIED]
 # blockHash            0x923c626ec44aea46426580ae5e8010f239f37a612c90b35ebc4299d8b75b8383
 # from                 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
@@ -625,9 +659,50 @@ Now we submit a transaction for the same amount to complete the activation of th
 # status               1 (success)
 ```
 
-**The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so watch the log output for it to roll from "sloft=...f to ...0" twice.
+**The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so observe the log watcher, which shows the slot number in hexadecimal:
 
-You will see it first showing in the activation queue:
+```
+INFO Received incoming beacon block slot=0x84
+INFO Received incoming beacon block slot=0x85
+INFO Received incoming beacon block slot=0x86
+INFO Received incoming beacon block slot=0x87    
+INFO Found deposits on execution layer block=0x86 deposits=1   // [!code warning]
+INFO Received incoming beacon block slot=0x88
+INFO Processed deposit to set Eth 1 deposit index previous=6 new=7
+INFO Processed deposit to increase balance deposit_amount=9 validator_index=0x5
+INFO Received incoming beacon block slot=0x89
+INFO Received incoming beacon block slot=0x8a
+...
+INFO Received incoming beacon block slot=0x9e
+INFO Received incoming beacon block slot=0x9f  # end of deposit epoch // [!code warning]
+INFO Received incoming beacon block slot=0xa0  
+INFO Received incoming beacon block slot=0xa1
+INFO Received incoming beacon block slot=0xa2
+INFO Received incoming beacon block slot=0xa3
+...
+INFO Received incoming beacon block slot=0xbe
+INFO Received incoming beacon block slot=0xbf # end of 1st epoch after deposit  // [!code warning]
+INFO Received incoming beacon block slot=0xc0 # state=pending_queued // [!code warning]
+INFO Received incoming beacon block slot=0xc1
+INFO Received incoming beacon block slot=0xc2
+INFO Received incoming beacon block slot=0xc3
+...
+INFO Received incoming beacon block slot=0xdd
+INFO Received incoming beacon block slot=0xde
+INFO Received incoming beacon block slot=0xdf # end of 2nd epoch after deposit  // [!code warning]
+INFO Received incoming beacon block slot=0xe0 # state=active_ongoing.  // [!code warning]
+INFO Received incoming beacon block slot=0xe1
+INFO Received incoming beacon block slot=0xe2
+...
+INFO Received incoming beacon block slot=0xeb 
+INFO Waiting for local payload to be delivered to execution client for_slot=236 timeout=850ms
+INFO Building block body with local deposits start_index=7 num_deposits=0
+INFO Beacon block successfully built slot=236 duration=855.180167ms
+INFO Received incoming beacon block slot=0xec # this validator built this block // [!code warning]
+INFO Received incoming beacon block slot=0xed
+```
+
+If you check during the activation delay, you will see it first showing in the activation queue:
 ```bash{5}
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
   {
@@ -640,7 +715,9 @@ You will see it first showing in the activation queue:
 ```
 
 And then, finally, as activated:
-```bash{5}
+```bash{7}
+# FROM: ~/beacon-kit (host OS)
+
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
     {
       "index": "5",
@@ -658,7 +735,8 @@ And then, finally, as activated:
 If Docker stops working on MacOS, first try running `kurtosis clean -a`. If the problem persists, try removing all containers and restarting Docker.
 
 ```bash
-# To remove all docker instances quickly
+# FROM: ~/beacon-kit (host OS)
+
 docker rm -f $(docker ps -aq);
 
 # [Expected Output]:
@@ -670,20 +748,26 @@ docker rm -f $(docker ps -aq);
 
 To watch logs for deposit activity:
 ```bash
+# FROM: ~/beacon-kit (host OS)
+
 kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | grep num_deposits
 ```
 
 To test whether a certain CometBFT public key is a associated with an operator addreass:
 ```bash
+# FROM: ~ (cl-full-beaconkit-0 container)
+
 echo call  $DEPOSIT_ADDR \'getOperator\(bytes\)\' $COMETBFT_PUB_KEY --rpc-url $RPC_URL --private-key $PK
 ```
+
+Then paste the resulting command into the host OS.
 
 ## Teardown and Cleanup
 
 To remove all services and clean up the environment, run the following commands:
 
 ```bash
-# FROM: ./beacon-kit
+# FROM: ~/beacon-kit (host OS)
 
 # NOTE: These may get stuck - in that case see Debugging Issues below
 make stop-devnet;
