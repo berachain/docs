@@ -2,14 +2,13 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# FeeCollector
+# TimeLock
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.feeCollector.address">{{config.mainnet.contracts.feeCollector.address}}</a><span v-if="config.mainnet.contracts.feeCollector.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.feeCollector.abi">ABI JSON</a></span></small>
 
-The Fee Collector contract is responsible for collecting fees from Berachain Dapps and
-auctioning them for a Payout token which then is distributed among the BGT stakers.
+The TimeLock contract is in charge of introducing a delay between a proposal and its execution.
 
-This contract is inspired by the [Uniswap V3 Factory Owner contract](https://github.com/uniswapfoundation/UniStaker/blob/main/src/V3FactoryOwner.sol).
+This contract is from [OpenZeppelin Governance](https://docs.openzeppelin.com/contracts/4.x/api/governance).
 
 ## Functions
 
