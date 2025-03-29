@@ -106,3 +106,58 @@ This results in the depositor receiving an increasing amount of `$BGT` daily unt
 Given that rewards are distributed on a frequent basis, the reward rate on a new reward vault should normalize after the initial three-day period.
 
 Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
+
+## Calculating `$BGT` Yield
+
+The [RewardVault](../../developers/contracts/reward-vault.md) yield is determined by several factors.
+The components of this yield calculation include:
+
+- `rewardRate`
+- `stakeToken`
+- `totalSupply`
+- Price of BGT (BERA)
+- Price of Stake Token
+
+:::tip
+The `rewardRate` value returned includes an extra precision factor of `1000000000000000000`.
+Converting this to a human readable value requires to normalize the value twice, rather than once.
+:::
+
+The units of `rewardRate` is denominated as `$BGT per second`.
+The above pieces of data allow us to calculate the yield on the Reward Vault in the following way:
+
+![RewardVaultMath](../../public/assets/BGTYieldMath.png)
+
+This formula provides the current rate that the Reward Vault is crediting depositors with BGT.
+
+### Example
+
+As a concrete example of the above formula, a reward vault with the following values can be used:
+
+| Parameter            | Value                                | Normalized          |
+| :------------------- | :----------------------------------- | :------------------ |
+| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
+| Price of BERA        | $7.8                                 | $7.8                |
+| Total Supply         | 598626940947001140289                | 598.6269409470011   |
+| Price of Stake Token | $223,845.58                          | $223,845.58         |
+| Seconds per year     | 31,536,000                           | 31,536,000          |
+
+Utilizing the fomula above:
+
+```
+numerator = 0.27249052710368116 * 31536000 * 7.8
+denominator = 598.6269409470011 * 223845.58
+
+numerator = 67027437.84938517
+denominator = 133999994.79990721
+
+result = 0.5002047794813167
+```
+
+:::tip
+The resultant value is represented as a percentage.
+Any value should be multiplied by 100 to show a human readable value.
+:::
+
+Thus, in the example, the reward vault has an estimated yield of 50%.
+These values are updated and reflected on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
