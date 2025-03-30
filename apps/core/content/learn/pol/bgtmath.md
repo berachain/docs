@@ -126,7 +126,7 @@ Converting this to a human readable value requires to normalize the value twice,
 The units of `rewardRate` is denominated as `$BGT per second`.
 The above pieces of data allow us to calculate the yield on the Reward Vault in the following way:
 
-![RewardVaultMath](../../public/assets/BGTYieldMath.png)
+$$ yield = {rewardRate \times secondsPerYear \times priceOfBGT \over totalSupply \times priceOfStakeToken} $$
 
 This formula provides the current rate that the Reward Vault is crediting depositors with BGT.
 
