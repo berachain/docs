@@ -109,15 +109,15 @@ Reward duration periods incentivize ecosystem alignment with depositors via this
 
 ## Calculating `$BGT` APR
 
-As a user, if I want to manually verify the BGT APR for a given Reward Vault, the folowing information is available on chain to do so.
+As a user, if I want to manually verify the BGT APR for a given Reward Vault, the following information is available on chain to do so.
 The value calculated corresponds to the light blue `BGT APR` value found on the Hub frontend.
 
 ![BGT APR Example](/public/assets/bgt-apr-example.png)
 
-The [RewardVault](/developers/contracts/reward-vault.md) APR is determined by several factors.
+The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
 The components of this APR calculation include:
 
-- `rewardRate` - The BGT amount added to Reward Vault staker's total claims per second
+- `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
 - `stakeToken` - The token you stake into the Reward Vault
 - `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
 - Price of `$BGT` (`$BERA`) - The assumption is made the price of `$BGT` is equivalent the `$BERA` price
