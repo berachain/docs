@@ -220,6 +220,8 @@ Displays the validator key as Comet address, Comet pubkey, and Eth/Beacon pubkey
 
 Commands for genesis file management.  These are largely only of interest to those of us maintaining Berachain, so we have stuck to the generally useful ones.
 
+### `genesis validator-root`
+
 Get and return the genesis validator root hash.
 
 ```bash
