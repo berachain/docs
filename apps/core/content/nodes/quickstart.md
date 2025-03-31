@@ -17,13 +17,13 @@ head:
 
 # Berachain Node Quickstart ⚡
 
-This guide will walk you through setting up an RPC node on a Linux or Mac computer. If you want to operate Berachain in a production environment, it will provide a guide to the layout and configuration of these services, that you can apply to your kubernetes- or systemd-based deployments.
+This guide will walk you through setting up an RPC node on a Linux or Mac computer.  If you want to operate Berachain in a production environment, it will provide a guide to the layout and configuration of these services, that you can apply to your kubernetes- or systemd-based deployments.
 
 ## Configurations ⚙️
 
 This quickstart describes both **mainnet** and **Bepolia** deployments. There are certain scenarios, specifically experimenting with validator and beacon-chain technology, where you're better off with a [local devnet from Beacon-Kit source](/nodes/kurtosis).
 
-The scripts employ a number of environment variables created in `env.sh` to store configuration preferences. Each execution layer client has its own approach to configuration, reflected in its `setup` and `run` scripts. However, `beacond` relies only upon the `CHAIN_SPEC` variable, which you should make sure is properly set in your environment.
+The scripts employ a number of environment variables created in `env.sh` to store configuration preferences. Each execution layer client has its own approach to configuration, reflected in its `setup` and `run` scripts.  However, `beacond` relies only upon the `CHAIN_SPEC` variable, which you should make sure is properly set in your environment.
 
 ### Hardware Requirements 💻
 
@@ -93,7 +93,7 @@ export ERIGON_BIN=$(command -v erigon || echo $(pwd)/erigon)
 
 You need to set these constants:
 
-1. **CHAIN_SPEC**: Set to `testnet` or `mainnet`.
+1. **CHAIN_SPEC**: Set to `testnet` or `mainnet`.  
 2. **MONIKER_NAME**: Should be a name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.

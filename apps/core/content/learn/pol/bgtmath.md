@@ -77,7 +77,7 @@ $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 This invocation creates `$BGT` that is then claimable by [Reward Vault](../pol/rewardvaults.md) stakers.
 
 :::tip
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.**
+Rewards are created on a per-block basis; however, the distribution of rewards is done **over a seven-day period.**
 :::
 
 Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts.
@@ -85,11 +85,11 @@ The reward window is reset each time new rewards are added.
 
 ### Distribution Example
 
-On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
+On Berachain, `$BGT` is distributed per block, meaning that the seven-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a weekly sliding window based on the emissions at any given time during the previous week.
 
-A more real-world example with simplified numbers can be used to understand distribution currently (taking place over 9 days):
+A more real-world example with simplified numbers can be used to understand distribution currently (taking place over 2 weeks):
 
-- 3 `$BGT` distributed daily, for a total of 27 over 9 days
+- 7 `$BGT` distributed daily, for a total of 98 over 14 days
 - 1 depositor, owning all the deposits
 
 The distribution graph would be as follows:
@@ -102,62 +102,7 @@ The distribution graph would be as follows:
 - Claimable: Total number of `$BGT` able to be claimed by depositors
 - Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
 
-This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after three days where all rewards are actively being distributed.
-Given that rewards are distributed on a frequent basis, the reward rate on a new reward vault should normalize after the initial three-day period.
+This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after 7 days where all rewards are actively being distributed.
+Given that rewards are distributed on a frequent basis, the reward rate on a new reward vault should normalize after the initial seven-day period.
 
 Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
-
-## Calculating `$BGT` Yield
-
-The [RewardVault](../../developers/contracts/reward-vault.md) yield is determined by several factors.
-The components of this yield calculation include:
-
-- `rewardRate`
-- `stakeToken`
-- `totalSupply`
-- Price of BGT (BERA)
-- Price of Stake Token
-
-:::tip
-The `rewardRate` value returned includes an extra precision factor of `1000000000000000000`.
-Converting this to a human readable value requires to normalize the value twice, rather than once.
-:::
-
-The units of `rewardRate` is denominated as `$BGT per second`.
-The above pieces of data allow us to calculate the yield on the Reward Vault in the following way:
-
-$$ yield = {rewardRate \times secondsPerYear \times priceOfBGT \over totalSupply \times priceOfStakeToken} $$
-
-This formula provides the current rate that the Reward Vault is crediting depositors with BGT.
-
-### Example
-
-As a concrete example of the above formula, a reward vault with the following values can be used:
-
-| Parameter            | Value                                | Normalized          |
-| :------------------- | :----------------------------------- | :------------------ |
-| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
-| Price of BERA        | $7.8                                 | $7.8                |
-| Total Supply         | 598626940947001140289                | 598.6269409470011   |
-| Price of Stake Token | $223,845.58                          | $223,845.58         |
-| Seconds per year     | 31,536,000                           | 31,536,000          |
-
-Utilizing the fomula above:
-
-```
-numerator = 0.27249052710368116 * 31536000 * 7.8
-denominator = 598.6269409470011 * 223845.58
-
-numerator = 67027437.84938517
-denominator = 133999994.79990721
-
-result = 0.5002047794813167
-```
-
-:::tip
-The resultant value is represented as a percentage.
-Any value should be multiplied by 100 to show a human readable value.
-:::
-
-Thus, in the example, the reward vault has an estimated yield of 50%.
-These values are updated and reflected on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
