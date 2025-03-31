@@ -191,7 +191,6 @@ beacond deposit create-validator [withdrawal-address] [amount] ?[beacond/genesis
 |------|-------------|
 | `-g, --genesis-validator-root string` | Use provided genesis validator root (if not set, beacond genesis file must be provided) |
 | `-o, --override-node-key` | Override the node private key |
-| `--validator-private-key string` | Validator private key (required if override-node-key is set) |
 
 ### `deposit validate`
 
@@ -219,49 +218,9 @@ Displays the validator key as Comet address, Comet pubkey, and Eth/Beacon pubkey
 
 ## Genesis Commands (`genesis`)
 
-Commands for genesis file management.
+Commands for genesis file management.  These are largely only of interest to those of us maintaining Berachain, so we have stuck to the generally useful ones.
 
-### `genesis add-premined-deposit`
-
-Add a validator to the genesis file with necessary credentials.
-
-```bash
-beacond genesis add-premined-deposit [flags]
-```
-
-### `genesis collect-premined-deposits`
-
-Add validators to the genesis file.
-
-```bash
-beacond genesis collect-premined-deposits [flags]
-```
-
-### `genesis execution-payload`
-
-Add eth1 genesis execution payload to the genesis file.
-
-```bash
-beacond genesis execution-payload [eth/genesis/file.json] [flags]
-```
-
-### `genesis set-deposit-storage`
-
-Update deposit contract storage in an eth genesis file.
-
-```bash
-beacond genesis set-deposit-storage [eth/genesis/file.json] [flags]
-```
-
-#### Flags
-
-| Flag | Description |
-|------|-------------|
-| `-n, --nethermind` | Use the nethermind genesis file |
-
-### `genesis validator-root`
-
-Get and return the genesis validator root.
+Get and return the genesis validator root hash.
 
 ```bash
 beacond genesis validator-root [beacond/genesis.json] [flags]
