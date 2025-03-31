@@ -21,6 +21,8 @@ The following steps will guide you through the process of increasing a Validator
 
 This guide assumes that a Validator is already in the Active Set.
 
+If you would like to test this out locally, consult our guide to a [local Kurtosis-based devnet](/nodes/guides/kurtosis), which includes instructions on testing deposits.
+
 ## Active Set & $BERA Stake
 
 Currently, the Active Set consists of `{{config.mainnet.validatorActiveSetSize}}` Validators, which is the number of Validators that can propose blocks.

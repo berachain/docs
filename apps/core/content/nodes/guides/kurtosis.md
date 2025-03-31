@@ -423,6 +423,8 @@ cast call 0x4d31F9761DEe0132A17794018143360113575cFE "getGreeting()" --rpc-url {
 In this section, we will upgrade one of the full nodes from the default Kurtosis deployment to a full validator.
 We will be following the process laid out in the [Become a Validator](/nodes/guides/validator) guide and interacting with the [BeaconDeposit](/developers/contracts/beacondeposit) contract.
 
+### Node Setup
+
 Revise `beaconkit-local.yml` to **remove any `tx-fuzz` or `spamoor` instances**:
 **File:** `beacon-kit/kurtosis/beaconkit-local.yml`
 
@@ -471,6 +473,8 @@ Start a log watcher that will report deposit activity:
 
 kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | egrep '(slot|deposit)'
 ```
+
+### Collect Registration Transaction Parameters
 
 Log into the beaconkit container:
 
@@ -587,6 +591,9 @@ beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_G
 # ✅ Deposit message is valid!
 ```
 
+
+### Send Registration Transaction
+
 Generate the command to send the registration transaction. This an initial deposit of `10,000 $BERA` to create the association to the CometBFT public key, the selected operator address, and the selected withdrawal address.
 Note you are **printing** the command in the beacond container, then will copy and paste it to the host operating system:
 
@@ -634,6 +641,8 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | 
 #      "withdrawable_epoch": "18446744073709551615"
 ```
 
+### Send Activation Transaction
+
 Now we submit a transaction for the same amount to complete the activation of the validator:
 
 ```bash{20}
@@ -659,6 +668,8 @@ echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'  \
 # status               1 (success)
 ```
 
+
+### Confirm Activation
 **The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so observe the log watcher, which shows the slot number in hexadecimal:
 
 ```

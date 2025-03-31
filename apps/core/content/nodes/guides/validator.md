@@ -29,6 +29,9 @@ If you haven't, please read through the [overview](/nodes/validator-lifecycle) t
 
 **Our goal** is to deposit your stake and establish a connection between your **validator identity** on the consensus layer, your **operator identity** on the execution layer, and the **withdrawal address** where your stake is returned when you stop being a validator.
 
+If you would like to test this out locally, consult our guide to a [local Kurtosis-based devnet](/nodes/guides/kurtosis), which includes instructions on testing deposits.
+
+
 ## Step 1: Check beacond and Set Up Environment
 
 A point of reassurance about `beacond`: it _cannot_ transact on your behalf on either the execution or consensus layers. By invoking `beacond` on the command line you are not playing with TNT strapped to your stake.
