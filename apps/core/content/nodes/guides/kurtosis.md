@@ -561,7 +561,7 @@ WITHDRAW_CREDENTIAL=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_
 DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT | sed -n 's/signature: //p')
 ```
 
-At this point, you have everything you need to calculate a deposit signature. If you would like to preserve this material for later re-use:
+At this point, you have everything you need to calculate a deposit signature. If you would like to preserve this material for later re-use, you can write all the environment variables to a file and later re-load them with `source env.sh`:
 
 ```bash
 # FROM: ~ (cl-full-beaconkit-0 container)
