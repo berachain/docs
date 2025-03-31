@@ -260,7 +260,7 @@ const SIDEBAR = {
       items: [
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
-        { text: "API Reference", link: "/beacon-kit/api" },
+        // { text: "API Reference", link: "/beacon-kit/api" },
         { text: "Changelog", link: "/beacon-kit/changelog" },
 
       ],
