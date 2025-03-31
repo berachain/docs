@@ -753,15 +753,6 @@ To watch logs for deposit activity:
 kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | grep num_deposits
 ```
 
-To test whether a certain CometBFT public key is a associated with an operator addreass:
-```bash
-# FROM: ~ (cl-full-beaconkit-0 container)
-
-echo call  $DEPOSIT_ADDR \'getOperator\(bytes\)\' $COMETBFT_PUB_KEY --rpc-url $RPC_URL --private-key $PK
-```
-
-Then paste the resulting command into the host OS.
-
 ## Teardown and Cleanup
 
 To remove all services and clean up the environment, run the following commands:
