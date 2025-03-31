@@ -39,7 +39,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
   max_num_outbound_peers = 10
   ```
   
-* `enable state pruning to reduce memory footprint considerably`
+* `State pruning disabled. This may increase memory footprint considerably`
 
   Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage.
   
