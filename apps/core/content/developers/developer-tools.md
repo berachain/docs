@@ -53,7 +53,6 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Thirdweb](https://thirdweb.com/chainlist)
 - [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 
-
 ### Wallets & Multisigs
 
 - [Metamask](https://metamask.io/)
