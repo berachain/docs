@@ -13,7 +13,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
 
   Set your RPC timeout to at least 2 seconds:
 
-  **FILE: app.toml**
+  **FILE:** `app.toml`
   ```
   rpc-timeout = "2s"
   ```
@@ -22,7 +22,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
 
   This setting is no longer used and should be be removed.
 
-  **FILE: app.toml**
+  **FILE:** `app.toml`
   ```
   rpc-retries = 10
   ```
@@ -33,7 +33,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
   We recommend that most node operators, including validators, set their maximum inbound peers to 40, and maximum outbound peers to 10.
   We previously shipped considerably higher default values for this, which can cause excessive memory and CPU consumption.
 
-  **FILE: config.toml**
+  **FILE:** `config.toml`
   ```
   max_num_inbound_peers = 40
   max_num_outbound_peers = 10
@@ -43,7 +43,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
 
   Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage.
   
-  **FILE: config.toml**
+  **FILE:** `config.toml`
   ```
   pruning = "everything"
   ```
