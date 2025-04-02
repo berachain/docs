@@ -468,6 +468,7 @@ kurtosis enclave inspect my-local-devnet
 ```
 
 Start a log watcher that will report deposit activity:
+
 ```bash
 # FROM: ~/beacon-kit (host OS)
 
@@ -493,7 +494,7 @@ beacond deposit validator-keys
 
 # [Expected Similar Output]:
 # ...
-# 
+#
 # Eth/Beacon Pubkey (Compressed 48-byte Hex):
 # 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
 ```
@@ -518,7 +519,7 @@ COMETBFT_PUB_KEY=$(beacond deposit validator-keys|tail -1)
 GENESIS_ROOT=$(beacond genesis validator-root ~/.beacond/config/genesis.json)
 
 DEPOSIT_ADDR=0x4242424242424242424242424242424242424242
-OPERATOR_ADDRESS=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5  
+OPERATOR_ADDRESS=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
 WITHDRAW_ADDRESS=$OPERATOR_ADDRESS
 STAKE_AMOUNT_GWEI=9000000000
 PK=fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306
@@ -526,13 +527,13 @@ RPC_URL=http://127.0.0.1:8547    # port number for a json-rpc in kurtosis
 ```
 
 Notes:
-* **DEPOSIT_ADDR** is the address of the BeaconDeposit contract. It's the same on mainnet.
-* **OPERATOR_ADDRESS** is an example value which you can use for this tutorial.
-* **WITHDRAW_ADDRESS** is an example value which you can use for this tutorial.
-* **STAKE_AMOUNT_GWEI** is the amount to be deposited in the depost transactions. This is `9 $BERA`.  In the devnet, a validator is activated above `18 $BERA`.  After depositing this amount a second time, the validator will be activated.
-* **PK** is the wallet address we are going to transact from. This is a private key selected from the [list seeded with the Kurtosis deployment](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
-* **RPC_URL** is the `eth-json-rpc` port exposed by Kurtosis for the `reth-0` container, shown above. Yours will be different.
 
+- **DEPOSIT_ADDR** is the address of the BeaconDeposit contract. It's the same on mainnet.
+- **OPERATOR_ADDRESS** is an example value which you can use for this tutorial.
+- **WITHDRAW_ADDRESS** is an example value which you can use for this tutorial.
+- **STAKE_AMOUNT_GWEI** is the amount to be deposited in the depost transactions. This is `9 $BERA`. In the devnet, a validator is activated above `18 $BERA`. After depositing this amount a second time, the validator will be activated.
+- **PK** is the wallet address we are going to transact from. This is a private key selected from the [list seeded with the Kurtosis deployment](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
+- **RPC_URL** is the `eth-json-rpc` port exposed by Kurtosis for the `reth-0` container, shown above. Yours will be different.
 
 Confirm that our CometBFT client is not currently a validator:
 
@@ -545,7 +546,6 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data | 
 # SHOULD SHOW NO MATCHES
 ```
 
-
 Calculate the deposit signature, then load the calculated credential and signature to variables:
 
 ```bash
@@ -555,7 +555,7 @@ beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESI
 
 # [Expected Similar Output]:
 # ✅ Deposit message created successfully!
-# 
+#
 # pubkey: 0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07
 # credentials: 0x0100000000000000000000009bcaa41dc32627776b1a4d714eef627e640b3ef5
 # amount: 9000000000
@@ -590,7 +590,6 @@ beacond deposit  validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_G
 # [Expected Similar Output]:
 # ✅ Deposit message is valid!
 ```
-
 
 ### Send Registration Transaction
 
@@ -668,15 +667,15 @@ echo cast send $DEPOSIT_ADDR \'deposit\(bytes,bytes,bytes,address\)\'  \
 # status               1 (success)
 ```
 
-
 ### Confirm Activation
-**The activation process will proceed over the next 2 complete epochs.**  The devnet has 32 blocks per epoch, so observe the log watcher, which shows the slot number in hexadecimal:
+
+**The activation process will proceed over the next 2 complete epochs.** The devnet has 32 blocks per epoch, so observe the log watcher, which shows the slot number in hexadecimal:
 
 ```
 INFO Received incoming beacon block slot=0x84
 INFO Received incoming beacon block slot=0x85
 INFO Received incoming beacon block slot=0x86
-INFO Received incoming beacon block slot=0x87    
+INFO Received incoming beacon block slot=0x87
 INFO Found deposits on execution layer block=0x86 deposits=1   // [!code warning]
 INFO Received incoming beacon block slot=0x88
 INFO Processed deposit to set Eth 1 deposit index previous=6 new=7
@@ -686,7 +685,7 @@ INFO Received incoming beacon block slot=0x8a
 ...
 INFO Received incoming beacon block slot=0x9e
 INFO Received incoming beacon block slot=0x9f  # end of deposit epoch // [!code warning]
-INFO Received incoming beacon block slot=0xa0  
+INFO Received incoming beacon block slot=0xa0
 INFO Received incoming beacon block slot=0xa1
 INFO Received incoming beacon block slot=0xa2
 INFO Received incoming beacon block slot=0xa3
@@ -705,7 +704,7 @@ INFO Received incoming beacon block slot=0xe0 # state=active_ongoing.  // [!code
 INFO Received incoming beacon block slot=0xe1
 INFO Received incoming beacon block slot=0xe2
 ...
-INFO Received incoming beacon block slot=0xeb 
+INFO Received incoming beacon block slot=0xeb
 INFO Waiting for local payload to be delivered to execution client for_slot=236 timeout=850ms
 INFO Building block body with local deposits start_index=7 num_deposits=0
 INFO Beacon block successfully built slot=236 duration=855.180167ms
@@ -714,6 +713,7 @@ INFO Received incoming beacon block slot=0xed
 ```
 
 If you check during the activation delay, you will see it first showing in the activation queue:
+
 ```bash{5}
 > curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq . | tail -n20
   {
@@ -721,11 +721,12 @@ If you check during the activation delay, you will see it first showing in the a
     "balance": "18000000000",
     "status": "pending_queued",
     "validator": {
-        "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",  
+        "pubkey": "0x80b2d75cfb977199f7474dd5bf3b039e11e4a10a01b57e922f14d3eb9df448e65e27ff356fe4082cc34c9bad8b9f0d07",
         "activation_eligibility_epoch": "7",
 ```
 
 And then, finally, as activated:
+
 ```bash{7}
 # FROM: ~/beacon-kit (host OS)
 
@@ -739,7 +740,6 @@ And then, finally, as activated:
         "activation_eligibility_epoch": "7",
         "activation_epoch": "8",
 ```
-
 
 ## Debugging Issues
 
@@ -758,6 +758,7 @@ docker rm -f $(docker ps -aq);
 ```
 
 To watch logs for deposit activity:
+
 ```bash
 # FROM: ~/beacon-kit (host OS)
 
@@ -779,4 +780,3 @@ make rm-devnet;
 # kurtosis enclave stop my-local-devnet
 # ...
 ```
-
