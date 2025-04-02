@@ -1,6 +1,6 @@
 # Berachain Node (`beacond`) Reference
 
-`beacond` is a basic beacon node implementation for Berachain, usable with most standard networks.
+`beacond`, is an EVM consensus client implementation used as a basic beacon node for Berachain. See [BeaconKit Consensus Layer](/nodes/beaconkit-consensus) for more details.
 
 ## Global Flags
 
