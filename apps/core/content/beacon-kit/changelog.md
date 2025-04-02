@@ -3,7 +3,7 @@
 
 ## Version 1.1.4
 
-Imrpoves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
+Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
 
 ### Configuration recommendations
 
@@ -20,7 +20,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
 
 * `ignoring deprecated setting rpc-retries`
 
-  This setting is no longer used and should be be removed.
+  This setting is no longer used and should be removed.
 
   **FILE:** `app.toml`
   ```
