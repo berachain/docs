@@ -21,6 +21,11 @@ This is a list of addresses where contracts can be read from or written to.
 
 > A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
 
+:::info
+Deployed contracts have received several audits from various parties.
+All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).
+:::
+
 ## Mainnet Contracts
 
 ### Proof-of-Liquidity

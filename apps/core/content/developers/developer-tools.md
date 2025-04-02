@@ -50,6 +50,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Tenderly](https://dashboard.tenderly.co/)
 - [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
+- [DRPC](https://drpc.org/chainlist/berachain)
 
 ### Wallets & Multisigs
 
