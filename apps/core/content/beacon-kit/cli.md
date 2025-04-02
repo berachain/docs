@@ -6,8 +6,8 @@
 
 These flags apply to all commands:
 
-| Flag | Description |
-|------|-------------|
+| Flag            | Description                                           |
+| --------------- | ----------------------------------------------------- |
 | `--home string` | Directory for config and data (default: `~/.beacond`) |
 
 ## Basic Commands
@@ -22,13 +22,13 @@ beacond init <moniker> [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
-| `--chain-id string` | Genesis file chain-id (randomly created if blank) |
-| `--default-denom string` | Genesis file default denomination (default: "stake") |
-| `--initial-height int` | Initial block height at genesis (default: 1) |
-| `-o, --overwrite` | Overwrite the genesis.json file |
-| `--recover` | Recover existing key using seed phrase instead of creating new one |
+| Flag                     | Description                                                        |
+| ------------------------ | ------------------------------------------------------------------ |
+| `--chain-id string`      | Genesis file chain-id (randomly created if blank)                  |
+| `--default-denom string` | Genesis file default denomination (default: "stake")               |
+| `--initial-height int`   | Initial block height at genesis (default: 1)                       |
+| `-o, --overwrite`        | Overwrite the genesis.json file                                    |
+| `--recover`              | Recover existing key using seed phrase instead of creating new one |
 
 ### `start`
 
@@ -42,17 +42,17 @@ beacond start [flags]
 
 The `start` command has numerous configuration flags for networking, consensus, pruning, and more. Key flags include:
 
-| Flag | Description |
-|------|-------------|
-| `--abci string` | ABCI transport (socket or grpc) (default: "socket") |
-| `--address string` | Listen address (default: "tcp://127.0.0.1:26658") |
-| `--db_backend string` | Database backend (default: "pebbledb") |
-| `--moniker string` | Node name |
-| `--p2p.laddr string` | Node listen address (default: "tcp://0.0.0.0:26656") |
-| `--p2p.persistent_peers string` | Comma-delimited ID@host:port persistent peers |
-| `--p2p.seeds string` | Comma-delimited ID@host:port seed nodes |
-| `--pruning string` | Pruning strategy (default\|nothing\|everything\|custom) |
-| `--rpc.laddr string` | RPC listen address (default: "tcp://127.0.0.1:26657") |
+| Flag                            | Description                                             |
+| ------------------------------- | ------------------------------------------------------- |
+| `--abci string`                 | ABCI transport (socket or grpc) (default: "socket")     |
+| `--address string`              | Listen address (default: "tcp://127.0.0.1:26658")       |
+| `--db_backend string`           | Database backend (default: "pebbledb")                  |
+| `--moniker string`              | Node name                                               |
+| `--p2p.laddr string`            | Node listen address (default: "tcp://0.0.0.0:26656")    |
+| `--p2p.persistent_peers string` | Comma-delimited ID@host:port persistent peers           |
+| `--p2p.seeds string`            | Comma-delimited ID@host:port seed nodes                 |
+| `--pruning string`              | Pruning strategy (default\|nothing\|everything\|custom) |
+| `--rpc.laddr string`            | RPC listen address (default: "tcp://127.0.0.1:26657")   |
 
 Additional flags are available for detailed engine configuration, beacon-kit settings, and consensus parameters.
 
@@ -66,10 +66,10 @@ beacond status [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
-| `-n, --node string` | Node to connect to (default: "tcp://localhost:26657") |
-| `-o, --output string` | Output format (text\|json) (default: "json") |
+| Flag                  | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| `-n, --node string`   | Node to connect to (default: "tcp://localhost:26657") |
+| `-o, --output string` | Output format (text\|json) (default: "json")          |
 
 ### `version`
 
@@ -81,9 +81,9 @@ beacond version [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
-| `--long` | Print long version information |
+| Flag                  | Description                                  |
+| --------------------- | -------------------------------------------- |
+| `--long`              | Print long version information               |
 | `-o, --output string` | Output format (text\|json) (default: "text") |
 
 ### `rollback`
@@ -96,8 +96,8 @@ beacond rollback [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag     | Description                        |
+| -------- | ---------------------------------- |
 | `--hard` | Remove last block as well as state |
 
 ## CometBFT Commands (`comet`)
@@ -114,8 +114,8 @@ beacond comet bootstrap-state [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag           | Description                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------ |
 | `--height int` | Block height to bootstrap state at (uses latest block height in app state if not provided) |
 
 ### `comet reset-state`
@@ -160,9 +160,9 @@ beacond comet unsafe-reset-all [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
-| `--keep-addr-book` | Keep the address book intact |
+| Flag                    | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `--keep-addr-book`      | Keep the address book intact                                          |
 | `-k, --key-type string` | Private key type (ed25519\|secp256k1\|bls12_381) (default: "ed25519") |
 
 ### `comet version`
@@ -187,10 +187,10 @@ beacond deposit create-validator [withdrawal-address] [amount] ?[beacond/genesis
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                                  | Description                                                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
 | `-g, --genesis-validator-root string` | Use provided genesis validator root (if not set, beacond genesis file must be provided) |
-| `-o, --override-node-key` | Override the node private key |
+| `-o, --override-node-key`             | Override the node private key                                                           |
 
 ### `deposit validate`
 
@@ -202,8 +202,8 @@ beacond deposit validate [pubkey] [withdrawal-credentials] [amount] [signature] 
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                                  | Description                                                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
 | `-g, --genesis-validator-root string` | Use provided genesis validator root (if not set, beacond genesis file must be provided) |
 
 ### `deposit validator-keys`
@@ -218,7 +218,7 @@ Displays the validator key as Comet address, Comet pubkey, and Eth/Beacon pubkey
 
 ## Genesis Commands (`genesis`)
 
-Commands for genesis file management.  These are largely only of interest to those of us maintaining Berachain, so we have stuck to the generally useful ones.
+Commands for genesis file management. These are largely only of interest to those of us maintaining Berachain, so we have stuck to the generally useful ones.
 
 ### `genesis validator-root`
 
@@ -242,8 +242,8 @@ beacond jwt generate [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                       | Description                                                         |
+| -------------------------- | ------------------------------------------------------------------- |
 | `-o, --output-path string` | Optional output file path for the JWT secret (default: "./jwt.hex") |
 
 ### `jwt validate`
@@ -256,6 +256,6 @@ beacond jwt validate [flags]
 
 #### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                      | Description                                                        |
+| ------------------------- | ------------------------------------------------------------------ |
 | `-i, --input-path string` | Optional input file path for the JWT secret (default: "./jwt.hex") |

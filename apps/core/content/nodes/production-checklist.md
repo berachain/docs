@@ -25,11 +25,12 @@ There are several ingredients to successful peering:
 2. **Peers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client. `reth` accepts a `--trusted-peers` option.
 3. **Remember, peers are not the same as bootnodes.** Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks. Ensure your firewall allows both UDP and TCP traffic to your chain clients, for both consensus and execution layer, for the ports they are configured to listen on. In the default configurations we provide, this is TCP and UDP 30303 for the execution layer, and TCP 26657 for the consensus layer.
 4. **Indicate your node's external IP address.** In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option, For Beacon Kit this is configured with `p2p.external_addresss` in `config.toml`.
-5. **40 inbound + 10 outbound peers for beacond**.  We recommend the following settings `config.toml` for healthy peering with reasonable resource usage:
-    ```
-    max_num_inbound_peers = 40
-    max_num_outbound_peers = 10
-    ```
+5. **40 inbound + 10 outbound peers for beacond**. We recommend the following settings `config.toml` for healthy peering with reasonable resource usage:
+   ```
+   max_num_inbound_peers = 40
+   max_num_outbound_peers = 10
+   ```
+
 ### Let us know who you are
 
 If you have launched a validator on the chain, it's in your interest to let us know who you are, so we know who to contact in case there's trouble with on-chain performance or actions.
