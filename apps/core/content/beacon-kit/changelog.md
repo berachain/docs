@@ -60,6 +60,7 @@ Now, every RPC communication issue among them will result in a BeaconKit termina
 To that end, configure Reth to not forget blocks on exit with these command line options:
 
 ```bash
+# Reth execution client required flags
 --engine.persistence-threshold 0
 --engine.memory-block-buffer-target 0
 ```
