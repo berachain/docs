@@ -256,6 +256,16 @@ const SIDEBAR = {
       ],
     },
     {
+      text: "Beacon Kit",
+      items: [
+        { text: "CLI Reference", link: "/beacon-kit/cli" },
+        { text: "Configuration Reference", link: "/beacon-kit/configuration" },
+        // { text: "API Reference", link: "/beacon-kit/api" },
+        { text: "Changelog", link: "/beacon-kit/changelog" },
+      ],
+    },
+
+    {
       text: "Help",
       items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }],
     },
@@ -268,6 +278,7 @@ export const sidebar: DefaultTheme.Sidebar = {
   "/learn": SIDEBAR.LEARN,
   "/developers": SIDEBAR.DEVELOPERS,
   "/nodes": SIDEBAR.NODES,
+  "/beacon-kit": SIDEBAR.NODES,
   // NOTE: This has to be the last in order to prevent it overriding all pages
   // "/": SIDEBAR.LEARN,
 };

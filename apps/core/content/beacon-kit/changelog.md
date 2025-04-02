@@ -1,0 +1,79 @@
+# Beacon Kit Changelog
+
+
+## Version 1.1.4
+
+Imrpoves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
+
+### Configuration recommendations
+
+On startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
+
+* ```WARN Automatically raising RPCTimeout ... minimum=2000```
+
+  Set your RPC timeout to at least 2 seconds:
+
+  **FILE:** `app.toml`
+  ```
+  rpc-timeout = "2s"
+  ```
+
+* `ignoring deprecated setting rpc-retries`
+
+  This setting is no longer used and should be be removed.
+
+  **FILE:** `app.toml`
+  ```
+  rpc-retries = 10
+  ```
+
+
+* `excessive peering`
+
+  We recommend that most node operators, including validators, set their maximum inbound peers to 40, and maximum outbound peers to 10.
+  We previously shipped considerably higher default values for this, which can cause excessive memory and CPU consumption.
+
+  **FILE:** `config.toml`
+  ```
+  max_num_inbound_peers = 40
+  max_num_outbound_peers = 10
+  ```
+  
+* `State pruning disabled. This may increase memory footprint considerably`
+
+  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage.
+  
+  **FILE:** `config.toml`
+  ```
+  pruning = "everything"
+  ```
+
+
+
+
+## Version 1.1.3
+
+This release restructures Consensus Layer and Execution Layer communication to keep them in lock-step.
+
+Now, every RPC communication issue among them will result in a BeaconKit termination *but* keeps their states in sync so you can easily restart any time and keep going.
+
+To that end, configure Reth to not forget blocks on exit with these command line options:
+
+```bash
+# Reth execution client required flags
+--engine.persistence-threshold 0
+--engine.memory-block-buffer-target 0
+```
+
+You don’t need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
+
+
+## Version 1.1.2
+
+This is a security-focused update:
+* Harden timestamp validation of EL payload
+* Prevent potential panics and node halts while decoding data
+
+## Version 1.1.0
+
+BeaconKit v1.1.0 unlocks minting of BERA tokens towards the BGT contract.
