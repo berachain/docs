@@ -10,178 +10,286 @@ The TimeLock contract is in charge of introducing a delay between a proposal and
 
 This contract is from [OpenZeppelin Governance](https://docs.openzeppelin.com/contracts/4.x/api/governance).
 
+## State Variables
+
+### PROPOSER_ROLE
+
+```solidity
+bytes32 public constant PROPOSER_ROLE = keccak256("PROPOSER_ROLE");
+```
+
+### EXECUTOR_ROLE
+
+```solidity
+bytes32 public constant EXECUTOR_ROLE = keccak256("EXECUTOR_ROLE");
+```
+
+### CANCELLER_ROLE
+
+```solidity
+bytes32 public constant CANCELLER_ROLE = keccak256("CANCELLER_ROLE");
+```
+
 ## Functions
 
-### queuePayoutAmountChange
+### getMinDelay
 
-Queues a new payout amount. Must be called by admin.
-
-Update the payout amount to a new value. Must be called by admin.
+Returns the minimum delay in seconds for an operation to become valid.
+This value can be changed by executing an operation that calls `updateDelay`.
 
 ```solidity
-function queuePayoutAmountChange(uint256 _newPayoutAmount) external;
+function getMinDelay() public view virtual returns (uint256);
+```
+
+### getOperationState
+
+Returns operation state.
+
+```solidity
+function getOperationState(bytes32 id) public view virtual returns (OperationState)
 ```
 
 **Parameters**
 
-| Name               | Type      | Description                                   |
-| ------------------ | --------- | --------------------------------------------- |
-| `_newPayoutAmount` | `uint256` | The value that will be the new payout amount. |
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
 
-### payoutToken
+### getTimestamp
 
-The ERC-20 token which must be used to pay for fees when claiming dapp fees.
-
-```solidity
-function payoutToken() external view returns (address);
-```
-
-### queuedPayoutAmount
-
-The amount of payout token that is queued to be set as the payout amount.
-
-_It becomes the payout amount after the next claim._
+Returns the timestamp at which an operation becomes ready (0 for unset operations, 1 for done operations).
 
 ```solidity
-function queuedPayoutAmount() external view returns (uint256);
-```
-
-### payoutAmount
-
-The amount of payout token that is required to claim dapp fees of a particular token.
-
-_This works as first come first serve basis. whoever pays this much amount of the payout amount first will
-get the fees._
-
-```solidity
-function payoutAmount() external view returns (uint256);
-```
-
-### rewardReceiver
-
-The contract that receives the payout and is notified via method call, when dapp fees are claimed.
-
-```solidity
-function rewardReceiver() external view returns (address);
-```
-
-### claimFees
-
-Claim collected dapp fees and transfer them to the recipient.
-
-_Caller needs to pay the PAYMENT_AMOUNT of PAYOUT_TOKEN tokens._
-
-_This function is NOT implementing slippage protection. Caller has to check that received amounts match the
-minimum expected._
-
-```solidity
-function claimFees(address recipient, address[] calldata feeTokens) external;
+function getTimestamp(bytes32 id) public view virtual returns (uint256);
 ```
 
 **Parameters**
 
-| Name        | Type        | Description                                                   |
-| ----------- | ----------- | ------------------------------------------------------------- |
-| `recipient` | `address`   | The address to which collected dapp fees will be transferred. |
-| `feeTokens` | `address[]` | The addresses of the fee token to collect to the recipient.   |
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
 
-### donate
+### isOperation
 
-directly sends dapp fees from msg.sender to the BGTStaker reward receiver.
-
-_The dapp fee ERC20 token MUST be the payoutToken._
-
-_The amount must be at least payoutAmount to notify the reward receiver._
+Returns whether an id corresponds to a registered operation. This includes both Waiting, Ready, and Done operations.
 
 ```solidity
-function donate(uint256 amount) external;
+function isOperation(bytes32 id) public view returns (bool);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                                      |
-| -------- | --------- | ---------------------------------------------------------------- |
-| `amount` | `uint256` | the amount of fee token to directly send to the reward receiver. |
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
 
-### pause
+### isOperationPending
 
-Allows the owner to pause the collector.
-
-```solidity
-function pause() external;
-```
-
-### unpause
-
-Allows the owner to unpause the collector.
+Returns whether an operation is pending or not. Note that a "pending" operation may also be "ready".
 
 ```solidity
-function unpause() external;
+function isOperationPending(bytes32 id) public view returns (bool);
 ```
+
+**Parameters**
+
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
+
+### isOperationReady
+
+Returns whether an operation is ready for execution. Note that a "ready" operation is also "pending".
+
+```solidity
+function isOperationReady(bytes32 id) public view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
+
+### isOperationDone
+
+Returns whether an operation is done or not.
+
+```solidity
+function isOperationDone(bytes32 id) public view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type      | Description      |
+| ---- | --------- | ---------------- |
+| `id` | `bytes32` | The operationId. |
 
 ## Events
 
-### QueuedPayoutAmount
+### TimelockInvalidOperationLength
 
-Emitted when the admin queues the payout amount.
-
-```solidity
-event QueuedPayoutAmount(uint256 queuedPayoutAmount, uint256 currentPayoutAmount);
-```
-
-### PayoutAmountSet
-
-Emitted when the payout amount is updated.
-
-Emitted when the admin updates the payout amount.
+Mismatch between the parameters length for an operation call.
 
 ```solidity
-event PayoutAmountSet(uint256 indexed oldPayoutAmount, uint256 indexed newPayoutAmount);
-```
-
-### FeesClaimed
-
-Emitted when the dapp fees are claimed.
-
-```solidity
-event FeesClaimed(address indexed caller, address indexed recipient);
+error TimelockInvalidOperationLength(uint256 targets, uint256 payloads, uint256 values);
 ```
 
 **Parameters**
 
-| Name        | Type      | Description                                                   |
-| ----------- | --------- | ------------------------------------------------------------- |
-| `caller`    | `address` | Caller of the `claimFees` function.                           |
-| `recipient` | `address` | The address to which collected dapp fees will be transferred. |
+| Name       | Type      | Description         |
+| ---------- | --------- | ------------------- |
+| `targets`  | `uint256` | Number of targets.  |
+| `payloads` | `uint256` | Number of payloads. |
+| `values`   | `uint256` | Number of values.   |
 
-### PayoutDonated
+### TimelockInsufficientDelay
 
-Emitted when the `PayoutToken` is donated.
+The schedule operation doesn't meet the minimum delay.
 
 ```solidity
-event PayoutDonated(address indexed caller, uint256 amount);
+error TimelockInsufficientDelay(uint256 delay, uint256 minDelay);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                    |
-| -------- | --------- | ---------------------------------------------- |
-| `caller` | `address` | Caller of the `donate` function.               |
-| `amount` | `uint256` | The amount of payout token that is transfered. |
+| Name       | Type      | Description     |
+| ---------- | --------- | --------------- |
+| `delay`    | `uint256` | Provided delay. |
+| `minDelay` | `uint256` | Minimum delay.  |
 
-### FeesClaimed
+### TimelockUnexpectedOperationState
 
-Emitted when the fees are claimed.
+The current state of an operation is not as required.
+The `expectedStates` is a bitmap with the bits enabled for each OperationState enum position
+counting from right to left.
+See {\_encodeStateBitmap}.
 
 ```solidity
-event FeesClaimed(address indexed caller, address indexed recipient, address indexed feeToken, uint256 amount);
+error TimelockUnexpectedOperationState(bytes32 operationId, bytes32 expectedStates);
 ```
 
 **Parameters**
 
-| Name        | Type      | Description                                                   |
-| ----------- | --------- | ------------------------------------------------------------- |
-| `caller`    | `address` | Caller of the `claimFees` function.                           |
-| `recipient` | `address` | The address to which collected dapp fees will be transferred. |
-| `feeToken`  | `address` | The address of the fee token to collect.                      |
-| `amount`    | `uint256` | The amount of fee token to transfer.                          |
+| Name             | Type      | Description               |
+| ---------------- | --------- | ------------------------- |
+| `operationId`    | `bytes32` | The operation identifier. |
+| `expectedStates` | `bytes32` | Bitmap of OperationState. |
+
+### TimelockUnexecutedPredecessor
+
+The predecessor to an operation not yet done.
+
+```solidity
+error TimelockUnexecutedPredecessor(bytes32 predecessorId);
+```
+
+**Parameters**
+
+| Name            | Type      | Description                     |
+| --------------- | --------- | ------------------------------- |
+| `predecessorId` | `bytes32` | Previous operation operationId. |
+
+### TimelockUnauthorizedCaller
+
+The caller account is not authorized.
+
+```solidity
+error TimelockUnauthorizedCaller(address caller);
+```
+
+**Parameters**
+
+| Name     | Type      | Description     |
+| -------- | --------- | --------------- |
+| `caller` | `address` | Caller address. |
+
+### CallScheduled
+
+Emitted when a call is scheduled as part of operation `id`.
+
+```solidity
+event CallScheduled(
+    bytes32 indexed id,
+    uint256 indexed index,
+    address target,
+    uint256 value,
+    bytes data,
+    bytes32 predecessor,
+    uint256 delay
+);
+```
+
+**Parameters**
+
+| Name          | Type      | Description                     |
+| ------------- | --------- | ------------------------------- |
+| `id`          | `bytes32` | Call associated id.             |
+| `index`       | `uint256` | Call index.                     |
+| `target`      | `address` | Target address.                 |
+| `value`       | `uint256` | Amount of BERA sent with call.  |
+| `data`        | `bytes`   | Data sent with call.            |
+| `predecessor` | `bytes32` | Previous operation operationId. |
+| `delay`       | `uint256` | Execution delay.                |
+
+### CallExecuted
+
+Emitted when a call is performed as part of operation `id`.
+
+```solidity
+event CallExecuted(bytes32 indexed id, uint256 indexed index, address target, uint256 value, bytes data);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                    |
+| -------- | --------- | ------------------------------ |
+| `id`     | `bytes32` | Call associated id.            |
+| `index`  | `uint256` | Call index.                    |
+| `target` | `address` | Target address.                |
+| `value`  | `uint256` | Amount of BERA sent with call. |
+| `data`   | `bytes`   | Data sent with call.           |
+
+### CallSalt
+
+Emitted when new proposal is scheduled with non-zero salt.
+
+```solidity
+event CallSalt(bytes32 indexed id, bytes32 salt);
+```
+
+**Parameters**
+
+| Name   | Type      | Description           |
+| ------ | --------- | --------------------- |
+| `id`   | `bytes32` | Call associated id.   |
+| `salt` | `bytes32` | Call associated salt. |
+
+### Cancelled
+
+Emitted when operation `id` is cancelled.
+
+```solidity
+event Cancelled(bytes32 indexed id);
+```
+
+**Parameters**
+
+| Name | Type      | Description         |
+| ---- | --------- | ------------------- |
+| `id` | `bytes32` | Call associated id. |
+
+### MinDelayChange
+
+Emitted when the minimum delay for future operations is modified.
+
+```solidity
+event MinDelayChange(uint256 oldDuration, uint256 newDuration);
+```
+
+**Parameters**
+
+| Name          | Type      | Description         |
+| ------------- | --------- | ------------------- |
+| `oldDuration` | `uint256` | Old delay duration. |
+| `newDuration` | `uint256` | New delay duration. |
