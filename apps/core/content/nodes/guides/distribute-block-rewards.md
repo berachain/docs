@@ -34,7 +34,7 @@ Anyone can trigger this function, as long as they have access to the proof gener
 There are a few points to consider with distribution:
 
 1. **Distribute At Block N-1** - The Distributor contract can only distribute block rewards for the block that was last created and not the current block.
-2. **Block Rewards Expiration** - If rewards are not distributed within `{{config.mainnet.rewardDistributionTimeExpiration}}` seconds, the rewards are lost.
+2. **Block Rewards Expiration** - If rewards are not distributed within `{{config.mainnet.rewardDistributionTimeExpiration}}` blocks, the rewards are lost.
 3. **Foundation Trigger Fallback** - The Berachain foundation has set up a service to call the `distributeFor` function periodically, including sometimes in a `multicall` to ensure that block rewards are distributed. However, this fallback should be considered a last resort, and Validators should plan to set up a service to handle triggering the distribution themselves.
 4. **Block Reward Tracking** - It is recommended that node operators track the block rewards they have distributed to ensure that they are not missing any rewards.
 
