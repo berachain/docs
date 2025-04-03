@@ -425,15 +425,17 @@ We will be following the process laid out in the [Become a Validator](/nodes/gui
 
 ### Node Setup
 
-Revise `beaconkit-local.yml` to **remove any `tx-fuzz` or `spamoor` instances**:
+Revise `beaconkit-local.yml` to **remove all additional services:**:
+
 **File:** `beacon-kit/kurtosis/beaconkit-local.yml`
 
-```beaconkit-local.yml - to be removed
-...
-additional_services:
+```beaconkit-local.yml
+additional_services:   // [!code --]
   - name: "spamoor"    // [!code --]
   - name: "tx-fuzz"    // [!code --]
-...
+      replicas: 16     // [!code --]
+  - name: "prometheus" // [!code --]
+...                    // [!code --]
 ```
 
 Then, clean and re-launch:
