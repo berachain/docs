@@ -75,4 +75,4 @@ Voluntary withdrawals are not yet implemented on Berachain and will be coming in
 
 Block rewards are in the form of `$BGT`, with a base reward of `{{config.mainnet.validatorBaseBGTReward}}` `$BGT` per block proposed.
 
-Rewards are not distributed automatically and require that the block rewards be distributed via the [`Distributor`](/developers/contracts/distributor) contract. Distribution must occur before `{{config.mainnet.rewardDistributionTimeExpiration}}` blocks have passed, or validators risk losing those rewards.
+Rewards are not distributed automatically and require that the block rewards be distributed via the [`Distributor`](/developers/contracts/distributor) contract. Distribution must occur before `{{config.mainnet.rewardDistributionTimeExpiration}}` seconds have passed, or validators risk losing those rewards.
