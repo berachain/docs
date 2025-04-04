@@ -46,10 +46,11 @@ These are a list of community developer guides for Berachain.
 
 ## Indexing and Querying
 
-| Project Name                              | Git Repository                                                                   |
-| ----------------------------------------- | -------------------------------------------------------------------------------- |
-| Index & Query Berachain Data with Goldsky | [GitHub](https://github.com/berachain/guides/tree/main/apps/goldsky-subgraph)    |
-| Envio Indexer ERC20                       | [GitHub](https://github.com/berachain/guides/tree/main/apps/envio-indexer-erc20) |
+| Project Name                                | Git Repository                                                                   |
+| ------------------------------------------- | -------------------------------------------------------------------------------- |
+| Index & Query Berachain Data with Goldsky   | [GitHub](https://github.com/berachain/guides/tree/main/apps/goldsky-subgraph)    |
+| Index & Query Berachain Data with The Graph | [Guide](https://thegraph.com/docs/en/subgraphs/quick-start/)                     |
+| Envio Indexer ERC20                         | [GitHub](https://github.com/berachain/guides/tree/main/apps/envio-indexer-erc20) |
 
 ## Verifiable Randomness
 
