@@ -21,7 +21,7 @@ This list is used to update formation such as:
 - Price Feeds
 - Tags
 
-A team may submit a pull request to the [Metadata](https://github.com/berachain/metadata/tree/main) repository to update these values.
+A team may submit a pull request to the [Metadata](https://github.com/berachain/metadata) repository to update these values.
 dApps utilizing the token list, such as BEX, will be able to show your token's information and logo.
 
 Please make sure to over the [Metadata CONTRIBUTING.md](https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md) for the full details on contributing.
