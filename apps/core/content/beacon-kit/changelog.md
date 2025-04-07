@@ -39,11 +39,11 @@ Also, on startup, beacond now issues warnings about deprecated settings, or sett
   
 * `State pruning disabled. This may increase memory footprint considerably`
 
-  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage.
+  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage. Validators should use `default`, and RPC noodes can use `everything`.
   
   **FILE:** `config.toml`
   ```
-  pruning = "everything"
+  pruning = "default"
   ```
 
 

@@ -8,7 +8,7 @@ These options appear at the top of the file without a section header.
 
 | Option                  | Description                                                                | Default Value  |
 | ----------------------- | -------------------------------------------------------------------------- | -------------- |
-| `pruning`               | Pruning strategy for state storage                                         | `"everything"` |
+| `pruning`               | Pruning strategy for state storage. Validators should use `default`.       | `"everything"` |
 | `pruning-keep-recent`   | Number of recent states to keep when using `custom` pruning                | `"0"`          |
 | `pruning-interval`      | Interval for state pruning when using `custom` pruning                     | `"0"`          |
 | `halt-height`           | Block height at which to gracefully halt the node                          | `0`            |
