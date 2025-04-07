@@ -41,7 +41,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
   
 * `State pruning disabled. This may increase memory footprint considerably`
 
-  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage.
+  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage. Simple RPC nodes can use `everything`, and validator nodes should use `everything`.  The only exception is if your node is being used to (calcualate block reward claims)[https://docs.berachain.com/nodes/guides/distribute-block-rewards], in which case the `default` setting is a good choice, but this **should not** be done on the validator itself.
   
   **FILE:** `config.toml`
   ```
@@ -49,9 +49,7 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
   ```
 
 
-
-
-## Version 1.1.3
+## v1.1.3: fix `deposit mismatch`
 
 This release restructures Consensus Layer and Execution Layer communication to keep them in lock-step.
 

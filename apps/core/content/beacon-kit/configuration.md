@@ -6,17 +6,17 @@
 
 These options appear at the top of the file without a section header.
 
-| Option                  | Description                                                                | Default Value  |
-| ----------------------- | -------------------------------------------------------------------------- | -------------- |
-| `pruning`               | Pruning strategy for state storage                                         | `"everything"` |
-| `pruning-keep-recent`   | Number of recent states to keep when using `custom` pruning                | `"0"`          |
-| `pruning-interval`      | Interval for state pruning when using `custom` pruning                     | `"0"`          |
-| `halt-height`           | Block height at which to gracefully halt the node                          | `0`            |
-| `halt-time`             | Unix timestamp at which to gracefully halt the node                        | `0`            |
-| `min-retain-blocks`     | Minimum block height offset from current block for pruning CometBFT blocks | `0`            |
-| `inter-block-cache`     | Enables inter-block caching                                                | `true`         |
-| `iavl-cache-size`       | Size of the IAVL tree cache (in number of nodes)                           | `2500`         |
-| `iavl-disable-fastnode` | Disables the fast node feature of IAVL                                     | `true`         |
+| Option                  | Description                                                                                                   | Default Value  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
+| `pruning`               | Pruning strategy for state storage. Only nodes that calculate block reward claim transactions need `default`. | `"everything"` |
+| `pruning-keep-recent`   | Number of recent states to keep when using `custom` pruning                                                   | `"0"`          |
+| `pruning-interval`      | Interval for state pruning when using `custom` pruning                                                        | `"0"`          |
+| `halt-height`           | Block height at which to gracefully halt the node                                                             | `0`            |
+| `halt-time`             | Unix timestamp at which to gracefully halt the node                                                           | `0`            |
+| `min-retain-blocks`     | Minimum block height offset from current block for pruning CometBFT blocks                                    | `0`            |
+| `inter-block-cache`     | Enables inter-block caching                                                                                   | `true`         |
+| `iavl-cache-size`       | Size of the IAVL tree cache (in number of nodes)                                                              | `2500`         |
+| `iavl-disable-fastnode` | Disables the fast node feature of IAVL                                                                        | `true`         |
 
 #### Pruning Options
 
