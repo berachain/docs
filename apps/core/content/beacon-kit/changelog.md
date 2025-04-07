@@ -1,13 +1,11 @@
 # Beacon Kit Changelog
 
 
-## Version 1.1.4
+## v1.1.4: configuration advice
 
 Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
 
-### Configuration recommendations
-
-On startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
+Also, on startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
 
 * ```WARN Automatically raising RPCTimeout ... minimum=2000```
 
@@ -43,11 +41,10 @@ On startup, beacond now issues warnings about deprecated settings, or settings t
 
   Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage. Simple RPC nodes can use `everything`, and validator nodes should use `everything`.  The only exception is if your node is being used to (calcualate block reward claims)[https://docs.berachain.com/nodes/guides/distribute-block-rewards], in which case the `default` setting is a good choice, but this **should not** be done on the validator itself.
   
-  **FILE:** `config.toml`
+  **FILE:** `app.toml`
   ```
-  pruning = "everything"
+  pruning = "default"
   ```
-
 
 ## v1.1.3: fix `deposit mismatch`
 
@@ -66,12 +63,16 @@ To that end, configure Reth to not forget blocks on exit with these command line
 You don’t need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
 
 
-## Version 1.1.2
+## v1.1.2: security improvements
 
 This is a security-focused update:
 * Harden timestamp validation of EL payload
 * Prevent potential panics and node halts while decoding data
 
-## Version 1.1.0
+## v1.1.1: fixes potential halt
 
-BeaconKit v1.1.0 unlocks minting of BERA tokens towards the BGT contract.
+BeaconKit 1.1.1 fixes ASA-2025-001 and ASA-2025-002, which could lead to a network halt. Moreover it hardens some checks around deposit and blob processing.
+
+## v1.1.0: BGT minting
+
+BeaconKit v1.1.0 unlocks minting of tokens towards the BGT contract.
