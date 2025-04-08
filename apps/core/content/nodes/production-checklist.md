@@ -11,7 +11,7 @@ Before reaching out for support, here are some steps to check your installation.
 
 ### Start with a quick diagnosis script
 
-We distribute a stand-alone [diagnosis script](https://github.com/berachain/guides/blob/add-diagnostic-script/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system, and run:
+We distribute a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system, and run:
 ```bash
 /path/to/node-diagnostic.sh -d /var/beacond/ -p /opt/bin/beacond
 ```
