@@ -103,5 +103,8 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 ### Incentives Marketplace
 
+These tools provide validator and vault analytics.
+
 - [BGTscan](https://bgtscan.com/bribe-market/bgt-emission-rates)
-- [Furthermore](https://furthermore.app/) 
+- [Furthermore](https://furthermore.app/)
+- [Nambera](https://nambera.com/)
