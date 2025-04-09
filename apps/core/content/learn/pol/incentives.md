@@ -131,9 +131,9 @@ Each validator can set a percentage that they take as a commission of all Incent
 
 _Example:_
 
-| Supply    | Incentive Rate Per $BGT |
-| --------- | ----------------------- |
-| 100 $USDC | 100 /$BGT               |
+| Incentive Amount | Incentive Rate |
+| ---------------- | -------------- |
+| 100 $USDC        | 100 /$BGT      |
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions towards the Reward Vault.
 
@@ -146,4 +146,4 @@ From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, 
 | Cami        |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
 | Jintao      |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
 
-A validator can change their commission percentage by first queuing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
+A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
