@@ -16,9 +16,9 @@ Validators can capture Incentives offered by Whitelisted Reward Vaults by direct
 
 The distribution of Incentives follows this process:
 
-1. A **User** Boosts (associates their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
+1. A **User** Boosts (by associating their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
 2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [\$BGT Emissions Per Block](/learn/pol/bgtmath#bgt-emissions-per-block)), and directs emissions toward Whitelisted Reward Vaults chosen by the validator.
-3. A **Protocol** can offer up to 2 different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
+3. A **Protocol** can offer up to two different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
    - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
@@ -30,7 +30,7 @@ As an overview, Incentives involve 3 different parties:
 
 | User      | Description & Motivation                                                                                                                                                                                                                      |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Any user that boosts a validator with $BGT to increase a validator's $BGT emissions to capture more Incentives from Reward Vaults, so that the Booster can take a portion of those Incentives.                                                |
+| Booster   | Any user that boosts a validator with $BGT. This increases a validator's $BGT emissions, allowing them to capture more Incentives from Reward Vaults. Boosters receive a portion of these Incentives.                                         |
 | Validator | A node in the Active Set that directs $BGT emissions to different Reward Vaults defined by their Reward Allocation distribution, captures Incentives from Reward Vaults, and takes a percentage (Commission Rate) of the Incentives captured. |
 | Protocol  | An entity, group, or organization that offers Incentive tokens for their respective Reward Vault with the goal of capturing $BGT emissions for their protocol and/or users.                                                                   |
 
@@ -42,91 +42,88 @@ Behind Incentives, there are additional mechanics to consider beyond the high-le
 
 Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
 
-A Reward Vault can have up to (2) two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
+A Reward Vault can have up to two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
 
 ### Incentive Token Managers
 
 Only Incentive Token Managers of a Reward Vault can offer Incentives. One wallet address is responsible for offering an Incentive Token. The same wallet address can be set as a Token Manager for multiple Incentive Tokens.
 
-A Governance proposal will specify a Token Managers when proposing an Incentive Token.
+A Governance proposal will specify Token Managers when proposing an Incentive Token.
 Changing a Token or Token Manager requires passing a governance proposal.
 
 ### Offering Incentives
 
-A Reward Vault can offer up to (2) Incentive Tokens simultaneously. The offered token cannot be reverted or taken back.
+A Reward Vault can offer up to two Incentive Tokens simultaneously. The offered amount cannot be withdrawn or revoked.
 
 The Incentive Token Manager must define an Incentive Rate when initially offering the Incentive Token and cannot decrease or reset it until the supply of the Incentive Token offered has been exhausted by validators directing $BGT emissions. While defining an Incentive Rate, a Token Manager can increase that rate. When the supply of the Incentive Token offered is exhausted, a Token Manager can set a new Incentive Rate.
 
 Incentives can be calculated with the following formulas:
 
-$$ rateDelta = (newRate - currentRate) $$
+$$ rateDelta = (newIncentiveRatePerBGT - existingIncentiveRatePerBGT) $$
 
-$$ newIncentiveAmount = {(currentAmount \times rateDelta) \over currentRate} $$
+$$ newIncentiveAmount = {(existingIncentiveAmount \times rateDelta) \over existingIncentiveRatePerBGT} $$
 
-Key takeways are that Token Managers:
+Key takeaways are that Token Managers:
 
 - ✅ Can increase the Incentive Amount by any number, keeping the same Incentive Rate.
 - ✅ Can increase the Incentive Rate provided that the Incentive Amount increases based on the formulas below.
 - ✅ Can set a new Incentive Rate (including lower) when the Incentive Amount has been fully captured.
-- ❌ Cannot decrease the Incentive Rate when an current Incentive Rate has been defined.
+- ❌ Cannot decrease the Incentive Rate while an existing Incentive is active.
 - ❌ Cannot have the Incentive Amount returned.
 
 #### Example 1 - Increase Incentive Rate:
 
-This scenario is where the Reward Vault has an current Incentive Amount and Incentive Rate and the Token Manager wants to increase the Incentive Rate from 20 to 30 $USDC/$BGT:
+In this scenario, the Reward Vault has an active Incentive and the Token Manager wants to increase the Incentive Rate from `20` to `30`/$BGT:
 
-| Reward Vault Incentive Token Supply | current Incentive Rate |
-| ----------------------------------- | ---------------------- |
-| 1,000 $USDC                         | 20 USDC/BGT         |
+| Current Incentive Amount | Current Incentive Rate |
+| ------------------------ | ---------------------- |
+| 1,000 $USDC              | 20/$BGT                |
 
 Using the formulas:
 
-$$ 10 \times rateDelta = 30 \times newRate - 20 \times currentRate $$
+$$ 10 rateDelta = 30 newIncentiveRatePerBGT - 20 existingIncentiveRatePerBGT $$
 
-$$ 500 \times newIncentiveAmount = {(1000 \times currentAmount \times 10 \times rateDelta) \over (20 \times currentRate) } $$
+$$ 500newIncentiveAmount = {(1000existingIncentiveAmount \times 10 rateDelta) \over 20 existingIncentiveRatePerBGT} $$
 
-An Incentive Manager would need to send the following to change their Incentive Rate:
+An Incentive Manager would need to add the following to change their Incentive Rate:
 
 :::warning
-If the Incentive Amount added is lower than the required amount, the Incentive Rate will default to the `currentRate` (20 USDC/BGT).
+If the Incentive Amount added is lower than the required amount, the Incentive Rate will default to the `existingIncentiveRatePerBGT` (20/$BGT).
 :::
 
-| Type                                  | Value         |
-| ------------------------------------- | ------------- |
-| Required Incentive Amount To Increase | 500 $USDC     |
-| New Incentive Rate                    | 30 USDC/BGT|
+| Type                                  | Value     |
+| ------------------------------------- | --------- |
+| Required Incentive Amount To Increase | 500 $USDC |
+| New Incentive Rate                    | 30/$BGT   |
 
 #### Example 2 - Increase Incentive Amount:
 
-This scenario is where the Reward Vault has a current Incentive Amount and Incentive Rate and the Token Manager has an Incentive Amount in mind but would like to know the minimum and maximum Incentive Rates they could set after adding 5,000 $USDC.
+In this scenario, the Reward Vault has an active Incentive and the Token Manager wants to add a certain Incentive Amount, but would like to know the minimum and maximum Incentive Rates they could set with `5,000` $USDC.
 
-| Reward Vault Incentive Token Supply | current Incentive Rate |
-| ----------------------------------- | ---------------------- |
-| 2,000 $USDC                         | 10 USDC/BGT         |
+| Existing Incentive Amount | Existing Incentive Rate |
+| ------------------------- | ----------------------- |
+| 2,000 $USDC               | 10 /$BGT                |
 
 To calculate the highest Incentive Rate using the formulas:
 
-$$ 5000 \times newAmount = {(2000 \times currentIncentive \times (newRate - 10 \times currentRate)) \over (10 \times currentRate)} $$
+$$ 5000 newIncentiveAmount = {(2000 existingIncentiveAmount \times (newIncentiveRatePerBGT - 10 existingIncentiveRatePerBGT)) \over 10 existingIncentiveRatePerBGT} $$
 
-$$ 50000 = {2000 \times currentIncentive \times (newRate - 10 \times currentRate)} $$
+$$ 50000 = {2000 existingIncentiveAmount \times (newIncentiveRatePerBGT - 10 existingIncentiveRatePerBGT)} $$
 
-$$ 25 = {newRate - 10 \times currentRate} $$
+$$ 25 = {newIncentiveRatePerBGT - 10 existingIncentiveRatePerBGT} $$
 
-$$ \therefore {newRate} = 35 $$
+$$ 35 = {newIncentiveRatePerBGT} $$
 
+:::warning
+If the Incentive rate is set lower than the Lowest Incentive Rate or higher than the Highest Incentive Rate, it will default to the `existingIncentiveRatePerBGT` (10/$BGT).
+:::
 
-So, with an additional `5,000 $USDC` a Token Manager can choose any Incentive Rate between `10-35`.
+With an additional `5,000 $USDC`, a Token Manager can choose any Incentive Rate between `10-35`.
 
 | Option                 | Incentive Amount To Add | Incentive Rate Option |
 | ---------------------- | ----------------------- | --------------------- |
-| Lowest Incentive Rate  | 5,000 $USDC             | 10 USDC/BGT        |
-| Highest Incentive Rate | 5,000 $USDC             | 35 USDC/BGT        |
-
-
-:::info
-If the if the Incentive rate is set lower than the Lowest Incentive Rate or higher than the Highest Incentive Rate, it will default to the `currentRate` (10 $USDC/$BGT).
-:::
-
+| Lowest Incentive Rate  | 5,000 $USDC             | 10/$BGT               |
+| Highest Incentive Rate | 5,000 $USDC             | 35/$BGT               |
 
 ### Incentive Commission and Distribution
 
@@ -134,13 +131,13 @@ Each validator can set a percentage that they take as a commission of all Incent
 
 _Example:_
 
-| Reward Vault Incentive Token Supply | Incentive Rate |
-| ----------------------------------- | -------------- |
-| 100 $USDC                           | 100 USDC/BGT|
+| Supply    | Incentive Rate Per $BGT |
+| --------- | ----------------------- |
+| 100 $USDC | 100 /$BGT               |
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions towards the Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on that booster's proportion among the total $BGT boosting that validator.
+From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on their proportion of the total $BGT boosting that validator.
 
 | Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
 | ----------- | ------------------: | ---------------: | -------------------------------: |
