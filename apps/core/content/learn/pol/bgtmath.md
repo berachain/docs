@@ -118,10 +118,15 @@ The [RewardVault](/developers/contracts/reward-vault) APR is determined by sever
 The components of this APR calculation include:
 
 - `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
+- `periodFinish` - The timestamp when the `rewardRate` expires
 - `stakeToken` - The token you stake into the Reward Vault
 - `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
 - Price of `$BGT` (`$BERA`) - The assumption is made the price of `$BGT` is equivalent the `$BERA` price
 - Price of Stake Token
+
+:::info
+If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT` APR is 0%.
+:::
 
 The units of `rewardRate` is denominated as `$BGT per second`.
 The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
