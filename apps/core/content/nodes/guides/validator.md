@@ -61,6 +61,10 @@ export GENESIS_ROOT=0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63
 
 The `0xdf6..0bda` hash output confirms that you have the right mainnet genesis file.
 
+:::danger
+If you sign a deposit without using the above genesis root, **the deposit will fail and the funds will be burnt**.
+:::
+
 - **BEACOND_HOME**: The path to your beacond data directory.
 - **RPC_URL**: The URL of the RPC endpoint you are using. You can use your own if you want.
 - **DEPOSIT_ADDR**: The address of the deposit contract.
@@ -86,12 +90,6 @@ This is your **beacon chain public key**, and in this tutorial is placed in the 
 
 ## Step 2: Prepare registration transaction
 
-:::warning
-
-1. Ensure you calculate a signature for the parameters _and deposit amount_ you are going to send to the deposit contract. If you change anything
-   after calculating the signature, **the deposit will fail and the funds will be burnt**.
-   :::
-
 The first registration transaction is the most important. It establishes the association between your validator key and your presence in the consensus layer. **Mistakes in this step can result in a permanent loss of funds.**
 
 1. **Set up and fund your funding account on Berachain.** You should be equipped so that you can use metamask or `cast` to send transactions from the funding account.
@@ -101,6 +99,11 @@ The first registration transaction is the most important. It establishes the ass
    ```bash
    cast call $DEPOSIT_ADDR 'getOperator(bytes)' $VAL_PUB_KEY -r $RPC_URL;
    ```
+
+   :::danger
+   Do not change any parameters of your deposit transaction before sending them. Calculate the signature for the parameters _and deposit amount_ you are going to send to the deposit contract.
+   If you change anything after calculating the signature, **the deposit will fail and the funds will be burnt**.
+   :::
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator` which takes:
 
