@@ -21,16 +21,16 @@ This section provides an overview of the developer tools that are available on t
 
 Since Berachain is EVM-compatible, if you're familiar with creating dApps on other EVM chains, then you'll feel right at home building on Berachain.
 
-### Smart Contract Programming Languages
-
-- [Solidity](https://docs.soliditylang.org/en/v0.8.20/)
-- [Vyper](https://docs.vyperlang.org/en/stable/)
-
 ### Development Environments
 
 - [Foundry](https://github.com/foundry-rs/foundry)
 - [Hardhat](https://hardhat.org/)
 - [Remix](https://remix.ethereum.org/)
+
+### Smart Contract Programming Languages
+
+- [Solidity](https://docs.soliditylang.org/en/v0.8.20/)
+- [Vyper](https://docs.vyperlang.org/en/stable/)
 
 ### Frontend Libraries
 
@@ -100,3 +100,11 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 - [Gelato](https://app.gelato.network/vrf)
 - [Pyth](https://docs.pyth.network/entropy)
+
+### Incentives Marketplace
+
+These tools provide validator and vault analytics.
+
+- [BGTscan](https://bgtscan.com/bribe-market/bgt-emission-rates)
+- [Furthermore](https://furthermore.app/)
+- [Nambera](https://nambera.com/)
