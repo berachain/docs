@@ -9,6 +9,19 @@ head:
 
 Before reaching out for support, here are some steps to check your installation.
 
+### Start with a quick diagnosis script
+
+We distribute a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system, and run:
+
+```bash
+/path/to/node-diagnostic.sh -d /var/beacond/ -p /opt/bin/beacond
+```
+
+Substitute the respectively the path to your Beacon Kit data directory (containing `config` and `data` directories), and the path to `beacond` binary (if not in your $PATH).
+
+This script will produce clearly marked recommendations.
+Provide the output of this script when communicating with us for support.
+
 ### Beacon Kit version check
 
 Ensure you are running the latest version of [Beacon Kit](https://github.com/berachain/beacon-kit)
@@ -19,7 +32,7 @@ Check that you are running a supported version of your [execution client](/nodes
 
 ### Peering
 
-There are several ingredients to successful peering:
+There are several ingredients to successful peering. If you are running in a containerized envrionment, it's important to ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
 
 1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept `--bootnodes` option. `beacond` has the boot node list baked into our distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
 2. **Check Execution Layer peering**: The execution layer needs excellent peering in order to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" or "static peers" in your execution client. Here's how:
