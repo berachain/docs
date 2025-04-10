@@ -75,6 +75,7 @@ Start the devnet:
 # 9 - Connecting EL Peers...
 # ...
 # Started!
+```
 
 You can use `docker ps` to view the launched containers and verify the services are running:
 
@@ -117,7 +118,7 @@ docker logs cl-node-val-2 -f | grep deposit
 # INFO Building block body ... num_deposits=0
 ```
 
-Now invoke the deposit script to generate the deposit transactions (but not transmit them). The script will provide two `cast` calls and a command to view the current validator set. 
+Now invoke the deposit script to generate the deposit transactions (but not transmit them). The script will provide two `cast` calls and a command to view the current validator set.
 Recall that there are two types of deposits: 1. initial registration and 2. top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minEffectiveBalance }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
 
 ```bash
