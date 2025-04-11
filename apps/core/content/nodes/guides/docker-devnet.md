@@ -12,56 +12,60 @@ head:
 ---
 
 <script setup>
-    import config from '@berachain/config/constants.json';
-    import AddNetwork from '@berachain/ui/AddNetwork';
-    import CopyToClipboard from '@berachain/ui/CopyToClipboard';
+  import config from '@berachain/config/constants.json';
+  import AddNetwork from '@berachain/ui/AddNetwork';
+  import CopyToClipboard from '@berachain/ui/CopyToClipboard';
 </script>
 
 # Berachain Local Devnet With Docker
 
-This tutorial will walk you through launching a private network, and promoting one of the nodes in that network to a full validator.
+This tutorial will walk you through launching a private local network and promoting one of the nodes in that network to a full validator.
 
 :::tip
-Some features like native dApps, contracts, and more may still be a work in progress.
+Some features like native dApps, contracts, and more are still a work in progress.
 :::
 
 ## Requirements
 
-Before starting, ensure that you have the following installed on your computer.
+Before starting, ensure that you have the following installed on your computer:
 
-- You should have read and understood the [validator activation process](/nodes/guides/validator)
+- Have read and understood the [validator activation process](/nodes/guides/validator)
 - [Docker](https://docs.docker.com/get-docker/) `version 25.0.2` or greater
-- [Foundry](https://book.getfoundry.sh/getting-started/installation) `v0.2.0` or greater
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) `v1.0.0` or greater
+- MacOS - This script is made for Mac but can be modified to work with Linux
 
 ## Launch Local Devnet
 
-We will now launch multiple Docker containers containing execution clients and consensus clients for a test chain initialized from genesis.
+We will now launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis.
 
-### Obtain the source and build
+### Step 1 - Obtain & Build Source
 
 ```bash
 # FROM: ~
 
 git clone https://github.com/berachain/guides;
-mv guides/apps/docker-devnet ./
-cd docker-devnet;
+mv guides/apps/local-docker-devnet ./;
+rm -rf guides;
+cd local-docker-devnet;
 ./build.sh;
 
-# [EXPECTED OUTPUT]
-# [DOCKER BUILD NOISES]
+# [Expected Result]:
+# ...
 # *** Build complete
 ```
 
-Review `env.sh`, which contains important variables for running the docker-devnet and deposit testing.
+### Step 2 - Start Containers
+
+Review the `env.sh` file, which contains important variables for running the docker-devnet and deposit testing.
 
 Start the devnet:
 
 ```bash
-# FROM: ~/docker-devnet/
+# FROM: ~/local-docker-devnet/
 
-./start.sh
+./start.sh;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # Starting Beacond...
 # 0 - Creating config folders...
 # 1 - Creating node configurations...
@@ -77,14 +81,14 @@ Start the devnet:
 # Started!
 ```
 
-You can use `docker ps` to view the launched containers and verify the services are running:
+Use `docker ps` to view the launched containers and verify that the services are running:
 
 ```bash
-# FROM: ~/docker-devnet/
+# FROM: ~/local-docker-devnet/
 
-docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
+docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # NAMES           IMAGE            STATUS         PORTS
 # el-node-rpc-0   reth-docker      Up 2 minutes   0.0.0.0:8545-8546->8545-8546/tcp
 # el-node-val-2   reth-docker      Up 2 minutes
@@ -97,36 +101,42 @@ docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
 
 curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
 
-# [EXPECTED OUTPUT - actual number will vary]
+# [Expected Output - actual number will vary]:
 # "0x12"
 
 curl -s --location 'http://localhost:26657/net_info' | jq .result.n_peers;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # "3"
 ```
 
-Start a log watcher in a separate window to view the deposit-related log messages:
+Start a log watcher in a separate terminal window to view deposit-related log messages:
+
+**Terminal 1:**
 
 ```bash
-# FROM: ~/docker-devnet
+# FROM: ~/local-docker-devnet
 
-docker logs cl-node-val-2 -f | grep deposit
+docker logs cl-node-val-2 -f | grep deposit;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # INFO Building block body ... num_deposits=0
 # INFO Building block body ... num_deposits=0
 ```
 
-Now invoke the deposit script to generate the deposit transactions (but not transmit them). The script will provide two `cast` calls and a command to view the current validator set.
-Recall that there are two types of deposits: 1. initial registration and 2. top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minEffectiveBalance }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
+### Step 3 - Generate Deposit Scripts
+
+Now invoke the deposit script to generate the deposit transactions (but do not transmit them). The script will provide two `cast` calls and a command to view the current validator set.
+Recall that there are two types of deposits: 1) initial registration and 2) top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minEffectiveBalance }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
+
+**Terminal 2:**
 
 ```bash
-# FROM: ~/docker-devnet
+# FROM: ~/local-docker-devnet
 
-./generate-deposit-tx.sh
+./generate-deposit-tx.sh;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # Starting Beacon Deposit Txn...
 # 0 - Retrieving Validator Pubkey & Verifying Not A Validator...
 # 1 - Generating Signature for Parameters:
@@ -143,17 +153,20 @@ Recall that there are two types of deposits: 1. initial registration and 2. top-
 ```
 
 :::danger
-Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis root is different from mainnet's, and the signature will be invalid on mainnet.
+Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis root differs from mainnet's, and the signature will be invalid on mainnet.
 Study the registration and activation process in `generate-deposit-tx` and the [Deposit Guide](/nodes/guides/validator) to understand how to apply this process to mainnet.
 :::
 
 To view the current list of validators, invoke the provided command:
 
-```bash
-# FROM: ~/docker-devnet
+**Terminal 2:**
 
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
-# [EXPECTED OUTPUT]
+```bash
+# FROM: ~/local-docker-devnet
+
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data;
+
+# [Expected Output]:
 # [
 #  {
 #     "index": "0",
@@ -171,27 +184,32 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
 
 Key values:
 
-- **Status**: The validator status begins as `pending_initialized` when a deposit is registered. It changes to `pending_queued` when in the activation queue, and finally becomes `active_ongoing` when in the active set and able to propose blocks.
-- **Effective Balance**: the amount staked to that validator
-- **Activation Epochs**: when the validator is eligible to be activated. 0 means it's a genesis validator.
+- **Status**: The validator status begins as `pending_initialized` when a deposit is registered. It changes to `pending_queued` when in the activation queue, and finally becomes `active_ongoing` when the validator is in the active set and able to propose blocks.
+- **Effective Balance**: The amount of $BERA staked by that validator.
+- **Activation Epochs**: The epoch when the validator is eligible to be activated. A value of 0 means it's a genesis validator.
 
-Now transmit the first `cast` call, which calls `deposit()` for the first time with an initial stake of `10,000 $BERA`, and view the validator list:
+### Step 4 - Run Registration Deposit Transaction
+
+Now transmit the first `cast` call, which calls `deposit()` for the first time with an initial stake of `10,000 $BERA` and view the validator list:
+
+**Terminal 2:**
 
 ```bash
-# FROM: ~/docker-devnet
+# FROM: ~/local-docker-devnet
 
 cast call ...
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # status               1 (success)
 # blockNumber          52
 # transactionHash      0xe0e8b0...
 # status               1 (success)
 
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
+source env.sh;
+COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
 
-# [EXPECTED OUTPUT]
-# [
+# [Expected Output]:
 #  {
 #     "index": "0",
 #     "balance": "10000000000000",
@@ -200,13 +218,18 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
 #       "effective_balance": "10000000000000",
 #       "activation_eligibility_epoch": "0",
 #       "activation_epoch": "0",
+#       "exit_epoch": "18446744073709551615",
+#       "withdrawable_epoch": "18446744073709551615"
 #     }
+#  }
 ```
 
-This shows the validator is registered. You will see output like this in the log watcher:
+This shows the validator is registered. You will see a successful output in the log watcher:
+
+**Terminal 1:**
 
 ```bash
-# [LOG OUTPUT]
+# [LOG OUTPUT - Successful Registration]
 
 INFO Found deposits on execution layer service=blockchain block=0x22 deposits=1
 INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
@@ -217,21 +240,49 @@ INFO Building block body with local deposits service=validator start_index=4 num
 INFO Building block body with local deposits service=validator start_index=4 num_deposits=0
 ```
 
-Now send the second suggested `cast` call which stakes an additional 240,000 $BERA, sufficient to put the validator into the activation queue.
+Here is an example of a failed deposit:
+
+:::danger
+If you receive the error message `signer returned an invalid signature invalid deposit message`, DO NOT continue making deposits with the same pubkey as it will result in loss of funds. You will need to create an entirely new node pubkey and go through the process again.
+:::
+
+**Terminal 1:**
 
 ```bash
-# FROM: ~/docker-devnet
+# [LOG OUTPUT - Failed Registration]
+
+INFO Found deposits on execution layer service=blockchain block=0xf deposits=1
+INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
+INFO Validator does not exist so creating service=state-processor pubkey=0xa4bd74c3705152c8022800e0728f0a8083c0672e957f19947a69435563b56e324643a9cb46adbc0afd9b4851ba2ea0ac index=0x3 deposit_amount=0x9188a0d6a00
+WARN failed deposit signature verification service=state-processor pubkey=0xa4bd74c3705152c8022800e0728f0a8083c0672e957f19947a69435563b56e324643a9cb46adbc0afd9b4851ba2ea0ac deposit_index=0x3 amount_gwei=10001000000000 error=signer returned an invalid signature
+invalid deposit message
+INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
+INFO Validator does not exist so creating service=state-processor pubkey=0xa4bd74c3705152c8022800e0728f0a8083c0672e957f19947a69435563b56e324643a9cb46adbc0afd9b4851ba2ea0ac index=0x3 deposit_amount=0x9188a0d6a00
+WARN failed deposit signature verification service=state-processor pubkey=0xa4bd74c3705152c8022800e0728f0a8083c0672e957f19947a69435563b56e324643a9cb46adbc0afd9b4851ba2ea0ac deposit_index=0x3 amount_gwei=10001000000000 error=signer returned an invalid signature
+invalid deposit message
+```
+
+### Step 5 - Run Activation Deposit Transaction
+
+Now send the second suggested `cast` call, which stakes an additional 240,000 $BERA, sufficient to put the validator into the activation queue.
+
+**Terminal 2:**
+
+```bash
+# FROM: ~/local-docker-devnet
 
 cast call ...
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # blockNumber          55
 # transactionHash      0xdeadbeef...
 # status               1 (success)
 
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
+source env.sh;
+COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 #   {
 #     "index": "3",
 #     "balance": "250000000000000",
@@ -241,33 +292,49 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
 #       "activation_eligibility_epoch": "18446744073709551615",
 ```
 
-Note the chain has selected an activation epoch for the validator.
+### Step 6 - Monitor Activation Status
 
-Continue to monitor the chain's progress. Epochs on mainnet, testnet, and this devnet are 192 blocks, or 0xc0 hex.
+Note that the chain has selected an activation epoch for the validator.
+
+Continue to monitor the chain's progress. Epochs on mainnet, testnet, and this devnet consist of 192 blocks, or 0xc0 in hex.
+
+**Terminal 2:**
 
 ```bash
 # FROM: ~/devnet
 
 curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
-# [SAMPLE OUTPUT]
+
+# [Expected Similar Output]:
 # "0x10c"
 ```
 
-Provided you have activated before block 0xc0, at block 0x180, the validator will become status `pending_queued` and at block 0x240 will become `active_ongoing`.
+Provided you have activated before block 0xc0, at block 0x180, the validator will change status to `pending_queued` and at block 0x240 will change to `active_ongoing`.
+
+The estimated time for changing states is as follows:
+
+- After ~7 minutes: `pending_initialized` → `pending_queued`
+- After ~12 minutes: `pending_queued` → `active_ongoing` (Validator becomes fully activated and begins proposing blocks)
 
 ## Cleanup
 
-This action will destroy all running Docker containers on your system.
+This action will destroy all running Docker containers on your system when executed.
+
+:::tip
+Cleaning removes the built Docker images, so you will have to run `build.sh` before `start.sh`.
+:::
+
+**Terminal 2:**
 
 ```bash
 # FROM: ~/docker/devnet
 
 ./clean.sh
 
-# [SAMPLE OUTPUT]
-# Total reclaimed space: 644.1MB
+# [Example Similiar Output]:
+# Shutting down docker containers:
+# el-node-val-0
+# cl-node-val-0
+# el-node-val-1
+# ...
 ```
-
-:::tip
-Cleaning removes the built Docker images, so you have to run `build.sh` before `start.sh`
-:::
