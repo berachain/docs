@@ -57,8 +57,12 @@ const SIDEBAR = {
       items: [
         { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
         {
-          text: "Add Incentives For Reward Vault",
+          text: "Add Incentives via HUB",
           link: "/learn/guides/add-incentives-for-reward-vault",
+        },
+        {
+          text: "Add Incentives via SAFE",
+          link: "/learn/guides/safe-add-incentives-for-reward-vault",
         },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
       ],

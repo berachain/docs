@@ -81,6 +81,10 @@
       "nftBridge": {
         "name": "Berachain NFT Bridge",
         "url": "https://nftbridge.berachain.com/"
+      },
+      "safe": {
+        "name": "Berachain SAFE",
+        "utl": "https://safe.berachain.com"
       }
     },
     "thirdparty": {
