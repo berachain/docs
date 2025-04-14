@@ -46,3 +46,63 @@ To understand why validators would choose to emit `$BGT` to one Reward Vault ove
 New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
 
 Protocols creating Reward Vaults must additionally [whitelist their vaults](/learn/governance/rewardvault) through `$BGT` governance to be eligible to receive emissions from validators.
+
+## Calculating `$BGT` APR
+
+As a user, if I want to manually verify the BGT APR for a given Reward Vault, the following information is available on chain to do so.
+The value calculated corresponds to the light blue `BGT APR` value found on the Hub frontend.
+
+![BGT APR Example](/public/assets/bgt-apr-example.png)
+
+The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
+The components of this APR calculation include:
+
+- `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
+- `stakeToken` - The token you stake into the Reward Vault
+- `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
+- Price of `$BGT` (`$BERA`) - The assumption is made the price of `$BGT` is equivalent the `$BERA` price
+- Price of Stake Token
+
+The units of `rewardRate` is denominated as `$BGT per second`.
+The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
+
+$$ APR = {rewardRate \times secondsPerYear \times priceOfBGT \over totalSupply \times priceOfStakeToken} $$
+
+This formula provides the current rate that the Reward Vault is crediting depositors with `$BGT`.
+
+### Example
+
+As a concrete example of the above formula, a reward vault with the following values can be used:
+
+| Parameter            | Value                                | Normalized          |
+| :------------------- | :----------------------------------- | :------------------ |
+| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
+| Price of `$BERA`     | $7.8                                 | $7.8                |
+| Total Supply         | 598626940947001140289                | 598.6269409470011   |
+| Price of Stake Token | $223,845.58                          | $223,845.58         |
+| Seconds per year     | 31,536,000                           | 31,536,000          |
+
+:::tip
+The `rewardRate` value returned includes an extra precision factor of `1000000000000000000`.
+Converting this to a human readable value requires to normalize the value twice, rather than once.
+:::
+
+Utilizing the fomula above:
+
+```
+numerator = 0.27249052710368116 (rewardRate) x 31536000 (secondsPerYear) x 7.8 (priceOfBGT)
+denominator = 598.6269409470011 (totalSupply) x 223845.58 (priceOfStakeToken)
+
+numerator = 67027437.84938517
+denominator = 133999994.79990721
+
+result = 0.5002047794813167 (APR = 50.02%)
+```
+
+:::tip
+The resultant value is represented as a percentage.
+Any value should be multiplied by 100 to show a human readable value.
+:::
+
+Thus, in the example, the reward vault has an estimated yield of 50%.
+These values are updated and reflected on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
