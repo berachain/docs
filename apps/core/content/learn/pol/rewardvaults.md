@@ -91,7 +91,6 @@ Normalizing it requires dividing by `1e36`.
 Using the formula above:
 
 $$ APR = {0.27249052710368116 \times 31536000 \times 7.8 \over 598.6269409470011 \times 223845.58} $$
-$$ APR = 0.500204 (or 50.02%) $$
+$$ \therefore APR = 0.500204 = 50.02\% $$
 
-Thus, in the example, the reward vault has an estimated yield of 50%.
 These values are updated on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
