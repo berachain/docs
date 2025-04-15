@@ -21,36 +21,37 @@ This section provides an overview of the developer tools that are available on t
 
 Since Berachain is EVM-compatible, if you're familiar with creating dApps on other EVM chains, then you'll feel right at home building on Berachain.
 
-### Smart Contract Programming Languages
-
-- [Solidity](https://docs.soliditylang.org/en/v0.8.20/)
-- [Vyper](https://docs.vyperlang.org/en/stable/)
-
 ### Development Environments
 
 - [Foundry](https://github.com/foundry-rs/foundry)
 - [Hardhat](https://hardhat.org/)
 - [Remix](https://remix.ethereum.org/)
 
+### Smart Contract Programming Languages
+
+- [Solidity](https://docs.soliditylang.org/en/v0.8.20/)
+- [Vyper](https://docs.vyperlang.org/en/stable/)
+
 ### Frontend Libraries
 
-- [Viem](https://viem.sh)
 - [Ethers.js](https://docs.ethers.org/v5/)
+- [Viem](https://viem.sh)
 - [Web3.js](https://web3js.readthedocs.io/en/v1.10.0/)
 
 ### RPC & Infrastructure Providers
 
-- [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
-- [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
-- [Envio](https://envio.dev) (optimized read-only)
-- [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 - [BlockPI](https://blockpi.io/)
-- [Thirdweb](https://thirdweb.com/chainlist)
-- [Tenderly](https://dashboard.tenderly.co/)
-- [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
-- [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
 - [DRPC](https://drpc.org/chainlist/berachain)
+- [Envio](https://envio.dev) (optimized read-only)
+- [Nirvana](https://nirvanalabs.io/nodes/berachain)
+- [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
+- [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
+- [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
+- [Tatum RPC and Webhooks](https://tatum.io/berachain-and-tatum)
+- [Tenderly](https://dashboard.tenderly.co/)
+- [Thirdweb](https://thirdweb.com/chainlist)
+- [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
 
 ### Wallets & Multisigs
 
@@ -64,13 +65,13 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 ## Authentication & Account Abstraction
 
-- [Privy](https://www.privy.io/)
 - [Dynamic](https://www.dynamic.xyz/)
 - [Para](https://getpara.com)
+- [Particle](https://particle.network/)
+- [Privy](https://www.privy.io/)
 - [Thirdweb](https://thirdweb.com/explore/smart-wallet)
 - [Turnkey](https://www.turnkey.com/)
 - [ZeroDev](https://zerodev.app/)
-- [Particle](https://particle.network/)
 
 ### Subgraphs & Data Indexers
 
@@ -78,6 +79,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Ghost Graph](https://ghostgraph.xyz)
 - [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
 - [Envio](https://envio.dev)
+- [Tatum Indexed Data API](https://tatum.io/berachain-and-tatum)
 - [The Graph](https://thegraph.com/)
 - [Thirdweb](https://thirdweb.com/insight?ref=blog.thirdweb.com)
 
@@ -98,3 +100,11 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 - [Gelato](https://app.gelato.network/vrf)
 - [Pyth](https://docs.pyth.network/entropy)
+
+### Incentives Marketplace
+
+These tools provide validator and vault analytics.
+
+- [BGTscan](https://bgtscan.com/bribe-market/bgt-emission-rates)
+- [Furthermore](https://furthermore.app/)
+- [Nambera](https://nambera.com/)

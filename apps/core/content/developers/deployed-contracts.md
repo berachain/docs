@@ -85,7 +85,7 @@ const render_groups = {
           <tr>
             <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else><b>{{ sc.name }}</b></template></td>
             <td>
-              <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + sc['bepolia-address']">{{sc['bepolia-address']}}</a>
+              <a target="_blank" :href="config.bepolia.dapps.beratrail.url + 'address/' + sc['bepolia-address']">{{sc['bepolia-address']}}</a>
             </td> 
             <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
           </tr>

@@ -51,7 +51,7 @@ You can modify the [beaconkit-local.yaml](https://github.com/berachain/beacon-ki
 
 ### Step 1 - Clone Repository & Run Nodes
 
-The first step is to clone the Beacon-Kit repository.
+The first step is to clone the Beacon Kit repository.
 
 ```bash
 git clone https://github.com/berachain/beacon-kit;
