@@ -57,6 +57,7 @@ The value calculated corresponds to the light blue `BGT APR` value found on the 
 The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
 The components of this APR calculation include:
 
+
 - `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
 - `stakeToken` - The token you stake into the Reward Vault
 - `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
@@ -83,26 +84,14 @@ As a concrete example of the above formula, a reward vault with the following va
 | Seconds per year     | 31,536,000                           | 31,536,000          |
 
 :::tip
-The `rewardRate` value returned includes an extra precision factor of `1000000000000000000`.
-Converting this to a human readable value requires to normalize the value twice, rather than once.
+The `rewardRate` returned is in gwei and includes an extra precision factor of `1e18`, so is effectively in wei.
+Normalizing it requires dividing by `1e36`.
 :::
 
-Utilizing the fomula above:
+Using the formula above:
 
-```
-numerator = 0.27249052710368116 (rewardRate) x 31536000 (secondsPerYear) x 7.8 (priceOfBGT)
-denominator = 598.6269409470011 (totalSupply) x 223845.58 (priceOfStakeToken)
-
-numerator = 67027437.84938517
-denominator = 133999994.79990721
-
-result = 0.5002047794813167 (APR = 50.02%)
-```
-
-:::tip
-The resultant value is represented as a percentage.
-Any value should be multiplied by 100 to show a human readable value.
-:::
+$$ APR = {0.27249052710368116 \times 31536000 \times 7.8 \over 598.6269409470011 \times 223845.58} $$
+$$ APR = 0.500204 (or 50.02%) $$
 
 Thus, in the example, the reward vault has an estimated yield of 50%.
-These values are updated and reflected on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
+These values are updated on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
