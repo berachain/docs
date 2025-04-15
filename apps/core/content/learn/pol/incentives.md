@@ -57,11 +57,17 @@ A Reward Vault can offer up to two Incentive Tokens simultaneously. The offered 
 
 The Incentive Token Manager must define an Incentive Rate, greater than the minimum approved in the Governance proposal, when initially offering the Incentive Tokens and cannot decrease it until the supply of the Incentive Tokens offered has been exhausted by validators directing $BGT emissions. The Token Manager can deposit additional Incentive Tokens anytime, with an option to increase the rate at the same time.
 
-Incentives can be calculated with the following formulas:
+$$ BGT = \frac{tokenAmount}{ratePerBGT} $$
 
-$$ rateDelta = (newIncentiveRatePerBGT - existingIncentiveRatePerBGT) $$
+| Incentive Amount | Incentive Rate | Incentivized $BGT |
+| ---------------- | -------------- | ----------------- |
+| 2,000 $USDC      | 10 /$BGT       | 200 $BGT          |
 
-$$ newIncentiveAmount = {(existingIncentiveAmount \times rateDelta) \over existingIncentiveRatePerBGT} $$
+Scenario: increase incentive rate 10% + deposit additional tokens (500 $USDC)
+
+| New Incentive Amount | New Incentive Rate | New Incentivized $BGT |
+| -------------------- | ------------------ | --------------------- |
+| 2,500 $USDC          | 11 /$BGT           | 227 $BGT              |
 
 Key takeaways are that Token Managers:
 
@@ -70,7 +76,6 @@ Key takeaways are that Token Managers:
 - ✅ Can set a lower Incentive Rate only when the Incentive Tokens have been fully exhausted.
 - ❌ Cannot decrease the Incentive Rate while an existing Incentive is active.
 - ❌ Cannot reclaim or return the Incentive Tokens once they are added.
-
 
 ### Incentive Commission and Distribution
 

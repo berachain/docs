@@ -57,7 +57,6 @@ The value calculated corresponds to the light blue `BGT APR` value found on the 
 The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
 The components of this APR calculation include:
 
-
 - `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
 - `stakeToken` - The token you stake into the Reward Vault
 - `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
