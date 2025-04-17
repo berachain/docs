@@ -182,6 +182,100 @@ Here's an example of `setup-reth`:
 
 Your genesis block hash **must** agree with the above.
 
+## Fetch snapshots (optional)
+
+Snapshots are a collection of files from a node's backend, representing its state at the point of time when it was captured.
+
+Useful as backups, for syncing nodes that have failed, corrupted, slowed down, or even spinning up a new node. It's much faster to restore a snapshot than letting it sync from the network.
+
+Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be a lot faster when both snapshots are simultaneously restored. For other chains, such as Nethermind, using only a beacond snapshot will improve the initial chain sync.
+
+This tutorial fetches pruned snapshots. If you plan to run an archive node, we recommend a beginning-to-end sync from empty state.
+
+1. **Obtain a snapshot.** Berachain and the community offer snapshots for mainnet and Bepolia. You can download snapshots at the following links.
+
+   - [Awesome Berachain Validators]() is a community-maintained list; all of them have great download speed.
+
+   - Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. Key are the variables at the top:
+
+   **FILE:** `~/beranode/fetch-berachain-snapshots.js`
+
+   ```bash
+   const el_node_type = 'reth' || 'geth';
+   const snapshot_type = "bera-snapshot" || "bera-testnet-snapshot";
+   const geography = "na" || 'eu' || 'as'; // North America, EU, Asia
+   ...
+   ```
+
+   Revise the file to choose an EL listed in our snapshots, to indicate whether you want mainnet or Bepolia snapshots, and to choose your geographically nearest Google Storage endpoint. Run the file to fetch the latest snapshot.
+
+   ```bash
+   # FROM: ~/beranode
+
+   node fetch-berachain-snapshots.js
+
+   # [EXPECTED OUTPUT]
+   # Fetching bucket contents...
+   # Found snapshot_beacond_reth_full_v1.1.3_3768872.tar in beacon_reth/pruned
+   # Downloading snapshot_beacond_reth_full_v1.1.3_3768872.tar
+   # ...
+   ```
+
+2. **Ensure the clients are stopped.** Shut down `beacond` and your Execution Layer, if they are running.
+
+3. **Clean out old chain data.** To clean the Beacon Kit and — to pick an example — reth data store:
+
+```bash
+# FROM: ~/beranode
+
+source env.sh
+$BEACOND_BIN --home $BEACOND_HOME comet unsafe-reset-all
+
+# [ EXPECTED OUTPUT ]
+# Removed all blockchain history dir=var/beacond/data
+# Reset private validator file to genesis state key=..
+
+ls var/reth
+
+# [EXPECTED OUTPUT]
+# data  genesis.json
+
+rm -r var/reth/data
+```
+
+4. **Install the beacond snapshot.** The ones distributed by Berachain are designed to be installed in the beacond home directory, which contains both `config` and `data`:
+
+```bash
+# FROM: ~/beranode
+
+tar xzvf downloads/snapshot_beacond_reth_...tgz -C var/beacond/
+
+# [ EXPECTED OUTPUT ]
+# x data/
+# x data/cs.wal/
+# x data/cs.wal/wal.10416
+# x data/cs.wal/wal.10424
+# x data/cs.wal/wal.10398
+# ...
+```
+
+5. **Install the Execution Layer snapshot.** The example shown below again for `reth` as an example.
+
+```bash
+# FROM: ~/beranode
+
+tar xzvf downloads/snapshot_reth_pruned...tgz -C var/reth/
+
+# [ EXPECTED OUTPUT ]
+# x data/
+# x data/db/
+# x data/db/mdbx.dat
+# x data/static_files/
+# x data/static_files/static_file_transactions_2500000_2999999
+```
+
+6. **Start (or restart) both chain clients.** Described in the next section.
+
 ## Run Both Clients 🏃
 
 The following two scripts run the consensus and execution clients.
