@@ -55,7 +55,7 @@ Unlike most clients, `geth` does not automatically read an updated genesis file.
 /path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
 ```
 
-The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.   
+The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.
 
 If your node is an archive node, and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
 

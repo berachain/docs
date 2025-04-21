@@ -213,6 +213,10 @@ const SIDEBAR = {
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
         { text: "Production Checklist", link: "/nodes/production-checklist" },
         {
+          text: "Bectra Hardfork",
+          link: "/nodes/guides/bectra",
+        },
+        {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
         },
@@ -242,6 +246,10 @@ const SIDEBAR = {
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {
+          text: "Withdraw Validator Stake",
+          link: "/nodes/guides/withdraw-stake",
+        },
+        {
           text: "Local Devnet with Docker",
           link: "/nodes/guides/docker-devnet",
         },
@@ -252,10 +260,6 @@ const SIDEBAR = {
         {
           text: "Manage Validator Incentives Commission Rate",
           link: "/nodes/guides/manage-incentives-commission",
-        },
-        {
-          text: "Bectra Hardfork",
-          link: "/nodes/guides/bectra",
         },
         {
           text: "Awesome Validator Tools",
