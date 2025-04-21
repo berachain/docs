@@ -44,7 +44,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [BlockPI](https://blockpi.io/)
 - [DRPC](https://drpc.org/chainlist/berachain)
 - [Envio](https://envio.dev) (optimized read-only)
-- [Enigma](https://enigma-validator.com/services) 
+- [Enigma](https://enigma-validator.com/services)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
