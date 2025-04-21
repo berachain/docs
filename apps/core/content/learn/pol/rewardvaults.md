@@ -71,7 +71,6 @@ If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a r
 The units of `rewardRate` is denominated as `$BGT per second`.
 The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
 
-
 The units of `rewardRate` is denominated as `$BGT per second`.
 The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
 
