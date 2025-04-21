@@ -9,9 +9,22 @@ head:
 
 Before reaching out for support, here are some steps to check your installation.
 
-### Beacon-Kit version check
+### Start with a quick diagnosis script
 
-Ensure you are running the latest version of [Beacon-Kit](https://github.com/berachain/beacon-kit)
+We distribute a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system, and run:
+
+```bash
+/path/to/node-diagnostic.sh -d /var/beacond/ -p /opt/bin/beacond
+```
+
+Substitute the respectively the path to your Beacon Kit data directory (containing `config` and `data` directories), and the path to `beacond` binary (if not in your $PATH).
+
+This script will produce clearly marked recommendations.
+Provide the output of this script when communicating with us for support.
+
+### Beacon Kit version check
+
+Ensure you are running the latest version of [Beacon Kit](https://github.com/berachain/beacon-kit)
 
 ### Execution client version check
 
@@ -19,13 +32,19 @@ Check that you are running a supported version of your [execution client](/nodes
 
 ### Peering
 
-There are several ingredients to successful peering:
+There are several ingredients to successful peering. If you are running in a containerized envrionment, it's important to ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
 
-1. **Bootnodes**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept `--bootnodes` option.
-2. **Peers**: Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" in your execution client. `reth` accepts a `--trusted-peers` option.
-3. **Remember, peers are not the same as bootnodes.** Bootnodes speak UDP and provide node discovery. Peers speak TCP and provide blocks. Ensure your firewall allows both UDP and TCP traffic to your chain clients, for both consensus and execution layer, for the ports they are configured to listen on. In the default configurations we provide, this is TCP and UDP 30303 for the execution layer, and TCP 26657 for the consensus layer.
-
-4. **Indicate your node's external IP address.** In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option, For Beacon-Kit this is configured with `p2p.external_addresss` in `config.toml`.
+1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept `--bootnodes` option. `beacond` has the boot node list baked into our distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
+2. **Check Execution Layer peering**: The execution layer needs excellent peering in order to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" or "static peers" in your execution client. Here's how:
+   - **Reth**: Use `trusted_nodes` in the `[peers]` section of `reth.toml` or the --trusted-peers option.
+   - **Geth**: Use the `StaticNodes` field of the `[Node.P2P]` section in `config.toml`. This config file isn't generated for you, and you must make one with `geth dumpconfig` and refer to it with `geth --config <configfile>`.
+   - **Nethermind**: Use the `Network.StaticPeers` key in `nethermind.cfg`.
+3. **Indicate your Execution Layer's external IP address.** In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option.
+4. **Check beacond peering**: `beacond`needs good peering to organize and perform consensus actions. This is carried out over TCP port 26656, typically. Also, correctly advertise your node's external IP with `p2p.external_address` in `config.toml`. Further, to limit beacond's memory consumption we recommend **40 inbound + 10 outbound peers**, by applying the settings in `config.toml` for healthy peering with reasonable resource usage:
+   ```
+   max_num_inbound_peers = 40
+   max_num_outbound_peers = 10
+   ```
 
 ### Let us know who you are
 
@@ -38,7 +57,7 @@ Steps to do that:
 
 ### Hygiene
 
-Make sure Beacon-Kit and your execution client are configured to start when your operating system starts.
+Make sure Beacon Kit and your execution client are configured to start when your operating system starts.
 
 Cause your operating system to rotate logs, and slim the log output.
 
