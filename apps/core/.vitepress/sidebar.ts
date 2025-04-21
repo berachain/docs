@@ -254,6 +254,10 @@ const SIDEBAR = {
           link: "/nodes/guides/manage-incentives-commission",
         },
         {
+          text: "Bectra Hardfork",
+          link: "/nodes/guides/bectra",
+        },
+        {
           text: "Awesome Validator Tools",
           link: "https://github.com/chuck-bear/awesome-berachain-validators",
         },
