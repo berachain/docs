@@ -35,16 +35,16 @@ The following execution client versions are tested with this upgrade
 
 The first upgrade is to the Execution Client, to enable new operations that are enabled at the designated fork activation time.
 
-1. Fetch a new genesis file from https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json. If you are using Nethermind, use (this genesis file)[https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json]
+1. Fetch a new genesis file for [reth, geth, besu, erigon](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) or [Nethermind](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json).
 
 2. Verify its signature:
    `md5 eth-genesis.json` should show **fixme**. For the Nethermind genesis, this is **fixme**.
 
-3. Deploy this genesis file, along with the upgraded EL binary.
+3. Deploy this genesis file, along with the upgraded Execution Client binary.
 
 4. Geth requires additional steps (see below). Other execution clients automatically load and apply a new genesis file.
 
-5. Check the Execution Layer startup for indications of successful enabling of the fork.  
+5. Check the Execution Layer log for indications of successful enabling of the fork.  
    ![Geth Startup Banner fixme refresh](assets/geth-banner.png)
 
 ### Geth special instructions
@@ -52,14 +52,14 @@ The first upgrade is to the Execution Client, to enable new operations that are 
 Unlike most clients, `geth` does not automatically read an updated genesis file. To apply the new genesis file, do the following on the RPC or Validator:
 
 ```bash
-/path/to/geth init --datadir /path/to/geth/data /path/to/genesis
+/path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
 ```
+
+The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.   
 
 If your node is an archive node, and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
 
 ### Beacon Kit Upgrade
-
-All Validators and full nodes will need to run the latest version of Beacon Kit at the time of the fork. Any validators or full nodes not running the latest version of Beacon Kit will not progress and get stuck at the hard fork time.
 
 The hardfork timestamp is baked into `beacond` at compile time.
 
