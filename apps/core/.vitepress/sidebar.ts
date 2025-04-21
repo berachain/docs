@@ -242,6 +242,10 @@ const SIDEBAR = {
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {
+          text: "Local Devnet with Docker",
+          link: "/nodes/guides/docker-devnet",
+        },
+        {
           text: "Local Devnet with Kurtosis",
           link: "/nodes/guides/kurtosis",
         },

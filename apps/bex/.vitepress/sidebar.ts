@@ -48,6 +48,7 @@ const SIDEBAR = {
     {
       text: "User Guides",
       items: [
+        { text: "Add Token Metadata", link: "/learn/guides/add-token" },
         { text: "Swaps", link: "/learn/guides/swaps" },
         { text: "Fees", link: "/learn/guides/fees" },
         {
