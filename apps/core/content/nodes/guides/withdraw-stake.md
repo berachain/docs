@@ -5,6 +5,10 @@ head:
       content: Withdraw Validator Stake
 ---
 
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Withdraw a Validator $BERA Stake
 
 New with the Bectra release, we have added support for withdrawing $BERA stake from a Validator.
@@ -16,10 +20,10 @@ is selected to produce a block, and therefore reduce your $BGT emissions.
 
 ## Withdrawal Rules & Process
 
-Withdrawals occur at the end of the 42nd epoch after the epoch in which you perform the withdrawal.
+Withdrawals occur at the end of the 256th epoch after the epoch in which you perform the withdrawal.
   The block number can be calculated as follows:
   
-$\text{withdrawal\_block} = \lceil\frac{\text{transaction\_block}}{192} + 42\rceil \times 192$
+$\text{withdrawal\_block} = \lceil\frac{\text{transaction\_block}}{192} + 256\rceil \times 192$
 
 Where `transaction_block` is the block number where your withdrawal transaction was included, and `192` is the number of blocks in an epoch.
 
@@ -27,8 +31,9 @@ Every withdrawal requires a fee, which will go up if the withdrawal service expe
 
 The withdrawal transaction must originate from the Withdrawal Address for the Validator that wants to withdraw.
 
-If you withdraw enough of your Validator's stake, then as described by and subject to
-the rules in [the lifecycle overview](/nodes/validator-lifecycle), your Validator will exit the active set and no longer produce blocks. Once a Validator is removed from the active set, the complete stake is returned to the Withdrawal Address.
+The withdrawal API will silently adjust the withdrawal amount so as to **maintain a minimum stake of {{ config.mainnet.minEffectiveBalance }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 50,000 $BERA.   
+
+To exit your Validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your Validator will exit the active set and no longer produce blocks.
 
 :::danger
 If you are removed from the Active Set, **future deposits to your CometBFT public key will be burnt**. If you want to [activate as a validator](/nodes/guides/validator) again, you must do so with a new CometBFT identity.
@@ -47,6 +52,8 @@ export WITHDRAW_AMOUNT_GWEI=${WITHDRAW_AMOUNT_ETH}000000000
 export COMETBFT_PUB_KEY=your-cometbft-public-key
 export WITHDRAW_PRIVKEY=withdrawal-address-private-key
 ```
+
+Use the special amount of `0` to withdraw the Validator's entire stake.
 
 1. Determine withdrawal fee
 ```bash
@@ -67,10 +74,14 @@ echo $WITHDRAW_REQUEST
 # 0xacaf2e8ec309513...0009184E72A000
 ```
 
-3. Send the withdraw request to the contract, from the Validator's withdraw address.
+3. Send the withdrawal request to the contract, from the Validator's withdraw address.
 ```bash
 cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value $WITHDRAW_FEE 
 ```
 
 Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
 
+4. Monitor the Beacon Kit Validator API to observe your stake's change.
+   The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq '.[] | select(type == "object" and .validator? and .validator.pubkey ==  "$COMETBFT_PUB_KEY")'`) should show your validator’s status. NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
+
+jq '.[] | select(type == "object" and .validator? and .validator.pubkey == "0x98111a6ee569f1be005551d8c76e042aabcb5bf4c491d177445a2b5fb30dedc7bf6db39e387831c6739bde4129c6ada5")' file.json

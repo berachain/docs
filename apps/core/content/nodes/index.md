@@ -63,13 +63,13 @@ If a validator is removed from the active set, all `$BERA` staked to that valida
 
 A validator can decide to become a validator again but will need to generate new CometBFT validator keys and start the deposit process again as if they were a new validator.
 
-:::warning
-Staking with a past validator's CometBFT keys and PubKey (a validator that was removed from the active set), without creating new validator keys, can result in loss of funds.
+:::danger
+Staking with a previously-used CometBFT identity — a validator that was removed from the active set — will result in the funds being burnt.
 :::
 
 ## Voluntary Withdrawals ⚠️
 
-Voluntary withdrawals are not yet implemented on Berachain and will be coming in a future release.
+A Validator can [withdraw all or part of their stake](/nodes/guides/withdraw-stake).  
 
 ## Validator Block Rewards & Distribution 🪙
 

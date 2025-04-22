@@ -27,18 +27,30 @@ The following execution client versions are tested with this upgrade
 
 ## Bepolia Upgrade
 
-- **Week of April 21**: Documentation released. Node operators upgrade execution client
-- **Week of April 28**: Beacon Kit 1.2.0 released. Node operators upgrade Beacon Kit.
-- **May 7**: Bectra live on Bepolia
+- **Week of April 21**: Documentation released.
+- **Monday April 28**: Beacon Kit 1.2.0-rc released. Node operators upgrade Beacon Kit and geth/reth/etc.
+- **Monday May 5**: All infrastructure partners and public RPCs are expected to be upgraded.
+- **May 7 at 10am Eastern**: Bectra hardfork on Bepolia
 
-### Execution Client Upgrade Week of April 21
+With experience from Bepolia, we will plan the release to mainnet, tentatively set for May 28.
+
+### Execution Client Upgrade Week of April 28
 
 The first upgrade is to the Execution Client, to enable new operations that are enabled at the designated fork activation time.
 
-1. Fetch a new genesis file for [reth, geth, besu, erigon](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) or [Nethermind](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json).
+1. For [reth, geth, besu, erigon]:
+   ```bash
+   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json
+   md5 eth-genesis.json
+   ```
+   The hash should be `fixme`.
 
-2. Verify its signature:
-   `md5 eth-genesis.json` should show **fixme**. For the Nethermind genesis, this is **fixme**.
+2. For Nethermind:
+   ```bash
+   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json
+   md5 eth-nether-genesis.json
+   ```
+   The hash should be `fixme`.
 
 3. Deploy this genesis file, along with the upgraded Execution Client binary.
 
