@@ -21,17 +21,17 @@ is selected to produce a block, and therefore reduce your $BGT emissions.
 ## Withdrawal Rules & Process
 
 Withdrawals occur at the end of the 256th epoch after the epoch in which you perform the withdrawal.
-  The block number can be calculated as follows:
-  
+The block number can be calculated as follows:
+
 $\text{withdrawal\_block} = \lceil\frac{\text{transaction\_block}}{192} + 256\rceil \times 192$
 
 Where `transaction_block` is the block number where your withdrawal transaction was included, and `192` is the number of blocks in an epoch.
 
-Every withdrawal requires a fee, which will go up if the withdrawal service experiences an unusual volume of requests. 
+Every withdrawal requires a fee, which will go up if the withdrawal service experiences an unusual volume of requests.
 
 The withdrawal transaction must originate from the Withdrawal Address for the Validator that wants to withdraw.
 
-The withdrawal API will silently adjust the withdrawal amount so as to **maintain a minimum stake of {{ config.mainnet.minEffectiveBalance }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 50,000 $BERA.   
+The withdrawal API will silently adjust the withdrawal amount so as to **maintain a minimum stake of {{ config.mainnet.minEffectiveBalance }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 50,000 $BERA.
 
 To exit your Validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your Validator will exit the active set and no longer produce blocks.
 
@@ -41,7 +41,7 @@ If you are removed from the Active Set, **future deposits to your CometBFT publi
 
 ## How to withdraw $BERA stake
 
-1. Set up environment. You are going to need the private key of your Withdrawal Address, or to have it on an attached ledger.  To obtain your cometbft public key, you can invoke `beacond --home path/to/beacond/data deposit validator-keys`.
+1. Set up environment. You are going to need the private key of your Withdrawal Address, or to have it on an attached ledger. To obtain your cometbft public key, you can invoke `beacond --home path/to/beacond/data deposit validator-keys`.
 
 ```bash
 export RPC=https://bepolia.rpc.berachain.com/
@@ -56,6 +56,7 @@ export WITHDRAW_PRIVKEY=withdrawal-address-private-key
 Use the special amount of `0` to withdraw the Validator's entire stake.
 
 1. Determine withdrawal fee
+
 ```bash
 WITHDRAW_FEE=$(cast call -r $RPC $WITHDRAW_CONTRACT)
 echo $WITHDRAW_FEE
@@ -75,8 +76,9 @@ echo $WITHDRAW_REQUEST
 ```
 
 3. Send the withdrawal request to the contract, from the Validator's withdraw address.
+
 ```bash
-cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value $WITHDRAW_FEE 
+cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value $WITHDRAW_FEE
 ```
 
 Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.

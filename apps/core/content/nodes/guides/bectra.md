@@ -39,17 +39,21 @@ With experience from Bepolia, we will plan the release to mainnet, tentatively s
 The first upgrade is to the Execution Client, to enable new operations that are enabled at the designated fork activation time.
 
 1. For [reth, geth, besu, erigon]:
+
    ```bash
    wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json
    md5 eth-genesis.json
    ```
+
    The hash should be `fixme`.
 
 2. For Nethermind:
+
    ```bash
    wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json
    md5 eth-nether-genesis.json
    ```
+
    The hash should be `fixme`.
 
 3. Deploy this genesis file, along with the upgraded Execution Client binary.

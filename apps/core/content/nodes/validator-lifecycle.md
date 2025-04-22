@@ -105,7 +105,7 @@ Once **Active**:
 
 ## Exited State
 
-A Validator may choose to exit by [withdrawing their complete stake](/nodes/guides/withdraw-stake).   Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the `ValidatorSetCap` is reached and another validator with a higher priority enters. Higher priority is determined by:
+A Validator may choose to exit by [withdrawing their complete stake](/nodes/guides/withdraw-stake). Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the `ValidatorSetCap` is reached and another validator with a higher priority enters. Higher priority is determined by:
 
 1. **Larger Effective Balance**
 2. **If Equal Effective Balance**, a lower-order pubKey (alphabetically).

@@ -69,7 +69,7 @@ Staking with a previously-used CometBFT identity — a validator that was remove
 
 ## Voluntary Withdrawals ⚠️
 
-A Validator can [withdraw all or part of their stake](/nodes/guides/withdraw-stake).  
+A Validator can [withdraw all or part of their stake](/nodes/guides/withdraw-stake).
 
 ## Validator Block Rewards & Distribution 🪙
 
