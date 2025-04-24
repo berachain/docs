@@ -213,10 +213,6 @@ const SIDEBAR = {
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
         { text: "Production Checklist", link: "/nodes/production-checklist" },
         {
-          text: "Bectra Hardfork",
-          link: "/nodes/guides/bectra",
-        },
-        {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
         },
