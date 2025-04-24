@@ -63,6 +63,7 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 
 Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
 $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
+
 <p align="center">
   <img src="/public/assets/updatedemission.png" alt="chart showing how emissions scale with `$BGT` delegation">
 </p>
