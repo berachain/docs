@@ -33,7 +33,7 @@ The withdrawal transaction must originate from the Withdrawal Address for the Va
 
 The withdrawal API will silently adjust the withdrawal amount so as to **maintain a minimum stake of {{ config.mainnet.minEffectiveBalance }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 50,000 $BERA.
 
-To exit your Validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your Validator will immediately be queued to exit the active set and no longer produce blocks.  The stake will be returned by the consensus layer on the above schedule.
+To exit your Validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your Validator will immediately be queued to exit the active set and no longer produce blocks. The stake will be returned by the consensus layer on the above schedule.
 
 :::danger
 If you are removed from the Active Set, **future deposits to your CometBFT public key will be burnt**. If you want to [activate as a validator](/nodes/guides/validator) again, you must do so with a new CometBFT identity.
