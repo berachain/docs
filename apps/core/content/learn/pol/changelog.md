@@ -10,7 +10,7 @@ We launched Proof of Liquidity 1.0 with public release of the [Honey Paper](http
 
 **Proof of Liquidity 1.2:**
 1. New Maximum of 3 incentives per reward vault
-2. Block Reward Emissions reduced by 20% to keep inflation below target
+2. Block Reward Emissions reduced by 20% to keep inflation below target. Updated constants are shown on [Block Production & Emissions](https://docs.berachain.com/learn/pol/bgtmath)
 3. Auto-Incentivizer: fees from foundation vaults will use the fees to automatically offer incentives
 
 <p align="center">
