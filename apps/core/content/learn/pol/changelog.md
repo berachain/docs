@@ -1,12 +1,14 @@
 # Proof of Liquidity Updates
 
-## January 2025
+## 2025-Jan-20
 
 We launched Proof of Liquidity 1.0 with public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain Mainnet.
 
-## April 2025
+## 2025-Apr-18
 
 **Proof of Liquidity 1.1:**   Reward Allocations limit any one reward vault to 30% share of emissions.
+
+## 2025-Apr-24
 
 **Proof of Liquidity 1.2:**
 1. New Maximum of 3 incentives per reward vault
