@@ -62,8 +62,10 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 ### Sample Emissions Chart
 
 Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
-$$B = 0.5, R = 1.5, a = 3.5, b = 0.4, m = 0$$
-![chart showing how emissions scale with `$BGT` delegation](/public/assets/updatedemission.png)
+$$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
+<p align="center">
+  <img src="/public/assets/updatedemission.png" alt="chart showing how emissions scale with `$BGT` delegation">
+</p>
 
 ## Max Block Inflation
 
