@@ -79,7 +79,7 @@ echo $WITHDRAW_REQUEST
 3. Send the withdrawal request to the contract, from the Validator's withdraw address.
 
 ```bash
-cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value $WITHDRAW_AMOUNT
+cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value ${WITHDRAW_AMOUNT}wei
 ```
 
 Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
