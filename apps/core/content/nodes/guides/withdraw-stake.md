@@ -58,9 +58,9 @@ Use the special amount of `0` to withdraw the Validator's entire stake.
 1. Determine withdrawal fee
 
 ```bash
-WITHDRAW_FEE=$(cast call -r $RPC $WITHDRAW_CONTRACT)
-WITHDRAW_AMOUNT=$(cast to-dec $WITHDRAW_FEE)
-echo $WITHDRAW_AMOUNT
+WITHDRAW_FEE_HEX=$(cast call -r $RPC $WITHDRAW_CONTRACT)
+WITHDRAW_FEE=$(cast to-dec $WITHDRAW_FEE_HEX)
+echo $WITHDRAW_FEE
 
 # [ TYPICAL OUTPUT, MAY VERY ]
 # 1
@@ -79,7 +79,7 @@ echo $WITHDRAW_REQUEST
 3. Send the withdrawal request to the contract, from the Validator's withdraw address.
 
 ```bash
-cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value ${WITHDRAW_AMOUNT}wei
+cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value ${WITHDRAW_FEE}wei
 ```
 
 Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
