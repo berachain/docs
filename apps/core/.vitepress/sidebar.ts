@@ -243,6 +243,10 @@ const SIDEBAR = {
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {
+          text: "Withdraw Validator Stake",
+          link: "/nodes/guides/withdraw-stake",
+        },
+        {
           text: "Local Devnet with Docker",
           link: "/nodes/guides/docker-devnet",
         },
