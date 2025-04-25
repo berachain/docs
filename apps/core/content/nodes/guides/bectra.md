@@ -12,7 +12,6 @@ Bectra introduces two changes to Berachain:
 1. Validators are able to withdraw all or part of their $BERA stake.
 2. All users are able to take advantage of [EIP 7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md) for an improved wallet experience.
 
-
 Note all users, whether hosting an RPC or a validator, **must upgrade** their Execution Client and Consensus Client to continue following the chain.
 
 ## Bepolia Upgrade
@@ -35,7 +34,6 @@ The following execution client versions are tested with this upgrade
 - [Nethermind 1.31.8](https://github.com/NethermindEth/nethermind/releases/tag/1.31.8)
 - [Besu 25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)
 - [Erigon 3.0.2](https://github.com/erigontech/erigon/releases/tag/v3.0.2)
-
 
 1. For **reth, geth, besu, erigon**:
 
@@ -78,7 +76,7 @@ If your node is an archive node, and ordinarily runs with `--state.scheme hash`,
 
 Beacon Kit 1.2.0-rc is required to follow the Bepolia Hardfork.
 
-**Configuration change to `app.toml`.**  Revise your app.toml to add this configuration to the `beacon-kit` section, creating it if it doesn't exist:
+**Configuration change to `app.toml`.** Revise your app.toml to add this configuration to the `beacon-kit` section, creating it if it doesn't exist:
 
 ```app.toml
 [beacon-kit]
@@ -92,10 +90,8 @@ The following will be logged on `beacond` startup.
 
 Note the version number and "Electra Fork Time" in the banner.
 
-
 ## Mainnet upgrade
 
 We are staging this release: first to our Bepolia testnet, and only when successful to Berachain Mainnet.
 
-The timing of upgrades to Mainnet will be confirmed after we get operational experience with the Bepolia upgrade, but are **tentatively set for May 28**.  Beacon Kit will be 1.2.0 (not -rc) for the Mainnet upgrade.
-
+The timing of upgrades to Mainnet will be confirmed after we get operational experience with the Bepolia upgrade, but are **tentatively set for May 28**. Beacon Kit will be 1.2.0 (not -rc) for the Mainnet upgrade.

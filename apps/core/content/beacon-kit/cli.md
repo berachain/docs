@@ -22,15 +22,15 @@ beacond init <moniker> [flags]
 
 #### Flags
 
-| Flag                     | Description                                                        |
-| ------------------------ | ------------------------------------------------------------------ |
-| `--chain-id string`      | Genesis file chain-id (randomly created if blank)                  |
-| `--beacon-kit.chain-spec` | Which chain to generate configurations for. This value is also placed in the generated app.toml.   `mainnet` or `testnet` or `file`
-| `--beacon-kit.chain-spec-file` | If `chain-spec=file`, which file to use. Should be toml format.  This value is also placed in the generated app.toml. 
-| `--default-denom string` | Genesis file default denomination (default: "stake")               |
-| `--initial-height int`   | Initial block height at genesis (default: 1)                       |
-| `-o, --overwrite`        | Overwrite the genesis.json file                                    |
-| `--recover`              | Recover existing key using seed phrase instead of creating new one |
+| Flag                           | Description                                                                                                                       |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--chain-id string`            | Genesis file chain-id (randomly created if blank)                                                                                 |
+| `--beacon-kit.chain-spec`      | Which chain to generate configurations for. This value is also placed in the generated app.toml. `mainnet` or `testnet` or `file` |
+| `--beacon-kit.chain-spec-file` | If `chain-spec=file`, which file to use. Should be toml format. This value is also placed in the generated app.toml.              |
+| `--default-denom string`       | Genesis file default denomination (default: "stake")                                                                              |
+| `--initial-height int`         | Initial block height at genesis (default: 1)                                                                                      |
+| `-o, --overwrite`              | Overwrite the genesis.json file                                                                                                   |
+| `--recover`                    | Recover existing key using seed phrase instead of creating new one                                                                |
 
 ### `start`
 

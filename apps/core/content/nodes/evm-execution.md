@@ -17,10 +17,10 @@ The execution layer consists of multiple implementations in the form of EVM exec
 
 The following execution clients have been tested and verified by BeaconKit:
 
-| Client                                                    | Language | Sync Strategies                    | Mainnet Version | Bepolia Version
-| --------------------------------------------------------- | -------- | ---------------------------------- | ------------------- | -- |
-| [Geth](https://github.com/ethereum/go-ethereum)           | Golang   | Snap, Full                         | v1.14.x             | v1.15.10+
-| [Reth](https://github.com/paradigmxyz/reth)               | Rust     | Full                               | v1.1.x              | v1.3.12+
-| [Nethermind](https://github.com/NethermindEth/nethermind) | C#       | Snap (without serving), Fast, Full | v1.31.x             | v1.31.8+
-| [Erigon](https://github.com/ledgerwatch/erigon)           | Golang   | Full                               | v2.61.x             | v3.0.2+
-| [Besu](https://github.com/hyperledger/besu/)              | Java     | Snap, Fast, Full                   | v25.2.x             | v25.4.1+
+| Client                                                    | Language | Sync Strategies                    | Mainnet Version | Bepolia Version |
+| --------------------------------------------------------- | -------- | ---------------------------------- | --------------- | --------------- |
+| [Geth](https://github.com/ethereum/go-ethereum)           | Golang   | Snap, Full                         | v1.14.x         | v1.15.10+       |
+| [Reth](https://github.com/paradigmxyz/reth)               | Rust     | Full                               | v1.1.x          | v1.3.12+        |
+| [Nethermind](https://github.com/NethermindEth/nethermind) | C#       | Snap (without serving), Fast, Full | v1.31.x         | v1.31.8+        |
+| [Erigon](https://github.com/ledgerwatch/erigon)           | Golang   | Full                               | v2.61.x         | v3.0.2+         |
+| [Besu](https://github.com/hyperledger/besu/)              | Java     | Snap, Fast, Full                   | v25.2.x         | v25.4.1+        |
