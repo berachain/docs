@@ -17,9 +17,9 @@ The -rc will be initially rc0, but there may be more RC releases. Click "Watch" 
 
 **The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain. Though defaulted to mainnet so that money machines don't stop working, for Bepolia this line must be added.
 
-  ```
+  ```app.toml
   [beacon-kit] 
-  chain-spec=testnet
+  chain-spec = "testnet"
   ```
 
 
