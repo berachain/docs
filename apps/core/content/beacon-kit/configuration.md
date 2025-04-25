@@ -44,6 +44,14 @@ These options appear at the top of the file without a section header.
 
 BeaconKit settings are organized into several subsections.
 
+#### Core settings `[beacon-kit]`.
+
+| Option              | Description                                                                                                                                                                                                                                                                                                                                                           | Default Value |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `chain-spec`        | The type of chain specification to use. This can be `mainnet`, `testnet`, and `file`                                                                                                                                                                                                                                                                                  | `mainnet`     |
+| `chain-spec-file`   | When `chain-spec` is `file`, this is the file to use. Evaluated relative to the beacond configuration directory. The [mainnet](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/spec.toml) and [testnet](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/spec.toml) configuration files are available for reference. | ""            |
+| `shutdown-timeout`  | This is the maximum time to wait for the node to gracefully shutdown before forcing an exit.                                                                                                                                                                                                                                                                           | "5m0s"        |
+
 #### Engine `[beacon-kit.engine]`
 
 | Option                       | Description                                             | Default Value             |
