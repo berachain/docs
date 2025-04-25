@@ -4,7 +4,7 @@
 
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and EIP-7702.  
 
-**[Upgrade instructions are posted](/nodes/guides/bectra)**. These are for **Bepolia only**. Mainnet upgrades will be confirmed/announced after Beacon Kit 1.2.0 is out of "release candidate" testing.
+**[Upgrade instructions are posted](/nodes/guides/bectra)**. 
 
 **What's new**
 
@@ -26,8 +26,8 @@ The -rc will be initially rc0, but there may be more RC releases. Click "Watch" 
 **New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade.  New deployments should use those recommended versions.
 
 To emphasize, **do not change anything on mainnet nodes yet**.
-
-
+These are for **Bepolia only**.
+Mainnet upgrades will be confirmed/announced after Beacon Kit 1.2.0 is out of "release candidate" testing.
 
 
 ## v1.1.4: configuration advice
