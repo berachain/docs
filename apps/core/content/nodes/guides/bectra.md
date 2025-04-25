@@ -94,4 +94,4 @@ Note the version number and "Electra Fork Time" in the banner.
 
 We are staging this release: first to our Bepolia testnet, and only when successful to Berachain Mainnet.
 
-The timing of upgrades to Mainnet will be confirmed after we get operational experience with the Bepolia upgrade, but are **tentatively set for May 28**. Beacon Kit will be 1.2.0 (not -rc) for the Mainnet upgrade.
+The timing of upgrades to Mainnet will be confirmed after we get operational experience with the Bepolia upgrade. Beacon Kit will be 1.2.0 (not -rc) for the Mainnet upgrade.
