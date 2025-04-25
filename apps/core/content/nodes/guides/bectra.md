@@ -19,7 +19,7 @@ Note all users, whether hosting an RPC or a validator, **must upgrade** their Ex
 
 The following execution client versions are tested with this upgrade
 
-- [Geth 1.15.9](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.9)
+- [Geth 1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10)
 - [Reth 1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)
 - [Nethermind 1.31.8](https://github.com/NethermindEth/nethermind/releases/tag/1.31.8)
 - [Besu 25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)
