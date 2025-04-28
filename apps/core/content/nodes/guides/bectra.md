@@ -17,9 +17,9 @@ Note all users, whether hosting an RPC or a validator, **must upgrade** their Ex
 ## Bepolia Upgrade
 
 - **Week of April 21**: Documentation released.
-- **Monday April 28**: Beacon Kit 1.2.0-rc released. Node operators upgrade Beacon Kit and geth/reth/etc.
+- **Week of April 28**: Beacon Kit 1.2.0-rc released. Node operators upgrade Beacon Kit and geth/reth/etc.
 - **Monday May 5**: All infrastructure partners and public RPCs are expected to be upgraded.
-- **May 7 at 10am Eastern**: Bectra hardfork on Bepolia
+- **May 7 at noon Eastern**: Bectra hardfork on Bepolia
 
 With experience from Bepolia, we will plan the release to mainnet, tentatively set for May 28.
 
