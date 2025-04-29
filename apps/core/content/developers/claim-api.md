@@ -55,32 +55,30 @@ When you receive a Merkle proof from the API:
 
 ### Health Check
 
+Check if the API is operational.
+
 ```http
 GET /health
 ```
 
-Check if the API is operational.
-
 <ApiTester 
   endpoint="/health"
   method="GET"
-  description="Check the health status of the API"
 />
 
 ### Validator Yields
 
 #### Get Latest Yield for Specific Validator
 
+Retrieve the most recent yield information for a specific validator.
+
 ```http
 GET /api/v1/reward-distributions/validators/yield/{validator}
 ```
 
-Retrieve the most recent yield information for a specific validator.
-
 <ApiTester 
   endpoint="/api/v1/reward-distributions/validators/yield/{validator}"
   method="GET"
-  description="Get the latest yield information for a specific validator"
   :pathParams="[
     {
       name: 'validator',
@@ -95,12 +93,9 @@ Retrieve the most recent yield information for a specific validator.
 GET /api/v1/reward-distributions/validators/yield
 ```
 
-Retrieve the most recent yield information for all validators.
-
 <ApiTester 
   endpoint="/api/v1/reward-distributions/validators/yield"
   method="GET"
-  description="Get the latest yield information for all validators"
 />
 
 ### Wallet Operations
@@ -116,7 +111,6 @@ Retrieve all reward distributions associated with a specific wallet.
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/reward-distributions"
   method="GET"
-  description="Get all reward distributions for a specific wallet"
   :pathParams="[
     {
       name: 'wallet',

@@ -12,11 +12,6 @@ const props = defineProps({
     type: String,
     default: 'GET'
   },
-  // Description of what the endpoint does
-  description: {
-    type: String,
-    default: ''
-  },
   // Path parameters definition array [{name: 'wallet', description: 'Wallet address'}]
   pathParams: {
     type: Array,
@@ -128,58 +123,50 @@ async function testEndpoint() {
       </select>
     </div>
 
+    <!-- Path Parameters -->
+    <div v-if="pathParams.length > 0" class="params-section">
+      <h4>Path Parameters</h4>
+      <div 
+        v-for="param in pathParams" 
+        :key="param.name"
+        class="param-input"
+      >
+        <label :for="param.name">{{ param.name }}:</label>
+        <input 
+          :id="param.name"
+          v-model="paramValues[param.name]"
+          :placeholder="param.description"
+          class="param-field"
+        />
+      </div>
+    </div>
+
+    <!-- Query Parameters -->
+    <div v-if="queryParams.length > 0" class="params-section">
+      <h4>Query Parameters</h4>
+      <div 
+        v-for="param in queryParams" 
+        :key="param.name"
+        class="param-input"
+      >
+        <label :for="param.name">{{ param.name }}:</label>
+        <input 
+          :id="param.name"
+          v-model="paramValues[param.name]"
+          :placeholder="param.description"
+          class="param-field"
+        />
+        <span v-if="param.required" class="required">*</span>
+      </div>
+    </div>
+
     <div class="endpoint-test">
-      <div v-if="description" class="description">
-        {{ description }}
-      </div>
-
-      <!-- Path Parameters -->
-      <div v-if="pathParams.length > 0" class="params-section">
-        <h4>Path Parameters</h4>
-        <div 
-          v-for="param in pathParams" 
-          :key="param.name"
-          class="param-input"
-        >
-          <label :for="param.name">{{ param.name }}:</label>
-          <input 
-            :id="param.name"
-            v-model="paramValues[param.name]"
-            :placeholder="param.description"
-            class="param-field"
-          />
-        </div>
-      </div>
-
-      <!-- Query Parameters -->
-      <div v-if="queryParams.length > 0" class="params-section">
-        <h4>Query Parameters</h4>
-        <div 
-          v-for="param in queryParams" 
-          :key="param.name"
-          class="param-input"
-        >
-          <label :for="param.name">{{ param.name }}:</label>
-          <input 
-            :id="param.name"
-            v-model="paramValues[param.name]"
-            :placeholder="param.description"
-            class="param-field"
-          />
-          <span v-if="param.required" class="required">*</span>
-        </div>
-      </div>
-
-      <div class="endpoint-url">
-        <code>{{ method }} {{ finalUrl }}</code>
-      </div>
-
       <button 
         @click="testEndpoint"
         :disabled="loading || !isValid"
         class="test-button"
       >
-        {{ loading ? 'Testing...' : 'Test Endpoint' }}
+        {{ loading ? 'Testing...' : 'Try it' }}
       </button>
 
       <div v-if="response" class="response">
@@ -202,11 +189,6 @@ async function testEndpoint() {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   font-size: 0.9em;
-}
-
-.description {
-  margin-bottom: 1rem;
-  color: var(--vp-c-text-2);
 }
 
 .network-selector {
@@ -252,12 +234,9 @@ async function testEndpoint() {
   margin-left: 0.2rem;
 }
 
-.endpoint-url {
-  margin: 1rem 0;
-  padding: 0.5rem;
-  background: var(--vp-c-bg-soft);
-  border-radius: 4px;
-  word-break: break-all;
+.endpoint-test {
+  margin-top: 1rem;
+  text-align: right;
 }
 
 .test-button {
@@ -278,6 +257,7 @@ async function testEndpoint() {
   margin-top: 1rem;
   padding: 1rem;
   border-radius: 4px;
+  text-align: left;
 }
 
 .response {
