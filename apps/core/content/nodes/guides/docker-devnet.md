@@ -145,41 +145,19 @@ docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
 # cl-node-val-0   beacond-docker   Up 2 minutes
 ```
 
-Check block height:
+**Monitor beacond logs for deposits, withdrals, and blocks:**
 
 ```bash
-curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
 
-# [Expected Output - actual number will vary]:
-# "0x12"
-```
-
-Check peering:
-
-```bash
-curl -s --location 'http://localhost:26657/net_info' | jq .result.n_peers;
+docker logs -f cl-node-rpc-0    | egrep '(Commit|deposit|withdraw|exit)';
 
 # [Expected Output]:
-# "3"
-```
-
-Monitor beacond logs for deposit, withdraw, exit requests and block generation:
-
-```bash
-docker ps | grep beacond;
-# [SAMPLE OUTPUT]
-# 0fcebd46b9d8   beacond-docker   Up 20 minutes   0.0.0.0:3500->3500/tcp, 0.0.0.0:26657->26657/tcp   cl-node-rpc-0
-# ...
-
-docker logs -f 0fcebd46b9d8 | egrep '(Commit|deposit|withdraw|exit)';
-
-# [Expected Output]:
-# INFO Committed statee ... height=10
+# INFO Committed state ... height=10
 # INFO Building block body ... num_deposits=1
 # INFO Processing partial withdrawal ...
 ```
 
-Show the current status of your validator:
+**Show the current status of your validator:**
 
 ```bash
 # FROM: ~/devnet
@@ -190,7 +168,7 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[]
 ```
 
 
-Monitor the validator set, reporting every time it changes. **Start this process to monitor changes done** in the next sections:
+**Start Validator State Watcher:**
 
 ```bash
 URL="http://localhost:3500/eth/v1/beacon/states/head/validators"
