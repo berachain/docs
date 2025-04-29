@@ -110,9 +110,6 @@ GET /api/v1/reward-distributions/validators/yield/{validator}
   }"
 />
 
-
-
-
 #### Get Latest Yields for All Validators
 
 ```http
@@ -349,4 +346,3 @@ Error responses will include a message explaining what went wrong:
   "error": "Error message description"
 }
 ```
-
