@@ -18,7 +18,7 @@ import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';
 
 # Claim API
 
-The Claim API provides endpoints for learning about available reward distributions, providing proofs on demand, and aggregated.  This API is useful for developers in the Proof of Liquidity ecosystem.
+The Claim API provides endpoints for learning about available reward distributions, providing proofs on demand, and aggregated. This API is useful for developers in the Proof of Liquidity ecosystem.
 
 ## Base URL
 
@@ -29,7 +29,7 @@ The base URL for the API endpoints depends on which network you're interacting w
 
 ## Rate Limiting and Caching
 
-All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design. 
+All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design.
 
 ## Merkle Proofs
 
@@ -134,10 +134,12 @@ GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
 Retrieve proofs for a specific distribution.
 
 **Parameters**
+
 - `wallet` (path): The wallet address
 - `dist_id` (path): The distribution ID
 
 **Response**
+
 ```json
 // FIXME: Add example response showing proof structure including:
 // - Merkle proof format
@@ -152,10 +154,12 @@ GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
 Retrieve all proofs associated with a specific validator for a wallet.
 
 **Parameters**
+
 - `wallet` (path): The wallet address
 - `validator` (path): The validator address
 
 **Response**
+
 ```json
 // FIXME: Add example response showing array of proofs with their associated distributions
 ```
@@ -169,9 +173,11 @@ GET /api/v1/wallets/{wallet}/rewards
 Retrieve all rewards for a specific wallet.
 
 **Parameters**
+
 - `wallet` (path): The wallet address
 
 **Response**
+
 ```json
 // FIXME: Add example response showing:
 // - Total rewards
@@ -189,9 +195,11 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation
 Retrieve aggregated unclaimed rewards grouped by validators for a wallet.
 
 **Parameters**
+
 - `wallet` (path): The wallet address
 
 **Response**
+
 ```json
 // FIXME: Add example response showing aggregated rewards structure:
 // - Total unclaimed amount
@@ -208,10 +216,12 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
 Retrieve aggregated unclaimed rewards for a specific validator and wallet.
 
 **Parameters**
+
 - `wallet` (path): The wallet address
 - `validator` (path): The validator address
 
 **Response**
+
 ```json
 // FIXME: Add example response showing detailed breakdown of unclaimed rewards
 ```
@@ -227,15 +237,16 @@ GET /api/v1/vaults/{vault}/bgt-rate
 Retrieve the expected BGT ingestion rate per block for a specific vault.
 
 **Parameters**
+
 - `vault` (path): The vault address
 
 **Response**
+
 ```json
 // FIXME: Add example response showing:
 // - BGT rate per block
 // - Any additional vault metrics
 ```
-
 
 ## Error Handling
 
@@ -251,7 +262,7 @@ Error responses will include a message explaining what went wrong:
 
 ```json
 {
-    "error": "Error message description"
+  "error": "Error message description"
 }
 ```
 
@@ -262,7 +273,3 @@ Common error scenarios:
 // - Invalid distribution ID
 // - Missing proofs
 // - System maintenance states
-
-
-
-
