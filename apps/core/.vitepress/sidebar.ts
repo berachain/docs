@@ -101,6 +101,11 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
         {
+          text: "Claim API",
+          link: "/developers/claim-api",
+        },
+
+        {
           text: `${constants.bepolia.dapps.faucet.name}`,
           link: `${constants.bepolia.dapps.faucet.url}`,
           target: "_blank",

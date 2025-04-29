@@ -2,22 +2,22 @@
 head:
   - - meta
     - property: og:title
-      content: Berachain Claims API
+      content: Berachain Claim API
   - - meta
     - name: description
-      content: Berachain Claims JSON-RPC API
+      content: Berachain Claim JSON-RPC API
   - - meta
     - property: og:description
-      content: Berachain Claims JSON-RPC API
+      content: Berachain Claim JSON-RPC API
 ---
 
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# Claims API
+# Claim API
 
-The Claims API provides endpoints for learning about available reward distributions, providing proofs on demand, and aggregated.  This API is useful for developers in the Proof of Liquidity ecosystem.
+The Claim API provides endpoints for learning about available reward distributions, providing proofs on demand, and aggregated.  This API is useful for developers in the Proof of Liquidity ecosystem.
 
 ## Base URL
 
@@ -32,7 +32,7 @@ All endpoints are rate-limited to prevent abuse. Responses are also cached for o
 
 ## Merkle Proofs
 
-The Claims API uses Merkle proofs to verify reward eligibility. These proofs are cryptographic evidence that a particular wallet address is entitled to specific rewards from a distribution.
+The Claim API uses Merkle proofs to verify reward eligibility. These proofs are cryptographic evidence that a particular wallet address is entitled to specific rewards from a distribution.
 
 ### What are Merkle Proofs?
 
