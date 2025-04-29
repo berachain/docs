@@ -21,8 +21,6 @@ head:
 
 This tutorial will walk you through launching a private local network and promoting one of the nodes in that network to a full validator.
 
-
-
 :::tip
 Some features like native dApps, contracts, and more are still a work in progress.
 :::
@@ -38,7 +36,7 @@ Before starting, ensure that you have the following installed on your computer:
 
 ## Launch Local Devnet
 
-We will now launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis. 
+We will now launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis.
 
 ### Step 1 - Obtain & Build Source
 
@@ -53,33 +51,35 @@ cd devnet;
 
 Review the `env.sh` file, which contains important variables for running the docker-devnet and deposit testing.
 
-**CHAIN_SPEC and CHAIN_ID** Are used to influence the configuration of the deployed `beacond`. 
+**CHAIN_SPEC and CHAIN_ID** Are used to influence the configuration of the deployed `beacond`.
 Valid values for **CHAIN_SPEC** are `mainnet`, `testnet` and `file`.
-The `file` specification uses the ``CHAIN_ID`` to look up a chainspec file in `templates/beacond`.
+The `file` specification uses the `CHAIN_ID` to look up a chainspec file in `templates/beacond`.
 
 In the provided example, we begin with the [Bepolia configuration](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/spec.toml), and modify:
-* `chain-id = 87337`
-* `slots-per-epoch = 10` from 192
-* `min-validator-withdrawability-delay = 4` instead of a 256-epoch delay
-* `validator-set-cap = 3` instead of 69, to keep things interesting on our 4-node cluster
+
+- `chain-id = 87337`
+- `slots-per-epoch = 10` from 192
+- `min-validator-withdrawability-delay = 4` instead of a 256-epoch delay
+- `validator-set-cap = 3` instead of 69, to keep things interesting on our 4-node cluster
 
 **CUSTOM_BIN_BEACOND**: Leave this blank to automatically use the latest released beacond.  
 If you want a custom build of Beacon Kit, you need to compile it for Linux. This is easily done in a Vagrant:
 
 ```bash
-brew install vagrant virtualbox 
+brew install vagrant virtualbox
 vagrant init bento/ubuntu-22.04
 vagrant up
 vagrant ssh
 sudo apt update && sudo apt -y install build-essential
 wget https://go.dev/dl/go1.23.8.linux-arm64.tar.gz
 sudo tar xzvf go1.23.8.linux-arm64.tar.gz  -C /opt/
-git clone https://github.com/berachain/beacon-kit && cd beacon-kit 
+git clone https://github.com/berachain/beacon-kit && cd beacon-kit
 git checkout v1.2.0.rc0
 PATH=/opt/go/bin:$PATH && make build
 ```
 
 **Host Terminal:**
+
 ```bash
 # FROM: ~/devnet
 
@@ -146,6 +146,7 @@ docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
 ```
 
 Check block height:
+
 ```bash
 curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
 
@@ -154,6 +155,7 @@ curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq 
 ```
 
 Check peering:
+
 ```bash
 curl -s --location 'http://localhost:26657/net_info' | jq .result.n_peers;
 
@@ -162,6 +164,7 @@ curl -s --location 'http://localhost:26657/net_info' | jq .result.n_peers;
 ```
 
 Monitor beacond logs for deposit, withdraw, exit requests and block generation:
+
 ```bash
 docker ps | grep beacond;
 # [SAMPLE OUTPUT]
@@ -185,8 +188,8 @@ COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-key
 curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
 ```
 
-
 This will report the current block number:
+
 ```bash
 # FROM: ~/devnet
 
@@ -196,9 +199,10 @@ curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq 
 # "0x10c"
 ```
 
-Monitor the validator set, reporting every time it changes.  Start this while performing the next sections:
+Monitor the validator set, reporting every time it changes. Start this while performing the next sections:
 
 **Terminal 2:**
+
 ```bash
 URL="http://localhost:3500/eth/v1/beacon/states/head/validators"
 TEMP_FILE="/tmp/url_content.tmp"
@@ -228,12 +232,12 @@ Recall that there are two types of deposits: 1) initial registration and 2) top-
 
 # [Expected Output]:
 #Generating Signature for Parameters: ...
-# ..	pubkey = 0xaee37b7ed9814aaa01c917484e2f5bb60583ff5ec5402611de6fd5c226007d4aead7e88a55b86cff61fb2cd17f405949 
+# ..	pubkey = 0xaee37b7ed9814aaa01c917484e2f5bb60583ff5ec5402611de6fd5c226007d4aead7e88a55b86cff61fb2cd17f405949
 
-# Send this command to register the validator + deposit 10000 BERA: 
+# Send this command to register the validator + deposit 10000 BERA:
 # cast send ..
 #
-# Send this command to activate the validator by depositing 240000 BERA: 
+# Send this command to activate the validator by depositing 240000 BERA:
 # cast send..
 ```
 
@@ -241,7 +245,6 @@ Recall that there are two types of deposits: 1) initial registration and 2) top-
 Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis root differs from mainnet's, and the signature will be invalid on mainnet.
 Study the registration and activation process in `generate-deposit-tx` and the [Deposit Guide](/nodes/guides/validator) to understand how to apply this process to mainnet.
 :::
-
 
 Your validator status monitor should show:
 
@@ -312,7 +315,6 @@ INFO Processed deposit to create new validator service=state-processor deposit_a
 #     }
 #  }
 ```
-
 
 Here is an example of a failed deposit, for instance by modifying the signed data before sending it:
 
@@ -402,7 +404,6 @@ Using the provided call to exit the validator, you wil see the validator state i
 can no longer produce blocks.
 
 After the required delay in epochs, the validator's remaining stake is returned at the status then rests at `withdrawal_done`.
-
 
 ## Cleanup
 

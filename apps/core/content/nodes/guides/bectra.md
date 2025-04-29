@@ -55,7 +55,7 @@ The following execution client versions are tested with this upgrade
 
 3. Deploy this genesis file, along with the upgraded Execution Client.
 
-4. **Special steps for Geth**.  Other execution clients automatically load and apply a new genesis file.  For Geth, though, you must use `geth init` again:
+4. **Special steps for Geth**. Other execution clients automatically load and apply a new genesis file. For Geth, though, you must use `geth init` again:
 
    ```bash
    /path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
@@ -68,8 +68,7 @@ The following execution client versions are tested with this upgrade
    Sample of a geth upgrade:
    ![Geth bectra upgrade](assets/geth-bectra-upgrade.png)
 
-
-5. Start the EL, and check the Execution Layer log for indications of successful enabling of the fork.  
+5. Start the EL, and check the Execution Layer log for indications of successful enabling of the fork.
    ```bash{5}
    # [ EXAMPLE FROM RETH STARTUP]
    # Post-merge hard forks (timestamp based):
@@ -77,8 +76,7 @@ The following execution client versions are tested with this upgrade
    # - Cancun                           @0
    # - Prague                           @1746633600
    ```
-   
-   
+
 ### Beacon Kit Upgrade
 
 Beacon Kit 1.2.0-rc is required to follow the Bepolia Hardfork.
@@ -94,7 +92,6 @@ chain-spec = testnet
 The following will be logged on `beacond` startup. Note the "Electra Fork Time" in the banner.
 
 ![Beacon Kit Bectra Hard Fork](assets/beacond-bectra-banner.png)
-
 
 ## Mainnet upgrade
 
