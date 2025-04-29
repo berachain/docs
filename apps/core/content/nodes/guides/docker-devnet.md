@@ -171,7 +171,7 @@ docker ps | grep beacond;
 # 0fcebd46b9d8   beacond-docker   Up 20 minutes   0.0.0.0:3500->3500/tcp, 0.0.0.0:26657->26657/tcp   cl-node-rpc-0
 # ...
 
-docker logs -f 0fcebd46b9d8 | egrep '(Commit|deposit|withdraw|exit');
+docker logs -f 0fcebd46b9d8 | egrep '(Commit|deposit|withdraw|exit)';
 
 # [Expected Output]:
 # INFO Committed statee ... height=10
@@ -183,25 +183,14 @@ Show the current status of your validator:
 
 ```bash
 # FROM: ~/devnet
+
 source env.sh;
 COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
 curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
 ```
 
-This will report the current block number:
 
-```bash
-# FROM: ~/devnet
-
-curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
-
-# [Expected Similar Output]:
-# "0x10c"
-```
-
-Monitor the validator set, reporting every time it changes. Start this while performing the next sections:
-
-**Terminal 2:**
+Monitor the validator set, reporting every time it changes. **Start this process to monitor changes done** in the next sections:
 
 ```bash
 URL="http://localhost:3500/eth/v1/beacon/states/head/validators"
@@ -357,7 +346,7 @@ cast call ...
 
 **Validator State Watcher:**
 
-```
+```js{4,7}
 #   {
 #     "index": "3",
 #     "balance": "250000000000000",
@@ -367,13 +356,15 @@ cast call ...
 #       "activation_eligibility_epoch": "18446744073709551615",
 ```
 
+If you perform two such deposits, the new validator will increase to a stake of `490,000 $BERA` and cause one of the other validators to exit.
+
 ### Step 6 - Observe Activation
 
 Note that in the above output, the chain has selected an activation epoch for the validator.
 
-Continue to monitor the chain's progress. Over three complete 10-block epochs.
+Continue to monitor the chain's progress for three complete 10-block epochs.
 
-Upon activation, the validator status will change to `active_ongoing - which is fully active, and eligible to propose blocks. Note that one of the other validators will have been selected for eviction,
+Upon activation, the validator status will change to `active_ongoing` - which is fully active, and eligible to propose blocks. One of the other validators will have been selected for eviction,
 since the active set is limited to 3 validators.
 
 ### Step 7 - Send Withdrawal Transaction
@@ -409,14 +400,10 @@ After the required delay in epochs, the validator's remaining stake is returned 
 
 This action will destroy all running Docker containers on your system when executed.
 
-:::tip
-Cleaning removes the built Docker images, so you will have to run `build.sh` before `start.sh`.
-:::
-
-**Terminal 2:**
+**Host Terminal:**
 
 ```bash
-# FROM: ~/docker/devnet
+# FROM: ~/devnet
 
 ./clean.sh
 
