@@ -63,7 +63,7 @@ Merkle proofs are a cryptographic method that allows for efficient and secure ve
 When you receive a Merkle proof from the API:
 
 1. Store the proof data securely
-2. Submit the proof to the (FIXME which) smart contract when claiming rewards
+2. Submit the proof to the [BGTIncentiveDistributor](0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983) smart contract when claiming rewards
 3. The contract will verify the proof's validity before releasing the rewards
 
 ## Endpoints
@@ -97,10 +97,21 @@ GET /api/v1/reward-distributions/validators/yield/{validator}
   :pathParams="[
     {
       name: 'validator',
-      description: 'The validator address'
+      description: 'The validator CometBFT public address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      validator: '0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983'
+    },
+    mainnet: {
+      validator: '0xfixme'
+    }
+  }"
 />
+
+
+
 
 #### Get Latest Yields for All Validators
 
@@ -132,6 +143,14 @@ Retrieve all reward distributions associated with a specific wallet.
       description: 'The wallet address to query'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
+    },
+    mainnet: {
+      wallet: '0xfixme'
+    }
+  }"
 />
 
 #### Get Proofs for Distribution
@@ -155,6 +174,14 @@ GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
       description: 'The distribution ID'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
+    },
+    mainnet: {
+      wallet: '0xfixme'
+    }
+  }"
 />
 
 #### Get Proofs for Validator
@@ -178,6 +205,16 @@ GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
       description: 'The validator address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d',
+      validator: '0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983'
+    },
+    mainnet: {
+      wallet: '0xfixme',
+      validator: '0xfixme'
+    }
+  }"
 />
 
 #### Get Wallet Rewards
@@ -197,6 +234,14 @@ GET /api/v1/wallets/{wallet}/rewards
       description: 'The wallet address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
+    },
+    mainnet: {
+      wallet: '0xfixme'
+    }
+  }"
 />
 
 #### Get Aggregated Unclaimed Rewards
@@ -216,6 +261,14 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation
       description: 'The wallet address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
+    },
+    mainnet: {
+      wallet: '0xfixme'
+    }
+  }"
 />
 
 #### Get Aggregated Unclaimed Rewards for Specific Validator
@@ -239,6 +292,15 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
       description: 'The validator address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d',
+      validator: '0xa15875a9e554e446e5fcd463245f4d7bd6863b1a5f51d33ac828d06f9185c5705f1d0a442b52df142ee74f300a01551f'
+    },
+    mainnet: {
+      wallet: '0xfixme',validator: '0xfixme'
+    }
+  }"
 />
 
 ### Vault Operations
@@ -260,6 +322,14 @@ GET /api/v1/vaults/{vault}/bgt-rate
       description: 'The vault address'
     }
   ]"
+  :examples="{
+    bepolia: {
+      vault: '0x9c84a17467d0f691b4a6fe6c64fa00edb55d9646'
+    },
+    mainnet: {
+      vault: 'fixme'
+    }
+  }"
 />
 
 ## Error Handling
@@ -280,10 +350,3 @@ Error responses will include a message explaining what went wrong:
 }
 ```
 
-Common error scenarios:
-// FIXME: Document specific error cases for each endpoint, such as:
-// - Invalid wallet address format
-// - Non-existent validator
-// - Invalid distribution ID
-// - Missing proofs
-// - System maintenance states

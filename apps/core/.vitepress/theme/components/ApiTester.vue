@@ -26,21 +26,30 @@ const props = defineProps({
   showNetworkSelect: {
     type: Boolean,
     default: true
+  },
+  // New prop for example values by network and param
+  examples: {
+    type: Object,
+    default: () => ({})
+    // Format:
+    // {
+    //   bepolia: { paramName: 'example value' },
+    //   mainnet: { paramName: 'example value' }
+    // }
   }
 })
 
 const networks = [
-  { name: 'Testnet (Bepolia)', url: 'https://bepolia.api-claim.berachain.com' },
-  { name: 'Mainnet', url: 'https://api-claim.berachain.com' }
+  { name: 'Testnet (Bepolia)', url: 'https://bepolia.api-claim.berachain.com', id: 'bepolia' },
+  { name: 'Mainnet', url: 'https://api-claim.berachain.com', id: 'mainnet' }
 ]
 
 const selectedNetwork = ref(networks[0])
 const response = ref(null)
 const loading = ref(false)
 const error = ref(null)
-
-// Store parameter values
 const paramValues = ref({})
+const copySuccess = ref('')
 
 // Initialize parameter values
 props.pathParams.forEach(param => {
@@ -82,6 +91,26 @@ const isValid = computed(() => {
     
   return pathParamsValid && queryParamsValid
 })
+
+// Get example value for current network and parameter
+const getExample = (paramName) => {
+  const networkId = selectedNetwork.value.id
+  return props.examples[networkId]?.[paramName] || ''
+}
+
+// Copy example value to parameter
+const useExample = (paramName) => {
+  const example = getExample(paramName)
+  if (example) {
+    paramValues.value[paramName] = example
+    copySuccess.value = paramName
+    setTimeout(() => {
+      if (copySuccess.value === paramName) {
+        copySuccess.value = ''
+      }
+    }, 2000)
+  }
+}
 
 async function testEndpoint() {
   loading.value = true
@@ -129,12 +158,24 @@ async function testEndpoint() {
         class="param-input"
       >
         <label :for="param.name">{{ param.name }}:</label>
-        <input 
-          :id="param.name"
-          v-model="paramValues[param.name]"
-          :placeholder="param.description"
-          class="param-field"
-        />
+        <div class="input-with-example">
+          <input 
+            :id="param.name"
+            v-model="paramValues[param.name]"
+            :placeholder="param.description"
+            class="param-field"
+          />
+          <button 
+            v-if="getExample(param.name)"
+            @click="useExample(param.name)"
+            class="example-button"
+            :class="{ 'success': copySuccess === param.name }"
+            :title="getExample(param.name)"
+          >
+            <span v-if="copySuccess === param.name">✓</span>
+            <span v-else>📋</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -147,13 +188,25 @@ async function testEndpoint() {
         class="param-input"
       >
         <label :for="param.name">{{ param.name }}:</label>
-        <input 
-          :id="param.name"
-          v-model="paramValues[param.name]"
-          :placeholder="param.description"
-          class="param-field"
-        />
-        <span v-if="param.required" class="required">*</span>
+        <div class="input-with-example">
+          <input 
+            :id="param.name"
+            v-model="paramValues[param.name]"
+            :placeholder="param.description"
+            class="param-field"
+          />
+          <button 
+            v-if="getExample(param.name)"
+            @click="useExample(param.name)"
+            class="example-button"
+            :class="{ 'success': copySuccess === param.name }"
+            :title="getExample(param.name)"
+          >
+            <span v-if="copySuccess === param.name">✓</span>
+            <span v-else>📋</span>
+          </button>
+          <span v-if="param.required" class="required">*</span>
+        </div>
       </div>
     </div>
 
@@ -217,6 +270,13 @@ async function testEndpoint() {
   gap: 0.5rem;
 }
 
+.input-with-example {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .param-field {
   flex: 1;
   padding: 0.3rem;
@@ -224,6 +284,27 @@ async function testEndpoint() {
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
+}
+
+.example-button {
+  padding: 0.3rem;
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.example-button:hover {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-1);
+}
+
+.example-button.success {
+  background: var(--vp-c-green-dimm-2);
+  color: var(--vp-c-green-1);
+  border-color: var(--vp-c-green-dimm-3);
 }
 
 .required {
