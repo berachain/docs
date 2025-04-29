@@ -266,6 +266,7 @@ Error responses will include a message explaining what went wrong:
 }
 ```
 
+
 Common error scenarios:
 // FIXME: Document specific error cases for each endpoint, such as:
 // - Invalid wallet address format
