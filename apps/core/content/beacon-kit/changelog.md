@@ -11,7 +11,7 @@
 Since this is a .0 release, that means breaking changes.
 
 This is a *hardfork* planned to release onto Bepolia on May 7 2025 at 12 PM EST.
-Beacon Kit 1.2.0-rc is required to communicate on Bepolia after that time.
+Beacon Kit 1.2.0-rc is required to continue progressing on the Bepolia chain after that time.
 
 The -rc will be initially rc0, but there may be more RC releases. Click "Watch" on the [Beacon Kit repository home](https://github.com/berachain/beacon-kit), and monitor the #dev-resources channel on [Discord](https://discord.gg/berachain).
 
