@@ -66,9 +66,6 @@ const finalUrl = computed(() => {
     .filter(param => paramValues.value[param.name])
     .map(param => `${param.name}=${encodeURIComponent(paramValues.value[param.name])}`)
   
-  // Always add per_page=999
-  queryParams.push('per_page=999')
-  
   // Add the query string to the URL
   return `${baseUrl.value}${url}${queryParams.length ? '?' + queryParams.join('&') : ''}`
 })
