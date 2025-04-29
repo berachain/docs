@@ -167,7 +167,6 @@ COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-key
 curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
 ```
 
-
 **Start Validator State Watcher:**
 
 ```bash
