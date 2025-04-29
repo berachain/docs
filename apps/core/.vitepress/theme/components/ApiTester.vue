@@ -66,11 +66,11 @@ const finalUrl = computed(() => {
     .filter(param => paramValues.value[param.name])
     .map(param => `${param.name}=${encodeURIComponent(paramValues.value[param.name])}`)
   
-  if (queryParams.length > 0) {
-    url += `?${queryParams.join('&')}`
-  }
+  // Always add per_page=999
+  queryParams.push('per_page=999')
   
-  return `${baseUrl.value}${url}`
+  // Add the query string to the URL
+  return `${baseUrl.value}${url}${queryParams.length ? '?' + queryParams.join('&') : ''}`
 })
 
 const isValid = computed(() => {

@@ -27,9 +27,26 @@ The base URL for the API endpoints depends on which network you're interacting w
 - **Testnet (Bepolia)**: `https://bepolia.api-claim.berachain.com`
 - **Mainnet**: `https://api-claim.berachain.com`
 
-## Rate Limiting and Caching
+## Rate Limiting, Pagination and Caching
+
 
 All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design.
+
+Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata.  The pagination parameters:, being `page` - the page number beginning from 0 -- and `per_page` values.  APIs that return paginated results return pagination info with every reply:
+
+```json
+{
+  "pagination": {
+    "next": 2,
+    "previous": 0,
+    "record_per_page": 10,
+    "current_page": 1,
+    "total_page": 4
+  },
+  ... remainder of response here
+}
+```
+
 
 ## Merkle Proofs
 
