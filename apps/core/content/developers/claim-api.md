@@ -12,7 +12,8 @@ head:
 ---
 
 <script setup>
-  import config from '@berachain/config/constants.json';
+import config from '@berachain/config/constants.json';
+import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';
 </script>
 
 # Claim API
@@ -23,8 +24,8 @@ The Claim API provides endpoints for learning about available reward distributio
 
 The base URL for the API endpoints depends on which network you're interacting with:
 
-- **Testnet (Bepolia)**: `https://bepolia.claim-api.berachain.com`
-- **Mainnet**: `https://claim-api.berachain.com`
+- **Testnet (Bepolia)**: `https://bepolia.api-claim.berachain.com`
+- **Mainnet**: `https://api-claim.berachain.com`
 
 ## Rate Limiting and Caching
 
@@ -50,22 +51,6 @@ When you receive a Merkle proof from the API:
 2. Submit the proof to the (FIXME which) smart contract when claiming rewards
 3. The contract will verify the proof's validity before releasing the rewards
 
-
-## Examples
-
-Here's an example of how to fetch rewards for a wallet using curl:
-
-```bash
-curl https://bepolia.claim-api.berachain.com/api/v1/wallets/0x1234.../rewards
-```
-
-For JavaScript/TypeScript applications:
-
-```typescript
-const response = await fetch('https://bepolia.claim-api.berachain.com/api/v1/wallets/0x1234.../rewards');
-const data = await response.json();
-```
-
 ## Endpoints
 
 ### Health Check
@@ -76,12 +61,11 @@ GET /health
 
 Check if the API is operational.
 
-**Response**
-```json
-{
-    "status": "healthy"
-}
-```
+<ApiTester 
+  endpoint="/health"
+  method="GET"
+  description="Check the health status of the API"
+/>
 
 ### Validator Yields
 
@@ -93,13 +77,17 @@ GET /api/v1/reward-distributions/validators/yield/{validator}
 
 Retrieve the most recent yield information for a specific validator.
 
-**Parameters**
-- `validator` (path): The validator address
-
-**Response**
-```json
-// FIXME: Add example response showing yield data structure 
-```
+<ApiTester 
+  endpoint="/api/v1/reward-distributions/validators/yield/{validator}"
+  method="GET"
+  description="Get the latest yield information for a specific validator"
+  :pathParams="[
+    {
+      name: 'validator',
+      description: 'The validator address'
+    }
+  ]"
+/>
 
 #### Get Latest Yields for All Validators
 
@@ -109,10 +97,11 @@ GET /api/v1/reward-distributions/validators/yield
 
 Retrieve the most recent yield information for all validators.
 
-**Response**
-```json
-// FIXME: Add example response showing array of validator yields with their addresses
-```
+<ApiTester 
+  endpoint="/api/v1/reward-distributions/validators/yield"
+  method="GET"
+  description="Get the latest yield information for all validators"
+/>
 
 ### Wallet Operations
 
@@ -124,13 +113,17 @@ GET /api/v1/wallets/{wallet}/reward-distributions
 
 Retrieve all reward distributions associated with a specific wallet.
 
-**Parameters**
-- `wallet` (path): The wallet address
-
-**Response**
-```json
-// FIXME: Add example response showing distribution data structure 
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/reward-distributions"
+  method="GET"
+  description="Get all reward distributions for a specific wallet"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address to query'
+    }
+  ]"
+/>
 
 #### Get Proofs for Distribution
 
