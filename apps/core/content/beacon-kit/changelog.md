@@ -8,7 +8,7 @@
 
 **What's new**
 
-Since this is a .0 release, that means breaking changes.
+Since this is a minor version release (`major.minor.0`), there are breaking changes.
 
 This is a *hardfork* planned to release onto Bepolia on May 7 2025 at 12 PM EST.
 Beacon Kit 1.2.0-rc is required to communicate on Bepolia after that time.

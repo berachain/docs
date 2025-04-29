@@ -21,7 +21,8 @@ is selected to produce a block, and therefore reduce your $BGT emissions.
 
 ## Withdrawal Rules & Process
 
-Withdrawals occur at the end of the 256th epoch after the epoch in which you perform the withdrawal.
+Withdrawals occur at the end of the 256th epoch after the epoch in which you perform the withdrawal. This is ~27 hours.
+
 The block number can be calculated as follows:
 
 $\text{withdrawal\_block} = \lceil\frac{\text{transaction\_block}}{192} + 256\rceil \times 192$
