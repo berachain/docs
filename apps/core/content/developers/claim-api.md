@@ -138,126 +138,131 @@ Retrieve all reward distributions associated with a specific wallet.
 
 #### Get Proofs for Distribution
 
+Retrieve proofs for a specific distribution.
+
 ```http
 GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
 ```
 
-Retrieve proofs for a specific distribution.
-
-**Parameters**
-
-- `wallet` (path): The wallet address
-- `dist_id` (path): The distribution ID
-
-**Response**
-
-```json
-// FIXME: Add example response showing proof structure including:
-// - Merkle proof format
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/proofs/distribution/{dist_id}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address'
+    },
+    {
+      name: 'dist_id',
+      description: 'The distribution ID'
+    }
+  ]"
+/>
 
 #### Get Proofs for Validator
+
+Retrieve all proofs associated with a specific validator for a wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
 ```
 
-Retrieve all proofs associated with a specific validator for a wallet.
-
-**Parameters**
-
-- `wallet` (path): The wallet address
-- `validator` (path): The validator address
-
-**Response**
-
-```json
-// FIXME: Add example response showing array of proofs with their associated distributions
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/proofs/validator/{validator}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address'
+    },
+    {
+      name: 'validator',
+      description: 'The validator address'
+    }
+  ]"
+/>
 
 #### Get Wallet Rewards
+
+Retrieve all rewards for a specific wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards
 ```
 
-Retrieve all rewards for a specific wallet.
-
-**Parameters**
-
-- `wallet` (path): The wallet address
-
-**Response**
-
-```json
-// FIXME: Add example response showing:
-// - Total rewards
-// - Breakdown by validator
-// - Claim status
-// - Timestamps
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/rewards"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address'
+    }
+  ]"
+/>
 
 #### Get Aggregated Unclaimed Rewards
+
+Retrieve aggregated unclaimed rewards grouped by validators for a wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards/aggregation
 ```
 
-Retrieve aggregated unclaimed rewards grouped by validators for a wallet.
-
-**Parameters**
-
-- `wallet` (path): The wallet address
-
-**Response**
-
-```json
-// FIXME: Add example response showing aggregated rewards structure:
-// - Total unclaimed amount
-// - Breakdown by validator
-// - Time periods
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/rewards/aggregation"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address'
+    }
+  ]"
+/>
 
 #### Get Aggregated Unclaimed Rewards for Specific Validator
+
+Retrieve aggregated unclaimed rewards for a specific validator and wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
 ```
 
-Retrieve aggregated unclaimed rewards for a specific validator and wallet.
-
-**Parameters**
-
-- `wallet` (path): The wallet address
-- `validator` (path): The validator address
-
-**Response**
-
-```json
-// FIXME: Add example response showing detailed breakdown of unclaimed rewards
-```
+<ApiTester 
+  endpoint="/api/v1/wallets/{wallet}/rewards/aggregation/{validator}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'wallet',
+      description: 'The wallet address'
+    },
+    {
+      name: 'validator',
+      description: 'The validator address'
+    }
+  ]"
+/>
 
 ### Vault Operations
 
 #### Get Vault BGT Rate
 
+Retrieve the expected BGT ingestion rate per block for a specific vault.
+
 ```http
 GET /api/v1/vaults/{vault}/bgt-rate
 ```
 
-Retrieve the expected BGT ingestion rate per block for a specific vault.
-
-**Parameters**
-
-- `vault` (path): The vault address
-
-**Response**
-
-```json
-// FIXME: Add example response showing:
-// - BGT rate per block
-// - Any additional vault metrics
-```
+<ApiTester 
+  endpoint="/api/v1/vaults/{vault}/bgt-rate"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'vault',
+      description: 'The vault address'
+    }
+  ]"
+/>
 
 ## Error Handling
 
