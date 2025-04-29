@@ -29,10 +29,9 @@ The base URL for the API endpoints depends on which network you're interacting w
 
 ## Rate Limiting, Pagination and Caching
 
-
 All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design.
 
-Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata.  The pagination parameters:, being `page` - the page number beginning from 0 -- and `per_page` values.  APIs that return paginated results return pagination info with every reply:
+Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata. The pagination parameters:, being `page` - the page number beginning from 0 -- and `per_page` values. APIs that return paginated results return pagination info with every reply:
 
 ```json
 {
@@ -46,7 +45,6 @@ Some endpoints employ pagination, so all queries accept pagination parameters an
   ... remainder of response here
 }
 ```
-
 
 ## Merkle Proofs
 
@@ -281,7 +279,6 @@ Error responses will include a message explaining what went wrong:
   "error": "Error message description"
 }
 ```
-
 
 Common error scenarios:
 // FIXME: Document specific error cases for each endpoint, such as:
