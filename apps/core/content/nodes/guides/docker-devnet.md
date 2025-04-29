@@ -400,7 +400,7 @@ You can now send the provided cast calls to, respectively, withdraw `10,000 $BER
 
 ### Step 8 - Send Exit Transaction
 
-Using the provided call to exit the validator, you wil see the validator state immediately changes to `exited_unslashed` state, meaning the validator
+Using the provided call to exit the validator, you will see the validator state immediately changes to `exited_unslashed` state, meaning the validator
 can no longer produce blocks.
 
 After the required delay in epochs, the validator's remaining stake is returned at the status then rests at `withdrawal_done`.
