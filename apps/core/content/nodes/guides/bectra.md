@@ -38,40 +38,47 @@ The following execution client versions are tested with this upgrade
 1. For **reth, geth, besu, erigon**:
 
    ```bash
-   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json
+   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-genesis.json
    md5 eth-genesis.json
    ```
 
-   The hash should be `fixme`.
+   The hash should be `9e32b2a1a5eb434d7b2fbaa27752b751`.
 
 2. For **Nethermind**:
 
    ```bash
-   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-nether-genesis.json
+   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-nether-genesis.json
    md5 eth-nether-genesis.json
    ```
 
-   The hash should be `fixme`.
+   The hash should be `04e689193d6506f36abf98c23b75a07e`.
 
 3. Deploy this genesis file, along with the upgraded Execution Client.
 
-4. Geth requires additional steps (see below). Other execution clients automatically load and apply a new genesis file.
+4. **Special steps for Geth**.  Other execution clients automatically load and apply a new genesis file.  For Geth, though, you must use `geth init` again:
+
+   ```bash
+   /path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
+   ```
+
+   The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.
+
+   If your node is an archive node, and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
+
+   Sample of a geth upgrade:
+   ![Geth bectra upgrade](assets/geth-bectra-upgrade.png)
+
 
 5. Start the EL, and check the Execution Layer log for indications of successful enabling of the fork.  
-   ![Geth Startup Banner fixme refresh](assets/geth-banner.png)
-
-#### Geth special instructions
-
-Unlike most clients, `geth` does not automatically read an updated genesis file. To apply the new genesis file, do the following on the RPC or Validator.
-
-```bash
-/path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
-```
-
-The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.
-
-If your node is an archive node, and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
-
+   ```bash{5}
+   # [ EXAMPLE FROM RETH STARTUP]
+   # Post-merge hard forks (timestamp based):
+   # - Shanghai                         @0
+   # - Cancun                           @0
+   # - Prague                           @1746633600
+   ```
+   
+   
 ### Beacon Kit Upgrade
 
 Beacon Kit 1.2.0-rc is required to follow the Bepolia Hardfork.
@@ -84,11 +91,10 @@ Beacon Kit 1.2.0-rc is required to follow the Bepolia Hardfork.
 chain-spec = testnet
 ```
 
-The following will be logged on `beacond` startup.
+The following will be logged on `beacond` startup. Note the "Electra Fork Time" in the banner.
 
-![Beacon Kit Hard Fork fixme replace](assets/beacond-banner.png)
+![Beacon Kit Bectra Hard Fork](assets/beacond-bectra-banner.png)
 
-Note the version number and "Electra Fork Time" in the banner.
 
 ## Mainnet upgrade
 

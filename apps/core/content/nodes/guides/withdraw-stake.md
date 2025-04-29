@@ -11,7 +11,8 @@ head:
 
 # Withdraw a Validator $BERA Stake
 
-New with the Bectra release, we have added support for withdrawing $BERA stake from a Validator.
+New with the Bectra release, we have added support for withdrawing $BERA stake from a Validator. This process is demonstrated 
+with the [Docker Devnet's final steps]()
 
 :::warning
 Withdrawing your $BERA stake will reduce the probability your validator
@@ -78,13 +79,11 @@ echo $WITHDRAW_REQUEST
 
 3. Send the withdrawal request to the contract, from the Validator's withdraw address.
 
-```bash
-cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value ${WITHDRAW_FEE}wei
-```
+  ```bash
+  cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_PRIVKEY --value ${WITHDRAW_FEE}wei
+  ```
 
-Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
+  Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
 
 4. Monitor the Beacon Kit Validator API to observe your stake's change.
    The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq '.[] | select(type == "object" and .validator? and .validator.pubkey ==  "$COMETBFT_PUB_KEY")'`) should show your validator’s status. NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
-
-jq '.[] | select(type == "object" and .validator? and .validator.pubkey == "0x98111a6ee569f1be005551d8c76e042aabcb5bf4c491d177445a2b5fb30dedc7bf6db39e387831c6739bde4129c6ada5")' file.json

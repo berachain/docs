@@ -21,6 +21,8 @@ head:
 
 This tutorial will walk you through launching a private local network and promoting one of the nodes in that network to a full validator.
 
+
+
 :::tip
 Some features like native dApps, contracts, and more are still a work in progress.
 :::
@@ -36,7 +38,7 @@ Before starting, ensure that you have the following installed on your computer:
 
 ## Launch Local Devnet
 
-We will now launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis.
+We will now launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis. 
 
 ### Step 1 - Obtain & Build Source
 
@@ -44,9 +46,54 @@ We will now launch multiple Docker containers that contain execution and consens
 # FROM: ~
 
 git clone https://github.com/berachain/guides;
-mv guides/apps/local-docker-devnet ./;
+mv guides/apps/local-docker-devnet ./devnet;
 rm -rf guides;
-cd local-docker-devnet;
+cd devnet;
+```
+
+Review the `env.sh` file, which contains important variables for running the docker-devnet and deposit testing.
+
+**CHAIN_SPEC and CHAIN_ID** Are used to influence the configuration of the deployed `beacond`. 
+Valid values for **CHAIN_SPEC** are `mainnet`, `testnet` and `file`.
+The `file` specification uses the ``CHAIN_ID`` to look up a chainspec file in `templates/beacond`.
+
+In the provided example, we begin with the [Bepolia configuration](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/spec.toml), and modify:
+* `chain-id = 87337`
+* `slots-per-epoch = 10` from 192
+* `min-validator-withdrawability-delay = 4` instead of a 256-epoch delay
+* `validator-set-cap = 3` instead of 69, to keep things interesting on our 4-node cluster
+
+**CUSTOM_BIN_BEACOND**: Leave this blank to automatically use the latest released beacond.  
+If you want a custom build of Beacon Kit, you need to compile it for Linux. This is easily done in a Vagrant:
+
+```bash
+brew install vagrant virtualbox 
+vagrant init bento/ubuntu-22.04
+vagrant up
+vagrant ssh
+sudo apt update && sudo apt -y install build-essential
+wget https://go.dev/dl/go1.23.8.linux-arm64.tar.gz
+sudo tar xzvf go1.23.8.linux-arm64.tar.gz  -C /opt/
+git clone https://github.com/berachain/beacon-kit && cd beacon-kit 
+git checkout v1.2.0.rc0
+PATH=/opt/go/bin:$PATH && make build
+```
+
+**Host Terminal:**
+```bash
+# FROM: ~/devnet
+
+vagrant plugin install vagrant-scp
+vagrant scp default:beacon-kit/build/bin/beacond ./beacond-mine
+```
+
+Use this binary for `CUSTOM_BIN_BEACOND`.
+
+Once you are happy with `env.sh`, build the Docker devnet images:
+
+```bash
+# FROM: ~/devnet
+
 ./build.sh;
 
 # [Expected Result]:
@@ -54,14 +101,12 @@ cd local-docker-devnet;
 # *** Build complete
 ```
 
-### Step 2 - Start Containers
-
-Review the `env.sh` file, which contains important variables for running the docker-devnet and deposit testing.
+### Step 2 - Start Containers & Monitor Chain Activity
 
 Start the devnet:
 
 ```bash
-# FROM: ~/local-docker-devnet/
+# FROM: ~/devnet
 
 ./start.sh;
 
@@ -84,7 +129,7 @@ Start the devnet:
 Use `docker ps` to view the launched containers and verify that the services are running:
 
 ```bash
-# FROM: ~/local-docker-devnet/
+# FROM: ~/devnet
 
 docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
 
@@ -98,30 +143,75 @@ docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
 # cl-node-val-2   beacond-docker   Up 2 minutes
 # cl-node-val-1   beacond-docker   Up 2 minutes
 # cl-node-val-0   beacond-docker   Up 2 minutes
+```
 
+Check block height:
+```bash
 curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
 
 # [Expected Output - actual number will vary]:
 # "0x12"
+```
 
+Check peering:
+```bash
 curl -s --location 'http://localhost:26657/net_info' | jq .result.n_peers;
 
 # [Expected Output]:
 # "3"
 ```
 
-Start a log watcher in a separate terminal window to view deposit-related log messages:
-
-**Terminal 1:**
-
+Monitor beacond logs for deposit, withdraw, exit requests and block generation:
 ```bash
-# FROM: ~/local-docker-devnet
+docker ps | grep beacond;
+# [SAMPLE OUTPUT]
+# 0fcebd46b9d8   beacond-docker   Up 20 minutes   0.0.0.0:3500->3500/tcp, 0.0.0.0:26657->26657/tcp   cl-node-rpc-0
+# ...
 
-docker logs cl-node-val-2 -f | grep deposit;
+docker logs -f 0fcebd46b9d8 | egrep '(Commit|deposit|withdraw|exit');
 
 # [Expected Output]:
-# INFO Building block body ... num_deposits=0
-# INFO Building block body ... num_deposits=0
+# INFO Committed statee ... height=10
+# INFO Building block body ... num_deposits=1
+# INFO Processing partial withdrawal ...
+```
+
+Show the current status of your validator:
+
+```bash
+# FROM: ~/devnet
+source env.sh;
+COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
+```
+
+
+This will report the current block number:
+```bash
+# FROM: ~/devnet
+
+curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
+
+# [Expected Similar Output]:
+# "0x10c"
+```
+
+Monitor the validator set, reporting every time it changes.  Start this while performing the next sections:
+
+**Terminal 2:**
+```bash
+URL="http://localhost:3500/eth/v1/beacon/states/head/validators"
+TEMP_FILE="/tmp/url_content.tmp"
+touch $TEMP_FILE
+
+while true; do
+  NEW=$(curl -s "$URL" | jq '.data')
+  if ! cmp -s <(echo "$NEW") "$TEMP_FILE"; then
+    date
+    echo "$NEW" | tee "$TEMP_FILE"
+  fi
+  sleep 2
+done
 ```
 
 ### Step 3 - Generate Deposit Scripts
@@ -129,27 +219,22 @@ docker logs cl-node-val-2 -f | grep deposit;
 Now invoke the deposit script to generate the deposit transactions (but do not transmit them). The script will provide two `cast` calls and a command to view the current validator set.
 Recall that there are two types of deposits: 1) initial registration and 2) top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minEffectiveBalance }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
 
-**Terminal 2:**
+**Terminal 1:**
 
 ```bash
-# FROM: ~/local-docker-devnet
+# FROM: ~/devnet
 
 ./generate-deposit-tx.sh;
 
 # [Expected Output]:
-# Starting Beacon Deposit Txn...
-# 0 - Retrieving Validator Pubkey & Verifying Not A Validator...
-# 1 - Generating Signature for Parameters:
-# Send this command to view validators:
-#  curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data
+#Generating Signature for Parameters: ...
+# ..	pubkey = 0xaee37b7ed9814aaa01c917484e2f5bb60583ff5ec5402611de6fd5c226007d4aead7e88a55b86cff61fb2cd17f405949 
+
+# Send this command to register the validator + deposit 10000 BERA: 
+# cast send ..
 #
-# 2 - Preparing Registration Deposit Transaction...
-# Send this command to register the validator:
-# cast send ...
-#
-# Preparing Activation Deposit Transaction...
-# Send this command to activate the validator:
-# cast send ...
+# Send this command to activate the validator by depositing 240000 BERA: 
+# cast send..
 ```
 
 :::danger
@@ -157,16 +242,12 @@ Do not send these transactions as-is on mainnet, or you will burn your funds. Th
 Study the registration and activation process in `generate-deposit-tx` and the [Deposit Guide](/nodes/guides/validator) to understand how to apply this process to mainnet.
 :::
 
-To view the current list of validators, invoke the provided command:
 
-**Terminal 2:**
+Your validator status monitor should show:
+
+**Validator Watcher:**
 
 ```bash
-# FROM: ~/local-docker-devnet
-
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data;
-
-# [Expected Output]:
 # [
 #  {
 #     "index": "0",
@@ -192,10 +273,10 @@ Key values:
 
 Now transmit the first `cast` call, which calls `deposit()` for the first time with an initial stake of `10,000 $BERA` and view the validator list:
 
-**Terminal 2:**
+**Terminal 1:**
 
 ```bash
-# FROM: ~/local-docker-devnet
+# FROM: ~/devnet
 
 cast call ...
 
@@ -204,12 +285,20 @@ cast call ...
 # blockNumber          52
 # transactionHash      0xe0e8b0...
 # status               1 (success)
+```
 
-source env.sh;
-COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
+**Log Watcher:**
 
-# [Expected Output]:
+```bash
+INFO Found deposits on execution layer service=blockchain block=0x22 deposits=1
+INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
+INFO Validator does not exist so creating service=state-processor pubkey=0x9687a... index=0x3 deposit_amount=0x9184e72a000
+INFO Processed deposit to create new validator service=state-processor deposit_amount=10000 validator_index=0x3 withdrawal_epoch=0xffffffffffffffff
+```
+
+**Validator Watcher:**
+
+```
 #  {
 #     "index": "0",
 #     "balance": "10000000000000",
@@ -224,29 +313,14 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[]
 #  }
 ```
 
-This shows the validator is registered. You will see a successful output in the log watcher:
 
-**Terminal 1:**
-
-```bash
-# [LOG OUTPUT - Successful Registration]
-
-INFO Found deposits on execution layer service=blockchain block=0x22 deposits=1
-INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
-INFO Processed deposit to set Eth 1 deposit index service=state-processor previous=3 new=4
-INFO Validator does not exist so creating service=state-processor pubkey=0x9687a... index=0x3 deposit_amount=0x9184e72a000
-INFO Processed deposit to create new validator service=state-processor deposit_amount=10000 validator_index=0x3 withdrawal_epoch=0xffffffffffffffff
-INFO Building block body with local deposits service=validator start_index=4 num_deposits=0
-INFO Building block body with local deposits service=validator start_index=4 num_deposits=0
-```
-
-Here is an example of a failed deposit:
+Here is an example of a failed deposit, for instance by modifying the signed data before sending it:
 
 :::danger
 If you receive the error message `signer returned an invalid signature invalid deposit message`, DO NOT continue making deposits with the same pubkey as it will result in loss of funds. You will need to create an entirely new node pubkey and go through the process again.
 :::
 
-**Terminal 1:**
+**Log Watcher:**
 
 ```bash
 # [LOG OUTPUT - Failed Registration]
@@ -266,10 +340,10 @@ invalid deposit message
 
 Now send the second suggested `cast` call, which stakes an additional 240,000 $BERA, sufficient to put the validator into the activation queue.
 
-**Terminal 2:**
+**Host Terminal:**
 
 ```bash
-# FROM: ~/local-docker-devnet
+# FROM: ~/devnet
 
 cast call ...
 
@@ -277,12 +351,11 @@ cast call ...
 # blockNumber          55
 # transactionHash      0xdeadbeef...
 # status               1 (success)
+```
 
-source env.sh;
-COMETBFT_PUB_KEY=$(docker exec $CL_MONIKER-rpc-0 ./beacond deposit validator-keys|tail -1);
-curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[] | select(.validator.pubkey == \"$COMETBFT_PUB_KEY\")";
+**Validator State Watcher:**
 
-# [Expected Output]:
+```
 #   {
 #     "index": "3",
 #     "balance": "250000000000000",
@@ -292,29 +365,44 @@ curl -s http://localhost:3500/eth/v1/beacon/states/head/validators | jq ".data[]
 #       "activation_eligibility_epoch": "18446744073709551615",
 ```
 
-### Step 6 - Monitor Activation Status
+### Step 6 - Observe Activation
 
-Note that the chain has selected an activation epoch for the validator.
+Note that in the above output, the chain has selected an activation epoch for the validator.
 
-Continue to monitor the chain's progress. Epochs on mainnet, testnet, and this devnet consist of 192 blocks, or 0xc0 in hex.
+Continue to monitor the chain's progress. Over three complete 10-block epochs.
 
-**Terminal 2:**
+Upon activation, the validator status will change to `active_ongoing - which is fully active, and eligible to propose blocks. Note that one of the other validators will have been selected for eviction,
+since the active set is limited to 3 validators.
+
+### Step 7 - Send Withdrawal Transaction
+
+Generate the withdrawal transactions similar to the way you generated deposit transactions:
 
 ```bash
 # FROM: ~/devnet
 
-curl -s --location 'http://localhost:3500/eth/v2/debug/beacon/states/head' | jq .data.latest_block_header.slot;
+./generate-withdraw-tx.sh
 
-# [Expected Similar Output]:
-# "0x10c"
+# [ EXPECTED OUTPUT ]
+# RPC validator pubkey is 0xaee37...
+# Determined withdrawal fee: 1
+#
+# To send withdrawal request for 10000 BERA:
+# cast send ...
+#
+# To exit the validator and return BERA stake:
+# cast send ...
 ```
 
-Provided you have activated before block 0xc0, at block 0x180, the validator will change status to `pending_queued` and at block 0x240 will change to `active_ongoing`.
+You can now send the provided cast calls to, respectively, withdraw `10,000 $BERA`, or force the validator to exit.
 
-The estimated time for changing states is as follows:
+### Step 8 - Send Exit Transaction
 
-- After ~7 minutes: `pending_initialized` → `pending_queued`
-- After ~12 minutes: `pending_queued` → `active_ongoing` (Validator becomes fully activated and begins proposing blocks)
+Using the provided call to exit the validator, you wil see the validator state immediately changes to `exited_unslashed` state, meaning the validator
+can no longer produce blocks.
+
+After the required delay in epochs, the validator's remaining stake is returned at the status then rests at `withdrawal_done`.
+
 
 ## Cleanup
 
