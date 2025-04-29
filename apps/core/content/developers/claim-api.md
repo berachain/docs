@@ -25,7 +25,7 @@ The Claim API provides endpoints for learning about available reward distributio
 The base URL for the API endpoints depends on which network you're interacting with:
 
 - **Testnet (Bepolia)**: `https://bepolia.api-claim.berachain.com`
-- **Mainnet**: `https://api-claim.berachain.com`
+- **Mainnet**: ~~`https://api-claim.berachain.com`~~ (coming soon)
 
 ## Rate Limiting, Pagination and Caching
 
