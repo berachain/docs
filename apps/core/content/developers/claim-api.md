@@ -105,7 +105,7 @@ GET /api/v1/reward-distributions/validators/yield/{validator}
       validator: '0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983'
     },
     mainnet: {
-      validator: '0xfixme'
+      validator: '0xa0c673180d97213c1c35fe3bf4e684dd3534baab235a106d1f71b9c8a37e4d37a056d47546964fd075501dff7f76aeaf'
     }
   }"
 />
@@ -148,7 +148,7 @@ Retrieve all reward distributions associated with a specific wallet.
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
     },
     mainnet: {
-      wallet: '0xfixme'
+      wallet: '0x0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8'
     }
   }"
 />
@@ -179,7 +179,7 @@ GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
     },
     mainnet: {
-      wallet: '0xfixme'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8'
     }
   }"
 />
@@ -208,11 +208,11 @@ GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
   :examples="{
     bepolia: {
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d',
-      validator: '0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983'
+      validator: '0xa4e4b63514f54d61da5197359f11ff1fc2930788ba2ffdd30c2fc059cbe0221020197bf9446b16ac347f36c7517a8686'
     },
     mainnet: {
-      wallet: '0xfixme',
-      validator: '0xfixme'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8',
+      validator: '0x83199315cf36ebcf6a50bab572800d79324835fae832a3da9238f399c39feceb62de41339eab4cc8f79a6d4e6bcb825c'
     }
   }"
 />
@@ -239,7 +239,7 @@ GET /api/v1/wallets/{wallet}/rewards
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
     },
     mainnet: {
-      wallet: '0xfixme'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8'
     }
   }"
 />
@@ -266,7 +266,7 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d'
     },
     mainnet: {
-      wallet: '0xfixme'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8'
     }
   }"
 />
@@ -295,10 +295,10 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
   :examples="{
     bepolia: {
       wallet: '0xEB4A898C0bA5d0cdC5886156408edaea5b0A188d',
-      validator: '0xa15875a9e554e446e5fcd463245f4d7bd6863b1a5f51d33ac828d06f9185c5705f1d0a442b52df142ee74f300a01551f'
+      validator: '0xa4e4b63514f54d61da5197359f11ff1fc2930788ba2ffdd30c2fc059cbe0221020197bf9446b16ac347f36c7517a8686'
     },
     mainnet: {
-      wallet: '0xfixme',validator: '0xfixme'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8',validator: '0x83199315cf36ebcf6a50bab572800d79324835fae832a3da9238f399c39feceb62de41339eab4cc8f79a6d4e6bcb825c'
     }
   }"
 />
@@ -327,7 +327,7 @@ GET /api/v1/vaults/{vault}/bgt-rate
       vault: '0x9c84a17467d0f691b4a6fe6c64fa00edb55d9646'
     },
     mainnet: {
-      vault: 'fixme'
+      vault: '0xe8ed00b1b142e8d84ef773c4fccaa18682d5a401'
     }
   }"
 />
