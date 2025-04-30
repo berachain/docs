@@ -27,6 +27,14 @@
         "name": "Bepolia $HONEY Swap",
         "url": "https://bepolia.honey.berachain.com"
       }
+    },
+    "contracts": {
+      "withdrawalContract": {
+        "name": "Withdrawal Contract",
+        "address": "0x00000961Ef480Eb55e80D19ad83579A64c007002",
+        "abi": "",
+        "docsUrl": ""
+      }
     }
   },
   "mainnet": {

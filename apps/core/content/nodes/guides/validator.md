@@ -29,7 +29,7 @@ If you haven't, please read through the [overview](/nodes/validator-lifecycle) t
 
 **Our goal** is to deposit your stake and establish a connection between your **validator identity** on the consensus layer, your **operator identity** on the execution layer, and the **withdrawal address** where your stake is returned when you stop being a validator.
 
-## Step 1: Check beacond and Set Up Environment
+## Step 1 - Check beacond and Set Up Environment
 
 A point of reassurance about `beacond`: it _cannot_ transact on your behalf on either the execution or consensus layers. By invoking `beacond` on the command line you are not playing with TNT strapped to your stake.
 
@@ -88,7 +88,7 @@ beacond deposit validator-keys;
 
 This is your **beacon chain public key**, and in this tutorial is placed in the `VAL_PUB_KEY` environment variable.
 
-## Step 2: Prepare registration transaction
+## Step 2 - Prepare registration transaction
 
 The first registration transaction is the most important. It establishes the association between your validator key and your presence in the consensus layer. **Mistakes in this step can result in a permanent loss of funds.**
 
@@ -149,7 +149,7 @@ The first registration transaction is the most important. It establishes the ass
 
 You now have everything needed to deposit the initial {{ config.mainnet.registrationMinimum.toLocaleString() }} BERA.
 
-## Step 3: Send registration transaction
+## Step 3 - Send registration transaction
 
 You will now send the above transaction onto the chain. We are calling the `deposit` function on the [BeaconDeposit](https://docs.berachain.com/developers/contracts/beacondeposit) contract:
 
@@ -192,7 +192,7 @@ cast send $DEPOSIT_ADDR \
 -r $RPC_URL;
 ```
 
-## Step 4: Confirm successful registration
+## Step 4 - Confirm successful registration
 
 The following traits denote a successful registration:
 
@@ -201,7 +201,7 @@ The following traits denote a successful registration:
 3. **Most importantly,** the validator's public key is present in the beacon state.
    The beacon state (available from your node’s beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator’s public key, likely at the end of the list. **The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract transaction is processed.** NOTE: the beacon API must be enabled on your node (in `app.toml` : `[beacon-kit.node-api]`).
 
-## Step 5: Activation or top-up
+## Step 5 - Activation or top-up
 
 Having completed the registration, you can now deposit additional $BERA. The floor for becoming a validator is `{{ config.mainnet.minEffectiveBalance.toLocaleString() }} $BERA`, and you must be among the top `{{ config.mainnet.validatorActiveSetSize }}` validators, ordered by $BERA staked.
 

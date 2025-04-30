@@ -57,7 +57,7 @@ The following is a single bash command that can be run to distribute block rewar
 ```bash-vue
 # FROM: /
 
-# STEP 1: Get Block(s) To Be Distributed
+# STEP 1 - Get Block(s) To Be Distributed
 # ----------------------------------------------------
 # Get recent finalized block's number from Exec Layer -> Get timestamp of its parent block
 # Example: 1730756547
@@ -89,7 +89,7 @@ echo $TIMESTAMP;
 # [Expected Similar Output]:
 # 1734598728
 
-# STEP 2: Generate Proofs For Block
+# STEP 2 - Generate Proofs For Block
 # ----------------------------------------------------
 # Sanity check - isTimestampActionable? Returns true if rewards have not yet been distributed for this block.
 
@@ -103,7 +103,7 @@ cast call "{{config.mainnet.contracts.distributor.address}}" "isTimestampActiona
 PROOF_JSON=`curl http://localhost:3500/bkit/v1/proof/block_proposer/t$TIMESTAMP`
 echo $PROOF_JSON;
 
-# STEP 3: Distribute Block Rewards
+# STEP 3 - Distribute Block Rewards
 # ----------------------------------------------------
 # Retrieve needed data
 PROPOSER_INDEX=`echo $PROOF_JSON|jq -r '.beacon_block_header.proposer_index'`;
