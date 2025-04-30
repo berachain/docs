@@ -220,6 +220,16 @@ const SIDEBAR = {
       ],
     },
     {
+      text: "Beacon Kit",
+      items: [
+        { text: "CLI Reference", link: "/beacon-kit/cli" },
+        { text: "Configuration Reference", link: "/beacon-kit/configuration" },
+        // { text: "API Reference", link: "/beacon-kit/api" },
+        { text: "Changelog", link: "/beacon-kit/changelog" },
+        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" },
+      ],
+    },
+    {
       text: "Node Guides",
       items: [
         {
@@ -264,17 +274,6 @@ const SIDEBAR = {
         },
       ],
     },
-    {
-      text: "Beacon Kit",
-      items: [
-        { text: "CLI Reference", link: "/beacon-kit/cli" },
-        { text: "Configuration Reference", link: "/beacon-kit/configuration" },
-        // { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Changelog", link: "/beacon-kit/changelog" },
-        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" },
-      ],
-    },
-
     {
       text: "Help",
       items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }],
