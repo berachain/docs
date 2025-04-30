@@ -131,7 +131,13 @@ Revise your app.toml by adding this configuration to the `beacon-kit` section. C
 ```toml
 [beacon-kit]
 
-chain-spec = testnet
+chain-spec = "testnet"
+```
+
+Alernatively, you can use the `--beacon-kit.chain-spec` command line option to set/override this.
+
+```sh
+/path/to/beacond --home $BEACOND_HOME --beacon-kit.chain-spec=testnet
 ```
 
 ### Step 2 - Verify Upgrade
