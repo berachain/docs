@@ -36,15 +36,16 @@ const props = defineProps({
     //   bepolia: { paramName: 'example value' },
     //   mainnet: { paramName: 'example value' }
     // }
+  },
+  // New prop for networks configuration
+  networks: {
+    type: Array,
+    required: true,
+    // Each network should have: { name: string, url: string, id: string }
   }
 })
 
-const networks = [
-  { name: 'Testnet (Bepolia)', url: 'https://bepolia.api-claim.berachain.com', id: 'bepolia' },
-  { name: 'Mainnet', url: 'https://api-claim.berachain.com', id: 'mainnet' }
-]
-
-const selectedNetwork = ref(networks[0])
+const selectedNetwork = ref(props.networks[0])
 const response = ref(null)
 const loading = ref(false)
 const error = ref(null)
@@ -143,8 +144,9 @@ async function testEndpoint() {
           v-for="network in networks" 
           :key="network.url"
           :value="network"
+          :disabled="network.disabled"
         >
-          {{ network.name }}
+          {{ network.name }}{{ network.disabled ? ' (coming soon)' : '' }}
         </option>
       </select>
     </div>
@@ -173,7 +175,7 @@ async function testEndpoint() {
             :title="getExample(param.name)"
           >
             <span v-if="copySuccess === param.name">✓</span>
-            <span v-else>📋</span>
+            <span v-else>←📄</span>
           </button>
         </div>
       </div>
@@ -350,5 +352,10 @@ async function testEndpoint() {
 pre {
   margin: 0;
   white-space: pre-wrap;
+}
+
+.network-select option:disabled {
+  color: var(--vp-c-text-3);
+  font-style: italic;
 }
 </style> 

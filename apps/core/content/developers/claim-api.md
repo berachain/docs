@@ -14,6 +14,20 @@ head:
 <script setup>
 import config from '@berachain/config/constants.json';
 import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';
+
+const networks = [
+  { 
+    name: 'Testnet (Bepolia)', 
+    url: 'https://bepolia.api-claim.berachain.com', 
+    id: 'bepolia' 
+  },
+  { 
+    name: 'Mainnet', 
+    url: 'https://api-claim.berachain.com', 
+    id: 'mainnet',
+    disabled: true 
+  }
+];
 </script>
 
 # Claim API
@@ -31,7 +45,12 @@ The base URL for the API endpoints depends on which network you're interacting w
 
 All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design.
 
-Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata. The pagination parameters:, being `page` - the page number beginning from 0 -- and `per_page` values. APIs that return paginated results return pagination info with every reply:
+Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata. The pagination parameters are:
+
+* `page` — the page number beginning from 0 
+*  `per_page` — how many items to have on each page.
+
+APIs endpoints that return paginated results return pagination info with every reply:
 
 ```json
 {
@@ -79,6 +98,7 @@ GET /health
 <ApiTester 
   endpoint="/health"
   method="GET"
+  :networks="networks"
 />
 
 ### Validator Yields
@@ -94,6 +114,7 @@ GET /api/v1/reward-distributions/validators/yield/{validator}
 <ApiTester 
   endpoint="/api/v1/reward-distributions/validators/yield/{validator}"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'validator',
@@ -119,6 +140,7 @@ GET /api/v1/reward-distributions/validators/yield
 <ApiTester 
   endpoint="/api/v1/reward-distributions/validators/yield"
   method="GET"
+  :networks="networks"
 />
 
 ### Wallet Operations
@@ -134,6 +156,7 @@ Retrieve all reward distributions associated with a specific wallet.
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/reward-distributions"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -161,6 +184,7 @@ GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/proofs/distribution/{dist_id}"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -192,6 +216,7 @@ GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/proofs/validator/{validator}"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -225,6 +250,7 @@ GET /api/v1/wallets/{wallet}/rewards
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/rewards"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -252,6 +278,7 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/rewards/aggregation"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -279,6 +306,7 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/rewards/aggregation/{validator}"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'wallet',
@@ -295,7 +323,8 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
       validator: '0xa4e4b63514f54d61da5197359f11ff1fc2930788ba2ffdd30c2fc059cbe0221020197bf9446b16ac347f36c7517a8686'
     },
     mainnet: {
-      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8',validator: '0x83199315cf36ebcf6a50bab572800d79324835fae832a3da9238f399c39feceb62de41339eab4cc8f79a6d4e6bcb825c'
+      wallet: '0x8E21f3431F8Dcd1fAD8d70F4EbFd8B62F5053bD8',
+      validator: '0x83199315cf36ebcf6a50bab572800d79324835fae832a3da9238f399c39feceb62de41339eab4cc8f79a6d4e6bcb825c'
     }
   }"
 />
@@ -313,6 +342,7 @@ GET /api/v1/vaults/{vault}/bgt-rate
 <ApiTester 
   endpoint="/api/v1/vaults/{vault}/bgt-rate"
   method="GET"
+  :networks="networks"
   :pathParams="[
     {
       name: 'vault',
