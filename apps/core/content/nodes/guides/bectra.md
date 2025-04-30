@@ -2,99 +2,153 @@
 head:
   - - meta
     - property: og:title
-      content: Bectra Hardfork
+      content: Berachain Bectra Hardfork
+  - - meta
+    - name: description
+      content: Bectra (Pectra) upgrade for Berachain
+  - - meta
+    - property: og:description
+      content: Bectra (Pectra) upgrade for Berachain
 ---
 
 # Bectra Hardfork
 
-Bectra introduces two changes to Berachain:
+Bectra is Berachain's EVM Pectra upgrade, which introduces a variety of changes, including major updates:
 
-1. Validators are able to withdraw all or part of their $BERA stake.
-2. All users are able to take advantage of [EIP 7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md) for an improved wallet experience.
+1. Validators can withdraw all or part of their `$BERA` stake.
+2. All users can take advantage of [EIP 7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md), which enables any EOA to set its code based on any existing smart contract.
 
-Note all users, whether hosting an RPC or a validator, **must upgrade** their Execution Client and Consensus Client to continue following the chain.
+:::warning
+All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client and Consensus Client to continue following the chain.
+:::
 
-## Bepolia Upgrade
+## Bepolia Hardfork Upgrade Timeline
 
-- **Week of April 21**: Documentation released.
-- **Week of April 28**: Beacon Kit 1.2.0-rc released. Node operators upgrade Beacon Kit and geth/reth/etc.
-- **Monday May 5**: All infrastructure partners and public RPCs are expected to be upgraded.
-- **May 7 at noon Eastern**: Bectra hardfork on Bepolia
+As a first step, Berachain will implement the upgrades in phases, with the first phase being the full upgrade on Bepolia Testnet.
 
-With experience from Bepolia, we will plan the release to mainnet, tentatively set for May 28.
+| Date                | Milestone                                                                                 |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| Week of April 21    | Documentation Release                                                                     |
+| Week of April 28    | Beacon Kit 1.2.0-rc Released <br/> (Node operators upgrade Beacon Kit and geth/reth/etc.) |
+| Week of May 5       | All Infrastructure Providers Upgraded                                                     |
+| May 7 - 12:00pm EST | Bectra Hardfork on Bepolia                                                                |
 
-### Execution Client Upgrade
+After evaluating the upgrade on Bepolia, Berachain will schedule a hardfork for Berachain Mainnet at the end of May.
+The final release date for Berachain Mainnet will be announced closer to the upgrade.
 
-The first upgrade is to the Execution Client, to enable new operations that are enabled at the designated fork activation time.
+## Bepolia Execution Client Upgrade Instructions
 
-The following execution client versions are tested with this upgrade
+The first upgrade is for the Execution Client, which enables new operations at the designated fork activation time.
 
-- [Geth 1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10)
-- [Reth 1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)
-- [Nethermind 1.31.8](https://github.com/NethermindEth/nethermind/releases/tag/1.31.8)
-- [Besu 25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)
-- [Erigon 3.0.2](https://github.com/erigontech/erigon/releases/tag/v3.0.2)
+The following execution client versions have been tested with the upgrade and are the recommended versions to use:
 
-1. For **reth, geth, besu, erigon**:
+| Client     | Version                                                                   |
+| ---------- | ------------------------------------------------------------------------- |
+| Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10)  |
+| Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)        |
+| Nethermind | [1.31.8](https://github.com/NethermindEth/nethermind/releases/tag/1.31.8) |
+| Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)         |
+| Erigon     | [3.0.2](https://github.com/erigontech/erigon/releases/tag/v3.0.2)         |
 
-   ```bash
-   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-genesis.json
-   md5 eth-genesis.json
-   ```
+### Step 1 - Deploy Genesis File
 
-   The hash should be `9e32b2a1a5eb434d7b2fbaa27752b751`.
+Use the following execution client genesis files to ensure your node is compatible with Bectra, and place them in their respective locations based on the execution client you are using:
 
-2. For **Nethermind**:
+#### Reth, Geth, Besu, Erison
 
-   ```bash
-   wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-nether-genesis.json
-   md5 eth-nether-genesis.json
-   ```
+```bash-vue{4,5}
+wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-genesis.json;
+md5 eth-genesis.json;
 
-   The hash should be `04e689193d6506f36abf98c23b75a07e`.
+# [Expected Exact Output]:
+# 9e32b2a1a5eb434d7b2fbaa27752b751
+```
 
-3. Deploy this genesis file, along with the upgraded Execution Client.
+##### Geth Additional Steps
 
-4. **Special steps for Geth**. Other execution clients automatically load and apply a new genesis file. For Geth, though, you must use `geth init` again:
+:::warning
+If you are using Geth, you will need to perform the following steps to ensure that the new genesis file is applied correctly.
+:::
+Other execution clients automatically load and apply the new genesis file. For Geth, you must run `geth init` again after the genesis file has been placed in the correct directory:
 
-   ```bash
-   /path/to/geth init --datadir /path/to/geth/data /path/to/eth-genesis.json
-   ```
+:::tip
+If your node is an archive node and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
+:::
 
-   The `datadir` should contain at least two directories, `keystore` and `geth`, with the latter containing directories such as `blobpool` and `chaindata`.
+```bash
+geth init --datadir /path/to/geth/data /path/to/eth-genesis.json;
+```
 
-   If your node is an archive node, and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
+The geth `datadir` should contain the following directories:
 
-   Sample of a geth upgrade:
-   ![Geth bectra upgrade](assets/geth-bectra-upgrade.png)
+```bash-vue{4-8}
+tree datadir;
 
-5. Start the EL, and check the Execution Layer log for indications of successful enabling of the fork.
-   ```bash{5}
-   # [ EXAMPLE FROM RETH STARTUP]
-   # Post-merge hard forks (timestamp based):
-   # - Shanghai                         @0
-   # - Cancun                           @0
-   # - Prague                           @1746633600
-   ```
+# [Expected Output]:
+# datadir
+# ├── keystore
+# └── geth
+#     ├── blobpool
+#     └── chaindata
+```
 
-### Beacon Kit Upgrade
+_**Example Successful Geth Bectra Upgrade:**_
 
-Beacon Kit 1.2.0-rc is required to follow the Bepolia Hardfork.
+![Geth bectra upgrade](/assets/geth-bectra-upgrade.png)
 
-**Configuration change to `app.toml`.** Revise your app.toml to add this configuration to the `beacon-kit` section, creating it if it doesn't exist:
+#### Nethermind
 
-```app.toml
+```bash-vue{4,5}
+wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc0/testing/networks/80069/eth-nether-genesis.json;
+md5 eth-nether-genesis.json;
+
+# [Expected Exact Output]:
+# 04e689193d6506f36abf98c23b75a07e
+```
+
+### Step 2 - Start Execution Client
+
+Start the execution client and check the logs for indications of successful fork activation.
+
+```bash{5}
+# [EXAMPLE Reth - Expected Similar Output]:
+# Post-merge hard forks (timestamp based):
+# - Shanghai                         @0
+# - Cancun                           @0
+# - Prague                           @1746633600
+```
+
+## Bepolia Beacon Kit Upgrade Instructions
+
+Beacon Kit [1.2.0-rc](https://github.com/berachain/beacon-kit/releases) is required in addition to the [execution client configuration](#bepolia-execution-client-upgrade-instructions) for the Bepolia Hardfork.
+
+### Step 1 - Configure App Toml
+
+Revise your app.toml by adding this configuration to the `beacon-kit` section. Create the section if it doesn't exist:
+
+**File:** `./.beacond/config/app.toml`
+
+```toml
 [beacon-kit]
 
 chain-spec = testnet
 ```
 
-The following will be logged on `beacond` startup. Note the "Electra Fork Time" in the banner.
+### Step 2 - Verify Upgrade
 
-![Beacon Kit Bectra Hard Fork](assets/beacond-bectra-banner.png)
+Start `beacond` and verify that the following is logged. Note the **"Electra Fork Time"** in the banner.
 
-## Mainnet upgrade
+```bash-vue{10}
+./beacond start; # Use --home as needed;
 
-We are staging this release: first to our Bepolia testnet, and only when successful to Berachain Mainnet.
-
-The timing of upgrades to Mainnet will be confirmed after we get operational experience with the Bepolia upgrade. Beacon Kit will be 1.2.0 (not -rc) for the Mainnet upgrade.
+# [Expected Output]:
+# +=========================================================================+
+# + ⭐ BeaconKit on GitHub @ https://github.com/berachain/beacon-kit        +
+# + 🧩 Your node is running version: v1.2.0.rc0                             +
+# + ♦ Eth client: unknown (version: unknown)                                +
+# + 💾 Your system: linux/amd64                                             +
+# + 🍴 Deneb1 Fork Time: 1740090694                                         +
+# + 🍴 Electra Fork Time: 1746633600                                        +
+# + 🦺 Please report issues @ http://github.com/berachain/beacon-kit/issues +
+# +=========================================================================+
+```
