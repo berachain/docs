@@ -84,7 +84,7 @@
       },
       "safe": {
         "name": "Berachain SAFE",
-        "utl": "https://safe.berachain.com"
+        "url": "https://safe.berachain.com"
       }
     },
     "thirdparty": {

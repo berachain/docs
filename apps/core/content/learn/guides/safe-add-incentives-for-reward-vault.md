@@ -4,15 +4,16 @@
 
 # Add Incentives For Reward Vault
 
-The following guide will walk you through the process of adding Incentives to existing Berachain Whitelisted Reward Vault with a Whitelisted Incentive Token. If you'd like to understand additional mechanics, see the [Incentives](/learn/pol/incentives) section for more detials.
+The following guide will walk you through the process of adding incentives to an existing Berachain whitelisted reward vault with a whitelisted incentive token. If you'd like to understand additional mechanics, see the [Incentives](/learn/pol/incentives) section for more details.
 
 ## Requirements
 
 - Whitelisted Reward Vault with Whitelisted Incentive Token
+- Token Manager [Safe Multisig Wallet](https://safe.berachain.com)
 
 ## How To Add Incentives To A Reward Vault
 
-This will walk you through the process of adding Incentive Tokens to a Whitelisted Reward Vault through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.safe.name}}</a>.
+This guide will walk you through the process of adding incentive tokens to a whitelisted reward vault using <a :href="config.mainnet.dapps.safe.url" target="_blank">{{config.mainnet.dapps.safe.name}}</a>.
 
 ### Step 1 - Start a New Transaction
 
@@ -22,7 +23,7 @@ Click the button **New transaction** in the top left from the homepage.
 
 ### Step 2 - Add the Reward Vault Address
 
-Add the Reward Vault address into the input. Click **Use Implementation ABI**.
+Add the Reward Vault address into the input and click **Use Implementation ABI**.
 
 ![Add Address](/assets/add-address.png)
 
