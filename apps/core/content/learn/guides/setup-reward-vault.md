@@ -1,38 +1,42 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # Setup Reward Vault
 
 Participating in Proof of Liquidity on Berachain requires the use of a Reward Vault to allow protocol users to earn BGT.
-Reward Vaults are able to be created via the [Reward Vault Factory]() permissionlessly, but require some work to become operational.
+Reward Vaults can be created via the <a :href="config.mainnet.contracts.rewardVaultFactory.docsUrl">{{config.mainnet.contracts.rewardVaultFactory.name}}</a> permissionlessly, but require some work to become operational.
 
 ![Reward Vault Section](/assets/add-incentives-vaults.png)
 
 ## Checklist
 
-All of the following items shuold be completed for a fully featured reward vault.
+All of the following items should be completed for a fully featured reward vault:
 
 - [Create a Reward Vault Request](#create-a-reward-vault-request)
 - [Configuring Your Reward Vault](#configuring-your-reward-vault)
 
 ## Create a Reward Vault Request
 
-Utilizing the Reward Vault functionality is a currently a permissioned process and conducted via Governance as part of Phase One.
-More information about Phase One is available on the [Berachain Forums]('https://hub.forum.berachain.com/t/governance-phase-one-is-here/30').
+Utilizing the Reward Vault functionality is currently a permissioned process and conducted via Governance as part of Phase One.
+More information about Phase One is available on the [Berachain Forums](https://hub.forum.berachain.com/t/governance-phase-one-is-here/30).
 
-Creating a reward vault requests is two parts:
+Creating a reward vault request consists of two parts:
 
 - Request For Reward Vault (RFRV) Form submission
 - Governance proposal
 
-A RFRV can be submitted by filling out the [Request For Reward Vault](https://ufdx3v8g7qg.typeform.com/to/yqOvlUrV?typeform-source=docs.berachain.com) form.
+An RFRV can be submitted by filling out the [Request For Reward Vault](https://ufdx3v8g7qg.typeform.com/to/yqOvlUrV?typeform-source=docs.berachain.com) form.
 
 A governance proposal may be submitted on the [Berachain Forums](https://hub.forum.berachain.com/c/reward-vaults/6).
 Any request submitted should conform to the RFRV format.
 
 ## Configuring Your Reward Vault
 
-[The Hub](https://hub.berachain.com) contains the information for all Reward Vaults in the Berachain ecosystem.
+[The Hub](https://hub.berachain.com) contains information for all Reward Vaults in the Berachain ecosystem.
 Users may stake, withdraw, and claim rewards via The Hub - making it important for interacting with Reward Vaults.
 
-As a result, for the best user experience and protocol or project discoverability the following are suggested:
+As a result, for the best user experience and protocol or project discoverability, the following are suggested:
 
 - [Add Token Metadata](#add-token-metadata)
 - [Create Proof of Liquidity adapter](#create-proof-of-liquidity-adapter)
@@ -43,22 +47,22 @@ Additionally, one of the following should be completed:
 
 ### Add Token Metadata
 
-If your protocol or project has a token associated with it creating a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository will allow it to be displayed as a recognized token.
+If your protocol or project has a token associated with it, creating a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository will allow it to be displayed as a recognized token.
 
 Follow the instructions provided in the [Contribution Guidelines](https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md#adding-a-token) to add new tokens.
 
 ### Create Proof of Liquidity Adapter
 
-A Proof of Liquidity adapter is used to help display a Reward Vault BGT emission yield.
-If your Reward Vault stake token is a plain liquidity pool you may be able to skip this.
+A Proof of Liquidity adapter is used to help display a Reward Vault's BGT emission yield.
+If your Reward Vault stake token is a plain liquidity pool, you may be able to skip this.
 
 :::tip
-If you are uncertain if you need an adapter, you can read this checklist to help you decide.
+If you are uncertain if you need an adapter, you can read this checklist to help you decide:
 
-[When do I need an adapter?](https://github.com/berachain/hub-pol-adapters/blob/main/README.md#when-you-dont-need-an-adapter).
+[When do I need an adapter?](https://github.com/berachain/hub-pol-adapters/blob/main/README.md#when-you-dont-need-an-adapter)
 :::
 
-Stake tokens such as ERC-4626 vaults or other custom implementations will require an adapter to help properly price these t
+Stake tokens such as ERC-4626 vaults or other custom implementations will require an adapter to help properly price these tokens.
 
 ### Submit Beradata Form
 
@@ -82,6 +86,6 @@ If you do not submit Reward Vault metadata, The Hub will display only contract a
 
 ### Add Reward Vault Metadata
 
-Alternatively, if you are unable to or do not wish to use the form - Reward Vault metadata can be submitted via a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository.
+Alternatively, if you are unable to or do not wish to use the form, Reward Vault metadata can be submitted via a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository.
 
 Follow the instructions provided in the [Contributing Guidelines](https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md#adding-a-vault) to add new reward vaults.
