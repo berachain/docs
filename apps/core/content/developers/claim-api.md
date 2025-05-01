@@ -47,8 +47,8 @@ All endpoints are rate-limited to prevent abuse. Responses are also cached for o
 
 Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata. The pagination parameters are:
 
-* `page` — the page number beginning from 0 
-*  `per_page` — how many items to have on each page.
+- `page` — the page number beginning from 0
+- `per_page` — how many items to have on each page.
 
 APIs endpoints that return paginated results return pagination info with every reply:
 
