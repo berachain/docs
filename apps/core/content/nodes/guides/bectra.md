@@ -140,6 +140,12 @@ Alernatively, you can use the `--beacon-kit.chain-spec` command line option to s
 /path/to/beacond --home $BEACOND_HOME --beacon-kit.chain-spec=testnet
 ```
 
+Alernatively, you can use the `--beacon-kit.chain-spec` command line option to set/override this.
+
+```sh
+/path/to/beacond --home $BEACOND_HOME --beacon-kit.chain-spec=testnet
+```
+
 ### Step 2 - Verify Upgrade
 
 Start `beacond` and verify that the following is logged. Note the **"Electra Fork Time"** in the banner.
