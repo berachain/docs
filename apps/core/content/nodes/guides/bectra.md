@@ -120,7 +120,7 @@ Start the execution client and check the logs for indications of successful fork
 
 ## Bepolia Beacon Kit Upgrade Instructions
 
-Beacon Kit [1.2.0-rc](https://github.com/berachain/beacon-kit/releases) is required in addition to the [execution client configuration](#bepolia-execution-client-upgrade-instructions) for the Bepolia Hardfork.
+Beacon Kit [1.2.0-rc](https://github.com/berachain/beacon-kit/tags) is required in addition to the [execution client configuration](#bepolia-execution-client-upgrade-instructions) for the Bepolia Hardfork.
 
 ### Step 1 - Configure App Toml
 
