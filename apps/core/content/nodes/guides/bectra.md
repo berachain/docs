@@ -26,12 +26,12 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 As a first step, Berachain will implement the upgrades in phases, with the first phase being the full upgrade on Bepolia Testnet.
 
-| Date                | Milestone                                                                                 |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| Week of April 21    | Documentation Release                                                                     |
+| Date                | Milestone                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| Week of April 21    | Documentation Release                                                                      |
 | Week of April 28    | Beacon Kit 1.2.0-rc2 Released <br/> (Node operators upgrade Beacon Kit and geth/reth/etc.) |
-| Week of May 5       | All Infrastructure Providers Upgraded                                                     |
-| May 7 - 12:00pm EST | Bectra Hardfork on Bepolia                                                                |
+| Week of May 5       | All Infrastructure Providers Upgraded                                                      |
+| May 7 - 12:00pm EST | Bectra Hardfork on Bepolia                                                                 |
 
 After evaluating the upgrade on Bepolia, Berachain will schedule a hardfork for Berachain Mainnet at the end of May.
 The final release date for Berachain Mainnet will be announced closer to the upgrade.
