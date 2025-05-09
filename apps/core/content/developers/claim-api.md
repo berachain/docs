@@ -81,7 +81,7 @@ Merkle proofs are a cryptographic method that allows for efficient and secure ve
 When you receive a Merkle proof from the API:
 
 1. Store the proof data securely
-2. Submit the proof to the [BGTIncentiveDistributor](0x92203b1242e536e91159707c2a6bfb3ed1339b07eb35a724e5237b60a55919815505a82199a4a8aa63e4e1daafd37983) smart contract when claiming rewards
+2. Submit the proof to the [BGTIncentiveDistributor](https://docs.berachain.com/developers/contracts/bgtincentivedistributor) smart contract when claiming rewards
 3. The contract will verify the proof's validity before releasing the rewards
 
 ## Endpoints
