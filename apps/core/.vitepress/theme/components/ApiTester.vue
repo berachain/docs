@@ -83,6 +83,10 @@ const validateUrl = () => {
     urlError.value = 'URL is required'
     return false
   }
+  
+  // Remove trailing slashes from the URL
+  customUrl.value = customUrl.value.replace(/\/+$/, '')
+  
   if (!isValidUrl(customUrl.value)) {
     urlError.value = 'Please enter a valid URL starting with http:// or https://'
     return false
