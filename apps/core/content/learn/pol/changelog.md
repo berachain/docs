@@ -15,6 +15,7 @@ The Bectra release adds support for:
 * **EIP-7702** Set code for EOA 
 * **EIP-7840** Add blob schedule to EL config files
 
+The [Claim API](/developer/claim-api) is now released.
 
 
 ### 2025-APR-24
@@ -22,7 +23,6 @@ The Bectra release adds support for:
 **Proof of Liquidity 1.2:**
 1. New Maximum of 3 incentives per reward vault
 2. Block Reward Emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Production & Emissions](/learn/pol/bgtmath).
-
 3. Auto-Incentivizer: fees from default cutting board BEX Reward Vaults will use the fees to automatically offer incentives
 
 ![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
