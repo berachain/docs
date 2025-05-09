@@ -7,7 +7,7 @@ Berachain's Proof of Liquidity (PoL) mechanism can be broken down into two broad
 
 ## BGT Distribution
 
-As discussed in [Block Production](/learn/pol/bgtmath), $BGT emissions stem from the block production process. The variable component of $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
+As discussed in [Block Rewards](/learn/pol/blockrewards), $BGT emissions stem from the block production process. The variable component of $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
 
 ### Distributor
 

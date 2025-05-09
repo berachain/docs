@@ -38,4 +38,4 @@ The `$BERA` token serves two main purposes on the Berachain network:
 
 Validators stake `$BERA` to operate a validator. Within the active set, the more `$BERA` a validator has staked, the more frequently they are chosen to propose blocks. A validator's probability of block production is directly proportional to their share of the total staked `$BERA`. The economic value of all staked `$BERA` tokens forms the economic security of the chain, with [$BGT](/learn/pol/tokens/bgt) dynamics controlling its inflation.
 
-To learn more about how `$BERA` staking affects block production and emissions, see [Block Production](/learn/pol/bgtmath.md).
+To learn more about how `$BERA` staking affects block production and emissions, see [Block Rewards](/learn/pol/blockrewards.md).
