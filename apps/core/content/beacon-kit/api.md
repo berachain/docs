@@ -15,23 +15,23 @@ const networks = [
 
 ## API Status Scoreboard
 
-| Endpoint | Status | Notes |
-|----------|--------|-------|
-| [Node Version](#ethv1nodeversion) | ✅ | Basic node information |
-| [Debug Beacon States](#ethv2debugbeaconstatesstate_id) | ✅ | Debug information including validator data |
-| [Get State Validators](#get-ethv1beaconstatesstate_idvalidators) | ✅ | List validators with filtering |
-| [Get State Validator](#get-ethv1beaconstatesstate_idvalidatorsvalidator_id) | ✅ | Single validator details |
-| [Get Validator Balances](#get-ethv1beaconstatesstate_idvalidator_balances) | ✅ | Validator balance information |
-| [Get Attester Duties](#post-ethv1validatordutiesattesterepoch) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttesterDuties) |
-| [Get Proposer Duties](#get-ethv1validatordutiesproposerepoch) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getProposerDuties) |
-| [Get Sync Committee Duties](#post-ethv1validatordutiessyncepoch) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getSyncCommitteeDuties) |
-| [Get Attestation Data](#post-ethv1validatorattestation_data) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttestationData) |
-| [Get Aggregate Attestation](#get-ethv2validatoraggregate_attestation) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAggregateAttestation) |
-| [Submit Aggregate and Proofs](#post-ethv2validatoraggregate_and_proofs) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/submitAggregateAndProofs) |
-| [Subscribe to Beacon Committee](#post-ethv1validatorbeacon_committee_subscriptions) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToBeaconCommittee) |
-| [Subscribe to Sync Committee](#post-ethv1validatorsync_committee_subscriptions) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToSyncCommittee) |
-| [Register Validator](#post-ethv1validatorregister_validator) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/registerValidator) |
-| [Get Validator Liveness](#post-ethv1validatorlivenessepoch) | ❌ | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getValidatorLiveness) |
+| Endpoint                                                                            | Status | Notes                                                                                                                           |
+| ----------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| [Node Version](#ethv1nodeversion)                                                   | ✅     | Basic node information                                                                                                          |
+| [Debug Beacon States](#ethv2debugbeaconstatesstate_id)                              | ✅     | Debug information including validator data                                                                                      |
+| [Get State Validators](#get-ethv1beaconstatesstate_idvalidators)                    | ✅     | List validators with filtering                                                                                                  |
+| [Get State Validator](#get-ethv1beaconstatesstate_idvalidatorsvalidator_id)         | ✅     | Single validator details                                                                                                        |
+| [Get Validator Balances](#get-ethv1beaconstatesstate_idvalidator_balances)          | ✅     | Validator balance information                                                                                                   |
+| [Get Attester Duties](#post-ethv1validatordutiesattesterepoch)                      | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttesterDuties)          |
+| [Get Proposer Duties](#get-ethv1validatordutiesproposerepoch)                       | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getProposerDuties)          |
+| [Get Sync Committee Duties](#post-ethv1validatordutiessyncepoch)                    | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getSyncCommitteeDuties)     |
+| [Get Attestation Data](#post-ethv1validatorattestation_data)                        | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttestationData)         |
+| [Get Aggregate Attestation](#get-ethv2validatoraggregate_attestation)               | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAggregateAttestation)    |
+| [Submit Aggregate and Proofs](#post-ethv2validatoraggregate_and_proofs)             | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/submitAggregateAndProofs)   |
+| [Subscribe to Beacon Committee](#post-ethv1validatorbeacon_committee_subscriptions) | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToBeaconCommittee) |
+| [Subscribe to Sync Committee](#post-ethv1validatorsync_committee_subscriptions)     | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToSyncCommittee)   |
+| [Register Validator](#post-ethv1validatorregister_validator)                        | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/registerValidator)          |
+| [Get Validator Liveness](#post-ethv1validatorlivenessepoch)                         | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getValidatorLiveness)       |
 
 ## Node API
 
@@ -50,6 +50,7 @@ Returns node version information.
 ### /eth/v2/debug/beacon/states/:state_id
 
 Returns a quantity of debug information, including:
+
 - validator root
 - latest beacon and execution chain block headers
 - various root hashes
@@ -79,9 +80,11 @@ The Validator API provides endpoints for managing and monitoring validators. All
 ### Validator Information
 
 #### GET /eth/v1/beacon/states/:state_id/validators
+
 Returns validator information for the specified state.
 
 Query Parameters:
+
 - `id`: Array of validator IDs (public keys or indices)
 - `status`: Array of validator statuses to filter by
 
@@ -115,6 +118,7 @@ Query Parameters:
 />
 
 #### GET /eth/v1/beacon/states/:state_id/validators/:validator_id
+
 Returns information about a specific validator.
 
 <ApiTester
@@ -141,6 +145,7 @@ Returns information about a specific validator.
 ### Validator Balances
 
 #### GET /eth/v1/beacon/states/:state_id/validator_balances
+
 Returns validator balances for the specified state.
 
 <ApiTester
@@ -170,6 +175,7 @@ Returns validator balances for the specified state.
 ### Validator Duties
 
 #### POST /eth/v1/validator/duties/attester/:epoch
+
 FIXME: Implementation details needed for attester duties
 
 <ApiTester
@@ -185,6 +191,7 @@ FIXME: Implementation details needed for attester duties
 />
 
 #### GET /eth/v1/validator/duties/proposer/:epoch
+
 FIXME: Implementation details needed for proposer duties
 
 <ApiTester
@@ -200,6 +207,7 @@ FIXME: Implementation details needed for proposer duties
 />
 
 #### POST /eth/v1/validator/duties/sync/:epoch
+
 FIXME: Implementation details needed for sync committee duties
 
 <ApiTester
@@ -217,6 +225,7 @@ FIXME: Implementation details needed for sync committee duties
 ### Validator Operations
 
 #### POST /eth/v1/validator/attestation_data
+
 FIXME: Implementation details needed for attestation data
 
 <ApiTester
@@ -226,6 +235,7 @@ FIXME: Implementation details needed for attestation data
 />
 
 #### GET /eth/v2/validator/aggregate_attestation
+
 FIXME: Implementation details needed for aggregate attestation
 
 <ApiTester
@@ -235,6 +245,7 @@ FIXME: Implementation details needed for aggregate attestation
 />
 
 #### POST /eth/v2/validator/aggregate_and_proofs
+
 FIXME: Implementation details needed for aggregate and proofs
 
 <ApiTester
@@ -246,6 +257,7 @@ FIXME: Implementation details needed for aggregate and proofs
 ### Validator Subscriptions
 
 #### POST /eth/v1/validator/beacon_committee_subscriptions
+
 FIXME: Implementation details needed for beacon committee subscriptions
 
 <ApiTester
@@ -255,6 +267,7 @@ FIXME: Implementation details needed for beacon committee subscriptions
 />
 
 #### POST /eth/v1/validator/sync_committee_subscriptions
+
 FIXME: Implementation details needed for sync committee subscriptions
 
 <ApiTester
@@ -266,6 +279,7 @@ FIXME: Implementation details needed for sync committee subscriptions
 ### Validator Registration
 
 #### POST /eth/v1/validator/register_validator
+
 FIXME: Implementation details needed for validator registration
 
 <ApiTester
@@ -277,6 +291,7 @@ FIXME: Implementation details needed for validator registration
 ### Validator Health
 
 #### POST /eth/v1/validator/liveness/:epoch
+
 FIXME: Implementation details needed for validator liveness
 
 <ApiTester
@@ -295,6 +310,7 @@ FIXME: Implementation details needed for validator liveness
 
 1. All balance values are returned in Gwei (1 ETH = 10^9 Gwei)
 2. Validator statuses include:
+
    - `active_ongoing`
    - `active_exiting`
    - `active_slashed`
