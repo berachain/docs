@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# Block Production and Emissions
+# Block Production & Rewards
 
 Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
 
@@ -15,6 +15,8 @@ The network maintains an active set of **{{ config.mainnet.validatorActiveSetSiz
 - Stake limitations per validator:
   - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
   - Maximum: {{ config.mainnet.maxEffectiveBalance }} `$BERA`
+
+A given Validator's probability of selection for producing a block is the proportion of its stake's weight to the total stakes of the active set.
 
 ## $BGT Emissions Structure
 

@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/learn/pol/bgtmath",
+      "destination": "/learn/pol/blockrewards"
+    },
+    {
       "source": "/learn/dapps/swap",
       "destination": "/learn/dapps/bex"
     },
