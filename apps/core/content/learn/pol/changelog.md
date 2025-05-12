@@ -2,6 +2,22 @@
 
 ## 2025
 
+### 2025-MAY
+
+**Proof of Liquidity 1.3 × Prague × Electra × Booga ** 
+
+The Bectra release adds support for:
+* **EIP-2537** Precompile for BLS12-381 curve operations
+* **EIP-2935** Serve historical block hashes from state
+* **EIP-7002** Execution layer triggerable withdrawals
+* **EIP-7623** Increase calldata cost
+* **EIP-7685** General purpose EL requests
+* **EIP-7702** Set code for EOA 
+* **EIP-7840** Add blob schedule to EL config files
+
+The [Claim API](/developer/claim-api) is now released.
+
+
 ### 2025-APR-24
 
 **Proof of Liquidity 1.2:**
