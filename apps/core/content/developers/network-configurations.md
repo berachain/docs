@@ -87,8 +87,6 @@ With the testnet, you can:
 
 ### Bepolia Testnet dApps
 
-
-
 <template v-for="(item) in config['bepolia']['dapps']">
   <table>
     <thead><tr><th>Name</th><th>URL</th></tr></thead>
@@ -100,4 +98,3 @@ With the testnet, you can:
     </tbody>
   </table>
 </template>
-
