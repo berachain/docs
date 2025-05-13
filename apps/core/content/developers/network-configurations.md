@@ -92,7 +92,7 @@ With the testnet, you can:
     <thead><tr><th>Name</th><th>URL</th></tr></thead>
     <tbody>
           <tr>
-            <td><a :href="item.url">{{ item.name }}</a>
+            <td><a :href="item.url">{{ item.name }}</a></td>
             <td>{{ item.url }}</td>
           </tr>
     </tbody>
