@@ -15,29 +15,52 @@ const networks = [
 
 ## API Status Scoreboard
 
-| Endpoint                                                                            | Status | Notes                                                                                                                           |
-| ----------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| [Node Version](#ethv1nodeversion)                                                   | ✅     | Basic node information                                                                                                          |
-| [Debug Beacon States](#ethv2debugbeaconstatesstate_id)                              | ✅     | Debug information including validator data                                                                                      |
-| [Get State Validators](#get-ethv1beaconstatesstate_idvalidators)                    | ✅     | List validators with filtering                                                                                                  |
-| [Get State Validator](#get-ethv1beaconstatesstate_idvalidatorsvalidator_id)         | ✅     | Single validator details                                                                                                        |
-| [Get Validator Balances](#get-ethv1beaconstatesstate_idvalidator_balances)          | ✅     | Validator balance information                                                                                                   |
-| [Get Attester Duties](#post-ethv1validatordutiesattesterepoch)                      | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttesterDuties)          |
-| [Get Proposer Duties](#get-ethv1validatordutiesproposerepoch)                       | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getProposerDuties)          |
-| [Get Sync Committee Duties](#post-ethv1validatordutiessyncepoch)                    | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getSyncCommitteeDuties)     |
-| [Get Attestation Data](#post-ethv1validatorattestation_data)                        | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAttestationData)         |
-| [Get Aggregate Attestation](#get-ethv2validatoraggregate_attestation)               | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getAggregateAttestation)    |
-| [Submit Aggregate and Proofs](#post-ethv2validatoraggregate_and_proofs)             | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/submitAggregateAndProofs)   |
-| [Subscribe to Beacon Committee](#post-ethv1validatorbeacon_committee_subscriptions) | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToBeaconCommittee) |
-| [Subscribe to Sync Committee](#post-ethv1validatorsync_committee_subscriptions)     | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/subscribeToSyncCommittee)   |
-| [Register Validator](#post-ethv1validatorregister_validator)                        | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/registerValidator)          |
-| [Get Validator Liveness](#post-ethv1validatorlivenessepoch)                         | ❌     | Not implemented - See [Ethereum Beacon API Spec](https://ethereum.github.io/beacon-APIs/#/Validator/getValidatorLiveness)       |
+### Standard Beacon Chain API v1 Endpoints
+
+| Endpoint | URI | Status |
+|----------|-----|--------|
+| [Node Version](#ethv1nodeversion) | `/eth/v1/node/version` | ✅ |
+| [Node Syncing](#ethv1nodesyncing) | `/eth/v1/node/syncing` | ✅ |
+| [Get Genesis](#ethv1beacongenesis) | `/eth/v1/beacon/genesis` | ✅ |
+| [Get State Root](#ethv1beaconstatesstate_idroot) | `/eth/v1/beacon/states/{state_id}/root` | ✅ |
+| [Get State Fork](#ethv1beaconstatesstate_idfork) | `/eth/v1/beacon/states/{state_id}/fork` | ✅ |
+| [Get State Validators](#get-ethv1beaconstatesstate_idvalidators) | `/eth/v1/beacon/states/{state_id}/validators` | ✅ |
+| [Get State Validator](#get-ethv1beaconstatesstate_idvalidatorsvalidator_id) | `/eth/v1/beacon/states/{state_id}/validators/{validator_id}` | ✅ |
+| [Get Validator Balances](#get-ethv1beaconstatesstate_idvalidator_balances) | `/eth/v1/beacon/states/{state_id}/validator_balances` | ✅ |
+| [Get State Randao](#ethv1beaconstatesstate_idrandao) | `/eth/v1/beacon/states/{state_id}/randao` | ✅ |
+| [Get Block Headers](#ethv1beaconheaders) | `/eth/v1/beacon/headers` | ✅ |
+| [Get Block Header](#ethv1beaconheadersblock_id) | `/eth/v1/beacon/headers/{block_id}` | ✅ |
+| [Get Blob Sidecars](#ethv1beaconblob_sidecarsblock_id) | `/eth/v1/beacon/blob_sidecars/{block_id}` | ✅ |
+| [Get Block Rewards](#ethv1beaconrewardsblocksblock_id) | `/eth/v1/beacon/rewards/blocks/{block_id}` | ✅ |
+| [Get Config Spec](#ethv1configspec) | `/eth/v1/config/spec` | ✅ |
+| [Get Attester Duties](#ethv1validatordutiesattesterepoch) | `/eth/v1/validator/duties/attester/{epoch}` | ❌ |
+| [Get Proposer Duties](#ethv1validatordutiesproposerepoch) | `/eth/v1/validator/duties/proposer/{epoch}` | ❌ |
+| [Get Sync Committee Duties](#ethv1validatordutiessyncepoch) | `/eth/v1/validator/duties/sync/{epoch}` | ❌ |
+| [Get Attestation Data](#ethv1validatorattestation_data) | `/eth/v1/validator/attestation_data` | ❌ |
+| [Subscribe to Beacon Committee](#ethv1validatorbeacon_committee_subscriptions) | `/eth/v1/validator/beacon_committee_subscriptions` | ❌ |
+| [Subscribe to Sync Committee](#ethv1validatorsync_committee_subscriptions) | `/eth/v1/validator/sync_committee_subscriptions` | ❌ |
+| [Register Validator](#ethv1validatorregister_validator) | `/eth/v1/validator/register_validator` | ❌ |
+| [Get Validator Liveness](#ethv1validatorlivenessepoch) | `/eth/v1/validator/liveness/{epoch}` | ❌ |
+
+### Standard Beacon Chain API v2 Endpoints
+
+| Endpoint | URI | Status |
+|----------|-----|--------|
+| [Debug Beacon States](#ethv2debugbeaconstatesstate_id) | `/eth/v2/debug/beacon/states/{state_id}` | ✅ |
+| [Get Aggregate Attestation](#ethv2validatoraggregate_attestation) | `/eth/v2/validator/aggregate_attestation` | ❌ |
+| [Submit Aggregate and Proofs](#ethv2validatoraggregate_and_proofs) | `/eth/v2/validator/aggregate_and_proofs` | ❌ |
+
+### Beacon Kit Custom Extensions
+
+| Endpoint | URI | Status |
+|----------|-----|--------|
+| [Get Block Proposer](#bkitv1proofblock_proposertimestamp_id) | `/bkit/v1/proof/block_proposer/{timestamp_id}` | ✅ |
 
 ## Node API
 
 The Node API is default closed. To open it, revise your installation's `app.toml` and review the section `beacon-kit.node-api`.
 
-### /eth/v1/node/version
+### /eth/v1/node/version {#ethv1nodeversion}
 
 Returns node version information.
 
@@ -47,10 +70,210 @@ Returns node version information.
   :networks="networks"
 />
 
-### /eth/v2/debug/beacon/states/:state_id
+### /eth/v1/node/syncing {#ethv1nodesyncing}
+
+Returns the current sync status of the node.
+
+<ApiTester
+  endpoint="/eth/v1/node/syncing"
+  method="GET"
+  :networks="networks"
+/>
+
+### /eth/v1/beacon/genesis {#ethv1beacongenesis}
+
+Returns genesis information.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/genesis"
+  method="GET"
+  :networks="networks"
+/>
+
+### /eth/v1/beacon/states/:state_id/root {#ethv1beaconstatesstate_idroot}
+
+Returns the state root for the specified state.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/states/{state_id}/root"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'state_id',
+      description: 'State identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      state_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/beacon/states/:state_id/fork {#ethv1beaconstatesstate_idfork}
+
+Returns the fork information for the specified state.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/states/{state_id}/fork"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'state_id',
+      description: 'State identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      state_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/beacon/states/:state_id/randao {#ethv1beaconstatesstate_idrandao}
+
+Returns the RANDAO value for the specified state.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/states/{state_id}/randao"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'state_id',
+      description: 'State identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      state_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/beacon/headers {#ethv1beaconheaders}
+
+Returns the block headers matching the specified query parameters.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/headers"
+  method="GET"
+  :queryParams="[
+    {
+      name: 'slot',
+      description: 'Slot number',
+      required: false
+    },
+    {
+      name: 'parent_root',
+      description: 'Parent root hash',
+      required: false
+    }
+  ]"
+  :networks="networks"
+/>
+
+### /eth/v1/beacon/headers/:block_id {#ethv1beaconheadersblock_id}
+
+Returns the block header for the specified block.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/headers/{block_id}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'block_id',
+      description: 'Block identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      block_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/beacon/blob_sidecars/:block_id {#ethv1beaconblob_sidecarsblock_id}
+
+Returns the blob sidecars for the specified block.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/blob_sidecars/{block_id}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'block_id',
+      description: 'Block identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :queryParams="[
+    {
+      name: 'indices',
+      description: 'Array of blob indices',
+      required: false
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      block_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/beacon/rewards/blocks/:block_id {#ethv1beaconrewardsblocksblock_id}
+
+Returns the block rewards for the specified block.
+
+<ApiTester
+  endpoint="/eth/v1/beacon/rewards/blocks/{block_id}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'block_id',
+      description: 'Block identifier (head, genesis, finalized, justified, or slot number)'
+    }
+  ]"
+  :networks="networks"
+  :examples="{
+    custom: { 
+      block_id: 'head'  // Most common use case
+    }
+  }"
+/>
+
+### /eth/v1/config/spec {#ethv1configspec}
+
+Returns the chain specification.
+
+<ApiTester
+  endpoint="/eth/v1/config/spec"
+  method="GET"
+  :networks="networks"
+/>
+
+### /bkit/v1/proof/block_proposer/:timestamp_id {#bkitv1proofblock_proposertimestamp_id}
+
+Returns the block proposer for the specified timestamp.
+
+<ApiTester
+  endpoint="/bkit/v1/proof/block_proposer/{timestamp_id}"
+  method="GET"
+  :pathParams="[
+    {
+      name: 'timestamp_id',
+      description: 'Timestamp identifier'
+    }
+  ]"
+  :networks="networks"
+/>
+
+### /eth/v2/debug/beacon/states/:state_id {#ethv2debugbeaconstatesstate_id}
 
 Returns a quantity of debug information, including:
-
 - validator root
 - latest beacon and execution chain block headers
 - various root hashes
@@ -79,12 +302,11 @@ The Validator API provides endpoints for managing and monitoring validators. All
 
 ### Validator Information
 
-#### GET /eth/v1/beacon/states/:state_id/validators
+#### GET /eth/v1/beacon/states/:state_id/validators {#get-ethv1beaconstatesstate_idvalidators}
 
 Returns validator information for the specified state.
 
 Query Parameters:
-
 - `id`: Array of validator IDs (public keys or indices)
 - `status`: Array of validator statuses to filter by
 
@@ -117,7 +339,7 @@ Query Parameters:
   }"
 />
 
-#### GET /eth/v1/beacon/states/:state_id/validators/:validator_id
+#### GET /eth/v1/beacon/states/:state_id/validators/:validator_id {#get-ethv1beaconstatesstate_idvalidatorsvalidator_id}
 
 Returns information about a specific validator.
 
@@ -144,7 +366,7 @@ Returns information about a specific validator.
 
 ### Validator Balances
 
-#### GET /eth/v1/beacon/states/:state_id/validator_balances
+#### GET /eth/v1/beacon/states/:state_id/validator_balances {#get-ethv1beaconstatesstate_idvalidator_balances}
 
 Returns validator balances for the specified state.
 
@@ -172,145 +394,10 @@ Returns validator balances for the specified state.
   }"
 />
 
-### Validator Duties
-
-#### POST /eth/v1/validator/duties/attester/:epoch
-
-FIXME: Implementation details needed for attester duties
-
-<ApiTester
-  endpoint="/eth/v1/validator/duties/attester/{epoch}"
-  method="POST"
-  :pathParams="[
-    {
-      name: 'epoch',
-      description: 'Epoch number'
-    }
-  ]"
-  :networks="networks"
-/>
-
-#### GET /eth/v1/validator/duties/proposer/:epoch
-
-FIXME: Implementation details needed for proposer duties
-
-<ApiTester
-  endpoint="/eth/v1/validator/duties/proposer/{epoch}"
-  method="GET"
-  :pathParams="[
-    {
-      name: 'epoch',
-      description: 'Epoch number'
-    }
-  ]"
-  :networks="networks"
-/>
-
-#### POST /eth/v1/validator/duties/sync/:epoch
-
-FIXME: Implementation details needed for sync committee duties
-
-<ApiTester
-  endpoint="/eth/v1/validator/duties/sync/{epoch}"
-  method="POST"
-  :pathParams="[
-    {
-      name: 'epoch',
-      description: 'Epoch number'
-    }
-  ]"
-  :networks="networks"
-/>
-
-### Validator Operations
-
-#### POST /eth/v1/validator/attestation_data
-
-FIXME: Implementation details needed for attestation data
-
-<ApiTester
-  endpoint="/eth/v1/validator/attestation_data"
-  method="POST"
-  :networks="networks"
-/>
-
-#### GET /eth/v2/validator/aggregate_attestation
-
-FIXME: Implementation details needed for aggregate attestation
-
-<ApiTester
-  endpoint="/eth/v2/validator/aggregate_attestation"
-  method="GET"
-  :networks="networks"
-/>
-
-#### POST /eth/v2/validator/aggregate_and_proofs
-
-FIXME: Implementation details needed for aggregate and proofs
-
-<ApiTester
-  endpoint="/eth/v2/validator/aggregate_and_proofs"
-  method="POST"
-  :networks="networks"
-/>
-
-### Validator Subscriptions
-
-#### POST /eth/v1/validator/beacon_committee_subscriptions
-
-FIXME: Implementation details needed for beacon committee subscriptions
-
-<ApiTester
-  endpoint="/eth/v1/validator/beacon_committee_subscriptions"
-  method="POST"
-  :networks="networks"
-/>
-
-#### POST /eth/v1/validator/sync_committee_subscriptions
-
-FIXME: Implementation details needed for sync committee subscriptions
-
-<ApiTester
-  endpoint="/eth/v1/validator/sync_committee_subscriptions"
-  method="POST"
-  :networks="networks"
-/>
-
-### Validator Registration
-
-#### POST /eth/v1/validator/register_validator
-
-FIXME: Implementation details needed for validator registration
-
-<ApiTester
-  endpoint="/eth/v1/validator/register_validator"
-  method="POST"
-  :networks="networks"
-/>
-
-### Validator Health
-
-#### POST /eth/v1/validator/liveness/:epoch
-
-FIXME: Implementation details needed for validator liveness
-
-<ApiTester
-  endpoint="/eth/v1/validator/liveness/{epoch}"
-  method="POST"
-  :pathParams="[
-    {
-      name: 'epoch',
-      description: 'Epoch number'
-    }
-  ]"
-  :networks="networks"
-/>
-
 ## Notes
 
 1. All balance values are returned in Gwei (1 ETH = 10^9 Gwei)
 2. Validator statuses include:
-
    - `active_ongoing`
    - `active_exiting`
    - `active_slashed`
