@@ -17,7 +17,7 @@
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
-        "url": "#"
+        "url": "https://testnet.berascan.com/"
       },
       "hub": {
         "name": "Bepolia Hub",
