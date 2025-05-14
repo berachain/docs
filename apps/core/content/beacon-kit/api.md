@@ -44,66 +44,130 @@ Note that this is different from CometBFT API endpoint, typically exposed from
 
 ## API Methods
 
-### /bkit/v1/proof/block_proposer/{timestamp_id} {#bkitv1proofblock_proposertimestamp_id}
+### Get Block Proposer Proof {#bkitv1proofblock_proposertimestamp_id}
 Returns the block proposer's public key for the given timestamp ID, along with Merkle proofs for the public key and proposer index, verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/block_proposer/{timestamp_id}
+```
 <ApiTester endpoint="/bkit/v1/proof/block_proposer/{timestamp_id}" method="GET" :pathParams="[{ name: 'timestamp_id', description: 'Timestamp identifier' }]" :networks="networks" />
 
-### /eth/v1/beacon/blob_sidecars/{block_id} {#ethv1beaconblob_sidecarsblock_id}
+### Get Blob Sidecars {#ethv1beaconblob_sidecarsblock_id}
 Retrieves blob sidecars for the specified block ID. Optionally filters by blob indices.
+
+```http
+GET /eth/v1/beacon/blob_sidecars/{block_id}
+```
 <ApiTester endpoint="/eth/v1/beacon/blob_sidecars/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'indices', description: 'Array of blob indices', required: false }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
 
-### /eth/v1/beacon/genesis {#ethv1beacongenesis}
+### Get Chain Genesis Details {#ethv1beacongenesis}
 Retrieves details of the chain's genesis, including genesis time, validators root, and fork version.
+
+```http
+GET /eth/v1/beacon/genesis
+```
 <ApiTester endpoint="/eth/v1/beacon/genesis" method="GET" :networks="networks" />
 
-### /eth/v1/beacon/headers {#ethv1beaconheaders}
+### Get Block Headers {#ethv1beaconheaders}
 Retrieves block headers matching the specified slot or parent root.
+
+```http
+GET /eth/v1/beacon/headers
+```
 <ApiTester endpoint="/eth/v1/beacon/headers" method="GET" :queryParams="[{ name: 'slot', description: 'Slot number', required: false }, { name: 'parent_root', description: 'Parent root hash', required: false }]" :networks="networks" />
 
-### /eth/v1/beacon/headers/{block_id} {#ethv1beaconheadersblock_id}
+### Get Block Header by ID {#ethv1beaconheadersblock_id}
 Retrieves the block header for the specified block ID.
+
+```http
+GET /eth/v1/beacon/headers/{block_id}
+```
 <ApiTester endpoint="/eth/v1/beacon/headers/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
 
-### /eth/v1/beacon/rewards/blocks/{block_id} {#ethv1beaconrewardsblocksblock_id}
+### Get Block Rewards {#ethv1beaconrewardsblocksblock_id}
 Retrieves execution layer block rewards for the specified block ID.
+
+```http
+GET /eth/v1/beacon/rewards/blocks/{block_id}
+```
 <ApiTester endpoint="/eth/v1/beacon/rewards/blocks/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/fork {#ethv1beaconstatesstate_idfork}
+### Get Fork Information {#ethv1beaconstatesstate_idfork}
 Retrieves the fork object for the specified state ID, providing information about past and upcoming forks.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/fork
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/fork" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/randao {#ethv1beaconstatesstate_idrandao}
+### Get RANDAO Mix {#ethv1beaconstatesstate_idrandao}
 Retrieves the RANDAO mix for the state ID and optionally a specific epoch. Defaults to genesis epoch if not specified.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/randao
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/randao" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/root {#ethv1beaconstatesstate_idroot}
+### Get State Root {#ethv1beaconstatesstate_idroot}
 Retrieves the hash tree root of the beacon state for the specified state ID.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/root
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/root" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/validator_balances {#ethv1beaconstatesstate_idvalidator_balances}
+### Get Validator Balances {#ethv1beaconstatesstate_idvalidator_balances}
 Retrieves the balances for the specified validators at the given state ID.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/validator_balances
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validator_balances" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'id', description: 'Array of validator IDs', required: false }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/validators {#ethv1beaconstatesstate_idvalidators}
+### Get Validators {#ethv1beaconstatesstate_idvalidators}
 Retrieves validators, optionally filtered by ID and status, for the specified state ID.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/validators
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validators" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'id', description: 'Array of validator IDs', required: false }, { name: 'status', description: 'Array of validator statuses', required: false }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/beacon/states/{state_id}/validators/{validator_id} {#ethv1beaconstatesstate_idvalidatorsvalidator_id}
+### Get Validator by ID {#ethv1beaconstatesstate_idvalidatorsvalidator_id}
 Retrieves a single validator by its ID for the specified state ID.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/validators/{validator_id}
+```
 <ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validators/{validator_id}" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }, { name: 'validator_id', description: 'Validator ID (public key or index)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
 
-### /eth/v1/config/spec {#ethv1configspec}
+### Get Chain Specification {#ethv1configspec}
 Retrieves the chain specification, including deposit contract address, network ID, and various fork-specific parameters.
+
+```http
+GET /eth/v1/config/spec
+```
 <ApiTester endpoint="/eth/v1/config/spec" method="GET" :networks="networks" />
 
-### /eth/v1/node/syncing {#ethv1nodesyncing}
+### Get Node Syncing Status {#ethv1nodesyncing}
 Retrieves the node's current sync status. (Currently returns placeholder data indicating the node is synced).
+
+```http
+GET /eth/v1/node/syncing
+```
 <ApiTester endpoint="/eth/v1/node/syncing" method="GET" :networks="networks" />
 
-### /eth/v1/node/version {#ethv1nodeversion}
+### Get Node Version {#ethv1nodeversion}
 Retrieves the version of the node software. (Currently returns a placeholder version).
+
+```http
+GET /eth/v1/node/version
+```
 <ApiTester endpoint="/eth/v1/node/version" method="GET" :networks="networks" />
 
-### /eth/v2/debug/beacon/states/{state_id} {#ethv2debugbeaconstatesstate_id}
+### Get Full Beacon State {#ethv2debugbeaconstatesstate_id}
 Retrieves the full beacon state for the specified state ID, including fork version and finality status.
+
+```http
+GET /eth/v2/debug/beacon/states/{state_id}
+```
 <ApiTester endpoint="/eth/v2/debug/beacon/states/{state_id}" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
