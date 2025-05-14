@@ -64,10 +64,16 @@ props.queryParams.forEach(param => {
 
 const baseUrl = computed(() => {
   if (selectedNetwork.value.allowCustomUrl) {
-    return customUrl.value
+    // customUrl.value is cleaned by validateUrl() when isValid is computed or on blur.
+    // So, baseUrl can directly return it. This avoids removing slashes during typing.
+    return customUrl.value;
+  } else {
+    // For pre-defined networks, clean the URL here.
+    // props.networks ensures selectedNetwork.value and selectedNetwork.value.url exist.
+    const networkUrl = selectedNetwork.value.url;
+    return networkUrl ? networkUrl.replace(/\/+$/, '') : '';
   }
-  return selectedNetwork.value.url
-})
+});
 
 const isValidUrl = (url) => {
   try {
@@ -78,21 +84,29 @@ const isValidUrl = (url) => {
   }
 }
 
-const validateUrl = () => {
+// Renamed from validateUrl. This function is called on blur from the custom URL input.
+// It sanitizes customUrl.value and sets urlError.
+const handleCustomUrlBlurAndValidate = () => {
   if (!customUrl.value) {
     urlError.value = 'URL is required'
-    return false
-  }
+    // No return, side effects are on customUrl.value and urlError.value
+  } else {
+    // 1. Trim leading/trailing whitespace
+    let cleanedUrl = customUrl.value.trim();
+
+    // 2. Remove trailing slashes from the trimmed string
+    cleanedUrl = cleanedUrl.replace(/\/+$/, '');
+
+    // 3. Update the model with the fully cleaned URL so the input field reflects it
+    customUrl.value = cleanedUrl;
   
-  // Remove trailing slashes from the URL
-  customUrl.value = customUrl.value.replace(/\/+$/, '')
-  
-  if (!isValidUrl(customUrl.value)) {
-    urlError.value = 'Please enter a valid URL starting with http:// or https://'
-    return false
+    // 4. Validate the now fully cleaned customUrl.value
+    if (!isValidUrl(customUrl.value)) { // isValidUrl is the pure http/https check
+      urlError.value = 'Please enter a valid URL starting with http:// or https://'
+    } else {
+      urlError.value = '' // Clear error if now valid
+    }
   }
-  urlError.value = ''
-  return true
 }
 
 const isValid = computed(() => {
@@ -106,9 +120,23 @@ const isValid = computed(() => {
     .every(param => paramValues.value[param.name])
   
   // Check URL validation if using custom URL
-  const urlValid = !selectedNetwork.value.allowCustomUrl || validateUrl()
+  // This check does NOT modify customUrl.value or urlError.value
+  let customUrlSeemsValidForButton = true;
+  if (selectedNetwork.value.allowCustomUrl) {
+    if (!customUrl.value) { // An empty custom URL means this part is not ready
+      customUrlSeemsValidForButton = false;
+    } else {
+      // Check if the current customUrl.value, if it *were* sanitized, would be valid.
+      // This avoids modifying the input during typing.
+      const potentiallySanitizedUrl = customUrl.value.replace(/\/+$/, '');
+      if (!isValidUrl(potentiallySanitizedUrl)) {
+        customUrlSeemsValidForButton = false;
+      }
+    }
+  }
+  const urlConsideredValidForButton = !selectedNetwork.value.allowCustomUrl || customUrlSeemsValidForButton;
     
-  return pathParamsValid && queryParamsValid && urlValid
+  return pathParamsValid && queryParamsValid && urlConsideredValidForButton;
 })
 
 // Compute the final URL with parameters replaced
@@ -192,7 +220,7 @@ async function testEndpoint() {
           placeholder="http://host:port/"
           class="custom-url-input"
           :class="{ 'error': urlError }"
-          @blur="validateUrl"
+          @blur="handleCustomUrlBlurAndValidate"
         />
         <span v-if="urlError" class="url-error">{{ urlError }}</span>
       </div>
