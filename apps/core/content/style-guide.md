@@ -11,8 +11,8 @@ The documentation is built using [VitePress](https://vitepress.dev/). Familiarit
 - **Main Content:** All documentation content resides primarily within `bcdocs/apps/core/content/` and `bcdocs/apps/bex/content/`.
 - **Subdirectories:** Organize content into logical subdirectories based on topics (e.g., `learn/`, `developers/`, `nodes/`, `beacon-kit/`).
 - **File Naming:**
-    - Use lowercase, hyphenated filenames (kebab-case). E.g., `proof-of-liquidity.md`.
-    - `index.md` is the default file for a directory, serving as its landing page.
+  - Use lowercase, hyphenated filenames (kebab-case). E.g., `proof-of-liquidity.md`.
+  - `index.md` is the default file for a directory, serving as its landing page.
 - **Assets:** Static assets like images should be placed in the `public/assets/` directory (e.g., `bcdocs/apps/core/public/assets/`). Reference them in markdown using root-relative paths (e.g., `/assets/my-image.png`).
 
 ## 3. Markdown & Content Formatting
@@ -20,7 +20,7 @@ The documentation is built using [VitePress](https://vitepress.dev/). Familiarit
 ### 3.1. Headings
 
 - **`# (H1)`:** Reserved for the main title of the page. This is often automatically generated from the frontmatter `title` or is the first line of the file.
-    - For special landing pages (like `index.md`), H1 might be part of a custom Vue component structure (e.g., `<h1 class="title">`).
+  - For special landing pages (like `index.md`), H1 might be part of a custom Vue component structure (e.g., `<h1 class="title">`).
 - **`## (H2)`:** Use for major sections within a page. These often correspond to main topics covered in the `sidebar.ts`.
 - **`### (H3)`:** Use for sub-sections of an H2.
 - **`#### (H4)` and deeper:** Use sparingly for further nested sub-sections.
@@ -51,9 +51,9 @@ head:
 
 - Clearly identify the language of the code block (e.g., `bash`, `sh`, `zsh`, `json`, `javascript`, `go`, `solidity`).
 - For shell commands:
-    - Indicate the context or directory if necessary, e.g., `# FROM: ~/devnet` or `# FROM: project-root/directory`.
-    - Show the command and its expected output clearly.
-    - Use comments (`# [Expected Output]:` or similar) to delineate commands from output.
+  - Indicate the context or directory if necessary, e.g., `# FROM: ~/devnet` or `# FROM: project-root/directory`.
+  - Show the command and its expected output clearly.
+  - Use comments (`# [Expected Output]:` or similar) to delineate commands from output.
 
 **Example (Bash):**
 
@@ -91,7 +91,6 @@ Use VitePress callouts to emphasize information:
 
 **Example:**
 
-
 ```md
 ˋˋˋ
 :::danger
@@ -103,12 +102,12 @@ Modifying signed data before sending it can result in a loss of funds. Do not pr
 ### 3.5. Links
 
 - **Internal Links:**
-    - Link to other documentation pages using relative paths from the current file, or site-root relative paths.
-    - E.g., `[Our Quickstart Guide](../quickstart.md)` or `[Proof of Liquidity](/learn/pol/)`.
-    - Omit the `.md` extension for links that `sidebar.ts` will resolve.
+  - Link to other documentation pages using relative paths from the current file, or site-root relative paths.
+  - E.g., `[Our Quickstart Guide](../quickstart.md)` or `[Proof of Liquidity](/learn/pol/)`.
+  - Omit the `.md` extension for links that `sidebar.ts` will resolve.
 - **External Links:**
-    - Use the full URL. E.g., `[Berachain Website](https://www.berachain.com)`.
-    - Consider if `target="_blank"` is appropriate (usually for links leaving the docs site).
+  - Use the full URL. E.g., `[Berachain Website](https://www.berachain.com)`.
+  - Consider if `target="_blank"` is appropriate (usually for links leaving the docs site).
 
 ### 3.6. Lists
 
@@ -121,10 +120,10 @@ Use markdown tables for structured data. Keep them concise and readable.
 
 ```md
 ˋˋˋ
-| Feature         | Supported | Notes                               |
+| Feature | Supported | Notes |
 |-----------------|-----------|-------------------------------------|
-| Proof of Stake  | Yes       | Via BGT delegation                  |
-| Smart Contracts | Yes       | EVM Compatible                      |
+| Proof of Stake | Yes | Via BGT delegation |
+| Smart Contracts | Yes | EVM Compatible |
 ˋˋˋ
 ```
 
@@ -134,14 +133,14 @@ The main navigation is controlled by `bcdocs/apps/core/.vitepress/sidebar.ts` (a
 
 - **Structure:** The `SIDEBAR` constant contains objects for major sections like `LEARN`, `DEVELOPERS`, `NODES`.
 - **Items:** Each navigational item is an object:
-    - `text`: The displayed text in the sidebar.
-    - `link`: The path to the markdown file (e.g., `/learn/what-is-proof-of-liquidity`). The `.md` extension is omitted.
-    - `items`: An array of nested item objects for collapsible sub-sections.
-    - `target: '_blank'`: For external links.
-    - `rel: 'no-referrer'`: Often used with `target: '_blank'`.
+  - `text`: The displayed text in the sidebar.
+  - `link`: The path to the markdown file (e.g., `/learn/what-is-proof-of-liquidity`). The `.md` extension is omitted.
+  - `items`: An array of nested item objects for collapsible sub-sections.
+  - `target: '_blank'`: For external links.
+  - `rel: 'no-referrer'`: Often used with `target: '_blank'`.
 - **Adding New Pages:**
-    1. Create your `.md` file in the appropriate content directory.
-    2. Add a corresponding entry in `sidebar.ts` in the correct section and nesting level.
+  1. Create your `.md` file in the appropriate content directory.
+  2. Add a corresponding entry in `sidebar.ts` in the correct section and nesting level.
 
 ## 5. Homepage (`index.md`) Structure
 
@@ -149,7 +148,7 @@ The `index.md` files (e.g., `bcdocs/apps/core/content/index.md`) serve as the ma
 
 - **Layout:** Uses `layout: page` in the frontmatter.
 - **Custom Components:** Heavily relies on custom Vue components, particularly:
-    - `<Feature>`: To create visually distinct links to key sections or resources. Takes props like `title`, `description`, `link`, `icon`, `image`, `type`.
+  - `<Feature>`: To create visually distinct links to key sections or resources. Takes props like `title`, `description`, `link`, `icon`, `image`, `type`.
 - **`<script setup>`:** Used to import components (`Feature`, icons from `@tabler/icons-vue`, configuration constants).
 - **Structure:** Typically includes a hero section followed by multiple `<section class="features">` containing `<Feature>` components.
 - **Styling:** May include page-specific CSS within `<style>` tags.
@@ -160,13 +159,13 @@ Refer to `bcdocs/apps/core/content/nodes/guides/docker-devnet.md` as a primary e
 
 - **Clear Steps:** Break down procedures into numbered steps using H2 or H3 headings (e.g., "### Step 1 - Obtain & Build Source").
 - **Command Presentation:**
-    - Use `bash` (or relevant shell type) code blocks.
-    - Prefix commands with context if helpful: `# FROM: ~/devnet`.
-    - Use `<CopyToClipboard>` component (imported via `<script setup>`) for easy copying of complex commands if appropriate, though direct markdown code blocks are standard.
+  - Use `bash` (or relevant shell type) code blocks.
+  - Prefix commands with context if helpful: `# FROM: ~/devnet`.
+  - Use `<CopyToClipboard>` component (imported via `<script setup>`) for easy copying of complex commands if appropriate, though direct markdown code blocks are standard.
 - **Output Presentation:**
-    - Clearly indicate expected output using comments within the code block or separate blocks.
-    - E.g., `# [Expected Output]:` or a descriptive comment.
-    - For logs, use `docker logs -f cl-node-rpc-0 | egrep '(Commit|deposit|withdraw|exit)';` and show representative output.
+  - Clearly indicate expected output using comments within the code block or separate blocks.
+  - E.g., `# [Expected Output]:` or a descriptive comment.
+  - For logs, use `docker logs -f cl-node-rpc-0 | egrep '(Commit|deposit|withdraw|exit)';` and show representative output.
 - **Placeholders:** Use clear placeholders for user-specific values (e.g., `YOUR_VALIDATOR_ADDRESS`) and instruct the user on how to obtain them.
 - **Callouts:** Use `:::tip`, `:::warning`, `:::danger` extensively to guide the user and prevent common errors.
 
@@ -178,10 +177,13 @@ Refer to `bcdocs/apps/core/content/nodes/guides/docker-devnet.md` as a primary e
 Run the following command:
 
 ˋˋˋbash
+
 # FROM: /path/to/your/project
+
 your-command --with-options
 
 # [Expected Output]:
+
 Processing complete.
 Result: SUCCESS
 ˋˋˋ
@@ -207,7 +209,7 @@ Each API endpoint should be documented with:
       ˋˋˋhttp
       GET /eth/v1/beacon/headers
       ˋˋˋ
-      ```
+    ```
 3.  **Description:** A brief explanation of what the endpoint does.
 4.  **Parameters:** (If applicable)
     - Path Parameters
@@ -226,35 +228,34 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
 - **Import:** Import it in the `<script setup>` block: `import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';`
 - **Usage:**
   ```vue
-  <ApiTester
-    endpoint="/eth/v1/beacon/headers/{block_id}"
-    method="GET"
-    :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]"
-    :queryParams="[{ name: 'slot', description: 'Slot number', required: false }, { name: 'parent_root', description: 'Parent root hash', required: false }]"
-    :networks="networks" // Define 'networks' array in script setup
-    :examples="{ custom: { block_id: 'head' } }" // Provide example values
-  />
+  <ApiTester endpoint="/eth/v1/beacon/headers/{block_id}" method="GET"
+  :pathParams="[{ name: 'block_id', description: 'Block identifier (head,
+  genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name:
+  'slot', description: 'Slot number', required: false }, { name: 'parent_root',
+  description: 'Parent root hash', required: false }]" :networks="networks" //
+  Define 'networks' array in script setup :examples="{ custom: { block_id:
+  'head' } }" // Provide example values />
   ```
 - **`networks` variable:** Define a `networks` array in your `<script setup>` to provide base URLs for different environments (Testnet, Mainnet, Custom).
 
   ```javascript
   const networks = [
     {
-      name: 'Testnet (Bepolia)',
-      url: 'https://bepolia.api-claim.berachain.com',
-      id: 'bepolia'
+      name: "Testnet (Bepolia)",
+      url: "https://bepolia.api-claim.berachain.com",
+      id: "bepolia",
     },
     {
-      name: 'Mainnet',
-      url: 'https://api-claim.berachain.com',
-      id: 'mainnet'
+      name: "Mainnet",
+      url: "https://api-claim.berachain.com",
+      id: "mainnet",
     },
     {
-      name: 'Custom URL',
-      url: '', // User can input their own
-      id: 'custom',
-      allowCustomUrl: true
-    }
+      name: "Custom URL",
+      url: "", // User can input their own
+      id: "custom",
+      allowCustomUrl: true,
+    },
   ];
   ```
 
@@ -275,6 +276,7 @@ Include general information relevant to the API set:
 The documentation utilizes several custom Vue components to enhance presentation and interactivity.
 
 - **Import:** Components are imported in the `<script setup>` block at the top of a markdown file.
+
 ```
   ˋˋˋjavascript
   <script setup>
@@ -284,13 +286,14 @@ The documentation utilizes several custom Vue components to enhance presentation
   </script>
   ˋˋˋ
 ```
+
 - **Usage:** Components are used directly in the markdown body with Vue syntax (e.g., `<Feature title="..." />`).
 - **Common Components:**
-    - `@berachain/ui/Feature`: For feature cards on landing pages.
-    - `@berachain/ui/CopyToClipboard`: For copy-to-clipboard functionality.
-    - `@berachain/ui/AddNetwork`: (Purpose to be confirmed by usage context).
-    - `@tabler/icons-vue`: For iconography.
-    - `ApiTester`: For API endpoint interaction.
+  - `@berachain/ui/Feature`: For feature cards on landing pages.
+  - `@berachain/ui/CopyToClipboard`: For copy-to-clipboard functionality.
+  - `@berachain/ui/AddNetwork`: (Purpose to be confirmed by usage context).
+  - `@tabler/icons-vue`: For iconography.
+  - `ApiTester`: For API endpoint interaction.
 - When introducing new widely-used custom components, document their props and typical usage in this style guide or a dedicated components guide.
 
 ---
@@ -319,8 +322,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
 
     ```javascript
     <script setup>
-    import config from '@berachain/config/constants.json';
-    // Other imports...
+      import config from '@berachain/config/constants.json'; // Other imports...
     </script>
     ```
 
