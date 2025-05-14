@@ -44,6 +44,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [BlockPI](https://blockpi.io/)
 - [DRPC](https://drpc.org/chainlist/berachain)
 - [Envio](https://envio.dev) (optimized read-only)
+- [Enigma](https://enigma-validator.com/services)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis) - 6 global nodes with websockets
@@ -52,6 +53,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Tenderly](https://dashboard.tenderly.co/)
 - [Thirdweb](https://thirdweb.com/chainlist)
 - [Validation Cloud](https://www.validationcloud.io/berachain-rpc) (RPC with full archive)
+- [Winnie](https://www.henlo-winnie.dev/)
 
 ### Wallets & Multisigs
 
@@ -105,6 +107,6 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 These tools provide validator and vault analytics.
 
-- [BGTscan](https://bgtscan.com/bribe-market/bgt-emission-rates)
+- [BGTscan](https://bgtscan.com/bribe-market/bgt-emission-rates) Onchain analytics tool for Berachain's PoL (Proof-of-Liquidity) economics
 - [Furthermore](https://furthermore.app/)
 - [Nambera](https://nambera.com/)

@@ -53,7 +53,7 @@ Users can claim accumulated `$BGT` from Berahub.
 
 #### Boost A Validator For Incentives
 
-Users can select validators to "boost" with their `$BGT`, increasing the validator's [reward emission](/learn/pol/bgtmath). The amount of [Incentives](/learn/pol/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
+Users can select validators to "boost" with their `$BGT`, increasing the validator's [block rewards](/learn/pol/blockrewards). The amount of [Incentives](/learn/pol/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
 
 #### dApp Fees
 

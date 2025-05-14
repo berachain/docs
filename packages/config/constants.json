@@ -17,7 +17,7 @@
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
-        "url": "#"
+        "url": "https://testnet.berascan.com/"
       },
       "hub": {
         "name": "Bepolia Hub",
@@ -26,6 +26,14 @@
       "honey": {
         "name": "Bepolia $HONEY Swap",
         "url": "https://bepolia.honey.berachain.com"
+      }
+    },
+    "contracts": {
+      "withdrawalContract": {
+        "name": "Withdrawal Contract",
+        "address": "0x00000961Ef480Eb55e80D19ad83579A64c007002",
+        "abi": "",
+        "docsUrl": ""
       }
     }
   },
@@ -81,6 +89,10 @@
       "nftBridge": {
         "name": "Berachain NFT Bridge",
         "url": "https://nftbridge.berachain.com/"
+      },
+      "safe": {
+        "name": "Berachain SAFE",
+        "url": "https://safe.berachain.com"
       }
     },
     "thirdparty": {

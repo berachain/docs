@@ -23,6 +23,7 @@ const SIDEBAR = {
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
         { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
         { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
+        { text: "What's New in PoL", link: "/learn/pol/changelog" },
       ],
     },
     {
@@ -30,7 +31,7 @@ const SIDEBAR = {
       items: [
         { text: "Overview", link: "/learn/pol/" },
         { text: "Participants", link: "/learn/pol/participants" },
-        { text: "Block Production/Emissions", link: "/learn/pol/bgtmath" },
+        { text: "Block Rewards", link: "/learn/pol/blockrewards" },
         { text: "Reward Vaults", link: "/learn/pol/rewardvaults" },
         { text: "Incentives", link: "/learn/pol/incentives" },
         {
@@ -56,11 +57,24 @@ const SIDEBAR = {
       text: "Guides",
       items: [
         { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
-        {
-          text: "Add Incentives For Reward Vault",
-          link: "/learn/guides/add-incentives-for-reward-vault",
-        },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+        {
+          text: "Setup Reward Vault",
+          link: "/learn/guides/setup-reward-vault",
+        },
+        {
+          text: "Offer Incentives",
+          items: [
+            {
+              text: "Add Incentives via HUB",
+              link: "/learn/guides/add-incentives-for-reward-vault",
+            },
+            {
+              text: "Add Incentives via SAFE",
+              link: "/learn/guides/safe-add-incentives-for-reward-vault",
+            },
+          ],
+        },
       ],
     },
     {
@@ -99,6 +113,11 @@ const SIDEBAR = {
         },
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
+        {
+          text: "Claim API",
+          link: "/developers/claim-api",
+        },
+
         {
           text: `${constants.bepolia.dapps.faucet.name}`,
           link: `${constants.bepolia.dapps.faucet.url}`,
@@ -219,6 +238,16 @@ const SIDEBAR = {
       ],
     },
     {
+      text: "Beacon Kit",
+      items: [
+        { text: "CLI Reference", link: "/beacon-kit/cli" },
+        { text: "Configuration Reference", link: "/beacon-kit/configuration" },
+        // { text: "API Reference", link: "/beacon-kit/api" },
+        { text: "Changelog", link: "/beacon-kit/changelog" },
+        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" },
+      ],
+    },
+    {
       text: "Node Guides",
       items: [
         {
@@ -242,6 +271,10 @@ const SIDEBAR = {
           link: "/nodes/guides/increase-validator-bera-stake",
         },
         {
+          text: "Withdraw Validator Stake",
+          link: "/nodes/guides/withdraw-stake",
+        },
+        {
           text: "Local Devnet with Docker",
           link: "/nodes/guides/docker-devnet",
         },
@@ -259,16 +292,6 @@ const SIDEBAR = {
         },
       ],
     },
-    {
-      text: "Beacon Kit",
-      items: [
-        { text: "CLI Reference", link: "/beacon-kit/cli" },
-        { text: "Configuration Reference", link: "/beacon-kit/configuration" },
-        // { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Changelog", link: "/beacon-kit/changelog" },
-      ],
-    },
-
     {
       text: "Help",
       items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }],

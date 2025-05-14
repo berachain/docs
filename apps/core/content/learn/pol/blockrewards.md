@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# Block Production and Emissions
+# Block Production & Rewards
 
 Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
 
@@ -15,6 +15,8 @@ The network maintains an active set of **{{ config.mainnet.validatorActiveSetSiz
 - Stake limitations per validator:
   - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
   - Maximum: {{ config.mainnet.maxEffectiveBalance }} `$BERA`
+
+A given Validator's probability of selection for producing a block is the proportion of its stake's weight to the total stakes of the active set.
 
 ## $BGT Emissions Structure
 
@@ -53,7 +55,7 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | Parameter                       | Description                                                    | Impact                                         |
 | ------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
 | x (boost)                       | Fraction of total `$BGT` delegated to validator (range: [0,1]) | Determines `$BGT` emissions to Reward Vaults   |
-| B (base rate)                   | Fixed amount of 0.5 `$BGT` for block production                | Determines baseline validator rewards          |
+| B (base rate)                   | Fixed amount of `$BGT` for block production                    | Determines baseline validator rewards          |
 | R (reward rate)                 | Base `$BGT` amount for reward vaults                           | Sets foundation for reward emissions           |
 | a (boost multiplier)            | Boost impact coefficient                                       | Higher values increase boost importance        |
 | b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
@@ -62,8 +64,11 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 ### Sample Emissions Chart
 
 Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
-$$B = 0.5, R = 1.5, a = 3.5, b = 0.4, m = 0$$
-![chart showing how emissions scale with `$BGT` delegation](/public/assets/updatedemission.png)
+$$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
+
+<p align="center">
+  <img src="/public/assets/updatedemission.png" alt="chart showing how emissions scale with `$BGT` delegation">
+</p>
 
 ## Max Block Inflation
 
@@ -107,67 +112,43 @@ Given that rewards are distributed on a frequent basis, the reward rate on a new
 
 Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
 
-## Calculating `$BGT` APR
+## Calculating Boost APR
 
-As a user, if I want to manually verify the BGT APR for a given Reward Vault, the following information is available on chain to do so.
-The value calculated corresponds to the light blue `BGT APR` value found on the Hub frontend.
+Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
 
-![BGT APR Example](/public/assets/bgt-apr-example.png)
+![Boost APR Example](/public/assets/boost-apr-example.png)
 
-The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
-The components of this APR calculation include:
+Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).
 
-- `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
-- `periodFinish` - The timestamp when the `rewardRate` expires
-- `stakeToken` - The token you stake into the Reward Vault
-- `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
-- Price of `$BGT` (`$BERA`) - The assumption is made the price of `$BGT` is equivalent the `$BERA` price
-- Price of Stake Token
+Initial variables:
 
-:::info
-If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT` APR is 0%.
-:::
+- $R_c$ : cycle rate
+- $B_s$ : starting block
+- $t_{B_s}$ : timestamp of starting block
+- $B_e$ : ending block
+- $t_{B_e}$ : timestamp of ending block
+- $IT$ : incentive token
+- $P_{T,t_{B_e}}$ : price of token $T$ at the end time of the block range
 
-The units of `rewardRate` is denominated as `$BGT per second`.
-The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
+These variables are collected for the particular validator:
 
-$$ APR = {rewardRate \times secondsPerYear \times priceOfBGT \over totalSupply \times priceOfStakeToken} $$
+- $I_{T,b}$ : incentive amount received by validator at given block $b$ per given token $T$
+- $Boost_{t_{B_e}}$
+  : total BGT boost of the validator at ending time of the block range
 
-This formula provides the current rate that the Reward Vault is crediting depositors with `$BGT`.
+Then, the $APR$ for that validator is the sum over the range of all received incentives priced at the end time of the block range, divided by the total boost at the end time, priced with BERA price at final time, annualized.
 
-### Example
+$$ R*c = \frac{\sum*{T∈IT}\Big(\sum*{b = B_s}^{B_e} I*{T,b}\Big) \times P*{T,t*{B*e}}} {Boost*{t*{B_e}} \times P*{BERA,t\_{B_e}}} $$
 
-As a concrete example of the above formula, a reward vault with the following values can be used:
+$$ APR = R*c \times \frac{{T*{year}}}{t*{B_e} - t*{B_s}} $$
 
-| Parameter            | Value                                | Normalized          |
-| :------------------- | :----------------------------------- | :------------------ |
-| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
-| Price of `$BERA`     | $7.8                                 | $7.8                |
-| Total Supply         | 598626940947001140289                | 598.6269409470011   |
-| Price of Stake Token | $223,845.58                          | $223,845.58         |
-| Seconds per year     | 31,536,000                           | 31,536,000          |
+Note that by “incentive received” we only consider incentives distributed by the RewardVault to the BGTIncentiveDistributor, tracked by the event BGTBoosterIncentivesProcessed (see contract code).
 
-:::tip
-The `rewardRate` value returned includes an extra precision factor of `1000000000000000000`.
-Converting this to a human readable value requires to normalize the value twice, rather than once.
-:::
+Amount in this calculation is net of commission, so per token it’s given by:
 
-Utilizing the fomula above:
+$$ I\_{T,b} = IR_T \times DistributedBGT \times (1 - C) $$
 
-```
-numerator = 0.27249052710368116 (rewardRate) x 31536000 (secondsPerYear) x 7.8 (priceOfBGT)
-denominator = 598.6269409470011 (totalSupply) x 223845.58 (priceOfStakeToken)
+with:
 
-numerator = 67027437.84938517
-denominator = 133999994.79990721
-
-result = 0.5002047794813167 (APR = 50.02%)
-```
-
-:::tip
-The resultant value is represented as a percentage.
-Any value should be multiplied by 100 to show a human readable value.
-:::
-
-Thus, in the example, the reward vault has an estimated yield of 50%.
-These values are updated and reflected on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
+- $IR_T$ : incentive rate of token $T$
+- $C$ : validator commission on incentives

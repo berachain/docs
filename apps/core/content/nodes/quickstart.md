@@ -182,6 +182,112 @@ Here's an example of `setup-reth`:
 
 Your genesis block hash **must** agree with the above.
 
+## Fetch snapshots (optional)
+
+Snapshots are collections of files from a node's backend that represent its state at a specific point in time.
+
+They are useful as backups and for syncing nodes that have failed, become corrupted, slowed down, or when spinning up a new node. Restoring a snapshot is much faster than syncing from the network.
+
+Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when both snapshots are restored simultaneously. For other clients like Nethermind, using only a beacond snapshot will improve the initial chain sync.
+
+This tutorial fetches pruned snapshots. If you plan to run an archive node, we recommend syncing from an empty state.
+
+### Step 1 - Obtain Snapshot
+
+Berachain and the community offer snapshots for mainnet and Bepolia. You can download snapshots at the following links.
+
+- [Awesome Berachain Validators]() is a community-maintained list; all of them have great download speed.
+
+- Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. Key are the variables at [the top](#getting-started):
+
+**File:** `~/beranode/fetch-berachain-snapshots.js`
+
+```bash
+const el_node_type = 'reth' || 'geth';
+const snapshot_type = "bera-snapshot" || "bera-testnet-snapshot";
+const geography = "na" || 'eu' || 'as'; // North America, EU, Asia
+...
+```
+
+Revise the file to choose an EL listed in our snapshots, to indicate whether you want mainnet or Bepolia snapshots, and to choose your geographically nearest Google Storage endpoint. Run the file to fetch the latest snapshot.
+
+```bash
+# FROM: ~/beranode
+
+node fetch-berachain-snapshots.js;
+
+# [Expected Output]:
+# Fetching bucket contents...
+# Found snapshot_beacond_reth_full_v1.1.3_3768872.tar in beacon_reth/pruned
+# Downloading snapshot_beacond_reth_full_v1.1.3_3768872.tar
+# ...
+```
+
+### Step 2 - Stop Clients
+
+**Ensure the clients are stopped.** Shut down `beacond` and your Execution Layer, if they are running.
+
+### Step 3 - Clean Existing Chain Data
+
+**Clean out old chain data.** To clean the Beacon Kit and — to pick an example — reth data store:
+
+```bash
+# FROM: ~/beranode
+
+source env.sh;
+$BEACOND_BIN --home $BEACOND_HOME comet unsafe-reset-all;
+
+# [Expected Output]:
+# Removed all blockchain history dir=var/beacond/data
+# Reset private validator file to genesis state key=..
+
+ls var/reth;
+
+# [Expected Output]:
+# data  genesis.json
+
+rm -r var/reth/data;
+```
+
+### Step 4 - Install Beacond Snapshot
+
+The snapshots distributed by Berachain are designed to be installed in the beacond home directory, which contains both `config` and `data`:
+
+```bash
+# FROM: ~/beranode
+
+tar xzvf downloads/snapshot_beacond_reth_...tgz -C var/beacond/;
+
+# [Expected Output]:
+# x data/
+# x data/cs.wal/
+# x data/cs.wal/wal.10416
+# x data/cs.wal/wal.10424
+# x data/cs.wal/wal.10398
+# ...
+```
+
+### Step 5 - Install Execution Layer Snapshot
+
+The example shown below is using `reth` as an example:
+
+```bash
+# FROM: ~/beranode
+
+tar xzvf downloads/snapshot_reth_pruned...tgz -C var/reth/;
+
+# [Expected Output]:
+# x data/
+# x data/db/
+# x data/db/mdbx.dat
+# x data/static_files/
+# x data/static_files/static_file_transactions_2500000_2999999
+```
+
+### Step 6 - Restart Both Client
+
+Described in the next section.
+
 ## Run Both Clients 🏃
 
 The following two scripts run the consensus and execution clients.
@@ -240,7 +346,7 @@ Launch two windows. In the first, run the consensus client:
 
 ./run-beacond.sh;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # INFO Starting service type=telemetry
 # INFO Starting service type=engine-client
 # INFO Initializing connection to the execution client... service=engine.client dial_url=http://localhost:8551
@@ -265,7 +371,7 @@ In the second, run the execution client (corresponding to the one you chose). He
 
 ./run-reth.sh;
 
-# [EXPECTED OUTPUT]
+# [Expected Output]:
 # INFO Transaction pool initialized
 # INFO P2P networking initialized
 # INFO StaticFileProducer initialized

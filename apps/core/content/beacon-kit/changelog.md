@@ -1,5 +1,35 @@
 # Beacon Kit Changelog
 
+## v1.2.0-rc: Bectra
+
+**Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and EIP-7702.  
+
+**[Upgrade instructions are posted](/nodes/guides/bectra)**. 
+
+**What's new**
+
+Since this is a minor version release (`major.minor.0`), there are breaking changes.
+
+This is a *hardfork* planned to release onto Bepolia on May 7 2025 at 12 PM EST.
+Beacon Kit 1.2.0-rc is required to continue progressing on the Bepolia chain after that time.
+
+The -rc will be initially rc0, but there may be more RC releases. Click "Watch" on the [Beacon Kit repository home](https://github.com/berachain/beacon-kit), and monitor the #dev-resources channel on [Discord](https://discord.gg/berachain).
+
+**The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though defaulted to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
+
+  ```app.toml
+  [beacon-kit] 
+  chain-spec = "testnet"
+  ```
+
+During `beacond init`, for new installations, `beacond` accepts the new (command line option)[beacon-kit/cli#flags] `--beacon-kit.chain-spec`.
+
+**New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade.  New deployments should use those recommended versions.
+
+To emphasize, **do not change anything on mainnet nodes yet**.
+These are for **Bepolia only**.
+Mainnet upgrades will be confirmed/announced after Beacon Kit 1.2.0 is out of "release candidate" testing.
+
 
 ## v1.1.4: configuration advice
 

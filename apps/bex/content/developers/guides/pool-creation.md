@@ -55,7 +55,7 @@ const amountsIn = [
 ];
 ```
 
-### Step 1: Approve the PoolCreationHelper
+### Step 1 - Approve the PoolCreationHelper
 
 The PoolCreationHelper must be approved as a relayer in the Vault contract:
 
@@ -75,7 +75,7 @@ await vault.setRelayerApproval(
 );
 ```
 
-### Step 2: Approve Tokens
+### Step 2 - Approve Tokens
 
 The Vault contract needs approval to spend your tokens:
 
@@ -91,7 +91,7 @@ for (const [i, tokenAddress] of createPoolTokens.entries()) {
 }
 ```
 
-### Step 3: Create and Join Pool
+### Step 3 - Create and Join Pool
 
 Finally, create and join the pool in a single transaction. We leverage the function [`createAndJoinWeightedPool`](/developers/contracts/factory/pool-creation-helper#createandjoinweightedpool).
 
