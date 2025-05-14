@@ -19,22 +19,19 @@ Bectra is Berachain's EVM Pectra upgrade, which introduces a variety of changes,
 2. All users can take advantage of [EIP 7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md) which enables any EOA to set its code based on any existing smart contract.
 3. There are [additional EIPs enabled](learn/pol/changelog) with this fork.
 
-
-
 :::warning
 All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client and Consensus Client to continue following the chain.
 :::
 
 ## Hardfork Upgrade Timeline
 
-| Date                | Milestone                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| April 30, 2025 | Beacon-Kit 1.2.0-rc released for Bepolia |
-| May 7, 2025 @ 12pm EDT | Bectra Hardfork Live on Bepolia                                                            |
-| May 16, 2025 | Beacon-Kit 1.2.0 released for Mainnet
-| May 26, 2025 | All infrastructure partners expected to be upgraded |
-| May 28, 2025 @ 12pm EDT | Bectra Hardfork Live on Berachain Mainnet
-
+| Date                    | Milestone                                           |
+| ----------------------- | --------------------------------------------------- |
+| April 30, 2025          | Beacon-Kit 1.2.0-rc released for Bepolia            |
+| May 7, 2025 @ 12pm EDT  | Bectra Hardfork Live on Bepolia                     |
+| May 16, 2025            | Beacon-Kit 1.2.0 released for Mainnet               |
+| May 26, 2025            | All infrastructure partners expected to be upgraded |
+| May 28, 2025 @ 12pm EDT | Bectra Hardfork Live on Berachain Mainnet           |
 
 ## Execution Client Upgrade Instructions
 
