@@ -35,16 +35,14 @@ Check that you are running a supported version of your [execution client](/nodes
 There are several ingredients to successful peering. If you are running in a containerized envrionment, it's important to ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
 
 1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept `--bootnodes` option. `beacond` has the boot node list baked into our distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
-2. **Check Execution Layer peering**: The execution layer needs excellent peering in order to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [peers](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-peers.txt). It's a good idea to use these as "trusted peers" or "static peers" in your execution client. Here's how:
-   - **Reth**: Use `trusted_nodes` in the `[peers]` section of `reth.toml` or the --trusted-peers option.
-   - **Geth**: Use the `StaticNodes` field of the `[Node.P2P]` section in `config.toml`. This config file isn't generated for you, and you must make one with `geth dumpconfig` and refer to it with `geth --config <configfile>`.
-   - **Nethermind**: Use the `Network.StaticPeers` key in `nethermind.cfg`.
+2. **Check Execution Layer peering**: The execution layer needs excellent peering in order to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
 3. **Indicate your Execution Layer's external IP address.** In order to advertise their address for peering, execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option.
 4. **Check beacond peering**: `beacond`needs good peering to organize and perform consensus actions. This is carried out over TCP port 26656, typically. Also, correctly advertise your node's external IP with `p2p.external_address` in `config.toml`. Further, to limit beacond's memory consumption we recommend **40 inbound + 10 outbound peers**, by applying the settings in `config.toml` for healthy peering with reasonable resource usage:
    ```
    max_num_inbound_peers = 40
    max_num_outbound_peers = 10
    ```
+5. **No static or persistent peers.**  Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network, or business partners you want permanent connections to.
 
 ### Let us know who you are
 
