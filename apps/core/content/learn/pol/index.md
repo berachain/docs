@@ -16,7 +16,7 @@ Berachain's Active Set of validators (validators participating in consensus) is 
 
 The size of a validator's `$BGT` block reward is determined by their Boost, which is a percentage calculated from the validator's `$BGT` boost divided by the total `$BGT` boosted to all validators. Boosts are obtained when `$BGT` holders delegate to validators.
 
-Learn more about how emissions are calculated on the [emissions page](./bgtmath.md).
+Learn more about how emissions are calculated on the [emissions page](./blockrewards.md).
 
 ## PoL Lifecycle
 
@@ -24,7 +24,7 @@ Learn more about how emissions are calculated on the [emissions page](./bgtmath.
 
 ### 1. Validator Lifecycle
 
-The journey begins when a Prospective Validator stakes their `$BERA` as a security bond (①). Validators are chosen to propose blocks with a probability proportional to their staked amount (②). For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (③) (see [emissions](./bgtmath.md)).
+The journey begins when a Prospective Validator stakes their `$BERA` as a security bond (①). Validators are chosen to propose blocks with a probability proportional to their staked amount (②). For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (③) (see [emissions](./blockrewards.md)).
 
 ### 2. Reward Distribution
 

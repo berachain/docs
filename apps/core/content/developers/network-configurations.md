@@ -87,7 +87,14 @@ With the testnet, you can:
 
 ### Bepolia Testnet dApps
 
-| Name                                                                                                        | URL                                                                                     |
-| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| <a :href="config.bepolia.dapps.faucet.url" target="_blank">{{ config.bepolia.dapps.faucet.name }}</a>       | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.faucet.url" /></ClientOnly>    |
-| <a :href="config.bepolia.dapps.beratrail.url" target="_blank">{{ config.bepolia.dapps.beratrail.name }}</a> | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.beratrail.url" /></ClientOnly> |
+<template v-for="(item) in config['bepolia']['dapps']">
+  <table>
+    <thead><tr><th>Name</th><th>URL</th></tr></thead>
+    <tbody>
+          <tr>
+            <td><a :href="item.url">{{ item.name }}</a></td>
+            <td>{{ item.url }}</td>
+          </tr>
+    </tbody>
+  </table>
+</template>

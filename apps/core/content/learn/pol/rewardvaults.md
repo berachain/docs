@@ -35,7 +35,7 @@ After staking assets in a Reward Vault, users are free to claim their earned rew
 
 ## $BGT Flow
 
-When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [emissions](/learn/pol/bgtmath).
+When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/learn/pol/blockrewards).
 
 ## Incentives
 

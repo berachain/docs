@@ -2,7 +2,7 @@
   import config from '@berachain/config/constants.json';
 </script>
 
-# Block Production and Emissions
+# Block Production & Rewards
 
 Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
 
@@ -15,6 +15,8 @@ The network maintains an active set of **{{ config.mainnet.validatorActiveSetSiz
 - Stake limitations per validator:
   - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
   - Maximum: {{ config.mainnet.maxEffectiveBalance }} `$BERA`
+
+A given Validator's probability of selection for producing a block is the proportion of its stake's weight to the total stakes of the active set.
 
 ## $BGT Emissions Structure
 
@@ -53,7 +55,7 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | Parameter                       | Description                                                    | Impact                                         |
 | ------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
 | x (boost)                       | Fraction of total `$BGT` delegated to validator (range: [0,1]) | Determines `$BGT` emissions to Reward Vaults   |
-| B (base rate)                   | Fixed amount of 0.5 `$BGT` for block production                | Determines baseline validator rewards          |
+| B (base rate)                   | Fixed amount of `$BGT` for block production                    | Determines baseline validator rewards          |
 | R (reward rate)                 | Base `$BGT` amount for reward vaults                           | Sets foundation for reward emissions           |
 | a (boost multiplier)            | Boost impact coefficient                                       | Higher values increase boost importance        |
 | b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |

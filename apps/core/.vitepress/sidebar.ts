@@ -31,7 +31,7 @@ const SIDEBAR = {
       items: [
         { text: "Overview", link: "/learn/pol/" },
         { text: "Participants", link: "/learn/pol/participants" },
-        { text: "Block Production/Emissions", link: "/learn/pol/bgtmath" },
+        { text: "Block Rewards", link: "/learn/pol/blockrewards" },
         { text: "Reward Vaults", link: "/learn/pol/rewardvaults" },
         { text: "Incentives", link: "/learn/pol/incentives" },
         {
@@ -113,6 +113,11 @@ const SIDEBAR = {
         },
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
+        {
+          text: "Claim API",
+          link: "/developers/claim-api",
+        },
+
         {
           text: `${constants.bepolia.dapps.faucet.name}`,
           link: `${constants.bepolia.dapps.faucet.url}`,
