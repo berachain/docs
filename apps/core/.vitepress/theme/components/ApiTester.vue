@@ -192,7 +192,7 @@ async function testEndpoint() {
           placeholder="http://host:port/"
           class="custom-url-input"
           :class="{ 'error': urlError }"
-          @input="validateUrl"
+          @blur="validateUrl"
         />
         <span v-if="urlError" class="url-error">{{ urlError }}</span>
       </div>
