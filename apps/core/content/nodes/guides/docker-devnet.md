@@ -25,6 +25,9 @@ This tutorial will walk you through launching a private local network and promot
 Some features like native dApps, contracts, and more are still a work in progress.
 :::
 
+This guide results in a simple deployment of a few validators and one RPC. If you want more control over the network, and additional
+services such block explorers and PoL backends, refer to [Local Devnet with Kurtosis](kurtosis.md).
+
 ## Requirements
 
 Before starting, ensure that you have the following installed on your computer:
