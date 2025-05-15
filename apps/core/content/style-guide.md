@@ -6,7 +6,7 @@ This style guide provides conventions and best practices for creating and mainta
 
 The documentation is built using [VitePress](https://vitepress.dev/). Familiarity with VitePress and Markdown is recommended.
 
-## 2. Directory Structure & File Naming
+## 2. Directory Structure & File Naming & Formatting
 
 - **Main Content:** All documentation content resides primarily within `bcdocs/apps/core/content/` and `bcdocs/apps/bex/content/`.
 - **Subdirectories:** Organize content into logical subdirectories based on topics (e.g., `learn/`, `developers/`, `nodes/`, `beacon-kit/`).
@@ -14,6 +14,8 @@ The documentation is built using [VitePress](https://vitepress.dev/). Familiarit
   - Use lowercase, hyphenated filenames (kebab-case). E.g., `proof-of-liquidity.md`.
   - `index.md` is the default file for a directory, serving as its landing page.
 - **Assets:** Static assets like images should be placed in the `public/assets/` directory (e.g., `bcdocs/apps/core/public/assets/`). Reference them in markdown using root-relative paths (e.g., `/assets/my-image.png`).
+
+Files must be formatted by running `pnpm format` before being checked in. The CI/CD process checks for potential format fixes (with `pnpm format:check`) and fails the build if there are any.
 
 ## 3. Markdown & Content Formatting
 
