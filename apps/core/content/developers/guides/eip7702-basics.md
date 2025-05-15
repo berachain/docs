@@ -102,7 +102,7 @@ EOF
 
 ### Step 3 - Deploy HelloWorld Contract
 
-```bash
+```bash-vue
 # FROM: /eip7702-basics
 
 # EOA we're setting code for
@@ -110,7 +110,7 @@ EOA_ADDRESS=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
 EOA_PK=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 OTHER_ADDRESS=0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
 OTHER_PK=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d;
-RPC_URL=http://localhost:8545;
+RPC_URL={{config.bepolia.rpcUrl}}
 forge script script/HelloWorld.s.sol --rpc-url $RPC_URL --private-key $EOA_PK --broadcast -vvvv;
 
 # [Expected Similar Output]:
@@ -315,7 +315,7 @@ EOF
 
 ### Step 2 - Deploy Counter Contract
 
-```bash
+```bash-vue
 # FROM: /eip7702-basics
 
 # EOA we're setting code for
@@ -323,7 +323,7 @@ EOA_ADDRESS=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
 EOA_PK=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 OTHER_ADDRESS=0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
 OTHER_PK=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d;
-RPC_URL=http://localhost:8545;
+RPC_URL={{config.bepolia.rpcUrl}}
 forge script script/Counter.s.sol --rpc-url $RPC_URL --private-key $EOA_PK --broadcast -vvvv;
 
 # [Expected Similar Output]:
@@ -492,7 +492,7 @@ EOF
 
 ### Step 3 - Deploy SimpleDelegate ERC20Token Contract
 
-```bash
+```bash-vue
 # FROM: /eip7702-basics
 
 # EOA we're setting code for
@@ -500,7 +500,7 @@ EOA_ADDRESS=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
 EOA_PK=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 OTHER_ADDRESS=0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
 OTHER_PK=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d;
-RPC_URL=http://localhost:8545;
+RPC_URL={{config.bepolia.rpcUrl}}
 
 forge install OpenZeppelin/openzeppelin-contracts;
 forge script script/SimpleDelegate.s.sol --rpc-url $RPC_URL --private-key $EOA_PK --broadcast -vvvv --via-ir;
@@ -595,14 +595,14 @@ cast call $ERC20_ADDRESS "balanceOf(address)(uint256)" $EOA_ADDRESS --rpc-url $R
 
 The last remaining step is to remove any code associated with the `EOA_ADDRESS`.
 
-```bash
+```bash-vue
 # FROM: /eip7702-basics
 
 EOA_ADDRESS=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
 EOA_PK=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 OTHER_ADDRESS=0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
 OTHER_PK=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d;
-RPC_URL=http://localhost:8545;
+RPC_URL={{config.bepolia.rpcUrl}}
 
 # Verify existing code
 cast code $EOA_ADDRESS;
