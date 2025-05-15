@@ -39,13 +39,13 @@ The first upgrade is for the Execution Client, which enables new operations at t
 
 The following execution client versions have been tested with the upgrade and are the recommended versions to use:
 
-| Client     | Version                                                                   |
-| ---------- | ------------------------------------------------------------------------- |
-| Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10) or .11  |
-| Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)        |
-| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.10) |
-| Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)         |
-| Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)         |
+| Client     | Version                                                                         |
+| ---------- | ------------------------------------------------------------------------------- |
+| Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10) or .11 |
+| Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)              |
+| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.10)      |
+| Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)               |
+| Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)               |
 
 ### Step 1 - Deploy Genesis File
 
