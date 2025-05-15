@@ -42,7 +42,7 @@ There are several ingredients to successful peering. If you are running in a con
    max_num_inbound_peers = 40
    max_num_outbound_peers = 10
    ```
-5. **No static or persistent peers.**  Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network, or business partners you want permanent connections to.
+5. **No static or persistent peers.** Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network, or business partners you want permanent connections to.
 
 ### Let us know who you are
 
