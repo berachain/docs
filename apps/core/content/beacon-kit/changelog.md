@@ -23,6 +23,17 @@ During `beacond init`, for new installations, `beacond` accepts the new [command
 
 **New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade.  New deployments should use those recommended versions.
 
+**Support for new EIPs.** 
+
+This release adds support for:
+* **EIP-2537** Precompile for BLS12-381 curve operations
+* **EIP-2935** Serve historical block hashes from state
+* **EIP-7002** Execution layer triggerable withdrawals
+* **EIP-7623** Increase calldata cost
+* **EIP-7685** General purpose EL requests
+* **EIP-7702** Set code for EOA 
+* **EIP-7840** Add blob schedule to EL config files
+
 ## v1.1.4: configuration advice
 
 Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
