@@ -117,20 +117,19 @@ The `fetch-berachain-params.sh` script downloads the key network parameters for 
 ./fetch-berachain-params.sh;
 
 # [Expected Output for mainnet]:
-# cd3a642dc78823aea8d80d5239231557  seed-data-80094/eth-genesis.json
-# c0b7dc21e089f9074d97957526fcd08f  seed-data-80094/eth-nether-genesis.json
+# 5c0a871ea3e3e307c1378f68105b5871  seed-data-80094/eth-genesis.json
+# 1ff6731a7b2517787c7cbc0cee0579f9  seed-data-80094/eth-nether-genesis.json
 # c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data-80094/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data-80094/kzg-trusted-setup.json
 
 # [Expected Output for bepolia]
-# 7ac0e3756f7e3d0af36d023f9e6cfd0c  seed-data-80069/eth-genesis.json
-# ec67ba1beb73cc9042000e5dd21b5f72  seed-data-80069/eth-nether-genesis.json
+# 9e32b2a1a5eb434d7b2fbaa27752b751  seed-data-80069/eth-genesis.json
+# 04e689193d6506f36abf98c23b75a07e  seed-data-80069/eth-nether-genesis.json
 # a24fb9c7ddf3ebd557300e989d44b619  seed-data-80069/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data-80069/kzg-trusted-setup.json
-
 ```
 
-Check the signatures above against your results. Further confirmations of the consequences of these signatures are below.
+Check the signatures above against your results. Further confirmation of the consequences of these signatures is below.
 
 ## Set up the Consensus Client 🔗
 
