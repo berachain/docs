@@ -16,8 +16,8 @@ head:
 Bectra is Berachain's EVM Pectra upgrade, which introduces a variety of changes, including major updates:
 
 1. Validators can withdraw all or part of their `$BERA` stake.
-2. All users can take advantage of [EIP 7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md) which enables any EOA to set its code based on any existing smart contract.
-3. There are [additional EIPs enabled](learn/pol/changelog) with this fork.
+2. All users can take advantage of [EIP 7702](/developers/guides/eip7702-basics) which enables any EOA to set its code based on any existing smart contract.
+3. There are [additional EIPs enabled]/beacon-kit/changelog#v1-2-0-bectra-hardfork-bera-prague-electra) with this fork.
 
 :::warning
 All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client and Consensus Client to continue following the chain.
@@ -25,13 +25,13 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 ## Hardfork Upgrade Timeline
 
-| Date                    | Milestone                                           |
-| ----------------------- | --------------------------------------------------- |
-| April 30, 2025          | Beacon-Kit 1.2.0-rc released for Bepolia            |
-| May 7, 2025 @ 12pm EDT  | Bectra Hardfork Live on Bepolia                     |
-| May 16, 2025            | Beacon-Kit 1.2.0 released for Mainnet               |
-| May 26, 2025            | All infrastructure partners expected to be upgraded |
-| May 28, 2025 @ 12pm EDT | Bectra Hardfork Live on Berachain Mainnet           |
+| Date                   | Milestone                                           |
+| ---------------------- | --------------------------------------------------- |
+| April 30, 2025         | Beacon-Kit 1.2.0-rc released for Bepolia            |
+| May 7, 2025 @ 12pm EDT | Bectra Hardfork Live on Bepolia                     |
+| May 16, 2025           | Beacon-Kit 1.2.0 released for Mainnet               |
+| May 26, 2025           | All infrastructure partners expected to be upgraded |
+| May 28, 2025 @ 1pm EDT | Bectra Hardfork Live on Berachain Mainnet           |
 
 ## Execution Client Upgrade Instructions
 
@@ -39,13 +39,13 @@ The first upgrade is for the Execution Client, which enables new operations at t
 
 The following execution client versions have been tested with the upgrade and are the recommended versions to use:
 
-| Client     | Version                                                                         |
-| ---------- | ------------------------------------------------------------------------------- |
-| Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10) or .11 |
-| Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)              |
-| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.10)      |
-| Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)               |
-| Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)               |
+| Client     | Version                                                                                                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10) or [.11](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.11) |
+| Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)                                                                               |
+| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.10)                                                                       |
+| Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)                                                                                |
+| Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)                                                                                |
 
 ### Step 1 - Deploy Genesis File
 
@@ -58,7 +58,7 @@ wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0/tes
 md5 eth-genesis.json;
 
 # [Expected Exact Output]:
-# FIXME
+# 5c0a871ea3e3e307c1378f68105b5871
 ```
 
 ##### Geth Additional Steps
@@ -91,17 +91,16 @@ tree datadir;
 
 _**Example Successful Geth Bectra Upgrade:**_
 
-FIXME revise for mainnet
 ![Geth bectra upgrade](/assets/geth-bectra-upgrade.png)
 
 #### Nethermind
 
 ```bash-vue{4,5}
-wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0.rc2/testing/networks/80069/eth-nether-genesis.json;
+wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0/testing/networks/80094/eth-nether-genesis.json;
 md5 eth-nether-genesis.json;
 
 # [Expected Exact Output]:
-# 04e689193d6506f36abf98c23b75a07e
+# 1ff6731a7b2517787c7cbc0cee0579f9
 ```
 
 ### Step 2 - Start Execution Client

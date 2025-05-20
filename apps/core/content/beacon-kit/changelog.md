@@ -2,11 +2,11 @@
 
 ## v1.2.0: Bectra Hardfork (Bera + Prague + Electra)
 
-**Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and EIP-7702, among a [few other EIP's](/learn/pol/changelog#_2025-may). The release candidate upgrades Bepolia, and the final release upgrades mainnet.
+**Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
 **[Upgrade instructions are posted](/nodes/guides/bectra)**. 
-This is a *hardfork* planned to release onto Berachain Mainnet on May 28 2025 at 12 PM EST.
-Beacon Kit 1.2.0 is required to continue progressing on the Bepolia chain after that time.
+This is a *hardfork* activating on Berachain Mainnet on May 28 2025 at 1 PM EST.
+Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
 
 Since this is a minor version release (`major.minor.0`), there are breaking changes.
 
