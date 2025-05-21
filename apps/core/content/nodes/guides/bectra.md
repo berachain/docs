@@ -51,7 +51,7 @@ The following execution client versions have been tested with the upgrade and ar
 
 Use the following execution client genesis files to ensure your node is compatible with Bectra, and place them in their respective locations based on the execution client you are using:
 
-#### Reth, Geth, Besu, Erison
+#### Reth, Geth, Besu, Erigon
 
 ```bash-vue{4,5}
 wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0/testing/networks/80094/eth-genesis.json;
