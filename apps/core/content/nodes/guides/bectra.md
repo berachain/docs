@@ -58,7 +58,7 @@ wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0/tes
 md5 eth-genesis.json;
 
 # [Expected Exact Output]:
-# 5c0a871ea3e3e307c1378f68105b5871
+# fac172eb459c4df86810c9f2f936e9fa
 ```
 
 ##### Geth Additional Steps
@@ -100,7 +100,7 @@ wget https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.2.0/tes
 md5 eth-nether-genesis.json;
 
 # [Expected Exact Output]:
-# 1ff6731a7b2517787c7cbc0cee0579f9
+# 6f8f21aa0cce8b8a1ef37f90d46875f7
 ```
 
 ### Step 2 - Start Execution Client
