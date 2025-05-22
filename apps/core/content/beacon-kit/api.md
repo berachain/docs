@@ -1,18 +1,5 @@
 # Beacon Kit API Reference
 
-<script setup>
-import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';
-
-const networks = [
-  { 
-    name: 'Custom URL', 
-    url: '', 
-    id: 'custom',
-    allowCustomUrl: true
-  }
-];
-</script>
-
 ## Enabling the API
 
 Beacon Kit offers an API that follows the [Beacon Node API](https://ethereum.github.io/beacon-APIs/). This API is **default off** and must be enabled by revising your installation's `app.toml` file, in the `beacon-kit.node-api` section. When enabled, the suggested port is 3500.
@@ -50,7 +37,10 @@ Returns the block proposer's public key for the given timestamp ID, along with M
 ```http
 GET /bkit/v1/proof/block_proposer/{timestamp_id}
 ```
-<ApiTester endpoint="/bkit/v1/proof/block_proposer/{timestamp_id}" method="GET" :pathParams="[{ name: 'timestamp_id', description: 'Timestamp identifier' }]" :networks="networks" />
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/block_proposer/{timestamp_id}
+```
 
 ### Get Blob Sidecars {#ethv1beaconblob_sidecarsblock_id}
 Retrieves blob sidecars for the specified block ID. Optionally filters by blob indices.
@@ -58,7 +48,14 @@ Retrieves blob sidecars for the specified block ID. Optionally filters by blob i
 ```http
 GET /eth/v1/beacon/blob_sidecars/{block_id}
 ```
-<ApiTester endpoint="/eth/v1/beacon/blob_sidecars/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'indices', description: 'Array of blob indices', required: false }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
+
+```bash
+# Get all blob sidecars for a block
+curl -s http://localhost:3500/eth/v1/beacon/blob_sidecars/head
+
+# Get specific blob sidecars by indices
+curl -s "http://localhost:3500/eth/v1/beacon/blob_sidecars/head?indices=0,1"
+```
 
 ### Get Chain Genesis Details {#ethv1beacongenesis}
 Retrieves details of the chain's genesis, including genesis time, validators root, and fork version.
@@ -66,7 +63,10 @@ Retrieves details of the chain's genesis, including genesis time, validators roo
 ```http
 GET /eth/v1/beacon/genesis
 ```
-<ApiTester endpoint="/eth/v1/beacon/genesis" method="GET" :networks="networks" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/genesis
+```
 
 ### Get Block Headers {#ethv1beaconheaders}
 Retrieves block headers matching the specified slot or parent root.
@@ -74,7 +74,14 @@ Retrieves block headers matching the specified slot or parent root.
 ```http
 GET /eth/v1/beacon/headers
 ```
-<ApiTester endpoint="/eth/v1/beacon/headers" method="GET" :queryParams="[{ name: 'slot', description: 'Slot number', required: false }, { name: 'parent_root', description: 'Parent root hash', required: false }]" :networks="networks" />
+
+```bash
+# Get headers by slot
+curl -s "http://localhost:3500/eth/v1/beacon/headers?slot=12345"
+
+# Get headers by parent root
+curl -s "http://localhost:3500/eth/v1/beacon/headers?parent_root=0x..."
+```
 
 ### Get Block Header by ID {#ethv1beaconheadersblock_id}
 Retrieves the block header for the specified block ID.
@@ -82,7 +89,10 @@ Retrieves the block header for the specified block ID.
 ```http
 GET /eth/v1/beacon/headers/{block_id}
 ```
-<ApiTester endpoint="/eth/v1/beacon/headers/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/headers/head
+```
 
 ### Get Block Rewards {#ethv1beaconrewardsblocksblock_id}
 Retrieves execution layer block rewards for the specified block ID.
@@ -90,7 +100,10 @@ Retrieves execution layer block rewards for the specified block ID.
 ```http
 GET /eth/v1/beacon/rewards/blocks/{block_id}
 ```
-<ApiTester endpoint="/eth/v1/beacon/rewards/blocks/{block_id}" method="GET" :pathParams="[{ name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { block_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/rewards/blocks/head
+```
 
 ### Get Fork Information {#ethv1beaconstatesstate_idfork}
 Retrieves the fork object for the specified state ID, providing information about past and upcoming forks.
@@ -98,7 +111,10 @@ Retrieves the fork object for the specified state ID, providing information abou
 ```http
 GET /eth/v1/beacon/states/{state_id}/fork
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/fork" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/states/head/fork
+```
 
 ### Get RANDAO Mix {#ethv1beaconstatesstate_idrandao}
 Retrieves the RANDAO mix for the state ID and optionally a specific epoch. Defaults to genesis epoch if not specified.
@@ -106,7 +122,10 @@ Retrieves the RANDAO mix for the state ID and optionally a specific epoch. Defau
 ```http
 GET /eth/v1/beacon/states/{state_id}/randao
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/randao" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/states/head/randao
+```
 
 ### Get State Root {#ethv1beaconstatesstate_idroot}
 Retrieves the hash tree root of the beacon state for the specified state ID.
@@ -114,7 +133,10 @@ Retrieves the hash tree root of the beacon state for the specified state ID.
 ```http
 GET /eth/v1/beacon/states/{state_id}/root
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/root" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/states/head/root
+```
 
 ### Get Validator Balances {#ethv1beaconstatesstate_idvalidator_balances}
 Retrieves the balances for the specified validators at the given state ID.
@@ -122,7 +144,14 @@ Retrieves the balances for the specified validators at the given state ID.
 ```http
 GET /eth/v1/beacon/states/{state_id}/validator_balances
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validator_balances" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'id', description: 'Array of validator IDs', required: false }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+# Get all validator balances
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validator_balances
+
+# Get specific validator balances
+curl -s "http://localhost:3500/eth/v1/beacon/states/head/validator_balances?id=1,2,3"
+```
 
 ### Get Validators {#ethv1beaconstatesstate_idvalidators}
 Retrieves validators, optionally filtered by ID and status, for the specified state ID.
@@ -130,7 +159,14 @@ Retrieves validators, optionally filtered by ID and status, for the specified st
 ```http
 GET /eth/v1/beacon/states/{state_id}/validators
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validators" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name: 'id', description: 'Array of validator IDs', required: false }, { name: 'status', description: 'Array of validator statuses', required: false }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+# Get all validators
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators
+
+# Get specific validators by ID and status
+curl -s "http://localhost:3500/eth/v1/beacon/states/head/validators?id=1,2,3&status=active_ongoing"
+```
 
 ### Get Validator by ID {#ethv1beaconstatesstate_idvalidatorsvalidator_id}
 Retrieves a single validator by its ID for the specified state ID.
@@ -138,7 +174,10 @@ Retrieves a single validator by its ID for the specified state ID.
 ```http
 GET /eth/v1/beacon/states/{state_id}/validators/{validator_id}
 ```
-<ApiTester endpoint="/eth/v1/beacon/states/{state_id}/validators/{validator_id}" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }, { name: 'validator_id', description: 'Validator ID (public key or index)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/states/head/validators/1
+```
 
 ### Get Chain Specification {#ethv1configspec}
 Retrieves the chain specification, including deposit contract address, network ID, and various fork-specific parameters.
@@ -146,7 +185,10 @@ Retrieves the chain specification, including deposit contract address, network I
 ```http
 GET /eth/v1/config/spec
 ```
-<ApiTester endpoint="/eth/v1/config/spec" method="GET" :networks="networks" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/config/spec
+```
 
 ### Get Node Syncing Status {#ethv1nodesyncing}
 Retrieves the node's current sync status. (Currently returns placeholder data indicating the node is synced).
@@ -154,7 +196,10 @@ Retrieves the node's current sync status. (Currently returns placeholder data in
 ```http
 GET /eth/v1/node/syncing
 ```
-<ApiTester endpoint="/eth/v1/node/syncing" method="GET" :networks="networks" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/node/syncing
+```
 
 ### Get Node Version {#ethv1nodeversion}
 Retrieves the version of the node software. (Currently returns a placeholder version).
@@ -162,7 +207,10 @@ Retrieves the version of the node software. (Currently returns a placeholder ver
 ```http
 GET /eth/v1/node/version
 ```
-<ApiTester endpoint="/eth/v1/node/version" method="GET" :networks="networks" />
+
+```bash
+curl -s http://localhost:3500/eth/v1/node/version
+```
 
 ### Get Full Beacon State {#ethv2debugbeaconstatesstate_id}
 Retrieves the full beacon state for the specified state ID, including fork version and finality status.
@@ -170,4 +218,7 @@ Retrieves the full beacon state for the specified state ID, including fork versi
 ```http
 GET /eth/v2/debug/beacon/states/{state_id}
 ```
-<ApiTester endpoint="/eth/v2/debug/beacon/states/{state_id}" method="GET" :pathParams="[{ name: 'state_id', description: 'State identifier (head, genesis, finalized, justified, or slot number)' }]" :networks="networks" :examples="{ custom: { state_id: 'head' } }" />
+
+```bash
+curl -s http://localhost:3500/eth/v2/debug/beacon/states/head
+```
