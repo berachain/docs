@@ -31,7 +31,7 @@ We recommend the following additional packages:
 
 ## Monitoring Service Endpoints
 
-The following endpoints are expected to be publicly routable in a running Berachain installation. 
+The following endpoints are expected to be publicly routable in a running Berachain installation.
 
 1. **Execution Layer Traffic.** This is usually on TCP port 30303.
 2. **Execution Layer Peer Discovery.** This is usually on UDP port 30303.
@@ -124,16 +124,17 @@ scrape_configs:
 
 `geth` publishes the following interesting metrics:
 
-* `chain_head_finalized` is the chain height for the `_finalized` sync step. There are additional steps avilable such as `_receipt`, `_header`, etc.
-* `eth_db_chaindata_disk_size` is the on-disk size of the chain data.
-* `p2p_peers_inbound` and `p2p_peers_outbound` are the number of connections propagating transactions and blocks.
-* `irate(txpool_known[5m])` is the number of new transactions introduced to the pool in the last 5 minutes, and is an indicator of successful peering.
+- `chain_head_finalized` is the chain height for the `_finalized` sync step. There are additional steps avilable such as `_receipt`, `_header`, etc.
+- `eth_db_chaindata_disk_size` is the on-disk size of the chain data.
+- `p2p_peers_inbound` and `p2p_peers_outbound` are the number of connections propagating transactions and blocks.
+- `irate(txpool_known[5m])` is the number of new transactions introduced to the pool in the last 5 minutes, and is an indicator of successful peering.
 
 `reth` publishes the following interesting metrics:
-* `reth_sync_checkpoint` is the chain height, with details available on the height/progress of every sync step (there are ~ 14)
-* `reth_network_outgoing_connections` and `reth_network_incoming_connections` are the number of connections propagating transactions and blocks.
-* `reth_transaction_pool_pending_pool_transactions` sows the number of transactions pending in the pool (i.e. waiting to be executed). This is different from `reth_transaction_pool_queued_pool_transactions` in that qeuued transactions are stuck due to a wrong nonce.
-* `reth_sync_execution_gas_per_second` shows the execution engine's performance, measured in gas/sec.
+
+- `reth_sync_checkpoint` is the chain height, with details available on the height/progress of every sync step (there are ~ 14)
+- `reth_network_outgoing_connections` and `reth_network_incoming_connections` are the number of connections propagating transactions and blocks.
+- `reth_transaction_pool_pending_pool_transactions` sows the number of transactions pending in the pool (i.e. waiting to be executed). This is different from `reth_transaction_pool_queued_pool_transactions` in that qeuued transactions are stuck due to a wrong nonce.
+- `reth_sync_execution_gas_per_second` shows the execution engine's performance, measured in gas/sec.
 
 ## Sample Dashboard
 
