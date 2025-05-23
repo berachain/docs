@@ -29,13 +29,15 @@ We recommend the following additional packages:
 - `prometheus-node-exporter` collects operating system metrics from the host computer
 - `prometheus-alertmanager` to identify failure conditions and dispatch alerts
 
-## Monitoring Service endpoints
+## Monitoring Service Endpoints
+
+The following endpoints are expected to be publicly routable in a running Berachain installation. 
 
 1. **Execution Layer Traffic.** This is usually on TCP port 30303.
 2. **Execution Layer Peer Discovery.** This is usually on UDP port 30303.
-3. **Consensus Layer.** This is by default on TCP port 26656.
+3. **Consensus Layer Traffic.** This is by default on TCP port 26656.
 
-The following prometheus configuration sets up monitoring for the TCP endpoints, and gives them a useful name.
+The following prometheus configuration sets up monitoring for the TCP endpoints.
 
 **File: `/etc/prometheus/prometheus.yml`**
 
@@ -46,7 +48,7 @@ scrape_configs:
     params:
       module: [tcp_connect]
     static_configs:
-      - targets: ["127.0.0.1:21000", "127.0.0.1:21005"]
+      - targets: ["a.b.c.d:30303", "a.b.c.d:26656"]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -54,19 +56,11 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 127.0.0.1:9115
-      - source_labels: [__param_target]
-        regex: "127.0.0.1:21000"
-        target_label: node_type
-        replacement: "testnet-reth-beacond"
-      - source_labels: [__param_target]
-        regex: "127.0.0.1:21005"
-        target_label: node_type
-        replacement: "testnet-reth"
 ```
 
-In the above configuration, monitoring is set up to ensure port 21000 (a beacond instance) and 21005 (a reth instance) are listening.
+In the above configuration, monitoring is set up to ensure port 26656 (a beacond instance) and 30303 (a reth instance) are listening.
 
-When you restart prometheus, it should begin publishing a `probe_success` metric. In the sample dashboards provided above, these values are overridden to read as DOWN or UP.
+When you restart prometheus with this configuration, it should begin publishing a `probe_success` metric with a 0 or 1 value to indicate DOWN or UP.
 
 ## Monitoring Beacon-Kit
 
@@ -77,10 +71,10 @@ Beacon-Kit must have the Prometheus instrumentation enabled. To do this, revise 
 ```toml
 [instrumentation]
 prometheus = true
-prometheus_listen_addr = "0.0.0.0:31007"
+prometheus_listen_addr = "0.0.0.0:9107"
 ```
 
-This enables the Beacon-Kit client to listen on port 21000. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the addresss to your administrative network instead of 0.0.0.0.
+This enables the Beacon-Kit client to listen on port 9107. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the addresss to your administrative network instead of 0.0.0.0.
 
 Then, add this endpoint to Prometheus by referring to the metrics port:
 
@@ -90,7 +84,7 @@ Then, add this endpoint to Prometheus by referring to the metrics port:
 scrape_configs:
   - job_name: beacond
     static_configs:
-      - targets: ["localhost:31007"]
+      - targets: ["localhost:9107"]
 ```
 
 With this enabled, beacond exports a considerable number of metrics. Here are some of the more useful ones:
@@ -100,20 +94,18 @@ With this enabled, beacond exports a considerable number of metrics. Here are so
 - `cometbft_p2p_message_receive_bytes_total` (and `cometbft_p2p_message_send_bytes_total`) show the network traffic received and sent
 - `cometbft_p2p_peers` is the total (incoming + outgoing) peer connections to `beacond`
 
-These metrics and others are collected into the sample dashboard provided above.
-
 ## Monitoring Execution Layer
 
 Both `geth` and `reth` allow you to enable metrics with identical command line options:
 
 `--metrics
---metrics.port 21005
+--metrics.port 9108
 --metrics.addr 0.0.0.0
 `
 
 The address, again, should be either on a private network or not accessible to the public via firewall rule. `reth` publishes the metrics at `/metrics`, while `geth` mixes things up by using `/debug/metrics/prometheus`.
 
-After restarting your EL to begin publishing metrics at your chosen port, add this endpoint to Prometheus by referring to the metrics port:
+After restarting your EL to begin publishing metrics at your chosen port, add this endpoint to Prometheus by referring to the metrics port. **You only need the one which matches your EL client:**
 
 **File: `/etc/prometheus/prometheus.yml`**
 
@@ -122,15 +114,34 @@ scrape_configs:
   - job_name: geth
     metrics_path: /debug/metrics/prometheus
     static_configs:
-      - targets: ["localhost:21005"]
+      - targets: ["localhost:9108"]
 
   - job_name: reth
     metrics_path: /metrics
     static_configs:
-      - targets: ["localhost:21005"]
+      - targets: ["localhost:9108"]
 ```
 
-Since the execution layer is responsible for transaction propagation, it is a good idea to also monitor the transaction pool telemetry, if your node is a validator.
+`geth` publishes the following interesting metrics:
+
+* `chain_head_finalized` is the chain height for the `_finalized` sync step. There are additional steps avilable such as `_receipt`, `_header`, etc.
+* `eth_db_chaindata_disk_size` is the on-disk size of the chain data.
+* `p2p_peers_inbound` and `p2p_peers_outbound` are the number of connections propagating transactions and blocks.
+* `irate(txpool_known[5m])` is the number of new transactions introduced to the pool in the last 5 minutes, and is an indicator of successful peering.
+
+`reth` publishes the following interesting metrics:
+* `reth_sync_checkpoint` is the chain height, with details available on the height/progress of every sync step (there are ~ 14)
+* `reth_network_outgoing_connections` and `reth_network_incoming_connections` are the number of connections propagating transactions and blocks.
+* `reth_transaction_pool_pending_pool_transactions` sows the number of transactions pending in the pool (i.e. waiting to be executed). This is different from `reth_transaction_pool_queued_pool_transactions` in that qeuued transactions are stuck due to a wrong nonce.
+* `reth_sync_execution_gas_per_second` shows the execution engine's performance, measured in gas/sec.
+
+## Sample Dashboard
+
+All of the above metrics are collectied into a sample Grafana dashboard shown below.
+If you would like to start with this dashboard as a basis for your system, download the dashboard description file - as a JSON file which can be imported into Grafana - at https://github.com/berachain/guides/tree/main/apps/grafana/sample-dashboard.json
+
+![Berachain Grafana Dashboard](/assets/guides/monitoring-dashboard-1.png)
+![Berachain Grafana Dashboard](/assets/guides/monitoring-dashboard-2.png)
 
 ## Further exploration
 
