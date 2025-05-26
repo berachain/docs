@@ -294,7 +294,13 @@ The `beacond` address book contains a list of nodes to communicate with. Startin
 
 ```bash
 # FROM: ~/beranode
+
+# MAINNET
 wget https://storage.googleapis.com/bera-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json 
+
+# TESTNET
+wget https://storage.googleapis.com/bera-testnet-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json 
+
 
 # [Expected Output]:
 #  ‘var/beacond/config/addrbook.json’ saved 
