@@ -88,12 +88,14 @@ mv /tmp/beacond/built ./beacond
 ```
 
 Use this binary for `CUSTOM_BIN_BEACOND`:
+
 ```bash
 cd ~/devnet
 mv /tmp/beacond-built ./beacond-built
 ```
 
 **File:** `env.sh`
+
 ```bash
 CUSTOM_BIN_BEACOND=./beacond-built
 ```
