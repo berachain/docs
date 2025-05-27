@@ -116,13 +116,13 @@ The `fetch-berachain-params.sh` script downloads the key network parameters for 
 
 ./fetch-berachain-params.sh;
 
-# [Expected Output for mainnet]:
-# fac172eb459c4df86810c9f2f936e9fa  seed-data-80094/eth-genesis.json
-# 6f8f21aa0cce8b8a1ef37f90d46875f7  seed-data-80094/eth-nether-genesis.json
+# [Expected Output for mainnet - must match]:
+# 77bc26d81f1c8c16070d3b641428901f  seed-data-80094/eth-genesis.json
+# 2deeecfe9ac40d6a8cced45cca3bf0bc  seed-data-80094/eth-nether-genesis.json
 # c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data-80094/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data-80094/kzg-trusted-setup.json
 
-# [Expected Output for bepolia]
+# [Expected Output for bepolia - must match]
 # 9e32b2a1a5eb434d7b2fbaa27752b751  seed-data-80069/eth-genesis.json
 # 04e689193d6506f36abf98c23b75a07e  seed-data-80069/eth-nether-genesis.json
 # a24fb9c7ddf3ebd557300e989d44b619  seed-data-80069/genesis.json
