@@ -163,12 +163,16 @@ const SIDEBAR = {
           link: "/developers/guides/deploy-contract-using-nextjs-walletconnect",
         },
         {
-          text: "Community Guides",
-          link: "/developers/guides/community-guides",
-        },
-        {
           text: "Non-ERC20 PoL Integration",
           link: "/developers/guides/advanced-pol",
+        },
+        {
+          text: "EIP-7702 Basics",
+          link: "/developers/guides/eip7702-basics",
+        },
+        {
+          text: "Community Guides",
+          link: "/developers/guides/community-guides",
         },
       ],
     },
