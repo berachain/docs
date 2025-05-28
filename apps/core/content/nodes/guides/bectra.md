@@ -29,7 +29,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | ---------------------- | --------------------------------------------------- |
 | April 30, 2025         | Beacon-Kit 1.2.0-rc released for Bepolia            |
 | May 7, 2025 @ 12pm EDT | Bectra Hardfork Live on Bepolia                     |
-| May 16, 2025           | Beacon-Kit 1.2.0 released for Mainnet               |
+| May 28, 2025           | Beacon-Kit 1.2.0 released for Mainnet               |
 | June 2, 2025           | All infrastructure partners expected to be upgraded |
 | June 4, 2025 @ 1pm EDT | Bectra Hardfork Live on Berachain Mainnet           |
 
