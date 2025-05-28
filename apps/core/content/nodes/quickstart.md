@@ -218,8 +218,8 @@ node fetch-berachain-snapshots.js;
 
 # [Expected Output]:
 # Fetching bucket contents...
-# Found snapshot_beacond_reth_full_v1.1.3_3768872.tar in beacon_reth/pruned
-# Downloading snapshot_beacond_reth_full_v1.1.3_3768872.tar
+# Found snapshot_beacond_reth_full_v1.1.3_3768872.tar.lz4 in beacon_reth/pruned
+# Downloading snapshot_beacond_reth_full_v1.1.3_3768872.tar.lz4
 # ...
 ```
 
@@ -256,7 +256,7 @@ The snapshots distributed by Berachain are designed to be installed in the beaco
 ```bash
 # FROM: ~/beranode
 
-tar xzvf downloads/snapshot_beacond_reth_...tgz -C var/beacond/;
+lz4 -d downloads/snapshot_beacond_reth_...tar.lz4 | tar xv  -C var/beacond/;
 
 # [Expected Output]:
 # x data/
@@ -274,7 +274,7 @@ The example below uses `reth`:
 ```bash
 # FROM: ~/beranode
 
-tar xzvf downloads/snapshot_reth_pruned...tgz -C var/reth/;
+lz4 -d downloads/snapshot_reth_pruned...tar.lz4 | tar xv -C var/reth/;
 
 # [Expected Output]:
 # x data/
