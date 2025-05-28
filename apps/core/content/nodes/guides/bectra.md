@@ -45,7 +45,6 @@ The first upgrade is for the Execution Client, which enables new operations at t
 | Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)                                                                                |
 | Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)                                                                                |
 
-
 ### Step 1 - Deploy Genesis File
 
 Use the updated execution client [genesis files](https://github.com/berachain/beacon-kit/tree/v1.2.0/testing/networks/80094) to ensure your node is compatible with Bectra, and place them in their respective locations based on the execution client you are using:
@@ -66,7 +65,7 @@ The reth, besu, Erigon, and Nethermind clients automatically load and apply the 
 
 ##### Geth Additional Steps
 
-For `geth` you must run `geth init` again after the genesis file has been placed in the correct directory. We recommend this be made a permanent part of every geth startup.  Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
+For `geth` you must run `geth init` again after the genesis file has been placed in the correct directory. We recommend this be made a permanent part of every geth startup. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
 :::tip
 If your node is an archive node and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
@@ -103,7 +102,7 @@ Operating System: linux
 GOPATH=
 GOROOT=
 
-$ ./fetch-berachain-params.sh 
+$ ./fetch-berachain-params.sh
 0038db129d91238c9bff8e495c5fa93f  seed-data-80094/app.toml
 8e5601f00d14d3694b4eccc8c101b15b  seed-data-80094/config.toml
 5aeab3cb885d8f32892685fc8e44151b  seed-data-80094/el-bootnodes.txt
@@ -113,7 +112,7 @@ b00257ebcaa13f02559861696b55c5da  seed-data-80094/el-peers.txt
 c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data-80094/genesis.json
 5d0d482758117af8dfc20e1d52c31eef  seed-data-80094/kzg-trusted-setup.json
 
-$ geth init --datadir var/geth/data seed-data-80094/eth-genesis.json 
+$ geth init --datadir var/geth/data seed-data-80094/eth-genesis.json
 INFO [05-27|17:37:00.791] Maximum peer count                       ETH=50 total=50
 INFO [05-27|17:37:00.793] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
 INFO [05-27|17:37:00.795] Set global gas cap                       cap=50,000,000
@@ -126,7 +125,6 @@ INFO [05-27|17:37:07.758] Successfully wrote genesis state         database=chai
 ```
 
 Note: `hash=d57819..fcfb38` must be seen!
-
 
 #### Nethermind
 
@@ -145,8 +143,8 @@ Start the execution client and check the logs for indications of successful fork
 ```bash{5}
 # [ EXAMPLE for geth - expected similar output for other EL]
 # Post-Merge hard forks (timestamp based):
-# - Shanghai:                    @0         
-# - Cancun:                      @0        
+# - Shanghai:                    @0
+# - Cancun:                      @0
 # - Prague:                      @1749056400
 ```
 
@@ -165,7 +163,6 @@ Revise your app.toml by adding this configuration to the `beacon-kit` section. C
 
 chain-spec = "mainnet"     # or testnet, as case may be
 ```
-
 
 ### Step 2 - Verify CL Upgrade
 
