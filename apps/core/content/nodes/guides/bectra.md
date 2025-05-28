@@ -41,14 +41,14 @@ The first upgrade is for the Execution Client, which enables new operations at t
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Geth       | [1.15.10](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.10) or [.11](https://github.com/ethereum/go-ethereum/releases/tag/v1.15.11) |
 | Reth       | [1.3.12](https://github.com/paradigmxyz/reth/releases/tag/v1.3.12)                                                                               |
-| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.10)                                                                       |
+| Nethermind | [1.31.x](https://github.com/NethermindEth/nethermind/releases/tag/1.31.11)                                                                       |
 | Besu       | [25.4.1](https://github.com/hyperledger/besu/releases/tag/25.4.1)                                                                                |
 | Erigon     | [3.0.x](https://github.com/erigontech/erigon/releases/tag/v3.0.3)                                                                                |
 
 
 ### Step 1 - Deploy Genesis File
 
-Use the updated execution client [genesis files](https://github.com/berachain/beacon-kit/tree/main/testing/networks/80094) to ensure your node is compatible with Bectra, and place them in their respective locations based on the execution client you are using:
+Use the updated execution client [genesis files](https://github.com/berachain/beacon-kit/tree/v1.2.0/testing/networks/80094) to ensure your node is compatible with Bectra, and place them in their respective locations based on the execution client you are using:
 
 #### Reth, Geth, Besu, Erigon
 
@@ -66,7 +66,7 @@ The reth, besu, Erigon, and Nethermind clients automatically load and apply the 
 
 ##### Geth Additional Steps
 
-For `geth` you must run `geth init` again after the genesis file has been placed in the correct directory. We recommend this be made a permanent part of every geth startup.  Our recommended [startup process](https://github.com/berachain/guides/blob/main/apps/node-scripts/run-geth.sh) now includes this.
+For `geth` you must run `geth init` again after the genesis file has been placed in the correct directory. We recommend this be made a permanent part of every geth startup.  Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
 :::tip
 If your node is an archive node and ordinarily runs with `--state.scheme hash`, then you must provide that option to `geth init` as well.
