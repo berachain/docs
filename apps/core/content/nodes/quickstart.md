@@ -17,17 +17,17 @@ head:
 
 # Berachain Node Quickstart ⚡
 
-This guide will walk you through setting up an RPC node on a Linux or Mac computer. If you want to operate Berachain in a production environment, it will provide a guide to the layout and configuration of these services, that you can apply to your kubernetes- or systemd-based deployments.
+This guide will walk you through setting up an RPC node on a Linux or Mac computer. If you want to operate Berachain in a production environment, this guide will provide the layout and configuration of these services, which you can apply to your Kubernetes- or systemd-based deployments.
 
 ## Configurations ⚙️
 
 This quickstart describes both **mainnet** and **Bepolia** deployments. There are certain scenarios, specifically experimenting with validator and beacon-chain technology, where you're better off with a [local devnet from Beacon-Kit source](/nodes/kurtosis).
 
-The scripts employ a number of environment variables created in `env.sh` to store configuration preferences. Each execution layer client has its own approach to configuration, reflected in its `setup` and `run` scripts. However, `beacond` relies only upon the `CHAIN_SPEC` variable, which you should make sure is properly set in your environment.
+The scripts use a number of environment variables, created in `env.sh`, to store configuration preferences. Each execution layer client has its own approach to configuration, reflected in its `setup` and `run` scripts. Note that `beacond` relies on the `CHAIN_SPEC` variable, which you should ensure is properly set in your environment.
 
 ### Hardware Requirements 💻
 
-The following requirements are needed to run both the execution and consensus clients:
+The following are required to run both the execution and consensus clients:
 
 - **OS**: Linux AMD64, Linux ARM64, MacOS ARM64
 - **CPU**: 8 Physical Cores
@@ -36,7 +36,7 @@ The following requirements are needed to run both the execution and consensus cl
 
 ### Software Requirements 💾
 
-- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written against v1.1.3.
+- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written for v1.1.3.
 - One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
   - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
   - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
@@ -97,39 +97,39 @@ You need to set these constants:
 2. **MONIKER_NAME**: Should be a name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: This is the address that will receive the priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-5. **MY_IP**: This is used to set the IP address your chain clients advertise to other peers on the network. If you leave it blank, `geth` and `reth` will discover the address with UPnP (if you are behind a NAT gateway) or assign the node's ethernet IP (which is OK if your computer is directly on the internet and has a public IP). In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it, if connections to that address lead back to your instance.
+5. **MY_IP**: This sets the IP address your chain clients advertise to other peers on the network. If you leave it blank, `geth` and `reth` will discover the address with UPnP (if you are behind a NAT gateway) or assign the node's ethernet IP (which is OK if your computer is directly on the internet and has a public IP). In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it.
 
 You should verify these constants:
 
 - **LOG_DIR**: This directory stores log files.
 - **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
-- **BEACOND_DATA**: Set this to where the consensus data and config should be kept. BEACOND_CONFIG must be under BEACOND_PATH as shown. Don't change it.
+- **BEACOND_DATA**: Set this to where the consensus data and config should be kept. `BEACOND_CONFIG` must be under `BEACOND_PATH` as shown. Don't change it.
 - **RETH_BIN** or other chain client: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
+- **CL_ETHRPC_PORT and EL_ETHRPC_PORT** are important for the exchange of consensus and transaction activity. These are highly recommended to be open for incoming connections, and ensuring that these ports on the advertised IP `MY_IP`, are open.
 
 ## Fetch Mainnet Parameters 📥
 
-The key network parameters for Berachain mainnet are downloaded by `fetch-berachain-params.sh`. Invoke the script as follows to download the files and verify their integrity:
+The `fetch-berachain-params.sh` script downloads the key network parameters for Berachain mainnet. Invoke the script as follows to download the files and verify their integrity:
 
 ```bash
 # FROM: ~/beranode
 
 ./fetch-berachain-params.sh;
 
-# [Expected Output for mainnet]:
-# cd3a642dc78823aea8d80d5239231557  seed-data-80094/eth-genesis.json
-# c0b7dc21e089f9074d97957526fcd08f  seed-data-80094/eth-nether-genesis.json
+# [Expected Output for mainnet - must match]:
+# 77bc26d81f1c8c16070d3b641428901f  seed-data-80094/eth-genesis.json
+# 2deeecfe9ac40d6a8cced45cca3bf0bc  seed-data-80094/eth-nether-genesis.json
 # c66dbea5ee3889e1d0a11f856f1ab9f0  seed-data-80094/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data-80094/kzg-trusted-setup.json
 
-# [Expected Output for bepolia]
-# 7ac0e3756f7e3d0af36d023f9e6cfd0c  seed-data-80069/eth-genesis.json
-# ec67ba1beb73cc9042000e5dd21b5f72  seed-data-80069/eth-nether-genesis.json
+# [Expected Output for bepolia - must match]
+# 9e32b2a1a5eb434d7b2fbaa27752b751  seed-data-80069/eth-genesis.json
+# 04e689193d6506f36abf98c23b75a07e  seed-data-80069/eth-nether-genesis.json
 # a24fb9c7ddf3ebd557300e989d44b619  seed-data-80069/genesis.json
 # 5d0d482758117af8dfc20e1d52c31eef  seed-data-80069/kzg-trusted-setup.json
-
 ```
 
-Check the signatures above against your results. Further confirmations of the consequences of these signatures are below.
+Check the signatures above against your results. Further confirmation of the consequences of these signatures is below.
 
 ## Set up the Consensus Client 🔗
 
@@ -137,8 +137,8 @@ The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`.
 
 1. Runs `beacond init` to create the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key, and especially if you intend to become a validator, this file should be kept safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
 2. Runs `beacond jwt generate` to create the file `jwt.hex`. This contains a secret shared between the consensus client and execution client so they can securely communicate. Protect this file. If you suspect it has been leaked, generate a new one with `beacond jwt generate -o $JWT_PATH`.
-3. Rewrites the beacond configuration files to reflect settings chosen in `env.sh`.
-4. Places the mainnet parameters fetched above where Beacon-Kit expects them, and shows you an important hash from the genesis file.
+3. It rewrites the `beacond` configuration files to reflect settings chosen in `env.sh`.
+4. It places the mainnet parameters, fetched above, where Beacon-Kit expects them and shows you an important hash from the genesis file.
 
 ```bash
 # FROM: ~/beranode
@@ -161,7 +161,7 @@ Your validator state root **must** agree with the value shown above.
 
 ## Set up the Execution Client 🛠️
 
-The provided scripts `setup-reth`, `setup-geth` and `setup-nether` create a runtime directory and configuration for those respective chain clients. The node is configured with pruning settings according to the `EL_ARCHIVE_NODE` setting in `config.sh`.
+The `setup-reth`, `setup-geth`, and `setup-nether` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
 
 Here's an example of `setup-reth`:
 
@@ -184,11 +184,11 @@ Your genesis block hash **must** agree with the above.
 
 ## Fetch snapshots (optional)
 
-Snapshots are collections of files from a node's backend that represent its state at a specific point in time.
+Snapshots are collections of files from a node's backend that represent its state at a specific time.
 
 They are useful as backups and for syncing nodes that have failed, become corrupted, slowed down, or when spinning up a new node. Restoring a snapshot is much faster than syncing from the network.
 
-Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when both snapshots are restored simultaneously. For other clients like Nethermind, using only a beacond snapshot will improve the initial chain sync.
+Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when you restore both snapshots simultaneously. For other clients like Nethermind, using only a beacond snapshot will improve the initial chain sync.
 
 This tutorial fetches pruned snapshots. If you plan to run an archive node, we recommend syncing from an empty state.
 
@@ -198,7 +198,7 @@ Berachain and the community offer snapshots for mainnet and Bepolia. You can dow
 
 - [Awesome Berachain Validators]() is a community-maintained list; all of them have great download speed.
 
-- Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. Key are the variables at [the top](#getting-started):
+- Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. The key variables are at [the top](#getting-started):
 
 **File:** `~/beranode/fetch-berachain-snapshots.js`
 
@@ -225,7 +225,7 @@ node fetch-berachain-snapshots.js;
 
 ### Step 2 - Stop Clients
 
-**Ensure the clients are stopped.** Shut down `beacond` and your Execution Layer, if they are running.
+**Ensure that the clients are stopped.** Shut down `beacond` and your Execution Layer, if they are running.
 
 ### Step 3 - Clean Existing Chain Data
 
@@ -269,7 +269,7 @@ lz4 -d downloads/snapshot_beacond_reth_...tar.lz4 | tar xv  -C var/beacond/;
 
 ### Step 5 - Install Execution Layer Snapshot
 
-The example shown below is using `reth` as an example:
+The example below uses `reth`:
 
 ```bash
 # FROM: ~/beranode
@@ -284,9 +284,9 @@ lz4 -d downloads/snapshot_reth_pruned...tar.lz4 | tar xv -C var/reth/;
 # x data/static_files/static_file_transactions_2500000_2999999
 ```
 
-### Step 6 - Restart Both Client
+### Step 6 - Restart Both Clients
 
-Described in the next section.
+This is described in the next section.
 
 ## Run Both Clients 🏃
 
@@ -437,7 +437,7 @@ If `catching_up` is set to `true`, it is still syncing.
 
 ### Testing Local RPC Node ✅
 
-Now that we have our RPC running, let's go through a few steps to verify that the network is working currently but performing a few RPC requests.
+Now that our RPC is running, let's verify that the network is working by performing a few RPC requests.
 
 :::tip
 Make sure that your node is fully synced before proceeding with these steps.
