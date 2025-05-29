@@ -66,33 +66,41 @@ In the provided example, we begin with the [Bepolia configuration](https://githu
 - `validator-set-cap = 3` instead of 69, to keep things interesting on our 4-node cluster
 
 **CUSTOM_BIN_BEACOND**: Leave this blank to automatically use the latest released beacond.  
-If you want a custom build of Beacon Kit, you need to compile it for Linux. This is easily done in a Vagrant:
+If you want a custom build of Beacon Kit, you need to compile it for Linux. This is easily done in a Docker container:
 
 ```bash
-brew install vagrant virtualbox
-vagrant init bento/ubuntu-22.04
-vagrant up
-vagrant ssh
-sudo apt update && sudo apt -y install build-essential
-wget https://go.dev/dl/go1.23.8.linux-arm64.tar.gz
-sudo tar xzvf go1.23.8.linux-arm64.tar.gz  -C /opt/
-git clone https://github.com/berachain/beacon-kit && cd beacon-kit
-git checkout v1.2.0.rc0
-PATH=/opt/go/bin:$PATH && make build
+# Build beacon-kit using Docker and extract the binary
+# FROM: ~
+git clone https://github.com/berachain/beacon-kit
+cd beacon-kit
+git checkout main  # or recent release tag
+
+# Build the binary inside a Docker container
+docker build -t beacon-kit-builder .
+
+# Create a container from the image and copy the built binary to the host
+docker create --name temp-beacon-kit beacon-kit-builder
+docker cp temp-beacon-kit:/usr/bin/beacond /tmp/beacond-built
+docker rm temp-beacon-kit
+
+cd ~/devnet
+mv /tmp/beacond/built ./beacond
 ```
 
-**Host Terminal:**
+Use this binary for `CUSTOM_BIN_BEACOND`:
 
 ```bash
-# FROM: ~/devnet
-
-vagrant plugin install vagrant-scp
-vagrant scp default:beacon-kit/build/bin/beacond ./beacond-mine
+cd ~/devnet
+mv /tmp/beacond-built ./beacond-built
 ```
 
-Use this binary for `CUSTOM_BIN_BEACOND`.
+**File:** `env.sh`
 
-Once you are happy with `env.sh`, build the Docker devnet images:
+```bash
+CUSTOM_BIN_BEACOND=./beacond-built
+```
+
+Build the Docker devnet images:
 
 ```bash
 # FROM: ~/devnet
