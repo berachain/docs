@@ -54,6 +54,21 @@ If you'd like to run an individual app, run the following:
 pnpm dev --filter @berachain/core;
 ```
 
+## About Berachain
+
+Berachain is a high-performance EVM-compatible L1 blockchain built on the Cosmos SDK, specifically designed for DeFi applications. It combines the best of both worlds: the robust security and developer-friendly environment of Ethereum with the scalability and interoperability of Cosmos.
+
+## Berachain Foundation
+
+The Berachain Foundation is a non-profit organization dedicated to supporting the development and growth of the Berachain ecosystem. Our mission is to:
+
+- Foster innovation in decentralized finance
+- Support developers building on Berachain
+- Promote research and development in blockchain technology
+- Ensure the long-term sustainability of the Berachain network
+
+The Foundation provides grants, technical resources, and community support to projects that contribute to the Berachain ecosystem. We are committed to maintaining an open, transparent, and collaborative environment for all participants.
+
 ## Contributing
 
 ### Code Of Conduct
