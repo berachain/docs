@@ -32,6 +32,7 @@ Price_{LP\ token} = \frac{\sum_i (Balance_i \times Price_i)}{Supply_{LP\ Tokens}
 $$
 
 **Where:**
+
 - **Balance<sub>i</sub>**: balance of token $i$ in the pool
 - **Price<sub>i</sub>**: market price of token $i$
 - **Supply<sub>LP\ Tokens</sub>**: total supply of LP tokens
@@ -120,6 +121,7 @@ A \cdot n^n \cdot \sum_i x_i + D = A \cdot D \cdot n^n + \frac{D^{n+1}}{n^n \cdo
 $$
 
 Where:
+
 - $A$ is the amplification parameter
 - $n$ is the number of tokens
 - $x_i$ are token balances
@@ -144,6 +146,7 @@ Where $S$ is the actual supply (use `getActualSupply()` for pre-minted pools).
 **Example:**
 
 Suppose a USDC/DAI/USDT pool with $getRate() = 1.01$ and USD as the base asset:
+
 - **LP token price:** $p_{LP} = 1.01 \times 1 = 1.01$ USD per LP token
 
 ---
@@ -177,6 +180,7 @@ Where $S$ is the virtual supply (use `getVirtualSupply()`).
 **Example:**
 
 Suppose a wstETH/ETH pool with $getRate() = 1.05$ and ETH at $2000$:
+
 - **LP token price:** $p_{LP} = 1.05 \times 2000 = 2100$ USD per LP token
 
 ---
