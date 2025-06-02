@@ -167,8 +167,17 @@ const SIDEBAR = {
           link: "/developers/guides/advanced-pol",
         },
         {
-          text: "EIP-7702 Basics",
-          link: "/developers/guides/eip7702-basics",
+          text: "EIP-7702",
+          items: [
+            {
+              text: "Basics",
+              link: "/developers/guides/eip7702-basics",
+            },
+            {
+              text: "Batch Transactions",
+              link: "/developers/guides/eip7702-batch-transactions",
+            },
+          ],
         },
         {
           text: "Community Guides",
