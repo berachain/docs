@@ -60,7 +60,7 @@ The architecture diagram below shows the high-level flow of batch transactions. 
 
 ```mermaid
 flowchart TD
-    A[User] -->|Submit Batch Transaction| B[EIP-7702 Contract]
+    A[User] -->|Submit Batch Transaction| B[EOA EIP-7702 Contract Code]
     B -->|Process Batch| C[Transaction Executor]
     C -->|Execute| D[Transaction 1]
     C -->|Execute| E[Transaction 2]
