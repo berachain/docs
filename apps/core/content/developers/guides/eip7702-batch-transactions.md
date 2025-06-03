@@ -34,20 +34,33 @@ _Batch transactions_ allow you to execute multiple operations in a single EIP-77
 
 EIP-7702 is a proposed Ethereum Improvement Proposal that introduces a new transaction type for batching multiple operations. It enables users to combine multiple transactions into a single transaction, reducing gas costs and improving efficiency. The proposal is designed to be backward compatible with existing Ethereum infrastructure while providing enhanced functionality for batch operations.
 
+## Limitations
+
+1. **Wallet Support for EIP-7702 Batch Contract Deployment**
+
+   - Native EIP-7702 batch transactions require the wallet provider (e.g., MetaMask, Rabby, etc.) to support deploying and interacting with batch contracts directly from the frontend. As of now, most wallets do not natively support this, so users may need to rely on custom integrations or scripts.
+
+2. **Batch Transaction Dependency**
+   - The batch transactions are executed sequentially within the contract. This means that later transactions in the batch can depend on the successful execution of earlier ones (e.g., using an approval in the first call and a transfer in the second). However, if any transaction in the batch fails, the entire batch reverts, ensuring atomicity. Parallel execution is not supported; all calls are processed in order.
+
+## Advanced Batch Logic
+
+In a custom implementation, it is feasible to utilize the results of earlier calls in the batch as inputs for later calls. This requires additional logic in the batch contract to capture and pass the return values between calls. However, our current example does not support this functionality. If you need to implement such advanced batch logic, you would need to modify the contract to store intermediate results and use them in subsequent calls.
+
 ## Comparison Table
 
-| Feature                   | EIP-7702 + EIP-5792 | Multicall3 | Permit2 | Meta-tx + Forwarder | EIP-4337 + Bundlers |
-| ------------------------- | ------------------- | ---------- | ------- | ------------------- | ------------------- |
-| Transaction Batching      | ✅ Yes              | ✅ Yes     | ❌ No   | ✅ Yes              | ✅ Yes              |
-| Gas Optimization          | ✅ High             | ⚠️ Medium  | ✅ High | ⚠️ Medium          | ⚠️ Medium          |
-| Atomic Execution          | ✅ Yes              | ✅ Yes     | ✅ Yes  | ❌ No               | ✅ Yes              |
-| Backward Compatibility    | ✅ Yes              | ✅ Yes     | ⚠️ Limited | ⚠️ Limited       | ❌ No               |
-| Implementation Complexity | ⚠️ Medium           | ✅ Low     | ⚠️ Medium | ⚠️ High           | ⚠️ High            |
-| Gas Cost per Operation    | ✅ Lowest           | ⚠️ Medium  | ✅ Low  | ⚠️ Medium          | ⚠️ Medium          |
-| Trust Assumptions         | ✅ None             | ⚠️ Low     | ✅ None | ❌ High             | ⚠️ Medium          |
-| Frontend Integration      | ✅ Native           | ⚠️ Manual  | ✅ Native | ⚠️ Manual         | ⚠️ Complex         |
-| Token Support             | ✅ All              | ✅ All     | ❌ ERC20 Only | ✅ All        | ✅ All             |
-| Setup Requirements        | ✅ Minimal          | ✅ Minimal | ⚠️ Medium | ⚠️ High           | ❌ Complex          |
+| Feature                   | EIP-7702 + EIP-5792 | Multicall3 | Permit2       | Meta-tx + Forwarder | EIP-4337 + Bundlers |
+| ------------------------- | ------------------- | ---------- | ------------- | ------------------- | ------------------- |
+| Transaction Batching      | ✅ Yes              | ✅ Yes     | ❌ No         | ✅ Yes              | ✅ Yes              |
+| Gas Optimization          | ✅ High             | ⚠️ Medium  | ✅ High       | ⚠️ Medium           | ⚠️ Medium           |
+| Atomic Execution          | ✅ Yes              | ✅ Yes     | ✅ Yes        | ❌ No               | ✅ Yes              |
+| Backward Compatibility    | ✅ Yes              | ✅ Yes     | ⚠️ Limited    | ⚠️ Limited          | ❌ No               |
+| Implementation Complexity | ⚠️ Medium           | ✅ Low     | ⚠️ Medium     | ⚠️ High             | ⚠️ High             |
+| Gas Cost per Operation    | ✅ Lowest           | ⚠️ Medium  | ✅ Low        | ⚠️ Medium           | ⚠️ Medium           |
+| Trust Assumptions         | ✅ None             | ⚠️ Low     | ✅ None       | ❌ High             | ⚠️ Medium           |
+| Frontend Integration      | ✅ Native           | ⚠️ Manual  | ✅ Native     | ⚠️ Manual           | ⚠️ Complex          |
+| Token Support             | ✅ All              | ✅ All     | ❌ ERC20 Only | ✅ All              | ✅ All              |
+| Setup Requirements        | ✅ Minimal          | ✅ Minimal | ⚠️ Medium     | ⚠️ High             | ❌ Complex          |
 
 ## Why These Ratings?
 
