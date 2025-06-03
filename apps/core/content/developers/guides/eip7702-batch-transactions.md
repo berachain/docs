@@ -99,7 +99,9 @@ sequenceDiagram
 ```solidity [BatchTransaction.sol]
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-
+/**
+ * @notice VULNERABLE, UNAUDITED CODE. DO NOT USE IN PRODUCTION.
+ */
 contract BatchTransaction {
     struct Call {
         address to;
