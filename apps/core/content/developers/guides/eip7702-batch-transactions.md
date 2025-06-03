@@ -36,23 +36,40 @@ EIP-7702 is a proposed Ethereum Improvement Proposal that introduces a new trans
 
 ## Comparison Table
 
-| Feature                   | EIP-7702 Batch Transactions | Traditional Transactions | EIP-5792 (Account Abstraction) |
-| ------------------------- | --------------------------- | ------------------------ | ------------------------------ |
-| Transaction Batching      | ✅ Yes                      | ❌ No                    | ⚠️ Partial                     |
-| Gas Optimization          | ✅ High                     | ❌ Low                   | ⚠️ Medium                      |
-| Atomic Execution          | ✅ Yes                      | ❌ No                    | ✅ Yes                         |
-| Backward Compatibility    | ✅ Yes                      | N/A                      | ⚠️ Limited                     |
-| Implementation Complexity | ⚠️ Medium                   | ✅ Low                   | ⚠️ High                        |
-| Gas Cost per Operation    | ✅ Lowest                   | ❌ Highest               | ⚠️ Medium                      |
+| Feature                   | EIP-7702 + EIP-5792 | Multicall3 | Permit2 | Meta-tx + Forwarder | EIP-4337 + Bundlers |
+| ------------------------- | ------------------- | ---------- | ------- | ------------------- | ------------------- |
+| Transaction Batching      | ✅ Yes              | ✅ Yes     | ❌ No   | ✅ Yes              | ✅ Yes              |
+| Gas Optimization          | ✅ High             | ⚠️ Medium  | ✅ High | ⚠️ Medium          | ⚠️ Medium          |
+| Atomic Execution          | ✅ Yes              | ✅ Yes     | ✅ Yes  | ❌ No               | ✅ Yes              |
+| Backward Compatibility    | ✅ Yes              | ✅ Yes     | ⚠️ Limited | ⚠️ Limited       | ❌ No               |
+| Implementation Complexity | ⚠️ Medium           | ✅ Low     | ⚠️ Medium | ⚠️ High           | ⚠️ High            |
+| Gas Cost per Operation    | ✅ Lowest           | ⚠️ Medium  | ✅ Low  | ⚠️ Medium          | ⚠️ Medium          |
+| Trust Assumptions         | ✅ None             | ⚠️ Low     | ✅ None | ❌ High             | ⚠️ Medium          |
+| Frontend Integration      | ✅ Native           | ⚠️ Manual  | ✅ Native | ⚠️ Manual         | ⚠️ Complex         |
+| Token Support             | ✅ All              | ✅ All     | ❌ ERC20 Only | ✅ All        | ✅ All             |
+| Setup Requirements        | ✅ Minimal          | ✅ Minimal | ⚠️ Medium | ⚠️ High           | ❌ Complex          |
 
 ## Why These Ratings?
 
-- **Transaction Batching:** EIP-7702 natively supports batching, while traditional transactions do not. EIP-5792 allows some batching via account abstraction, but it's not as seamless or native as EIP-7702.
-- **Gas Optimization:** EIP-7702 is designed for gas efficiency by reducing overhead per operation. Traditional transactions incur full overhead for each transaction. EIP-5792 can optimize gas, but not to the same extent as EIP-7702 due to additional abstraction layers.
-- **Atomic Execution:** EIP-7702 and EIP-5792 both support atomic execution (all succeed or all fail). Traditional transactions are independent and not atomic as a group.
-- **Backward Compatibility:** EIP-7702 is designed to be backward compatible with existing infrastructure. EIP-5792 may require changes to wallets and tooling. Traditional transactions are the baseline.
-- **Implementation Complexity:** EIP-7702 requires some new logic but is less complex than EIP-5792, which introduces full account abstraction. Traditional transactions are the simplest to implement.
-- **Gas Cost per Operation:** EIP-7702 offers the lowest per-operation cost due to batching. Traditional transactions are the most expensive. EIP-5792 is in between due to abstraction overhead.
+- **Transaction Batching:** EIP-7702 + EIP-5792 provides native batching with frontend support. Multicall3 and Meta-tx + Forwarder support batching but with different limitations. Permit2 doesn't support batching but enables gasless approvals. EIP-4337 + Bundlers supports batching but requires complex setup.
+
+- **Gas Optimization:** EIP-7702 + EIP-5792 and Permit2 offer high gas optimization through native batching and gasless approvals respectively. Multicall3, Meta-tx + Forwarder, and EIP-4337 + Bundlers provide medium optimization due to additional overhead or complexity.
+
+- **Atomic Execution:** EIP-7702 + EIP-5792, Multicall3, Permit2, and EIP-4337 + Bundlers all support atomic execution. Meta-tx + Forwarder doesn't guarantee atomicity due to its relay-based nature.
+
+- **Backward Compatibility:** EIP-7702 + EIP-5792 and Multicall3 maintain high compatibility with existing infrastructure. Permit2 and Meta-tx + Forwarder have limited compatibility due to specific token standards or relay requirements. EIP-4337 + Bundlers requires significant infrastructure changes.
+
+- **Implementation Complexity:** Multicall3 is simplest to implement. EIP-7702 + EIP-5792 and Permit2 require medium complexity. Meta-tx + Forwarder and EIP-4337 + Bundlers require high complexity due to relay infrastructure or account abstraction.
+
+- **Gas Cost per Operation:** EIP-7702 + EIP-5792 offers lowest per-operation cost through native batching. Permit2 provides low costs through gasless approvals. Other solutions have medium costs due to additional overhead.
+
+- **Trust Assumptions:** EIP-7702 + EIP-5792 and Permit2 require no trust assumptions. Multicall3 has low trust requirements. Meta-tx + Forwarder requires high trust in relayers. EIP-4337 + Bundlers requires medium trust in bundlers.
+
+- **Frontend Integration:** EIP-7702 + EIP-5792 and Permit2 offer native frontend integration. Multicall3 and Meta-tx + Forwarder require manual integration. EIP-4337 + Bundlers requires complex integration.
+
+- **Token Support:** EIP-7702 + EIP-5792, Multicall3, Meta-tx + Forwarder, and EIP-4337 + Bundlers support all token types. Permit2 is limited to ERC20 tokens.
+
+- **Setup Requirements:** EIP-7702 + EIP-5792 and Multicall3 require minimal setup. Permit2 requires medium setup for token integration. Meta-tx + Forwarder requires high setup for relay infrastructure. EIP-4337 + Bundlers requires complex setup for account abstraction.
 
 ## Architecture
 
