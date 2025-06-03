@@ -29,15 +29,20 @@ We recommend the following additional packages:
 - `prometheus-node-exporter` collects operating system metrics from the host computer
 - `prometheus-alertmanager` to identify failure conditions and dispatch alerts
 
+## What Should be Monitored
+
+At minimum:
+
+1. The **public** TCP/IP endpoints for your beacon kit, generally on port 26656.
+2. The **public** TCP/IP endpoint for your execution layer. This is usually on TCP port 30303.
+3. The **block height** for both of these
+4. **Operating system telemetry**
+
+It is not sufficient to monitor an internal IP address, when the important thing is whether the system is reacahble from the Internet.
+
 ## Monitoring Service Endpoints
 
-The following endpoints are expected to be publicly routable in a running Berachain installation.
-
-1. **Execution Layer Traffic.** This is usually on TCP port 30303.
-2. **Execution Layer Peer Discovery.** This is usually on UDP port 30303.
-3. **Consensus Layer Traffic.** This is by default on TCP port 26656.
-
-The following prometheus configuration sets up monitoring for the TCP endpoints.
+The following prometheus configuration sets up monitoring for TCP endpoints.
 
 **File: `/etc/prometheus/prometheus.yml`**
 
@@ -58,7 +63,7 @@ scrape_configs:
         replacement: 127.0.0.1:9115
 ```
 
-In the above configuration, monitoring is set up to ensure port 26656 (a beacond instance) and 30303 (a reth instance) are listening.
+In the above configuration, monitoring is set up to ensure port 26656 (a beacond instance) and 30303 (a reth/geth instance) are listening.
 
 When you restart prometheus with this configuration, it should begin publishing a `probe_success` metric with a 0 or 1 value to indicate DOWN or UP.
 
