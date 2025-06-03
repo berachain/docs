@@ -17,11 +17,13 @@ head:
 
 BEX LP tokens represent a share of a liquidity pool. Accurately valuing these tokens is essential for displaying user balances, calculating rewards, and for on-chain operations like collateralization and liquidation. There are several methods to value LP tokens, each suited to different use cases.
 
----
-
 ## Methods of Valuation
 
 ### Informational (Sum of Balances)
+
+::: warning
+This calculation is for informational purposes only and should NOT be used on-chain as it can be easily manipulated.
+:::
 
 This method is suitable for off-chain, informational, or UI purposes. It is **not manipulation-resistant** and should not be used for on-chain or critical financial operations.
 
@@ -39,14 +41,17 @@ $$
 
 **Example:**
 
-Suppose a pool has **1000 BERA** and **10000 HONEY**, with prices **10 (BERA)** and **1 (HONEY)**, and **1000 LP tokens**:
+Suppose a \$BERA/\$HONEY pool contains the following:
 
-- **Pool value:** $1000 \times 10 + 10000 \times 1 = 20000$
-- **LP token price:** $20000 / 1000 = 20$
+| Token                | Balance   | Price (USD) | Value (USD) |
+| -------------------- | --------- | ----------- | ----------- |
+| $BERA                | 1,000     | $10         | $10,000     |
+| $HONEY               | 10,000    | $1          | $10,000     |
+| **Total Pool Value** |           |             | **$20,000** |
+| **LP Token Supply**  | **1,000** |             |             |
 
-::: warning
-This calculation is for informational purposes only and should NOT be used on-chain as it can be easily manipulated.
-:::
+- **Pool Value:** 1000 \$BERA $\times$ 10 USD + 10000 \$HONEY $\times$ 1 USD = 20000 USD
+- **LP Token Price:** 20000 USD $/$ 1000 \$LPTOKEN = 20 USD
 
 ---
 
@@ -54,59 +59,23 @@ This calculation is for informational purposes only and should NOT be used on-ch
 
 Weighted pools use a constant product invariant with custom weights. This method is **manipulation-resistant** and is recommended for on-chain or robust off-chain use.
 
-**Invariant:**
+| Calculation Steps                                                 | Formula                                                                                       |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Step 1: Pool Invariant** where $\sum_i w_i = 1$                 | $x_1^{w_1} x_2^{w_2} \cdots x_n^{w_n} = k$                                                    |
+| **Step 2: Token Weighted Values**                                 | $\frac{p_1 x_1}{w_1} = \cdots = \frac{p_n x_n}{w_n} = \hat{k}$                                |
+| **Step 3: Calculate $\hat{k}$**                                   | $\hat{k} = k \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i}$                              |
+| **Step 4: Final LP Token Price** where $s$ is the LP token supply | $p_{LP} = \frac{\hat{k}}{s} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i}$ |
 
-$$
-x_1^{w_1} x_2^{w_2} \cdots x_n^{w_n} = k
-$$
+**Example**
 
-where $\sum_i w_i = 1$.
+Imagine an 80 \$BAL/20 \$WETH Pool with the following:
 
-**Weighted Value of Each Token:**
-
-$$
-\frac{p_1 x_1}{w_1} = \cdots = \frac{p_n x_n}{w_n} = \hat{k}
-$$
-
-**Solving for $\hat{k}$:**
-
-$$
-\hat{k} = k \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i}
-$$
-
-**LP Token Price:**
-
-$$
-p_{LP} = \frac{\hat{k}}{s} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i}
-$$
-
-Where $s$ is the LP token supply.
-
-#### Worked Example: 80 BAL – 20 WETH Pool
-
-**Weights:**
-
-$$
-w_1 = 0.8 \qquad w_2 = 0.2
-$$
-
-**Prices from oracle:**
-
-$$
-p_1 \approx \$4.53 \qquad p_2 \approx \$1090.82
-$$
-
-**Get $k$ from** `pool.getInvariant()` **and $s$ from** `pool.totalSupply()`:
-
-$$
-k \approx 2,852,257.5 \qquad s \approx 5,628,392.26
-$$
-
-**Therefore:**
-
-$$
-p_{LP} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i} \approx \$11.34
-$$
+| Calculation Steps                | Values                                                                                                       |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Step 1: Token Weights**        | $w_1 = 0.8$ (\$BAL)<br>$w_2 = 0.2$ (\$WETH)                                                                  |
+| **Step 2: Oracle Prices**        | $p_1 \approx \$4.53$ (\$BAL)<br>$p_2 \approx \$1090.82$ (\$WETH)                                             |
+| **Step 3: Pool Parameters**      | $k \approx 2,852,257.5$ (from `pool.getInvariant()`)<br>$s \approx 5,628,392.26$ (from `pool.totalSupply()`) |
+| **Step 4: Final LP Token Price** | $p_{LP} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i} \approx \$11.34$                    |
 
 ---
 
@@ -183,8 +152,6 @@ Suppose a wstETH/ETH pool with $getRate() = 1.05$ and ETH at $2000$:
 
 - **LP token price:** $p_{LP} = 1.05 \times 2000 = 2100$ USD per LP token
 
----
-
 ## Special Considerations
 
 - **Pre-minted Supply:** Some pools (especially stable pools) pre-mint the maximum possible LP tokens. Always use `getActualSupply()` or `getVirtualSupply()` as appropriate.
@@ -192,8 +159,6 @@ Suppose a wstETH/ETH pool with $getRate() = 1.05$ and ETH at $2000$:
 - **Manipulation Resistance:** For on-chain or critical use, always use invariant-based or rate-based pricing, not simple sum-of-balances.
 - **Re-entrancy Protection:** When evaluating on-chain, always check for Vault re-entrancy using `ensureNotInVaultContext(vault)`.
 - **Staked LP Tokens:** If LP tokens are staked, include both wallet and staked balances in your calculations.
-
----
 
 ## References
 
