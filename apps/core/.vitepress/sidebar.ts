@@ -177,6 +177,10 @@ const SIDEBAR = {
               text: "Batch Transactions",
               link: "/developers/guides/eip7702-batch-transactions",
             },
+            {
+              text: "Gas Sponsorship",
+              link: "/developers/guides/eip7702-gas-sponsorship",
+            },
           ],
         },
         {
