@@ -13,22 +13,23 @@ head:
 
 # EIP-7702 Gas Sponsorship with Anvil
 
-In this guide, we will walk you through a demo of gas sponsorship accomplished with EIP-7702, all on a local anvil fork. EIP-7702 is one of the improvement proposals implemented in the Bectra upgrade, on Bepolia, mirroring the changes made within Ethereum Mainnet with Pectra. 
+In this guide, we will walk you through a demo of gas sponsorship accomplished with EIP-7702, all on a local anvil fork. EIP-7702 is one of the improvement proposals implemented in the Bectra upgrade, on Bepolia, mirroring the changes made within Ethereum Mainnet with Pectra.
 
 Gas Sponsorship simply entails:
+
 - An EOA authorizing an implementation contract at its own address
 - Use of EIP-7702 transaction type, 0x04, to carry out transactions with this implementation logic
 - The EOA signing an authorized transaction offchain and passing the details to a Sponsor to broadcast it to the chain, where the transaction `to` variable is actually the EOA itself
 
 ## Gas Sponsorship with EIP 7702 vs EIP 4337 and Pre-Signed Transactions
 
-Before getting into the guide, it is important to highlight key distinctions between the alternative methods for gas sponsorship.  The three main options today include: 
+Before getting into the guide, it is important to highlight key distinctions between the alternative methods for gas sponsorship. The three main options today include:
 
 - Pre-signed transactions with relayers
 - EIP-4337 with account abstraction and a complex system
 - EIP-7702 where an EOA acts like a smart account offering gas sponsorship methods
 
-Pre-signed transactions with relayers are the simplest way to do gas sponsorship. The process simply includes the user signing something offchain, and a relayer sending the actual transaction onchain. It works, but it’s all custom, where the designer has to handle replay protection,  validation, and signatures manually. Since there is no standard format or infrastructure, implementation can get complicated. 
+Pre-signed transactions with relayers are the simplest way to do gas sponsorship. The process simply includes the user signing something offchain, and a relayer sending the actual transaction onchain. It works, but it’s all custom, where the designer has to handle replay protection, validation, and signatures manually. Since there is no standard format or infrastructure, implementation can get complicated.
 
 On the other hand, EIP-4337 takes things further with a full account abstraction system. There are aspects such as an EntryPoint contract, UserOperations, bundlers, paymasters, and more. The standard unlocks powerful features like sponsor-paid gas, batching, and smart account logic, but the tradeoff is high complexity and more infrastructure that doesn’t exist natively on Ethereum.
 
@@ -37,6 +38,7 @@ EIP-7702 is a newer option that offers more simplicity holistically. It lets an 
 In comparison to the other two, EIP-7702 gives the designer and user the benefits of account abstraction; ie. smart logic, delegated signing, sponsor support, without reinventing the transaction process. It offers the benefits of EIP-4337 without custom mempools, complex validation flows, etc., whilst also offering simplicity like pre-signed transactions. In essence, it really is just a EVM-native, standardized method to delegate behavior in a transaction. It's an exciting design space that will open up with Pectra on the EVM, and Bectra on Bepolia.
 
 ## Gas Sponsorship Flow Diagram with EIP-7702
+
 Gas Sponsorship with EIP-7702 is an interesting design space. We have gone ahead and made this simple "Part 1" where the main flow of carrying out a gas sponsorship is highlighted. We will publish more parts outlining:
 
 - Gas Sponsorship with ERC20s, where the EOA authorizes a transaction that transfers ERC20 to the Sponsor as a payment for the Sponsor to cover the gas required for the transaction.
@@ -47,12 +49,12 @@ Today's main flow consists of the following architecture and flow shown in the b
 ![EIP-7702 Gas Sponsorship Flow Diagram](./assets/EIP7702-Gas-Sponsorship-Diagram-1.png)
 
 :::tip
-For further information on Bectra, make sure to follow our [berachaindevs twitter](https://x.com/berachaindevs) as we publish more content! 
+For further information on Bectra, make sure to follow our [berachaindevs twitter](https://x.com/berachaindevs) as we publish more content!
 :::
 
 ## Requirements
 
-Before starting, ensure that you have carried out the following: 
+Before starting, ensure that you have carried out the following:
 
 - Install [Foundry](https://book.getfoundry.sh/getting-started/installation) `v1.0.0` or greater
 - Clone the guides [repo](https://github.com/berachain/guides/tree/main) and make your way to the `apps/eip-7702-gas-sponsorship` directory to find the Gas Sponsorship Guide and associated code we'll walk through today.
@@ -65,16 +67,17 @@ Run all the commands within this guide while at the file path: `./apps/eip-7702-
 
 Install dependencies for the project:
 
-   ```bash
-   pnpm install
-   ```
+```bash
+pnpm install
+```
 
 Set up environment variables:
 
-   ```bash
-   cp .env.example .env
-   ```
-There are already `anvil` test addresses and private keys there. For this guide, keep it as is until you have walked through everything. Afterwards, feel free to use your own of course for your own testing. 
+```bash
+cp .env.example .env
+```
+
+There are already `anvil` test addresses and private keys there. For this guide, keep it as is until you have walked through everything. Afterwards, feel free to use your own of course for your own testing.
 
 Start `anvil` fork at hard fork prague:
 
@@ -99,6 +102,7 @@ sed -i '' "/^CONTRACT_ADDRESS=/d" .env && echo "CONTRACT_ADDRESS=$CONTRACT_ADDRE
 ## Step 3 - Get the Nonce to Use for the Authorized Transaction
 
 As mentioned, gas sponsorship with EIP-7702 requires:
+
 - The `SPONSOR` to actually send enough gas to cover the transaction in the broadcasted call.
 - Onchain checks for replay attacks, including across different chains, is recommended as well.
 
@@ -123,7 +127,7 @@ source .env && cast nonce $EOA_ADDRESS --rpc-url $TEST_RPC_URL
 
 ## Step 4 - Prepare the Offchain Transaction Details to be Broadcast
 
-Now that you have the correct nonce to use in your `.env`, the next step is to use `sign-auth` to have the `EOA` authorize the transaction to be broadcast by the `SPONSOR`. 
+Now that you have the correct nonce to use in your `.env`, the next step is to use `sign-auth` to have the `EOA` authorize the transaction to be broadcast by the `SPONSOR`.
 
 The bash command provided does the following:
 
@@ -202,7 +206,7 @@ SPONSOR." sponsor delta roughly equals gasUsed * effectiveGasPrice → gas was p
 �� Transaction Hash: 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41
 🔍 To view the auth list, run:
 source .env && cast tx 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41 --rpc-url http://localhost:8545
-To view the receipt and ensure that the transaction was successful or not, run: 
+To view the receipt and ensure that the transaction was successful or not, run:
 source .env && cast receipt 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41 --rpc-url http://localhost:8545
 📜 Gas Used: 47476 gas units
 💸 Gas Cost: 41717194480676 wei (~41717.194480676 gwei)
@@ -248,25 +252,25 @@ from                 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
 source .env && cast receipt $TX_HASH --rpc-url $TEST_RPC_URL
 ```
 
-Here you can see the gasUsed, as well as that the transaction has successfully passed. 
+Here you can see the gasUsed, as well as that the transaction has successfully passed.
 
 ```bash
 blockHash            0x4c20dd22bfec22f1a1e7e647a38d2af17087e8a02b39adcd4f77ab96cb985558
 blockNumber          2
-contractAddress      
+contractAddress
 cumulativeGasUsed    47476
 effectiveGasPrice    878700701
 from                 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
 gasUsed              47476
 logs                 []
 logsBloom            0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-root                 
+root
 status               1 (success)
 transactionHash      0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41
 transactionIndex     0
 type                 4
 blobGasPrice         1
-blobGasUsed          
+blobGasUsed
 to                   0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 ```
 
@@ -279,7 +283,7 @@ SPONSOR." sponsor delta roughly equals gasUsed * effectiveGasPrice → gas was p
 �� Transaction Hash: 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41
 🔍 To view the auth list, run:
 source .env && cast tx 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41 --rpc-url http://localhost:8545
-To view the receipt and ensure that the transaction was successful or not, run: 
+To view the receipt and ensure that the transaction was successful or not, run:
 source .env && cast receipt 0xd8c7c699172330bc68cceff113a188dd146a1460a59aad50ff85dfbd52f91e41 --rpc-url http://localhost:8545
 📜 Gas Used: 47476 gas units
 💸 Gas Cost: 41717194480676 wei (~41717.194480676 gwei)
@@ -316,7 +320,7 @@ The SimpleDelegatePart2.s.sol script is very different from the script used in p
 
 > `vm.signDelegation` and `vm.attachDelegation` are cheatcodes from Foundry that allow EOAs and Sponsors to carry out EIP-7702 transactions when broadcast to networks. Please note that within simulations, such as with `forge test` or where solidity scripts are ran but not broadcast, Foundry is still working to support EIP-7702 transactions in full. For this tutorial, we will simply test against a local anvil forked network or the network directly.
 
-The main gotcha with the script code and the changed implementation code is that the implementation code checks if the recovered address, and thus the signer, is the EOA itself. Only then will it pass and allow the transaction to carry out. 
+The main gotcha with the script code and the changed implementation code is that the implementation code checks if the recovered address, and thus the signer, is the EOA itself. Only then will it pass and allow the transaction to carry out.
 
 ```solidity
 ...
@@ -339,7 +343,7 @@ Expanding on part 1, where the high level transaction flow was shown for Gas Spo
 
 Recall that the EOA nonce is not the same as the nonce used in these checks. The nonce used in these checks correspond to the arbitrary nonce that the offchain service uses to prepare transactions signed by the EOA ultimately. One reason for these arbitrary nonces is to prevent replay attacks by marking the nonce as used within a mapping in the implementation logic itself.
 
-> A key lesson here is that the storage of the EOA persists when it comes to using authorized implementation logic via EIP-7702. It can be transient as well. 
+> A key lesson here is that the storage of the EOA persists when it comes to using authorized implementation logic via EIP-7702. It can be transient as well.
 
 The changes made with respect to nonce management include:
 
@@ -350,7 +354,7 @@ The changes made with respect to nonce management include:
 ...
     mapping(uint256 => bool) public nonceUsed; // Whether EOA nonce has been used or not
     error NonceAlreadyUsed();
-    
+
 ...
     function execute(
         Call memory userCall,
@@ -369,7 +373,7 @@ The changes made with respect to nonce management include:
 
 ## Step 3 - Crosschain Replay Attack Prevention via ChainID Management
 
-Crosschain replay attacks occur when an authorized, signed, transaction is replayed on a separate network then from where it originated. This exposes risks to funds on different networks, and more. 
+Crosschain replay attacks occur when an authorized, signed, transaction is replayed on a separate network then from where it originated. This exposes risks to funds on different networks, and more.
 
 ChainIDs are used in the implementation logic as a way to prevent these crosschain attacks. Combined with the nonce mapping mentioned before, chainIDs can be used to ensure the transaction can only occur once on the specified network, and no where else.
 
@@ -395,7 +399,7 @@ ChainIDs are used in the implementation logic as a way to prevent these crosscha
 
 ## Step 4 - Using Actual calldata via `burnNative()` with EIP-7702 Calls
 
-Within the first part of this guide, we sent empty `calldata` to focus in on the use of EIP-7702 for gas sponsorship. Typically, transactions will not have empty calldata. An additional expansion for part 2 of this guide is to include a `burnNative()` function to showcase the execution of an internal call within the authorized transaction. 
+Within the first part of this guide, we sent empty `calldata` to focus in on the use of EIP-7702 for gas sponsorship. Typically, transactions will not have empty calldata. An additional expansion for part 2 of this guide is to include a `burnNative()` function to showcase the execution of an internal call within the authorized transaction.
 
 With EIP-7702, it's especially important to validate that inner calldata works as expected because the EOA is executing the smart logic directly at its own address. This means:
 
@@ -452,7 +456,7 @@ SimpleDelegatePart2.Call memory call = SimpleDelegatePart2.Call({
 
 We have discussed the changes made to the implementation logic in `SimpleDelegatePart2.sol`. Within this section, we will walk through the main components within the Solidity Script. First we must expand our `.env`, and stop the anvil network that you started in Part 1, and create another network that forks off of Bepolia, to ensure we get the full features offered by BECTRA.
 
-You have to update your `.env` so you can broadcast properly to Bepolia. You will need to have $tBERA within your wallets that you are using for both the EOA and the SPONSOR. 
+You have to update your `.env` so you can broadcast properly to Bepolia. You will need to have $tBERA within your wallets that you are using for both the EOA and the SPONSOR.
 
 > If you need $tBERA, you can get some from our [faucet](#step-5---understanding-and-running-the-solidity-script), or contact us directly.
 
@@ -480,7 +484,7 @@ Now we can start a new `anvil` fork with Bepolia at "hardfork prague."
 
 ```bash
 source .env && anvil --fork-url $BEPOLIA_RPC_URL --chain-id 80069 --hardfork prague --port 8545
-``` 
+```
 
 Instead of piecing things together with `cast`, we use a full Foundry Solidity script to handle everything: deployment, delegation, authorization, broadcasting, and even checking for replay and signature mismatches. This is a great way to simulate what a service or wallet might actually do when working with EIP-7702.
 
@@ -537,39 +541,39 @@ Below you can see the `to` address is the EOA, the `from` address is the SPONSOR
 
 ```json
 {
-      "hash": "0x131051742f94c2fb10422d53d134a78deb41404dd5b47e99cff721dc4eb70b02",
-      "transactionType": "CALL",
-      "contractName": null,
-      "contractAddress": "0x63e6ab65010c695805a3049546ef71e4a242eb6c",
-      "function": "execute((bytes,address,uint256),address,uint256,bytes)",
-      "arguments": [
-        "(0xfbc7c433, 0x63E6ab65010C695805a3049546EF71e4A242EB6C, 10000000000000000)",
-        "0x00195EFB66D39809EcE9AaBDa38172A5e603C0dE",
-        "17",
-        "0xbb7f5ba622d818bb258263974aaa2131dd1dda771c78f88b89152d6b432cfbfe3d02237565c005bb0e6811de03311210e04ec7224d262b2bf7c764b66ce4aff41b"
-      ],
-      "transaction": {
-        "from": "0x00195efb66d39809ece9aabda38172a5e603c0de",
-        "to": "0x63e6ab65010c695805a3049546ef71e4a242eb6c",
-        "gas": "0x2a7d1",
-        "value": "0x6a94d74f430000",
-        "input": "0xd65fcb6c000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000195efb66d39809ece9aabda38172a5e603c0de00000000000000000000000000000000000000000000000000000000000000110000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000006000000000000000000000000063e6ab65010c695805a3049546ef71e4a242eb6c000000000000000000000000000000000000000000000000002386f26fc100000000000000000000000000000000000000000000000000000000000000000004fbc7c433000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041bb7f5ba622d818bb258263974aaa2131dd1dda771c78f88b89152d6b432cfbfe3d02237565c005bb0e6811de03311210e04ec7224d262b2bf7c764b66ce4aff41b00000000000000000000000000000000000000000000000000000000000000",
-        "nonce": "0x2",
+  "hash": "0x131051742f94c2fb10422d53d134a78deb41404dd5b47e99cff721dc4eb70b02",
+  "transactionType": "CALL",
+  "contractName": null,
+  "contractAddress": "0x63e6ab65010c695805a3049546ef71e4a242eb6c",
+  "function": "execute((bytes,address,uint256),address,uint256,bytes)",
+  "arguments": [
+    "(0xfbc7c433, 0x63E6ab65010C695805a3049546EF71e4A242EB6C, 10000000000000000)",
+    "0x00195EFB66D39809EcE9AaBDa38172A5e603C0dE",
+    "17",
+    "0xbb7f5ba622d818bb258263974aaa2131dd1dda771c78f88b89152d6b432cfbfe3d02237565c005bb0e6811de03311210e04ec7224d262b2bf7c764b66ce4aff41b"
+  ],
+  "transaction": {
+    "from": "0x00195efb66d39809ece9aabda38172a5e603c0de",
+    "to": "0x63e6ab65010c695805a3049546ef71e4a242eb6c",
+    "gas": "0x2a7d1",
+    "value": "0x6a94d74f430000",
+    "input": "0xd65fcb6c000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000195efb66d39809ece9aabda38172a5e603c0de00000000000000000000000000000000000000000000000000000000000000110000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000006000000000000000000000000063e6ab65010c695805a3049546ef71e4a242eb6c000000000000000000000000000000000000000000000000002386f26fc100000000000000000000000000000000000000000000000000000000000000000004fbc7c433000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041bb7f5ba622d818bb258263974aaa2131dd1dda771c78f88b89152d6b432cfbfe3d02237565c005bb0e6811de03311210e04ec7224d262b2bf7c764b66ce4aff41b00000000000000000000000000000000000000000000000000000000000000",
+    "nonce": "0x2",
+    "chainId": "0x138c5",
+    "authorizationList": [
+      {
         "chainId": "0x138c5",
-        "authorizationList": [
-          {
-            "chainId": "0x138c5",
-            "address": "0xddb11edb9498e778d783e1514519631db978cefe",
-            "nonce": "0x7",
-            "yParity": "0x1",
-            "r": "0xd304ce7ae24007d5f367dd397030c92686c7a10180c8094825736854a96be633",
-            "s": "0x1c304881690f634b1a2f9192137097d0e7e37d27538353f26446368925e0c2e5"
-          }
-        ]
-      },
-      "additionalContracts": [],
-      "isFixedGasLimit": false
-    }
+        "address": "0xddb11edb9498e778d783e1514519631db978cefe",
+        "nonce": "0x7",
+        "yParity": "0x1",
+        "r": "0xd304ce7ae24007d5f367dd397030c92686c7a10180c8094825736854a96be633",
+        "s": "0x1c304881690f634b1a2f9192137097d0e7e37d27538353f26446368925e0c2e5"
+      }
+    ]
+  },
+  "additionalContracts": [],
+  "isFixedGasLimit": false
+}
 ```
 
 The output will showcase a successful transaction and a reversion for both `NonceAlreadyUsed()` and `Invalid Signer`.
@@ -621,4 +625,4 @@ The below snippit from the output shows chat the EOA successfully burns a small 
 
 ```
 
-Finally, we have walked through the second part of gas sponsorship. Congrats! In the next gas-sponsorship guide expansion, we will walk through support for ERC20 payment flows. 
+Finally, we have walked through the second part of gas sponsorship. Congrats! In the next gas-sponsorship guide expansion, we will walk through support for ERC20 payment flows.
