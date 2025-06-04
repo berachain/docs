@@ -150,7 +150,7 @@ Start the execution client and check the logs for indications of successful fork
 
 ## Beacon Kit Upgrade
 
-[Beacon Kit 1.2.0](https://github.com/berachain/beacon-kit/releases/tag/v1.2.0) is required in addition to the [execution client configuration](#execution-client-upgrade-instructions) for the Bectra Hardfork.
+[Beacon Kit 1.2.0](https://github.com/berachain/beacon-kit/releases/tag/v1.2.0) is required in addition to the [execution client configuration](#execution-client-upgrade) for the Bectra Hardfork.
 
 ### Step 1 - Configure app.toml
 
