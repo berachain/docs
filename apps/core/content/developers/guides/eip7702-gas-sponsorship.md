@@ -46,7 +46,7 @@ Gas Sponsorship with EIP-7702 is an interesting design space. We have gone ahead
 
 Today's main flow consists of the following architecture and flow shown in the below diagram. The steps highlighted in the schematic will be walked through in the code walk through.
 
-![EIP-7702 Gas Sponsorship Flow Diagram](./assets/EIP7702-Gas-Sponsorship-Diagram-1.png)
+![EIP-7702 Gas Sponsorship Flow Diagram](../../public/assets/EIP7702-Gas-Sponsorship-Diagram-1.png)
 
 :::tip
 For further information on Bectra, make sure to follow our [berachaindevs twitter](https://x.com/berachaindevs) as we publish more content!
