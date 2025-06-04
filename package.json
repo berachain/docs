@@ -15,11 +15,15 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.7",
+    "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@turbo/gen": "^1.10.14",
+    "@types/node": "^20.5.9",
     "dotenv-cli": "^7.3.0",
     "eslint": "^7.32.0",
+    "mermaid": "^11.6.0",
     "prettier": "^2.8.8",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitepress-plugin-mermaid": "^2.0.17"
   },
   "packageManager": "pnpm@8.15.0",
   "name": "docs-monorepo",
@@ -27,6 +31,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@vercel/toolbar": "^0.1.30"
+    "@vercel/toolbar": "^0.1.30",
+    "dayjs": "^1.11.13"
   }
 }
