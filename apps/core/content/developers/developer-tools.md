@@ -87,7 +87,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 ### Oracles
 
-- [API3](https://api3.org)
+- [Api3](https://api3.org)
 - [Chronicle](https://chroniclelabs.org/)
 - [Pyth](https://pyth.network/)
 - [Redstone](https://docs.redstone.finance/docs/introduction)
