@@ -164,7 +164,7 @@ You can see the details of the code in `eip2935GasComparison.sol`.
 
 ## Step 7 - Assessing the Results
 
-The table is output in `gas_comparison.md` where we can see the gas savings when comparing one method to the next.
+The table is output in `gas_comparison.md` at the root of this subdirectory, where we can see the gas savings when comparing one method to the next.
 
 Below is an example output that you ought to see when running the bash script:
 
