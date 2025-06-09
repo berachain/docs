@@ -18,7 +18,7 @@ Validators have several key responsibilities:
 The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest `{{ constants.mainnet.stakeMinimumIncrement }}`. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
 The limit on the number of active validators, termed in this document the `ValidatorSetCap`, is set in Beacon-Kit, and can only be affected
-by Berachain govenance actions followed by an update to Beacon-Kit.
+by Berachain governance actions followed by an update to Beacon-Kit.
 
 ![Validator Lifecycle](/assets/validator-lifecycle.png)
 
@@ -45,7 +45,7 @@ With the states defined, let’s examine each in detail, along with the transiti
 
 The validator’s journey begins with a deposit transaction on the **Execution Layer** (via the Deposit Contract). Once this deposit transaction is successful and emits an event, it is captured by beacon-kit nodes and processed for signature verification.
 
-The initial deposiot transaction establishes a connection between a validator's Consensus Layer identity and its Execution Layer identity and
+The initial deposit transaction establishes a connection between a validator's Consensus Layer identity and its Execution Layer identity and
 decides the withdrawal address for the $BERA stake.
 
 Credentials Address,

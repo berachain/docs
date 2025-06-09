@@ -13,7 +13,7 @@ head:
 
 # What is Proof-of-Liquidity? 🤝
 
-Proof-of-Liquidity (PoL) is a novel economic mechanism that uses network incentives to align the interests of ecosystem participants and bolster both application-layer and chain security.
+Proof-of-Liquidity (PoL) is a novel economic mechanism that uses network incentives to align the interests of ecosystem participants and bolster both the application-layer and chain security.
 
 ## Two Token Model
 
