@@ -4,6 +4,11 @@
 
 The [Claim API](/developers/claim-api) is now released.
 
+The Bectra release adds support for a number of improvements for PoL participants. 
+
+* **EIP-7002** introduces execution layer triggerable withdrawals
+* **EIP-7702** introduces a new transaction type that allows EOAs to include ephemeral smart contract code during a transaction, allowing complex, PoL-specific logic to be executed atomically, securely, and more flexibly—without requiring permanent infrastructure changes or full migration to smart contract wallets. See our [EIP 7702 guide](https://docs.berachain.com/developers/guides/eip7702-basics).  
+
 ### 2025-APR-24
 
 1. New Maximum of 3 incentives per reward vault
