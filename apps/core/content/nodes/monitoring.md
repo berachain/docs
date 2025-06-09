@@ -9,7 +9,7 @@ head:
 
 Berachain nodes operate as a joined pair of execution layer and consensus layer. The healthy operation of these servers can be tracked by monitoring metrics exposed over Prometheus endpoints, which are collected by Prometheus and graphed with Grafana. This guide will describe setting up monitoring of a Berachain node with Prometheus and Grafana.
 
-## What is Prometheus and Grafana?
+## What are Prometheus and Grafana?
 
 Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It functions as a time series database that collects and stores metrics from monitored targets at regular intervals. Prometheus works on a pull-based model, where it scrapes HTTP endpoints exposed by services like `beacond` or `geth`. These services listen on dedicated ports and respond with metrics in a simple text-based format. For Berachain nodes, Prometheus is essential for tracking performance metrics, resource utilization, and operational health over time.
 
@@ -38,7 +38,7 @@ At minimum:
 3. The **block height** for both of these
 4. **Operating system telemetry**
 
-It is not sufficient to monitor an internal IP address, when the important thing is whether the system is reacahble from the Internet.
+It is not sufficient to monitor an internal IP address, when the important thing is whether the system is reachable from the Internet.
 
 ## Monitoring Service Endpoints
 
@@ -79,7 +79,7 @@ prometheus = true
 prometheus_listen_addr = "0.0.0.0:9107"
 ```
 
-This enables the Beacon-Kit client to listen on port 9107. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the addresss to your administrative network instead of 0.0.0.0.
+This enables the Beacon-Kit client to listen on port 9107. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the address to your administrative network instead of 0.0.0.0.
 
 Then, add this endpoint to Prometheus by referring to the metrics port:
 
@@ -129,7 +129,7 @@ scrape_configs:
 
 `geth` publishes the following interesting metrics:
 
-- `chain_head_finalized` is the chain height for the `_finalized` sync step. There are additional steps avilable such as `_receipt`, `_header`, etc.
+- `chain_head_finalized` is the chain height for the `_finalized` sync step. There are additional steps available such as `_receipt`, `_header`, etc.
 - `eth_db_chaindata_disk_size` is the on-disk size of the chain data.
 - `p2p_peers_inbound` and `p2p_peers_outbound` are the number of connections propagating transactions and blocks.
 - `irate(txpool_known[5m])` is the number of new transactions introduced to the pool in the last 5 minutes, and is an indicator of successful peering.
@@ -138,12 +138,12 @@ scrape_configs:
 
 - `reth_sync_checkpoint` is the chain height, with details available on the height/progress of every sync step (there are ~ 14)
 - `reth_network_outgoing_connections` and `reth_network_incoming_connections` are the number of connections propagating transactions and blocks.
-- `reth_transaction_pool_pending_pool_transactions` sows the number of transactions pending in the pool (i.e. waiting to be executed). This is different from `reth_transaction_pool_queued_pool_transactions` in that qeuued transactions are stuck due to a wrong nonce.
+- `reth_transaction_pool_pending_pool_transactions` shows the number of transactions pending in the pool (i.e. waiting to be executed). This is different from `reth_transaction_pool_queued_pool_transactions` in that queued transactions are stuck due to a wrong nonce.
 - `reth_sync_execution_gas_per_second` shows the execution engine's performance, measured in gas/sec.
 
 ## Sample Dashboard
 
-All of the above metrics are collectied into a sample Grafana dashboard shown below.
+All of the above metrics are collected into a sample Grafana dashboard shown below.
 If you would like to start with this dashboard as a basis for your system, download the dashboard description file - as a JSON file which can be imported into Grafana - at https://github.com/berachain/guides/tree/main/apps/grafana/sample-dashboard.json
 
 ![Berachain Grafana Dashboard](/assets/guides/monitoring-dashboard-1.png)
