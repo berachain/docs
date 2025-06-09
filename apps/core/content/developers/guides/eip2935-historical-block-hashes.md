@@ -48,41 +48,7 @@ Smart contracts can now:
 - Ensure reliable behavior where the system contract will revert if a block is out of range, rather than returning 'silent' values not indicative of the failed call
 - Support calldata-driven logic, dynamic access, and composable designs
 
-Anyone can later call `get(blockNumber)` to retrieve a blockhash from that range.
-
-## What This Looks Like in Code
-
-Before EIP-2935, developers would do something like:
-
-```solidity
-bytes32 hash = blockhash(blockNumber); // Only works if blockNumber is within 256-block window
-storedHash = hash; // Costly SSTORE just to remember it
-```
-
-With EIP2935, they can just do something like:
-
-```solidity
-bytes32 blockNumberBigEndian = bytes32(uint256(blockNumber));
-bytes memory rawCallData = abi.encodePacked(blockNumberBigEndian);
-(bool ok, bytes memory data) = systemContract.staticcall(rawCallData);
-```
-
-This saves at least one SSTORE per use case, which can reduce total gas by 20,000+ per user interaction. Within an application, this of course can add up to massive savings over time.
-
-> It is very important to note that the system contract only receives the `calldata`, and there is no specification of the function signature or anything. See the explaination below.
-
-**Why the EIP-2935 System Contract Uses Raw Bytes**
-
-It might seem strange that the system contract is not verified and easily readible when looking on a block explorer. There are some key things to note in regards to this. The EIP-2935 system contract is a precompiled system contract inserted directly by the client at a fixed address. It does not follow standard Solidity conventions:
-
-- It has no function selectors or ABI encoding
-- It was not deployed via a transaction, so there is no verified source code
-- It accepts a raw 32-byte uint256 block number as input
-- It returns a raw 32-byte bytes32 blockhash as output
-
-This low-level design avoids ABI overhead and enables efficient access to blockhashes, but requires manually encoding inputs when calling the contract.
-
-Now that you have an understanding of EIP-2935 and what it brings to Berachain's developer experience, let's get into the guide and code itself for this guide.
+Anyone can later call the system contract to retrieve a blockhash from that range.
 
 ## Guide
 
@@ -129,7 +95,48 @@ pnpm install && cp .env.example .env
 forge install && forge build
 ```
 
-### Step 2 - Start Your Anvil Fork
+### Step 2 - Run Forge Tests
+
+The majority of this guide will go through running tests against an anvil fork. Of course, running unit tests is important for the development cycle in the beginning. We have provided quick foundry tests to showcase checks that the example implementation contract, `eip2935GasComparison.sol`, is functioning properly before testing against anvil forks or on actual networks.
+
+If you'd like to understand the solidity code first, check it out [here](#step-6---highlevel-review-of-the-solidity-file).
+
+> NOTE: The tests in this guide are setup to test against a Bepolia fork-url because the typical foundry EVM environment does not reflect EIP-2935 (and the needed system contract), and the other Bectra upgrades.
+
+Run tests by running:
+
+```bash
+# From apps/eip-2935-gas-comparison
+source .env && forge test --fork-url $BEPOLIA_RPC_URL --fork-block-number 5045482
+```
+
+You should see an ouput showcasing the tests passing:
+
+```bash
+[⠊] Compiling...
+[⠔] Compiling 1 files with Solc 0.8.29
+[⠒] Solc 0.8.29 finished in 426.77ms
+Compiler run successful!
+
+Ran 4 tests for test/eip2935GasComparison.t.sol:GasComparisonTest
+[PASS] testBlock() (gas: 2515)
+[PASS] testGas_OracleSubmission() (gas: 39693)
+[PASS] testGas_ReadWithGet() (gas: 41618)
+[PASS] testGas_ReadWithSLOAD() (gas: 59398)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 1.05ms (679.63µs CPU time)
+
+Ran 1 test suite in 278.65ms (1.05ms CPU time): 4 tests passed, 0 failed, 0 skipped (4 total tests)
+```
+
+The pertinent tests to ensure that `eip2935GasComparison.sol` implementation is functioning properly includes:
+
+- `testGas_OracleSubmission()`: Checking that the oracle-based pattern methods for obtaining blockhash history and inherent historic data functions
+- `testGas_ReadWithGet()`: Checking the usage of the system contract as per EIP2935 for obtaining historic blockhashes
+- `testGas_ReadWithSLOAD()`: Checking that the SSTORE and SLOAD pattern methods for storing and obtaining blockhash history, respectively, functions properly
+
+Now we can move onto testing with an actual script either against an anvil network or an actual network.
+
+### Step 3 - Start Your Anvil Fork
 
 Run the following command to deploy a local anvil fork via your terminal. You need to specify the block number shown below to ensure that the EIP2935 system contract will function properly to reflect being activated after Bectra upgrades on Bepolia.
 
@@ -138,7 +145,7 @@ Run the following command to deploy a local anvil fork via your terminal. You ne
 source .env && anvil --fork-url $BEPOLIA_RPC_URL --fork-block-number 4867668 --chain-id 80069 --port 8545
 ```
 
-### Step 3 - Update Your `.env` and Deploy `eip2935GasComparison.sol` Implementation
+### Step 4 - Update Your `.env` and Deploy `eip2935GasComparison.sol` Implementation
 
 This script works on a local Bepolia Anvil fork.
 
@@ -149,21 +156,111 @@ Update your `.env` with your `EOA_PRIVATE_KEY` and make sure it has enough $tBER
 ./script/run_gas-comparison.sh
 ```
 
-### Step 4 - Understanding What the Script Does
+### Step 5 - Understanding What the Script Does
 
 The bash script, `run_gas_comparison.sh` deploys the `eip2935GasComparison.sol` contract on the locally ran anvil fork of Bepolia. It then goes through the results and tabulates the total gas expenses for each blockhashing method, including storing the blockhash or replicating the usage of an oracle.
 
 #### Step 6 - Highlevel Review of the Solidity File
 
-This project demonstrates and benchmarks different blockhash access patterns:
+This project demonstrates and benchmarks different blockhash access patterns. Below are categories we'll refer to and their details:
 
-1. Manual SSTORE of blockhash (pre-EIP-2935 workaround) and direct SLOAD readback of stored hash
-2. EIP-2935-style .get() call to a mock system contract
-3. Oracle-submitted blockhash pattern simulating offchain access
+1. "Manual Method:" Manual SSTORE of blockhash (pre-EIP-2935 workaround) and direct SLOAD readback of stored hash
+2. "2935 Method:" .get() call to a system contract as per EIP-2935
+3. "Oracle Method:" Oracle-submitted blockhash pattern simulating offchain access
 
-You can see the details of the code in `eip2935GasComparison.sol`.
+We'll go over a quick comparison of these methods that are in the file `eip2935GasComparison.sol`.
 
-> It is very important to note that the system contract only receives the `calldata`, and there is no specification of the function signature or anything. See the explaination below. You can see this more within the `eip2935GasComparison.sol` `readWithGet()` function.
+**Different Blockhash Access Patterns**
+
+<!-- Outline the different methods and how they work. -->
+
+_Manual Method_
+
+Manual Method implementation simply involves storing a variable and calling upon it later. The key thing to note about this method is that it requires storing information onchain. Below is an example of carrying out this method:
+
+```solidity
+function storeWithSSTORE(uint256 blockNumber) external {
+    stored[blockNumber] = blockhash(blockNumber);
+}
+
+function readWithSLOAD(uint256 blockNumber) external view returns (bytes32) {
+    return stored[blockNumber];
+}
+```
+
+In the example code used, the mapping `mapping(uint256 => bytes32) public stored;` is simply updated and queried for historic data.
+
+_Oracle Method_
+
+The Oracle Method implementation involves storing data onchain, where an onchain oracle passes data to a receiver. Similar to the "Manual Method," storage of the respective data is needed and is paid for / instigated by a user or contract.
+
+```solidity
+function submitOracleBlockhash(uint256 blockNumber, bytes32 hash) external {
+    oracleHashes[blockNumber] = hash;
+}
+
+function readFromOracle(uint256 blockNumber) external view returns (bytes32) {
+    return oracleHashes[blockNumber];
+}
+```
+
+The example "Oracle Method" code shows a mapping `mapping(uint256 => bytes32) public oracleHashes` get updated and queried for historic data as well.
+
+_The 2935 Method_
+
+The 2935 Method is the new one that is the focus of this guide. There ought to only be one `systemContract` contract that is referred to on a network that has upgrades like Pectra or Bectra.
+
+For Bepolia, it is at:
+
+```solidity
+address public constant systemContract = 0x0000F90827F1C53a10cb7A02335B175320002935;
+```
+
+The example implementation of it is shown below:
+
+```solidity
+function readWithGet(uint256 blockNumber) external view returns (bytes32 result) {
+    if (blockNumber < (block.number - HISTORIC_SERVE_WINDOW)) revert PAST_HISTORY_SERVE_WINDOW();
+    if ((blockNumber) > block.number) revert BEYOND_HISTORY_SERVE_WINDOW();
+
+    bytes32 blockNumberBigEndian = bytes32(uint256(blockNumber));
+    bytes memory rawCallData = abi.encodePacked(blockNumberBigEndian);
+    (bool ok, bytes memory data) = systemContract.staticcall(rawCallData);
+    require(ok, "EIP-2935 system contract call failed");
+    require(data.length >= 32, "Input too short");
+    assembly {
+        result := mload(add(data, 32)) // skip length prefix
+    }
+
+    return result;
+}
+```
+
+Let's break down what's happening and how it differs from the other methods:
+
+1. `blockNumber` is checked because EIP-2935 only allows access to block hashes for the last 8,191 blocks (approximately 1 day), aka the `HISTORY_SERVE_WINDOW,` in protocol-maintained storage.
+
+- If it is older or newer than block numbers outside of this range, then the returned blockHash will not be correct.
+
+2. The `systemContract` requires a raw 32-byte uint256 block number as input. It needs to be prepared accordingly using typical solidity practices.
+3. The `data.length` is checked because if that value does not make sense, it must be caught. This only occurs if querying blockHashes at blockNumbers outside of the `HISTORY_SERVE_WINDOW`
+
+Overall, this method saves at least one SSTORE per use case, which can reduce total gas by 20,000+ per user interaction. Within an application, this of course can add up to massive savings over time.
+
+> It is very important to note that the system contract only receives the `calldata`, and there is no specification of the function signature or anything. See the explaination below.
+
+**Why the EIP-2935 System Contract Uses Raw Bytes**
+
+It might seem strange that [the system contract is not verified and easily readible when looking on a block explorer.](https://bepolia.beratrail.io/address/0x0000F90827F1C53a10cb7A02335B175320002935/contract/80069/code) There are some key things to note in regards to this. The EIP-2935 system contract is a precompiled system contract inserted directly by the client at a fixed address. It does not follow standard Solidity conventions:
+
+- It has no function selectors or ABI encoding
+- It was not deployed via a transaction, so there is no verified source code
+- It accepts a raw 32-byte uint256 block number as input
+- It returns a raw 32-byte bytes32 blockhash as output
+
+This low-level design avoids ABI overhead and enables efficient access to blockhashes, but requires manually encoding inputs when calling the contract.
+
+Now that you have an understanding of EIP-2935 and what it brings to Berachain's developer experience, let's get into the guide and code itself for this guide.
 
 ## Step 7 - Assessing the Results
 
