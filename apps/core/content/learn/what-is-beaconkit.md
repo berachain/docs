@@ -27,12 +27,12 @@ BeaconKit is a modular and customizable consensus layer for Ethereum-based block
 
 > <small>Check out the official <a :href="config.websites.beaconkit.url">BeaconKit GitHub Repository</a>.</small>
 
-BeaconKit is an innovative framework that makes the [CometBFT](https://docs.cometbft.com/v0.38/) consensus algorithm available to arbitrary EVM execution environments.
+BeaconKit is an innovative framework that makes the [CometBFT](https://docs.cometbft.com/v0.38/) consensus algorithm available to any EVM execution environment.
 In other words, BeaconKit is a modular [consensus layer](/learn/help/glossary#consensus-client) that is adaptable for Ethereum-based blockchains.
 
 BeaconKit packages the CometBFT consensus algorithm with a modular middleware layer capable of receiving blocks from any execution environment that conforms to the [Engine API](/learn/help/glossary#engine-api) specification. This allows those blocks to be processed through CometBFT consensus. In practice, this enables support for unmodified EVM [execution clients](/learn/help/glossary#execution-client) to run on top of BeaconKit, allowing chains to be [EVM identical](/learn/#berachain-evm-identical-⟠).
 
-The framework is built with modularity in mind and can be extended with different layers that may include a custom block builder, a rollup layer, a data availability layer, and others. This modularity enables the building of not only Layer 1 blockchains but also serves as a framework for Layer 2 solutions.
+The framework is built with modularity in mind and can be extended with different layers such as a custom block builder, a rollup layer, a data availability layer, and others. This modularity enables the building of not only Layer 1 blockchains but also serves as a framework for Layer 2 solutions.
 
 ## BeaconKit Advantages
 
