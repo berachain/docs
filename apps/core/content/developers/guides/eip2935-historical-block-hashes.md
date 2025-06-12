@@ -249,16 +249,16 @@ Block: 4867670
 Paid: 0.000890480000311668 ETH (44524 gas * 20.000000007 gwei)
 
 ✅ Sequence #1 on berachain-bepolia | Total Paid: 0.011703460004096211 ETH (585173 gas * avg 2
-0.000000007 gwei)                                                                                                                                                                           
+0.000000007 gwei)
 
 ==========================
 
 ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
 
 Transactions saved to: ichiraku/guides/apps/eip-
-2935-gas-comparison/broadcast/eip2935GasComparison.s.sol/80069/run-latest.json                
+2935-gas-comparison/broadcast/eip2935GasComparison.s.sol/80069/run-latest.json
 Sensitive values saved to: ichiraku/guides/apps/
-eip-2935-gas-comparison/cache/eip2935GasComparison.s.sol/80069/run-latest.json                
+eip-2935-gas-comparison/cache/eip2935GasComparison.s.sol/80069/run-latest.json
 ✅ Script execution complete. Parsing gas usage...
 
 📄 Table saved to gas_comparison.md
