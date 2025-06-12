@@ -288,6 +288,24 @@ lz4 -d downloads/snapshot_reth_pruned...tar.lz4 | tar xv -C var/reth/;
 
 This is described in the next section.
 
+## Fetch Address Book (optional)
+
+The `beacond` address book contains a list of nodes to communicate with. Starting with one dramatically improves startup time.
+
+```bash
+# FROM: ~/beranode
+
+# MAINNET
+wget https://storage.googleapis.com/bera-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json
+
+# TESTNET
+wget https://storage.googleapis.com/bera-testnet-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json
+
+
+# [Expected Output]:
+#  ‘var/beacond/config/addrbook.json’ saved
+```
+
 ## Run Both Clients 🏃
 
 The following two scripts run the consensus and execution clients.
