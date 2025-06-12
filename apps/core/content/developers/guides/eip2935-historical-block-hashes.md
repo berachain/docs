@@ -23,9 +23,9 @@ This guide specifically shows obtaining a historic blockhash using the power of 
 
 Before EIP-2935, smart contracts could access only the last 256 block hashes using the `BLOCKHASH` opcode. This process raised challenges though:
 
-- Accessing a hash outside that window, returned `0x0`, silently,
-- You couldn’t fetch a blockhash using dynamic inputs (e.g. calldata or computation),
-- If you needed a blockhash later, you had to store it manually using `SSTORE` (~20,000 gas),
+- Accessing a hash outside that window returns `0x0` silently
+- You couldn’t fetch a blockhash using dynamic inputs (e.g. calldata or computation)
+- If you needed a blockhash later, you had to store it manually using `SSTORE` (~20,000 gas)
 - Or emit it in an event and recover it offchain, which breaks onchain determinism
 
 This led to dApps implementing expensive or complex workarounds, especially in cases like:
@@ -43,14 +43,14 @@ EIP-2935 solves this by creating a system contract at a fixed address on the res
 
 Smart contracts can now:
 
-- Access historical blockhashes using arbitrary block numbers within the window referred to as `HISTORY_SERVE_WINDOW`,
+- Access historical blockhashes using arbitrary block numbers within the window referred to as `HISTORY_SERVE_WINDOW`
 - Avoid `SSTORE` overhead by not needing to manually persist hashes, unless they need blockhashes outside of the new `HISTORY_SERVE_WINDOW`
 - Ensure reliable behavior where the system contract will revert if a block is out of range, rather than returning 'silent' values not indicative of the failed call
 - Support calldata-driven logic, dynamic access, and composable designs
 
 Anyone can later call the system contract to retrieve a blockhash from that range.
 
-## Guide
+## How To Obtain BlockHashes & Store Them
 
 This guide primarily revolves around the following files:
 
@@ -59,9 +59,14 @@ This guide primarily revolves around the following files:
 - `eip2935GasComparison.s.sol` - A solidity script used to deploy the `eip2935GasComparison.sol` and make calls to it to simulate different blockhash reading methods.
 - `run_gas_comparison.sh` - A bash script created to deploy `eip2935GasComparison.sol` and tabulate the gas expenditure results.
 
-### Prerequisites
+### Requirementse
 
-Make sure you have the Foundry toolchain installed.
+Make sure you have the following installed on your computer before we begin:
+
+- Foundry (Foirge & Cast): v1.0.0 or greater
+- Solidity: version ^0.8.29
+
+If you have not installed these before, simply follow the commands below:
 
 ```bash
 curl -L https://foundry.paradigm.xyz | bash
@@ -76,9 +81,9 @@ foundryup
 
 > This guide requires Solidity ^0.8.29. `forge build` will automatically download the right version if you're using a modern `forge` via `foundryup`.
 
-Go through the following steps:
+Next, go through the following steps to setup your dependencies and `.env`.
 
-### Step 1 - Install Deps
+### Step 1 - Install Dependencies
 
 ```bash
 cd apps/eip-2935-gas-comparison
@@ -105,8 +110,8 @@ If you'd like to understand the solidity code first, check it out [here](#step-6
 
 Run tests by running:
 
-```bash
-# From apps/eip-2935-gas-comparison
+```bash-vue
+# FROM: ./
 source .env && forge test --fork-url $BEPOLIA_RPC_URL --fork-block-number 5045482
 ```
 
@@ -140,7 +145,7 @@ Now we can move onto testing with an actual script either against an anvil netwo
 
 Run the following command to deploy a local anvil fork via your terminal. You need to specify the block number shown below to ensure that the EIP2935 system contract will function properly to reflect being activated after Bectra upgrades on Bepolia.
 
-```bash
+```bash-vue
 # From apps/eip-2935-gas-comparison
 source .env && anvil --fork-url $BEPOLIA_RPC_URL --fork-block-number 4867668 --chain-id 80069 --port 8545
 ```
@@ -152,15 +157,128 @@ This script works on a local Bepolia Anvil fork.
 Update your `.env` with your `EOA_PRIVATE_KEY` and make sure it has enough $tBERA for deployment. A single $tBERA should be more than enough.
 
 ```bash
-# From apps/eip-2935-gas-comparison
-./script/run_gas-comparison.sh
+# FROM: ./
+
+./script/run_gas_comparison.sh
+
+```
+
+#### Expected Similar Results:
+
+After running `run_gas_comparison.sh` you should see results like the following in your terminal:
+
+```bash
+./script/run_gas_comparison.sh
+🔧 Running eip2935GasComparison.s.sol script...
+No files changed, compilation skipped
+Warning: EIP-3855 is not supported in one or more of the RPCs used.
+Unsupported Chain IDs: 80069.
+Contracts deployed with a Solidity version equal or higher than 0.8.20 might not work properly
+.                                                                                             For more information, please see https://eips.ethereum.org/EIPS/eip-3855
+Traces:
+  [507107] eip2935GasComparison::run()
+    ├─ [0] VM::startBroadcast()
+    │   └─ ← [Return]
+    ├─ [412864] → new BlockhashConsumer@0x59ef61D43bdAF8B1257071a2035Ef5789f46463f
+    │   └─ ← [Return] 2062 bytes of code
+    ├─ [0] console::log("Consumer contract deployed at: %s", BlockhashConsumer: [0x59ef61D43bd
+AF8B1257071a2035Ef5789f46463f]) [staticcall]                                                      │   └─ ← [Stop]
+    ├─ [0] console::log("Current block: %s", 4867668 [4.867e6]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [22677] BlockhashConsumer::storeWithSSTORE(4867666 [4.867e6])
+    │   └─ ← [Stop]
+    ├─ [6497] BlockhashConsumer::readWithGet(4867666 [4.867e6]) [staticcall]
+    │   ├─ [2225] 0x0000F90827F1C53a10cb7A02335B175320002935::00000000(00000000000000000000000
+0000000000000000000000000004a4652) [staticcall]                                                   │   │   └─ ← [Return] 0x713825db1a93b11015ba43eb0eea7005c55c7b98375dda1961cc9c3c96d03c0b
+    │   └─ ← [Return] 0x713825db1a93b11015ba43eb0eea7005c55c7b98375dda1961cc9c3c96d03c0b
+    ├─ [22784] BlockhashConsumer::submitOracleBlockhash(4867666 [4.867e6], 0x713825db1a93b1101
+5ba43eb0eea7005c55c7b98375dda1961cc9c3c96d03c0b)                                                  │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+
+Script ran successfully.
+
+== Logs ==
+  Consumer contract deployed at: 0x59ef61D43bdAF8B1257071a2035Ef5789f46463f
+  Current block: 4867668
+
+## Setting up 1 EVM.
+==========================
+Simulated On-chain Traces:
+
+  [412864] → new BlockhashConsumer@0x59ef61D43bdAF8B1257071a2035Ef5789f46463f
+    └─ ← [Return] 2062 bytes of code
+
+  [22677] BlockhashConsumer::storeWithSSTORE(4867666 [4.867e6])
+    └─ ← [Stop]
+
+  [22784] BlockhashConsumer::submitOracleBlockhash(4867666 [4.867e6], 0x713825db1a93b11015ba43
+eb0eea7005c55c7b98375dda1961cc9c3c96d03c0b)                                                       └─ ← [Stop]
+
+
+==========================
+
+Chain 80069
+
+Estimated gas price: 20.000000014 gwei
+
+Estimated total gas used for script: 771474
+
+Estimated amount required: 0.015429480010800636 BERA
+
+==========================
+
+##### berachain-bepolia
+✅  [Success] Hash: 0x04112af6eee2ec29d1647353a2854e803d360856db00f7e65267bd5640958daa
+Contract Address: 0x59ef61D43bdAF8B1257071a2035Ef5789f46463f
+Block: 4867669
+Paid: 0.009934880003477208 ETH (496744 gas * 20.000000007 gwei)
+
+
+##### berachain-bepolia
+✅  [Success] Hash: 0x08e8aa80c9e97fef47566f56215969536631228ba0f37fecd54bbb44fe5a6bd1
+Block: 4867670
+Paid: 0.000878100000307335 ETH (43905 gas * 20.000000007 gwei)
+
+
+##### berachain-bepolia
+✅  [Success] Hash: 0xa098ac84c403a04265ba3657a177382957547201eea8360564335e0a6b5fe4af
+Block: 4867670
+Paid: 0.000890480000311668 ETH (44524 gas * 20.000000007 gwei)
+
+✅ Sequence #1 on berachain-bepolia | Total Paid: 0.011703460004096211 ETH (585173 gas * avg 2
+0.000000007 gwei)                                                                                                                                                                           
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+
+Transactions saved to: ichiraku/guides/apps/eip-
+2935-gas-comparison/broadcast/eip2935GasComparison.s.sol/80069/run-latest.json                
+Sensitive values saved to: ichiraku/guides/apps/
+eip-2935-gas-comparison/cache/eip2935GasComparison.s.sol/80069/run-latest.json                
+✅ Script execution complete. Parsing gas usage...
+
+📄 Table saved to gas_comparison.md
+
+
+# EIP-2935 Gas Comparison
+
+| Pattern                             | Methods Involved                         | Total Gas |
+|-------------------------------------|------------------------------------------|-----------|
+| Before EIP-2935: SSTORE pattern     | storeWithSSTORE(...)                     |     45354 |
+| After EIP-2935: .get() access       | readWithGet(...)                         |      6497 |
+| Before EIP-2935: Oracle pattern     | submitOracleBlockhash(...)               |     45568 |
+
 ```
 
 ### Step 5 - Understanding What the Script Does
 
 The bash script, `run_gas_comparison.sh` deploys the `eip2935GasComparison.sol` contract on the locally ran anvil fork of Bepolia. It then goes through the results and tabulates the total gas expenses for each blockhashing method, including storing the blockhash or replicating the usage of an oracle.
 
-#### Step 6 - Highlevel Review of the Solidity File
+### Step 6 - Highlevel Review of the Solidity File
 
 This project demonstrates and benchmarks different blockhash access patterns. Below are categories we'll refer to and their details:
 
