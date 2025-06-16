@@ -17,7 +17,7 @@ head:
 
 # Smart Order Router (SOR) Guide
 
-The [Berancer SDK](https://github.com/berachain-foundation/berancer-sdk) includes a Smart Order Router (SOR) that finds optimal paths for token swaps. This guide demonstrates how to:
+The [Berancer SDK](https://github.com/berachain/berancer-sdk) includes a Smart Order Router (SOR) that finds optimal paths for token swaps. This guide demonstrates how to:
 
 1. Use the SOR to find the best swap routes
 2. Convert SOR output to batch swap parameters
