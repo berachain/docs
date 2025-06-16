@@ -17,7 +17,7 @@ head:
 
 # Add Liquidity Guide
 
-Using the [BEX SDK](https://github.com/berachain-foundation/berasher-sdk), users can add liquidity using two primary methods (see [AddLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/addLiquidity/types.ts#L12)):
+Using the [BEX SDK](https://github.com/berachain/berasher-sdk), users can add liquidity using two primary methods (see [AddLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/addLiquidity/types.ts#L12)):
 
 1. _Unbalanced_ - add liquidity with arbitrary amounts of each token
 2. _Proportional_ - add liquidity with proportional amount of both tokens
