@@ -1,4 +1,12 @@
-# Berachain Documentation Changelog
+# Berachain Changelog
+
+Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributing to the BRIP repository at GitHub](https://github.com/berachain/BRIPs/tree/main) and then posting to the the [Berachain Forum](https://hub.forum.berachain.com/c/brips/9).
+
+Below are important changes shipped to Berachain.
+
+## 2025-JUNE-17
+
+The delay for reward allocation changes has been reduced from 8,191 blocks to 500.
 
 ## 2025-JUNE-04: Bectra Hardfork (Bera + Prague + Electra)
 
