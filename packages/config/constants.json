@@ -50,7 +50,7 @@
     "validatorBaseBGTReward": 0.5,
     "validatorDepositGweiAmount": 250000000000000,
     "validatorDepositAmount": 250000,
-    "rewardAllocationBlockDelay": 8191,
+    "rewardAllocationBlockDelay": 500,
     "registrationMinimum": 10000,
     "stakeMinimumIncrement": 10000,
     "rewardDistributionTimeExpiration": 8191,
