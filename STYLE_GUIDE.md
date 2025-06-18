@@ -6,7 +6,7 @@ This style guide provides conventions and best practices for creating and mainta
 
 The documentation is built using [VitePress](https://vitepress.dev/). Familiarity with VitePress and Markdown is recommended.
 
-## 2. Directory Structure & File Naming & Formatting
+## 2. Directory Structure & File Naming
 
 - **Main Content:** All documentation content resides primarily within `bcdocs/apps/core/content/` and `bcdocs/apps/bex/content/`.
 - **Subdirectories:** Organize content into logical subdirectories based on topics (e.g., `learn/`, `developers/`, `nodes/`, `beacon-kit/`).
@@ -19,7 +19,84 @@ Files must be formatted by running `pnpm format` before being checked in. The CI
 
 ## 3. Markdown & Content Formatting
 
-### 3.1. Headings
+#### Metadata
+
+Whenever possible, each page should have meta tags defined.
+
+```md
+---
+head:
+  - - meta
+    - property: og:title
+      content: What is Berachain?
+  - - meta
+    - name: description
+      content: Berachain Is a High-Performance EVM-Compatible Blockchain Built on Proof-of-Liquidity Consensus
+  - - meta
+    - property: og:description
+      content: Berachain Is a High-Performance EVM-Identical blockchain built on Proof-of-Liquidity, and supported by the BeaconKit framework.
+---
+
+# What is Berachain?
+```
+
+#### Imports
+
+If you need to import constants or components, do so after the metatags and before the main header tag.
+
+```md
+---
+head:
+  - - meta
+    - property: og:title
+      content: What is Berachain?
+---
+
+<!-- Add here -->
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+<!-- end add -->
+
+# What is Berachain?
+```
+
+#### Variables
+
+Most variables defined by the constants can be done through curly braces `{{}}`.
+
+Example:
+
+```md
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+{{config.websites.foundation.name}}
+
+<p>{{config.websites.foundation.url}}</p>
+```
+
+In some cases, links cannot be setup with traditional markdown, and here is the work around:
+
+```md
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+<!--
+❌ Does not work
+[{{config.websites.foundation.name}}]({{config.websites.foundation.url}})
+-->
+
+✅ Correct way
+<a :href="config.websites.foundation.url" target="_blank" rel="no-referrer">{{config.websites.foundation.name}}</a>
+
+✅ Correct way combining variables
+<a :href="config.mainnet.dapps.bex.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.bex.name}}</a>
+```
+
+### Headings
 
 - **`# (H1)`:** Reserved for the main title of the page. This is often automatically generated from the frontmatter `title` or is the first line of the file.
   - For special landing pages (like `index.md`), H1 might be part of a custom Vue component structure (e.g., `<h1 class="title">`).
@@ -28,7 +105,7 @@ Files must be formatted by running `pnpm format` before being checked in. The CI
 - **`#### (H4)` and deeper:** Use sparingly for further nested sub-sections.
 - **Sentence Case:** Use sentence case for headings (capitalize the first word and proper nouns).
 
-### 3.2. Frontmatter
+### Frontmatter
 
 All markdown files should start with YAML frontmatter:
 
@@ -49,13 +126,33 @@ head:
 
 - For the main `index.md` landing pages, `layout: page` is used.
 
-### 3.3. Code Blocks
+### Code Blocks
 
-- Clearly identify the language of the code block (e.g., `bash`, `sh`, `zsh`, `json`, `javascript`, `go`, `solidity`).
-- For shell commands:
-  - Indicate the context or directory if necessary, e.g., `# FROM: ~/devnet` or `# FROM: project-root/directory`.
-  - Show the command and its expected output clearly.
-  - Use comments (`# [Expected Output]:` or similar) to delineate commands from output.
+Code snippets should start with 3 ticks (\`) followed by the programming language, the code, and wrapped by an additional 3 ticks (\`).
+
+_Example:_
+
+```bash
+ˋˋˋjs
+const hello = "there";
+ˋˋˋ
+```
+
+If you'd like to use variables in code snippets, add a suffix of `-vue`
+
+_Example:_
+
+```
+ˋˋˋjs-vue
+const hello = "{{config.mainnet.dapps.berascan.name}}";
+ˋˋˋ
+```
+
+For shell commands:
+
+- Indicate the context or directory if necessary, e.g., `# FROM: ~/devnet` or `# FROM: project-root/directory`.
+- Show the command and its expected output clearly.
+- Use comments (`# [Expected Output]:` or similar) to delineate commands from output.
 
 **Example (Bash):**
 
@@ -83,7 +180,7 @@ head:
 ˋˋˋ
 ```
 
-### 3.4. Callouts (Tips, Warnings, Dangers)
+### Callouts (Tips, Warnings, Dangers)
 
 Use VitePress callouts to emphasize information:
 
@@ -101,7 +198,7 @@ Modifying signed data before sending it can result in a loss of funds. Do not pr
 ˋˋˋ
 ```
 
-### 3.5. Links
+### Links
 
 - **Internal Links:**
   - Link to other documentation pages using relative paths from the current file, or site-root relative paths.
@@ -111,12 +208,12 @@ Modifying signed data before sending it can result in a loss of funds. Do not pr
   - Use the full URL. E.g., `[Berachain Website](https://www.berachain.com)`.
   - Consider if `target="_blank"` is appropriate (usually for links leaving the docs site).
 
-### 3.6. Lists
+### Lists
 
 - Use bullet points (`-`, `*`) for unordered lists.
 - Use numbered lists (`1.`, `2.`) for ordered steps.
 
-### 3.7. Tables
+### Tables
 
 Use markdown tables for structured data. Keep them concise and readable.
 
@@ -199,7 +296,7 @@ You can verify the outcome by checking the log file at `/var/log/app.log`.
 
 Refer to [claim-api.md](https://github.com/berachain/docs/blob/main/apps/core/content/developers/claim-api.md?plain=1) as an example.
 
-### 7.1. Endpoint Structure
+### Endpoint Structure
 
 Each API endpoint should be documented with:
 
@@ -223,7 +320,7 @@ Each API endpoint should be documented with:
     - Error responses with example bodies.
 6.  **Interactive Tester:** Use the `<ApiTester>` component.
 
-### 7.2. Using `<ApiTester>`
+### Using `<ApiTester>`
 
 The `<ApiTester>` Vue component provides an interactive way for users to try out API calls.
 
@@ -261,7 +358,7 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
   ];
   ```
 
-### 7.3. Common Informational Sections
+### Common Informational Sections
 
 Include general information relevant to the API set:
 
@@ -306,17 +403,17 @@ This style guide is a living document and will evolve. Please refer back to it a
 
 A central configuration file, `constants.json`, located at `bcdocs/packages/config/constants.json`, is used to store values that are shared across multiple documentation pages or are subject to change. This practice ensures consistency and simplifies updates.
 
-### 9.1. Purpose
+### Purpose
 
 - **Single Source of Truth:** Provides a centralized location for common data points such as URLs, dApp names, network parameters (Chain IDs, RPC URLs), contract addresses, and other reusable constants.
 - **Maintainability:** When a value changes (e.g., an API endpoint or a dApp URL), it only needs to be updated in `constants.json`, and the change will propagate throughout the documentation.
 - **Consistency:** Reduces the risk of typos or outdated information by ensuring all parts of the documentation refer to the same values.
 
-### 9.2. Location
+### Location
 
 The file is located at: `bcdocs/packages/config/constants.json`
 
-### 9.3. Usage in Markdown (`.md` files)
+### Usage in Markdown (`.md` files)
 
 In Markdown files, `constants.json` can be imported and used within `<script setup>` blocks, making its values available to Vue expressions in your page.
 
@@ -342,7 +439,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
     <p>The minimum effective balance is {{ config.mainnet.minEffectiveBalance }} BERA.</p>
     ```
 
-### 9.4. Usage in TypeScript (`.ts` files)
+### Usage in TypeScript (`.ts` files)
 
 In TypeScript files, such as `sidebar.ts` or other configuration files within `.vitepress/`, the constants can be imported directly.
 
@@ -367,7 +464,7 @@ In TypeScript files, such as `sidebar.ts` or other configuration files within `.
     }
     ```
 
-### 9.5. Benefits
+### Benefits
 
 - **Reduced Redundancy:** Avoids hardcoding the same values in multiple places.
 - **Simplified Updates:** Makes global changes quick and reliable.
