@@ -147,10 +147,6 @@ const SIDEBAR = {
       text: "Developer Guides",
       items: [
         {
-          text: "Mainnet Migration Guide",
-          link: "/developers/guides/migration-guide",
-        },
-        {
           text: "Create HelloWorld Contract Using Hardhat",
           link: "/developers/guides/create-helloworld-contract-using-hardhat",
         },
@@ -261,7 +257,6 @@ const SIDEBAR = {
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
         { text: "Changelog", link: "/beacon-kit/changelog" },
-        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" },
       ],
     },
     {
