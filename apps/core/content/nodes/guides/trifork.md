@@ -20,22 +20,20 @@ Our next upgrade brings to Berachain two approved Improvement Proposals.
 
 [Bera-reth](https://github.com/berachain/bera-reth) and [Bera-geth](https://github.com/berachain/bera-geth) are new forks of ParadymXYZ's reth and Ethereum Foundation's go-ethereum, under the same software license.
 
-Either of these execution clients are _required_ to follow Berachain after the appointed upgrade date. Beacon Kit will refuse to start without these clients.
-
 :::warning
 All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-reth or Bera-geth, **and** upgrade to Beacon Kit TBD, to continue following the chain.
 :::
 
 ## Hardfork Upgrade Timeline
 
-| Date                    | Milestone                                                   |
-| ----------------------- | ----------------------------------------------------------- |
-| June 27, 2025           | Beacon-Kit TBD-rc, Bera-geth TBD-rc and Bera-reth released  |
-| July 7, 2025            | All Bepolia infrastructure partners expected to be upgraded |
-| July 8, 2025 @ 12pm EDT | Trifork Upgrade Activates on Bepolia                        |
-| TBD                     | Beacon-Kit TBD, Bera-geth TBD and Bera-reth released        |
-| TBD                     | All infrastructure partners expected to be upgraded         |
-| TBD                     | Trifork Upgrade Activates on Berachain Mainnet              |
+| Date                    | Milestone                                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| June 27, 2025           | Beacon-Kit TBD-rc, Bera-geth TBD-rc and Bera-reth released for installation to Bepolia       |
+| July 7, 2025            | All Bepolia infrastructure partners expected to be upgraded                                  |
+| July 8, 2025 @ 12pm EDT | Trifork Upgrade Activates on Bepolia                                                         |
+| TBD                     | Beacon-Kit TBD, Bera-geth TBD and Bera-reth released for installation on Bepolia and Mainnet |
+| TBD                     | All infrastructure partners expected to be upgraded                                          |
+| TBD                     | Trifork Upgrade Activates on Berachain Mainnet                                               |
 
 ## New Chain Clients and Genesis Files
 
@@ -44,6 +42,8 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | Bera-geth vTBD  | [TBD](https://github.com/berachain/bera-geth/releases/tag/TBD)  |
 | Bera-reth vTBD  | [TBD](https://github.com/berachain/bera-reth/releases/tag/TBD)  |
 | Beacon-Kit vTBD | [TBD](https://github.com/berachain/beacon-kit/releases/tag/TBD) |
+
+The above clients will be released as "-rc" (release candidate) versions for Bepolia first. There may be multiple RC releases depending on testing results. These will eventually converge into final release versions without the "-rc" suffix. The final version is recommended to be deployed to Bepolia _and_ Mainnet infrastructure.
 
 | Chain             | Genesis file & hash                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
