@@ -85,6 +85,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Tatum Indexed Data API](https://tatum.io/berachain-and-tatum)
 - [The Graph](https://thegraph.com/)
 - [Thirdweb](https://thirdweb.com/insight?ref=blog.thirdweb.com)
+- [SubQuery](https://subquery.network)
 
 ### Oracles
 
