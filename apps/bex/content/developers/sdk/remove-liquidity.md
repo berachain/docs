@@ -17,7 +17,7 @@ head:
 
 # Remove Liquidity Guide
 
-Using the [Berancer SDK](https://github.com/berachain-foundation/berancer-sdk), users can remove liquidity using two primary methods (see [RemoveLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/removeLiquidity/types.ts)):
+Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), users can remove liquidity using two primary methods (see [RemoveLiquidityKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/removeLiquidity/types.ts)):
 
 1. _Proportional_ - remove liquidity proportionally across all tokens
 2. _SingleTokenExactIn_ - remove liquidity and receive a single token

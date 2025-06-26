@@ -17,7 +17,7 @@ head:
 
 # Swap Guide
 
-Using the [Berancer SDK](https://github.com/berachain-foundation/berancer-sdk), users can execute swaps using the Smart Order Router (SOR) to find optimal swap paths. The SDK supports two types of swaps (see [SwapKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/swap/types.ts)):
+Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), users can execute swaps using the Smart Order Router (SOR) to find optimal swap paths. The SDK supports two types of swaps (see [SwapKind](https://github.com/berachain/berancer-sdk/blob/main/src/entities/swap/types.ts)):
 
 1. _GivenIn_ - specify the exact input amount
 2. _GivenOut_ - specify the exact output amount
