@@ -46,12 +46,12 @@ These are a list of community developer guides for Berachain.
 
 ## Indexing and Querying
 
-| Project Name                                | Git Repository                                                                   |
-| ------------------------------------------- | -------------------------------------------------------------------------------- |
-| Index & Query Berachain Data with Goldsky   | [GitHub](https://github.com/berachain/guides/tree/main/apps/goldsky-subgraph)    |
-| Index & Query Berachain Data with The Graph | [Guide](https://thegraph.com/docs/en/subgraphs/quick-start/)                     |
-| Envio Indexer ERC20                         | [GitHub](https://github.com/berachain/guides/tree/main/apps/envio-indexer-erc20) |
-| Index & Query Berachain Data with SubQuery   | [Guide](https://subquery.network/doc/indexer/quickstart/quickstart_chains/berachain-artio-testnet.html#berachain-artio-testnet-quick-start)    |
+| Project Name                                | Git Repository                                                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Index & Query Berachain Data with Goldsky   | [GitHub](https://github.com/berachain/guides/tree/main/apps/goldsky-subgraph)                                                               |
+| Index & Query Berachain Data with The Graph | [Guide](https://thegraph.com/docs/en/subgraphs/quick-start/)                                                                                |
+| Envio Indexer ERC20                         | [GitHub](https://github.com/berachain/guides/tree/main/apps/envio-indexer-erc20)                                                            |
+| Index & Query Berachain Data with SubQuery  | [Guide](https://subquery.network/doc/indexer/quickstart/quickstart_chains/berachain-artio-testnet.html#berachain-artio-testnet-quick-start) |
 
 ## Verifiable Randomness
 
