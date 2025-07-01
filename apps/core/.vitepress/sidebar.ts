@@ -189,12 +189,7 @@ const SIDEBAR = {
         },
         {
           text: "EIP-5792",
-          items: [
-            {
-              text: "Introduction",
-              link: "/developers/guides/eip-5792",
-            },
-          ],
+          link: "/developers/guides/eip-5792",
         },
         {
           text: "Community Guides",
