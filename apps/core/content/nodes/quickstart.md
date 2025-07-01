@@ -36,12 +36,10 @@ The following are required to run both the execution and consensus clients:
 
 ### Software Requirements 💾
 
-- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written for v1.1.3.
+- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags).
 - One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
-  - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
-  - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
-  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
-  - [Erigon](https://github.com/erigontech/erigon/releases)
+  - [bera-reth](https://github.com/berachain/bera-reth/releases)
+  - [bera-geth](https://github.com/berachain/bera-geth/releases)
 
 ## Getting started
 
@@ -87,8 +85,6 @@ export BEACOND_BIN=$(command -v beacond || echo $(pwd)/beacond)
 export BEACOND_DATA=$(pwd)/var/beacond
 export RETH_BIN=$(command -v reth || echo $(pwd)/reth)
 export GETH_BIN=$(command -v geth || echo $(pwd)/geth)
-export NETHERMIND_BIN=$(command -v Nethermind.Runner || echo $(pwd)/Nethermind.Runner)
-export ERIGON_BIN=$(command -v erigon || echo $(pwd)/erigon)
 ```
 
 You need to set these constants:
@@ -188,7 +184,7 @@ Snapshots are collections of files from a node's backend that represent its stat
 
 They are useful as backups and for syncing nodes that have failed, become corrupted, slowed down, or when spinning up a new node. Restoring a snapshot is much faster than syncing from the network.
 
-Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when you restore both snapshots simultaneously. For other clients like Nethermind, using only a beacond snapshot will improve the initial chain sync.
+Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when you restore both snapshots simultaneously.
 
 This tutorial fetches pruned snapshots. If you plan to run an archive node, we recommend syncing from an empty state.
 

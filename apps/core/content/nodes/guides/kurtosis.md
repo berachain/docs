@@ -113,7 +113,6 @@ make start-devnet;
 # 39ab7b9e6b01   kzg_trusted_setup
 # 0f6148946b08   multiple-premined-deposits
 # c59bf8b35b60   nether_genesis_file
-# 0c84ab86dd73   nethermind-config
 # e965d7a7faa0   node-beacond-config-0
 # 030b600e169c   node-beacond-config-1
 # 8d644e614430   node-beacond-config-2
@@ -217,12 +216,6 @@ make start-devnet;
 #                                            metrics: 9001/tcp -> 127.0.0.1:51457
 #                                            tcp-discovery: 30303/tcp -> 127.0.0.1:51458
 #                                            udp-discovery: 30303/udp -> 127.0.0.1:57790
-# 27c61431bf07   el-validator-nethermind-1   engine-rpc: 8551/tcp -> 127.0.0.1:51440                RUNNING
-#                                            eth-json-rpc: 8545/tcp -> 127.0.0.1:51443
-#                                            eth-json-rpc-ws: 8546/tcp -> 127.0.0.1:51444
-#                                            metrics: 9001/tcp -> 127.0.0.1:51441
-#                                            tcp-discovery: 30303/tcp -> 127.0.0.1:51442
-#                                            udp-discovery: 30303/udp -> 127.0.0.1:60619
 # bb829e4f06e5   el-validator-reth-2         engine-rpc: 8551/tcp -> 127.0.0.1:51423                RUNNING
 #                                            eth-json-rpc: 8545/tcp -> 127.0.0.1:51421
 #                                            eth-json-rpc-ws: 8546/tcp -> 127.0.0.1:51422
