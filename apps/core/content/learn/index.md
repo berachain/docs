@@ -27,7 +27,7 @@ Berachain is a high-performance [EVM-Identical](#berachain-evm-identical-⟠) La
 
 ## EVM Identical ⟠
 
-Berachain's execution layer is identical to the Ethereum Virtual Machine (EVM) runtime environment seen on Ethereum Mainnet. This means that it uses existing unmodified [execution clients](/learn/help/glossary#execution-client) like Geth, Reth, Erigon, Nethermind, and more to handle executing smart contracts and supports all the tooling that comes native with the EVM.
+Berachain's execution environment is identical to the Ethereum Virtual Machine (EVM) runtime environment seen on Ethereum Mainnet. We use very lightly modified forks of popular [execution clients](/learn/help/glossary#execution-client) like Geth and Reth to handle executing smart contracts. We support all the [usual tooling](developers/developer-tools) that are familiar to EVM developers.
 
 Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints, and any improvements made to execution clients can be applied immediately to Berachain.
 
