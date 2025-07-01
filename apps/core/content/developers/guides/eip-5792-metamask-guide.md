@@ -89,6 +89,17 @@ async function checkEIP5792Support() {
     });
     
     console.log('MetaMask capabilities:', capabilities);
+    // Example output:
+    // {
+    //   wallet_sendCalls: true,
+    //   wallet_getCallsStatus: true,
+    //   wallet_showCallsStatus: true,
+    //   wallet_getCapabilities: true,
+    //   atomic: 'supported',
+    //   paymasterService: 'supported',
+    //   flowControl: 'supported',
+    //   auxiliaryFunds: 'unsupported'
+    // }
     
     // Check for EIP-5792 support
     if (capabilities.wallet_sendCalls) {
@@ -181,6 +192,27 @@ async function monitorBatchStatus(callId: string) {
     return status;
   } catch (error) {
     console.error('Error checking status:', error);
+    throw error;
+  }
+}
+
+// Example usage with proper error handling
+async function executeBatchWithMonitoring(calls: any[]) {
+  try {
+    // Send batch transaction
+    const result = await window.ethereum.request({
+      method: 'wallet_sendCalls',
+      params: { calls, capabilities: { atomic: true } }
+    });
+
+    console.log('Batch submitted with callId:', result.callId);
+    
+    // Monitor the transaction
+    await monitorBatchStatus(result.callId);
+    
+    return result;
+  } catch (error) {
+    console.error('Failed to execute batch:', error);
     throw error;
   }
 }
@@ -319,6 +351,10 @@ async function sendBatchWithUserHandling(calls: any[]) {
       // Method not supported
       console.log('EIP-5792 not supported by this wallet');
       throw new Error('EIP-5792 not supported');
+    } else if (error.code === 4201) {
+      // Method not supported
+      console.log('Method not supported by this wallet');
+      throw new Error('Method not supported');
     } else {
       // Other errors
       console.error('Unexpected error:', error);
@@ -372,10 +408,20 @@ const capabilities = await window.ethereum.request({
   method: 'wallet_getCapabilities'
 });
 
-if (capabilities.atomic === 'supported') {
-  // Use atomic execution
+// Check if EIP-5792 is supported
+if (capabilities.wallet_sendCalls) {
+  console.log('EIP-5792 is supported');
+  
+  // Check atomic execution capability
+  if (capabilities.atomic === 'supported') {
+    console.log('Atomic execution is supported');
+  } else if (capabilities.atomic === 'ready') {
+    console.log('Atomic execution is ready (requires user approval)');
+  } else {
+    console.log('Atomic execution is not supported');
+  }
 } else {
-  // Handle non-atomic execution
+  console.log('EIP-5792 is not supported, use fallback');
 }
 ```
 
