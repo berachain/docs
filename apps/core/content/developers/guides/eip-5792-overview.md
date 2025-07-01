@@ -19,6 +19,10 @@ head:
 
 EIP-5792 is a proposed Ethereum Improvement Proposal that enables applications to request wallets to process batches of on-chain write calls and check their status. This standard introduces a new wallet method `wallet_sendCalls` along with supporting methods for status checking and capability discovery.
 
+:::tip
+**Practical Implementation**: For a hands-on guide to implementing EIP-5792 with MetaMask, see our [MetaMask Guide](/developers/guides/eip-5792-metamask-guide).
+:::
+
 ![EIP-5792 Overview](/assets/eip5792-overview.png)
 
 :::info
@@ -483,9 +487,11 @@ As EIP-5792 moves toward finalization, expect to see:
 ## Resources
 
 - [EIP-5792 Specification](https://eips.ethereum.org/EIPS/eip-5792)
-- [Official Documentation](https://www.eip5792.xyz/)
+- [MetaMask EIP-5792 Documentation](https://docs.metamask.io/wallet/reference/json-rpc-methods/wallet_sendcalls/)
+- [Official EIP-5792 Documentation](https://www.eip5792.xyz/)
 - [GitHub Repository](https://github.com/ethereum/EIPs/pull/5792)
 - [Ethereum Magicians Discussion](https://ethereum-magicians.org/t/eip-5792-wallet-send-calls/12345)
+- [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792)
 
 ## Conclusion
 
