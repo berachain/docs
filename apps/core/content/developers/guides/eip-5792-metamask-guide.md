@@ -27,7 +27,9 @@ This guide walks you through implementing EIP-5792 with MetaMask on Berachain, p
 :::
 
 :::tip
-**Complete Implementation**: For the full working example with all code and tests, see our [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
+**Complete Implementation**: For the full working example with React, TypeScript, and all code, see our [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
+
+**Note**: The actual implementation in the Berachain guides repository includes a complete React application with UI components, error handling, and real-world examples that you can run and test immediately.
 :::
 
 ## Overview
@@ -38,6 +40,10 @@ EIP-5792 enables applications to request MetaMask to process batches of on-chain
 2. Send batch transactions
 3. Monitor transaction status
 4. Handle errors and fallbacks
+
+:::info
+**Documentation vs Implementation**: This guide provides the conceptual framework and code examples for EIP-5792. For a complete, working React application with UI components and real examples, see the [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
+:::
 
 ## MetaMask EIP-5792 Support
 
@@ -405,6 +411,20 @@ For a complete, production-ready implementation with:
 - Berachain-specific optimizations
 
 See our [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
+
+### 3. What's in the Actual Implementation
+
+The Berachain guides repository contains a complete React application that demonstrates:
+
+- **React Components**: UI for connecting wallets, checking capabilities, and sending batch transactions
+- **TypeScript**: Full type safety and modern development practices
+- **Real Examples**: Working examples of approve & transfer, DeFi operations, and NFT operations
+- **Error Handling**: Comprehensive error handling and user feedback
+- **Status Monitoring**: Real-time transaction status updates
+- **Network Support**: Berachain testnet configuration
+- **Testing**: Ready-to-run examples you can test immediately
+
+The implementation is designed to be a complete, working example that developers can clone, run, and use as a reference for their own projects.
 
 ## Resources
 

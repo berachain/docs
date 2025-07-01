@@ -21,6 +21,8 @@ EIP-5792 is a proposed Ethereum Improvement Proposal that enables applications t
 
 :::tip
 **Practical Implementation**: For a hands-on guide to implementing EIP-5792 with MetaMask, see our [MetaMask Guide](/developers/guides/eip-5792-metamask-guide).
+
+**Working Example**: For a complete, working implementation with React and TypeScript, see our [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
 :::
 
 ![EIP-5792 Overview](/assets/eip5792-overview.png)
