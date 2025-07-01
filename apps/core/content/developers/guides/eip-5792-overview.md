@@ -98,7 +98,7 @@ Applications call this method to discover what capabilities a wallet supports:
 ```typescript
 // Example capability discovery
 const capabilities = await wallet.request({
-  method: 'wallet_getCapabilities'
+  method: "wallet_getCapabilities",
 });
 
 console.log(capabilities);
@@ -117,24 +117,24 @@ Submit a batch of calls for execution:
 ```typescript
 // Example batch submission
 const result = await wallet.request({
-  method: 'wallet_sendCalls',
+  method: "wallet_sendCalls",
   params: {
     calls: [
       {
-        to: '0x...',
-        data: '0x...',
-        value: '0x0'
+        to: "0x...",
+        data: "0x...",
+        value: "0x0",
       },
       {
-        to: '0x...',
-        data: '0x...',
-        value: '0x0'
-      }
+        to: "0x...",
+        data: "0x...",
+        value: "0x0",
+      },
     ],
     capabilities: {
-      atomic: true
-    }
-  }
+      atomic: true,
+    },
+  },
 });
 ```
 
@@ -145,10 +145,10 @@ Check the status of submitted calls:
 ```typescript
 // Example status check
 const status = await wallet.request({
-  method: 'wallet_getCallsStatus',
+  method: "wallet_getCallsStatus",
   params: {
-    callId: '0x...'
-  }
+    callId: "0x...",
+  },
 });
 ```
 
@@ -164,20 +164,20 @@ const calls = [
     to: tokenAddress,
     data: encodeFunctionData({
       abi: erc20ABI,
-      functionName: 'approve',
-      args: [spender, amount]
+      functionName: "approve",
+      args: [spender, amount],
     }),
-    value: '0x0'
+    value: "0x0",
   },
   {
     to: spenderAddress,
     data: encodeFunctionData({
       abi: contractABI,
-      functionName: 'transfer',
-      args: [recipient, amount]
+      functionName: "transfer",
+      args: [recipient, amount],
     }),
-    value: '0x0'
-  }
+    value: "0x0",
+  },
 ];
 ```
 
@@ -191,28 +191,28 @@ const calls = [
   {
     to: dexAddress,
     data: encodeSwapData(tokenA, tokenB, amount),
-    value: '0x0'
+    value: "0x0",
   },
   // Approve staking contract
   {
     to: tokenBAddress,
     data: encodeFunctionData({
       abi: erc20ABI,
-      functionName: 'approve',
-      args: [stakingAddress, swappedAmount]
+      functionName: "approve",
+      args: [stakingAddress, swappedAmount],
     }),
-    value: '0x0'
+    value: "0x0",
   },
   // Stake tokens
   {
     to: stakingAddress,
     data: encodeFunctionData({
       abi: stakingABI,
-      functionName: 'stake',
-      args: [swappedAmount]
+      functionName: "stake",
+      args: [swappedAmount],
     }),
-    value: '0x0'
-  }
+    value: "0x0",
+  },
 ];
 ```
 
@@ -227,34 +227,34 @@ const calls = [
     to: nftContractAddress,
     data: encodeFunctionData({
       abi: nftABI,
-      functionName: 'mint',
-      args: [recipient]
+      functionName: "mint",
+      args: [recipient],
     }),
-    value: mintPrice
+    value: mintPrice,
   },
   // Set metadata
   {
     to: nftContractAddress,
     data: encodeFunctionData({
       abi: nftABI,
-      functionName: 'setTokenURI',
-      args: [tokenId, metadataURI]
+      functionName: "setTokenURI",
+      args: [tokenId, metadataURI],
     }),
-    value: '0x0'
-  }
+    value: "0x0",
+  },
 ];
 ```
 
 ## Comparison with Other Solutions
 
-| Feature | EIP-5792 | Multicall3 | Permit2 | Meta-tx + Forwarder | EIP-4337 + Bundlers |
-|---------|----------|------------|---------|---------------------|---------------------|
-| **Wallet Integration** | ✅ Native | ❌ Manual | ✅ Native | ❌ Manual | ❌ Complex |
-| **Capability Discovery** | ✅ Built-in | ❌ None | ⚠️ Limited | ❌ None | ❌ None |
-| **Atomic Execution** | ✅ Guaranteed | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes |
-| **Gas Optimization** | ✅ High | ⚠️ Medium | ✅ High | ⚠️ Medium | ⚠️ Medium |
-| **User Experience** | ✅ Excellent | ⚠️ Manual | ✅ Good | ⚠️ Complex | ⚠️ Complex |
-| **Implementation** | ✅ Simple | ✅ Simple | ⚠️ Medium | ❌ Complex | ❌ Complex |
+| Feature                  | EIP-5792      | Multicall3 | Permit2    | Meta-tx + Forwarder | EIP-4337 + Bundlers |
+| ------------------------ | ------------- | ---------- | ---------- | ------------------- | ------------------- |
+| **Wallet Integration**   | ✅ Native     | ❌ Manual  | ✅ Native  | ❌ Manual           | ❌ Complex          |
+| **Capability Discovery** | ✅ Built-in   | ❌ None    | ⚠️ Limited | ❌ None             | ❌ None             |
+| **Atomic Execution**     | ✅ Guaranteed | ✅ Yes     | ✅ Yes     | ❌ No               | ✅ Yes              |
+| **Gas Optimization**     | ✅ High       | ⚠️ Medium  | ✅ High    | ⚠️ Medium           | ⚠️ Medium           |
+| **User Experience**      | ✅ Excellent  | ⚠️ Manual  | ✅ Good    | ⚠️ Complex          | ⚠️ Complex          |
+| **Implementation**       | ✅ Simple     | ✅ Simple  | ⚠️ Medium  | ❌ Complex          | ❌ Complex          |
 
 ## Implementation Example
 
@@ -271,34 +271,34 @@ class EIP5792Client {
 
   async getCapabilities() {
     return await this.wallet.request({
-      method: 'wallet_getCapabilities'
+      method: "wallet_getCapabilities",
     });
   }
 
   async sendCalls(calls: any[], capabilities?: any) {
     const params: any = { calls };
-    
+
     if (capabilities) {
       params.capabilities = capabilities;
     }
 
     return await this.wallet.request({
-      method: 'wallet_sendCalls',
-      params
+      method: "wallet_sendCalls",
+      params,
     });
   }
 
   async getCallsStatus(callId: string) {
     return await this.wallet.request({
-      method: 'wallet_getCallsStatus',
-      params: { callId }
+      method: "wallet_getCallsStatus",
+      params: { callId },
     });
   }
 
   async showCallsStatus(callId: string) {
     return await this.wallet.request({
-      method: 'wallet_showCallsStatus',
-      params: { callId }
+      method: "wallet_showCallsStatus",
+      params: { callId },
     });
   }
 }
@@ -308,25 +308,25 @@ const client = new EIP5792Client(window.ethereum);
 
 // Check capabilities
 const capabilities = await client.getCapabilities();
-console.log('Wallet capabilities:', capabilities);
+console.log("Wallet capabilities:", capabilities);
 
 // Prepare batch calls
 const calls = [
   {
-    to: '0x...',
-    data: '0x...',
-    value: '0x0'
-  }
+    to: "0x...",
+    data: "0x...",
+    value: "0x0",
+  },
 ];
 
 // Send batch with atomic execution if supported
 const result = await client.sendCalls(calls, {
-  atomic: capabilities.atomic === 'supported'
+  atomic: capabilities.atomic === "supported",
 });
 
 // Check status
 const status = await client.getCallsStatus(result.callId);
-console.log('Batch status:', status);
+console.log("Batch status:", status);
 ```
 
 ## Migration Guide
@@ -340,17 +340,17 @@ If you're currently using Multicall3, migration to EIP-5792 is straightforward:
 const multicall = new Multicall3(provider);
 const results = await multicall.call([
   { target: contract1, callData: data1 },
-  { target: contract2, callData: data2 }
+  { target: contract2, callData: data2 },
 ]);
 
 // After: EIP-5792
 const calls = [
-  { to: contract1, data: data1, value: '0x0' },
-  { to: contract2, data: data2, value: '0x0' }
+  { to: contract1, data: data1, value: "0x0" },
+  { to: contract2, data: data2, value: "0x0" },
 ];
 const result = await wallet.request({
-  method: 'wallet_sendCalls',
-  params: { calls }
+  method: "wallet_sendCalls",
+  params: { calls },
 });
 ```
 
@@ -369,18 +369,21 @@ await tx2.wait();
 const calls = [
   {
     to: contract1.address,
-    data: contract1.interface.encodeFunctionData('approve', [spender, amount]),
-    value: '0x0'
+    data: contract1.interface.encodeFunctionData("approve", [spender, amount]),
+    value: "0x0",
   },
   {
     to: contract2.address,
-    data: contract2.interface.encodeFunctionData('transfer', [recipient, amount]),
-    value: '0x0'
-  }
+    data: contract2.interface.encodeFunctionData("transfer", [
+      recipient,
+      amount,
+    ]),
+    value: "0x0",
+  },
 ];
 await wallet.request({
-  method: 'wallet_sendCalls',
-  params: { calls, capabilities: { atomic: true } }
+  method: "wallet_sendCalls",
+  params: { calls, capabilities: { atomic: true } },
 });
 ```
 
@@ -392,11 +395,11 @@ Before sending calls, always check what the wallet supports:
 
 ```typescript
 const capabilities = await wallet.request({
-  method: 'wallet_getCapabilities'
+  method: "wallet_getCapabilities",
 });
 
 // Only request atomic execution if supported
-const useAtomic = capabilities.atomic === 'supported';
+const useAtomic = capabilities.atomic === "supported";
 ```
 
 ### 2. Handle Errors Gracefully
@@ -406,16 +409,16 @@ Implement proper error handling for unsupported features:
 ```typescript
 try {
   const result = await wallet.request({
-    method: 'wallet_sendCalls',
-    params: { calls, capabilities: { atomic: true } }
+    method: "wallet_sendCalls",
+    params: { calls, capabilities: { atomic: true } },
   });
 } catch (error) {
   if (error.code === 4201) {
     // User rejected the request
-    console.log('User rejected batch transaction');
+    console.log("User rejected batch transaction");
   } else if (error.code === 4001) {
     // Wallet doesn't support the requested capability
-    console.log('Wallet doesn\'t support atomic execution');
+    console.log("Wallet doesn't support atomic execution");
     // Fall back to individual transactions
   }
 }
@@ -430,12 +433,12 @@ async function executeBatch(calls: any[]) {
   try {
     // Try EIP-5792 first
     return await wallet.request({
-      method: 'wallet_sendCalls',
-      params: { calls }
+      method: "wallet_sendCalls",
+      params: { calls },
     });
   } catch (error) {
     // Fall back to individual transactions
-    console.log('EIP-5792 not supported, using individual transactions');
+    console.log("EIP-5792 not supported, using individual transactions");
     return await executeIndividualTransactions(calls);
   }
 }
@@ -447,21 +450,21 @@ Use the status checking methods to provide better user feedback:
 
 ```typescript
 const result = await wallet.request({
-  method: 'wallet_sendCalls',
-  params: { calls }
+  method: "wallet_sendCalls",
+  params: { calls },
 });
 
 // Monitor status
 const checkStatus = async () => {
   const status = await wallet.request({
-    method: 'wallet_getCallsStatus',
-    params: { callId: result.callId }
+    method: "wallet_getCallsStatus",
+    params: { callId: result.callId },
   });
-  
-  if (status.status === 'pending') {
+
+  if (status.status === "pending") {
     setTimeout(checkStatus, 1000);
   } else {
-    console.log('Batch completed:', status);
+    console.log("Batch completed:", status);
   }
 };
 
@@ -503,4 +506,4 @@ The combination of EIP-5792 (application interface) and EIP-7702 (on-chain execu
 
 :::tip
 **Get Involved**: Review the EIP, test implementations, and join the conversation on Ethereum Magicians to help shape the future of wallet batching capabilities.
-::: 
+:::
