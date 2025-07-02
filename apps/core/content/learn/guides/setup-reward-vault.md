@@ -14,7 +14,7 @@ Reward Vaults can be created via the <a :href="config.mainnet.contracts.rewardVa
 All of the following items should be completed for a fully featured reward vault:
 
 :::info
-Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/reward-vault-guidelines) for the application process.
+Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/help/reward-vault-guidelines) for the application process.
 :::
 
 - [Create a Reward Vault Request](#create-a-reward-vault-request)

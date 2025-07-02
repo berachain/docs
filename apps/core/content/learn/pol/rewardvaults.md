@@ -11,7 +11,7 @@ Reward Vaults are key infrastructure that allows protocols to leverage PoL, enab
 It should be noted that only Whitelisted Reward Vaults are elligible to receive `$BGT` emissions from Validators.
 
 :::info
-Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/reward-vault-guidelines) for the application process.
+Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/help/reward-vault-guidelines) for the application process.
 :::
 
 ## User Interactions
