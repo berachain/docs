@@ -151,6 +151,8 @@ If you would like to start with this dashboard as a basis for your system, downl
 
 ## Further exploration
 
+[This article](https://research.despread.io/berachain-monitoring/) by Despread, a Berachain Validator, provides a lot of useful insight about monitoring what's happening on the Beacon Chain.
+
 Set up alerts in Grafana to dispatch notifications when a service goes down, or you begin to run low on disk space.
 
 Grafana offers a feature called Drilldown that allows you to explore the metrics available to you. Some metrics are more useful than others.
