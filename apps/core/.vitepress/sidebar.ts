@@ -96,6 +96,10 @@ const SIDEBAR = {
       items: [
         { text: "FAQs", link: "/learn/help/faqs" },
         { text: "Glossary", link: "/learn/help/glossary" },
+        {
+          text: "Reward Vault Guidelines",
+          link: "/learn/help/reward-vault-guidelines",
+        },
       ],
     },
   ],
