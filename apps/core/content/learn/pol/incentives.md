@@ -140,5 +140,5 @@ Example:
   duration (set via `setRewardsDuration`) is applied at the next
   `notifyRewardAmount`.
 
-See the [RewardVault contract reference](/developers/contracts/reward-vault.md)
+See the [RewardVault contract reference](/developers/contracts/reward-vault)
 for the on-chain API.
