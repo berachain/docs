@@ -102,15 +102,13 @@ From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, 
 
 A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
 
-:::note Commission cap
+:::tip Commission cap
 Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
 :::
 
----
-
 ## Rate-Based Reward Distribution (Target Rate)
 
-With the June 2025 upgrade Reward Vaults can optionally distribute rewards at a
+Reward Vaults can optionally distribute rewards at a
 **target rewards-per-second rate** instead of using a fixed duration.
 
 When `targetRewardsPerSecond` is set to a non-zero value the vault computes the

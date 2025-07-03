@@ -11,7 +11,7 @@ The following guide will walk you through the process of adding incentives to an
 - Whitelisted Reward Vault with Whitelisted Incentive Token
 - Token Manager [Safe Multisig Wallet](https://safe.berachain.com)
 
-:::note Commission cap
+:::tip Commission cap
 A validator's commission on incentive tokens is capped at **20 %** (`MAX_COMMISSION_RATE = 0.2e4`).  
 Queuing a commission above the cap **reverts**. If an older stored value exceeds 20 %, reads are **clamped** to the cap.
 :::

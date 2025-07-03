@@ -97,7 +97,7 @@ uint256 public constant MAX_REWARD_DURATION = 7 days;
 
 ### rewardVaultManager
 
-Address authorized to configure reward-distribution parameters (duration or target rate).
+Address authorized to configure incentive parameters (duration or target rate).
 
 ```solidity
 address public rewardVaultManager;
@@ -180,12 +180,6 @@ function initialize(
 | `_distributor`           | `address` | The address of the distributor.   |
 | `_stakingToken`          | `address` | The address of the staking token. |
 
-### onlyDistributor
-
-```solidity
-modifier onlyDistributor();
-```
-
 ### onlyOperatorOrUser
 
 ```solidity
@@ -204,94 +198,7 @@ modifier checkSelfStakedBalance(address account, uint256 amount);
 modifier onlyWhitelistedToken(address token);
 ```
 
-### setDistributor
-
-Allows the factory owner to set the contract that is allowed to distribute rewards.
-
-```solidity
-function setDistributor(address _rewardDistribution) external onlyFactoryOwner;
-```
-
-**Parameters**
-
-| Name                  | Type      | Description                                        |
-| --------------------- | --------- | -------------------------------------------------- |
-| `_rewardDistribution` | `address` | The address that is allowed to distribute rewards. |
-
-### notifyRewardAmount
-
-Allows the distributor to notify the reward amount.
-
-```solidity
-function notifyRewardAmount(bytes calldata pubkey, uint256 reward) external onlyDistributor;
-```
-
-**Parameters**
-
-| Name     | Type      | Description                     |
-| -------- | --------- | ------------------------------- |
-| `pubkey` | `bytes`   | The pubkey of the validator.    |
-| `reward` | `uint256` | The amount of reward to notify. |
-
-### recoverERC20
-
-Allows the factory owner to recover any ERC20 token from the vault.
-
-```solidity
-function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyFactoryOwner;
-```
-
-**Parameters**
-
-| Name           | Type      | Description                          |
-| -------------- | --------- | ------------------------------------ |
-| `tokenAddress` | `address` | The address of the token to recover. |
-| `tokenAmount`  | `uint256` | The amount of token to recover.      |
-
-### setRewardsDuration
-
-Updates the distribution duration **while the vault is in duration-based mode**.
-
-Callable only by the `rewardDurationManager` address and subject to:
-
-- Cool-down: at least 1 day since the previous change (`REWARD_DURATION_COOLDOWN_PERIOD`).
-- Bounds: value must be between `MIN_REWARD_DURATION` (3 days) and `MAX_REWARD_DURATION` (7 days).
-
-```solidity
-function setRewardsDuration(uint256 _rewardsDuration) external;
-```
-
-| Name               | Type      | Description              |
-| ------------------ | --------- | ------------------------ |
-| `_rewardsDuration` | `uint256` | New duration in seconds. |
-
-### setRewardDurationManager
-
-Transfers the role that controls reward-duration settings.
-
-```solidity
-function setRewardDurationManager(address _rewardDurationManager) external onlyFactoryVaultManager;
-```
-
-| Name                     | Type      | Description          |
-| ------------------------ | --------- | -------------------- |
-| `_rewardDurationManager` | `address` | New manager address. |
-
-### whitelistIncentiveToken
-
-Allows the factory owner to whitelist a token to incentivize with.
-
-```solidity
-function whitelistIncentiveToken(address token, uint256 minIncentiveRate, address manager) external onlyFactoryOwner;
-```
-
-**Parameters**
-
-| Name               | Type      | Description                                                      |
-| ------------------ | --------- | ---------------------------------------------------------------- |
-| `token`            | `address` | The address of the token to whitelist.                           |
-| `minIncentiveRate` | `uint256` | The minimum amount of the token to incentivize per BGT emission. |
-| `manager`          | `address` | The address of the manager that can addIncentive for this token. |
+## Incentive Management
 
 ### removeIncentiveToken
 
@@ -435,6 +342,8 @@ function getDelegateStake(address account, address delegate) external view retur
 | Name     | Type      | Description                      |
 | -------- | --------- | -------------------------------- |
 | `<none>` | `uint256` | The amount staked by a delegate. |
+
+## Staking & Delegation
 
 ### stake
 
