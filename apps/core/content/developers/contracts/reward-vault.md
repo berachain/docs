@@ -424,14 +424,14 @@ function getReward(
 
 | Name        | Type      | Description                        |
 | ----------- | --------- | ---------------------------------- |
-| `account`   | `address` | The account to get the reward for. |
-| `recipient` | `address` | The address to send the reward to. |
+| `account`   | `address` | The account to claim the BGT incentive for. |
+| `recipient` | `address` | The address that will receive the BGT incentive. |
 
 **Returns**
 
 | Name     | Type      | Description                       |
 | -------- | --------- | --------------------------------- |
-| `<none>` | `uint256` | The amount of the reward claimed. |
+| `<none>` | `uint256` | The amount of BGT claimed. |
 
 ### exit
 
@@ -447,7 +447,7 @@ function exit(address recipient) external nonReentrant;
 
 | Name        | Type      | Description                              |
 | ----------- | --------- | ---------------------------------------- |
-| `recipient` | `address` | The address to send the 'BGT' reward to. |
+| `recipient` | `address` | The address that will receive the BGT incentive. |
 
 ### setOperator
 
@@ -592,7 +592,7 @@ struct Incentive {
 
 ### TargetRewardsPerSecondUpdated
 
-Emitted when the target reward rate is changed.
+Emitted when the target **incentive** emission rate is changed.
 
 ```solidity
 event TargetRewardsPerSecondUpdated(uint256 newTargetRewardsPerSecond, uint256 oldTargetRewardsPerSecond);
@@ -608,7 +608,7 @@ event RewardVaultManagerSet(address indexed newRewardVaultManager, address index
 
 ### MinRewardDurationForTargetRateUpdated
 
-Emitted when the minimum reward duration used by the target-rate algorithm is updated.
+Emitted when the minimum incentive duration used by the target-rate algorithm is updated.
 
 ```solidity
 event MinRewardDurationForTargetRateUpdated(uint256 newMinRewardDurationForTargetRate, uint256 oldMinRewardDurationForTargetRate);
