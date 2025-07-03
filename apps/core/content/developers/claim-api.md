@@ -66,7 +66,7 @@ APIs endpoints that return paginated results return pagination info with every r
 
 ## Merkle Proofs
 
-The Claim API uses Merkle proofs to verify incentive eligibility. These proofs are cryptographic evidence that a particular wallet address is entitled to specific rewards from a distribution.
+The Claim API uses Merkle proofs to verify incentive eligibility. These proofs are cryptographic evidence that a particular wallet address is entitled to specified amount of incentives from a particular vault.
 
 ### What are Merkle Proofs?
 
