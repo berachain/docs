@@ -31,7 +31,7 @@ const networks = [
 
 # Claim API
 
-The Claim API provides endpoints for learning about available reward distributions, providing proofs on demand, and aggregated. This API is useful for developers in the Proof of Liquidity ecosystem.
+The Claim API provides endpoints for learning about available incentive distributions, providing proofs on demand, and aggregated. This API is useful for developers in the Proof of Liquidity ecosystem.
 
 ## Base URL
 
@@ -70,7 +70,7 @@ The Claim API uses Merkle proofs to verify reward eligibility. These proofs are 
 
 ### What are Merkle Proofs?
 
-Merkle proofs are a cryptographic method that allows for efficient and secure verification of data within a larger dataset without requiring the entire dataset. In the context of reward distributions:
+Merkle proofs are a cryptographic method that allows for efficient and secure verification of data within a larger dataset without requiring the entire dataset. In the context of incentive distributions:
 
 1. Each distribution creates a Merkle tree containing all eligible wallet addresses and their corresponding rewards
 2. When a wallet requests their rewards, the API provides a Merkle proof that cryptographically verifies their inclusion in the distribution
@@ -144,13 +144,13 @@ GET /api/v1/reward-distributions/validators/yield
 
 ### Wallet Operations
 
-#### Get Reward Distributions for Wallet
+#### Get Incentive Distributions for Wallet
 
 ```http
 GET /api/v1/wallets/{wallet}/reward-distributions
 ```
 
-Retrieve all reward distributions associated with a specific wallet.
+Retrieve all incentive distributions associated with a specific wallet.
 
 <ApiTester 
   endpoint="/api/v1/wallets/{wallet}/reward-distributions"

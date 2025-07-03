@@ -81,7 +81,7 @@ address[] public whitelistedTokens;
 
 ### MIN_REWARD_DURATION
 
-The minimum reward distribution period when using duration-based rewards.
+The minimum incentive distribution period when using duration-based rewards.
 
 ```solidity
 uint256 public constant MIN_REWARD_DURATION = 3 days;
@@ -89,7 +89,7 @@ uint256 public constant MIN_REWARD_DURATION = 3 days;
 
 ### MAX_REWARD_DURATION
 
-The maximum reward distribution period when using duration-based rewards.
+The maximum incentive distribution period when using duration-based rewards.
 
 ```solidity
 uint256 public constant MAX_REWARD_DURATION = 7 days;
@@ -646,5 +646,5 @@ Assigns a new reward-vault manager.
 function setRewardVaultManager(address _rewardVaultManager) external onlyFactoryVaultManager;
 ```
 
-> **Rate-based reward distribution**  
-> When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Rate-based distribution section](../../learn/pol/incentives#rate-based-reward-distribution-target-rate) for maths and examples.
+> **Rate-based incentive distribution**  
+When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Rate-based distribution section](../../learn/pol/incentives#rate-based-reward-distribution-target-rate) for maths and examples.

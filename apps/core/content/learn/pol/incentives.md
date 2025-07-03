@@ -106,9 +106,9 @@ A validator can change their commission percentage by first queueing the rate to
 Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
 :::
 
-## Rate-Based Reward Distribution (Target Rate)
+## Rate-Based Incentive Distribution (Target Rate)
 
-Reward Vaults can optionally distribute rewards at a
+Reward Vaults can optionally distribute incentives at a
 **target rewards-per-second rate** instead of using a fixed duration.
 
 When `targetRewardsPerSecond` is set to a non-zero value the vault computes the

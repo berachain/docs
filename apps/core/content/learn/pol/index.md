@@ -26,7 +26,7 @@ Learn more about how emissions are calculated on the [emissions page](./blockrew
 
 The journey begins when a Prospective Validator stakes their `$BERA` as a security bond (①). Validators are chosen to propose blocks with a probability proportional to their staked amount (②). For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (③) (see [emissions](./blockrewards.md)).
 
-### 2. Reward Distribution
+### 2. Block Reward Distribution
 
 After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted [Reward Vaults](/learn/pol/rewardvaults) of their choosing (④). In exchange for directing their emissions, validators receive protocol-provided [Incentives](/learn/pol/incentives) from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
 
