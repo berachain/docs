@@ -127,11 +127,11 @@ Minimum duration applied by the target-rate algorithm if the computed period wou
 uint256 public minRewardDurationForTargetRate;
 ```
 
-## Reward Mechanics: Duration vs Target Rate
+## Incentive Emission Mechanics: Duration vs Target Rate
 
 RewardVaults support **two mutually-exclusive modes** for distributing incentives:
 
-1. **Duration-based (legacy)** – the Reward Duration Manager picks a fixed `rewardsDuration`. Each call to `notifyRewardAmount` drips the supplied reward evenly over that period.
+1. **Duration-based (legacy)** – the `rewardDurationManager` picks a fixed `rewardsDuration`. Each `notifyRewardAmount` call distributes the supplied **incentive** amount evenly over that period.
 2. **Target rate** – enabled when `targetRewardsPerSecond` is set to a non-zero value. For every `notifyRewardAmount` call the vault computes a period so that the realised emission rate does not exceed the target while still respecting the hard limits:
 
    ```text
