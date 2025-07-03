@@ -6,12 +6,11 @@ Below are important changes shipped to Berachain.
 
 ## 2025-JUL-03
 
-* **Reward Vault upgrades**
+* **[Reward Vault upgrades](/developers/contracts/reward-vault)**
   * Introduced _rate-based_ reward distribution via `targetRewardsPerSecond`, with automatic duration clamping between `MIN_REWARD_DURATION` (3 days) and `MAX_REWARD_DURATION` (7 days).
   * Added `setRewardsDuration`, `setRewardDurationManager`, and related state (`pendingRewardsDuration`, `minRewardDurationForTargetRate`).
-  * New role `rewardVaultManager` controls reward-distribution parameters.
-* **Validator commission cap** – BeraChef now enforces a hard upper-limit of **20 %** on incentive-token commission (`MAX_COMMISSION_RATE = 0.2e4`). Attempts to queue higher values revert; stored values above the cap are clamped on reads.
-* **Documentation refresh** – contract references, guides, and incentives concept page updated to reflect the above mechanics and to replace legacy “reward distribution” terminology with “incentives”.
+* **Validator commission cap** – [`BeraChef`](/developers/contracts/berachef) now enforces a hard upper-limit of **20 %** on incentive-token commission (`MAX_COMMISSION_RATE = 0.2e4`). 
+* **Documentation refresh** – contract references, guides, and the [rate-based distribution section](/learn/pol/incentives#rate-based-reward-distribution-target-rate) were updated to reflect these mechanics.
 
 ## 2025-JUNE-17
 
