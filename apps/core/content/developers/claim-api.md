@@ -72,17 +72,17 @@ The Claim API uses Merkle proofs to verify incentive eligibility. These proofs a
 
 Merkle proofs are a cryptographic method that allows for efficient and secure verification of data within a larger dataset without requiring the entire dataset. In the context of incentive distributions:
 
-1. Each distribution creates a Merkle tree containing all eligible wallet addresses and their corresponding rewards
-2. When a wallet requests their rewards, the API provides a Merkle proof that cryptographically verifies their inclusion in the distribution
-3. This proof can be submitted on-chain to claim the rewards
+1. Each distribution creates a Merkle tree containing all eligible wallet addresses and their corresponding incentives
+2. When a wallet requests their incentives, the API provides a Merkle proof that cryptographically verifies their inclusion in the distribution
+3. This proof can be submitted on-chain to claim the incentives
 
 ### Using Merkle Proofs
 
 When you receive a Merkle proof from the API:
 
 1. Store the proof data securely
-2. Submit the proof to the [BGTIncentiveDistributor](https://docs.berachain.com/developers/contracts/bgtincentivedistributor) smart contract when claiming rewards
-3. The contract will verify the proof's validity before releasing the rewards
+2. Submit the proof to the [BGTIncentiveDistributor](https://docs.berachain.com/developers/contracts/bgtincentivedistributor) smart contract when claiming incentives
+3. The contract will verify the proof's validity before releasing the incentives
 
 ## Endpoints
 
@@ -238,9 +238,9 @@ GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
   }"
 />
 
-#### Get Wallet Rewards
+#### Get Wallet Incentives
 
-Retrieve all rewards for a specific wallet.
+Retrieve all incentives for a specific wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards
@@ -266,9 +266,9 @@ GET /api/v1/wallets/{wallet}/rewards
   }"
 />
 
-#### Get Aggregated Unclaimed Rewards
+#### Get Aggregated Unclaimed Incentives
 
-Retrieve aggregated unclaimed rewards grouped by validators for a wallet.
+Retrieve aggregated unclaimed incentives grouped by validators for a wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards/aggregation
@@ -294,9 +294,9 @@ GET /api/v1/wallets/{wallet}/rewards/aggregation
   }"
 />
 
-#### Get Aggregated Unclaimed Rewards for Specific Validator
+#### Get Aggregated Unclaimed Incentives for Specific Validator
 
-Retrieve aggregated unclaimed rewards for a specific validator and wallet.
+Retrieve aggregated unclaimed incentives for a specific validator and wallet.
 
 ```http
 GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
