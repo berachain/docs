@@ -30,6 +30,14 @@ _Represents default commission rate, set to 5%._
 uint96 internal constant DEFAULT_COMMISSION_RATE = 0.05e4;
 ```
 
+### MAX_COMMISSION_RATE
+
+_Hard upper-limit on validator commission, set to 20 %._
+
+```solidity
+uint96 public constant MAX_COMMISSION_RATE = 0.2e4;
+```
+
 ### MAX_COMMISSION_CHANGE_DELAY
 
 _The maximum delay in block for a validator to change its commission rate._
@@ -142,6 +150,14 @@ Mapping of validator pubkey to its commission rate on incentive tokens
 mapping(bytes valPubkey => CommissionRate) internal valCommission;
 ```
 
+### maxWeightPerVault
+
+_The maximum weight a vault can assume in the reward allocation._
+
+```solidity
+uint96 public maxWeightPerVault;
+```
+
 ## Functions
 
 ### constructor
@@ -200,6 +216,20 @@ Sets the delay in blocks before a new reward allocation can be queued.
 ```solidity
 function setRewardAllocationBlockDelay(uint64 _rewardAllocationBlockDelay) external onlyOwner;
 ```
+
+### setMaxWeightPerVault
+
+Sets the maximum weight a vault can assume in a reward allocation.
+
+```solidity
+function setMaxWeightPerVault(uint96 _maxWeightPerVault) external onlyOwner;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `_maxWeightPerVault` | `uint96` | The maximum weight (in basis points) allowed for a single vault. |
 
 ### setVaultWhitelistedStatus
 
@@ -295,6 +325,8 @@ function queueNewRewardAllocation(
 Queues a commission rate change for a validator on incentive tokens.
 
 _The caller of this function must be the validator operator address._
+
+> **Note** ‑ The requested `commissionRate` **must not exceed** `MAX_COMMISSION_RATE` (20 %). Any call with a higher value will revert.
 
 ```solidity
 function queueValCommission(bytes calldata valPubkey, uint96 commissionRate) external onlyOperator(valPubkey);
@@ -459,6 +491,8 @@ Returns the commission rate of a validator on an incentive tokens.
 
 _Default commission rate is 5% if the commission was never set._
 
+_If the stored commission exceeds the 20 % cap, the value returned by this view is **clamped to `MAX_COMMISSION_RATE`**._
+
 ```solidity
 function getValCommissionOnIncentiveTokens(bytes calldata valPubkey) external view returns (uint96);
 ```
@@ -524,61 +558,3 @@ function getValidatorIncentiveTokenShare(
 | Name     | Type      | Description                                                   |
 | -------- | --------- | ------------------------------------------------------------- |
 | `<none>` | `uint256` | validatorShare The validator's share of the incentive tokens. |
-
-### \_validateWeights
-
-Validates the weights of a reward allocation.
-
-```solidity
-function _validateWeights(Weight[] calldata weights) internal view;
-```
-
-**Parameters**
-
-| Name      | Type       | Description                           |
-| --------- | ---------- | ------------------------------------- |
-| `weights` | `Weight[]` | The weights of the reward allocation. |
-
-### \_checkIfStillValid
-
-Checks if the weights of a reward allocation are still valid.
-
-This method is used to check if the weights of a reward allocation are still valid in flight.
-
-```solidity
-function _checkIfStillValid(Weight[] memory weights) internal view returns (bool);
-```
-
-**Parameters**
-
-| Name      | Type       | Description                           |
-| --------- | ---------- | ------------------------------------- |
-| `weights` | `Weight[]` | The weights of the reward allocation. |
-
-**Returns**
-
-| Name     | Type   | Description                                           |
-| -------- | ------ | ----------------------------------------------------- |
-| `<none>` | `bool` | True if the weights are still valid, otherwise false. |
-
-### \_getOperatorCommission
-
-Gets the operator commission for a validator.
-
-_If the operator commission was never set, default is 5%._
-
-```solidity
-function _getOperatorCommission(bytes calldata valPubkey) internal view returns (uint96);
-```
-
-**Parameters**
-
-| Name        | Type    | Description                      |
-| ----------- | ------- | -------------------------------- |
-| `valPubkey` | `bytes` | The public key of the validator. |
-
-**Returns**
-
-| Name     | Type     | Description                                |
-| -------- | -------- | ------------------------------------------ |
-| `<none>` | `uint96` | The operator commission for the validator. |

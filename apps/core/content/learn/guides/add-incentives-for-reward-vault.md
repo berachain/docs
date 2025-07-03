@@ -11,6 +11,11 @@ The following guide will walk you through the process of adding Incentives to ex
 - Whitelisted Reward Vault with Whitelisted Incentive Token
 - Must be connected with [Token Manager](/learn/pol/incentives#incentive-token-managers) wallet
 
+:::note Commission cap
+A validator's commission on incentive tokens is capped at **20 %** (`MAX_COMMISSION_RATE = 0.2e4`).  
+Queuing a commission above the cap **reverts**. If an older stored value exceeds 20 %, reads are **clamped** to the cap.
+:::
+
 ## How To Add Incentives To A Reward Vault
 
 This will walk you through the process of adding Incentive Tokens to a Whitelisted Reward Vault through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.hub.name}}</a>.
