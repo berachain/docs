@@ -121,22 +121,22 @@ period = max(MIN_REWARD_DURATION,
              min(totalReward / targetRate, MAX_REWARD_DURATION))
 ```
 
-* The result is never shorter than `MIN_REWARD_DURATION` (3 days) and never
-  longer than `MAX_REWARD_DURATION` (7 days).  
-* If the calculated duration would exceed the maximum the actual rate drops
+- The result is never shorter than `MIN_REWARD_DURATION` (3 days) and never
+  longer than `MAX_REWARD_DURATION` (7 days).
+- If the calculated duration would exceed the maximum the actual rate drops
   below the target until rewards are depleted.
 
 Example:
 
-| totalReward | targetRate | resulting duration |
-|-------------|-----------:|-------------------:|
+| totalReward |  targetRate |                    resulting duration |
+| ----------- | ----------: | ------------------------------------: |
 | 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
 
 ### Switching modes
 
-* `setTargetRewardsPerSecond(x)` (called by the Reward Vault Manager) enables
-  rate-based mode.  
-* `setTargetRewardsPerSecond(0)` re-enables duration-based mode; a pending
+- `setTargetRewardsPerSecond(x)` (called by the Reward Vault Manager) enables
+  rate-based mode.
+- `setTargetRewardsPerSecond(0)` re-enables duration-based mode; a pending
   duration (set via `setRewardsDuration`) is applied at the next
   `notifyRewardAmount`.
 

@@ -134,12 +134,12 @@ RewardVaults support **two mutually-exclusive modes** for distributing incentive
 1. **Duration-based (legacy)** – the Reward Duration Manager picks a fixed `rewardsDuration`. Each call to `notifyRewardAmount` drips the supplied reward evenly over that period.
 2. **Target rate** – enabled when `targetRewardsPerSecond` is set to a non-zero value. For every `notifyRewardAmount` call the vault computes a period so that the realised emission rate does not exceed the target while still respecting the hard limits:
 
-    ```text
-    period = max(MIN_REWARD_DURATION,
-                 min(totalReward / targetRate, MAX_REWARD_DURATION))
-    ```
+   ```text
+   period = max(MIN_REWARD_DURATION,
+                min(totalReward / targetRate, MAX_REWARD_DURATION))
+   ```
 
-    This guarantees the duration is never shorter than 3 days and never longer than 7 days.
+   This guarantees the duration is never shorter than 3 days and never longer than 7 days.
 
 Switching back to duration mode is done by setting `targetRewardsPerSecond` to 0 and (optionally) queuing a new duration with `setRewardsDuration`.
 
@@ -254,15 +254,15 @@ Updates the distribution duration **while the vault is in duration-based mode**.
 
 Callable only by the `rewardDurationManager` address and subject to:
 
-* Cool-down: at least 1 day since the previous change (`REWARD_DURATION_COOLDOWN_PERIOD`).
-* Bounds: value must be between `MIN_REWARD_DURATION` (3 days) and `MAX_REWARD_DURATION` (7 days).
+- Cool-down: at least 1 day since the previous change (`REWARD_DURATION_COOLDOWN_PERIOD`).
+- Bounds: value must be between `MIN_REWARD_DURATION` (3 days) and `MAX_REWARD_DURATION` (7 days).
 
 ```solidity
 function setRewardsDuration(uint256 _rewardsDuration) external;
 ```
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name               | Type      | Description              |
+| ------------------ | --------- | ------------------------ |
 | `_rewardsDuration` | `uint256` | New duration in seconds. |
 
 ### setRewardDurationManager
@@ -273,8 +273,8 @@ Transfers the role that controls reward-duration settings.
 function setRewardDurationManager(address _rewardDurationManager) external onlyFactoryVaultManager;
 ```
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name                     | Type      | Description          |
+| ------------------------ | --------- | -------------------- |
 | `_rewardDurationManager` | `address` | New manager address. |
 
 ### whitelistIncentiveToken
@@ -738,4 +738,4 @@ function setRewardVaultManager(address _rewardVaultManager) external onlyFactory
 ```
 
 > **Rate-based reward distribution**  
-When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Rate-based distribution section](../../learn/pol/incentives#rate-based-reward-distribution-target-rate) for maths and examples.
+> When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Rate-based distribution section](../../learn/pol/incentives#rate-based-reward-distribution-target-rate) for maths and examples.
