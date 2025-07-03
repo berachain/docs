@@ -23,7 +23,7 @@ const SIDEBAR = {
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
         { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
         { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
-        { text: "What's New in PoL", link: "/learn/pol/changelog" },
+        { text: "Docs Changelog", link: "/learn/changelog" },
       ],
     },
     {
@@ -265,7 +265,6 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Changelog", link: "/beacon-kit/changelog" },
         { text: "Bectra Hardfork", link: "/nodes/guides/bectra" },
       ],
     },

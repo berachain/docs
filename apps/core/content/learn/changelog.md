@@ -1,11 +1,18 @@
-# Beacon Kit Changelog
+# Berachain Changelog
 
-## v1.2.0: Bectra Hardfork (Bera + Prague + Electra)
+Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributing to the BRIP repository at GitHub](https://github.com/berachain/BRIPs/tree/main) and then posting to the the [Berachain Forum](https://hub.forum.berachain.com/c/brips/9).
+
+Below are important changes shipped to Berachain.
+
+## 2025-JUNE-17
+
+The delay for reward allocation changes has been reduced from 8,191 blocks to 500.
+
+## 2025-JUNE-04: Bectra Hardfork (Bera + Prague + Electra)
 
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
-**[Upgrade instructions are posted](/nodes/guides/bectra)**. 
-This is a *hardfork* activating on Berachain Mainnet on June 4 2025 at 1 PM EDT.
+This is a *hardfork* activated on Berachain Mainnet on June 4 2025.
 Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
 
 Since this is a minor version release (`major.minor.0`), there are breaking changes.
@@ -21,7 +28,7 @@ Since this is a minor version release (`major.minor.0`), there are breaking chan
 
 During `beacond init`, for new installations, `beacond` accepts the new [command line option](beacon-kit/cli#flags) `--beacon-kit.chain-spec`.
 
-**New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade.  New deployments should use those recommended versions.
+**New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade. New deployments should use those recommended versions.
 
 **Support for new EIPs.** 
 
@@ -34,7 +41,23 @@ This release adds support for:
 * **EIP-7702** Set code for EOA 
 * **EIP-7840** Add blob schedule to EL config files
 
-## v1.1.4: configuration advice
+## 2025-MAY
+
+The [Claim API](/developers/claim-api) is now released.
+
+## 2025-APR-24
+
+1. New Maximum of 3 incentives per reward vault
+2. Block Reward Emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
+3. Auto-Incentivizer: fees from default cutting board BEX Reward Vaults will use the fees to automatically offer incentives.
+
+![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
+
+## 2025-APR-18
+
+Reward Allocations limit any one reward vault to 30% share of emissions.
+
+## 2025-APR: Beacon Kit v1.1.4
 
 Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
 
@@ -58,7 +81,6 @@ Also, on startup, beacond now issues warnings about deprecated settings, or sett
   rpc-retries = 10
   ```
 
-
 * `excessive peering`
 
   We recommend that most node operators, including validators, set their maximum inbound peers to 40, and maximum outbound peers to 10.
@@ -72,7 +94,7 @@ Also, on startup, beacond now issues warnings about deprecated settings, or sett
   
 * `State pruning disabled. This may increase memory footprint considerably`
 
-  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage. Simple RPC nodes can use `everything`, and validator nodes should use `everything`.  The only exception is if your node is being used to [calculate block reward claims](https://docs.berachain.com/nodes/guides/distribute-block-rewards), in which case the `default` setting is a good choice, but this **should not** be done on the validator itself.
+  Setting `beacond` to disable state pruning, in which previous states are kept, dramatically increases memory usage. Simple RPC nodes can use `everything`, and validator nodes should use `everything`. The only exception is if your node is being used to [calculate block reward claims](https://docs.berachain.com/nodes/guides/distribute-block-rewards), in which case the `default` setting is a good choice, but this **should not** be done on the validator itself.
   
   **FILE:** `app.toml`
   ```
@@ -80,7 +102,7 @@ Also, on startup, beacond now issues warnings about deprecated settings, or sett
   pruning = "default"         # needed for calculating block reward proofs
   ```
 
-## v1.1.3: fix `deposit mismatch`
+## 2025-MAR: Beacon Kit v1.1.3
 
 This release restructures Consensus Layer and Execution Layer communication to keep them in lock-step.
 
@@ -94,19 +116,22 @@ To that end, configure Reth to not forget blocks on exit with these command line
 --engine.memory-block-buffer-target 0
 ```
 
-You don’t need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
+You don't need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
 
-
-## v1.1.2: security improvements
+## 2025-FEB: Beacon Kit v1.1.2
 
 This is a security-focused update:
 * Harden timestamp validation of EL payload
 * Prevent potential panics and node halts while decoding data
 
-## v1.1.1: fixes potential halt
+## 2025-JAN-20
+
+We launched Proof of Liquidity 1.0 with public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain Mainnet.
+
+## 2025-JAN: Beacon Kit v1.1.1
 
 BeaconKit 1.1.1 fixes ASA-2025-001 and ASA-2025-002, which could lead to a network halt. Moreover it hardens some checks around deposit and blob processing.
 
-## v1.1.0: BGT minting
+## 2025-JAN: Beacon Kit v1.1.0
 
 BeaconKit v1.1.0 unlocks minting of tokens towards the BGT contract.
