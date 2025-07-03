@@ -101,3 +101,44 @@ From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, 
 | Jintao      |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
 
 A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
+
+:::note Commission cap
+Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+:::
+
+---
+
+## Rate-Based Reward Distribution (Target Rate)
+
+With the June 2025 upgrade Reward Vaults can optionally distribute rewards at a
+**target rewards-per-second rate** instead of using a fixed duration.
+
+When `targetRewardsPerSecond` is set to a non-zero value the vault computes the
+period for each `notifyRewardAmount` call as
+
+```text
+period = max(MIN_REWARD_DURATION,
+             min(totalReward / targetRate, MAX_REWARD_DURATION))
+```
+
+* The result is never shorter than `MIN_REWARD_DURATION` (3 days) and never
+  longer than `MAX_REWARD_DURATION` (7 days).  
+* If the calculated duration would exceed the maximum the actual rate drops
+  below the target until rewards are depleted.
+
+Example:
+
+| totalReward | targetRate | resulting duration |
+|-------------|-----------:|-------------------:|
+| 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
+
+### Switching modes
+
+* `setTargetRewardsPerSecond(x)` (called by the Reward Vault Manager) enables
+  rate-based mode.  
+* `setTargetRewardsPerSecond(0)` re-enables duration-based mode; a pending
+  duration (set via `setRewardsDuration`) is applied at the next
+  `notifyRewardAmount`.
+
+See the [RewardVault contract reference](/developers/contracts/reward-vault.md)
+for the on-chain API.
