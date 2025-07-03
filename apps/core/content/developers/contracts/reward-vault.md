@@ -97,7 +97,7 @@ uint256 public constant MAX_REWARD_DURATION = 7 days;
 
 ### rewardVaultManager
 
-Address that is allowed to manage vault parameters such as reward duration or target rate.
+Address authorized to configure reward-distribution parameters (duration or target rate).
 
 ```solidity
 address public rewardVaultManager;
@@ -105,7 +105,7 @@ address public rewardVaultManager;
 
 ### targetRewardsPerSecond
 
-Target (and maximum) rewards-per-second rate, scaled by `PRECISION`. When set to a non-zero value the vault automatically stretches or shrinks the reward period so that actual reward rate never exceeds this target (but never drops below `MIN_REWARD_DURATION`).
+Target (and maximum) reward-emission rate, scaled by `PRECISION`. When non-zero, the vault automatically adjusts `rewardsDuration` so the realised rate never exceeds this value (but never drops below `MIN_REWARD_DURATION`).
 
 ```solidity
 uint256 public targetRewardsPerSecond;
@@ -113,7 +113,7 @@ uint256 public targetRewardsPerSecond;
 
 ### pendingRewardsDuration
 
-Reward duration that will take effect on the next `notifyRewardAmount` call when operating in duration-based mode.
+Duration that will take effect at the next `notifyRewardAmount` call when operating in duration-based mode.
 
 ```solidity
 uint256 public pendingRewardsDuration;
@@ -121,7 +121,7 @@ uint256 public pendingRewardsDuration;
 
 ### minRewardDurationForTargetRate
 
-Guaranteed minimum reward duration that applies when the vault is in target-rate mode and calculated duration would otherwise fall below this value.
+Minimum duration applied by the target-rate algorithm if the computed period would otherwise fall below this value.
 
 ```solidity
 uint256 public minRewardDurationForTargetRate;
@@ -674,7 +674,7 @@ event MinRewardDurationForTargetRateUpdated(uint256 newMinRewardDurationForTarge
 
 ### setRewardsDuration
 
-_Update: now callable only by `rewardVaultManager` and only when the vault is operating in duration-based mode ( `targetRewardsPerSecond == 0`).  The new value is staged in `pendingRewardsDuration` and applied on the next `notifyRewardAmount`._
+_Update:_ callable only by `rewardVaultManager` **and only when `targetRewardsPerSecond == 0`** (duration-based mode). The supplied value is stored in `pendingRewardsDuration` and applied on the next `notifyRewardAmount`.
 
 ```solidity
 function setRewardsDuration(uint256 _rewardsDuration) external onlyRewardVaultManager;
@@ -682,7 +682,7 @@ function setRewardsDuration(uint256 _rewardsDuration) external onlyRewardVaultMa
 
 ### setTargetRewardsPerSecond
 
-Sets (or resets to 0) the target reward rate used in rate-based distribution mode.
+Switches the vault to rate-based mode (or back to duration mode when set to 0).
 
 ```solidity
 function setTargetRewardsPerSecond(uint256 _targetRewardsPerSecond) external onlyRewardVaultManager;
@@ -690,7 +690,7 @@ function setTargetRewardsPerSecond(uint256 _targetRewardsPerSecond) external onl
 
 ### setMinRewardDurationForTargetRate
 
-Sets the lower-bound duration that the target-rate algorithm may produce.
+Sets the minimum duration used by the target-rate algorithm.
 
 ```solidity
 function setMinRewardDurationForTargetRate(uint256 _minRewardDurationForTargetRate) external onlyRewardVaultManager;
@@ -698,11 +698,11 @@ function setMinRewardDurationForTargetRate(uint256 _minRewardDurationForTargetRa
 
 ### setRewardVaultManager
 
-Assigns a new vault manager.
+Assigns a new reward-vault manager.
 
 ```solidity
 function setRewardVaultManager(address _rewardVaultManager) external onlyFactoryVaultManager;
 ```
 
 > **Rate-based reward distribution**  
-> When `targetRewardsPerSecond` is non-zero the vault enters rate-based mode. Each `notifyRewardAmount` call computes a reward duration that yields a per-second emission **no greater than** the configured target, but never less than `minRewardDurationForTargetRate`.  See the [Learn article on reward distribution](../learn/concepts/reward-distribution.md) for full maths and examples.
+> When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Reward Distribution concept](../../learn/concepts/reward-distribution.md) for maths and examples.
