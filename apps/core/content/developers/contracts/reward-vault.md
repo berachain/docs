@@ -13,10 +13,10 @@ to be considered a 'miner' and not a 'trader'._
 
 ## Incentive Emission Mechanics: Duration vs Target Rate
 
-RewardVaults support **two mutually-exclusive modes** for distributing incentives:
+RewardVaults support **two mutually-exclusive modes** for **BGT reward distribution timing**:
 
-1. **Duration-based (legacy)** – the `rewardDurationManager` picks a fixed `rewardsDuration`. Each `notifyRewardAmount` call distributes the supplied **incentive** amount evenly over that period.
-2. **Target rate** – enabled when `targetRewardsPerSecond` is set to a non-zero value. For every `notifyRewardAmount` call the vault computes a period so that the realised emission rate does not exceed the target while still respecting the hard limits:
+1. **Duration-based (legacy)** – the `rewardDurationManager` picks a fixed `rewardsDuration`. Each `notifyRewardAmount` call distributes the supplied **BGT reward** amount evenly over that period.
+2. **Target rate** – enabled when `targetRewardsPerSecond` is set to a non-zero value. For every `notifyRewardAmount` call the vault computes a period so that the realised BGT emission rate does not exceed the target while still respecting the hard limits:
 
    ```text
    period = max(MIN_REWARD_DURATION,
@@ -24,6 +24,8 @@ RewardVaults support **two mutually-exclusive modes** for distributing incentive
    ```
 
    This guarantees the duration is never shorter than 3 days and never longer than 7 days.
+
+**Important Distinction**: These modes control **BGT emission timing only**. They do not affect incentive token exchange rates, which are controlled separately by protocol token managers through `addIncentive()` calls. For details on how incentive tokens work, see the [Incentive Marketplace documentation](/learn/pol/incentives).
 
 Switching back to duration mode is done by setting `targetRewardsPerSecond` to 0 and (optionally) queuing a new duration with `setRewardsDuration`.
 
@@ -355,6 +357,8 @@ function unpause() external onlyFactoryVaultManager;
 
 ## Incentive Management
 
+These functions control **incentive token exchange rates** and deposits. The exchange rates set here (tokens per BGT) operate independently of the BGT emission timing modes described above. For comprehensive information about incentive mechanics, see the [Incentive Marketplace documentation](/learn/pol/incentives).
+
 ### addIncentive
 
 Add an incentive token to the vault.
@@ -399,6 +403,20 @@ function removeIncentiveToken(address token) external onlyFactoryVaultManager on
 | `token` | `address` | The address of the token to remove. |
 
 ## Staking & Delegation
+
+The RewardVault supports **delegation**, which allows one address (the delegate) to stake tokens on behalf of another address (the account holder). This enables use cases such as:
+
+- **Custodial staking**: Exchanges or custodians staking on behalf of users
+- **Smart contract integration**: Protocols automatically staking user funds
+- **Managed staking services**: Third-party services handling staking operations
+
+**Key delegation concepts**:
+- **Delegate**: The address that deposits/withdraws tokens (msg.sender)
+- **Account**: The address that owns the staked position and receives rewards
+- **Self-staked balance**: Tokens staked directly by the account holder
+- **Delegated balance**: Tokens staked by delegates on behalf of the account
+
+**Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
 
 ### delegateStake
 
@@ -870,5 +888,5 @@ Emitted when the target **incentive** emission rate is changed.
 event TargetRewardsPerSecondUpdated(uint256 newTargetRewardsPerSecond, uint256 oldTargetRewardsPerSecond);
 ```
 
-> **Rate-based incentive distribution**  
-When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. See the [Rate-based distribution section](../../learn/pol/incentives#rate-based-reward-distribution-target-rate) for maths and examples.
+> **Rate-based BGT emission timing**  
+When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. This affects **BGT emission timing only** and does not change incentive token exchange rates. See the [BGT Emission Timing Modes section](../../learn/pol/incentives#bgt-emission-timing-modes) for details and examples.
