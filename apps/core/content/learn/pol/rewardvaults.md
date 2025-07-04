@@ -59,7 +59,7 @@ When `targetRewardsPerSecond` is set to a non-zero value, the vault automaticall
 
 **Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
 
-For detailed technical information, see [BGT Emission Timing vs Incentive Exchange Rates](/learn/pol/incentives#bgt-emission-timing-vs-incentive-exchange-rates) and the [RewardVault contract reference](/developers/contracts/reward-vault).
+For technical implementation details, see the [RewardVault contract reference](/developers/contracts/reward-vault). To understand how protocols offer incentive tokens that are distributed alongside BGT rewards, see the [Incentive Marketplace](/learn/pol/incentives).
 
 ## Incentives
 
