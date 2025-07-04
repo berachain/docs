@@ -114,8 +114,8 @@ The `minRewardDurationForTargetRate` parameter controls the minimum distribution
 
 Example of target rate calculation:
 
-| totalReward |  targetRate |                    resulting duration |
-| ----------- | ----------: | ------------------------------------: |
+| totalReward |     targetRate |                    resulting duration |
+| ----------- | -------------: | ------------------------------------: |
 | 10 000 BERA | 0.02572 BERA/s | 388,800 s ≈ 4.5 days ≈ 194,400 blocks |
 
 For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
