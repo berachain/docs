@@ -66,22 +66,23 @@ Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward di
 
 In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
 
+Duration-based mode enforces the 3-7 day range: if switching from target rate mode where the duration exceeded 7 days, the duration will be capped at 7 days.
+
 **Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
 
 ### Target Rate Mode
 
-When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting minimum (3 days) and maximum (7 days) duration limits.
+When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting the minimum duration limit.
 
 The computation follows this formula:
 
 ```text
-period = max(MIN_REWARD_DURATION,
-             min(totalReward / targetRate, MAX_REWARD_DURATION))
+period = max(minRewardDurationForTargetRate, totalReward / targetRate)
 ```
 
-This guarantees the duration is never shorter than 3 days and never longer than 7 days.
+This guarantees the duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
 
-**Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days. However, if this exceeds the 7-day maximum, it will distribute over 7 days at ~14.3 BGT/day.
+**Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days at exactly 10 BGT/day to maintain the target rate.
 
 ### BGT Emission Timing vs Incentive Exchange Rates
 
@@ -96,6 +97,15 @@ It's important to understand that **BGT emission timing** and **incentive token 
 
 **Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
 
+### Minimum Duration Configuration
+
+The `minRewardDurationForTargetRate` parameter controls the minimum distribution period in target rate mode:
+
+- **Default**: 3 days (259,200 seconds)
+- **Range**: Between 3-7 days (259,200 to 604,800 seconds)
+- **Management**: Only the `rewardVaultManager` can modify this value
+- **Purpose**: Ensures rewards are distributed over a reasonable minimum timeframe even when target rates would allow shorter periods
+
 ### Switching Between Modes
 
 - `setTargetRewardsPerSecond(x)` enables target rate mode
@@ -106,7 +116,7 @@ Example of target rate calculation:
 
 | totalReward |  targetRate |                    resulting duration |
 | ----------- | ----------: | ------------------------------------: |
-| 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
+| 10 000 BERA | 0.02572 BERA/s | 388,800 s ≈ 4.5 days ≈ 194,400 blocks |
 
 For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
 
