@@ -65,13 +65,13 @@ const vault = new ethers.Contract(
   [
     "function setRelayerApproval(address sender, address relayer, bool approved)",
   ],
-  wallet,
+  wallet
 );
 
 await vault.setRelayerApproval(
   wallet.address, // sender
   POOL_CREATION_HELPER_ADDRESS, // relayer
-  true, // approved
+  true // approved
 );
 ```
 
@@ -84,7 +84,7 @@ for (const [i, tokenAddress] of createPoolTokens.entries()) {
   const tokenContract = new ethers.Contract(
     tokenAddress,
     ["function approve(address spender, uint256 amount)"],
-    wallet,
+    wallet
   );
 
   await tokenContract.approve(VAULT_ADDRESS, amountsIn[i]);
@@ -99,7 +99,7 @@ Finally, create and join the pool in a single transaction. We leverage the funct
 const poolCreationHelper = new ethers.Contract(
   POOL_CREATION_HELPER_ADDRESS,
   POOL_CREATION_HELPER_ABI,
-  wallet,
+  wallet
 );
 
 const tx = await poolCreationHelper.createAndJoinWeightedPool(
@@ -112,6 +112,6 @@ const tx = await poolCreationHelper.createAndJoinWeightedPool(
   ethers.parseUnits("0.01", 18), // 1% swap fee
   amountsIn,
   wallet.address, // pool owner
-  ethers.keccak256(ethers.toUtf8Bytes(`${poolName}-${wallet.address}`)), // salt
+  ethers.keccak256(ethers.toUtf8Bytes(`${poolName}-${wallet.address}`)) // salt
 );
 ```

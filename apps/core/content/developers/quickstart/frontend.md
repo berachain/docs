@@ -313,7 +313,7 @@ const connect = async () => {
       error?.message ?? "Unknown wallet connection error.";
     devErrorConnect.classList = devErrorConnect.classList.value.replaceAll(
       "hidden",
-      "",
+      ""
     );
   }
   console.groupEnd();
@@ -361,7 +361,7 @@ const onSubmitEthBlockNumber = async (event) => {
 
     preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(
       result,
-      16,
+      16
     )}`;
   } catch (error) {
     console.log({ error });

@@ -164,8 +164,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/NavBar.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -173,8 +173,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/NavBarMenu.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -182,8 +182,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/NavBarMenuLink.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -191,8 +191,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/Flyout.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -200,8 +200,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -209,8 +209,8 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/Flyout.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
           {
@@ -218,12 +218,12 @@ export default withMermaid(
             replacement: fileURLToPath(
               new URL(
                 "../node_modules/@berachain/ui/Sidebar.vue",
-                import.meta.url,
-              ),
+                import.meta.url
+              )
             ),
           },
         ],
       },
     },
-  }),
+  })
 );
