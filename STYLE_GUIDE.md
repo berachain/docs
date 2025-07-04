@@ -342,19 +342,19 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
     {
       name: "Testnet (Bepolia)",
       url: "https://bepolia.api-claim.berachain.com",
-      id: "bepolia",
+      id: "bepolia"
     },
     {
       name: "Mainnet",
       url: "https://api-claim.berachain.com",
-      id: "mainnet",
+      id: "mainnet"
     },
     {
       name: "Custom URL",
       url: "", // User can input their own
       id: "custom",
-      allowCustomUrl: true,
-    },
+      allowCustomUrl: true
+    }
   ];
   ```
 
@@ -420,9 +420,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
 1.  **Import the configuration:**
 
     ```javascript
-    <script setup>
-      import config from '@berachain/config/constants.json'; // Other imports...
-    </script>
+    <script setup>import config from '@berachain/config/constants.json'; // Other imports...</script>
     ```
 
 2.  **Use in Vue expressions:**
