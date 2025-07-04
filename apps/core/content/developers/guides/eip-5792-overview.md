@@ -17,7 +17,13 @@ head:
 
 # EIP-5792: Wallet Batching Capabilities
 
-EIP-5792 is a proposed Ethereum Improvement Proposal that enables applications to request wallets to process batches of on-chain write calls and check their status. This standard introduces a new wallet method `wallet_sendCalls` along with supporting methods for status checking and capability discovery.
+EIP-5792 is a proposed Ethereum Improvement Proposal that enables applications to request wallets to process batches of on-chain write calls and to check their status. This standard introduces a new wallet method, `wallet_sendCalls`, along with supporting methods for status checking and capability discovery.
+
+EIP-5792 represents a significant step forward in improving the user experience of Ethereum applications. By providing a standardized way for applications to request batch operations from wallets, it eliminates the need for complex multi-transaction flows and enables more intuitive user interfaces.
+
+The combination of EIP-5792 (application interface) and EIP-7702 (on-chain execution) creates a powerful foundation for the future of Ethereum transaction batching, making the ecosystem more accessible to both developers and end users.
+
+<!-- ![EIP-5792 Overview](/assets/eip5792-overview.png) -->
 
 :::tip
 **Practical Implementation**: For a hands-on guide to implementing EIP-5792 with MetaMask, see our [MetaMask Guide](/developers/guides/eip-5792-metamask-guide).
@@ -25,75 +31,79 @@ EIP-5792 is a proposed Ethereum Improvement Proposal that enables applications t
 **Working Example**: For a complete, working implementation with React and TypeScript, see our [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792).
 :::
 
-![EIP-5792 Overview](/assets/eip5792-overview.png)
+:::info
+**Status**: EIP-5792 is currently in "Last Call" with a deadline of May 5, 2025. There is significant support from wallets and tools.
+:::
 
 :::info
-**Status**: EIP-5792 is currently in "Last Call" with a deadline of May 5, 2025. There is significant support across wallets and tools.
+**Get Involved**: Review the EIP, test implementations, and join the conversation on Ethereum Magicians to help shape the future of wallet batching capabilities.
 :::
 
 ## What is EIP-5792?
 
-EIP-5792 enables applications to ask a wallet to process a batch of on-chain write calls and to check on the status of those calls. These calls can be enhanced by `capabilities` (such as atomic execution or paymasters), if they are supported by the wallet.
+EIP-5792 enables applications to request that a wallet process a batch of on-chain write calls and check the status of those calls. These calls can be enhanced by `capabilities` (such as atomic execution or paymasters) if supported by the wallet.
 
 ### Key Components
 
-- **`wallet_sendCalls`**: Main method for submitting batch transactions
-- **`wallet_getCallsStatus`**: Check status of submitted calls
-- **`wallet_showCallsStatus`**: Display call information to users
-- **`wallet_getCapabilities`**: Discover wallet capabilities
-- **Capabilities**: Features like atomic execution, paymaster support, flow control, and auxiliary funds
+- **`wallet_sendCalls`**: The main method for submitting batch transactions.
+- **`wallet_getCallsStatus`**: Checks the status of submitted calls.
+- **`wallet_showCallsStatus`**: Displays call information to users.
+- **`wallet_getCapabilities`**: Discovers wallet capabilities.
+- **Capabilities**: Features such as atomic execution, paymaster support, flow control, and auxiliary funds.
 
 ## Relationship with EIP-7702
 
 EIP-5792 and EIP-7702 work together to provide a complete batching solution:
 
-- **EIP-7702**: Enables EOAs to temporarily upgrade to smart contract functionality for batch execution
-- **EIP-5792**: Provides the wallet interface and capabilities discovery for batch operations
+- **EIP-7702**: Enables EOAs to temporarily upgrade to smart contract functionality for batch execution.
+- **EIP-5792**: Provides the wallet interface and capability discovery for batch operations.
 
-The approaching Pectra upgrade includes EIP-7702, which will enable Externally Owned Accounts (EOAs) to set their address to be represented by the code of an existing smart contract. This means any account on Ethereum will be able to make batched calls (assuming the EOA's designated smart contract supports it).
+The Bectra upgrade includes EIP-7702, which enables Externally Owned Accounts (EOAs) to have their address represented by the code of an existing smart contract. This means any account on Berachain will be able to make batched calls, assuming the EOA's designated smart contract supports it.
 
 EIP-5792 provides the application layer interface to access these new capabilities.
 
 ## User Benefits
 
-End users will no longer need to manually execute multiple transactions one by one. The canonical example is the "approve and transfer" flow for ERC-20 tokens, which currently requires two transactions and necessitates a disorienting UI, particularly for users who are new to the space.
+End users will no longer need to manually execute multiple transactions one by one. The canonical example is the "approve and transfer" flow for ERC-20 tokens, which currently requires two transactions and results in a disorienting UI, especially for users who are new to the space.
 
 ### Improved User Experience
 
-- **Simplified Interfaces**: User interfaces can be simpler and more intuitive
-- **Reduced Transaction Count**: Multiple operations in a single transaction
-- **Better Context**: Wallets can provide richer confirmation dialogs with full batch context
-- **Atomic Execution**: All operations succeed or fail together
+- **Simplified Interfaces**: User interfaces can be simpler and more intuitive.
+- **Reduced Transaction Count**: Multiple operations can be performed in a single transaction.
+- **Better Context**: Wallets can provide richer confirmation dialogs with full batch context.
+- **Atomic Execution**: All operations either succeed or fail together.
 
 ## Developer Benefits
 
 ### For Application Developers
 
-- **Simplified Integration**: No need to "guess" what a given wallet is capable of
-- **Capability Discovery**: Clear indication of supported features
-- **Reduced Complexity**: No need to create complex multi-transaction interfaces
-- **Future-Proof**: Foundation for iterative functionality improvements
+- **Simplified Integration**: No need to "guess" what a given wallet is capable of.
+- **Capability Discovery**: Clear indication of supported features.
+- **Reduced Complexity**: No need to create complex multi-transaction interfaces.
+- **Future-Proof**: Provides a foundation for iterative functionality improvements.
 
 ### For Wallet Developers
 
-- **Richer Context**: More information about application intent
-- **Better UX**: Can show comprehensive batch information instead of individual transactions
-- **Capability Signaling**: Can indicate support for advanced features
-- **Extensible**: Framework for adding new capabilities over time
+- **Richer Context**: Provides more information about application intent.
+- **Better UX**: Allows the display of comprehensive batch information instead of individual transactions.
+- **Capability Signaling**: Indicates support for advanced features.
+- **Extensible**: Serves as a framework for adding new capabilities over time.
 
 ## Atomic Execution Capabilities
 
-Wallets can indicate their support for atomic execution of batches through the `atomic` capability, which can have three states:
+Wallets can indicate their support for atomic execution of batches through the `atomic` capability, which can have three possible states:
 
-- **`supported`**: The wallet will execute all calls atomically and contiguously
-- **`ready`**: The wallet is able to upgrade to `supported` pending user approval (e.g., via EIP-7702)
-- **`unsupported`**: The wallet does not provide any atomicity or contiguity guarantees
+- **`supported`**: The wallet executes all calls atomically and contiguously.
+- **`ready`**: The wallet can be upgraded to `supported`, pending user approval (e.g., via EIP-7702).
+- **`unsupported`**: The wallet does not provide any atomicity or contiguity guarantees.
 
 ## Core Methods
 
+The following are core methods that can be called by libraries for wallets.
+
 ### wallet_getCapabilities
 
-Applications call this method to discover what capabilities a wallet supports:
+Applications call this method to discover which capabilities the wallet supports:
 
 ```typescript
 // Example capability discovery
@@ -120,6 +130,7 @@ const result = await wallet.request({
   method: "wallet_sendCalls",
   params: {
     calls: [
+      // Notice the multiple requests are an array
       {
         to: "0x...",
         data: "0x...",
@@ -154,9 +165,9 @@ const status = await wallet.request({
 
 ## Use Cases
 
-### 1. Approve and Transfer
+### 1 - Approve and Transfer
 
-The most common use case - approve a token and then transfer it in a single operation:
+The most common use case is to approve a token and then transfer it in a single operation:
 
 ```typescript
 const calls = [
@@ -181,9 +192,9 @@ const calls = [
 ];
 ```
 
-### 2. Complex DeFi Operations
+### 2 - Complex DeFi Operations
 
-Multi-step DeFi operations like swapping tokens and then staking:
+Multi-step DeFi operations, such as swapping tokens and then staking:
 
 ```typescript
 const calls = [
@@ -216,9 +227,9 @@ const calls = [
 ];
 ```
 
-### 3. NFT Operations
+### 3 - NFT Operations
 
-Batch NFT operations like minting and setting metadata:
+Batch NFT operations, such as minting and setting metadata:
 
 ```typescript
 const calls = [
@@ -258,7 +269,7 @@ const calls = [
 
 ## Implementation Example
 
-Here's a complete example of how to implement EIP-5792 in a web application:
+Here's a complete example demonstrating how to implement EIP-5792 in a web application:
 
 ```typescript
 // EIP-5792 implementation example
@@ -333,7 +344,7 @@ console.log("Batch status:", status);
 
 ### From Multicall3
 
-If you're currently using Multicall3, migration to EIP-5792 is straightforward:
+If you are currently using Multicall3, migrating to EIP-5792 is straightforward:
 
 ```typescript
 // Before: Multicall3
@@ -356,7 +367,7 @@ const result = await wallet.request({
 
 ### From Manual Batching
 
-If you're manually handling multiple transactions:
+If you are manually handling multiple transactions:
 
 ```typescript
 // Before: Manual batching
@@ -389,9 +400,9 @@ await wallet.request({
 
 ## Best Practices
 
-### 1. Always Check Capabilities
+### 1 - Always Check Capabilities
 
-Before sending calls, always check what the wallet supports:
+Before sending calls, always check which capabilities the wallet supports:
 
 ```typescript
 const capabilities = await wallet.request({
@@ -402,9 +413,9 @@ const capabilities = await wallet.request({
 const useAtomic = capabilities.atomic === "supported";
 ```
 
-### 2. Handle Errors Gracefully
+### 2 - Handle Errors Gracefully
 
-Implement proper error handling for unsupported features:
+Implement proper error handling for unsupported capabilities:
 
 ```typescript
 try {
@@ -424,9 +435,9 @@ try {
 }
 ```
 
-### 3. Provide Fallbacks
+### 3 - Provide Fallbacks
 
-Always provide fallback mechanisms for wallets that don't support EIP-5792:
+Always provide fallback mechanisms for wallets that do not support EIP-5792:
 
 ```typescript
 async function executeBatch(calls: any[]) {
@@ -444,9 +455,9 @@ async function executeBatch(calls: any[]) {
 }
 ```
 
-### 4. Monitor Status
+### 4 - Monitor Status
 
-Use the status checking methods to provide better user feedback:
+Use the status-checking methods to provide better user feedback:
 
 ```typescript
 const result = await wallet.request({
@@ -475,19 +486,19 @@ checkStatus();
 
 ### Upcoming Features
 
-- **Paymaster Integration**: Native support for gasless transactions
-- **Flow Control**: Advanced transaction ordering and dependencies
-- **Auxiliary Funds**: Support for complex funding scenarios
-- **Cross-Chain Batching**: Extensions for multi-chain operations
+- **Paymaster Integration**: Native support for gasless transactions.
+- **Flow Control**: Advanced transaction ordering and dependencies.
+- **Auxiliary Funds**: Support for complex funding scenarios.
+- **Cross-Chain Batching**: Extensions for multi-chain operations.
 
 ### Ecosystem Adoption
 
-As EIP-5792 moves toward finalization, expect to see:
+As EIP-5792 moves toward finalization, you can expect to see:
 
-- **Wallet Integration**: Major wallets adding native support
-- **Framework Updates**: Libraries like ethers.js and viem adding built-in support
-- **Tooling**: Development tools and debugging utilities
-- **Standards**: Additional EIPs building on the foundation
+- **Wallet Integration**: Major wallets adding native support.
+- **Framework Updates**: Libraries like ethers.js and viem adding built-in support.
+- **Tooling**: Development tools and debugging utilities.
+- **Standards**: Additional EIPs building on this foundation.
 
 ## Resources
 
@@ -497,13 +508,3 @@ As EIP-5792 moves toward finalization, expect to see:
 - [GitHub Repository](https://github.com/ethereum/EIPs/pull/5792)
 - [Ethereum Magicians Discussion](https://ethereum-magicians.org/t/eip-5792-wallet-send-calls/12345)
 - [Berachain EIP-5792 Implementation Guide](https://github.com/berachain/guides/tree/main/apps/eip-5792)
-
-## Conclusion
-
-EIP-5792 represents a significant step forward in improving the user experience of Ethereum applications. By providing a standardized way for applications to request batch operations from wallets, it eliminates the need for complex multi-transaction flows and enables more intuitive user interfaces.
-
-The combination of EIP-5792 (application interface) and EIP-7702 (on-chain execution) creates a powerful foundation for the future of Ethereum transaction batching, making the ecosystem more accessible to both developers and end users.
-
-:::tip
-**Get Involved**: Review the EIP, test implementations, and join the conversation on Ethereum Magicians to help shape the future of wallet batching capabilities.
-:::
