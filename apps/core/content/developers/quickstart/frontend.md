@@ -170,10 +170,7 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
         >
           Connect Wallet (Unsupported)
         </button>
-        <div
-          id="div-error-connect"
-          class="mt-4 bg-red-300 rounded p-6 text-red-800 hidden"
-        ></div>
+        <div id="div-error-connect" class="mt-4 bg-red-300 rounded p-6 text-red-800 hidden"></div>
       </div>
       <!-- END -->
 
@@ -181,13 +178,9 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
 
       <!-- START: Main section that will appear when our wallet is connected -->
       <section id="section-connected" class="hidden">
-        <h2 id="wallet-connection" class="text-xl text-zinc-200 mb-4">
-          Wallet Connection
-        </h2>
+        <h2 id="wallet-connection" class="text-xl text-zinc-200 mb-4">Wallet Connection</h2>
 
-        <p class="text-zinc-400 mb-4">
-          If you're seeing this then your wallet is connected.
-        </p>
+        <p class="text-zinc-400 mb-4">If you're seeing this then your wallet is connected.</p>
 
         <div class="mb-4">
           <button
@@ -199,8 +192,8 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
           </button>
           <p class="text-sm text-zinc-300">
             <small
-              >*Remember you're not really disconnecting unless the wallet
-              removes the website from Connected Sites.</small
+              >*Remember you're not really disconnecting unless the wallet removes the website from Connected
+              Sites.</small
             >
           </p>
         </div>
@@ -219,16 +212,11 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
 
         <hr class="border-zinc-700 mb-8" />
 
-        <h2 id="eth-blocknumber" class="text-xl text-zinc-100 mb-4">
-          Get Berachain Block Number
-        </h2>
+        <h2 id="eth-blocknumber" class="text-xl text-zinc-100 mb-4">Get Berachain Block Number</h2>
 
         <p class="text-zinc-400 mb-4">
-          Will make a JSON-RPC request to Berachain to retrieve the current
-          block number with
-          <span class="bg-zinc-700 text-zinc-200 py-1 px-1.5 rounded"
-            >eth_blockNumber</span
-          >.
+          Will make a JSON-RPC request to Berachain to retrieve the current block number with
+          <span class="bg-zinc-700 text-zinc-200 py-1 px-1.5 rounded">eth_blockNumber</span>.
         </p>
 
         <form id="form-eth-blocknumber">
@@ -244,9 +232,7 @@ To that, we'll modify out `index.html` file by adding a script tag for CDN to Ta
           <!-- Where the results are displayed -->
           <div class="mb-4">
             <label class="block mb-2 text-zinc-600">Response</label>
-            <code
-              class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"
-            >
+            <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200">
               <pre id="pre-eth-blocknumber"></pre>
             </code>
           </div>
@@ -287,7 +273,7 @@ const connect = async () => {
   // Attempt to connect to wallet with JSON-RPC request
   try {
     const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
+      method: "eth_requestAccounts"
     });
     const chainId = await ethereum.request({ method: "eth_chainId" });
 
@@ -309,12 +295,8 @@ const connect = async () => {
     preWalletNetwork.innerHTML = `${chainId}`;
   } catch (error) {
     console.log({ error });
-    devErrorConnect.innerHTML =
-      error?.message ?? "Unknown wallet connection error.";
-    devErrorConnect.classList = devErrorConnect.classList.value.replaceAll(
-      "hidden",
-      ""
-    );
+    devErrorConnect.innerHTML = error?.message ?? "Unknown wallet connection error.";
+    devErrorConnect.classList = devErrorConnect.classList.value.replaceAll("hidden", "");
   }
   console.groupEnd();
 };
@@ -354,15 +336,12 @@ const onSubmitEthBlockNumber = async (event) => {
   // Attempt request for block number
   try {
     const result = await window.ethereum.request({
-      method: "eth_blockNumber",
+      method: "eth_blockNumber"
     });
 
     console.log({ result });
 
-    preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(
-      result,
-      16
-    )}`;
+    preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(result, 16)}`;
   } catch (error) {
     console.log({ error });
     preEthBlockNumber.innerHTML = error?.message ?? "Unknown JSON-RPC error.";

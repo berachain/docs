@@ -1,11 +1,11 @@
 // Imports
 // ========================================================
-import { defineConfig } from "vitepress";
-import { fileURLToPath, URL } from "node:url";
-import markdownItConditionalRender from "markdown-it-conditional-render";
-import { sidebar } from "./sidebar";
-import { constants } from "@berachain/config/constants";
-import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
+import { defineConfig } from 'vitepress';
+import { fileURLToPath, URL } from 'node:url';
+import markdownItConditionalRender from 'markdown-it-conditional-render';
+import { sidebar } from './sidebar';
+import { constants } from '@berachain/config/constants';
+import { vercelToolbar } from '@vercel/toolbar/plugins/vite';
 
 // Config
 // ========================================================
@@ -14,11 +14,11 @@ import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
 // ::if testnet
 // <your content>
 // ::endif
-const ENABLED_FLAGS = ["testnet", "mainnet"];
+const ENABLED_FLAGS = ['testnet', 'mainnet'];
 /**
  *
  */
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 // Main Configuration
 // ========================================================
@@ -27,44 +27,41 @@ export default defineConfig({
   title: `${constants.websites.docsBex.name}`,
   description: `${constants.websites.docsBex.description}`,
   cleanUrls: true,
-  srcDir: "content",
+  srcDir: 'content',
   ignoreDeadLinks: true,
   head: [
-    ["meta", { name: "og:type", content: "website" }],
-    ["meta", { name: "og:locale", content: "en" }],
+    ['meta', { name: 'og:type', content: 'website' }],
+    ['meta', { name: 'og:locale', content: 'en' }],
+    ['meta', { name: 'og:site_name', content: `${constants.websites.docsBex.name}` }],
     [
-      "meta",
-      { name: "og:site_name", content: `${constants.websites.docsBex.name}` },
-    ],
-    [
-      "meta",
+      'meta',
       {
-        name: "og:image",
+        name: 'og:image',
         content: `${constants.websites.docsBex.url}/previewDocs.jpg`,
       },
     ],
     [
-      "script",
-      { id: "va" },
+      'script',
+      { id: 'va' },
       `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`,
     ],
     IS_PRODUCTION
-      ? ["script", { src: "/_vercel/insights/script.js", defer: "true" }]
+      ? ['script', { src: '/_vercel/insights/script.js', defer: 'true' }]
       : [
-          "meta",
+          'meta',
           {
-            name: "environment",
-            content: "development",
+            name: 'environment',
+            content: 'development',
           },
         ],
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/assets/icon.svg' }],
   ],
   sitemap: {
     hostname: `${constants.websites.docsBex.url}`,
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    returnToTopLabel: "Up Only",
+    returnToTopLabel: 'Up Only',
     nav: [
       {
         text: `<span style="display: flex; align-items: center; gap: 6px;">
@@ -85,16 +82,16 @@ export default defineConfig({
           },
         ],
       },
-      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
+      { text: 'Learn', link: 'learn/index', activeMatch: '/learn/' },
       {
-        text: "Developers",
-        link: "developers/index",
-        activeMatch: "/developers/",
+        text: 'Developers',
+        link: 'developers/index',
+        activeMatch: '/developers/',
       },
     ],
     outline: [2, 3],
     search: {
-      provider: "local",
+      provider: 'local',
       options: {
         miniSearch: {
           /**
@@ -118,15 +115,15 @@ export default defineConfig({
     sidebar,
     siteTitle: `🐻⛓️ ${constants.websites.docsBex.name}`,
     socialLinks: [
-      { icon: "twitter", link: `${constants.socials.twitter}` },
-      { icon: "discord", link: `${constants.socials.discord}` },
-      { icon: "github", link: `${constants.socials.github}` },
+      { icon: 'twitter', link: `${constants.socials.twitter}` },
+      { icon: 'discord', link: `${constants.socials.discord}` },
+      { icon: 'github', link: `${constants.socials.github}` },
       {
         icon: {
           svg: '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>',
         },
         link: `${constants.socials.telegram}`,
-        ariaLabel: "Berachain Portal",
+        ariaLabel: 'Berachain Portal',
       },
     ],
   },
@@ -149,57 +146,37 @@ export default defineConfig({
       alias: [
         {
           find: /^.*\/VPNavBar\.vue$/,
-          replacement: fileURLToPath(
-            new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
-          ),
+          replacement: fileURLToPath(new URL('../node_modules/@berachain/ui/NavBar.vue', import.meta.url)),
         },
         {
           find: /^.*\/VPNavBarMenu\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBarMenu.vue",
-              import.meta.url
-            )
+            new URL('../node_modules/@berachain/ui/NavBarMenu.vue', import.meta.url)
           ),
         },
         {
           find: /^.*\/VPNavBarMenuLink\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBarMenuLink.vue",
-              import.meta.url
-            )
+            new URL('../node_modules/@berachain/ui/NavBarMenuLink.vue', import.meta.url)
           ),
         },
         {
           find: /^.*\/VPFlyout\.vue$/,
-          replacement: fileURLToPath(
-            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
-          ),
+          replacement: fileURLToPath(new URL('../node_modules/@berachain/ui/Flyout.vue', import.meta.url)),
         },
         {
           find: /^.*\/VPNavScreenMenuGroup\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
-              import.meta.url
-            )
+            new URL('../node_modules/@berachain/ui/NavScreenMenuGroup.vue', import.meta.url)
           ),
         },
         {
           find: /^.*\/VPFlyout\.vue$/,
-          replacement: fileURLToPath(
-            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
-          ),
+          replacement: fileURLToPath(new URL('../node_modules/@berachain/ui/Flyout.vue', import.meta.url)),
         },
         {
           find: /^.*\/VPSidebar\.vue$/,
-          replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/Sidebar.vue",
-              import.meta.url
-            )
-          ),
+          replacement: fileURLToPath(new URL('../node_modules/@berachain/ui/Sidebar.vue', import.meta.url)),
         },
       ],
     },

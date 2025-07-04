@@ -1,6 +1,6 @@
 // Imports
 // ========================================================
-import { BrowserProvider, Eip1193Provider } from "ethers";
+import { BrowserProvider, Eip1193Provider } from 'ethers';
 
 // Types
 // ========================================================
@@ -10,4 +10,4 @@ declare global {
   }
 }
 
-declare module "@rive-app/canvas";
+declare module '@rive-app/canvas';

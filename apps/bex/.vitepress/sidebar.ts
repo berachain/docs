@@ -1,7 +1,7 @@
 // Imports
 // ========================================================
-import { DefaultTheme } from "vitepress";
-import { constants } from "@berachain/config/constants";
+import { DefaultTheme } from 'vitepress';
+import { constants } from '@berachain/config/constants';
 
 // Constants
 // ========================================================
@@ -11,58 +11,58 @@ const SIDEBAR = {
    */
   LEARN: [
     {
-      text: "Introduction To BEX",
+      text: 'Introduction To BEX',
       items: [
-        { text: "What is BEX?", link: "/learn/" },
+        { text: 'What is BEX?', link: '/learn/' },
         {
-          text: "BEX dApp",
+          text: 'BEX dApp',
           link: `${constants.mainnet.dapps.bex.url}`,
-          target: "_blank",
-          rel: "no-referrer",
+          target: '_blank',
+          rel: 'no-referrer',
         },
       ],
     },
     {
-      text: "Core Concepts",
+      text: 'Core Concepts',
       items: [
-        { text: "AMMs", link: "/learn/concepts/amm" },
-        { text: "Governance", link: "/learn/concepts/governance" },
-        { text: "Vault", link: "/learn/concepts/vault" },
+        { text: 'AMMs', link: '/learn/concepts/amm' },
+        { text: 'Governance', link: '/learn/concepts/governance' },
+        { text: 'Vault', link: '/learn/concepts/vault' },
         {
-          text: "Pools",
-          link: "/learn/concepts/pools",
+          text: 'Pools',
+          link: '/learn/concepts/pools',
           items: [
             {
-              text: "Weighted Pools",
-              link: "/learn/concepts/pools/weighted-pools",
+              text: 'Weighted Pools',
+              link: '/learn/concepts/pools/weighted-pools',
             },
             {
-              text: "Stable Pools",
-              link: "/learn/concepts/pools/stable-pools",
+              text: 'Stable Pools',
+              link: '/learn/concepts/pools/stable-pools',
             },
           ],
         },
-        { text: "Flash Loans", link: "/learn/concepts/flash-loans" },
+        { text: 'Flash Loans', link: '/learn/concepts/flash-loans' },
       ],
     },
     {
-      text: "User Guides",
+      text: 'User Guides',
       items: [
-        { text: "Add Token Metadata", link: "/learn/guides/add-token" },
-        { text: "Swaps", link: "/learn/guides/swaps" },
-        { text: "Fees", link: "/learn/guides/fees" },
+        { text: 'Add Token Metadata', link: '/learn/guides/add-token' },
+        { text: 'Swaps', link: '/learn/guides/swaps' },
+        { text: 'Fees', link: '/learn/guides/fees' },
         {
-          text: "Liquidity Provision",
-          link: "/learn/guides/liquidity/intro",
+          text: 'Liquidity Provision',
+          link: '/learn/guides/liquidity/intro',
           items: [
-            { text: "Intro", link: "/learn/guides/liquidity/intro" },
-            { text: "Proof of Liquidity", link: "/learn/guides/liquidity/pol" },
+            { text: 'Intro', link: '/learn/guides/liquidity/intro' },
+            { text: 'Proof of Liquidity', link: '/learn/guides/liquidity/pol' },
           ],
         },
-        { text: "Pool Creation", link: "/learn/guides/pool-creation" },
+        { text: 'Pool Creation', link: '/learn/guides/pool-creation' },
         {
-          text: "Pool Configuration",
-          link: "/learn/guides/pool-configuration",
+          text: 'Pool Configuration',
+          link: '/learn/guides/pool-configuration',
         },
       ],
     },
@@ -72,131 +72,131 @@ const SIDEBAR = {
    */
   DEVELOPERS: [
     {
-      text: "BEX For Devs",
+      text: 'BEX For Devs',
       items: [
-        { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Migration Guide", link: "/developers/migration-guide" },
+        { text: 'Deployed Contracts', link: '/developers/' },
+        { text: 'Migration Guide', link: '/developers/migration-guide' },
       ],
     },
     {
-      text: "Contract References",
+      text: 'Contract References',
       items: [
         {
-          text: "Vault Contract",
-          link: "/developers/contracts/vault",
+          text: 'Vault Contract',
+          link: '/developers/contracts/vault',
         },
         {
-          text: "Query Contract",
-          link: "/developers/contracts/query",
+          text: 'Query Contract',
+          link: '/developers/contracts/query',
         },
         {
-          text: "Pool Factory Contracts",
+          text: 'Pool Factory Contracts',
           items: [
             {
-              text: "WeightedPoolFactory",
-              link: "/developers/contracts/factory/weighted-pool-factory",
+              text: 'WeightedPoolFactory',
+              link: '/developers/contracts/factory/weighted-pool-factory',
             },
             {
-              text: "StablePoolFactory",
-              link: "/developers/contracts/factory/stable-pool-factory",
+              text: 'StablePoolFactory',
+              link: '/developers/contracts/factory/stable-pool-factory',
             },
             {
-              text: "PoolCreationHelper",
-              link: "/developers/contracts/factory/pool-creation-helper",
+              text: 'PoolCreationHelper',
+              link: '/developers/contracts/factory/pool-creation-helper',
             },
           ],
         },
       ],
     },
     {
-      text: "Concepts",
+      text: 'Concepts',
       items: [
         {
-          text: "Swaps",
+          text: 'Swaps',
           items: [
             {
-              text: "Single Swap",
-              link: "/developers/contracts/swaps/single_swap",
+              text: 'Single Swap',
+              link: '/developers/contracts/swaps/single_swap',
             },
             {
-              text: "Batch Swap",
-              link: "/developers/contracts/swaps/batch_swap",
+              text: 'Batch Swap',
+              link: '/developers/contracts/swaps/batch_swap',
             },
           ],
         },
         {
-          text: "Pools",
+          text: 'Pools',
           items: [
             {
-              text: "Pool Interfacing",
-              link: "/developers/contracts/pools/pool-interfacing.md",
+              text: 'Pool Interfacing',
+              link: '/developers/contracts/pools/pool-interfacing.md',
             },
             {
-              text: "Pool Joins",
-              link: "/developers/contracts/pools/joins.md",
+              text: 'Pool Joins',
+              link: '/developers/contracts/pools/joins.md',
             },
             {
-              text: "Pool Exits",
-              link: "/developers/contracts/pools/exit.md",
+              text: 'Pool Exits',
+              link: '/developers/contracts/pools/exit.md',
             },
           ],
         },
         {
-          text: "LP Tokens",
+          text: 'LP Tokens',
           items: [
             {
-              text: "Underlying Tokens",
-              link: "/developers/contracts/lp_tokens/underlying",
+              text: 'Underlying Tokens',
+              link: '/developers/contracts/lp_tokens/underlying',
             },
             {
-              text: "Valuing",
-              link: "/developers/contracts/lp_tokens/valuing",
+              text: 'Valuing',
+              link: '/developers/contracts/lp_tokens/valuing',
             },
           ],
         },
         {
-          text: "Relayers",
-          link: "/developers/contracts/relayers",
+          text: 'Relayers',
+          link: '/developers/contracts/relayers',
         },
       ],
     },
     {
-      text: "Developer Guides",
+      text: 'Developer Guides',
       items: [
         {
-          text: "Pool Creation",
-          link: "/developers/guides/pool-creation",
+          text: 'Pool Creation',
+          link: '/developers/guides/pool-creation',
         },
       ],
     },
     {
-      text: "SDK",
+      text: 'SDK',
       items: [
-        { text: "Introduction", link: "/developers/sdk" },
+        { text: 'Introduction', link: '/developers/sdk' },
         {
-          text: "SDK API Reference",
-          link: "/developers/sdk/reference",
+          text: 'SDK API Reference',
+          link: '/developers/sdk/reference',
         },
         {
-          text: "SDK Guides",
+          text: 'SDK Guides',
           items: [
-            { text: "Add Liquidity", link: "/developers/sdk/add-liquidity" },
+            { text: 'Add Liquidity', link: '/developers/sdk/add-liquidity' },
             {
-              text: "Remove Liquidity",
-              link: "/developers/sdk/remove-liquidity",
+              text: 'Remove Liquidity',
+              link: '/developers/sdk/remove-liquidity',
             },
-            { text: "Swap", link: "/developers/sdk/swap" },
-            { text: "Smart Order Router", link: "/developers/sdk/sor" },
+            { text: 'Swap', link: '/developers/sdk/swap' },
+            { text: 'Smart Order Router', link: '/developers/sdk/sor' },
           ],
         },
       ],
     },
     {
-      text: "Help",
+      text: 'Help',
       items: [
         {
-          text: "Error Codes",
-          link: "/developers/help/error-codes",
+          text: 'Error Codes',
+          link: '/developers/help/error-codes',
         },
       ],
     },
@@ -206,8 +206,8 @@ const SIDEBAR = {
 // Main Sidebar Configuration
 // ========================================================
 export const sidebar: DefaultTheme.Sidebar = {
-  "/learn": SIDEBAR.LEARN,
-  "/developers": SIDEBAR.DEVELOPERS,
+  '/learn': SIDEBAR.LEARN,
+  '/developers': SIDEBAR.DEVELOPERS,
   // NOTE: This has to be the last in order to prevent it overriding all pages
   // "/": SIDEBAR.LEARN,
 };
