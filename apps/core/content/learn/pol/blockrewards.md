@@ -61,11 +61,13 @@ BeraChef manages three key aspects of the reward system:
 Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed across different Reward Vaults. If a validator doesn't set a custom allocation, a default allocation is used.
 
 **Reward Allocation Structure:**
+
 - **Weights**: Percentage allocations to different vaults (must sum to 100%)
 - **Start Block**: When the allocation becomes effective
 - **Delay Period**: Time buffer before allocations can be changed
 
 **Validator Control:**
+
 - Queue new reward allocations with a specified delay
 - Modify commission rates on incentive tokens (capped at 20%)
 - Change allocations following governance-imposed delay periods
@@ -81,11 +83,13 @@ BeraChef manages validator commission rates on incentive tokens with the followi
 ### Integration with Block Rewards
 
 When a validator produces a block, BeraChef determines:
+
 1. Which Reward Vaults receive the variable BGT emission
 2. The proportion each vault receives based on the validator's allocation weights
 3. The commission the validator earns on any incentive tokens from those vaults
 
 For detailed validator operations, see:
+
 - [Managing Validator Reward Allocations](/nodes/guides/reward-allocation)
 - [Setting Commission Rates](/nodes/guides/manage-incentives-commission)
 

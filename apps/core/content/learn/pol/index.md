@@ -4,7 +4,7 @@
 
 # Proof-of-Liquidity Overview 📓
 
-Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives among validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`).  Further information about our design goals for Proof of Liquidity are in the [Honeypaper](https://honeypaper.berachain.com/)
+Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives among validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`). Further information about our design goals for Proof of Liquidity are in the [Honeypaper](https://honeypaper.berachain.com/)
 
 ## Core Components
 
@@ -40,7 +40,7 @@ After collecting the base `$BGT` rewards for themselves, validators direct the r
 
 ### 3. Liquidity Provider Flow
 
-The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. Users can provide liquidity to protocols like BEX (⑤) and receive receipt tokens as proof of their contribution (⑥). These receipt tokens are then staked in Reward Vaults (⑦), where users earn `$BGT` proportional to their share of the vault (⑧). 
+The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. Users can provide liquidity to protocols like BEX (⑤) and receive receipt tokens as proof of their contribution (⑥). These receipt tokens are then staked in Reward Vaults (⑦), where users earn `$BGT` proportional to their share of the vault (⑧).
 
 Learn about [integrating with Berachain's incentive system](/learn/pol/incentives) and [Reward Vault design](/learn/pol/rewardvaults).
 
