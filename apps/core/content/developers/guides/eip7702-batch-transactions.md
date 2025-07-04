@@ -37,7 +37,6 @@ EIP-7702 is a proposed Ethereum Improvement Proposal that introduces a new trans
 ## Limitations
 
 1. **Wallet Support for EIP-7702 Batch Contract Deployment**
-
    - Native EIP-7702 batch transactions require the wallet provider (e.g., MetaMask, Rabby, etc.) to support deploying and interacting with batch contracts directly from the frontend. As of now, most wallets do not natively support this, so users may need to rely on custom integrations or scripts.
 
 2. **Batch Transaction Dependency**
@@ -152,29 +151,29 @@ contract BatchTransaction {
 
 ```typescript [usage.ts]
 // Example usage with viem and EIP-7702 signing
-import { createWalletClient, http, parseEther, encodeFunctionData } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { eip7702Actions } from "viem/experimental";
-import { batchABI, batchContractAddress } from "./abi";
+import { createWalletClient, http, parseEther, encodeFunctionData } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { eip7702Actions } from 'viem/experimental';
+import { batchABI, batchContractAddress } from './abi';
 
-const account = privateKeyToAccount("0xYOUR_PRIVATE_KEY");
+const account = privateKeyToAccount('0xYOUR_PRIVATE_KEY');
 const client = createWalletClient({
   account,
   chain: {
     id: 1337,
-    name: "Local",
-    rpcUrls: { default: { http: ["http://localhost:8545"] } },
+    name: 'Local',
+    rpcUrls: { default: { http: ['http://localhost:8545'] } }
   },
-  transport: http(),
+  transport: http()
 }).extend(eip7702Actions());
 
 // Prepare your batch of calls
 const calls = [
   {
-    to: "0xContract1",
-    value: parseEther("0"),
-    data: "0x...", // encoded function data
-  },
+    to: '0xContract1',
+    value: parseEther('0'),
+    data: '0x...' // encoded function data
+  }
   // ... more calls
 ];
 
@@ -182,21 +181,21 @@ const calls = [
 const authorization = await client.signAuthorization({
   account,
   contractAddress: batchContractAddress,
-  executor: "self", // for direct execution
+  executor: 'self' // for direct execution
 });
 
 // Encode the batch call
 const data = encodeFunctionData({
   abi: batchABI,
-  functionName: "execute",
-  args: [calls],
+  functionName: 'execute',
+  args: [calls]
 });
 
 // Send the EIP-7702 transaction to the EOA address
 await client.sendTransaction({
   authorizationList: [authorization],
   data,
-  to: account.address,
+  to: account.address
 });
 
 // For a full working script, see:

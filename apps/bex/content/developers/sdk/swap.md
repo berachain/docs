@@ -134,12 +134,12 @@ The `Swap` class provides a `query` method to simulate the swap and get current 
 const swap = new Swap({
   chainId: CHAIN_ID,
   paths: sorPaths,
-  swapKind: SwapKind.GivenIn,
+  swapKind: SwapKind.GivenIn
 });
 
 const queryOutput = await swap.query(RPC_URL);
 
-const slippage = Slippage.fromPercentage("1");
+const slippage = Slippage.fromPercentage('1');
 ```
 
 This helps users understand the expected output amount before executing the trade.
@@ -155,6 +155,6 @@ const callData = swap.buildCall({
   queryOutput,
   sender: wallet.address,
   recipient: wallet.address,
-  wethIsEth: false,
+  wethIsEth: false
 });
 ```

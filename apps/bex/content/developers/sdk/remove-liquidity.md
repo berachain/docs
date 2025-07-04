@@ -132,10 +132,10 @@ Its use in the above example is informational, but can be used to provide detail
 ```js
 const [queryOutput, priceImpact] = await Promise.all([
   removeLiquidity.query(removeLiquidityInput, poolState),
-  PriceImpact.removeLiquidity(removeLiquidityInput, poolState),
+  PriceImpact.removeLiquidity(removeLiquidityInput, poolState)
 ]);
 
-const slippage = Slippage.fromPercentage("1");
+const slippage = Slippage.fromPercentage('1');
 ```
 
 ### Building the Transaction
@@ -143,13 +143,13 @@ const slippage = Slippage.fromPercentage("1");
 The `RemoveLiquidity` class has a `buildCall` method that allows us to build the transaction. This method takes in the `queryOutput` and address parameters.
 
 ```js
-const slippage = Slippage.fromPercentage("1");
+const slippage = Slippage.fromPercentage('1');
 const callData = removeLiquidity.buildCall({
   ...queryOutput,
   sender: wallet.address,
   recipient: wallet.address,
   wethIsEth: true,
   slippage,
-  deadline,
+  deadline
 });
 ```

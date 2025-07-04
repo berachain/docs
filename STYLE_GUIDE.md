@@ -340,21 +340,21 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
   ```javascript
   const networks = [
     {
-      name: "Testnet (Bepolia)",
-      url: "https://bepolia.api-claim.berachain.com",
-      id: "bepolia",
+      name: 'Testnet (Bepolia)',
+      url: 'https://bepolia.api-claim.berachain.com',
+      id: 'bepolia'
     },
     {
-      name: "Mainnet",
-      url: "https://api-claim.berachain.com",
-      id: "mainnet",
+      name: 'Mainnet',
+      url: 'https://api-claim.berachain.com',
+      id: 'mainnet'
     },
     {
-      name: "Custom URL",
-      url: "", // User can input their own
-      id: "custom",
-      allowCustomUrl: true,
-    },
+      name: 'Custom URL',
+      url: '', // User can input their own
+      id: 'custom',
+      allowCustomUrl: true
+    }
   ];
   ```
 
@@ -420,9 +420,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
 1.  **Import the configuration:**
 
     ```javascript
-    <script setup>
-      import config from '@berachain/config/constants.json'; // Other imports...
-    </script>
+    <script setup>import config from '@berachain/config/constants.json'; // Other imports...</script>
     ```
 
 2.  **Use in Vue expressions:**
@@ -447,7 +445,7 @@ In TypeScript files, such as `sidebar.ts` or other configuration files within `.
     The path alias `@berachain/config/constants` typically resolves to the `constants.json` file.
 
     ```typescript
-    import { constants } from "@berachain/config/constants";
+    import { constants } from '@berachain/config/constants';
     // Or, depending on TS/Vite config for JSON imports:
     // import constants from '@berachain/config/constants.json';
     ```
