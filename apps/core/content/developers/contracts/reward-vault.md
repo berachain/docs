@@ -197,10 +197,10 @@ function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyFa
 
 **Parameters**
 
-| Name           | Type      | Description                       |
-| -------------- | --------- | --------------------------------- |
+| Name           | Type      | Description                          |
+| -------------- | --------- | ------------------------------------ |
 | `tokenAddress` | `address` | The address of the token to recover. |
-| `tokenAmount`  | `uint256` | The amount of tokens to recover.  |
+| `tokenAmount`  | `uint256` | The amount of tokens to recover.     |
 
 ##### setDistributor
 
@@ -214,9 +214,9 @@ function setDistributor(address _rewardDistribution) external onlyFactoryOwner;
 
 **Parameters**
 
-| Name                   | Type      | Description                           |
-| ---------------------- | --------- | ------------------------------------- |
-| `_rewardDistribution`  | `address` | The new distributor contract address. |
+| Name                  | Type      | Description                           |
+| --------------------- | --------- | ------------------------------------- |
+| `_rewardDistribution` | `address` | The new distributor contract address. |
 
 #### setMaxIncentiveTokensCount
 
@@ -275,10 +275,10 @@ function whitelistIncentiveToken(
 
 **Parameters**
 
-| Name               | Type      | Description                                           |
-| ------------------ | --------- | ----------------------------------------------------- |
-| `token`            | `address` | The address of the token to whitelist.               |
-| `minIncentiveRate` | `uint256` | The minimum incentive rate for this token.           |
+| Name               | Type      | Description                                            |
+| ------------------ | --------- | ------------------------------------------------------ |
+| `token`            | `address` | The address of the token to whitelist.                 |
+| `minIncentiveRate` | `uint256` | The minimum incentive rate for this token.             |
 | `manager`          | `address` | The address that can manage incentives for this token. |
 
 ### Administrative Functions
@@ -393,6 +393,7 @@ The RewardVault supports **delegation**, which allows one address (the delegate)
 - **Managed staking services**: Third-party services handling staking operations
 
 **Key delegation concepts**:
+
 - **Delegate**: The address that deposits/withdraws tokens (msg.sender)
 - **Account**: The address that owns the staked position and receives rewards
 - **Self-staked balance**: Tokens staked directly by the account holder
@@ -446,8 +447,8 @@ function exit(address recipient) external nonReentrant;
 
 **Parameters**
 
-| Name        | Type      | Description                              |
-| ----------- | --------- | ---------------------------------------- |
+| Name        | Type      | Description                                      |
+| ----------- | --------- | ------------------------------------------------ |
 | `recipient` | `address` | The address that will receive the BGT incentive. |
 
 #### getReward
@@ -469,15 +470,15 @@ function getReward(
 
 **Parameters**
 
-| Name        | Type      | Description                        |
-| ----------- | --------- | ---------------------------------- |
-| `account`   | `address` | The account to claim the BGT incentive for. |
+| Name        | Type      | Description                                      |
+| ----------- | --------- | ------------------------------------------------ |
+| `account`   | `address` | The account to claim the BGT incentive for.      |
 | `recipient` | `address` | The address that will receive the BGT incentive. |
 
 **Returns**
 
-| Name     | Type      | Description                       |
-| -------- | --------- | --------------------------------- |
+| Name     | Type      | Description                |
+| -------- | --------- | -------------------------- |
 | `<none>` | `uint256` | The amount of BGT claimed. |
 
 #### setOperator
@@ -871,4 +872,4 @@ event TargetRewardsPerSecondUpdated(uint256 newTargetRewardsPerSecond, uint256 o
 ```
 
 > **Rate-based BGT emission timing**  
-When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. This affects **BGT emission timing only** and does not change incentive token exchange rates. See the [BGT Emission Timing Modes section](../../learn/pol/incentives#bgt-emission-timing-modes) for details and examples.
+> When `targetRewardsPerSecond` is non-zero the vault operates in rate-based mode. Each `notifyRewardAmount` call chooses a `rewardsDuration` such that `reward / duration ≤ targetRewardsPerSecond`, while never dropping below `minRewardDurationForTargetRate`. This affects **BGT emission timing only** and does not change incentive token exchange rates. See the [BGT Emission Timing Modes section](../../learn/pol/incentives#bgt-emission-timing-modes) for details and examples.
