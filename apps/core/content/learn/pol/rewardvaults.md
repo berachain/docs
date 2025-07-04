@@ -41,6 +41,24 @@ After staking assets in a Reward Vault, users are free to claim their earned rew
 
 When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/learn/pol/blockrewards).
 
+## BGT Emission Modes
+
+Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward distribution timing**:
+
+### Duration-Based Mode (Legacy)
+In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
+
+**Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
+
+### Target Rate Mode
+When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting minimum (3 days) and maximum (7 days) duration limits.
+
+**Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days. However, if this exceeds the 7-day maximum, it will distribute over 7 days at ~14.3 BGT/day.
+
+**Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
+
+For detailed technical information, see [BGT Emission Timing vs Incentive Exchange Rates](/learn/pol/incentives#bgt-emission-timing-vs-incentive-exchange-rates) and the [RewardVault contract reference](/developers/contracts/reward-vault).
+
 ## Incentives
 
 To understand why validators would choose to emit `$BGT` to one Reward Vault over another, refer to [Incentives](/learn/pol/incentives) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
