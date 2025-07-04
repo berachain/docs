@@ -82,7 +82,13 @@ period = max(minRewardDurationForTargetRate, totalReward / targetRate)
 
 This guarantees the duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
 
-**Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days at exactly 10 BGT/day to maintain the target rate.
+**Example**: If 100 BGT is added with a target rate equivalent to 10 BGT/day, the vault will distribute over 10 days at a rate equivalent to 10 BGT/day to maintain the target rate.
+
+**Example - Duration Above Maximum (Target Rate → Duration-Based Mode)**:
+Imagine a vault currently in target rate mode with a very low target rate equivalent to 1 BGT/day. If 100 BGT is added, it would normally distribute over 100 days. However, when switching to duration-based mode, the system enforces the 7-day maximum limit, so the 100 BGT would be distributed over exactly 7 days at a rate equivalent to ~14.29 BGT/day instead.
+
+**Example - Rate Above Minimum Duration (Target Rate Mode)**:
+Consider a vault with a target rate equivalent to 50 BGT/day. If 100 BGT is added, the natural calculation would be 100 ÷ 50 = 2 days. However, the system enforces the fixed 3-day minimum duration, so the BGT will be distributed over 3 days at a rate equivalent to 33.33 BGT/day (slower than the target rate to respect the minimum duration).
 
 ### BGT Emission Timing vs Incentive Exchange Rates
 
