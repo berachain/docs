@@ -38,17 +38,6 @@ As an overview, Incentives involve 3 different parties:
 
 Behind Incentives, there are additional mechanics to consider beyond the high-level overview of how distribution works.
 
-### BGT Emission Timing vs Incentive Exchange Rates
-
-It's important to understand that **BGT emission timing** and **incentive token exchange rates** are controlled by separate mechanisms:
-
-**BGT Emission Timing** is controlled by the Reward Vault's emission mode (see [RewardVault Emission Mechanics](/developers/contracts/reward-vault#incentive-emission-mechanics-duration-vs-target-rate)):
-
-- **Duration-based mode**: Fixed distribution period (3-7 days)
-- **Target rate mode**: `targetRewardsPerSecond` automatically calculates distribution period
-
-**Incentive Exchange Rates** are controlled by protocol token managers through `addIncentive()` calls, which set how many incentive tokens are distributed per individual BGT received. These exchange rates operate independently of BGT emission timing.
-
 ### Whitelisting Incentive Tokens
 
 Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a [Token Manager](#incentive-token-managers).
@@ -126,34 +115,6 @@ A validator can change their commission percentage by first queueing the rate to
 Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
 :::
 
-## BGT Emission Timing Modes
-
-While incentive token exchange rates are controlled by token managers, the **timing** of BGT emissions (which triggers incentive distribution) can be configured in two ways. See the [RewardVault contract documentation](/developers/contracts/reward-vault#incentive-emission-mechanics-duration-vs-target-rate) for complete technical details.
-
-### Duration-Based Mode (Legacy)
-
-- BGT rewards are distributed over a fixed period (3-7 days)
-- Controlled by the `rewardDurationManager`
-- Each `notifyRewardAmount` call distributes BGT evenly over the set duration
-
-### Target Rate Mode
-
-- BGT rewards are distributed to maintain a target emission rate per second
-- Controlled by the `rewardVaultManager`
-- Duration is automatically calculated: `period = max(MIN_REWARD_DURATION, min(totalReward / targetRate, MAX_REWARD_DURATION))`
-
-**Important**: These timing modes affect **when** incentives are distributed but do **not** change the exchange rate of incentive tokens per BGT. A rate of 10 USDC per BGT remains 10 USDC per BGT regardless of whether that BGT is distributed over 3 days or 7 days.
-
-### Switching Between Modes
-
-- `setTargetRewardsPerSecond(x)` enables target rate mode
-- `setTargetRewardsPerSecond(0)` re-enables duration-based mode
-- Only the `rewardVaultManager` can switch modes
-
-Example of target rate calculation:
-
-| totalReward |  targetRate |                    resulting duration |
-| ----------- | ----------: | ------------------------------------: |
-| 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
-
-For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
+:::info BGT Emission Timing
+The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
+:::

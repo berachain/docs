@@ -57,9 +57,32 @@ When `targetRewardsPerSecond` is set to a non-zero value, the vault automaticall
 
 **Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days. However, if this exceeds the 7-day maximum, it will distribute over 7 days at ~14.3 BGT/day.
 
+### BGT Emission Timing vs Incentive Exchange Rates
+
+It's important to understand that **BGT emission timing** and **incentive token exchange rates** are controlled by separate mechanisms:
+
+**BGT Emission Timing** is controlled by the Reward Vault's emission mode (as described above):
+
+- **Duration-based mode**: Fixed distribution period (3-7 days)
+- **Target rate mode**: `targetRewardsPerSecond` automatically calculates distribution period
+
+**Incentive Exchange Rates** are controlled by protocol token managers through `addIncentive()` calls, which set how many incentive tokens are distributed per individual BGT received. These exchange rates operate independently of BGT emission timing.
+
 **Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
 
-For technical implementation details, see the [RewardVault contract reference](/developers/contracts/reward-vault). To understand how protocols offer incentive tokens that are distributed alongside BGT rewards, see the [Incentive Marketplace](/learn/pol/incentives).
+### Switching Between Modes
+
+- `setTargetRewardsPerSecond(x)` enables target rate mode
+- `setTargetRewardsPerSecond(0)` re-enables duration-based mode
+- Only the `rewardVaultManager` can switch modes
+
+Example of target rate calculation:
+
+| totalReward |  targetRate |                    resulting duration |
+| ----------- | ----------: | ------------------------------------: |
+| 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
+
+For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
 
 ## Incentives
 
