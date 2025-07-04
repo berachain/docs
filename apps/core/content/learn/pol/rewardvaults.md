@@ -46,11 +46,13 @@ When a validator is chosen to propose a block, they direct a portion of their `$
 Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward distribution timing**:
 
 ### Duration-Based Mode (Legacy)
+
 In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
 
 **Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
 
 ### Target Rate Mode
+
 When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting minimum (3 days) and maximum (7 days) duration limits.
 
 **Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days. However, if this exceeds the 7-day maximum, it will distribute over 7 days at ~14.3 BGT/day.
