@@ -8,9 +8,10 @@ Reward Vaults are smart contracts in which users can stake their Proof-of-Liquid
 
 Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
 
-It should be noted that only Whitelisted Reward Vaults are elligible to receive `$BGT` emissions from Validators.
 
 :::info
+Only Reward Vaults approved through governance are elligible to receive `$BGT` emissions from Validators.
+
 Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/help/reward-vault-guidelines) for the application process.
 :::
 
@@ -37,6 +38,23 @@ After staking assets in a Reward Vault, users are free to claim their earned rew
 
 `$BGT` farming with Reward Vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry.
 
+## Delegation
+
+The RewardVault supports **delegation**, which allows one address (the delegate) to stake tokens on behalf of another address (the account holder). This enables use cases such as:
+
+- **Custodial staking**: Exchanges or custodians staking on behalf of users
+- **Smart contract integration**: Protocols automatically staking user funds
+- **Managed staking services**: Third-party services handling staking operations
+
+**Key delegation concepts**:
+
+- **Delegate**: The address that deposits/withdraws tokens (msg.sender)
+- **Account**: The address that owns the staked position and receives rewards
+- **Self-staked balance**: Tokens staked directly by the account holder
+- **Delegated balance**: Tokens staked by delegates on behalf of the account
+
+**Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
+
 ## $BGT Flow
 
 When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/learn/pol/blockrewards).
@@ -54,6 +72,15 @@ In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typica
 ### Target Rate Mode
 
 When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting minimum (3 days) and maximum (7 days) duration limits.
+
+The computation follows this formula:
+
+```text
+period = max(MIN_REWARD_DURATION,
+             min(totalReward / targetRate, MAX_REWARD_DURATION))
+```
+
+This guarantees the duration is never shorter than 3 days and never longer than 7 days.
 
 **Example**: If 100 BGT is added with a target rate of 10 BGT/day, the vault will distribute over 10 days. However, if this exceeds the 7-day maximum, it will distribute over 7 days at ~14.3 BGT/day.
 
@@ -83,6 +110,23 @@ Example of target rate calculation:
 | 10 000 BERA | 0.05 BERA/s | 200 000 s ≈ 2.3 days ≈ 100 000 blocks |
 
 For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
+
+## Incentive Management
+
+RewardVaults support **incentive tokens**, which are additional tokens that protocols can offer to BGT stakers beyond the base BGT rewards. This creates a powerful mechanism for protocols to attract liquidity and user engagement.
+
+### How Incentive Tokens Work
+
+1. **Whitelisting**: Protocol tokens must first be whitelisted in the vault by governance
+2. **Exchange Rate Setting**: Protocol managers set exchange rates (e.g., "10 USDC per BGT earned")
+3. **Token Deposits**: Protocols deposit their tokens into the vault
+4. **Automatic Distribution**: When users earn BGT, they automatically receive proportional incentive tokens
+
+### Independence from BGT Emission
+
+**Important Distinction**: Incentive token exchange rates operate completely independently from BGT emission timing modes. Whether BGT is distributed over 3 days or 7 days, the incentive token exchange rate (tokens per BGT) remains constant.
+
+For comprehensive information about incentive mechanics, see the [Incentive Marketplace documentation](/learn/pol/incentives).
 
 ## Incentives
 
