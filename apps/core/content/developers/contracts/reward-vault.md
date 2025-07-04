@@ -47,7 +47,7 @@ The mapping of accounts to their operators.
 mapping(address account => address operator) internal _operators;
 ```
 
-### beaconDepositContract
+#### beaconDepositContract
 
 The BeaconDeposit contract.
 
@@ -55,7 +55,7 @@ The BeaconDeposit contract.
 IBeaconDeposit public beaconDepositContract;
 ```
 
-### distributor
+#### distributor
 
 The address of the distributor contract.
 
@@ -63,7 +63,7 @@ The address of the distributor contract.
 address public distributor;
 ```
 
-### incentives
+#### incentives
 
 the mapping of incentive token to its incentive data.
 
@@ -71,13 +71,13 @@ the mapping of incentive token to its incentive data.
 mapping(address token => Incentive) public incentives;
 ```
 
-### MAX_INCENTIVE_RATE
+#### MAX_INCENTIVE_RATE
 
 ```solidity
 uint256 private constant MAX_INCENTIVE_RATE = 1e36;
 ```
 
-### MAX_REWARD_DURATION
+#### MAX_REWARD_DURATION
 
 The maximum incentive distribution period when using duration-based rewards.
 
@@ -85,7 +85,7 @@ The maximum incentive distribution period when using duration-based rewards.
 uint256 public constant MAX_REWARD_DURATION = 7 days;
 ```
 
-### maxIncentiveTokensCount
+#### maxIncentiveTokensCount
 
 The maximum count of incentive tokens that can be stored.
 
@@ -93,7 +93,7 @@ The maximum count of incentive tokens that can be stored.
 uint8 public maxIncentiveTokensCount;
 ```
 
-### MIN_REWARD_DURATION
+#### MIN_REWARD_DURATION
 
 The minimum incentive distribution period when using duration-based rewards.
 
@@ -101,7 +101,7 @@ The minimum incentive distribution period when using duration-based rewards.
 uint256 public constant MIN_REWARD_DURATION = 3 days;
 ```
 
-### minRewardDurationForTargetRate
+#### minRewardDurationForTargetRate
 
 Minimum duration applied by the target-rate algorithm if the computed period would otherwise fall below this value.
 
@@ -109,7 +109,7 @@ Minimum duration applied by the target-rate algorithm if the computed period wou
 uint256 public minRewardDurationForTargetRate;
 ```
 
-### pendingRewardsDuration
+#### pendingRewardsDuration
 
 Duration that will take effect at the next `notifyRewardAmount` call when operating in duration-based mode.
 
@@ -117,7 +117,7 @@ Duration that will take effect at the next `notifyRewardAmount` call when operat
 uint256 public pendingRewardsDuration;
 ```
 
-### rewardVaultManager
+#### rewardVaultManager
 
 Address authorized to configure incentive parameters (duration or target rate).
 
@@ -125,13 +125,13 @@ Address authorized to configure incentive parameters (duration or target rate).
 address public rewardVaultManager;
 ```
 
-### SAFE_GAS_LIMIT
+#### SAFE_GAS_LIMIT
 
 ```solidity
 uint256 private constant SAFE_GAS_LIMIT = 500_000;
 ```
 
-### targetRewardsPerSecond
+#### targetRewardsPerSecond
 
 Target (and maximum) reward-emission rate, scaled by `PRECISION`. When non-zero, the vault automatically adjusts `rewardsDuration` so the realised rate never exceeds this value (but never drops below `MIN_REWARD_DURATION`).
 
@@ -139,7 +139,7 @@ Target (and maximum) reward-emission rate, scaled by `PRECISION`. When non-zero,
 uint256 public targetRewardsPerSecond;
 ```
 
-### whitelistedTokens
+#### whitelistedTokens
 
 The list of whitelisted tokens.
 
@@ -149,33 +149,15 @@ address[] public whitelistedTokens;
 
 ## Functions
 
-### Function Groups
+### Initialization
 
-| Group | Description |
-|-------|-------------|
-| [Initialization](#initialization) | Contract setup and initialization |
-| [Governance Functions](#governance-functions) | Functions controlled by Berachain governance |
-| [Administrative Functions](#administrative-functions) | Management and configuration functions |
-| [Incentive Management](#incentive-management) | Token incentive operations |
-| [Staking & Delegation](#staking--delegation) | Core staking functionality |
-| [View Functions](#view-functions) | Read-only state queries |
-| [Internal Functions](#internal-functions) | Internal helper functions |
-| [Modifiers](#modifiers) | Function modifiers |
-
----
-
-## Initialization
-
-### constructor
-
-**Note:**
-oz-upgrades-unsafe-allow: constructor
+#### constructor
 
 ```solidity
 constructor();
 ```
 
-### initialize
+#### initialize
 
 Initialize the vault, this is only callable once and by the factory since its the deployer.
 
@@ -199,11 +181,11 @@ function initialize(
 | `_distributor`           | `address` | The address of the distributor.   |
 | `_stakingToken`          | `address` | The address of the staking token. |
 
-## Governance Functions
+### Governance Functions
 
 These functions can only be invoked by Berachain's governance mechanisms through the factory owner role.
 
-### recoverERC20
+#### recoverERC20
 
 Recover ERC20 tokens from the vault. Cannot recover incentive tokens or more staking tokens than the recoverable amount.
 
@@ -220,7 +202,7 @@ function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyFa
 | `tokenAddress` | `address` | The address of the token to recover. |
 | `tokenAmount`  | `uint256` | The amount of tokens to recover.  |
 
-### setDistributor
+##### setDistributor
 
 Set the address of the distributor contract.
 
@@ -236,7 +218,7 @@ function setDistributor(address _rewardDistribution) external onlyFactoryOwner;
 | ---------------------- | --------- | ------------------------------------- |
 | `_rewardDistribution`  | `address` | The new distributor contract address. |
 
-### setMaxIncentiveTokensCount
+#### setMaxIncentiveTokensCount
 
 Allows the factory owner to update the maxIncentiveTokensCount.
 
@@ -252,7 +234,7 @@ function setMaxIncentiveTokensCount(uint8 _maxIncentiveTokensCount) external onl
 | -------------------------- | ------- | --------------------------------- |
 | `_maxIncentiveTokensCount` | `uint8` | The new maxIncentiveTokens count. |
 
-### updateIncentiveManager
+#### updateIncentiveManager
 
 Update the manager of an incentive token.
 
@@ -275,7 +257,7 @@ function updateIncentiveManager(
 | `token`      | `address` | The address of the incentive token.     |
 | `newManager` | `address` | The new manager of the incentive token. |
 
-### whitelistIncentiveToken
+#### whitelistIncentiveToken
 
 Whitelist a new incentive token with its minimum rate and manager.
 
@@ -299,9 +281,9 @@ function whitelistIncentiveToken(
 | `minIncentiveRate` | `uint256` | The minimum incentive rate for this token.           |
 | `manager`          | `address` | The address that can manage incentives for this token. |
 
-## Administrative Functions
+### Administrative Functions
 
-### pause
+#### pause
 
 Allows the factory vault pauser to pause the vault.
 
@@ -309,7 +291,7 @@ Allows the factory vault pauser to pause the vault.
 function pause() external onlyFactoryVaultPauser;
 ```
 
-### setMinRewardDurationForTargetRate
+#### setMinRewardDurationForTargetRate
 
 Sets the minimum duration used by the target-rate algorithm.
 
@@ -319,7 +301,7 @@ Sets the minimum duration used by the target-rate algorithm.
 function setMinRewardDurationForTargetRate(uint256 _minRewardDurationForTargetRate) external onlyRewardVaultManager;
 ```
 
-### setRewardVaultManager
+#### setRewardVaultManager
 
 Assigns a new reward-vault manager.
 
@@ -329,7 +311,7 @@ Assigns a new reward-vault manager.
 function setRewardVaultManager(address _rewardVaultManager) external onlyFactoryVaultManager;
 ```
 
-### setRewardsDuration
+#### setRewardsDuration
 
 Update the rewards duration. Callable only by `rewardVaultManager` **and only when `targetRewardsPerSecond == 0`** (duration-based mode). The supplied value is stored in `pendingRewardsDuration` and applied on the next `notifyRewardAmount`.
 
@@ -337,7 +319,7 @@ Update the rewards duration. Callable only by `rewardVaultManager` **and only wh
 function setRewardsDuration(uint256 _rewardsDuration) external onlyRewardVaultManager;
 ```
 
-### setTargetRewardsPerSecond
+#### setTargetRewardsPerSecond
 
 Switches the vault to rate-based mode (or back to duration mode when set to 0).
 
@@ -347,7 +329,7 @@ Switches the vault to rate-based mode (or back to duration mode when set to 0).
 function setTargetRewardsPerSecond(uint256 _targetRewardsPerSecond) external onlyRewardVaultManager;
 ```
 
-### unpause
+#### unpause
 
 Allows the factory vault manager to unpause the vault.
 
@@ -355,11 +337,11 @@ Allows the factory vault manager to unpause the vault.
 function unpause() external onlyFactoryVaultManager;
 ```
 
-## Incentive Management
+### Incentive Management
 
 These functions control **incentive token exchange rates** and deposits. The exchange rates set here (tokens per BGT) operate independently of the BGT emission timing modes described above. For comprehensive information about incentive mechanics, see the [Incentive Marketplace documentation](/learn/pol/incentives).
 
-### addIncentive
+#### addIncentive
 
 Add an incentive token to the vault.
 
@@ -386,7 +368,7 @@ function addIncentive(
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
-### removeIncentiveToken
+#### removeIncentiveToken
 
 Allows the factory vault manager to remove a whitelisted incentive token.
 
@@ -402,7 +384,7 @@ function removeIncentiveToken(address token) external onlyFactoryVaultManager on
 | ------- | --------- | ----------------------------------- |
 | `token` | `address` | The address of the token to remove. |
 
-## Staking & Delegation
+### Staking & Delegation
 
 The RewardVault supports **delegation**, which allows one address (the delegate) to stake tokens on behalf of another address (the account holder). This enables use cases such as:
 
@@ -418,7 +400,7 @@ The RewardVault supports **delegation**, which allows one address (the delegate)
 
 **Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
 
-### delegateStake
+#### delegateStake
 
 Stake tokens on behalf of another account.
 
@@ -435,7 +417,7 @@ function delegateStake(address account, uint256 amount) external nonReentrant wh
 | `account` | `address` | The account to stake for.      |
 | `amount`  | `uint256` | The amount of tokens to stake. |
 
-### delegateWithdraw
+#### delegateWithdraw
 
 Withdraw tokens staked on behalf of another account by the delegate (msg.sender).
 
@@ -452,7 +434,7 @@ function delegateWithdraw(address account, uint256 amount) external nonReentrant
 | `account` | `address` | The account to withdraw for.      |
 | `amount`  | `uint256` | The amount of tokens to withdraw. |
 
-### exit
+#### exit
 
 Exit the vault with the staked tokens and claim the reward.
 
@@ -468,7 +450,7 @@ function exit(address recipient) external nonReentrant;
 | ----------- | --------- | ---------------------------------------- |
 | `recipient` | `address` | The address that will receive the BGT incentive. |
 
-### getReward
+#### getReward
 
 Claim the reward.
 
@@ -498,7 +480,7 @@ function getReward(
 | -------- | --------- | --------------------------------- |
 | `<none>` | `uint256` | The amount of BGT claimed. |
 
-### setOperator
+#### setOperator
 
 Allows msg.sender to set another address to claim and manage their rewards.
 
@@ -514,7 +496,7 @@ function setOperator(address _operator) external;
 | ----------- | --------- | ------------------------------------------------------------- |
 | `_operator` | `address` | The address that will be allowed to claim and manage rewards. |
 
-### stake
+#### stake
 
 Stake tokens in the vault.
 
@@ -528,7 +510,7 @@ function stake(uint256 amount) external nonReentrant whenNotPaused;
 | -------- | --------- | ------------------------------ |
 | `amount` | `uint256` | The amount of tokens to stake. |
 
-### withdraw
+#### withdraw
 
 Withdraw the staked tokens from the vault.
 
@@ -542,9 +524,9 @@ function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(m
 | -------- | --------- | --------------------------------- |
 | `amount` | `uint256` | The amount of tokens to withdraw. |
 
-## View Functions
+### View Functions
 
-### getDelegateStake
+#### getDelegateStake
 
 Get the amount staked by a delegate on behalf of an account.
 
@@ -558,7 +540,7 @@ function getDelegateStake(address account, address delegate) external view retur
 | -------- | --------- | -------------------------------- |
 | `<none>` | `uint256` | The amount staked by a delegate. |
 
-### getTotalDelegateStaked
+#### getTotalDelegateStaked
 
 Get the total amount staked by delegates.
 
@@ -572,7 +554,7 @@ function getTotalDelegateStaked(address account) external view returns (uint256)
 | -------- | --------- | ------------------------------------- |
 | `<none>` | `uint256` | The total amount staked by delegates. |
 
-### getWhitelistedTokens
+#### getWhitelistedTokens
 
 Get the list of whitelisted tokens.
 
@@ -586,7 +568,7 @@ function getWhitelistedTokens() public view returns (address[] memory);
 | -------- | ----------- | ------------------------------- |
 | `<none>` | `address[]` | The list of whitelisted tokens. |
 
-### getWhitelistedTokensCount
+#### getWhitelistedTokensCount
 
 Get the count of active incentive tokens.
 
@@ -600,7 +582,7 @@ function getWhitelistedTokensCount() external view returns (uint256);
 | -------- | --------- | ------------------------------------- |
 | `<none>` | `uint256` | The count of active incentive tokens. |
 
-### operator
+#### operator
 
 Get the operator for an account.
 
@@ -620,15 +602,15 @@ function operator(address account) external view returns (address);
 | -------- | --------- | ----------------------------- |
 | `<none>` | `address` | The operator for the account. |
 
-## Internal Functions
+### Internal Functions
 
-### \_checkRewardSolvency
+#### \_checkRewardSolvency
 
 ```solidity
 function _checkRewardSolvency() internal view override;
 ```
 
-### \_checkSelfStakedBalance
+#### \_checkSelfStakedBalance
 
 _Check if the account has enough self-staked balance._
 
@@ -643,13 +625,13 @@ function _checkSelfStakedBalance(address account, uint256 amount) internal view;
 | `account` | `address` | The account to check the self-staked balance for. |
 | `amount`  | `uint256` | The amount being withdrawn.                       |
 
-### \_deleteWhitelistedTokenFromList
+#### \_deleteWhitelistedTokenFromList
 
 ```solidity
 function _deleteWhitelistedTokenFromList(address token) internal;
 ```
 
-### \_processIncentives
+#### \_processIncentives
 
 process the incentives for a validator.
 
@@ -666,7 +648,7 @@ function _processIncentives(bytes calldata pubkey, uint256 bgtEmitted) internal;
 | `pubkey`     | `bytes`   | The pubkey of the validator to process the incentives for. |
 | `bgtEmitted` | `uint256` | The amount of BGT emitted by the validator.                |
 
-### \_safeTransferRewardToken
+#### \_safeTransferRewardToken
 
 _The Distributor grants this contract the allowance to transfer the BGT in its balance._
 
@@ -674,27 +656,27 @@ _The Distributor grants this contract the allowance to transfer the BGT in its b
 function _safeTransferRewardToken(address to, uint256 amount) internal override;
 ```
 
-## Modifiers
+### Modifiers
 
-### checkSelfStakedBalance
+#### checkSelfStakedBalance
 
 ```solidity
 modifier checkSelfStakedBalance(address account, uint256 amount);
 ```
 
-### onlyOperatorOrUser
+#### onlyOperatorOrUser
 
 ```solidity
 modifier onlyOperatorOrUser(address account);
 ```
 
-### onlyRewardVaultManager
+#### onlyRewardVaultManager
 
 ```solidity
 modifier onlyRewardVaultManager();
 ```
 
-### onlyWhitelistedToken
+#### onlyWhitelistedToken
 
 ```solidity
 modifier onlyWhitelistedToken(address token);
@@ -702,7 +684,7 @@ modifier onlyWhitelistedToken(address token);
 
 ## Structs
 
-### DelegateStake
+#### DelegateStake
 
 Struct to hold delegate stake data.
 
@@ -720,7 +702,7 @@ struct DelegateStake {
 | `delegateTotalStaked` | `uint256`                                     | The total amount staked by delegates.              |
 | `stakedByDelegate`    | `mapping(address delegate => uint256 amount)` | The mapping of the amount staked by each delegate. |
 
-### Incentive
+#### Incentive
 
 Struct to hold an incentive data.
 
@@ -744,7 +726,7 @@ struct Incentive {
 
 ## Events
 
-### BGTBoosterIncentivesProcessed
+#### BGTBoosterIncentivesProcessed
 
 Emitted when BGT booster incentives are successfully processed.
 
@@ -752,7 +734,7 @@ Emitted when BGT booster incentives are successfully processed.
 event BGTBoosterIncentivesProcessed(bytes indexed pubkey, address indexed token, uint256 bgtEmitted, uint256 amount);
 ```
 
-### BGTBoosterIncentivesProcessFailed
+#### BGTBoosterIncentivesProcessFailed
 
 Emitted when BGT booster incentives processing fails.
 
@@ -760,7 +742,7 @@ Emitted when BGT booster incentives processing fails.
 event BGTBoosterIncentivesProcessFailed(bytes indexed pubkey, address indexed token, uint256 bgtEmitted, uint256 amount);
 ```
 
-### DelegateStaked
+#### DelegateStaked
 
 Emitted when tokens are staked on behalf of another account.
 
@@ -768,7 +750,7 @@ Emitted when tokens are staked on behalf of another account.
 event DelegateStaked(address indexed account, address indexed delegate, uint256 amount);
 ```
 
-### DelegateWithdrawn
+#### DelegateWithdrawn
 
 Emitted when delegated tokens are withdrawn.
 
@@ -776,7 +758,7 @@ Emitted when delegated tokens are withdrawn.
 event DelegateWithdrawn(address indexed account, address indexed delegate, uint256 amount);
 ```
 
-### DistributorSet
+#### DistributorSet
 
 Emitted when the distributor address is updated.
 
@@ -784,7 +766,7 @@ Emitted when the distributor address is updated.
 event DistributorSet(address indexed newDistributor);
 ```
 
-### IncentiveAdded
+#### IncentiveAdded
 
 Emitted when an incentive is added to the vault.
 
@@ -792,7 +774,7 @@ Emitted when an incentive is added to the vault.
 event IncentiveAdded(address indexed token, address indexed manager, uint256 amount, uint256 incentiveRate);
 ```
 
-### IncentiveManagerChanged
+#### IncentiveManagerChanged
 
 Emitted when an incentive token's manager is updated.
 
@@ -800,7 +782,7 @@ Emitted when an incentive token's manager is updated.
 event IncentiveManagerChanged(address indexed token, address indexed newManager, address indexed oldManager);
 ```
 
-### IncentiveTokenRemoved
+#### IncentiveTokenRemoved
 
 Emitted when an incentive token is removed from the whitelist.
 
@@ -808,7 +790,7 @@ Emitted when an incentive token is removed from the whitelist.
 event IncentiveTokenRemoved(address indexed token);
 ```
 
-### IncentiveTokenWhitelisted
+#### IncentiveTokenWhitelisted
 
 Emitted when a new incentive token is whitelisted.
 
@@ -816,7 +798,7 @@ Emitted when a new incentive token is whitelisted.
 event IncentiveTokenWhitelisted(address indexed token, uint256 minIncentiveRate, address indexed manager);
 ```
 
-### IncentivesProcessed
+#### IncentivesProcessed
 
 Emitted when validator incentives are successfully processed.
 
@@ -824,7 +806,7 @@ Emitted when validator incentives are successfully processed.
 event IncentivesProcessed(bytes indexed pubkey, address indexed token, uint256 bgtEmitted, uint256 amount);
 ```
 
-### IncentivesProcessFailed
+#### IncentivesProcessFailed
 
 Emitted when validator incentive processing fails.
 
@@ -832,7 +814,7 @@ Emitted when validator incentive processing fails.
 event IncentivesProcessFailed(bytes indexed pubkey, address indexed token, uint256 bgtEmitted, uint256 amount);
 ```
 
-### MaxIncentiveTokensCountUpdated
+#### MaxIncentiveTokensCountUpdated
 
 Emitted when the maximum incentive tokens count is updated.
 
@@ -840,7 +822,7 @@ Emitted when the maximum incentive tokens count is updated.
 event MaxIncentiveTokensCountUpdated(uint8 newMaxIncentiveTokensCount);
 ```
 
-### MinRewardDurationForTargetRateUpdated
+#### MinRewardDurationForTargetRateUpdated
 
 Emitted when the minimum incentive duration used by the target-rate algorithm is updated.
 
@@ -848,7 +830,7 @@ Emitted when the minimum incentive duration used by the target-rate algorithm is
 event MinRewardDurationForTargetRateUpdated(uint256 newMinRewardDurationForTargetRate, uint256 oldMinRewardDurationForTargetRate);
 ```
 
-### OperatorSet
+#### OperatorSet
 
 Emitted when an operator is set for an account.
 
@@ -856,7 +838,7 @@ Emitted when an operator is set for an account.
 event OperatorSet(address indexed account, address indexed operator);
 ```
 
-### Recovered
+#### Recovered
 
 Emitted when ERC20 tokens are recovered from the vault.
 
@@ -864,7 +846,7 @@ Emitted when ERC20 tokens are recovered from the vault.
 event Recovered(address indexed token, uint256 amount);
 ```
 
-### RewardDurationManagerSet
+#### RewardDurationManagerSet
 
 Emitted when the reward duration manager is updated.
 
@@ -872,7 +854,7 @@ Emitted when the reward duration manager is updated.
 event RewardDurationManagerSet(address indexed newRewardDurationManager, address indexed oldRewardDurationManager);
 ```
 
-### RewardVaultManagerSet
+#### RewardVaultManagerSet
 
 Emitted when a new reward-vault manager is assigned.
 
@@ -880,7 +862,7 @@ Emitted when a new reward-vault manager is assigned.
 event RewardVaultManagerSet(address indexed newRewardVaultManager, address indexed oldRewardVaultManager);
 ```
 
-### TargetRewardsPerSecondUpdated
+#### TargetRewardsPerSecondUpdated
 
 Emitted when the target **incentive** emission rate is changed.
 
