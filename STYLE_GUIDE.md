@@ -340,19 +340,19 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
   ```javascript
   const networks = [
     {
-      name: "Testnet (Bepolia)",
-      url: "https://bepolia.api-claim.berachain.com",
-      id: "bepolia"
+      name: 'Testnet (Bepolia)',
+      url: 'https://bepolia.api-claim.berachain.com',
+      id: 'bepolia'
     },
     {
-      name: "Mainnet",
-      url: "https://api-claim.berachain.com",
-      id: "mainnet"
+      name: 'Mainnet',
+      url: 'https://api-claim.berachain.com',
+      id: 'mainnet'
     },
     {
-      name: "Custom URL",
-      url: "", // User can input their own
-      id: "custom",
+      name: 'Custom URL',
+      url: '', // User can input their own
+      id: 'custom',
       allowCustomUrl: true
     }
   ];
@@ -445,7 +445,7 @@ In TypeScript files, such as `sidebar.ts` or other configuration files within `.
     The path alias `@berachain/config/constants` typically resolves to the `constants.json` file.
 
     ```typescript
-    import { constants } from "@berachain/config/constants";
+    import { constants } from '@berachain/config/constants';
     // Or, depending on TS/Vite config for JSON imports:
     // import constants from '@berachain/config/constants.json';
     ```

@@ -62,7 +62,7 @@ The PoolCreationHelper must be approved as a relayer in the Vault contract:
 ```js
 const vault = new ethers.Contract(
   VAULT_ADDRESS,
-  ["function setRelayerApproval(address sender, address relayer, bool approved)"],
+  ['function setRelayerApproval(address sender, address relayer, bool approved)'],
   wallet
 );
 
@@ -81,7 +81,7 @@ The Vault contract needs approval to spend your tokens:
 for (const [i, tokenAddress] of createPoolTokens.entries()) {
   const tokenContract = new ethers.Contract(
     tokenAddress,
-    ["function approve(address spender, uint256 amount)"],
+    ['function approve(address spender, uint256 amount)'],
     wallet
   );
 
@@ -107,7 +107,7 @@ const tx = await poolCreationHelper.createAndJoinWeightedPool(
   createPoolTokens, // joinPoolTokens same as createPoolTokens
   normalizedWeights,
   createPoolTokens.map(() => ethers.ZeroAddress), // no rate providers
-  ethers.parseUnits("0.01", 18), // 1% swap fee
+  ethers.parseUnits('0.01', 18), // 1% swap fee
   amountsIn,
   wallet.address, // pool owner
   ethers.keccak256(ethers.toUtf8Bytes(`${poolName}-${wallet.address}`)) // salt

@@ -139,7 +139,7 @@ const swap = new Swap({
 
 const queryOutput = await swap.query(RPC_URL);
 
-const slippage = Slippage.fromPercentage("1");
+const slippage = Slippage.fromPercentage('1');
 ```
 
 This helps users understand the expected output amount before executing the trade.

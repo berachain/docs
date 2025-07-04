@@ -18,9 +18,9 @@ const SIDEBAR = {
           text: 'BEX dApp',
           link: `${constants.mainnet.dapps.bex.url}`,
           target: '_blank',
-          rel: 'no-referrer',
-        },
-      ],
+          rel: 'no-referrer'
+        }
+      ]
     },
     {
       text: 'Core Concepts',
@@ -34,16 +34,16 @@ const SIDEBAR = {
           items: [
             {
               text: 'Weighted Pools',
-              link: '/learn/concepts/pools/weighted-pools',
+              link: '/learn/concepts/pools/weighted-pools'
             },
             {
               text: 'Stable Pools',
-              link: '/learn/concepts/pools/stable-pools',
-            },
-          ],
+              link: '/learn/concepts/pools/stable-pools'
+            }
+          ]
         },
-        { text: 'Flash Loans', link: '/learn/concepts/flash-loans' },
-      ],
+        { text: 'Flash Loans', link: '/learn/concepts/flash-loans' }
+      ]
     },
     {
       text: 'User Guides',
@@ -56,16 +56,16 @@ const SIDEBAR = {
           link: '/learn/guides/liquidity/intro',
           items: [
             { text: 'Intro', link: '/learn/guides/liquidity/intro' },
-            { text: 'Proof of Liquidity', link: '/learn/guides/liquidity/pol' },
-          ],
+            { text: 'Proof of Liquidity', link: '/learn/guides/liquidity/pol' }
+          ]
         },
         { text: 'Pool Creation', link: '/learn/guides/pool-creation' },
         {
           text: 'Pool Configuration',
-          link: '/learn/guides/pool-configuration',
-        },
-      ],
-    },
+          link: '/learn/guides/pool-configuration'
+        }
+      ]
+    }
   ],
   /**
    * Main section for /developers
@@ -75,38 +75,38 @@ const SIDEBAR = {
       text: 'BEX For Devs',
       items: [
         { text: 'Deployed Contracts', link: '/developers/' },
-        { text: 'Migration Guide', link: '/developers/migration-guide' },
-      ],
+        { text: 'Migration Guide', link: '/developers/migration-guide' }
+      ]
     },
     {
       text: 'Contract References',
       items: [
         {
           text: 'Vault Contract',
-          link: '/developers/contracts/vault',
+          link: '/developers/contracts/vault'
         },
         {
           text: 'Query Contract',
-          link: '/developers/contracts/query',
+          link: '/developers/contracts/query'
         },
         {
           text: 'Pool Factory Contracts',
           items: [
             {
               text: 'WeightedPoolFactory',
-              link: '/developers/contracts/factory/weighted-pool-factory',
+              link: '/developers/contracts/factory/weighted-pool-factory'
             },
             {
               text: 'StablePoolFactory',
-              link: '/developers/contracts/factory/stable-pool-factory',
+              link: '/developers/contracts/factory/stable-pool-factory'
             },
             {
               text: 'PoolCreationHelper',
-              link: '/developers/contracts/factory/pool-creation-helper',
-            },
-          ],
-        },
-      ],
+              link: '/developers/contracts/factory/pool-creation-helper'
+            }
+          ]
+        }
+      ]
     },
     {
       text: 'Concepts',
@@ -116,58 +116,58 @@ const SIDEBAR = {
           items: [
             {
               text: 'Single Swap',
-              link: '/developers/contracts/swaps/single_swap',
+              link: '/developers/contracts/swaps/single_swap'
             },
             {
               text: 'Batch Swap',
-              link: '/developers/contracts/swaps/batch_swap',
-            },
-          ],
+              link: '/developers/contracts/swaps/batch_swap'
+            }
+          ]
         },
         {
           text: 'Pools',
           items: [
             {
               text: 'Pool Interfacing',
-              link: '/developers/contracts/pools/pool-interfacing.md',
+              link: '/developers/contracts/pools/pool-interfacing.md'
             },
             {
               text: 'Pool Joins',
-              link: '/developers/contracts/pools/joins.md',
+              link: '/developers/contracts/pools/joins.md'
             },
             {
               text: 'Pool Exits',
-              link: '/developers/contracts/pools/exit.md',
-            },
-          ],
+              link: '/developers/contracts/pools/exit.md'
+            }
+          ]
         },
         {
           text: 'LP Tokens',
           items: [
             {
               text: 'Underlying Tokens',
-              link: '/developers/contracts/lp_tokens/underlying',
+              link: '/developers/contracts/lp_tokens/underlying'
             },
             {
               text: 'Valuing',
-              link: '/developers/contracts/lp_tokens/valuing',
-            },
-          ],
+              link: '/developers/contracts/lp_tokens/valuing'
+            }
+          ]
         },
         {
           text: 'Relayers',
-          link: '/developers/contracts/relayers',
-        },
-      ],
+          link: '/developers/contracts/relayers'
+        }
+      ]
     },
     {
       text: 'Developer Guides',
       items: [
         {
           text: 'Pool Creation',
-          link: '/developers/guides/pool-creation',
-        },
-      ],
+          link: '/developers/guides/pool-creation'
+        }
+      ]
     },
     {
       text: 'SDK',
@@ -175,7 +175,7 @@ const SIDEBAR = {
         { text: 'Introduction', link: '/developers/sdk' },
         {
           text: 'SDK API Reference',
-          link: '/developers/sdk/reference',
+          link: '/developers/sdk/reference'
         },
         {
           text: 'SDK Guides',
@@ -183,31 +183,31 @@ const SIDEBAR = {
             { text: 'Add Liquidity', link: '/developers/sdk/add-liquidity' },
             {
               text: 'Remove Liquidity',
-              link: '/developers/sdk/remove-liquidity',
+              link: '/developers/sdk/remove-liquidity'
             },
             { text: 'Swap', link: '/developers/sdk/swap' },
-            { text: 'Smart Order Router', link: '/developers/sdk/sor' },
-          ],
-        },
-      ],
+            { text: 'Smart Order Router', link: '/developers/sdk/sor' }
+          ]
+        }
+      ]
     },
     {
       text: 'Help',
       items: [
         {
           text: 'Error Codes',
-          link: '/developers/help/error-codes',
-        },
-      ],
-    },
-  ],
+          link: '/developers/help/error-codes'
+        }
+      ]
+    }
+  ]
 };
 
 // Main Sidebar Configuration
 // ========================================================
 export const sidebar: DefaultTheme.Sidebar = {
   '/learn': SIDEBAR.LEARN,
-  '/developers': SIDEBAR.DEVELOPERS,
+  '/developers': SIDEBAR.DEVELOPERS
   // NOTE: This has to be the last in order to prevent it overriding all pages
   // "/": SIDEBAR.LEARN,
 };

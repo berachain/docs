@@ -131,7 +131,7 @@ We also set the slippage to 1% meaning the transaction reverts if we receive les
 // Query expected BPT out
 const queryOutput = await addLiquidity.query(addLiquidityInput, poolState);
 // Build transaction with 1% slippage
-const slippage = Slippage.fromPercentage("1");
+const slippage = Slippage.fromPercentage('1');
 ```
 
 ### Building the Transaction
