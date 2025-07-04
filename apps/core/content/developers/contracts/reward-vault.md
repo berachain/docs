@@ -2,7 +2,7 @@
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/RewardVault.sol)
 
 **Inherits:**
-PausableUpgradeable, ReentrancyGuardUpgradeable, [FactoryOwnable](/src/base/FactoryOwnable.sol/abstract.FactoryOwnable.md), [StakingRewards](/src/base/StakingRewards.sol/abstract.StakingRewards.md), [IRewardVault](/src/pol/interfaces/IRewardVault.sol/interface.IRewardVault.md)
+PausableUpgradeable, ReentrancyGuardUpgradeable, FactoryOwnable, StakingRewards, IRewardVault
 
 **Author:**
 Berachain Team

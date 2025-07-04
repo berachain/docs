@@ -2,7 +2,7 @@
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/BeraChef.sol)
 
 **Inherits:**
-[IBeraChef](/src/pol/interfaces/IBeraChef.sol/interface.IBeraChef.md), OwnableUpgradeable, UUPSUpgradeable
+IBeraChef, OwnableUpgradeable, UUPSUpgradeable
 
 **Author:**
 Berachain Team
