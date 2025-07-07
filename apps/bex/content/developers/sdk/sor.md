@@ -154,6 +154,6 @@ const tx = await vaultContract.batchSwap(
   batchSwapParams.assets,
   batchSwapParams.funds,
   batchSwapParams.limits,
-  batchSwapParams.deadline
+  batchSwapParams.deadline,
 );
 ```

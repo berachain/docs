@@ -257,7 +257,7 @@ const SIDEBAR = {
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
         { text: "Changelog", link: "/beacon-kit/changelog" },
-        { text: "Trifork Upgrade", link: "/nodes/guides/trifork" },
+        { text: "Arctic Upgrade", link: "/nodes/guides/arctic" },
       ],
     },
     {
