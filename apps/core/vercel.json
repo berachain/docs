@@ -5,6 +5,14 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/learn/pol/changelog",
+      "destination": "/learn/changelog"
+    },
+    {
+      "source": "/learn/beacon-kit/changelog",
+      "destination": "/learn/changelog"
+    },
+    {
       "source": "/learn/pol/bgtmath",
       "destination": "/learn/pol/blockrewards"
     },

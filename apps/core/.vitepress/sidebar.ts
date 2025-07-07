@@ -23,7 +23,7 @@ const SIDEBAR = {
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
         { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
         { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
-        { text: "What's New in PoL", link: "/learn/pol/changelog" },
+        { text: "Docs Changelog", link: "/learn/changelog" },
       ],
     },
     {
@@ -96,6 +96,10 @@ const SIDEBAR = {
       items: [
         { text: "FAQs", link: "/learn/help/faqs" },
         { text: "Glossary", link: "/learn/help/glossary" },
+        {
+          text: "Reward Vault Guidelines",
+          link: "/learn/help/reward-vault-guidelines",
+        },
       ],
     },
   ],
@@ -244,6 +248,7 @@ const SIDEBAR = {
         { text: "EVM Execution Layer", link: "/nodes/evm-execution" },
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
         { text: "Production Checklist", link: "/nodes/production-checklist" },
+        { text: "Monitoring", link: "/nodes/monitoring" },
         {
           text: "BeaconKit GitHub Repo",
           link: "https://github.com/berachain/beacon-kit",
@@ -256,7 +261,6 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Changelog", link: "/beacon-kit/changelog" },
         { text: "Arctic Upgrade", link: "/nodes/guides/arctic" },
       ],
     },
