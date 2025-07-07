@@ -1,8 +1,12 @@
 # Berachain Changelog
 
-Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributing to the BRIP repository at GitHub](https://github.com/berachain/BRIPs/tree/main) and then posting to the the [Berachain Forum](https://hub.forum.berachain.com/c/brips/9).
+Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributing to the BRIP repository at GitHub](https://github.com/berachain/BRIPs/tree/main) and then posting to the [Berachain Forum](https://hub.forum.berachain.com/c/brips/9).
 
 Below are important changes shipped to Berachain.
+
+## 2025-JULY-21
+
+[Arctic Upgrade instructions are posted](/nodes/guides/arctic), introducing our next hardfork, which introduces forks of Geth and Reth, stabilizes block time and gas prices, and integrates automatic PoL distributions into our software stack.
 
 ## 2025-JUNE-17
 
@@ -12,14 +16,14 @@ The delay for reward allocation changes has been reduced from 8,191 blocks to 50
 
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
-This is a *hardfork* activated on Berachain Mainnet on June 4 2025.
+This is a *hardfork* activated on Berachain Mainnet on June 4, 2025.
 Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
 
 Since this is a minor version release (`major.minor.0`), there are breaking changes.
 
 **What's new**
 
-**The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though defaulted to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
+**The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though it defaults to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
 
   ```app.toml
   [beacon-kit] 
@@ -47,15 +51,15 @@ The [Claim API](/developers/claim-api) is now released.
 
 ## 2025-APR-24
 
-1. New Maximum of 3 incentives per reward vault
-2. Block Reward Emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
+1. New maximum of 3 incentives per reward vault
+2. Block reward emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
 3. Auto-Incentivizer: fees from default cutting board BEX Reward Vaults will use the fees to automatically offer incentives.
 
 ![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
 
 ## 2025-APR-18
 
-Reward Allocations limit any one reward vault to 30% share of emissions.
+Reward allocations limit any one reward vault to 30% share of emissions.
 
 ## 2025-APR: Beacon Kit v1.1.4
 

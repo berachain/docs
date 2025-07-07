@@ -15,7 +15,7 @@ head:
 
 Our next upgrade brings to Berachain four approved Improvement Proposals.
 
-1. [BRIP-0001 (Execution Layer Forked Clients)](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0001.md)
+1. [BRIP-0001 - Execution Layer Forked Clients](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0001.md)
 2. [BRIP-0002 - Gas Fee Modifications](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0002.md)
 3. [BRIP-0003 - Stable Block Time](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0003.md)
 4. [BRIP-0004 - Enshrined PoL Reward Distribution](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0004.md)
@@ -44,9 +44,9 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | Bepolia | [Bera-reth vTBD-rc](https://github.com/berachain/bera-reth/releases/tag/TBD)   |
 | Bepolia | [Beacon-Kit vTBD-rc](https://github.com/berachain/beacon-kit/releases/tag/TBD) |
 
-| Chain             | Genesis file & hash                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------ |
-| Bepolia           | [TBD](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
+| Chain   | Genesis file & hash                                                                              |
+| ------- | ------------------------------------------------------------------------------------------------ |
+| Bepolia | [TBD](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
