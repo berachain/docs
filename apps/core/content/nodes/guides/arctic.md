@@ -23,30 +23,30 @@ Our next upgrade brings to Berachain four approved Improvement Proposals.
 [Bera-reth](https://github.com/berachain/bera-reth) and [Bera-geth](https://github.com/berachain/bera-geth) are new forks of ParadymXYZ's reth and Ethereum Foundation's go-ethereum, under the upstream software licenses.
 
 :::warning
-All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-reth or Bera-geth, **and** upgrade to Beacon Kit TBD, to continue following the chain.
+All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-reth or Bera-geth, **and** upgrade to Beacon Kit 1.3.0, to continue following the chain.
 :::
 
 ## Arctic Upgrade Timeline
 
-| Date                     | Milestone                                                                              |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| July 21, 2025            | Beacon-Kit TBD-rc, Bera-geth TBD-rc and Bera-reth released for installation to Bepolia |
-| July 28, 2025            | All Bepolia infrastructure partners expected to be upgraded                            |
-| July 30, 2025 @ Noon EDT | Bepolia upgrade activates                                                              |
-| mid August               | Mainnet upgrade instructions posted                                                    |
-| late August              | Mainnet hardfork activates                                                             |
+| Date                     | Milestone                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| July 21, 2025            | Beacon-Kit 1.3.0-rc, Bera-geth 1.FIXME.0-rc and Bera-reth 1.0.0-rc released for installation to Bepolia |
+| July 28, 2025            | All Bepolia infrastructure partners expected to be upgraded                                             |
+| July 30, 2025 @ Noon EDT | Bepolia upgrade activates                                                                               |
+| mid August               | Mainnet upgrade instructions posted                                                                     |
+| late August              | Mainnet hardfork activates                                                                              |
 
 ## New Chain Clients and Genesis Files
 
-| Chain   | Client                                                                         |
-| ------- | ------------------------------------------------------------------------------ |
-| Bepolia | [Bera-geth vTBD-rc](https://github.com/berachain/bera-geth/releases/tag/TBD)   |
-| Bepolia | [Bera-reth vTBD-rc](https://github.com/berachain/bera-reth/releases/tag/TBD)   |
-| Bepolia | [Beacon-Kit vTBD-rc](https://github.com/berachain/beacon-kit/releases/tag/TBD) |
+| Chain   | Client                                                                             |
+| ------- | ---------------------------------------------------------------------------------- |
+| Bepolia | [Bera-geth vFIXME-rc](https://github.com/berachain/bera-geth/releases/tag/FIXME)   |
+| Bepolia | [Bera-reth v1.0.0-rc](https://github.com/berachain/bera-reth/releases/tag/FIXME)   |
+| Bepolia | [Beacon-Kit v1.3.0-rc](https://github.com/berachain/beacon-kit/releases/tag/FIXME) |
 
-| Chain   | Genesis file & hash                                                                              |
-| ------- | ------------------------------------------------------------------------------------------------ |
-| Bepolia | [TBD](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
+| Chain   | Genesis file & hash                                                                                |
+| ------- | -------------------------------------------------------------------------------------------------- |
+| Bepolia | [FIXME](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
@@ -95,5 +95,5 @@ tree datadir;
 Beacon-Kit should log the following on startup:
 
 ```
-TBD
+FIXME
 ```

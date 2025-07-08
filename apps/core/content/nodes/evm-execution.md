@@ -20,6 +20,6 @@ The following execution clients are supported by BeaconKit:
 | Client                                              | Language | Sync Strategies | Recommended Version |
 | --------------------------------------------------- | -------- | --------------- | ------------------- |
 | [Bera-Geth](https://github.com/berachain/bera-geth) | Golang   | Snap, Full      | vFIXME              |
-| [Bera-Reth](https://github.com/berachain/bera-reth) | Rust     | Full            | vFIXME              |
+| [Bera-Reth](https://github.com/berachain/bera-reth) | Rust     | Full            | v1.0.0              |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
