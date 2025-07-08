@@ -2,16 +2,16 @@
 head:
   - - meta
     - property: og:title
-      content: Berachain  Upgrade Instructions
+      content: Berachain August 2025 Upgrade Instructions
   - - meta
     - name: description
-      content: Berachain  upgrade instructions
+      content: Berachain August 2025 upgrade instructions
   - - meta
     - property: og:description
-      content: Berachain  upgrade instructions
+      content: Berachain August 2025 upgrade instructions
 ---
 
-# Arctic Hardfork 🔱
+# August 2025 Berachain Upgrade 🔱
 
 Our next upgrade brings to Berachain four approved Improvement Proposals.
 
@@ -26,7 +26,7 @@ Our next upgrade brings to Berachain four approved Improvement Proposals.
 All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-reth or Bera-geth, **and** upgrade to Beacon Kit 1.3.0, to continue following the chain.
 :::
 
-## Arctic Upgrade Timeline
+## August 2025 Upgrade Timeline
 
 | Date                     | Milestone                                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------------------------- |

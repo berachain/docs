@@ -6,7 +6,7 @@ Below are important changes shipped to Berachain.
 
 ## 2025-JULY-21
 
-[Arctic Upgrade instructions are posted](/nodes/guides/arctic), introducing our next hardfork, which introduces forks of Geth and Reth, stabilizes block time and gas prices, and integrates automatic PoL distributions into our software stack.
+[Arctic Upgrade instructions are posted](/nodes/guides/august-2025-upgrade), introducing our next hardfork, which introduces forks of Geth and Reth, stabilizes block time and gas prices, and integrates automatic PoL distributions into our software stack.
 
 ## 2025-JUNE-17
 
