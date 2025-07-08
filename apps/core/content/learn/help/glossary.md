@@ -85,9 +85,6 @@ An EVM (Ethereum Virtual Machine) execution client (sometimes referred to as the
 EVM Execution Clients:
 
 - **Geth:** Official Go implementation of the Ethereum protocol
-- **Erigon:** More performant, feature-rich client forked from go-ethereum
-- **Nethermind:** .NET based client with full support for Ethereum protocols
-- **Besu:** Enterprise-grade client, Apache 2.0 licensed, written in Java
 - **Reth:** Rust-based client focusing on performance and reliability
 
 ## Finality

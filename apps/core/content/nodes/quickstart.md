@@ -29,21 +29,21 @@ The scripts use a number of environment variables, created in `env.sh`, to store
 
 The following are required to run both the execution and consensus clients:
 
-- **OS**: Linux AMD64, Linux ARM64, MacOS ARM64
-- **CPU**: 8 Physical Cores
-- **RAM**: 48GB
-- **Storage**: 4TB (SSD with high IOPS)
+- **OS**: Linux AMD64, Linux ARM64
+- **CPU**: 4 Physical Cores
+- **RAM**: 16GB
+- **Storage**: 2TB SSD or network volume with minimum 1000 IOPS
 
 ### Software Requirements 💾
 
-- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written for v1.1.3.
-- One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
-  - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
-  - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
-  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
-  - [Erigon](https://github.com/erigontech/erigon/releases)
+- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags).
+- A corresponding release of our supported [execution clients](/nodes/evm-execution).
+  - [bera-reth](https://github.com/berachain/bera-reth/releases)
+  - [bera-geth](https://github.com/berachain/bera-geth/releases)
 
-## Getting started
+These clients are easily compiled for experiments on a laptop.
+
+## Getting Started
 
 Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`. Then, clone the berachain node scripts.
 
@@ -59,9 +59,8 @@ ls;
 
 # [Expected output, edited for clarity]
 # README.md	                  run-geth.sh     setup-geth.sh
-# env.sh                      run-nether.sh   setup-nether.sh
-# fetch-berachain-params.sh	  run-reth.sh     setup-reth.sh
-#                             run-beacond.sh  setup-beacond.sh
+# env.sh                      run-reth.sh     setup-reth.sh
+# fetch-berachain-params.sh	  run-beacond.sh  setup-beacond.sh
 ```
 
 The file `env.sh` contains environment variables used in the other scripts.
@@ -85,10 +84,8 @@ export LOG_DIR=$(pwd)/logs
 export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 export BEACOND_BIN=$(command -v beacond || echo $(pwd)/beacond)
 export BEACOND_DATA=$(pwd)/var/beacond
-export RETH_BIN=$(command -v reth || echo $(pwd)/reth)
-export GETH_BIN=$(command -v geth || echo $(pwd)/geth)
-export NETHERMIND_BIN=$(command -v Nethermind.Runner || echo $(pwd)/Nethermind.Runner)
-export ERIGON_BIN=$(command -v erigon || echo $(pwd)/erigon)
+export RETH_BIN=$(command -v bera-reth || echo $(pwd)/bera-reth)
+export GETH_BIN=$(command -v bera-geth || echo $(pwd)/bera-geth)
 ```
 
 You need to set these constants:
@@ -104,7 +101,7 @@ You should verify these constants:
 - **LOG_DIR**: This directory stores log files.
 - **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
 - **BEACOND_DATA**: Set this to where the consensus data and config should be kept. `BEACOND_CONFIG` must be under `BEACOND_PATH` as shown. Don't change it.
-- **RETH_BIN** or other chain client: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
+- **RETH_BIN** or other chain client: Set this to the full path where you installed the chain client. The expression provided finds it in your $PATH.
 - **CL_ETHRPC_PORT and EL_ETHRPC_PORT** are important for the exchange of consensus and transaction activity. These are highly recommended to be open for incoming connections, and ensuring that these ports on the advertised IP `MY_IP`, are open.
 
 ## Fetch Mainnet Parameters 📥
@@ -131,7 +128,7 @@ The `fetch-berachain-params.sh` script downloads the key network parameters for 
 
 Check the signatures above against your results. Further confirmation of the consequences of these signatures is below.
 
-## Set up the Consensus Client 🔗
+## Set Up the Consensus Client 🔗
 
 The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`. This script:
 
@@ -159,7 +156,7 @@ The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`.
 
 Your validator state root **must** agree with the value shown above.
 
-## Set up the Execution Client 🛠️
+## Set Up the Execution Client 🛠️
 
 The `setup-reth`, `setup-geth`, and `setup-nether` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
 
@@ -177,18 +174,18 @@ Here's an example of `setup-reth`:
 # INFO Verifying storage consistency.
 # INFO [BEPOLIA] Genesis block written hash=0x0207661de38f0e54ba91c8286096e72486784c79dc6a9681fc486b38335c042f
 # INFO [MAINNET] Genesis block written hash=0xd57819422128da1c44339fc7956662378c17e2213e669b427ac91cd11dfcfb38
-# ✓ Reth set up.
+# ✓ bera-reth set up.
 ```
 
 Your genesis block hash **must** agree with the above.
 
-## Fetch snapshots (optional)
+## Fetch Snapshots (Optional)
 
 Snapshots are collections of files from a node's backend that represent its state at a specific time.
 
 They are useful as backups and for syncing nodes that have failed, become corrupted, slowed down, or when spinning up a new node. Restoring a snapshot is much faster than syncing from the network.
 
-Snapshots can be applied to both the consensus (beacond) and execution (geth, reth, etc.) clients. In fact, syncing can be significantly faster when you restore both snapshots simultaneously. For other clients like Nethermind, using only a beacond snapshot will improve the initial chain sync.
+Snapshots can be applied to both the consensus (beacond) and execution clients. In fact, syncing can be significantly faster when you restore both snapshots simultaneously.
 
 This tutorial fetches pruned snapshots. If you plan to run an archive node, we recommend syncing from an empty state.
 
@@ -288,7 +285,7 @@ lz4 -d downloads/snapshot_reth_pruned...tar.lz4 | tar xv -C var/reth/;
 
 This is described in the next section.
 
-## Fetch Address Book (optional)
+## Fetch Address Book (Optional)
 
 The `beacond` address book contains a list of nodes to communicate with. Starting with one dramatically improves startup time.
 
@@ -357,7 +354,7 @@ $RETH_BIN node \
 --log.file.directory=$LOG_DIR;
 ```
 
-Launch two windows. In the first, run the consensus client:
+Launch two terminal windows. In the first, run the consensus client:
 
 ```bash
 # FROM: ~/beranode
@@ -461,7 +458,7 @@ Now that our RPC is running, let's verify that the network is working by perform
 Make sure that your node is fully synced before proceeding with these steps.
 :::
 
-### Get current execution block number
+### Get Current Execution Block Number
 
 ```bash
 curl --location 'http://localhost:8545' \

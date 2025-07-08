@@ -92,7 +92,6 @@ struct FundManagement {
 >
 > - **GIVEN_IN**: Specify the exact amount of tokens to swap in. The function calculates and returns the amount of tokens you'll receive.
 >   Example: "Swap exactly 100 USDC for as much ETH as possible."
->
 > - **GIVEN_OUT**: Specify the exact amount of tokens to receive. The function calculates and returns the amount of tokens you need to swap in.
 >   Example: "Receive exactly 1 ETH, how much USDC do I need to swap?"
 >

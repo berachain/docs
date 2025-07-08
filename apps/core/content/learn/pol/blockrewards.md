@@ -23,12 +23,10 @@ A given Validator's probability of selection for producing a block is the propor
 When a validator produces a block, `$BGT` tokens are emitted through two emission components:
 
 1. Base Emission
-
    - **Fixed amount** equal to a `base rate` parameter (B)
    - Paid directly to block-producing validator
 
 2. Reward Vault Emission
-
    - **Variable amount** dependent on validator's boost (x)
      - i.e. percentage of total `$BGT` delegated to the validator
    - Distributed to [Reward Vaults](/learn/pol/rewardvaults) selected by validator

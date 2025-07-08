@@ -51,7 +51,7 @@ const vault = new ethers.Contract(VAULT_ADDRESS, vaultAbi, wallet);
 await vault.setRelayerApproval(
   wallet.address, // sender
   RELAYER_ADDRESS, // relayer
-  true // approved
+  true, // approved
 );
 ```
 

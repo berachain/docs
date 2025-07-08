@@ -503,7 +503,7 @@ async function main() {
     // Retrieve contract artifact ABI & Bytecode // [!code ++]
     const contractName = "HelloWorld"; // [!code ++]
     const artifactFile = fs.readFileSync(
-      `${hre.artifacts._artifactsPath}/contracts/${contractName}.sol/${contractName}.json`
+      `${hre.artifacts._artifactsPath}/contracts/${contractName}.sol/${contractName}.json`,
     ); // [!code ++]
     const artifactJSON = JSON.parse(artifactFile.toString()) as any; // [!code ++]
 
@@ -516,7 +516,7 @@ async function main() {
       {
         // [!code ++]
         chain: chainConfiguration, // [!code ++]
-      } // [!code ++]
+      }, // [!code ++]
     ); // [!code ++]
 
     // Deploy contract // [!code ++]
