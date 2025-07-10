@@ -125,7 +125,7 @@ const metadata = {
   name: "Berachain Web3Modal",
   description: "Berachain Web3Modal Example",
   url: "https://web3modal.com", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/96059542"],
+  icons: ["https://avatars.githubusercontent.com/u/96059542"]
 };
 
 if (!projectId) throw new Error("Project ID is not defined");
@@ -138,12 +138,12 @@ export const config = defaultWagmiConfig({
   metadata, // required
   ssr: true,
   storage: createStorage({
-    storage: cookieStorage,
+    storage: cookieStorage
   }),
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  enableCoinbase: true // Optional - true by default
   //   ...wagmiOptions // Optional - Override createConfig parameters
 });
 ```
@@ -181,9 +181,9 @@ const queryClient = new QueryClient({
   // Prevent refetch on window refos
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
+      refetchOnWindowFocus: false
+    }
+  }
 });
 
 if (!projectId) throw new Error("Project ID is not defined");
@@ -192,14 +192,14 @@ if (!projectId) throw new Error("Project ID is not defined");
 createWeb3Modal({
   wagmiConfig: config,
   projectId,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 });
 
 // Exports
 // ========================================================
 export default function Web3Modal({
   children,
-  initialState,
+  initialState
 }: {
   children: ReactNode;
   initialState?: State;
@@ -230,23 +230,17 @@ import ContextProvider from "@/context";
 // ========================================================
 export const metadata: Metadata = {
   title: "Web3Modal Berachain",
-  description: "Web3Modal Example With Berachain",
+  description: "Web3Modal Example With Berachain"
 };
 
 // Main Layout
 // ========================================================
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const initialState = cookieToInitialState(config, headers().get("cookie"));
   return (
     <html lang="en">
       <body>
-        <ContextProvider initialState={initialState}>
-          {children}
-        </ContextProvider>
+        <ContextProvider initialState={initialState}>{children}</ContextProvider>
       </body>
     </html>
   );
@@ -506,7 +500,7 @@ export default function SignMessage() {
     chainId: berachainTestnet.id,
     address,
     message,
-    signature,
+    signature
   });
 
   // Functions
@@ -514,15 +508,13 @@ export default function SignMessage() {
    * @dev Handles signing messages from whatever is placed in textarea
    * @param event
    */
-  const onSubmitSignMessage = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const onSubmitSignMessage = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.group("onSubmitSignMessage");
 
     try {
       const signature = await signMessageAsync({
-        message,
+        message
       });
       setSignature(signature);
       setResult(signature);
@@ -671,11 +663,11 @@ const CONTRACT_ABI = [
       {
         internalType: "string",
         name: "_greeting",
-        type: "string",
-      },
+        type: "string"
+      }
     ],
     stateMutability: "nonpayable",
-    type: "constructor",
+    type: "constructor"
   },
   {
     anonymous: false,
@@ -684,17 +676,17 @@ const CONTRACT_ABI = [
         indexed: false,
         internalType: "address",
         name: "sender",
-        type: "address",
+        type: "address"
       },
       {
         indexed: false,
         internalType: "string",
         name: "message",
-        type: "string",
-      },
+        type: "string"
+      }
     ],
     name: "NewGreeting",
-    type: "event",
+    type: "event"
   },
   {
     inputs: [],
@@ -703,25 +695,25 @@ const CONTRACT_ABI = [
       {
         internalType: "string",
         name: "",
-        type: "string",
-      },
+        type: "string"
+      }
     ],
     stateMutability: "view",
-    type: "function",
+    type: "function"
   },
   {
     inputs: [
       {
         internalType: "string",
         name: "_greeting",
-        type: "string",
-      },
+        type: "string"
+      }
     ],
     name: "setGreeting",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
+    type: "function"
+  }
 ];
 
 /**
@@ -747,7 +739,7 @@ export default function Deploy() {
 
   const receipt = useWaitForTransactionReceipt({
     chainId: berachainTestnet.id,
-    hash: transactionHash ? (`${transactionHash}` as `0x${string}`) : undefined,
+    hash: transactionHash ? (`${transactionHash}` as `0x${string}`) : undefined
   });
 
   // Functions
@@ -776,9 +768,7 @@ export default function Deploy() {
       );
 
       // Need slide(2) to remove 0x from encodedData at the beginning
-      const fullByteCode = `${CONTRACT_BYTECODE}${encodedData.slice(
-        2
-      )}` as `0x${string}`;
+      const fullByteCode = `${CONTRACT_BYTECODE}${encodedData.slice(2)}` as `0x${string}`;
 
       // Process trasaction
       const tx = await provider.request({
@@ -786,9 +776,9 @@ export default function Deploy() {
         params: [
           {
             from: address,
-            data: fullByteCode,
-          },
-        ],
+            data: fullByteCode
+          }
+        ]
       });
 
       // Get the transaction hash
@@ -839,10 +829,7 @@ export default function Deploy() {
                 </pre>
               </div>
               <div>
-                <button
-                  disabled={isLoading || greeting.length === 0}
-                  type="submit"
-                >
+                <button disabled={isLoading || greeting.length === 0} type="submit">
                   Deploy
                 </button>
               </div>

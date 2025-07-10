@@ -39,8 +39,8 @@ const steps = [
     base: baseTokenAddress,
     quote: quoteTokenAddress,
     poolIdx: poolIndex,
-    isBuy: true,
-  },
+    isBuy: true
+  }
 ];
 const amount = ethers.utils.parseUnits("1", 18);
 const minOut = ethers.utils.parseUnits("0.99", 18);
@@ -159,15 +159,11 @@ In the current BEX implementation, pools are created through the [PoolCreationHe
 ```js
 const POOL_CREATION_HELPER_ABI = [
   "function createAndJoinWeightedPool(string name, string symbol, address[] createPoolTokens, address[] joinPoolTokens, uint256[] normalizedWeights, address[] rateProviders, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt) payable returns (address pool)",
-  "function createAndJoinStablePool(string name, string symbol, address[] createPoolTokens, uint256 amplificationParameter, address[] rateProviders, uint256[] tokenRateCacheDurations, bool exemptFromYieldProtocolFeeFlag, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt, bool joinWBERAPoolWithBERA) payable returns (address pool)",
+  "function createAndJoinStablePool(string name, string symbol, address[] createPoolTokens, uint256 amplificationParameter, address[] rateProviders, uint256[] tokenRateCacheDurations, bool exemptFromYieldProtocolFeeFlag, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt, bool joinWBERAPoolWithBERA) payable returns (address pool)"
 ];
 
 // Approve PoolCreationHelper as relayer
-await vault.setRelayerApproval(
-  wallet.address,
-  POOL_CREATION_HELPER_ADDRESS,
-  true
-);
+await vault.setRelayerApproval(wallet.address, POOL_CREATION_HELPER_ADDRESS, true);
 // Create pool with initial liquidity
 const poolCreationHelper = new ethers.Contract(
   POOL_CREATION_HELPER_ADDRESS,

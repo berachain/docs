@@ -132,7 +132,7 @@ Its use in the above example is informational, but can be used to provide detail
 ```js
 const [queryOutput, priceImpact] = await Promise.all([
   removeLiquidity.query(removeLiquidityInput, poolState),
-  PriceImpact.removeLiquidity(removeLiquidityInput, poolState),
+  PriceImpact.removeLiquidity(removeLiquidityInput, poolState)
 ]);
 
 const slippage = Slippage.fromPercentage("1");
@@ -150,6 +150,6 @@ const callData = removeLiquidity.buildCall({
   recipient: wallet.address,
   wethIsEth: true,
   slippage,
-  deadline,
+  deadline
 });
 ```

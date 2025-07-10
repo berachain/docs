@@ -62,9 +62,7 @@ The PoolCreationHelper must be approved as a relayer in the Vault contract:
 ```js
 const vault = new ethers.Contract(
   VAULT_ADDRESS,
-  [
-    "function setRelayerApproval(address sender, address relayer, bool approved)",
-  ],
+  ["function setRelayerApproval(address sender, address relayer, bool approved)"],
   wallet
 );
 

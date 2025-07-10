@@ -342,19 +342,19 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
     {
       name: "Testnet (Bepolia)",
       url: "https://bepolia.api-claim.berachain.com",
-      id: "bepolia",
+      id: "bepolia"
     },
     {
       name: "Mainnet",
       url: "https://api-claim.berachain.com",
-      id: "mainnet",
+      id: "mainnet"
     },
     {
       name: "Custom URL",
       url: "", // User can input their own
       id: "custom",
-      allowCustomUrl: true,
-    },
+      allowCustomUrl: true
+    }
   ];
   ```
 
