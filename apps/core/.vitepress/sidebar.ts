@@ -188,6 +188,19 @@ const SIDEBAR = {
           ],
         },
         {
+          text: "EIP-5792",
+          items: [
+            {
+              text: "Overview",
+              link: "/developers/guides/eip-5792-overview",
+            },
+            {
+              text: "MetaMask Guide",
+              link: "/developers/guides/eip-5792-metamask-guide",
+            },
+          ],
+        },
+        {
           text: "Community Guides",
           link: "/developers/guides/community-guides",
         },
