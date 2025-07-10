@@ -179,13 +179,13 @@ In our new `HelloWorld.test.ts` file, we'll replace the existing code with the f
 ```ts
 // Imports
 // ========================================================
-import { loadFixture } from '@nomicfoundation/hardhat-toolbox-viem/network-helpers';
-import { expect } from 'chai';
-import hre from 'hardhat';
+import { loadFixture } from "@nomicfoundation/hardhat-toolbox-viem/network-helpers";
+import { expect } from "chai";
+import hre from "hardhat";
 
 // Tests
 // ========================================================
-describe('HelloWorld', function () {
+describe("HelloWorld", function () {
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
@@ -193,7 +193,7 @@ describe('HelloWorld', function () {
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await hre.viem.getWalletClients();
 
-    const contract = await hre.viem.deployContract('HelloWorld', ['Test Message']);
+    const contract = await hre.viem.deployContract("HelloWorld", ["Test Message"]);
     const publicClient = await hre.viem.getPublicClient();
 
     return {
@@ -207,30 +207,30 @@ describe('HelloWorld', function () {
   /**
    *
    */
-  describe('Deployment', function () {
+  describe("Deployment", function () {
     /**
      *
      */
-    it('Should deploy with original message', async function () {
+    it("Should deploy with original message", async function () {
       // Setup
       const { contract } = await loadFixture(deployFixture);
 
       // Init + Expectations
-      expect(await contract.read.getGreeting()).to.equal('Test Message');
+      expect(await contract.read.getGreeting()).to.equal("Test Message");
     });
 
     /**
      *
      */
-    it('Should set a new message', async function () {
+    it("Should set a new message", async function () {
       // Setup
       const { contract, owner } = await loadFixture(deployFixture);
 
       // Init
-      await contract.write.setGreeting(['Hello There']);
+      await contract.write.setGreeting(["Hello There"]);
 
       // Expectations
-      expect(await contract.read.getGreeting()).to.equal('Hello There');
+      expect(await contract.read.getGreeting()).to.equal("Hello There");
     });
   });
 });
@@ -318,9 +318,9 @@ With our environment variable setup, we can now load them into our `hardhat.conf
 ```ts
 // Imports
 // ========================================================
-import { HardhatUserConfig } from 'hardhat/config';
-import '@nomicfoundation/hardhat-toolbox-viem';
-import dotenv from 'dotenv';
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox-viem";
+import dotenv from "dotenv";
 
 // Load Environment Variables
 // ========================================================
@@ -329,7 +329,7 @@ dotenv.config();
 // Main Hardhat Config
 // ========================================================
 const config: HardhatUserConfig = {
-  solidity: '0.8.19',
+  solidity: "0.8.19",
   networks: {
     // For localhost network
     hardhat: {
@@ -338,7 +338,7 @@ const config: HardhatUserConfig = {
     // NOTE: hardhat viem currently doesn't yet support this method for custom chains through Hardhat config ↴
     berachainTestnet: {
       chainId: parseInt(`${process.env.CHAIN_ID}`),
-      url: `${process.env.RPC_URL || ''}`,
+      url: `${process.env.RPC_URL || ""}`,
       accounts: process.env.WALLET_PRIVATE_KEY ? [`${process.env.WALLET_PRIVATE_KEY}`] : []
     }
   }
@@ -382,12 +382,12 @@ We'll also need to configure our `./scripts/deploy.ts` script to make sure thing
 ```ts
 // Imports
 // ========================================================
-import hre from 'hardhat';
+import hre from "hardhat";
 
 // Main Deployment Script
 // ========================================================
 async function main() {
-  const contract = await hre.viem.deployContract('HelloWorld', ['Hello from the contract!']);
+  const contract = await hre.viem.deployContract("HelloWorld", ["Hello from the contract!"]);
   console.log(`HelloWorld deployed to ${contract.address}`);
 }
 
@@ -450,10 +450,10 @@ Now that we can see that the contract can be successfully deployed for a local n
 ```ts
 // Imports
 // ========================================================
-import hre from 'hardhat';
-import fs from 'fs'; // [!code ++]
-import { defineChain } from 'viem'; // [!code ++]
-import { privateKeyToAccount } from 'viem/accounts'; // [!code ++]
+import hre from "hardhat";
+import fs from "fs"; // [!code ++]
+import { defineChain } from "viem"; // [!code ++]
+import { privateKeyToAccount } from "viem/accounts"; // [!code ++]
 
 // Config Needed For Custom Chain  // [!code ++]
 // ========================================================  // [!code ++]
@@ -492,10 +492,10 @@ const chainConfiguration = defineChain({
 // ========================================================
 async function main() {
   // NOTE: hardhat with viem currently doesn't support custom chains so there needs to be some custom functionality ↴ // [!code ++]
-  if (hre.network.name === 'berachainTestnet') {
+  if (hre.network.name === "berachainTestnet") {
     // [!code ++]
     // Retrieve contract artifact ABI & Bytecode // [!code ++]
-    const contractName = 'HelloWorld'; // [!code ++]
+    const contractName = "HelloWorld"; // [!code ++]
     const artifactFile = fs.readFileSync(
       `${hre.artifacts._artifactsPath}/contracts/${contractName}.sol/${contractName}.json`
     ); // [!code ++]
@@ -518,7 +518,7 @@ async function main() {
       // [!code ++]
       abi: artifactJSON.abi, // [!code ++]
       bytecode: artifactJSON.bytecode, // [!code ++]
-      args: ['Hello From Deployed Contract'] // [!code ++]
+      args: ["Hello From Deployed Contract"] // [!code ++]
     }); // [!code ++]
     console.log({ hash }); // [!code ++]
 
@@ -531,7 +531,7 @@ async function main() {
     console.log(`${contractName} deployed to ${receipt?.contractAddress}`); // [!code ++]
   } else {
     // [!code ++]
-    const contract = await hre.viem.deployContract('HelloWorld', ['Hello from the contract!']);
+    const contract = await hre.viem.deployContract("HelloWorld", ["Hello from the contract!"]);
     console.log(`HelloWorld deployed to ${contract.address}`);
   } // [!code ++]
 }
@@ -590,9 +590,9 @@ To verify our contract, we just need add an additional configuration to our `har
 ```ts
 // Imports
 // ========================================================
-import { HardhatUserConfig } from 'hardhat/config';
-import '@nomicfoundation/hardhat-toolbox-viem';
-import dotenv from 'dotenv';
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox-viem";
+import dotenv from "dotenv";
 
 // Load Environment Variables
 // ========================================================
@@ -601,7 +601,7 @@ dotenv.config();
 // Main Hardhat Config
 // ========================================================
 const config: HardhatUserConfig = {
-  solidity: '0.8.19',
+  solidity: "0.8.19",
   networks: {
     hardhat: {
       chainId: 1337
@@ -609,7 +609,7 @@ const config: HardhatUserConfig = {
     // NOTE: hardhat viem currently doesn't yet support this method for custom chains through Hardhat config ↴
     berachainTestnet: {
       chainId: parseInt(`${process.env.CHAIN_ID}`),
-      url: `${process.env.RPC_URL || ''}`,
+      url: `${process.env.RPC_URL || ""}`,
       accounts: process.env.WALLET_PRIVATE_KEY ? [`${process.env.WALLET_PRIVATE_KEY}`] : []
     }
   }, // [!code ++]
@@ -621,7 +621,7 @@ const config: HardhatUserConfig = {
       // [!code ++]
       {
         // [!code ++]
-        network: 'Berachain Testnet', // [!code ++]
+        network: "Berachain Testnet", // [!code ++]
         chainId: parseInt(`${process.env.CHAIN_ID}`), // [!code ++]
         urls: {
           // [!code ++]

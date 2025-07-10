@@ -151,18 +151,18 @@ contract BatchTransaction {
 
 ```typescript [usage.ts]
 // Example usage with viem and EIP-7702 signing
-import { createWalletClient, http, parseEther, encodeFunctionData } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
-import { eip7702Actions } from 'viem/experimental';
-import { batchABI, batchContractAddress } from './abi';
+import { createWalletClient, http, parseEther, encodeFunctionData } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { eip7702Actions } from "viem/experimental";
+import { batchABI, batchContractAddress } from "./abi";
 
-const account = privateKeyToAccount('0xYOUR_PRIVATE_KEY');
+const account = privateKeyToAccount("0xYOUR_PRIVATE_KEY");
 const client = createWalletClient({
   account,
   chain: {
     id: 1337,
-    name: 'Local',
-    rpcUrls: { default: { http: ['http://localhost:8545'] } }
+    name: "Local",
+    rpcUrls: { default: { http: ["http://localhost:8545"] } }
   },
   transport: http()
 }).extend(eip7702Actions());
@@ -170,9 +170,9 @@ const client = createWalletClient({
 // Prepare your batch of calls
 const calls = [
   {
-    to: '0xContract1',
-    value: parseEther('0'),
-    data: '0x...' // encoded function data
+    to: "0xContract1",
+    value: parseEther("0"),
+    data: "0x..." // encoded function data
   }
   // ... more calls
 ];
@@ -181,13 +181,13 @@ const calls = [
 const authorization = await client.signAuthorization({
   account,
   contractAddress: batchContractAddress,
-  executor: 'self' // for direct execution
+  executor: "self" // for direct execution
 });
 
 // Encode the batch call
 const data = encodeFunctionData({
   abi: batchABI,
-  functionName: 'execute',
+  functionName: "execute",
   args: [calls]
 });
 

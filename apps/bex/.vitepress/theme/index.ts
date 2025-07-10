@@ -1,10 +1,10 @@
 // Imports
 // ========================================================
-import { h, onMounted } from 'vue';
-import DefaultTheme from 'vitepress/theme';
-import Fidget from '@berachain/ui/Fidget';
-import '@berachain/ui/style';
-import { mountVercelToolbar } from '@vercel/toolbar/vite';
+import { h, onMounted } from "vue";
+import DefaultTheme from "vitepress/theme";
+import Fidget from "@berachain/ui/Fidget";
+import "@berachain/ui/style";
+import { mountVercelToolbar } from "@vercel/toolbar/vite";
 
 // Theme Configuration
 // ========================================================
@@ -18,7 +18,7 @@ export default {
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'sidebar-nav-after': () => h(Fidget)
+      "sidebar-nav-after": () => h(Fidget)
     });
   },
   enhanceApp({ app, router, siteData }) {

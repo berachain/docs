@@ -42,8 +42,8 @@ const steps = [
     isBuy: true
   }
 ];
-const amount = ethers.utils.parseUnits('1', 18);
-const minOut = ethers.utils.parseUnits('0.99', 18);
+const amount = ethers.utils.parseUnits("1", 18);
+const minOut = ethers.utils.parseUnits("0.99", 18);
 
 await swapRouter.multiSwap(steps, amount, minOut);
 ```
@@ -158,8 +158,8 @@ In the current BEX implementation, pools are created through the [PoolCreationHe
 
 ```js
 const POOL_CREATION_HELPER_ABI = [
-  'function createAndJoinWeightedPool(string name, string symbol, address[] createPoolTokens, address[] joinPoolTokens, uint256[] normalizedWeights, address[] rateProviders, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt) payable returns (address pool)',
-  'function createAndJoinStablePool(string name, string symbol, address[] createPoolTokens, uint256 amplificationParameter, address[] rateProviders, uint256[] tokenRateCacheDurations, bool exemptFromYieldProtocolFeeFlag, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt, bool joinWBERAPoolWithBERA) payable returns (address pool)'
+  "function createAndJoinWeightedPool(string name, string symbol, address[] createPoolTokens, address[] joinPoolTokens, uint256[] normalizedWeights, address[] rateProviders, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt) payable returns (address pool)",
+  "function createAndJoinStablePool(string name, string symbol, address[] createPoolTokens, uint256 amplificationParameter, address[] rateProviders, uint256[] tokenRateCacheDurations, bool exemptFromYieldProtocolFeeFlag, uint256 swapFeePercentage, uint256[] amountsIn, address owner, bytes32 salt, bool joinWBERAPoolWithBERA) payable returns (address pool)"
 ];
 
 // Approve PoolCreationHelper as relayer
@@ -171,13 +171,13 @@ const poolCreationHelper = new ethers.Contract(
   wallet
 );
 const tx = await poolCreationHelper.createAndJoinWeightedPool(
-  'Pool Name', // name
-  'POOL', // symbol
+  "Pool Name", // name
+  "POOL", // symbol
   [token1Address, token2Address],
   [token1Address, token2Address],
   [weight1, weight2], // Must add up to 1e18
   [address(0), address(0)], // No rate providers
-  ethers.parseUnits('0.01', 18), // 1% swap fee
+  ethers.parseUnits("0.01", 18), // 1% swap fee
   amountsIn, // Array of initial liquidity amounts
   wallet.address, // Owner
   salt // For deterministic deploys

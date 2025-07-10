@@ -53,7 +53,7 @@ scrape_configs:
     params:
       module: [tcp_connect]
     static_configs:
-      - targets: ['a.b.c.d:30303', 'a.b.c.d:26656']
+      - targets: ["a.b.c.d:30303", "a.b.c.d:26656"]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -89,7 +89,7 @@ Then, add this endpoint to Prometheus by referring to the metrics port:
 scrape_configs:
   - job_name: beacond
     static_configs:
-      - targets: ['localhost:9107']
+      - targets: ["localhost:9107"]
 ```
 
 With this enabled, beacond exports a considerable number of metrics. Here are some of the more useful ones:
@@ -119,12 +119,12 @@ scrape_configs:
   - job_name: geth
     metrics_path: /debug/metrics/prometheus
     static_configs:
-      - targets: ['localhost:9108']
+      - targets: ["localhost:9108"]
 
   - job_name: reth
     metrics_path: /metrics
     static_configs:
-      - targets: ['localhost:9108']
+      - targets: ["localhost:9108"]
 ```
 
 `geth` publishes the following interesting metrics:
