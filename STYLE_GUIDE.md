@@ -420,7 +420,9 @@ In Markdown files, `constants.json` can be imported and used within `<script set
 1.  **Import the configuration:**
 
     ```javascript
-    <script setup>import config from '@berachain/config/constants.json'; // Other imports...</script>
+    <script setup>
+      import config from '@berachain/config/constants.json'; // Other imports...
+    </script>
     ```
 
 2.  **Use in Vue expressions:**

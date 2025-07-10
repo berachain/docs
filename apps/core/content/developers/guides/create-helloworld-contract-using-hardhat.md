@@ -339,7 +339,9 @@ const config: HardhatUserConfig = {
     berachainTestnet: {
       chainId: parseInt(`${process.env.CHAIN_ID}`),
       url: `${process.env.RPC_URL || ""}`,
-      accounts: process.env.WALLET_PRIVATE_KEY ? [`${process.env.WALLET_PRIVATE_KEY}`] : []
+      accounts: process.env.WALLET_PRIVATE_KEY
+        ? [`${process.env.WALLET_PRIVATE_KEY}`]
+        : []
     }
   }
 };
@@ -387,7 +389,9 @@ import hre from "hardhat";
 // Main Deployment Script
 // ========================================================
 async function main() {
-  const contract = await hre.viem.deployContract("HelloWorld", ["Hello from the contract!"]);
+  const contract = await hre.viem.deployContract("HelloWorld", [
+    "Hello from the contract!"
+  ]);
   console.log(`HelloWorld deployed to ${contract.address}`);
 }
 
@@ -531,7 +535,9 @@ async function main() {
     console.log(`${contractName} deployed to ${receipt?.contractAddress}`); // [!code ++]
   } else {
     // [!code ++]
-    const contract = await hre.viem.deployContract("HelloWorld", ["Hello from the contract!"]);
+    const contract = await hre.viem.deployContract("HelloWorld", [
+      "Hello from the contract!"
+    ]);
     console.log(`HelloWorld deployed to ${contract.address}`);
   } // [!code ++]
 }
@@ -610,7 +616,9 @@ const config: HardhatUserConfig = {
     berachainTestnet: {
       chainId: parseInt(`${process.env.CHAIN_ID}`),
       url: `${process.env.RPC_URL || ""}`,
-      accounts: process.env.WALLET_PRIVATE_KEY ? [`${process.env.WALLET_PRIVATE_KEY}`] : []
+      accounts: process.env.WALLET_PRIVATE_KEY
+        ? [`${process.env.WALLET_PRIVATE_KEY}`]
+        : []
     }
   }, // [!code ++]
   // For Contract Verification // [!code ++]

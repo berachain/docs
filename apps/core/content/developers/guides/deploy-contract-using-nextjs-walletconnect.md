@@ -197,7 +197,13 @@ createWeb3Modal({
 
 // Exports
 // ========================================================
-export default function Web3Modal({ children, initialState }: { children: ReactNode; initialState?: State }) {
+export default function Web3Modal({
+  children,
+  initialState
+}: {
+  children: ReactNode;
+  initialState?: State;
+}) {
   return (
     <WagmiProvider config={config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -756,7 +762,10 @@ export default function Deploy() {
       console.log({ greeting });
 
       // Based on constructor - constructor(string memory _greeting) {
-      const encodedData = encodeAbiParameters([{ name: "_greeting", type: "string" }], [`${greeting}`]);
+      const encodedData = encodeAbiParameters(
+        [{ name: "_greeting", type: "string" }],
+        [`${greeting}`]
+      );
 
       // Need slide(2) to remove 0x from encodedData at the beginning
       const fullByteCode = `${CONTRACT_BYTECODE}${encodedData.slice(2)}` as `0x${string}`;
@@ -836,7 +845,11 @@ export default function Deploy() {
               </pre>
               {transactionHash ? (
                 <p>
-                  <a className="button" href={`${BLOCK_EXPLORER}/tx/${transactionHash}`} target="_blank">
+                  <a
+                    className="button"
+                    href={`${BLOCK_EXPLORER}/tx/${transactionHash}`}
+                    target="_blank"
+                  >
                     Beratrail Tx Link
                   </a>
                 </p>
@@ -847,7 +860,9 @@ export default function Deploy() {
               <label>Transaction Receipt</label>
               <pre>
                 <code>
-                  {receipt.status === "pending" ? `Status: ${receipt.status}\n\nWaiting...` : ""}
+                  {receipt.status === "pending"
+                    ? `Status: ${receipt.status}\n\nWaiting...`
+                    : ""}
                   {receipt.status === "error"
                     ? `Status: ${receipt.status}\n\n${receipt?.failureReason?.message}`
                     : ""}

@@ -158,7 +158,9 @@ export default withMermaid(
         alias: [
           {
             find: /^.*\/VPNavBar\.vue$/,
-            replacement: fileURLToPath(new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url))
+            replacement: fileURLToPath(
+              new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
+            )
           },
           {
             find: /^.*\/VPNavBarMenu\.vue$/,
@@ -174,21 +176,30 @@ export default withMermaid(
           },
           {
             find: /^.*\/VPFlyout\.vue$/,
-            replacement: fileURLToPath(new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url))
+            replacement: fileURLToPath(
+              new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
+            )
           },
           {
             find: /^.*\/VPNavScreenMenuGroup\.vue$/,
             replacement: fileURLToPath(
-              new URL("../node_modules/@berachain/ui/NavScreenMenuGroup.vue", import.meta.url)
+              new URL(
+                "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
+                import.meta.url
+              )
             )
           },
           {
             find: /^.*\/VPFlyout\.vue$/,
-            replacement: fileURLToPath(new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url))
+            replacement: fileURLToPath(
+              new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
+            )
           },
           {
             find: /^.*\/VPSidebar\.vue$/,
-            replacement: fileURLToPath(new URL("../node_modules/@berachain/ui/Sidebar.vue", import.meta.url))
+            replacement: fileURLToPath(
+              new URL("../node_modules/@berachain/ui/Sidebar.vue", import.meta.url)
+            )
           }
         ]
       }
