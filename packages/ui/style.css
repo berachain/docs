@@ -149,8 +149,8 @@
     --vp-custom-block-font-size: 14px;
     --vp-custom-block-code-font-size: 13px;
   
-    --vp-custom-block-info-border: #afabab;
-    --vp-custom-block-info-text: #afabab;
+    --vp-custom-block-info-border: #525252;
+    --vp-custom-block-info-text: #525252;
     --vp-custom-block-info-bg: #fafaf9;
     --vp-custom-block-info-code-bg: var(--vp-c-default-soft);
   
@@ -169,8 +169,8 @@
     --vp-custom-block-danger-bg: #fef2f2;
     --vp-custom-block-danger-code-bg: var(--vp-c-danger-soft);
   
-    --vp-custom-block-details-border: #afabab;
-    --vp-custom-block-details-text: #afabab;
+    --vp-custom-block-details-border: #525252;
+    --vp-custom-block-details-text: #525252;
     --vp-custom-block-details-bg: #fafaf9;
     --vp-custom-block-details-code-bg: var(--vp-custom-block-info-code-bg);
   }
@@ -179,8 +179,8 @@
     --vp-custom-block-font-size: 14px;
     --vp-custom-block-code-font-size: 13px;
   
-    --vp-custom-block-info-border: #afabab;
-    --vp-custom-block-info-text: #afabab;
+    --vp-custom-block-info-border: #a3a3a3;
+    --vp-custom-block-info-text: #a3a3a3;
     --vp-custom-block-info-bg: #0e0803;
     --vp-custom-block-info-code-bg: var(--vp-c-default-soft);
   
@@ -199,8 +199,8 @@
     --vp-custom-block-danger-bg: #241515;
     --vp-custom-block-danger-code-bg: var(--vp-c-danger-soft);
   
-    --vp-custom-block-details-border: #afabab;
-    --vp-custom-block-details-text: #afabab;
+    --vp-custom-block-details-border: #a3a3a3;
+    --vp-custom-block-details-text: #a3a3a3;
     --vp-custom-block-details-bg: #0e0803;
     --vp-custom-block-details-code-bg: var(--vp-custom-block-info-code-bg);
   }

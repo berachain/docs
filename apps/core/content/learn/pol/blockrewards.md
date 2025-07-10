@@ -16,7 +16,7 @@ The network maintains an active set of **{{ config.mainnet.validatorActiveSetSiz
   - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
   - Maximum: {{ config.mainnet.maxEffectiveBalance }} `$BERA`
 
-A given Validator's probability of selection for producing a block is the proportion of its stake's weight to the total stakes of the active set.
+A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
 
 ## $BGT Emissions Structure
 
@@ -41,8 +41,57 @@ Boost is a crucial metric that determines a validator's reward emissions:
 
 - Calculated as the percentage of `$BGT` delegation a validator has compared to the total `$BGT` delegated in the network
 - Expressed as a decimal between 0 and 1
-- Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%)
-  Higher boost leads to higher reward emissions, subject to the emission formula
+- Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%).
+  Higher boost leads to higher reward emissions, subject to the emission formula.
+
+## BeraChef: Reward Allocation Management
+
+BeraChef is the core contract that manages how validators direct their BGT rewards across different Reward Vaults. It serves as the configuration layer that determines reward distribution based on validator preferences.
+
+### Core Responsibilities
+
+BeraChef manages three key aspects of the reward system:
+
+1. **Reward Allocations** - Maintains lists of weights that determine the percentage of rewards going to each Reward Vault
+2. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
+3. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
+
+### How Reward Allocations Work
+
+Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed across different Reward Vaults. If a validator doesn't set a custom allocation, a default allocation is used.
+
+**Reward Allocation Structure:**
+
+- **Weights**: Percentage allocations to different vaults (must sum to 100%)
+- **Start Block**: When the allocation becomes effective
+- **Delay Period**: Time buffer before allocations can be changed
+
+**Validator Control:**
+
+- Queue new reward allocations with a specified delay
+- Modify commission rates on incentive tokens (capped at 20%)
+- Change allocations following governance-imposed delay periods
+
+### Commission Management
+
+BeraChef manages validator commission rates on incentive tokens with the following constraints:
+
+- **Default Commission**: 5% if not explicitly set
+- **Maximum Commission**: 20% hard cap enforced by the contract
+- **Change Delay**: Required waiting period before commission changes take effect
+
+### Integration with Block Rewards
+
+When a validator produces a block, BeraChef determines:
+
+1. Which Reward Vaults receive the variable BGT emission
+2. The proportion each vault receives based on the validator's allocation weights
+3. The commission the validator earns on any incentive tokens from those vaults
+
+For detailed validator operations, see:
+
+- [Managing Validator Reward Allocations](/nodes/guides/reward-allocation)
+- [Setting Commission Rates](/nodes/guides/manage-incentives-commission)
 
 ## $BGT Emissions Per Block
 

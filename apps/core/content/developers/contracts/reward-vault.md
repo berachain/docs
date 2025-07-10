@@ -1,8 +1,12 @@
-<script setup>
-  import config from '@berachain/config/constants.json';
-</script>
-
 # RewardVault
+
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/RewardVault.sol)
+
+**Inherits:**
+PausableUpgradeable, ReentrancyGuardUpgradeable, FactoryOwnable, StakingRewards, IRewardVault
+
+**Author:**
+Berachain Team
 
 This contract is the vault for the Berachain rewards, it handles the staking and rewards accounting of BGT.
 
@@ -23,6 +27,22 @@ uint256 private constant MAX_INCENTIVE_RATE = 1e36;
 
 ```solidity
 uint256 private constant SAFE_GAS_LIMIT = 500_000;
+```
+
+### MIN_REWARD_DURATION
+
+The minimum reward duration.
+
+```solidity
+uint256 public constant MIN_REWARD_DURATION = 3 days;
+```
+
+### MAX_REWARD_DURATION
+
+The maximum reward duration.
+
+```solidity
+uint256 public constant MAX_REWARD_DURATION = 7 days;
 ```
 
 ### maxIncentiveTokensCount
@@ -77,6 +97,55 @@ The list of whitelisted tokens.
 
 ```solidity
 address[] public whitelistedTokens;
+```
+
+### rewardVaultManager
+
+The address authorized to manage reward vault operations and configurations.
+
+_This role is typically assigned to dApp teams to enable them to configure reward distribution parameters._
+
+```solidity
+address public rewardVaultManager;
+```
+
+### \_lastRewardDurationChangeTimestamp
+
+```solidity
+uint256 private _lastRewardDurationChangeTimestamp;
+```
+
+### targetRewardsPerSecond
+
+The target rewards per second, scaled by PRECISION.
+
+_This acts as both a maximum and a target rate. When the calculated reward rate exceeds this value,
+the duration is dynamically adjusted to achieve this target rate, but never goes below MIN_REWARD_DURATION.
+This prevents the issue where a spike in rewards would permanently expand the duration, causing subsequent
+smaller rewards to be spread over longer periods with very low rates._
+
+```solidity
+uint256 public targetRewardsPerSecond;
+```
+
+### pendingRewardsDuration
+
+The pending rewards duration.
+
+_Comes into effect during the next `notifyRewardAmount` call._
+
+```solidity
+uint256 public pendingRewardsDuration;
+```
+
+### minRewardDurationForTargetRate
+
+The reward duration in case targetRewardsPerSecond is not met.
+
+_must be between MIN_REWARD_DURATION and MAX_REWARD_DURATION and can be set only by reward vault manager._
+
+```solidity
+uint256 public minRewardDurationForTargetRate;
 ```
 
 ## Functions
@@ -138,6 +207,12 @@ modifier checkSelfStakedBalance(address account, uint256 amount);
 modifier onlyWhitelistedToken(address token);
 ```
 
+### onlyRewardVaultManager
+
+```solidity
+modifier onlyRewardVaultManager();
+```
+
 ### setDistributor
 
 Allows the factory owner to set the contract that is allowed to distribute rewards.
@@ -184,10 +259,12 @@ function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyFa
 
 ### setRewardsDuration
 
-Allows the factory owner to update the duration of the rewards.
+Allows the reward vault manager to update the duration of the rewards.
+
+_Only allowed if targetRewardsPerSecond is not set._
 
 ```solidity
-function setRewardsDuration(uint256 _rewardsDuration) external onlyFactoryOwner;
+function setRewardsDuration(uint256 _rewardsDuration) external onlyRewardVaultManager;
 ```
 
 **Parameters**
@@ -195,6 +272,41 @@ function setRewardsDuration(uint256 _rewardsDuration) external onlyFactoryOwner;
 | Name               | Type      | Description                      |
 | ------------------ | --------- | -------------------------------- |
 | `_rewardsDuration` | `uint256` | The new duration of the rewards. |
+
+### setTargetRewardsPerSecond
+
+Sets the target rewards per second rate.
+
+_This rate acts as both a maximum and a target. When rewards exceed this rate, the duration is
+dynamically adjusted to achieve this target rate while respecting MIN_REWARD_DURATION constraints.
+This prevents permanent duration expansion from reward spikes that would cause subsequent smaller
+rewards to be distributed at very low rates._
+
+```solidity
+function setTargetRewardsPerSecond(uint256 _targetRewardsPerSecond) external onlyRewardVaultManager;
+```
+
+**Parameters**
+
+| Name                      | Type      | Description                                             |
+| ------------------------- | --------- | ------------------------------------------------------- |
+| `_targetRewardsPerSecond` | `uint256` | The new target rewards per second, scaled by PRECISION. |
+
+### setMinRewardDurationForTargetRate
+
+Allows the reward vault manager to set the min reward duration for target rate.
+
+_This duration is used in case target rewards per second is not met._
+
+```solidity
+function setMinRewardDurationForTargetRate(uint256 _minRewardDurationForTargetRate) external onlyRewardVaultManager;
+```
+
+**Parameters**
+
+| Name                              | Type      | Description                                  |
+| --------------------------------- | --------- | -------------------------------------------- |
+| `_minRewardDurationForTargetRate` | `uint256` | The new min reward duration for target rate. |
 
 ### whitelistIncentiveToken
 
@@ -278,6 +390,20 @@ Allows the factory vault manager to unpause the vault.
 ```solidity
 function unpause() external onlyFactoryVaultManager;
 ```
+
+### setRewardVaultManager
+
+Allows the factory vault manager to set the address responsible for managing the reward vault.
+
+```solidity
+function setRewardVaultManager(address _rewardVaultManager) external onlyFactoryVaultManager;
+```
+
+**Parameters**
+
+| Name                  | Type      | Description                              |
+| --------------------- | --------- | ---------------------------------------- |
+| `_rewardVaultManager` | `address` | The address of the reward vault manager. |
 
 ### operator
 
@@ -498,6 +624,23 @@ function addIncentive(
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
+### accountIncentives
+
+Process incentives added via IERC20.transfer, adding them to the incentive accounting.
+
+_Permissioned function, only callable by incentive token manager._
+
+```solidity
+function accountIncentives(address token, uint256 amount) external nonReentrant onlyWhitelistedToken(token);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                                  |
+| -------- | --------- | -------------------------------------------- |
+| `token`  | `address` | The address of the token to process.         |
+| `amount` | `uint256` | The amount of token to account as incentive. |
+
 ### \_checkSelfStakedBalance
 
 _Check if the account has enough self-staked balance._
@@ -548,6 +691,12 @@ function _processIncentives(bytes calldata pubkey, uint256 bgtEmitted) internal;
 
 ```solidity
 function _deleteWhitelistedTokenFromList(address token) internal;
+```
+
+### \_setRewardRate
+
+```solidity
+function _setRewardRate() internal override;
 ```
 
 ## Structs
