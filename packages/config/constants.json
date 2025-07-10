@@ -659,7 +659,7 @@
     "pol": {
       "bgtIncentiveDistributor": {
         "name": "BGTIncentiveDistributor",
-        "bepolia-address": "",
+        "bepolia-address": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
         "mainnet-address": "0xBDDba144482049382eC79CadfA02f0fa0F462dE3",
         "abi": "",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
