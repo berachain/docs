@@ -4,7 +4,7 @@
 
 # PoolCreationHelper
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bex.poolCreationHelper.address">{{config.mainnet.contracts.bex.poolCreationHelper.address}}</a><span v-if="config.mainnet.contracts.bex.poolCreationHelper.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.bex.poolCreationHelper.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.bex.poolCreationHelper['mainnet-address']">{{config.contracts.bex.poolCreationHelper['mainnet-address']}}</a><span v-if="config.contracts.bex.poolCreationHelper.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bex.poolCreationHelper.abi">ABI JSON</a></span></small>
 
 Helper contract to create and join pools in a single transaction. Supports joining `WBERA` pools with `BERA`. Non-standard ERC20 tokens and double-entrypoint tokens are not supported.
 

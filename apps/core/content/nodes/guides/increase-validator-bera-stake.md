@@ -62,7 +62,7 @@ YOUR_ETH_RPC_URL=<YOUR_ETH_RPC_URL>;
 YOUR_STAKED_AMOUNT=<NUMBER>ether;
 
 # The 0x0.. are NOT typos
-cast send "{{config.mainnet.contracts.beaconDeposit.address}}" \
+cast send "{{config.contracts.pol.beaconDeposit['mainnet-address']}}" \
 'deposit(bytes,bytes,bytes,address)' \
 "$VALIDATOR_PUB_KEY" \
 "0x0000000000000000000000000000000000000000000000000000000000000000" \
