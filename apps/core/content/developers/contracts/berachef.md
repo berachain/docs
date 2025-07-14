@@ -4,7 +4,7 @@
 
 # BeraChef
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.berachef.address">{{config.mainnet.contracts.berachef.address}}</a><span v-if="config.mainnet.contracts.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.berachef.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
 
 The BeraChef contract is responsible for managing the reward allocations and the whitelisted vaults.
 Reward allocation is a list of weights that determine the percentage of rewards that goes to each reward vault.

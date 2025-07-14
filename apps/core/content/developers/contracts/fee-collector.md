@@ -4,7 +4,7 @@
 
 # FeeCollector
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.feeCollector.address">{{config.mainnet.contracts.feeCollector.address}}</a><span v-if="config.mainnet.contracts.feeCollector.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.feeCollector.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.feeCollector['mainnet-address']">{{config.contracts.pol.feeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.feeCollector.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.feeCollector.abi">ABI JSON</a></span></small>
 
 The Fee Collector contract is responsible for collecting fees from Berachain Dapps and
 auctioning them for a Payout token which then is distributed among the BGT stakers.

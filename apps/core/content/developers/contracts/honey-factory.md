@@ -4,7 +4,7 @@
 
 # HoneyFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.honeyFactory.address">{{config.mainnet.contracts.honeyFactory.address}}</a><span v-if="config.mainnet.contracts.honeyFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.honeyFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactory['mainnet-address']">{{config.contracts.tokens.honeyFactory['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactory.abi">ABI JSON</a></span></small>
 
 This is the router contract for minting and redeeming Honey.
 

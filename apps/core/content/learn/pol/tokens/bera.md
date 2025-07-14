@@ -18,7 +18,7 @@ head:
 
 # $BERA
 
-`$WBERA`: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.wbera.address">{{config.mainnet.contracts.wbera.address}}</a>
+`$WBERA`: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.wbera['mainnet-address']">{{config.contracts.tokens.wbera['mainnet-address']}}</a>
 
 <ClientOnly>
   <Token title="$BERA" image="/assets/BERA.png" />

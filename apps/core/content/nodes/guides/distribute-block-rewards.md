@@ -23,7 +23,7 @@ The following steps will guide you through the process of distributing block rew
 
 Block rewards are distributed to both a Validator and Reward Vaults defined by the respective Validator's Reward Allocation.
 
-Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.distributor.address" target="_blank">Distributor</a> contract.
+Reward distribution does not happen automatically and requires that the `distributeFor` function be called in the <a :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.distributor['mainnet-address']" target="_blank">Distributor</a> contract.
 
 ## Who Can Distribute Block Rewards?
 
@@ -94,7 +94,7 @@ echo $TIMESTAMP;
 # Sanity check - isTimestampActionable? Returns true if rewards have not yet been distributed for this block.
 
 # NOTE: Distribute contract may differ
-cast call "{{config.mainnet.contracts.distributor.address}}" "isTimestampActionable(uint64 timestamp) returns (bool success)" "$TIMESTAMP" --rpc-url http://localhost:8545;
+cast call "{{config.contracts.pol.distributor['mainnet-address']}}" "isTimestampActionable(uint64 timestamp) returns (bool success)" "$TIMESTAMP" --rpc-url http://localhost:8545;
 
 # [Expected Output]:
 # true
@@ -115,7 +115,7 @@ VAL_PUBKEY_PROOF=`echo $PROOF_JSON|jq -j '.validator_pubkey_proof'|sed 's/"//g'|
 # Example: Transaction successfully executed. Gas used: 104467
 WALLET_PRIVATE_KEY=<0xYOUR_WALLET_PRIVATE_KEY>;
 
-cast send "{{config.mainnet.contracts.distributor.address}}" \
+cast send "{{config.contracts.pol.distributor['mainnet-address']}}" \
 "distributeFor(uint64 nextTimestamp, uint64 proposerIndex, bytes calldata pubkey, bytes32[] calldata proposerIndexProof, bytes32[] calldata pubkeyProof)" \
 "$TIMESTAMP" \
 "$PROPOSER_INDEX" \
