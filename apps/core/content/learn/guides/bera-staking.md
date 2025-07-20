@@ -194,7 +194,6 @@ Right now, staked BERA can't be delegated to validators. Future LST integration 
 
 ## Related Resources
 
-- [PoL V2 Migration Guide](/learn/guides/pol-v2-migration)
 - [Proof-of-Liquidity Overview](/learn/pol/)
 - [BGT Staking Guide](/learn/guides/boost-a-validator)
 - [Reward Vaults](/learn/pol/rewardvaults) 

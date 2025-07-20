@@ -69,7 +69,7 @@ PoL V2 brings a new BERA Yield Module that gives `$BERA` holders direct yield op
 3. **Distribution**: `$WBERA` gets distributed to BERA stakers in the WBERAStakerVault
 4. **Yield Generation**: You earn yield from the distributed WBERA
 
-Check out our [BERA staking guide](/learn/guides/bera-staking) and [PoL V2 migration details](/learn/guides/pol-v2-migration).
+Check out our [BERA staking guide](/learn/guides/bera-staking) for more details.
 
 ## Ecosystem Alignment 🤝
 
