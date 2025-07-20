@@ -167,31 +167,6 @@ function withdraw(uint256 assets, address receiver, address owner) external retu
 function completeWithdrawal(bool isNative) external
 ```
 
-## FAQ
-
-### How much yield can I expect?
-
-Yield depends on:
-- Total PoL incentive volume
-- Number of stakers in the vault
-- Market conditions and protocol activity
-
-### Can I stake from a CEX?
-
-Yes! You can transfer BERA from centralized exchanges and stake it directly.
-
-### What happens if I need to withdraw quickly?
-
-The 7-day unbonding period can't be skipped. Make sure to plan your withdrawals ahead of time.
-
-### Is my staked BERA at risk?
-
-The vault has multiple security features and has been audited. But like all DeFi protocols, there's always some risk.
-
-### Can I delegate my staked BERA?
-
-Right now, staked BERA can't be delegated to validators. Future LST integration will make this possible.
-
 ## Related Resources
 
 - [Proof-of-Liquidity Overview](/learn/pol/)
