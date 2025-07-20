@@ -37,9 +37,9 @@ The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from
 ## Contract Addresses
 
 | Network | Contract Address | Status |
-|---------|------------------|--------|
-| Mainnet | `0x...` | TBD |
-| Testnet | `0x...` | TBD |
+| ------- | ---------------- | ------ |
+| Mainnet | `0x...`          | TBD    |
+| Testnet | `0x...`          | TBD    |
 
 ## Core Functions
 
@@ -47,8 +47,8 @@ The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from
 
 ```solidity
 function initialize(
-    address governance, 
-    uint256 _payoutAmount, 
+    address governance,
+    uint256 _payoutAmount,
     address _wberaStakerVault
 ) public initializer
 ```
@@ -56,6 +56,7 @@ function initialize(
 Initializes the contract with governance, payout amount, and vault address.
 
 **Parameters:**
+
 - `governance`: Address with DEFAULT_ADMIN_ROLE
 - `_payoutAmount`: Amount of WBERA required to claim fees
 - `_wberaStakerVault`: Address of the WBERAStakerVault contract
@@ -64,7 +65,7 @@ Initializes the contract with governance, payout amount, and vault address.
 
 ```solidity
 function claimFees(
-    address _recipient, 
+    address _recipient,
     address[] calldata _feeTokens
 ) external whenNotPaused
 ```
@@ -72,24 +73,27 @@ function claimFees(
 Claims collected incentive fees. The caller must transfer the payout amount of WBERA to the WBERAStakerVault.
 
 **Parameters:**
+
 - `_recipient`: Address to receive the auctioned tokens
 - `_feeTokens`: Array of token addresses to claim
 
 **Requirements:**
+
 - Caller must transfer `payoutAmount` WBERA to WBERAStakerVault
 - Contract must have collected fees for the specified tokens
 
 ### Payout Amount Management
 
 ```solidity
-function queuePayoutAmountChange(uint256 _newPayoutAmount) 
-    external 
+function queuePayoutAmountChange(uint256 _newPayoutAmount)
+    external
     onlyRole(DEFAULT_ADMIN_ROLE)
 ```
 
 Queues a change to the payout amount. The change takes effect on the next fee claim.
 
 **Parameters:**
+
 - `_newPayoutAmount`: New payout amount in WBERA
 
 ## View Functions
@@ -132,8 +136,8 @@ Pauses or unpauses fee claiming operations.
 ### Upgrade Contract
 
 ```solidity
-function upgradeToAndCall(address newImplementation, bytes memory data) 
-    external 
+function upgradeToAndCall(address newImplementation, bytes memory data)
+    external
     onlyRole(DEFAULT_ADMIN_ROLE)
 ```
 
@@ -175,9 +179,9 @@ Emitted when fees are claimed and tokens are transferred.
 ```javascript
 // Prepare fee tokens to claim
 const feeTokens = [
-    "0x...", // USDC
-    "0x...", // USDT
-    "0x..."  // DAI
+  "0x...", // USDC
+  "0x...", // USDT
+  "0x...", // DAI
 ];
 
 // Get payout amount
@@ -202,19 +206,24 @@ const tokens = ["0x...", "0x...", "0x..."]; // USDC, USDT, DAI
 const balances = {};
 
 for (const token of tokens) {
-    const tokenContract = new ethers.Contract(token, ERC20_ABI, provider);
-    const balance = await tokenContract.balanceOf(bgtIncentiveFeeCollector.address);
-    balances[token] = balance;
-    console.log(`Balance of ${token}:`, ethers.formatUnits(balance, 6)); // Assuming 6 decimals
+  const tokenContract = new ethers.Contract(token, ERC20_ABI, provider);
+  const balance = await tokenContract.balanceOf(
+    bgtIncentiveFeeCollector.address
+  );
+  balances[token] = balance;
+  console.log(`Balance of ${token}:`, ethers.formatUnits(balance, 6)); // Assuming 6 decimals
 }
 
 // Check if fees are available to claim
-const totalFees = Object.values(balances).reduce((sum, balance) => sum + balance, 0n);
+const totalFees = Object.values(balances).reduce(
+  (sum, balance) => sum + balance,
+  0n
+);
 const payoutAmount = await bgtIncentiveFeeCollector.payoutAmount();
 
 if (totalFees > 0) {
-    console.log("Fees available to claim:", ethers.formatUnits(totalFees, 6));
-    console.log("Payout amount required:", ethers.formatEther(payoutAmount));
+  console.log("Fees available to claim:", ethers.formatUnits(totalFees, 6));
+  console.log("Payout amount required:", ethers.formatEther(payoutAmount));
 }
 ```
 
@@ -245,6 +254,7 @@ incentive.amountRemaining = amountRemainingBefore + amount - feeAmount;
 ### 2. Fee Collection
 
 The `_collectIncentiveFee` function:
+
 - Calculates fee amount based on incentive fee rate
 - Transfers fee to BGTIncentiveFeeCollector
 - Emits `IncentiveFeeCollected` event
@@ -252,6 +262,7 @@ The `_collectIncentiveFee` function:
 ### 3. Fee Auction and Distribution
 
 When `claimFees` is called:
+
 - Caller transfers WBERA to WBERAStakerVault
 - Collected tokens are transferred to recipient
 - WBERA is distributed to BERA stakers
@@ -278,10 +289,10 @@ When `claimFees` is called:
 
 ## Error Codes
 
-| Error | Description |
-|-------|-------------|
-| `ZeroAddress` | Governance or vault address cannot be zero |
-| `PayoutAmountIsZero` | Payout amount cannot be zero |
+| Error                | Description                                |
+| -------------------- | ------------------------------------------ |
+| `ZeroAddress`        | Governance or vault address cannot be zero |
+| `PayoutAmountIsZero` | Payout amount cannot be zero               |
 
 ## Related Contracts
 
@@ -293,4 +304,4 @@ When `claimFees` is called:
 
 - [PoL V2 Migration Guide](/learn/guides/pol-v2-migration)
 - [Incentive Fee Collection](/learn/pol/blockrewards#incentive-fee-collection-pol-v2)
-- [BERA Staking Guide](/learn/guides/bera-staking) 
+- [BERA Staking Guide](/learn/guides/bera-staking)

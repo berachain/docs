@@ -39,9 +39,9 @@ The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake 
 ## Contract Addresses
 
 | Network | Contract Address | Status |
-|---------|------------------|--------|
-| Mainnet | `0x...` | TBD |
-| Testnet | `0x...` | TBD |
+| ------- | ---------------- | ------ |
+| Mainnet | `0x...`          | TBD    |
+| Testnet | `0x...`          | TBD    |
 
 ## Core Functions
 
@@ -54,6 +54,7 @@ function initialize(address governance) external initializer
 Initializes the vault with the governance address. Can only be called once.
 
 **Parameters:**
+
 - `governance`: Address that will have DEFAULT_ADMIN_ROLE
 
 ### Deposits
@@ -61,38 +62,42 @@ Initializes the vault with the governance address. Can only be called once.
 #### Native BERA Deposit
 
 ```solidity
-function depositNative(uint256 assets, address receiver) 
-    external 
-    payable 
-    whenNotPaused 
+function depositNative(uint256 assets, address receiver)
+    external
+    payable
+    whenNotPaused
     returns (uint256 shares)
 ```
 
 Deposits native BERA into the vault. The function automatically wraps BERA to WBERA.
 
 **Parameters:**
+
 - `assets`: Amount of BERA to deposit (must equal `msg.value`)
 - `receiver`: Address to receive the sWBERA shares
 
 **Returns:**
+
 - `shares`: Number of sWBERA shares minted
 
 #### WBERA Deposit
 
 ```solidity
-function deposit(uint256 assets, address receiver) 
-    external 
-    whenNotPaused 
+function deposit(uint256 assets, address receiver)
+    external
+    whenNotPaused
     returns (uint256 shares)
 ```
 
 Deposits WBERA into the vault (standard ERC4626 deposit).
 
 **Parameters:**
+
 - `assets`: Amount of WBERA to deposit
 - `receiver`: Address to receive the sWBERA shares
 
 **Returns:**
+
 - `shares`: Number of sWBERA shares minted
 
 ### Withdrawals
@@ -100,34 +105,37 @@ Deposits WBERA into the vault (standard ERC4626 deposit).
 #### Initiate Withdrawal
 
 ```solidity
-function withdraw(uint256 assets, address receiver, address owner) 
-    external 
-    whenNotPaused 
+function withdraw(uint256 assets, address receiver, address owner)
+    external
+    whenNotPaused
     returns (uint256 shares)
 ```
 
 Initiates a withdrawal request. The withdrawal will be available after 7 days.
 
 **Parameters:**
+
 - `assets`: Amount of WBERA to withdraw
 - `receiver`: Address to receive the withdrawn assets
 - `owner`: Address that owns the shares
 
 **Returns:**
+
 - `shares`: Number of sWBERA shares burned
 
 #### Complete Withdrawal
 
 ```solidity
-function completeWithdrawal(bool isNative) 
-    external 
-    nonReentrant 
+function completeWithdrawal(bool isNative)
+    external
+    nonReentrant
     whenNotPaused
 ```
 
 Completes a withdrawal request after the 7-day cooldown period.
 
 **Parameters:**
+
 - `isNative`: If true, receive native BERA; if false, receive WBERA
 
 ### View Functions
@@ -143,9 +151,9 @@ Returns the total WBERA in the vault, excluding reserved assets for pending with
 #### Withdrawal Request
 
 ```solidity
-function withdrawalRequests(address user) 
-    external 
-    view 
+function withdrawalRequests(address user)
+    external
+    view
     returns (
         uint256 assets,
         uint256 shares,
@@ -158,9 +166,11 @@ function withdrawalRequests(address user)
 Returns the withdrawal request details for a user.
 
 **Parameters:**
+
 - `user`: Address to check withdrawal request for
 
 **Returns:**
+
 - `assets`: Amount of assets requested for withdrawal
 - `shares`: Number of shares burned for the withdrawal
 - `requestTime`: Timestamp when withdrawal was requested
@@ -189,22 +199,23 @@ Pauses or unpauses the vault operations.
 ### Recover ERC20
 
 ```solidity
-function recoverERC20(address tokenAddress, uint256 tokenAmount) 
-    external 
+function recoverERC20(address tokenAddress, uint256 tokenAmount)
+    external
     onlyRole(DEFAULT_ADMIN_ROLE)
 ```
 
 Recovers ERC20 tokens accidentally sent to the vault (except WBERA).
 
 **Parameters:**
+
 - `tokenAddress`: Address of the token to recover
 - `tokenAmount`: Amount of tokens to recover
 
 ### Upgrade Contract
 
 ```solidity
-function upgradeToAndCall(address newImplementation, bytes memory data) 
-    external 
+function upgradeToAndCall(address newImplementation, bytes memory data)
+    external
     onlyRole(DEFAULT_ADMIN_ROLE)
 ```
 
@@ -258,7 +269,7 @@ Emitted when ERC20 tokens are recovered from the vault.
 // Deposit native BERA
 const depositAmount = ethers.parseEther("10");
 await wberaStakerVault.depositNative(depositAmount, userAddress, {
-    value: depositAmount
+  value: depositAmount,
 });
 
 // Check shares received
@@ -279,12 +290,12 @@ await wberaStakerVault.completeWithdrawal(true); // Receive native BERA
 // Check if user has pending withdrawal
 const request = await wberaStakerVault.withdrawalRequests(userAddress);
 if (request.assets > 0) {
-    const requestTime = request.requestTime;
-    const cooldownEnd = requestTime + (7 * 24 * 60 * 60); // 7 days
-    const isReady = block.timestamp >= cooldownEnd;
-    
-    console.log("Withdrawal ready:", isReady);
-    console.log("Assets to withdraw:", ethers.formatEther(request.assets));
+  const requestTime = request.requestTime;
+  const cooldownEnd = requestTime + 7 * 24 * 60 * 60; // 7 days
+  const isReady = block.timestamp >= cooldownEnd;
+
+  console.log("Withdrawal ready:", isReady);
+  console.log("Assets to withdraw:", ethers.formatEther(request.assets));
 }
 ```
 
@@ -327,14 +338,14 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 
 ## Error Codes
 
-| Error | Description |
-|-------|-------------|
-| `ZeroAddress` | Governance address cannot be zero |
-| `InsufficientNativeValue` | `msg.value` must equal assets parameter |
-| `WithdrawalNotRequested` | No withdrawal request found for caller |
-| `WithdrawalNotReady` | 7-day cooldown period not completed |
+| Error                        | Description                                   |
+| ---------------------------- | --------------------------------------------- |
+| `ZeroAddress`                | Governance address cannot be zero             |
+| `InsufficientNativeValue`    | `msg.value` must equal assets parameter       |
+| `WithdrawalNotRequested`     | No withdrawal request found for caller        |
+| `WithdrawalNotReady`         | 7-day cooldown period not completed           |
 | `WithdrawalAlreadyRequested` | Only one withdrawal request allowed at a time |
-| `CannotRecoverStakingToken` | Cannot recover WBERA token |
+| `CannotRecoverStakingToken`  | Cannot recover WBERA token                    |
 
 ## Related Contracts
 
@@ -346,4 +357,4 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 
 - [BERA Staking Guide](/learn/guides/bera-staking)
 - [PoL V2 Migration Guide](/learn/guides/pol-v2-migration)
-- [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626) 
+- [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626)

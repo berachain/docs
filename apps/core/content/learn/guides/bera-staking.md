@@ -171,4 +171,4 @@ function completeWithdrawal(bool isNative) external
 
 - [Proof-of-Liquidity Overview](/learn/pol/)
 - [BGT Staking Guide](/learn/guides/boost-a-validator)
-- [Reward Vaults](/learn/pol/rewardvaults) 
+- [Reward Vaults](/learn/pol/rewardvaults)

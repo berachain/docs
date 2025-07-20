@@ -77,6 +77,7 @@ BERA stakers earn yield through the incentive tax mechanism:
 4. **WBERA distributed** to WBERAStakerVault stakers
 
 The yield rate depends on:
+
 - Total PoL incentive volume across all protocols
 - Number of BERA stakers in the vault
 - Market conditions and protocol activity

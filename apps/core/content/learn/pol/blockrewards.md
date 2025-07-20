@@ -160,6 +160,7 @@ incentive.amountRemaining = amountRemainingBefore + amount - feeAmount;
 ```
 
 The fee amount is calculated as:
+
 ```
 feeAmount = (incentiveAmount * bgtIncentiveFeeRate) / 10000
 ```
@@ -168,12 +169,12 @@ Where `bgtIncentiveFeeRate` is currently set to 3300 (33%) and can be adjusted b
 
 ### Impact on Stakeholders
 
-| Stakeholder | Impact |
-|-------------|--------|
-| **BGT Holders** | Receive ~67% of previous incentive amounts |
-| **BERA Stakers** | Earn yield from redirected 33% of incentives |
-| **Protocols** | Pay the same total incentives, with 33% redirected |
-| **Validators** | No change to operations or earnings |
+| Stakeholder      | Impact                                             |
+| ---------------- | -------------------------------------------------- |
+| **BGT Holders**  | Receive ~67% of previous incentive amounts         |
+| **BERA Stakers** | Earn yield from redirected 33% of incentives       |
+| **Protocols**    | Pay the same total incentives, with 33% redirected |
+| **Validators**   | No change to operations or earnings                |
 
 ### Fee Collection Architecture
 
