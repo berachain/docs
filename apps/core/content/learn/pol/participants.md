@@ -50,6 +50,50 @@ When selecting a validator to delegate `$BGT` to, users typically consider:
 
 The primary goal is to earn as many Incentives as possible through delegation.
 
+## BERA Stakers 🐻
+
+With PoL V2, `$BERA` holders can now participate directly in the Proof-of-Liquidity ecosystem through the BERA Yield Module. BERA stakers help:
+
+- Provide direct utility and demand for the network's native asset
+- Earn yield from redirected PoL incentives
+- Strengthen the economic foundation of the Berachain network
+
+### BERA Staking Mechanics 🔄
+
+BERA stakers use the **WBERAStakerVault**, an ERC4626-compliant vault that:
+
+- Takes both native `$BERA` and wrapped `$WBERA` deposits
+- Earns yield from 33% of PoL protocol incentives
+- Has a 7-day unbonding period for withdrawals
+- Automatically compounds rewards for better yields
+
+### Earning Yield Through PoL V2 📈
+
+BERA stakers earn yield through the incentive tax mechanism:
+
+1. **Protocols pay incentives** to validators for directing BGT emissions
+2. **33% fee collected** and sent to BGTIncentiveFeeCollector
+3. **Fees auctioned** for WBERA
+4. **WBERA distributed** to WBERAStakerVault stakers
+
+The yield rate depends on:
+- Total PoL incentive volume across all protocols
+- Number of BERA stakers in the vault
+- Market conditions and protocol activity
+
+### Strategic Considerations for BERA Stakers 🎯
+
+Successful BERA stakers consider:
+
+- **Long-term alignment**: The 7-day unbonding period encourages long-term staking
+- **Yield optimization**: Monitor vault performance and incentive volume
+- **Risk management**: Understand the smart contract risks and emergency controls
+- **Diversification**: Balance BERA staking with other yield opportunities
+
+::: tip
+BERA staking is completely separate from traditional validator staking. You can participate in both systems simultaneously.
+:::
+
 ## Ecosystem Projects 🧸
 
 Projects participate in PoL by:
@@ -59,3 +103,13 @@ Projects participate in PoL by:
 3. Supplying incentive tokens and managing rates in their vault
 
 The [Incentives marketplace](/learn/pol/incentives) allows protocols to bid for validators' emissions using whitelisted tokens, creating alignment between all stakeholders to increase the overall value of the network. Projects must also gain the favor of `$BGT` holders to enter into the PoL system.
+
+### PoL V2 Impact on Projects 🔄
+
+With PoL V2, projects now:
+
+- **Pay incentive fees**: 33% of incentives are collected as fees for BERA stakers
+- **Maintain competition**: Continue competing for the remaining 67% of BGT emissions
+- **Benefit from enhanced BERA utility**: More BERA utility strengthens the overall ecosystem
+
+The incentive fee mechanism ensures that projects contribute to BERA's value while maintaining the competitive incentive marketplace.
