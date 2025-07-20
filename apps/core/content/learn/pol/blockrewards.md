@@ -135,19 +135,84 @@ Rewards are created on a per-block basis; however, the distribution of rewards i
 Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts.
 The reward window is reset each time new rewards are added.
 
-## Incentive Fee Collection (PoL V2) 🐻
+### Distribution Example
 
-With PoL V2, a portion of protocol incentives goes to BERA stakers through an incentive tax mechanism. This gives `$BERA` holders direct yield opportunities while keeping the existing PoL ecosystem intact.
+On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
+
+A more real-world example with simplified numbers can be used to understand distribution currently (taking place over 9 days):
+
+- 3 `$BGT` distributed daily, for a total of 27 over 9 days
+- 1 depositor, owning all the deposits
+
+The distribution graph would be as follows:
+
+![Complex Example](../../public/assets//complex-emission.png)
+
+**Legend**
+
+- Emitted: Total number of `$BGT` distributed and available
+- Claimable: Total number of `$BGT` able to be claimed by depositors
+- Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
+
+This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after three days where all rewards are actively being distributed.
+Given that rewards are distributed on a frequent basis, the reward rate on a new reward vault should normalize after the initial three-day period.
+
+Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
+
+## Calculating Boost APR
+
+Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
+
+![Boost APR Example](/public/assets/boost-apr-example.png)
+
+Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).
+
+Initial variables:
+
+- $R_c$ : cycle rate
+- $B_s$ : starting block
+- $t_{B_s}$ : timestamp of starting block
+- $B_e$ : ending block
+- $t_{B_e}$ : timestamp of ending block
+- $IT$ : incentive token
+- $P_{T,t_{B_e}}$ : price of token $T$ at the end time of the block range
+
+These variables are collected for the particular validator:
+
+- $I_{T,b}$ : incentive amount received by validator at given block $b$ per given token $T$
+- $Boost_{t_{B_e}}$
+  : total BGT boost of the validator at ending time of the block range
+
+Then, the $APR$ for that validator is the sum over the range of all received incentives priced at the end time of the block range, divided by the total boost at the end time, priced with BERA price at final time, annualized.
+
+$$ R*c = \frac{\sum*{T∈IT}\Big(\sum*{b = B_s}^{B_e} I*{T,b}\Big) \times P*{T,t*{B*e}}} {Boost*{t*{B_e}} \times P*{BERA,t\_{B_e}}} $$
+
+$$ APR = R*c \times \frac{{T*{year}}}{t*{B_e} - t*{B_s}} $$
+
+Note that by “incentive received” we only consider incentives distributed by the RewardVault to the BGTIncentiveDistributor, tracked by the event BGTBoosterIncentivesProcessed (see contract code).
+
+Amount in this calculation is net of commission, so per token it’s given by:
+
+$$ I\_{T,b} = IR_T \times DistributedBGT \times (1 - C) $$
+
+with:
+
+- $IR_T$ : incentive rate of token $T$
+- $C$ : validator commission on incentives
+
+## Incentive Fee Collection (PoL V2)
+
+With PoL V2, a portion of protocol incentives is redirected to BERA stakers through an incentive tax mechanism, providing $BERA holders with direct yield opportunities.
 
 ### How Incentive Fees Work
 
 When protocols pay incentives to validators for directing BGT emissions:
 
-1. **Incentive Payment**: Protocols transfer incentive tokens to Reward Vaults
-2. **Fee Collection**: 33% of the incentive amount gets collected as a fee
-3. **Fee Distribution**: Collected fees go to the BGTIncentiveFeeCollector
-4. **WBERA Conversion**: Fees get auctioned for WBERA
-5. **BERA Staker Distribution**: WBERA gets distributed to WBERAStakerVault stakers
+1. **Incentive Payment**: Protocol pays incentives to validators
+2. **Fee Collection**: 33% of the incentive amount is collected as a fee
+3. **Fee Distribution**: Collected fees are sent to BGTIncentiveFeeCollector
+4. **WBERA Conversion**: Fees are auctioned for WBERA tokens
+5. **BERA Staker Distribution**: WBERA is distributed to WBERAStakerVault stakers
 
 ### Fee Collection Process
 
@@ -155,8 +220,8 @@ The incentive fee collection happens automatically when protocols add incentives
 
 ```solidity
 // Simplified flow in RewardVault.addIncentive()
-uint256 feeAmount = _collectIncentiveFee(token, amount);
-incentive.amountRemaining = amountRemainingBefore + amount - feeAmount;
+_collectIncentiveFee(incentive.amount);
+incentive.amountRemaining = incentive.amount - feeAmount;
 ```
 
 The fee amount is calculated as:
@@ -165,7 +230,7 @@ The fee amount is calculated as:
 feeAmount = (incentiveAmount * bgtIncentiveFeeRate) / 10000
 ```
 
-Where `bgtIncentiveFeeRate` is currently set to 3300 (33%) and can be adjusted by governance.
+Where `bgtIncentiveFeeRate` is currently 3300 (33%) and is adjustable by governance.
 
 ### Impact on Stakeholders
 
