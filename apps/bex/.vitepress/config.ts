@@ -32,21 +32,18 @@ export default defineConfig({
   head: [
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "en" }],
-    [
-      "meta",
-      { name: "og:site_name", content: `${constants.websites.docsBex.name}` },
-    ],
+    ["meta", { name: "og:site_name", content: `${constants.websites.docsBex.name}` }],
     [
       "meta",
       {
         name: "og:image",
-        content: `${constants.websites.docsBex.url}/previewDocs.jpg`,
-      },
+        content: `${constants.websites.docsBex.url}/previewDocs.jpg`
+      }
     ],
     [
       "script",
       { id: "va" },
-      `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`,
+      `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`
     ],
     IS_PRODUCTION
       ? ["script", { src: "/_vercel/insights/script.js", defer: "true" }]
@@ -54,13 +51,13 @@ export default defineConfig({
           "meta",
           {
             name: "environment",
-            content: "development",
-          },
+            content: "development"
+          }
         ],
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }]
   ],
   sitemap: {
-    hostname: `${constants.websites.docsBex.url}`,
+    hostname: `${constants.websites.docsBex.url}`
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -81,16 +78,16 @@ export default defineConfig({
         items: [
           {
             text: `${constants.websites.docsCore.name}`,
-            link: `${constants.websites.docsCore.url}`,
-          },
-        ],
+            link: `${constants.websites.docsCore.url}`
+          }
+        ]
       },
       { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
       {
         text: "Developers",
         link: "developers/index",
-        activeMatch: "/developers/",
-      },
+        activeMatch: "/developers/"
+      }
     ],
     outline: [2, 3],
     search: {
@@ -110,10 +107,10 @@ export default defineConfig({
            */
           searchOptions: {
             /* ... */
-          },
+          }
         },
-        detailedView: true,
-      },
+        detailedView: true
+      }
     },
     sidebar,
     siteTitle: `🐻⛓️ ${constants.websites.docsBex.name}`,
@@ -123,12 +120,12 @@ export default defineConfig({
       { icon: "github", link: `${constants.socials.github}` },
       {
         icon: {
-          svg: '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>',
+          svg: '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>'
         },
         link: `${constants.socials.telegram}`,
-        ariaLabel: "Berachain Portal",
-      },
-    ],
+        ariaLabel: "Berachain Portal"
+      }
+    ]
   },
   markdown: {
     math: true,
@@ -139,9 +136,9 @@ export default defineConfig({
         evaluate: function (condition: string, value: any) {
           let flag = condition.trim().toLowerCase();
           return ENABLED_FLAGS.includes(flag);
-        },
+        }
       });
-    },
+    }
   },
   vite: {
     plugins: [vercelToolbar()],
@@ -150,67 +147,49 @@ export default defineConfig({
         {
           find: /^.*\/VPNavBar\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBar.vue",
-              import.meta.url,
-            ),
-          ),
+            new URL("../node_modules/@berachain/ui/NavBar.vue", import.meta.url)
+          )
         },
         {
           find: /^.*\/VPNavBarMenu\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBarMenu.vue",
-              import.meta.url,
-            ),
-          ),
+            new URL("../node_modules/@berachain/ui/NavBarMenu.vue", import.meta.url)
+          )
         },
         {
           find: /^.*\/VPNavBarMenuLink\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/NavBarMenuLink.vue",
-              import.meta.url,
-            ),
-          ),
+            new URL("../node_modules/@berachain/ui/NavBarMenuLink.vue", import.meta.url)
+          )
         },
         {
           find: /^.*\/VPFlyout\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/Flyout.vue",
-              import.meta.url,
-            ),
-          ),
+            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
+          )
         },
         {
           find: /^.*\/VPNavScreenMenuGroup\.vue$/,
           replacement: fileURLToPath(
             new URL(
               "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
-              import.meta.url,
-            ),
-          ),
+              import.meta.url
+            )
+          )
         },
         {
           find: /^.*\/VPFlyout\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/Flyout.vue",
-              import.meta.url,
-            ),
-          ),
+            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
+          )
         },
         {
           find: /^.*\/VPSidebar\.vue$/,
           replacement: fileURLToPath(
-            new URL(
-              "../node_modules/@berachain/ui/Sidebar.vue",
-              import.meta.url,
-            ),
-          ),
-        },
-      ],
-    },
-  },
+            new URL("../node_modules/@berachain/ui/Sidebar.vue", import.meta.url)
+          )
+        }
+      ]
+    }
+  }
 });

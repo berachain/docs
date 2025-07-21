@@ -8,9 +8,9 @@ Reward Vaults are smart contracts in which users can stake their Proof-of-Liquid
 
 Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
 
-It should be noted that only Whitelisted Reward Vaults are elligible to receive `$BGT` emissions from Validators.
-
 :::info
+Only Reward Vaults approved through governance are elligible to receive `$BGT` emissions from Validators.
+
 Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/help/reward-vault-guidelines) for the application process.
 :::
 
@@ -37,9 +37,111 @@ After staking assets in a Reward Vault, users are free to claim their earned rew
 
 `$BGT` farming with Reward Vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry.
 
+## Delegation
+
+The RewardVault supports **delegation**, which allows one address (the delegate) to stake tokens on behalf of another address (the account holder). This enables use cases such as:
+
+- **Custodial staking**: Exchanges or custodians staking on behalf of users
+- **Smart contract integration**: Protocols automatically staking user funds
+- **Managed staking services**: Third-party services handling staking operations
+
+**Key delegation concepts**:
+
+- **Delegate**: The address that deposits/withdraws tokens (msg.sender)
+- **Account**: The address that owns the staked position and receives rewards
+- **Self-staked balance**: Tokens staked directly by the account holder
+- **Delegated balance**: Tokens staked by delegates on behalf of the account
+
+**Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
+
 ## $BGT Flow
 
 When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/learn/pol/blockrewards).
+
+## BGT Emission Modes
+
+Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward distribution timing**:
+
+### Duration-Based Mode (Legacy)
+
+In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
+
+Duration-based mode enforces the 3-7 day range: if switching from target rate mode where the duration exceeded 7 days, the duration will be capped at 7 days.
+
+**Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
+
+### Target Rate Mode
+
+When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting the minimum duration limit.
+
+The computation follows this formula:
+
+```text
+period = max(minRewardDurationForTargetRate, totalReward / targetRate)
+```
+
+This guarantees the duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
+
+**Example**: If 100 BGT is added with a target rate equivalent to 10 BGT/day, the vault will distribute over 10 days at a rate equivalent to 10 BGT/day to maintain the target rate.
+
+**Example - Duration Above Maximum (Target Rate → Duration-Based Mode)**:
+Imagine a vault currently in target rate mode with a very low target rate equivalent to 1 BGT/day. If 100 BGT is added, it would normally distribute over 100 days. However, when switching to duration-based mode, the system enforces the 7-day maximum limit, so the 100 BGT would be distributed over exactly 7 days at a rate equivalent to ~14.29 BGT/day instead.
+
+**Example - Rate Above Minimum Duration (Target Rate Mode)**:
+Consider a vault with a target rate equivalent to 50 BGT/day. If 100 BGT is added, the natural calculation would be 100 ÷ 50 = 2 days. However, the system enforces the fixed 3-day minimum duration, so the BGT will be distributed over 3 days at a rate equivalent to 33.33 BGT/day (slower than the target rate to respect the minimum duration).
+
+### BGT Emission Timing vs Incentive Exchange Rates
+
+It's important to understand that **BGT emission timing** and **incentive token exchange rates** are controlled by separate mechanisms:
+
+**BGT Emission Timing** is controlled by the Reward Vault's emission mode (as described above):
+
+- **Duration-based mode**: Fixed distribution period (3-7 days)
+- **Target rate mode**: `targetRewardsPerSecond` automatically calculates distribution period
+
+**Incentive Exchange Rates** are controlled by protocol token managers through `addIncentive()` calls, which set how many incentive tokens are distributed per individual BGT received. These exchange rates operate independently of BGT emission timing.
+
+**Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
+
+### Minimum Duration Configuration
+
+The `minRewardDurationForTargetRate` parameter controls the minimum distribution period in target rate mode:
+
+- **Default**: 3 days (259,200 seconds)
+- **Range**: Between 3-7 days (259,200 to 604,800 seconds)
+- **Management**: Only the `rewardVaultManager` can modify this value
+- **Purpose**: Ensures rewards are distributed over a reasonable minimum timeframe even when target rates would allow shorter periods
+
+### Switching Between Modes
+
+- `setTargetRewardsPerSecond(x)` enables target rate mode
+- `setTargetRewardsPerSecond(0)` re-enables duration-based mode
+- Only the `rewardVaultManager` can switch modes
+
+Example of target rate calculation:
+
+| totalReward |     targetRate |                    resulting duration |
+| ----------- | -------------: | ------------------------------------: |
+| 10 000 BERA | 0.02572 BERA/s | 388,800 s ≈ 4.5 days ≈ 194,400 blocks |
+
+For detailed implementation and additional configuration options, see the [RewardVault contract reference](/developers/contracts/reward-vault).
+
+## Incentive Management
+
+RewardVaults support **incentive tokens**, which are additional tokens that protocols can offer to BGT stakers beyond the base BGT rewards. This creates a powerful mechanism for protocols to attract liquidity and user engagement.
+
+### How Incentive Tokens Work
+
+1. **Whitelisting**: Protocol tokens must first be whitelisted in the vault by governance
+2. **Exchange Rate Setting**: Protocol managers set exchange rates (e.g., "10 USDC per BGT earned")
+3. **Token Deposits**: Protocols deposit their tokens into the vault
+4. **Automatic Distribution**: When users earn BGT, they automatically receive proportional incentive tokens
+
+### Independence from BGT Emission
+
+**Important Distinction**: Incentive token exchange rates operate completely independently from BGT emission timing modes. Whether BGT is distributed over 3 days or 7 days, the incentive token exchange rate (tokens per BGT) remains constant.
+
+For comprehensive information about incentive mechanics, see the [Incentive Marketplace documentation](/learn/pol/incentives).
 
 ## Incentives
 

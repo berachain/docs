@@ -18,10 +18,10 @@ export default {
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      "sidebar-nav-after": () => h(Fidget),
+      "sidebar-nav-after": () => h(Fidget)
     });
   },
   enhanceApp({ app, router, siteData }) {
     // Extended here
-  },
+  }
 };
