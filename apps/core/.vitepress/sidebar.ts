@@ -210,14 +210,18 @@ const SIDEBAR = {
     {
       text: "Contract References",
       items: [
+        { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
+        { text: "BeraChef", link: "/developers/contracts/berachef" },
+        { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
+        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         {
           text: "BGTIncentiveDistributor",
           link: "/developers/contracts/bgtincentivedistributor"
         },
-        { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
-        { text: "BeraChef", link: "/developers/contracts/berachef" },
-        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
-        { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
+        {
+          text: "BGTIncentiveFeeCollector",
+          link: "/developers/contracts/bgt-incentive-fee-collector"
+        },
         {
           text: "Block Reward Controller",
           link: "/developers/contracts/block-reward-controller"
@@ -242,16 +246,12 @@ const SIDEBAR = {
           text: "Reward Vault Factory",
           link: "/developers/contracts/reward-vault-factory"
         },
+        { text: "TimeLock", link: "/developers/contracts/timelock" },
+        { text: "WBERA Token", link: "/developers/contracts/wbera-token" },
         {
           text: "WBERAStakerVault",
           link: "/developers/contracts/wbera-staker-vault"
-        },
-        {
-          text: "BGTIncentiveFeeCollector",
-          link: "/developers/contracts/bgt-incentive-fee-collector"
-        },
-        { text: "TimeLock", link: "/developers/contracts/timelock" },
-        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
+        }
       ]
     }
   ],
