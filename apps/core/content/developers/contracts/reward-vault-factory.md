@@ -83,6 +83,24 @@ the BGT booster share of the incentive tokens.
 address public bgtIncentiveDistributor;
 ```
 
+### bgtIncentiveFeeCollector
+
+The address of the BGTIncentiveFeeCollector contract that receives
+incentive fees for BERA stakers (PoL V2).
+
+```solidity
+address public bgtIncentiveFeeCollector;
+```
+
+### bgtIncentiveFeeRate
+
+The fee rate for incentive collection, expressed in basis points (10000 = 100%).
+Currently set to 3300 (33%).
+
+```solidity
+uint256 public bgtIncentiveFeeRate;
+```
+
 ## Functions
 
 ### constructor
@@ -129,6 +147,38 @@ function setBGTIncentiveDistributor(address _bgtIncentiveDistributor) external o
 | Name                       | Type      | Description                                              |
 | -------------------------- | --------- | -------------------------------------------------------- |
 | `_bgtIncentiveDistributor` | `address` | The address of the new BGTIncentiveDistributor contract. |
+
+### setBGTIncentiveFeeCollector
+
+Sets the BGTIncentiveFeeCollector contract.
+
+_Only callable by the admin._
+
+```solidity
+function setBGTIncentiveFeeCollector(address _bgtIncentiveFeeCollector) external onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name                        | Type      | Description                                               |
+| --------------------------- | --------- | --------------------------------------------------------- |
+| `_bgtIncentiveFeeCollector` | `address` | The address of the new BGTIncentiveFeeCollector contract. |
+
+### setBGTIncentiveFeeRate
+
+Sets the incentive fee rate.
+
+_Only callable by the admin._
+
+```solidity
+function setBGTIncentiveFeeRate(uint256 _bgtIncentiveFeeRate) external onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name                   | Type      | Description                                      |
+| ---------------------- | --------- | ------------------------------------------------ |
+| `_bgtIncentiveFeeRate` | `uint256` | The new fee rate in basis points (10000 = 100%). |
 
 ### createRewardVault
 

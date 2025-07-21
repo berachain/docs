@@ -353,7 +353,10 @@ const onSubmitEthBlockNumber = async (event) => {
 
     console.log({ result });
 
-    preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(result, 16)}`;
+    preEthBlockNumber.innerHTML = `${result}\n\n// Block Number:\n// ${parseInt(
+      result,
+      16
+    )}`;
   } catch (error) {
     console.log({ error });
     preEthBlockNumber.innerHTML = error?.message ?? "Unknown JSON-RPC error.";

@@ -57,6 +57,7 @@ const SIDEBAR = {
       text: "Guides",
       items: [
         { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
+        { text: "BERA Staking", link: "/learn/guides/bera-staking" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
         {
           text: "Setup Reward Vault",
@@ -192,13 +193,13 @@ const SIDEBAR = {
           items: [
             {
               text: "Overview",
-              link: "/developers/guides/eip-5792-overview",
+              link: "/developers/guides/eip-5792-overview"
             },
             {
               text: "MetaMask Guide",
-              link: "/developers/guides/eip-5792-metamask-guide",
-            },
-          ],
+              link: "/developers/guides/eip-5792-metamask-guide"
+            }
+          ]
         },
         {
           text: "Community Guides",
@@ -240,6 +241,14 @@ const SIDEBAR = {
         {
           text: "Reward Vault Factory",
           link: "/developers/contracts/reward-vault-factory"
+        },
+        {
+          text: "WBERAStakerVault",
+          link: "/developers/contracts/wbera-staker-vault"
+        },
+        {
+          text: "BGTIncentiveFeeCollector",
+          link: "/developers/contracts/bgt-incentive-fee-collector"
         },
         { text: "TimeLock", link: "/developers/contracts/timelock" },
         { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
