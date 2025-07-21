@@ -108,7 +108,7 @@ Applications call this method to discover which capabilities the wallet supports
 ```typescript
 // Example capability discovery
 const capabilities = await wallet.request({
-  method: "wallet_getCapabilities",
+  method: "wallet_getCapabilities"
 });
 
 console.log(capabilities);
@@ -134,18 +134,18 @@ const result = await wallet.request({
       {
         to: "0x...",
         data: "0x...",
-        value: "0x0",
+        value: "0x0"
       },
       {
         to: "0x...",
         data: "0x...",
-        value: "0x0",
-      },
+        value: "0x0"
+      }
     ],
     capabilities: {
-      atomic: true,
-    },
-  },
+      atomic: true
+    }
+  }
 });
 ```
 
@@ -158,8 +158,8 @@ Check the status of submitted calls:
 const status = await wallet.request({
   method: "wallet_getCallsStatus",
   params: {
-    callId: "0x...",
-  },
+    callId: "0x..."
+  }
 });
 ```
 
@@ -176,19 +176,19 @@ const calls = [
     data: encodeFunctionData({
       abi: erc20ABI,
       functionName: "approve",
-      args: [spender, amount],
+      args: [spender, amount]
     }),
-    value: "0x0",
+    value: "0x0"
   },
   {
     to: spenderAddress,
     data: encodeFunctionData({
       abi: contractABI,
       functionName: "transfer",
-      args: [recipient, amount],
+      args: [recipient, amount]
     }),
-    value: "0x0",
-  },
+    value: "0x0"
+  }
 ];
 ```
 
@@ -202,7 +202,7 @@ const calls = [
   {
     to: dexAddress,
     data: encodeSwapData(tokenA, tokenB, amount),
-    value: "0x0",
+    value: "0x0"
   },
   // Approve staking contract
   {
@@ -210,9 +210,9 @@ const calls = [
     data: encodeFunctionData({
       abi: erc20ABI,
       functionName: "approve",
-      args: [stakingAddress, swappedAmount],
+      args: [stakingAddress, swappedAmount]
     }),
-    value: "0x0",
+    value: "0x0"
   },
   // Stake tokens
   {
@@ -220,10 +220,10 @@ const calls = [
     data: encodeFunctionData({
       abi: stakingABI,
       functionName: "stake",
-      args: [swappedAmount],
+      args: [swappedAmount]
     }),
-    value: "0x0",
-  },
+    value: "0x0"
+  }
 ];
 ```
 
@@ -239,9 +239,9 @@ const calls = [
     data: encodeFunctionData({
       abi: nftABI,
       functionName: "mint",
-      args: [recipient],
+      args: [recipient]
     }),
-    value: mintPrice,
+    value: mintPrice
   },
   // Set metadata
   {
@@ -249,10 +249,10 @@ const calls = [
     data: encodeFunctionData({
       abi: nftABI,
       functionName: "setTokenURI",
-      args: [tokenId, metadataURI],
+      args: [tokenId, metadataURI]
     }),
-    value: "0x0",
-  },
+    value: "0x0"
+  }
 ];
 ```
 
@@ -282,7 +282,7 @@ class EIP5792Client {
 
   async getCapabilities() {
     return await this.wallet.request({
-      method: "wallet_getCapabilities",
+      method: "wallet_getCapabilities"
     });
   }
 
@@ -295,21 +295,21 @@ class EIP5792Client {
 
     return await this.wallet.request({
       method: "wallet_sendCalls",
-      params,
+      params
     });
   }
 
   async getCallsStatus(callId: string) {
     return await this.wallet.request({
       method: "wallet_getCallsStatus",
-      params: { callId },
+      params: { callId }
     });
   }
 
   async showCallsStatus(callId: string) {
     return await this.wallet.request({
       method: "wallet_showCallsStatus",
-      params: { callId },
+      params: { callId }
     });
   }
 }
@@ -326,13 +326,13 @@ const calls = [
   {
     to: "0x...",
     data: "0x...",
-    value: "0x0",
-  },
+    value: "0x0"
+  }
 ];
 
 // Send batch with atomic execution if supported
 const result = await client.sendCalls(calls, {
-  atomic: capabilities.atomic === "supported",
+  atomic: capabilities.atomic === "supported"
 });
 
 // Check status
@@ -351,17 +351,17 @@ If you are currently using Multicall3, migrating to EIP-5792 is straightforward:
 const multicall = new Multicall3(provider);
 const results = await multicall.call([
   { target: contract1, callData: data1 },
-  { target: contract2, callData: data2 },
+  { target: contract2, callData: data2 }
 ]);
 
 // After: EIP-5792
 const calls = [
   { to: contract1, data: data1, value: "0x0" },
-  { to: contract2, data: data2, value: "0x0" },
+  { to: contract2, data: data2, value: "0x0" }
 ];
 const result = await wallet.request({
   method: "wallet_sendCalls",
-  params: { calls },
+  params: { calls }
 });
 ```
 
@@ -381,20 +381,17 @@ const calls = [
   {
     to: contract1.address,
     data: contract1.interface.encodeFunctionData("approve", [spender, amount]),
-    value: "0x0",
+    value: "0x0"
   },
   {
     to: contract2.address,
-    data: contract2.interface.encodeFunctionData("transfer", [
-      recipient,
-      amount,
-    ]),
-    value: "0x0",
-  },
+    data: contract2.interface.encodeFunctionData("transfer", [recipient, amount]),
+    value: "0x0"
+  }
 ];
 await wallet.request({
   method: "wallet_sendCalls",
-  params: { calls, capabilities: { atomic: true } },
+  params: { calls, capabilities: { atomic: true } }
 });
 ```
 
@@ -406,7 +403,7 @@ Before sending calls, always check which capabilities the wallet supports:
 
 ```typescript
 const capabilities = await wallet.request({
-  method: "wallet_getCapabilities",
+  method: "wallet_getCapabilities"
 });
 
 // Only request atomic execution if supported
@@ -421,7 +418,7 @@ Implement proper error handling for unsupported capabilities:
 try {
   const result = await wallet.request({
     method: "wallet_sendCalls",
-    params: { calls, capabilities: { atomic: true } },
+    params: { calls, capabilities: { atomic: true } }
   });
 } catch (error) {
   if (error.code === 4201) {
@@ -445,7 +442,7 @@ async function executeBatch(calls: any[]) {
     // Try EIP-5792 first
     return await wallet.request({
       method: "wallet_sendCalls",
-      params: { calls },
+      params: { calls }
     });
   } catch (error) {
     // Fall back to individual transactions
@@ -462,14 +459,14 @@ Use the status-checking methods to provide better user feedback:
 ```typescript
 const result = await wallet.request({
   method: "wallet_sendCalls",
-  params: { calls },
+  params: { calls }
 });
 
 // Monitor status
 const checkStatus = async () => {
   const status = await wallet.request({
     method: "wallet_getCallsStatus",
-    params: { callId: result.callId },
+    params: { callId: result.callId }
   });
 
   if (status.status === "pending") {

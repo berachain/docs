@@ -145,7 +145,7 @@ const callData = addLiquidity.buildCall({
   recipient: wallet.address,
   wethIsEth: true,
   slippage,
-  deadline,
+  deadline
 });
 ```
 

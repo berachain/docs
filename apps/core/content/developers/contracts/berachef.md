@@ -1,10 +1,12 @@
-<script setup>
-  import config from '@berachain/config/constants.json';
-</script>
-
 # BeraChef
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/BeraChef.sol)
+
+**Inherits:**
+IBeraChef, OwnableUpgradeable, UUPSUpgradeable
+
+**Author:**
+Berachain Team
 
 The BeraChef contract is responsible for managing the reward allocations and the whitelisted vaults.
 Reward allocation is a list of weights that determine the percentage of rewards that goes to each reward vault.
@@ -46,6 +48,14 @@ _With 2 second block time, this is ~30 days._
 
 ```solidity
 uint64 public constant MAX_REWARD_ALLOCATION_BLOCK_DELAY = 1_315_000;
+```
+
+### MAX_COMMISSION_RATE
+
+_Represents the maximum commission rate per validator, set to 20%._
+
+```solidity
+uint96 public constant MAX_COMMISSION_RATE = 0.2e4;
 ```
 
 ### distributor
@@ -142,6 +152,14 @@ Mapping of validator pubkey to its commission rate on incentive tokens
 mapping(bytes valPubkey => CommissionRate) internal valCommission;
 ```
 
+### maxWeightPerVault
+
+The maximum weight a vault can assume in the reward allocation
+
+```solidity
+uint96 public maxWeightPerVault;
+```
+
 ## Functions
 
 ### constructor
@@ -191,6 +209,14 @@ Sets the maximum number of weights per reward allocation.
 
 ```solidity
 function setMaxNumWeightsPerRewardAllocation(uint8 _maxNumWeightsPerRewardAllocation) external onlyOwner;
+```
+
+### setMaxWeightPerVault
+
+Sets the maximum weight a vault can assume in a reward allocation.
+
+```solidity
+function setMaxWeightPerVault(uint96 _maxWeightPerVault) external onlyOwner;
 ```
 
 ### setRewardAllocationBlockDelay
@@ -530,14 +556,21 @@ function getValidatorIncentiveTokenShare(
 Validates the weights of a reward allocation.
 
 ```solidity
-function _validateWeights(Weight[] calldata weights) internal view;
+function _validateWeights(bytes memory valPubkey, Weight[] calldata weights) internal;
 ```
 
 **Parameters**
 
-| Name      | Type       | Description                           |
-| --------- | ---------- | ------------------------------------- |
-| `weights` | `Weight[]` | The weights of the reward allocation. |
+| Name        | Type       | Description                           |
+| ----------- | ---------- | ------------------------------------- |
+| `valPubkey` | `bytes`    |                                       |
+| `weights`   | `Weight[]` | The weights of the reward allocation. |
+
+### \_checkForDuplicateReceivers
+
+```solidity
+function _checkForDuplicateReceivers(bytes memory valPubkey, Weight[] calldata weights) internal;
+```
 
 ### \_checkIfStillValid
 
