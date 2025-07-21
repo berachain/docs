@@ -26,7 +26,7 @@ Since this is a minor version release (`major.minor.0`), there are breaking chan
 
 **The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though defaulted to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
 
-  ```app.toml
+  ```toml
   [beacon-kit] 
   chain-spec = "testnet"
   ```
