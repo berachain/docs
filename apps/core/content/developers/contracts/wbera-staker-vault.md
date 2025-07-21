@@ -38,8 +38,8 @@ The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake 
 
 ## Contract Addresses
 
-| Network | Contract Address | Status |
-| ------- | ---------------- | ------ |
+| Network | Contract Address                                          | Status   |
+| ------- | --------------------------------------------------------- | -------- |
 | Mainnet | `{{ config.mainnet.contracts.wberaStakerVault.address }}` | Deployed |
 | Testnet | `{{ config.bepolia.contracts.wberaStakerVault.address }}` | Deployed |
 

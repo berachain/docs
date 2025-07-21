@@ -160,8 +160,8 @@ function setBGTIncentiveFeeCollector(address _bgtIncentiveFeeCollector) external
 
 **Parameters**
 
-| Name                        | Type      | Description                                             |
-| --------------------------- | --------- | ------------------------------------------------------- |
+| Name                        | Type      | Description                                               |
+| --------------------------- | --------- | --------------------------------------------------------- |
 | `_bgtIncentiveFeeCollector` | `address` | The address of the new BGTIncentiveFeeCollector contract. |
 
 ### setBGTIncentiveFeeRate
@@ -176,9 +176,9 @@ function setBGTIncentiveFeeRate(uint256 _bgtIncentiveFeeRate) external onlyRole(
 
 **Parameters**
 
-| Name                    | Type      | Description                                    |
-| ----------------------- | --------- | ---------------------------------------------- |
-| `_bgtIncentiveFeeRate`  | `uint256` | The new fee rate in basis points (10000 = 100%). |
+| Name                   | Type      | Description                                      |
+| ---------------------- | --------- | ------------------------------------------------ |
+| `_bgtIncentiveFeeRate` | `uint256` | The new fee rate in basis points (10000 = 100%). |
 
 ### createRewardVault
 
