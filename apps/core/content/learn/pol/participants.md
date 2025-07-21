@@ -104,13 +104,3 @@ Projects participate in PoL by:
 3. Supplying incentive tokens and managing rates in their vault
 
 The [Incentives marketplace](/learn/pol/incentives) allows protocols to bid for validators' emissions using whitelisted tokens, creating alignment between all stakeholders to increase the overall value of the network. Projects must also gain the favor of `$BGT` holders to enter into the PoL system.
-
-### PoL V2 Impact on Projects 🔄
-
-With PoL V2, projects now:
-
-- **Pay incentive fees**: 33% of incentives are collected as fees for BERA stakers
-- **Maintain competition**: Continue competing for the remaining 67% of BGT emissions
-- **Benefit from enhanced BERA utility**: More BERA utility strengthens the overall ecosystem
-
-The incentive fee mechanism ensures that projects contribute to BERA's value while maintaining the competitive incentive marketplace.

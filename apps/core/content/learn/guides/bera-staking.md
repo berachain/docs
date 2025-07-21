@@ -147,9 +147,9 @@ Future versions will support **Liquid Staking Tokens (LSTs)**:
 
 ### Contract Addresses
 
-- **WBERAStakerVault**: `0x...` (TBD)
+- **WBERAStakerVault**: `{{ config.mainnet.contracts.wberaStakerVault.address }}`
 - **WBERA Token**: `0x6969696969696969696969696969696969696969`
-- **BGTIncentiveFeeCollector**: `0x...` (TBD)
+- **BGTIncentiveFeeCollector**: `{{ config.mainnet.contracts.bgtIncentiveFeeCollector.address }}`
 
 ### Key Functions
 
