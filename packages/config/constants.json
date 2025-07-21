@@ -28,26 +28,7 @@
         "url": "https://bepolia.honey.berachain.com"
       }
     },
-    "contracts": {
-      "withdrawalContract": {
-        "name": "Withdrawal Contract",
-        "address": "0x00000961Ef480Eb55e80D19ad83579A64c007002",
-        "abi": "",
-        "docsUrl": ""
-      },
-      "bgtIncentiveFeeCollector": {
-        "name": "BGTIncentiveFeeCollector",
-        "address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
-        "abi": "",
-        "docsUrl": "/developers/contracts/bgt-incentive-fee-collector"
-      },
-      "wberaStakerVault": {
-        "name": "WBERAStakerVault",
-        "address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
-        "abi": "",
-        "docsUrl": "/developers/contracts/wbera-staker-vault"
-      }
-    }
+    "contracts": {}
   },
   "mainnet": {
     "chainId": 80094,
@@ -181,6 +162,20 @@
         "mainnet-address": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
         "abi": "",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
+      },
+      "bgtIncentiveFeeCollector": {
+        "name": "BGTIncentiveFeeCollector",
+        "bepolia-address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
+        "mainnet-address": "",
+        "abi": "",
+        "docsUrl": "/developers/contracts/bgt-incentive-fee-collector"
+      },
+      "wberaStakerVault": {
+        "name": "WBERAStakerVault",
+        "bepolia-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
+        "mainnet-address": "",
+        "abi": "",
+        "docsUrl": "/developers/contracts/wbera-staker-vault"
       },
       "beaconDeposit": {
         "name": "BeaconDeposit",

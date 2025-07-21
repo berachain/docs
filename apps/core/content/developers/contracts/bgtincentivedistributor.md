@@ -5,7 +5,7 @@
 # BGTIncentiveDistributor
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveDistributor['mainnet-address']">{{config.contracts.pol.bgtIncentiveDistributor['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveDistributor.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveDistributor.abi">ABI JSON</a></span></small>
->
+
 > forked from Hidden Hand RewardDistributor Contract:
 > https://github.com/dinero-protocol/hidden-hand-contracts/blob/master/contracts/RewardDistributor.sol
 
