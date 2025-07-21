@@ -92,11 +92,24 @@ Key takeaways are that Token Managers:
 
 Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
 
+Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+
 _Example:_
 
 | Incentive Tokens | Incentive Rate |
 | ---------------- | -------------- |
 | 100 $USDC        | 100 /$BGT      |
+
+### PoL V2 Incentive Fee Collection
+
+With PoL V2, a portion of protocol incentives is automatically collected as fees for BERA stakers:
+
+- **Fee Rate**: 33% of the incentive amount
+- **Collection Process**: Automatically deducted when incentives are added to Reward Vaults
+- **Distribution**: Fees are auctioned for WBERA and distributed to BERA stakers
+- **Remaining Amount**: Validators receive the remaining 67% of incentives
+
+This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions toward the Reward Vault.
 
