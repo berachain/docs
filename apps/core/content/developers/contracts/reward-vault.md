@@ -630,6 +630,14 @@ function addIncentive(
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
+**PoL V2 Fee Collection**
+
+When adding incentives, a portion is automatically collected as a fee for BERA stakers:
+
+- **Fee Rate**: 33% of the incentive amount
+- **Fee Collection**: Automatically sent to BGTIncentiveFeeCollector
+- **Remaining Amount**: The remaining 67% is available for distribution to validators
+
 ### accountIncentives
 
 Process incentives added via IERC20.transfer, adding them to the incentive accounting.

@@ -98,6 +98,18 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
+## Incentive Fee Collection (PoL V2)
+
+A mechanism in PoL V2 where 33% of protocol incentives are automatically collected as fees when added to Reward Vaults. These fees are auctioned for WBERA and distributed to BERA stakers in the WBERAStakerVault, providing direct yield opportunities for BERA holders.
+
+## WBERAStakerVault
+
+An ERC4626-compliant vault that allows users to stake BERA and earn yield from redirected PoL incentives. The vault accepts both native BERA and WBERA deposits, has a 7-day unbonding period, and automatically compounds rewards. [Read more about BERA Staking](/learn/guides/bera-staking).
+
+## BGTIncentiveFeeCollector
+
+A contract that collects incentive fees from PoL protocols and auctions them for WBERA tokens, which are then distributed to BERA stakers in the WBERAStakerVault. This contract is a key component of the PoL V2 incentive tax mechanism.
+
 ## HONEY
 
 `$HONEY` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - $HONEY](/learn/pol/tokens/honey).

@@ -4,7 +4,11 @@
 
 ### Minor Changes
 
-- Update contract interfaces and migration guide
+- Add comprehensive PoL V2 documentation with BERA Yield Module
+- Add BERA staking guide with step-by-step instructions
+- Add developer contract references for WBERAStakerVault and BGTIncentiveFeeCollector
+- Update existing PoL documentation to include V2 features and human-friendly tone
+- Update FAQs to cover PoL V2 and BERA staking questions
 
 ### Patch Changes
 

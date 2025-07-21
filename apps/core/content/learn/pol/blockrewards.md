@@ -199,3 +199,54 @@ with:
 
 - $IR_T$ : incentive rate of token $T$
 - $C$ : validator commission on incentives
+
+## Incentive Fee Collection (PoL V2)
+
+With PoL V2, a portion of protocol incentives is redirected to BERA stakers through an incentive tax mechanism, providing $BERA holders with direct yield opportunities.
+
+### How Incentive Fees Work
+
+When protocols pay incentives to validators for directing BGT emissions:
+
+1. **Incentive Payment**: Protocol pays incentives to validators
+2. **Fee Collection**: 33% of the incentive amount is collected as a fee
+3. **Fee Distribution**: Collected fees are sent to BGTIncentiveFeeCollector
+4. **WBERA Conversion**: Fees are auctioned for WBERA tokens
+5. **BERA Staker Distribution**: WBERA is distributed to WBERAStakerVault stakers
+
+### Fee Collection Process
+
+The incentive fee collection happens automatically when protocols add incentives to Reward Vaults:
+
+```solidity
+// Simplified flow in RewardVault.addIncentive()
+_collectIncentiveFee(incentive.amount);
+incentive.amountRemaining = incentive.amount - feeAmount;
+```
+
+The fee amount is calculated as:
+
+```
+feeAmount = (incentiveAmount * bgtIncentiveFeeRate) / 10000
+```
+
+Where `bgtIncentiveFeeRate` is currently 3300 (33%) and is adjustable by governance.
+
+### Impact on Stakeholders
+
+| Stakeholder      | Impact                                             |
+| ---------------- | -------------------------------------------------- |
+| **BGT Holders**  | Receive ~67% of previous incentive amounts         |
+| **BERA Stakers** | Earn yield from redirected 33% of incentives       |
+| **Protocols**    | Pay the same total incentives, with 33% redirected |
+| **Validators**   | No change to operations or earnings                |
+
+### Fee Collection Architecture
+
+The incentive fee system consists of three main contracts:
+
+1. **RewardVaultFactory**: Manages the fee rate and collector address
+2. **BGTIncentiveFeeCollector**: Collects and auctions incentive fees for WBERA
+3. **WBERAStakerVault**: Distributes WBERA to BERA stakers
+
+This architecture ensures that BERA stakers receive a direct share of PoL incentives while maintaining the competitive incentive marketplace for protocols.

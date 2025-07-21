@@ -79,3 +79,42 @@ The end result is that the inflation cadence should effectively mirror an equiva
 ### Can only validators vote on or create governance proposals?
 
 Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10,000 $BGT can create a proposal.
+
+## PoL V2 & BERA Staking
+
+### What is PoL V2 and how does it differ from PoL V1?
+
+PoL V2 introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes are:
+
+- **Incentive Fee Collection**: 33% of protocol incentives are collected as fees for BERA stakers
+- **BERA Staking**: Direct staking of BERA through the WBERAStakerVault
+- **Enhanced BERA Utility**: More utility for BERA as the network's economic foundation
+
+### How does BERA staking work in PoL V2?
+
+BERA staking uses the WBERAStakerVault, an ERC4626-compliant vault that:
+
+- Accepts both native BERA and WBERA deposits
+- Earns yield from 33% of PoL protocol incentives
+- Has a 7-day unbonding period for withdrawals
+- Automatically compounds rewards
+
+### What is the incentive fee collection mechanism?
+
+When protocols add incentives to Reward Vaults, 33% is automatically collected as fees:
+
+1. **Fee Collection**: 33% deducted when `addIncentive()` is called
+2. **Fee Distribution**: Sent to BGTIncentiveFeeCollector
+3. **WBERA Conversion**: Fees auctioned for WBERA
+4. **BERA Staker Distribution**: WBERA distributed to BERA stakers
+
+### How does PoL V2 affect existing participants?
+
+- **BGT Holders**: Receive ~67% of previous incentive amounts
+- **BERA Stakers**: Earn yield from redirected 33% of incentives
+- **Protocols**: Pay the same total incentives, with 33% redirected
+- **Validators**: No change to operations or earnings
+
+### Is BERA staking the same as validator staking?
+
+No, BERA staking in PoL V2 is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking is for participating in network consensus.
