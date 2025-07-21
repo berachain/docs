@@ -65,6 +65,7 @@ Credentials Address,
 1. **Deposit Transaction Failure on the EVM Layer**
 
    > **Note**: Funds are **not lost** if the transaction fails on the EVM layer due to any of these reasons.
+
    - **Invalid Inputs**
      - Invalid pubKey, signature, or withdrawal credentials (e.g., incorrect lengths).
      - Invalid deposit amount (less than the **minimum deposit amount of {{ constants.mainnet.registrationMinimum }} BERA**, or not a multiple of 1 gwei).

@@ -269,7 +269,7 @@ Emitted when ERC20 tokens are recovered from the vault.
 // Deposit native BERA
 const depositAmount = ethers.parseEther("10");
 await wberaStakerVault.depositNative(depositAmount, userAddress, {
-  value: depositAmount,
+  value: depositAmount
 });
 
 // Check shares received

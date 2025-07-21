@@ -193,13 +193,13 @@ const SIDEBAR = {
           items: [
             {
               text: "Overview",
-              link: "/developers/guides/eip-5792-overview",
+              link: "/developers/guides/eip-5792-overview"
             },
             {
               text: "MetaMask Guide",
-              link: "/developers/guides/eip-5792-metamask-guide",
-            },
-          ],
+              link: "/developers/guides/eip-5792-metamask-guide"
+            }
+          ]
         },
         {
           text: "Community Guides",
@@ -244,11 +244,11 @@ const SIDEBAR = {
         },
         {
           text: "WBERAStakerVault",
-          link: "/developers/contracts/wbera-staker-vault",
+          link: "/developers/contracts/wbera-staker-vault"
         },
         {
           text: "BGTIncentiveFeeCollector",
-          link: "/developers/contracts/bgt-incentive-fee-collector",
+          link: "/developers/contracts/bgt-incentive-fee-collector"
         },
         { text: "TimeLock", link: "/developers/contracts/timelock" },
         { text: "WBERA Token", link: "/developers/contracts/wbera-token" }

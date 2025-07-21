@@ -28,6 +28,7 @@ Stable pools are specifically designed for tokens that maintain similar values, 
 ### Configuration Parameters
 
 1. **Token Selection**
+
    - Maximum of 5 tokens per pool
    - All tokens must have identical decimals
    - Tokens should maintain similar prices (e.g., USDC/USDT/DAI)
@@ -57,11 +58,13 @@ Weighted pools offer more flexibility and are suitable for tokens with different
 ### Key Configuration Parameters
 
 1. **Token Selection**
+
    - Maximum of 8 tokens per pool
    - No decimal restrictions
    - Can mix different types of tokens
 
 2. **Weight Distribution**
+
    - Range: 1% to 99% per token
    - Total weights must equal 100%
 

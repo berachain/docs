@@ -181,7 +181,7 @@ Emitted when fees are claimed and tokens are transferred.
 const feeTokens = [
   "0x...", // USDC
   "0x...", // USDT
-  "0x...", // DAI
+  "0x..." // DAI
 ];
 
 // Get payout amount
@@ -207,18 +207,13 @@ const balances = {};
 
 for (const token of tokens) {
   const tokenContract = new ethers.Contract(token, ERC20_ABI, provider);
-  const balance = await tokenContract.balanceOf(
-    bgtIncentiveFeeCollector.address
-  );
+  const balance = await tokenContract.balanceOf(bgtIncentiveFeeCollector.address);
   balances[token] = balance;
   console.log(`Balance of ${token}:`, ethers.formatUnits(balance, 6)); // Assuming 6 decimals
 }
 
 // Check if fees are available to claim
-const totalFees = Object.values(balances).reduce(
-  (sum, balance) => sum + balance,
-  0n
-);
+const totalFees = Object.values(balances).reduce((sum, balance) => sum + balance, 0n);
 const payoutAmount = await bgtIncentiveFeeCollector.payoutAmount();
 
 if (totalFees > 0) {

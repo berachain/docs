@@ -327,13 +327,12 @@ The `<ApiTester>` Vue component provides an interactive way for users to try out
 - **Import:** Import it in the `<script setup>` block: `import ApiTester from '../../.vitepress/theme/components/ApiTester.vue';`
 - **Usage:**
   ```vue
-  <ApiTester endpoint="/eth/v1/beacon/headers/{block_id}" method="GET"
-  :pathParams="[{ name: 'block_id', description: 'Block identifier (head,
-  genesis, finalized, justified, or slot number)' }]" :queryParams="[{ name:
-  'slot', description: 'Slot number', required: false }, { name: 'parent_root',
-  description: 'Parent root hash', required: false }]" :networks="networks" //
-  Define 'networks' array in script setup :examples="{ custom: { block_id:
-  'head' } }" // Provide example values />
+  <ApiTester endpoint="/eth/v1/beacon/headers/{block_id}" method="GET" :pathParams="[{
+  name: 'block_id', description: 'Block identifier (head, genesis, finalized, justified,
+  or slot number)' }]" :queryParams="[{ name: 'slot', description: 'Slot number',
+  required: false }, { name: 'parent_root', description: 'Parent root hash', required:
+  false }]" :networks="networks" // Define 'networks' array in script setup :examples="{
+  custom: { block_id: 'head' } }" // Provide example values />
   ```
 - **`networks` variable:** Define a `networks` array in your `<script setup>` to provide base URLs for different environments (Testnet, Mainnet, Custom).
 
