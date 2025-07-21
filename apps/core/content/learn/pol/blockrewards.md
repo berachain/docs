@@ -23,7 +23,6 @@ A given Validator's probability of being selected to produce a block is the prop
 When a validator produces a block, `$BGT` tokens are emitted through two emission components:
 
 1. Base Emission
-
    - **Fixed amount** equal to a `base rate` parameter (B)
    - Paid directly to block-producing validator
 
