@@ -12,10 +12,10 @@ export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      "sidebar-nav-after": () => h(Fidget),
+      "sidebar-nav-after": () => h(Fidget)
     });
   },
   enhanceApp({ app, router, siteData }) {
     // Extended here
-  },
+  }
 };

@@ -10,7 +10,6 @@ Note that this is different from CometBFT API endpoint, typically exposed from
 
 1. All balance values are returned in Gwei (1 ETH = 10^9 Gwei)
 2. Validator statuses include:
-
    - `active_ongoing`
    - `active_exiting`
    - `active_slashed`
