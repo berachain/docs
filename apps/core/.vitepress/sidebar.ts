@@ -297,10 +297,6 @@ const SIDEBAR = {
           link: "/nodes/guides/reward-allocation"
         },
         {
-          text: "Distribute Block Rewards",
-          link: "/nodes/guides/distribute-block-rewards"
-        },
-        {
           text: "Increase Validator Stake",
           link: "/nodes/guides/increase-validator-bera-stake"
         },

@@ -11,7 +11,7 @@ As discussed in [Block Rewards](/learn/pol/blockrewards), $BGT emissions stem fr
 
 ### Distributor
 
-The [Distributor](/developers/contracts/distributor) contract is the entry point for BGT distribution. The `distributeFor()` function accepts a Merkle proof that a validator has proposed a certain beacon block. The Distributor then:
+The [Distributor](/developers/contracts/distributor) contract is the entry point for BGT distribution. Distribution is built into our technology stack, so that block N includes transactions which performs distributions for block N-1. During that process, the Distributor:
 
 - Receives newly minted $BGT from the `BlockRewardController`
 - Processes rewards based on validator-specified allocations via `BeraChef`
