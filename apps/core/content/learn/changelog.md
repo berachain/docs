@@ -4,9 +4,13 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
-## 2025-JULY-21
+## AUGUST 2025
 
-[Upgrade instructions are posted](/nodes/guides/august-2025-upgrade), introducing our next hardfork, which introduces forks of Geth and Reth, stabilizes block time and gas prices, and integrates automatic PoL distributions into our software stack.
+[Upgrade instructions are posted](/nodes/guides/august-2025-upgrade) for our next hardfork, which delivers:
+* BRIP 0001 - Forked Execution Clients.
+* BRIP 0002 - Gas Price Stablization. We now adjust gas prices at the same rate as Ethereum, and have raised the minimum for gas prices to reduce spam. 
+* BRIP 0003 - Stable Block Time. Now fixed at 2 seconds.
+* BRIP 0004 - Enshrine PoL. Each block automatically includes transaction to generate the previous block's rewards. Also, Validators can delegate the right for Reward Allocations to a sub-account. (See FIXME - BeraChef # setValRewardAllocator)
 
 ## 2025-JULY-7
 
