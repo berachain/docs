@@ -200,9 +200,9 @@ with:
 - $IR_T$ : incentive rate of token $T$
 - $C$ : validator commission on incentives
 
-## Incentive Fee Collection (PoL V2)
+## Incentive Fee Collection (PoL)
 
-With PoL V2, a portion of protocol incentives is redirected to BERA stakers through an incentive tax mechanism, providing $BERA holders with direct yield opportunities.
+With PoL, a portion of protocol incentives is redirected to BERA stakers through an incentive tax mechanism, providing $BERA holders with direct yield opportunities.
 
 ### How Incentive Fees Work
 

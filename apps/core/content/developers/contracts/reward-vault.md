@@ -624,7 +624,7 @@ function addIncentive(
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
-**PoL V2 Fee Collection**
+**PoL Fee Collection**
 
 When adding incentives, a portion is automatically collected as a fee for BERA stakers:
 

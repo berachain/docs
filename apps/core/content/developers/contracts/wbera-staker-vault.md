@@ -5,10 +5,10 @@ head:
       content: WBERAStakerVault Contract Reference
   - - meta
     - name: description
-      content: Developer reference for the WBERAStakerVault contract in PoL V2
+      content: Developer reference for the WBERAStakerVault contract in PoL
   - - meta
     - property: og:description
-      content: Developer reference for the WBERAStakerVault contract in PoL V2
+      content: Developer reference for the WBERAStakerVault contract in PoL
 ---
 
 <script setup>
@@ -17,7 +17,7 @@ head:
 
 # WBERAStakerVault Contract Reference
 
-The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake `$BERA` and earn yield from redirected PoL incentives. This contract is the core component of the PoL V2 BERA Yield Module.
+The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake `$BERA` and earn yield from redirected PoL incentives. This contract is the core component of the PoL BERA Yield Module.
 
 ## Contract Overview
 
@@ -356,5 +356,5 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 ## Resources
 
 - [BERA Staking Guide](/learn/guides/bera-staking)
-- [PoL V2 Migration Guide](/learn/guides/pol-v2-migration)
+- [PoL Migration Guide](/learn/guides/pol-migration)
 - [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626)

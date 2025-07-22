@@ -5,10 +5,10 @@ head:
       content: BERA Staking Guide
   - - meta
     - name: description
-      content: Learn how to stake BERA and earn yield through the PoL V2 BERA Yield Module
+      content: Learn how to stake BERA and earn yield through the PoL BERA Yield Module
   - - meta
     - property: og:description
-      content: Learn how to stake BERA and earn yield through the PoL V2 BERA Yield Module
+      content: Learn how to stake BERA and earn yield through the PoL BERA Yield Module
 ---
 
 <script setup>
@@ -17,7 +17,7 @@ head:
 
 # BERA Staking Guide 🐻
 
-The PoL V2 BERA Yield Module lets you stake `$BERA` directly and earn yield from Proof-of-Liquidity incentives. It's a simple way to earn yield on your BERA without diving into complex DeFi protocols.
+The PoL BERA Yield Module lets you stake `$BERA` directly and earn yield from Proof-of-Liquidity incentives. It's a simple way to earn yield on your BERA without diving into complex DeFi protocols.
 
 ## Overview
 

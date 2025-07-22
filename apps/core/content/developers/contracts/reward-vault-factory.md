@@ -86,7 +86,7 @@ address public bgtIncentiveDistributor;
 ### bgtIncentiveFeeCollector
 
 The address of the BGTIncentiveFeeCollector contract that receives
-incentive fees for BERA stakers (PoL V2).
+incentive fees for BERA stakers (PoL).
 
 ```solidity
 address public bgtIncentiveFeeCollector;

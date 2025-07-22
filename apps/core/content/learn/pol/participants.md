@@ -52,7 +52,7 @@ The primary goal is to earn as many Incentives as possible through delegation.
 
 ## BERA Stakers 🐻
 
-With PoL V2, `$BERA` holders can now participate directly in the Proof-of-Liquidity ecosystem through the BERA Yield Module. BERA stakers help:
+With PoL, `$BERA` holders can now participate directly in the Proof-of-Liquidity ecosystem through the BERA Yield Module. BERA stakers help:
 
 - Provide direct utility and demand for the network's native asset
 - Earn yield from redirected PoL incentives
@@ -67,7 +67,7 @@ BERA stakers use the **WBERAStakerVault**, an ERC4626-compliant vault that:
 - Has a 7-day unbonding period for withdrawals
 - Automatically compounds rewards for better yields
 
-### Earning Yield Through PoL V2 📈
+### Earning Yield Through PoL 📈
 
 BERA stakers earn yield through the incentive tax mechanism:
 

@@ -101,11 +101,11 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 `$BGT` is earned through Reward Vaults when validators direct `$BGT` emissions towards Reward Vaults. See [Earning `$BGT`](/learn/pol/tokens/bgt#earning-bgt) for more.
 
-## PoL V2 & BERA Staking
+## PoL & BERA Staking
 
-### What is PoL V2?
+### What is PoL?
 
-PoL V2 introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes include incentive fee collection (33% of protocol incentives redirected to BERA stakers) and direct BERA staking through the WBERAStakerVault.
+PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes include incentive fee collection (33% of protocol incentives redirected to BERA stakers) and direct BERA staking through the WBERAStakerVault.
 
 ### How does BERA staking work?
 
@@ -113,7 +113,7 @@ BERA staking uses the WBERAStakerVault, an ERC4626-compliant vault that accepts 
 
 ### Is BERA staking the same as validator staking?
 
-No, BERA staking in PoL V2 is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking is for participating in network consensus.
+No, BERA staking in PoL is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking is for participating in network consensus.
 
 ### How does the incentive fee collection work?
 

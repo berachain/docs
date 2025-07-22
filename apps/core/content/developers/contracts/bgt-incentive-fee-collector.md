@@ -5,10 +5,10 @@ head:
       content: BGTIncentiveFeeCollector Contract Reference
   - - meta
     - name: description
-      content: Developer reference for the BGTIncentiveFeeCollector contract in PoL V2
+      content: Developer reference for the BGTIncentiveFeeCollector contract in PoL
   - - meta
     - property: og:description
-      content: Developer reference for the BGTIncentiveFeeCollector contract in PoL V2
+      content: Developer reference for the BGTIncentiveFeeCollector contract in PoL
 ---
 
 <script setup>
@@ -17,7 +17,7 @@ head:
 
 # BGTIncentiveFeeCollector Contract Reference
 
-The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from PoL protocols and distributing them to BERA stakers. This contract is a key component of the PoL V2 incentive tax mechanism.
+The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from PoL protocols and distributing them to BERA stakers. This contract is a key component of the PoL incentive tax mechanism.
 
 ## Contract Overview
 
@@ -297,6 +297,6 @@ When `claimFees` is called:
 
 ## Resources
 
-- [PoL V2 Migration Guide](/learn/guides/pol-v2-migration)
-- [Incentive Fee Collection](/learn/pol/blockrewards#incentive-fee-collection-pol-v2)
+- [PoL Migration Guide](/learn/guides/pol-migration)
+- [Incentive Fee Collection](/learn/pol/blockrewards#incentive-fee-collection-pol)
 - [BERA Staking Guide](/learn/guides/bera-staking)

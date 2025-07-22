@@ -100,9 +100,9 @@ _Example:_
 | ---------------- | -------------- |
 | 100 $USDC        | 100 /$BGT      |
 
-### PoL V2 Incentive Fee Collection
+### PoL Incentive Fee Collection
 
-With PoL V2, a portion of protocol incentives is automatically collected as fees for BERA stakers:
+With PoL, a portion of protocol incentives is automatically collected as fees for BERA stakers:
 
 - **Fee Rate**: 33% of the incentive amount
 - **Collection Process**: Automatically deducted when incentives are added to Reward Vaults

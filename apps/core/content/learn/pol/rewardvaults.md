@@ -101,9 +101,9 @@ It's important to understand that **BGT emission timing** and **incentive token 
 
 **Incentive Exchange Rates** are controlled by protocol token managers through `addIncentive()` calls, which set how many incentive tokens are distributed per individual BGT received. These exchange rates operate independently of BGT emission timing.
 
-### PoL V2 Incentive Fee Collection
+### PoL Incentive Fee Collection
 
-With PoL V2, when protocols add incentives to Reward Vaults, a portion is automatically collected as fees for BERA stakers:
+With PoL, when protocols add incentives to Reward Vaults, a portion is automatically collected as fees for BERA stakers:
 
 - **Fee Rate**: 33% of the incentive amount
 - **Collection Process**: Automatically deducted when `addIncentive()` is called
