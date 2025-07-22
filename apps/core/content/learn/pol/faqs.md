@@ -82,7 +82,7 @@ Anyone who holds enough $BGT can vote on proposals. Anyone who meets the thresho
 
 ## PoL & BERA Staking
 
-### What is PoL and how does it differ from the previous version?
+### What is PoL?
 
 PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes are:
 
