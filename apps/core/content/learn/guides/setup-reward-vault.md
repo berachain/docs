@@ -5,7 +5,7 @@
 # Setup Reward Vault
 
 Participating in Proof of Liquidity on Berachain requires the use of a Reward Vault to allow protocol users to earn BGT.
-Reward Vaults can be created via the <a :href="config.mainnet.contracts.rewardVaultFactory.docsUrl">{{config.mainnet.contracts.rewardVaultFactory.name}}</a> permissionlessly, but require some work to become operational.
+Reward Vaults can be created via the <a :href="config.contracts.pol.rewardVaultFactory.docsUrl">{{config.contracts.pol.rewardVaultFactory.name}}</a> permissionlessly, but require some work to become operational.
 
 ![Reward Vault Section](/assets/add-incentives-vaults.png)
 

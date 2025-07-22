@@ -18,8 +18,7 @@ The delay for reward allocation changes has been reduced from 8,191 blocks to 50
 
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
-This is a *hardfork* activated on Berachain Mainnet on June 4 2025.
-Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
+This is a *hardfork* activated on Berachain Mainnet on June 4 2025. Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
 
 The `CHAIN_SPEC` environment variable is no longer used. There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. 
 
@@ -48,6 +47,24 @@ The [Claim API](/developers/claim-api) is now released.
 
 ![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
 
-**Beacon Kit v1.1.4**  Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
+**Beacon Kit v1.1.4** improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
 
 Also, on startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
+
+## March 2025
+
+**Beacon Kit v1.1.3** Restructures Consensus Layer and Execution Layer communication to keep them in lock-step. Now, every RPC communication issue among them will result in a BeaconKit termination *but* keeps their states in sync so you can easily restart any time and keep going. You don't need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
+
+## February 2025
+
+**BEacon Kit v1.1.2** is a security-focused update:
+* Harden timestamp validation of EL payload
+* Prevent potential panics and node halts while decoding data
+
+## January 2025
+
+We launched Proof of Liquidity with the public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain Mainnet.
+
+**BeaconKit 1.1.1** fixes ASA-2025-001 and ASA-2025-002, which could lead to a network halt. Moreover it hardens some checks around deposit and blob processing.
+
+**BeaconKit v1.1.0** unlocks minting of tokens towards the BGT contract.

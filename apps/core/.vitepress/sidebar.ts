@@ -208,50 +208,54 @@ const SIDEBAR = {
       ]
     },
     {
-      text: "Contract References",
+      text: "Token Contracts",
       items: [
+        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
+        { text: "Honey Token", link: "/developers/contracts/honey-token" },
+        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
+      ]
+    },
+    {
+      text: "PoL Contracts",
+      items: [
+        { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
+        { text: "BeraChef", link: "/developers/contracts/berachef" },
+        { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
         {
           text: "BGTIncentiveDistributor",
           link: "/developers/contracts/bgtincentivedistributor"
         },
-        { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
-        { text: "BeraChef", link: "/developers/contracts/berachef" },
-        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
-        { text: "BGT Staker", link: "/developers/contracts/bgt-staker" },
+        {
+          text: "BGTIncentiveFeeCollector",
+          link: "/developers/contracts/bgt-incentive-fee-collector"
+        },
         {
           text: "Block Reward Controller",
           link: "/developers/contracts/block-reward-controller"
         },
         { text: "CREATE2", link: "/developers/contracts/create2" },
         { text: "Distributor", link: "/developers/contracts/distributor" },
-        { text: "Fee Collector", link: "/developers/contracts/fee-collector" },
+        { text: "FeeCollector", link: "/developers/contracts/fee-collector" },
         { text: "Governance", link: "/developers/contracts/governance" },
-        { text: "Honey Factory", link: "/developers/contracts/honey-factory" },
+        { text: "HoneyFactory", link: "/developers/contracts/honey-factory" },
         {
-          text: "Honey Factory Reader",
+          text: "HoneyFactoryReader",
           link: "/developers/contracts/honey-factory-reader"
         },
-        { text: "Honey Token", link: "/developers/contracts/honey-token" },
         { text: "Multicall3", link: "/developers/contracts/multicall3" },
         { text: "Permit2", link: "/developers/contracts/permit2" },
         {
-          text: "Reward Vault",
+          text: "RewardVault",
           link: "/developers/contracts/reward-vault"
         },
         {
-          text: "Reward Vault Factory",
+          text: "RewardVaultFactory",
           link: "/developers/contracts/reward-vault-factory"
         },
         {
           text: "WBERAStakerVault",
           link: "/developers/contracts/wbera-staker-vault"
-        },
-        {
-          text: "BGTIncentiveFeeCollector",
-          link: "/developers/contracts/bgt-incentive-fee-collector"
-        },
-        { text: "TimeLock", link: "/developers/contracts/timelock" },
-        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
+        }
       ]
     }
   ],

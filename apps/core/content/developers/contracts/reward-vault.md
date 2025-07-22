@@ -1,4 +1,10 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # RewardVault
+
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVault['mainnet-address']">{{config.contracts.pol.rewardVault['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVault.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/RewardVault.sol)
 

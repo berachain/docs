@@ -4,7 +4,7 @@
 
 # RewardVaultFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.rewardVaultFactory.address">{{config.mainnet.contracts.rewardVaultFactory.address}}</a><span v-if="config.mainnet.contracts.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.rewardVaultFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory['mainnet-address']">{{config.contracts.pol.rewardVaultFactory['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVaultFactory.abi">ABI JSON</a></span></small>
 
 Factory contract for creating RewardVaults and keeping track of them.
 
