@@ -142,6 +142,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [vercelToolbar()],
+    optimizeDeps: {
+      include: ["mermaid"]
+    },
     resolve: {
       alias: [
         {

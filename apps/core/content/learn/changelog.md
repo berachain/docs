@@ -26,7 +26,7 @@ Since this is a minor version release (`major.minor.0`), there are breaking chan
 
 **The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though defaulted to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
 
-  ```app.toml
+  ```toml
   [beacon-kit] 
   chain-spec = "testnet"
   ```
@@ -68,13 +68,26 @@ Improves `beacond` handling of transient conditions (which solve themselves) suc
 
 Also, on startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
 
-* ```WARN Automatically raising RPCTimeout ... minimum=2000```
+## 2025-MAR: Beacon Kit v1.1.3
 
-  Set your RPC timeout to at least 2 seconds:
+This release restructures Consensus Layer and Execution Layer communication to keep them in lock-step.
 
-  **FILE:** `app.toml`
-  ```
-  rpc-timeout = "2s"
-  ```
+Now, every RPC communication issue among them will result in a BeaconKit termination *but* keeps their states in sync so you can easily restart any time and keep going. You don't need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
 
-* `ignoring deprecated setting rpc-retries`
+## 2025-FEB: Beacon Kit v1.1.2
+
+This is a security-focused update:
+* Harden timestamp validation of EL payload
+* Prevent potential panics and node halts while decoding data
+
+## 2025-JAN-20
+
+We launched Proof of Liquidity 1.0 with public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain Mainnet.
+
+## 2025-JAN: Beacon Kit v1.1.1
+
+BeaconKit 1.1.1 fixes ASA-2025-001 and ASA-2025-002, which could lead to a network halt. Moreover it hardens some checks around deposit and blob processing.
+
+## 2025-JAN: Beacon Kit v1.1.0
+
+BeaconKit v1.1.0 unlocks minting of tokens towards the BGT contract.

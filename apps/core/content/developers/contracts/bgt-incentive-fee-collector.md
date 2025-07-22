@@ -36,10 +36,10 @@ The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from
 
 ## Contract Addresses
 
-| Network | Contract Address                                                  | Status   |
-| ------- | ----------------------------------------------------------------- | -------- |
-| Mainnet | `{{ config.mainnet.contracts.bgtIncentiveFeeCollector.address }}` | Deployed |
-| Testnet | `{{ config.bepolia.contracts.bgtIncentiveFeeCollector.address }}` | Deployed |
+| Network | Contract Address                                                         |
+| ------- | ------------------------------------------------------------------------ |
+| Mainnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address'] }}` |
+| Testnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}` |
 
 ## Core Functions
 

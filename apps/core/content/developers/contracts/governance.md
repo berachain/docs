@@ -4,7 +4,7 @@
 
 # BerachainGovernance
 
-<small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.governance.address">{{config.mainnet.contracts.governance.address}}</a><span v-if="config.mainnet.contracts.governance.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.governance.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.governance['mainnet-address']">{{config.contracts.pol.governance['mainnet-address']}}</a><span v-if="config.contracts.pol.governance.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.governance.abi">ABI JSON</a></span></small>
 
 The Berachain Governance contract extends [OpenZeppelin's governor contracts](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/governance). It uses the `$BGT` token as its governance token, which determines voting power in the governance system. Users must hold `$BGT` tokens to participate in governance activities such as creating proposals and voting.
 
