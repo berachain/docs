@@ -100,20 +100,9 @@ _Example:_
 | ---------------- | -------------- |
 | 100 $USDC        | 100 /$BGT      |
 
-### PoL Incentive Fee Collection
-
-With PoL, a portion of protocol incentives is automatically collected as fees during the incentive distribution process for BERA stakers:
-
-- **Fee Rate**: 33% of the incentive amount
-- **Collection Process**: Automatically deducted when incentives are added to Reward Vaults
-- **Distribution**: Fees are auctioned for WBERA and distributed to BERA stakers
-- **Remaining Amount**: Validators receive the remaining 67% of incentives
-
-This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.
-
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions toward the Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on their proportion of the total $BGT boosting that validator.
+From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on their proportion of the total $BGT boosting that validator:
 
 | Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
 | ----------- | ------------------: | ---------------: | -------------------------------: |
@@ -131,3 +120,14 @@ Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any
 :::info BGT Emission Timing
 The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
 :::
+
+## Incentive Fees
+
+A portion of protocol incentives is automatically collected as fees during the incentive distribution process for BERA stakers:
+
+- **Fee Rate**: 33% of the incentive amount
+- **Collection Process**: Automatically deducted when incentives are distributed
+- **Distribution**: Fees are auctioned for WBERA and distributed to BERA stakers
+- **Remaining Amount**: Validators receive the remaining 67% of incentives
+
+This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.

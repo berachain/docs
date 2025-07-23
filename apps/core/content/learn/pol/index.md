@@ -49,33 +49,3 @@ Learn about [integrating with Berachain's incentive system](/learn/pol/incentive
 As `$BGT` Holders accumulate tokens, they can delegate them to validators (⑨), directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
 
 **For BGT Holders**: Learn how to [boost a validator with BGT](/learn/guides/boost-a-validator) to participate in the delegation cycle.
-
-## PoL: BERA Yield Module 🚀 {#pol-bera-yield-module}
-
-The PoL BERA Yield Module gives `$BERA` holders direct yield opportunities while keeping the existing PoL ecosystem intact. This upgrade makes `$BERA` even more useful as Berachain's economic foundation.
-
-### What's New
-
-- **Direct BERA Staking**: Stake `$BERA` directly for yield no third-party dApps needed
-- **7-Day Unbonding Period**: Keeps stakers aligned for the long term
-- **Incentive Tax Redirection**: 33% of PoL incentives go to BERA stakers
-- **Auto-Compounding**: Your rewards automatically compound for better yields
-- **LST Support**: Liquid Staking Tokens coming in future updates
-
-### How It Works
-
-1. **Incentive Collection**: Protocols pay incentives, and a portion gets collected as fees during distribution
-2. **WBERA Conversion**: Those fees get auctioned for `$WBERA`
-3. **Distribution**: `$WBERA` gets distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault)
-4. **Yield Generation**: You earn yield from the distributed WBERA
-
-Check out our [BERA staking guide](/learn/guides/bera-staking) for more details.
-
-## Ecosystem Alignment 🤝
-
-By integrating Berachain's native network rewards among all ecosystem participants, PoL creates alignment between:
-
-- **Validators**: Need `$BGT` delegation to maximize their block rewards and must efficiently direct emissions to reward vaults to earn Incentives and attract more boost.
-- **Protocols**: Compete for `$BGT` emissions by offering attractive Incentive rates in their reward vaults
-- **Users**: Earn `$BGT` by providing liquidity, then delegate to validators who maximize returns
-- **BERA Stakers**: Earn direct yield from PoL incentives through the BERA Yield Module, strengthening the network's base asset
