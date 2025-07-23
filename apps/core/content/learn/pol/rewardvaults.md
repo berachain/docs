@@ -101,17 +101,6 @@ It's important to understand that **BGT emission timing** and **incentive token 
 
 **Incentive Exchange Rates** are controlled by protocol token managers through `addIncentive()` calls, which set how many incentive tokens are distributed per individual BGT received. These exchange rates operate independently of BGT emission timing.
 
-### PoL Incentive Fee Collection
-
-With PoL, when incentives are distributed to validators, a portion is automatically collected as fees for BERA stakers:
-
-- **Fee Rate**: 33% of the incentive amount
-- **Collection Process**: Automatically deducted when `addIncentive()` is called
-- **Distribution**: Fees are sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) for auction to WBERA
-- **Remaining Amount**: The remaining 67% is available for distribution to validators
-
-This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.
-
 **Key Point**: These modes control **when** BGT is distributed to stakers, not **how much** incentive tokens protocols offer. Incentive token exchange rates (like "10 USDC per BGT") remain constant regardless of whether that BGT is distributed over 3 days or 7 days.
 
 ### Minimum Duration Configuration

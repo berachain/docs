@@ -52,7 +52,7 @@ As `$BGT` Holders accumulate tokens, they can delegate them to validators (⑨),
 
 ## PoL: BERA Yield Module 🚀 {#pol-bera-yield-module}
 
-PoL brings a new BERA Yield Module that gives `$BERA` holders direct yield opportunities while keeping the existing PoL ecosystem intact. This upgrade makes `$BERA` even more useful as Berachain's economic foundation.
+The PoL BERA Yield Module gives `$BERA` holders direct yield opportunities while keeping the existing PoL ecosystem intact. This upgrade makes `$BERA` even more useful as Berachain's economic foundation.
 
 ### What's New
 

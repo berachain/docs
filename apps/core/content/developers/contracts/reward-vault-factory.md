@@ -160,8 +160,8 @@ function setBGTIncentiveFeeCollector(address _bgtIncentiveFeeCollector) external
 
 **Parameters**
 
-| Name                        | Type      | Description                                               |
-| --------------------------- | --------- | --------------------------------------------------------- |
+| Name                        | Type      | Description                                                                                                   |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
 | `_bgtIncentiveFeeCollector` | `address` | The address of the new [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract. |
 
 ### setBGTIncentiveFeeRate

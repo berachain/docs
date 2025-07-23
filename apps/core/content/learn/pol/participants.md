@@ -52,7 +52,7 @@ The primary goal is to earn as many Incentives as possible through delegation.
 
 ## BERA Stakers 🐻
 
-With PoL, `$BERA` holders can now participate directly in the Proof-of-Liquidity ecosystem through the BERA Yield Module. BERA stakers help:
+The BERA Yield Module empowers `$BERA` holders to participate directly in the Proof-of-Liquidity ecosystem. BERA stakers help:
 
 - Provide direct utility and demand for the network's native asset
 - Earn yield from redirected PoL incentives

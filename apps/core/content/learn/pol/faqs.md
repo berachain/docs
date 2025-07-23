@@ -84,11 +84,7 @@ Anyone who holds enough $BGT can vote on proposals. Anyone who meets the thresho
 
 ### What is PoL?
 
-PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes are:
-
-- **Incentive Fee Collection**: 33% of protocol incentives are collected as fees for BERA stakers
-- **BERA Staking**: Direct staking of BERA through the [Staking Vault](/developers/contracts/wbera-staker-vault)
-- **Enhanced BERA Utility**: More utility for BERA as the network's economic foundation
+Proof-of-Liquidity (PoL) is a comprehensive mechanism designed to bootstrap liquidity and align economic incentives across the Berachain ecosystem. It enables protocols to efficiently incentivize and grow their user base through a competitive marketplace where validators direct BGT emissions to Reward Vaults in exchange for protocol incentives. Users earn BGT by providing liquidity to protocols and can delegate it to validators for additional rewards. The system also includes a BERA Yield Module that provides native BERA staking opportunities, with a portion of protocol incentives redirected to BERA stakers, strengthening the network's economic foundation while creating a virtuous cycle of liquidity provision and reward distribution.
 
 ### How does BERA staking work in PoL?
 
