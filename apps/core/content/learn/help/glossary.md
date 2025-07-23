@@ -13,6 +13,10 @@ head:
 
 # Glossary 📖
 
+## BeaconKit
+
+BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
+
 ## BERA Token
 
 `$BERA` is the native gas token of Berachain's L1 and serves multiple purposes:
@@ -24,6 +28,10 @@ head:
 - Can be obtained by burning BGT (one-way conversion)
 
 Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
+
+## BEX
+
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
 
 ## BGT (Bera Governance Token)
 
@@ -38,17 +46,9 @@ participating in [Proof of Liquidity](#proof-of-liquidity) (PoL):
 
 Read more in [Tokens - $BGT](/learn/pol/tokens/bgt).
 
-## BeaconKit
-
-BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
-
 ## Block
 
 A data unit containing a list of transactions that is permanently added to the blockchain in a sequential manner.
-
-## BEX
-
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
 
 ## Block Time
 
@@ -98,18 +98,6 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, HoneySwap) using BGT tokens for participation. [Read more about Governance](/learn/governance/).
 
-## Incentive Fee Collection (PoL)
-
-A mechanism in PoL where 33% of protocol incentives are automatically collected as fees during the incentive distribution process. These fees are auctioned for WBERA and distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault), providing direct yield opportunities for BERA holders.
-
-## Staking Vault
-
-An ERC4626-compliant vault that allows users to stake BERA and earn yield from redirected PoL incentives. The vault accepts both native BERA and WBERA deposits, has a 7-day unbonding period, and automatically compounds rewards. [Read more about BERA Staking](/learn/guides/bera-staking).
-
-## Incentive Fee Collector
-
-A contract that collects incentive fees from PoL protocols and auctions them for WBERA tokens, which are then distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault). This contract is a key component of the PoL incentive tax mechanism.
-
 ## HONEY
 
 `$HONEY` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - $HONEY](/learn/pol/tokens/honey).
@@ -149,3 +137,7 @@ The process of locking up tokens to support the operations of a blockchain netwo
 ## Swap
 
 The process of exchanging one token for another on a decentralized exchange. Swaps involve a fee, which varies depending on the pool's settings.
+
+## WBera Staking
+
+By staking into the [WBERA Staking Vault](/developers/contracts/wbera-staker-vault), BERA holders gain direct yield opportunities: 33% of protocol incentives are automatically collected as fees during the incentive distribution process and distributed to these stakers. [Read more about BERA Staking](/learn/guides/bera-staking).
