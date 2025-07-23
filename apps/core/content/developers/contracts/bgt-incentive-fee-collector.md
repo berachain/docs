@@ -297,6 +297,5 @@ When `claimFees` is called:
 
 ## Resources
 
-- [PoL Migration Guide](/learn/guides/pol-migration)
 - [Incentive Fee Collection](/learn/pol/blockrewards#incentive-fee-collection-pol)
 - [BERA Staking Guide](/learn/guides/bera-staking)

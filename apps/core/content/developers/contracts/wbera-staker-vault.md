@@ -356,5 +356,5 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 ## Resources
 
 - [BERA Staking Guide](/learn/guides/bera-staking)
-- [PoL Migration Guide](/learn/guides/pol-migration)
+
 - [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626)
