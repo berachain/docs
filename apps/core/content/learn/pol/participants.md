@@ -52,7 +52,7 @@ The primary goal is to earn as many Incentives as possible through delegation.
 
 ## BERA Stakers 🐻
 
-With PoL V2, `$BERA` holders can now participate directly in the Proof-of-Liquidity ecosystem through the BERA Yield Module. BERA stakers help:
+The BERA Yield Module empowers `$BERA` holders to participate directly in the Proof-of-Liquidity ecosystem. BERA stakers help:
 
 - Provide direct utility and demand for the network's native asset
 - Earn yield from redirected PoL incentives
@@ -60,21 +60,21 @@ With PoL V2, `$BERA` holders can now participate directly in the Proof-of-Liquid
 
 ### BERA Staking Mechanics 🔄
 
-BERA stakers use the **WBERAStakerVault**, an ERC4626-compliant vault that:
+BERA stakers use the **[Staking Vault](/developers/contracts/wbera-staker-vault)**, an ERC4626-compliant vault that:
 
 - Takes both native `$BERA` and wrapped `$WBERA` deposits
 - Earns yield from 33% of PoL protocol incentives
 - Has a 7-day unbonding period for withdrawals
 - Automatically compounds rewards for better yields
 
-### Earning Yield Through PoL V2 📈
+### Earning Yield Through PoL 📈
 
 BERA stakers earn yield through the incentive tax mechanism:
 
 1. **Protocols pay incentives** to validators for directing BGT emissions
-2. **33% fee collected** and sent to BGTIncentiveFeeCollector
+2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
 3. **Fees auctioned** for WBERA
-4. **WBERA distributed** to WBERAStakerVault stakers
+4. **WBERA distributed** to Staking Vault stakers
 
 The yield rate depends on:
 
