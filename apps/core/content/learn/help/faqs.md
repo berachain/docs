@@ -101,24 +101,6 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 `$BGT` is earned through Reward Vaults when validators direct `$BGT` emissions towards Reward Vaults. See [Earning `$BGT`](/learn/pol/tokens/bgt#earning-bgt) for more.
 
-## PoL & BERA Staking
-
-### What is PoL?
-
-PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes include incentive fee collection (33% of protocol incentives redirected to BERA stakers) and direct BERA staking through the [Staking Vault](/developers/contracts/wbera-staker-vault).
-
-### How does BERA staking work?
-
-BERA staking uses the [Staking Vault](/developers/contracts/wbera-staker-vault), an ERC4626-compliant vault that accepts both native BERA and WBERA deposits, earns yield from 33% of PoL protocol incentives, and has a 7-day unbonding period for withdrawals. See the [BERA Staking Guide](/learn/guides/bera-staking) for detailed instructions.
-
-### Is BERA staking the same as validator staking?
-
-No, BERA staking in PoL is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking is for participating in network consensus.
-
-### How does the incentive fee collection work?
-
-When incentives are distributed to validators, 33% is automatically collected as fees for BERA stakers. These fees are auctioned for WBERA and distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault). The remaining 67% is available for distribution to validators.
-
 ## What is governance?
 
 Governance is the process by which the community decides what changes are made to the Berachain protocol. This includes how the node is upgraded and what parameters are set for various components on the chain.
