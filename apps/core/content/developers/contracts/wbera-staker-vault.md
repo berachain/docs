@@ -349,7 +349,7 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 
 ## Related Contracts
 
-- [BGTIncentiveFeeCollector](./bgt-incentive-fee-collector.md): Collects and distributes incentive fees
+- [Incentive Fee Collector](./bgt-incentive-fee-collector.md): Collects and distributes incentive fees
 - [RewardVaultFactory](./reward-vault-factory.md): Manages incentive fee rates
 - [WBERA](./wbera.md): Wrapped BERA token contract
 

@@ -87,12 +87,12 @@ Anyone who holds enough $BGT can vote on proposals. Anyone who meets the thresho
 PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes are:
 
 - **Incentive Fee Collection**: 33% of protocol incentives are collected as fees for BERA stakers
-- **BERA Staking**: Direct staking of BERA through the WBERAStakerVault
+- **BERA Staking**: Direct staking of BERA through the [Staking Vault](/developers/contracts/wbera-staker-vault)
 - **Enhanced BERA Utility**: More utility for BERA as the network's economic foundation
 
 ### How does BERA staking work in PoL?
 
-BERA staking uses the WBERAStakerVault, an ERC4626-compliant vault that:
+BERA staking uses the [Staking Vault](/developers/contracts/wbera-staker-vault), an ERC4626-compliant vault that:
 
 - Accepts both native BERA and WBERA deposits
 - Earns yield from 33% of PoL protocol incentives
@@ -101,10 +101,10 @@ BERA staking uses the WBERAStakerVault, an ERC4626-compliant vault that:
 
 ### What is the incentive fee collection mechanism?
 
-When protocols add incentives to Reward Vaults, 33% is automatically collected as fees:
+When incentives are distributed to validators, 33% is automatically collected as fees:
 
 1. **Fee Collection**: 33% deducted when `addIncentive()` is called
-2. **Fee Distribution**: Sent to BGTIncentiveFeeCollector
+2. **Fee Distribution**: Sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
 3. **WBERA Conversion**: Fees auctioned for WBERA
 4. **BERA Staker Distribution**: WBERA distributed to BERA stakers
 

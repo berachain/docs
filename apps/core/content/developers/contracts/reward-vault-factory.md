@@ -85,7 +85,7 @@ address public bgtIncentiveDistributor;
 
 ### bgtIncentiveFeeCollector
 
-The address of the BGTIncentiveFeeCollector contract that receives
+The address of the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract that receives
 incentive fees for BERA stakers (PoL).
 
 ```solidity
@@ -150,7 +150,7 @@ function setBGTIncentiveDistributor(address _bgtIncentiveDistributor) external o
 
 ### setBGTIncentiveFeeCollector
 
-Sets the BGTIncentiveFeeCollector contract.
+Sets the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract.
 
 _Only callable by the admin._
 
@@ -162,7 +162,7 @@ function setBGTIncentiveFeeCollector(address _bgtIncentiveFeeCollector) external
 
 | Name                        | Type      | Description                                               |
 | --------------------------- | --------- | --------------------------------------------------------- |
-| `_bgtIncentiveFeeCollector` | `address` | The address of the new BGTIncentiveFeeCollector contract. |
+| `_bgtIncentiveFeeCollector` | `address` | The address of the new [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract. |
 
 ### setBGTIncentiveFeeRate
 

@@ -60,7 +60,7 @@ With PoL, `$BERA` holders can now participate directly in the Proof-of-Liquidity
 
 ### BERA Staking Mechanics 🔄
 
-BERA stakers use the **WBERAStakerVault**, an ERC4626-compliant vault that:
+BERA stakers use the **[Staking Vault](/developers/contracts/wbera-staker-vault)**, an ERC4626-compliant vault that:
 
 - Takes both native `$BERA` and wrapped `$WBERA` deposits
 - Earns yield from 33% of PoL protocol incentives
@@ -72,9 +72,9 @@ BERA stakers use the **WBERAStakerVault**, an ERC4626-compliant vault that:
 BERA stakers earn yield through the incentive tax mechanism:
 
 1. **Protocols pay incentives** to validators for directing BGT emissions
-2. **33% fee collected** and sent to BGTIncentiveFeeCollector
+2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
 3. **Fees auctioned** for WBERA
-4. **WBERA distributed** to WBERAStakerVault stakers
+4. **WBERA distributed** to Staking Vault stakers
 
 The yield rate depends on:
 

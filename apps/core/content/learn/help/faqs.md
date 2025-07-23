@@ -105,11 +105,11 @@ With Proof of Liquidity, you can earn many different types of rewards:
 
 ### What is PoL?
 
-PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes include incentive fee collection (33% of protocol incentives redirected to BERA stakers) and direct BERA staking through the WBERAStakerVault.
+PoL introduces the BERA Yield Module, which gives BERA holders direct yield opportunities while keeping the existing PoL ecosystem intact. The main changes include incentive fee collection (33% of protocol incentives redirected to BERA stakers) and direct BERA staking through the [Staking Vault](/developers/contracts/wbera-staker-vault).
 
 ### How does BERA staking work?
 
-BERA staking uses the WBERAStakerVault, an ERC4626-compliant vault that accepts both native BERA and WBERA deposits, earns yield from 33% of PoL protocol incentives, and has a 7-day unbonding period for withdrawals. See the [BERA Staking Guide](/learn/guides/bera-staking) for detailed instructions.
+BERA staking uses the [Staking Vault](/developers/contracts/wbera-staker-vault), an ERC4626-compliant vault that accepts both native BERA and WBERA deposits, earns yield from 33% of PoL protocol incentives, and has a 7-day unbonding period for withdrawals. See the [BERA Staking Guide](/learn/guides/bera-staking) for detailed instructions.
 
 ### Is BERA staking the same as validator staking?
 
@@ -117,7 +117,7 @@ No, BERA staking in PoL is completely separate from traditional validator stakin
 
 ### How does the incentive fee collection work?
 
-When protocols add incentives to Reward Vaults, 33% is automatically collected as fees for BERA stakers. These fees are auctioned for WBERA and distributed to BERA stakers in the WBERAStakerVault. The remaining 67% is available for distribution to validators.
+When incentives are distributed to validators, 33% is automatically collected as fees for BERA stakers. These fees are auctioned for WBERA and distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault). The remaining 67% is available for distribution to validators.
 
 ## What is governance?
 

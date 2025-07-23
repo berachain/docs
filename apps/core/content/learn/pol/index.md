@@ -64,9 +64,9 @@ PoL brings a new BERA Yield Module that gives `$BERA` holders direct yield oppor
 
 ### How It Works
 
-1. **Incentive Collection**: Protocols pay incentives, and a portion gets collected as fees
+1. **Incentive Collection**: Protocols pay incentives, and a portion gets collected as fees during distribution
 2. **WBERA Conversion**: Those fees get auctioned for `$WBERA`
-3. **Distribution**: `$WBERA` gets distributed to BERA stakers in the WBERAStakerVault
+3. **Distribution**: `$WBERA` gets distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault)
 4. **Yield Generation**: You earn yield from the distributed WBERA
 
 Check out our [BERA staking guide](/learn/guides/bera-staking) for more details.

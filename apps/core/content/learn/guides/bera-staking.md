@@ -21,7 +21,7 @@ The PoL BERA Yield Module lets you stake `$BERA` directly and earn yield from Pr
 
 ## Overview
 
-The BERA Yield Module uses the **WBERAStakerVault**, an ERC4626-compliant vault that:
+The BERA Yield Module uses the **[Staking Vault](/developers/contracts/wbera-staker-vault)**, an ERC4626-compliant vault that:
 
 - Takes both native `$BERA` and wrapped `$WBERA` deposits
 - Earns yield from redirected PoL incentives (33% of protocol incentives)
@@ -33,7 +33,7 @@ The BERA Yield Module uses the **WBERAStakerVault**, an ERC4626-compliant vault 
 ### Option 1: Native BERA Staking (Recommended)
 
 1. **Connect your wallet** to the Berachain network
-2. **Navigate to the WBERAStakerVault** interface
+2. **Navigate to the Staking Vault** interface
 3. **Select "Deposit Native"** and enter the amount of BERA you want to stake
 4. **Confirm the transaction** - your BERA will be automatically wrapped to WBERA and deposited
 5. **Receive sWBERA tokens** representing your staked position
@@ -41,7 +41,7 @@ The BERA Yield Module uses the **WBERAStakerVault**, an ERC4626-compliant vault 
 ### Option 2: WBERA Staking
 
 1. **Wrap your BERA** to WBERA first using the WBERA contract
-2. **Approve WBERA** for the WBERAStakerVault
+2. **Approve WBERA** for the Staking Vault
 3. **Deposit WBERA** into the vault
 4. **Receive sWBERA tokens** representing your staked position
 
@@ -109,9 +109,9 @@ The vault can be paused by authorized roles in emergency situations:
 Your yield comes from the **33% incentive tax** collected from PoL protocols:
 
 1. **Protocols pay incentives** to validators for directing BGT emissions
-2. **33% fee collected** and sent to BGTIncentiveFeeCollector
+2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
 3. **Fees auctioned** for WBERA
-4. **WBERA distributed** to WBERAStakerVault stakers
+4. **WBERA distributed** to Staking Vault stakers
 
 ### Auto-Compounding
 
@@ -147,9 +147,9 @@ Future versions will support **Liquid Staking Tokens (LSTs)**:
 
 ### Contract Addresses
 
-- **WBERAStakerVault**: `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}`
+- **Staking Vault**: `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}`
 - **WBERA Token**: `0x6969696969696969696969696969696969696969`
-- **BGTIncentiveFeeCollector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}`
+- **Incentive Fee Collector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}`
 
 ### Key Functions
 

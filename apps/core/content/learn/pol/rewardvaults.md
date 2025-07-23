@@ -103,11 +103,11 @@ It's important to understand that **BGT emission timing** and **incentive token 
 
 ### PoL Incentive Fee Collection
 
-With PoL, when protocols add incentives to Reward Vaults, a portion is automatically collected as fees for BERA stakers:
+With PoL, when incentives are distributed to validators, a portion is automatically collected as fees for BERA stakers:
 
 - **Fee Rate**: 33% of the incentive amount
 - **Collection Process**: Automatically deducted when `addIncentive()` is called
-- **Distribution**: Fees are sent to BGTIncentiveFeeCollector for auction to WBERA
+- **Distribution**: Fees are sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) for auction to WBERA
 - **Remaining Amount**: The remaining 67% is available for distribution to validators
 
 This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.

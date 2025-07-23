@@ -100,15 +100,15 @@ The system by which decisions are made within the Berachain ecosystem. Governanc
 
 ## Incentive Fee Collection (PoL)
 
-A mechanism in PoL where 33% of protocol incentives are automatically collected as fees when added to Reward Vaults. These fees are auctioned for WBERA and distributed to BERA stakers in the WBERAStakerVault, providing direct yield opportunities for BERA holders.
+A mechanism in PoL where 33% of protocol incentives are automatically collected as fees during the incentive distribution process. These fees are auctioned for WBERA and distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault), providing direct yield opportunities for BERA holders.
 
-## WBERAStakerVault
+## Staking Vault
 
 An ERC4626-compliant vault that allows users to stake BERA and earn yield from redirected PoL incentives. The vault accepts both native BERA and WBERA deposits, has a 7-day unbonding period, and automatically compounds rewards. [Read more about BERA Staking](/learn/guides/bera-staking).
 
-## BGTIncentiveFeeCollector
+## Incentive Fee Collector
 
-A contract that collects incentive fees from PoL protocols and auctions them for WBERA tokens, which are then distributed to BERA stakers in the WBERAStakerVault. This contract is a key component of the PoL incentive tax mechanism.
+A contract that collects incentive fees from PoL protocols and auctions them for WBERA tokens, which are then distributed to BERA stakers in the [Staking Vault](/developers/contracts/wbera-staker-vault). This contract is a key component of the PoL incentive tax mechanism.
 
 ## HONEY
 

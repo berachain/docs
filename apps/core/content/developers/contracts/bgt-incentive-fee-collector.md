@@ -30,7 +30,7 @@ The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from
 
 - **Fee Collection**: Collects incentive fees from Reward Vaults
 - **Token Auction**: Auctions collected tokens for WBERA
-- **Payout Distribution**: Distributes WBERA to WBERAStakerVault
+- **Payout Distribution**: Distributes WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
 - **Configurable Payouts**: Adjustable payout amounts via governance
 - **Emergency Controls**: Pausable operations with role-based access
 
@@ -59,7 +59,7 @@ Initializes the contract with governance, payout amount, and vault address.
 
 - `governance`: Address with DEFAULT_ADMIN_ROLE
 - `_payoutAmount`: Amount of WBERA required to claim fees
-- `_wberaStakerVault`: Address of the WBERAStakerVault contract
+- `_wberaStakerVault`: Address of the [Staking Vault](/developers/contracts/wbera-staker-vault) contract
 
 ### Fee Claiming
 
@@ -70,7 +70,7 @@ function claimFees(
 ) external whenNotPaused
 ```
 
-Claims collected incentive fees. The caller must transfer the payout amount of WBERA to the WBERAStakerVault.
+Claims collected incentive fees. The caller must transfer the payout amount of WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault).
 
 **Parameters:**
 
@@ -79,7 +79,7 @@ Claims collected incentive fees. The caller must transfer the payout amount of W
 
 **Requirements:**
 
-- Caller must transfer `payoutAmount` WBERA to WBERAStakerVault
+- Caller must transfer `payoutAmount` WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
 - Contract must have collected fees for the specified tokens
 
 ### Payout Amount Management
@@ -120,7 +120,7 @@ Returns the queued payout amount that will take effect on the next fee claim.
 function wberaStakerVault() external view returns (address)
 ```
 
-Returns the address of the WBERAStakerVault contract.
+Returns the address of the [Staking Vault](/developers/contracts/wbera-staker-vault) contract.
 
 ## Admin Functions
 
@@ -188,7 +188,7 @@ const feeTokens = [
 const payoutAmount = await bgtIncentiveFeeCollector.payoutAmount();
 console.log("Payout amount:", ethers.formatEther(payoutAmount));
 
-// Approve WBERA transfer to WBERAStakerVault
+// Approve WBERA transfer to the Staking Vault
 const wberaStakerVault = await bgtIncentiveFeeCollector.wberaStakerVault();
 await wbera.approve(wberaStakerVault, payoutAmount);
 
@@ -251,14 +251,14 @@ incentive.amountRemaining = amountRemainingBefore + amount - feeAmount;
 The `_collectIncentiveFee` function:
 
 - Calculates fee amount based on incentive fee rate
-- Transfers fee to BGTIncentiveFeeCollector
+- Transfers fee to this contract
 - Emits `IncentiveFeeCollected` event
 
 ### 3. Fee Auction and Distribution
 
 When `claimFees` is called:
 
-- Caller transfers WBERA to WBERAStakerVault
+- Caller transfers WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
 - Collected tokens are transferred to recipient
 - WBERA is distributed to BERA stakers
 
@@ -272,7 +272,7 @@ When `claimFees` is called:
 
 ### Payout Requirements
 
-- Caller must transfer exact payout amount to WBERAStakerVault
+- Caller must transfer exact payout amount to the [Staking Vault](/developers/contracts/wbera-staker-vault)
 - Payout amount can be adjusted by governance
 - Changes are queued and take effect on next claim
 
@@ -291,7 +291,7 @@ When `claimFees` is called:
 
 ## Related Contracts
 
-- [WBERAStakerVault](./wbera-staker-vault.md): Receives WBERA payouts
+- [Staking Vault](./wbera-staker-vault.md): Receives WBERA payouts
 - [RewardVaultFactory](./reward-vault-factory.md): Manages incentive fee rates
 - [RewardVault](./reward-vault.md): Collects incentive fees
 

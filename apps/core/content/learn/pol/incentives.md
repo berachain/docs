@@ -102,7 +102,7 @@ _Example:_
 
 ### PoL Incentive Fee Collection
 
-With PoL, a portion of protocol incentives is automatically collected as fees for BERA stakers:
+With PoL, a portion of protocol incentives is automatically collected as fees during the incentive distribution process for BERA stakers:
 
 - **Fee Rate**: 33% of the incentive amount
 - **Collection Process**: Automatically deducted when incentives are added to Reward Vaults

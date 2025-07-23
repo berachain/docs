@@ -6,7 +6,7 @@ Below are important changes shipped to Berachain.
 
 ## July 2025
 
-**Launched [BERA Staking](https://docs.berachain.com/learn/guides/bera-staking).**  Earn yield on BERA via [the Hub](http://hub.berachain.com/stake/). For developers, we introduced the [WBeraStakeVault](https://docs.berachain.com/developers/contracts/wbera-staker-vault) and [BGTIncentiveFeeCollector](https://docs.berachain.com/developers/contracts/bgt-incentive-fee-collector) contracts.
+**Launched [BERA Staking](https://docs.berachain.com/learn/guides/bera-staking).**  Earn yield on BERA via [the Hub](http://hub.berachain.com/stake/). For developers, we introduced the [WBeraStakeVault](https://docs.berachain.com/developers/contracts/wbera-staker-vault) and [Incentive Fee Collector](https://docs.berachain.com/developers/contracts/bgt-incentive-fee-collector) contracts.
 
 **[Reward Vault upgrades](/developers/contracts/reward-vault)** – Introduced _rate-based_ BGT emission timing via [`targetRewardsPerSecond`](/developers/contracts/reward-vault#targetrewardspersecond), with automatic duration calculation based on reward amounts and target rates. Added [`setRewardsDuration`](/developers/contracts/reward-vault#setrewardsduration), [`setTargetRewardsPerSecond`](/developers/contracts/reward-vault#settargetrewardspersecond), and related state management. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for an overview and [Reward Vault contract reference](/developers/contracts/reward-vault) for implementation details.
 
