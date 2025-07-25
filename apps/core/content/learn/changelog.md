@@ -4,6 +4,20 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## August 2025
+
+**Reward Vault enhanced functionality** – Added two new functions to enhance staking and reward management capabilities:
+
+- **`stakeOnBehalf`** – Allows any account to stake tokens directly for another account without requiring delegation permissions. This enables new integration patterns for protocol-to-protocol interactions, automated staking services, and custodial solutions while giving the beneficiary full control over their staked balance. See the [Staking for Other Accounts guide](/developers/guides/staking-for-other-accounts) for implementation details.
+
+- **`getPartialReward`** – Enables claiming specific amounts of BGT rewards instead of all accumulated rewards at once. This supports streaming rewards, vesting strategies, dollar-cost averaging patterns, and gas optimization for large reward balances. See the [Partial Reward Claims guide](/developers/guides/partial-reward-claims) for advanced examples.
+
+**New developer guides and documentation:**
+- Updated [BGT claiming guide](/learn/guides/claim-bgt) with protocol claiming information
+- Enhanced [PoL integration quickstart](/developers/quickstart/pol-integration) highlighting new staking options
+
+**Updated contract references** generated from the latest implementation with complete API documentation for the new functions. See the [Reward Vault contract reference](/developers/contracts/reward-vault) for technical details.
+
 ## July 2025
 
 **Launched [BERA Staking](https://docs.berachain.com/learn/guides/bera-staking).**  Earn yield on BERA via [the Hub](http://hub.berachain.com/stake/). For developers, we introduced the [WBeraStakeVault](https://docs.berachain.com/developers/contracts/wbera-staker-vault) and [Incentive Fee Collector](https://docs.berachain.com/developers/contracts/bgt-incentive-fee-collector) contracts.

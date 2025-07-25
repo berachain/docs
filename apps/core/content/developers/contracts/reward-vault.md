@@ -516,12 +516,27 @@ function delegateStake(address account, uint256 amount) external nonReentrant wh
 | `account` | `address` | The account to stake for.      |
 | `amount`  | `uint256` | The amount of tokens to stake. |
 
+### stakeOnBehalf
+
+Stake tokens on behalf of another account.
+
+```solidity
+function stakeOnBehalf(address account, uint256 amount) external nonReentrant whenNotPaused;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                    |
+| --------- | --------- | ------------------------------ |
+| `account` | `address` | The account to stake for.      |
+| `amount`  | `uint256` | The amount of tokens to stake. |
+
 ### withdraw
 
 Withdraw the staked tokens from the vault.
 
 ```solidity
-function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(msg.sender, amount);
+function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(msg.sender, amount) whenNotPaused;
 ```
 
 **Parameters**
@@ -535,7 +550,7 @@ function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(m
 Withdraw tokens staked on behalf of another account by the delegate (msg.sender).
 
 ```solidity
-function delegateWithdraw(address account, uint256 amount) external nonReentrant;
+function delegateWithdraw(address account, uint256 amount) external nonReentrant whenNotPaused;
 ```
 
 **Parameters**
@@ -558,6 +573,7 @@ function getReward(
 )
     external
     nonReentrant
+    whenNotPaused
     onlyOperatorOrUser(account)
     returns (uint256);
 ```
@@ -575,6 +591,32 @@ function getReward(
 | -------- | --------- | --------------------------------- |
 | `<none>` | `uint256` | The amount of the reward claimed. |
 
+### getPartialReward
+
+Claim a partial reward.
+
+_Use `getReward` if you want to claim the full reward._
+
+```solidity
+function getPartialReward(
+    address account,
+    address recipient,
+    uint256 amount
+)
+    external
+    nonReentrant
+    whenNotPaused
+    onlyOperatorOrUser(account);
+```
+
+**Parameters**
+
+| Name        | Type      | Description                        |
+| ----------- | --------- | ---------------------------------- |
+| `account`   | `address` | The account to get the reward for. |
+| `recipient` | `address` | The address to send the reward to. |
+| `amount`    | `uint256` | The amount of the reward to claim. |
+
 ### exit
 
 Exit the vault with the staked tokens and claim the reward.
@@ -582,7 +624,7 @@ Exit the vault with the staked tokens and claim the reward.
 _Only the account holder can call this function, not the operator._
 
 ```solidity
-function exit(address recipient) external nonReentrant;
+function exit(address recipient) external nonReentrant whenNotPaused;
 ```
 
 **Parameters**
@@ -609,7 +651,9 @@ function setOperator(address _operator) external;
 
 Add an incentive token to the vault.
 
-_Permissioned function, only callable by incentive token manager._
+_The incentive token's transfer should not exceed a gas usage of 500k units.
+In case the transfer exceeds 500k gas units, your incentive will fail to be transferred to the validator and
+its delegates._
 
 ```solidity
 function addIncentive(
@@ -630,19 +674,12 @@ function addIncentive(
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
 
-**PoL Fee Collection**
-
-When incentives are distributed, a portion is automatically collected as a fee for BERA stakers:
-
-- **Fee Rate**: 33% of the incentive amount
-- **Fee Collection**: Automatically sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
-- **Remaining Amount**: The remaining 67% is available for distribution to validators
-
 ### accountIncentives
 
 Process incentives added via IERC20.transfer, adding them to the incentive accounting.
 
-_Permissioned function, only callable by incentive token manager._
+_Allows permissionless incentive addition, without dossing the manager possibility to
+let the incentive accounting go to 0 in order to be able to decrease the incentive rate._
 
 ```solidity
 function accountIncentives(address token, uint256 amount) external nonReentrant onlyWhitelistedToken(token);
@@ -654,64 +691,6 @@ function accountIncentives(address token, uint256 amount) external nonReentrant 
 | -------- | --------- | -------------------------------------------- |
 | `token`  | `address` | The address of the token to process.         |
 | `amount` | `uint256` | The amount of token to account as incentive. |
-
-### \_checkSelfStakedBalance
-
-_Check if the account has enough self-staked balance._
-
-```solidity
-function _checkSelfStakedBalance(address account, uint256 amount) internal view;
-```
-
-**Parameters**
-
-| Name      | Type      | Description                                       |
-| --------- | --------- | ------------------------------------------------- |
-| `account` | `address` | The account to check the self-staked balance for. |
-| `amount`  | `uint256` | The amount being withdrawn.                       |
-
-### \_safeTransferRewardToken
-
-_The Distributor grants this contract the allowance to transfer the BGT in its balance._
-
-```solidity
-function _safeTransferRewardToken(address to, uint256 amount) internal override;
-```
-
-### \_checkRewardSolvency
-
-```solidity
-function _checkRewardSolvency() internal view override;
-```
-
-### \_processIncentives
-
-process the incentives for a validator.
-
-If a token transfer consumes more than 500k gas units, the transfer alone will fail.
-
-```solidity
-function _processIncentives(bytes calldata pubkey, uint256 bgtEmitted) internal;
-```
-
-**Parameters**
-
-| Name         | Type      | Description                                                |
-| ------------ | --------- | ---------------------------------------------------------- |
-| `pubkey`     | `bytes`   | The pubkey of the validator to process the incentives for. |
-| `bgtEmitted` | `uint256` | The amount of BGT emitted by the validator.                |
-
-### \_deleteWhitelistedTokenFromList
-
-```solidity
-function _deleteWhitelistedTokenFromList(address token) internal;
-```
-
-### \_setRewardRate
-
-```solidity
-function _setRewardRate() internal override;
-```
 
 ## Structs
 
