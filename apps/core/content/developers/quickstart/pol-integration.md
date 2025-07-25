@@ -69,7 +69,7 @@ function autoStakeForUser(address user, uint256 amount) external onlyAuthorized 
     activityToken.transferFrom(user, address(this), amount);
     activityToken.approve(address(rewardVault), amount);
     rewardVault.stakeOnBehalf(user, amount);
-    
+
     emit AutoStaked(user, amount);
 }
 ```
@@ -84,7 +84,7 @@ function autoStakeForUser(address user, uint256 amount) external onlyAuthorized 
 // Protocol delegates staking for institutional users
 function institutionalStake(address institution, uint256 amount) external {
     require(isApprovedInstitution[institution], "Not approved");
-    
+
     activityToken.transferFrom(msg.sender, address(this), amount);
     activityToken.approve(address(rewardVault), amount);
     rewardVault.delegateStake(institution, amount);
@@ -102,7 +102,7 @@ function institutionalStake(address institution, uint256 amount) external {
 function claimStreamedRewards(address user) external {
     uint256 claimable = calculateClaimableAmount(user);
     require(claimable > 0, "No rewards claimable");
-    
+
     rewardVault.getPartialReward(user, user, claimable);
     updateStreamingState(user, claimable);
 }
@@ -118,7 +118,7 @@ function claimStreamedRewards(address user) external {
 // Mint and automatically stake tokens based on trading activity
 function rewardTradingActivity(address trader, uint256 tradeVolume) external {
     uint256 tokensToMint = calculateActivityTokens(trader, tradeVolume);
-    
+
     activityToken.mint(address(this), tokensToMint);
     activityToken.approve(address(rewardVault), tokensToMint);
     rewardVault.stakeOnBehalf(trader, tokensToMint);
@@ -126,6 +126,7 @@ function rewardTradingActivity(address trader, uint256 tradeVolume) external {
 ```
 
 Core Mechanics:
+
 - Tracks trades within a 7-day rolling window
 - Awards points based on trading frequency and size
 - Automatic staking of newly minted tokens
