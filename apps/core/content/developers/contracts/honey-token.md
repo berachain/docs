@@ -24,7 +24,7 @@ The Honey token (HONEY) is Berachain's native stablecoin, designed to maintain a
 **Inherits:**
 ERC20, ERC20Permit, AccessControl
 
-*HONEY is a decentralized stablecoin backed by collateral assets.*
+_HONEY is a decentralized stablecoin backed by collateral assets._
 
 ## View Functions
 
@@ -78,9 +78,8 @@ function burn(uint256 amount) external;
 
 Mints new tokens to the specified address.
 
-*Only addresses with MINTER_ROLE can call this function.*
+_Only addresses with MINTER_ROLE can call this function._
 
 ```solidity
 function mint(address to, uint256 amount) external;
 ```
-

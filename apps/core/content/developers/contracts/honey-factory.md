@@ -24,7 +24,7 @@ The HoneyFactory contract manages the minting and redemption of HONEY tokens, fa
 **Inherits:**
 IHoneyFactory, OwnableUpgradeable, UUPSUpgradeable
 
-*This contract handles HONEY token lifecycle and collateral management.*
+_This contract handles HONEY token lifecycle and collateral management._
 
 ## View Functions
 
@@ -63,6 +63,7 @@ function initialize(address _honey) external initializer;
 Mints HONEY tokens to the specified address.
 
 **Emits:**
+
 - [HoneyMinted](#event-honeyminted)
 
 ```solidity
@@ -74,6 +75,7 @@ function mint(address to, uint256 amount) external onlyOwner;
 Redeems HONEY tokens from the specified address.
 
 **Emits:**
+
 - [HoneyRedeemed](#event-honeyredeemed)
 
 ```solidity
@@ -89,6 +91,7 @@ function upgradeToAndCall(address newImplementation, bytes memory data) public p
 ## Events
 
 ### HoneyMinted {#event-honeyminted}
+
 Emitted when HONEY tokens are minted.
 
 ```solidity
@@ -96,6 +99,7 @@ event HoneyMinted(address indexed to, uint256 amount);
 ```
 
 ### HoneyRedeemed {#event-honeyredeemed}
+
 Emitted when HONEY tokens are redeemed.
 
 ```solidity
@@ -103,6 +107,7 @@ event HoneyRedeemed(address indexed from, uint256 amount);
 ```
 
 ### Initialized {#event-initialized}
+
 Emitted when the contract is initialized.
 
 ```solidity
@@ -110,6 +115,7 @@ event Initialized(uint64 version);
 ```
 
 ### OwnershipTransferred {#event-ownershiptransferred}
+
 Emitted when ownership is transferred.
 
 ```solidity
@@ -117,6 +123,7 @@ event OwnershipTransferred(address indexed previousOwner, address indexed newOwn
 ```
 
 ### Upgraded {#event-upgraded}
+
 Emitted when the implementation is upgraded.
 
 ```solidity

@@ -24,7 +24,7 @@ The WBERAStakerVault contract manages staking of WBERA tokens and distributes st
 **Inherits:**
 IWBERAStakerVault, ERC4626Upgradeable, OwnableUpgradeable, UUPSUpgradeable
 
-*This vault enables WBERA staking and handles reward distribution to stakers.*
+_This vault enables WBERA staking and handles reward distribution to stakers._
 
 ## Contract Overview
 

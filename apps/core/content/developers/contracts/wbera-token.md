@@ -24,7 +24,7 @@ WBERA is the wrapped version of BERA, Berachain's native token, enabling ERC20 f
 **Inherits:**
 IWETH, ERC20, ERC20Permit
 
-*This contract wraps BERA into an ERC20 token that can be used in smart contracts.*
+_This contract wraps BERA into an ERC20 token that can be used in smart contracts._
 
 ## View Functions
 
@@ -71,6 +71,7 @@ function totalSupply() public view virtual override returns (uint256);
 Wraps BERA into WBERA tokens.
 
 **Emits:**
+
 - [Deposit](#event-deposit)
 
 ```solidity
@@ -82,6 +83,7 @@ function deposit() public payable;
 Unwraps WBERA tokens back to BERA.
 
 **Emits:**
+
 - [Withdrawal](#event-withdrawal)
 
 ```solidity
@@ -91,6 +93,7 @@ function withdraw(uint256 amount) external;
 ## Events
 
 ### Approval {#event-approval}
+
 Emitted when an approval is made.
 
 ```solidity
@@ -98,6 +101,7 @@ event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
 ### Deposit {#event-deposit}
+
 Emitted when BERA is deposited and WBERA is minted.
 
 ```solidity
@@ -105,6 +109,7 @@ event Deposit(address indexed account, uint256 amount);
 ```
 
 ### Transfer {#event-transfer}
+
 Emitted when tokens are transferred.
 
 ```solidity
@@ -112,6 +117,7 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 ```
 
 ### Withdrawal {#event-withdrawal}
+
 Emitted when WBERA is burned and BERA is withdrawn.
 
 ```solidity

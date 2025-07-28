@@ -24,7 +24,7 @@ The RewardVaultFactory contract creates and manages RewardVault instances for va
 **Inherits:**
 IRewardVaultFactory, OwnableUpgradeable, UUPSUpgradeable
 
-*This factory contract deploys and configures RewardVault contracts for validator rewards.*
+_This factory contract deploys and configures RewardVault contracts for validator rewards._
 
 ## State Variables
 

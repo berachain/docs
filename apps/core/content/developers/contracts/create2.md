@@ -24,7 +24,7 @@ The Create2Deployer contract enables deterministic contract deployment using CRE
 **Inherits:**
 ICreate2Deployer
 
-*This contract facilitates deterministic contract deployment across different networks.*
+_This contract facilitates deterministic contract deployment across different networks._
 
 ## State Variables
 

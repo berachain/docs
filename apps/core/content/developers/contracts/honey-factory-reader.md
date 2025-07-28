@@ -24,7 +24,7 @@ The HoneyFactoryReader contract provides read-only access to HoneyFactory data a
 **Inherits:**
 IHoneyFactoryReader
 
-*This contract enables efficient querying of HoneyFactory state without modifying it.*
+_This contract enables efficient querying of HoneyFactory state without modifying it._
 
 ## Functions
 

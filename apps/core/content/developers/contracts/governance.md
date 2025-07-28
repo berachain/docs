@@ -24,7 +24,7 @@ The BerachainGovernance contract implements the governance system for Berachain,
 **Inherits:**
 Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl, GovernorPreventLateQuorum
 
-*This contract manages the governance process including proposal creation, voting, and execution through a timelock.*
+_This contract manages the governance process including proposal creation, voting, and execution through a timelock._
 
 ## View Functions
 
@@ -236,6 +236,7 @@ function updateTimelock(TimelockController newTimelock) external virtual overrid
 ## Events
 
 ### EIP712DomainChanged {#event-eip712domainchanged}
+
 Emitted when the EIP712 domain is changed.
 
 ```solidity
@@ -243,6 +244,7 @@ event EIP712DomainChanged();
 ```
 
 ### LateQuorumVoteExtensionSet {#event-latequorumvoteextensionset}
+
 Emitted when the late quorum vote extension is set.
 
 ```solidity
@@ -251,12 +253,13 @@ event LateQuorumVoteExtensionSet(uint64 oldVoteExtension, uint64 newVoteExtensio
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldVoteExtension`|`uint64`|The previous vote extension|
-|`newVoteExtension`|`uint64`|The new vote extension|
+| Name               | Type     | Description                 |
+| ------------------ | -------- | --------------------------- |
+| `oldVoteExtension` | `uint64` | The previous vote extension |
+| `newVoteExtension` | `uint64` | The new vote extension      |
 
 ### ProposalCanceled {#event-proposalcanceled}
+
 Emitted when a proposal is canceled.
 
 ```solidity
@@ -265,11 +268,12 @@ event ProposalCanceled(uint256 proposalId);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`proposalId`|`uint256`|The ID of the canceled proposal|
+| Name         | Type      | Description                     |
+| ------------ | --------- | ------------------------------- |
+| `proposalId` | `uint256` | The ID of the canceled proposal |
 
 ### ProposalCreated {#event-proposalcreated}
+
 Emitted when a proposal is created.
 
 ```solidity
@@ -288,19 +292,20 @@ event ProposalCreated(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`proposalId`|`uint256`|The ID of the created proposal|
-|`proposer`|`address`|The address of the proposer|
-|`targets`|`address[]`|The target addresses|
-|`values`|`uint256[]`|The values for each call|
-|`signatures`|`string[]`|The function signatures|
-|`calldatas`|`bytes[]`|The call data|
-|`voteStart`|`uint256`|The voting start time|
-|`voteEnd`|`uint256`|The voting end time|
-|`description`|`string`|The proposal description|
+| Name          | Type        | Description                    |
+| ------------- | ----------- | ------------------------------ |
+| `proposalId`  | `uint256`   | The ID of the created proposal |
+| `proposer`    | `address`   | The address of the proposer    |
+| `targets`     | `address[]` | The target addresses           |
+| `values`      | `uint256[]` | The values for each call       |
+| `signatures`  | `string[]`  | The function signatures        |
+| `calldatas`   | `bytes[]`   | The call data                  |
+| `voteStart`   | `uint256`   | The voting start time          |
+| `voteEnd`     | `uint256`   | The voting end time            |
+| `description` | `string`    | The proposal description       |
 
 ### ProposalExecuted {#event-proposalexecuted}
+
 Emitted when a proposal is executed.
 
 ```solidity
@@ -309,11 +314,12 @@ event ProposalExecuted(uint256 proposalId);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`proposalId`|`uint256`|The ID of the executed proposal|
+| Name         | Type      | Description                     |
+| ------------ | --------- | ------------------------------- |
+| `proposalId` | `uint256` | The ID of the executed proposal |
 
 ### ProposalExtended {#event-proposalextended}
+
 Emitted when a proposal is extended.
 
 ```solidity
@@ -322,12 +328,13 @@ event ProposalExtended(uint256 indexed proposalId, uint64 extendedDeadline);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`proposalId`|`uint256`|The ID of the extended proposal|
-|`extendedDeadline`|`uint64`|The new extended deadline|
+| Name               | Type      | Description                     |
+| ------------------ | --------- | ------------------------------- |
+| `proposalId`       | `uint256` | The ID of the extended proposal |
+| `extendedDeadline` | `uint64`  | The new extended deadline       |
 
 ### ProposalQueued {#event-proposalqueued}
+
 Emitted when a proposal is queued.
 
 ```solidity
@@ -336,12 +343,13 @@ event ProposalQueued(uint256 proposalId, uint256 etaSeconds);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`proposalId`|`uint256`|The ID of the queued proposal|
-|`etaSeconds`|`uint256`|The execution time in seconds|
+| Name         | Type      | Description                   |
+| ------------ | --------- | ----------------------------- |
+| `proposalId` | `uint256` | The ID of the queued proposal |
+| `etaSeconds` | `uint256` | The execution time in seconds |
 
 ### ProposalThresholdSet {#event-proposalthresholdset}
+
 Emitted when the proposal threshold is set.
 
 ```solidity
@@ -350,12 +358,13 @@ event ProposalThresholdSet(uint256 oldProposalThreshold, uint256 newProposalThre
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldProposalThreshold`|`uint256`|The previous proposal threshold|
-|`newProposalThreshold`|`uint256`|The new proposal threshold|
+| Name                   | Type      | Description                     |
+| ---------------------- | --------- | ------------------------------- |
+| `oldProposalThreshold` | `uint256` | The previous proposal threshold |
+| `newProposalThreshold` | `uint256` | The new proposal threshold      |
 
 ### QuorumNumeratorUpdated {#event-quorumnumeratorupdated}
+
 Emitted when the quorum numerator is updated.
 
 ```solidity
@@ -364,12 +373,13 @@ event QuorumNumeratorUpdated(uint256 oldQuorumNumerator, uint256 newQuorumNumera
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldQuorumNumerator`|`uint256`|The previous quorum numerator|
-|`newQuorumNumerator`|`uint256`|The new quorum numerator|
+| Name                 | Type      | Description                   |
+| -------------------- | --------- | ----------------------------- |
+| `oldQuorumNumerator` | `uint256` | The previous quorum numerator |
+| `newQuorumNumerator` | `uint256` | The new quorum numerator      |
 
 ### TimelockChange {#event-timelockchange}
+
 Emitted when the timelock is changed.
 
 ```solidity
@@ -378,12 +388,13 @@ event TimelockChange(address oldTimelock, address newTimelock);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldTimelock`|`address`|The previous timelock address|
-|`newTimelock`|`address`|The new timelock address|
+| Name          | Type      | Description                   |
+| ------------- | --------- | ----------------------------- |
+| `oldTimelock` | `address` | The previous timelock address |
+| `newTimelock` | `address` | The new timelock address      |
 
 ### VoteCast {#event-votecast}
+
 Emitted when a vote is cast.
 
 ```solidity
@@ -392,15 +403,16 @@ event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`voter`|`address`|The voter address|
-|`proposalId`|`uint256`|The proposal ID|
-|`support`|`uint8`|The vote support|
-|`weight`|`uint256`|The vote weight|
-|`reason`|`string`|The vote reason|
+| Name         | Type      | Description       |
+| ------------ | --------- | ----------------- |
+| `voter`      | `address` | The voter address |
+| `proposalId` | `uint256` | The proposal ID   |
+| `support`    | `uint8`   | The vote support  |
+| `weight`     | `uint256` | The vote weight   |
+| `reason`     | `string`  | The vote reason   |
 
 ### VoteCastWithParams {#event-votecastwithparams}
+
 Emitted when a vote with parameters is cast.
 
 ```solidity
@@ -411,16 +423,17 @@ event VoteCastWithParams(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`voter`|`address`|The voter address|
-|`proposalId`|`uint256`|The proposal ID|
-|`support`|`uint8`|The vote support|
-|`weight`|`uint256`|The vote weight|
-|`reason`|`string`|The vote reason|
-|`params`|`bytes`|The vote parameters|
+| Name         | Type      | Description         |
+| ------------ | --------- | ------------------- |
+| `voter`      | `address` | The voter address   |
+| `proposalId` | `uint256` | The proposal ID     |
+| `support`    | `uint8`   | The vote support    |
+| `weight`     | `uint256` | The vote weight     |
+| `reason`     | `string`  | The vote reason     |
+| `params`     | `bytes`   | The vote parameters |
 
 ### VotingDelaySet {#event-votingdelayset}
+
 Emitted when the voting delay is set.
 
 ```solidity
@@ -429,12 +442,13 @@ event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldVotingDelay`|`uint256`|The previous voting delay|
-|`newVotingDelay`|`uint256`|The new voting delay|
+| Name             | Type      | Description               |
+| ---------------- | --------- | ------------------------- |
+| `oldVotingDelay` | `uint256` | The previous voting delay |
+| `newVotingDelay` | `uint256` | The new voting delay      |
 
 ### VotingPeriodSet {#event-votingperiodset}
+
 Emitted when the voting period is set.
 
 ```solidity
@@ -443,7 +457,7 @@ event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldVotingPeriod`|`uint256`|The previous voting period|
-|`newVotingPeriod`|`uint256`|The new voting period|
+| Name              | Type      | Description                |
+| ----------------- | --------- | -------------------------- |
+| `oldVotingPeriod` | `uint256` | The previous voting period |
+| `newVotingPeriod` | `uint256` | The new voting period      |

@@ -24,7 +24,7 @@ The Timelock contract enforces a delay on the execution of governance proposals,
 **Inherits:**
 AccessControl, IERC721Receiver, IERC1155Receiver
 
-*This contract is a standard OpenZeppelin TimelockController that works with the governance system.*
+_This contract is a standard OpenZeppelin TimelockController that works with the governance system._
 
 ## Constants
 
@@ -55,6 +55,7 @@ bytes32 public constant TIMELOCK_ADMIN_ROLE = keccak256("TIMELOCK_ADMIN_ROLE");
 ## State Variables
 
 ### minDelay
+
 The minimum delay before a proposal can be executed.
 
 ```solidity
@@ -150,6 +151,7 @@ function isOperationReady(bytes32 id) public view virtual returns (bool ready);
 Cancels an operation.
 
 **Emits:**
+
 - [Cancelled](#event-cancelled)
 
 ```solidity
@@ -161,6 +163,7 @@ function cancel(bytes32 id) external virtual;
 Executes an operation.
 
 **Emits:**
+
 - [CallExecuted](#event-callexecuted)
 
 ```solidity
@@ -178,6 +181,7 @@ function execute(
 Executes a batch of operations.
 
 **Emits:**
+
 - [CallExecuted](#event-callexecuted)
 
 ```solidity
@@ -205,6 +209,7 @@ function onERC1155Received(address, address, uint256, uint256, bytes memory)
 Schedules an operation.
 
 **Emits:**
+
 - [CallScheduled](#event-callscheduled)
 
 ```solidity
@@ -223,6 +228,7 @@ function schedule(
 Schedules a batch of operations.
 
 **Emits:**
+
 - [CallScheduled](#event-callscheduled)
 
 ```solidity
@@ -241,6 +247,7 @@ function scheduleBatch(
 Updates the minimum delay.
 
 **Emits:**
+
 - [MinDelayChange](#event-mindelaychange)
 
 ```solidity
@@ -250,6 +257,7 @@ function updateDelay(uint256 newDelay) external virtual;
 ## Events
 
 ### CallExecuted {#event-callexecuted}
+
 Emitted when a call is executed.
 
 ```solidity
@@ -258,15 +266,16 @@ event CallExecuted(bytes32 indexed id, uint256 indexed index, address target, ui
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`id`|`bytes32`|The operation ID|
-|`index`|`uint256`|The call index|
-|`target`|`address`|The target address|
-|`value`|`uint256`|The value sent|
-|`data`|`bytes`|The call data|
+| Name     | Type      | Description        |
+| -------- | --------- | ------------------ |
+| `id`     | `bytes32` | The operation ID   |
+| `index`  | `uint256` | The call index     |
+| `target` | `address` | The target address |
+| `value`  | `uint256` | The value sent     |
+| `data`   | `bytes`   | The call data      |
 
 ### CallScheduled {#event-callscheduled}
+
 Emitted when a call is scheduled.
 
 ```solidity
@@ -283,17 +292,18 @@ event CallScheduled(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`id`|`bytes32`|The operation ID|
-|`index`|`uint256`|The call index|
-|`target`|`address`|The target address|
-|`value`|`uint256`|The value to send|
-|`data`|`bytes`|The call data|
-|`predecessor`|`bytes32`|The predecessor operation|
-|`delay`|`uint256`|The delay before execution|
+| Name          | Type      | Description                |
+| ------------- | --------- | -------------------------- |
+| `id`          | `bytes32` | The operation ID           |
+| `index`       | `uint256` | The call index             |
+| `target`      | `address` | The target address         |
+| `value`       | `uint256` | The value to send          |
+| `data`        | `bytes`   | The call data              |
+| `predecessor` | `bytes32` | The predecessor operation  |
+| `delay`       | `uint256` | The delay before execution |
 
 ### Cancelled {#event-cancelled}
+
 Emitted when an operation is cancelled.
 
 ```solidity
@@ -302,11 +312,12 @@ event Cancelled(bytes32 indexed id);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`id`|`bytes32`|The cancelled operation ID|
+| Name | Type      | Description                |
+| ---- | --------- | -------------------------- |
+| `id` | `bytes32` | The cancelled operation ID |
 
 ### MinDelayChange {#event-mindelaychange}
+
 Emitted when the minimum delay is changed.
 
 ```solidity
@@ -315,12 +326,13 @@ event MinDelayChange(uint256 oldDuration, uint256 newDuration);
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`oldDuration`|`uint256`|The previous minimum delay|
-|`newDuration`|`uint256`|The new minimum delay|
+| Name          | Type      | Description                |
+| ------------- | --------- | -------------------------- |
+| `oldDuration` | `uint256` | The previous minimum delay |
+| `newDuration` | `uint256` | The new minimum delay      |
 
 ### RoleAdminChanged {#event-roleadminchanged}
+
 Emitted when a role's admin is changed.
 
 ```solidity
@@ -329,13 +341,14 @@ event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, 
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`role`|`bytes32`|The role that was changed|
-|`previousAdminRole`|`bytes32`|The previous admin role|
-|`newAdminRole`|`bytes32`|The new admin role|
+| Name                | Type      | Description               |
+| ------------------- | --------- | ------------------------- |
+| `role`              | `bytes32` | The role that was changed |
+| `previousAdminRole` | `bytes32` | The previous admin role   |
+| `newAdminRole`      | `bytes32` | The new admin role        |
 
 ### RoleGranted {#event-rolegranted}
+
 Emitted when a role is granted.
 
 ```solidity
@@ -344,13 +357,14 @@ event RoleGranted(bytes32 indexed role, address indexed account, address indexed
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`role`|`bytes32`|The role that was granted|
-|`account`|`address`|The account that received the role|
-|`sender`|`address`|The account that granted the role|
+| Name      | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `role`    | `bytes32` | The role that was granted          |
+| `account` | `address` | The account that received the role |
+| `sender`  | `address` | The account that granted the role  |
 
 ### RoleRevoked {#event-rolerevoked}
+
 Emitted when a role is revoked.
 
 ```solidity
@@ -359,8 +373,8 @@ event RoleRevoked(bytes32 indexed role, address indexed account, address indexed
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`role`|`bytes32`|The role that was revoked|
-|`account`|`address`|The account that lost the role|
-|`sender`|`address`|The account that revoked the role|
+| Name      | Type      | Description                       |
+| --------- | --------- | --------------------------------- |
+| `role`    | `bytes32` | The role that was revoked         |
+| `account` | `address` | The account that lost the role    |
+| `sender`  | `address` | The account that revoked the role |

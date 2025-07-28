@@ -24,7 +24,7 @@ The BGTStaker contract enables staking of BGT tokens and manages staking rewards
 **Inherits:**
 IBGTStaker, OwnableUpgradeable, UUPSUpgradeable
 
-*This contract facilitates BGT staking operations and reward management.*
+_This contract facilitates BGT staking operations and reward management._
 
 ## Functions
 
@@ -134,6 +134,7 @@ function getReward() external returns (uint256);
 ## Events
 
 ### Recovered {#event-recovered}
+
 Emitted when a token has been recovered.
 
 ```solidity

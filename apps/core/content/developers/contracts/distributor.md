@@ -24,7 +24,7 @@ The Distributor contract manages the distribution of BGT rewards to validators a
 **Inherits:**
 IDistributor, OwnableUpgradeable, UUPSUpgradeable
 
-*This contract coordinates reward distribution across the validator ecosystem.*
+_This contract coordinates reward distribution across the validator ecosystem._
 
 _Each validator has its own reward allocation, if it does not exist, a default reward allocation is used.
 And if governance has not set the default reward allocation, the rewards are not minted and distributed._

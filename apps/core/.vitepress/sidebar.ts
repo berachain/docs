@@ -265,9 +265,7 @@ const SIDEBAR = {
     },
     {
       text: "Token Contracts",
-      items: [
-        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
-      ]
+      items: [{ text: "WBERA Token", link: "/developers/contracts/wbera-token" }]
     }
   ],
   /**

@@ -24,7 +24,7 @@ Permit2 enables advanced token approval patterns, allowing for more flexible and
 **Inherits:**
 IPermit2, EIP712
 
-*This is the standard Permit2 implementation for gasless approvals and signature-based transfers.*
+_This is the standard Permit2 implementation for gasless approvals and signature-based transfers._
 
 ## State Variables
 

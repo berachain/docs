@@ -24,7 +24,7 @@ The FeeCollector contract manages the collection and distribution of protocol fe
 **Inherits:**
 IFeeCollector, OwnableUpgradeable, UUPSUpgradeable
 
-*This contract handles fee collection from various protocol operations and distributes them appropriately.*
+_This contract handles fee collection from various protocol operations and distributes them appropriately._
 
 ## Functions
 
@@ -138,6 +138,7 @@ function unpause() external;
 ## Events
 
 ### QueuedPayoutAmount {#event-queuedpayoutamount}
+
 Emitted when the admin queues the payout amount.
 
 ```solidity
@@ -145,6 +146,7 @@ event QueuedPayoutAmount(uint256 queuedPayoutAmount, uint256 currentPayoutAmount
 ```
 
 ### PayoutAmountSet {#event-payoutamountset}
+
 Emitted when the payout amount is updated.
 
 Emitted when the admin updates the payout amount.
@@ -154,6 +156,7 @@ event PayoutAmountSet(uint256 indexed oldPayoutAmount, uint256 indexed newPayout
 ```
 
 ### FeesClaimed {#event-feesclaimed-dapp}
+
 Emitted when the dapp fees are claimed.
 
 ```solidity
@@ -168,6 +171,7 @@ event FeesClaimed(address indexed caller, address indexed recipient);
 | `recipient` | `address` | The address to which collected dapp fees will be transferred. |
 
 ### PayoutDonated {#event-payoutdonated}
+
 Emitted when the `PayoutToken` is donated.
 
 ```solidity
@@ -182,6 +186,7 @@ event PayoutDonated(address indexed caller, uint256 amount);
 | `amount` | `uint256` | The amount of payout token that is transfered. |
 
 ### FeesClaimed {#event-feesclaimed-token}
+
 Emitted when the fees are claimed.
 
 ```solidity

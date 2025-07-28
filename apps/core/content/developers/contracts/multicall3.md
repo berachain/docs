@@ -24,7 +24,7 @@ Multicall3 enables batching multiple function calls into a single transaction, r
 **Inherits:**
 IMulticall3
 
-*This is the standard Multicall3 implementation for efficient batch operations.*
+_This is the standard Multicall3 implementation for efficient batch operations._
 
 ## View Functions
 
@@ -170,6 +170,7 @@ function tryBlockAndAggregate(bool requireSuccess, Call[] calldata calls)
 ## Structs
 
 ### Call
+
 Basic call struct.
 
 ```solidity
@@ -180,6 +181,7 @@ struct Call {
 ```
 
 ### Call3
+
 Call struct with allowFailure flag.
 
 ```solidity
@@ -191,6 +193,7 @@ struct Call3 {
 ```
 
 ### Call3Value
+
 Call struct with value and allowFailure flag.
 
 ```solidity
@@ -203,6 +206,7 @@ struct Call3Value {
 ```
 
 ### Result
+
 Result struct for call returns.
 
 ```solidity

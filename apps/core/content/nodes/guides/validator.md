@@ -108,6 +108,7 @@ The first registration transaction is the most important. It establishes the ass
    :::
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `./beacond deposit create-validator` which takes:
+
    1. **withdrawal-addr** is described in Step 1
    2. **stake-amount** is the initial stake amount (as GWei). We strongly recommend using the minimum -- {{ config.mainnet.registrationMinimum.toLocaleString() }} $BERA.
    3. **genesis-root**: as confirmed in Step 1.
