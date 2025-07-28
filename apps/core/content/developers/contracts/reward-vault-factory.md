@@ -1,12 +1,30 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: RewardVaultFactory Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the RewardVaultFactory contract in PoL
+  - - meta
+    - property: og:description
+      content: Developer reference for the RewardVaultFactory contract in PoL
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # RewardVaultFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory['mainnet-address']">{{config.contracts.pol.rewardVaultFactory['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVaultFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory['mainnet-address']">{{config.contracts.pol.rewardVaultFactory['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVaultFactory.abi && config.contracts.pol.rewardVaultFactory.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVaultFactory.abi">ABI JSON</a></span></small>
 
-Factory contract for creating RewardVaults and keeping track of them.
+The RewardVaultFactory contract creates and manages RewardVault instances for validators in the Berachain ecosystem.
+
+**Inherits:**
+IRewardVaultFactory, OwnableUpgradeable, UUPSUpgradeable
+
+*This factory contract deploys and configures RewardVault contracts for validator rewards.*
 
 ## State Variables
 

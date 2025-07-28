@@ -15,9 +15,16 @@ head:
   import config from '@berachain/config/constants.json';
 </script>
 
-# WBERAStakerVault Contract Reference
+# WBERAStakerVault
 
-The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake `$BERA` and earn yield from redirected PoL incentives. This contract is the core component of the PoL BERA Yield Module.
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault['mainnet-address']">{{config.contracts.pol.wberaStakerVault['mainnet-address']}}</a><span v-if="config.contracts.pol.wberaStakerVault.abi && config.contracts.pol.wberaStakerVault.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.wberaStakerVault.abi">ABI JSON</a></span></small>
+
+The WBERAStakerVault contract manages staking of WBERA tokens and distributes staking rewards to participants.
+
+**Inherits:**
+IWBERAStakerVault, ERC4626Upgradeable, OwnableUpgradeable, UUPSUpgradeable
+
+*This vault enables WBERA staking and handles reward distribution to stakers.*
 
 ## Contract Overview
 

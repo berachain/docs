@@ -208,19 +208,10 @@ const SIDEBAR = {
       ]
     },
     {
-      text: "Token Contracts",
-      items: [
-        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
-        { text: "Honey Token", link: "/developers/contracts/honey-token" },
-        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
-      ]
-    },
-    {
       text: "PoL Contracts",
       items: [
         { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
         { text: "BeraChef", link: "/developers/contracts/berachef" },
-        { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
         {
           text: "BGTIncentiveDistributor",
           link: "/developers/contracts/bgtincentivedistributor"
@@ -229,6 +220,8 @@ const SIDEBAR = {
           text: "BGTIncentiveFeeCollector",
           link: "/developers/contracts/bgt-incentive-fee-collector"
         },
+        { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
+        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         {
           text: "Block Reward Controller",
           link: "/developers/contracts/block-reward-controller"
@@ -236,12 +229,6 @@ const SIDEBAR = {
         { text: "CREATE2", link: "/developers/contracts/create2" },
         { text: "Distributor", link: "/developers/contracts/distributor" },
         { text: "FeeCollector", link: "/developers/contracts/fee-collector" },
-        { text: "Governance", link: "/developers/contracts/governance" },
-        { text: "HoneyFactory", link: "/developers/contracts/honey-factory" },
-        {
-          text: "HoneyFactoryReader",
-          link: "/developers/contracts/honey-factory-reader"
-        },
         { text: "Multicall3", link: "/developers/contracts/multicall3" },
         { text: "Permit2", link: "/developers/contracts/permit2" },
         {
@@ -256,6 +243,30 @@ const SIDEBAR = {
           text: "WBERAStakerVault",
           link: "/developers/contracts/wbera-staker-vault"
         }
+      ]
+    },
+    {
+      text: "Governance Contracts",
+      items: [
+        { text: "Governance", link: "/developers/contracts/governance" },
+        { text: "Timelock", link: "/developers/contracts/timelock" }
+      ]
+    },
+    {
+      text: "Honey Contracts",
+      items: [
+        { text: "HoneyFactory", link: "/developers/contracts/honey-factory" },
+        {
+          text: "HoneyFactoryReader",
+          link: "/developers/contracts/honey-factory-reader"
+        },
+        { text: "Honey Token", link: "/developers/contracts/honey-token" }
+      ]
+    },
+    {
+      text: "Token Contracts",
+      items: [
+        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
       ]
     }
   ],

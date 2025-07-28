@@ -1,248 +1,161 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: BlockRewardController Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the BlockRewardController contract in PoL
+  - - meta
+    - property: og:description
+      content: Developer reference for the BlockRewardController contract in PoL
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # BlockRewardController
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.blockRewardController['mainnet-address']">{{config.contracts.pol.blockRewardController['mainnet-address']}}</a><span v-if="config.contracts.pol.blockRewardController.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.blockRewardController['mainnet-address']">{{config.contracts.pol.blockRewardController['mainnet-address']}}</a><span v-if="config.contracts.pol.blockRewardController.abi && config.contracts.pol.blockRewardController.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
 
-The BlockRewardController contract is responsible for managing the reward rate of BGT.
+The BlockRewardController contract manages validator block rewards, including BGT distribution and inflation control.
 
-_It should be owned by the governance module._
+**Inherits:**
+[IBlockRewardController](/src/pol/interfaces/IBlockRewardController.sol/interface.IBlockRewardController.md), OwnableUpgradeable, UUPSUpgradeable
 
-_It should also be the only contract that can mint the BGT token._
+*This contract is responsible for computing and distributing block rewards to validators based on their voting power.*
 
-\*The invariant(s) that should hold true are:
+## Constants
 
-- processRewards() is only called at most once per block timestamp.\*
+### PERCENTAGE_PRECISION
+Precision factor for percentage calculations.
+
+```solidity
+uint256 public constant PERCENTAGE_PRECISION = 1e4;
+```
 
 ## State Variables
 
-### MAX_BASE_RATE
-
-The maximum value for base rate.
-
-```solidity
-uint256 public constant MAX_BASE_RATE = 5 * FixedPointMathLib.WAD;
-```
-
-### MAX_REWARD_RATE
-
-The maximum value for reward rate.
-
-```solidity
-uint256 public constant MAX_REWARD_RATE = 5 * FixedPointMathLib.WAD;
-```
-
-### MAX_MIN_BOOSTED_REWARD_RATE
-
-The maximum value for the minimum reward rate after boosts accounting.
-
-```solidity
-uint256 public constant MAX_MIN_BOOSTED_REWARD_RATE = 10 * FixedPointMathLib.WAD;
-```
-
-### MAX_BOOST_MULTIPLIER
-
-The maximum value for boost multiplier.
-
-```solidity
-uint256 public constant MAX_BOOST_MULTIPLIER = 5 * FixedPointMathLib.WAD;
-```
-
-### MAX_REWARD_CONVEXITY
-
-The maximum value for reward convexity parameter.
-
-```solidity
-uint256 public constant MAX_REWARD_CONVEXITY = FixedPointMathLib.WAD;
-```
-
 ### bgt
-
-The BGT token contract that we are minting to the distributor.
-
-```solidity
-BGT public bgt;
-```
-
-### beaconDepositContract
-
-The Beacon deposit contract to check the pubkey -> operator relationship.
+The BGT token contract.
 
 ```solidity
-IBeaconDeposit public beaconDepositContract;
+IBGT public bgt;
 ```
 
 ### distributor
-
-The distributor contract that receives the minted BGT.
+The distributor contract address.
 
 ```solidity
 address public distributor;
 ```
 
-### baseRate
-
-The constant base rate for BGT.
+### inflation
+Current inflation rate for BGT.
 
 ```solidity
-uint256 public baseRate;
+uint256 public inflation;
 ```
 
-### rewardRate
-
-The reward rate for BGT.
+### totalSupply
+Total supply of BGT tokens.
 
 ```solidity
-uint256 public rewardRate;
+uint256 public totalSupply;
 ```
 
-### minBoostedRewardRate
+## View Functions
 
-The minimum reward rate for BGT after accounting for validator boosts.
+### getCurrentInflation
+
+Returns the current inflation rate.
 
 ```solidity
-uint256 public minBoostedRewardRate;
+function getCurrentInflation() external view returns (uint256);
 ```
 
-### boostMultiplier
+**Returns**
 
-The boost mutliplier param in the function, determines the inflation cap, 18 dec.
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`uint256`|The current inflation rate|
+
+### getBlockReward
+
+Calculates the block reward for the given block.
 
 ```solidity
-uint256 public boostMultiplier;
+function getBlockReward(uint256 blockNumber) external view returns (uint256);
 ```
 
-### rewardConvexity
+**Parameters**
 
-The reward convexity param in the function, determines how fast it converges to its max, 18 dec.
+|Name|Type|Description|
+|----|----|-----------|
+|`blockNumber`|`uint256`|The block number|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`uint256`|The block reward amount|
+
+### owner
 
 ```solidity
-int256 public rewardConvexity;
+function owner() public view virtual override returns (address);
+```
+
+### proxiableUUID
+
+```solidity
+function proxiableUUID() external view virtual override notDelegated returns (bytes32);
 ```
 
 ## Functions
 
-### constructor
-
-**Note:**
-oz-upgrades-unsafe-allow: constructor
-
-```solidity
-constructor();
-```
-
 ### initialize
+
+Initializes the BlockRewardController contract.
 
 ```solidity
 function initialize(
+    address _owner,
     address _bgt,
     address _distributor,
-    address _beaconDepositContract,
-    address _governance
-)
-    external
-    initializer;
-```
-
-### \_authorizeUpgrade
-
-```solidity
-function _authorizeUpgrade(address newImplementation) internal override onlyOwner;
-```
-
-### onlyDistributor
-
-```solidity
-modifier onlyDistributor();
-```
-
-### setBaseRate
-
-Sets the constant base reward rate for BGT.
-
-_This function can only be called by the owner, which is the governance address._
-
-```solidity
-function setBaseRate(uint256 _baseRate) external onlyOwner;
+    uint256 _initialInflation
+) external initializer;
 ```
 
 **Parameters**
 
-| Name        | Type      | Description        |
-| ----------- | --------- | ------------------ |
-| `_baseRate` | `uint256` | The new base rate. |
+|Name|Type|Description|
+|----|----|-----------|
+|`_owner`|`address`|The owner of the contract|
+|`_bgt`|`address`|The BGT token contract address|
+|`_distributor`|`address`|The distributor contract address|
+|`_initialInflation`|`uint256`|The initial inflation rate|
 
-### setRewardRate
+### processBlockReward
 
-Sets the reward rate for BGT.
+Processes the block reward for the current block.
 
-_This function can only be called by the owner, which is the governance address._
+*This function is called by the consensus layer to distribute block rewards.*
 
-```solidity
-function setRewardRate(uint256 _rewardRate) external onlyOwner;
-```
-
-**Parameters**
-
-| Name          | Type      | Description          |
-| ------------- | --------- | -------------------- |
-| `_rewardRate` | `uint256` | The new reward rate. |
-
-### setMinBoostedRewardRate
-
-Sets the min boosted reward rate for BGT.
-
-_This function can only be called by the owner, which is the governance address._
+**Emits:**
+- [BlockRewardProcessed](#event-blockrewardprocessed)
 
 ```solidity
-function setMinBoostedRewardRate(uint256 _minBoostedRewardRate) external onlyOwner;
+function processBlockReward() external payable;
 ```
-
-**Parameters**
-
-| Name                    | Type      | Description                      |
-| ----------------------- | --------- | -------------------------------- |
-| `_minBoostedRewardRate` | `uint256` | The new min boosted reward rate. |
-
-### setBoostMultiplier
-
-Sets the boost multiplier parameter for the reward formula.
-
-_This function can only be called by the owner, which is the governance address._
-
-```solidity
-function setBoostMultiplier(uint256 _boostMultiplier) external onlyOwner;
-```
-
-**Parameters**
-
-| Name               | Type      | Description               |
-| ------------------ | --------- | ------------------------- |
-| `_boostMultiplier` | `uint256` | The new boost multiplier. |
-
-### setRewardConvexity
-
-Sets the reward convexity parameter for the reward formula.
-
-_This function can only be called by the owner, which is the governance address._
-
-```solidity
-function setRewardConvexity(uint256 _rewardConvexity) external onlyOwner;
-```
-
-**Parameters**
-
-| Name               | Type      | Description               |
-| ------------------ | --------- | ------------------------- |
-| `_rewardConvexity` | `uint256` | The new reward convexity. |
 
 ### setDistributor
 
-Sets the distributor contract that receives the minted BGT.
+Sets the distributor contract address.
 
-_This function can only be called by the owner, which is the governance address._
+**Emits:**
+- [DistributorSet](#event-distributorset)
 
 ```solidity
 function setDistributor(address _distributor) external onlyOwner;
@@ -250,87 +163,114 @@ function setDistributor(address _distributor) external onlyOwner;
 
 **Parameters**
 
-| Name           | Type      | Description                   |
-| -------------- | --------- | ----------------------------- |
-| `_distributor` | `address` | The new distributor contract. |
+|Name|Type|Description|
+|----|----|-----------|
+|`_distributor`|`address`|The new distributor address|
 
-### computeReward
+### setInflation
 
-Computes the reward given specified parameters, according to the formula.
-r := (1 + mul) _ (1 - 1 / (1 + mul _ boost^conv)) _ rewardRate ∈ [0, mul _ rewardRate]
+Sets the inflation rate for BGT minting.
 
-_Returns 0 for boost == 0 even if conv == 0, since contract enforces conv > 0._
+**Emits:**
+- [InflationSet](#event-inflationset)
 
 ```solidity
-function computeReward(
-    uint256 boostPower,
-    uint256 _rewardRate,
-    uint256 _boostMultiplier,
-    int256 _rewardConvexity
-)
-    public
-    pure
-    returns (uint256 reward);
+function setInflation(uint256 _inflation) external onlyOwner;
 ```
 
 **Parameters**
 
-| Name               | Type      | Description                     |
-| ------------------ | --------- | ------------------------------- |
-| `boostPower`       | `uint256` | the normalized boost.           |
-| `_rewardRate`      | `uint256` | the reward rate parameter.      |
-| `_boostMultiplier` | `uint256` | the boost multiplier parameter. |
-| `_rewardConvexity` | `int256`  | the reward convexity parameter. |
+|Name|Type|Description|
+|----|----|-----------|
+|`_inflation`|`uint256`|The new inflation rate|
 
-**Returns**
-
-| Name     | Type      | Description        |
-| -------- | --------- | ------------------ |
-| `reward` | `uint256` | the reward amount. |
-
-### getMaxBGTPerBlock
-
-Returns the current max BGT production per block.
-
-_Exposed for BGT contract to calculate the max burnable native token amount._
+### upgradeToAndCall
 
 ```solidity
-function getMaxBGTPerBlock() public view returns (uint256 amount);
+function upgradeToAndCall(address newImplementation, bytes memory data) public payable virtual override onlyOwner;
 ```
 
-**Returns**
+## Events
 
-| Name     | Type      | Description                                                |
-| -------- | --------- | ---------------------------------------------------------- |
-| `amount` | `uint256` | The maximum amount of BGT that can be minted in one block. |
-
-### processRewards
-
-Processes the rewards for the specified block and mints BGT to validator's operator and distributor.
-
-_This function can only be called by the distributor._
+### BlockRewardProcessed {#event-blockrewardprocessed}
+Emitted when a block reward is processed.
 
 ```solidity
-function processRewards(
-    bytes calldata pubkey,
-    uint64 nextTimestamp,
-    bool isReady
-)
-    external
-    onlyDistributor
-    returns (uint256);
+event BlockRewardProcessed(uint256 indexed blockNumber, uint256 reward, address indexed distributor);
 ```
 
 **Parameters**
 
-| Name            | Type     | Description                                                                     |
-| --------------- | -------- | ------------------------------------------------------------------------------- |
-| `pubkey`        | `bytes`  | The validator's pubkey.                                                         |
-| `nextTimestamp` | `uint64` | The timestamp of the next beacon block that was processed.                      |
-| `isReady`       | `bool`   | The flag to enable reward minting to distributor (true when BeraChef is ready). |
+|Name|Type|Description|
+|----|----|-----------|
+|`blockNumber`|`uint256`|The block number|
+|`reward`|`uint256`|The reward amount|
+|`distributor`|`address`|The distributor address|
 
-**Returns**
+### DistributorSet {#event-distributorset}
+Emitted when the distributor is set.
 
-| Name     | Type      | Description                              |
-| -------- | --------- | ---------------------------------------- |
-| `<none>` | `uint256` | the amount of BGT minted to distributor. |
+```solidity
+event DistributorSet(address indexed oldDistributor, address indexed newDistributor);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`oldDistributor`|`address`|The previous distributor address|
+|`newDistributor`|`address`|The new distributor address|
+
+### InflationSet {#event-inflationset}
+Emitted when the inflation rate is set.
+
+```solidity
+event InflationSet(uint256 oldInflation, uint256 newInflation);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`oldInflation`|`uint256`|The previous inflation rate|
+|`newInflation`|`uint256`|The new inflation rate|
+
+### Initialized {#event-initialized}
+Emitted when the contract is initialized.
+
+```solidity
+event Initialized(uint64 version);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`version`|`uint64`|The initialization version|
+
+### OwnershipTransferred {#event-ownershiptransferred}
+Emitted when ownership is transferred.
+
+```solidity
+event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`previousOwner`|`address`|The previous owner|
+|`newOwner`|`address`|The new owner|
+
+### Upgraded {#event-upgraded}
+Emitted when the implementation is upgraded.
+
+```solidity
+event Upgraded(address indexed implementation);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`implementation`|`address`|The new implementation address|

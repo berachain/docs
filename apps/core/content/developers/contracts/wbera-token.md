@@ -1,100 +1,119 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: WBERA Token Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the WBERA wrapped token contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the WBERA wrapped token contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # WBERA
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.wbera['mainnet-address']">{{config.contracts.tokens.wbera['mainnet-address']}}</a><span v-if="config.contracts.tokens.wbera.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.wbera.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.wbera['mainnet-address']">{{config.contracts.tokens.wbera['mainnet-address']}}</a><span v-if="config.contracts.tokens.wbera.abi && config.contracts.tokens.wbera.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.wbera.abi">ABI JSON</a></span></small>
 
-**Inherits:** [Solady WETH](https://github.com/vectorized/solady/blob/main/src/tokens/WETH.sol)
+WBERA is the wrapped version of BERA, Berachain's native token, enabling ERC20 functionality.
 
-## Functions
+**Inherits:**
+IWETH, ERC20, ERC20Permit
 
-### deposit
+*This contract wraps BERA into an ERC20 token that can be used in smart contracts.*
 
-```solidity
-function deposit() external payable;
-```
-
-### withdraw
-
-```solidity
-function withdraw(uint256) external;
-```
-
-### name
-
-```solidity
-function name() public pure override returns (string memory);
-```
-
-### symbol
-
-```solidity
-function symbol() public pure override returns (string memory);
-```
-
-### decimals
-
-Returns the number of decimals used to get its user representation.
-
-For example, if `decimals` equals `2`, a balance of `505` tokens should
-be displayed to a user as `5,05` (`505 / 10 ** 2`).
-
-```solidity
-function decimals() public view returns (uint8);
-```
-
-### totalSupply
-
-Returns the amount of tokens in existence.
-
-```solidity
-function totalSupply() public view override returns (uint256);
-```
-
-### balanceOf
-
-Returns the amount of tokens owned by `owner`.
-
-```solidity
-function balanceOf(address account) public view override returns (uint256);
-```
-
-### transfer
-
-Transfer `amount` tokens from the caller to `to`.
-
-- the caller must have a balance of at least `amount`
-
-```solidity
-function transfer(address recipient, uint256 amount) public virtual override returns (bool);
-```
+## View Functions
 
 ### allowance
-
-Returns the amount of tokens that `spender` can spend on behalf of `owner`.
 
 ```solidity
 function allowance(address owner, address spender) public view virtual override returns (uint256);
 ```
 
-### approve
-
-Sets `amount` as the allowance of `spender` over the caller's tokens.
+### balanceOf
 
 ```solidity
-function approve(address spender, uint256 amount) public virtual override returns (bool);
+function balanceOf(address account) public view virtual override returns (uint256);
 ```
 
-### transferFrom
-
-Transfers `amount` tokens from `from` to `to`.
-
-- `sender` must have a balance of at least `amount`
-- the caller must have allowance for `sender`'s tokens of at least
-  `amount`
+### decimals
 
 ```solidity
-function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool);
+function decimals() public view virtual override returns (uint8);
+```
+
+### name
+
+```solidity
+function name() public view virtual override returns (string memory);
+```
+
+### symbol
+
+```solidity
+function symbol() public view virtual override returns (string memory);
+```
+
+### totalSupply
+
+```solidity
+function totalSupply() public view virtual override returns (uint256);
+```
+
+## Functions
+
+### deposit
+
+Wraps BERA into WBERA tokens.
+
+**Emits:**
+- [Deposit](#event-deposit)
+
+```solidity
+function deposit() public payable;
+```
+
+### withdraw
+
+Unwraps WBERA tokens back to BERA.
+
+**Emits:**
+- [Withdrawal](#event-withdrawal)
+
+```solidity
+function withdraw(uint256 amount) external;
+```
+
+## Events
+
+### Approval {#event-approval}
+Emitted when an approval is made.
+
+```solidity
+event Approval(address indexed owner, address indexed spender, uint256 value);
+```
+
+### Deposit {#event-deposit}
+Emitted when BERA is deposited and WBERA is minted.
+
+```solidity
+event Deposit(address indexed account, uint256 amount);
+```
+
+### Transfer {#event-transfer}
+Emitted when tokens are transferred.
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+### Withdrawal {#event-withdrawal}
+Emitted when WBERA is burned and BERA is withdrawn.
+
+```solidity
+event Withdrawal(address indexed account, uint256 amount);
 ```

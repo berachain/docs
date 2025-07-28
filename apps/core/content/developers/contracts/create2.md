@@ -1,12 +1,30 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: Create2Deployer Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the Create2Deployer contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the Create2Deployer contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # Create2Deployer
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.create2['mainnet-address']">{{config.contracts.other.create2['mainnet-address']}}</a><span v-if="config.contracts.other.create2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.create2.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.create2['mainnet-address']">{{config.contracts.other.create2['mainnet-address']}}</a><span v-if="config.contracts.other.create2.abi && config.contracts.other.create2.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.create2.abi">ABI JSON</a></span></small>
 
-Can be used to deploy contracts with CREATE2 Factory.
+The Create2Deployer contract enables deterministic contract deployment using CREATE2 opcode, allowing for predictable contract addresses.
+
+**Inherits:**
+ICreate2Deployer
+
+*This contract facilitates deterministic contract deployment across different networks.*
 
 ## State Variables
 

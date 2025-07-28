@@ -1,12 +1,30 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: BGTStaker Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the BGTStaker contract in PoL
+  - - meta
+    - property: og:description
+      content: Developer reference for the BGTStaker contract in PoL
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # BGTStaker
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtStaker['mainnet-address']">{{config.contracts.pol.bgtStaker['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtStaker.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtStaker.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtStaker['mainnet-address']">{{config.contracts.pol.bgtStaker['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtStaker.abi && config.contracts.pol.bgtStaker.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtStaker.abi">ABI JSON</a></span></small>
 
-A contract for staking BGT tokens without transferring them. BGT delegators stake in this contract and receive dApp fees.
+The BGTStaker contract enables staking of BGT tokens and manages staking rewards distribution.
+
+**Inherits:**
+IBGTStaker, OwnableUpgradeable, UUPSUpgradeable
+
+*This contract facilitates BGT staking operations and reward management.*
 
 ## Functions
 
@@ -115,8 +133,7 @@ function getReward() external returns (uint256);
 
 ## Events
 
-### Recovered
-
+### Recovered {#event-recovered}
 Emitted when a token has been recovered.
 
 ```solidity

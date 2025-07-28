@@ -1,14 +1,30 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: Permit2 Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the Permit2 contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the Permit2 contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # Permit2
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.permit2['mainnet-address']">{{config.contracts.other.permit2['mainnet-address']}}</a><span v-if="config.contracts.other.permit2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.permit2.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.permit2['mainnet-address']">{{config.contracts.other.permit2['mainnet-address']}}</a><span v-if="config.contracts.other.permit2.abi && config.contracts.other.permit2.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.permit2.abi">ABI JSON</a></span></small>
 
-Permit2 handles signature-based transfers in SignatureTransfer and allowance-based transfers in AllowanceTransfer.
+Permit2 enables advanced token approval patterns, allowing for more flexible and secure token transfers through signatures.
 
-_Users must approve Permit2 before calling any of the transfer functions._
+**Inherits:**
+IPermit2, EIP712
+
+*This is the standard Permit2 implementation for gasless approvals and signature-based transfers.*
 
 ## State Variables
 

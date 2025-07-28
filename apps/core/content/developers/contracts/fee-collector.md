@@ -1,15 +1,30 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: FeeCollector Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the FeeCollector contract in PoL
+  - - meta
+    - property: og:description
+      content: Developer reference for the FeeCollector contract in PoL
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # FeeCollector
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.feeCollector['mainnet-address']">{{config.contracts.pol.feeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.feeCollector.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.feeCollector.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.feeCollector['mainnet-address']">{{config.contracts.pol.feeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.feeCollector.abi && config.contracts.pol.feeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.feeCollector.abi">ABI JSON</a></span></small>
 
-The Fee Collector contract is responsible for collecting fees from Berachain Dapps and
-auctioning them for a Payout token which then is distributed among the BGT stakers.
+The FeeCollector contract manages the collection and distribution of protocol fees across the Berachain ecosystem.
 
-This contract is inspired by the [Uniswap V3 Factory Owner contract](https://github.com/uniswapfoundation/UniStaker/blob/main/src/V3FactoryOwner.sol).
+**Inherits:**
+IFeeCollector, OwnableUpgradeable, UUPSUpgradeable
+
+*This contract handles fee collection from various protocol operations and distributes them appropriately.*
 
 ## Functions
 
@@ -122,16 +137,14 @@ function unpause() external;
 
 ## Events
 
-### QueuedPayoutAmount
-
+### QueuedPayoutAmount {#event-queuedpayoutamount}
 Emitted when the admin queues the payout amount.
 
 ```solidity
 event QueuedPayoutAmount(uint256 queuedPayoutAmount, uint256 currentPayoutAmount);
 ```
 
-### PayoutAmountSet
-
+### PayoutAmountSet {#event-payoutamountset}
 Emitted when the payout amount is updated.
 
 Emitted when the admin updates the payout amount.
@@ -140,8 +153,7 @@ Emitted when the admin updates the payout amount.
 event PayoutAmountSet(uint256 indexed oldPayoutAmount, uint256 indexed newPayoutAmount);
 ```
 
-### FeesClaimed
-
+### FeesClaimed {#event-feesclaimed-dapp}
 Emitted when the dapp fees are claimed.
 
 ```solidity
@@ -155,8 +167,7 @@ event FeesClaimed(address indexed caller, address indexed recipient);
 | `caller`    | `address` | Caller of the `claimFees` function.                           |
 | `recipient` | `address` | The address to which collected dapp fees will be transferred. |
 
-### PayoutDonated
-
+### PayoutDonated {#event-payoutdonated}
 Emitted when the `PayoutToken` is donated.
 
 ```solidity
@@ -170,8 +181,7 @@ event PayoutDonated(address indexed caller, uint256 amount);
 | `caller` | `address` | Caller of the `donate` function.               |
 | `amount` | `uint256` | The amount of payout token that is transfered. |
 
-### FeesClaimed
-
+### FeesClaimed {#event-feesclaimed-token}
 Emitted when the fees are claimed.
 
 ```solidity

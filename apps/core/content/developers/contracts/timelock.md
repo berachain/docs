@@ -1,21 +1,37 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: Timelock Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the Timelock contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the Timelock contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# TimeLock
+# Timelock
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.timelock['mainnet-address']">{{config.contracts.pol.timelock['mainnet-address']}}</a><span v-if="config.contracts.pol.timelock.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.timelock.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.timelock['mainnet-address']">{{config.contracts.pol.timelock['mainnet-address']}}</a><span v-if="config.contracts.pol.timelock.abi && config.contracts.pol.timelock.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.timelock.abi">ABI JSON</a></span></small>
 
-The TimeLock contract is in charge of introducing a delay between a proposal and its execution.
+The Timelock contract enforces a delay on the execution of governance proposals, providing time for the community to review changes before they take effect.
 
-This contract is from [OpenZeppelin Governance](https://docs.openzeppelin.com/contracts/4.x/api/governance).
+**Inherits:**
+AccessControl, IERC721Receiver, IERC1155Receiver
 
-## State Variables
+*This contract is a standard OpenZeppelin TimelockController that works with the governance system.*
 
-### PROPOSER_ROLE
+## Constants
+
+### CANCELLER_ROLE
 
 ```solidity
-bytes32 public constant PROPOSER_ROLE = keccak256("PROPOSER_ROLE");
+bytes32 public constant CANCELLER_ROLE = keccak256("CANCELLER_ROLE");
 ```
 
 ### EXECUTOR_ROLE
@@ -24,189 +40,234 @@ bytes32 public constant PROPOSER_ROLE = keccak256("PROPOSER_ROLE");
 bytes32 public constant EXECUTOR_ROLE = keccak256("EXECUTOR_ROLE");
 ```
 
-### CANCELLER_ROLE
+### PROPOSER_ROLE
 
 ```solidity
-bytes32 public constant CANCELLER_ROLE = keccak256("CANCELLER_ROLE");
+bytes32 public constant PROPOSER_ROLE = keccak256("PROPOSER_ROLE");
+```
+
+### TIMELOCK_ADMIN_ROLE
+
+```solidity
+bytes32 public constant TIMELOCK_ADMIN_ROLE = keccak256("TIMELOCK_ADMIN_ROLE");
+```
+
+## State Variables
+
+### minDelay
+The minimum delay before a proposal can be executed.
+
+```solidity
+uint256 public minDelay;
+```
+
+## View Functions
+
+### getMinDelay
+
+Returns the minimum delay for operations.
+
+```solidity
+function getMinDelay() external view returns (uint256 duration);
+```
+
+### getRoleAdmin
+
+```solidity
+function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32);
+```
+
+### hasRole
+
+```solidity
+function hasRole(bytes32 role, address account) public view virtual override returns (bool);
+```
+
+### hashOperation
+
+Returns the hash of an operation.
+
+```solidity
+function hashOperation(
+    address target,
+    uint256 value,
+    bytes calldata data,
+    bytes32 predecessor,
+    bytes32 salt
+) public pure virtual returns (bytes32 hash);
+```
+
+### hashOperationBatch
+
+Returns the hash of a batch operation.
+
+```solidity
+function hashOperationBatch(
+    address[] calldata targets,
+    uint256[] calldata values,
+    bytes[] calldata payloads,
+    bytes32 predecessor,
+    bytes32 salt
+) public pure virtual returns (bytes32 hash);
+```
+
+### isOperation
+
+Returns true if the operation is pending.
+
+```solidity
+function isOperation(bytes32 id) public view virtual returns (bool registered);
+```
+
+### isOperationDone
+
+Returns true if the operation is done.
+
+```solidity
+function isOperationDone(bytes32 id) public view virtual returns (bool done);
+```
+
+### isOperationPending
+
+Returns true if the operation is pending.
+
+```solidity
+function isOperationPending(bytes32 id) public view virtual returns (bool pending);
+```
+
+### isOperationReady
+
+Returns true if the operation is ready for execution.
+
+```solidity
+function isOperationReady(bytes32 id) public view virtual returns (bool ready);
 ```
 
 ## Functions
 
-### getMinDelay
+### cancel
 
-Returns the minimum delay in seconds for an operation to become valid.
-This value can be changed by executing an operation that calls `updateDelay`.
+Cancels an operation.
 
-```solidity
-function getMinDelay() public view virtual returns (uint256);
-```
-
-### getOperationState
-
-Returns operation state.
+**Emits:**
+- [Cancelled](#event-cancelled)
 
 ```solidity
-function getOperationState(bytes32 id) public view virtual returns (OperationState)
+function cancel(bytes32 id) external virtual;
 ```
 
-**Parameters**
+### execute
 
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
+Executes an operation.
 
-### getTimestamp
-
-Returns the timestamp at which an operation becomes ready (0 for unset operations, 1 for done operations).
+**Emits:**
+- [CallExecuted](#event-callexecuted)
 
 ```solidity
-function getTimestamp(bytes32 id) public view virtual returns (uint256);
+function execute(
+    address target,
+    uint256 value,
+    bytes calldata data,
+    bytes32 predecessor,
+    bytes32 salt
+) external payable virtual;
 ```
 
-**Parameters**
+### executeBatch
 
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
+Executes a batch of operations.
 
-### isOperation
-
-Returns whether an id corresponds to a registered operation. This includes both Waiting, Ready, and Done operations.
+**Emits:**
+- [CallExecuted](#event-callexecuted)
 
 ```solidity
-function isOperation(bytes32 id) public view returns (bool);
+function executeBatch(
+    address[] calldata targets,
+    uint256[] calldata values,
+    bytes[] calldata payloads,
+    bytes32 predecessor,
+    bytes32 salt
+) external payable virtual;
 ```
 
-**Parameters**
-
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
-
-### isOperationPending
-
-Returns whether an operation is pending or not. Note that a "pending" operation may also be "ready".
+### onERC1155Received
 
 ```solidity
-function isOperationPending(bytes32 id) public view returns (bool);
+function onERC1155Received(address, address, uint256, uint256, bytes memory)
+    public
+    virtual
+    override
+    returns (bytes4);
 ```
 
-**Parameters**
+### schedule
 
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
+Schedules an operation.
 
-### isOperationReady
-
-Returns whether an operation is ready for execution. Note that a "ready" operation is also "pending".
+**Emits:**
+- [CallScheduled](#event-callscheduled)
 
 ```solidity
-function isOperationReady(bytes32 id) public view returns (bool);
+function schedule(
+    address target,
+    uint256 value,
+    bytes calldata data,
+    bytes32 predecessor,
+    bytes32 salt,
+    uint256 delay
+) external virtual;
 ```
 
-**Parameters**
+### scheduleBatch
 
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
+Schedules a batch of operations.
 
-### isOperationDone
-
-Returns whether an operation is done or not.
+**Emits:**
+- [CallScheduled](#event-callscheduled)
 
 ```solidity
-function isOperationDone(bytes32 id) public view returns (bool);
+function scheduleBatch(
+    address[] calldata targets,
+    uint256[] calldata values,
+    bytes[] calldata payloads,
+    bytes32 predecessor,
+    bytes32 salt,
+    uint256 delay
+) external virtual;
 ```
 
-**Parameters**
+### updateDelay
 
-| Name | Type      | Description      |
-| ---- | --------- | ---------------- |
-| `id` | `bytes32` | The operationId. |
+Updates the minimum delay.
+
+**Emits:**
+- [MinDelayChange](#event-mindelaychange)
+
+```solidity
+function updateDelay(uint256 newDelay) external virtual;
+```
 
 ## Events
 
-### TimelockInvalidOperationLength
-
-Mismatch between the parameters length for an operation call.
+### CallExecuted {#event-callexecuted}
+Emitted when a call is executed.
 
 ```solidity
-error TimelockInvalidOperationLength(uint256 targets, uint256 payloads, uint256 values);
+event CallExecuted(bytes32 indexed id, uint256 indexed index, address target, uint256 value, bytes data);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description         |
-| ---------- | --------- | ------------------- |
-| `targets`  | `uint256` | Number of targets.  |
-| `payloads` | `uint256` | Number of payloads. |
-| `values`   | `uint256` | Number of values.   |
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`bytes32`|The operation ID|
+|`index`|`uint256`|The call index|
+|`target`|`address`|The target address|
+|`value`|`uint256`|The value sent|
+|`data`|`bytes`|The call data|
 
-### TimelockInsufficientDelay
-
-The schedule operation doesn't meet the minimum delay.
-
-```solidity
-error TimelockInsufficientDelay(uint256 delay, uint256 minDelay);
-```
-
-**Parameters**
-
-| Name       | Type      | Description     |
-| ---------- | --------- | --------------- |
-| `delay`    | `uint256` | Provided delay. |
-| `minDelay` | `uint256` | Minimum delay.  |
-
-### TimelockUnexpectedOperationState
-
-The current state of an operation is not as required.
-The `expectedStates` is a bitmap with the bits enabled for each OperationState enum position
-counting from right to left.
-See {\_encodeStateBitmap}.
-
-```solidity
-error TimelockUnexpectedOperationState(bytes32 operationId, bytes32 expectedStates);
-```
-
-**Parameters**
-
-| Name             | Type      | Description               |
-| ---------------- | --------- | ------------------------- |
-| `operationId`    | `bytes32` | The operation identifier. |
-| `expectedStates` | `bytes32` | Bitmap of OperationState. |
-
-### TimelockUnexecutedPredecessor
-
-The predecessor to an operation not yet done.
-
-```solidity
-error TimelockUnexecutedPredecessor(bytes32 predecessorId);
-```
-
-**Parameters**
-
-| Name            | Type      | Description                     |
-| --------------- | --------- | ------------------------------- |
-| `predecessorId` | `bytes32` | Previous operation operationId. |
-
-### TimelockUnauthorizedCaller
-
-The caller account is not authorized.
-
-```solidity
-error TimelockUnauthorizedCaller(address caller);
-```
-
-**Parameters**
-
-| Name     | Type      | Description     |
-| -------- | --------- | --------------- |
-| `caller` | `address` | Caller address. |
-
-### CallScheduled
-
-Emitted when a call is scheduled as part of operation `id`.
+### CallScheduled {#event-callscheduled}
+Emitted when a call is scheduled.
 
 ```solidity
 event CallScheduled(
@@ -222,52 +283,18 @@ event CallScheduled(
 
 **Parameters**
 
-| Name          | Type      | Description                     |
-| ------------- | --------- | ------------------------------- |
-| `id`          | `bytes32` | Call associated id.             |
-| `index`       | `uint256` | Call index.                     |
-| `target`      | `address` | Target address.                 |
-| `value`       | `uint256` | Amount of BERA sent with call.  |
-| `data`        | `bytes`   | Data sent with call.            |
-| `predecessor` | `bytes32` | Previous operation operationId. |
-| `delay`       | `uint256` | Execution delay.                |
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`bytes32`|The operation ID|
+|`index`|`uint256`|The call index|
+|`target`|`address`|The target address|
+|`value`|`uint256`|The value to send|
+|`data`|`bytes`|The call data|
+|`predecessor`|`bytes32`|The predecessor operation|
+|`delay`|`uint256`|The delay before execution|
 
-### CallExecuted
-
-Emitted when a call is performed as part of operation `id`.
-
-```solidity
-event CallExecuted(bytes32 indexed id, uint256 indexed index, address target, uint256 value, bytes data);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
-| `id`     | `bytes32` | Call associated id.            |
-| `index`  | `uint256` | Call index.                    |
-| `target` | `address` | Target address.                |
-| `value`  | `uint256` | Amount of BERA sent with call. |
-| `data`   | `bytes`   | Data sent with call.           |
-
-### CallSalt
-
-Emitted when new proposal is scheduled with non-zero salt.
-
-```solidity
-event CallSalt(bytes32 indexed id, bytes32 salt);
-```
-
-**Parameters**
-
-| Name   | Type      | Description           |
-| ------ | --------- | --------------------- |
-| `id`   | `bytes32` | Call associated id.   |
-| `salt` | `bytes32` | Call associated salt. |
-
-### Cancelled
-
-Emitted when operation `id` is cancelled.
+### Cancelled {#event-cancelled}
+Emitted when an operation is cancelled.
 
 ```solidity
 event Cancelled(bytes32 indexed id);
@@ -275,13 +302,12 @@ event Cancelled(bytes32 indexed id);
 
 **Parameters**
 
-| Name | Type      | Description         |
-| ---- | --------- | ------------------- |
-| `id` | `bytes32` | Call associated id. |
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`bytes32`|The cancelled operation ID|
 
-### MinDelayChange
-
-Emitted when the minimum delay for future operations is modified.
+### MinDelayChange {#event-mindelaychange}
+Emitted when the minimum delay is changed.
 
 ```solidity
 event MinDelayChange(uint256 oldDuration, uint256 newDuration);
@@ -289,7 +315,52 @@ event MinDelayChange(uint256 oldDuration, uint256 newDuration);
 
 **Parameters**
 
-| Name          | Type      | Description         |
-| ------------- | --------- | ------------------- |
-| `oldDuration` | `uint256` | Old delay duration. |
-| `newDuration` | `uint256` | New delay duration. |
+|Name|Type|Description|
+|----|----|-----------|
+|`oldDuration`|`uint256`|The previous minimum delay|
+|`newDuration`|`uint256`|The new minimum delay|
+
+### RoleAdminChanged {#event-roleadminchanged}
+Emitted when a role's admin is changed.
+
+```solidity
+event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`role`|`bytes32`|The role that was changed|
+|`previousAdminRole`|`bytes32`|The previous admin role|
+|`newAdminRole`|`bytes32`|The new admin role|
+
+### RoleGranted {#event-rolegranted}
+Emitted when a role is granted.
+
+```solidity
+event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`role`|`bytes32`|The role that was granted|
+|`account`|`address`|The account that received the role|
+|`sender`|`address`|The account that granted the role|
+
+### RoleRevoked {#event-rolerevoked}
+Emitted when a role is revoked.
+
+```solidity
+event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`role`|`bytes32`|The role that was revoked|
+|`account`|`address`|The account that lost the role|
+|`sender`|`address`|The account that revoked the role|
