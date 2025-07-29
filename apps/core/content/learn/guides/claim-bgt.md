@@ -5,10 +5,10 @@ head:
       content: Claim BGT Rewards Guide
   - - meta
     - name: description
-      content: Learn how to claim your BGT rewards from Reward Vaults, including partial claiming options
+      content: Learn how to claim your BGT rewards from Reward Vaults
   - - meta
     - property: og:description
-      content: Learn how to claim your BGT rewards from Reward Vaults, including partial claiming options
+      content: Learn how to claim your BGT rewards from Reward Vaults
 ---
 
 <script setup>
@@ -28,11 +28,9 @@ If you're building applications that integrate BGT claiming functionality, see o
 BGT rewards accumulate in Reward Vaults as validators direct emissions to them. You can claim these rewards in two ways:
 
 - **Full Claim**: Claim all your accumulated BGT at once
-- **Partial Claim**: Claim specific amounts, leaving the rest to accumulate
+- **Partial Claim**: Claim specific amounts, leaving the rest to accumulate (coming thoon)
 
 ## How to Claim BGT Rewards
-
-### Option 1: Full BGT Claim
 
 **Via Berachain Hub:**
 
@@ -47,20 +45,6 @@ BGT rewards accumulate in Reward Vaults as validators direct emissions to them. 
 - All your accumulated BGT is claimed to your wallet
 - Your reward balance resets to zero
 - You continue earning new rewards on your staked position
-
-### Option 2: Partial BGT Claim
-
-Partial claiming lets you claim specific amounts of BGT while leaving the rest to accumulate. This is useful for:
-
-- **Gradual claiming**: Take profits over time instead of all at once
-- **Strategic timing**: Claim when you need BGT for specific purposes
-- **Gas optimization**: Avoid claiming small amounts frequently
-
-**How to use partial claiming:**
-
-TODO screenshots from hub
-
-## Advanced Strategies
 
 ### Protocol Claiming
 
@@ -104,12 +88,6 @@ See the [staking for other accounts guide](/developers/guides/staking-for-other-
 - Check gas limits and network congestion
 - Ensure your wallet has enough BERA for gas fees
 
-**"Partial claim not available"**
-
-- Some interfaces only support full claims
-- Partial claiming requires direct contract interaction or compatible protocol interfaces
-- Check with your preferred interface for partial claiming support
-
 ### Getting Help
 
 - Visit the [Berachain Hub](https://hub.berachain.com) for the official interface
@@ -125,7 +103,3 @@ After claiming your BGT:
 - **[Explore more earning opportunities](https://hub.berachain.com/earn/)** to diversify your PoL participation
 
 ---
-
-::: tip Pro Tip
-Consider using partial claiming for better control over your BGT flow. You can always claim more when needed, but once claimed, BGT stops earning additional rewards from staking.
-:::

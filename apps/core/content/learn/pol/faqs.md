@@ -96,14 +96,14 @@ Anyone who holds enough $BGT can vote on proposals. Anyone who meets the thresho
 
 ### Can I claim only a portion of my BGT?
 
-Yes! You can now claim specific amounts of your BGT rewards instead of claiming everything at once. This partial claiming feature allows you to:
+Soon you will be able to claim specific amounts of your BGT rewards instead of claiming everything at once. This partial claiming feature allows you to:
 
 - Take profits gradually over time
 - Claim only what you need for specific purposes
 - Leave the rest to continue accumulating
 - Optimize gas costs by avoiding frequent small claims
 
-Partial claiming is available through compatible protocols and interfaces that support the new `getPartialReward` function. You can specify any amount up to your total earned BGT balance.
+Partial claiming will be available through compatible protocols and interfaces that support the new `getPartialReward` function. You can specify any amount up to your total earned BGT balance.
 
 ### Can I have a protocol claim on my behalf?
 
@@ -115,15 +115,3 @@ Yes, you can authorize trusted protocols to claim your BGT rewards automatically
 - **Enhanced user experience** with fewer manual transactions
 
 The protocol can only claim your BGT rewards - they cannot withdraw your staked tokens or access other wallet functions. You can revoke these permissions at any time. Learn more in our [BGT Claiming Guide](/learn/guides/claim-bgt#protocol-claiming).
-
-### Can I give my BGT Rewards to someone else?
-
-Yes, when claiming BGT rewards, you can specify any recipient address to receive the BGT. This allows you to:
-
-- **Send rewards directly to cold storage** or hardware wallets
-- **Gift BGT to other users** by claiming to their addresses
-- **Pay team members or collaborators** with your earned BGT
-- **Claim into DeFi protocols** or multi-signature wallets
-- **Split rewards** among multiple addresses
-
-Both full and partial claiming support custom recipient addresses, giving you complete flexibility over where your BGT rewards are sent.
