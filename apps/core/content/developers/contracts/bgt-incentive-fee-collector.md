@@ -19,14 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']">{{config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveFeeCollector.abi && config.contracts.pol.bgtIncentiveFeeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveFeeCollector.abi">ABI JSON</a></span></small>
 
-The BGTIncentiveFeeCollector contract is responsible for collecting incentive fees and distributing them.
+Collects the fees on the incentives posted on reward vaults and auction them for WBERA. Accrued WBERA serves as a payout for the stakers of `WBERAStakerVault.sol`.
 
 **Inherits:**
 [IBGTIncentiveFeeCollector](/src/pol/interfaces/IBGTIncentiveFeeCollector.sol/interface.IBGTIncentiveFeeCollector.md), UUPSUpgradeable, OwnableUpgradeable, PausableUpgradeable
-
-_This contract collects fees from incentive tokens and allows them to be claimed by paying WBERA._
-
-_The collected WBERA is distributed to the staking vault._
 
 ## Constants
 

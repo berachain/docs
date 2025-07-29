@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveDistributor['mainnet-address']">{{config.contracts.pol.bgtIncentiveDistributor['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveDistributor.abi && config.contracts.pol.bgtIncentiveDistributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveDistributor.abi">ABI JSON</a></span></small>
 
-The BGTIncentiveDistributor contract is used to distribute the POL incentives to the BGT boosters. BGT boosters share of incentive from the rewardVault is transferred to the BGTIncentiveDistributor contract. The rewards are then distributed to the BGT boosters based on the merkle root computed off-chain.
+A contract that distributes POL incentives to BGT boosters using a merkle-based distribution system. When BGT holders boost a validator, they become eligible for a share of the incentives from reward vaults. These incentives are transferred to this contract and distributed based on off-chain computed merkle roots.
 
 **Inherits:**
 [IBGTIncentiveDistributor](/src/pol/interfaces/IBGTIncentiveDistributor.sol/interface.IBGTIncentiveDistributor.md), AccessControlUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable
-
-_forked from Hidden Hand RewardDistributor Contract: https://github.com/dinero-protocol/hidden-hand-contracts/blob/master/contracts/RewardDistributor.sol_
 
 ## Constants
 
@@ -79,6 +77,7 @@ The distribution struct for reward metadata.
 ```solidity
 struct Distribution {
     bytes32 identifier;
+    bytes pubkey;
     address token;
     bytes32 merkleRoot;
     bytes proof;
@@ -90,6 +89,7 @@ struct Distribution {
 | Name         | Type      | Description              |
 | ------------ | --------- | ------------------------ |
 | `identifier` | `bytes32` | The merkle identifier    |
+| `pubkey`     | `bytes`   | The validator pubkey     |
 | `token`      | `address` | The reward token address |
 | `merkleRoot` | `bytes32` | The merkle root          |
 | `proof`      | `bytes`   | The proof data           |
@@ -103,18 +103,20 @@ struct Reward {
     address token;
     bytes32 merkleRoot;
     bytes proof;
-    uint64 updateTime;
+    uint256 activeAt;
+    bytes pubkey;
 }
 ```
 
 **Properties**
 
-| Name         | Type      | Description              |
-| ------------ | --------- | ------------------------ |
-| `token`      | `address` | The reward token address |
-| `merkleRoot` | `bytes32` | The merkle root          |
-| `proof`      | `bytes`   | The proof data           |
-| `updateTime` | `uint64`  | The update timestamp     |
+| Name         | Type      | Description                                 |
+| ------------ | --------- | ------------------------------------------- |
+| `token`      | `address` | The reward token address                    |
+| `merkleRoot` | `bytes32` | The merkle root                             |
+| `proof`      | `bytes`   | The proof data                              |
+| `activeAt`   | `uint256` | The timestamp when rewards become claimable |
+| `pubkey`     | `bytes`   | The validator pubkey                        |
 
 ## State Variables
 

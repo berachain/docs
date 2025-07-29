@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.blockRewardController['mainnet-address']">{{config.contracts.pol.blockRewardController['mainnet-address']}}</a><span v-if="config.contracts.pol.blockRewardController.abi && config.contracts.pol.blockRewardController.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
 
-The BlockRewardController contract manages validator block rewards, including BGT distribution and inflation control.
+The BlockRewardController contract is responsible for managing the reward rate of BGT. It computes and distributes block rewards to validators based on their voting power.
 
 **Inherits:**
 [IBlockRewardController](/src/pol/interfaces/IBlockRewardController.sol/interface.IBlockRewardController.md), OwnableUpgradeable, UUPSUpgradeable
-
-_This contract is responsible for computing and distributing block rewards to validators based on their voting power._
 
 ## Constants
 

@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.timelock['mainnet-address']">{{config.contracts.pol.timelock['mainnet-address']}}</a><span v-if="config.contracts.pol.timelock.abi && config.contracts.pol.timelock.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.timelock.abi">ABI JSON</a></span></small>
 
-The Timelock contract enforces a delay on the execution of governance proposals, providing time for the community to review changes before they take effect.
+The TimeLock contract is in charge of introducing a delay between a proposal and its execution.
 
 **Inherits:**
 AccessControl, IERC721Receiver, IERC1155Receiver
-
-_This contract is a standard OpenZeppelin TimelockController that works with the governance system._
 
 ## Constants
 

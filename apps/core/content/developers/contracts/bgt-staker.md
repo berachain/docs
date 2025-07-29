@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtStaker['mainnet-address']">{{config.contracts.pol.bgtStaker['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtStaker.abi && config.contracts.pol.bgtStaker.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtStaker.abi">ABI JSON</a></span></small>
 
-The BGTStaker contract enables staking of BGT tokens and manages staking rewards distribution.
+A contract that enables BGT token holders to stake their tokens and earn dApp fees without transferring their tokens. This contract acts as a non-custodial staking solution where BGT tokens remain in the holder's wallet while still allowing them to participate in fee distribution. The contract integrates with the FeeCollector to distribute protocol fees to BGT delegators.
 
 **Inherits:**
 IBGTStaker, OwnableUpgradeable, UUPSUpgradeable
-
-_This contract facilitates BGT staking operations and reward management._
 
 ## Functions
 

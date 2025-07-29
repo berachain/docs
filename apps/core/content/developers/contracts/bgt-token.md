@@ -19,28 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a><span v-if="config.contracts.tokens.bgt.abi && config.contracts.tokens.bgt.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
 
-The Berachain governance token (BGT) contract.
+The Berachain Governance Token ($BGT) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for $BERA.
 
 **Inherits:**
 [IBGT](/src/pol/interfaces/IBGT.sol/interface.IBGT.md), ERC20VotesUpgradeable, OwnableUpgradeable, Multicallable
-
-_Should be owned by the governance module._
-
-_Only allows minting BGT by the BlockRewardController contract._
-
-_It's not upgradable even though it inherits from `ERC20VotesUpgradeable` and `OwnableUpgradeable`._
-
-_This contract inherits from `Multicallable` to allow for batch calls for `activateBoost` by a third party._
-
-## Constants
-
-### TEN_PERCENT
-
-Represents 10%.
-
-```solidity
-uint128 public constant TEN_PERCENT = 0.1e4;
-```
 
 ## Structs
 
@@ -50,17 +32,17 @@ The queued boost struct for validator boosting.
 
 ```solidity
 struct QueuedBoost {
-    uint128 balance;
     uint32 blockNumberLast;
+    uint128 balance;
 }
 ```
 
 **Properties**
 
-| Name              | Type      | Description                                |
-| ----------------- | --------- | ------------------------------------------ |
-| `balance`         | `uint128` | The amount of BGT queued for boost         |
-| `blockNumberLast` | `uint32`  | The block number when the boost was queued |
+| Name              | Type      | Description                                    |
+| ----------------- | --------- | ---------------------------------------------- |
+| `blockNumberLast` | `uint32`  | The last block number boost balance was queued |
+| `balance`         | `uint128` | The queued BGT balance to boost with           |
 
 ### QueuedDropBoost
 
@@ -68,17 +50,17 @@ The queued drop boost struct for validator boosting.
 
 ```solidity
 struct QueuedDropBoost {
-    uint128 balance;
     uint32 blockNumberLast;
+    uint128 balance;
 }
 ```
 
 **Properties**
 
-| Name              | Type      | Description                                     |
-| ----------------- | --------- | ----------------------------------------------- |
-| `balance`         | `uint128` | The amount of BGT queued to drop boost          |
-| `blockNumberLast` | `uint32`  | The block number when the drop boost was queued |
+| Name              | Type      | Description                                                 |
+| ----------------- | --------- | ----------------------------------------------------------- |
+| `blockNumberLast` | `uint32`  | The last block number boost balance was queued for dropping |
+| `balance`         | `uint128` | The boosted BGT balance to drop boost with                  |
 
 ### UserBoost
 
@@ -86,17 +68,17 @@ The user boost struct for tracking validator boosts.
 
 ```solidity
 struct UserBoost {
-    uint128 balance;
-    uint32 blockNumberLast;
+    uint128 boost;
+    uint128 queuedBoost;
 }
 ```
 
 **Properties**
 
-| Name              | Type      | Description                                  |
-| ----------------- | --------- | -------------------------------------------- |
-| `balance`         | `uint128` | The total amount of BGT used for boosting    |
-| `blockNumberLast` | `uint32`  | The last block number when boost was updated |
+| Name          | Type      | Description                                     |
+| ------------- | --------- | ----------------------------------------------- |
+| `boost`       | `uint128` | The boost balance being used by the user        |
+| `queuedBoost` | `uint128` | The queued boost balance to be used by the user |
 
 ## State Variables
 

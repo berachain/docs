@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactory['mainnet-address']">{{config.contracts.tokens.honeyFactory['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactory.abi && config.contracts.tokens.honeyFactory.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactory.abi">ABI JSON</a></span></small>
 
-The HoneyFactory contract manages the minting and redemption of HONEY tokens, facilitating the stablecoin's collateral operations.
+This is the factory contract for minting and redeeming Honey.
 
 **Inherits:**
 IHoneyFactory, OwnableUpgradeable, UUPSUpgradeable
-
-_This contract handles HONEY token lifecycle and collateral management._
 
 ## View Functions
 

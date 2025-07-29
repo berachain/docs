@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.wbera['mainnet-address']">{{config.contracts.tokens.wbera['mainnet-address']}}</a><span v-if="config.contracts.tokens.wbera.abi && config.contracts.tokens.wbera.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.wbera.abi">ABI JSON</a></span></small>
 
-WBERA is the wrapped version of BERA, Berachain's native token, enabling ERC20 functionality.
+An ERC20 token that wraps the native BERA token, allowing it to be used in smart contracts that expect ERC20 tokens. Users can deposit BERA to receive WBERA and withdraw BERA by burning WBERA.
 
 **Inherits:**
 IWETH, ERC20, ERC20Permit
-
-_This contract wraps BERA into an ERC20 token that can be used in smart contracts._
 
 ## View Functions
 

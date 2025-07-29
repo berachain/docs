@@ -19,12 +19,45 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault['mainnet-address']">{{config.contracts.pol.wberaStakerVault['mainnet-address']}}</a><span v-if="config.contracts.pol.wberaStakerVault.abi && config.contracts.pol.wberaStakerVault.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.wberaStakerVault.abi">ABI JSON</a></span></small>
 
-The WBERAStakerVault contract manages staking of WBERA tokens and distributes staking rewards to participants.
+The WBERAStakerVault is an ERC4626-compliant vault that allows users to stake $BERA and earn yield from redirected PoL incentives. This contract is the core component of the PoL BERA Yield Module.
+
+Key features:
+
+- ERC4626 Compliance: Standard vault interface for easy integration
+- Native BERA Support: Accepts both native BERA and WBERA deposits
+- 7-Day Unbonding: Withdrawal requests require 7-day cooldown period
+- Auto-Compounding: Rewards automatically compound to staker positions
+- Inflation Attack Protection: Initial deposit mechanism prevents attacks
+- Emergency Controls: Pausable with role-based access control
 
 **Inherits:**
 IWBERAStakerVault, ERC4626Upgradeable, OwnableUpgradeable, UUPSUpgradeable
 
-_This vault enables WBERA staking and handles reward distribution to stakers._
+## Structs
+
+### WithdrawalRequest
+
+Struct to hold withdrawal request data.
+
+```solidity
+struct WithdrawalRequest {
+    uint256 assets;
+    uint256 shares;
+    uint256 requestTime;
+    address owner;
+    address receiver;
+}
+```
+
+**Properties**
+
+| Name          | Type      | Description                                |
+| ------------- | --------- | ------------------------------------------ |
+| `assets`      | `uint256` | The amount of assets to withdraw           |
+| `shares`      | `uint256` | The amount of shares to burn               |
+| `requestTime` | `uint256` | The timestamp when the request was created |
+| `owner`       | `address` | The owner of the withdrawal request        |
+| `receiver`    | `address` | The receiver of the withdrawn assets       |
 
 ## Contract Overview
 

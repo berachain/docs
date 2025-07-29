@@ -19,14 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.beaconDeposit['mainnet-address']">{{config.contracts.pol.beaconDeposit['mainnet-address']}}</a><span v-if="config.contracts.pol.beaconDeposit.abi && config.contracts.pol.beaconDeposit.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.beaconDeposit.abi">ABI JSON</a></span></small>
 
-A contract that handles validators deposits.
+The contract handling validators deposits. Its events are used by the beacon chain to manage the staking process.
 
 **Inherits:**
 [IBeaconDeposit](/src/pol/interfaces/IBeaconDeposit.sol/interface.IBeaconDeposit.md), [ERC165](/src/pol/interfaces/IERC165.sol/interface.ERC165.md)
-
-_Its events are used by the beacon chain to manage the staking process._
-
-_This contract does not implement the deposit merkle tree._
 
 ## Constants
 
@@ -41,10 +37,6 @@ uint8 public constant CREDENTIALS_LENGTH = 32;
 ### MIN_DEPOSIT_AMOUNT_IN_GWEI
 
 The minimum amount of `BERA` to deposit i.e 10_000 ether.
-
-_Converted to Gwei since our deposit contract denominates in Gwei._
-
-_10_000 ether = 10_000e18, in Gwei: 10_000e18 / 1e9 = 10_000e9 = 10_000 gwei._
 
 ```solidity
 uint64 public constant MIN_DEPOSIT_AMOUNT_IN_GWEI = 10_000 gwei;
@@ -90,9 +82,7 @@ struct QueuedOperator {
 
 ### depositCount
 
-depositCount represents the number of deposits that have been made to the contract.
-
-_The index of the next deposit will use this value._
+The number of deposits that have been made to the contract.
 
 ```solidity
 uint64 public depositCount;

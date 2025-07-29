@@ -19,15 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.distributor['mainnet-address']">{{config.contracts.pol.distributor['mainnet-address']}}</a><span v-if="config.contracts.pol.distributor.abi && config.contracts.pol.distributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.distributor.abi">ABI JSON</a></span></small>
 
-The Distributor contract manages the distribution of BGT rewards to validators and their delegators based on voting power and boost factors.
+The Distributor contract is responsible for distributing the block rewards from the reward controller and the reward allocation weights, to the reward allocation receivers. Each validator has its own reward allocation, if it does not exist, a default reward allocation is used. And if governance has not set the default reward allocation, the rewards are not minted and distributed.
 
 **Inherits:**
 IDistributor, OwnableUpgradeable, UUPSUpgradeable
-
-_This contract coordinates reward distribution across the validator ecosystem._
-
-_Each validator has its own reward allocation, if it does not exist, a default reward allocation is used.
-And if governance has not set the default reward allocation, the rewards are not minted and distributed._
 
 ## State Variables
 

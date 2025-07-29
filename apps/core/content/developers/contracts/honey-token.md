@@ -19,12 +19,10 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a><span v-if="config.contracts.tokens.honey.abi && config.contracts.tokens.honey.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honey.abi">ABI JSON</a></span></small>
 
-The Honey token (HONEY) is Berachain's native stablecoin, designed to maintain a stable value.
+This is the ERC20 token representation of Berachain's native stablecoin, Honey.
 
 **Inherits:**
-ERC20, ERC20Permit, AccessControl
-
-_HONEY is a decentralized stablecoin backed by collateral assets._
+ERC20, AccessControlUpgradeable, UUPSUpgradeable, IHoneyErrors
 
 ## View Functions
 
@@ -68,18 +66,16 @@ function totalSupply() public view virtual override returns (uint256);
 
 ### burn
 
-Burns tokens from the caller's account.
+Burn Honey from an account.
 
 ```solidity
-function burn(uint256 amount) external;
+function burn(address from, uint256 amount) external onlyFactory;
 ```
 
 ### mint
 
-Mints new tokens to the specified address.
-
-_Only addresses with MINTER_ROLE can call this function._
+Mint Honey to the receiver.
 
 ```solidity
-function mint(address to, uint256 amount) external;
+function mint(address to, uint256 amount) external onlyFactory;
 ```

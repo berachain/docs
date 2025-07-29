@@ -19,12 +19,34 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.governance['mainnet-address']">{{config.contracts.pol.governance['mainnet-address']}}</a><span v-if="config.contracts.pol.governance.abi && config.contracts.pol.governance.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.governance.abi">ABI JSON</a></span></small>
 
-The BerachainGovernance contract implements the governance system for Berachain, allowing BGT holders to create and vote on proposals.
+The Berachain Governance contract extends OpenZeppelin's governor contracts. It uses the $BGT token as its governance token, which determines voting power in the governance system. Users must hold $BGT tokens to participate in governance activities such as creating proposals and voting.
 
 **Inherits:**
 Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl, GovernorPreventLateQuorum
 
-_This contract manages the governance process including proposal creation, voting, and execution through a timelock._
+## Structs
+
+### InitialGovernorParameters
+
+Parameters used to initialize the governor contract.
+
+```solidity
+struct InitialGovernorParameters {
+    uint256 proposalThreshold;
+    uint256 quorumNumeratorValue;
+    uint48 votingDelay;
+    uint32 votingPeriod;
+}
+```
+
+**Properties**
+
+| Name                   | Type      | Description                                               |
+| ---------------------- | --------- | --------------------------------------------------------- |
+| `proposalThreshold`    | `uint256` | The minimum number of votes required to create a proposal |
+| `quorumNumeratorValue` | `uint256` | The numerator of the quorum fraction                      |
+| `votingDelay`          | `uint48`  | The delay before voting begins                            |
+| `votingPeriod`         | `uint32`  | The duration of the voting period                         |
 
 ## View Functions
 

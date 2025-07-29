@@ -24,8 +24,6 @@ The BeraChef contract is responsible for managing the reward allocations and the
 **Inherits:**
 [IBeraChef](/src/pol/interfaces/IBeraChef.sol/interface.IBeraChef.md), OwnableUpgradeable, UUPSUpgradeable
 
-_It should be owned by the governance module._
-
 ## Constants
 
 ### MAX_COMMISSION_RATE
@@ -52,17 +50,17 @@ The commission rate struct for validators.
 
 ```solidity
 struct CommissionRate {
-    uint96 rate;
-    uint64 blockNumber;
+    uint32 activationBlock;
+    uint96 commissionRate;
 }
 ```
 
 **Properties**
 
-| Name          | Type     | Description                            |
-| ------------- | -------- | -------------------------------------- |
-| `rate`        | `uint96` | The commission rate percentage         |
-| `blockNumber` | `uint64` | The block number when the rate was set |
+| Name              | Type     | Description                                                 |
+| ----------------- | -------- | ----------------------------------------------------------- |
+| `activationBlock` | `uint32` | The block number in which the commission rate was activated |
+| `commissionRate`  | `uint96` | The commission rate to be used by the validator             |
 
 ### QueuedCommissionRateChange
 
@@ -70,17 +68,17 @@ The queued commission rate change struct for validators.
 
 ```solidity
 struct QueuedCommissionRateChange {
-    uint96 rate;
-    uint64 blockNumber;
+    uint32 blockNumberLast;
+    uint96 commissionRate;
 }
 ```
 
 **Properties**
 
-| Name          | Type     | Description                                 |
-| ------------- | -------- | ------------------------------------------- |
-| `rate`        | `uint96` | The queued commission rate percentage       |
-| `blockNumber` | `uint64` | The block number when the change was queued |
+| Name              | Type     | Description                                            |
+| ----------------- | -------- | ------------------------------------------------------ |
+| `blockNumberLast` | `uint32` | The last block number commission rate was queued       |
+| `commissionRate`  | `uint96` | The queued commission rate to be used by the validator |
 
 ### RewardAllocation
 
