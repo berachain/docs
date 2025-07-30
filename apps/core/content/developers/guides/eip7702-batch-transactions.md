@@ -37,7 +37,6 @@ EIP-7702 is a proposed Ethereum Improvement Proposal that introduces a new trans
 ## Limitations
 
 1. **Wallet Support for EIP-7702 Batch Contract Deployment**
-
    - Native EIP-7702 batch transactions require the wallet provider (e.g., MetaMask, Rabby, etc.) to support deploying and interacting with batch contracts directly from the frontend. As of now, most wallets do not natively support this, so users may need to rely on custom integrations or scripts.
 
 2. **Batch Transaction Dependency**

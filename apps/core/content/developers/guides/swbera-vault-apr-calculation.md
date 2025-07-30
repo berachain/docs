@@ -52,11 +52,11 @@ $$APR = \frac{Current Share Value - Previous Share Value}{Previous Share Value} 
 Here's a complete Node.js script to calculate the SWBERA vault APR:
 
 ```javascript
-const { ethers } = require('ethers');
+const { ethers } = require("ethers");
 
 // Configuration
-const RPC_URL = 'https://rpc.berachain.com/';
-const VAULT_ADDRESS = '0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a';
+const RPC_URL = "https://rpc.berachain.com/";
+const VAULT_ADDRESS = "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a";
 const VAULT_ABI = [
   "function previewRedeem(uint256 shares) external view returns (uint256 assets)"
 ];
@@ -65,37 +65,43 @@ async function calculateSWBERAAPR() {
   try {
     const provider = new ethers.JsonRpcProvider(RPC_URL);
     const currentBlock = await provider.getBlockNumber();
-    
+
     // Calculate blocks for 24-26 hours (assuming 2-second block time)
     const blocksPerHour = 3600 / 2; // 1800 blocks per hour
     const blocksPerDay = blocksPerHour * 24; // 43200 blocks per day
     const blocksPer26Hours = blocksPerHour * 26; // 46800 blocks for 26 hours
-    
+
     const previousBlock24h = currentBlock - blocksPerDay;
     const previousBlock26h = currentBlock - blocksPer26Hours;
-    
+
     const vaultContract = new ethers.Contract(VAULT_ADDRESS, VAULT_ABI, provider);
-    
+
     // Get share values
     const currentShareValue = await vaultContract.previewRedeem(ethers.parseEther("1"));
-    const previousShareValue24h = await vaultContract.previewRedeem(ethers.parseEther("1"), {
-      blockTag: previousBlock24h
-    });
-    const previousShareValue26h = await vaultContract.previewRedeem(ethers.parseEther("1"), {
-      blockTag: previousBlock26h
-    });
-    
+    const previousShareValue24h = await vaultContract.previewRedeem(
+      ethers.parseEther("1"),
+      {
+        blockTag: previousBlock24h
+      }
+    );
+    const previousShareValue26h = await vaultContract.previewRedeem(
+      ethers.parseEther("1"),
+      {
+        blockTag: previousBlock26h
+      }
+    );
+
     // Calculate returns
     const return24h = currentShareValue - previousShareValue24h;
     const return26h = currentShareValue - previousShareValue26h;
-    
+
     // Calculate APRs
     const apr24h = (return24h * 365n * 10000n) / previousShareValue24h;
     const apr26h = (return26h * 365n * 10000n) / previousShareValue26h;
-    
+
     // Calculate average APR
     const avgAPR = (Number(apr24h) + Number(apr26h)) / 2;
-    
+
     return {
       currentShareValue: ethers.formatEther(currentShareValue),
       previousShareValue24h: ethers.formatEther(previousShareValue24h),
@@ -106,20 +112,19 @@ async function calculateSWBERAAPR() {
       apr26h: Number(apr26h) / 100,
       avgAPR: avgAPR
     };
-    
   } catch (error) {
-    console.error('Error calculating APR:', error.message);
+    console.error("Error calculating APR:", error.message);
     throw error;
   }
 }
 
 // Usage
 calculateSWBERAAPR()
-  .then(result => {
-    console.log('APR Results:', result);
+  .then((result) => {
+    console.log("APR Results:", result);
   })
-  .catch(error => {
-    console.error('Calculation failed:', error);
+  .catch((error) => {
+    console.error("Calculation failed:", error);
   });
 ```
 
@@ -147,6 +152,7 @@ Using the values from the sample output:
 **Formula**: $$APR = \frac{Current Share Value - Previous Share Value}{Previous Share Value} \times 365 \times 100$$
 
 **24-hour calculation**:
+
 - Current Share Value: 1.044773554183778978 WBERA
 - Previous Share Value (24h ago): 1.041352132320814436 WBERA
 - 24h Return: 0.003421421862964542 WBERA
