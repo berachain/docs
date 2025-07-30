@@ -17,9 +17,9 @@ The execution layer consists of multiple implementations in the form of EVM exec
 
 The following execution clients are supported by BeaconKit:
 
-| Client                                              | Language | Sync Strategies | Required Version |
-| --------------------------------------------------- | -------- | --------------- | ---------------- |
-| [Bera-Geth](https://github.com/berachain/bera-geth) | Golang   | Snap, Full      | v1.011602.0-rc2  |
-| [Bera-Reth](https://github.com/berachain/bera-reth) | Rust     | Full            | 1.0.0-rc.7       |
+| Client                                              | Language | Sync Strategies | Required Version (Bepolia) | Required Version (mainnet) |
+| --------------------------------------------------- | -------- | --------------- | -------------------------- | -------------------------- |
+| [Bera-Geth](https://github.com/berachain/bera-geth) | Golang   | Snap, Full      | v1.011602.0-rc2            | v1.15.x                    |
+| [Bera-Reth](https://github.com/berachain/bera-reth) | Rust     | Full            | 1.0.0-rc.7                 | v1.3.x                     |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
