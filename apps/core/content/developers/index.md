@@ -11,13 +11,17 @@ As discussed in [Block Rewards](/learn/pol/blockrewards), $BGT emissions stem fr
 
 ### Distributor
 
-The [Distributor](/developers/contracts/distributor) contract is the entry point for BGT distribution. Distribution is built into our technology stack, so that block N includes transactions which performs distributions for block N-1. During that process, the Distributor:
+The [Distributor](/developers/contracts/distributor) contract is the entry point for BGT distribution. Distribution is built into our technology stack, so that block N includes transactions which perform distributions for block N-1. During that process, the Distributor:
 
 - Receives newly minted $BGT from the `BlockRewardController`
 - Processes rewards based on validator-specified allocations via `BeraChef`
 - Distributes $BGT to the validator's designated Reward Vaults - defined by the Reward Allocation
 - Distributes Validator commission of Incentives received for distributing $BGT emissions
 - Distirbutes remaining Incentives to `BGTIncentiveDistributor` for Validator Boosters to claim
+
+:::tip
+With the [August 2025 upgrade](/nodes/guides/august-2025-upgrade), distributions are now automatic.
+:::
 
 ### BlockRewardController
 

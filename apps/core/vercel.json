@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/nodes/guides/bectra",
+      "destination": "https://docs.berachain.com/learn/changelog#june-2025"
+    },
+    {
       "source": "/learn/pol/changelog",
       "destination": "/learn/changelog"
     },
