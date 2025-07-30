@@ -174,7 +174,7 @@
         "name": "WBERAStakerVault",
         "bepolia-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
         "mainnet-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json",
         "docsUrl": "/developers/contracts/wbera-staker-vault"
       },
       "beaconDeposit": {

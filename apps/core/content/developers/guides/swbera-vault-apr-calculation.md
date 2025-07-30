@@ -85,13 +85,19 @@ async function calculateSWBERAAPR(vaultContract, provider) {
 // Usage
 const vaultAddress = "{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}";
 const vaultABI = [
-  "function previewRedeem(uint256 shares) external view returns (uint256 assets)"
+  "function previewRedeem(uint256 shares) external view returns (uint256 assets)",
+  "function totalAssets() public view returns (uint256)",
+  "function totalSupply() public view returns (uint256)"
 ];
 const vaultContract = new ethers.Contract(vaultAddress, vaultABI, provider);
 
 const result = await calculateSWBERAAPR(vaultContract, provider);
 console.log(`SWBERA Vault APR: ${result.apr.toFixed(2)}%`);
-```
+
+// Alternative: Using the full ABI from GitHub
+const fullABI = await fetch("https://raw.githubusercontent.com/berachain/doc-abis/main/core/WBERAStakerVault.json")
+  .then(response => response.json());
+const vaultContractFull = new ethers.Contract(vaultAddress, fullABI, provider);
 
 ## Key Considerations
 
@@ -119,8 +125,13 @@ console.log(`SWBERA Vault APR: ${result.apr.toFixed(2)}%`);
 | Mainnet | `{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}` |
 | Testnet | `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}` |
 
+## Contract ABI
+
+The complete WBERAStakerVault ABI is available at: [WBERAStakerVault.json](https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json)
+
 ## Related Documentation
 
 - [WBERA Staker Vault Contract Reference](/developers/contracts/wbera-staker-vault)
 - [BERA Staking Guide](/learn/guides/bera-staking)
 - [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626)
+```
