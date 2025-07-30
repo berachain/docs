@@ -30,7 +30,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 | Date                                 | Milestone                                                                                                    |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| July 30, 2025                        | Beacon-Kit 1.3.0-rc, Bera-geth v1.011602.0-rc2 and Bera-reth 1.0.0-rc.7 released for installation to Bepolia |
+| July 30, 2025                        | Beacon-Kit 1.3.0-rc, Bera-geth v1.011602.0-rc3 and Bera-reth 1.0.0-rc.7 released for installation to Bepolia |
 | August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded                                                  |
 | August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activates                                                                                    |
 | August 11 (tentative)                | Mainnet upgrade instructions posted                                                                          |
@@ -40,7 +40,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 | Chain   | Client                                                                                           |
 | ------- | ------------------------------------------------------------------------------------------------ |
-| Bepolia | [Bera-geth v1.011602.0-rc2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.0-rc2) |
+| Bepolia | [Bera-geth v1.011602.0-rc3](https://github.com/berachain/bera-geth/releases/tag/v1.011602.0-rc3) |
 | Bepolia | [Bera-reth v1.0.0-rc.7](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.7)         |
 | Bepolia | [Beacon-Kit v1.3.0-rc](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)          |
 
