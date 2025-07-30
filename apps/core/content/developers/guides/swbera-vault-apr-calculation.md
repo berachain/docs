@@ -198,7 +198,7 @@ onMounted(() => {
 
 <div class="apr-calculator">
   <h3>Current SWBERA Vault APR</h3>
-  
+
   <div v-if="aprData.loading" class="loading">
     <p>Calculating APR from blockchain data...</p>
   </div>
@@ -212,13 +212,13 @@ onMounted(() => {
     <div class="apr-value">
       <strong>APR: {{ aprData.apr.toFixed(2) }}%</strong>
     </div>
-    
+
     <div class="apr-details">
       <p><strong>Current Share Value:</strong> {{ aprData.currentShareValue }} WBERA</p>
       <p><strong>Previous Share Value (24h ago):</strong> {{ aprData.previousShareValue }} WBERA</p>
       <p><strong>24h Return:</strong> {{ aprData.return24h }} WBERA</p>
     </div>
-    
+
     <button @click="calculateLiveAPR" class="refresh-btn">Refresh</button>
   </div>
 </div>
@@ -271,3 +271,4 @@ onMounted(() => {
   font-size: 0.9em;
 }
 </style>
+```
