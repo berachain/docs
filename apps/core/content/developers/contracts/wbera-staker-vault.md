@@ -148,6 +148,24 @@ function totalAssets() public view returns (uint256)
 
 Returns the total WBERA in the vault, excluding reserved assets for pending withdrawals.
 
+#### Preview Redeem
+
+```solidity
+function previewRedeem(uint256 shares) external view returns (uint256 assets)
+```
+
+Calculates how much WBERA would be received for a given number of shares.
+
+**Parameters:**
+
+- `shares`: Number of shares to redeem
+
+**Returns:**
+
+- `assets`: Amount of WBERA that would be received
+
+**Note:** This function is essential for calculating the vault's APR by measuring share value changes over time.
+
 #### Withdrawal Request
 
 ```solidity
@@ -352,6 +370,10 @@ console.log("Share price:", ethers.formatEther(sharePrice));
 - [Incentive Fee Collector](./bgt-incentive-fee-collector.md): Collects and distributes incentive fees
 - [RewardVaultFactory](./reward-vault-factory.md): Manages incentive fee rates
 - [WBERA](./wbera.md): Wrapped BERA token contract
+
+## Related Guides
+
+- [SWBERA Vault APR Calculation](/developers/guides/swbera-vault-apr-calculation): How to calculate the vault's APR
 
 ## Resources
 
