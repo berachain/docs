@@ -13,6 +13,8 @@ head:
 
 <script setup>
   import config from '@berachain/config/constants.json';
+  import { ref, onMounted } from 'vue'
+  import { ethers } from 'ethers'
 </script>
 
 # SWBERA Vault APR Calculation
@@ -55,6 +57,8 @@ $$\text{APR} = \frac{\text{Current Share Value} - \text{Previous Share Value}}{\
 
 ## Implementation Example
 
+### Core APR Calculation Function
+
 ```javascript
 const { ethers } = require("ethers");
 
@@ -81,7 +85,11 @@ async function calculateSWBERAAPR(vaultContract, provider) {
     apr: Number(apr) / 100 // Convert basis points to percentage
   };
 }
+```
 
+### Usage Example
+
+```javascript
 // Usage
 const vaultAddress = "{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}";
 const vaultABI = [
@@ -93,7 +101,11 @@ const vaultContract = new ethers.Contract(vaultAddress, vaultABI, provider);
 
 const result = await calculateSWBERAAPR(vaultContract, provider);
 console.log(`SWBERA Vault APR: ${result.apr.toFixed(2)}%`);
+```
 
+### Alternative: Using Full ABI
+
+```javascript
 // Alternative: Using the full ABI from GitHub
 const fullABI = await fetch("{{ config.contracts.pol.wberaStakerVault.abi.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/') }}")
   .then(response => response.json());
@@ -118,20 +130,144 @@ const vaultContractFull = new ethers.Contract(vaultAddress, fullABI, provider);
 - Account for potential chain reorganizations
 - Consider using multiple data points for more accurate calculations
 
-## Contract Addresses
+## Live APR Calculation
 
-| Network | Contract Address                                                 |
-| ------- | ---------------------------------------------------------------- |
-| Mainnet | `{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}` |
-| Testnet | `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}` |
+<script setup>
+import { ref, onMounted } from 'vue'
+import { ethers } from 'ethers'
 
-## Contract ABI
+const aprData = ref({
+  currentShareValue: null,
+  previousShareValue: null,
+  return24h: null,
+  apr: null,
+  loading: true,
+  error: null
+})
 
-The complete WBERAStakerVault ABI is available at: [WBERAStakerVault.json]({{ config.contracts.pol.wberaStakerVault.abi }})
+const vaultAddress = "{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}"
+const vaultABI = [
+  "function previewRedeem(uint256 shares) external view returns (uint256 assets)"
+]
 
-## Related Documentation
+async function calculateLiveAPR() {
+  try {
+    aprData.value.loading = true
+    aprData.value.error = null
 
-- [WBERA Staker Vault Contract Reference](/developers/contracts/wbera-staker-vault)
-- [BERA Staking Guide](/learn/guides/bera-staking)
-- [ERC4626 Standard](https://eips.ethereum.org/EIPS/eip-4626)
-```
+    // Connect to Berachain mainnet
+    const provider = new ethers.JsonRpcProvider("{{ config.mainnet.rpcUrl }}")
+    const vaultContract = new ethers.Contract(vaultAddress, vaultABI, provider)
+
+    // Get current share value
+    const currentBlock = await provider.getBlockNumber()
+    const currentShareValue = await vaultContract.previewRedeem(ethers.parseEther("1"))
+
+    // Get share value from 24 hours ago (assuming 12-second block time)
+    const blocksPerDay = (24 * 60 * 60) / 12
+    const previousBlock = currentBlock - blocksPerDay
+    const previousShareValue = await vaultContract.previewRedeem(ethers.parseEther("1"), {
+      blockTag: previousBlock
+    })
+
+    // Calculate APR
+    const return24h = currentShareValue - previousShareValue
+    const apr = (return24h * 365n * 10000n) / previousShareValue
+
+    aprData.value = {
+      currentShareValue: ethers.formatEther(currentShareValue),
+      previousShareValue: ethers.formatEther(previousShareValue),
+      return24h: ethers.formatEther(return24h),
+      apr: Number(apr) / 100,
+      loading: false,
+      error: null
+    }
+  } catch (error) {
+    aprData.value = {
+      ...aprData.value,
+      loading: false,
+      error: error.message
+    }
+  }
+}
+
+onMounted(() => {
+  calculateLiveAPR()
+})
+</script>
+
+<div class="apr-calculator">
+  <h3>Current SWBERA Vault APR</h3>
+  
+  <div v-if="aprData.loading" class="loading">
+    <p>Calculating APR from blockchain data...</p>
+  </div>
+
+  <div v-else-if="aprData.error" class="error">
+    <p>Error calculating APR: {{ aprData.error }}</p>
+    <button @click="calculateLiveAPR" class="retry-btn">Retry</button>
+  </div>
+
+  <div v-else class="apr-results">
+    <div class="apr-value">
+      <strong>APR: {{ aprData.apr.toFixed(2) }}%</strong>
+    </div>
+    
+    <div class="apr-details">
+      <p><strong>Current Share Value:</strong> {{ aprData.currentShareValue }} WBERA</p>
+      <p><strong>Previous Share Value (24h ago):</strong> {{ aprData.previousShareValue }} WBERA</p>
+      <p><strong>24h Return:</strong> {{ aprData.return24h }} WBERA</p>
+    </div>
+    
+    <button @click="calculateLiveAPR" class="refresh-btn">Refresh</button>
+  </div>
+</div>
+
+<style scoped>
+.apr-calculator {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  background: #f9fafb;
+}
+
+.loading {
+  text-align: center;
+  color: #6b7280;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.retry-btn, .refresh-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.retry-btn:hover, .refresh-btn:hover {
+  background: #2563eb;
+}
+
+.apr-value {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #059669;
+}
+
+.apr-details {
+  margin: 15px 0;
+}
+
+.apr-details p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+</style>
