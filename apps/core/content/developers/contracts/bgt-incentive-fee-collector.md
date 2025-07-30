@@ -41,6 +41,8 @@ The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from
 | Mainnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address'] }}` |
 | Testnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}` |
 
+**ABI:** [BGTIncentiveFeeCollector.json]({{ config.contracts.pol.bgtIncentiveFeeCollector.abi }})
+
 ## Core Functions
 
 ### Initialization
