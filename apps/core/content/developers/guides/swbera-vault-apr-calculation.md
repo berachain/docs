@@ -164,7 +164,7 @@ Using the values from the sample output:
 
 $$APR = \frac{0.003421421862964542}{1.041352132320814436} \times 365 \times 100 = 119.92\%$$
 
-This shows the SWBERA vault is currently generating approximately **119.92% APR** based on the 24-hour performance.
+This shows the $SWBERA vault is currently generating approximately **119.92% APR** based on the 24-hour performance.
 
 ## Key Considerations
 
