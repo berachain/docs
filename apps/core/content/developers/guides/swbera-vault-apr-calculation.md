@@ -158,9 +158,9 @@ Using the values from the sample output:
 
 **24-hour calculation**:
 
-- Current Share Value: 1.044773554183778978 WBERA
-- Previous Share Value (24h ago): 1.041352132320814436 WBERA
-- 24h Return: 0.003421421862964542 WBERA
+- Current Share Value: 1.044773554183778978 $WBERA
+- Previous Share Value (24h ago): 1.041352132320814436 $WBERA
+- 24h Return: 0.003421421862964542 $WBERA
 
 $$APR = \frac{0.003421421862964542}{1.041352132320814436} \times 365 \times 100 = 119.92\%$$
 
