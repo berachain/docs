@@ -43,7 +43,7 @@ The `WBERAStakerVault` is an ERC4626-compliant vault that allows users to stake 
 | Mainnet | `{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}` |
 | Testnet | `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}` |
 
-**ABI:** [WBERAStakerVault.json](https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json)
+**ABI:** [WBERAStakerVault.json]({{ config.contracts.pol.wberaStakerVault.abi }})
 
 ## Core Functions
 

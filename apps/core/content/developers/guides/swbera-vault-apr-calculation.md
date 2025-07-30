@@ -95,7 +95,7 @@ const result = await calculateSWBERAAPR(vaultContract, provider);
 console.log(`SWBERA Vault APR: ${result.apr.toFixed(2)}%`);
 
 // Alternative: Using the full ABI from GitHub
-const fullABI = await fetch("https://raw.githubusercontent.com/berachain/doc-abis/main/core/WBERAStakerVault.json")
+const fullABI = await fetch("{{ config.contracts.pol.wberaStakerVault.abi.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/') }}")
   .then(response => response.json());
 const vaultContractFull = new ethers.Contract(vaultAddress, fullABI, provider);
 
@@ -127,7 +127,7 @@ const vaultContractFull = new ethers.Contract(vaultAddress, fullABI, provider);
 
 ## Contract ABI
 
-The complete WBERAStakerVault ABI is available at: [WBERAStakerVault.json](https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json)
+The complete WBERAStakerVault ABI is available at: [WBERAStakerVault.json]({{ config.contracts.pol.wberaStakerVault.abi }})
 
 ## Related Documentation
 
