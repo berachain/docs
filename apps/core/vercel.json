@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/developers/guides/migration-guide",
+      "destination": "/nodes/guides/august-2025-upgrade"
+    },
+    {
       "source": "/nodes/guides/bectra",
       "destination": "https://docs.berachain.com/learn/changelog#june-2025"
     },
