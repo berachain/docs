@@ -33,8 +33,8 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | July 30, 2025                        | Beacon-Kit 1.3.0-rc, Bera-geth v1.011602.0-rc3 and Bera-reth 1.0.0-rc.7 released for installation to Bepolia |
 | August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded                                                  |
 | August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activates                                                                                    |
-| TBD                | Mainnet upgrade instructions posted                                                                          |
-| TBD                | Mainnet hardfork activates                                                                                   |
+| TBD                                  | Mainnet upgrade instructions posted                                                                          |
+| TBD                                  | Mainnet hardfork activates                                                                                   |
 
 ## New Chain Clients and Genesis Files
 
