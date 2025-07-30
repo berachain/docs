@@ -10,7 +10,7 @@ Below are important changes shipped to Berachain.
 * [BRIP 0001](https://github.com/berachain/brips/blob/main/meta/BRIP-0001.md) - Forked Execution Clients.
 * [BRIP 0002](https://github.com/berachain/brips/blob/main/meta/BRIP-0002.md) - Gas Price Stablization. We now adjust gas prices at the same rate as Ethereum, and have raised the minimum for gas prices to reduce spam. 
 * [BRIP 0003](https://github.com/berachain/brips/blob/main/meta/BRIP-0003.md) - Stable Block Time. Now fixed at 2 seconds.
-* [BRIP 0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md) - Enshrine PoL. Each block automatically includes transaction to generate the previous block's rewards. Also, Validators can delegate the right for Reward Allocations to a sub-account. (See FIXME - BeraChef # setValRewardAllocator)
+* [BRIP 0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md) - Enshrine PoL. Each block automatically includes transaction to generate the previous block's rewards.
 
 ## July 2025
 
