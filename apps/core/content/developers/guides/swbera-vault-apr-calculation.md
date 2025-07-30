@@ -134,17 +134,20 @@ calculateSWBERAAPR()
 
 When you run the script, you'll get output similar to this:
 
-```json
-{
-  "currentShareValue": "1.044773554183778978",
-  "previousShareValue24h": "1.041352132320814436",
-  "previousShareValue26h": "1.041352132320814436",
-  "return24h": "0.003421421862964542",
-  "return26h": "0.003421421862964542",
-  "apr24h": 119.92,
-  "apr26h": 119.92,
-  "avgAPR": 119.92
-}
+```bash
+# FROM: /
+node script.js;
+# [Expected Similar Output]:
+# {
+#   "currentShareValue": "1.044773554183778978",
+#   "previousShareValue24h": "1.041352132320814436",
+#   "previousShareValue26h": "1.041352132320814436",
+#   "return24h": "0.003421421862964542",
+#   "return26h": "0.003421421862964542",
+#   "apr24h": 119.92,
+#   "apr26h": 119.92,
+#   "avgAPR": 119.92
+# }
 ```
 
 ### Calculation Breakdown
