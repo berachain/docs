@@ -176,7 +176,7 @@ This shows the SWBERA vault is currently generating approximately **119.92% APR*
 ### Precision
 
 - All calculations use 18 decimal precision
-- Share values are denominated in WBERA
+- Share values are denominated in $WBERA
 - APR is calculated in basis points and converted to percentage
 
 ### Block Considerations
