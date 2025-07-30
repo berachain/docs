@@ -156,7 +156,7 @@ Returns the total WBERA in the vault, excluding reserved assets for pending with
 function previewRedeem(uint256 shares) external view returns (uint256 assets)
 ```
 
-Calculates how much WBERA would be received for a given number of shares.
+Calculates how much $WBERA would be received for a given number of shares.
 
 **Parameters:**
 
@@ -164,7 +164,7 @@ Calculates how much WBERA would be received for a given number of shares.
 
 **Returns:**
 
-- `assets`: Amount of WBERA that would be received
+- `assets`: Amount of $WBERA that would be received
 
 **Note:** This function is essential for calculating the vault's APR by measuring share value changes over time.
 
