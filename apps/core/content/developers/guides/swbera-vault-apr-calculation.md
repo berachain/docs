@@ -55,81 +55,6 @@ Multiply the 24-hour return by 365 to get the annualized rate:
 
 $$\text{APR} = \frac{\text{Current Share Value} - \text{Previous Share Value}}{\text{Previous Share Value}} \times 365 \times 100$$
 
-## Implementation Example
-
-### Core APR Calculation Function
-
-```javascript
-const { ethers } = require("ethers");
-
-async function calculateSWBERAAPR(vaultContract, provider) {
-  // Step 1: Get current share value
-  const currentBlock = await provider.getBlockNumber();
-  const currentShareValue = await vaultContract.previewRedeem(ethers.parseEther("1"));
-
-  // Step 2: Get share value from 24 hours ago
-  const blocksPerDay = (24 * 60 * 60) / 12; // Assuming 12-second block time
-  const previousBlock = currentBlock - blocksPerDay;
-  const previousShareValue = await vaultContract.previewRedeem(ethers.parseEther("1"), {
-    blockTag: previousBlock
-  });
-
-  // Step 3: Calculate APR
-  const return24h = currentShareValue - previousShareValue;
-  const apr = (return24h * 365n * 10000n) / previousShareValue; // Basis points
-
-  return {
-    currentShareValue: ethers.formatEther(currentShareValue),
-    previousShareValue: ethers.formatEther(previousShareValue),
-    return24h: ethers.formatEther(return24h),
-    apr: Number(apr) / 100 // Convert basis points to percentage
-  };
-}
-```
-
-### Usage Example
-
-```javascript
-// Usage
-const vaultAddress = "{{ config.contracts.pol.wberaStakerVault['mainnet-address'] }}";
-const vaultABI = [
-  "function previewRedeem(uint256 shares) external view returns (uint256 assets)",
-  "function totalAssets() public view returns (uint256)",
-  "function totalSupply() public view returns (uint256)"
-];
-const vaultContract = new ethers.Contract(vaultAddress, vaultABI, provider);
-
-const result = await calculateSWBERAAPR(vaultContract, provider);
-console.log(`SWBERA Vault APR: ${result.apr.toFixed(2)}%`);
-```
-
-### Alternative: Using Full ABI
-
-```javascript
-// Alternative: Using the full ABI from GitHub
-const fullABI = await fetch("{{ config.contracts.pol.wberaStakerVault.abi.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/') }}")
-  .then(response => response.json());
-const vaultContractFull = new ethers.Contract(vaultAddress, fullABI, provider);
-
-## Key Considerations
-
-### Time Frame
-
-- **Current**: 24-hour measurement period
-- **Future**: Planning to move to weekly measurements for more stable APR calculations
-
-### Precision
-
-- All calculations use 18 decimal precision
-- Share values are denominated in WBERA
-- APR is calculated in basis points and converted to percentage
-
-### Block Considerations
-
-- Ensure you have access to historical block data
-- Account for potential chain reorganizations
-- Consider using multiple data points for more accurate calculations
-
 ## Live APR Calculation
 
 <script setup>
@@ -213,7 +138,17 @@ onMounted(() => {
       <strong>APR: {{ aprData.apr.toFixed(2) }}%</strong>
     </div>
 
+    <div class="formula-calculation">
+      <h4>Formula Calculation:</h4>
+      <div class="formula">
+        <p>$$\text{APR} = \frac{{{ aprData.currentShareValue }} - {{ aprData.previousShareValue }}}{{{ aprData.previousShareValue }}} \times 365 \times 100$$</p>
+        <p>$$\text{APR} = \frac{{{ aprData.return24h }}}{{{ aprData.previousShareValue }}} \times 365 \times 100$$</p>
+        <p>$$\text{APR} = {{ ((parseFloat(aprData.return24h) / parseFloat(aprData.previousShareValue)) * 365 * 100).toFixed(2) }}%$$</p>
+      </div>
+    </div>
+
     <div class="apr-details">
+      <h4>Input Values:</h4>
       <p><strong>Current Share Value:</strong> {{ aprData.currentShareValue }} WBERA</p>
       <p><strong>Previous Share Value (24h ago):</strong> {{ aprData.previousShareValue }} WBERA</p>
       <p><strong>24h Return:</strong> {{ aprData.return24h }} WBERA</p>
@@ -262,8 +197,40 @@ onMounted(() => {
   color: #059669;
 }
 
+.formula-calculation {
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.formula-calculation h4 {
+  margin-top: 0;
+  color: #374151;
+}
+
+.formula {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.formula p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
 .apr-details {
   margin: 15px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.apr-details h4 {
+  margin-top: 0;
+  color: #374151;
 }
 
 .apr-details p {
@@ -271,4 +238,22 @@ onMounted(() => {
   font-size: 0.9em;
 }
 </style>
-```
+
+## Key Considerations
+
+### Time Frame
+
+- **Current**: 24-hour measurement period
+- **Future**: Planning to move to weekly measurements for more stable APR calculations
+
+### Precision
+
+- All calculations use 18 decimal precision
+- Share values are denominated in WBERA
+- APR is calculated in basis points and converted to percentage
+
+### Block Considerations
+
+- Ensure you have access to historical block data
+- Account for potential chain reorganizations
+- Consider using multiple data points for more accurate calculations
