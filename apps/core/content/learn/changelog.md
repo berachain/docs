@@ -26,33 +26,11 @@ The delay for reward allocation changes has been reduced from 8,191 blocks to 50
 
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
-<<<<<<< HEAD
-This is a *hardfork* activated on Berachain Mainnet on June 4, 2025.
-Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
-=======
 This is a *hardfork* activated on Berachain Mainnet on June 4 2025. Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
->>>>>>> origin
 
 The `CHAIN_SPEC` environment variable is no longer used. There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. 
 
-<<<<<<< HEAD
-**What's new**
-
-**The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though it defaults to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
-
-  ```app.toml
-  [beacon-kit] 
-  chain-spec = "testnet"
-  ```
-
-During `beacond init`, for new installations, `beacond` accepts the new [command line option](beacon-kit/cli#flags) `--beacon-kit.chain-spec`.
-
-**New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade. New deployments should use those recommended versions.
-
-**Support for new EIPs.** 
-=======
 We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade. New deployments should use those recommended versions.
->>>>>>> origin
 
 This release adds support for:
 * **EIP-2537** Precompile for BLS12-381 curve operations
@@ -69,30 +47,15 @@ The [Claim API](/developers/claim-api) is now released.
 
 ## April 2025
 
-<<<<<<< HEAD
-1. New maximum of 3 incentives per reward vault
-2. Block reward emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
-=======
 **Updates to POL.**
 1. New Maximum of 3 incentives per reward vault
 2. Block Reward Emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
->>>>>>> origin
 3. Auto-Incentivizer: fees from default cutting board BEX Reward Vaults will use the fees to automatically offer incentives.
 4. Reward Allocations limit any one reward vault to 30% share of emissions.
 
 ![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
 
-<<<<<<< HEAD
-## 2025-APR-18
-
-Reward allocations limit any one reward vault to 30% share of emissions.
-
-## 2025-APR: Beacon Kit v1.1.4
-
-Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
-=======
 **Beacon Kit v1.1.4** improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
->>>>>>> origin
 
 Also, on startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
 
