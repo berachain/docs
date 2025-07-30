@@ -206,7 +206,7 @@ const SIDEBAR = {
           link: "/developers/guides/community-guides"
         },
         {
-          text: "SWBERA Vault APR Calculation",
+          text: "Staking Vault APR",
           link: "/developers/guides/swbera-vault-apr-calculation"
         }
       ]
