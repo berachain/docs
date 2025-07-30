@@ -28,25 +28,25 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 ## August 2025 Upgrade Timeline
 
-| Date                     | Milestone                                                                                               |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- |
-| July 21, 2025            | Beacon-Kit 1.3.0-rc, Bera-geth 1.FIXME.0-rc and Bera-reth 1.0.0-rc released for installation to Bepolia |
-| July 28, 2025            | All Bepolia infrastructure partners expected to be upgraded                                             |
-| July 30, 2025 @ Noon EDT | Bepolia upgrade activates                                                                               |
-| mid August               | Mainnet upgrade instructions posted                                                                     |
-| late August              | Mainnet hardfork activates                                                                              |
+| Date                                 | Milestone                                                                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| July 30, 2025                        | Beacon-Kit 1.3.0-rc, Bera-geth v1.011602.0-rc2 and Bera-reth 1.0.0-rc.7 released for installation to Bepolia |
+| August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded                                                  |
+| August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activates                                                                                    |
+| August 11 (tentative)                | Mainnet upgrade instructions posted                                                                          |
+| August 20 (tentative)                | Mainnet hardfork activates                                                                                   |
 
 ## New Chain Clients and Genesis Files
 
-| Chain   | Client                                                                             |
-| ------- | ---------------------------------------------------------------------------------- |
-| Bepolia | [Bera-geth vFIXME-rc](https://github.com/berachain/bera-geth/releases/tag/FIXME)   |
-| Bepolia | [Bera-reth v1.0.0-rc](https://github.com/berachain/bera-reth/releases/tag/FIXME)   |
-| Bepolia | [Beacon-Kit v1.3.0-rc](https://github.com/berachain/beacon-kit/releases/tag/FIXME) |
+| Chain   | Client                                                                                           |
+| ------- | ------------------------------------------------------------------------------------------------ |
+| Bepolia | [Bera-geth v1.011602.0-rc2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.0-rc2) |
+| Bepolia | [Bera-reth v1.0.0-rc.7](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.7)         |
+| Bepolia | [Beacon-Kit v1.3.0-rc](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)          |
 
-| Chain   | Genesis file & hash                                                                                |
-| ------- | -------------------------------------------------------------------------------------------------- |
-| Bepolia | [FIXME](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
+| Chain   | Genesis file & md5 hash                                                                                                       |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Bepolia | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
@@ -55,6 +55,8 @@ Operators currently running Geth or Reth can upgrade to our forked versions whil
 ## Upgrade instructions
 
 Test your modifications on non-production infrastructure to verify your upgrade process and new chain launch procedure that refers to Bera-reth/Bera-geth.
+
+**No configuration changes are needed** aside from the new executables.
 
 :::tip
 If you duplicate your EL installation to test, don't duplicate the (reth) `discovery_secret` or (geth) `nodekey` files to avoid interfering with your production node's peering.
