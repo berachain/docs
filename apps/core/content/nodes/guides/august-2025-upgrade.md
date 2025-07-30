@@ -97,5 +97,15 @@ tree datadir;
 Beacon-Kit should log the following on startup:
 
 ```
-FIXME
+	+==========================================================================+
+	+ ⭐️ Star BeaconKit on GitHub @ https://github.com/berachain/beacon-kit    +
+	+ 🧩 Your node is running version: v1.3.0-rc1                              +
+	+ ♦ Eth client: unknown (version: unknown)                                 +
+	+ 💾 Your system: linux/amd64                                              +
+	+ 🍴 Deneb1 Fork Time: 1740090694                                          +
+	+ 🍴 Electra Fork Time: 1746633600                                         +
+	+ 🍴 Electra1 Fork Time: 1754496000                                        +
+	+ 🦺 Please report issues @ https://github.com/berachain/beacon-kit/issues +
+	+==========================================================================+
+
 ```
