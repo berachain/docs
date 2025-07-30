@@ -13,6 +13,10 @@ head:
 
 # Glossary 📖
 
+## BeaconKit
+
+BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
+
 ## BERA Token
 
 `$BERA` is the native gas token of Berachain's L1 and serves multiple purposes:
@@ -24,6 +28,10 @@ head:
 - Can be obtained by burning BGT (one-way conversion)
 
 Read more in [Tokens - $BERA](/learn/pol/tokens/bera).
+
+## BEX
+
+Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
 
 ## BGT (Bera Governance Token)
 
@@ -38,17 +46,9 @@ participating in [Proof of Liquidity](#proof-of-liquidity) (PoL):
 
 Read more in [Tokens - $BGT](/learn/pol/tokens/bgt).
 
-## BeaconKit
-
-BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
-
 ## Block
 
 A data unit containing a list of transactions that is permanently added to the blockchain in a sequential manner.
-
-## BEX
-
-Berachain's native [decentralized exchange](#dex-decentralized-exchange), called _BEX_. Read more in [Native dApps > BEX](/learn/dapps/bex).
 
 ## Block Time
 
@@ -134,3 +134,7 @@ The process of locking up tokens to support the operations of a blockchain netwo
 ## Swap
 
 The process of exchanging one token for another on a decentralized exchange. Swaps involve a fee, which varies depending on the pool's settings.
+
+## WBera Staking
+
+By staking into the [WBERA Staking Vault](/developers/contracts/wbera-staker-vault), BERA holders gain direct yield opportunities: 33% of protocol incentives are automatically collected as fees during the incentive distribution process and distributed to these stakers. [Read more about BERA Staking](/learn/guides/bera-staking).

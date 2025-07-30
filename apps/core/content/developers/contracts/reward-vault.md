@@ -1,4 +1,10 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # RewardVault
+
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVault['mainnet-address']">{{config.contracts.pol.rewardVault['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVault.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/RewardVault.sol)
 
@@ -623,6 +629,14 @@ function addIncentive(
 | `token`         | `address` | The address of the token to add as an incentive.         |
 | `amount`        | `uint256` | The amount of the token to add as an incentive.          |
 | `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
+
+**PoL Fee Collection**
+
+When incentives are distributed, a portion is automatically collected as a fee for BERA stakers:
+
+- **Fee Rate**: 33% of the incentive amount
+- **Fee Collection**: Automatically sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
+- **Remaining Amount**: The remaining 67% is available for distribution to validators
 
 ### accountIncentives
 

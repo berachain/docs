@@ -24,7 +24,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 // Main Configuration
 // ========================================================
 // https://vitepress.dev/reference/site-config
-export default withMermaid(
+const config = withMermaid(
   defineConfig({
     title: `${constants.websites.docsCore.name}`,
     description: `${constants.websites.docsCore.description}`,
@@ -151,9 +151,6 @@ export default withMermaid(
     },
     vite: {
       plugins: [vercelToolbar()],
-      optimizeDeps: {
-        include: ["@braintree/sanitize-url", "mermaid"]
-      },
       resolve: {
         alias: [
           {
@@ -200,3 +197,11 @@ export default withMermaid(
     }
   })
 );
+
+// Override optimizeDeps after withMermaid adds its dependencies
+// Only include mermaid to avoid resolution issues with transitive deps
+if (config.vite?.optimizeDeps) {
+  config.vite.optimizeDeps.include = ["mermaid"];
+}
+
+export default config;

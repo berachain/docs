@@ -4,7 +4,7 @@
 
 # HoneyFactoryReader
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.honeyFactoryReader.address">{{config.mainnet.contracts.honeyFactoryReader.address}}</a><span v-if="config.mainnet.contracts.honeyFactoryReader.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.honeyFactoryReader.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactoryReader['mainnet-address']">{{config.contracts.tokens.honeyFactoryReader['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactoryReader.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactoryReader.abi">ABI JSON</a></span></small>
 
 The Honey Factory Reader contract is responsible for providing previews of minting/redeeming HONEY.
 

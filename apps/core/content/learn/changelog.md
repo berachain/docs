@@ -12,24 +12,30 @@ Below are important changes shipped to Berachain.
 * [BRIP 0003](https://github.com/berachain/brips/blob/main/meta/BRIP-0003.md) - Stable Block Time. Now fixed at 2 seconds.
 * [BRIP 0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md) - Enshrine PoL. Each block automatically includes transaction to generate the previous block's rewards. Also, Validators can delegate the right for Reward Allocations to a sub-account. (See FIXME - BeraChef # setValRewardAllocator)
 
-## 2025-JULY-7
+## July 2025
 
-* **[Reward Vault upgrades](/developers/contracts/reward-vault)** – Introduced _rate-based_ BGT emission timing via [`targetRewardsPerSecond`](/developers/contracts/reward-vault#targetrewardspersecond), with automatic duration calculation based on reward amounts and target rates. Added [`setRewardsDuration`](/developers/contracts/reward-vault#setrewardsduration), [`setTargetRewardsPerSecond`](/developers/contracts/reward-vault#settargetrewardspersecond), and related state management. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for an overview and [Reward Vault contract reference](/developers/contracts/reward-vault) for implementation details.
-* **Validator commission cap** – [`BeraChef`](/developers/contracts/berachef) now enforces a hard upper-limit of **20%** on incentive-token commission (`MAX_COMMISSION_RATE = 0.2e4`). Existing validators with rates above 20% are automatically capped.
+**Launched [BERA Staking](https://docs.berachain.com/learn/guides/bera-staking).**  Earn yield on BERA via [the Hub](http://hub.berachain.com/stake/). For developers, we introduced the [WBeraStakeVault](https://docs.berachain.com/developers/contracts/wbera-staker-vault) and [Incentive Fee Collector](https://docs.berachain.com/developers/contracts/bgt-incentive-fee-collector) contracts.
 
-## 2025-JUNE-17
+**[Reward Vault upgrades](/developers/contracts/reward-vault)** – Introduced _rate-based_ BGT emission timing via [`targetRewardsPerSecond`](/developers/contracts/reward-vault#targetrewardspersecond), with automatic duration calculation based on reward amounts and target rates. Added [`setRewardsDuration`](/developers/contracts/reward-vault#setrewardsduration), [`setTargetRewardsPerSecond`](/developers/contracts/reward-vault#settargetrewardspersecond), and related state management. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for an overview and [Reward Vault contract reference](/developers/contracts/reward-vault) for implementation details.
+
+**Validator commission cap** – [`BeraChef`](/developers/contracts/berachef) now enforces a hard upper-limit of **20%** on incentive-token commission (`MAX_COMMISSION_RATE = 0.2e4`). Existing validators with rates above 20% are automatically capped.
+
+## June 2025
 
 The delay for reward allocation changes has been reduced from 8,191 blocks to 500.
 
-## 2025-JUNE-04: Bectra Hardfork (Bera + Prague + Electra)
-
 **Beacon Kit 1.2.0** adds support for [Validator Stake withdrawals](https://docs.berachain.com/nodes/guides/withdraw-stake) and [EIP 7702](/developers/guides/eip7702-basics), among a few other EIPs. The release candidate upgrades Bepolia, and the final release upgrades mainnet.
 
+<<<<<<< HEAD
 This is a *hardfork* activated on Berachain Mainnet on June 4, 2025.
 Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
+=======
+This is a *hardfork* activated on Berachain Mainnet on June 4 2025. Beacon Kit 1.2.0 is required to continue following Berachain Mainnet after that time.
+>>>>>>> origin
 
-Since this is a minor version release (`major.minor.0`), there are breaking changes.
+The `CHAIN_SPEC` environment variable is no longer used. There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. 
 
+<<<<<<< HEAD
 **What's new**
 
 **The `CHAIN_SPEC` environment variable is no longer used.** There are new [options](/beacon-kit/configuration#beaconkit-configuration) in [app.toml](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/app.toml#L117) for controlling the desired chain to follow. Though it defaults to mainnet so that money machines don't stop working, for Bepolia this configuration must be added:
@@ -44,6 +50,9 @@ During `beacond init`, for new installations, `beacond` accepts the new [command
 **New Required EL Versions.** We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade. New deployments should use those recommended versions.
 
 **Support for new EIPs.** 
+=======
+We have updated our [Execution Layer recommended versions](/nodes/evm-execution) to show new versions required for the post-Bectra upgrade. New deployments should use those recommended versions.
+>>>>>>> origin
 
 This release adds support for:
 * **EIP-2537** Precompile for BLS12-381 curve operations
@@ -54,18 +63,26 @@ This release adds support for:
 * **EIP-7702** Set code for EOA 
 * **EIP-7840** Add blob schedule to EL config files
 
-## 2025-MAY
+## May 2025
 
 The [Claim API](/developers/claim-api) is now released.
 
-## 2025-APR-24
+## April 2025
 
+<<<<<<< HEAD
 1. New maximum of 3 incentives per reward vault
 2. Block reward emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
+=======
+**Updates to POL.**
+1. New Maximum of 3 incentives per reward vault
+2. Block Reward Emissions have been modified in line with the targeted inflation rate of 10%. Updated constants are found on-chain via [BlockRewardController](https://berascan.com/address/0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e) and described in [Block Rewards](/learn/pol/blockrewards).
+>>>>>>> origin
 3. Auto-Incentivizer: fees from default cutting board BEX Reward Vaults will use the fees to automatically offer incentives.
+4. Reward Allocations limit any one reward vault to 30% share of emissions.
 
 ![Berachain Auto-Incentivizer](/assets/auto-incentivizer.png)
 
+<<<<<<< HEAD
 ## 2025-APR-18
 
 Reward allocations limit any one reward vault to 30% share of emissions.
@@ -73,16 +90,26 @@ Reward allocations limit any one reward vault to 30% share of emissions.
 ## 2025-APR: Beacon Kit v1.1.4
 
 Improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
+=======
+**Beacon Kit v1.1.4** improves `beacond` handling of transient conditions (which solve themselves) such as a slow execution layer. It will still exit if the execution layer is shut down.
+>>>>>>> origin
 
 Also, on startup, beacond now issues warnings about deprecated settings, or settings that could be improved.
 
-* ```WARN Automatically raising RPCTimeout ... minimum=2000```
+## March 2025
 
-  Set your RPC timeout to at least 2 seconds:
+**Beacon Kit v1.1.3** Restructures Consensus Layer and Execution Layer communication to keep them in lock-step. Now, every RPC communication issue among them will result in a BeaconKit termination *but* keeps their states in sync so you can easily restart any time and keep going. You don't need to keep these once the node has completed sync, but they make resuming syncing, or syncing from genesis, more robust.
 
-  **FILE:** `app.toml`
-  ```
-  rpc-timeout = "2s"
-  ```
+## February 2025
 
-* `ignoring deprecated setting rpc-retries`
+**BEacon Kit v1.1.2** is a security-focused update:
+* Harden timestamp validation of EL payload
+* Prevent potential panics and node halts while decoding data
+
+## January 2025
+
+We launched Proof of Liquidity with the public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain Mainnet.
+
+**BeaconKit 1.1.1** fixes ASA-2025-001 and ASA-2025-002, which could lead to a network halt. Moreover it hardens some checks around deposit and blob processing.
+
+**BeaconKit v1.1.0** unlocks minting of tokens towards the BGT contract.

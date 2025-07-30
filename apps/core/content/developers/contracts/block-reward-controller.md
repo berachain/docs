@@ -4,7 +4,7 @@
 
 # BlockRewardController
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.blockRewardsController.address">{{config.mainnet.contracts.blockRewardsController.address}}</a><span v-if="config.mainnet.contracts.blockRewardsController.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.blockRewardsController.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.blockRewardController['mainnet-address']">{{config.contracts.pol.blockRewardController['mainnet-address']}}</a><span v-if="config.contracts.pol.blockRewardController.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
 
 The BlockRewardController contract is responsible for managing the reward rate of BGT.
 

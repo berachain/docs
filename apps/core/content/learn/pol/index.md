@@ -49,11 +49,3 @@ Learn about [integrating with Berachain's incentive system](/learn/pol/incentive
 As `$BGT` Holders accumulate tokens, they can delegate them to validators (⑨), directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
 
 **For BGT Holders**: Learn how to [boost a validator with BGT](/learn/guides/boost-a-validator) to participate in the delegation cycle.
-
-## Ecosystem Alignment 🤝
-
-By integrating Berachain's native network rewards among all ecosystem participants, PoL creates alignment between:
-
-- **Validators**: Need `$BGT` delegation to maximize their block rewards and must efficiently direct emissions to reward vaults to earn Incentives and attract more boost.
-- **Protocols**: Compete for `$BGT` emissions by offering attractive Incentive rates in their reward vaults
-- **Users**: Earn `$BGT` by providing liquidity, then delegate to validators who maximize returns

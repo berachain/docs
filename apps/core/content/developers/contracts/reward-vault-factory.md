@@ -4,7 +4,7 @@
 
 # RewardVaultFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.rewardVaultFactory.address">{{config.mainnet.contracts.rewardVaultFactory.address}}</a><span v-if="config.mainnet.contracts.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.rewardVaultFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory['mainnet-address']">{{config.contracts.pol.rewardVaultFactory['mainnet-address']}}</a><span v-if="config.contracts.pol.rewardVaultFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.rewardVaultFactory.abi">ABI JSON</a></span></small>
 
 Factory contract for creating RewardVaults and keeping track of them.
 
@@ -83,6 +83,24 @@ the BGT booster share of the incentive tokens.
 address public bgtIncentiveDistributor;
 ```
 
+### bgtIncentiveFeeCollector
+
+The address of the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract that receives
+incentive fees for BERA stakers (PoL).
+
+```solidity
+address public bgtIncentiveFeeCollector;
+```
+
+### bgtIncentiveFeeRate
+
+The fee rate for incentive collection, expressed in basis points (10000 = 100%).
+Currently set to 3300 (33%).
+
+```solidity
+uint256 public bgtIncentiveFeeRate;
+```
+
 ## Functions
 
 ### constructor
@@ -129,6 +147,38 @@ function setBGTIncentiveDistributor(address _bgtIncentiveDistributor) external o
 | Name                       | Type      | Description                                              |
 | -------------------------- | --------- | -------------------------------------------------------- |
 | `_bgtIncentiveDistributor` | `address` | The address of the new BGTIncentiveDistributor contract. |
+
+### setBGTIncentiveFeeCollector
+
+Sets the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract.
+
+_Only callable by the admin._
+
+```solidity
+function setBGTIncentiveFeeCollector(address _bgtIncentiveFeeCollector) external onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name                        | Type      | Description                                                                                                   |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| `_bgtIncentiveFeeCollector` | `address` | The address of the new [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector) contract. |
+
+### setBGTIncentiveFeeRate
+
+Sets the incentive fee rate.
+
+_Only callable by the admin._
+
+```solidity
+function setBGTIncentiveFeeRate(uint256 _bgtIncentiveFeeRate) external onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name                   | Type      | Description                                      |
+| ---------------------- | --------- | ------------------------------------------------ |
+| `_bgtIncentiveFeeRate` | `uint256` | The new fee rate in basis points (10000 = 100%). |
 
 ### createRewardVault
 

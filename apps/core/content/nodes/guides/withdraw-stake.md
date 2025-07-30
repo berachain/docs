@@ -62,7 +62,7 @@ Set up your environment. You will need the private key of your Withdrawal Creden
 
 ```bash-vue
 export RPC=https://bepolia.rpc.berachain.com/
-export WITHDRAW_CONTRACT={{ config.bepolia.contracts.withdrawalContract.address }}
+export WITHDRAW_CONTRACT=0x00000961Ef480Eb55e80D19ad83579A64c007002
 export WITHDRAW_AMOUNT_ETH=10000
 # Alternatively
 export WITHDRAW_AMOUNT_GWEI=${WITHDRAW_AMOUNT_ETH}000000000

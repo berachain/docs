@@ -15,7 +15,19 @@ head:
     import config from '@berachain/config/constants.json';
 </script>
 
-# Proof-of-Liquidity Frequently Asked Questions ❓
+# Proof-of-Liquidity Frequently Asked Questions❓
+
+## PoL
+
+### What is PoL?
+
+Proof-of-Liquidity (PoL) is a comprehensive mechanism designed to bootstrap liquidity and align economic incentives across the Berachain ecosystem. It enables protocols to efficiently incentivize and grow their user base through a competitive marketplace where validators direct BGT emissions to Reward Vaults in exchange for protocol incentives. Users earn BGT by providing liquidity to protocols and can delegate it to validators for additional rewards. The system also includes a BERA Yield Module that provides native BERA staking opportunities, with a portion of protocol incentives redirected to BERA stakers, strengthening the network's economic foundation while creating a virtuous cycle of liquidity provision and reward distribution.
+
+Everything PoL can be done [on the Berachain Hub](https://hub.berachain.com/stake/). The vision is laid out in [the Honey Paper](https://honeypaper.berachain.com).
+
+### Is BERA staking the same as validator staking?
+
+No, BERA staking in PoL is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking earns rewards for participating in network consensus.
 
 ## Validator Requirements & Operations
 
