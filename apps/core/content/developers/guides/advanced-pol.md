@@ -5,23 +5,27 @@ head:
       content: Advanced PoL Integration
   - - meta
     - name: description
-      content: Proof of Liquidity Integration Guide for Non-ERC20 Protocols
+      content: Proof of Liquidity Integration Guide for Stake on Behalf
   - - meta
     - property: og:description
-      content: Proof of Liquidity Integration Guide for Non-ERC20 Protocols
+      content: Proof of Liquidity Integration Guide for Stake on Behalf
 ---
 
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
-# Proof of Liquidity Integration Guide for Non-ERC20 Protocols
+# Proof of Liquidity Integration Guide for Stake on Behalf
 
 ## Introduction
 
-Users typically engage with Proof of Liquidity by staking ERC20 receipt tokens into [Reward Vaults](/learn/pol/rewardvaults) to earn `$BGT`. However, this approach may not be suitable for all protocols.
+Users typically engage with Proof of Liquidity by staking ERC20 receipt tokens into [Reward Vaults](/learn/pol/rewardvaults) to earn `$BGT`. However, this approach may not be suitable for all protocols:
 
-This guide demonstrates how to integrate Berachain's Proof of Liquidity (PoL) system for protocols who don't naturally produce stakeable ERC20 receipt tokens or otherwise need to track balances internally. For example, a perpetual futures exchange may wish to reward users who open trading positions with `$BGT`, and cease rewards when the position is closed.
+- A protocol may not have a token
+- A consumer application may want to abstract PoL operations from the user
+- An application may want to offer a smoother UX to users that doesn't involve recieving, staking, and unstaking an ERC20 to earn BGT
+
+This guide demonstrates how to integrate Berachain's Proof of Liquidity (PoL) system for protocols who don't want to use the typical ERC20 pattern. For example, a perpetual futures exchange may wish to reward users who open trading positions with `$BGT`, and cease rewards when the position is closed.
 
 By implementing this approach, such protocols can still participate in PoL, benefiting from the improved incentive efficiencies it provides.
 
@@ -31,7 +35,7 @@ Note that this article provides only one possible workaround for integrating PoL
 
 ## Description of Approach
 
-The described approach involves the creation of a dummy `StakingToken` that is staked in a Reward Vault on behalf of users by a protocol. This dummy token is used to track the staked balances of users and is minted and burned by the protocol (operating through `ProtocolContract`) as users provide/withdraw their liquidity from the protocol.
+The described approach involves the creation of a dummy `StakingToken` that is minted and staked in a Reward Vault on behalf of users by a protocol. This dummy token is used to track the staked balances of users and is minted and burned by the protocol (operating through `ProtocolContract`) as users provide/withdraw their liquidity from the protocol.
 
 The staked dummy token balance entitles users to earn `$BGT` as if they had staked an ERC20 receipt token in a PoL vault themselves. This approach is enabled by the `delegateStake` and `delegateWithdraw` methods in the [RewardVault](/developers/contracts/reward-vault) contract.
 
