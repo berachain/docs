@@ -160,21 +160,21 @@
         "name": "BGTIncentiveDistributor",
         "bepolia-address": "0xb0d005Fe83E3F1ec876C1a64700c5F0d6265d9E3",
         "mainnet-address": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
       },
       "bgtIncentiveFeeCollector": {
         "name": "BGTIncentiveFeeCollector",
         "bepolia-address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
-        "mainnet-address": "",
-        "abi": "",
+        "mainnet-address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveFeeCollector.json",
         "docsUrl": "/developers/contracts/bgt-incentive-fee-collector"
       },
       "wberaStakerVault": {
         "name": "WBERAStakerVault",
         "bepolia-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
-        "mainnet-address": "",
-        "abi": "",
+        "mainnet-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json",
         "docsUrl": "/developers/contracts/wbera-staker-vault"
       },
       "beaconDeposit": {
@@ -216,7 +216,7 @@
         "name": "BGT Staker",
         "mainnet-address": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
         "bepolia-address": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTStaker.json",
         "docsUrl": "/developers/contracts/bgt-staker"
       },
       "feeCollector": {
@@ -230,7 +230,7 @@
         "name": "Governance",
         "mainnet-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
         "bepolia-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
-        "abi": "",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/gov/Governance.json",
         "docsUrl": "/developers/contracts/governance"
       },
       "timelock": {

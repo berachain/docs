@@ -7,6 +7,7 @@ import { sidebar } from "./sidebar";
 import { constants } from "@berachain/config/constants";
 import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
 import { withMermaid } from "vitepress-plugin-mermaid";
+import llmsTxt from "vitepress-plugin-llms";
 
 // Config
 // ========================================================
@@ -150,7 +151,7 @@ const config = withMermaid(
       }
     },
     vite: {
-      plugins: [vercelToolbar()],
+      plugins: [vercelToolbar(), llmsTxt()],
       resolve: {
         alias: [
           {
@@ -184,12 +185,6 @@ const config = withMermaid(
                 "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
                 import.meta.url
               )
-            )
-          },
-          {
-            find: /^.*\/VPFlyout\.vue$/,
-            replacement: fileURLToPath(
-              new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
             )
           },
           {

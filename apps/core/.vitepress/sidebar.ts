@@ -213,6 +213,10 @@ const SIDEBAR = {
         {
           text: "Community Guides",
           link: "/developers/guides/community-guides"
+        },
+        {
+          text: "BERA Staking Vault APR",
+          link: "/developers/guides/swbera-vault-apr-calculation"
         }
       ]
     },
@@ -300,7 +304,7 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" }
+        { text: "August 2025 Upgrade", link: "/nodes/guides/august-2025-upgrade" }
       ]
     },
     {
