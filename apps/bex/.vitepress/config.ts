@@ -6,6 +6,7 @@ import markdownItConditionalRender from "markdown-it-conditional-render";
 import { sidebar } from "./sidebar";
 import { constants } from "@berachain/config/constants";
 import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
+import llmsTxt from "vitepress-plugin-llms";
 
 // Config
 // ========================================================
@@ -141,7 +142,7 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [vercelToolbar()],
+    plugins: [vercelToolbar(), llmsTxt()],
     optimizeDeps: {
       include: ["mermaid"]
     },
