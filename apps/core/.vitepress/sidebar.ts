@@ -295,7 +295,7 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Bectra Hardfork", link: "/nodes/guides/bectra" }
+        { text: "August 2025 Upgrade", link: "/nodes/guides/august-2025-upgrade" }
       ]
     },
     {

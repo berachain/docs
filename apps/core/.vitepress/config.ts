@@ -187,12 +187,6 @@ const config = withMermaid(
             )
           },
           {
-            find: /^.*\/VPFlyout\.vue$/,
-            replacement: fileURLToPath(
-              new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
-            )
-          },
-          {
             find: /^.*\/VPSidebar\.vue$/,
             replacement: fileURLToPath(
               new URL("../node_modules/@berachain/ui/Sidebar.vue", import.meta.url)

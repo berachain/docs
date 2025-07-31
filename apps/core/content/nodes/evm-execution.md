@@ -15,15 +15,11 @@ head:
 
 The execution layer consists of multiple implementations in the form of EVM execution clients. These clients handle transactions, transaction gossiping, state management, and support for the Ethereum Virtual Machine - they are not responsible for block building.
 
-The following execution clients have been tested and verified by BeaconKit:
+The following execution clients are supported by BeaconKit:
 
-| Client                                                    | Language | Sync Strategies                    | Recommended Version |
-| --------------------------------------------------------- | -------- | ---------------------------------- | ------------------- |
-| [Geth](https://github.com/ethereum/go-ethereum)           | Golang   | Snap, Full                         | v1.15.10 or .11     |
-| [Reth](https://github.com/paradigmxyz/reth)               | Rust     | Full                               | v1.3.12             |
-| [Nethermind](https://github.com/NethermindEth/nethermind) | C#       | Snap (without serving), Fast, Full | v1.31.11            |
-| [Erigon](https://github.com/ledgerwatch/erigon)           | Golang   | Full                               | v3.0.x              |
-| [Besu](https://github.com/hyperledger/besu/)              | Java     | Snap, Fast, Full                   | v25.4.x             |
+| Client                                              | Language | Required Version (Bepolia) | Required Version (mainnet) |
+| --------------------------------------------------- | -------- | -------------------------- | -------------------------- |
+| [Bera-Geth](https://github.com/berachain/bera-geth) | Golang   | v1.011602.0-rc3            | v1.15.x                    |
+| [Bera-Reth](https://github.com/berachain/bera-reth) | Rust     | 1.0.0-rc.8                 | v1.3.x                     |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
-We do not recommend upgrading to new major or minor versions — `x.y.0` — until we have tested them.
