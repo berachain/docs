@@ -92,8 +92,6 @@ tree datadir;
 #     └── chaindata
 ```
 
-NOTE
-
 ## Confirm upgrade
 
 Beacon-Kit should log the following on startup:
