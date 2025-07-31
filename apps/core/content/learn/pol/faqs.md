@@ -91,3 +91,27 @@ The end result is that the inflation cadence should effectively mirror an equiva
 ### Can only validators vote on or create governance proposals?
 
 Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10,000 $BGT can create a proposal.
+
+## BGT Claiming and Management
+
+### Can I claim only a portion of my BGT?
+
+Soon you will be able to claim specific amounts of your BGT rewards instead of claiming everything at once. This partial claiming feature allows you to:
+
+- Take profits gradually over time
+- Claim only what you need for specific purposes
+- Leave the rest to continue accumulating
+- Optimize gas costs by avoiding frequent small claims
+
+Partial claiming will be available through compatible protocols and interfaces that support the new `getPartialReward` function. You can specify any amount up to your total earned BGT balance.
+
+### Can I have a protocol claim on my behalf?
+
+Yes, you can authorize trusted protocols to claim your BGT rewards automatically by setting them as your "operator." This enables:
+
+- **Automated claiming strategies** based on schedules or conditions you set
+- **Integrated DeFi workflows** where BGT is automatically used for other purposes
+- **Gas optimization** through batch operations
+- **Enhanced user experience** with fewer manual transactions
+
+The protocol can only claim your BGT rewards - they cannot withdraw your staked tokens or access other wallet functions. You can revoke these permissions at any time. Learn more in our [BGT Claiming Guide](/learn/guides/claim-bgt#protocol-claiming).

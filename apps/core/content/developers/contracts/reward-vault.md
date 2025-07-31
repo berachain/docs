@@ -550,16 +550,218 @@ function delegateStake(address account, uint256 amount) external nonReentrant wh
 | `account` | `address` | The account to stake for.      |
 | `amount`  | `uint256` | The amount of tokens to stake. |
 
+### stakeOnBehalf
+
+Stake tokens on behalf of another account.
+
+```solidity
+function stakeOnBehalf(address account, uint256 amount) external nonReentrant whenNotPaused;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                    |
+| --------- | --------- | ------------------------------ |
+| `account` | `address` | The account to stake for.      |
+| `amount`  | `uint256` | The amount of tokens to stake. |
+
 ### withdraw
 
 Withdraw the staked tokens from the vault.
 
 ```solidity
-function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(msg.sender, amount);
+function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(msg.sender, amount) whenNotPaused;
 ```
 
 **Parameters**
 
-| Name     | Type      | Description |
-| -------- | --------- | ----------- |
-| `amount` | `uint256` |
+| Name     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
+| `amount` | `uint256` | The amount of tokens to withdraw. |
+
+### delegateWithdraw
+
+Withdraw tokens staked on behalf of anot
+on delegateWithdraw(address account, uint256 amount) external nonReentrant whenNotPaused;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                       |
+| --------- | --------- | --------------------------------- |
+| `account` | `address` | The account to withdraw for.      |
+| `amount`  | `uint256` | The amount of tokens to withdraw. |
+
+### getReward
+
+Claim the reward.
+
+_The operator only handles BGT, not STAKING_TOKEN._
+
+```solidity
+function getReward(
+    address account,
+    address recipient
+)
+    external
+    nonReentrant
+    whenNotPaused
+    onlyOperatorOrUser(account)
+    returns (uint256);
+```
+
+**Parameters**
+
+| Name        | Type      | Description                        |
+| ----------- | --------- | ---------------------------------- |
+| `account`   | `address` | The account to get the reward for. |
+| `recipient` | `address` | The address to send the reward to. |
+
+**Returns**
+
+| Name     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
+| `<none>` | `uint256` | The amount of the reward claimed. |
+
+### getPartialReward
+
+Claim a partial reward.
+
+_Use `getReward` if you want to claim the full reward._
+
+```solidity
+function getPartialReward(
+    address account,
+    address recipient,
+    uint256 amount
+)
+    external
+    nonReentrant
+    whenNotPaused
+    onlyOperatorOrUser(account);
+```
+
+**Parameters**
+
+| Name        | Type      | Description                        |
+| ----------- | --------- | ---------------------------------- |
+| `account`   | `address` | The account to get the reward for. |
+| `recipient` | `address` | The address to send the reward to. |
+| `amount`    | `uint256` | The amount of the reward to claim. |
+
+### exit
+
+Exit the vault with the staked tokens and claim the reward.
+
+_Only the account holder can call this function, not the operator._
+
+```solidity
+function exit(address recipient) external nonReentrant whenNotPaused;
+```
+
+**Parameters**
+
+| Name        | Type      | Description                              |
+| ----------- | --------- | ---------------------------------------- |
+| `recipient` | `address` | The address to send the 'BGT' reward to. |
+
+### setOperator
+
+Allows msg.sender to set another address to claim and manage their rewards.
+
+```solidity
+function setOperator(address _operator) external;
+```
+
+**Parameters**
+
+| Name        | Type      | Description                                                   |
+| ----------- | --------- | ------------------------------------------------------------- |
+| `_operator` | `address` | The address that will be allowed to claim and manage rewards. |
+
+### addIncentive
+
+Add an incentive token to the vault.
+
+_The incentive token's transfer should not exceed a gas usage of 500k units.
+In case the transfer exceeds 500k gas units, your incentive will fail to be transferred to the validator and
+its delegates._
+
+```solidity
+function addIncentive(
+    address token,
+    uint256 amount,
+    uint256 incentiveRate
+)
+    external
+    nonReentrant
+    onlyWhitelistedToken(token);
+```
+
+**Parameters**
+
+| Name            | Type      | Description                                              |
+| --------------- | --------- | -------------------------------------------------------- |
+| `token`         | `address` | The address of the token to add as an incentive.         |
+| `amount`        | `uint256` | The amount of the token to add as an incentive.          |
+| `incentiveRate` | `uint256` | The amount of the token to incentivize per BGT emission. |
+
+### accountIncentives
+
+Process incentives added via IERC20.transfer, adding them to the incentive accounting.
+
+_Allows permissionless incentive addition, without dossing the manager possibility to
+let the incentive accounting go to 0 in order to be able to decrease the incentive rate._
+
+```solidity
+function accountIncentives(address token, uint256 amount) external nonReentrant onlyWhitelistedToken(token);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                                  |
+| -------- | --------- | -------------------------------------------- |
+| `token`  | `address` | The address of the token to process.         |
+| `amount` | `uint256` | The amount of token to account as incentive. |
+
+## Structs
+
+### DelegateStake
+
+Struct to hold delegate stake data.
+
+```solidity
+struct DelegateStake {
+    uint256 delegateTotalStaked;
+    mapping(address delegate => uint256 amount) stakedByDelegate;
+}
+```
+
+**Properties**
+
+| Name                  | Type                                          | Description                                        |
+| --------------------- | --------------------------------------------- | -------------------------------------------------- |
+| `delegateTotalStaked` | `uint256`                                     | The total amount staked by delegates.              |
+| `stakedByDelegate`    | `mapping(address delegate => uint256 amount)` | The mapping of the amount staked by each delegate. |
+
+### Incentive
+
+Struct to hold an incentive data.
+
+```solidity
+struct Incentive {
+    uint256 minIncentiveRate;
+    uint256 incentiveRate;
+    uint256 amountRemaining;
+    address manager;
+}
+```
+
+**Properties**
+
+| Name               | Type      | Description                                                                |
+| ------------------ | --------- | -------------------------------------------------------------------------- |
+| `minIncentiveRate` | `uint256` | The minimum amount of the token to incentivize per BGT emission.           |
+| `incentiveRate`    | `uint256` | The amount of the token to incentivize per BGT emission.                   |
+| `amountRemaining`  | `uint256` | The amount of the token remaining to incentivize.                          |
+| `manager`          | `address` | The address of the manager that can addIncentive for this incentive token. |
