@@ -61,7 +61,7 @@ The following will walk you through how to withdraw a portion of a validator's $
 Set up your environment. You will need the private key of your Withdrawal Credential Address, or to have it on an attached ledger. To obtain your CometBFT public key, you can invoke `beacond --home path/to/beacond/data deposit validator-keys`.
 
 ```bash-vue
-export RPC=https://bepolia.rpc.berachain.com/
+export RPC_URL=https://bepolia.rpc.berachain.com/
 export WITHDRAW_CONTRACT=0x00000961Ef480Eb55e80D19ad83579A64c007002
 export WITHDRAW_AMOUNT_ETH=10000
 # Alternatively
@@ -78,7 +78,7 @@ Use the special amount of `0` to withdraw the Validator's entire stake.
 In addition to the desired amount to withdrawal, a withdrawal fee must be sent with the transation.
 
 ```bash
-WITHDRAW_FEE_HEX=$(cast call -r $RPC $WITHDRAW_CONTRACT);
+WITHDRAW_FEE_HEX=$(cast call -r $RPC_URL $WITHDRAW_CONTRACT);
 WITHDRAW_FEE=$(cast to-dec $WITHDRAW_FEE_HEX);
 echo $WITHDRAW_FEE;
 
@@ -107,7 +107,7 @@ Remember to send it from the Withdrawal Credential Address, otherwise the transa
 :::
 
 ```bash
-cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC --private-key $WITHDRAW_CREDENTIAL_PRIVATE_KEY --value ${WITHDRAW_FEE}wei;
+cast send $WITHDRAW_CONTRACT $WITHDRAW_REQUEST --rpc-url $RPC_URL --private-key $WITHDRAW_CREDENTIAL_PRIVATE_KEY --value ${WITHDRAW_FEE}wei;
 ```
 
 Substitute `--ledger` for the `--private-key` if your key is kept on a hardware module.
