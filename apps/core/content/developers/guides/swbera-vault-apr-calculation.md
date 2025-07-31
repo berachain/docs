@@ -56,6 +56,7 @@ $$APR = \frac{Current Share Value - Previous Share Value}{Previous Share Value} 
 Here's a complete Node.js script to calculate the SWBERA vault APR:
 
 **File:** `script.js`
+
 ```js-vue
 const { ethers } = require("ethers");
 
