@@ -22,7 +22,7 @@ alwaysApply: true
 
 
 ### ABI Updates
-- To update ABI documents, check out the git@github.com:berachain/doc-abis repository, and the git@github.com:berachin/contracts-internal repository. In the contracts repo, check out the devel branch. Then, in the doc-abis directory invoke `npm run abis:sync`.
+- To update ABI documents, check out the git@github.com:berachain/doc-abis repository, and the git@github.com:berachain/contracts-internal repository. In the contracts repo, check out the devel branch. Then, in the doc-abis directory invoke `npm run abis:sync`.
 
 ### Autodoc generation
 The user can request to "refresh the autodocs". This means the following sequence.
