@@ -58,6 +58,7 @@ const SIDEBAR = {
       items: [
         { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
         { text: "BERA Staking", link: "/learn/guides/bera-staking" },
+        { text: "Claim BGT Rewards", link: "/learn/guides/claim-bgt" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
         {
           text: "Setup Reward Vault",
@@ -170,6 +171,14 @@ const SIDEBAR = {
         {
           text: "Non-ERC20 PoL Integration",
           link: "/developers/guides/advanced-pol"
+        },
+        {
+          text: "Staking for Other Accounts",
+          link: "/developers/guides/staking-for-other-accounts"
+        },
+        {
+          text: "Partial Reward Claims",
+          link: "/developers/guides/partial-reward-claims"
         },
         {
           text: "EIP-7702",
