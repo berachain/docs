@@ -17,11 +17,11 @@ head:
 
 # Withdraw Validator $BERA Stake
 
-With the [Bectra release](/nodes/guides/bectra), we have added support for withdrawing `$BERA` stake from a Validator. This process is demonstrated in the [Docker Devnet's final steps](/nodes/guides/docker-devnet#launch-local-devnet).
+The holder of the withdrawal credential, set during the initial deposit, can trigger partial or complete withdrawal of `$BERA` stake from a Validator. This process is demonstrated in the [Docker Devnet's final steps](/nodes/guides/docker-devnet#launch-local-devnet).
 
 :::warning
 Withdrawing your $BERA stake will reduce the probability that your validator
-is selected to produce a block and therefore reduce your $BGT emissions.
+is selected to produce a block and therefore reduce your $BGT emissions. Withdrawing all stake will exit your validator from the Active Set.
 :::
 
 ## Requirements
