@@ -192,7 +192,7 @@ This tutorial fetches pruned snapshots. If you plan to run an archive node, we r
 
 Berachain and the community offer snapshots for mainnet and Bepolia. You can download snapshots at the following links.
 
-- [Awesome Berachain Validators]() is a community-maintained list; all of them have great download speed.
+- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
 
 - Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. The key variables are at [the top](#getting-started):
 
