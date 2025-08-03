@@ -36,12 +36,9 @@ The following are required to run both the execution and consensus clients:
 
 ### Software Requirements 💾
 
-- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags). This guide was written for v1.1.3.
-- One of our recommended [execution clients](/nodes/evm-execution). Take note of the recommended versions on that page.
-  - [reth](https://github.com/paradigmxyz/reth/releases) DO NOT USE `op-reth`. Use `reth`.
-  - [go-ethereum](https://github.com/ethereum/go-ethereum/releases)
-  - [Nethermind](https://github.com/NethermindEth/nethermind/releases)
-  - [Erigon](https://github.com/erigontech/erigon/releases)
+[Consult this page](/nodes/evm-execution) for the recommended versions of Beacon Kit and execution clients.
+
+You need [Beacon Kit](https://github.com/berachain/beacon-kit/releases) and one of either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases).
 
 ## Getting started
 
@@ -59,9 +56,8 @@ ls;
 
 # [Expected output, edited for clarity]
 # README.md	                  run-geth.sh     setup-geth.sh
-# env.sh                      run-nether.sh   setup-nether.sh
-# fetch-berachain-params.sh	  run-reth.sh     setup-reth.sh
-#                             run-beacond.sh  setup-beacond.sh
+# env.sh                      run-reth.sh     setup-reth.sh
+# fetch-berachain-params.sh	  run-beacond.sh  setup-beacond.sh
 ```
 
 The file `env.sh` contains environment variables used in the other scripts.
@@ -104,7 +100,7 @@ You should verify these constants:
 - **LOG_DIR**: This directory stores log files.
 - **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
 - **BEACOND_DATA**: Set this to where the consensus data and config should be kept. `BEACOND_CONFIG` must be under `BEACOND_PATH` as shown. Don't change it.
-- **RETH_BIN** or other chain client: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
+- **RETH_BIN** or other chain client: Set this to the full path where you installed `bera-reth`. The expression provided finds it in your $PATH.
 - **CL_ETHRPC_PORT and EL_ETHRPC_PORT** are important for the exchange of consensus and transaction activity. These are highly recommended to be open for incoming connections, and ensuring that these ports on the advertised IP `MY_IP`, are open.
 
 ## Fetch Mainnet Parameters 📥
@@ -161,7 +157,7 @@ Your validator state root **must** agree with the value shown above.
 
 ## Set up the Execution Client 🛠️
 
-The `setup-reth`, `setup-geth`, and `setup-nether` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
+The `setup-reth` and `setup-geth` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
 
 Here's an example of `setup-reth`:
 
@@ -382,7 +378,7 @@ Launch two windows. In the first, run the consensus client:
 # Committed state ... height=49 ...
 ```
 
-In the second, run the execution client (corresponding to the one you chose). Here it is for Reth:
+In the second, run the execution client (corresponding to the one you chose). Here it is for Bera-Reth:
 
 ```bash
 # FROM: ~/beranode
