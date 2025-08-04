@@ -45,8 +45,8 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | Bepolia | [Bera-reth v1.0.0-rc.8](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.8)         |
 | Bepolia | [Beacon-Kit v1.3.0-rc1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)         |
 
-| Chain   | Genesis file & md5 hash                                                                                                       |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Chain   | Genesis file & md5 hash                                                                                                                            |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
