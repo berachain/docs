@@ -36,9 +36,7 @@ The following are required to run both the execution and consensus clients:
 
 ### Software Requirements 💾
 
-[Consult this page](/nodes/evm-execution) for the recommended versions of Beacon Kit and execution clients.
-
-You need [Beacon Kit](https://github.com/berachain/beacon-kit/releases) and one of either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases).
+You need [Beacon Kit](https://github.com/berachain/beacon-kit/releases) and one of either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases). [Consult this page](/nodes/evm-execution) for the recommended versions of Beacon Kit and execution clients.
 
 These clients are easily compiled for experiments on a laptop.
 
