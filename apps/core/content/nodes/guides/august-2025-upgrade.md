@@ -47,7 +47,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 | Chain   | Genesis file & md5 hash                                                                                                       |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/eth-genesis.json) |
+| Bepolia | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
