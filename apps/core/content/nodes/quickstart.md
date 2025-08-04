@@ -36,10 +36,7 @@ The following are required to run both the execution and consensus clients:
 
 ### Software Requirements 💾
 
-- Latest Beacond from its [GitHub release page](https://github.com/berachain/beacon-kit/tags).
-- A corresponding release of our supported [execution clients](/nodes/evm-execution).
-  - [bera-reth](https://github.com/berachain/bera-reth/releases)
-  - [bera-geth](https://github.com/berachain/bera-geth/releases)
+You need [Beacon Kit](https://github.com/berachain/beacon-kit/releases) and one of either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases). [Consult this page](/nodes/evm-execution) for the recommended versions of Beacon Kit and execution clients.
 
 These clients are easily compiled for experiments on a laptop.
 
@@ -158,7 +155,7 @@ Your validator state root **must** agree with the value shown above.
 
 ## Set Up the Execution Client 🛠️
 
-The `setup-reth`, `setup-geth`, and `setup-nether` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
+The `setup-reth` and `setup-geth` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
 
 Here's an example of `setup-reth`:
 
@@ -193,7 +190,7 @@ This tutorial fetches pruned snapshots. If you plan to run an archive node, we r
 
 Berachain and the community offer snapshots for mainnet and Bepolia. You can download snapshots at the following links.
 
-- [Awesome Berachain Validators]() is a community-maintained list; all of them have great download speed.
+- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
 
 - Or, you can use Berachain official snaps which are capped to 10 Mbyte/sec. Review the script `fetch-berachain-snapshots.js`. The key variables are at [the top](#getting-started):
 
@@ -379,7 +376,7 @@ Launch two terminal windows. In the first, run the consensus client:
 # Committed state ... height=49 ...
 ```
 
-In the second, run the execution client (corresponding to the one you chose). Here it is for Reth:
+In the second, run the execution client (corresponding to the one you chose). Here it is for Bera-Reth:
 
 ```bash
 # FROM: ~/beranode
