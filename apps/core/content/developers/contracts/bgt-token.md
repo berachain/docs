@@ -19,6 +19,8 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a><span v-if="config.contracts.tokens.bgt.abi && config.contracts.tokens.bgt.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
 
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGT.sol)
+
 The Berachain Governance Token ($BGT) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for $BERA.
 
 **Inherits:**
@@ -174,131 +176,10 @@ mapping(address account => UserBoost) public userBoosts;
 
 ## View Functions
 
-### CLOCK_MODE
-
-```solidity
-function CLOCK_MODE() external pure returns (string memory);
-```
-
-### DOMAIN_SEPARATOR
-
-```solidity
-function DOMAIN_SEPARATOR() external view returns (bytes32);
-```
-
-### allowance
-
-```solidity
-function allowance(address owner, address spender) public view virtual override returns (uint256);
-```
-
-### balanceOf
-
-```solidity
-function balanceOf(address account) public view virtual override returns (uint256);
-```
-
-### checkpoints
-
-```solidity
-function checkpoints(address account, uint32 pos) public view virtual returns (Checkpoints.Checkpoint208 memory);
-```
-
-### clock
-
-```solidity
-function clock() public view virtual override returns (uint48);
-```
-
-### decimals
-
-```solidity
-function decimals() public view virtual override returns (uint8);
-```
-
-### delegates
-
-```solidity
-function delegates(address account) public view virtual override returns (address);
-```
-
-### eip712Domain
-
-```solidity
-function eip712Domain()
-    public
-    view
-    virtual
-    override
-    returns (
-        bytes1 fields,
-        string memory name,
-        string memory version,
-        uint256 chainId,
-        address verifyingContract,
-        bytes32 salt,
-        uint256[] memory extensions
-    );
-```
-
-### getVotes
-
-```solidity
-function getVotes(address account) public view virtual override returns (uint256);
-```
-
 ### minter
 
 ```solidity
 function minter() external view returns (address);
-```
-
-### name
-
-```solidity
-function name() public view virtual override returns (string memory);
-```
-
-### nonces
-
-```solidity
-function nonces(address owner) public view virtual override returns (uint256);
-```
-
-### numCheckpoints
-
-```solidity
-function numCheckpoints(address account) public view virtual returns (uint32);
-```
-
-### owner
-
-```solidity
-function owner() public view virtual override returns (address);
-```
-
-### pastTotalSupply
-
-```solidity
-function pastTotalSupply(uint256 timepoint) public view virtual override returns (uint256);
-```
-
-### pastVotes
-
-```solidity
-function pastVotes(address account, uint256 timepoint) public view virtual override returns (uint256);
-```
-
-### symbol
-
-```solidity
-function symbol() public view virtual override returns (string memory);
-```
-
-### totalSupply
-
-```solidity
-function totalSupply() public view virtual override returns (uint256);
 ```
 
 ## Functions
@@ -401,12 +282,6 @@ _Only the minter can call this function._
 
 ```solidity
 function mint(address to, uint256 amount) external;
-```
-
-### multicall
-
-```solidity
-function multicall(bytes[] calldata data) external virtual override returns (bytes[] memory results);
 ```
 
 ### queueBoost
@@ -874,3 +749,29 @@ event WhitelistSender(address indexed sender, bool approved);
 | ---------- | --------- | ------------------------------ |
 | `sender`   | `address` | The sender address             |
 | `approved` | `bool`    | Whether whitelisted or removed |
+
+## Errors
+
+### ZeroAddress
+```solidity
+error ZeroAddress();
+```
+Thrown when attempting to initialize with a zero address.
+
+### UnauthorizedETHTransfer
+```solidity
+error UnauthorizedETHTransfer();
+```
+Thrown when attempting an unauthorized ETH transfer.
+
+### VotesExpiredSignature
+```solidity
+error VotesExpiredSignature(uint256 expiry);
+```
+Thrown when attempting to use an expired signature for voting.
+
+**Parameters**
+
+| Name     | Type      | Description                    |
+| -------- | --------- | ------------------------------ |
+| `expiry` | `uint256` | The expiry timestamp of the signature |

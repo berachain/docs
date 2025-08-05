@@ -21,9 +21,6 @@ head:
 
 A contract that distributes POL incentives to BGT boosters using a merkle-based distribution system. When BGT holders boost a validator, they become eligible for a share of the incentives from reward vaults. These incentives are transferred to this contract and distributed based on off-chain computed merkle roots.
 
-**Inherits:**
-[IBGTIncentiveDistributor](/src/pol/interfaces/IBGTIncentiveDistributor.sol/interface.IBGTIncentiveDistributor.md), AccessControlUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable
-
 ## Constants
 
 ### MANAGER_ROLE
@@ -80,7 +77,7 @@ struct Distribution {
     bytes pubkey;
     address token;
     bytes32 merkleRoot;
-    bytes proof;
+    bytes32 proof;
 }
 ```
 
@@ -92,7 +89,7 @@ struct Distribution {
 | `pubkey`     | `bytes`   | The validator pubkey     |
 | `token`      | `address` | The reward token address |
 | `merkleRoot` | `bytes32` | The merkle root          |
-| `proof`      | `bytes`   | The proof data           |
+| `proof`      | `bytes32` | The proof data           |
 
 ### Reward
 
@@ -102,7 +99,7 @@ The reward struct for reward metadata.
 struct Reward {
     address token;
     bytes32 merkleRoot;
-    bytes proof;
+    bytes32 proof;
     uint256 activeAt;
     bytes pubkey;
 }
@@ -114,7 +111,7 @@ struct Reward {
 | ------------ | --------- | ------------------------------------------- |
 | `token`      | `address` | The reward token address                    |
 | `merkleRoot` | `bytes32` | The merkle root                             |
-| `proof`      | `bytes`   | The proof data                              |
+| `proof`      | `bytes32` | The proof data                              |
 | `activeAt`   | `uint256` | The timestamp when rewards become claimable |
 | `pubkey`     | `bytes`   | The validator pubkey                        |
 
@@ -156,9 +153,17 @@ mapping(bytes32 => Reward) public rewards;
 
 ### paused
 
+Returns the pause state of the contract.
+
 ```solidity
 function paused() public view virtual override returns (bool);
 ```
+
+**Returns**
+
+| Name     | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `<none>` | `bool` | True if the contract is paused, false otherwise |
 
 ## Functions
 
@@ -168,7 +173,7 @@ Claim rewards based on the specified metadata
 
 **Emits:**
 
-- [Claimed](#event-claimed)
+- [RewardClaimed](#event-rewardclaimed)
 
 ```solidity
 function claim(Claim[] calldata _claims) external nonReentrant whenNotPaused;
@@ -182,9 +187,33 @@ function claim(Claim[] calldata _claims) external nonReentrant whenNotPaused;
 
 ### initialize
 
+Initializes the BGTIncentiveDistributor contract with the governance address.
+
 ```solidity
 function initialize(address _governance) external initializer;
 ```
+
+**Parameters**
+
+| Name          | Type      | Description                    |
+| ------------- | --------- | ------------------------------ |
+| `_governance` | `address` | The governance address to set  |
+
+### _authorizeUpgrade
+
+Authorizes an upgrade to a new implementation.
+
+_Only address with DEFAULT_ADMIN_ROLE can call this function._
+
+```solidity
+function _authorizeUpgrade(address newImplementation) internal override onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name                | Type      | Description                    |
+| ------------------- | --------- | ------------------------------ |
+| `newImplementation` | `address` | The new implementation address |
 
 ### receiveIncentive
 
@@ -256,7 +285,7 @@ _Only address with MANAGER_ROLE can call this function_
 
 **Emits:**
 
-- [RewardsMetadataUpdated](#event-rewardsmetadataupdated)
+- [RewardMetadataUpdated](#event-rewardmetadataupdated)
 
 ```solidity
 function updateRewardsMetadata(Distribution[] calldata _distributions) external onlyRole(MANAGER_ROLE);
@@ -276,21 +305,22 @@ function upgradeToAndCall(address newImplementation, bytes memory data) public p
 
 ## Events
 
-### Claimed {#event-claimed}
+### RewardClaimed {#event-rewardclaimed}
 
 Emitted when rewards are claimed.
 
 ```solidity
-event Claimed(address indexed account, address indexed token, bytes32 indexed identifier, uint256 amount);
+event RewardClaimed(bytes32 indexed identifier, address indexed token, address indexed account, bytes pubkey, uint256 amount);
 ```
 
 **Parameters**
 
 | Name         | Type      | Description                  |
 | ------------ | --------- | ---------------------------- |
-| `account`    | `address` | The account claiming rewards |
-| `token`      | `address` | The reward token             |
 | `identifier` | `bytes32` | The merkle identifier        |
+| `token`      | `address` | The reward token             |
+| `account`    | `address` | The account claiming rewards |
+| `pubkey`     | `bytes`   | The validator's public key   |
 | `amount`     | `uint256` | The amount claimed           |
 
 ### IncentiveReceived {#event-incentivereceived}
@@ -351,21 +381,24 @@ event RewardClaimDelaySet(uint64 delay);
 | ------- | -------- | -------------------------- |
 | `delay` | `uint64` | The new reward claim delay |
 
-### RewardsMetadataUpdated {#event-rewardsmetadataupdated}
+### RewardMetadataUpdated {#event-rewardmetadataupdated}
 
 Emitted when rewards metadata is updated.
 
 ```solidity
-event RewardsMetadataUpdated(bytes32 indexed identifier, address indexed token, bytes32 merkleRoot);
+event RewardMetadataUpdated(bytes32 indexed identifier, bytes indexed pubkey, address indexed token, bytes32 merkleRoot, bytes32 proof, uint256 activeAt);
 ```
 
 **Parameters**
 
-| Name         | Type      | Description           |
-| ------------ | --------- | --------------------- |
-| `identifier` | `bytes32` | The merkle identifier |
-| `token`      | `address` | The reward token      |
-| `merkleRoot` | `bytes32` | The merkle root       |
+| Name         | Type      | Description                                    |
+| ------------ | --------- | ---------------------------------------------- |
+| `identifier` | `bytes32` | The merkle identifier                          |
+| `pubkey`     | `bytes`   | The validator's public key                     |
+| `token`      | `address` | The reward token                               |
+| `merkleRoot` | `bytes32` | The merkle root                                |
+| `proof`      | `bytes32` | The proof data                                 |
+| `activeAt`   | `uint256` | The timestamp when rewards become claimable   |
 
 ### RoleAdminChanged {#event-roleadminchanged}
 

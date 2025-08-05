@@ -19,10 +19,12 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']">{{config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveFeeCollector.abi && config.contracts.pol.bgtIncentiveFeeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveFeeCollector.abi">ABI JSON</a></span></small>
 
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGTIncentiveFeeCollector.sol)
+
 Collects the fees on the incentives posted on reward vaults and auction them for WBERA. Accrued WBERA serves as a payout for the stakers of `WBERAStakerVault.sol`.
 
 **Inherits:**
-[IBGTIncentiveFeeCollector](/src/pol/interfaces/IBGTIncentiveFeeCollector.sol/interface.IBGTIncentiveFeeCollector.md), UUPSUpgradeable, OwnableUpgradeable, PausableUpgradeable
+IBGTIncentiveFeeCollector, UUPSUpgradeable, OwnableUpgradeable, PausableUpgradeable
 
 ## Constants
 
@@ -36,6 +38,14 @@ bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
 ```solidity
 bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+```
+
+### WBERA
+
+The WBERA token address, serves as payout token.
+
+```solidity
+address public constant WBERA = 0x6969696969696969696969696969696969696969;
 ```
 
 ## State Variables
@@ -66,6 +76,12 @@ address public wberaStakerVault;
 
 ## View Functions
 
+### hasRole
+
+```solidity
+function hasRole(bytes32 role, address account) public view virtual override returns (bool);
+```
+
 ### owner
 
 ```solidity
@@ -82,6 +98,12 @@ function paused() public view virtual override returns (bool);
 
 ```solidity
 function proxiableUUID() external view virtual override notDelegated returns (bytes32);
+```
+
+### queuedPayoutAmount
+
+```solidity
+function queuedPayoutAmount() external view returns (uint256);
 ```
 
 ## Functions
@@ -111,16 +133,21 @@ function claimFees(address _recipient, address[] calldata _feeTokens) external w
 
 Initializes the contract.
 
+**Emits:**
+
+- [Initialized](#event-initialized)
+- [PayoutAmountSet](#event-payoutamountset)
+
 ```solidity
-function initialize(address _governance, uint256 _payoutAmount, address _wberaStakerVault) external initializer;
+function initialize(address governance, uint256 _payoutAmount, address _wberaStakerVault) external initializer;
 ```
 
 **Parameters**
 
 | Name                | Type      | Description                                        |
 | ------------------- | --------- | -------------------------------------------------- |
-| `_governance`       | `address` | The address that will have the DEFAULT_ADMIN_ROLE. |
-| `_payoutAmount`     | `address` | The amount of WBERA required to claim fees.        |
+| `governance`        | `address` | The address that will have the DEFAULT_ADMIN_ROLE. |
+| `_payoutAmount`     | `uint256` | The amount of WBERA required to claim fees.        |
 | `_wberaStakerVault` | `address` | The address of the WBERA staker vault.             |
 
 ### pause
@@ -144,7 +171,7 @@ Queues a change to the payout amount.
 - [QueuedPayoutAmount](#event-queuedpayoutamount)
 
 ```solidity
-function queuePayoutAmountChange(uint256 _newPayoutAmount) external onlyOwner;
+function queuePayoutAmountChange(uint256 _newPayoutAmount) external onlyRole(DEFAULT_ADMIN_ROLE);
 ```
 
 **Parameters**
@@ -168,8 +195,16 @@ function unpause() external onlyRole(MANAGER_ROLE);
 ### upgradeToAndCall
 
 ```solidity
-function upgradeToAndCall(address newImplementation, bytes memory data) public payable virtual override onlyOwner;
+function upgradeToAndCall(address newImplementation, bytes memory data) public payable virtual override onlyRole(DEFAULT_ADMIN_ROLE);
 ```
+
+### wberaStakerVault
+
+```solidity
+function wberaStakerVault() external view returns (address);
+```
+
+
 
 ## Events
 

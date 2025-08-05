@@ -231,7 +231,6 @@ const SIDEBAR = {
           link: "/developers/contracts/bgt-incentive-fee-collector"
         },
         { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
-        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
         {
           text: "Block Reward Controller",
           link: "/developers/contracts/block-reward-controller"
@@ -269,13 +268,16 @@ const SIDEBAR = {
         {
           text: "HoneyFactoryReader",
           link: "/developers/contracts/honey-factory-reader"
-        },
-        { text: "Honey Token", link: "/developers/contracts/honey-token" }
+        }
       ]
     },
     {
       text: "Token Contracts",
-      items: [{ text: "WBERA Token", link: "/developers/contracts/wbera-token" }]
+      items: [
+        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
+        { text: "Honey Token", link: "/developers/contracts/honey-token" },
+        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
+      ]
     }
   ],
   /**

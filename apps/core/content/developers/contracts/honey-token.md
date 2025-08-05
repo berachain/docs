@@ -19,6 +19,8 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a><span v-if="config.contracts.tokens.honey.abi && config.contracts.tokens.honey.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honey.abi">ABI JSON</a></span></small>
 
+[Git Source](https://github.com/berachain/contracts/blob/main/src/honey/Honey.sol)
+
 This is the ERC20 token representation of Berachain's native stablecoin, Honey. The contract is upgradeable and access-controlled, with minting and burning restricted to the HoneyFactory contract.
 
 **Inherits:**
@@ -52,37 +54,7 @@ Returns the symbol of the token: "HONEY"
 function symbol() public pure override returns (string memory);
 ```
 
-### allowance
 
-Returns the remaining number of tokens that `spender` is allowed to spend on behalf of `owner`.
-
-```solidity
-function allowance(address owner, address spender) public view virtual returns (uint256);
-```
-
-### balanceOf
-
-Returns the amount of tokens owned by an account.
-
-```solidity
-function balanceOf(address account) public view virtual returns (uint256);
-```
-
-### decimals
-
-Returns the number of decimals used for token amounts.
-
-```solidity
-function decimals() public view virtual returns (uint8);
-```
-
-### totalSupply
-
-Returns the total amount of tokens in existence.
-
-```solidity
-function totalSupply() public view virtual returns (uint256);
-```
 
 ## Functions
 
