@@ -19,109 +19,162 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactoryReader['mainnet-address']">{{config.contracts.tokens.honeyFactoryReader['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactoryReader.abi && config.contracts.tokens.honeyFactoryReader.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactoryReader.abi">ABI JSON</a></span></small>
 
-The HoneyFactoryReader contract is responsible for providing previews of minting/redeeming HONEY.
+The HoneyFactoryReader contract provides view functions for previewing minting and redeeming operations in the Honey stablecoin system. It enables efficient querying of HoneyFactory state without modifying it.
 
 **Inherits:**
-IHoneyFactoryReader
+AccessControlUpgradeable, UUPSUpgradeable, IHoneyFactoryReader, IHoneyErrors
 
-_This contract enables efficient querying of HoneyFactory state without modifying it._
+## State Variables
+
+### honeyFactory
+
+The HoneyFactory contract that this reader interacts with.
+
+```solidity
+HoneyFactory public honeyFactory;
+```
+
+## View Functions
+
+### previewMintCollaterals
+
+Computes the amount of collateral(s) needed to obtain a given amount of Honey.
+
+**Note:** The `asset` parameter is ignored if running in basket mode.
+
+```solidity
+function previewMintCollaterals(address asset, uint256 honey) external view returns (uint256[] memory amounts);
+```
+
+### previewMintCollateralsWithPrices
+
+Same as `previewMintCollaterals` but uses provided prices instead of oracle prices.
+
+**Note:** Prices must be sorted like HoneyFactory.registeredAssets and use WAD (18 decimals) representation.
+
+```solidity
+function previewMintCollateralsWithPrices(
+    address asset,
+    uint256 honey,
+    uint256[] memory prices
+) external view returns (uint256[] memory amounts);
+```
+
+### previewMintHoney
+
+Given one collateral, computes the obtainable Honey amount and required collateral amounts if basket mode is enabled.
+
+```solidity
+function previewMintHoney(
+    address asset,
+    uint256 amount
+) external view returns (uint256[] memory collaterals, uint256 honey);
+```
+
+### previewMintHoneyWithPrices
+
+Same as `previewMintHoney` but uses provided prices instead of oracle prices.
+
+```solidity
+function previewMintHoneyWithPrices(
+    address asset,
+    uint256 amount,
+    uint256[] memory prices
+) external view returns (uint256[] memory collaterals, uint256 honey);
+```
+
+### previewRedeemCollaterals
+
+Computes the obtainable amount of collateral(s) for a given amount of Honey.
+
+**Note:** The `asset` parameter is ignored if running in basket mode.
+
+```solidity
+function previewRedeemCollaterals(
+    address asset,
+    uint256 honey
+) external view returns (uint256[] memory collaterals);
+```
+
+### previewRedeemCollateralsWithPrices
+
+Same as `previewRedeemCollaterals` but uses provided prices instead of oracle prices.
+
+```solidity
+function previewRedeemCollateralsWithPrices(
+    address asset,
+    uint256 honey,
+    uint256[] memory prices
+) external view returns (uint256[] memory collaterals);
+```
+
+### previewRedeemHoney
+
+Given one desired collateral amount, computes the required Honey amount and obtainable collateral amounts.
+
+**Note:** If basket mode is enabled, the required Honey amount will provide other collaterals besides the requested amount.
+
+```solidity
+function previewRedeemHoney(
+    address asset,
+    uint256 amount
+) external view returns (uint256[] memory collaterals, uint256 honey);
+```
+
+### previewRedeemHoneyWithPrices
+
+Same as `previewRedeemHoney` but uses provided prices instead of oracle prices.
+
+```solidity
+function previewRedeemHoneyWithPrices(
+    address asset,
+    uint256 amount,
+    uint256[] memory prices
+) external view returns (uint256[] memory collaterals, uint256 honey);
+```
+
+### isBasketModeEnabledWithPrices
+
+Checks if basket mode would be enabled with the provided prices.
+
+```solidity
+function isBasketModeEnabledWithPrices(
+    bool isMint,
+    uint256[] memory prices
+) external view returns (bool basketMode);
+```
+
+### isPeggedWithPrice
+
+Checks if an asset would be considered pegged at the provided price.
+
+```solidity
+function isPeggedWithPrice(
+    address asset,
+    uint256 price
+) external view returns (bool);
+```
 
 ## Functions
 
-### previewMint
+### initialize
 
-Get the amount of Honey that can be minted with the given ERC20.
+Initializes the contract with admin and HoneyFactory addresses. Can only be called once.
 
-```solidity
-function previewMint(address asset, uint256 amount) external view returns (uint256 honeyAmount);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                       |
-| -------- | --------- | --------------------------------- |
-| `asset`  | `address` | The ERC20 to mint with.           |
-| `amount` | `uint256` | The amount of ERC20 to mint with. |
-
-**Returns**
-
-| Name          | Type      | Description                             |
-| ------------- | --------- | --------------------------------------- |
-| `honeyAmount` | `uint256` | The amount of Honey that can be minted. |
-
-### previewRedeem
-
-Get the amount of ERC20 that can be redeemed with the given Honey.
+**Errors:**
+- `ZeroAddress`: If `honeyFactory_` is the zero address
 
 ```solidity
-function previewRedeem(address asset, uint256 honeyAmount) external view returns (uint256);
+function initialize(address admin, address honeyFactory_) external initializer;
 ```
 
-**Parameters**
+## Errors
 
-| Name          | Type      | Description                    |
-| ------------- | --------- | ------------------------------ |
-| `asset`       | `address` | The ERC20 to redeem.           |
-| `honeyAmount` | `uint256` | The amount of Honey to redeem. |
-
-**Returns**
-
-| Name     | Type      | Description                               |
-| -------- | --------- | ----------------------------------------- |
-| `<none>` | `uint256` | The amount of ERC20 that can be redeemed. |
-
-### previewRequiredCollateral
-
-Previews the amount of ERC20 required to mint an exact amount of honey.
-
+### ZeroAddress
 ```solidity
-function previewRequiredCollateral(
-    address asset,
-    uint256 exactHoneyAmount
-)
-    external
-    view
-    returns (uint256[] memory res);
+error ZeroAddress();
 ```
+Thrown when attempting to initialize with a zero address.
 
-**Parameters**
-
-| Name               | Type      | Description                        |
-| ------------------ | --------- | ---------------------------------- |
-| `asset`            | `address` | The ERC20 asset to use.            |
-| `exactHoneyAmount` | `uint256` | The exact amount of honey to mint. |
-
-### previewRedeemBasketMode
-
-Previews the amount of ERC20 assets that can be redeemed from honey.
-
-```solidity
-function previewRedeemBasketMode(uint256 honeyAmount) external view returns (uint256[] memory res);
-```
-
-**Parameters**
-
-| Name          | Type      | Description                                           |
-| ------------- | --------- | ----------------------------------------------------- |
-| `honeyAmount` | `uint256` | The amount of honey to use for redeeming collaterals. |
-
-**Returns**
-
-| Name  | Type        | Description                                      |
-| ----- | ----------- | ------------------------------------------------ |
-| `res` | `uint256[]` | The amount of ERC20 assets that can be redeemed. |
-
-### previewHoneyToRedeem
-
-Previews the amount of honey required to redeem an exact amount of target ERC20 asset.
-
-```solidity
-function previewHoneyToRedeem(address asset, uint256 exactAmount) external view returns (uint256);
-```
-
-**Parameters**
-
-| Name          | Type      | Description                            |
-| ------------- | --------- | -------------------------------------- |
-| `asset`       | `address` | The ERC20 asset to receive.            |
-| `exactAmount` | `uint256` | The exact amount of assets to receive. |
+### Other Errors
+The contract inherits additional errors from IHoneyErrors that may be relevant in the broader system context.

@@ -19,111 +19,194 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactory['mainnet-address']">{{config.contracts.tokens.honeyFactory['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactory.abi && config.contracts.tokens.honeyFactory.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactory.abi">ABI JSON</a></span></small>
 
-This is the factory contract for minting and redeeming Honey.
+This is the factory contract for minting and redeeming Honey. It manages collateral vaults, handles basket mode operations, and provides liquidation functionality.
 
 **Inherits:**
-IHoneyFactory, OwnableUpgradeable, UUPSUpgradeable
+IHoneyFactory, VaultAdmin
+
+## State Variables
+
+### honey
+The Honey token contract.
+```solidity
+Honey public honey;
+```
+
+### forcedBasketMode
+Whether basket mode is forced regardless of price oracle.
+```solidity
+bool public forcedBasketMode;
+```
+
+### liquidationEnabled
+Whether liquidation is enabled.
+```solidity
+bool public liquidationEnabled;
+```
+
+### priceOracle
+The price oracle contract.
+```solidity
+IPriceOracle public priceOracle;
+```
+
+### priceFeedMaxDelay
+Maximum number of seconds of tolerated staleness for price feeds.
+```solidity
+uint256 public priceFeedMaxDelay;
+```
 
 ## View Functions
 
-### getHoney
-
-Returns the HONEY token address.
-
+### getWeights
+Returns weights of all registered assets except for paused ones.
 ```solidity
-function getHoney() external view returns (address);
+function getWeights() external view returns (uint256[] memory weights);
 ```
 
-### owner
-
+### isPegged
+Checks if an asset is pegged within its allowed range.
 ```solidity
-function owner() public view virtual override returns (address);
+function isPegged(address asset) public view returns (bool);
 ```
 
-### proxiableUUID
-
+### isBasketModeEnabled
+Gets the status of basket mode. For minting, enabled if all collaterals are depegged or bad. For redeeming, enabled if at least one non-liquidated asset is depegged.
 ```solidity
-function proxiableUUID() external view virtual override notDelegated returns (bytes32);
+function isBasketModeEnabled(bool isMint) public view returns (bool basketMode);
 ```
 
 ## Functions
 
-### initialize
-
-Initializes the HoneyFactory contract.
-
-```solidity
-function initialize(address _honey) external initializer;
-```
-
 ### mint
+Mints Honey by depositing collateral assets.
 
-Mints HONEY tokens to the specified address.
+**Parameters:**
+- `asset`: The collateral asset to deposit
+- `amount`: Amount of collateral to deposit
+- `receiver`: Address to receive minted Honey
+- `expectBasketMode`: Expected basket mode status
 
-**Emits:**
-
-- [HoneyMinted](#event-honeyminted)
+**Errors:**
+- `NotPegged`: If asset is not pegged and basket mode is disabled
+- `UnexpectedBasketModeStatus`: If basket mode status doesn't match expectation
+- `ExceedGlobalCap`: If mint would exceed global cap
+- `ExceedRelativeCap`: If mint would exceed relative cap
+- `ZeroWeight`: If asset has zero weight in basket mode
 
 ```solidity
-function mint(address to, uint256 amount) external onlyOwner;
+function mint(
+    address asset,
+    uint256 amount,
+    address receiver,
+    bool expectBasketMode
+) external returns (uint256);
 ```
 
 ### redeem
+Redeems Honey for collateral assets.
 
-Redeems HONEY tokens from the specified address.
+**Parameters:**
+- `asset`: The collateral asset to receive
+- `honeyAmount`: Amount of Honey to redeem
+- `receiver`: Address to receive collateral
+- `expectBasketMode`: Expected basket mode status
 
-**Emits:**
-
-- [HoneyRedeemed](#event-honeyredeemed)
+**Errors:**
+- `UnexpectedBasketModeStatus`: If basket mode status doesn't match expectation
+- `ExceedGlobalCap`: If redeem would exceed global cap
+- `ExceedRelativeCap`: If redeem would exceed relative cap
 
 ```solidity
-function redeem(address from, uint256 amount) external onlyOwner;
+function redeem(
+    address asset,
+    uint256 honeyAmount,
+    address receiver,
+    bool expectBasketMode
+) external returns (uint256[] memory);
 ```
 
-### upgradeToAndCall
+### liquidate
+Liquidates a bad collateral asset for a good one.
+
+**Parameters:**
+- `badCollateral`: The asset to liquidate
+- `goodCollateral`: The asset to receive
+- `goodAmount`: Amount of good collateral to provide
+
+**Errors:**
+- `LiquidationDisabled`: If liquidation is not enabled
+- `AssetIsNotBadCollateral`: If bad collateral is not marked as bad
+- `LiquidationWithReferenceCollateral`: If trying to liquidate reference collateral
+- `ExceedRelativeCap`: If liquidation would exceed relative cap
+- `ExceedGlobalCap`: If liquidation would exceed global cap
+- `ZeroAmount`: If liquidation amount is zero
 
 ```solidity
-function upgradeToAndCall(address newImplementation, bytes memory data) public payable virtual override onlyOwner;
+function liquidate(
+    address badCollateral,
+    address goodCollateral,
+    uint256 goodAmount
+) external returns (uint256 badAmount);
+```
+
+### recapitalize
+Recapitalizes a collateral vault.
+
+**Parameters:**
+- `asset`: The asset to recapitalize
+- `amount`: Amount to provide
+
+**Errors:**
+- `RecapitalizeNotNeeded`: If vault doesn't need recapitalization
+- `NotPegged`: If asset is not pegged
+- `InsufficientRecapitalizeAmount`: If amount is below minimum
+- `ExceedRelativeCap`: If recapitalization would exceed relative cap
+- `ExceedGlobalCap`: If recapitalization would exceed global cap
+
+```solidity
+function recapitalize(address asset, uint256 amount) external;
 ```
 
 ## Events
 
-### HoneyMinted {#event-honeyminted}
-
-Emitted when HONEY tokens are minted.
-
+### HoneyMinted
 ```solidity
-event HoneyMinted(address indexed to, uint256 amount);
+event HoneyMinted(
+    address indexed from,
+    address indexed to,
+    address indexed asset,
+    uint256 assetAmount,
+    uint256 mintAmount
+);
 ```
+Emitted when Honey is minted.
 
-### HoneyRedeemed {#event-honeyredeemed}
-
-Emitted when HONEY tokens are redeemed.
-
+### HoneyRedeemed
 ```solidity
-event HoneyRedeemed(address indexed from, uint256 amount);
+event HoneyRedeemed(
+    address indexed from,
+    address indexed to,
+    address indexed asset,
+    uint256 assetAmount,
+    uint256 redeemAmount
+);
 ```
+Emitted when Honey is redeemed.
 
-### Initialized {#event-initialized}
-
-Emitted when the contract is initialized.
-
+### Liquidated
 ```solidity
-event Initialized(uint64 version);
+event Liquidated(
+    address badAsset,
+    address goodAsset,
+    uint256 amount,
+    address sender
+);
 ```
+Emitted when liquidation is performed.
 
-### OwnershipTransferred {#event-ownershiptransferred}
-
-Emitted when ownership is transferred.
-
+### Recapitalized
 ```solidity
-event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+event Recapitalized(address asset, uint256 amount, address sender);
 ```
-
-### Upgraded {#event-upgraded}
-
-Emitted when the implementation is upgraded.
-
-```solidity
-event Upgraded(address indexed implementation);
-```
+Emitted when vault is recapitalized.

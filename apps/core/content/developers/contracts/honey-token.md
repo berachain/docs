@@ -19,63 +19,140 @@ head:
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a><span v-if="config.contracts.tokens.honey.abi && config.contracts.tokens.honey.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honey.abi">ABI JSON</a></span></small>
 
-This is the ERC20 token representation of Berachain's native stablecoin, Honey.
+This is the ERC20 token representation of Berachain's native stablecoin, Honey. The contract is upgradeable and access-controlled, with minting and burning restricted to the HoneyFactory contract.
 
 **Inherits:**
 ERC20, AccessControlUpgradeable, UUPSUpgradeable, IHoneyErrors
 
+## State Variables
+
+### factory
+
+The factory contract address that has exclusive permission to mint and burn Honey.
+
+```solidity
+address public factory;
+```
+
 ## View Functions
-
-### allowance
-
-```solidity
-function allowance(address owner, address spender) public view virtual override returns (uint256);
-```
-
-### balanceOf
-
-```solidity
-function balanceOf(address account) public view virtual override returns (uint256);
-```
-
-### decimals
-
-```solidity
-function decimals() public view virtual override returns (uint8);
-```
 
 ### name
 
+Returns the name of the token: "Honey"
+
 ```solidity
-function name() public view virtual override returns (string memory);
+function name() public pure override returns (string memory);
 ```
 
 ### symbol
 
+Returns the symbol of the token: "HONEY"
+
 ```solidity
-function symbol() public view virtual override returns (string memory);
+function symbol() public pure override returns (string memory);
+```
+
+### allowance
+
+Returns the remaining number of tokens that `spender` is allowed to spend on behalf of `owner`.
+
+```solidity
+function allowance(address owner, address spender) public view virtual returns (uint256);
+```
+
+### balanceOf
+
+Returns the amount of tokens owned by an account.
+
+```solidity
+function balanceOf(address account) public view virtual returns (uint256);
+```
+
+### decimals
+
+Returns the number of decimals used for token amounts.
+
+```solidity
+function decimals() public view virtual returns (uint8);
 ```
 
 ### totalSupply
 
+Returns the total amount of tokens in existence.
+
 ```solidity
-function totalSupply() public view virtual override returns (uint256);
+function totalSupply() public view virtual returns (uint256);
 ```
 
 ## Functions
 
+### initialize
+
+Initializes the contract with governance and factory addresses. Can only be called once.
+
+**Access:** Only during deployment
+**Errors:**
+- `ZeroAddress`: If either `_governance` or `_factory` is the zero address
+
+```solidity
+function initialize(address _governance, address _factory) external initializer;
+```
+
+### mint
+
+Mints Honey tokens to a specified address.
+
+**Access:** Only HoneyFactory
+**Errors:**
+- `NotFactory`: If called by any address other than the factory
+
+```solidity
+function mint(address to, uint256 amount) external onlyFactory;
+```
+
 ### burn
 
-Burn Honey from an account.
+Burns Honey tokens from a specified address.
+
+**Access:** Only HoneyFactory
+**Errors:**
+- `NotFactory`: If called by any address other than the factory
 
 ```solidity
 function burn(address from, uint256 amount) external onlyFactory;
 ```
 
-### mint
+## Events
 
-Mint Honey to the receiver.
+### Transfer {#event-transfer}
+
+Emitted when tokens are transferred between accounts.
 
 ```solidity
-function mint(address to, uint256 amount) external onlyFactory;
+event Transfer(address indexed from, address indexed to, uint256 value);
 ```
+
+### Approval {#event-approval}
+
+Emitted when an account approves another account to spend tokens on their behalf.
+
+```solidity
+event Approval(address indexed owner, address indexed spender, uint256 value);
+```
+
+## Errors
+
+### ZeroAddress
+```solidity
+error ZeroAddress();
+```
+Thrown when attempting to initialize with a zero address.
+
+### NotFactory
+```solidity
+error NotFactory();
+```
+Thrown when a restricted function is called by an address other than the factory.
+
+### Other Errors
+The contract inherits additional errors from IHoneyErrors that may be relevant in the broader system context.
