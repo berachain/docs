@@ -454,6 +454,7 @@ Allows the distributor to notify the reward amount.
 
 **Emits:**
 
+- [RewardAdded](#event-rewardadded)
 - [IncentivesProcessed](#event-incentivesprocessed)
 - [IncentivesProcessFailed](#event-incentivesprocessfailed)
 - [BGTBoosterIncentivesProcessed](#event-bgtboosterincentivesprocessed)
@@ -615,6 +616,10 @@ Allows the reward vault manager to update the duration of the rewards.
 
 _Only allowed if targetRewardsPerSecond is not set._
 
+**Emits:**
+
+- [RewardsDurationUpdated](#event-rewardsdurationupdated)
+
 ```solidity
 function setRewardsDuration(uint256 _rewardsDuration) external onlyRewardVaultManager;
 ```
@@ -648,6 +653,10 @@ function setTargetRewardsPerSecond(uint256 _targetRewardsPerSecond) external onl
 ### stake
 
 Stake tokens in the vault.
+
+**Emits:**
+
+- [Staked](#event-staked)
 
 ```solidity
 function stake(uint256 amount) external nonReentrant whenNotPaused;
@@ -729,6 +738,10 @@ function whitelistIncentiveToken(address token, uint256 minIncentiveRate, addres
 ### withdraw
 
 Withdraw the staked tokens from the vault.
+
+**Emits:**
+
+- [Withdrawn](#event-withdrawn)
 
 ```solidity
 function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(msg.sender, amount) whenNotPaused;
@@ -1008,21 +1021,79 @@ event Recovered(address token, uint256 amount);
 | `token`  | `address` | The token that has been recovered |
 | `amount` | `uint256` | The amount of token recovered     |
 
+### Staked {#event-staked}
+
+Emitted when the staking balance of an account has increased.
+
+```solidity
+event Staked(address indexed account, uint256 amount);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                 |
+| --------- | --------- | --------------------------- |
+| `account` | `address` | The account that has staked |
+| `amount`  | `uint256` | The amount of staked tokens |
+
+### Withdrawn {#event-withdrawn}
+
+Emitted when the staking balance of an account has decreased.
+
+```solidity
+event Withdrawn(address indexed account, uint256 amount);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                    |
+| --------- | --------- | ------------------------------ |
+| `account` | `address` | The account that has withdrawn |
+| `amount`  | `uint256` | The amount of withdrawn tokens |
+
+### RewardAdded {#event-rewardadded}
+
+Emitted when a reward has been added to the vault.
+
+```solidity
+event RewardAdded(uint256 reward);
+```
+
+**Parameters**
+
+| Name     | Type      | Description                                     |
+| -------- | --------- | ----------------------------------------------- |
+| `reward` | `uint256` | The amount of reward added, scaled by PRECISION |
+
 ### RewardPaid {#event-rewardpaid}
 
 Emitted when a reward is paid to an account.
 
 ```solidity
-event RewardPaid(address indexed account, address indexed recipient, uint256 amount);
+event RewardPaid(address indexed account, address to, uint256 reward);
 ```
 
 **Parameters**
 
-| Name        | Type      | Description                          |
-| ----------- | --------- | ------------------------------------ |
-| `account`   | `address` | The account that earned the reward   |
-| `recipient` | `address` | The address that received the reward |
-| `amount`    | `uint256` | The amount of reward paid            |
+| Name      | Type      | Description                          |
+| --------- | --------- | ------------------------------------ |
+| `account` | `address` | The account that earned the reward   |
+| `to`      | `address` | The address that received the reward |
+| `reward`  | `uint256` | The amount of reward paid            |
+
+### RewardsDurationUpdated {#event-rewardsdurationupdated}
+
+Emitted when the reward duration has been updated.
+
+```solidity
+event RewardsDurationUpdated(uint256 newDuration);
+```
+
+**Parameters**
+
+| Name          | Type      | Description                    |
+| ------------- | --------- | ------------------------------ |
+| `newDuration` | `uint256` | The new duration of the reward |
 
 ### RewardVaultManagerSet {#event-rewardvaultmanagerset}
 
