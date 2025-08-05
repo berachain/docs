@@ -140,7 +140,7 @@ _Only the new operator can accept the change._
 
 **Emits:**
 
-- [OperatorAcceptChange](#event-operatoracceptchange)
+- [OperatorUpdated](#event-operatorupdated)
 
 ```solidity
 function acceptOperatorChange(bytes calldata pubkey) external;
@@ -160,7 +160,7 @@ _Only the current operator can cancel the change._
 
 **Emits:**
 
-- [OperatorCancelChange](#event-operatorcancelchange)
+- [OperatorChangeCancelled](#event-operatorchangecancelled)
 
 ```solidity
 function cancelOperatorChange(bytes calldata pubkey) external;
@@ -181,6 +181,7 @@ _emits the Deposit event upon successful deposit._
 **Emits:**
 
 - [Deposit](#event-deposit)
+- [OperatorUpdated](#event-operatorupdated) (only on first deposit)
 
 ```solidity
 function deposit(
@@ -210,7 +211,7 @@ _Only the current operator can request a change._
 
 **Emits:**
 
-- [OperatorRequestChange](#event-operatorrequestchange)
+- [OperatorChangeQueued](#event-operatorchangequeued)
 
 ```solidity
 function requestOperatorChange(bytes calldata pubkey, address newOperator) external;
@@ -243,49 +244,49 @@ event Deposit(bytes pubkey, bytes credentials, uint64 amount, bytes signature, u
 | `signature`   | `bytes`  | The signature used only on the first deposit |
 | `index`       | `uint64` | The deposit index                            |
 
-### OperatorAcceptChange {#event-operatoracceptchange}
+### OperatorChangeQueued {#event-operatorchangequeued}
 
-Emitted when an operator change is accepted.
+Emitted when an operator change is queued.
 
 ```solidity
-event OperatorAcceptChange(bytes indexed pubkey, address indexed oldOperator, address indexed newOperator);
+event OperatorChangeQueued(bytes indexed pubkey, address queuedOperator, address currentOperator, uint256 queuedTimestamp);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                   |
-| ------------- | --------- | ----------------------------- |
-| `pubkey`      | `bytes`   | The pubkey of the validator   |
-| `oldOperator` | `address` | The previous operator address |
-| `newOperator` | `address` | The new operator address      |
+| Name              | Type      | Description                        |
+| ----------------- | --------- | ---------------------------------- |
+| `pubkey`          | `bytes`   | The pubkey of the validator        |
+| `queuedOperator`  | `address` | The new queued operator address    |
+| `currentOperator` | `address` | The current operator address       |
+| `queuedTimestamp` | `uint256` | The timestamp when the change was queued |
 
-### OperatorCancelChange {#event-operatorcancelchange}
+### OperatorChangeCancelled {#event-operatorchangecancelled}
 
 Emitted when an operator change is cancelled.
 
 ```solidity
-event OperatorCancelChange(bytes indexed pubkey, address indexed operator);
+event OperatorChangeCancelled(bytes indexed pubkey);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                                    |
-| ---------- | --------- | ---------------------------------------------- |
-| `pubkey`   | `bytes`   | The pubkey of the validator                    |
-| `operator` | `address` | The operator address that cancelled the change |
+| Name     | Type    | Description                                    |
+| -------- | ------- | ---------------------------------------------- |
+| `pubkey` | `bytes` | The pubkey of the validator                    |
 
-### OperatorRequestChange {#event-operatorrequestchange}
+### OperatorUpdated {#event-operatorupdated}
 
-Emitted when an operator change is requested.
+Emitted when the operator of a validator is updated.
 
 ```solidity
-event OperatorRequestChange(bytes indexed pubkey, address indexed operator, address indexed newOperator);
+event OperatorUpdated(bytes indexed pubkey, address newOperator, address previousOperator);
 ```
 
 **Parameters**
 
-| Name          | Type      | Description                        |
-| ------------- | --------- | ---------------------------------- |
-| `pubkey`      | `bytes`   | The pubkey of the validator        |
-| `operator`    | `address` | The current operator address       |
-| `newOperator` | `address` | The requested new operator address |
+| Name              | Type      | Description                        |
+| ----------------- | --------- | ---------------------------------- |
+| `pubkey`          | `bytes`   | The pubkey of the validator        |
+| `newOperator`     | `address` | The new operator address           |
+| `previousOperator` | `address` | The previous operator address      |

@@ -377,7 +377,7 @@ Activates the queued commission rate of a validator on incentive tokens.
 
 **Emits:**
 
-- [ValidatorCommissionActivated](#event-validatorcommissionactivated)
+- [ValCommissionSet](#event-valcommissionset)
 
 ```solidity
 function activateQueuedValCommission(bytes calldata valPubkey) external;
@@ -397,7 +397,7 @@ _Should be called by the distribution contract._
 
 **Emits:**
 
-- [RewardAllocationActivated](#event-rewardallocationactivated)
+- [ActivateRewardAllocation](#event-activaterewardallocation)
 
 ```solidity
 function activateReadyQueuedRewardAllocation(bytes calldata valPubkey) external onlyDistributor;
@@ -411,6 +411,8 @@ function activateReadyQueuedRewardAllocation(bytes calldata valPubkey) external 
 
 ### initialize
 
+Initializes the BeraChef contract with the required parameters.
+
 ```solidity
 function initialize(
     address _distributor,
@@ -423,6 +425,36 @@ function initialize(
     initializer;
 ```
 
+**Parameters**
+
+| Name                               | Type      | Description                                    |
+| ---------------------------------- | --------- | ---------------------------------------------- |
+| `_distributor`                     | `address` | The address of the distributor contract        |
+| `_factory`                         | `address` | The address of the reward vault factory        |
+| `_governance`                      | `address` | The address of the governance module           |
+| `_beaconDepositContract`           | `address` | The address of the beacon deposit contract     |
+| `_maxNumWeightsPerRewardAllocation` | `uint8`   | The maximum number of weights per allocation   |
+
+**Emits:**
+
+- [MaxNumWeightsPerRewardAllocationSet](#event-maxnumweightsperrewardallocationset)
+
+### _authorizeUpgrade
+
+Authorizes an upgrade to a new implementation.
+
+_Only the owner can call this function._
+
+```solidity
+function _authorizeUpgrade(address newImplementation) internal override onlyOwner;
+```
+
+**Parameters**
+
+| Name                | Type      | Description                    |
+| ------------------- | --------- | ------------------------------ |
+| `newImplementation` | `address` | The new implementation address |
+
 ### queueNewRewardAllocation
 
 Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of existing queued reward allocation.
@@ -431,7 +463,7 @@ _The weights of the reward allocation must add up to 100% or 1e4. Only whitelist
 
 **Emits:**
 
-- [RewardAllocationQueued](#event-rewardallocationqueued)
+- [QueueRewardAllocation](#event-queuerewardallocation)
 
 ```solidity
 function queueNewRewardAllocation(
@@ -459,7 +491,7 @@ _The caller of this function must be the validator operator address._
 
 **Emits:**
 
-- [ValidatorCommissionQueued](#event-validatorcommissionqueued)
+- [QueuedValCommission](#event-queuedvalcommission)
 
 ```solidity
 function queueValCommission(bytes calldata valPubkey, uint96 commissionRate) external onlyOperator(valPubkey);
@@ -500,7 +532,7 @@ _The caller of this function must be the governance module account._
 
 **Emits:**
 
-- [DefaultRewardAllocationSet](#event-defaultrewardallocationset)
+- [SetDefaultRewardAllocation](#event-setdefaultrewardallocation)
 
 ```solidity
 function setDefaultRewardAllocation(RewardAllocation calldata ra) external onlyOwner;
@@ -510,7 +542,7 @@ function setDefaultRewardAllocation(RewardAllocation calldata ra) external onlyO
 
 | Name | Type               | Description |
 | ---- | ------------------ | ----------- |
-| `ra` | `RewardAllocation` |             |
+| `ra` | `RewardAllocation` | The default reward allocation to set |
 
 ### setMaxNumWeightsPerRewardAllocation
 
@@ -604,19 +636,19 @@ event CommissionChangeDelaySet(uint64 oldDelay, uint64 newDelay);
 | `oldDelay` | `uint64` | The previous commission change delay |
 | `newDelay` | `uint64` | The new commission change delay      |
 
-### DefaultRewardAllocationSet {#event-defaultrewardallocationset}
+### SetDefaultRewardAllocation {#event-setdefaultrewardallocation}
 
 Emitted when the default reward allocation is set.
 
 ```solidity
-event DefaultRewardAllocationSet(RewardAllocation ra);
+event SetDefaultRewardAllocation(RewardAllocation rewardAllocation);
 ```
 
 **Parameters**
 
-| Name | Type               | Description                       |
-| ---- | ------------------ | --------------------------------- |
-| `ra` | `RewardAllocation` | The new default reward allocation |
+| Name              | Type               | Description                       |
+| ----------------- | ------------------ | --------------------------------- |
+| `rewardAllocation` | `RewardAllocation` | The new default reward allocation |
 
 ### Initialized {#event-initialized}
 
@@ -677,20 +709,21 @@ event OwnershipTransferred(address indexed previousOwner, address indexed newOwn
 | `previousOwner` | `address` | The previous owner |
 | `newOwner`      | `address` | The new owner      |
 
-### RewardAllocationActivated {#event-rewardallocationactivated}
+### ActivateRewardAllocation {#event-activaterewardallocation}
 
 Emitted when a reward allocation is activated.
 
 ```solidity
-event RewardAllocationActivated(bytes indexed valPubkey, RewardAllocation ra);
+event ActivateRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weight[] weights);
 ```
 
 **Parameters**
 
-| Name        | Type               | Description                     |
-| ----------- | ------------------ | ------------------------------- |
-| `valPubkey` | `bytes`            | The validator's public key      |
-| `ra`        | `RewardAllocation` | The activated reward allocation |
+| Name        | Type       | Description                     |
+| ----------- | ---------- | ------------------------------- |
+| `valPubkey` | `bytes`    | The validator's public key      |
+| `startBlock` | `uint64`   | The block when allocation becomes active |
+| `weights`   | `Weight[]` | The weights of the reward allocation |
 
 ### RewardAllocationBlockDelaySet {#event-rewardallocationblockdelayset}
 
@@ -707,20 +740,21 @@ event RewardAllocationBlockDelaySet(uint64 oldDelay, uint64 newDelay);
 | `oldDelay` | `uint64` | The previous reward allocation block delay |
 | `newDelay` | `uint64` | The new reward allocation block delay      |
 
-### RewardAllocationQueued {#event-rewardallocationqueued}
+### QueueRewardAllocation {#event-queuerewardallocation}
 
 Emitted when a reward allocation is queued.
 
 ```solidity
-event RewardAllocationQueued(bytes indexed valPubkey, RewardAllocation ra);
+event QueueRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weight[] weights);
 ```
 
 **Parameters**
 
-| Name        | Type               | Description                  |
-| ----------- | ------------------ | ---------------------------- |
-| `valPubkey` | `bytes`            | The validator's public key   |
-| `ra`        | `RewardAllocation` | The queued reward allocation |
+| Name        | Type       | Description                  |
+| ----------- | ---------- | ---------------------------- |
+| `valPubkey` | `bytes`    | The validator's public key   |
+| `startBlock` | `uint64`   | The block when allocation becomes active |
+| `weights`   | `Weight[]` | The weights of the reward allocation |
 
 ### Upgraded {#event-upgraded}
 
@@ -736,36 +770,36 @@ event Upgraded(address indexed implementation);
 | ---------------- | --------- | ------------------------------ |
 | `implementation` | `address` | The new implementation address |
 
-### ValidatorCommissionActivated {#event-validatorcommissionactivated}
+### ValCommissionSet {#event-valcommissionset}
 
-Emitted when a validator commission is activated.
+Emitted when a validator commission is set.
 
 ```solidity
-event ValidatorCommissionActivated(bytes indexed valPubkey, uint96 commissionRate);
+event ValCommissionSet(bytes indexed valPubkey, uint96 oldCommissionRate, uint96 newCommissionRate);
 ```
 
 **Parameters**
 
-| Name             | Type     | Description                   |
-| ---------------- | -------- | ----------------------------- |
-| `valPubkey`      | `bytes`  | The validator's public key    |
-| `commissionRate` | `uint96` | The activated commission rate |
+| Name                | Type     | Description                   |
+| ------------------- | -------- | ----------------------------- |
+| `valPubkey`         | `bytes`  | The validator's public key    |
+| `oldCommissionRate` | `uint96` | The old commission rate       |
+| `newCommissionRate` | `uint96` | The new commission rate       |
 
-### ValidatorCommissionQueued {#event-validatorcommissionqueued}
+### QueuedValCommission {#event-queuedvalcommission}
 
 Emitted when a validator commission is queued.
 
 ```solidity
-event ValidatorCommissionQueued(bytes indexed valPubkey, uint96 commissionRate, uint64 blockNumber);
+event QueuedValCommission(bytes indexed valPubkey, uint96 queuedCommissionRate);
 ```
 
 **Parameters**
 
-| Name             | Type     | Description                  |
-| ---------------- | -------- | ---------------------------- |
-| `valPubkey`      | `bytes`  | The validator's public key   |
-| `commissionRate` | `uint96` | The queued commission rate   |
-| `blockNumber`    | `uint64` | The block number when queued |
+| Name                   | Type     | Description                  |
+| ---------------------- | -------- | ---------------------------- |
+| `valPubkey`            | `bytes`  | The validator's public key   |
+| `queuedCommissionRate` | `uint96` | The queued commission rate   |
 
 ### VaultWhitelistedStatusUpdated {#event-vaultwhitelistedstatusupdated}
 
