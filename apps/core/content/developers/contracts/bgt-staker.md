@@ -121,14 +121,14 @@ function balanceOf(address account) public view virtual returns (uint256);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
+| Name      | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
 | `account` | `address` | The account to get the balance for |
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                      |
+| -------- | --------- | -------------------------------- |
 | `<none>` | `uint256` | The balance of the staked tokens |
 
 ### earned
@@ -141,14 +141,14 @@ function earned(address account) public view virtual returns (uint256);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
+| Name      | Type      | Description                             |
+| --------- | --------- | --------------------------------------- |
 | `account` | `address` | The account to calculate the reward for |
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                |
+| -------- | --------- | ------------------------------------------ |
 | `<none>` | `uint256` | The amount of reward earned by the account |
 
 ### getRewardForDuration
@@ -161,8 +161,8 @@ function getRewardForDuration() public view virtual returns (uint256);
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                               |
+| -------- | --------- | ----------------------------------------- |
 | `<none>` | `uint256` | The total reward vested over the duration |
 
 ### lastTimeRewardApplicable
@@ -175,8 +175,8 @@ function lastTimeRewardApplicable() public view virtual returns (uint256);
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                   |
+| -------- | --------- | --------------------------------------------- |
 | `<none>` | `uint256` | The timestamp of the last reward distribution |
 
 ### rewardPerToken
@@ -189,8 +189,8 @@ function rewardPerToken() public view virtual returns (uint256);
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                                                 |
+| -------- | --------- | --------------------------------------------------------------------------- |
 | `<none>` | `uint256` | The current value of the global reward per token accumulator scaled by 1e18 |
 
 ### rewards
@@ -203,14 +203,14 @@ function rewards(address account) public view virtual returns (uint256);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
+| Name      | Type      | Description                                    |
+| --------- | --------- | ---------------------------------------------- |
 | `account` | `address` | The account to retrieve the reward balance for |
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                         |
+| -------- | --------- | --------------------------------------------------- |
 | `<none>` | `uint256` | The current reward balance of the specified account |
 
 ### userRewardPerTokenPaid
@@ -223,14 +223,14 @@ function userRewardPerTokenPaid(address account) public view virtual returns (ui
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
+| Name      | Type      | Description                            |
+| --------- | --------- | -------------------------------------- |
 | `account` | `address` | The account to retrieve the reward for |
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                         |
+| -------- | --------- | --------------------------------------------------- |
 | `<none>` | `uint256` | The current reward balance of the specified account |
 
 ## Functions
@@ -254,12 +254,12 @@ function initialize(
 
 **Parameters**
 
-| Name            | Type      | Description                |
-| --------------- | --------- | -------------------------- |
-| `_bgt`          | `address` | The BGT token address      |
-| `_feeCollector` | `address` | The fee collector address  |
-| `_governance`   | `address` | The governance address     |
-| `_rewardToken`  | `address` | The reward token address   |
+| Name            | Type      | Description               |
+| --------------- | --------- | ------------------------- |
+| `_bgt`          | `address` | The BGT token address     |
+| `_feeCollector` | `address` | The fee collector address |
+| `_governance`   | `address` | The governance address    |
+| `_rewardToken`  | `address` | The reward token address  |
 
 ### notifyRewardAmount
 
@@ -299,10 +299,10 @@ function recoverERC20(address tokenAddress, uint256 tokenAmount) external onlyOw
 
 **Parameters**
 
-| Name           | Type      | Description                    |
-| -------------- | --------- | ------------------------------ |
+| Name           | Type      | Description                         |
+| -------------- | --------- | ----------------------------------- |
 | `tokenAddress` | `address` | The address of the token to recover |
-| `tokenAmount`  | `uint256` | The amount of token to recover |
+| `tokenAmount`  | `uint256` | The amount of token to recover      |
 
 ### setRewardsDuration
 
@@ -322,9 +322,9 @@ function setRewardsDuration(uint256 _rewardsDuration) external onlyOwner;
 
 **Parameters**
 
-| Name               | Type      | Description                    |
-| ------------------ | --------- | ------------------------------ |
-| `_rewardsDuration` | `uint256` | The rewards duration           |
+| Name               | Type      | Description          |
+| ------------------ | --------- | -------------------- |
+| `_rewardsDuration` | `uint256` | The rewards duration |
 
 ### stake
 
@@ -342,10 +342,10 @@ function stake(address account, uint256 amount) external onlyBGT;
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `account` | `address` | The account to stake for        |
-| `amount`  | `uint256` | The amount of BGT to stake      |
+| Name      | Type      | Description                |
+| --------- | --------- | -------------------------- |
+| `account` | `address` | The account to stake for   |
+| `amount`  | `uint256` | The amount of BGT to stake |
 
 ### withdraw
 
@@ -363,10 +363,10 @@ function withdraw(address account, uint256 amount) external onlyBGT;
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `account` | `address` | The account to withdraw for     |
-| `amount`  | `uint256` | The amount of BGT to withdraw   |
+| Name      | Type      | Description                   |
+| --------- | --------- | ----------------------------- |
+| `account` | `address` | The account to withdraw for   |
+| `amount`  | `uint256` | The amount of BGT to withdraw |
 
 ### getReward
 
@@ -384,9 +384,9 @@ function getReward() external returns (uint256);
 
 **Returns**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
-| `<none>` | `uint256` | The reward amount               |
+| Name     | Type      | Description       |
+| -------- | --------- | ----------------- |
+| `<none>` | `uint256` | The reward amount |
 
 ### upgradeToAndCall
 
@@ -406,9 +406,9 @@ event Initialized(uint64 version);
 
 **Parameters**
 
-| Name      | Type     | Description                    |
-| --------- | -------- | ------------------------------ |
-| `version` | `uint64` | The initialization version      |
+| Name      | Type     | Description                |
+| --------- | -------- | -------------------------- |
+| `version` | `uint64` | The initialization version |
 
 ### OwnershipTransferred {#event-ownershiptransferred}
 
@@ -420,10 +420,10 @@ event OwnershipTransferred(address indexed previousOwner, address indexed newOwn
 
 **Parameters**
 
-| Name            | Type      | Description                    |
-| --------------- | --------- | ------------------------------ |
-| `previousOwner` | `address` | The previous owner              |
-| `newOwner`      | `address` | The new owner                   |
+| Name            | Type      | Description        |
+| --------------- | --------- | ------------------ |
+| `previousOwner` | `address` | The previous owner |
+| `newOwner`      | `address` | The new owner      |
 
 ### Recovered {#event-recovered}
 
@@ -435,10 +435,10 @@ event Recovered(address token, uint256 amount);
 
 **Parameters**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
 | `token`  | `address` | The token that has been recovered |
-| `amount` | `uint256` | The amount of token recovered   |
+| `amount` | `uint256` | The amount of token recovered     |
 
 ### RewardAdded {#event-rewardadded}
 
@@ -450,8 +450,8 @@ event RewardAdded(uint256 reward);
 
 **Parameters**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                                     |
+| -------- | --------- | ----------------------------------------------- |
 | `reward` | `uint256` | The amount of reward added, scaled by PRECISION |
 
 ### RewardPaid {#event-rewardpaid}
@@ -464,11 +464,11 @@ event RewardPaid(address indexed account, address to, uint256 reward);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `account` | `address` | The account whose reward has been claimed |
+| Name      | Type      | Description                                                |
+| --------- | --------- | ---------------------------------------------------------- |
+| `account` | `address` | The account whose reward has been claimed                  |
 | `to`      | `address` | The address that the reward was sent to (user or operator) |
-| `reward`  | `uint256` | The amount of reward claimed    |
+| `reward`  | `uint256` | The amount of reward claimed                               |
 
 ### RewardsDurationUpdated {#event-rewardsdurationupdated}
 
@@ -482,7 +482,7 @@ event RewardsDurationUpdated(uint256 newDuration);
 
 | Name          | Type      | Description                    |
 | ------------- | --------- | ------------------------------ |
-| `newDuration` | `uint256` | The new duration of the reward  |
+| `newDuration` | `uint256` | The new duration of the reward |
 
 ### Staked {#event-staked}
 
@@ -494,10 +494,10 @@ event Staked(address indexed account, uint256 amount);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `account` | `address` | The account that has staked     |
-| `amount`  | `uint256` | The amount of staked tokens     |
+| Name      | Type      | Description                 |
+| --------- | --------- | --------------------------- |
+| `account` | `address` | The account that has staked |
+| `amount`  | `uint256` | The amount of staked tokens |
 
 ### Upgraded {#event-upgraded}
 
@@ -511,7 +511,7 @@ event Upgraded(address indexed implementation);
 
 | Name             | Type      | Description                    |
 | ---------------- | --------- | ------------------------------ |
-| `implementation` | `address` | The new implementation address  |
+| `implementation` | `address` | The new implementation address |
 
 ### Withdrawn {#event-withdrawn}
 
@@ -525,5 +525,5 @@ event Withdrawn(address indexed account, uint256 amount);
 
 | Name      | Type      | Description                    |
 | --------- | --------- | ------------------------------ |
-| `account` | `address` | The account that has withdrawn  |
-| `amount`  | `uint256` | The amount of withdrawn tokens  |
+| `account` | `address` | The account that has withdrawn |
+| `amount`  | `uint256` | The amount of withdrawn tokens |
