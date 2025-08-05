@@ -17,6 +17,11 @@ head:
 
 # Distribute Block Rewards
 
+:::tip
+With the [August 2025 Upgrade](/nodes/guides/august-2025-upgrade), distributing your own block rewards is no longer necessary.
+Thanks to [BRIP-0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md), the process is built into the protocol.
+:::
+
 The following steps will guide you through the process of distributing block rewards on Berachain for both Validators and Reward Vaults.
 
 ## How Block Rewards Are Distributed

@@ -230,7 +230,7 @@
         "name": "Governance",
         "mainnet-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
         "bepolia-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/gov/BerachainGovernance.json",
+        "abi": "https://github.com/berachain/doc-abis/blob/main/gov/Governance.json",
         "docsUrl": "/developers/contracts/governance"
       },
       "timelock": {

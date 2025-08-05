@@ -125,15 +125,10 @@ $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 
 ## `$BGT` Distribution
 
-`$BGT` is emitted to reward vaults on a per-block basis via the [Distributor](../../developers/contracts/distributor.md#distributefor) by invoking the `distributeFor` function.
-This invocation creates `$BGT` that is then claimable by [Reward Vault](../pol/rewardvaults.md) stakers.
+`$BGT` is emitted to reward vaults on a per-block basis via the [Distributor](../../developers/contracts/distributor.md). Distributions for a given block are performed during processing
+for the following block. Distribution creates `$BGT` that is then claimable by [Reward Vault](../pol/rewardvaults.md) stakers.
 
-:::tip
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.**
-:::
-
-Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts.
-The reward window is reset each time new rewards are added.
+Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.** Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts. The reward window is reset each time new rewards are added.
 
 ### Distribution Example
 
