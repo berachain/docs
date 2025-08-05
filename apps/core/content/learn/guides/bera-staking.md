@@ -158,7 +158,7 @@ Future versions will support **Liquid Staking Tokens (LSTs)**:
 - **WBERA Token**: `0x6969696969696969696969696969696969696969`
 - **Incentive Fee Collector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}`
 
-::: tip For Developers
+:::tip
 For technical implementation details and function signatures, see the [WBERA Staker Vault contract documentation](/developers/contracts/wbera-staker-vault).
 :::
 

@@ -68,7 +68,7 @@ You can authorize protocols to claim your BGT rewards on your behalf, enabling a
 - **Dollar-cost averaging**: Regular small claims to smooth market volatility
 - **Streaming rewards**: Gradual claiming over time for tax or liquidity management
 
-::: tip For Developers
+:::tip
 See the [staking for other accounts guide](/developers/guides/staking-for-other-accounts) and [partial reward claims guide](/developers/guides/partial-reward-claims) for implementation details.
 :::
 
