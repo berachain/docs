@@ -27,31 +27,41 @@ IHoneyFactory, VaultAdmin
 ## State Variables
 
 ### honey
+
 The Honey token contract.
+
 ```solidity
 Honey public honey;
 ```
 
 ### forcedBasketMode
+
 Whether basket mode is forced regardless of price oracle.
+
 ```solidity
 bool public forcedBasketMode;
 ```
 
 ### liquidationEnabled
+
 Whether liquidation is enabled.
+
 ```solidity
 bool public liquidationEnabled;
 ```
 
 ### priceOracle
+
 The price oracle contract.
+
 ```solidity
 IPriceOracle public priceOracle;
 ```
 
 ### priceFeedMaxDelay
+
 Maximum number of seconds of tolerated staleness for price feeds.
+
 ```solidity
 uint256 public priceFeedMaxDelay;
 ```
@@ -59,19 +69,25 @@ uint256 public priceFeedMaxDelay;
 ## View Functions
 
 ### getWeights
+
 Returns weights of all registered assets except for paused ones.
+
 ```solidity
 function getWeights() external view returns (uint256[] memory weights);
 ```
 
 ### isPegged
+
 Checks if an asset is pegged within its allowed range.
+
 ```solidity
 function isPegged(address asset) public view returns (bool);
 ```
 
 ### isBasketModeEnabled
+
 Gets the status of basket mode. For minting, enabled if all collaterals are depegged or bad. For redeeming, enabled if at least one non-liquidated asset is depegged.
+
 ```solidity
 function isBasketModeEnabled(bool isMint) public view returns (bool basketMode);
 ```
@@ -79,15 +95,18 @@ function isBasketModeEnabled(bool isMint) public view returns (bool basketMode);
 ## Functions
 
 ### mint
+
 Mints Honey by depositing collateral assets.
 
 **Parameters:**
+
 - `asset`: The collateral asset to deposit
 - `amount`: Amount of collateral to deposit
 - `receiver`: Address to receive minted Honey
 - `expectBasketMode`: Expected basket mode status
 
 **Errors:**
+
 - `NotPegged`: If asset is not pegged and basket mode is disabled
 - `UnexpectedBasketModeStatus`: If basket mode status doesn't match expectation
 - `ExceedGlobalCap`: If mint would exceed global cap
@@ -104,15 +123,18 @@ function mint(
 ```
 
 ### redeem
+
 Redeems Honey for collateral assets.
 
 **Parameters:**
+
 - `asset`: The collateral asset to receive
 - `honeyAmount`: Amount of Honey to redeem
 - `receiver`: Address to receive collateral
 - `expectBasketMode`: Expected basket mode status
 
 **Errors:**
+
 - `UnexpectedBasketModeStatus`: If basket mode status doesn't match expectation
 - `ExceedGlobalCap`: If redeem would exceed global cap
 - `ExceedRelativeCap`: If redeem would exceed relative cap
@@ -127,14 +149,17 @@ function redeem(
 ```
 
 ### liquidate
+
 Liquidates a bad collateral asset for a good one.
 
 **Parameters:**
+
 - `badCollateral`: The asset to liquidate
 - `goodCollateral`: The asset to receive
 - `goodAmount`: Amount of good collateral to provide
 
 **Errors:**
+
 - `LiquidationDisabled`: If liquidation is not enabled
 - `AssetIsNotBadCollateral`: If bad collateral is not marked as bad
 - `LiquidationWithReferenceCollateral`: If trying to liquidate reference collateral
@@ -151,13 +176,16 @@ function liquidate(
 ```
 
 ### recapitalize
+
 Recapitalizes a collateral vault.
 
 **Parameters:**
+
 - `asset`: The asset to recapitalize
 - `amount`: Amount to provide
 
 **Errors:**
+
 - `RecapitalizeNotNeeded`: If vault doesn't need recapitalization
 - `NotPegged`: If asset is not pegged
 - `InsufficientRecapitalizeAmount`: If amount is below minimum
@@ -171,6 +199,7 @@ function recapitalize(address asset, uint256 amount) external;
 ## Events
 
 ### HoneyMinted
+
 ```solidity
 event HoneyMinted(
     address indexed from,
@@ -180,9 +209,11 @@ event HoneyMinted(
     uint256 mintAmount
 );
 ```
+
 Emitted when Honey is minted.
 
 ### HoneyRedeemed
+
 ```solidity
 event HoneyRedeemed(
     address indexed from,
@@ -192,9 +223,11 @@ event HoneyRedeemed(
     uint256 redeemAmount
 );
 ```
+
 Emitted when Honey is redeemed.
 
 ### Liquidated
+
 ```solidity
 event Liquidated(
     address badAsset,
@@ -203,10 +236,13 @@ event Liquidated(
     address sender
 );
 ```
+
 Emitted when liquidation is performed.
 
 ### Recapitalized
+
 ```solidity
 event Recapitalized(address asset, uint256 amount, address sender);
 ```
+
 Emitted when vault is recapitalized.

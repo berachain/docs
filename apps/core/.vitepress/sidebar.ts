@@ -213,8 +213,7 @@ const SIDEBAR = {
         {
           text: "Community Guides",
           link: "/developers/guides/community-guides"
-        },
-
+        }
       ]
     },
     {

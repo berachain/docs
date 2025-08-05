@@ -26,6 +26,7 @@ Multicall3 enables batching multiple function calls into a single transaction, r
 ## Structs
 
 ### Call
+
 Basic call struct.
 
 ```solidity
@@ -36,6 +37,7 @@ struct Call {
 ```
 
 ### Call3
+
 Call struct with allowFailure flag.
 
 ```solidity
@@ -47,6 +49,7 @@ struct Call3 {
 ```
 
 ### Call3Value
+
 Call struct with value and allowFailure flag.
 
 ```solidity
@@ -59,6 +62,7 @@ struct Call3Value {
 ```
 
 ### Result
+
 Result struct for call returns.
 
 ```solidity
@@ -71,6 +75,7 @@ struct Result {
 ## View Functions
 
 ### getBasefee
+
 Returns the current base fee.
 
 ```solidity
@@ -78,6 +83,7 @@ function getBasefee() external view returns (uint256 basefee)
 ```
 
 ### getBlockHash
+
 Returns the hash of a specific block.
 
 ```solidity
@@ -85,6 +91,7 @@ function getBlockHash(uint256 blockNumber) external view returns (bytes32 blockH
 ```
 
 ### getBlockNumber
+
 Returns the current block number.
 
 ```solidity
@@ -92,6 +99,7 @@ function getBlockNumber() external view returns (uint256 blockNumber)
 ```
 
 ### getChainId
+
 Returns the current chain ID.
 
 ```solidity
@@ -99,6 +107,7 @@ function getChainId() external view returns (uint256 chainid)
 ```
 
 ### getCurrentBlockCoinbase
+
 Returns the current block coinbase.
 
 ```solidity
@@ -106,6 +115,7 @@ function getCurrentBlockCoinbase() external view returns (address coinbase)
 ```
 
 ### getCurrentBlockDifficulty
+
 Returns the current block difficulty.
 
 ```solidity
@@ -113,6 +123,7 @@ function getCurrentBlockDifficulty() external view returns (uint256 difficulty)
 ```
 
 ### getCurrentBlockGasLimit
+
 Returns the current block gas limit.
 
 ```solidity
@@ -120,6 +131,7 @@ function getCurrentBlockGasLimit() external view returns (uint256 gaslimit)
 ```
 
 ### getCurrentBlockTimestamp
+
 Returns the current block timestamp.
 
 ```solidity
@@ -127,6 +139,7 @@ function getCurrentBlockTimestamp() external view returns (uint256 timestamp)
 ```
 
 ### getEthBalance
+
 Returns the ETH balance of an address.
 
 ```solidity
@@ -134,6 +147,7 @@ function getEthBalance(address addr) external view returns (uint256 balance)
 ```
 
 ### getLastBlockHash
+
 Returns the last block hash.
 
 ```solidity
@@ -143,6 +157,7 @@ function getLastBlockHash() external view returns (bytes32 blockhash)
 ## Functions
 
 ### aggregate
+
 Aggregate multiple calls in a single transaction.
 
 ```solidity
@@ -150,6 +165,7 @@ function aggregate(Call[] calldata calls) external payable returns (uint256 bloc
 ```
 
 ### aggregate3
+
 Aggregate multiple calls with optional failure handling.
 
 ```solidity
@@ -157,6 +173,7 @@ function aggregate3(Call3[] calldata calls) external payable returns (Result[] m
 ```
 
 ### aggregate3Value
+
 Aggregate multiple calls with value and optional failure handling.
 
 ```solidity
@@ -164,6 +181,7 @@ function aggregate3Value(Call3Value[] calldata calls) external payable returns (
 ```
 
 ### blockAndAggregate
+
 Aggregate calls and return block information.
 
 ```solidity
@@ -171,6 +189,7 @@ function blockAndAggregate(Call[] calldata calls) external payable returns (uint
 ```
 
 ### tryAggregate
+
 Try to aggregate calls with failure tolerance.
 
 ```solidity
@@ -178,6 +197,7 @@ function tryAggregate(bool requireSuccess, Call[] calldata calls) external payab
 ```
 
 ### tryBlockAndAggregate
+
 Try to aggregate calls with block information and failure tolerance.
 
 ```solidity

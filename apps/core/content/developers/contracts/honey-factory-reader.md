@@ -162,6 +162,7 @@ function isPeggedWithPrice(
 Initializes the contract with admin and HoneyFactory addresses. Can only be called once.
 
 **Errors:**
+
 - `ZeroAddress`: If `honeyFactory_` is the zero address
 
 ```solidity
@@ -171,10 +172,13 @@ function initialize(address admin, address honeyFactory_) external initializer;
 ## Errors
 
 ### ZeroAddress
+
 ```solidity
 error ZeroAddress();
 ```
+
 Thrown when attempting to initialize with a zero address.
 
 ### Other Errors
+
 The contract inherits additional errors from IHoneyErrors that may be relevant in the broader system context.

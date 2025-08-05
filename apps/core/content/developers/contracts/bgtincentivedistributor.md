@@ -161,8 +161,8 @@ function paused() public view virtual override returns (bool);
 
 **Returns**
 
-| Name     | Type   | Description                                    |
-| -------- | ------ | ---------------------------------------------- |
+| Name     | Type   | Description                                     |
+| -------- | ------ | ----------------------------------------------- |
 | `<none>` | `bool` | True if the contract is paused, false otherwise |
 
 ## Functions
@@ -195,11 +195,11 @@ function initialize(address _governance) external initializer;
 
 **Parameters**
 
-| Name          | Type      | Description                    |
-| ------------- | --------- | ------------------------------ |
-| `_governance` | `address` | The governance address to set  |
+| Name          | Type      | Description                   |
+| ------------- | --------- | ----------------------------- |
+| `_governance` | `address` | The governance address to set |
 
-### _authorizeUpgrade
+### \_authorizeUpgrade
 
 Authorizes an upgrade to a new implementation.
 
@@ -391,14 +391,14 @@ event RewardMetadataUpdated(bytes32 indexed identifier, bytes indexed pubkey, ad
 
 **Parameters**
 
-| Name         | Type      | Description                                    |
-| ------------ | --------- | ---------------------------------------------- |
-| `identifier` | `bytes32` | The merkle identifier                          |
-| `pubkey`     | `bytes`   | The validator's public key                     |
-| `token`      | `address` | The reward token                               |
-| `merkleRoot` | `bytes32` | The merkle root                                |
-| `proof`      | `bytes32` | The proof data                                 |
-| `activeAt`   | `uint256` | The timestamp when rewards become claimable   |
+| Name         | Type      | Description                                 |
+| ------------ | --------- | ------------------------------------------- |
+| `identifier` | `bytes32` | The merkle identifier                       |
+| `pubkey`     | `bytes`   | The validator's public key                  |
+| `token`      | `address` | The reward token                            |
+| `merkleRoot` | `bytes32` | The merkle root                             |
+| `proof`      | `bytes32` | The proof data                              |
+| `activeAt`   | `uint256` | The timestamp when rewards become claimable |
 
 ### RoleAdminChanged {#event-roleadminchanged}
 

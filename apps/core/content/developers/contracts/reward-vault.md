@@ -583,7 +583,8 @@ function withdraw(uint256 amount) external nonReentrant checkSelfStakedBalance(m
 
 Withdraw tokens staked on behalf of anot
 on delegateWithdraw(address account, uint256 amount) external nonReentrant whenNotPaused;
-```
+
+````
 
 **Parameters**
 
@@ -608,7 +609,7 @@ function getReward(
     whenNotPaused
     onlyOperatorOrUser(account)
     returns (uint256);
-```
+````
 
 **Parameters**
 

@@ -427,19 +427,19 @@ function initialize(
 
 **Parameters**
 
-| Name                               | Type      | Description                                    |
-| ---------------------------------- | --------- | ---------------------------------------------- |
-| `_distributor`                     | `address` | The address of the distributor contract        |
-| `_factory`                         | `address` | The address of the reward vault factory        |
-| `_governance`                      | `address` | The address of the governance module           |
-| `_beaconDepositContract`           | `address` | The address of the beacon deposit contract     |
-| `_maxNumWeightsPerRewardAllocation` | `uint8`   | The maximum number of weights per allocation   |
+| Name                                | Type      | Description                                  |
+| ----------------------------------- | --------- | -------------------------------------------- |
+| `_distributor`                      | `address` | The address of the distributor contract      |
+| `_factory`                          | `address` | The address of the reward vault factory      |
+| `_governance`                       | `address` | The address of the governance module         |
+| `_beaconDepositContract`            | `address` | The address of the beacon deposit contract   |
+| `_maxNumWeightsPerRewardAllocation` | `uint8`   | The maximum number of weights per allocation |
 
 **Emits:**
 
 - [MaxNumWeightsPerRewardAllocationSet](#event-maxnumweightsperrewardallocationset)
 
-### _authorizeUpgrade
+### \_authorizeUpgrade
 
 Authorizes an upgrade to a new implementation.
 
@@ -540,8 +540,8 @@ function setDefaultRewardAllocation(RewardAllocation calldata ra) external onlyO
 
 **Parameters**
 
-| Name | Type               | Description |
-| ---- | ------------------ | ----------- |
+| Name | Type               | Description                          |
+| ---- | ------------------ | ------------------------------------ |
 | `ra` | `RewardAllocation` | The default reward allocation to set |
 
 ### setMaxNumWeightsPerRewardAllocation
@@ -646,8 +646,8 @@ event SetDefaultRewardAllocation(RewardAllocation rewardAllocation);
 
 **Parameters**
 
-| Name              | Type               | Description                       |
-| ----------------- | ------------------ | --------------------------------- |
+| Name               | Type               | Description                       |
+| ------------------ | ------------------ | --------------------------------- |
 | `rewardAllocation` | `RewardAllocation` | The new default reward allocation |
 
 ### Initialized {#event-initialized}
@@ -719,11 +719,11 @@ event ActivateRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weigh
 
 **Parameters**
 
-| Name        | Type       | Description                     |
-| ----------- | ---------- | ------------------------------- |
-| `valPubkey` | `bytes`    | The validator's public key      |
+| Name         | Type       | Description                              |
+| ------------ | ---------- | ---------------------------------------- |
+| `valPubkey`  | `bytes`    | The validator's public key               |
 | `startBlock` | `uint64`   | The block when allocation becomes active |
-| `weights`   | `Weight[]` | The weights of the reward allocation |
+| `weights`    | `Weight[]` | The weights of the reward allocation     |
 
 ### RewardAllocationBlockDelaySet {#event-rewardallocationblockdelayset}
 
@@ -750,11 +750,11 @@ event QueueRewardAllocation(bytes indexed valPubkey, uint64 startBlock, Weight[]
 
 **Parameters**
 
-| Name        | Type       | Description                  |
-| ----------- | ---------- | ---------------------------- |
-| `valPubkey` | `bytes`    | The validator's public key   |
+| Name         | Type       | Description                              |
+| ------------ | ---------- | ---------------------------------------- |
+| `valPubkey`  | `bytes`    | The validator's public key               |
 | `startBlock` | `uint64`   | The block when allocation becomes active |
-| `weights`   | `Weight[]` | The weights of the reward allocation |
+| `weights`    | `Weight[]` | The weights of the reward allocation     |
 
 ### Upgraded {#event-upgraded}
 
@@ -780,11 +780,11 @@ event ValCommissionSet(bytes indexed valPubkey, uint96 oldCommissionRate, uint96
 
 **Parameters**
 
-| Name                | Type     | Description                   |
-| ------------------- | -------- | ----------------------------- |
-| `valPubkey`         | `bytes`  | The validator's public key    |
-| `oldCommissionRate` | `uint96` | The old commission rate       |
-| `newCommissionRate` | `uint96` | The new commission rate       |
+| Name                | Type     | Description                |
+| ------------------- | -------- | -------------------------- |
+| `valPubkey`         | `bytes`  | The validator's public key |
+| `oldCommissionRate` | `uint96` | The old commission rate    |
+| `newCommissionRate` | `uint96` | The new commission rate    |
 
 ### QueuedValCommission {#event-queuedvalcommission}
 
@@ -796,10 +796,10 @@ event QueuedValCommission(bytes indexed valPubkey, uint96 queuedCommissionRate);
 
 **Parameters**
 
-| Name                   | Type     | Description                  |
-| ---------------------- | -------- | ---------------------------- |
-| `valPubkey`            | `bytes`  | The validator's public key   |
-| `queuedCommissionRate` | `uint96` | The queued commission rate   |
+| Name                   | Type     | Description                |
+| ---------------------- | -------- | -------------------------- |
+| `valPubkey`            | `bytes`  | The validator's public key |
+| `queuedCommissionRate` | `uint96` | The queued commission rate |
 
 ### VaultWhitelistedStatusUpdated {#event-vaultwhitelistedstatusupdated}
 

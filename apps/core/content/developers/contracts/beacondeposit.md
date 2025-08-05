@@ -254,11 +254,11 @@ event OperatorChangeQueued(bytes indexed pubkey, address queuedOperator, address
 
 **Parameters**
 
-| Name              | Type      | Description                        |
-| ----------------- | --------- | ---------------------------------- |
-| `pubkey`          | `bytes`   | The pubkey of the validator        |
-| `queuedOperator`  | `address` | The new queued operator address    |
-| `currentOperator` | `address` | The current operator address       |
+| Name              | Type      | Description                              |
+| ----------------- | --------- | ---------------------------------------- |
+| `pubkey`          | `bytes`   | The pubkey of the validator              |
+| `queuedOperator`  | `address` | The new queued operator address          |
+| `currentOperator` | `address` | The current operator address             |
 | `queuedTimestamp` | `uint256` | The timestamp when the change was queued |
 
 ### OperatorChangeCancelled {#event-operatorchangecancelled}
@@ -271,9 +271,9 @@ event OperatorChangeCancelled(bytes indexed pubkey);
 
 **Parameters**
 
-| Name     | Type    | Description                                    |
-| -------- | ------- | ---------------------------------------------- |
-| `pubkey` | `bytes` | The pubkey of the validator                    |
+| Name     | Type    | Description                 |
+| -------- | ------- | --------------------------- |
+| `pubkey` | `bytes` | The pubkey of the validator |
 
 ### OperatorUpdated {#event-operatorupdated}
 
@@ -285,8 +285,8 @@ event OperatorUpdated(bytes indexed pubkey, address newOperator, address previou
 
 **Parameters**
 
-| Name              | Type      | Description                        |
-| ----------------- | --------- | ---------------------------------- |
-| `pubkey`          | `bytes`   | The pubkey of the validator        |
-| `newOperator`     | `address` | The new operator address           |
-| `previousOperator` | `address` | The previous operator address      |
+| Name               | Type      | Description                   |
+| ------------------ | --------- | ----------------------------- |
+| `pubkey`           | `bytes`   | The pubkey of the validator   |
+| `newOperator`      | `address` | The new operator address      |
+| `previousOperator` | `address` | The previous operator address |

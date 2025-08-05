@@ -89,6 +89,7 @@ function deposit() public payable;
 Burns WBERA tokens from the sender and sends the equivalent amount of BERA back. Inherited from WETH.
 
 **Errors:**
+
 - `ETHTransferFailed`: If the BERA transfer back to the sender fails
 
 ```solidity
@@ -124,7 +125,9 @@ event Approval(address indexed owner, address indexed spender, uint256 value);
 ## Errors
 
 ### ETHTransferFailed
+
 ```solidity
 error ETHTransferFailed();
 ```
+
 Thrown when the BERA transfer fails during withdrawal. Inherited from WETH.

@@ -196,12 +196,12 @@ function initialize(address _bgt, address _feeCollector, address _governance, ad
 
 **Parameters**
 
-| Name            | Type      | Description                    |
-| --------------- | --------- | ------------------------------ |
-| `_bgt`          | `address` | The BGT token address.         |
-| `_feeCollector` | `address` | The fee collector address.     |
-| `_governance`   | `address` | The governance address.        |
-| `_rewardToken`  | `address` | The reward token address.      |
+| Name            | Type      | Description                |
+| --------------- | --------- | -------------------------- |
+| `_bgt`          | `address` | The BGT token address.     |
+| `_feeCollector` | `address` | The fee collector address. |
+| `_governance`   | `address` | The governance address.    |
+| `_rewardToken`  | `address` | The reward token address.  |
 
 ### notifyRewardAmount
 
@@ -406,11 +406,11 @@ event RewardPaid(address indexed account, address to, uint256 reward);
 
 **Parameters**
 
-| Name      | Type      | Description                    |
-| --------- | --------- | ------------------------------ |
-| `account` | `address` | The account that earned reward. |
+| Name      | Type      | Description                       |
+| --------- | --------- | --------------------------------- |
+| `account` | `address` | The account that earned reward.   |
 | `to`      | `address` | The address that received reward. |
-| `reward`  | `uint256` | The reward amount.             |
+| `reward`  | `uint256` | The reward amount.                |
 
 ### RewardsDurationUpdated {#event-rewardsdurationupdated}
 
@@ -422,8 +422,8 @@ event RewardsDurationUpdated(uint256 newDuration);
 
 **Parameters**
 
-| Name          | Type      | Description              |
-| ------------- | --------- | ------------------------ |
+| Name          | Type      | Description               |
+| ------------- | --------- | ------------------------- |
 | `newDuration` | `uint256` | The new rewards duration. |
 
 ### Staked {#event-staked}
@@ -436,9 +436,9 @@ event Staked(address indexed account, uint256 amount);
 
 **Parameters**
 
-| Name      | Type      | Description                |
-| --------- | --------- | -------------------------- |
-| `account` | `address` | The account that staked.   |
+| Name      | Type      | Description                 |
+| --------- | --------- | --------------------------- |
+| `account` | `address` | The account that staked.    |
 | `amount`  | `uint256` | The amount that was staked. |
 
 ### Upgraded {#event-upgraded}
@@ -465,7 +465,7 @@ event Withdrawn(address indexed account, uint256 amount);
 
 **Parameters**
 
-| Name      | Type      | Description                  |
-| --------- | --------- | ---------------------------- |
-| `account` | `address` | The account that withdrew.   |
+| Name      | Type      | Description                    |
+| --------- | --------- | ------------------------------ |
+| `account` | `address` | The account that withdrew.     |
 | `amount`  | `uint256` | The amount that was withdrawn. |

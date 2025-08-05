@@ -54,8 +54,6 @@ Returns the symbol of the token: "HONEY"
 function symbol() public pure override returns (string memory);
 ```
 
-
-
 ## Functions
 
 ### initialize
@@ -64,6 +62,7 @@ Initializes the contract with governance and factory addresses. Can only be call
 
 **Access:** Only during deployment
 **Errors:**
+
 - `ZeroAddress`: If either `_governance` or `_factory` is the zero address
 
 ```solidity
@@ -76,6 +75,7 @@ Mints Honey tokens to a specified address.
 
 **Access:** Only HoneyFactory
 **Errors:**
+
 - `NotFactory`: If called by any address other than the factory
 
 ```solidity
@@ -88,6 +88,7 @@ Burns Honey tokens from a specified address.
 
 **Access:** Only HoneyFactory
 **Errors:**
+
 - `NotFactory`: If called by any address other than the factory
 
 ```solidity
@@ -115,16 +116,21 @@ event Approval(address indexed owner, address indexed spender, uint256 value);
 ## Errors
 
 ### ZeroAddress
+
 ```solidity
 error ZeroAddress();
 ```
+
 Thrown when attempting to initialize with a zero address.
 
 ### NotFactory
+
 ```solidity
 error NotFactory();
 ```
+
 Thrown when a restricted function is called by an address other than the factory.
 
 ### Other Errors
+
 The contract inherits additional errors from IHoneyErrors that may be relevant in the broader system context.

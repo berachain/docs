@@ -25,7 +25,8 @@ The Create2Deployer contract enables deterministic contract deployment using CRE
 
 ## Constants
 
-### _CREATE2_FACTORY
+### \_CREATE2_FACTORY
+
 Used by default when deploying with create2, https://github.com/Arachnid/deterministic-deployment-proxy.
 
 ```solidity
@@ -35,6 +36,7 @@ address public constant _CREATE2_FACTORY = 0x4e59b44847b379578588920cA78FbF26c0B
 ## View Functions
 
 ### getCreate2Address
+
 Returns the deterministic address of a contract for the given salt and init code.
 
 ```solidity
@@ -42,6 +44,7 @@ function getCreate2Address(uint256 salt, bytes memory initCode) internal pure re
 ```
 
 ### getCreate2Address
+
 Returns the deterministic address of a contract for the given salt and init code.
 
 ```solidity
@@ -49,6 +52,7 @@ function getCreate2Address(uint256 salt, bytes32 initCodeHash) internal pure ret
 ```
 
 ### getCreate2AddressWithArgs
+
 Returns the deterministic address of a contract for the given salt, init code and constructor arguments.
 
 ```solidity
@@ -60,6 +64,7 @@ function getCreate2AddressWithArgs(
 ```
 
 ### getCreate2ProxyAddress
+
 Returns the deterministic address of a ERC1967 proxy for the given implementation and salt.
 
 ```solidity
@@ -67,6 +72,7 @@ function getCreate2ProxyAddress(address implementation, uint256 salt) internal p
 ```
 
 ### initCodeERC1967
+
 Returns the init code for a ERC1967 proxy with the given implementation.
 
 ```solidity
@@ -76,14 +82,16 @@ function initCodeERC1967(address implementation) internal pure returns (bytes me
 ## Functions
 
 ### deployWithCreate2
-Deploys a contract using the _CREATE2_FACTORY.
+
+Deploys a contract using the \_CREATE2_FACTORY.
 
 ```solidity
 function deployWithCreate2(uint256 salt, bytes memory initCode) internal returns (address addr)
 ```
 
 ### deployWithCreate2WithArgs
-Deploys a contract using the _CREATE2_FACTORY with constructor arguments.
+
+Deploys a contract using the \_CREATE2_FACTORY with constructor arguments.
 
 ```solidity
 function deployWithCreate2WithArgs(
@@ -94,6 +102,7 @@ function deployWithCreate2WithArgs(
 ```
 
 ### deployProxyWithCreate2
+
 Deploys a ERC1967 Proxy for the already deployed implementation contract.
 
 ```solidity
@@ -103,7 +112,9 @@ function deployProxyWithCreate2(address implementation, uint256 salt) internal r
 ## Errors
 
 ### DeploymentFailed
+
 ```solidity
 error DeploymentFailed();
 ```
+
 Thrown when contract deployment fails.

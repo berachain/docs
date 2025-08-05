@@ -204,8 +204,6 @@ function upgradeToAndCall(address newImplementation, bytes memory data) public p
 function wberaStakerVault() external view returns (address);
 ```
 
-
-
 ## Events
 
 ### IncentiveFeesClaimed {#event-incentivefeesclaimed}

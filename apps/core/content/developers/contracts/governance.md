@@ -40,12 +40,12 @@ struct InitialGovernorParameters {
 ```
 
 **Properties**
-| Name                   | Type      | Description                                               |
+| Name | Type | Description |
 | ---------------------- | --------- | --------------------------------------------------------- |
-| `proposalThreshold`    | `uint256` | The minimum number of votes required to create a proposal |
-| `quorumNumeratorValue` | `uint256` | The numerator of the quorum fraction                      |
-| `votingDelay`          | `uint48`  | The delay before voting begins                            |
-| `votingPeriod`         | `uint32`  | The duration of the voting period                         |
+| `proposalThreshold` | `uint256` | The minimum number of votes required to create a proposal |
+| `quorumNumeratorValue` | `uint256` | The numerator of the quorum fraction |
+| `votingDelay` | `uint48` | The delay before voting begins |
+| `votingPeriod` | `uint32` | The duration of the voting period |
 
 ## View Functions
 
@@ -270,6 +270,7 @@ function votingPeriod() public view virtual override returns (uint256);
 Executes a successful proposal. Can only be called when a proposal is in the Succeeded state.
 
 **Parameters:**
+
 - `targets`: List of target addresses for proposal calls
 - `values`: List of ETH values for proposal calls
 - `calldatas`: List of calldata for proposal calls
@@ -339,10 +340,10 @@ event LateQuorumVoteExtensionSet(uint64 oldVoteExtension, uint64 newVoteExtensio
 ```
 
 **Parameters**
-| Name               | Type     | Description                                    |
+| Name | Type | Description |
 | ------------------ | -------- | ---------------------------------------------- |
 | `oldVoteExtension` | `uint64` | Previous duration of the vote extension period |
-| `newVoteExtension` | `uint64` | New duration of the vote extension period      |
+| `newVoteExtension` | `uint64` | New duration of the vote extension period |
 
 ### ProposalCanceled {#event-proposalcanceled}
 
@@ -353,9 +354,9 @@ event ProposalCanceled(uint256 proposalId);
 ```
 
 **Parameters**
-| Name         | Type      | Description                     |
+| Name | Type | Description |
 | ------------ | --------- | ------------------------------- |
-| `proposalId` | `uint256` | ID of the canceled proposal     |
+| `proposalId` | `uint256` | ID of the canceled proposal |
 
 ### ProposalCreated {#event-proposalcreated}
 
@@ -376,17 +377,17 @@ event ProposalCreated(
 ```
 
 **Parameters**
-| Name          | Type        | Description                                          |
+| Name | Type | Description |
 | ------------- | ----------- | ---------------------------------------------------- |
-| `proposalId`  | `uint256`   | Unique identifier of the proposal                    |
-| `proposer`    | `address`   | Address of the account that created the proposal     |
-| `targets`     | `address[]` | Target addresses for proposal calls                  |
-| `values`      | `uint256[]` | ETH values for proposal calls                       |
-| `signatures`  | `string[]`  | Function signatures for proposal calls               |
-| `calldatas`   | `bytes[]`   | Encoded function data for proposal calls            |
-| `voteStart`   | `uint256`   | Timestamp when voting begins                        |
-| `voteEnd`     | `uint256`   | Timestamp when voting ends                          |
-| `description` | `string`    | Description of the proposal                         |
+| `proposalId` | `uint256` | Unique identifier of the proposal |
+| `proposer` | `address` | Address of the account that created the proposal |
+| `targets` | `address[]` | Target addresses for proposal calls |
+| `values` | `uint256[]` | ETH values for proposal calls |
+| `signatures` | `string[]` | Function signatures for proposal calls |
+| `calldatas` | `bytes[]` | Encoded function data for proposal calls |
+| `voteStart` | `uint256` | Timestamp when voting begins |
+| `voteEnd` | `uint256` | Timestamp when voting ends |
+| `description` | `string` | Description of the proposal |
 
 ### ProposalExecuted {#event-proposalexecuted}
 
@@ -397,9 +398,9 @@ event ProposalExecuted(uint256 proposalId);
 ```
 
 **Parameters**
-| Name         | Type      | Description                     |
+| Name | Type | Description |
 | ------------ | --------- | ------------------------------- |
-| `proposalId` | `uint256` | ID of the executed proposal     |
+| `proposalId` | `uint256` | ID of the executed proposal |
 
 ### ProposalExtended {#event-proposalextended}
 
@@ -410,10 +411,10 @@ event ProposalExtended(uint256 indexed proposalId, uint64 extendedDeadline);
 ```
 
 **Parameters**
-| Name               | Type      | Description                                |
+| Name | Type | Description |
 | ------------------ | --------- | ------------------------------------------ |
-| `proposalId`       | `uint256` | ID of the proposal being extended          |
-| `extendedDeadline` | `uint64`  | New deadline timestamp for the proposal    |
+| `proposalId` | `uint256` | ID of the proposal being extended |
+| `extendedDeadline` | `uint64` | New deadline timestamp for the proposal |
 
 ### ProposalQueued {#event-proposalqueued}
 
@@ -424,10 +425,10 @@ event ProposalQueued(uint256 proposalId, uint256 etaSeconds);
 ```
 
 **Parameters**
-| Name         | Type      | Description                                     |
+| Name | Type | Description |
 | ------------ | --------- | ----------------------------------------------- |
-| `proposalId` | `uint256` | ID of the queued proposal                       |
-| `etaSeconds` | `uint256` | Timestamp when the proposal can be executed     |
+| `proposalId` | `uint256` | ID of the queued proposal |
+| `etaSeconds` | `uint256` | Timestamp when the proposal can be executed |
 
 ### ProposalThresholdSet {#event-proposalthresholdset}
 
@@ -438,10 +439,10 @@ event ProposalThresholdSet(uint256 oldProposalThreshold, uint256 newProposalThre
 ```
 
 **Parameters**
-| Name                   | Type      | Description                                           |
+| Name | Type | Description |
 | ---------------------- | --------- | ----------------------------------------------------- |
-| `oldProposalThreshold` | `uint256` | Previous number of votes required to create proposal  |
-| `newProposalThreshold` | `uint256` | New number of votes required to create proposal       |
+| `oldProposalThreshold` | `uint256` | Previous number of votes required to create proposal |
+| `newProposalThreshold` | `uint256` | New number of votes required to create proposal |
 
 ### QuorumNumeratorUpdated {#event-quorumnumeratorupdated}
 
@@ -452,10 +453,10 @@ event QuorumNumeratorUpdated(uint256 oldQuorumNumerator, uint256 newQuorumNumera
 ```
 
 **Parameters**
-| Name                 | Type      | Description                                    |
+| Name | Type | Description |
 | -------------------- | --------- | ---------------------------------------------- |
-| `oldQuorumNumerator` | `uint256` | Previous numerator of the quorum fraction      |
-| `newQuorumNumerator` | `uint256` | New numerator of the quorum fraction           |
+| `oldQuorumNumerator` | `uint256` | Previous numerator of the quorum fraction |
+| `newQuorumNumerator` | `uint256` | New numerator of the quorum fraction |
 
 ### TimelockChange {#event-timelockchange}
 
@@ -466,10 +467,10 @@ event TimelockChange(address oldTimelock, address newTimelock);
 ```
 
 **Parameters**
-| Name          | Type      | Description                          |
+| Name | Type | Description |
 | ------------- | --------- | ------------------------------------ |
-| `oldTimelock` | `address` | Previous timelock contract address    |
-| `newTimelock` | `address` | New timelock contract address         |
+| `oldTimelock` | `address` | Previous timelock contract address |
+| `newTimelock` | `address` | New timelock contract address |
 
 ### VoteCast {#event-votecast}
 
@@ -480,13 +481,13 @@ event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256
 ```
 
 **Parameters**
-| Name         | Type      | Description                                           |
+| Name | Type | Description |
 | ------------ | --------- | ----------------------------------------------------- |
-| `voter`      | `address` | Address of the account casting the vote               |
-| `proposalId` | `uint256` | ID of the proposal being voted on                     |
-| `support`    | `uint8`   | Support value: 0=against, 1=for, 2=abstain           |
-| `weight`     | `uint256` | Number of votes cast                                  |
-| `reason`     | `string`  | Optional reason for the vote                          |
+| `voter` | `address` | Address of the account casting the vote |
+| `proposalId` | `uint256` | ID of the proposal being voted on |
+| `support` | `uint8` | Support value: 0=against, 1=for, 2=abstain |
+| `weight` | `uint256` | Number of votes cast |
+| `reason` | `string` | Optional reason for the vote |
 
 ### VoteCastWithParams {#event-votecastwithparams}
 
@@ -504,14 +505,14 @@ event VoteCastWithParams(
 ```
 
 **Parameters**
-| Name         | Type      | Description                                           |
+| Name | Type | Description |
 | ------------ | --------- | ----------------------------------------------------- |
-| `voter`      | `address` | Address of the account casting the vote               |
-| `proposalId` | `uint256` | ID of the proposal being voted on                     |
-| `support`    | `uint8`   | Support value: 0=against, 1=for, 2=abstain           |
-| `weight`     | `uint256` | Number of votes cast                                  |
-| `reason`     | `string`  | Optional reason for the vote                          |
-| `params`     | `bytes`   | Additional parameters for the vote                    |
+| `voter` | `address` | Address of the account casting the vote |
+| `proposalId` | `uint256` | ID of the proposal being voted on |
+| `support` | `uint8` | Support value: 0=against, 1=for, 2=abstain |
+| `weight` | `uint256` | Number of votes cast |
+| `reason` | `string` | Optional reason for the vote |
+| `params` | `bytes` | Additional parameters for the vote |
 
 ### VotingDelaySet {#event-votingdelayset}
 
@@ -522,10 +523,10 @@ event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay);
 ```
 
 **Parameters**
-| Name             | Type      | Description                                    |
+| Name | Type | Description |
 | ---------------- | --------- | ---------------------------------------------- |
-| `oldVotingDelay` | `uint256` | Previous delay before voting starts            |
-| `newVotingDelay` | `uint256` | New delay before voting starts                 |
+| `oldVotingDelay` | `uint256` | Previous delay before voting starts |
+| `newVotingDelay` | `uint256` | New delay before voting starts |
 
 ### VotingPeriodSet {#event-votingperiodset}
 
@@ -536,7 +537,7 @@ event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod);
 ```
 
 **Parameters**
-| Name              | Type      | Description                                    |
+| Name | Type | Description |
 | ----------------- | --------- | ---------------------------------------------- |
-| `oldVotingPeriod` | `uint256` | Previous duration of the voting period         |
-| `newVotingPeriod` | `uint256` | New duration of the voting period              |
+| `oldVotingPeriod` | `uint256` | Previous duration of the voting period |
+| `newVotingPeriod` | `uint256` | New duration of the voting period |

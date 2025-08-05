@@ -26,6 +26,7 @@ Permit2 enables advanced token approval patterns, allowing for more flexible and
 ## State Variables
 
 ### allowance
+
 Maps users to tokens to spender addresses and information about the approval on the token.
 
 ```solidity
@@ -33,6 +34,7 @@ mapping(address => mapping(address => mapping(address => PackedAllowance))) publ
 ```
 
 ### nonceBitmap
+
 A map from token owner address and a caller specified word index to a bitmap. Used to set bits in the bitmap to prevent against signature replay protection.
 
 ```solidity
@@ -42,6 +44,7 @@ mapping(address => mapping(uint256 => uint256)) public nonceBitmap
 ## Functions
 
 ### approve
+
 Approves the spender to use up to amount of the specified token up until the expiration.
 
 ```solidity
@@ -49,6 +52,7 @@ function approve(address token, address spender, uint160 amount, uint48 expirati
 ```
 
 ### invalidateNonces
+
 Invalidate nonces for a given (token, spender) pair.
 
 ```solidity
@@ -56,6 +60,7 @@ function invalidateNonces(address token, address spender, uint48 newNonce) exter
 ```
 
 ### invalidateUnorderedNonces
+
 Invalidates the bits specified in mask for the bitmap at the word position.
 
 ```solidity
@@ -63,6 +68,7 @@ function invalidateUnorderedNonces(uint256 wordPos, uint256 mask) external
 ```
 
 ### lockdown
+
 Enables performing a "lockdown" of the sender's Permit2 identity by batch revoking approvals.
 
 ```solidity
@@ -70,6 +76,7 @@ function lockdown(TokenSpenderPair[] calldata approvals) external
 ```
 
 ### permit
+
 Permit a spender to a given amount of the owners token via the owner's EIP-712 signature.
 
 ```solidity
@@ -77,6 +84,7 @@ function permit(address owner, PermitSingle memory permitSingle, bytes calldata 
 ```
 
 ### permit
+
 Permit a spender to a given amount of the owners token via the owner's EIP-712 signature.
 
 ```solidity
@@ -84,6 +92,7 @@ function permit(address owner, PermitBatch memory permitBatch, bytes calldata si
 ```
 
 ### permitTransferFrom
+
 Transfers a token using a signed permit message.
 
 ```solidity
@@ -96,6 +105,7 @@ function permitTransferFrom(
 ```
 
 ### permitTransferFrom
+
 Transfers a token using a signed permit message.
 
 ```solidity
@@ -108,6 +118,7 @@ function permitTransferFrom(
 ```
 
 ### permitWitnessTransferFrom
+
 Transfers a token using a signed permit message.
 
 ```solidity
@@ -122,6 +133,7 @@ function permitWitnessTransferFrom(
 ```
 
 ### permitWitnessTransferFrom
+
 Transfers a token using a signed permit message.
 
 ```solidity
@@ -136,6 +148,7 @@ function permitWitnessTransferFrom(
 ```
 
 ### transferFrom
+
 Transfer approved tokens from one address to another.
 
 ```solidity
@@ -143,6 +156,7 @@ function transferFrom(address from, address to, uint160 amount, address token) e
 ```
 
 ### transferFrom
+
 Transfer approved tokens from one address to another.
 
 ```solidity

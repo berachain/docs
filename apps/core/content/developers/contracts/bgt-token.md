@@ -753,25 +753,31 @@ event WhitelistSender(address indexed sender, bool approved);
 ## Errors
 
 ### ZeroAddress
+
 ```solidity
 error ZeroAddress();
 ```
+
 Thrown when attempting to initialize with a zero address.
 
 ### UnauthorizedETHTransfer
+
 ```solidity
 error UnauthorizedETHTransfer();
 ```
+
 Thrown when attempting an unauthorized ETH transfer.
 
 ### VotesExpiredSignature
+
 ```solidity
 error VotesExpiredSignature(uint256 expiry);
 ```
+
 Thrown when attempting to use an expired signature for voting.
 
 **Parameters**
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                           |
+| -------- | --------- | ------------------------------------- |
 | `expiry` | `uint256` | The expiry timestamp of the signature |
