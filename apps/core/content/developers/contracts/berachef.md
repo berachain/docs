@@ -22,7 +22,7 @@ head:
 The BeraChef contract is responsible for managing the reward allocations and the whitelisted vaults. Reward allocation is a list of weights that determine the percentage of rewards that goes to each reward vault. Each validator could have a custom reward allocation, if not, the default reward allocation is used.
 
 **Inherits:**
-[IBeraChef](/src/pol/interfaces/IBeraChef.sol/interface.IBeraChef.md), OwnableUpgradeable, UUPSUpgradeable
+IBeraChef, OwnableUpgradeable, UUPSUpgradeable
 
 ## Constants
 

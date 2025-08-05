@@ -20,7 +20,6 @@ alwaysApply: true
 - Implementation files are authoritative for NatSpec documentation
 - Interface definitions take precedence in any conflicts
 
-
 ### ABI Updates
 - To update published ABI files, check out the git@github.com:berachain/doc-abis repository, and the git@github.com:berachain/contracts-internal repository. In the contracts repo, check out the devel branch. Then, in the doc-abis directory invoke `npm run abis:sync`.
 - This is a separate process from updating the autodocs.
@@ -40,7 +39,10 @@ The user can request to "refresh the autodocs". This means the following sequenc
     - Private constants, variables, and functions
     - Internal constants, variables, and functions 
     - Functions intended for subclasses
+    - Public virtual functions (except for RewardVault which is meant to be inherited)
   - Omit all Inherits lines
+  - Exclude factory-only functions (functions that are only meant to be called by factory contracts)
+  - Include governance-only contract functions since the chain uses on-chain governance
 
 - Every file in the documentation autodocs should have a preamble like this at the top. In the preamble, the key to look up within config.contracts depends on the contract itself. Ask if you aren't sure which to use. You can update the ABI link in @constants.json if you find a new ABI in doc-abis repository. For the Git Source link, link to the contract under the github.com:berachain/contracts/ repository, presuming that the path you find in contracts-internal will eventually be merged into the contracts repository. 
 
@@ -50,16 +52,18 @@ The user can request to "refresh the autodocs". This means the following sequenc
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/BeraChef.sol)
 ```
 
-- Contract documentation pages should then be reorganized into the following order:
+- Contract documentation pages should be organized into the following order:
    - Constants
-   - Structures used in state variables 
-   - Public state variables
-   - Public view functions
-   - Public state-changing functions
+   - State Variables (public state variables)
+   - Structs (structures used in state variables)
+   - View Functions (public view functions)
+   - Functions (public state-changing functions)
    - Events
-- The only exception for members to omit is for internal members in RewardVault.
-- Use alphabetical sorting order the names of functions, state variables, constants, and events.
-- Provide cross-links from state-changing functions to the events they can trigger. Use 'events-' prefix for event HTML anchors
+   - Errors
+- Use alphabetical sorting order for the names of functions, state variables, constants, and events.
+- Group functions by type rather than by inheritance - organize by function type (view vs state-changing) rather than organizing by inheritance
+- Keep documentation concise - avoid adding integration examples, security considerations, related contracts, or resources sections unless specifically requested
+- Focus on pure contract reference documentation
 
 ### Validation Requirements
 - Struct definitions and function calls must exactly match solidity code:
@@ -72,5 +76,9 @@ The user can request to "refresh the autodocs". This means the following sequenc
 - Seek permission before creating new files
 - Keep READMEs current
 - Respect pnpm workspace in guides/exp
+- Use loose version numbers for minor upgrades
+- Ensure any new files are inserted into the relevant sidebar file.
+- When cloning the contracts-internal repository, do not use recursive clone (--recursive flag)
+- Use git operations instead of recalculating patches and let the user handle the commit
 - Use loose version numbers for minor upgrades
 - Ensure any new files are inserted into the relevant sidebar file.

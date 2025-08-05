@@ -24,7 +24,7 @@ head:
 The Berachain Governance Token ($BGT) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for $BERA.
 
 **Inherits:**
-[IBGT](/src/pol/interfaces/IBGT.sol/interface.IBGT.md), ERC20VotesUpgradeable, OwnableUpgradeable, Multicallable
+IBGT, ERC20VotesUpgradeable, OwnableUpgradeable, Multicallable
 
 ## Structs
 

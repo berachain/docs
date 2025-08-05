@@ -231,7 +231,7 @@ const SIDEBAR = {
         },
         { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
         {
-          text: "Block Reward Controller",
+          text: "BlockRewardController",
           link: "/developers/contracts/block-reward-controller"
         },
         { text: "CREATE2", link: "/developers/contracts/create2" },

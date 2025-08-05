@@ -22,7 +22,7 @@ head:
 An ERC20 token that wraps the native BERA token, allowing it to be used in smart contracts that expect ERC20 tokens. Users can deposit BERA to receive WBERA and withdraw BERA by burning WBERA. The contract can receive BERA directly, which will automatically wrap it into WBERA for the sender.
 
 **Inherits:**
-WETH (which inherits ERC20)
+WETH, ERC20
 
 ## View Functions
 

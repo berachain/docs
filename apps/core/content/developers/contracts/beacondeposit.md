@@ -21,8 +21,7 @@ head:
 
 The contract handling validators deposits. Its events are used by the beacon chain to manage the staking process.
 
-**Inherits:**
-[IBeaconDeposit](/src/pol/interfaces/IBeaconDeposit.sol/interface.IBeaconDeposit.md), [ERC165](/src/pol/interfaces/IERC165.sol/interface.ERC165.md)
+**Inherits:** IBeaconDeposit, ERC165.
 
 ## Constants
 
