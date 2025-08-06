@@ -51,7 +51,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
-Operators currently running Geth or Reth can upgrade to our forked versions while retaining their current chain data files. Operators migrating from other clients should sync a new node with a [snapshot](https://storage.googleapis.com/bera-snapshot-eu/index.html).
+Operators currently running Geth or Reth can upgrade to our forked versions while retaining their current chain data files. Operators migrating from other clients should sync a new node with a snapshot - [testnet](https://storage.googleapis.com/bera-testnet-snapshot-eu/index.html) or [mainnet](https://storage.googleapis.com/bera-snapshot-eu/index.html).
 
 ## Upgrade instructions
 
