@@ -143,29 +143,24 @@ Future versions will support **Liquid Staking Tokens (LSTs)**:
 - **Diversify**: Don't put all your BERA in one place
 - **Stay informed**: Keep up with governance changes that might affect parameters
 
-## Technical Details
+## Available Actions
 
-### Contract Addresses
+### What You Can Do
+
+- **Stake BERA directly**: No need to wrap first - the system handles it automatically
+- **Stake WBERA**: If you already have wrapped BERA tokens
+- **Request withdrawals**: Start the unbonding process to get your BERA back
+- **Complete withdrawals**: Claim your BERA after the unbonding period ends
+
+### Contract Information
 
 - **Staking Vault**: `{{ config.contracts.pol.wberaStakerVault['bepolia-address'] }}`
 - **WBERA Token**: `0x6969696969696969696969696969696969696969`
 - **Incentive Fee Collector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}`
 
-### Key Functions
-
-```solidity
-// Deposit native BERA
-function depositNative(uint256 assets, address receiver) external payable returns (uint256 shares)
-
-// Deposit WBERA
-function deposit(uint256 assets, address receiver) external returns (uint256 shares)
-
-// Initiate withdrawal
-function withdraw(uint256 assets, address receiver, address owner) external returns (uint256 shares)
-
-// Complete withdrawal
-function completeWithdrawal(bool isNative) external
-```
+:::tip
+For technical implementation details and function signatures, see the [WBERA Staker Vault contract documentation](/developers/contracts/wbera-staker-vault).
+:::
 
 ## Related Resources
 

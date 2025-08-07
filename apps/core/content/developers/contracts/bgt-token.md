@@ -1,54 +1,296 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: BGT Token Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the BGT governance token contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the BGT governance token contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # BGT
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a><span v-if="config.contracts.tokens.bgt.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a><span v-if="config.contracts.tokens.bgt.abi && config.contracts.tokens.bgt.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
 
-The Berachain Governance Token (`$BGT`) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for `$BERA`.
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGT.sol)
 
-### whitelistSender
+The Berachain Governance Token ($BGT) is a soulbound ERC20 token, which cannot be transferred, only earned through Reward Vaults, used for governance proposals and voting, and can be redeemed for $BERA.
 
-Approve an address to send BGT or approve another address to transfer BGT from it.
+**Inherits:**
+IBGT, ERC20VotesUpgradeable, OwnableUpgradeable, Multicallable
 
-_This can only be called by the governance module._
+## Structs
 
-_BGT should be soul bound to EOAs and only transferable by approved senders._
+### QueuedBoost
+
+The queued boost struct for validator boosting.
 
 ```solidity
-function whitelistSender(address sender, bool approved) external;
+struct QueuedBoost {
+    uint32 blockNumberLast;
+    uint128 balance;
+}
+```
+
+**Properties**
+
+| Name              | Type      | Description                                    |
+| ----------------- | --------- | ---------------------------------------------- |
+| `blockNumberLast` | `uint32`  | The last block number boost balance was queued |
+| `balance`         | `uint128` | The queued BGT balance to boost with           |
+
+### QueuedDropBoost
+
+The queued drop boost struct for validator boosting.
+
+```solidity
+struct QueuedDropBoost {
+    uint32 blockNumberLast;
+    uint128 balance;
+}
+```
+
+**Properties**
+
+| Name              | Type      | Description                                                 |
+| ----------------- | --------- | ----------------------------------------------------------- |
+| `blockNumberLast` | `uint32`  | The last block number boost balance was queued for dropping |
+| `balance`         | `uint128` | The boosted BGT balance to drop boost with                  |
+
+### UserBoost
+
+The user boost struct for tracking validator boosts.
+
+```solidity
+struct UserBoost {
+    uint128 boost;
+    uint128 queuedBoost;
+}
+```
+
+**Properties**
+
+| Name          | Type      | Description                                     |
+| ------------- | --------- | ----------------------------------------------- |
+| `boost`       | `uint128` | The boost balance being used by the user        |
+| `queuedBoost` | `uint128` | The queued boost balance to be used by the user |
+
+## State Variables
+
+### activateBoostDelay
+
+The block delay for activating boosts.
+
+```solidity
+uint32 public activateBoostDelay;
+```
+
+### bgtTermsAndConditions
+
+The BGT terms and conditions.
+
+```solidity
+string public bgtTermsAndConditions;
+```
+
+### boosted
+
+The mapping of balances used to boost validator rewards by an account
+
+```solidity
+mapping(address account => mapping(bytes pubkey => uint128)) public boosted;
+```
+
+### boostedQueue
+
+The mapping of queued boosts on a validator by an account
+
+```solidity
+mapping(address account => mapping(bytes pubkey => QueuedBoost)) public boostedQueue;
+```
+
+### boostees
+
+The mapping of boost balances for a validator
+
+```solidity
+mapping(bytes pubkey => uint128) public boostees;
+```
+
+### dropBoostDelay
+
+The block delay for dropping boosts.
+
+```solidity
+uint32 public dropBoostDelay;
+```
+
+### dropBoostQueue
+
+The mapping of queued drop boosts on a validator by an account
+
+```solidity
+mapping(address account => mapping(bytes pubkey => QueuedDropBoost)) public dropBoostQueue;
+```
+
+### isWhitelistedSender
+
+The mapping of approved senders.
+
+```solidity
+mapping(address sender => bool) public isWhitelistedSender;
+```
+
+### staker
+
+The BGTStaker contract address that we are using to stake and withdraw BGT.
+
+_This contract is used to distribute dapp fees to BGT delegators._
+
+```solidity
+address public staker;
+```
+
+### totalBoosts
+
+Total amount of BGT used for validator boosts
+
+```solidity
+uint128 public totalBoosts;
+```
+
+### userBoosts
+
+The mapping of user boosts
+
+```solidity
+mapping(address account => UserBoost) public userBoosts;
+```
+
+## View Functions
+
+### minter
+
+```solidity
+function minter() external view returns (address);
+```
+
+## Functions
+
+### activateBoost
+
+Activates a queued boost on a validator.
+
+**Emits:**
+
+- [ActivateBoost](#event-activateboost)
+
+```solidity
+function activateBoost(address account, bytes calldata pubkey) external;
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                            |
-| ---------- | --------- | -------------------------------------- |
-| `sender`   | `address` | The address of the sender.             |
-| `approved` | `bool`    | Whether the sender is approved or not. |
+| Name      | Type      | Description                       |
+| --------- | --------- | --------------------------------- |
+| `account` | `address` | The account to activate boost for |
+| `pubkey`  | `bytes`   | The validator public key          |
+
+### burn
+
+Burns BGT tokens from the caller.
+
+```solidity
+function burn(uint256 amount) external;
+```
+
+### cancelQueuedBoost
+
+Cancels a queued boost on a validator.
+
+**Emits:**
+
+- [CancelQueuedBoost](#event-cancelqueuedboost)
+
+```solidity
+function cancelQueuedBoost(bytes calldata pubkey) external;
+```
+
+**Parameters**
+
+| Name     | Type    | Description              |
+| -------- | ------- | ------------------------ |
+| `pubkey` | `bytes` | The validator public key |
+
+### cancelQueuedDropBoost
+
+Cancels a queued drop boost on a validator.
+
+**Emits:**
+
+- [CancelQueuedDropBoost](#event-cancelqueueddropboost)
+
+```solidity
+function cancelQueuedDropBoost(bytes calldata pubkey) external;
+```
+
+**Parameters**
+
+| Name     | Type    | Description              |
+| -------- | ------- | ------------------------ |
+| `pubkey` | `bytes` | The validator public key |
+
+### dropBoost
+
+Drops a boost on a validator.
+
+**Emits:**
+
+- [DropBoost](#event-dropboost)
+
+```solidity
+function dropBoost(bytes calldata pubkey, uint128 amount) external;
+```
+
+**Parameters**
+
+| Name     | Type      | Description              |
+| -------- | --------- | ------------------------ |
+| `pubkey` | `bytes`   | The validator public key |
+| `amount` | `uint128` | The amount to drop boost |
+
+### initialize
+
+Initializes the BGT contract.
+
+```solidity
+function initialize(address _governance, address _staker) external initializer;
+```
 
 ### mint
 
-Mint BGT to the distributor.
+Mints BGT tokens to the specified address.
 
-_This can only be called by the minter address, which is set by governance._
+_Only the minter can call this function._
 
 ```solidity
-function mint(address distributor, uint256 amount) external;
+function mint(address to, uint256 amount) external;
 ```
-
-**Parameters**
-
-| Name          | Type      | Description                     |
-| ------------- | --------- | ------------------------------- |
-| `distributor` | `address` | The address of the distributor. |
-| `amount`      | `uint256` | The amount of BGT to mint.      |
 
 ### queueBoost
 
-Queues a new boost of the validator with an amount of BGT from `msg.sender`.
+Queues a boost on a validator.
 
-_Reverts if `msg.sender` does not have enough unboosted balance to cover amount._
+**Emits:**
+
+- [QueueBoost](#event-queueboost)
 
 ```solidity
 function queueBoost(bytes calldata pubkey, uint128 amount) external;
@@ -56,54 +298,18 @@ function queueBoost(bytes calldata pubkey, uint128 amount) external;
 
 **Parameters**
 
-| Name     | Type      | Description                                    |
-| -------- | --------- | ---------------------------------------------- |
-| `pubkey` | `bytes`   | The pubkey of the validator to be boosted.     |
-| `amount` | `uint128` | The amount of BGT to use for the queued boost. |
-
-### cancelBoost
-
-Cancels a queued boost of the validator removing an amount of BGT for `msg.sender`.
-
-_Reverts if `msg.sender` does not have enough queued balance to cover amount._
-
-```solidity
-function cancelBoost(bytes calldata pubkey, uint128 amount) external;
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                        |
-| -------- | --------- | -------------------------------------------------- |
-| `pubkey` | `bytes`   | The pubkey of the validator to cancel boost for.   |
-| `amount` | `uint128` | The amount of BGT to remove from the queued boost. |
-
-### activateBoost
-
-Boost the validator with an amount of BGT from `user`.
-
-```solidity
-function activateBoost(address user, bytes calldata pubkey) external returns (bool);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                |
-| -------- | --------- | ------------------------------------------ |
-| `user`   | `address` | The address of the user boosting.          |
-| `pubkey` | `bytes`   | The pubkey of the validator to be boosted. |
-
-**Returns**
-
-| Name     | Type   | Description                                                                    |
-| -------- | ------ | ------------------------------------------------------------------------------ |
-| `<none>` | `bool` | bool False if amount is zero or if enough time has not passed, otherwise true. |
+| Name     | Type      | Description                   |
+| -------- | --------- | ----------------------------- |
+| `pubkey` | `bytes`   | The validator public key      |
+| `amount` | `uint128` | The amount to queue for boost |
 
 ### queueDropBoost
 
-Queues a drop boost of the validator removing an amount of BGT for sender.
+Queues a drop boost on a validator.
 
-_Reverts if `user` does not have enough boosted balance to cover amount._
+**Emits:**
+
+- [QueueDropBoost](#event-queuedropboost)
 
 ```solidity
 function queueDropBoost(bytes calldata pubkey, uint128 amount) external;
@@ -111,422 +317,467 @@ function queueDropBoost(bytes calldata pubkey, uint128 amount) external;
 
 **Parameters**
 
-| Name     | Type      | Description                                       |
-| -------- | --------- | ------------------------------------------------- |
-| `pubkey` | `bytes`   | The pubkey of the validator to remove boost from. |
-| `amount` | `uint128` | The amount of BGT to remove from the boost.       |
-
-### cancelDropBoost
-
-Cancels a queued drop boost of the validator removing an amount of BGT for sender.
-
-```solidity
-function cancelDropBoost(bytes calldata pubkey, uint128 amount) external;
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                             |
-| -------- | --------- | ------------------------------------------------------- |
-| `pubkey` | `bytes`   | The pubkey of the validator to cancel drop boost for.   |
-| `amount` | `uint128` | The amount of BGT to remove from the queued drop boost. |
-
-### dropBoost
-
-Drops an amount of BGT from an existing boost of validator by user.
-
-```solidity
-function dropBoost(address user, bytes calldata pubkey) external returns (bool);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                       |
-| -------- | --------- | ------------------------------------------------- |
-| `user`   | `address` | The address of the user to drop boost from.       |
-| `pubkey` | `bytes`   | The pubkey of the validator to remove boost from. |
-
-**Returns**
-
-| Name     | Type   | Description                                                                    |
-| -------- | ------ | ------------------------------------------------------------------------------ |
-| `<none>` | `bool` | bool False if amount is zero or if enough time has not passed, otherwise true. |
-
-### boostedQueue
-
-Returns the amount of BGT queued up to be used by an account to boost a validator.
-
-```solidity
-function boostedQueue(
-    address account,
-    bytes calldata pubkey
-)
-    external
-    view
-    returns (uint32 blockNumberLast, uint128 balance);
-```
-
-**Parameters**
-
-| Name      | Type      | Description                                |
-| --------- | --------- | ------------------------------------------ |
-| `account` | `address` | The address of the account boosting.       |
-| `pubkey`  | `bytes`   | The pubkey of the validator being boosted. |
-
-### queuedBoost
-
-Returns the amount of BGT queued up to be used by an account for boosts.
-
-```solidity
-function queuedBoost(address account) external view returns (uint128);
-```
-
-**Parameters**
-
-| Name      | Type      | Description                          |
-| --------- | --------- | ------------------------------------ |
-| `account` | `address` | The address of the account boosting. |
-
-### boosted
-
-Returns the amount of BGT used by an account to boost a validator.
-
-```solidity
-function boosted(address account, bytes calldata pubkey) external view returns (uint128);
-```
-
-**Parameters**
-
-| Name      | Type      | Description                                |
-| --------- | --------- | ------------------------------------------ |
-| `account` | `address` | The address of the account boosting.       |
-| `pubkey`  | `bytes`   | The pubkey of the validator being boosted. |
-
-### boosts
-
-Returns the amount of BGT used by an account for boosts.
-
-```solidity
-function boosts(address account) external view returns (uint128);
-```
-
-**Parameters**
-
-| Name      | Type      | Description                          |
-| --------- | --------- | ------------------------------------ |
-| `account` | `address` | The address of the account boosting. |
-
-### boostees
-
-Returns the amount of BGT attributed to the validator for boosts.
-
-```solidity
-function boostees(bytes calldata pubkey) external view returns (uint128);
-```
-
-**Parameters**
-
-| Name     | Type    | Description                                |
-| -------- | ------- | ------------------------------------------ |
-| `pubkey` | `bytes` | The pubkey of the validator being boosted. |
-
-### totalBoosts
-
-Returns the total boosts for all validators.
-
-```solidity
-function totalBoosts() external view returns (uint128);
-```
-
-### normalizedBoost
-
-Returns the normalized boost power for the validator given outstanding boosts.
-
-_Used by distributor get validator boost power._
-
-```solidity
-function normalizedBoost(bytes calldata pubkey) external view returns (uint256);
-```
-
-**Parameters**
-
-| Name     | Type    | Description                          |
-| -------- | ------- | ------------------------------------ |
-| `pubkey` | `bytes` | The pubkey of the boosted validator. |
-
-### minter
-
-Public variable that represents the caller of the mint method.
-
-_This is going to be the BlockRewardController contract at first._
-
-```solidity
-function minter() external view returns (address);
-```
-
-### setMinter
-
-Set the minter address.
-
-_This can only be called by the governance module._
-
-```solidity
-function setMinter(address _minter) external;
-```
-
-**Parameters**
-
-| Name      | Type      | Description                |
-| --------- | --------- | -------------------------- |
-| `_minter` | `address` | The address of the minter. |
-
-### setStaker
-
-Set the BGT staker contract address.
-
-```solidity
-function setStaker(address _staker) external;
-```
-
-**Parameters**
-
-| Name      | Type      | Description                |
-| --------- | --------- | -------------------------- |
-| `_staker` | `address` | The address of the staker. |
-
-### setActivateBoostDelay
-
-Set the activate boost delay.
-
-```solidity
-function setActivateBoostDelay(uint32 _activateBoostDelay) external;
-```
-
-**Parameters**
-
-| Name                  | Type     | Description                          |
-| --------------------- | -------- | ------------------------------------ |
-| `_activateBoostDelay` | `uint32` | The new delay for activating boosts. |
-
-### setDropBoostDelay
-
-Set the drop boost delay.
-
-```solidity
-function setDropBoostDelay(uint32 _dropBoostDelay) external;
-```
-
-**Parameters**
-
-| Name              | Type     | Description                        |
-| ----------------- | -------- | ---------------------------------- |
-| `_dropBoostDelay` | `uint32` | The new delay for dropping boosts. |
+| Name     | Type      | Description                        |
+| -------- | --------- | ---------------------------------- |
+| `pubkey` | `bytes`   | The validator public key           |
+| `amount` | `uint128` | The amount to queue for drop boost |
 
 ### redeem
 
-Redeem the BGT token for the native token at a 1:1 rate.
+Redeems native tokens for BGT.
+
+**Emits:**
+
+- [Redeem](#event-redeem)
 
 ```solidity
-function redeem(address receiver, uint256 amount) external;
+function redeem(address receiver, uint256 amount) external payable;
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                                               |
-| ---------- | --------- | --------------------------------------------------------- |
-| `receiver` | `address` | The receiver's address who will receive the native token. |
-| `amount`   | `uint256` | The amount of BGT to redeem.                              |
+| Name       | Type      | Description                          |
+| ---------- | --------- | ------------------------------------ |
+| `receiver` | `address` | The address to receive native tokens |
+| `amount`   | `uint256` | The amount of BGT to redeem          |
 
-### unboostedBalanceOf
+### setActivateBoostDelay
 
-Returns the unboosted balance of an account.
+Sets the delay for activating boosts.
+
+**Emits:**
+
+- [SetActivateBoostDelay](#event-setactivateboostdelay)
 
 ```solidity
-function unboostedBalanceOf(address account) external view returns (uint256);
+function setActivateBoostDelay(uint32 _activateBoostDelay) external onlyOwner;
 ```
 
 **Parameters**
 
-| Name      | Type      | Description                 |
-| --------- | --------- | --------------------------- |
-| `account` | `address` | The address of the account. |
+| Name                  | Type     | Description                  |
+| --------------------- | -------- | ---------------------------- |
+| `_activateBoostDelay` | `uint32` | The new activate boost delay |
+
+### setBgtTermsAndConditions
+
+Sets the BGT terms and conditions.
+
+**Emits:**
+
+- [SetBgtTermsAndConditions](#event-setbgttermsandconditions)
+
+```solidity
+function setBgtTermsAndConditions(string calldata _bgtTermsAndConditions) external onlyOwner;
+```
+
+**Parameters**
+
+| Name                     | Type     | Description                  |
+| ------------------------ | -------- | ---------------------------- |
+| `_bgtTermsAndConditions` | `string` | The new terms and conditions |
+
+### setDropBoostDelay
+
+Sets the delay for dropping boosts.
+
+**Emits:**
+
+- [SetDropBoostDelay](#event-setdropboostdelay)
+
+```solidity
+function setDropBoostDelay(uint32 _dropBoostDelay) external onlyOwner;
+```
+
+**Parameters**
+
+| Name              | Type     | Description              |
+| ----------------- | -------- | ------------------------ |
+| `_dropBoostDelay` | `uint32` | The new drop boost delay |
+
+### setMinter
+
+Sets the minter address.
+
+**Emits:**
+
+- [SetMinter](#event-setminter)
+
+```solidity
+function setMinter(address _minter) external onlyOwner;
+```
+
+**Parameters**
+
+| Name      | Type      | Description            |
+| --------- | --------- | ---------------------- |
+| `_minter` | `address` | The new minter address |
+
+### setStaker
+
+Sets the staker contract address.
+
+**Emits:**
+
+- [SetStaker](#event-setstaker)
+
+```solidity
+function setStaker(address _staker) external onlyOwner;
+```
+
+**Parameters**
+
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| `_staker` | `address` | The new staker contract address |
+
+### whitelistSender
+
+Whitelists or removes a sender.
+
+**Emits:**
+
+- [WhitelistSender](#event-whitelistsender)
+
+```solidity
+function whitelistSender(address sender, bool approved) external onlyOwner;
+```
+
+**Parameters**
+
+| Name       | Type      | Description                    |
+| ---------- | --------- | ------------------------------ |
+| `sender`   | `address` | The sender address             |
+| `approved` | `bool`    | Whether to whitelist or remove |
 
 ## Events
 
-### MinterChanged
+### ActivateBoost {#event-activateboost}
 
-Emitted when the minter address is changed.
+Emitted when a boost is activated.
 
 ```solidity
-event MinterChanged(address indexed previous, address indexed current);
+event ActivateBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                         |
-| ---------- | --------- | ----------------------------------- |
-| `previous` | `address` | The address of the previous minter. |
-| `current`  | `address` | The address of the current minter.  |
+| Name      | Type      | Description                          |
+| --------- | --------- | ------------------------------------ |
+| `account` | `address` | The account that activated the boost |
+| `pubkey`  | `bytes`   | The validator public key             |
+| `amount`  | `uint128` | The amount of boost activated        |
 
-### StakerChanged
+### Approval {#event-approval}
 
-Emitted when the Staker address is changed.
+Emitted when an approval is made.
 
 ```solidity
-event StakerChanged(address indexed previous, address indexed current);
+event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                         |
-| ---------- | --------- | ----------------------------------- |
-| `previous` | `address` | The address of the previous Staker. |
-| `current`  | `address` | The address of the current Staker.  |
+| Name      | Type      | Description          |
+| --------- | --------- | -------------------- |
+| `owner`   | `address` | The token owner      |
+| `spender` | `address` | The approved spender |
+| `value`   | `uint256` | The approved amount  |
 
-### SenderWhitelisted
+### CancelQueuedBoost {#event-cancelqueuedboost}
 
-Emitted when an address is approved to send BGT.
+Emitted when a queued boost is cancelled.
 
 ```solidity
-event SenderWhitelisted(address indexed sender, bool approved);
+event CancelQueuedBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name       | Type      | Description                            |
-| ---------- | --------- | -------------------------------------- |
-| `sender`   | `address` | The address of the sender.             |
-| `approved` | `bool`    | Whether the sender is approved or not. |
+| Name      | Type      | Description                          |
+| --------- | --------- | ------------------------------------ |
+| `account` | `address` | The account that cancelled the boost |
+| `pubkey`  | `bytes`   | The validator public key             |
+| `amount`  | `uint128` | The amount of boost cancelled        |
 
-### QueueBoost
+### CancelQueuedDropBoost {#event-cancelqueueddropboost}
 
-Emitted when sender queues a new boost for a validator with an amount of BGT
+Emitted when a queued drop boost is cancelled.
 
 ```solidity
-event QueueBoost(address indexed sender, bytes indexed pubkey, uint128 amount);
+event CancelQueuedDropBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                         |
-| -------- | --------- | --------------------------------------------------- |
-| `sender` | `address` | The address of the sender.                          |
-| `pubkey` | `bytes`   | The pubkey of the validator to be queued for boost. |
-| `amount` | `uint128` | The amount of BGT to boost with.                    |
+| Name      | Type      | Description                               |
+| --------- | --------- | ----------------------------------------- |
+| `account` | `address` | The account that cancelled the drop boost |
+| `pubkey`  | `bytes`   | The validator public key                  |
+| `amount`  | `uint128` | The amount of drop boost cancelled        |
 
-### CancelBoost
+### DelegateChanged {#event-delegatechanged}
 
-Emitted when sender cancels a queued boost for a validator with an amount of BGT
+Emitted when a delegate is changed.
 
 ```solidity
-event CancelBoost(address indexed sender, bytes indexed pubkey, uint128 amount);
+event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                                    |
-| -------- | --------- | -------------------------------------------------------------- |
-| `sender` | `address` | The address of the sender.                                     |
-| `pubkey` | `bytes`   | The pubkey of the validator to be canceled from queued boosts. |
-| `amount` | `uint128` | The amount of BGT to cancel from queued boosts.                |
+| Name           | Type      | Description           |
+| -------------- | --------- | --------------------- |
+| `delegator`    | `address` | The delegator address |
+| `fromDelegate` | `address` | The previous delegate |
+| `toDelegate`   | `address` | The new delegate      |
 
-### ActivateBoost
+### DelegateVotesChanged {#event-delegatevoteschanged}
 
-Emitted when sender activates a new boost for a validator
+Emitted when delegate votes change.
 
 ```solidity
-event ActivateBoost(address indexed sender, address indexed user, bytes indexed pubkey, uint128 amount);
+event DelegateVotesChanged(address indexed delegate, uint256 previousVotes, uint256 newVotes);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                                        |
-| -------- | --------- | ------------------------------------------------------------------ |
-| `sender` | `address` | The address of the sender.                                         |
-| `user`   | `address` | The address of the user boosting.                                  |
-| `pubkey` | `bytes`   | The pubkey of the validator to be activated for the queued boosts. |
-| `amount` | `uint128` | The amount of BGT to boost with.                                   |
+| Name            | Type      | Description             |
+| --------------- | --------- | ----------------------- |
+| `delegate`      | `address` | The delegate address    |
+| `previousVotes` | `uint256` | The previous vote count |
+| `newVotes`      | `uint256` | The new vote count      |
 
-### QueueDropBoost
+### DropBoost {#event-dropboost}
 
-Emitted when an user queues a drop boost for a validator.
+Emitted when a boost is dropped.
 
 ```solidity
-event QueueDropBoost(address indexed user, bytes indexed pubkey, uint128 amount);
+event DropBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                       |
-| -------- | --------- | ------------------------------------------------- |
-| `user`   | `address` | The address of the user.                          |
-| `pubkey` | `bytes`   | The pubkey of the validator to remove boost from. |
-| `amount` | `uint128` | The amount of BGT boost to remove.                |
+| Name      | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `account` | `address` | The account that dropped the boost |
+| `pubkey`  | `bytes`   | The validator public key           |
+| `amount`  | `uint128` | The amount of boost dropped        |
 
-### CancelDropBoost
+### EIP712DomainChanged {#event-eip712domainchanged}
 
-Emitted when an user cancels a queued drop boost for a validator.
+Emitted when the EIP712 domain changes.
 
 ```solidity
-event CancelDropBoost(address indexed user, bytes indexed pubkey, uint128 amount);
+event EIP712DomainChanged();
+```
+
+### Initialized {#event-initialized}
+
+Emitted when the contract is initialized.
+
+```solidity
+event Initialized(uint64 version);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                           |
-| -------- | --------- | ----------------------------------------------------- |
-| `user`   | `address` | The address of the user.                              |
-| `pubkey` | `bytes`   | The pubkey of the validator to cancel drop boost for. |
-| `amount` | `uint128` | The amount of BGT boost to cancel.                    |
+| Name      | Type     | Description                |
+| --------- | -------- | -------------------------- |
+| `version` | `uint64` | The initialization version |
 
-### DropBoost
+### OwnershipTransferred {#event-ownershiptransferred}
 
-Emitted when sender removes an amount of BGT boost from a validator
+Emitted when ownership is transferred.
 
 ```solidity
-event DropBoost(address indexed sender, bytes indexed pubkey, uint128 amount);
+event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 ```
 
 **Parameters**
 
-| Name     | Type      | Description                                       |
-| -------- | --------- | ------------------------------------------------- |
-| `sender` | `address` | The address of the sender.                        |
-| `pubkey` | `bytes`   | The pubkey of the validator to remove boost from. |
-| `amount` | `uint128` | The amount of BGT boost to remove.                |
+| Name            | Type      | Description        |
+| --------------- | --------- | ------------------ |
+| `previousOwner` | `address` | The previous owner |
+| `newOwner`      | `address` | The new owner      |
 
-### Redeem
+### QueueBoost {#event-queueboost}
 
-Emitted when the BGT token is redeemed for the native token.
-
-```solidity
-event Redeem(address indexed from, address indexed receiver, uint256 amount);
-```
-
-### ActivateBoostDelayChanged
-
-Emitted when the activate boost delay is changed.
+Emitted when a boost is queued.
 
 ```solidity
-event ActivateBoostDelayChanged(uint32 newDelay);
+event QueueBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name       | Type     | Description                          |
-| ---------- | -------- | ------------------------------------ |
-| `newDelay` | `uint32` | The new delay for activating boosts. |
+| Name      | Type      | Description                       |
+| --------- | --------- | --------------------------------- |
+| `account` | `address` | The account that queued the boost |
+| `pubkey`  | `bytes`   | The validator public key          |
+| `amount`  | `uint128` | The amount of boost queued        |
 
-### DropBoostDelayChanged
+### QueueDropBoost {#event-queuedropboost}
 
-Emitted when the drop boost delay is changed.
+Emitted when a drop boost is queued.
 
 ```solidity
-event DropBoostDelayChanged(uint32 newDelay);
+event QueueDropBoost(address indexed account, bytes pubkey, uint128 amount);
 ```
 
 **Parameters**
 
-| Name       | Type     | Description                        |
-| ---------- | -------- | ---------------------------------- |
-| `newDelay` | `uint32` | The new delay for dropping boosts. |
+| Name      | Type      | Description                            |
+| --------- | --------- | -------------------------------------- |
+| `account` | `address` | The account that queued the drop boost |
+| `pubkey`  | `bytes`   | The validator public key               |
+| `amount`  | `uint128` | The amount of drop boost queued        |
+
+### Redeem {#event-redeem}
+
+Emitted when BGT is redeemed for native tokens.
+
+```solidity
+event Redeem(address indexed account, address indexed receiver, uint256 amount);
+```
+
+**Parameters**
+
+| Name       | Type      | Description                   |
+| ---------- | --------- | ----------------------------- |
+| `account`  | `address` | The account that redeemed     |
+| `receiver` | `address` | The receiver of native tokens |
+| `amount`   | `uint256` | The amount redeemed           |
+
+### SetActivateBoostDelay {#event-setactivateboostdelay}
+
+Emitted when the activate boost delay is set.
+
+```solidity
+event SetActivateBoostDelay(uint32 activateBoostDelay);
+```
+
+**Parameters**
+
+| Name                 | Type     | Description                  |
+| -------------------- | -------- | ---------------------------- |
+| `activateBoostDelay` | `uint32` | The new activate boost delay |
+
+### SetBgtTermsAndConditions {#event-setbgttermsandconditions}
+
+Emitted when BGT terms and conditions are set.
+
+```solidity
+event SetBgtTermsAndConditions(string bgtTermsAndConditions);
+```
+
+**Parameters**
+
+| Name                    | Type     | Description                  |
+| ----------------------- | -------- | ---------------------------- |
+| `bgtTermsAndConditions` | `string` | The new terms and conditions |
+
+### SetDropBoostDelay {#event-setdropboostdelay}
+
+Emitted when the drop boost delay is set.
+
+```solidity
+event SetDropBoostDelay(uint32 dropBoostDelay);
+```
+
+**Parameters**
+
+| Name             | Type     | Description              |
+| ---------------- | -------- | ------------------------ |
+| `dropBoostDelay` | `uint32` | The new drop boost delay |
+
+### SetMinter {#event-setminter}
+
+Emitted when the minter is set.
+
+```solidity
+event SetMinter(address indexed minter);
+```
+
+**Parameters**
+
+| Name     | Type      | Description            |
+| -------- | --------- | ---------------------- |
+| `minter` | `address` | The new minter address |
+
+### SetStaker {#event-setstaker}
+
+Emitted when the staker is set.
+
+```solidity
+event SetStaker(address indexed staker);
+```
+
+**Parameters**
+
+| Name     | Type      | Description            |
+| -------- | --------- | ---------------------- |
+| `staker` | `address` | The new staker address |
+
+### Transfer {#event-transfer}
+
+Emitted when tokens are transferred.
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+**Parameters**
+
+| Name    | Type      | Description            |
+| ------- | --------- | ---------------------- |
+| `from`  | `address` | The sender address     |
+| `to`    | `address` | The recipient address  |
+| `value` | `uint256` | The amount transferred |
+
+### WhitelistSender {#event-whitelistsender}
+
+Emitted when a sender is whitelisted or removed.
+
+```solidity
+event WhitelistSender(address indexed sender, bool approved);
+```
+
+**Parameters**
+
+| Name       | Type      | Description                    |
+| ---------- | --------- | ------------------------------ |
+| `sender`   | `address` | The sender address             |
+| `approved` | `bool`    | Whether whitelisted or removed |
+
+## Errors
+
+### ZeroAddress
+
+```solidity
+error ZeroAddress();
+```
+
+Thrown when attempting to initialize with a zero address.
+
+### UnauthorizedETHTransfer
+
+```solidity
+error UnauthorizedETHTransfer();
+```
+
+Thrown when attempting an unauthorized ETH transfer.
+
+### VotesExpiredSignature
+
+```solidity
+error VotesExpiredSignature(uint256 expiry);
+```
+
+Thrown when attempting to use an expired signature for voting.
+
+**Parameters**
+
+| Name     | Type      | Description                           |
+| -------- | --------- | ------------------------------------- |
+| `expiry` | `uint256` | The expiry timestamp of the signature |

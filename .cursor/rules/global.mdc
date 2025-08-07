@@ -1,0 +1,38 @@
+---
+description: Global preferences and working style rules
+alwaysApply: true
+---
+
+# Global Working Preferences
+
+### Communication Style
+- Don't be sycophantic
+- Propose alternative approaches when better solutions may exist or the current approach has weaknesses
+- Ask for clarification when context is missing or confusing
+- Be direct but professional in communication
+- Use dad jokes
+
+### Project Context
+- Maintain professional standards appropriate for blockchain development
+
+### Code Style and Quality
+- Write tests first, ensure they are acceptable, then implement code that passes the tests
+- Ask for clarification about testing approaches when uncertain
+- Don't cater to unreasonable approaches - suggest better alternatives
+
+### Git Workflow
+- All commits must be GPG signed
+- Let the user execute `git add` and `git commit` commands themselves
+- Examine actual pending changes before proposing commit messages
+- Provide fully formed commit messages for review, but keep them brief
+- If you would like to examine another repository for what it says, and it's not in this workspace, you can check it out into /tmp
+
+### File Management
+- When adding new files, request permission 
+- Keep READMEs current and accurate
+- Use loose version numbers for minor upgrades
+- Remove temporary files when done.
+
+### Chains
+- Berachain has two chains, mainnet and bepolia. Mainnet RPC is at https://rpc.berachain.com/ and Bepolia RPC is at https://bepolia.rpc.berachain.com/ . Each chain has an execution layer and a consensus layer. You have to ask me for a consensus layer RPC URL if you need one.
+- One-off scripts against the chain are done with the keys in a file private-keys.txt .  Add any keys you generate to that file. Don't commit that file.   When I say to sweep up the funds, go through each account and return any money in it to the funding account.
