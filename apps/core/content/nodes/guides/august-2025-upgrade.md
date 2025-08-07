@@ -28,56 +28,70 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 ## August 2025 Upgrade Timeline
 
-| Date                                  | Milestone                                                                                                     |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| July 30, 2025                         | Beacon-Kit 1.3.0-rc1, Bera-Geth v1.011602.0-rc4 and Bera-Reth 1.0.0-rc.8 released for installation to Bepolia |
-| August 1, 2025                        | Bera-Geth v1.011602.0-rc5 released                                                                            |
-| August 4, 2025                        | All Bepolia infrastructure partners expected to be upgraded                                                   |
-| August 6, 2025 @ 1600 GMT / 1200 EDT  | Bepolia upgrade activates                                                                                     |
-| August TODO, 2025                     | Mainnet upgrade instructions posted                                                                           |
-| August 20, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                                    |
+| Date                                    | Milestone                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| July 30, 2025                           | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                     |
+| August 6, 2025                          | Bepolia upgrade activated                                                                         |
+| August TODO, 2025                       | Final versions for Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
+| August TODO, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                        |
 
-## New Chain Clients and Genesis Files
+## Upgrade Details
 
-| Chain   | Client for Bepolia and Mainnet                                                           |
-| ------- | ---------------------------------------------------------------------------------------- |
-| Bepolia | [Bera-Geth v1.011602.0](https://github.com/berachain/bera-geth/releases/tag/v1.011602.0) |
-| Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0.0)           |
-| Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0)         |
+Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures for Beacon Kit, Bera-Reth, and Bera-Geth. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
 
-| Chain   | Genesis file & md5 hash                                                                                                                            |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet | [TODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
+**Executable names** are changed: `geth` → `bera-geth` and `reth` → `bera-reth`, in our release binaries and Docker images.
 
-Berachain will release stand-alone executables and Docker images for Linux ARM and AMD64 architectures. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
+Operators currently running Geth or Reth can upgrade to our forked versions while **retaining their current chain data files**. Operators migrating from other clients should sync a new node with a snapshot - [testnet](https://storage.googleapis.com/bera-testnet-snapshot-eu/index.html) or [mainnet](https://storage.googleapis.com/bera-snapshot-eu/index.html).
 
-Operators currently running Geth or Reth can upgrade to our forked versions while retaining their current chain data files. Operators migrating from other clients should sync a new node with a snapshot - [testnet](https://storage.googleapis.com/bera-testnet-snapshot-eu/index.html) or [mainnet](https://storage.googleapis.com/bera-snapshot-eu/index.html).
+**New genesis files** are required for Beacon-Kit and Bera-Reth/Geth, but **no other configuration changes** are needed.
 
 ## Upgrade instructions
 
 Test your modifications on non-production infrastructure to verify your new startup scripting that refers to the new executable names `bera-reth` and `bera-geth`.
 
-**No configuration changes are needed** aside from the new executables.
-
 :::tip
-If you duplicate your EL installation to test, don't duplicate the (reth) `discovery_secret` or (geth) `nodekey` files to avoid interfering with your production node's peering.
-:::
+If you duplicate your installation to test, don't duplicate these identity files to avoid interfering with your production node's peering:
 
-1. Stop your current execution and consensus clients.
-2. Install the new genesis files linked above into place, and verify their md5 hash.
-3. Install Beacon-Kit and either Bera-Geth or Bera-Reth into place. See below for additional steps for Bera-Geth.
-4. Start both clients.
+- **Bera-Reth**: `discovery_secret` file
+- **Bera-Geth**: `nodekey` file
+- **Beacon-Kit**: `priv_validator_key.json` file
+  :::
 
-### Geth Additional Steps
+1. Stop all clients.
+2. Install Beacon-Kit and either Bera-Geth or Bera-Reth, linked below, into place.
+3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`.
+   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
+   - **Bera-Geth:** Run `bera-geth init` against your Geth data directory with the supplied genesis file.
+     We recommend making this a permanent part of every `bera-geth` startup, especially in kubernetes. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
-You must run `bera-geth init` after the genesis file has been installed to upgrade the chain data to reflect the new genesis.
+     `bera-geth init --datadir /geth/datadir eth-genesis.json`
 
-We recommend this be made a permanent part of every geth startup. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
+4. Start all clients.
 
-```bash
-bera-geth init --datadir /path/to/geth/datadir /path/to/eth-genesis.json;
+### Download links
+
+| Chain             | Github release page                                                              | Release date |
+| ----------------- | -------------------------------------------------------------------------------- | ------------ |
+| Mainnet & Bepolia | [Bera-Geth vTODO](https://github.com/berachain/bera-geth/releases/tag/vTODO)     | August 2     |
+| Mainnet & Bepolia | [Bera-Reth vTODO](https://github.com/berachain/bera-reth/releases/tag/vTODO)     | July 31      |
+| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0) | July 29      |
+
+| File                           | Download link & md5 hash                                                                                                                           |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
+| Mainnet Bera-Reth/Geth Genesis | [TODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
+
+## Confirm upgrade
+
+Beacon-Kit should log the following on startup:
+
 ```
+TODO
+```
+
+## FAQ
+
+Where's my Bera-Geth data directory?
 
 The geth `datadir` should contain the following directories:
 
@@ -90,12 +104,4 @@ tree datadir;
 # └── geth
 #     ├── blobpool
 #     └── chaindata
-```
-
-## Confirm upgrade
-
-Beacon-Kit should log the following on startup:
-
-```
-TODO
 ```
