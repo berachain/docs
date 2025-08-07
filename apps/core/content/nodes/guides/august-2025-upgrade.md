@@ -28,13 +28,13 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 ## August 2025 Upgrade Timeline
 
-| Date                                 | Milestone                                                                                                     |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| July 30, 2025                        | Beacon-Kit, Bera-Geth, and Bera-Reth released for installation to Bepolia |	
-| August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded                                                   |
-| August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activated                                                                                     |
-| TBD                                  | Mainnet upgrade instructions posted                                                                           |
-| TBD                                  | Mainnet hardfork activates                                                                                    |
+| Date                                 | Milestone                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------- |
+| July 30, 2025                        | Beacon-Kit, Bera-Geth, and Bera-Reth released for installation to Bepolia |
+| August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded               |
+| August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activated                                                 |
+| TBD                                  | Mainnet upgrade instructions posted                                       |
+| TBD                                  | Mainnet hardfork activates                                                |
 
 ## Upgrade Details
 
@@ -52,10 +52,11 @@ Test your modifications on non-production infrastructure to verify your upgrade 
 
 :::tip
 If you duplicate your installation to test, don't duplicate these identity files to avoid interfering with your production node's peering:
+
 - **Bera-Reth**: `discovery_secret` file
-- **Bera-Geth**: `nodekey` file  
+- **Bera-Geth**: `nodekey` file
 - **Beacon-Kit**: `priv_validator_key.json` file
-:::
+  :::
 
 1. Stop your current execution and consensus clients.
 2. Install Beacon-Kit and either Bera-Geth or Bera-Reth, linked below, into place.
@@ -63,24 +64,24 @@ If you duplicate your installation to test, don't duplicate these identity files
    - **Beacon-Kit:** overwrite `$BEACOND_HOME/config/genesis.json`
    - **Bera-Reth:**, overwrite `$RETH_DATA/genesis.json`.
    - **Bera-Geth:** Run `bera-geth init` against your Geth data directory with the supplied genesis file.
-   We recommend making this a permanent part of every `bera-geth` startup. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
+     We recommend making this a permanent part of every `bera-geth` startup. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
      `bera-geth init --datadir /geth/datadir eth-genesis.json`
 
 4. Start all clients.
 
 ### Download links
-| Chain   | Github release page                                                                                           | Release date
-| ------- | ------------------------------------------------------------------------------------------------ | - 
-| Bepolia | [Bera-Geth v1.011602.1-rc0](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1-rc0) | August 2
-| Bepolia | [Bera-Reth v1.0.0-rc.8](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.8)         | July 31
-| Bepolia | [Beacon-Kit v1.3.0-rc1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)         | July 29
 
-| File               | Download link & md5 hash                                                                                                                                                |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Chain   | Github release page                                                                              | Release date |
+| ------- | ------------------------------------------------------------------------------------------------ | ------------ |
+| Bepolia | [Bera-Geth v1.011602.1-rc0](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1-rc0) | August 2     |
+| Bepolia | [Bera-Reth v1.0.0-rc.8](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.8)         | July 31      |
+| Bepolia | [Beacon-Kit v1.3.0-rc1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)         | July 29      |
+
+| File                           | Download link & md5 hash                                                                                                                                                |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json)                      |
-| Bepolia Beacon-Kit Genesis | [355e22c65b6040f91cea78c54ae009ee](https://raw.githubusercontent.com/berachain/beacon-kit/f27637ea49beb171fff47f10bece4fd6d57c5df9/testing/networks/80069/genesis.json) |
-
+| Bepolia Beacon-Kit Genesis     | [355e22c65b6040f91cea78c54ae009ee](https://raw.githubusercontent.com/berachain/beacon-kit/f27637ea49beb171fff47f10bece4fd6d57c5df9/testing/networks/80069/genesis.json) |
 
 ## Confirm upgrade
 
