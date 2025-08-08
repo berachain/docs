@@ -78,7 +78,7 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 
 ## Fees
 
-Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. Fees are determined based on the mint and redemption rates of each vault. For example, if the mint rate of the USDC vault is 0.999 (1 `$USDC` for 0.999 $HONEY), then a fee of 0.001 or 0.1% is collected for every `$USDC` deposited.
+Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. Fees are determined based on the mint and redemption rates of each vault. For example, if the mint rate of the USDC vault is 0.999 — 1 `$USDC` for 0.999 `$HONEY` — then a fee of 0.001 or 0.1% is collected for every `$USDC` deposited.
 
 ### Example
 
