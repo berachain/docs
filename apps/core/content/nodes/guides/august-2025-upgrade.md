@@ -43,7 +43,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 | Chain   | Client                                                                                           |
 | ------- | ------------------------------------------------------------------------------------------------ |
-| Bepolia | [Bera-Geth v1.011603.0-rc0](https://github.com/berachain/bera-geth/releases/tag/v1.011603.0-rc0) |
+| Bepolia | [Bera-Geth v1.011602.1-rc2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1-rc2) |
 | Bepolia | [Bera-Reth v1.0.0-rc.10](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.10)       |
 | Bepolia | [Beacon-Kit v1.3.0-rc3](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc3)         |
 
