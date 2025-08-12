@@ -28,12 +28,12 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 ## August 2025 Upgrade Timeline
 
-| Date                                    | Milestone                                                                                         |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| July 30, 2025                           | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                     |
-| August 6, 2025                          | Bepolia upgrade activated                                                                         |
+| Date                                  | Milestone                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| July 30, 2025                         | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                    |
+| August 6, 2025                        | Bepolia upgrade activated                                                                        |
 | August 13, 2025                       | Final versions of Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
-| August 27, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                        |
+| August 27, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                       |
 
 ## Upgrade Details
 
@@ -46,7 +46,6 @@ Operators currently running Geth or Reth can switch to our forked versions while
 **New genesis files** are required for Bera-Reth/Geth.
 
 **No configuration changes** are required for CL/EL config files.
-
 
 ## Upgrade instructions
 
@@ -73,31 +72,33 @@ If you duplicate your installation to test, don't duplicate these identity files
 
 ### Download links
 
-| Chain             | Github release page                                                              | Release date |
-| ----------------- | -------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth v1.011602.1](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1)     | August 13
-| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0-0)     | August 13     |
-| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0) | August 13     |
+| Chain             | Github release page                                                                      | Release date |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| Mainnet & Bepolia | [Bera-Geth v1.011602.1](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1) | August 13    |
+| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0-0)           | August 13    |
+| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0)         | August 13    |
 
 | File                           | Download link & md5 hash                                                                                                                           |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [52f2eb675d095f32fdb0091de9f0025e](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
+| Mainnet Bera-Reth/Geth Genesis | [52f2eb675d095f32fdb0091de9f0025e](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
 Beacon-Kit should log the following on startup:
+
 ```
 DOCTODO
 ```
 
-
 Bera-Geth should log the following on startup:
+
 ```
 DOCTODO
 ```
 
 Bera-Reth should log the following on startup:
+
 ```
 DOCTODO
 ```

@@ -17,7 +17,7 @@ head:
 
 # Berachain Node Quickstart
 
-This guide will walk you through setting up an RPC node on a Linux or Mac computer. If you want to operate Berachain in a production environment, this guide will help you learn how the final system will operate. 
+This guide will walk you through setting up an RPC node on a Linux or Mac computer. If you want to operate Berachain in a production environment, this guide will help you learn how the final system will operate.
 
 For true production deployments, consider using the docker images accompanying our releases, or [the community-maintained ansible scripts](https://github.com/RhinoStake/ansible-berachain).
 
@@ -219,6 +219,7 @@ node fetch-berachain-snapshots.js;
 # Downloading snapshot_beacond_reth_full_v1.1.3_3768872.tar.lz4
 # ...
 ```
+
 The download may take a while.
 
 ### 5b - Stop Clients
