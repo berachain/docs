@@ -32,8 +32,8 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | --------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | July 30, 2025                           | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                     |
 | August 6, 2025                          | Bepolia upgrade activated                                                                         |
-| August TODO, 2025                       | Final versions for Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
-| August TODO, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                        |
+| August 13, 2025                       | Final versions of Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
+| August 27, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                        |
 
 ## Upgrade Details
 
@@ -41,9 +41,12 @@ Berachain will release stand-alone executables and Docker images for Linux ARM a
 
 **Executable names** are changed: `geth` → `bera-geth` and `reth` → `bera-reth`, in our release binaries and Docker images.
 
-Operators currently running Geth or Reth can upgrade to our forked versions while **retaining their current chain data files**. Operators migrating from other clients should sync a new node with a snapshot - [testnet](https://storage.googleapis.com/bera-testnet-snapshot-eu/index.html) or [mainnet](https://storage.googleapis.com/bera-snapshot-eu/index.html).
+Operators currently running Geth or Reth can switch to our forked versions while **retaining their current chain data files**. Note that Bera-Geth will update the data store by by renaming `geth` directory to `bera-geth` on the first run.
 
-**New genesis files** are required for Beacon-Kit and Bera-Reth/Geth, but **no other configuration changes** are needed.
+**New genesis files** are required for Beacon-Kit and Bera-Reth/Geth.
+
+**No configuration changes** are required for CL/EL config files.
+
 
 ## Upgrade instructions
 
@@ -72,14 +75,14 @@ If you duplicate your installation to test, don't duplicate these identity files
 
 | Chain             | Github release page                                                              | Release date |
 | ----------------- | -------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth vTODO](https://github.com/berachain/bera-geth/releases/tag/vTODO)     | August 2     |
-| Mainnet & Bepolia | [Bera-Reth vTODO](https://github.com/berachain/bera-reth/releases/tag/vTODO)     | July 31      |
+| Mainnet & Bepolia | [Bera-Geth vDOCTODO](https://github.com/berachain/bera-geth/releases/tag/vDOCTODO)     | August 2     |
+| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0-0)     | July 31      |
 | Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0) | July 29      |
 
 | File                           | Download link & md5 hash                                                                                                                           |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [TODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
+| Mainnet Bera-Reth/Geth Genesis | [DOCTODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
 
 ## Confirm upgrade
 
