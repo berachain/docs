@@ -43,7 +43,7 @@ Berachain will release stand-alone executables and Docker images for Linux ARM a
 
 Operators currently running Geth or Reth can switch to our forked versions while **retaining their current chain data files**. Note that Bera-Geth will update the data store by by renaming `geth` directory to `bera-geth` on the first run.
 
-**New genesis files** are required for Beacon-Kit and Bera-Reth/Geth.
+**New genesis files** are required for Bera-Reth/Geth.
 
 **No configuration changes** are required for CL/EL config files.
 
@@ -67,7 +67,7 @@ If you duplicate your installation to test, don't duplicate these identity files
    - **Bera-Geth:** Run `bera-geth init` against your Geth data directory with the supplied genesis file.
      We recommend making this a permanent part of every `bera-geth` startup, especially in kubernetes. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
-     `bera-geth init --datadir /geth/datadir eth-genesis.json`
+     `bera-geth init --datadir /path/to/geth/datadir eth-genesis.json`
 
 4. Start all clients.
 
@@ -75,26 +75,36 @@ If you duplicate your installation to test, don't duplicate these identity files
 
 | Chain             | Github release page                                                              | Release date |
 | ----------------- | -------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth vDOCTODO](https://github.com/berachain/bera-geth/releases/tag/vDOCTODO)     | August 2     |
-| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0-0)     | July 31      |
-| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0) | July 29      |
+| Mainnet & Bepolia | [Bera-Geth v1.011602.1](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1)     | August 13
+| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0-0)     | August 13     |
+| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0) | August 13     |
 
 | File                           | Download link & md5 hash                                                                                                                           |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [DOCTODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
+| Mainnet Bera-Reth/Geth Genesis | [52f2eb675d095f32fdb0091de9f0025e](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json)                             |
 
 ## Confirm upgrade
 
 Beacon-Kit should log the following on startup:
-
 ```
-TODO
+DOCTODO
+```
+
+
+Bera-Geth should log the following on startup:
+```
+DOCTODO
+```
+
+Bera-Reth should log the following on startup:
+```
+DOCTODO
 ```
 
 ## FAQ
 
-Where's my Bera-Geth data directory?
+Where's my Geth data directory?
 
 The geth `datadir` should contain the following directories:
 
