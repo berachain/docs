@@ -35,6 +35,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | August 4, 2025                       | All Bepolia infrastructure partners expected to be upgraded                                                   |
 | August 6, 2025                       | Bera-Geth v1.011602.1-rc0 released                                                                            |
 | August 6, 2025 @ 1600 GMT / 1200 EDT | Bepolia upgrade activated                                                                                     |
+| August 11, 2025                      | Bera-Geth 1.011602.1-rc0, Bera-Reth 1.0.0-rc.8, Beacon-Kit 1.3.0-rc3 recommended for installation.            |
 | TBD                                  | Mainnet upgrade instructions posted                                                                           |
 | TBD                                  | Mainnet hardfork activates                                                                                    |
 
@@ -42,9 +43,9 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 
 | Chain   | Client                                                                                           |
 | ------- | ------------------------------------------------------------------------------------------------ |
-| Bepolia | [Bera-Geth v1.011602.1-rc0](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1-rc0) |
-| Bepolia | [Bera-Reth v1.0.0-rc.8](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.8)         |
-| Bepolia | [Beacon-Kit v1.3.0-rc1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc1)         |
+| Bepolia | [Bera-Geth v1.011603.0-rc0](https://github.com/berachain/bera-geth/releases/tag/v1.011603.0-rc0) |
+| Bepolia | [Bera-Reth v1.0.0-rc.10](https://github.com/berachain/bera-reth/releases/tag/v1.0.0-rc.10)       |
+| Bepolia | [Beacon-Kit v1.3.0-rc3](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0-rc3)         |
 
 | Chain   | Genesis file & md5 hash                                                                                                                            |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
