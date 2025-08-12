@@ -112,3 +112,16 @@ Beacon-Kit should log the following on startup:
 	+==========================================================================+
 
 ```
+
+## Common issues
+
+### `SBT cannot be disabled once enabled`
+
+Revise your beacon-kit genesis `feature` section at the bottom:
+```json{4}
+"feature": {
+   "vote_extensions_enable_height": "0",
+   "pbts_enable_height": "1",
+   "sbt_enable_height": "7768335"
+}
+```
