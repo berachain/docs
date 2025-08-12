@@ -34,7 +34,7 @@ Alternatively, `$HONEY` can be obtained by swapping from other assets on [BEX](/
 
 ### Collateral Assets
 
-The initial collateral options will be `$USDC` and `$BYUSD` (`$pyUSD`). New assets used to mint `$HONEY` can be added through governance.
+The collateral options include `$USDC`, `$BYUSD` (`$pyUSD`), and `$USDT0`. New assets used to mint `$HONEY` can be added through governance.
 
 ## How is $HONEY Used?
 
@@ -49,7 +49,7 @@ A flow diagram of the `$HONEY` minting process and associated contracts is shown
 
 `$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type, with its own unique mint and redemption rate.
 
-In the top flow of the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault is interacted with, not the `$pyUSD` vault.
+In the top flow of the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault is interacted with, not the `$pyUSD` or `$USDT0` vaults.
 
 ### HoneyFactory
 
@@ -69,6 +69,7 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 - For example, if you redeem 1 `$HONEY` token with Basket Mode active, you'll get:
   - Some `$USDC` based on its relative proportion as collateral
   - Some `$pyUSD` based on its relative proportion as collateral
+  - Some `$USDT0` based on its relative proportion as collateral
 
 **Minting:**
 
