@@ -62,7 +62,7 @@ If you duplicate your installation to test, don't duplicate these identity files
 1. Stop all clients.
 2. Install Beacon-Kit 1.3.0 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
 3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
-   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`. 
+   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
    - **Bera-Geth:** run `bera-geth init` against your Geth data directory with the supplied genesis file.
      We recommend making this a permanent part of every `bera-geth` startup, especially in kubernetes. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
