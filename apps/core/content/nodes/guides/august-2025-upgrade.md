@@ -49,7 +49,7 @@ Operators currently running Geth or Reth can switch to our forked versions while
 
 ## Upgrade instructions
 
-Test your modifications on non-production infrastructure to verify your new startup scripting that refers to the new executable names `bera-reth` and `bera-geth`.
+Test your modifications on non-production infrastructure to verify your new startup process that refers to the new executable names `bera-reth` and `bera-geth`.
 
 :::tip
 If you duplicate your installation to test, don't duplicate these identity files to avoid interfering with your production node's peering:
@@ -60,13 +60,13 @@ If you duplicate your installation to test, don't duplicate these identity files
   :::
 
 1. Stop all clients.
-2. Install Beacon-Kit and either Bera-Geth or Bera-Reth, linked below, into place.
-3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`.
-   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
-   - **Bera-Geth:** Run `bera-geth init` against your Geth data directory with the supplied genesis file.
+2. Install Beacon-Kit 1.3.0 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
+3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
+   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`. 
+   - **Bera-Geth:** run `bera-geth init` against your Geth data directory with the supplied genesis file.
      We recommend making this a permanent part of every `bera-geth` startup, especially in kubernetes. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
 
-     `bera-geth init --datadir /path/to/geth/datadir eth-genesis.json`
+     `bera-geth init --datadir /path/to/geth/datadir /path/to/eth-genesis.json`
 
 4. Start all clients.
 
@@ -81,26 +81,39 @@ If you duplicate your installation to test, don't duplicate these identity files
 | File                           | Download link & md5 hash                                                                                                                           |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [52f2eb675d095f32fdb0091de9f0025e](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| Mainnet Bera-Reth/Geth Genesis | [f3ec1202993b1b69a9c7ad30643856ce](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
-Beacon-Kit should log the following on startup:
+Beacon-Kit should log the fork timestamp:
 
-```
-DOCTODO
+```txt{6}
+ 	+ ⭐️ Star BeaconKit on GitHub @ https://github.com/berachain/beacon-kit    +
+ 	+ 🧩 Your node is running version: v1.3.0                                  +
+ 	+ 💾 Your system: linux/amd64                                              +
+ 	+ 🍴 Deneb1 Fork Time: 1738415507                                          +
+ 	+ 🍴 Electra Fork Time: 1749056400                                         +
+ 	+ 🍴 Electra1 Fork Time: 1756310400                                        +
+ 	+ 🦺 Please report issues @ https://github.com/berachain/beacon-kit/issues +
+ 	+==========================================================================+
 ```
 
-Bera-Geth should log the following on startup:
+Bera-Geth should log the fork timestamp:
 
-```
-DOCTODO
+```txt{3}
+INFO  Post-Merge hard forks (timestamp based):
+...
+INFO  - Prague1:                     prague1(time: 1756310400, ...)
+...
+INFO  Ready for fork activation                fork=Prague1 date="27 Aug 25 12:00 EDT" remaining=349h56m55s timestamp=1,756,310,400
 ```
 
-Bera-Reth should log the following on startup:
+Bera-Reth should log fork timestamp:
 
-```
-DOCTODO
+```txt{3}
+Post-merge hard forks (timestamp based):
+...
+- Prague1                          @1756310400
 ```
 
 ## FAQ
