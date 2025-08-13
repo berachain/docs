@@ -1,50 +1,46 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: Honey Token Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the Honey stablecoin token contract
+  - - meta
+    - property: og:description
+      content: Developer reference for the Honey stablecoin token contract
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # Honey
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a><span v-if="config.contracts.tokens.honey.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honey.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a><span v-if="config.contracts.tokens.honey.abi && config.contracts.tokens.honey.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honey.abi">ABI JSON</a></span></small>
 
-This is the ERC20 token representation of Berachain's native stablecoin, HONEY.
+[Git Source](https://github.com/berachain/contracts/blob/main/src/honey/Honey.sol)
 
-## Functions
+This is the ERC20 token representation of Berachain's native stablecoin, Honey. The contract is upgradeable and access-controlled, with minting and burning restricted to the HoneyFactory contract.
 
-### mint
+**Inherits:**
+ERC20, AccessControlUpgradeable, UUPSUpgradeable, IHoneyErrors
 
-Mint Honey to the receiver.
+## State Variables
 
-_Only the factory can call this function._
+### factory
 
-```solidity
-function mint(address to, uint256 amount) external onlyFactory;
-```
-
-**Parameters**
-
-| Name     | Type      | Description                  |
-| -------- | --------- | ---------------------------- |
-| `to`     | `address` | The receiver address.        |
-| `amount` | `uint256` | The amount of Honey to mint. |
-
-### burn
-
-Burn Honey from an account.
-
-_Only the factory can call this function._
+The factory contract address that has exclusive permission to mint and burn Honey.
 
 ```solidity
-function burn(address from, uint256 amount) external onlyFactory;
+address public factory;
 ```
 
-**Parameters**
-
-| Name     | Type      | Description                     |
-| -------- | --------- | ------------------------------- |
-| `from`   | `address` | The account to burn Honey from. |
-| `amount` | `uint256` | The amount of Honey to burn.    |
+## View Functions
 
 ### name
+
+Returns the name of the token: "Honey"
 
 ```solidity
 function name() public pure override returns (string memory);
@@ -52,71 +48,89 @@ function name() public pure override returns (string memory);
 
 ### symbol
 
+Returns the symbol of the token: "HONEY"
+
 ```solidity
 function symbol() public pure override returns (string memory);
 ```
 
-### decimals
+## Functions
 
-Returns the number of decimals used to get its user representation.
+### initialize
 
-For example, if `decimals` equals `2`, a balance of `505` tokens should
-be displayed to a user as `5,05` (`505 / 10 ** 2`).
+Initializes the contract with governance and factory addresses. Can only be called once.
 
-```solidity
-function decimals() public view returns (uint8);
-```
+**Access:** Only during deployment
+**Errors:**
 
-### totalSupply
-
-Returns the amount of tokens in existence.
+- `ZeroAddress`: If either `_governance` or `_factory` is the zero address
 
 ```solidity
-function totalSupply() public view override returns (uint256);
+function initialize(address _governance, address _factory) external initializer;
 ```
 
-### balanceOf
+### mint
 
-Returns the amount of tokens owned by `owner`.
+Mints Honey tokens to a specified address.
+
+**Access:** Only HoneyFactory
+**Errors:**
+
+- `NotFactory`: If called by any address other than the factory
 
 ```solidity
-function balanceOf(address account) public view override returns (uint256);
+function mint(address to, uint256 amount) external onlyFactory;
 ```
 
-### transfer
+### burn
 
-Transfer `amount` tokens from the caller to `to`.
+Burns Honey tokens from a specified address.
 
-- the caller must have a balance of at least `amount`
+**Access:** Only HoneyFactory
+**Errors:**
+
+- `NotFactory`: If called by any address other than the factory
 
 ```solidity
-function transfer(address recipient, uint256 amount) public virtual override returns (bool);
+function burn(address from, uint256 amount) external onlyFactory;
 ```
 
-### allowance
+## Events
 
-Returns the amount of tokens that `spender` can spend on behalf of `owner`.
+### Transfer {#event-transfer}
+
+Emitted when tokens are transferred between accounts.
 
 ```solidity
-function allowance(address owner, address spender) public view virtual override returns (uint256);
+event Transfer(address indexed from, address indexed to, uint256 value);
 ```
 
-### approve
+### Approval {#event-approval}
 
-Sets `amount` as the allowance of `spender` over the caller's tokens.
+Emitted when an account approves another account to spend tokens on their behalf.
 
 ```solidity
-function approve(address spender, uint256 amount) public virtual override returns (bool);
+event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
-### transferFrom
+## Errors
 
-Transfers `amount` tokens from `from` to `to`.
-
-- `sender` must have a balance of at least `amount`
-- the caller must have allowance for `sender`'s tokens of at least
-  `amount`
+### ZeroAddress
 
 ```solidity
-function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool);
+error ZeroAddress();
 ```
+
+Thrown when attempting to initialize with a zero address.
+
+### NotFactory
+
+```solidity
+error NotFactory();
+```
+
+Thrown when a restricted function is called by an address other than the factory.
+
+### Other Errors
+
+The contract inherits additional errors from IHoneyErrors that may be relevant in the broader system context.

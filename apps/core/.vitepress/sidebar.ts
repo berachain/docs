@@ -58,6 +58,7 @@ const SIDEBAR = {
       items: [
         { text: "Boost A Validator", link: "/learn/guides/boost-a-validator" },
         { text: "BERA Staking", link: "/learn/guides/bera-staking" },
+        { text: "Claim BGT Rewards", link: "/learn/guides/claim-bgt" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
         {
           text: "Setup Reward Vault",
@@ -172,6 +173,14 @@ const SIDEBAR = {
           link: "/developers/guides/advanced-pol"
         },
         {
+          text: "Staking for Other Accounts",
+          link: "/developers/guides/staking-for-other-accounts"
+        },
+        {
+          text: "Partial Reward Claims",
+          link: "/developers/guides/partial-reward-claims"
+        },
+        {
           text: "EIP-7702",
           items: [
             {
@@ -204,19 +213,7 @@ const SIDEBAR = {
         {
           text: "Community Guides",
           link: "/developers/guides/community-guides"
-        },
-        {
-          text: "BERA Staking Vault APR",
-          link: "/developers/guides/swbera-vault-apr-calculation"
         }
-      ]
-    },
-    {
-      text: "Token Contracts",
-      items: [
-        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
-        { text: "Honey Token", link: "/developers/contracts/honey-token" },
-        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
       ]
     },
     {
@@ -224,7 +221,6 @@ const SIDEBAR = {
       items: [
         { text: "BeaconDeposit", link: "/developers/contracts/beacondeposit" },
         { text: "BeraChef", link: "/developers/contracts/berachef" },
-        { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
         {
           text: "BGTIncentiveDistributor",
           link: "/developers/contracts/bgtincentivedistributor"
@@ -233,19 +229,14 @@ const SIDEBAR = {
           text: "BGTIncentiveFeeCollector",
           link: "/developers/contracts/bgt-incentive-fee-collector"
         },
+        { text: "BGTStaker", link: "/developers/contracts/bgt-staker" },
         {
-          text: "Block Reward Controller",
+          text: "BlockRewardController",
           link: "/developers/contracts/block-reward-controller"
         },
         { text: "CREATE2", link: "/developers/contracts/create2" },
         { text: "Distributor", link: "/developers/contracts/distributor" },
         { text: "FeeCollector", link: "/developers/contracts/fee-collector" },
-        { text: "Governance", link: "/developers/contracts/governance" },
-        { text: "HoneyFactory", link: "/developers/contracts/honey-factory" },
-        {
-          text: "HoneyFactoryReader",
-          link: "/developers/contracts/honey-factory-reader"
-        },
         { text: "Multicall3", link: "/developers/contracts/multicall3" },
         { text: "Permit2", link: "/developers/contracts/permit2" },
         {
@@ -260,6 +251,31 @@ const SIDEBAR = {
           text: "WBERAStakerVault",
           link: "/developers/contracts/wbera-staker-vault"
         }
+      ]
+    },
+    {
+      text: "Governance Contracts",
+      items: [
+        { text: "Governance", link: "/developers/contracts/governance" },
+        { text: "Timelock", link: "/developers/contracts/timelock" }
+      ]
+    },
+    {
+      text: "Honey Contracts",
+      items: [
+        { text: "HoneyFactory", link: "/developers/contracts/honey-factory" },
+        {
+          text: "HoneyFactoryReader",
+          link: "/developers/contracts/honey-factory-reader"
+        }
+      ]
+    },
+    {
+      text: "Token Contracts",
+      items: [
+        { text: "BGT Token", link: "/developers/contracts/bgt-token" },
+        { text: "Honey Token", link: "/developers/contracts/honey-token" },
+        { text: "WBERA Token", link: "/developers/contracts/wbera-token" }
       ]
     }
   ],
