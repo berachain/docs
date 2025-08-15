@@ -108,7 +108,7 @@ Bera-Geth should log the fork timestamp:
 ```txt{1}
 	+ 🍴 Electra1 Fork Time: 1756915200                                        +
 ...
-INFO  Ready for fork activation                fork=Prague1 date="3 Sep 25 12:00 EDT" remaining=...` timestamp=1,756,915,200
+INFO  - Prague1:                     prague1(time: 1756915200, baseFeeChangeDenominator: 48, minimumBaseFeeWei: 1000000000, polDistributorAddress: 0xD2f19a79b026Fb636A7c300bF5947df11394076
 ```
 
 Bera-Reth should log fork timestamp:
