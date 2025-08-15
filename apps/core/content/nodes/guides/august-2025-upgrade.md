@@ -33,7 +33,7 @@ All users, whether hosting an RPC or running a validator, **must upgrade** their
 | July 30, 2025                           | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                    |
 | August 6, 2025                          | Bepolia upgrade activated                                                                        |
 | August 13, 2025                         | Final versions of Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
-| August 15, 2025                         | Updated releases + fork activation date                                                          |
+| August 18, 2025                         | Updated releases + fork activation date                                                          |
 | September 3, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                       |
 
 ## Upgrade Details
@@ -58,7 +58,7 @@ If you duplicate your installation to test, don't duplicate these identity files
 - **Bera-Reth**: `discovery_secret` file
 - **Bera-Geth**: `nodekey` file
 - **Beacon-Kit**: `priv_validator_key.json` file
-:::
+  :::
 
 :::warning
 If you compile your own build, do so against the **recommended release branches**.
@@ -79,14 +79,14 @@ If you compile your own build, do so against the **recommended release branches*
 
 | Chain             | Github release page                                                                      | Release date |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) | August 15    |
-| Mainnet & Bepolia | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           | August 16    |
-| Mainnet & Bepolia | [Beacon-Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)         | August 15    |
+| Mainnet & Bepolia | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) | August 18    |
+| Mainnet & Bepolia | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           | August 18    |
+| Mainnet & Bepolia | [Beacon-Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)         | August 18    |
 
-| Bera-Reth/Geth Genesis File | Updated   | Download link & md5 hash                                                                                                                           |
-| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia                     | August 15 | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80069/eth-genesis.json) |
-| Mainnet                     | August 15 | [51ec047b71b06f7fbca9689037ec1d60](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80094/eth-genesis.json) |
+| Bera-Reth/Geth Genesis File | Updated   | Download link & md5 hash                                                                                                        |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Bepolia                     | July 29   | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80069/eth-genesis.json) |
+| Mainnet                     | August 18 | [51ec047b71b06f7fbca9689037ec1d60](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
