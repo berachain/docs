@@ -78,10 +78,10 @@ If you duplicate your installation to test, don't duplicate these identity files
 | Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0.0)           | August 13    |
 | Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0)         | August 13    |
 
-| File                           | Download link & md5 hash                                                                                                                           |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [f3ec1202993b1b69a9c7ad30643856ce](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| File                           | Download link & md5 hash                                                                                                                           | Updated   |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) | August 15 |
+| Mainnet Bera-Reth/Geth Genesis | [f3ec1202993b1b69a9c7ad30643856ce](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) | August 15 |
 
 ## Confirm upgrade
 
