@@ -76,7 +76,7 @@ If you duplicate your installation to test, don't duplicate these identity files
 | Chain             | Github release page                                                                      | Release date |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
 | Mainnet & Bepolia | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) | August 15    |
-| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0.0)           | August 13    |
+| Mainnet & Bepolia | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           | August 13    |
 | Mainnet & Bepolia | [Beacon-Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)         | August 15    |
 
 | Bera-Reth/Geth Genesis File | Updated   | Download link & md5 hash                                                                                                                           |

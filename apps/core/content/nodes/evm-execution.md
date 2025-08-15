@@ -20,6 +20,6 @@ The following execution clients are recommended to go with our **required [Beaco
 | Language | Required Version (Mainnet & Bepolia)                                                     |
 | -------- | ---------------------------------------------------------------------------------------- |
 | Golang   | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) |
-| Rust     | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0.0)           |
+| Rust     | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
