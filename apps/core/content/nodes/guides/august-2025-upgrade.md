@@ -90,31 +90,29 @@ Beacon-Kit should log the fork timestamp:
 
 ```txt{6}
  	+ ⭐️ Star BeaconKit on GitHub @ https://github.com/berachain/beacon-kit    +
- 	+ 🧩 Your node is running version: v1.3.0                                  +
+ 	+ 🧩 Your node is running version: v1.3.1                                  +
  	+ 💾 Your system: linux/amd64                                              +
  	+ 🍴 Deneb1 Fork Time: 1738415507                                          +
  	+ 🍴 Electra Fork Time: 1749056400                                         +
- 	+ 🍴 Electra1 Fork Time: 1756310400                                        +
+ 	+ 🍴 Electra1 Fork Time: 1756915200                                        +
  	+ 🦺 Please report issues @ https://github.com/berachain/beacon-kit/issues +
  	+==========================================================================+
 ```
 
 Bera-Geth should log the fork timestamp:
 
-```txt{3}
-INFO  Post-Merge hard forks (timestamp based):
+```txt{1}
+	+ 🍴 Electra1 Fork Time: 1756915200                                        +
 ...
-INFO  - Prague1:                     prague1(time: 1756310400, ...)
-...
-INFO  Ready for fork activation                fork=Prague1 date="27 Aug 25 12:00 EDT" remaining=349h56m55s timestamp=1,756,310,400
+INFO  Ready for fork activation                fork=Prague1 date="3 Sep 25 12:00 EDT" remaining=...` timestamp=1,756,915,200
 ```
 
 Bera-Reth should log fork timestamp:
 
 ```txt{3}
-Post-merge hard forks (timestamp based):
+- Prague1                          @1756915200
 ...
-- Prague1                          @1756310400
+Berachain Prague1 configuration: {time=1756915200, base_fee_denominator=48, min_base_fee=1 gwei, pol_distributor=0xD2f19a79b026Fb636A7c300bF5947df113940761}
 ```
 
 ## FAQ
