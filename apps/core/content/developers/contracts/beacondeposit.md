@@ -1,14 +1,111 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: BeaconDeposit Contract Reference
+  - - meta
+    - name: description
+      content: Developer reference for the BeaconDeposit contract in PoL
+  - - meta
+    - property: og:description
+      content: Developer reference for the BeaconDeposit contract in PoL
+---
+
 <script setup>
   import config from '@berachain/config/constants.json';
 </script>
 
 # BeaconDeposit
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.beaconDeposit['mainnet-address']">{{config.contracts.pol.beaconDeposit['mainnet-address']}}</a><span v-if="config.contracts.pol.beaconDeposit.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.beaconDeposit.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.beaconDeposit['mainnet-address']">{{config.contracts.pol.beaconDeposit['mainnet-address']}}</a><span v-if="config.contracts.pol.beaconDeposit.abi && config.contracts.pol.beaconDeposit.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.beaconDeposit.abi">ABI JSON</a></span></small>
 
 The contract handling validators deposits. Its events are used by the beacon chain to manage the staking process.
 
-## Functions
+**Inherits:** IBeaconDeposit, ERC165.
+
+## Constants
+
+### CREDENTIALS_LENGTH
+
+The length of the credentials, 1 byte prefix + 11 bytes padding + 20 bytes address = 32 bytes.
+
+```solidity
+uint8 public constant CREDENTIALS_LENGTH = 32;
+```
+
+### MIN_DEPOSIT_AMOUNT_IN_GWEI
+
+The minimum amount of `BERA` to deposit i.e 10_000 ether.
+
+```solidity
+uint64 public constant MIN_DEPOSIT_AMOUNT_IN_GWEI = 10_000 gwei;
+```
+
+### PUBLIC_KEY_LENGTH
+
+The length of the public key, PUBLIC_KEY_LENGTH bytes.
+
+```solidity
+uint8 public constant PUBLIC_KEY_LENGTH = 48;
+```
+
+### SIGNATURE_LENGTH
+
+The length of the signature, SIGNATURE_LENGTH bytes.
+
+```solidity
+uint8 public constant SIGNATURE_LENGTH = 96;
+```
+
+## Structs
+
+### QueuedOperator
+
+QueuedOperator is a struct that represents an operator address change request.
+
+```solidity
+struct QueuedOperator {
+    uint96 queuedTimestamp;
+    address newOperator;
+}
+```
+
+**Properties**
+
+| Name              | Type      | Description                                       |
+| ----------------- | --------- | ------------------------------------------------- |
+| `queuedTimestamp` | `uint96`  | The timestamp when the operator change was queued |
+| `newOperator`     | `address` | The new operator address                          |
+
+## State Variables
+
+### depositCount
+
+The number of deposits that have been made to the contract.
+
+```solidity
+uint64 public depositCount;
+```
+
+### genesisDepositsRoot
+
+The hash tree root of the genesis deposits.
+
+_Should be set in deployment (predeploy state or constructor)._
+
+```solidity
+bytes32 public genesisDepositsRoot;
+```
+
+### queuedOperator
+
+The mapping of public keys to operator change requests.
+
+```solidity
+mapping(bytes => QueuedOperator) public queuedOperator;
+```
+
+## View Functions
 
 ### getOperator
 
@@ -32,15 +129,58 @@ function getOperator(bytes calldata pubkey) external view returns (address);
 | -------- | --------- | ------------------------------------------ |
 | `<none>` | `address` | The operator address for the given pubkey. |
 
+## Functions
+
+### acceptOperatorChange
+
+Accept the operator change of a validator.
+
+_Only the new operator can accept the change._
+
+**Emits:**
+
+- [OperatorUpdated](#event-operatorupdated)
+
+```solidity
+function acceptOperatorChange(bytes calldata pubkey) external;
+```
+
+**Parameters**
+
+| Name     | Type    | Description                  |
+| -------- | ------- | ---------------------------- |
+| `pubkey` | `bytes` | The pubkey of the validator. |
+
+### cancelOperatorChange
+
+Cancel the operator change of a validator.
+
+_Only the current operator can cancel the change._
+
+**Emits:**
+
+- [OperatorChangeCancelled](#event-operatorchangecancelled)
+
+```solidity
+function cancelOperatorChange(bytes calldata pubkey) external;
+```
+
+**Parameters**
+
+| Name     | Type    | Description                  |
+| -------- | ------- | ---------------------------- |
+| `pubkey` | `bytes` | The pubkey of the validator. |
+
 ### deposit
 
 Submit a deposit message to the Beaconchain.
 
-This will be used to create a new validator or to top up an existing one, increasing stake.
-
 _emits the Deposit event upon successful deposit._
 
-_Reverts if the operator is already set and caller passed non-zero operator._
+**Emits:**
+
+- [Deposit](#event-deposit)
+- [OperatorUpdated](#event-operatorupdated) (only on first deposit)
 
 ```solidity
 function deposit(
@@ -68,6 +208,10 @@ Request to change the operator of a validator.
 
 _Only the current operator can request a change._
 
+**Emits:**
+
+- [OperatorChangeQueued](#event-operatorchangequeued)
+
 ```solidity
 function requestOperatorChange(bytes calldata pubkey, address newOperator) external;
 ```
@@ -79,45 +223,11 @@ function requestOperatorChange(bytes calldata pubkey, address newOperator) exter
 | `pubkey`      | `bytes`   | The pubkey of the validator. |
 | `newOperator` | `address` | The new operator address.    |
 
-### cancelOperatorChange
-
-Cancel the operator change of a validator.
-
-_Only the current operator can cancel the change._
-
-```solidity
-function cancelOperatorChange(bytes calldata pubkey) external;
-```
-
-**Parameters**
-
-| Name     | Type    | Description                  |
-| -------- | ------- | ---------------------------- |
-| `pubkey` | `bytes` | The pubkey of the validator. |
-
-### acceptOperatorChange
-
-Accept the operator change of a validator.
-
-_Only the new operator can accept the change._
-
-_Reverts if the queue delay has not passed._
-
-```solidity
-function acceptOperatorChange(bytes calldata pubkey) external;
-```
-
-**Parameters**
-
-| Name     | Type    | Description                  |
-| -------- | ------- | ---------------------------- |
-| `pubkey` | `bytes` | The pubkey of the validator. |
-
 ## Events
 
-### Deposit
+### Deposit {#event-deposit}
 
-_Emitted when a deposit is made, which could mean a new validator or a top up of an existing one._
+Emitted when a deposit is made.
 
 ```solidity
 event Deposit(bytes pubkey, bytes credentials, uint64 amount, bytes signature, uint64 index);
@@ -125,36 +235,34 @@ event Deposit(bytes pubkey, bytes credentials, uint64 amount, bytes signature, u
 
 **Parameters**
 
-| Name          | Type     | Description                                     |
-| ------------- | -------- | ----------------------------------------------- |
-| `pubkey`      | `bytes`  | the public key of the validator.                |
-| `credentials` | `bytes`  | is the withdrawal credentials of the validator. |
-| `amount`      | `uint64` | the amount of stake being deposited, in Gwei.   |
-| `signature`   | `bytes`  | the signature of the deposit message.           |
-| `index`       | `uint64` | the index of the deposit.                       |
+| Name          | Type     | Description                                  |
+| ------------- | -------- | -------------------------------------------- |
+| `pubkey`      | `bytes`  | The consensus public key of the validator    |
+| `credentials` | `bytes`  | The withdrawal credentials of the validator  |
+| `amount`      | `uint64` | The amount deposited in Gwei                 |
+| `signature`   | `bytes`  | The signature used only on the first deposit |
+| `index`       | `uint64` | The deposit index                            |
 
-### OperatorChangeQueued
+### OperatorChangeQueued {#event-operatorchangequeued}
 
-Emitted when the operator change of a validator is queued.
+Emitted when an operator change is queued.
 
 ```solidity
-event OperatorChangeQueued(
-    bytes indexed pubkey, address queuedOperator, address currentOperator, uint256 queuedTimestamp
-);
+event OperatorChangeQueued(bytes indexed pubkey, address queuedOperator, address currentOperator, uint256 queuedTimestamp);
 ```
 
 **Parameters**
 
-| Name              | Type      | Description                               |
-| ----------------- | --------- | ----------------------------------------- |
-| `pubkey`          | `bytes`   | The pubkey of the validator.              |
-| `queuedOperator`  | `address` | The new queued operator address.          |
-| `currentOperator` | `address` | The current operator address.             |
-| `queuedTimestamp` | `uint256` | The timestamp when the change was queued. |
+| Name              | Type      | Description                              |
+| ----------------- | --------- | ---------------------------------------- |
+| `pubkey`          | `bytes`   | The pubkey of the validator              |
+| `queuedOperator`  | `address` | The new queued operator address          |
+| `currentOperator` | `address` | The current operator address             |
+| `queuedTimestamp` | `uint256` | The timestamp when the change was queued |
 
-### OperatorChangeCancelled
+### OperatorChangeCancelled {#event-operatorchangecancelled}
 
-Emitted when the operator change of a validator is cancelled.
+Emitted when an operator change is cancelled.
 
 ```solidity
 event OperatorChangeCancelled(bytes indexed pubkey);
@@ -162,11 +270,11 @@ event OperatorChangeCancelled(bytes indexed pubkey);
 
 **Parameters**
 
-| Name     | Type    | Description                  |
-| -------- | ------- | ---------------------------- |
-| `pubkey` | `bytes` | The pubkey of the validator. |
+| Name     | Type    | Description                 |
+| -------- | ------- | --------------------------- |
+| `pubkey` | `bytes` | The pubkey of the validator |
 
-### OperatorUpdated
+### OperatorUpdated {#event-operatorupdated}
 
 Emitted when the operator of a validator is updated.
 
@@ -176,8 +284,8 @@ event OperatorUpdated(bytes indexed pubkey, address newOperator, address previou
 
 **Parameters**
 
-| Name               | Type      | Description                    |
-| ------------------ | --------- | ------------------------------ |
-| `pubkey`           | `bytes`   | The pubkey of the validator.   |
-| `newOperator`      | `address` | The new operator address.      |
-| `previousOperator` | `address` | The previous operator address. |
+| Name               | Type      | Description                   |
+| ------------------ | --------- | ----------------------------- |
+| `pubkey`           | `bytes`   | The pubkey of the validator   |
+| `newOperator`      | `address` | The new operator address      |
+| `previousOperator` | `address` | The previous operator address |

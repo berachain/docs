@@ -15,289 +15,376 @@ head:
   import config from '@berachain/config/constants.json';
 </script>
 
-# BGTIncentiveFeeCollector Contract Reference
+# BGTIncentiveFeeCollector
 
-The `BGTIncentiveFeeCollector` is responsible for collecting incentive fees from PoL protocols and distributing them to BERA stakers. This contract is a key component of the PoL incentive tax mechanism.
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']">{{config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveFeeCollector.abi && config.contracts.pol.bgtIncentiveFeeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveFeeCollector.abi">ABI JSON</a></span></small>
 
-## Contract Overview
+[Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGTIncentiveFeeCollector.sol)
 
-**Contract Name**: BGTIncentiveFeeCollector  
-**Purpose**: Collect and distribute incentive fees to BERA stakers  
-**Payout Token**: WBERA  
-**Status**: Pausable with role-based access control
+Collects the fees on the incentives posted on reward vaults and auction them for WBERA. Accrued WBERA serves as a payout for the stakers of `WBERAStakerVault.sol`.
 
-## Key Features
+**Inherits:**
+IBGTIncentiveFeeCollector, UUPSUpgradeable, OwnableUpgradeable, PausableUpgradeable
 
-- **Fee Collection**: Collects incentive fees from Reward Vaults
-- **Token Auction**: Auctions collected tokens for WBERA
-- **Payout Distribution**: Distributes WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
-- **Configurable Payouts**: Adjustable payout amounts via governance
-- **Emergency Controls**: Pausable operations with role-based access
+## Constants
 
-## Contract Addresses
-
-| Network | Contract Address                                                         |
-| ------- | ------------------------------------------------------------------------ |
-| Mainnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address'] }}` |
-| Testnet | `{{ config.contracts.pol.bgtIncentiveFeeCollector['bepolia-address'] }}` |
-
-**ABI:** [BGTIncentiveFeeCollector.json]({{ config.contracts.pol.bgtIncentiveFeeCollector.abi }})
-
-## Core Functions
-
-### Initialization
+### MANAGER_ROLE
 
 ```solidity
-function initialize(
-    address governance,
-    uint256 _payoutAmount,
-    address _wberaStakerVault
-) public initializer
+bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 ```
 
-Initializes the contract with governance, payout amount, and vault address.
-
-**Parameters:**
-
-- `governance`: Address with DEFAULT_ADMIN_ROLE
-- `_payoutAmount`: Amount of WBERA required to claim fees
-- `_wberaStakerVault`: Address of the [Staking Vault](/developers/contracts/wbera-staker-vault) contract
-
-### Fee Claiming
+### PAUSER_ROLE
 
 ```solidity
-function claimFees(
-    address _recipient,
-    address[] calldata _feeTokens
-) external whenNotPaused
+bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 ```
 
-Claims collected incentive fees. The caller must transfer the payout amount of WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault).
+### WBERA
 
-**Parameters:**
-
-- `_recipient`: Address to receive the auctioned tokens
-- `_feeTokens`: Array of token addresses to claim
-
-**Requirements:**
-
-- Caller must transfer `payoutAmount` WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
-- Contract must have collected fees for the specified tokens
-
-### Payout Amount Management
+The WBERA token address, serves as payout token.
 
 ```solidity
-function queuePayoutAmountChange(uint256 _newPayoutAmount)
-    external
-    onlyRole(DEFAULT_ADMIN_ROLE)
+address public constant WBERA = 0x6969696969696969696969696969696969696969;
 ```
 
-Queues a change to the payout amount. The change takes effect on the next fee claim.
+## State Variables
 
-**Parameters:**
+### payoutAmount
 
-- `_newPayoutAmount`: New payout amount in WBERA
+The amount of WBERA required to claim fees.
+
+```solidity
+uint256 public payoutAmount;
+```
+
+### queuedPayoutAmount
+
+The queued payout amount that will be activated on next claim.
+
+```solidity
+uint256 public queuedPayoutAmount;
+```
+
+### wberaStakerVault
+
+The address of the WBERA staker vault.
+
+```solidity
+address public wberaStakerVault;
+```
 
 ## View Functions
 
-### Payout Amount
+### hasRole
 
 ```solidity
-function payoutAmount() external view returns (uint256)
+function hasRole(bytes32 role, address account) public view virtual override returns (bool);
 ```
 
-Returns the current payout amount required to claim fees.
-
-### Queued Payout Amount
+### owner
 
 ```solidity
-function queuedPayoutAmount() external view returns (uint256)
+function owner() public view virtual override returns (address);
 ```
 
-Returns the queued payout amount that will take effect on the next fee claim.
-
-### WBERA Staker Vault
+### paused
 
 ```solidity
-function wberaStakerVault() external view returns (address)
+function paused() public view virtual override returns (bool);
 ```
 
-Returns the address of the [Staking Vault](/developers/contracts/wbera-staker-vault) contract.
-
-## Admin Functions
-
-### Pause/Unpause
+### proxiableUUID
 
 ```solidity
-function pause() external onlyRole(PAUSER_ROLE)
-function unpause() external onlyRole(MANAGER_ROLE)
+function proxiableUUID() external view virtual override notDelegated returns (bytes32);
 ```
 
-Pauses or unpauses fee claiming operations.
-
-### Upgrade Contract
+### queuedPayoutAmount
 
 ```solidity
-function upgradeToAndCall(address newImplementation, bytes memory data)
-    external
-    onlyRole(DEFAULT_ADMIN_ROLE)
+function queuedPayoutAmount() external view returns (uint256);
 ```
 
-Upgrades the contract implementation (UUPS upgradeable).
+## Functions
+
+### claimFees
+
+Claims the accumulated fees for the given tokens.
+
+_The caller must transfer the payout amount to the staking vault._
+
+**Emits:**
+
+- [IncentiveFeesClaimed](#event-incentivefeesclaimed)
+
+```solidity
+function claimFees(address _recipient, address[] calldata _feeTokens) external whenNotPaused;
+```
+
+**Parameters**
+
+| Name         | Type        | Description                                |
+| ------------ | ----------- | ------------------------------------------ |
+| `_recipient` | `address`   | The address to receive the claimed tokens. |
+| `_feeTokens` | `address[]` | The array of fee token addresses to claim. |
+
+### initialize
+
+Initializes the contract.
+
+**Emits:**
+
+- [Initialized](#event-initialized)
+- [PayoutAmountSet](#event-payoutamountset)
+
+```solidity
+function initialize(address governance, uint256 _payoutAmount, address _wberaStakerVault) external initializer;
+```
+
+**Parameters**
+
+| Name                | Type      | Description                                        |
+| ------------------- | --------- | -------------------------------------------------- |
+| `governance`        | `address` | The address that will have the DEFAULT_ADMIN_ROLE. |
+| `_payoutAmount`     | `uint256` | The amount of WBERA required to claim fees.        |
+| `_wberaStakerVault` | `address` | The address of the WBERA staker vault.             |
+
+### pause
+
+Pauses the contract.
+
+**Emits:**
+
+- [Paused](#event-paused)
+
+```solidity
+function pause() external onlyRole(PAUSER_ROLE);
+```
+
+### queuePayoutAmountChange
+
+Queues a change to the payout amount.
+
+**Emits:**
+
+- [QueuedPayoutAmount](#event-queuedpayoutamount)
+
+```solidity
+function queuePayoutAmountChange(uint256 _newPayoutAmount) external onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+**Parameters**
+
+| Name               | Type      | Description            |
+| ------------------ | --------- | ---------------------- |
+| `_newPayoutAmount` | `uint256` | The new payout amount. |
+
+### unpause
+
+Unpauses the contract.
+
+**Emits:**
+
+- [Unpaused](#event-unpaused)
+
+```solidity
+function unpause() external onlyRole(MANAGER_ROLE);
+```
+
+### upgradeToAndCall
+
+```solidity
+function upgradeToAndCall(address newImplementation, bytes memory data) public payable virtual override onlyRole(DEFAULT_ADMIN_ROLE);
+```
+
+### wberaStakerVault
+
+```solidity
+function wberaStakerVault() external view returns (address);
+```
 
 ## Events
 
-### Payout Amount Events
+### IncentiveFeesClaimed {#event-incentivefeesclaimed}
+
+Emitted when incentive fees are claimed.
 
 ```solidity
-event PayoutAmountSet(uint256 oldAmount, uint256 newAmount)
-event QueuedPayoutAmount(uint256 newAmount, uint256 currentAmount)
+event IncentiveFeesClaimed(address indexed caller, address indexed recipient);
 ```
 
-Emitted when payout amounts are set or queued.
+**Parameters**
 
-### Fee Claiming Events
+| Name        | Type      | Description                                 |
+| ----------- | --------- | ------------------------------------------- |
+| `caller`    | `address` | The address that called the claim function. |
+| `recipient` | `address` | The address that received the tokens.       |
+
+### IncentiveFeeTokenClaimed {#event-incentivefeetokenclaimed}
+
+Emitted when a specific incentive fee token is claimed.
 
 ```solidity
 event IncentiveFeeTokenClaimed(
-    address indexed caller,
-    address indexed recipient,
-    address indexed token,
-    uint256 amount
-)
-
-event IncentiveFeesClaimed(
-    address indexed caller,
-    address indexed recipient
-)
+    address indexed caller, address indexed recipient, address indexed token, uint256 amount
+);
 ```
 
-Emitted when fees are claimed and tokens are transferred.
+**Parameters**
 
-## Integration Examples
+| Name        | Type      | Description                                 |
+| ----------- | --------- | ------------------------------------------- |
+| `caller`    | `address` | The address that called the claim function. |
+| `recipient` | `address` | The address that received the tokens.       |
+| `token`     | `address` | The token that was claimed.                 |
+| `amount`    | `uint256` | The amount of tokens claimed.               |
 
-### Claim Incentive Fees
+### Initialized {#event-initialized}
 
-```javascript
-// Prepare fee tokens to claim
-const feeTokens = [
-  "0x...", // USDC
-  "0x...", // USDT
-  "0x..." // DAI
-];
-
-// Get payout amount
-const payoutAmount = await bgtIncentiveFeeCollector.payoutAmount();
-console.log("Payout amount:", ethers.formatEther(payoutAmount));
-
-// Approve WBERA transfer to the Staking Vault
-const wberaStakerVault = await bgtIncentiveFeeCollector.wberaStakerVault();
-await wbera.approve(wberaStakerVault, payoutAmount);
-
-// Claim fees
-await bgtIncentiveFeeCollector.claimFees(recipientAddress, feeTokens);
-
-console.log("Fees claimed successfully");
-```
-
-### Monitor Fee Collection
-
-```javascript
-// Check contract balances for different tokens
-const tokens = ["0x...", "0x...", "0x..."]; // USDC, USDT, DAI
-const balances = {};
-
-for (const token of tokens) {
-  const tokenContract = new ethers.Contract(token, ERC20_ABI, provider);
-  const balance = await tokenContract.balanceOf(bgtIncentiveFeeCollector.address);
-  balances[token] = balance;
-  console.log(`Balance of ${token}:`, ethers.formatUnits(balance, 6)); // Assuming 6 decimals
-}
-
-// Check if fees are available to claim
-const totalFees = Object.values(balances).reduce((sum, balance) => sum + balance, 0n);
-const payoutAmount = await bgtIncentiveFeeCollector.payoutAmount();
-
-if (totalFees > 0) {
-  console.log("Fees available to claim:", ethers.formatUnits(totalFees, 6));
-  console.log("Payout amount required:", ethers.formatEther(payoutAmount));
-}
-```
-
-### Queue Payout Amount Change
-
-```javascript
-// Queue a new payout amount (admin only)
-const newPayoutAmount = ethers.parseEther("10000"); // 10,000 WBERA
-await bgtIncentiveFeeCollector.queuePayoutAmountChange(newPayoutAmount);
-
-// Check queued amount
-const queuedAmount = await bgtIncentiveFeeCollector.queuedPayoutAmount();
-console.log("Queued payout amount:", ethers.formatEther(queuedAmount));
-
-// The change will take effect on the next fee claim
-```
-
-## Fee Collection Flow
-
-### 1. Protocol Incentive Payment
+Emitted when the contract is initialized.
 
 ```solidity
-// In RewardVault.addIncentive()
-uint256 feeAmount = _collectIncentiveFee(token, amount);
-incentive.amountRemaining = amountRemainingBefore + amount - feeAmount;
+event Initialized(uint64 version);
 ```
 
-### 2. Fee Collection
+**Parameters**
 
-The `_collectIncentiveFee` function:
+| Name      | Type     | Description                 |
+| --------- | -------- | --------------------------- |
+| `version` | `uint64` | The initialization version. |
 
-- Calculates fee amount based on incentive fee rate
-- Transfers fee to this contract
-- Emits `IncentiveFeeCollected` event
+### OwnershipTransferred {#event-ownershiptransferred}
 
-### 3. Fee Auction and Distribution
+Emitted when ownership is transferred.
 
-When `claimFees` is called:
+```solidity
+event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+```
 
-- Caller transfers WBERA to the [Staking Vault](/developers/contracts/wbera-staker-vault)
-- Collected tokens are transferred to recipient
-- WBERA is distributed to BERA stakers
+**Parameters**
 
-## Security Considerations
+| Name            | Type      | Description         |
+| --------------- | --------- | ------------------- |
+| `previousOwner` | `address` | The previous owner. |
+| `newOwner`      | `address` | The new owner.      |
 
-### Access Control
+### Paused {#event-paused}
 
-- `DEFAULT_ADMIN_ROLE`: Can upgrade contract and queue payout changes
-- `MANAGER_ROLE`: Can unpause contract and manage PAUSER_ROLE
-- `PAUSER_ROLE`: Can pause fee claiming operations
+Emitted when the contract is paused.
 
-### Payout Requirements
+```solidity
+event Paused(address account);
+```
 
-- Caller must transfer exact payout amount to the [Staking Vault](/developers/contracts/wbera-staker-vault)
-- Payout amount can be adjusted by governance
-- Changes are queued and take effect on next claim
+**Parameters**
 
-### Emergency Controls
+| Name      | Type      | Description                           |
+| --------- | --------- | ------------------------------------- |
+| `account` | `address` | The account that paused the contract. |
 
-- Contract can be paused in emergency situations
-- Payout amounts can be adjusted without immediate effect
-- UUPS upgradeable for future improvements
+### PayoutAmountSet {#event-payoutamountset}
 
-## Error Codes
+Emitted when the payout amount is set.
 
-| Error                | Description                                |
-| -------------------- | ------------------------------------------ |
-| `ZeroAddress`        | Governance or vault address cannot be zero |
-| `PayoutAmountIsZero` | Payout amount cannot be zero               |
+```solidity
+event PayoutAmountSet(uint256 oldAmount, uint256 newAmount);
+```
 
-## Related Contracts
+**Parameters**
 
-- [Staking Vault](./wbera-staker-vault.md): Receives WBERA payouts
-- [RewardVaultFactory](./reward-vault-factory.md): Manages incentive fee rates
-- [RewardVault](./reward-vault.md): Collects incentive fees
+| Name        | Type      | Description                 |
+| ----------- | --------- | --------------------------- |
+| `oldAmount` | `uint256` | The previous payout amount. |
+| `newAmount` | `uint256` | The new payout amount.      |
 
-## Resources
+### QueuedPayoutAmount {#event-queuedpayoutamount}
 
-- [Incentive Fee Collection](/learn/pol/blockrewards#incentive-fee-collection-pol)
-- [BERA Staking Guide](/learn/guides/bera-staking)
+Emitted when a payout amount change is queued.
+
+```solidity
+event QueuedPayoutAmount(uint256 newAmount, uint256 currentAmount);
+```
+
+**Parameters**
+
+| Name            | Type      | Description                   |
+| --------------- | --------- | ----------------------------- |
+| `newAmount`     | `uint256` | The new queued payout amount. |
+| `currentAmount` | `uint256` | The current payout amount.    |
+
+### RoleAdminChanged {#event-roleadminchanged}
+
+Emitted when the admin role for a role is changed.
+
+```solidity
+event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);
+```
+
+**Parameters**
+
+| Name                | Type      | Description                       |
+| ------------------- | --------- | --------------------------------- |
+| `role`              | `bytes32` | The role whose admin was changed. |
+| `previousAdminRole` | `bytes32` | The previous admin role.          |
+| `newAdminRole`      | `bytes32` | The new admin role.               |
+
+### RoleGranted {#event-rolegranted}
+
+Emitted when a role is granted to an account.
+
+```solidity
+event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                         |
+| --------- | --------- | ----------------------------------- |
+| `role`    | `bytes32` | The role that was granted.          |
+| `account` | `address` | The account that received the role. |
+| `sender`  | `address` | The account that granted the role.  |
+
+### RoleRevoked {#event-rolerevoked}
+
+Emitted when a role is revoked from an account.
+
+```solidity
+event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `role`    | `bytes32` | The role that was revoked.         |
+| `account` | `address` | The account that lost the role.    |
+| `sender`  | `address` | The account that revoked the role. |
+
+### Unpaused {#event-unpaused}
+
+Emitted when the contract is unpaused.
+
+```solidity
+event Unpaused(address account);
+```
+
+**Parameters**
+
+| Name      | Type      | Description                             |
+| --------- | --------- | --------------------------------------- |
+| `account` | `address` | The account that unpaused the contract. |
+
+### Upgraded {#event-upgraded}
+
+Emitted when the implementation is upgraded.
+
+```solidity
+event Upgraded(address indexed implementation);
+```
+
+**Parameters**
+
+| Name             | Type      | Description                     |
+| ---------------- | --------- | ------------------------------- |
+| `implementation` | `address` | The new implementation address. |
