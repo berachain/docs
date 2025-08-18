@@ -23,7 +23,7 @@ Our next upgrade brings to Berachain four approved Improvement Proposals.
 [Bera-Reth](https://github.com/berachain/bera-reth) and [Bera-Geth](https://github.com/berachain/bera-geth) are new forks of ParadymXYZ's reth and Ethereum Foundation's go-ethereum, under the upstream software licenses.
 
 :::warning
-All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-Reth or Bera-Geth, **and** upgrade to Beacon Kit 1.3.0, to continue following the chain.
+All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-Reth or Bera-Geth, **and** upgrade to Beacon Kit 1.3.1, to continue following the chain.
 :::
 
 ## ~~August~~ September 2025 Upgrade Timeline
@@ -65,7 +65,7 @@ If you compile your own build, do so against the **recommended release branches*
 :::
 
 1. Stop all clients.
-2. Install Beacon-Kit 1.3.0 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
+2. Install Beacon-Kit 1.3.1 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
 3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
    - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
    - **Bera-Geth:** run `bera-geth init` against your Geth data directory with the supplied genesis file.
