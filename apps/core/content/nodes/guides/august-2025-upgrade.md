@@ -23,17 +23,18 @@ Our next upgrade brings to Berachain four approved Improvement Proposals.
 [Bera-Reth](https://github.com/berachain/bera-reth) and [Bera-Geth](https://github.com/berachain/bera-geth) are new forks of ParadymXYZ's reth and Ethereum Foundation's go-ethereum, under the upstream software licenses.
 
 :::warning
-All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-Reth or Bera-Geth, **and** upgrade to Beacon Kit 1.3.0, to continue following the chain.
+All users, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to either Bera-Reth or Bera-Geth, **and** upgrade to Beacon Kit 1.3.1, to continue following the chain.
 :::
 
-## August 2025 Upgrade Timeline
+## ~~August~~ September 2025 Upgrade Timeline
 
-| Date                                  | Milestone                                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| July 30, 2025                         | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                    |
-| August 6, 2025                        | Bepolia upgrade activated                                                                        |
-| August 13, 2025                       | Final versions of Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
-| August 27, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                       |
+| Date                                    | Milestone                                                                                        |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| July 30, 2025                           | Beacon-Kit, Bera-Geth/Reth release candidates out for installation to Bepolia                    |
+| August 6, 2025                          | Bepolia upgrade activated                                                                        |
+| August 13, 2025                         | Final versions of Beacon-Kit, Bera-Geth/Reth released for installation to Mainnet _and_ Bepolia. |
+| August 18, 2025                         | Updated releases + fork activation date                                                          |
+| September 3, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                                                                       |
 
 ## Upgrade Details
 
@@ -59,8 +60,12 @@ If you duplicate your installation to test, don't duplicate these identity files
 - **Beacon-Kit**: `priv_validator_key.json` file
   :::
 
+:::warning
+If you compile your own build, do so against the **recommended release branches**.
+:::
+
 1. Stop all clients.
-2. Install Beacon-Kit 1.3.0 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
+2. Install Beacon-Kit 1.3.1 and the release version of either Bera-Geth or Bera-Reth, linked below, into place.
 3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
    - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
    - **Bera-Geth:** run `bera-geth init` against your Geth data directory with the supplied genesis file.
@@ -74,14 +79,14 @@ If you duplicate your installation to test, don't duplicate these identity files
 
 | Chain             | Github release page                                                                      | Release date |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth v1.011602.1](https://github.com/berachain/bera-geth/releases/tag/v1.011602.1) | August 13    |
-| Mainnet & Bepolia | [Bera-Reth v1.0.0](https://github.com/berachain/bera-reth/releases/tag/v1.0.0)           | August 13    |
-| Mainnet & Bepolia | [Beacon-Kit v1.3.0](https://github.com/berachain/beacon-kit/releases/tag/v1.3.0)         | August 13    |
+| Mainnet & Bepolia | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) | August 18    |
+| Mainnet & Bepolia | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           | August 18    |
+| Mainnet & Bepolia | [Beacon-Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)         | August 18    |
 
-| File                           | Download link & md5 hash                                                                                                                           |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia Bera-Reth/Geth Genesis | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet Bera-Reth/Geth Genesis | [f3ec1202993b1b69a9c7ad30643856ce](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| Bera-Reth/Geth Genesis File | Updated   | Download link & md5 hash                                                                                                        |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Bepolia                     | July 29   | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80069/eth-genesis.json) |
+| Mainnet                     | August 18 | [51ec047b71b06f7fbca9689037ec1d60](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
@@ -89,31 +94,29 @@ Beacon-Kit should log the fork timestamp:
 
 ```txt{6}
  	+ ⭐️ Star BeaconKit on GitHub @ https://github.com/berachain/beacon-kit    +
- 	+ 🧩 Your node is running version: v1.3.0                                  +
+ 	+ 🧩 Your node is running version: v1.3.1                                  +
  	+ 💾 Your system: linux/amd64                                              +
  	+ 🍴 Deneb1 Fork Time: 1738415507                                          +
  	+ 🍴 Electra Fork Time: 1749056400                                         +
- 	+ 🍴 Electra1 Fork Time: 1756310400                                        +
+ 	+ 🍴 Electra1 Fork Time: 1756915200                                        +
  	+ 🦺 Please report issues @ https://github.com/berachain/beacon-kit/issues +
  	+==========================================================================+
 ```
 
 Bera-Geth should log the fork timestamp:
 
-```txt{3}
-INFO  Post-Merge hard forks (timestamp based):
+```txt{1}
+	+ 🍴 Electra1 Fork Time: 1756915200                                        +
 ...
-INFO  - Prague1:                     prague1(time: 1756310400, ...)
-...
-INFO  Ready for fork activation                fork=Prague1 date="27 Aug 25 12:00 EDT" remaining=349h56m55s timestamp=1,756,310,400
+INFO  - Prague1:                     prague1(time: 1756915200, baseFeeChangeDenominator: 48, minimumBaseFeeWei: 1000000000, polDistributorAddress: 0xD2f19a79b026Fb636A7c300bF5947df11394076
 ```
 
 Bera-Reth should log fork timestamp:
 
 ```txt{3}
-Post-merge hard forks (timestamp based):
+- Prague1                          @1756915200
 ...
-- Prague1                          @1756310400
+Berachain Prague1 configuration: {time=1756915200, base_fee_denominator=48, min_base_fee=1 gwei, pol_distributor=0xD2f19a79b026Fb636A7c300bF5947df113940761}
 ```
 
 ## FAQ
