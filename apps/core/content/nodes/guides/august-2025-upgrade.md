@@ -79,7 +79,7 @@ If you compile your own build, do so against the **recommended release branches*
 
 | Chain             | Github release page                                                                      | Release date |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mainnet & Bepolia | [Bera-Geth v1.011602.2](https://github.com/berachain/bera-geth/releases/tag/v1.011602.2) | August 18    |
+| Mainnet & Bepolia | [Bera-Geth v1.011602.3](https://github.com/berachain/bera-geth/releases/tag/v1.011602.3) | August 19    |
 | Mainnet & Bepolia | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           | August 18    |
 | Mainnet & Bepolia | [Beacon-Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)         | August 18    |
 
