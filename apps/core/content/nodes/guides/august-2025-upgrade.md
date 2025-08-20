@@ -85,8 +85,8 @@ If you compile your own build, do so against the **recommended release branches*
 
 | Bera-Reth/Geth Genesis File | Updated   | Download link & md5 hash                                                                                                        |
 | --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Bepolia                     | July 29   | [b659cbef86a6eded371d8e443abf2c0b](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80069/eth-genesis.json) |
-| Mainnet                     | August 18 | [51ec047b71b06f7fbca9689037ec1d60](https://github.com/berachain/beacon-kit/blob/v1.3.1/testing/networks/80094/eth-genesis.json) |
+| Bepolia                     | July 29   | [b659cbef86a6eded371d8e443abf2c0b](https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.3.1/testing/networks/80069/eth-genesis.json) |
+| Mainnet                     | August 18 | [51ec047b71b06f7fbca9689037ec1d60](https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.3.1/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
