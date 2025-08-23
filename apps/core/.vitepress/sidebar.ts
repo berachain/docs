@@ -211,6 +211,10 @@ const SIDEBAR = {
           ]
         },
         {
+          text: "EIP-2935 Accessing Blockhashes with System Contracts",
+          link: "/developers/guides/eip2935-historical-block-hashes",
+        },
+        {
           text: "Community Guides",
           link: "/developers/guides/community-guides"
         }
