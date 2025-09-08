@@ -61,13 +61,11 @@ An additional 0.1% protocol fee is automatically added to each swap and directed
 ## Best Practices
 
 1. **Token Selection**
-
    - Include tokens with reliable price feeds
    - Consider market liquidity of each token
    - Ensure complementary token relationships
 
 2. **Weight Distribution**
-
    - Align weights with your investment strategy
    - Consider market capitalization
    - Account for token volatility

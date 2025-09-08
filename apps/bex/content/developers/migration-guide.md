@@ -166,13 +166,13 @@ const POOL_CREATION_HELPER_ABI = [
 await vault.setRelayerApproval(
   wallet.address,
   POOL_CREATION_HELPER_ADDRESS,
-  true
+  true,
 );
 // Create pool with initial liquidity
 const poolCreationHelper = new ethers.Contract(
   POOL_CREATION_HELPER_ADDRESS,
   POOL_CREATION_HELPER_ABI,
-  wallet
+  wallet,
 );
 const tx = await poolCreationHelper.createAndJoinWeightedPool(
   "Pool Name", // name
@@ -184,7 +184,7 @@ const tx = await poolCreationHelper.createAndJoinWeightedPool(
   ethers.parseUnits("0.01", 18), // 1% swap fee
   amountsIn, // Array of initial liquidity amounts
   wallet.address, // Owner
-  salt // For deterministic deploys
+  salt, // For deterministic deploys
 );
 ```
 
