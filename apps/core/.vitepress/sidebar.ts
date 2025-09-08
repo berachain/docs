@@ -317,20 +317,20 @@ const SIDEBAR = {
       text: "Staking Pools",
       items: [
         {
-          text: "System Overview",
-          link: "/nodes/staking-pools-overview",
+          text: "Overview",
+          link: "/nodes/staking-pools/",
         },
         {
           text: "Operator Guide",
-          link: "/nodes/staking-pools-operators",
+          link: "/nodes/staking-pools/operators",
         },
         {
           text: "User Guide",
-          link: "/nodes/staking-pools-users",
+          link: "/nodes/staking-pools/users",
         },
         {
           text: "Smart Contract Reference",
-          link: "/nodes/staking-pools-contracts",
+          link: "/nodes/staking-pools/contracts",
         },
       ],
     },
