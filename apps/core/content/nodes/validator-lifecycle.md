@@ -128,11 +128,11 @@ Note that transitions between states are done via a queue, on a FIFO basis, with
 
 ## Voting Power
 
-A validator’s **voting power** depends directly on their effective balance. The higher your effective balance, the more often you’ll be selected to propose blocks, and the more weight your votes carry in consensus. 
+A validator’s **voting power** depends directly on their effective balance. The higher your effective balance, the more often you’ll be selected to propose blocks, and the more weight your votes carry in consensus.
 
 The effective balance calculation uses a specific rounding formula: `min(actual_balance - (actual_balance % effective_balance_increment), max_effective_balance)`. This means your effective balance is always rounded down to the nearest 10,000 BERA increment, and any balance above the maximum effective balance (10 million BERA) is ignored for voting power calculations.
 
-For example, if you have 125,000 BERA staked, your effective balance becomes 120,000 BERA (rounded down to the nearest 10,000 BERA increment). 
+For example, if you have 125,000 BERA staked, your effective balance becomes 120,000 BERA (rounded down to the nearest 10,000 BERA increment).
 
 Effective balance updates happen at the end of each epoch and use hysteresis to avoid constant voting power changes from small balance moves. The system uses a few key constants to decide when effective balance changes.
 
@@ -144,11 +144,13 @@ Effective balance updates happen at the end of each epoch and use hysteresis to 
 Thresholds are calculated as:
 
 - **HI** (Hysteresis Increment):
+
   $$
   \text{HI} = \frac{\text{EBI}}{\text{HQ}} = \frac{10{,}000\ \text{BERA}}{4} = 2{,}500\ \text{BERA}
   $$
 
 - **Downward Threshold**:
+
   $$
   \text{Down} = \text{HI} \times \text{HDM} = 2{,}500\ \text{BERA} \times 1 = 2{,}500\ \text{BERA}
   $$
@@ -162,13 +164,14 @@ To decrease your effective balance, your actual balance must drop below your cur
 
 **Example:**  
 If a validator has an effective balance of 100,000 BERA:
-- To decrease: actual balance < 97,500 BERA 
+
+- To decrease: actual balance < 97,500 BERA
 - To increase: actual balance > 112,500 BERA
 
 **Scenario 1: Raising Effective Balance to 110,000 BERA**
 To increase your effective balance from 100,000 to 110,000 BERA, you need to trigger the upward threshold. The most efficient approach is to deposit 12,501 BERA (bringing your actual balance to 112,501 BERA), which exceeds the upward threshold of 112,500 BERA. This triggers the effective balance update, and the 112,501 BERA is rounded down to 110,000 BERA. You can then withdraw the excess 2,501 BERA if desired, leaving you with exactly 110,000 BERA actual balance and 110,000 BERA effective balance.
 
 **Scenario 2: Reducing Effective Balance to 90,000 BERA**
-To decrease your effective balance from 100,000 to 90,000 BERA, you need to withdraw between 2,501 and 10,000 $BERA inclusive, enough so your actual balance drops below 97,500 BERA. 
+To decrease your effective balance from 100,000 to 90,000 BERA, you need to withdraw between 2,501 and 10,000 $BERA inclusive, enough so your actual balance drops below 97,500 BERA.
 
 This hysteresis keeps voting power stable, so validators don't see their power bounce around with every small deposit or withdrawal. Only significant changes move the needle—no need to worry about your voting power catching a cold from a minor balance sneeze.
