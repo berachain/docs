@@ -17,6 +17,7 @@ function queueBoost() external returns (bool);
 Auto-boosts the validator key for the current unboosted amount of BGT.
 
 **Returns:**
+
 - `bool`: True if the boost was successfully queued
 
 ### activateBoost
@@ -36,6 +37,7 @@ function queueDropBoost(uint128 amount) external;
 Enqueues a drop boost request for a given amount.
 
 **Parameters:**
+
 - `amount`: The amount of BGT to unboost
 
 ### fullExitQueueDropBoost
@@ -63,6 +65,7 @@ function fullExitRedeemBGT(address receiver) external;
 Redeems all BGT tokens owned by this contract for BERA.
 
 **Parameters:**
+
 - `receiver`: The address to send the BERA to
 
 ### queueRewardsAllocation
@@ -74,6 +77,7 @@ function queueRewardsAllocation(uint64 startBlock, IBeraChef.Weight[] calldata w
 Queues a new rewards allocation for the validator key.
 
 **Parameters:**
+
 - `startBlock`: The block number when the new rewards allocation starts
 - `weights`: The weights for the new rewards allocation
 
@@ -86,6 +90,7 @@ function queueValCommission(uint96 commission) external;
 Queues a new validator commission for the validator key.
 
 **Parameters:**
+
 - `commission`: The new validator commission in basis points
 
 ### setMinEffectiveBalance
@@ -97,6 +102,7 @@ function setMinEffectiveBalance(uint256 minEffectiveBalance) external;
 Sets the minimum effective balance for the staking pool.
 
 **Parameters:**
+
 - `minEffectiveBalance`: The minimum effective balance to set
 
 ### queueIncentiveCollectorPayoutAmountChange
@@ -108,6 +114,7 @@ function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount) exte
 Queues a payout amount change for the incentive collector.
 
 **Parameters:**
+
 - `newPayoutAmount`: The new payout amount for the incentive collector
 
 ### setProtocolFeePercentage
@@ -119,6 +126,7 @@ function setProtocolFeePercentage(uint96 protocolFeePercentage_) external;
 Sets the protocol fee percentage for the smart operator.
 
 **Parameters:**
+
 - `protocolFeePercentage_`: The new fee percentage value
 
 ### accrueEarnedBGTFees
@@ -138,6 +146,7 @@ function accrueIncentivesFees(uint256 amount) external;
 Accrues the protocol fee for a given amount.
 
 **Parameters:**
+
 - `amount`: The amount to accrue the protocol fee for
 
 ### claimBgtStakerReward
@@ -149,6 +158,7 @@ function claimBgtStakerReward() external returns (uint256);
 Claims BGTStaker rewards and sends them to the incentive collector.
 
 **Returns:**
+
 - `uint256`: The amount of rewards claimed
 
 ### claimBoostRewards
@@ -160,6 +170,7 @@ function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, add
 Claims BGTStaker and incentive program rewards and sends them to the incentive collector.
 
 **Parameters:**
+
 - `claims`: Array of claims to process
 - `tokens`: Array of token addresses
 
@@ -174,6 +185,7 @@ function rebaseableBgtAmount() external view returns (uint256);
 Returns BGT balance of the smart operator minus the protocol fee.
 
 **Returns:**
+
 - `uint256`: The amount of BGT available for rebasing
 
 ### getEarnedBGTFeeState
@@ -190,6 +202,7 @@ function getEarnedBGTFeeState() external view returns (
 Returns the current base rate fee state information.
 
 **Returns:**
+
 - `currentBalance`: The current BGT balance of the smart operator
 - `bgtBalanceAlreadyCharged`: The amount of BGT that has already been charged fees
 - `chargeableBalance`: The amount of BGT that can still be charged fees
@@ -204,6 +217,7 @@ function unboostedBalance() external view returns (uint256);
 Get the unboosted BGT balance of the smart operator.
 
 **Returns:**
+
 - `uint256`: The unboosted BGT balance of the smart operator
 
 ## Events

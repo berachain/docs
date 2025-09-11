@@ -57,6 +57,7 @@ function deployStakingPoolContracts(
 Deploys all necessary contracts for a new staking pool.
 
 **Parameters:**
+
 - `pubkey`: The validator's 48-byte public key
 - `withdrawalCredentials`: Withdrawal credentials (0x01 + withdrawal vault address)
 - `signature`: Deposit signature from beacon client
@@ -64,6 +65,7 @@ Deploys all necessary contracts for a new staking pool.
 - `defaultSharesRecipient`: Address to receive initial shares
 
 **Returns:**
+
 - `address`: SmartOperator contract address
 - `address`: StakingPool contract address
 - `address`: StakingRewardsVault contract address

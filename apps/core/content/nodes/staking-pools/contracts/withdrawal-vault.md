@@ -14,7 +14,7 @@ The WithdrawalVault is a vault for temporary storage of withdrawals with integra
 uint256 public constant WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY = 49_152;
 ```
 
-The number of blocks to wait before a withdrawal request can be finalized (192 blocks per epoch * 256 epochs).
+The number of blocks to wait before a withdrawal request can be finalized (192 blocks per epoch \* 256 epochs).
 
 ## Functions
 
@@ -27,6 +27,7 @@ function requestWithdrawal(bytes memory pubkey, uint64 assetsInGWei, uint256 max
 Requests a withdrawal of assets from the staking pool.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 - `assetsInGWei`: The amount of BERA to withdraw in GWei
 - `maxFeeToPay`: The maximum fee the user is willing to pay for the withdrawal
@@ -40,6 +41,7 @@ function requestRedeem(bytes memory pubkey, uint256 shares, uint256 maxFeeToPay)
 Requests a redemption of shares from the staking pool.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 - `shares`: The amount of shares to redeem
 - `maxFeeToPay`: The maximum fee the user is willing to pay for the redemption
@@ -53,6 +55,7 @@ function finalizeWithdrawalRequest(uint256 requestId) external;
 Finalizes a single withdrawal request.
 
 **Parameters:**
+
 - `requestId`: The ID of the withdrawal request to finalize
 
 ### finalizeWithdrawalRequests
@@ -64,6 +67,7 @@ function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
 Finalizes multiple withdrawal requests.
 
 **Parameters:**
+
 - `requestIds`: Array of withdrawal request IDs to finalize
 
 ### notifyFullExitFromCL
@@ -75,6 +79,7 @@ function notifyFullExitFromCL(bytes memory pubkey) external;
 Notifies the withdrawal vault that a full exit was triggered from the consensus layer.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 ### getWithdrawalRequest
@@ -86,9 +91,11 @@ function getWithdrawalRequest(uint256 requestId) external view returns (Withdraw
 Gets a withdrawal request by ID.
 
 **Parameters:**
+
 - `requestId`: The ID of the withdrawal request
 
 **Returns:**
+
 - `WithdrawalRequest`: The withdrawal request struct
 
 ## View Functions
@@ -127,6 +134,7 @@ struct WithdrawalRequest {
 Represents a withdrawal request.
 
 **Fields:**
+
 - `pubkey`: The validator's public key
 - `assetsRequested`: The amount of BERA required for the withdrawal
 - `sharesBurnt`: The amount of shares burned for the withdrawal

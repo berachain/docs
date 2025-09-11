@@ -35,6 +35,7 @@ function updatePayoutAmount(uint256 newPayoutAmount) external;
 Updates the payout amount for incentives.
 
 **Parameters:**
+
 - `newPayoutAmount`: The new payout amount
 
 ### distributeIncentives
@@ -46,6 +47,7 @@ function distributeIncentives(address[] calldata recipients, uint256[] calldata 
 Distributes incentives to specified recipients.
 
 **Parameters:**
+
 - `recipients`: Array of recipient addresses
 - `amounts`: Array of amounts to distribute
 
@@ -60,6 +62,7 @@ function getPayoutAmount() external view returns (uint256);
 Returns the current payout amount.
 
 **Returns:**
+
 - `uint256`: The current payout amount
 
 ### getIncentiveBalance
@@ -71,6 +74,7 @@ function getIncentiveBalance() external view returns (uint256);
 Returns the current incentive balance.
 
 **Returns:**
+
 - `uint256`: The current incentive balance
 
 ## Events

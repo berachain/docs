@@ -99,7 +99,7 @@ function deposit(
 **Critical Configuration:**
 
 - **Withdrawal Credentials**: Must be set to your `withdrawalVault` contract address
-The operator address must be set to your `smartOperator` contract address, which will manage all validator operations on behalf of your staking pool. You'll also need to provide an initial deposit of at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA, which serves as the foundation for your pool's operations.
+  The operator address must be set to your `smartOperator` contract address, which will manage all validator operations on behalf of your staking pool. You'll also need to provide an initial deposit of at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA, which serves as the foundation for your pool's operations.
 
 ### Step 2: Obtain Verification Proofs
 
@@ -109,7 +109,7 @@ After registration, you'll need to obtain proofs from the beacon API to verify t
 # Get validator index proof
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/validators/{validator_index}"
 
-# Get withdrawal credentials proof  
+# Get withdrawal credentials proof
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/withdrawal_credentials/{validator_index}"
 ```
 

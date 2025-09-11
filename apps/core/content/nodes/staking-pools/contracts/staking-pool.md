@@ -51,9 +51,11 @@ function submit(address receiver) external payable returns (uint256 shares);
 Submit BERA to the staking pool and receive shares in return.
 
 **Parameters:**
+
 - `receiver`: Address to receive the minted shares
 
 **Returns:**
+
 - `shares`: Amount of shares minted to the receiver
 
 ### activate
@@ -65,6 +67,7 @@ function activate(uint256 initialDepositAmount) external;
 Activates the staking pool with an initial deposit amount.
 
 **Parameters:**
+
 - `initialDepositAmount`: The initial amount of assets to deposit into the pool
 
 ### notifyWithdrawalRequest
@@ -79,10 +82,12 @@ function notifyWithdrawalRequest(
 Processes a withdrawal request from a user by burning their shares.
 
 **Parameters:**
+
 - `user`: Address of the user requesting withdrawal
 - `assets`: Amount of BERA to withdraw
 
 **Returns:**
+
 - `sharesToBurn`: Amount of shares that were burned
 - `isFullyExited`: Whether the pool has fully exited
 - `isShortCircuit`: Whether the withdrawal request is short-circuited
@@ -96,6 +101,7 @@ function updateTotalDeposits(uint256 newTotalDeposits) external;
 Updates the total deposits of the staking pool.
 
 **Parameters:**
+
 - `newTotalDeposits`: The new total deposits amount
 
 ### setMinEffectiveBalance
@@ -107,6 +113,7 @@ function setMinEffectiveBalance(uint256 minEffectiveBalance) external;
 Sets the minimum effective balance for the staking pool.
 
 **Parameters:**
+
 - `minEffectiveBalance`: The minimum effective balance to set
 
 ### mintFeeShares
@@ -118,6 +125,7 @@ function mintFeeShares(uint256 amount) external;
 Mints shares to the default shares recipient.
 
 **Parameters:**
+
 - `amount`: The amount of assets to mint
 
 ### receiveRewards

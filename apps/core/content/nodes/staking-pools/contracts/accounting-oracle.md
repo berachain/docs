@@ -17,6 +17,7 @@ function updateTotalDeposits(bytes memory pubkey, uint256 newTotalDeposits) exte
 Updates the total deposits for a specific validator.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 - `newTotalDeposits`: The new total deposits amount
 
@@ -35,6 +36,7 @@ function updateValidatorData(
 Updates comprehensive validator data.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 - `totalStakedBalance`: The total staked balance
 - `effectiveBalance`: The effective balance
@@ -50,6 +52,7 @@ function triggerFundsManagement(bytes memory pubkey) external;
 Triggers funds management for a specific validator.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 ## View Functions
@@ -63,9 +66,11 @@ function getTotalDeposits(bytes memory pubkey) external view returns (uint256);
 Returns the total deposits for a specific validator.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 **Returns:**
+
 - `uint256`: The total deposits amount
 
 ### getValidatorData
@@ -82,9 +87,11 @@ function getValidatorData(bytes memory pubkey) external view returns (
 Returns comprehensive validator data.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 **Returns:**
+
 - `totalStakedBalance`: The total staked balance
 - `effectiveBalance`: The effective balance
 - `withdrawalAmount`: The withdrawal amount

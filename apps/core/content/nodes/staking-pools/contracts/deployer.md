@@ -23,6 +23,7 @@ function deployStakingPoolContracts(
 Deploys all necessary contracts for a new staking pool.
 
 **Parameters:**
+
 - `pubkey`: The validator's 48-byte public key
 - `withdrawalCredentials`: Withdrawal credentials (0x01 + withdrawal vault address)
 - `signature`: Deposit signature from beacon client
@@ -30,6 +31,7 @@ Deploys all necessary contracts for a new staking pool.
 - `defaultSharesRecipient`: Address to receive initial shares
 
 **Returns:**
+
 - `address`: SmartOperator contract address
 - `address`: StakingPool contract address
 - `address`: StakingRewardsVault contract address
@@ -49,9 +51,11 @@ function predictAddresses(bytes memory pubkey) external view returns (
 Predicts the addresses of contracts that will be deployed for a given validator public key.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 **Returns:**
+
 - `smartOperator`: Predicted SmartOperator address
 - `stakingPool`: Predicted StakingPool address
 - `stakingRewardsVault`: Predicted StakingRewardsVault address
@@ -71,9 +75,11 @@ function getDeployedContracts(bytes memory pubkey) external view returns (
 Returns the deployed contract addresses for a given validator public key.
 
 **Parameters:**
+
 - `pubkey`: The validator's public key
 
 **Returns:**
+
 - `smartOperator`: Deployed SmartOperator address
 - `stakingPool`: Deployed StakingPool address
 - `stakingRewardsVault`: Deployed StakingRewardsVault address

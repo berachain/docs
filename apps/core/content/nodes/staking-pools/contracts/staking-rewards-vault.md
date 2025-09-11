@@ -17,6 +17,7 @@ function withdrawRewards(uint256 amount) external;
 Withdraws the specified amount of rewards from the vault.
 
 **Parameters:**
+
 - `amount`: The amount of rewards to withdraw
 
 ## View Functions
@@ -30,6 +31,7 @@ function balance() external view returns (uint256);
 Returns the current balance of the vault.
 
 **Returns:**
+
 - `uint256`: The current balance of the vault
 
 ## Events
