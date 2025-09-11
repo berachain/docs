@@ -153,10 +153,6 @@ const SIDEBAR = {
       text: "Developer Guides",
       items: [
         {
-          text: "Mainnet Migration Guide",
-          link: "/developers/guides/migration-guide"
-        },
-        {
           text: "Create HelloWorld Contract Using Hardhat",
           link: "/developers/guides/create-helloworld-contract-using-hardhat"
         },
