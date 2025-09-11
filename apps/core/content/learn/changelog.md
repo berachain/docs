@@ -4,6 +4,10 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## September 2025
+
+**Enhanced validator lifecycle documentation** – Updated explanation of effective balance calculation and hysteresis mechanism in the [validator lifecycle guide](/nodes/validator-lifecycle).
+
 ## August 2025
 
 **Reward Vault enhanced functionality** – Added two new functions to enhance staking and reward management capabilities:
