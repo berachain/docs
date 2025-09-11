@@ -116,14 +116,19 @@ Rewards are automatically distributed:
 When you want to exit your position, request a withdrawal:
 
 ```solidity
-// Request withdrawal of specified amount
-function requestWithdrawal(uint256 amountOfShares) external;
+// Request withdrawal of specified amount (in GWei)
+function requestWithdrawal(bytes memory pubkey, uint64 assetsInGWei, uint256 maxFeeToPay) external payable;
+
+// Request redemption of shares
+function requestRedeem(bytes memory pubkey, uint256 shares, uint256 maxFeeToPay) external payable;
 ```
 
 **Parameters:**
 
-- `amountOfShares`: Number of shares to withdraw
-- Can withdraw partial or full position
+- `pubkey`: The validator's public key for the staking pool
+- `assetsInGWei`: Amount of BERA to withdraw in GWei (for requestWithdrawal)
+- `shares`: Number of shares to redeem (for requestRedeem)
+- `maxFeeToPay`: Maximum fee you're willing to pay for the withdrawal
 
 ### Step 2: Receive Withdrawal NFT
 
@@ -134,7 +139,7 @@ After requesting withdrawal, you receive an ERC-721 NFT representing your withdr
 function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256);
 
 // Get withdrawal request details
-function getWithdrawalRequest(uint256 tokenId) external view returns (WithdrawalRequest memory);
+function getWithdrawalRequest(uint256 requestId) external view returns (WithdrawalRequest memory);
 ```
 
 ### Withdrawal Processing
@@ -163,12 +168,16 @@ After the processing period, complete your withdrawal:
 
 ```solidity
 // Complete withdrawal using your NFT
-function completeWithdrawal(uint256 tokenId) external;
+function finalizeWithdrawalRequest(uint256 requestId) external;
+
+// Complete multiple withdrawals at once
+function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
 ```
 
 **Parameters:**
 
-- `tokenId`: Your withdrawal request NFT ID
+- `requestId`: Your withdrawal request ID (from the NFT)
+- `requestIds`: Array of withdrawal request IDs to finalize
 
 ## Understanding Fees
 
@@ -282,6 +291,6 @@ For detailed technical information about the smart contracts, see the [Smart Con
 Successful staking often involves building relationships with validators and their communities. Many validators provide regular updates and support to their stakers.
 :::
 
-:::note
+:::warning
 The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
 :::

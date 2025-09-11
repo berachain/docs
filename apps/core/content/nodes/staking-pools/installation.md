@@ -109,12 +109,12 @@ The deployment transaction must include exactly {{ config.mainnet.minEffectiveBa
 const factory = new ethers.Contract(factoryAddress, factoryABI, signer);
 
 const tx = await factory.deployStakingPoolContracts(
-  validatorPubkey, // 48-byte hex string
-  withdrawalCredentials, // 0x01 + 20-byte address
-  depositSignature, // From beacon client
-  validatorAdminAddress, // Your admin address
-  defaultSharesRecipient, // Your validator wallet
-  { value: ethers.parseEther("10000") }, // 10,000 BERA
+    validatorPubkey,           // 48-byte hex string
+    withdrawalCredentials,      // 0x01 + 20-byte address
+    depositSignature,           // From beacon client
+    validatorAdminAddress,      // Your admin address
+    defaultSharesRecipient,     // Your validator wallet
+    { value: ethers.parseEther("10000") } // 10,000 BERA
 );
 
 const receipt = await tx.wait();
@@ -144,9 +144,8 @@ function getCoreContracts(
 ```
 
 The returned `CoreContracts` struct contains:
-
 - `smartOperator`: Address of your SmartOperator contract
-- `stakingPool`: Address of your StakingPool contract
+- `stakingPool`: Address of your StakingPool contract  
 - `stakingRewardsVault`: Address of your StakingRewardsVault contract
 - `incentiveCollector`: Address of your IncentiveCollector contract
 
@@ -166,7 +165,6 @@ function deposit(
 ```
 
 **Critical Configuration:**
-
 - **Withdrawal Credentials**: Must match your deployed `WithdrawalVault` address
 - **Operator Address**: Must be set to your `SmartOperator` contract address
 - **Initial Deposit**: Must be exactly {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA
@@ -179,12 +177,16 @@ After registration, you'll need to obtain proofs from the beacon API:
 # Get validator index proof
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/validators/{validator_index}"
 
-# Get withdrawal credentials proof
+# Get withdrawal credentials proof  
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/withdrawal_credentials/{validator_index}"
 
 # Get initial balance proof
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/validators/{validator_index}/balance"
 ```
+
+:::warning
+The beacon API endpoints above are examples and may not be available on Berachain. You should verify the correct API endpoints for your specific network configuration.
+:::
 
 ### Activate the Pool
 
@@ -199,14 +201,12 @@ function activateStakingPool(
 ```
 
 The `ValidatorData` struct includes:
-
 - `pubkey`: Your validator's public key
 - `withdrawalCredentials`: Your withdrawal credentials
 - `operator`: Your SmartOperator contract address
 - `initialBalance`: Your initial deposit amount
 
 The `ProofData` struct includes:
-
 - `indexProof`: Proof of your validator index
 - `withdrawalCredentialsProof`: Proof of your withdrawal credentials
 - `initialBalanceProof`: Proof of your initial balance
@@ -258,30 +258,25 @@ After completing the deployment, verify:
 ### Deployment Failures
 
 **Insufficient Value**
-
 - Ensure transaction includes exactly {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA
 - Check that your wallet has sufficient balance
 
 **Invalid Withdrawal Credentials**
-
 - Verify withdrawal credentials format (0x01 + 20-byte address)
 - Ensure address matches predicted withdrawal vault address
 
 **Signature Verification Failed**
-
 - Verify deposit signature is from correct validator keys
 - Check that withdrawal credentials in signature match deployment parameters
 
 ### Activation Issues
 
 **Proof Verification Failed**
-
 - Ensure proofs are recent (within 10 minutes)
 - Verify proofs are from correct validator index
 - Check that withdrawal credentials proofs match deployed contracts
 
 **Pool Not Activating**
-
 - Verify all required proofs are provided
 - Check that validator data matches deployed contracts
 - Ensure timestamp is within acceptable range
@@ -319,6 +314,6 @@ After successful deployment and activation:
 Successful staking pool deployment requires careful attention to detail. Double-check all parameters and proofs before submitting transactions.
 :::
 
-:::note
+:::warning
 The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
 :::

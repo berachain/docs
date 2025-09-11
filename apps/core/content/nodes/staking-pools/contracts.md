@@ -25,18 +25,17 @@ The staking pools system consists of several interconnected smart contracts:
 
 ### Core Contracts
 
-- **[StakingPoolContractsFactory](./StakingPoolContractsFactory.sol/README.md)**: Deploys and manages all staking pool contracts
-- **[StakingPool](./core/StakingPool.sol/README.md)**: Core contract for user deposits, share management, and pool operations
-- **[SmartOperator](./core/SmartOperator.sol/README.md)**: Manages validator operations and PoL integration
-- **[WithdrawalVault](./WithdrawalVault.sol/README.md)**: Handles withdrawal requests and processing
-- **[StakingRewardsVault](./core/StakingRewardsVault.sol/README.md)**: Manages rewards and auto-compounding
-- **[IncentiveCollector](./core/IncentiveCollector.sol/README.md)**: Handles incentive token collection and conversion
-- **[AccountingOracle](./AccountingOracle.sol/README.md)**: Provides off-chain data validation
+- **[StakingPoolContractsFactory](./staking-pool-contracts-factory.md)**: Deploys and manages all staking pool contracts
+- **[StakingPool](./staking-pool.md)**: Core contract for user deposits, share management, and pool operations
+- **[SmartOperator](./smart-operator.md)**: Manages validator operations and PoL integration
+- **[WithdrawalVault](./withdrawal-vault.md)**: Handles withdrawal requests and processing
+- **[StakingRewardsVault](./staking-rewards-vault.md)**: Manages rewards and auto-compounding
+- **[IncentiveCollector](./incentive-collector.md)**: Handles incentive token collection and conversion
+- **[AccountingOracle](./accounting-oracle.md)**: Provides off-chain data validation
 
 ### Supporting Contracts
 
-- **[WithdrawalRequestERC721](./core/WithdrawalRequestERC721.sol/README.md)**: ERC-721 contract for withdrawal request NFTs
-- **[Deployer](./Deployer.sol/README.md)**: Contract deployment utilities
+- **[Deployer](./deployer.md)**: Contract deployment utilities
 - **[Base Contracts](./base/)**: Shared base contracts and interfaces
 
 ## Key Features
@@ -63,10 +62,7 @@ Users primarily interact with the `StakingPool` contract:
 
 ```solidity
 // Deposit BERA to receive shares
-function submit() external payable;
-
-// Request withdrawal of shares
-function requestWithdrawal(uint256 amountOfShares) external;
+function submit(address receiver) external payable returns (uint256);
 
 // Check share balance
 function sharesOf(address account) external view returns (uint256);
@@ -83,17 +79,19 @@ Validators interact with multiple contracts:
 // Deploy staking pool contracts
 StakingPoolContractsFactory.deployStakingPoolContracts(
     bytes memory pubkey,
-    address admin,
-    address defaultShareRecipient
+    bytes memory withdrawalCredentials,
+    bytes memory signature,
+    address validatorAdmin,
+    address defaultSharesRecipient
 );
 
-// Set commission rate
-SmartOperator.setValidatorCommissionRate(uint256 commissionRate);
+// Queue commission rate change
+SmartOperator.queueValCommission(uint96 commission);
 
-// Configure reward allocation
-SmartOperator.setRewardAllocation(
-    address[] memory rewardVaults,
-    uint256[] memory weights
+// Queue reward allocation
+SmartOperator.queueRewardsAllocation(
+    uint64 startBlock,
+    IBeraChef.Weight[] calldata weights
 );
 ```
 
@@ -159,18 +157,17 @@ Detailed documentation for each contract is available in the following sections:
 
 ### Core Contracts
 
-- [StakingPoolContractsFactory](./StakingPoolContractsFactory.sol/README.md) - Factory for deploying staking pool contracts
-- [StakingPool](./core/StakingPool.sol/README.md) - Main staking pool contract
-- [SmartOperator](./core/SmartOperator.sol/README.md) - Validator operations manager
-- [WithdrawalVault](./WithdrawalVault.sol/README.md) - Withdrawal request handler
-- [StakingRewardsVault](./core/StakingRewardsVault.sol/README.md) - Rewards management
-- [IncentiveCollector](./core/IncentiveCollector.sol/README.md) - Incentive token collector
-- [AccountingOracle](./AccountingOracle.sol/README.md) - Off-chain data validation
+- [StakingPoolContractsFactory](./staking-pool-contracts-factory.md) - Factory for deploying staking pool contracts
+- [StakingPool](./staking-pool.md) - Main staking pool contract
+- [SmartOperator](./smart-operator.md) - Validator operations manager
+- [WithdrawalVault](./withdrawal-vault.md) - Withdrawal request handler
+- [StakingRewardsVault](./staking-rewards-vault.md) - Rewards management
+- [IncentiveCollector](./incentive-collector.md) - Incentive token collector
+- [AccountingOracle](./accounting-oracle.md) - Off-chain data validation
 
 ### Supporting Contracts
 
-- [WithdrawalRequestERC721](./core/WithdrawalRequestERC721.sol/README.md) - Withdrawal request NFTs
-- [Deployer](./Deployer.sol/README.md) - Deployment utilities
+- [Deployer](./deployer.md) - Deployment utilities
 - [Base Contracts](./base/) - Shared interfaces and base contracts
 
 ### Interfaces
@@ -238,6 +235,6 @@ All contracts follow established standards:
 When integrating with staking pool contracts, always verify contract addresses and test thoroughly on testnets before mainnet deployment.
 :::
 
-:::note
+:::warning
 The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
 :::

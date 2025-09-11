@@ -31,7 +31,7 @@ The staking pools system consists of several interconnected smart contracts that
 
 The core operational contract is the **StakingPool**, which manages user deposits, share management, and pool operations. It acts as the primary interface for users to interact with the pool, handling deposits, withdrawals, and share calculations. The **SmartOperator** contract manages validator operations and integrates with the Proof of Liquidity system, ensuring that the validator's operations are properly coordinated with the broader Berachain ecosystem.
 
-Supporting these core contracts are specialized components like the **WithdrawalVault**, which handles withdrawal requests and processing, and the **StakingRewardsVault**, which manages rewards and implements auto-compounding functionality. The **IncentiveCollector** handles incentive token collection and conversion, while the **AccountingOracle** provides off-chain data validation to ensure the system operates with accurate consensus layer information.
+Supporting these core contracts are specialized components like the **WithdrawalVault**, which handles withdrawal requests and processing through integrated NFT functionality, and the **StakingRewardsVault**, which manages rewards and implements auto-compounding functionality. The **IncentiveCollector** handles incentive token collection and conversion, while the **AccountingOracle** provides off-chain data validation to ensure the system operates with accurate consensus layer information.
 
 ## Key Features and Benefits
 
@@ -87,6 +87,6 @@ For detailed information about the smart contracts and their functions, see the 
 Staking pools are designed to be validator-operated, meaning each validator creates and manages their own pool. This allows validators to build their own communities and branding while leveraging Berachain's PoL infrastructure.
 :::
 
-:::note
+:::warning
 Off-chain components such as the Consensus Layer Oracle and Incentive Management Bot are required for full functionality but are not yet implemented. These components will be developed and deployed separately.
 :::
