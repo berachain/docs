@@ -356,6 +356,27 @@ const SIDEBAR = {
       ]
     },
     {
+      text: "Staking Pools",
+      items: [
+        {
+          text: "Overview",
+          link: "/nodes/staking-pools/"
+        },
+        {
+          text: "Operator Guide",
+          link: "/nodes/staking-pools/operators"
+        },
+        {
+          text: "User Guide",
+          link: "/nodes/staking-pools/users"
+        },
+        {
+          text: "Smart Contract Reference",
+          link: "/nodes/staking-pools/contracts"
+        }
+      ]
+    },
+    {
       text: "Help",
       items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }]
     }
