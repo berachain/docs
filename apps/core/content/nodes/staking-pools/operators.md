@@ -147,7 +147,7 @@ function queueValCommission(uint96 commission) external;
 
 ### Configure Reward Allocations
 
-The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community.
+The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community. These operator‑level settings power the user experience shown in the [User Guide](/nodes/staking-pools/users).
 
 ```solidity
 // Queue reward allocation for specific applications
@@ -159,7 +159,7 @@ function queueRewardsAllocation(
 
 ### Manage BGT Operations
 
-BGT (Berachain Governance Token) operations are crucial for maximizing your Proof of Liquidity performance. The boost system allows you to queue BGT boosts for your validator and activate them strategically to enhance your position in the network's incentive structure.
+BGT (Berachain Governance Token) operations are crucial for maximizing your Proof of Liquidity performance. The boost system allows you to queue BGT boosts for your validator and activate them strategically to enhance your position in the network's incentive structure. Users will see the effects of boosts indirectly as improved rewards; see the [User Guide](/nodes/staking-pools/users) for the user-facing flow.
 
 ```solidity
 // Queue BGT boost for validator (auto-boosts current unboosted amount)
@@ -284,7 +284,7 @@ After setting up your staking pool:
 3. **Grow Your Community**: Attract and retain users
 4. **Monitor Performance**: Track your pool's performance and user satisfaction
 
-For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools-contracts).
+For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
 
 :::tip
 Successful staking pools often have strong community engagement and transparent operations. Focus on building trust with your users through clear communication and reliable performance.

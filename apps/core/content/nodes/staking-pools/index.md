@@ -43,9 +43,9 @@ Users benefit from liquid staking capabilities where they can stake BERA and rec
 
 The staking pool lifecycle begins with pool deployment, where validators use the factory contract to create all necessary contracts and configure their withdrawal credentials and operator addresses. This process establishes the foundation for the entire staking pool ecosystem.
 
-Once deployed, users can begin depositing BERA into the pool. These deposits are immediately accounted for and start earning returns, with users receiving shares that represent their proportional ownership of the pool. The share system ensures that users maintain their relative position in the pool as rewards accumulate and new deposits are made.
+Once deployed, users can begin depositing BERA into the pool. Deposits are immediately accounted for and represented by shares that reflect proportional ownership. Consensus-layer rewards begin only after the underlying validator enters the active validator set; until then, deposits are buffered and prepared for staking. The share system ensures that users maintain their relative position in the pool as rewards accumulate and new deposits are made.
 
-When the pool accumulates sufficient BERA (at least 10,000 BERA), funds are automatically staked into the consensus layer on behalf of the validator. This automation ensures that the pool operates efficiently without requiring manual intervention from the validator.
+When the pool accumulates at least 10,000 BERA, the system can register the validator on the consensus layer. However, the validator only comes online and begins producing consensus rewards once it enters the active set — a process that requires a minimum effective balance of 250,000 BERA and depends on the relative stakes of other validators. See the [Validator Lifecycle](/nodes/validator-lifecycle) for details.
 
 Reward management is handled automatically by the system. Non-BGT rewards are converted to BERA and automatically staked back into the pool, while BGT rewards are used to boost the validator's Proof of Liquidity performance. All rewards contribute to the auto-compounding effect, increasing the value of user shares over time.
 
@@ -61,7 +61,7 @@ Additionally, validators have the flexibility to direct rewards to specific appl
 
 ## Key Parameters and Constraints
 
-The system operates within well-defined parameters that ensure stability and security. A minimum deposit of 10,000 BERA is required to activate staking, ensuring that pools have sufficient capital to operate effectively. Each validator is limited to a maximum pool size of 10,000,000 BERA, preventing any single validator from becoming too dominant in the system.
+The system operates within well-defined parameters that ensure stability and security. A minimum deposit of 10,000 BERA is required to register a validator on the consensus layer; producing consensus rewards begins only once the validator enters the active set, which requires at least 250,000 BERA effective balance and is influenced by the relative stakes of other validators. Each validator is limited to a maximum pool size of 10,000,000 BERA, preventing any single validator from becoming too dominant in the system.
 
 The minimum validator balance is set at 250,000 BERA, and if this threshold is breached, the system automatically triggers a full exit to protect user funds. Withdrawal processing through the consensus layer requires approximately 27 hours (256 epochs) to complete, providing users with predictable timing expectations.
 
@@ -75,9 +75,9 @@ Risk management is implemented through several mechanisms, including automatic f
 
 ## Getting Started
 
-For validators interested in setting up staking pools, the process begins with deploying a staking pool through the factory contract, followed by pool initialization and configuration of operational parameters. The system is designed to be straightforward for validators to implement while providing comprehensive functionality for their users.
+For validators interested in setting up staking pools, the process begins with deploying a staking pool through the factory contract, followed by pool initialization and configuration of operational parameters. The system is designed to be straightforward for validators to implement while providing comprehensive functionality for their users. For a step‑by‑step setup, see the [Staking Pools Operator Guide](/nodes/staking-pools/operators) and the [Installation Guide](/nodes/staking-pools/installation).
 
-Users can get started by finding a staking pool operated by a validator they trust, depositing BERA to begin earning rewards, and monitoring their position through the transparent on-chain system. The liquid nature of the shares means users can adjust their position or withdraw funds as their needs change.
+Users can get started by finding a staking pool operated by a validator they trust, depositing BERA to begin earning rewards, and monitoring their position through the transparent on-chain system. The liquid nature of the shares means users can adjust their position or withdraw funds as their needs change. For a user‑focused walkthrough, see the [Staking Pools User Guide](/nodes/staking-pools/users).
 
 ## Smart Contract Reference
 

@@ -49,26 +49,11 @@ The first step in staking through a pool is ensuring your wallet is properly con
 
 ### Step 2: Approve the Transaction
 
-Once your wallet is connected, you can interact with the staking pool contract to deposit your BERA. The deposit process is straightforward and designed to be user-friendly.
-
-```solidity
-// Deposit BERA to receive shares
-function submit() external payable;
-```
-
-The deposit function accepts BERA as the transaction value, with a minimum deposit requirement of just 1 gwei. This low minimum makes staking accessible to users with various investment amounts. The maximum deposit is limited by the pool's capacity limits, which are designed to maintain system stability and prevent any single pool from becoming too dominant.
+With your wallet connected, open the validator’s staking pool page or supported dApp, choose Deposit, enter your amount, and confirm in your wallet. Minimum deposit is 1 gwei. Capacity limits may apply based on pool configuration.
 
 ### Step 3: Receive Shares
 
-After a successful deposit, you'll receive shares that represent your proportional ownership of the staking pool. These shares are your proof of stake and will increase in value as the pool earns rewards.
-
-```solidity
-// Check your share balance
-function sharesOf(address account) external view returns (uint256);
-
-// Check your BERA balance (including rewards)
-function balanceOf(address account) external view returns (uint256);
-```
+After a successful deposit, you'll see shares appear in the pool UI that represent your proportional ownership. Share value increases with rewards.
 
 ### Share Accounting
 
@@ -78,18 +63,7 @@ The share system provides a transparent and fair way to track your stake and rew
 
 ### Check Your Balance
 
-Regularly monitor your staking position:
-
-```solidity
-// Get your current BERA balance (including rewards)
-uint256 balance = stakingPool.balanceOf(yourAddress);
-
-// Get your share balance
-uint256 shares = stakingPool.sharesOf(yourAddress);
-
-// Get total assets in the pool
-uint256 totalAssets = stakingPool.totalAssets();
-```
+Use the pool UI or supported dApp to view your BERA balance (including rewards), share balance, and total pool assets.
 
 ### Track Performance
 
@@ -102,45 +76,22 @@ Monitor your pool's performance:
 
 ### Reward Distribution
 
-Rewards are automatically distributed:
+Rewards accrue automatically and are reflected in your share value:
 
-- **Block Rewards**: BERA earned from consensus layer participation
-- **BGT Rewards**: Used to boost validator for additional rewards
-- **Incentive Tokens**: Auctioned for BERA and distributed to stakers
-- **Auto-Compounding**: All rewards increase your share value
+- **Block Rewards**: BERA from consensus participation
+- **BGT Rewards**: Used by the operator to boost validator rewards
+- **Incentive Tokens**: Converted to BERA by the operator
+- **Auto-Compounding**: Reflected in rising share value
 
 ## Request Withdrawal
 
 ### Step 1: Initiate Withdrawal Request
 
-When you want to exit your position, request a withdrawal:
-
-```solidity
-// Request withdrawal of specified amount (in GWei)
-function requestWithdrawal(bytes memory pubkey, uint64 assetsInGWei, uint256 maxFeeToPay) external payable;
-
-// Request redemption of shares
-function requestRedeem(bytes memory pubkey, uint256 shares, uint256 maxFeeToPay) external payable;
-```
-
-**Parameters:**
-
-- `pubkey`: The validator's public key for the staking pool
-- `assetsInGWei`: Amount of BERA to withdraw in GWei (for requestWithdrawal)
-- `shares`: Number of shares to redeem (for requestRedeem)
-- `maxFeeToPay`: Maximum fee you're willing to pay for the withdrawal
+When you want to exit your position, open the pool UI and choose Withdraw. You can withdraw by amount (BERA) or redeem by shares. Confirm in your wallet. Any required fees are shown before confirmation.
 
 ### Step 2: Receive Withdrawal NFT
 
-After requesting withdrawal, you receive an ERC-721 NFT representing your withdrawal request:
-
-```solidity
-// Get your withdrawal request NFT
-function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256);
-
-// Get withdrawal request details
-function getWithdrawalRequest(uint256 requestId) external view returns (WithdrawalRequest memory);
-```
+After requesting withdrawal, the system issues you a withdrawal receipt (NFT) representing your request. You’ll see its status in the UI.
 
 ### Withdrawal Processing
 
@@ -164,15 +115,7 @@ If consensus layer withdrawal is required:
 
 ### Step 3: Complete Withdrawal
 
-After the processing period, complete your withdrawal:
-
-```solidity
-// Complete withdrawal using your NFT
-function finalizeWithdrawalRequest(uint256 requestId) external;
-
-// Complete multiple withdrawals at once
-function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
-```
+After the processing period, click Finalize Withdrawal in the UI to claim BERA back to your wallet.
 
 **Parameters:**
 
@@ -191,28 +134,24 @@ Withdrawals may incur fees:
 
 ### Validator Commission
 
-Validators may charge commission on your rewards:
-
-- **Commission Rate**: Percentage of rewards taken by validator
-- **Maximum Cap**: Typically capped at 10% to protect stakers
-- **Transparency**: Commission rates should be clearly displayed
+Validators may charge commission on your rewards. Commission is set and managed by the operator and is typically capped (up to 10%). You can view the current commission rate in the pool UI. See the [Operator Guide](/nodes/staking-pools/operators) for how operators configure commission.
 
 ## Pool Limits and Restrictions
 
 ### Capacity Limits
 
-Each staking pool has limits:
+Each staking pool has limits configured by the operator:
 
-- **Maximum Capacity**: 10,000,000 BERA per validator
-- **Minimum Balance**: 250,000 BERA (triggers full exit if breached)
-- **Pool Pausing**: Pools pause when maximum capacity reached
+- **Maximum Capacity**: e.g., 10,000,000 BERA per validator
+- **Minimum Balance**: 250,000 BERA effective balance threshold (affects validator lifecycle)
+- **Pool Pausing**: Pools may pause deposits when capacity is reached
 
 ### Full Exit Scenarios
 
 Pools may trigger full exit when:
 
-- **Below Minimum**: Total deposits fall below 250,000 BERA
-- **Large Withdrawal**: Single withdrawal would breach minimum
+- **Below Minimum**: Effective balance falls below 250,000 BERA
+- **Large Withdrawal**: A withdrawal would breach the minimum threshold
 - **Emergency**: Governance or validator triggers full exit
 
 ### Impact of Full Exit
@@ -285,7 +224,7 @@ After staking with a pool:
 3. **Consider Diversification**: Explore staking with multiple validators
 4. **Plan Withdrawals**: Understand withdrawal timing and fees
 
-For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools-contracts).
+For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
 
 :::tip
 Successful staking often involves building relationships with validators and their communities. Many validators provide regular updates and support to their stakers.
