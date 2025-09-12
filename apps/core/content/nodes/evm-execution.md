@@ -15,11 +15,11 @@ head:
 
 The execution layer consists of multiple implementations in the form of EVM execution clients. These clients handle transactions, transaction gossiping, state management, and support for the Ethereum Virtual Machine - they are not responsible for block building.
 
-The following execution clients are recommended to go with our **required [Beacon Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)**.
+The following execution clients are required to go with our **required [Beacon Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)**.
 
 | Language | Required Version (Mainnet & Bepolia)                                                     |
 | -------- | ---------------------------------------------------------------------------------------- |
-| Golang   | [Bera-Geth v1.011602.3](https://github.com/berachain/bera-geth/releases/tag/v1.011602.3) |
-| Rust     | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           |
+| Golang   | [Bera-Geth v1.011602.4](https://github.com/berachain/bera-geth/releases/tag/v1.011602.4) |
+| Rust     | [Bera-Reth v1.1.0](https://github.com/berachain/bera-reth/releases/tag/v1.1.0)           |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
