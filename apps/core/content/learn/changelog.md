@@ -6,7 +6,7 @@ Below are important changes shipped to Berachain.
 
 ## September 2025
 
-**Bepto hardfork** [/nodes/guides/bepto](upgrade instructions) are posted.  Based on further community feedback, this upgrade removes the minimum base fee set as part of BRIP-0002. However, the base fee rate of change will remain the same as introduced in BRIP-0002.
+**Bepto hardfork** [upgrade instructions](/nodes/guides/bepto) are posted.  Based on further community feedback, this upgrade removes the minimum base fee set as part of BRIP-0002. However, the base fee rate of change will remain the same as introduced in BRIP-0002.
 
 ## August 2025
 

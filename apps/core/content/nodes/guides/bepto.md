@@ -18,7 +18,7 @@ Our next upgrade adjusts the effect of [BRIP-0002 - Gas Fee Modifications](https
 This is an _execution client only_ hardfork.
 
 :::warning
-Validators **must upgrade** their Execution Client to the versions recommended below. Regular node operators **should** upgrade.
+All node operators — validators and regular RPC — **must upgrade** their Execution Client to the versions below to continue following the chain.
 :::
 
 ## Upgrade Timeline
