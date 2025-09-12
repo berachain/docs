@@ -15,15 +15,11 @@ head:
 
 The execution layer consists of multiple implementations in the form of EVM execution clients. These clients handle transactions, transaction gossiping, state management, and support for the Ethereum Virtual Machine - they are not responsible for block building.
 
-The following execution clients have been tested and verified by BeaconKit:
+The following execution clients are recommended to go with our **required [Beacon Kit v1.3.1](https://github.com/berachain/beacon-kit/releases/tag/v1.3.1)**.
 
-| Client                                                    | Language | Sync Strategies                    | Recommended Version |
-| --------------------------------------------------------- | -------- | ---------------------------------- | ------------------- |
-| [Geth](https://github.com/ethereum/go-ethereum)           | Golang   | Snap, Full                         | v1.15.10 or .11     |
-| [Reth](https://github.com/paradigmxyz/reth)               | Rust     | Full                               | v1.3.12             |
-| [Nethermind](https://github.com/NethermindEth/nethermind) | C#       | Snap (without serving), Fast, Full | v1.31.11            |
-| [Erigon](https://github.com/ledgerwatch/erigon)           | Golang   | Full                               | v3.0.x              |
-| [Besu](https://github.com/hyperledger/besu/)              | Java     | Snap, Fast, Full                   | v25.4.x             |
+| Language | Required Version (Mainnet & Bepolia)                                                     |
+| -------- | ---------------------------------------------------------------------------------------- |
+| Golang   | [Bera-Geth v1.011602.3](https://github.com/berachain/bera-geth/releases/tag/v1.011602.3) |
+| Rust     | [Bera-Reth v1.0.1](https://github.com/berachain/bera-reth/releases/tag/v1.0.1)           |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
-We do not recommend upgrading to new major or minor versions — `x.y.0` — until we have tested them.

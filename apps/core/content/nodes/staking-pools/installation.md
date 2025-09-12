@@ -114,7 +114,7 @@ const tx = await factory.deployStakingPoolContracts(
   depositSignature, // From beacon client
   validatorAdminAddress, // Your admin address
   defaultSharesRecipient, // Your validator wallet
-  { value: ethers.parseEther("10000") }, // 10,000 BERA
+  { value: ethers.parseEther("10000") } // 10,000 BERA
 );
 
 const receipt = await tx.wait();

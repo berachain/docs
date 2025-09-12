@@ -4,7 +4,7 @@
 
 # WeightedPoolFactory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bex.weightedPoolFactory.address">{{config.mainnet.contracts.bex.weightedPoolFactory.address}}</a><span v-if="config.mainnet.contracts.bex.weightedPoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.mainnet.contracts.bex.weightedPoolFactory.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.bex.weightedPoolFactory['mainnet-address']">{{config.contracts.bex.weightedPoolFactory['mainnet-address']}}</a><span v-if="config.contracts.bex.weightedPoolFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.bex.weightedPoolFactory.abi">ABI JSON</a></span></small>
 
 ## Functions
 

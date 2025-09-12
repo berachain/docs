@@ -50,6 +50,51 @@ When selecting a validator to delegate `$BGT` to, users typically consider:
 
 The primary goal is to earn as many Incentives as possible through delegation.
 
+## BERA Stakers 🐻
+
+The BERA Yield Module empowers `$BERA` holders to participate directly in the Proof-of-Liquidity ecosystem. BERA stakers help:
+
+- Provide direct utility and demand for the network's native asset
+- Earn yield from redirected PoL incentives
+- Strengthen the economic foundation of the Berachain network
+
+### BERA Staking Mechanics 🔄
+
+BERA stakers use the **[Staking Vault](/developers/contracts/wbera-staker-vault)**, an ERC4626-compliant vault that:
+
+- Takes both native `$BERA` and wrapped `$WBERA` deposits
+- Earns yield from 33% of PoL protocol incentives
+- Has a 7-day unbonding period for withdrawals
+- Automatically compounds rewards for better yields
+
+### Earning Yield Through PoL 📈
+
+BERA stakers earn yield through the incentive tax mechanism:
+
+1. **Protocols pay incentives** to validators for directing BGT emissions
+2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
+3. **Fees auctioned** for WBERA
+4. **WBERA distributed** to Staking Vault stakers
+
+The yield rate depends on:
+
+- Total PoL incentive volume across all protocols
+- Number of BERA stakers in the vault
+- Market conditions and protocol activity
+
+### Strategic Considerations for BERA Stakers 🎯
+
+Successful BERA stakers consider:
+
+- **Long-term alignment**: The 7-day unbonding period encourages long-term staking
+- **Yield optimization**: Monitor vault performance and incentive volume
+- **Risk management**: Understand the smart contract risks and emergency controls
+- **Diversification**: Balance BERA staking with other yield opportunities
+
+::: tip
+BERA staking is completely separate from traditional validator staking. You can participate in both systems simultaneously.
+:::
+
 ## Ecosystem Projects 🧸
 
 Projects participate in PoL by:

@@ -193,16 +193,14 @@ describe("HelloWorld", function () {
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await hre.viem.getWalletClients();
 
-    const contract = await hre.viem.deployContract("HelloWorld", [
-      "Test Message",
-    ]);
+    const contract = await hre.viem.deployContract("HelloWorld", ["Test Message"]);
     const publicClient = await hre.viem.getPublicClient();
 
     return {
       owner,
       otherAccount,
       publicClient,
-      contract,
+      contract
     };
   }
 
@@ -335,7 +333,7 @@ const config: HardhatUserConfig = {
   networks: {
     // For localhost network
     hardhat: {
-      chainId: 1337,
+      chainId: 1337
     },
     // NOTE: hardhat viem currently doesn't yet support this method for custom chains through Hardhat config ↴
     berachainTestnet: {
@@ -343,9 +341,9 @@ const config: HardhatUserConfig = {
       url: `${process.env.RPC_URL || ""}`,
       accounts: process.env.WALLET_PRIVATE_KEY
         ? [`${process.env.WALLET_PRIVATE_KEY}`]
-        : [],
-    },
-  },
+        : []
+    }
+  }
 };
 
 // Exports
@@ -392,7 +390,7 @@ import hre from "hardhat";
 // ========================================================
 async function main() {
   const contract = await hre.viem.deployContract("HelloWorld", [
-    "Hello from the contract!",
+    "Hello from the contract!"
   ]);
   console.log(`HelloWorld deployed to ${contract.address}`);
 }
@@ -472,26 +470,26 @@ const chainConfiguration = defineChain({
     // [!code ++]
     decimals: parseInt(`${process.env.CURRENCY_DECIMALS}`), // [!code ++]
     name: `${process.env.CURRENCY_NAME}`, // [!code ++]
-    symbol: `${process.env.CURRENCY_SYMBOL}`, // [!code ++]
+    symbol: `${process.env.CURRENCY_SYMBOL}` // [!code ++]
   }, // [!code ++]
   rpcUrls: {
     // [!code ++]
     default: {
       // [!code ++]
-      http: [`${process.env.RPC_URL}`], // [!code ++]
+      http: [`${process.env.RPC_URL}`] // [!code ++]
     }, // [!code ++]
     public: {
       // [!code ++]
-      http: [`${process.env.RPC_URL}`], // [!code ++]
-    }, // [!code ++]
+      http: [`${process.env.RPC_URL}`] // [!code ++]
+    } // [!code ++]
   }, // [!code ++]
   blockExplorers: {
     // [!code ++]
     default: {
       name: `${process.env.BLOCK_EXPLORER_NAME}`,
-      url: `${process.env.BLOCK_EXPLORER_URL}`,
-    }, // [!code ++]
-  }, // [!code ++]
+      url: `${process.env.BLOCK_EXPLORER_URL}`
+    } // [!code ++]
+  } // [!code ++]
 }); // [!code ++]
 
 // Main Deployment Script
@@ -503,7 +501,7 @@ async function main() {
     // Retrieve contract artifact ABI & Bytecode // [!code ++]
     const contractName = "HelloWorld"; // [!code ++]
     const artifactFile = fs.readFileSync(
-      `${hre.artifacts._artifactsPath}/contracts/${contractName}.sol/${contractName}.json`,
+      `${hre.artifacts._artifactsPath}/contracts/${contractName}.sol/${contractName}.json`
     ); // [!code ++]
     const artifactJSON = JSON.parse(artifactFile.toString()) as any; // [!code ++]
 
@@ -515,8 +513,8 @@ async function main() {
       // configured chain // [!code ++]
       {
         // [!code ++]
-        chain: chainConfiguration, // [!code ++]
-      }, // [!code ++]
+        chain: chainConfiguration // [!code ++]
+      } // [!code ++]
     ); // [!code ++]
 
     // Deploy contract // [!code ++]
@@ -524,21 +522,21 @@ async function main() {
       // [!code ++]
       abi: artifactJSON.abi, // [!code ++]
       bytecode: artifactJSON.bytecode, // [!code ++]
-      args: ["Hello From Deployed Contract"], // [!code ++]
+      args: ["Hello From Deployed Contract"] // [!code ++]
     }); // [!code ++]
     console.log({ hash }); // [!code ++]
 
     // Retrieve deployed contract address // [!code ++]
     const publicClient = await hre.viem.getPublicClient({
       // [!code ++]
-      chain: chainConfiguration, // [!code ++]
+      chain: chainConfiguration // [!code ++]
     }); // [!code ++]
     const receipt = await publicClient.waitForTransactionReceipt({ hash }); // [!code ++]
     console.log(`${contractName} deployed to ${receipt?.contractAddress}`); // [!code ++]
   } else {
     // [!code ++]
     const contract = await hre.viem.deployContract("HelloWorld", [
-      "Hello from the contract!",
+      "Hello from the contract!"
     ]);
     console.log(`HelloWorld deployed to ${contract.address}`);
   } // [!code ++]
@@ -612,7 +610,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.19",
   networks: {
     hardhat: {
-      chainId: 1337,
+      chainId: 1337
     },
     // NOTE: hardhat viem currently doesn't yet support this method for custom chains through Hardhat config ↴
     berachainTestnet: {
@@ -620,8 +618,8 @@ const config: HardhatUserConfig = {
       url: `${process.env.RPC_URL || ""}`,
       accounts: process.env.WALLET_PRIVATE_KEY
         ? [`${process.env.WALLET_PRIVATE_KEY}`]
-        : [],
-    },
+        : []
+    }
   }, // [!code ++]
   // For Contract Verification // [!code ++]
   etherscan: {
@@ -636,11 +634,11 @@ const config: HardhatUserConfig = {
         urls: {
           // [!code ++]
           apiURL: `${process.env.BLOCK_EXPLORER_API_URL}`, // [!code ++]
-          browserURL: `${process.env.BLOCK_EXPLORER_URL}`, // [!code ++]
-        }, // [!code ++]
-      }, // [!code ++]
-    ], // [!code ++]
-  }, // [!code ++]
+          browserURL: `${process.env.BLOCK_EXPLORER_URL}` // [!code ++]
+        } // [!code ++]
+      } // [!code ++]
+    ] // [!code ++]
+  } // [!code ++]
 };
 
 // Exports

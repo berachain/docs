@@ -55,7 +55,16 @@ Changing a Token or Token Manager requires passing a governance proposal.
 
 A Reward Vault can offer up to two Incentive Tokens simultaneously. The offered amount cannot be withdrawn or revoked.
 
-The Incentive Token Manager must define an Incentive Rate, greater than the minimum approved in the Governance proposal, when initially offering the Incentive Tokens and cannot decrease it until the supply of the Incentive Tokens offered has been exhausted by validators directing $BGT emissions. The Token Manager can deposit additional Incentive Tokens anytime, with an option to increase the rate at the same time.
+The Incentive Token Manager must define an **Incentive Rate** (the exchange rate of incentive tokens per individual BGT), which must be greater than the minimum approved in the Governance proposal. This rate determines how many incentive tokens are distributed for each BGT received by the vault, regardless of BGT emission timing.
+
+Key aspects of incentive rates:
+
+- **Exchange Rate Formula**: `incentiveTokens = bgtReceived × incentiveRate`
+- **Rate Constraints**: Cannot decrease the rate until the supply of Incentive Tokens has been exhausted
+- **Rate Updates**: Can increase the rate when depositing additional tokens
+- **Independent of BGT Timing**: The exchange rate operates the same whether BGT is distributed over 3 days or 7 days
+
+The Token Manager can deposit additional Incentive Tokens anytime, with an option to increase the rate at the same time.
 
 Additionally, any user can contribute an Incentive Token amount to the Reward Vault, but the Token Manager will decide when to apply that amount and at a rate of their choosing.
 
@@ -83,6 +92,8 @@ Key takeaways are that Token Managers:
 
 Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
 
+Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+
 _Example:_
 
 | Incentive Tokens | Incentive Rate |
@@ -91,7 +102,7 @@ _Example:_
 
 Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions toward the Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on their proportion of the total $BGT boosting that validator.
+From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator, which can include themselves. The amount of Incentive Tokens distributed to each booster is based on their proportion of the total $BGT boosting that validator:
 
 | Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
 | ----------- | ------------------: | ---------------: | -------------------------------: |
@@ -101,3 +112,22 @@ From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, 
 | Jintao      |             10 $BGT |            12.5% |         .125 ⨉ 95 = 11.875 $USDC |
 
 A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
+
+:::tip Commission cap
+Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+:::
+
+:::info BGT Emission Timing
+The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
+:::
+
+## Incentive Fees
+
+A portion of protocol incentives is automatically collected as fees during the incentive distribution process for BERA stakers:
+
+- **Fee Rate**: 33% of the incentive amount
+- **Collection Process**: Automatically deducted when incentives are distributed
+- **Distribution**: Fees are auctioned for WBERA and distributed to BERA stakers
+- **Remaining Amount**: Validators receive the remaining 67% of incentives
+
+This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.

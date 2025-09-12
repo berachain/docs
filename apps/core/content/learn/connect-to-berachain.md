@@ -83,6 +83,7 @@ Here are some examples of compatible wallets:
 - [Coinbase Wallet](https://www.coinbase.com/wallet)
 - [Brave Wallet](https://brave.com/wallet/)
 - [Frame](https://frame.sh)
+- [Zerion](https://zerion.io/download?utm_source=berachain)
 
 ## How To Set Up A MetaMask Wallet With Berachain 🦊
 

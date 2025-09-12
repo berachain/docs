@@ -44,6 +44,24 @@ There are several ingredients to successful peering. If you are running in a con
    ```
 5. **No static or persistent peers.** Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network, or business partners you want permanent connections to.
 
+### Recommended options
+
+For **Reth** we recommend these options in the Reth launch:
+
+```
+--engine.persistence-threshold 0
+--engine.memory-block-buffer-target 0
+```
+
+For **Geth** we recommend to override the gas price lower limit to agree with Reth:
+
+```
+--miner.gasprice 1
+```
+
+For both clients, we recommend to ensure the `debug` API is not enabled in `--http.api` option. We suggest it's better to
+**remove** the `--http.api` option entirely, and allow the secure default to apply, unless you have specific reasons to enable additional modules. For Geth, however, exposing the `debug` API module enables highly destructive commands.
+
 ### Let us know who you are
 
 If you have launched a validator on the chain, it's in your interest to let us know who you are, so we know who to contact in case there's trouble with on-chain performance or actions.

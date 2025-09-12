@@ -15,7 +15,19 @@ head:
     import config from '@berachain/config/constants.json';
 </script>
 
-# Proof-of-Liquidity Frequently Asked Questions ❓
+# Proof-of-Liquidity Frequently Asked Questions❓
+
+## PoL
+
+### What is PoL?
+
+Proof-of-Liquidity (PoL) is a comprehensive mechanism designed to bootstrap liquidity and align economic incentives across the Berachain ecosystem. It enables protocols to efficiently incentivize and grow their user base through a competitive marketplace where validators direct BGT emissions to Reward Vaults in exchange for protocol incentives. Users earn BGT by providing liquidity to protocols and can delegate it to validators for additional rewards. The system also includes a BERA Yield Module that provides native BERA staking opportunities, with a portion of protocol incentives redirected to BERA stakers, strengthening the network's economic foundation while creating a virtuous cycle of liquidity provision and reward distribution.
+
+Everything PoL can be done [on the Berachain Hub](https://hub.berachain.com/stake/). The vision is laid out in [the Honey Paper](https://honeypaper.berachain.com).
+
+### Is BERA staking the same as validator staking?
+
+No, BERA staking in PoL is completely separate from traditional validator staking. You can participate in both systems simultaneously. BERA staking is for earning yield from PoL incentives, while validator staking earns rewards for participating in network consensus.
 
 ## Validator Requirements & Operations
 
@@ -79,3 +91,27 @@ The end result is that the inflation cadence should effectively mirror an equiva
 ### Can only validators vote on or create governance proposals?
 
 Anyone who holds enough $BGT can vote on proposals. Anyone who meets the threshold of 10,000 $BGT can create a proposal.
+
+## BGT Claiming and Management
+
+### Can I claim only a portion of my BGT?
+
+Soon you will be able to claim specific amounts of your BGT rewards instead of claiming everything at once. This partial claiming feature allows you to:
+
+- Take profits gradually over time
+- Claim only what you need for specific purposes
+- Leave the rest to continue accumulating
+- Optimize gas costs by avoiding frequent small claims
+
+Partial claiming will be available through compatible protocols and interfaces that support the new `getPartialReward` function. You can specify any amount up to your total earned BGT balance.
+
+### Can I have a protocol claim on my behalf?
+
+Yes, you can authorize trusted protocols to claim your BGT rewards automatically by setting them as your "operator." This enables:
+
+- **Automated claiming strategies** based on schedules or conditions you set
+- **Integrated DeFi workflows** where BGT is automatically used for other purposes
+- **Gas optimization** through batch operations
+- **Enhanced user experience** with fewer manual transactions
+
+The protocol can only claim your BGT rewards - they cannot withdraw your staked tokens or access other wallet functions. You can revoke these permissions at any time. Learn more in our [BGT Claiming Guide](/learn/guides/claim-bgt#protocol-claiming).
