@@ -25,7 +25,7 @@ All node operators — validators and regular RPC — **must upgrade** their Exe
 
 | Date                               | Milestone                                 |
 | ---------------------------------- | ----------------------------------------- |
-| Sep 17, 2025                       | Bera-Reth and Bera-Geth binaries released |
+| Sep 15, 2025                       | Bera-Reth and Bera-Geth binaries released |
 | Sep 17, 2025 @ 1600 GMT / 1200 EDT | Bepolia hardfork activates                |
 | Sep 30, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                |
 
