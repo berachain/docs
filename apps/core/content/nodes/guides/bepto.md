@@ -71,19 +71,27 @@ If you compile your own build, do so against the **recommended release branches*
 
 | Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                               |
 | --------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Bepolia                     | Sep 17  | [TODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
-| Mainnet                     | Sep 17  | [TODO](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| Bepolia                     | Sep 17  | [c27c1162af33f7f5401bcef974a64454](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
+| Mainnet                     | Sep 17  | [a401a53f380e3ce49ef358fead5d3b16](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
 
 ## Confirm upgrade
 
-Bera-Geth should log the fork timestamp:
+Bera-Geth should log the fork timestamp, and the corresponding clock time in your server's timezone:
 
 ```txt
-TODO
+bepolia:
+ Ready for fork activation                fork=Prague2 date="17 Sep 25 18:00 CEST" remaining=46h5m32s  timestamp=1,758,124,800
+
+mainnet:
+ Ready for fork activation                fork=Prague2 date="30 Sep 25 18:00 CEST" remaining=358h4m52s timestamp=1,759,248,000
 ```
 
 Bera-Reth should log the fork timestamp:
 
 ```txt
-TODO
+bepolia:
+Berachain Prague2 configuration: {time=1758124800, min_base_fee=0 gwei}
+
+mainnet:
+Berachain Prague2 configuration: {time=1759248000, min_base_fee=0 gwei}
 ```
