@@ -23,11 +23,11 @@ All node operators — validators and regular RPC — **must upgrade** their Exe
 
 ## Upgrade Timeline
 
-| Date                                  | Milestone                                 |
-| ------------------------------------- | ----------------------------------------- |
-| Sep 17, 2025                          | Bera-Reth and Bera-Geth binaries released |
-| Sep 29, 2025                          | All operators should be upgraded          |
-| October 1, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                |
+| Date                               | Milestone                                 |
+| ---------------------------------- | ----------------------------------------- |
+| Sep 17, 2025                       | Bera-Reth and Bera-Geth binaries released |
+| Sep 17, 2025 @ 1600 GMT / 1200 EDT | Bepolia hardfork activates                |
+| Sep 30, 2025 @ 1600 GMT / 1200 EDT | Mainnet hardfork activates                |
 
 ## Upgrade Details
 
@@ -69,8 +69,8 @@ If you compile your own build, do so against the **recommended release branches*
 | Mainnet & Bepolia | [Bera-Geth v1.011602.4](https://github.com/berachain/bera-geth/releases/tag/v1.011602.4) | Sep 17       |
 | Mainnet & Bepolia | [Bera-Reth v1.1.0](https://github.com/berachain/bera-reth/releases/tag/v1.1.0)           | Sep 17       |
 
-| Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                               |
-| --------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                                                           |
+| --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bepolia                     | Sep 17  | [c27c1162af33f7f5401bcef974a64454](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
 | Mainnet                     | Sep 17  | [a401a53f380e3ce49ef358fead5d3b16](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
 
