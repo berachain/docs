@@ -307,7 +307,7 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "August 2025 Upgrade", link: "/nodes/guides/august-2025-upgrade" }
+        { text: "Bepto Upgrade", link: "/nodes/guides/bepto" }
       ]
     },
     {
@@ -324,10 +324,6 @@ const SIDEBAR = {
         {
           text: "Manage Reward Allocations",
           link: "/nodes/guides/reward-allocation"
-        },
-        {
-          text: "Distribute Block Rewards",
-          link: "/nodes/guides/distribute-block-rewards"
         },
         {
           text: "Increase Validator Stake",

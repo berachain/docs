@@ -4,6 +4,10 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## September 2025
+
+**Bepto hardfork** [upgrade instructions](/nodes/guides/bepto) are posted.  Based on further community feedback, this upgrade removes the minimum base fee set as part of BRIP-0002. However, the base fee rate of change will remain the same as introduced in BRIP-0002.
+
 ## August 2025
 
 **Reward Vault enhanced functionality** – Added two new functions to enhance staking and reward management capabilities:
@@ -20,7 +24,7 @@ Below are important changes shipped to Berachain.
 
 ---
 
-[Upgrade instructions are posted](/nodes/guides/august-2025-upgrade) for our next hardfork, which delivers:
+Launched the August 2025 hardfork, which delivers:
 * [BRIP 0001](https://github.com/berachain/brips/blob/main/meta/BRIP-0001.md) - Forked Execution Clients.
 * [BRIP 0002](https://github.com/berachain/brips/blob/main/meta/BRIP-0002.md) - Gas Price Stablization. We now adjust gas prices at the same rate as Ethereum, and have raised the minimum for gas prices to reduce spam. 
 * [BRIP 0003](https://github.com/berachain/brips/blob/main/meta/BRIP-0003.md) - Stable Block Time. Now fixed at 2 seconds.
