@@ -174,4 +174,4 @@ To increase your effective balance from 100,000 to 110,000 BERA, you need to tri
 **Scenario 2: Reducing Effective Balance to 90,000 BERA**
 To decrease your effective balance from 100,000 to 90,000 BERA, you need to withdraw between 2,501 and 10,000 $BERA inclusive, enough so your actual balance drops below 97,500 BERA.
 
-This hysteresis keeps voting power stable, so validators don't see their power bounce around with every small deposit or withdrawal. 
+This hysteresis keeps voting power stable, so validators don't see their power bounce around with every small deposit or withdrawal.
