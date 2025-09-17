@@ -15,10 +15,10 @@ Validators have several key responsibilities:
 - Participating in consensus by voting on the canonical chain
 - Maintaining network security through their staked tokens
 
-The Validator's Voting Power is determined by their **Effective Balance**, which is calculated from their actual balance using specific rounding rules. The Effective Balance is rounded down to the nearest `{{ constants.mainnet.stakeMinimumIncrement }}` BERA (the effective balance increment), but changes to Effective Balance are subject to hysteresis to prevent frequent fluctuations.
+The Validator's Voting Power is determined by their **Effective Balance**, which is calculated from their actual balance using [specific rounding rules](/nodes/validator-lifecycle#voting-power). The Effective Balance is rounded down to the nearest `{{ constants.mainnet.stakeMinimumIncrement }}` BERA to determine **Voting Power**.
 
 The limit on the number of active validators, termed in this document the `ValidatorSetCap`, is set in Beacon-Kit, and can only be affected
-by Berachain governance actions followed by an update to Beacon-Kit.
+by Berachain governance actions followed by an update to Beacon-Kit.  This limit is `{{constants.mainnet.validatorActiveSetSize}}` currently.
 
 ## Validator Lifecycle
 
