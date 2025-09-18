@@ -95,7 +95,7 @@ The validator remains in this **Eligible** state for 1 epoch. Afterward, it is a
 
 After spending 1 epoch in the **Eligible** state (say at `N+1`), the validator is marked **Active** at the start of epoch `N+2`.
 
-Because BeaconKit (the Berachain beacon client) does not currently support voluntary withdrawals, slashing, or inactivity leaks, a validator remains active indefinitely until it is forced out by a validator with higher priority.
+A validator remains active indefinitely until it is forced out by a validator with a higher stake or voluntarily exits.
 
 Once **Active**:
 
