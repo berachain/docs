@@ -34,7 +34,14 @@ Alternatively, `$HONEY` can be obtained by swapping from other assets on [BEX](/
 
 ### Collateral Assets
 
-The initial collateral options will be `$USDC` and `$BYUSD` (`$pyUSD`). New assets used to mint `$HONEY` can be added through governance.
+The following assets can be used as collateral to mint `$HONEY`:
+
+- `$USDC`
+- `$BYUSD` (`$pyUSD`)
+- `$USDT0`
+- `$USDE`
+
+New assets used to mint `$HONEY` can be added through governance.
 
 ## How is $HONEY Used?
 
@@ -43,13 +50,28 @@ The initial collateral options will be `$USDC` and `$BYUSD` (`$pyUSD`). New asse
 ## $HONEY Architecture
 
 A flow diagram of the `$HONEY` minting process and associated contracts is shown below:
-![HONEY Minting](/assets/honey-minting.png)
+
+```mermaid
+graph LR
+    User[User] -->|Asset| HoneyFactory[HoneyFactory]
+    HoneyFactory -->|Mint| User
+    
+    HoneyFactory -->|Shares| USDCVault[USDC Vault]
+    USDCVault -->|Shares| HoneyFactory
+    
+    HoneyFactory -->|Shares| BYUSDVault[BYUSD Vault]
+    BYUSDVault -->|Shares| HoneyFactory
+    
+    HoneyFactory -->|Shares| USDT0Vault[USDT0 Vault]
+    USDT0Vault -->|Shares| HoneyFactory
+    
+    HoneyFactory -->|Shares| USDEVault[USDE Vault]
+    USDEVault -->|Shares| HoneyFactory
+```
 
 ### $HONEY Vaults
 
-`$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type, with its own unique mint and redemption rate.
-
-In the top flow of the above example, the user deposits `$USDC` to mint `$HONEY`. Only the `$USDC` vault is interacted with, not the `$pyUSD` vault.
+`$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type. Currently, all vaults use the same rates: 0% for minting and 0.05% for burning/redeeming.
 
 ### HoneyFactory
 
@@ -66,9 +88,11 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 - When ANY collateral asset depegs, Basket Mode automatically activates
 - In this mode, users can't choose which asset they redeem their `$HONEY` for
 - Instead, users redeem for a proportional share of ALL collateral assets in the basket
-- For example, if you redeem 1 `$HONEY` token with Basket Mode active, you'll get:
-  - Some `$USDC` based on its relative proportion as collateral
-  - Some `$pyUSD` based on its relative proportion as collateral
+- For example, if you redeem 1 `$HONEY` token with Basket Mode active, you'll get some of each collateral asset based on their relative proportion as collateral:
+  - Some `$USDC`
+  - Some `$BYUSD` (`$pyUSD`)
+  - Some `$USDT0`
+  - Some `$USDE`
 
 **Minting:**
 
@@ -78,25 +102,21 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 
 ## Fees
 
-Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. Fees are determined based on the mint and redemption rates of each vault. For example, if the mint rate of the USDC vault is 0.999 (1 `$USDC` for 0.999 $HONEY), then a fee of 0.001 or 0.1% is collected for every `$USDC` deposited.
+Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is:
+
+- **Minting**: 0% fee
+- **Burning/Redeeming**: 0.05% fee
 
 ### Example
 
-Let's consider an example with the following parameters:
+Let's walk through minting and burning `$HONEY` with `$USDC`:
 
-- User wishes to deposit `1,000 $USDC`
-- Mint rate for `$USDC` is set at `0.999` (`99.9%`)
+**Minting:**
+- User deposits `1,000 $USDC`
+- Receives `1,000 $HONEY` (0% fee)
+- No fees collected
 
-Here's how the minting process would work:
-
-1. The user deposits `1,000 $USDC` into the HoneyFactory contract
-2. The HoneyFactory calculates the amount of `$HONEY` to mint:
-
-- `$HONEY` to mint = Vault shares × Mint rate
-- `$HONEY` to mint = `1,000` × `0.999` = `999 $HONEY`
-
-3. The HoneyFactory transfers 999 `$USDC` to the USDC vault and receives 999 vault shares in return
-
-- Fee shares = Vault shares - `$HONEY` to mint
-- Fee shares = `1,000 - 999 = 1 share`
-- The HoneyFactory transfers 1 vault share to the fee receiver
+**Burning:**
+- User burns `1,000 $HONEY`
+- Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
+- 0.5 $USDC fee is distributed to `$BGT` holders
