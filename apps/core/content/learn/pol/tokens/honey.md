@@ -55,16 +55,16 @@ A flow diagram of the `$HONEY` minting process and associated contracts is shown
 graph LR
     User[User] -->|Asset| HoneyFactory[HoneyFactory]
     HoneyFactory -->|Mint| User
-    
+
     HoneyFactory -->|Shares| USDCVault[USDC Vault]
     USDCVault -->|Shares| HoneyFactory
-    
+
     HoneyFactory -->|Shares| BYUSDVault[BYUSD Vault]
     BYUSDVault -->|Shares| HoneyFactory
-    
+
     HoneyFactory -->|Shares| USDT0Vault[USDT0 Vault]
     USDT0Vault -->|Shares| HoneyFactory
-    
+
     HoneyFactory -->|Shares| USDEVault[USDE Vault]
     USDEVault -->|Shares| HoneyFactory
 ```
@@ -112,11 +112,13 @@ Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` hol
 Let's walk through minting and burning `$HONEY` with `$USDC`:
 
 **Minting:**
+
 - User deposits `1,000 $USDC`
 - Receives `1,000 $HONEY` (0% fee)
 - No fees collected
 
 **Burning:**
+
 - User burns `1,000 $HONEY`
 - Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
 - 0.5 $USDC fee is distributed to `$BGT` holders
