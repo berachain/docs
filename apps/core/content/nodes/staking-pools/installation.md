@@ -61,11 +61,17 @@ beacond deposit validator-keys --home $BEACOND_HOME
 
 ### Prepare Withdrawal Credentials
 
-Your withdrawal credentials must match what the smart contract expects based on its own withdrawal vault address. To generate the correct credentials:
+Your withdrawal credentials must match what the smart contract expects based on its own withdrawal vault address. This is necessary because:
+
+1. **Security**: The withdrawal vault address is deterministically calculated from your validator's public key
+2. **Validation**: The smart contract validates that your withdrawal credentials match its expected withdrawal vault address
+3. **Consensus Layer Integration**: The beacon deposit contract requires valid withdrawal credentials to register your validator
+
+To generate the correct credentials:
 
 1. **Calculate the predicted addresses** using the factory's `predictStakingPoolContractsAddresses` function
-2. **Generate the withdrawal credentials** using the predicted withdrawal vault address
-3. **Create the deposit signature** with the correct withdrawal credentials
+2. **Generate the withdrawal credentials** using the predicted withdrawal vault address (format: `0x01` + 20-byte withdrawal vault address)
+3. **Create the deposit signature** with the correct withdrawal credentials using your beacon client
 
 :::tip
 The smart contract validates that your withdrawal credentials match what it expects based on its own withdrawal vault address. You need to calculate this in advance to generate the proper deposit signature.
@@ -100,7 +106,11 @@ function deployStakingPoolContracts(
 
 ### Required Value
 
-The deployment transaction must include exactly {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA (10,000 BERA) as the initial deposit. This stake serves as the foundation for your staking pool.
+The deployment transaction must include exactly 10,000 BERA as the initial deposit. This is necessary because:
+
+1. **Consensus Layer Registration**: The factory automatically registers your validator with the consensus layer using this deposit
+2. **Minimum Stake Requirement**: This meets the minimum stake required to register a validator on the consensus layer
+3. **Automatic Processing**: The factory handles the deposit process automatically, eliminating the need for separate transactions
 
 ### Example Deployment Transaction
 
@@ -152,24 +162,20 @@ The returned `CoreContracts` struct contains:
 
 ## Step 4: Initialize the Pool
 
-### Register Validator with Pool Contracts
+### Automatic Registration
 
-Once your contracts are deployed, you need to register your validator with the pool contracts using the `BeaconDeposit` contract:
+The factory contract automatically registers your validator with the consensus layer during deployment. This is necessary because:
 
-```solidity
-function deposit(
-    bytes memory pubkey,
-    bytes memory withdrawal_credentials,
-    bytes memory signature,
-    bytes32 deposit_data_root
-) external payable;
-```
+1. **Integrated Process**: The factory handles both contract deployment and validator registration in a single transaction
+2. **Consensus Layer Integration**: Your validator must be registered with the consensus layer to begin earning rewards
+3. **Operator Assignment**: The SmartOperator contract is automatically set as the validator's operator
 
-**Critical Configuration:**
+**What Happens Automatically:**
 
-- **Withdrawal Credentials**: Must match your deployed `WithdrawalVault` address
-- **Operator Address**: Must be set to your `SmartOperator` contract address
-- **Initial Deposit**: Must be exactly {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA
+- Validator registration with the consensus layer
+- Operator address assignment to your SmartOperator contract
+- Initial deposit processing (10,000 BERA)
+- Withdrawal credentials validation
 
 ### Obtain Verification Proofs
 
@@ -219,7 +225,7 @@ The `ProofData` struct includes:
 
 ### Set Commission Rates
 
-Configure your validator commission rate (maximum 10%):
+Configure your validator commission rate (maximum 100%):
 
 ```solidity
 function setValidatorCommissionRate(uint256 commissionRate) external;
@@ -257,38 +263,124 @@ After completing the deployment, verify:
 - [ ] BGT operations initialized
 - [ ] Pool accepting deposits (if desired)
 
+:::warning
+**Deployment Verification Needs Elaboration**: The current verification process requires more detailed guidance on how to confirm successful deployment and activation. This will be expanded in future documentation updates.
+:::
+
 ## Troubleshooting Common Issues
 
 ### Deployment Failures
 
-**Insufficient Value**
+**Problem: Transaction fails with "Insufficient Value"**
 
-- Ensure transaction includes exactly {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA
-- Check that your wallet has sufficient balance
+**Debug Steps:**
 
-**Invalid Withdrawal Credentials**
+1. **Check Transaction Value**: Ensure exactly 10,000 BERA is sent
+2. **Verify Wallet Balance**: Confirm your wallet has sufficient BERA for deposit + gas
+3. **Check Gas Estimation**: Ensure gas limit is sufficient for the complex deployment
 
-- Verify withdrawal credentials format (0x01 + 20-byte address)
-- Ensure address matches predicted withdrawal vault address
+**Debugging Commands:**
 
-**Signature Verification Failed**
+```solidity
+// Check your wallet balance
+uint256 balance = address(this).balance;
 
-- Verify deposit signature is from correct validator keys
-- Check that withdrawal credentials in signature match deployment parameters
+// Verify required amount
+uint256 required = 10000 ether; // 10,000 BERA
+```
+
+**Problem: "Invalid Withdrawal Credentials" error**
+
+**Debug Steps:**
+
+1. **Verify Format**: Ensure credentials are `0x01` + 20-byte withdrawal vault address
+2. **Check Predicted Address**: Use `predictStakingPoolContractsAddresses()` to get correct address
+3. **Validate Signature**: Ensure deposit signature uses correct withdrawal credentials
+
+**Debugging Commands:**
+
+```solidity
+// Get predicted withdrawal vault address
+CoreContracts memory contracts = factory.predictStakingPoolContractsAddresses(pubkey);
+address withdrawalVault = contracts.withdrawalVault;
+
+// Generate correct withdrawal credentials
+bytes memory credentials = abi.encodePacked(bytes1(0x01), withdrawalVault);
+```
+
+**Problem: "Signature Verification Failed"**
+
+**Debug Steps:**
+
+1. **Verify Validator Keys**: Ensure signature is from correct validator keypair
+2. **Check Withdrawal Credentials**: Confirm credentials in signature match deployment parameters
+3. **Validate Signature Format**: Ensure signature is properly formatted from beacon client
 
 ### Activation Issues
 
-**Proof Verification Failed**
+**Problem: "Proof Verification Failed"**
 
-- Ensure proofs are recent (within 10 minutes)
-- Verify proofs are from correct validator index
-- Check that withdrawal credentials proofs match deployed contracts
+**Debug Steps:**
 
-**Pool Not Activating**
+1. **Check Proof Freshness**: Ensure proofs are recent (within 10 minutes)
+2. **Verify Validator Index**: Confirm proofs are from correct validator index
+3. **Validate Proof Data**: Ensure withdrawal credentials proofs match deployed contracts
+4. **Check Beacon API**: Verify beacon API is responding and data is current
 
-- Verify all required proofs are provided
-- Check that validator data matches deployed contracts
-- Ensure timestamp is within acceptable range
+**Debugging Commands:**
+
+```solidity
+// Check if pool is active
+bool active = stakingPool.isActive();
+
+// Get validator pubkey
+bytes memory pubkey = stakingPool.getValidatorPubkey();
+
+// Check minimum effective balance
+uint256 minBalance = stakingPool.minEffectiveBalance();
+```
+
+**Problem: Pool won't activate after successful deployment**
+
+**Debug Steps:**
+
+1. **Verify All Proofs**: Ensure index, withdrawal credentials, and balance proofs are provided
+2. **Check Validator Data**: Confirm pubkey, withdrawal credentials, and operator match deployed contracts
+3. **Validate Timestamp**: Ensure timestamp is within acceptable range (recent)
+4. **Monitor Events**: Watch for `StakingPoolActivated` event
+
+**Debugging Commands:**
+
+```solidity
+// Check deployed contracts
+CoreContracts memory contracts = factory.getCoreContracts(pubkey);
+
+// Verify contract addresses match predictions
+CoreContracts memory predicted = factory.predictStakingPoolContractsAddresses(pubkey);
+require(contracts.stakingPool == predicted.stakingPool, "Address mismatch");
+```
+
+### Common Error Messages
+
+**"StakingPoolAlreadyActivated"**
+
+- Pool has already been activated
+- Check `isActive()` status before attempting activation
+
+**"InvalidSender"**
+
+- Function called by unauthorized address
+- Verify caller has correct role permissions
+
+**"InvalidAmount"**
+
+- Amount parameter is zero or invalid
+- Check all amount parameters are non-zero
+
+**"TransferFailed"**
+
+- BERA transfer failed
+- Check contract has sufficient balance and gas
 
 ## Security Considerations
 

@@ -371,8 +371,37 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/users"
         },
         {
+          text: "Installation Guide",
+          link: "/nodes/staking-pools/installation"
+        },
+        {
           text: "Smart Contract Reference",
           link: "/nodes/staking-pools/contracts"
+        }
+      ]
+    },
+    {
+      text: "Staking Pool Contracts",
+      items: [
+        {
+          text: "StakingPoolContractsFactory",
+          link: "/nodes/staking-pools/contracts/StakingPoolContractsFactory.md"
+        },
+        {
+          text: "StakingPool",
+          link: "/nodes/staking-pools/contracts/core/StakingPool.md"
+        },
+        {
+          text: "SmartOperator",
+          link: "/nodes/staking-pools/contracts/core/SmartOperator.md"
+        },
+        {
+          text: "StBERA",
+          link: "/nodes/staking-pools/contracts/base/StBERA.md"
+        },
+        {
+          text: "ELWithdrawHelper",
+          link: "/nodes/staking-pools/contracts/helpers/ELWithdrawHelper.md"
         }
       ]
     },

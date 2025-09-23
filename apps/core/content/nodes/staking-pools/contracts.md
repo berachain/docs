@@ -21,215 +21,47 @@ This reference provides detailed information about the smart contracts that powe
 
 ## Contract Architecture
 
-The staking pools system consists of several interconnected smart contracts:
+The staking pools system consists of several interconnected smart contracts that work together to provide liquid staking functionality. At the heart of the system is the **StakingPoolContractsFactory**, which serves as the deployment mechanism for all other contracts. This factory creates and manages the complete suite of contracts needed for each validator's staking pool.
 
-### Core Contracts
+The core functionality revolves around the **StakingPool** contract, which handles user deposits, share management, and the fundamental operations of the staking pool. Users interact primarily with this contract to stake their BERA tokens and receive stBERA shares in return. The StakingPool contract maintains the accounting for user positions and manages the conversion between BERA and stBERA shares.
 
-- **[StakingPoolContractsFactory](./staking-pool-contracts-factory.md)**: Deploys and manages all staking pool contracts
-- **[StakingPool](./staking-pool.md)**: Core contract for user deposits, share management, and pool operations
-- **[SmartOperator](./smart-operator.md)**: Manages validator operations and PoL integration
-- **[WithdrawalVault](./withdrawal-vault.md)**: Handles withdrawal requests and processing
-- **[StakingRewardsVault](./staking-rewards-vault.md)**: Manages rewards and auto-compounding
-- **[IncentiveCollector](./incentive-collector.md)**: Handles incentive token collection and conversion
-- **[AccountingOracle](./accounting-oracle.md)**: Provides off-chain data validation
+Validator operations are coordinated through the **SmartOperator** contract, which manages the integration with Berachain's Proof of Liquidity system. This contract handles BGT boosting, reward allocation, commission management, and other validator-specific operations that require coordination with the broader Berachain ecosystem.
 
-### Supporting Contracts
-
-- **[Deployer](./deployer.md)**: Contract deployment utilities
-- **[Base Contracts](./base/)**: Shared base contracts and interfaces
-
-## Key Features
-
-### For Validators
-
-- **Easy Deployment**: Factory contract deploys all necessary contracts
-- **Automated Operations**: Smart contracts handle validator operations
-- **Reward Management**: Automatic reward collection and distribution
-- **Commission Control**: Configurable commission rates on user rewards
-
-### For Users
-
-- **Liquid Staking**: Stake BERA and receive shares representing your position
-- **Auto-Compounding**: All rewards automatically reinvested
-- **Flexible Withdrawals**: Request withdrawals at any time
-- **Transparent Operations**: All operations are on-chain and verifiable
+Supporting these core contracts are additional utilities such as the **StBERA** base contract for token implementation and the **ELWithdrawHelper** for execution layer withdrawal utilities, which define the common patterns used throughout the system.
 
 ## Contract Interactions
 
-### User Interactions
+The staking pools system involves two main types of interactions, each serving different participants in the ecosystem.
 
-Users primarily interact with the `StakingPool` contract:
+Users primarily interact with the `StakingPool` contract for their staking activities. The most fundamental interaction is the `submit` function, which allows users to deposit BERA tokens and receive stBERA shares in return. Users can check their share balance using the `sharesOf` function, which returns the number of stBERA shares they hold. To see their total BERA balance including accumulated rewards, users can call the `balanceOf` function, which converts their shares back to the equivalent BERA amount.
 
-```solidity
-// Deposit BERA to receive shares
-function submit(address receiver) external payable returns (uint256);
-
-// Check share balance
-function sharesOf(address account) external view returns (uint256);
-
-// Check BERA balance (including rewards)
-function balanceOf(address account) external view returns (uint256);
-```
-
-### Validator Interactions
-
-Validators interact with multiple contracts:
-
-```solidity
-// Deploy staking pool contracts
-StakingPoolContractsFactory.deployStakingPoolContracts(
-    bytes memory pubkey,
-    bytes memory withdrawalCredentials,
-    bytes memory signature,
-    address validatorAdmin,
-    address defaultSharesRecipient
-);
-
-// Queue commission rate change
-SmartOperator.queueValCommission(uint96 commission);
-
-// Queue reward allocation
-SmartOperator.queueRewardsAllocation(
-    uint64 startBlock,
-    IBeraChef.Weight[] calldata weights
-);
-```
-
-### Oracle Interactions
-
-The `AccountingOracle` provides off-chain data:
-
-```solidity
-// Update oracle data
-function updateData(
-    uint256 totalStakedBalance,
-    uint256 effectiveBalance,
-    uint256 withdrawalAmount,
-    uint256 bgtToUnboostAndBurn
-) external;
-
-// Trigger funds management
-function triggerFundsManagement() external;
-```
+Validators interact with multiple contracts to manage their staking pools. The initial setup begins with the `StakingPoolContractsFactory.deployStakingPoolContracts` function, which deploys all necessary contracts for a new validator. This function requires the validator's public key, withdrawal credentials, deposit signature, and administrative addresses. Once deployed, validators use the `SmartOperator` contract to manage ongoing operations, such as queuing commission rate changes with `queueValCommission` and setting up reward allocations through `queueRewardsAllocation`.
 
 ## Security Model
 
-### Access Control
+The staking pools system implements a comprehensive security model designed to protect user funds while maintaining operational flexibility for validators and administrators.
 
-Contracts use role-based access control (RBAC):
+Access control is managed through a role-based system that provides granular permissions for different types of operations. The `DEFAULT_ADMIN_ROLE` provides governance control over contract upgrades and emergency actions, ensuring that the system can be maintained and updated as needed. Validators receive the `VALIDATOR_ADMIN_ROLE`, which grants them operational control over their specific staking pool while preventing interference with other validators' operations.
 
-- **DEFAULT_ADMIN_ROLE**: Governance control (upgrades, emergency actions)
-- **VALIDATOR_ADMIN_ROLE**: Validator operational control
-- **REWARD_ALLOCATION_MANAGER_ROLE**: BGT reward management
-- **COMMISSION_MANAGER_ROLE**: Fee management
-- **BOOST_MANAGER_ROLE**: BGT boost operations
-- **INCENTIVE_MANAGER_BOT_ROLE**: Incentive collection
-- **REDEEM_BOT_ROLE**: BGT redemption operations
+Specialized roles handle specific aspects of the system. The `REWARD_ALLOCATION_MANAGER_ROLE` manages BGT reward distribution, while the `COMMISSION_MANAGER_ROLE` handles fee management. BGT boost operations are controlled by the `BOOST_MANAGER_ROLE`, and incentive collection is managed by the `INCENTIVE_MANAGER_BOT_ROLE`. The `REDEEM_BOT_ROLE` handles BGT redemption operations, ensuring that these critical functions are properly isolated and controlled.
 
-### Emergency Controls
-
-- **Pause Mechanisms**: Contracts can be paused in emergency situations
-- **Full Exit Triggers**: Automatic full exit if minimum balance breached
-- **Upgradeable Contracts**: Governance can upgrade contracts if needed
-
-## Integration Points
-
-### Proof of Liquidity (PoL)
-
-Contracts integrate with Berachain's PoL system:
-
-- **BGT Management**: Automatic boost and unboost operations
-- **Incentive Collection**: Claim and distribute PoL incentives
-- **Reward Allocation**: Direct rewards to specific applications
-- **Commission Management**: Validator fees on user rewards
-
-### Consensus Layer
-
-Contracts interact with the consensus layer:
-
-- **Validator Registration**: Set operator and withdrawal credentials
-- **Staking Operations**: Deposit and withdraw from consensus layer
-- **Oracle Data**: Verify validator state and balances
+Emergency controls provide additional layers of protection. Contracts can be paused in emergency situations, allowing administrators to halt operations while issues are resolved. The system includes automatic full exit triggers that activate if the minimum balance threshold is breached, protecting users from potential losses. All contracts are upgradeable through a beacon proxy pattern, allowing governance to upgrade contracts if security issues are discovered or improvements are needed.
 
 ## Contract Documentation
 
-Detailed documentation for each contract is available in the following sections:
+Detailed documentation for each contract is available through the following reference materials. Each contract documentation provides comprehensive information about functions, events, errors, and usage patterns.
 
-### Core Contracts
-
-- [StakingPoolContractsFactory](./staking-pool-contracts-factory.md) - Factory for deploying staking pool contracts
-- [StakingPool](./staking-pool.md) - Main staking pool contract
-- [SmartOperator](./smart-operator.md) - Validator operations manager
-- [WithdrawalVault](./withdrawal-vault.md) - Withdrawal request handler
-- [StakingRewardsVault](./staking-rewards-vault.md) - Rewards management
-- [IncentiveCollector](./incentive-collector.md) - Incentive token collector
-- [AccountingOracle](./accounting-oracle.md) - Off-chain data validation
-
-### Supporting Contracts
-
-- [Deployer](./deployer.md) - Deployment utilities
-- [Base Contracts](./base/) - Shared interfaces and base contracts
-
-### Interfaces
-
-- [Interfaces](./interfaces/) - Contract interfaces and types
-- [Libraries](./libraries/) - Shared libraries and utilities
-- [Helpers](./helpers/) - Helper contracts and utilities
-
-## Development Guidelines
-
-### Contract Standards
-
-All contracts follow established standards:
-
-- **OpenZeppelin**: Use OpenZeppelin contracts for security
-- **Solidity**: Latest stable Solidity version
-- **Testing**: Comprehensive test coverage
-- **Documentation**: NatSpec comments for all public functions
-
-### Security Considerations
-
-- **Access Control**: Granular role-based permissions
-- **Input Validation**: Comprehensive parameter validation
-- **Emergency Controls**: Pause and emergency exit mechanisms
-- **Upgradeability**: Beacon proxy pattern for upgrades
-
-### Integration Guidelines
-
-- **Event Monitoring**: Monitor contract events for state changes
-- **Error Handling**: Proper error handling for failed transactions
-- **Gas Optimization**: Efficient gas usage for user operations
-- **Oracle Dependencies**: Handle oracle failures gracefully
-
-## Getting Started
-
-### For Developers
-
-1. **Review Contracts**: Start with the [StakingPool](./core/StakingPool.sol/README.md) contract
-2. **Understand Architecture**: Study the contract interactions and data flow
-3. **Test Integration**: Use test contracts to understand interactions
-4. **Monitor Events**: Track contract events for state changes
-
-### For Validators
-
-1. **Deploy Contracts**: Use the [StakingPoolContractsFactory](./StakingPoolContractsFactory.sol/README.md)
-2. **Configure Operations**: Set up commission rates and reward allocation
-3. **Monitor Performance**: Track pool performance and user activity
-4. **Manage Risk**: Understand emergency procedures and controls
-
-### For Users
-
-1. **Choose Pool**: Research validator reputation and pool performance
-2. **Deposit BERA**: Use the `submit()` function to stake
-3. **Monitor Position**: Track your share balance and rewards
-4. **Request Withdrawal**: Use `requestWithdrawal()` when ready to exit
+| Contract                        | Description                                               | Documentation                                                                                   |
+| ------------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts       | [View Documentation](./StakingPoolContractsFactory.md)                                          |
+| **StakingPool**                 | Main staking functionality and user interactions          | [View Documentation](./core/StakingPool.md)                                                     |
+| **SmartOperator**               | Validator operations and Proof of Liquidity integration   | [View Documentation](./core/SmartOperator.md)                                                   |
+| **StBERA**                      | Base contract for stBERA token implementation            | [View Documentation](./base/StBERA.md)                                                          |
+| **ELWithdrawHelper**            | Execution layer withdrawal utilities (EIP-7002)          | [View Documentation](./helpers/ELWithdrawHelper.md)                                             |
 
 ## Support and Resources
 
-- **Documentation**: This reference and related guides
-- **Community**: Berachain Discord and forums
-- **Technical Support**: GitHub issues for technical problems
-- **Security**: Official security channels for urgent matters
+The staking pools system is supported by comprehensive documentation, an active community, and dedicated technical support channels. This reference and related guides provide detailed information about using and integrating with the system. The Berachain community maintains active Discord channels and forums where users can ask questions and share experiences. Technical problems can be reported through GitHub issues, while urgent security matters should be directed to official security channels.
 
 :::tip
 When integrating with staking pool contracts, always verify contract addresses and test thoroughly on testnets before mainnet deployment.
