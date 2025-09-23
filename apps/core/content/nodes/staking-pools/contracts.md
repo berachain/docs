@@ -51,13 +51,13 @@ Emergency controls provide additional layers of protection. Contracts can be pau
 
 Detailed documentation for each contract is available through the following reference materials. Each contract documentation provides comprehensive information about functions, events, errors, and usage patterns.
 
-| Contract                        | Description                                               | Documentation                                                                                   |
-| ------------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts       | [View Documentation](./StakingPoolContractsFactory.md)                                          |
-| **StakingPool**                 | Main staking functionality and user interactions          | [View Documentation](./core/StakingPool.md)                                                     |
-| **SmartOperator**               | Validator operations and Proof of Liquidity integration   | [View Documentation](./core/SmartOperator.md)                                                   |
-| **StBERA**                      | Base contract for stBERA token implementation            | [View Documentation](./base/StBERA.md)                                                          |
-| **ELWithdrawHelper**            | Execution layer withdrawal utilities (EIP-7002)          | [View Documentation](./helpers/ELWithdrawHelper.md)                                             |
+| Contract                        | Description                                             | Documentation                                          |
+| ------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts     | [View Documentation](./StakingPoolContractsFactory.md) |
+| **StakingPool**                 | Main staking functionality and user interactions        | [View Documentation](./core/StakingPool.md)            |
+| **SmartOperator**               | Validator operations and Proof of Liquidity integration | [View Documentation](./core/SmartOperator.md)          |
+| **StBERA**                      | Base contract for stBERA token implementation           | [View Documentation](./base/StBERA.md)                 |
+| **ELWithdrawHelper**            | Execution layer withdrawal utilities (EIP-7002)         | [View Documentation](./helpers/ELWithdrawHelper.md)    |
 
 ## Support and Resources
 
