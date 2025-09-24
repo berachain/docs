@@ -60,6 +60,7 @@ const SIDEBAR = {
         { text: "BERA Staking", link: "/learn/guides/bera-staking" },
         { text: "Claim BGT Rewards", link: "/learn/guides/claim-bgt" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+        { text: "Berascan Token Update", link: "/learn/guides/berascan-token-update" },
         {
           text: "Setup Reward Vault",
           link: "/learn/guides/setup-reward-vault"
