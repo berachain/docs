@@ -55,6 +55,10 @@ If your protocol or project has a token associated with it, creating a pull requ
 
 Follow the instructions provided in the [Contribution Guidelines](https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md#adding-a-token) to add new tokens.
 
+:::tip Additional Token Information
+If you want to update your token information on Berascan (the block explorer), see our [Berascan Token Update Guide](/learn/guides/berascan-token-update) for step-by-step instructions on how to verify ownership and submit token updates.
+:::
+
 ### Create Proof of Liquidity Adapter
 
 A Proof of Liquidity adapter is used to help display a Reward Vault's BGT emission yield.
