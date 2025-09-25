@@ -24,8 +24,10 @@ Kubernetes environments are also perfectly viable, but require extensive experti
 ## 🔥📄🔥 TL;DR
 
 1. Launch a new machine based on Debian or Ubuntu:
+
 - an AWS `is4gen.medium` instance ($60/mo cheapest option that works)
 - a [Hetzner AX102](https://www.hetzner.com/dedicated-rootserver/ax102/) ($130/mo monster dedicated machine)
+
 2. Configure the security rules to allow traffic on all ports from all sources.
 3. Login in, then fetch and run our all-in-one script:
 
@@ -58,19 +60,18 @@ Therefore we recommend **dedicated servers** for Berachain instances. Here are s
 
 1. In Europe, Hetzner [is a popular choice](https://www.hetzner.com/dedicated-rootserver/).
 2. In North America, Interserver [has a number of offerings](https://www.interserver.net/dedicated/buy-now-servers.html).
-
 3. OVH has several data centres [on every continent](https://www.ovhcloud.com/en/bare-metal/regions-availability/).
 
-Should you prefer to use _cloud compute_ such as AWS, we recommend instances that come with instance storage. The scripts in this guide will automatically detect the instance storage and put it to use. You can [research your instance options](https://ec2instances.info). The tradeoff with on-instance storage is that the storage will be wiped if the instance is ever stopped (but it does survive reboots). Further, we recommend ARM instances as these are generally 15-20% cheaper.
+Should you prefer to use _cloud compute_ such as AWS, we recommend instances that come with instance storage. The scripts in this guide will automatically detect AWS instance storage and put it to use. You can [research your instance options](https://ec2instances.info). The tradeoff with on-instance storage is that the storage will be wiped if the instance is ever stopped; it does, however, survive reboots. Further, we recommend ARM instances, since these are generally 15-20% cheaper.
 
 ### Hardware Sizing Guide
 
 | Use Case                                       | CPU Cores  | RAM      | Storage | Example CPU          |
 | ---------------------------------------------- | ---------- | -------- | ------- | -------------------- |
 | **Development/Testing**                        | 4-8 cores  | 16-32GB  | 1 TB    | XEON, AMD 5600X      |
-| **Production Pruned**                          | 8-16 cores | 32-48GB  | 1-2TB   | XEON, 5900X          |
+| **Production Pruned**                          | 4-16 cores | 32-48GB  | 1-2TB   | XEON, 5900X          |
 | **High-Traffic RPC**                           | 8-16 cores | 48-64GB  | 1-2 TB  | Xeon E5, AMD 7950X3D |
-| **Archive Node with both testnet and mainnet** | 16 cores   | 64-128GB | 4 TB   | Xeon E5, AMD 7950X3D |
+| **Archive Node with both testnet and mainnet** | 16 cores   | 64-128GB | 4 TB    | Xeon E5, AMD 7950X3D |
 
 ## Quick Start with mkberanode.sh
 
@@ -103,15 +104,15 @@ sudo ./mkberanode.sh --chain bepolia --el geth \
 
 The script supports various configuration options:
 
-| Option                 | Values               | Description                                         |
-| ---------------------- | -------------------- | --------------------------------------------------- |
-| `--chain`              | `mainnet`, `bepolia` | Target network                                      |
-| `--el`                 | `reth`, `geth`       | Execution client                 |
-| `--mode`               | `archive`, `pruned`  | Node type                                           |
-| `--no-snapshot`        | (flag)               | Do not fetch a snapshot |
-| `--snapshot-geography` | `na`, `eu`, `as`     | Snapshot download region                            |
-| `--cl-version`         | `vX.Y.Z`             | Specific consensus client version                   |
-| `--el-version`         | `vX.Y.Z`             | Specific execution client version                   |
+| Option                 | Values               | Description                       |
+| ---------------------- | -------------------- | --------------------------------- |
+| `--chain`              | `mainnet`, `bepolia` | Target network                    |
+| `--el`                 | `reth`, `geth`       | Execution client                  |
+| `--mode`               | `archive`, `pruned`  | Node type                         |
+| `--no-snapshot`        | (flag)               | Do not fetch a snapshot           |
+| `--snapshot-geography` | `na`, `eu`, `as`     | Snapshot download region          |
+| `--cl-version`         | `vX.Y.Z`             | Specific consensus client version |
+| `--el-version`         | `vX.Y.Z`             | Specific execution client version |
 
 ### 4. What the Script Does
 
@@ -122,14 +123,14 @@ The automated installation:
 3. **Network Configuration**: Fetches genesis files and network parameters
 4. **Database Initialization**: Sets up blockchain databases
 5. **Snapshot Download**: Downloads and installs snapshots (optional)
-6. **Service Creation**: Creates and enables systemd services
+6. **Service Creation**: Creates and enables systemd services to provide RPC and websocket service.
 7. **Security Setup**: Generates JWT secrets and sets proper permissions
 
-After installation, you will be given commands to launch the chains.  The services have been set up to provide RPC and websocket service of standard ETH RPCs, and use our recommended settings in the CL and EL.
+After installation, you will be given commands to launch the chains.
 
 ### 5. Start Services
 
-After installation with `mkberanode.sh`, services are automatically enabled but not started:
+After installation with `mkberanode.sh`, services are enabled but not started:
 
 ```bash
 # Start execution layer first
@@ -141,57 +142,11 @@ sudo systemctl status berachain-el.service
 sudo systemctl status berachain-cl.service
 ```
 
-## Understanding the Berachain Node Setup
+### What just happened?
 
 The `mkberanode.sh` script orchestrates a complete Berachain node deployment. Understanding how it works provides insight into the node architecture and can help with troubleshooting and customization.
 
-### Chain Parameters and Genesis Files
-
-Berachain nodes require specific genesis files and network parameters that define the initial state and rules of the blockchain:
-
-#### Network Configuration Sources
-
-The script downloads network parameters from the beacon-kit repository:
-
-```
-https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/{CHAIN_ID}/
-```
-
-Where `CHAIN_ID` is:
-- `80094` for mainnet
-- `80069` for bepolia (testnet)
-
-#### Critical Genesis Files
-
-**Execution Layer Genesis** (`eth-genesis.json`)
-- Defines initial account balances, contract deployments, and EVM parameters
-- Sets the chain ID, gas limits, and consensus algorithm parameters
-- Contains the genesis block hash that all nodes must agree upon
-- Used by both bera-reth and bera-geth to initialize their databases
-
-**Consensus Layer Genesis** (`genesis.json`)
-- Defines initial validator set and staking parameters
-- Contains BeaconKit-specific configuration for proof-of-stake consensus
-- Sets epoch timing, slot duration, and validator rewards
-- Used by beacond to initialize the consensus state
-
-**KZG Trusted Setup** (`kzg-trusted-setup.json`)
-- Cryptographic parameters for EIP-4844 blob transactions
-- Required for data availability and rollup functionality
-- Ensures all nodes use the same cryptographic assumptions
-
-#### Network Configuration Files
-
-Additional configuration files are downloaded when available:
-
-- `config.toml`: P2P networking, RPC endpoints, and node behavior
-- `app.toml`: Application-specific settings like pruning, API endpoints
-- `el-bootnodes.txt`: Bootstrap nodes for execution layer peer discovery
-- `el-peers.txt`: Static peers for execution layer networking
-
-### Directory Structure: `/opt/berachain`
-
-The script creates a standardized directory layout under `/opt/berachain`:
+The script creates a simple directory layout under `/opt/berachain`:
 
 ```
 /opt/berachain/
@@ -208,7 +163,7 @@ The script creates a standardized directory layout under `/opt/berachain`:
 │   │   │   └── jwt.hex    # Shared secret for EL-CL communication
 │   │   └── data/          # Blockchain state and blocks
 │   └── el/                # Execution layer data
-│       ├── bera-reth/     # Reth database (or bera-geth/)
+│       ├── bera-geth/     # EL database
 │       └── config/        # EL configuration
 ├── chainspec/             # Network parameters
 │   ├── el/
@@ -222,8 +177,6 @@ The script creates a standardized directory layout under `/opt/berachain`:
     └── jwt.hex           # Engine API authentication
 ```
 
-#### Directory Purpose and Ownership
-
 All directories are owned by the `berachain` system user for security isolation. Key purposes:
 
 - **`bin/`**: Contains the node software binaries downloaded from GitHub releases
@@ -232,151 +185,68 @@ All directories are owned by the `berachain` system user for security isolation.
 - **`chainspec/`**: Network parameter templates used during initialization
 - **`runtime/`**: Shared secrets and runtime configuration
 
-### Database Initialization Process
+Berachain nodes require specific genesis files and network parameters that define the initial state and rules of the blockchain.
+The script downloads network parameters from the beacon-kit repository:
 
-#### Execution Layer Initialization
-
-The script initializes the execution layer database using the network genesis file:
-
-**For bera-reth:**
-```bash
-bera-reth init --datadir /opt/berachain/var/el --chain /opt/berachain/chainspec/el/genesis.json
+```
+https://raw.githubusercontent.com/berachain/beacon-kit/main/testing/networks/{CHAIN_ID}/
 ```
 
-**For bera-geth:**
-```bash
-bera-geth init --state.scheme=path --datadir /opt/berachain/var/el/bera-geth/ /opt/berachain/chainspec/el/genesis.json
-```
+Where `CHAIN_ID` is:
 
-This process:
-- Creates the database schema
-- Inserts the genesis block and initial state
-- Sets up account balances and smart contract code
-- Establishes the starting point for blockchain synchronization
+- `80094` for mainnet
+- `80069` for bepolia (testnet)
 
-#### Consensus Layer Initialization
+**Execution Layer Genesis** (`eth-genesis.json`)
 
-The consensus layer is initialized using beacond:
+- Defines initial account balances, contract deployments, and EVM parameters
+- Sets the chain ID, gas limits, and consensus algorithm parameters
+- Contains the genesis block hash that all nodes must agree upon
+- Used by both bera-reth and bera-geth to initialize their databases
 
-```bash
-beacond init "berachain-node" --chain-id {CHAIN_ID} --home /opt/berachain/var/beacond --beacon-kit.chain-spec {mainnet|testnet}
-```
+**Consensus Layer Genesis** (`genesis.json`)
 
-This creates the consensus data directory and reads network-specific files:
-- Genesis state for proof-of-stake consensus
-- Network configuration for P2P and API settings
-- KZG trusted setup for data availability
+- Defines initial validator set and staking parameters
+- Contains BeaconKit-specific configuration for proof-of-stake consensus
+- Sets epoch timing, slot duration, and validator rewards
+- Used by beacond to initialize the consensus state
 
-### Snapshot Integration
+**KZG Trusted Setup** (`kzg-trusted-setup.json`)
 
-When snapshots are enabled, the script streams compressed blockchain data directly into the database directories:
+- Cryptographic parameters for EIP-4844 blob transactions
+- Required for data availability and rollup functionality
+- Ensures all nodes use the same cryptographic assumptions
 
-**Process Flow:**
-1. Fetch snapshot metadata from Google Cloud Storage buckets
-2. Identify latest snapshots for the specified client and mode
-3. Stream download and decompress directly to target directories:
-   - Beacon snapshots → `/opt/berachain/var/beacond/data/`
-   - Execution snapshots → `/opt/berachain/var/el/`
+Additional configuration files are installed to configure the EL and CL clients:
 
-**Benefits:**
-- Reduces initial sync time from hours/days to minutes
-- No intermediate storage required (streams directly)
+- `config.toml`: P2P networking, RPC endpoints, and node behavior
+- `app.toml`: Application-specific settings like pruning, API endpoints
+- `el-bootnodes.txt`: Bootstrap nodes for execution layer peer discovery
+- `el-peers.txt`: Static peers for execution layer networking
 
-### systemd Service Architecture
-
-The script creates two interconnected systemd services:
-
-#### Execution Layer Service (`berachain-el.service`)
-
-```ini
-[Unit]
-Description=Berachain Execution Layer (reth/geth)
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-User=berachain
-Group=berachain
-ExecStart=/opt/berachain/bin/bera-reth node --datadir /opt/berachain/var/el \
-  --http --http.addr 0.0.0.0 --http.port 8545 \
-  --ws --ws.addr 0.0.0.0 --ws.port 8546 \
-  --authrpc.addr 127.0.0.1 --authrpc.port 8551 --authrpc.jwtsecret /opt/berachain/runtime/jwt.hex \
-  --port 30303 --chain /opt/berachain/var/el/config/genesis.json
-Restart=always
-RestartSec=3
-LimitNOFILE=1048576
-
-[Install]
-WantedBy=multi-user.target
-```
-
-#### Consensus Layer Service (`berachain-cl.service`)
-
-```ini
-[Unit]
-Description=Berachain Consensus Layer (beacond)
-Requires=berachain-el.service
-After=berachain-el.service
-
-[Service]
-User=berachain
-Group=berachain
-ExecStart=/opt/berachain/bin/beacond start --home /opt/berachain/var/beacond 
-Restart=always
-RestartSec=3
-LimitNOFILE=1048576
-
-[Install]
-WantedBy=multi-user.target
-```
-
-#### Service Dependencies and Communication
-
-The service dependency chain ensures `berachain-el.service` starts first to establish the execution layer, followed by `berachain-cl.service` starting after the EL is running. Inter-client communication occurs through the Engine API on port 8551, facilitating CL ↔ EL communication for block proposals and validation. JWT authentication using a shared secret (`jwt.hex`) secures Engine API communications, while external applications connect via JSON-RPC on port 8545 (HTTP) or 8546 (WebSocket).
-
-#### Service Management and Monitoring
-
-**Standard Operations:**
-```bash
-# Start services in correct order
-sudo systemctl start berachain-el.service
-sudo systemctl start berachain-cl.service
-
-# Check service status
-sudo systemctl status berachain-*.service
-
-# View logs
-sudo journalctl -u berachain-el.service -f
-sudo journalctl -u berachain-cl.service -f
-
-# Restart for upgrades
-sudo systemctl restart berachain-el.service
-sudo systemctl restart berachain-cl.service
-```
-
-### Network Integration and P2P Discovery
-
-#### Execution Layer Networking
+The script sets up two new systemd services: `berachain-cl` and `berachain-el`. These are configured so that the EL starts first, and so that both services start on boot.
 
 The execution layer client connects to the network using bootstrap nodes from `el-bootnodes.txt` for initial peer discovery, P2P port 30303 for ongoing peer communication, and external IP detection for NAT traversal and peer advertisement.
 
-#### Consensus Layer Networking
-
-The CL client establishes connectivity through:
-- **P2P port 26656** for validator and node communication
-- **External address configuration** using detected public IP
-- **Beacon network participation** for consensus message propagation
-
 ## Post-Installation Checks
 
-### Check Consensus Layer Sync
+### Check Consensus Layer
 
 ```bash
 # Check if still syncing
 curl -s http://localhost:26658/status | jq '.result.sync_info.catching_up'
 ```
 
-### Check Execution Layer Sync
+```bash
+# Get consensus client status
+curl -s http://localhost:26658/status | jq '{
+  latest_block_height: .result.sync_info.latest_block_height,
+  catching_up: .result.sync_info.catching_up,
+  latest_block_time: .result.sync_info.latest_block_time
+}'
+```
+
+### Check Execution Layer
 
 ```bash
 # Get current block number
@@ -390,8 +260,6 @@ curl -X POST -H "Content-Type: application/json" \
   http://localhost:8545
 ```
 
-### Network Information
-
 ```bash
 # Get network information
 curl -X POST -H "Content-Type: application/json" \
@@ -400,17 +268,6 @@ curl -X POST -H "Content-Type: application/json" \
 
 # Mainnet returns: "80094"
 # Bepolia returns: "80069"
-```
-
-### Consensus Layer Status
-
-```bash
-# Get consensus client status
-curl -s http://localhost:26658/status | jq '{
-  latest_block_height: .result.sync_info.latest_block_height,
-  catching_up: .result.sync_info.catching_up,
-  latest_block_time: .result.sync_info.latest_block_time
-}'
 ```
 
 ### View Logs
@@ -435,8 +292,6 @@ Re-run `mkberanode.sh` specifying the same chain and clients. Alternatively, you
 After the upgrade has completed, restart the `berachain-el` and `bearchain-cl` services or reboot your node.
 
 ## Troubleshooting
-
-### Common Issues
 
 #### Services Won't Start
 
@@ -487,7 +342,7 @@ sudo chown -R berachain:berachain /opt/berachain
 
 Consider setting up monitoring using our [monitoring guide](/nodes/monitoring) to track your node's performance and health. If you're interested in participating in consensus, review our [validator guide](/nodes/guides/validator) to learn about becoming a validator. For production deployments, carefully review our [production checklist](/nodes/production-checklist) to ensure your setup meets enterprise requirements.
 
-### Firewall Configuration
+#### Firewall Configuration
 
 ```bash
 # Install UFW firewall
@@ -505,6 +360,6 @@ sudo ufw allow 26656 comment "Consensus P2P"
 sudo ufw --force enable
 ```
 
-### Getting Help
+## Getting Help
 
 For assistance with your node setup, check our [FAQ](/nodes/faq) for answers to common questions. Join our Discord community for peer support and real-time discussion with other node operators. Report technical issues or contribute improvements through our [GitHub repository](https://github.com/berachain/).
