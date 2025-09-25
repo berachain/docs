@@ -71,7 +71,7 @@ graph LR
 
 ### $HONEY Vaults
 
-`$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type. Currently, all vaults use the same rates: 0% for minting and 0.05% for burning/redeeming.
+`$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type. Currently, all vaults use the same conversion rates: 100% mint rate (0% mint fee) and 99.95% redeem rate (0.05% redeem fee).
 
 ### HoneyFactory
 
@@ -121,4 +121,4 @@ Let's walk through minting and burning `$HONEY` with `$USDC`:
 
 - User burns `1,000 $HONEY`
 - Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
-- 0.5 $USDC fee is distributed to `$BGT` holders
+- `0.5 $USDC` fee is distributed to `$BGT` holders
