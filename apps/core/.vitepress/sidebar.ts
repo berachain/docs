@@ -353,6 +353,56 @@ const SIDEBAR = {
       ]
     },
     {
+      text: "Staking Pools",
+      items: [
+        {
+          text: "Overview",
+          link: "/nodes/staking-pools/"
+        },
+        {
+          text: "Operator Guide",
+          link: "/nodes/staking-pools/operators"
+        },
+        {
+          text: "User Guide",
+          link: "/nodes/staking-pools/users"
+        },
+        {
+          text: "Installation Guide",
+          link: "/nodes/staking-pools/installation"
+        },
+        {
+          text: "Smart Contract Reference",
+          link: "/nodes/staking-pools/contracts"
+        }
+      ]
+    },
+    {
+      text: "Staking Pool Contracts",
+      items: [
+        {
+          text: "StakingPoolContractsFactory",
+          link: "/nodes/staking-pools/contracts/StakingPoolContractsFactory.md"
+        },
+        {
+          text: "StakingPool",
+          link: "/nodes/staking-pools/contracts/core/StakingPool.md"
+        },
+        {
+          text: "SmartOperator",
+          link: "/nodes/staking-pools/contracts/core/SmartOperator.md"
+        },
+        {
+          text: "StBERA",
+          link: "/nodes/staking-pools/contracts/base/StBERA.md"
+        },
+        {
+          text: "ELWithdrawHelper",
+          link: "/nodes/staking-pools/contracts/helpers/ELWithdrawHelper.md"
+        }
+      ]
+    },
+    {
       text: "Help",
       items: [{ text: "Validator Support FAQ", link: "/nodes/faq" }]
     }

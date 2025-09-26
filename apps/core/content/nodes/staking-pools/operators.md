@@ -1,0 +1,474 @@
+---
+head:
+  - - meta
+    - property: og:title
+      content: Staking Pools Operator Guide
+  - - meta
+    - name: description
+      content: How to set up and manage staking pools as a validator
+  - - meta
+    - property: og:description
+      content: How to set up and manage staking pools as a validator
+---
+
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+# Staking Pools Operator Guide
+
+This guide walks validators through setting up and managing staking pools to offer liquid staking services to their communities. Staking pools represent a significant opportunity for validators to build engaged communities while leveraging Berachain's advanced staking infrastructure.
+
+## Prerequisites
+
+Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential, as the staking pool will integrate directly with your existing validator infrastructure. You'll also need at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA for the initial deposit, which serves as the foundation for your staking pool operations.
+
+Technical knowledge of smart contract interactions is important, as you'll be deploying and managing several contracts. While the system is designed to be user-friendly, understanding the underlying mechanics will help you troubleshoot issues and optimize your pool's performance. Perhaps most importantly, you should have a community of users interested in staking with your validator, as staking pools are most effective when they serve an engaged user base.
+
+:::warning
+Staking pools are only available for new validators. Existing validators must perform a full withdrawal and recreate their validator to use staking pools.
+:::
+
+## Validator Lifecycle Integration
+
+Your staking pool integrates with Berachain's validator lifecycle, which follows these states:
+
+- **Deposited**: Initial 10,000 BERA deposit establishes your validator identity
+- **Eligible**: After 1 epoch, your validator becomes eligible for activation
+- **Active**: After another epoch, your validator joins the active set and can propose blocks
+- **Exited**: If capacity limits are reached, validators with lower priority are exited
+- **Withdrawn**: After 1 epoch in exited state, funds are returned to your withdrawal address
+
+The staking pool automatically manages your validator's progression through these states, handling deposits, activation, and any necessary exits based on network conditions.
+
+## Overview of the Setup Process
+
+The setup process for staking pools follows a logical progression that ensures all components are properly configured before going live. It begins with deploying the staking pool contracts through the factory, which creates all the necessary smart contracts for your pool and automatically registers your validator with the consensus layer using the provided deposit.
+
+The next critical step is verification, where you'll obtain proofs and verify that your configuration is correct. This verification process is essential for ensuring the security and proper operation of your pool. After verification, you can activate the pool, enabling user deposits and beginning operations. Finally, you'll configure operational parameters such as commission rates and reward allocations to optimize your pool's performance.
+
+## Deploy and Initialize Your Staking Pool
+
+The deployment and initialization process involves several key steps that must be completed in sequence. This process deploys all necessary contracts, registers your validator with the consensus layer, and activates your pool for user deposits.
+
+**Key Steps:**
+
+1. **Deploy Contracts**: Use the factory to deploy all staking pool contracts with your validator data
+2. **Automatic Registration**: The deployment automatically registers your validator with the consensus layer
+3. **Obtain Proofs**: Gather verification proofs from the beacon API
+4. **Activate Pool**: Verify proofs and activate your pool for operations
+
+The deployment process uses the `StakingPoolContractsFactory` to create all necessary contracts in a single transaction. This factory approach ensures that all contracts are properly linked and configured, reducing the complexity of the setup process. The deployment function automatically performs the first deposit to the consensus layer, registering your validator immediately upon successful deployment.
+
+For detailed step-by-step instructions on deployment, contract verification, proof gathering, and activation, see the [Installation Guide](/nodes/staking-pools/installation).
+
+## Configure Operations
+
+Once your staking pool is active, you'll want to configure various operational parameters to optimize performance and align with your goals. These configurations allow you to customize how your pool operates and how rewards are distributed.
+
+### Business Model and Commission Rates
+
+Staking pools provide validators with a revenue stream through commission on user rewards. You can set commission rates up to a maximum of 100% (10,000 basis points), allowing you to balance profitability with competitive positioning.
+
+**Revenue Calculation Example:**
+
+- Pool size: 1,000,000 BERA
+- Annual rewards: 100,000 BERA (10% APY)
+- Commission rate: 5%
+- Your annual revenue: 5,000 BERA
+- Users receive: 95,000 BERA (auto-compounded)
+
+**Commission Strategy Considerations:**
+
+- **Competitive Rates**: Lower commissions attract more users but reduce revenue per user
+- **Premium Positioning**: Higher commissions can work with strong community and performance
+- **Market Conditions**: Adjust rates based on network conditions and competition
+
+```solidity
+// Queue validator commission rate change (in basis points, max 10000 = 100%)
+function queueValCommission(uint96 commission) external;
+```
+
+See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuevalcommission)
+
+### Configure Reward Allocations
+
+The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community. These operator‑level settings power the user experience shown in the [User Guide](/nodes/staking-pools/users).
+
+```solidity
+// Queue reward allocation for specific applications
+function queueRewardsAllocation(
+    uint64 startBlock,
+    IBeraChef.Weight[] calldata weights
+) external;
+```
+
+See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuerewardsallocation)
+
+### Configure Reward Allocations
+
+The reward allocation system is the primary way you can influence your pool's performance and support specific ecosystem initiatives. This system allows you to direct Proof of Liquidity incentives to specific applications or use cases, creating opportunities to differentiate your pool and build stronger relationships with your staking community.
+
+```solidity
+// Queue reward allocation for specific applications
+function queueRewardsAllocation(
+    uint64 startBlock,
+    IBeraChef.Weight[] calldata weights
+) external;
+```
+
+See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuerewardsallocation)
+
+### BGT Operations and Protocol Fees
+
+The SmartOperator contract automatically manages BGT (Berachain Governance Token) operations to maximize your Proof of Liquidity performance. These operations are handled automatically based on the BGT balance in the contract - you don't need to manually manage BGT boosts or redemptions.
+
+**Protocol Fee System:**
+The protocol charges a fee on BGT boosts (up to 20% maximum). This fee is set by the protocol governance and applies specifically when BGT is boosted to enhance validator performance. The fee helps fund protocol development and maintenance.
+
+**Automatic BGT Management:**
+The system automatically:
+
+- Queues BGT boosts when unboosted BGT is available
+- Activates queued boosts to enhance your validator's position
+- Manages boost drops and BGT redemptions as needed
+- Collects and distributes BGT-related rewards and fees
+
+While you can monitor these operations through various view functions, the actual BGT management is handled automatically by the smart contracts to ensure optimal performance without requiring manual intervention.
+
+## Pool Management
+
+Effective pool management requires ongoing monitoring and proactive decision-making. Regular oversight ensures your pool operates smoothly and helps you identify opportunities for optimization or potential issues before they become problems.
+
+### Monitor Pool Status
+
+Regular monitoring of your pool's status is essential for maintaining optimal performance. You should check key metrics such as whether the pool is active, the total assets under management, and the amount of buffered assets that haven't been staked yet. These metrics provide insights into your pool's health and performance.
+
+```solidity
+// Check if pool is active
+function isActive() external view returns (bool);
+
+// Get total assets under management
+function totalAssets() external view returns (uint256);
+
+// Get buffered assets (not yet staked)
+function bufferedAssets() external view returns (uint256);
+
+// Check if pool has fully exited
+function isFullyExited() external view returns (bool);
+
+// Get minimum effective balance threshold
+function minEffectiveBalance() external view returns (uint256);
+
+// Check if active threshold is reached
+function activeThresholdReached() external view returns (bool);
+```
+
+See: [StakingPool.isActive](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#mineffectivebalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#activethresholdreached)
+
+### Understanding Pool Operations
+
+The StakingPool contract manages several critical operational aspects that directly impact your pool's performance and user experience.
+
+#### Deposit Processing
+
+When users deposit BERA into your pool, the contract automatically handles several processes:
+
+1. **Share Minting**: Users receive stBERA shares proportional to their deposit
+2. **Buffer Management**: Deposits are added to the buffer until sufficient for consensus layer deposits
+3. **Automatic Staking**: When the buffer reaches the minimum deposit amount (10,000 BERA), funds are automatically staked to the consensus layer
+4. **Reward Collection**: Any rewards from previous operations are collected and distributed
+
+The pool uses a sophisticated deposit calculation system that handles:
+
+- **User Deposits**: The actual amount users are depositing
+- **Reward Collection**: Automatic collection of earned rewards
+- **Refund Handling**: Any excess amounts are refunded to users
+- **Buffer Updates**: Maintaining the optimal buffer for consensus layer deposits
+
+#### Withdrawal Management
+
+The withdrawal system provides both immediate and delayed withdrawal options:
+
+1. **Short Circuit Withdrawals**: If sufficient buffered assets are available and the active threshold hasn't been reached, withdrawals are processed immediately
+2. **Standard Withdrawals**: Larger withdrawals or those after the active threshold require consensus layer processing
+3. **Full Exit Triggers**: Automatic full exit when the pool falls below the minimum effective balance
+
+#### Capacity Management
+
+Your pool operates within chain-defined capacity limits:
+
+- **Maximum Capacity**: 10,000,000 BERA per validator (set by governance to prevent dominance)
+- **Minimum Balance**: {{ config.mainnet.minEffectiveBalance }} BERA effective balance threshold (required for validator activation)
+- **Automatic Pausing**: Pool pauses when maximum capacity is reached
+- **Withdrawal Cooldown**: 43,200 blocks (~1 day) cooldown after reaching active threshold
+
+### Oracle Integration
+
+The StakingPool contract integrates with the AccountingOracle to maintain accurate balance information:
+
+```solidity
+// Update total deposits (called by oracle)
+function updateTotalDeposits(uint256 newTotalDeposits) external;
+```
+
+The oracle provides:
+
+- **Balance Updates**: Regular updates of your validator's total deposits
+- **Full Exit Detection**: Automatic detection when your validator has fully exited
+- **Capacity Monitoring**: Tracking when your pool approaches capacity limits
+
+### Reward Management
+
+The pool automatically handles reward collection and distribution:
+
+```solidity
+// Receive rewards from staking rewards vault
+function receiveRewards() external payable;
+
+// Mint fee shares for validator
+function mintFeeShares(uint256 amount) external;
+```
+
+Reward management includes:
+
+- **Automatic Collection**: Rewards are automatically collected from the consensus layer
+- **Fee Distribution**: Validator fees are minted as shares to the default recipient
+- **Auto-Compounding**: All rewards are automatically reinvested in the pool
+
+### Withdrawal Management
+
+The WithdrawalVault contract handles all withdrawal operations for your staking pool. Understanding its operations helps you manage user expectations and troubleshoot withdrawal issues.
+
+#### Withdrawal Processing
+
+The WithdrawalVault provides two types of withdrawal requests:
+
+```solidity
+// Request withdrawal of specific BERA amount
+function requestWithdrawal(
+    bytes memory pubkey,
+    uint64 assetsInGWei,
+    uint256 maxFeeToPay
+) external payable returns (uint256);
+
+// Request redemption of specific share amount
+function requestRedeem(
+    bytes memory pubkey,
+    uint256 shares,
+    uint256 maxFeeToPay
+) external payable returns (uint256);
+```
+
+#### Withdrawal Finalization
+
+Withdrawals are finalized through the consensus layer:
+
+```solidity
+// Finalize a single withdrawal request
+function finalizeWithdrawalRequest(uint256 requestId) external;
+
+// Finalize multiple withdrawal requests
+function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
+```
+
+#### Full Exit Management
+
+When your validator fully exits, the WithdrawalVault handles the transition:
+
+```solidity
+// Notify of full exit from consensus layer
+function notifyFullExitFromCL(bytes memory pubkey) external;
+```
+
+The full exit process includes:
+
+- **Automatic Detection**: The system detects when your validator has fully exited
+- **BGT Redemption**: Automatic redemption of BGT tokens during full exit
+- **Withdrawal Processing**: All pending withdrawals are processed normally
+- **Pool State Update**: The pool is marked as fully exited
+
+#### Withdrawal Request NFTs
+
+Each withdrawal request is represented by an ERC-721 NFT that users can track:
+
+- **Non-Transferable**: Withdrawal request NFTs cannot be transferred
+- **Unique Identification**: Each request has a unique ID for tracking
+- **Status Tracking**: Users can monitor their withdrawal status through the NFT
+- **Finalization Proof**: The NFT serves as proof of the withdrawal request
+
+See: [WithdrawalVault.requestWithdrawal](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#requestwithdrawal), [WithdrawalVault.requestRedeem](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#requestredeem), [WithdrawalVault.finalizeWithdrawalRequest](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#finalizewithdrawalrequest), [WithdrawalVault.finalizeWithdrawalRequests](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#finalizewithdrawalrequests), and [WithdrawalVault.notifyFullExitFromCL](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#notifyfullexitfromcl)
+
+### Emergency Operations
+
+In emergency situations, the protocol governance system has controls to protect pools and users. Individual validators should focus on maintaining clear communication with their users during any operational disruptions or significant changes to their pool's status.
+
+## User Experience Considerations
+
+Building a successful staking pool requires attention to user experience and community building. Provide clear information about your pool's performance, commission rates, and operational status. Maintain an active community through regular communication about pool performance and ecosystem developments.
+
+**Community Building Strategy:**
+
+- **Transparency**: Share performance metrics and operational updates
+- **Support**: Establish clear support channels for users
+- **Engagement**: Regular communication about pool performance and ecosystem developments
+- **Differentiation**: Use reward allocation to support specific ecosystem initiatives
+
+**Growth and Optimization:**
+
+- **Marketing**: Communicate your value proposition clearly (commission rates, performance history, unique features)
+- **Competitive Positioning**: Regularly evaluate commission rates and reward allocation strategies
+- **User Retention**: Focus on reliable operations and responsive support
+- **Performance Monitoring**: Track pool metrics and user satisfaction
+
+:::tip
+Successful staking pools often have strong community engagement and transparent operations. Focus on building trust with your users through clear communication and reliable performance. Consider creating good memes to build community engagement!
+:::
+
+## Security Best Practices
+
+Effective security practices protect both your operations and your users' funds. The role-based access control system in the SmartOperator contract provides granular permissions that should be carefully managed. Use dedicated wallets for different operational roles rather than relying on a single administrative wallet for all functions. This separation of concerns limits the potential impact of any security incident and makes it easier to audit and monitor different aspects of your operations.
+
+Regular monitoring of your pool's operations helps identify potential issues before they become problems. Keep track of oracle data updates to ensure the accounting information remains accurate and current. Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
+
+Understanding the full exit process and having clear communication plans for emergency situations remains important. Develop procedures for communicating with your users during any operational disruptions or significant changes to your pool's status.
+
+## Troubleshooting
+
+### Pool Activation Issues
+
+**Problem: Pool won't activate after deployment**
+
+**Debug Steps:**
+
+1. **Check Pool Status**: Call `isActive()` on your StakingPool contract
+2. **Verify Proofs**: Ensure all proofs are recent (within 10 minutes) and from correct validator index
+3. **Check Withdrawal Credentials**: Verify they match your deployed WithdrawalVault address
+4. **Validate Initial Deposit**: Confirm exactly 10,000 BERA was sent with deployment
+
+**Debugging Commands:**
+
+```solidity
+// Check if pool is active
+bool active = stakingPool.isActive();
+
+// Get validator pubkey
+bytes memory pubkey = stakingPool.getValidatorPubkey();
+
+// Check minimum effective balance
+uint256 minBalance = stakingPool.minEffectiveBalance();
+```
+
+### Oracle and Balance Issues
+
+**Problem: Pool balance not updating or oracle seems stuck**
+
+**Debug Steps:**
+
+1. **Check Oracle Updates**: Monitor `updateTotalDeposits` calls to your pool
+2. **Verify Balance Sync**: Compare on-chain balance with consensus layer data
+3. **Check Pool State**: Verify `isFullyExited()` returns false
+4. **Monitor Events**: Watch for `TotalDepositsUpdated` events
+
+**Debugging Commands:**
+
+```solidity
+// Check if pool has fully exited
+bool fullyExited = stakingPool.isFullyExited();
+
+// Check total assets
+uint256 totalAssets = stakingPool.totalAssets();
+
+// Check buffered assets
+uint256 buffered = stakingPool.bufferedAssets();
+```
+
+### BGT and Rewards Issues
+
+**Problem: BGT operations not working or rewards not accruing**
+
+**Debug Steps:**
+
+1. **Check BGT Balance**: Call `unboostedBalance()` on SmartOperator
+2. **Verify Fee State**: Use `getEarnedBGTFeeState()` to check fee calculations
+3. **Monitor Boost Status**: Check if boosts are queued or active
+4. **Verify Protocol Fees**: Ensure protocol fee percentage is set correctly
+
+**Debugging Commands:**
+
+```solidity
+// Check BGT fee state
+(uint256 currentBalance, uint256 alreadyCharged, uint256 chargeable, uint96 feePercent) =
+    smartOperator.getEarnedBGTFeeState();
+
+// Check unboosted BGT balance
+uint256 unboosted = smartOperator.unboostedBalance();
+
+// Check rebaseable BGT amount
+uint256 rebaseable = smartOperator.rebaseableBgtAmount();
+```
+
+### Capacity and Performance Issues
+
+**Problem: Pool hitting capacity limits or performance issues**
+
+**Debug Steps:**
+
+1. **Check Capacity Status**: Monitor `activeThresholdReached()` and total assets
+2. **Verify Commission Rates**: Ensure rates are competitive and sustainable
+3. **Monitor User Deposits**: Track deposit patterns and user behavior
+4. **Check Pool Health**: Verify all contracts are functioning properly
+
+**Debugging Commands:**
+
+```solidity
+// Check if active threshold reached
+bool thresholdReached = stakingPool.activeThresholdReached();
+
+// Get total assets under management
+uint256 totalAssets = stakingPool.totalAssets();
+
+// Check minimum effective balance
+uint256 minBalance = stakingPool.minEffectiveBalance();
+```
+
+### Withdrawal Issues
+
+**Problem: Users reporting withdrawal problems**
+
+**Debug Steps:**
+
+1. **Check Withdrawal Requests**: Use `getWithdrawalRequest(requestId)` to examine specific requests
+2. **Verify Processing Time**: Confirm 27-hour delay has passed for standard withdrawals
+3. **Check Pool Buffer**: Verify sufficient funds available for short-circuit withdrawals
+4. **Monitor Withdrawal Events**: Watch for `WithdrawalRequested` and `WithdrawalRequestFinalized` events
+
+**Debugging Commands:**
+
+```solidity
+// Get withdrawal request details
+WithdrawalRequest memory request = withdrawalVault.getWithdrawalRequest(requestId);
+
+// Check if request is ready (27 hours passed)
+bool ready = block.number >= (request.requestBlock + 49152);
+```
+
+### Getting Help
+
+When technical issues require assistance:
+
+- **Contract Issues**: Use the debugging commands above to gather specific information
+- **Protocol Issues**: Contact Berachain technical support with contract addresses and transaction hashes
+- **Community Support**: Join validator Discord channels with specific error messages and contract states
+
+For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
+
+## Getting Started as a Validator
+
+Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.sol/contract.StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
+
+For developers looking to integrate with the staking pools, begin by reviewing the [StakingPool](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md) contract, which contains the core functionality that most applications will interact with. Understanding the overall architecture requires studying how the contracts interact and how data flows through the system. Testing integration through test contracts provides hands-on experience with the system's behavior, while monitoring contract events is essential for tracking state changes and building responsive applications.
+
+:::warning
+The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
+:::
