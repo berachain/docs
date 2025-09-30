@@ -40,10 +40,13 @@ The staking pools system uses a factory pattern where the `StakingPoolContractsF
 - **StakingPoolContractsFactory**: Main factory contract that orchestrates deployment
 - **StakingPool**: Core contract for user deposits and share management
 - **SmartOperator**: Manages validator operations and PoL integration
-- **WithdrawalVault**: Handles withdrawal requests and processing
 - **StakingRewardsVault**: Manages rewards and auto-compounding
 - **IncentiveCollector**: Handles incentive token collection and conversion
-- **AccountingOracle**: Provides off-chain data validation
+
+The system also includes shared infrastructure contracts:
+
+- **WithdrawalVault**: Centralized contract that handles withdrawal requests and processing for all staking pools
+- **AccountingOracle**: Permissionless oracle that provides consensus layer data validation and updates
 
 ## Step 1: Prepare Validator Data
 
@@ -159,6 +162,8 @@ The returned `CoreContracts` struct contains:
 - `stakingPool`: Address of your StakingPool contract
 - `stakingRewardsVault`: Address of your StakingRewardsVault contract
 - `incentiveCollector`: Address of your IncentiveCollector contract
+
+Note that the WithdrawalVault and AccountingOracle are shared infrastructure contracts used by all staking pools, not deployed per validator.
 
 ## Step 4: Initialize the Pool
 

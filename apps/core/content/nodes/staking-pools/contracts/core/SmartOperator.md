@@ -152,24 +152,7 @@ uint96 public protocolFeePercentage;
 modifier whenNotFullyExited();
 ```
 
-### constructor
 
-```solidity
-constructor();
-```
-
-### initialize
-
-```solidity
-function initialize(
-    address governance,
-    bytes memory pubkey,
-    address validatorAdmin,
-    address factory
-)
-    public
-    initializer;
-```
 
 ### queueBoost
 
@@ -365,21 +348,6 @@ Claims BGTStaker and incentive program rewards and send them to the incentive co
 function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, address[] memory tokens) external;
 ```
 
-### setMinEffectiveBalance
-
-Sets the minimum effective balance for the staking pool.
-
-_Can only be called by DEFAULT_ADMIN_ROLE._
-
-```solidity
-function setMinEffectiveBalance(uint256 minEffectiveBalance) external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
-**Parameters**
-
-| Name                  | Type      | Description                                                |
-| --------------------- | --------- | ---------------------------------------------------------- |
-| `minEffectiveBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
 
 ### setProtocolFeePercentage
 

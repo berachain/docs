@@ -139,24 +139,7 @@ bool public activeThresholdReached;
 
 ## Functions
 
-### constructor
 
-```solidity
-constructor();
-```
-
-### initialize
-
-```solidity
-function initialize(
-    address governance,
-    bytes memory pubkey,
-    address defaultSharesRecipient,
-    address factory
-)
-    public
-    initializer;
-```
 
 ### pause
 
@@ -184,21 +167,6 @@ function unpause() external onlyOwner;
 function getValidatorPubkey() external view returns (bytes memory);
 ```
 
-### minEffectiveBalance
-
-Returns the minimum effective balance for the staking pool.
-
-_If not set, returns the default minimum effective balance._
-
-```solidity
-function minEffectiveBalance() public view returns (uint256);
-```
-
-**Returns**
-
-| Name     | Type      | Description                                         |
-| -------- | --------- | --------------------------------------------------- |
-| `<none>` | `uint256` | The minimum effective balance for the staking pool. |
 
 ### activate
 
@@ -219,22 +187,6 @@ function activate(uint256 initialDepositAmount) external;
 | ---------------------- | --------- | ------------------------------------------------------ |
 | `initialDepositAmount` | `uint256` | The initial amount of assets to deposit into the pool. |
 
-### setMinEffectiveBalance
-
-Sets the minimum effective balance for the staking pool.
-
-**Note:**
-throws: InvalidSender if not called by the smart operator.
-
-```solidity
-function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
-```
-
-**Parameters**
-
-| Name                     | Type      | Description |
-| ------------------------ | --------- | ----------- |
-| `newMinEffectiveBalance` | `uint256` |             |
 
 ### receiveRewards
 

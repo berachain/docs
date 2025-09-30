@@ -56,6 +56,8 @@ Detailed documentation for each contract is available through the following refe
 | **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts     | [View Documentation](./StakingPoolContractsFactory.md) |
 | **StakingPool**                 | Main staking functionality and user interactions        | [View Documentation](./core/StakingPool.md)            |
 | **SmartOperator**               | Validator operations and Proof of Liquidity integration | [View Documentation](./core/SmartOperator.md)          |
+| **WithdrawalVault**             | Withdrawal request processing and NFT-based tracking    | [View Documentation](./WithdrawalVault.md)             |
+| **AccountingOracle**            | Consensus layer data validation and updates             | [View Documentation](./AccountingOracle.md)            |
 | **StBERA**                      | Base contract for stBERA token implementation           | [View Documentation](./base/StBERA.md)                 |
 | **ELWithdrawHelper**            | Execution layer withdrawal utilities (EIP-7002)         | [View Documentation](./helpers/ELWithdrawHelper.md)    |
 

@@ -50,8 +50,12 @@ The staking pool system uses smart contracts to automate the complex process of 
 
 - **Staking Pool Contract**: Manages user deposits, tracks shares, and handles withdrawals
 - **Smart Operator**: Automatically manages validator operations and Proof of Liquidity integration
-- **Withdrawal Vault**: Processes withdrawal requests and issues tracking NFTs
 - **Rewards Vault**: Collects and automatically reinvests all rewards
+
+**Shared Infrastructure:**
+
+- **Withdrawal Vault**: Centralized contract that processes withdrawal requests, issues tracking NFTs, and manages withdrawal finalization for all staking pools
+- **Accounting Oracle**: Permissionless oracle that provides consensus layer data updates and validation
 
 The system is designed to be fully automated, requiring minimal manual intervention from validators while providing users with a seamless staking experience.
 
@@ -99,14 +103,6 @@ Additionally, validators have the flexibility to direct rewards to specific appl
 The system operates within well-defined parameters that ensure stability and security. A minimum deposit of 10,000 BERA is required to register a validator on the consensus layer; producing consensus rewards begins only once the validator enters the active set, which requires at least 250,000 BERA effective balance and is influenced by the relative stakes of other validators. Each validator is limited to a maximum pool size of 10,000,000 BERA, preventing any single validator from becoming too dominant in the system.
 
 The minimum validator balance is set at 250,000 BERA, and if this threshold is breached, the system automatically triggers a full exit to protect user funds. Withdrawal processing through the consensus layer requires approximately 27 hours (256 epochs) to complete, providing users with predictable timing expectations.
-
-## Security Model
-
-The security model is built around the principle of trust minimization, where smart contracts manage all validator operations and all operations are verifiable on-chain. This approach eliminates the need for users to trust individual validators with their funds, as the smart contracts enforce all rules and procedures automatically.
-
-Role-based access control provides granular permissions for different operations, ensuring that only authorized parties can perform specific functions. The integration with off-chain oracles provides additional validation of consensus layer state, creating multiple layers of verification and security.
-
-Risk management is implemented through several mechanisms, including automatic full exit protection if minimum balance requirements are breached, pause mechanisms that can be activated in emergency situations, upgradeable contracts that allow governance to improve the system over time, and graceful handling of oracle data issues to ensure system resilience.
 
 ## Getting Started
 

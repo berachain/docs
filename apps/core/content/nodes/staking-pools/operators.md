@@ -203,21 +203,6 @@ Your pool operates within chain-defined capacity limits:
 - **Automatic Pausing**: Pool pauses when maximum capacity is reached
 - **Withdrawal Cooldown**: 43,200 blocks (~1 day) cooldown after reaching active threshold
 
-### Oracle Integration
-
-The StakingPool contract integrates with the AccountingOracle to maintain accurate balance information:
-
-```solidity
-// Update total deposits (called by oracle)
-function updateTotalDeposits(uint256 newTotalDeposits) external;
-```
-
-The oracle provides:
-
-- **Balance Updates**: Regular updates of your validator's total deposits
-- **Full Exit Detection**: Automatic detection when your validator has fully exited
-- **Capacity Monitoring**: Tracking when your pool approaches capacity limits
-
 ### Reward Management
 
 The pool automatically handles reward collection and distribution:
@@ -238,7 +223,7 @@ Reward management includes:
 
 ### Withdrawal Management
 
-The WithdrawalVault contract handles all withdrawal operations for your staking pool. Understanding its operations helps you manage user expectations and troubleshoot withdrawal issues.
+The centralized WithdrawalVault contract handles all withdrawal operations for all staking pools. Understanding its operations helps you manage user expectations and troubleshoot withdrawal issues.
 
 #### Withdrawal Processing
 
@@ -329,7 +314,7 @@ Successful staking pools often have strong community engagement and transparent 
 
 Effective security practices protect both your operations and your users' funds. The role-based access control system in the SmartOperator contract provides granular permissions that should be carefully managed. Use dedicated wallets for different operational roles rather than relying on a single administrative wallet for all functions. This separation of concerns limits the potential impact of any security incident and makes it easier to audit and monitor different aspects of your operations.
 
-Regular monitoring of your pool's operations helps identify potential issues before they become problems. Keep track of oracle data updates to ensure the accounting information remains accurate and current. Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
+Regular monitoring of your pool's operations helps identify potential issues before they become problems.  Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
 
 Understanding the full exit process and having clear communication plans for emergency situations remains important. Develop procedures for communicating with your users during any operational disruptions or significant changes to your pool's status.
 
@@ -357,30 +342,6 @@ bytes memory pubkey = stakingPool.getValidatorPubkey();
 
 // Check minimum effective balance
 uint256 minBalance = stakingPool.minEffectiveBalance();
-```
-
-### Oracle and Balance Issues
-
-**Problem: Pool balance not updating or oracle seems stuck**
-
-**Debug Steps:**
-
-1. **Check Oracle Updates**: Monitor `updateTotalDeposits` calls to your pool
-2. **Verify Balance Sync**: Compare on-chain balance with consensus layer data
-3. **Check Pool State**: Verify `isFullyExited()` returns false
-4. **Monitor Events**: Watch for `TotalDepositsUpdated` events
-
-**Debugging Commands:**
-
-```solidity
-// Check if pool has fully exited
-bool fullyExited = stakingPool.isFullyExited();
-
-// Check total assets
-uint256 totalAssets = stakingPool.totalAssets();
-
-// Check buffered assets
-uint256 buffered = stakingPool.bufferedAssets();
 ```
 
 ### BGT and Rewards Issues
