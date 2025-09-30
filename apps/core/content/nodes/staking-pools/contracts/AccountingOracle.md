@@ -1,3 +1,7 @@
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
 # AccountingOracle
 
 > <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.accountingOracle['mainnet-address']">{{config.contracts.pol.accountingOracle['mainnet-address']}}</a><span v-if="config.contracts.pol.accountingOracle.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.accountingOracle.abi">ABI JSON</a></span></small>
@@ -8,12 +12,6 @@
 [IAccountingOracle](/src/interfaces/IAccountingOracle.sol/interface.IAccountingOracle.md), OwnableUpgradeable, UUPSUpgradeable
 
 ## State Variables
-
-### \_factory
-
-```solidity
-IStakingPoolContractsFactory internal _factory;
-```
 
 ## Functions
 

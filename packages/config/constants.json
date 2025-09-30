@@ -252,23 +252,23 @@
       "stakingPoolContractsFactory": {
         "name": "StakingPoolContractsFactory",
         "mainnet-address": "",
-        "bepolia-address": "",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/staking-pools/StakingPoolContractsFactory.json",
-        "docsUrl": "/nodes/staking-pools/contracts/StakingPoolContractsFactory.sol/contract.StakingPoolContractsFactory"
+        "bepolia-address": "0x176c081E95C82CA68DEa20CA419C7506Aa063C24",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPoolContractsFactory"
       },
       "stakingPool": {
         "name": "StakingPool",
         "mainnet-address": "",
-        "bepolia-address": "",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/staking-pools/StakingPool.json",
-        "docsUrl": "/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool"
+        "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/core/StakingPool"
       },
       "smartOperator": {
         "name": "SmartOperator",
         "mainnet-address": "",
-        "bepolia-address": "",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/staking-pools/SmartOperator.json",
-        "docsUrl": "/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator"
+        "bepolia-address": "0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/core/SmartOperator"
       }
     },
     "tokens": {

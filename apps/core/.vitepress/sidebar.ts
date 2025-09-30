@@ -398,10 +398,6 @@ const SIDEBAR = {
         {
           text: "StBERA",
           link: "/nodes/staking-pools/contracts/base/StBERA.md"
-        },
-        {
-          text: "ELWithdrawHelper",
-          link: "/nodes/staking-pools/contracts/helpers/ELWithdrawHelper.md"
         }
       ]
     },

@@ -51,59 +51,7 @@ address public accountingOracle;
 address public withdrawalVault;
 ```
 
-### \_beaconSmartOperator
-
-```solidity
-address internal _beaconSmartOperator;
-```
-
-### \_beaconStakingPool
-
-```solidity
-address internal _beaconStakingPool;
-```
-
-### \_beaconStakingRewardsVault
-
-```solidity
-address internal _beaconStakingRewardsVault;
-```
-
-### \_beaconIncentiveCollector
-
-```solidity
-address internal _beaconIncentiveCollector;
-```
-
-### \_coreContracts
-
-```solidity
-mapping(bytes => CoreContracts) internal _coreContracts;
-```
-
 ## Functions
-
-### constructor
-
-```solidity
-constructor();
-```
-
-### initialize
-
-```solidity
-function initialize(
-    address governance,
-    address accountingOracle_,
-    address withdrawalVault_,
-    address smartOperatorInitialImpl,
-    address stakingPoolInitialImpl,
-    address stakingRewardsVaultInitialImpl,
-    address incentiveCollectorInitialImpl
-)
-    public
-    initializer;
-```
 
 ### deployStakingPoolContracts
 
@@ -168,12 +116,6 @@ function validateBalanceProof(
 )
     public
     view;
-```
-
-### \_authorizeUpgrade
-
-```solidity
-function _authorizeUpgrade(address newImplementation) internal override onlyOwner;
 ```
 
 ### setZeroValidatorPubkeyGIndex
@@ -280,87 +222,3 @@ function upgradeIncentiveCollectorBeaconImpl(address newImplementation) external
 | Name                | Type      | Description                                    |
 | ------------------- | --------- | ---------------------------------------------- |
 | `newImplementation` | `address` | The address of the new implementation contract |
-
-### \_upgradeBeaconImpl
-
-Upgrades the implementation of a beacon
-
-**Note:**
-throws: InvalidAddress if newImplementation is the zero address
-
-```solidity
-function _upgradeBeaconImpl(address beacon, address newImplementation) internal;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                    |
-| ------------------- | --------- | ---------------------------------------------- |
-| `beacon`            | `address` | The address of the beacon to upgrade           |
-| `newImplementation` | `address` | The address of the new implementation contract |
-
-### \_getSalt
-
-```solidity
-function _getSalt(bytes memory pubkey) internal pure returns (bytes32);
-```
-
-### \_withdrawalAddressToCredentials
-
-```solidity
-function _withdrawalAddressToCredentials(address withdrawalAddress)
-    internal
-    pure
-    returns (bytes memory withdrawalCredentials);
-```
-
-### \_validateInputs
-
-\*Checks that:
-
-- The operator is not already set for this pubkey
-- The withdrawal credentials match the withdrawalVault address
-- The msg.value matches FIRST_DEPOSIT_AMOUNT\*
-
-```solidity
-function _validateInputs(bytes memory pubkey, bytes memory withdrawalCredentials) internal view;
-```
-
-### \_validateWithdrawalCredentials
-
-```solidity
-function _validateWithdrawalCredentials(bytes memory withdrawalCredentials) internal view;
-```
-
-### \_validateProofsTimestamp
-
-```solidity
-function _validateProofsTimestamp(uint64 timestamp) internal view;
-```
-
-### \_deployAndInitializeCoreContracts
-
-```solidity
-function _deployAndInitializeCoreContracts(
-    bytes memory pubkey,
-    address validatorAdmin,
-    address defaultSharesRecipient
-)
-    internal
-    returns (CoreContracts memory);
-```
-
-### \_performFirstDeposit
-
-_The deposit function in the beacon deposit contract checks that pubkey, withdrawal credentials and
-signature has the correct length._
-
-```solidity
-function _performFirstDeposit(
-    bytes memory pubkey,
-    bytes memory withdrawalCredentials,
-    bytes memory depositSignature,
-    address operator
-)
-    internal;
-```

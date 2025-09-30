@@ -19,18 +19,6 @@ uint256 public constant WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY = 49_152;
 
 ## State Variables
 
-### \_factory
-
-```solidity
-ICoreContractsStorage internal _factory;
-```
-
-### \_nextRequestId
-
-```solidity
-uint256 internal _nextRequestId;
-```
-
 ### withdrawalRequests
 
 ```solidity
@@ -41,12 +29,6 @@ mapping(uint256 => WithdrawalRequest) public withdrawalRequests;
 
 ```solidity
 mapping(bytes => uint256) public allocatedWithdrawalsAmount;
-```
-
-### \_isFullyExited
-
-```solidity
-mapping(bytes => bool) internal _isFullyExited;
 ```
 
 ## Functions
