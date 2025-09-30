@@ -25,70 +25,31 @@ Staking Pools are validator-operated services that allow users to stake BERA thr
 
 For validators, staking pools provide a way to build and monetize their own community of stakers, earning commission on user rewards while providing professional staking services. For users, staking pools offer lower barriers to entry, automatic reward reinvestment, and the ability to withdraw funds when needed.
 
-## Key Benefits
-
-**For Users:**
-
-- **Liquid Staking**: Receive shares representing your stake that can be tracked and managed
-- **Automatic Compounding**: All rewards are automatically reinvested to maximize returns
-- **Flexible Withdrawals**: Exit your position at any time with predictable processing times
-- **Lower Barriers**: Stake any amount without validator minimums
-- **Transparent Operations**: All activities are verifiable on-chain
-
-**For Validators:**
-
-- **Community Building**: Create and manage your own branded staking service
-- **Revenue Generation**: Earn commission on user rewards (up to 100%)
-- **Professional Services**: Offer liquid staking without the complexity of building from scratch
-- **Competitive Advantage**: Differentiate through community engagement and reward allocation
-
 ## How It Works
 
 The staking pool system uses smart contracts to automate the complex process of staking, reward distribution, and withdrawal management. When a validator creates a staking pool, the system deploys several interconnected contracts that handle different aspects of the operation.
 
-**Core Components:**
+The system operates through a combination of core components deployed per validator and shared infrastructure used by all staking pools. Each validator's staking pool consists of a Staking Pool Contract that manages user deposits and tracks shares, a Smart Operator that automatically handles validator operations and Proof of Liquidity integration, and a Rewards Vault that collects and automatically reinvests all rewards. The shared infrastructure includes a centralized Withdrawal Vault that processes withdrawal requests, issues tracking NFTs, and manages withdrawal finalization for all staking pools, along with a permissionless Accounting Oracle that provides consensus layer data updates and validation.
 
-- **Staking Pool Contract**: Manages user deposits, tracks shares, and handles withdrawals
-- **Smart Operator**: Automatically manages validator operations and Proof of Liquidity integration
-- **Rewards Vault**: Collects and automatically reinvests all rewards
-
-**Shared Infrastructure:**
-
-- **Withdrawal Vault**: Centralized contract that processes withdrawal requests, issues tracking NFTs, and manages withdrawal finalization for all staking pools
-- **Accounting Oracle**: Permissionless oracle that provides consensus layer data updates and validation
-
-The system is designed to be fully automated, requiring minimal manual intervention from validators while providing users with a seamless staking experience.
+The system is designed to be fully automated, requiring minimal manual intervention from validators while providing users with a seamless staking experience. This automation eliminates the complexity of traditional staking while maintaining the security and transparency that users expect from decentralized systems.
 
 ## User Experience
 
-**For Users - Simple Staking Process:**
+### For Users
 
-1. **Find a Pool**: Choose a validator-operated staking pool that fits your needs
-2. **Deposit BERA**: Send BERA to the pool and receive shares representing your stake
-3. **Earn Rewards**: Your shares automatically increase in value as the validator earns rewards
-4. **Withdraw Anytime**: Request withdrawal and receive your BERA back (with processing time)
+The user experience with staking pools is designed to be straightforward and accessible. Users begin by finding a validator-operated staking pool that aligns with their preferences, whether that's based on commission rates, community reputation, or specific reward allocation strategies. Once they've selected a pool, the process is remarkably simple: they deposit BERA directly to the pool and immediately receive liquid shares that represent their stake.
 
-**Example User Flow:**
+The key advantage for users is the automatic compounding of rewards. As the validator earns rewards through their operations, these rewards are automatically reinvested into the pool, causing the value of each user's shares to increase over time. This means users don't need to manually claim or reinvest rewards - the system handles this automatically, maximizing their returns without any additional effort.
 
-- Alice deposits 1,000 BERA into ValidatorBob's staking pool
-- She receives 1,000 stBERA shares (assuming 1:1 ratio at deposit time)
-- Over time, the pool earns rewards and her shares are now worth 1,050 BERA
-- Alice can withdraw her 1,050 BERA at any time
+Withdrawal flexibility is another significant benefit. Users can exit their position at any time by requesting a withdrawal, which will be processed through the consensus layer with predictable timing of approximately 27 hours. The system also supports lower barriers to entry, allowing users to stake any amount without being constrained by validator minimums, while maintaining full transparency through on-chain verification of all operations.
 
-**For Validators - Automated Operations:**
+### For Validators
 
-1. **Deploy Pool**: Use the factory contract to create your staking pool
-2. **Configure Settings**: Set commission rates and reward allocation preferences
-3. **Attract Users**: Build community and attract stakers to your pool
-4. **Earn Revenue**: Collect commission on user rewards automatically
+Validators operating staking pools benefit from a comprehensive system that handles the technical complexity while providing opportunities for community building and revenue generation. The setup process begins with deploying a staking pool through the factory contract, which creates all necessary smart contracts and automatically registers the validator with the consensus layer. Once deployed, validators configure their operational parameters, including commission rates that can be set up to 100% of user rewards.
 
-**Example Validator Flow:**
+The system provides validators with professional-grade staking services without requiring them to build the infrastructure from scratch. Validators can differentiate themselves through community engagement and strategic reward allocation, directing Proof of Liquidity incentives to specific applications or ecosystem initiatives. This creates opportunities to build stronger relationships with their staking communities while supporting particular projects or causes.
 
-- ValidatorBob sets up a staking pool with 5% commission
-- Users deposit 100,000 BERA total into his pool
-- The pool earns 10,000 BERA in rewards over a year
-- ValidatorBob automatically receives 500 BERA in commission
-- Users receive 9,500 BERA in rewards (auto-compounded)
+Revenue generation happens automatically as the system collects commission on user rewards. For example, a validator operating a pool with 5% commission and 100,000 BERA in total deposits would automatically receive 500 BERA in commission from 10,000 BERA in annual rewards, while users receive the remaining 9,500 BERA in auto-compounded rewards. This automated revenue model allows validators to focus on community building and operational excellence rather than manual reward management.
 
 ## Integration with Proof of Liquidity
 
@@ -97,12 +58,6 @@ Staking pools are fully integrated with Berachain's Proof of Liquidity system, c
 The smart contracts automatically claim and distribute Proof of Liquidity incentives, ensuring that validators and their stakers benefit from the full range of available rewards. Validators can set commission rates on user rewards, allowing them to monetize their staking pool operations while providing value to their community.
 
 Additionally, validators have the flexibility to direct rewards to specific applications or use cases, enabling them to support particular ecosystem initiatives or community projects. This creates opportunities for validators to differentiate themselves and build stronger relationships with their staking communities.
-
-## Key Parameters and Constraints
-
-The system operates within well-defined parameters that ensure stability and security. A minimum deposit of 10,000 BERA is required to register a validator on the consensus layer; producing consensus rewards begins only once the validator enters the active set, which requires at least 250,000 BERA effective balance and is influenced by the relative stakes of other validators. Each validator is limited to a maximum pool size of 10,000,000 BERA, preventing any single validator from becoming too dominant in the system.
-
-The minimum validator balance is set at 250,000 BERA, and if this threshold is breached, the system automatically triggers a full exit to protect user funds. Withdrawal processing through the consensus layer requires approximately 27 hours (256 epochs) to complete, providing users with predictable timing expectations.
 
 ## Getting Started
 
