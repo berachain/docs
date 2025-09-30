@@ -389,16 +389,21 @@ const SIDEBAR = {
         },
         {
           text: "StakingPool",
-          link: "/nodes/staking-pools/contracts/core/StakingPool.md"
+          link: "/nodes/staking-pools/contracts/StakingPool.md"
         },
         {
           text: "SmartOperator",
-          link: "/nodes/staking-pools/contracts/core/SmartOperator.md"
+          link: "/nodes/staking-pools/contracts/SmartOperator.md"
         },
         {
           text: "StBERA",
-          link: "/nodes/staking-pools/contracts/base/StBERA.md"
+          link: "/nodes/staking-pools/contracts/StBERA.md"
+        },
+        {
+          text: "WithdrawalVault",
+          link: "/nodes/staking-pools/contracts/WithdrawalVault.md"
         }
+
       ]
     },
     {

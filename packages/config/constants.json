@@ -249,6 +249,13 @@
       }
     },
     "stakingPools": {
+      "accountingOracle": {
+        "name": "AccountingOracle",
+        "mainnet-address": "",
+        "bepolia-address": "0xC6aF379515380BE6F72A3d7dE7681D1ae65EF871",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/AccountingOracle"
+      },
       "stakingPoolContractsFactory": {
         "name": "StakingPoolContractsFactory",
         "mainnet-address": "",
@@ -261,14 +268,21 @@
         "mainnet-address": "",
         "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
         "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/core/StakingPool"
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPool"
       },
       "smartOperator": {
         "name": "SmartOperator",
         "mainnet-address": "",
         "bepolia-address": "0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4",
         "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/core/SmartOperator"
+        "docsUrl": "/nodes/staking-pools/contracts/SmartOperator"
+      },
+      "withdrawalVault": {
+        "name": "WithdrawalVault",
+        "mainnet-address": "",
+        "bepolia-address": "0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/WithdrawalVault"
       }
     },
     "tokens": {

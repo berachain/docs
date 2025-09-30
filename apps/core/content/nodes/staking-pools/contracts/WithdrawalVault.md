@@ -1,11 +1,15 @@
 # WithdrawalVault
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.withdrawalVault['mainnet-address']">{{config.contracts.pol.withdrawalVault['mainnet-address']}}</a><span v-if="config.contracts.pol.withdrawalVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.withdrawalVault.abi">ABI JSON</a></span></small>
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
 
-[Git Source](https://github.com/berachain/contracts/blob/main/src/WithdrawalVault.sol)
+<template v-if="config.contracts.stakingPools.withdrawalVault['mainnet-address']">
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['mainnet-address']">{{config.contracts.stakingPools.withdrawalVault['mainnet-address']}}</a><span v-if="config.contracts.stakingPools.withdrawalVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.withdrawalVault.abi">ABI JSON</a></span></small>
+</template>
 
 **Inherits:**
-[IWithdrawalVault](/src/interfaces/IWithdrawalVault.sol/interface.IWithdrawalVault.md), AccessControlUpgradeable, UUPSUpgradeable, [ELWithdrawHelper](/src/helpers/ELWithdrawHelper.sol/abstract.ELWithdrawHelper.md), ERC721EnumerableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable
+IWithdrawalVault, AccessControlUpgradeable, UUPSUpgradeable, ERC721EnumerableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable
 
 ## Constants
 

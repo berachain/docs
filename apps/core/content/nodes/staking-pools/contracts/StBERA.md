@@ -1,9 +1,15 @@
 # StBERA
 
-[Git Source](https://github.com/berachain/contracts-staking-pools/blob/b7f6d4823d9636f498243ce334a1458550330535/src/base/StBERA.sol)
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+<template v-if="config.contracts.stakingPools.stBERA && config.contracts.stakingPools.stBERA['mainnet-address']">
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stBERA['mainnet-address']">{{config.contracts.stakingPools.stBERA['mainnet-address']}}</a><span v-if="config.contracts.stakingPools.stBERA.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.stBERA.abi">ABI JSON</a></span></small>
+</template>
 
 **Inherits:**
-[IStBera](/src/interfaces/IStBera.sol/interface.IStBera.md)
+IStBera
 
 Abstract base contract for the Staked BERA (stBERA) token implementation
 

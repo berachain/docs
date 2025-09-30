@@ -1,11 +1,15 @@
 # StakingPoolContractsFactory
 
-[Git Source](https://github.com/berachain/contracts-staking-pools/blob/b7f6d4823d9636f498243ce334a1458550330535/src/StakingPoolContractsFactory.sol)
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+<template v-if="config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']">
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']">{{config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']}}</a><span v-if="config.contracts.stakingPools.stakingPoolContractsFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.stakingPoolContractsFactory.abi">ABI JSON</a></span></small>
+</template>
 
 **Inherits:**
-[IStakingPoolContractsFactory](/src/interfaces/IStakingPoolContractsFactory.sol/interface.IStakingPoolContractsFactory.md), [BeaconRootsHelper](/src/helpers/BeaconRootsHelper.sol/abstract.BeaconRootsHelper.md), OwnableUpgradeable, UUPSUpgradeable
-
-SPDX-License-Identifier: BUSL-1.1
+IStakingPoolContractsFactory, BeaconRootsHelper, OwnableUpgradeable, UUPSUpgradeable
 
 ## State Variables
 
@@ -118,107 +122,4 @@ function validateBalanceProof(
     view;
 ```
 
-### setZeroValidatorPubkeyGIndex
 
-_This is necessary to call when the beacon chain hard forks (and specifically the underlying structure of
-beacon state is modified)._
-
-```solidity
-function setZeroValidatorPubkeyGIndex(uint64 _zeroValidatorPubkeyGIndex) public onlyOwner;
-```
-
-### setZeroValidatorWithdrawalCredentialsGIndex
-
-_This is necessary to call when the beacon chain hard forks (and specifically the underlying structure of
-beacon state is modified)._
-
-```solidity
-function setZeroValidatorWithdrawalCredentialsGIndex(uint64 _zeroValidatorWithdrawalCredentialsGIndex)
-    public
-    onlyOwner;
-```
-
-### setZeroValidatorBalanceGIndex
-
-_This is necessary to call when the beacon chain hard forks (and specifically the underlying structure of
-beacon state is modified)._
-
-```solidity
-function setZeroValidatorBalanceGIndex(uint64 _zeroValidatorBalanceGIndex) public onlyOwner;
-```
-
-### upgradeSmartOperatorBeaconImpl
-
-Upgrades the implementation of the SmartOperator beacon
-
-_Only callable by the owner of the factory contract_
-
-**Note:**
-throws: InvalidAddress if newImplementation is the zero address
-
-```solidity
-function upgradeSmartOperatorBeaconImpl(address newImplementation) external onlyOwner;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                    |
-| ------------------- | --------- | ---------------------------------------------- |
-| `newImplementation` | `address` | The address of the new implementation contract |
-
-### upgradeStakingPoolBeaconImpl
-
-Upgrades the implementation of the StakingPool beacon
-
-_Only callable by the owner of the factory contract_
-
-**Note:**
-throws: InvalidAddress if newImplementation is the zero address
-
-```solidity
-function upgradeStakingPoolBeaconImpl(address newImplementation) external onlyOwner;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                    |
-| ------------------- | --------- | ---------------------------------------------- |
-| `newImplementation` | `address` | The address of the new implementation contract |
-
-### upgradeStakingRewardsVaultBeaconImpl
-
-Upgrades the implementation of the StakingRewardsVault beacon
-
-_Only callable by the owner of the factory contract_
-
-**Note:**
-throws: InvalidAddress if newImplementation is the zero address
-
-```solidity
-function upgradeStakingRewardsVaultBeaconImpl(address newImplementation) external onlyOwner;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                    |
-| ------------------- | --------- | ---------------------------------------------- |
-| `newImplementation` | `address` | The address of the new implementation contract |
-
-### upgradeIncentiveCollectorBeaconImpl
-
-Upgrades the implementation of the IncentiveCollector beacon
-
-_Only callable by the owner of the factory contract_
-
-**Note:**
-throws: InvalidAddress if newImplementation is the zero address
-
-```solidity
-function upgradeIncentiveCollectorBeaconImpl(address newImplementation) external onlyOwner;
-```
-
-**Parameters**
-
-| Name                | Type      | Description                                    |
-| ------------------- | --------- | ---------------------------------------------- |
-| `newImplementation` | `address` | The address of the new implementation contract |

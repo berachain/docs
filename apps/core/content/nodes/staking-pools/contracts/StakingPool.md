@@ -1,9 +1,15 @@
 # StakingPool
 
-[Git Source](https://github.com/berachain/contracts-staking-pools/blob/b7f6d4823d9636f498243ce334a1458550330535/src/core/StakingPool.sol)
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+<template v-if="config.contracts.stakingPools.stakingPool['mainnet-address']">
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stakingPool['mainnet-address']">{{config.contracts.stakingPools.stakingPool['mainnet-address']}}</a><span v-if="config.contracts.stakingPools.stakingPool.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.stakingPool.abi">ABI JSON</a></span></small>
+</template>
 
 **Inherits:**
-[IStakingPool](/src/interfaces/IStakingPool.sol/interface.IStakingPool.md), [StBERA](/src/base/StBERA.sol/abstract.StBERA.md), PausableUpgradeable, OwnableUpgradeable
+IStakingPool, StBERA, PausableUpgradeable, OwnableUpgradeable
 
 ## State Variables
 
@@ -139,25 +145,6 @@ bool public activeThresholdReached;
 
 ## Functions
 
-### pause
-
-Pauses deposits.
-
-_Admin function._
-
-```solidity
-function pause() external onlyOwner;
-```
-
-### unpause
-
-Unpauses deposits.
-
-_Admin function._
-
-```solidity
-function unpause() external onlyOwner;
-```
 
 ### getValidatorPubkey
 

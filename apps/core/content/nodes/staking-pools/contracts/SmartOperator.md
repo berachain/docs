@@ -1,9 +1,19 @@
 # SmartOperator
 
-[Git Source](https://github.com/berachain/contracts-staking-pools/blob/b7f6d4823d9636f498243ce334a1458550330535/src/core/SmartOperator.sol)
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
+
+<template v-if="config.contracts.stakingPools.smartOperator['mainnet-address']">
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.smartOperator['mainnet-address']">{{config.contracts.stakingPools.smartOperator['mainnet-address']}}</a><span v-if="config.contracts.stakingPools.smartOperator.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.smartOperator.abi">ABI JSON</a></span></small>
+</template>
 
 **Inherits:**
-[ISmartOperator](/src/interfaces/ISmartOperator.sol/interface.ISmartOperator.md), AccessControlUpgradeable
+ISmartOperator, AccessControlUpgradeable
+
+:::tip
+For guidance on managing roles and configuring your staking pool operations, see the [Staking Pools Operator Guide](/nodes/staking-pools/operators#role-management-and-access-control).
+:::
 
 ## State Variables
 
@@ -46,13 +56,6 @@ _Validator admin manages other roles and is managed by the contract owner._
 bytes32 public constant VALIDATOR_ADMIN_ROLE = keccak256("VALIDATOR_ADMIN_ROLE");
 ```
 
-### BGT_MANAGER_ROLE
-
-_Can unboost and redeem BGT._
-
-```solidity
-bytes32 public constant BGT_MANAGER_ROLE = keccak256("BGT_MANAGER_ROLE");
-```
 
 ### PROTOCOL_FEE_MANAGER_ROLE
 
@@ -176,11 +179,6 @@ Simple relayer to BGT.activateBoost() function for this operator.
 function activateBoost() external;
 ```
 
-### queueDropBoost
-
-```solidity
-function queueDropBoost(uint128 amount) external onlyRole(BGT_MANAGER_ROLE);
-```
 
 ### fullExitQueueDropBoost
 
@@ -200,11 +198,6 @@ Executes the drop boost for this operator.
 function dropBoost() external;
 ```
 
-### redeemBGT
-
-```solidity
-function redeemBGT(uint256 amount) external whenNotFullyExited onlyRole(BGT_MANAGER_ROLE);
-```
 
 ### fullExitRedeemBGT
 

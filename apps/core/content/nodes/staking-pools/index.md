@@ -69,10 +69,7 @@ Users can get started by finding a staking pool operated by a validator they tru
 
 For detailed information about the smart contracts and their functions, see the [Smart Contract Reference](/nodes/staking-pools/contracts). This reference provides comprehensive documentation of all contract interfaces, functions, and operational details that developers and advanced users may need.
 
-:::tip
-Staking pools are designed to be validator-operated, meaning each validator creates and manages their own pool. This allows validators to build their own communities and branding while leveraging Berachain's PoL infrastructure.
-:::
+## Support and Resources
 
-:::warning
-Off-chain components such as the Consensus Layer Oracle and Incentive Management Bot are required for full functionality but are not yet implemented.
-:::
+If you don't have contact with Berachain Validator Relations, ask on our [Discord's](https://discord.gg/berachain) #node-support channel.
+

@@ -242,7 +242,3 @@ Successful staking often involves building relationships with validators and the
 ## Getting Started as a User
 
 Users who want to stake through a staking pool should first research validator reputation and pool performance to choose the right pool for their needs. The staking process begins with using the `submit()` function to deposit BERA tokens and receive stBERA shares. Users should monitor their position by tracking their share balance and accumulated rewards. When ready to exit, users can request withdrawal using the `requestWithdrawal()` function, though the actual withdrawal process depends on the consensus layer's withdrawal queue.
-
-:::warning
-The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
-:::

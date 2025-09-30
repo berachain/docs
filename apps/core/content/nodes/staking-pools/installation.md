@@ -163,7 +163,7 @@ The returned `CoreContracts` struct contains:
 - `stakingRewardsVault`: Address of your StakingRewardsVault contract
 - `incentiveCollector`: Address of your IncentiveCollector contract
 
-Note that the WithdrawalVault and AccountingOracle are shared infrastructure contracts used by all staking pools, not deployed per validator.
+Note that withdrawal processing and oracle services are handled by shared infrastructure contracts used by all staking pools, not deployed per validator.
 
 ## Step 4: Initialize the Pool
 
@@ -197,9 +197,6 @@ curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/withdrawal_credential
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/validators/{validator_index}/balance"
 ```
 
-:::warning
-The beacon API endpoints above are examples and may not be available on Berachain. You should verify the correct API endpoints for your specific network configuration.
-:::
 
 ### Activate the Pool
 
@@ -268,9 +265,6 @@ After completing the deployment, verify:
 - [ ] BGT operations initialized
 - [ ] Pool accepting deposits (if desired)
 
-:::warning
-**Deployment Verification Needs Elaboration**: The current verification process requires more detailed guidance on how to confirm successful deployment and activation. This will be expanded in future documentation updates.
-:::
 
 ## Troubleshooting Common Issues
 
@@ -415,11 +409,3 @@ After successful deployment and activation:
 - **Technical Documentation**: [Smart Contract Reference](/nodes/staking-pools/contracts)
 - **Validator Community**: Join Berachain validator channels
 - **Technical Support**: Contact Berachain technical support for deployment issues
-
-:::tip
-Successful staking pool deployment requires careful attention to detail. Double-check all parameters and proofs before submitting transactions.
-:::
-
-:::warning
-The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
-:::

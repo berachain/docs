@@ -89,7 +89,7 @@ Staking pools provide validators with a revenue stream through commission on use
 function queueValCommission(uint96 commission) external;
 ```
 
-See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuevalcommission)
+See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/SmartOperator.md#queuevalcommission)
 
 ### Configure Reward Allocations
 
@@ -103,7 +103,49 @@ function queueRewardsAllocation(
 ) external;
 ```
 
-See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuerewardsallocation)
+See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/SmartOperator.md#queuerewardsallocation)
+
+### Role Management and Access Control
+
+The SmartOperator contract uses a role-based access control system that allows you to delegate specific operational responsibilities to different addresses. This provides flexibility in managing your staking pool operations while maintaining security through separation of concerns.
+
+**Your Role as Validator Admin:**
+
+When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which gives you the ability to grant and revoke the following operational roles to other addresses:
+
+**REWARDS_ALLOCATION_MANAGER_ROLE:**
+- Controls where your Proof of Liquidity rewards are directed
+- Can call `queueRewardsAllocation()` to support specific DeFi protocols or applications
+- Useful for supporting ecosystem initiatives or community projects
+
+**COMMISSION_MANAGER_ROLE:**
+- Controls your validator commission rate (up to 100%)
+- Can call `queueValCommission()` to adjust how much you earn from user rewards
+- Essential for managing your revenue model
+
+**INCENTIVE_COLLECTOR_MANAGER_ROLE:**
+- Controls incentive collector payout amounts
+- Can call `queueIncentiveCollectorPayoutAmountChange()` to adjust user incentive payouts
+- Useful for optimizing user experience and retention
+
+**PROTOCOL_FEE_MANAGER_ROLE:**
+- Controls the protocol fee percentage (up to 20%) charged on BGT operations
+- Can call `setProtocolFeePercentage()` to adjust fee rates
+- Important for managing operational costs
+
+**BGT_MANAGER_ROLE:**
+- Controls BGT boost and redemption operations
+- Can call `queueDropBoost()` and `redeemBGT()` for BGT management
+- Note: This role must be granted by protocol governance, not by validator admins
+
+**Role Assignment Strategy:**
+
+You can assign these roles to different addresses based on your operational needs:
+- **Single Address**: Grant all roles to your main validator wallet for simplicity
+- **Distributed Management**: Grant specific roles to different team members or automated systems
+- **Automated Systems**: Grant roles to smart contracts for automated operations
+
+This role system allows you to maintain operational flexibility while keeping your validator keys secure and separate from day-to-day management functions.
 
 ### Configure Reward Allocations
 
@@ -117,7 +159,7 @@ function queueRewardsAllocation(
 ) external;
 ```
 
-See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/core/SmartOperator.sol/contract.SmartOperator.md#queuerewardsallocation)
+See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/SmartOperator.md#queuerewardsallocation)
 
 ### BGT Operations and Protocol Fees
 
@@ -164,7 +206,7 @@ function minEffectiveBalance() external view returns (uint256);
 function activeThresholdReached() external view returns (bool);
 ```
 
-See: [StakingPool.isActive](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#mineffectivebalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md#activethresholdreached)
+See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#mineffectivebalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
 
 ### Understanding Pool Operations
 
@@ -227,7 +269,7 @@ The centralized WithdrawalVault contract handles all withdrawal operations for a
 
 #### Withdrawal Processing
 
-The WithdrawalVault provides two types of withdrawal requests:
+The withdrawal system provides two types of withdrawal requests:
 
 ```solidity
 // Request withdrawal of specific BERA amount
@@ -259,7 +301,7 @@ function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
 
 #### Full Exit Management
 
-When your validator fully exits, the WithdrawalVault handles the transition:
+When your validator fully exits, the withdrawal system handles the transition:
 
 ```solidity
 // Notify of full exit from consensus layer
@@ -282,7 +324,7 @@ Each withdrawal request is represented by an ERC-721 NFT that users can track:
 - **Status Tracking**: Users can monitor their withdrawal status through the NFT
 - **Finalization Proof**: The NFT serves as proof of the withdrawal request
 
-See: [WithdrawalVault.requestWithdrawal](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#requestwithdrawal), [WithdrawalVault.requestRedeem](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#requestredeem), [WithdrawalVault.finalizeWithdrawalRequest](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#finalizewithdrawalrequest), [WithdrawalVault.finalizeWithdrawalRequests](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#finalizewithdrawalrequests), and [WithdrawalVault.notifyFullExitFromCL](/nodes/staking-pools/contracts/WithdrawalVault.sol/contract.WithdrawalVault.md#notifyfullexitfromcl)
+These functions are part of the centralized withdrawal system that handles all withdrawal operations for staking pools.
 
 ### Emergency Operations
 
@@ -328,7 +370,7 @@ Understanding the full exit process and having clear communication plans for eme
 
 1. **Check Pool Status**: Call `isActive()` on your StakingPool contract
 2. **Verify Proofs**: Ensure all proofs are recent (within 10 minutes) and from correct validator index
-3. **Check Withdrawal Credentials**: Verify they match your deployed WithdrawalVault address
+3. **Check Withdrawal Credentials**: Verify they match the expected withdrawal system address
 4. **Validate Initial Deposit**: Confirm exactly 10,000 BERA was sent with deployment
 
 **Debugging Commands:**
@@ -426,10 +468,7 @@ For detailed technical information about the smart contracts, see the [Smart Con
 
 ## Getting Started as a Validator
 
-Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.sol/contract.StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
+Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
 
-For developers looking to integrate with the staking pools, begin by reviewing the [StakingPool](/nodes/staking-pools/contracts/core/StakingPool.sol/contract.StakingPool.md) contract, which contains the core functionality that most applications will interact with. Understanding the overall architecture requires studying how the contracts interact and how data flows through the system. Testing integration through test contracts provides hands-on experience with the system's behavior, while monitoring contract events is essential for tracking state changes and building responsive applications.
+For developers looking to integrate with the staking pools, begin by reviewing the [StakingPool](/nodes/staking-pools/contracts/StakingPool.md) contract, which contains the core functionality that most applications will interact with. Understanding the overall architecture requires studying how the contracts interact and how data flows through the system. Testing integration through test contracts provides hands-on experience with the system's behavior, while monitoring contract events is essential for tracking state changes and building responsive applications.
 
-:::warning
-The off-chain oracle and incentive management bot components are required for full functionality but are not yet implemented. These will be deployed separately and integrated with the staking pools system.
-:::
