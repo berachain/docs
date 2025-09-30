@@ -139,8 +139,6 @@ bool public activeThresholdReached;
 
 ## Functions
 
-
-
 ### pause
 
 Pauses deposits.
@@ -167,7 +165,6 @@ function unpause() external onlyOwner;
 function getValidatorPubkey() external view returns (bytes memory);
 ```
 
-
 ### activate
 
 Activates the staking pool with an initial deposit.
@@ -186,7 +183,6 @@ function activate(uint256 initialDepositAmount) external;
 | Name                   | Type      | Description                                            |
 | ---------------------- | --------- | ------------------------------------------------------ |
 | `initialDepositAmount` | `uint256` | The initial amount of assets to deposit into the pool. |
-
 
 ### receiveRewards
 

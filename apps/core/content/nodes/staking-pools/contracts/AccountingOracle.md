@@ -9,15 +9,13 @@
 
 ## State Variables
 
-### _factory
+### \_factory
 
 ```solidity
 IStakingPoolContractsFactory internal _factory;
 ```
 
 ## Functions
-
-
 
 ### updateTotalDeposits
 
@@ -38,12 +36,12 @@ function updateTotalDeposits(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`pubkey`|`bytes`|The pubkey of the validator.|
-|`pubkeyProof`|`bytes32[]`|The proof of the pubkey.|
-|`balance`|`uint64`|The new balance of the validator in GWei.|
-|`balancesLeaf`|`bytes32`|The leaf of the balances.|
-|`balanceProof`|`bytes32[]`|The proof of the balance.|
-|`validatorIndex`|`uint64`|The index of the validator.|
-|`timestamp`|`uint64`|The timestamp of the beacon block.|
+| Name             | Type        | Description                               |
+| ---------------- | ----------- | ----------------------------------------- |
+| `pubkey`         | `bytes`     | The pubkey of the validator.              |
+| `pubkeyProof`    | `bytes32[]` | The proof of the pubkey.                  |
+| `balance`        | `uint64`    | The new balance of the validator in GWei. |
+| `balancesLeaf`   | `bytes32`   | The leaf of the balances.                 |
+| `balanceProof`   | `bytes32[]` | The proof of the balance.                 |
+| `validatorIndex` | `uint64`    | The index of the validator.               |
+| `timestamp`      | `uint64`    | The timestamp of the beacon block.        |

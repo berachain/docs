@@ -314,7 +314,7 @@ Successful staking pools often have strong community engagement and transparent 
 
 Effective security practices protect both your operations and your users' funds. The role-based access control system in the SmartOperator contract provides granular permissions that should be carefully managed. Use dedicated wallets for different operational roles rather than relying on a single administrative wallet for all functions. This separation of concerns limits the potential impact of any security incident and makes it easier to audit and monitor different aspects of your operations.
 
-Regular monitoring of your pool's operations helps identify potential issues before they become problems.  Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
+Regular monitoring of your pool's operations helps identify potential issues before they become problems. Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
 
 Understanding the full exit process and having clear communication plans for emergency situations remains important. Develop procedures for communicating with your users during any operational disruptions or significant changes to your pool's status.
 

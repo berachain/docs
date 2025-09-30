@@ -152,8 +152,6 @@ uint96 public protocolFeePercentage;
 modifier whenNotFullyExited();
 ```
 
-
-
 ### queueBoost
 
 This function is used to auto-boost the validator key for the current unboosted amount of BGT.
@@ -347,7 +345,6 @@ Claims BGTStaker and incentive program rewards and send them to the incentive co
 ```solidity
 function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, address[] memory tokens) external;
 ```
-
 
 ### setProtocolFeePercentage
 

@@ -11,7 +11,7 @@
 
 ### WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY
 
-192 blocks per epoch * 256 epochs
+192 blocks per epoch \* 256 epochs
 
 ```solidity
 uint256 public constant WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY = 49_152;
@@ -19,13 +19,13 @@ uint256 public constant WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY = 49_152;
 
 ## State Variables
 
-### _factory
+### \_factory
 
 ```solidity
 ICoreContractsStorage internal _factory;
 ```
 
-### _nextRequestId
+### \_nextRequestId
 
 ```solidity
 uint256 internal _nextRequestId;
@@ -43,15 +43,13 @@ mapping(uint256 => WithdrawalRequest) public withdrawalRequests;
 mapping(bytes => uint256) public allocatedWithdrawalsAmount;
 ```
 
-### _isFullyExited
+### \_isFullyExited
 
 ```solidity
 mapping(bytes => bool) internal _isFullyExited;
 ```
 
 ## Functions
-
-
 
 ### requestRedeem
 
@@ -76,11 +74,11 @@ function requestRedeem(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`pubkey`|`bytes`|The validator's public key.|
-|`shares`|`uint256`|The amount of shares to redeem.|
-|`maxFeeToPay`|`uint256`|The maximum fee the user is willing to pay for the redemption (EIP-7002).|
+| Name          | Type      | Description                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------- |
+| `pubkey`      | `bytes`   | The validator's public key.                                               |
+| `shares`      | `uint256` | The amount of shares to redeem.                                           |
+| `maxFeeToPay` | `uint256` | The maximum fee the user is willing to pay for the redemption (EIP-7002). |
 
 ### requestWithdrawal
 
@@ -105,11 +103,11 @@ function requestWithdrawal(
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`pubkey`|`bytes`|The validator's public key.|
-|`assetsInGWei`|`uint64`|The amount of BERA to withdraw in GWei.|
-|`maxFeeToPay`|`uint256`|The maximum fee the user is willing to pay for the withdrawal (EIP-7002).|
+| Name           | Type      | Description                                                               |
+| -------------- | --------- | ------------------------------------------------------------------------- |
+| `pubkey`       | `bytes`   | The validator's public key.                                               |
+| `assetsInGWei` | `uint64`  | The amount of BERA to withdraw in GWei.                                   |
+| `maxFeeToPay`  | `uint256` | The maximum fee the user is willing to pay for the withdrawal (EIP-7002). |
 
 ### finalizeWithdrawalRequest
 
@@ -124,9 +122,9 @@ function finalizeWithdrawalRequest(uint256 requestId) external nonReentrant when
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`requestId`|`uint256`|The ID of the withdrawal request to finalize.|
+| Name        | Type      | Description                                   |
+| ----------- | --------- | --------------------------------------------- |
+| `requestId` | `uint256` | The ID of the withdrawal request to finalize. |
 
 ### finalizeWithdrawalRequests
 
@@ -141,9 +139,9 @@ function finalizeWithdrawalRequests(uint256[] calldata requestIds) external nonR
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`requestIds`|`uint256[]`|Array of withdrawal request IDs to finalize.|
+| Name         | Type        | Description                                  |
+| ------------ | ----------- | -------------------------------------------- |
+| `requestIds` | `uint256[]` | Array of withdrawal request IDs to finalize. |
 
 ### notifyFullExitFromCL
 
@@ -155,9 +153,9 @@ function notifyFullExitFromCL(bytes memory pubkey) external;
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`pubkey`|`bytes`|The validator's public key.|
+| Name     | Type    | Description                 |
+| -------- | ------- | --------------------------- |
+| `pubkey` | `bytes` | The validator's public key. |
 
 ### getWithdrawalRequest
 
@@ -169,13 +167,12 @@ function getWithdrawalRequest(uint256 requestId) external view returns (Withdraw
 
 **Parameters**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`requestId`|`uint256`|The ID of the withdrawal request|
+| Name        | Type      | Description                      |
+| ----------- | --------- | -------------------------------- |
+| `requestId` | `uint256` | The ID of the withdrawal request |
 
 **Returns**
 
-|Name|Type|Description|
-|----|----|-----------|
-|`<none>`|`WithdrawalRequest`|The withdrawal request struct|
-
+| Name     | Type                | Description                   |
+| -------- | ------------------- | ----------------------------- |
+| `<none>` | `WithdrawalRequest` | The withdrawal request struct |
