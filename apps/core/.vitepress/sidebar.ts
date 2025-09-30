@@ -403,7 +403,6 @@ const SIDEBAR = {
           text: "WithdrawalVault",
           link: "/nodes/staking-pools/contracts/WithdrawalVault.md"
         }
-
       ]
     },
     {

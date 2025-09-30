@@ -51,10 +51,10 @@ Emergency controls provide additional layers of protection. Contracts can be pau
 
 Detailed documentation for each contract is available through the following reference materials. Each contract documentation provides comprehensive information about functions, events, errors, and usage patterns.
 
-| Contract                        | Description                                             | Documentation                                          |
-| ------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Contract                        | Description                                             | Documentation                                               |
+| ------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
 | **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts     | [View Documentation](contracts/StakingPoolContractsFactory) |
-| **StakingPool**                 | Main staking functionality and user interactions        | [View Documentation](contracts/StakingPool)            |
-| **SmartOperator**               | Validator operations and Proof of Liquidity integration | [View Documentation](contracts/SmartOperator)          |
+| **StakingPool**                 | Main staking functionality and user interactions        | [View Documentation](contracts/StakingPool)                 |
+| **SmartOperator**               | Validator operations and Proof of Liquidity integration | [View Documentation](contracts/SmartOperator)               |
 | **WithdrawalVault**             | Withdrawal request processing and NFT-based tracking    | [View Documentation](contracts/WithdrawalVault)             |
-| **StBERA**                      | Base contract for stBERA token implementation           | [View Documentation](contracts/StBERA)                 |
+| **StBERA**                      | Base contract for stBERA token implementation           | [View Documentation](contracts/StBERA)                      |

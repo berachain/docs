@@ -197,7 +197,6 @@ curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/withdrawal_credential
 curl "https://beacon-api.berachain.com/eth/v1/beacon/proof/validators/{validator_index}/balance"
 ```
 
-
 ### Activate the Pool
 
 Use the factory contract to activate your staking pool:
@@ -264,7 +263,6 @@ After completing the deployment, verify:
 - [ ] Reward allocation set
 - [ ] BGT operations initialized
 - [ ] Pool accepting deposits (if desired)
-
 
 ## Troubleshooting Common Issues
 

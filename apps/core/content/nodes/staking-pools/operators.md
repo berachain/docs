@@ -114,26 +114,31 @@ The SmartOperator contract uses a role-based access control system that allows y
 When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which gives you the ability to grant and revoke the following operational roles to other addresses:
 
 **REWARDS_ALLOCATION_MANAGER_ROLE:**
+
 - Controls where your Proof of Liquidity rewards are directed
 - Can call `queueRewardsAllocation()` to support specific DeFi protocols or applications
 - Useful for supporting ecosystem initiatives or community projects
 
 **COMMISSION_MANAGER_ROLE:**
+
 - Controls your validator commission rate (up to 100%)
 - Can call `queueValCommission()` to adjust how much you earn from user rewards
 - Essential for managing your revenue model
 
 **INCENTIVE_COLLECTOR_MANAGER_ROLE:**
+
 - Controls incentive collector payout amounts
 - Can call `queueIncentiveCollectorPayoutAmountChange()` to adjust user incentive payouts
 - Useful for optimizing user experience and retention
 
 **PROTOCOL_FEE_MANAGER_ROLE:**
+
 - Controls the protocol fee percentage (up to 20%) charged on BGT operations
 - Can call `setProtocolFeePercentage()` to adjust fee rates
 - Important for managing operational costs
 
 **BGT_MANAGER_ROLE:**
+
 - Controls BGT boost and redemption operations
 - Can call `queueDropBoost()` and `redeemBGT()` for BGT management
 - Note: This role must be granted by protocol governance, not by validator admins
@@ -141,6 +146,7 @@ When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which
 **Role Assignment Strategy:**
 
 You can assign these roles to different addresses based on your operational needs:
+
 - **Single Address**: Grant all roles to your main validator wallet for simplicity
 - **Distributed Management**: Grant specific roles to different team members or automated systems
 - **Automated Systems**: Grant roles to smart contracts for automated operations
@@ -471,4 +477,3 @@ For detailed technical information about the smart contracts, see the [Smart Con
 Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
 
 For developers looking to integrate with the staking pools, begin by reviewing the [StakingPool](/nodes/staking-pools/contracts/StakingPool.md) contract, which contains the core functionality that most applications will interact with. Understanding the overall architecture requires studying how the contracts interact and how data flows through the system. Testing integration through test contracts provides hands-on experience with the system's behavior, while monitoring contract events is essential for tracking state changes and building responsive applications.
-

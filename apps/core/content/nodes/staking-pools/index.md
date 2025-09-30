@@ -72,4 +72,3 @@ For detailed information about the smart contracts and their functions, see the 
 ## Support and Resources
 
 If you don't have contact with Berachain Validator Relations, ask on our [Discord's](https://discord.gg/berachain) #node-support channel.
-

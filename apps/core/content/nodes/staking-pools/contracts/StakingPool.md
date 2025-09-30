@@ -145,7 +145,6 @@ bool public activeThresholdReached;
 
 ## Functions
 
-
 ### getValidatorPubkey
 
 ```solidity

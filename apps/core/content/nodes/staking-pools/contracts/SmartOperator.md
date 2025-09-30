@@ -56,7 +56,6 @@ _Validator admin manages other roles and is managed by the contract owner._
 bytes32 public constant VALIDATOR_ADMIN_ROLE = keccak256("VALIDATOR_ADMIN_ROLE");
 ```
 
-
 ### PROTOCOL_FEE_MANAGER_ROLE
 
 _Can set the fee percentage and claim fees._
@@ -179,7 +178,6 @@ Simple relayer to BGT.activateBoost() function for this operator.
 function activateBoost() external;
 ```
 
-
 ### fullExitQueueDropBoost
 
 Enqueues a drop boost request for the whole boosted amount.
@@ -197,7 +195,6 @@ Executes the drop boost for this operator.
 ```solidity
 function dropBoost() external;
 ```
-
 
 ### fullExitRedeemBGT
 

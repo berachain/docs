@@ -121,5 +121,3 @@ function validateBalanceProof(
     public
     view;
 ```
-
-
