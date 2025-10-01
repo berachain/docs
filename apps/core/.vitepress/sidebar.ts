@@ -145,6 +145,10 @@ const SIDEBAR = {
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
         {
+          text: "Bridge to Berachain",
+          link: "/developers/quickstart/bridge-to-berachain"
+        },
+        {
           text: "Integrating with PoL",
           link: "/developers/quickstart/pol-integration"
         }
