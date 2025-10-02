@@ -54,7 +54,7 @@ Credentials Address,
   It takes 2 ETH1 blocks (on the EVM layer) from the event emission to verify the event on the Consensus Layer. If the deposit event is processed at epoch `N`, the validator is then considered in the **Deposited** state, provided the validator’s balance equals (or exceeds) the minimum required for staking.
 
 - **Minimum Requirement**  
-  A total of **{{ constants.mainnet.minEffectiveBalance }} BERA** is required for a validator to reach the Deposited state. (Multiple deposits can accumulate to this amount.)
+  A total of **{{ constants.mainnet.minActivationBalance }} BERA** is required for a validator to reach the Deposited state. (Multiple deposits can accumulate to this amount.)
 
 - **Signature Verification**
   - On the first deposit, the validator’s signature is fully verified (similar to ETH2).
