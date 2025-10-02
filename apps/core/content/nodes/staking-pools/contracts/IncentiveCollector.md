@@ -104,11 +104,11 @@ function recoverERC20(address[] calldata tokens, address receiver) external only
 
 ### Donated
 
-Emitted when an amount is donated to the staking pool.
-
 ```solidity
 event Donated(address indexed donor, uint256 amount);
 ```
+
+Emitted when native tokens are sent directly to the contract via the `receive()` function. The tokens are automatically forwarded to the staking rewards vault.
 
 **Parameters**
 
@@ -202,11 +202,15 @@ event IncentiveTokensClaimed(address indexed from, uint256 payoutAmount, uint256
 error InvalidSender(address sender, address expected);
 ```
 
+Thrown by `_validateSender()` when the sender is not the expected address.
+
 ### IncorrectPayoutAmount
 
 ```solidity
 error IncorrectPayoutAmount();
 ```
+
+Thrown by `claim()` when the msg.value does not match the required payout amount.
 
 ### NodeIsFullyExited
 
@@ -214,8 +218,12 @@ error IncorrectPayoutAmount();
 error NodeIsFullyExited();
 ```
 
+Thrown by functions when the validator node has been fully exited.
+
 ### PayoutAmountIsZero
 
 ```solidity
 error PayoutAmountIsZero();
 ```
+
+Thrown by `claim()` when the payout amount is zero.

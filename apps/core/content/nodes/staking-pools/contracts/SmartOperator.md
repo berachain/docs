@@ -309,17 +309,23 @@ function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, add
 event ProtocolFeePercentageSet(uint96 protocolFeePercentage);
 ```
 
+Emitted when the protocol fee percentage is updated via `setProtocolFeePercentage()`.
+
 ### BGTRedeemed
 
 ```solidity
 event BGTRedeemed(address receiver, uint256 amount);
 ```
 
+Emitted when BGT tokens are redeemed via `redeemBGT()` or `redeemBGTTo()`.
+
 ### RewardAllocatorSet
 
 ```solidity
 event RewardAllocatorSet(address rewardAllocator);
 ```
+
+Emitted when the reward allocator is set via `setRewardAllocator()`.
 
 ## Errors
 
@@ -329,11 +335,15 @@ event RewardAllocatorSet(address rewardAllocator);
 error InvalidSender(address sender, address expected);
 ```
 
+Thrown by `_validateSender()` when the sender is not the expected address.
+
 ### InvalidProtocolFeePercentage
 
 ```solidity
 error InvalidProtocolFeePercentage();
 ```
+
+Thrown by `setProtocolFeePercentage()` when the protocol fee percentage is invalid.
 
 ### StakingPoolIsFullyExited
 
@@ -341,8 +351,12 @@ error InvalidProtocolFeePercentage();
 error StakingPoolIsFullyExited();
 ```
 
+Thrown by various functions when the staking pool has been fully exited.
+
 ### ZeroAddress
 
 ```solidity
 error ZeroAddress();
 ```
+
+Thrown by functions when a zero address is provided where a valid address is required.

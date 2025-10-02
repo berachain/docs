@@ -292,6 +292,20 @@
         "bepolia-address": "0x8F761B285870c3d1740a823eABd33D1c9bD30b9d",
         "abi": "",
         "docsUrl": "/nodes/staking-pools/contracts/IncentiveCollector"
+      },
+      "delegationHandlerImpl": {
+        "name": "DelegationHandler Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandler"
+      },
+      "delegationHandlerFactoryImpl": {
+        "name": "DelegationHandlerFactory Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandlerFactory"
       }
     },
     "tokens": {

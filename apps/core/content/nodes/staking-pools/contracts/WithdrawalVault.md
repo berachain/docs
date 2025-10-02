@@ -232,11 +232,11 @@ function unpause() external onlyRole(DEFAULT_ADMIN_ROLE);
 
 ### ERC20Recovered
 
-Event emitted when ERC20 tokens are recovered.
-
 ```solidity
 event ERC20Recovered(address token, address to, uint256 amount);
 ```
+
+Emitted when ERC20 tokens that were accidentally sent to the contract are recovered by the admin. This is an emergency recovery function for tokens sent to the wrong address.
 
 **Parameters**
 
@@ -248,13 +248,13 @@ event ERC20Recovered(address token, address to, uint256 amount);
 
 ### WithdrawalRequested
 
-Emitted when a withdrawal request is created.
-
 ```solidity
 event WithdrawalRequested(
     address indexed user, uint256 amountOfAsset, uint256 amountOfShares, uint256 requestId, bool isFullExitWithdraw
 );
 ```
+
+Emitted when a user creates a withdrawal request that will be processed through the consensus layer after a cooldown period. The request creates an NFT that must be used to finalize the withdrawal after the delay.
 
 **Parameters**
 

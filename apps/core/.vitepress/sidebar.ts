@@ -371,6 +371,10 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/users"
         },
         {
+          text: "Delegation Guide",
+          link: "/nodes/staking-pools/delegators"
+        },
+        {
           text: "Installation Guide",
           link: "/nodes/staking-pools/installation"
         },
@@ -404,8 +408,12 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/contracts/WithdrawalVault.md"
         },
         {
-          text: "AccountingOracle",
-          link: "/nodes/staking-pools/contracts/AccountingOracle.md"
+          text: "DelegationHandler",
+          link: "/nodes/staking-pools/contracts/DelegationHandler.md"
+        },
+        {
+          text: "DelegationHandlerFactory",
+          link: "/nodes/staking-pools/contracts/DelegationHandlerFactory.md"
         }
       ]
     },

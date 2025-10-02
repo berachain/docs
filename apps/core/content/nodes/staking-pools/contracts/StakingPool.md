@@ -230,11 +230,15 @@ function unpause() external onlyOwner;
 event StakingPoolActivated();
 ```
 
+Emitted when the staking pool is activated via `activate()`.
+
 ### StakingRewardsReceived
 
 ```solidity
 event StakingRewardsReceived(uint256 amount);
 ```
+
+Emitted when staking rewards are received via `receiveRewards()`.
 
 ### MaxCapacityReached
 
@@ -242,11 +246,15 @@ event StakingRewardsReceived(uint256 amount);
 event MaxCapacityReached(bytes pubkey);
 ```
 
+Emitted when the staking pool reaches maximum capacity during `_processDeposit()`.
+
 ### FullExitTriggered
 
 ```solidity
 event FullExitTriggered();
 ```
+
+Emitted when a full exit is triggered via `triggerFullExit()`.
 
 ### TotalDepositsUpdated
 
@@ -254,17 +262,23 @@ event FullExitTriggered();
 event TotalDepositsUpdated(uint256 newTotalDeposits);
 ```
 
+Emitted when total deposits are updated during `_processDeposit()`.
+
 ### ActiveThresholdReached
 
 ```solidity
 event ActiveThresholdReached();
 ```
 
+Emitted when the active threshold is reached during `_processDeposit()`.
+
 ### MinEffectiveBalanceUpdated
 
 ```solidity
 event MinEffectiveBalanceUpdated(uint256 newMinEffectiveBalance);
 ```
+
+Emitted when the minimum effective balance is updated via `setMinEffectiveBalance()`.
 
 ## Errors
 
@@ -274,11 +288,15 @@ event MinEffectiveBalanceUpdated(uint256 newMinEffectiveBalance);
 error StakingPoolAlreadyActivated();
 ```
 
+Thrown by `activate()` when the staking pool has already been activated.
+
 ### StakingPoolFullExited
 
 ```solidity
 error StakingPoolFullExited();
 ```
+
+Thrown by various functions when the staking pool has been fully exited.
 
 ### InvalidSender
 
@@ -286,11 +304,15 @@ error StakingPoolFullExited();
 error InvalidSender(address sender, address expected);
 ```
 
+Thrown by `_validateSender()` when the sender is not the expected address.
+
 ### InvalidAmount
 
 ```solidity
 error InvalidAmount();
 ```
+
+Thrown by `_submit()` when the deposit amount is zero.
 
 ### WithdrawalNotAllowed
 
@@ -298,8 +320,12 @@ error InvalidAmount();
 error WithdrawalNotAllowed();
 ```
 
+Thrown by withdrawal functions when the withdrawal cooldown period has not elapsed.
+
 ### InvalidMinEffectiveBalance
 
 ```solidity
 error InvalidMinEffectiveBalance();
 ```
+
+Thrown by `setMinEffectiveBalance()` when the new minimum effective balance is invalid.

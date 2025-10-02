@@ -440,6 +440,35 @@ When technical issues require assistance:
 
 For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
 
+## Delegation System
+
+The staking pools system includes a delegation mechanism that enables **capital-light validator operations** by separating capital provision from validator operations. This allows validators to operate without significant upfront capital while enabling passive staking for capital providers.
+
+### How Delegation Works
+
+Through the delegation system, capital providers (delegators) can fund validators directly, while validator operators maintain control over technical operations. This creates opportunities for both parties: validators can focus on operational excellence without capital constraints, while delegators can earn staking rewards through passive investment.
+
+The system maintains clear separation between principal (delegated capital) and yield (staking rewards), ensuring that delegators can withdraw their original funds while validator operators retain earned rewards.
+
+### For Validator Operators
+
+As a validator operator, you can work with delegators to fund your staking pool operations:
+
+1. **Deploy Delegation Handler**: A delegation handler is deployed for your validator's public key
+2. **Receive Delegated Funds**: Delegators provide BERA capital to the delegation handler
+3. **Create Staking Pool**: Use delegated funds to create your staking pool (requires 10,000 BERA minimum)
+4. **Manage Operations**: Deposit additional delegated funds and manage validator operations
+5. **Withdraw Yield**: You can withdraw staking rewards and yield earned from operations
+
+### Key Benefits
+
+- **Capital Efficiency**: Operate validators without significant upfront capital requirements
+- **Focus on Operations**: Concentrate on technical excellence rather than capital management
+- **Revenue Generation**: Earn commission on user rewards while delegators provide capital
+- **Clear Separation**: Distinct roles ensure proper fund management and accountability
+
+For detailed information about working with delegators, see the [Delegators Guide](/nodes/staking-pools/delegators) and the [DelegationHandler contract reference](/nodes/staking-pools/contracts/DelegationHandler).
+
 ## Getting Started as a Validator
 
 Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
