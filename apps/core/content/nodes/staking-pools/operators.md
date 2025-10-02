@@ -21,9 +21,9 @@ This guide walks validators through setting up and managing staking pools to off
 
 ## Prerequisites
 
-Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential, as the staking pool will integrate directly with your existing validator infrastructure. You'll need at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA to reach the minimum effective balance required for activation, though actual activation to the Active state depends on the ValidatorSetCap and your validator's priority.
+Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential. You'll need at least {{ config.mainnet.votingPowerIncrement.toLocaleString() }} $BERA to register the pool, though actual activation to the Active state requires at least {{ config.mainnet.minActivationBalance.toLocaleString() }} $BERA.
 
-Technical knowledge of smart contract interactions is important, as you'll be deploying and managing several contracts. While the system is designed to be user-friendly, understanding the underlying mechanics will help you troubleshoot issues and optimize your pool's performance. Perhaps most importantly, you should have a community of users interested in staking with your validator, as staking pools are most effective when they serve an engaged user base.
+Technical knowledge of smart contract interactions is important, as you'll be deploying and managing several contracts. While the system is designed to be user-friendly, understanding the underlying mechanics will help you troubleshoot issues and optimize your pool's performance. Perhaps most importantly, you should have a community of users interested in staking with your validator, since staking pools are most effective when they serve an engaged user base.
 
 :::warning
 Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
@@ -43,9 +43,11 @@ The staking pool automatically manages your validator's progression through thes
 
 ## Overview of the Setup Process
 
-The setup process for staking pools follows a logical progression that ensures all components are properly configured before going live. It begins with deploying the staking pool contracts through the factory, which creates all the necessary smart contracts for your pool and automatically registers your validator with the consensus layer using the provided deposit.
+The setup process for staking pools follows a logical progression that ensures all components are properly configured before going live:
 
-The next critical step is verification, where you'll obtain proofs and verify that your configuration is correct. This verification process is essential for ensuring the security and proper operation of your pool. After verification, you can activate the pool, enabling user deposits and beginning operations. Finally, you'll configure operational parameters such as commission rates and reward allocations to optimize your pool's performance.
+1. **Deploy and Initialize Your Staking Pool**: Deploy the staking pool contracts through the factory, obtain verification proofs from the beacon API, and activate your pool for user deposits.
+
+2. **Configure Operations**: Set operational parameters such as commission rates and reward allocations to optimize your pool's performance.
 
 ## Deploy and Initialize Your Staking Pool
 
@@ -164,20 +166,6 @@ You can assign these roles to different addresses based on your operational need
 
 This role system allows you to maintain operational flexibility while keeping your validator keys secure and separate from day-to-day management functions.
 
-### Configure Reward Allocations
-
-The reward allocation system is the primary way you can influence your pool's performance and support specific ecosystem initiatives. This system allows you to direct Proof of Liquidity incentives to specific applications or use cases, creating opportunities to differentiate your pool and build stronger relationships with your staking community.
-
-```solidity
-// Queue reward allocation for specific applications
-function queueRewardsAllocation(
-    uint64 startBlock,
-    IBeraChef.Weight[] calldata weights
-) external;
-```
-
-See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/SmartOperator.md#queuerewardsallocation)
-
 ### BGT Operations and Protocol Fees
 
 The SmartOperator contract automatically manages BGT (Berachain Governance Token) operations to maximize your Proof of Liquidity performance. These operations are handled automatically based on the BGT balance in the contract - you don't need to manually manage BGT boosts or redemptions.
@@ -223,7 +211,7 @@ function minEffectiveBalance() external view returns (uint256);
 function activeThresholdReached() external view returns (bool);
 ```
 
-See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#mineffectivebalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
+See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#minEffectiveBalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
 
 ### Understanding Pool Operations
 
@@ -235,8 +223,8 @@ When users deposit BERA into your pool, the contract automatically handles sever
 
 1. **Share Minting**: Users receive stBERA shares proportional to their deposit
 2. **Buffer Management**: Deposits are added to the buffer until sufficient for consensus layer deposits
-3. **Automatic Staking**: When the buffer reaches the minimum deposit amount (10,000 BERA), funds are automatically staked to the consensus layer
-4. **Reward Collection**: Any rewards from previous operations are collected and distributed
+3. **Reward Collection**: Rewards from incentive auctions are collected and added to the buffer if the total capacity is not reached
+4. **Automatic Staking**: When the buffer reaches the minimum deposit amount (10,000 BERA), funds are automatically staked to the consensus layer
 
 The pool uses a sophisticated deposit calculation system that handles:
 
