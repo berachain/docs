@@ -35,7 +35,7 @@ No, BERA staking in PoL is completely separate from traditional validator stakin
 
 While anyone can stake $BERA to try to become a validator in the active set, there are specific staking requirements:
 
-There is a minimum floor of **{{ config.mainnet.minEffectiveBalance }} $BERA** required to be a validator. There is a maximum cap of **{{ config.mainnet.maxEffectiveBalance }} $BERA** for any validator's stake. Only the **top {{ config.mainnet.validatorActiveSetSize }} validators** (ordered by $BERA staked) can be in the active validator set. Even if someone stakes above the minimum **{{ config.mainnet.minEffectiveBalance }} $BERA**, they would still need to have enough stake to be within the **top {{ config.mainnet.validatorActiveSetSize }} validators** to be part of the active validator set that can produce blocks.
+There is a minimum floor of **{{ config.mainnet.minActivationBalance.toLocaleString() }} $BERA** required to be a validator. There is a maximum cap of **{{ config.mainnet.maxDepositBalance.toLocaleString() }} $BERA** for any validator's stake. Only the **top {{ config.mainnet.validatorActiveSetSize }} validators** (ordered by $BERA staked) can be in the active validator set. Even if someone stakes above the minimum **{{ config.mainnet.minActivationBalance.toLocaleString() }} $BERA**, they would still need to have enough stake to be within the **top {{ config.mainnet.validatorActiveSetSize }} validators** to be part of the active validator set that can produce blocks.
 
 ### Can validators with no $BGT boosted to them build blocks and earn rewards?
 
