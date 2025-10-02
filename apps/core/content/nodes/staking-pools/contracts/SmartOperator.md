@@ -209,19 +209,19 @@ function queueValCommission(uint96 commission) external;
 | ------------ | -------- | --------------------------------------------- |
 | `commission` | `uint96` | The new validator commission in basis points. |
 
-### setMinEffectiveBalance
+### setminActivationBalance
 
 Sets the minimum effective balance for the staking pool. Can only be called by the validator admin role.
 
 ```solidity
-function setMinEffectiveBalance(uint256 minEffectiveBalance) external;
+function setminActivationBalance(uint256 minActivationBalance) external;
 ```
 
 **Parameters**
 
-| Name                  | Type      | Description                                                |
-| --------------------- | --------- | ---------------------------------------------------------- |
-| `minEffectiveBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
+| Name                   | Type      | Description                                                |
+| ---------------------- | --------- | ---------------------------------------------------------- |
+| `minActivationBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
 
 ### queueIncentiveCollectorPayoutAmountChange
 

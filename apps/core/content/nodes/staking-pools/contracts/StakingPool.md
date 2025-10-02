@@ -61,12 +61,12 @@ bool public activeThresholdReached;
 function getValidatorPubkey() external view returns (bytes memory);
 ```
 
-### minEffectiveBalance
+### minActivationBalance
 
 Returns the minimum effective balance for the staking pool. If not set, returns the default minimum effective balance.
 
 ```solidity
-function minEffectiveBalance() public view returns (uint256);
+function minActivationBalance() public view returns (uint256);
 ```
 
 **Returns**
@@ -97,19 +97,19 @@ function activate(uint256 initialDepositAmount) external;
 - Pool must be paused
 - Pool must not already be activated or have deposits
 
-### setMinEffectiveBalance
+### setminActivationBalance
 
 Sets the minimum effective balance for the staking pool.
 
 ```solidity
-function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
+function setminActivationBalance(uint256 newminActivationBalance) external;
 ```
 
 **Parameters**
 
-| Name                     | Type      | Description                       |
-| ------------------------ | --------- | --------------------------------- |
-| `newMinEffectiveBalance` | `uint256` | The new minimum effective balance |
+| Name                      | Type      | Description                       |
+| ------------------------- | --------- | --------------------------------- |
+| `newminActivationBalance` | `uint256` | The new minimum effective balance |
 
 **Requirements**
 
@@ -272,13 +272,13 @@ event ActiveThresholdReached();
 
 Emitted when the active threshold is reached during `_processDeposit()`.
 
-### MinEffectiveBalanceUpdated
+### minActivationBalanceUpdated
 
 ```solidity
-event MinEffectiveBalanceUpdated(uint256 newMinEffectiveBalance);
+event minActivationBalanceUpdated(uint256 newminActivationBalance);
 ```
 
-Emitted when the minimum effective balance is updated via `setMinEffectiveBalance()`.
+Emitted when the minimum effective balance is updated via `setminActivationBalance()`.
 
 ## Errors
 
@@ -322,10 +322,10 @@ error WithdrawalNotAllowed();
 
 Thrown by withdrawal functions when the withdrawal cooldown period has not elapsed.
 
-### InvalidMinEffectiveBalance
+### InvalidminActivationBalance
 
 ```solidity
-error InvalidMinEffectiveBalance();
+error InvalidminActivationBalance();
 ```
 
-Thrown by `setMinEffectiveBalance()` when the new minimum effective balance is invalid.
+Thrown by `setminActivationBalance()` when the new minimum effective balance is invalid.
