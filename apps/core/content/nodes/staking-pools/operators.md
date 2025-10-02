@@ -259,6 +259,32 @@ Reward management includes:
 - **Fee Distribution**: Validator fees are minted as shares to the default recipient
 - **Auto-Compounding**: All rewards are automatically reinvested in the pool
 
+#### Incentive Collector Payout Requirements
+
+The IncentiveCollector contract requires users to pay a specific amount when claiming incentive tokens. This mechanism ensures that users contribute to the pool's rewards while retrieving their earned incentives.
+
+**Initial Payout Amount**: 100 BERA (set during deployment)
+
+**How It Works**:
+1. Users call `claim()` with the required payout amount (100 BERA)
+2. The contract transfers all ERC20 incentive tokens to the user
+3. The payout amount is distributed to the staking rewards vault (minus validator fees)
+4. This creates a sustainable reward cycle for the pool
+
+**Managing Payout Amounts**:
+```solidity
+// Queue a new payout amount (requires INCENTIVE_COLLECTOR_MANAGER_ROLE)
+function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount) external;
+```
+
+**Key Considerations**:
+- **User Experience**: Higher payout amounts may discourage small claims
+- **Pool Sustainability**: The payout amount contributes to pool rewards
+- **Fee Structure**: Validator fees are calculated on the payout amount
+- **Minimum Viable**: Users should only claim when the incentive value exceeds the payout cost
+
+This payout mechanism ensures that incentive collection benefits both users (who receive their tokens) and the pool (which receives additional rewards from the payout amount).
+
 ### Withdrawal Management
 
 The centralized WithdrawalVault contract handles all withdrawal operations for all staking pools. Understanding its operations helps you manage user expectations and troubleshoot withdrawal issues.
