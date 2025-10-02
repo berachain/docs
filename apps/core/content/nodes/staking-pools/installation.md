@@ -25,7 +25,7 @@ Before proceeding with the installation, ensure you have:
 
 - **Validator Setup**: A fully operational Berachain validator node
 - **Validator Keys**: Your validator's public key and withdrawal credentials
-- **Initial Stake**: At least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA for the initial deposit
+- **Initial Stake**: At least {{ config.mainnet.minEffectiveBalance }} BERA for the initial deposit
 - **Web3 Environment**: Access to a web3 provider (MetaMask, WalletConnect, or programmatic access)
 - **Gas Fees**: Sufficient BERA for deployment and initialization transactions
 

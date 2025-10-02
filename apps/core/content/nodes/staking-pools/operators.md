@@ -21,7 +21,7 @@ This guide walks validators through setting up and managing staking pools to off
 
 ## Prerequisites
 
-Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential. You'll need at least {{ config.mainnet.votingPowerIncrement.toLocaleString() }} $BERA to register the pool, though actual activation to the Active state requires at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} $BERA.
+Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential. You'll need at least {{ config.mainnet.votingPowerIncrement }} $BERA to register the pool, though actual activation to the Active state requires at least {{ config.mainnet.minEffectiveBalance }} $BERA.
 
 Technical knowledge of smart contract interactions is important, as you'll be deploying and managing several contracts. While the system is designed to be user-friendly, understanding the underlying mechanics will help you troubleshoot issues and optimize your pool's performance. Perhaps most importantly, you should have a community of users interested in staking with your validator, since staking pools are most effective when they serve an engaged user base.
 

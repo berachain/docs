@@ -51,6 +51,7 @@
     "validatorActivationEpochDelay": 3,
     "blocksPerEpoch": 192,
     "stakeMinimumDeadlineEpoch": 1,
+    "votingPowerIncrement": "10,000",
     "minEffectiveBalance": "250,000",
     "maxEffectiveBalance": "10,000,000",
     "dapps": {
