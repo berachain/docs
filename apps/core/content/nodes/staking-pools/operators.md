@@ -266,7 +266,7 @@ The IncentiveCollector contract requires users to pay a specific amount when cla
 **Initial Payout Amount**: 100 BERA (set during deployment)
 
 **How It Works**:
-1. Users call `claim()` with the required payout amount (100 BERA)
+1. **Users** call `claim()` with the required payout amount (100 BERA)
 2. The contract transfers all ERC20 incentive tokens to the user
 3. The payout amount is distributed to the staking rewards vault (minus validator fees)
 4. This creates a sustainable reward cycle for the pool
@@ -277,13 +277,13 @@ The IncentiveCollector contract requires users to pay a specific amount when cla
 function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount) external;
 ```
 
-**Key Considerations**:
-- **User Experience**: Higher payout amounts may discourage small claims
-- **Pool Sustainability**: The payout amount contributes to pool rewards
-- **Fee Structure**: Validator fees are calculated on the payout amount
-- **Minimum Viable**: Users should only claim when the incentive value exceeds the payout cost
+**Key Considerations for Operators**:
+- **User Experience**: Higher payout amounts may discourage small claims from your users
+- **Pool Sustainability**: The payout amount contributes to your pool's rewards
+- **Fee Structure**: Your validator fees are calculated on the payout amount
+- **User Guidance**: Users should only claim when the incentive value exceeds the payout cost
 
-This payout mechanism ensures that incentive collection benefits both users (who receive their tokens) and the pool (which receives additional rewards from the payout amount).
+This payout mechanism ensures that incentive collection benefits both users (who receive their tokens) and your pool (which receives additional rewards from the payout amount). As an operator, you can adjust the payout amount to optimize the balance between user experience and pool sustainability.
 
 ### Withdrawal Management
 
