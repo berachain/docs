@@ -19,7 +19,6 @@ head:
 
 > <small><span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']"><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']}}</a></span><span v-else>Mainnet address not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.abi">ABI JSON</a></span></small>
 
-
 The StakingRewardsVault contract holds execution layer rewards for validators. It receives BERA rewards from validator activities and allows the staking pool to withdraw these rewards when needed.
 
 ## Functions

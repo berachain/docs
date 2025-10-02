@@ -19,9 +19,7 @@ head:
 
 > <small><span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']"><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']}}</a></span><span v-else>Mainnet address not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.smartOperatorImpl.abi">ABI JSON</a></span></small>
 
-
 The SmartOperator contract manages validator operations including BGT boosting, fee management, and reward allocation. It serves as the central controller for validator-related activities within the staking pool ecosystem.
-
 
 ## State Variables
 

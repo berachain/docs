@@ -19,9 +19,7 @@ head:
 
 > <small><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']"><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']}}</a></span><span v-else>Mainnet address not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">ABI JSON</a></span></small>
 
-
 The IncentiveCollector contract manages incentive token collection for validators. It allows users to claim incentive tokens by paying a required payout amount, with fees going to the smart operator and the remaining amount to the staking rewards vault.
-
 
 ## State Variables
 

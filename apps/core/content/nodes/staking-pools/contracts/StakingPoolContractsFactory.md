@@ -19,9 +19,7 @@ head:
 
 > <small><span v-if="config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']"><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']">{{config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']}}</a></span><span v-else>Mainnet address not yet deployed</span><span v-if="config.contracts.stakingPools.stakingPoolContractsFactory.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.stakingPoolContractsFactory.abi">ABI JSON</a></span></small>
 
-
 The StakingPoolContractsFactory is responsible for deploying and managing staking pool contracts for validators. It creates the core contracts (SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector) and handles the initial validator deposit to register with the consensus layer.
-
 
 ## State Variables
 
