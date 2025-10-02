@@ -1,0 +1,138 @@
+# Berachain Documentation - Cursor Rules
+
+## Documentation Standards
+
+### Documentation Style
+- Use Canadian spelling and usage
+- Keep documentation professional but approachable
+- Write documentation so it is useful for the purpose of external developers who want to understand our tools. Documentation only of interest to Berachain internal developers should be excluded.
+- Follow @CONTRIBUTING.md style guide
+
+### Source of Truth
+- Interface files (*.I.sol) are the definitive source for:
+  - Struct definitions
+  - Function signatures
+  - Events
+- Implementation files are authoritative for NatSpec documentation
+- Interface definitions take precedence in any conflicts
+
+### ABI Updates
+- To update published ABI files, check out the git@github.com:berachain/doc-abis repository, and the git@github.com:berachain/contracts-internal repository. In the contracts repo, check out the devel branch. Then, in the doc-abis directory invoke `npm run abis:sync`.
+- This is a separate process from updating the autodocs.
+
+### Git Source Links
+- All Git Source links in documentation MUST point to the public contracts repository at github.com:berachain/contracts/
+- When generating documentation from contracts-internal, replace the repository path in Git Source links
+- Example: Replace `https://github.com/berachain/contracts-internal/blob/[commit]/src/...` with `https://github.com/berachain/contracts/blob/main/src/...`
+
+### Autodoc Generation Process
+The user can request to "refresh the autodocs". This means the following sequence:
+1. Check out a copy of git@github.com:berachain/contracts-staking-pools and switch to the devel branch
+2. Update submodules: `git submodule update --init --recursive`
+3. Install dependencies: `npm install` (if package.json exists)
+4. Use `forge doc --out docs-temp` to generate contract documentation markdown
+5. Extract the documentation from the markdown and replace the body of the corresponding file in this repository, applying the following rules as you copy the markdown:
+   - Exclude `supportsInterface` functions (ERC-165) from documentation
+   - Omit documentation for:
+     - Private constants, variables, and functions
+     - Internal constants, variables, and functions 
+     - Functions intended for subclasses
+     - Public virtual functions (except for RewardVault which is meant to be inherited)
+   - Omit all Inherits lines
+   - Exclude factory-only functions (functions that are only meant to be called by factory contracts)
+   - Include governance-only contract functions since the chain uses on-chain governance
+   - Merge inherited interface documentation into the main contract documentation
+
+### Contract Documentation Structure
+Every file in the documentation autodocs should have a preamble like this at the top. In the preamble, the key to look up within config.contracts depends on the contract itself. Ask if you aren't sure which to use. You can update the ABI link in @constants.json if you find a new ABI in doc-abis repository. For the Git Source link, link to the contract under the github.com:berachain/contracts/ repository, presuming that the path you find in contracts-staking-pools will eventually be merged into the contracts repository.
+
+```
+> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.contractName['mainnet-address']">{{config.contracts.pol.contractName['mainnet-address']}}</a><span v-if="config.contracts.pol.contractName.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.contractName.abi">ABI JSON</a></span></small>
+
+[Git Source](https://github.com/berachain/contracts/blob/main/src/path/to/contract.sol)
+```
+
+### Contract Documentation Organization
+Contract documentation pages should be organized into the following order:
+- Constants
+- State Variables (public state variables)
+- Structs (structures used in state variables)
+- View Functions (public view functions)
+- Functions (public state-changing functions)
+- Events
+- Errors
+- Use alphabetical sorting order for the names of functions, state variables, constants, and events
+- Group functions by type rather than by inheritance - organize by function type (view vs state-changing) rather than organizing by inheritance
+- Keep documentation concise - avoid adding integration examples, security considerations, related contracts, or resources sections unless specifically requested
+- Focus on pure contract reference documentation
+
+### Validation Requirements
+- Struct definitions and function calls must exactly match solidity code:
+  - Names
+  - Types
+  - Order
+- Include type information in struct descriptions
+
+### File Management
+- Seek permission before creating new files
+- Keep READMEs current
+- Respect pnpm workspace in guides/exp
+- Use loose version numbers for minor upgrades
+- Ensure any new files are inserted into the relevant sidebar file
+- When cloning repositories, do not use recursive clone (--recursive flag)
+- Use git operations instead of recalculating patches and let the user handle the commit
+- Use loose version numbers for minor upgrades
+- Ensure any new files are inserted into the relevant sidebar file
+
+## Global Working Preferences
+
+### Communication Style
+- Don't be sycophantic
+- Propose alternative approaches when better solutions may exist or the current approach has weaknesses
+- Ask for clarification when context is missing or confusing
+- Be direct but professional in communication
+- Use dad jokes
+
+### Project Context
+- Maintain professional standards appropriate for blockchain development
+
+### Code Style and Quality
+- Write tests first, ensure they are acceptable, then implement code that passes the tests
+- Ask for clarification about testing approaches when uncertain
+- Don't cater to unreasonable approaches - suggest better alternatives
+
+### Git Workflow
+- All commits must be GPG signed
+- Let the user execute `git add` and `git commit` commands themselves
+- Examine actual pending changes before proposing commit messages
+- Provide fully formed commit messages for review, but keep them brief
+- If you would like to examine another repository for what it says, and it's not in this workspace, you can check it out into /tmp
+
+### File Management
+- When adding new files, request permission 
+- Keep READMEs current and accurate
+- Use loose version numbers for minor upgrades
+- Remove temporary files when done
+
+### Chains
+- Berachain has two chains, mainnet and bepolia. Mainnet RPC is at https://rpc.berachain.com/ and Bepolia RPC is at https://bepolia.rpc.berachain.com/ . Each chain has an execution layer and a consensus layer. You have to ask me for a consensus layer RPC URL if you need one.
+- One-off scripts against the chain are done with the keys in a file private-keys.txt . Add any keys you generate to that file. Don't commit that file. When I say to sweep up the funds, go through each account and return any money in it to the funding account.
+
+## Forge Doc Process Learnings
+
+### Repository Setup
+- Always use the contracts-staking-pools repository for staking pool contract documentation
+- Ensure submodules are updated: `git submodule update --init --recursive`
+- Install dependencies with `npm install` if package.json exists
+- Use `forge doc --out docs-temp` to generate documentation
+
+### Documentation Merging
+- When merging inherited interface documentation, include all functions, events, and errors from the interface
+- Maintain the same organization structure (Constants, State Variables, Structs, View Functions, Functions, Events, Errors)
+- Ensure function signatures match exactly between interface and implementation
+- Include all parameter descriptions and return value descriptions from interfaces
+
+### Error Handling
+- If forge doc fails due to compilation errors, check if submodules need updating
+- If dependencies are missing, install them with npm install
+- Always verify that the generated documentation includes all expected functions and events

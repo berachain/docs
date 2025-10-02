@@ -198,7 +198,7 @@ done
 ### Step 3 - Generate Deposit Scripts
 
 Now invoke the deposit script to generate the deposit transactions (but do not transmit them). The script will provide two `cast` calls and a command to view the current validator set.
-Recall that there are two types of deposits: 1) initial registration and 2) top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minEffectiveBalance }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
+Recall that there are two types of deposits: 1) initial registration and 2) top-up. While multiple top-ups are possible, this script only performs one. Once the top-up exceeds the activation threshold of **{{ config.mainnet.minActivationBalance.toLocaleString() }} $BERA**, the validator will be activated at the end of the second epoch after the threshold is met.
 
 **Terminal 1:**
 

@@ -44,7 +44,7 @@ Every withdrawal requires a fee, which will increase if the withdrawal service e
 
 The withdrawal transaction must originate from the Withdrawal Credential Address for the validator to perform a withdrawal.
 
-The withdrawal API will silently adjust the withdrawal amount to **maintain a minimum stake of {{ config.mainnet.minEffectiveBalance }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 100,000 $BERA.
+The withdrawal API will silently adjust the withdrawal amount to **maintain a minimum stake of {{ config.mainnet.minActivationBalance.toLocaleString() }} $BERA**. For instance, a validator with 350,000 $BERA staked that requests a withdrawal of 300,000 $BERA will only withdraw 100,000 $BERA.
 
 To exit your validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your validator will immediately be queued to exit the active set and no longer produce blocks. The stake will be returned by the consensus layer on the above schedule.
 

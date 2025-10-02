@@ -13,8 +13,8 @@ The network maintains an active set of **{{ config.mainnet.validatorActiveSetSiz
 - Only top **{{ config.mainnet.validatorActiveSetSize }} validators** by `$BERA` stake are included in active set
 - Block proposal probability is proportional to staked `$BERA` and does not affect reward amounts
 - Stake limitations per validator:
-  - Minimum: {{ config.mainnet.minEffectiveBalance }} `$BERA`
-  - Maximum: {{ config.mainnet.maxEffectiveBalance }} `$BERA`
+  - Minimum: {{ config.mainnet.minActivationBalance.toLocaleString() }} `$BERA`
+  - Maximum: {{ config.mainnet.maxDepositBalance.toLocaleString() }} `$BERA`
 
 A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
 

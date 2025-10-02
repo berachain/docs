@@ -435,7 +435,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
       target="_blank"
     />
 
-    <p>The minimum effective balance is {{ config.mainnet.minEffectiveBalance }} BERA.</p>
+    <p>The minimum effective balance is {{ config.mainnet.minActivationBalance.toLocaleString() }} BERA.</p>
     ```
 
 ### Usage in TypeScript (`.ts` files)
