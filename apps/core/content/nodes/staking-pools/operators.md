@@ -21,20 +21,20 @@ This guide walks validators through setting up and managing staking pools to off
 
 ## Prerequisites
 
-Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential, as the staking pool will integrate directly with your existing validator infrastructure. You'll also need at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA for the initial deposit, which serves as the foundation for your staking pool operations.
+Before setting up a staking pool, validators need to ensure they have the necessary foundation in place. A fully operational Berachain validator node is essential, as the staking pool will integrate directly with your existing validator infrastructure. You'll need at least {{ config.mainnet.minEffectiveBalance.toLocaleString() }} BERA to reach the minimum effective balance required for activation, though actual activation to the Active state depends on the ValidatorSetCap and your validator's priority.
 
 Technical knowledge of smart contract interactions is important, as you'll be deploying and managing several contracts. While the system is designed to be user-friendly, understanding the underlying mechanics will help you troubleshoot issues and optimize your pool's performance. Perhaps most importantly, you should have a community of users interested in staking with your validator, as staking pools are most effective when they serve an engaged user base.
 
 :::warning
-Staking pools are only available for new validators. Existing validators must perform a full withdrawal and recreate their validator to use staking pools.
+Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
 :::
 
 ## Validator Lifecycle Integration
 
 Your staking pool integrates with Berachain's validator lifecycle, which follows these states:
 
-- **Deposited**: Initial 10,000 BERA deposit establishes your validator identity
-- **Eligible**: After 1 epoch, your validator becomes eligible for activation
+- **Deposited**: Initial deposit establishes your validator identity (minimum 10,000 BERA to reach Deposited state)
+- **Eligible**: After 1 epoch, your validator becomes eligible for activation (requires 250,000 BERA minimum effective balance)
 - **Active**: After another epoch, your validator joins the active set and can propose blocks
 - **Exited**: If capacity limits are reached, validators with lower priority are exited
 - **Withdrawn**: After 1 epoch in exited state, funds are returned to your withdrawal address
@@ -105,6 +105,17 @@ function queueRewardsAllocation(
 
 See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/SmartOperator.md#queuerewardsallocation)
 
+### Set Reward Allocator
+
+You can set a reward allocator address for your validator on the BeraChef contract. This allows you to delegate reward allocation management to a specific address or smart contract.
+
+```solidity
+// Set reward allocator for validator
+function setRewardAllocator(address rewardAllocator) external;
+```
+
+See: [SmartOperator.setRewardAllocator](/nodes/staking-pools/contracts/SmartOperator.md#setrewardallocator)
+
 ### Role Management and Access Control
 
 The SmartOperator contract uses a role-based access control system that allows you to delegate specific operational responsibilities to different addresses. This provides flexibility in managing your staking pool operations while maintaining security through separation of concerns.
@@ -141,7 +152,7 @@ When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which
 
 - Controls BGT boost and redemption operations
 - Can call `queueDropBoost()` and `redeemBGT()` for BGT management
-- Note: This role must be granted by protocol governance, not by validator admins
+- Can be granted by validator admins for BGT management operations
 
 **Role Assignment Strategy:**
 
@@ -242,15 +253,6 @@ The withdrawal system provides both immediate and delayed withdrawal options:
 2. **Standard Withdrawals**: Larger withdrawals or those after the active threshold require consensus layer processing
 3. **Full Exit Triggers**: Automatic full exit when the pool falls below the minimum effective balance
 
-#### Capacity Management
-
-Your pool operates within chain-defined capacity limits:
-
-- **Maximum Capacity**: 10,000,000 BERA per validator (set by governance to prevent dominance)
-- **Minimum Balance**: {{ config.mainnet.minEffectiveBalance }} BERA effective balance threshold (required for validator activation)
-- **Automatic Pausing**: Pool pauses when maximum capacity is reached
-- **Withdrawal Cooldown**: 43,200 blocks (~1 day) cooldown after reaching active threshold
-
 ### Reward Management
 
 The pool automatically handles reward collection and distribution:
@@ -331,40 +333,6 @@ Each withdrawal request is represented by an ERC-721 NFT that users can track:
 - **Finalization Proof**: The NFT serves as proof of the withdrawal request
 
 These functions are part of the centralized withdrawal system that handles all withdrawal operations for staking pools.
-
-### Emergency Operations
-
-In emergency situations, the protocol governance system has controls to protect pools and users. Individual validators should focus on maintaining clear communication with their users during any operational disruptions or significant changes to their pool's status.
-
-## User Experience Considerations
-
-Building a successful staking pool requires attention to user experience and community building. Provide clear information about your pool's performance, commission rates, and operational status. Maintain an active community through regular communication about pool performance and ecosystem developments.
-
-**Community Building Strategy:**
-
-- **Transparency**: Share performance metrics and operational updates
-- **Support**: Establish clear support channels for users
-- **Engagement**: Regular communication about pool performance and ecosystem developments
-- **Differentiation**: Use reward allocation to support specific ecosystem initiatives
-
-**Growth and Optimization:**
-
-- **Marketing**: Communicate your value proposition clearly (commission rates, performance history, unique features)
-- **Competitive Positioning**: Regularly evaluate commission rates and reward allocation strategies
-- **User Retention**: Focus on reliable operations and responsive support
-- **Performance Monitoring**: Track pool metrics and user satisfaction
-
-:::tip
-Successful staking pools often have strong community engagement and transparent operations. Focus on building trust with your users through clear communication and reliable performance. Consider creating good memes to build community engagement!
-:::
-
-## Security Best Practices
-
-Effective security practices protect both your operations and your users' funds. The role-based access control system in the SmartOperator contract provides granular permissions that should be carefully managed. Use dedicated wallets for different operational roles rather than relying on a single administrative wallet for all functions. This separation of concerns limits the potential impact of any security incident and makes it easier to audit and monitor different aspects of your operations.
-
-Regular monitoring of your pool's operations helps identify potential issues before they become problems. Monitor contract events for any unusual patterns or anomalies that might indicate operational issues or security concerns. Pay attention to deposit patterns and user behavior to identify any unusual activity that might require investigation.
-
-Understanding the full exit process and having clear communication plans for emergency situations remains important. Develop procedures for communicating with your users during any operational disruptions or significant changes to your pool's status.
 
 ## Troubleshooting
 

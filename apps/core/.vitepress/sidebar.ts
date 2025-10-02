@@ -396,12 +396,16 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/contracts/SmartOperator.md"
         },
         {
-          text: "StBERA",
-          link: "/nodes/staking-pools/contracts/StBERA.md"
+          text: "IncentiveCollector",
+          link: "/nodes/staking-pools/contracts/IncentiveCollector.md"
         },
         {
           text: "WithdrawalVault",
           link: "/nodes/staking-pools/contracts/WithdrawalVault.md"
+        },
+        {
+          text: "AccountingOracle",
+          link: "/nodes/staking-pools/contracts/AccountingOracle.md"
         }
       ]
     },

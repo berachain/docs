@@ -107,7 +107,7 @@ Rewards accrue automatically and are reflected in your share value:
 
 The withdrawal system provides two processing paths depending on the pool's current state and available funds. When you request a withdrawal, the system first checks if sufficient funds are available in the pool's buffer. If the pool has enough buffered BERA and hasn't reached the active threshold, your withdrawal is processed immediately through the short-circuit path, transferring BERA directly to your wallet without any waiting period.
 
-However, if the pool has reached its active threshold or doesn't have sufficient buffered funds, your withdrawal follows the standard path through the consensus layer. This process requires approximately 27 hours (256 epochs) to complete, as the withdrawal must be processed by the consensus layer before the BERA becomes available in your wallet. The system automatically determines which path your withdrawal will take based on the pool's current state and available liquidity.
+However, if the pool has reached its active threshold or doesn't have sufficient buffered funds, your withdrawal follows the standard path through the consensus layer. This process requires approximately 27 hours (256 epochs) to complete, as the withdrawal must be processed by the consensus layer before the BERA becomes available in your wallet. Additionally, there is a cooldown period of approximately 3 days (129,600 blocks) after a validator reaches its active threshold, during which withdrawals are disabled to ensure network stability. The system automatically determines which path your withdrawal will take based on the pool's current state and available liquidity.
 
 ### Step 1: Initiate Withdrawal Request
 
@@ -210,6 +210,7 @@ During full exit:
 
 - Normal processing time is ~27 hours for standard withdrawals
 - Short-circuit withdrawals (immediate) depend on pool buffer availability
+- Cooldown period of ~3 days after validator activation during which withdrawals are disabled
 - Use your withdrawal NFT to track request status
 
 **Share Value Not Increasing**

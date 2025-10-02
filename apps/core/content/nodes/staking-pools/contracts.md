@@ -27,7 +27,15 @@ The core functionality revolves around the **StakingPool** contract, which handl
 
 Validator operations are coordinated through the **SmartOperator** contract, which manages the integration with Berachain's Proof of Liquidity system. This contract handles BGT boosting, reward allocation, commission management, and other validator-specific operations that require coordination with the broader Berachain ecosystem.
 
-Supporting these core contracts are additional utilities such as the **StBERA** base contract for token implementation, which defines the common patterns used throughout the system.
+The **StakingPool** contract inherits from the **StBERA** base contract, which provides the core token functionality for staked BERA shares, including share minting, burning, and conversion between assets and shares.
+
+## Implementation vs Proxy Pattern
+
+The staking pools system uses a **Beacon Proxy Pattern** for efficient deployment and upgrades. Implementation contracts contain the business logic, while each validator gets their own proxy contracts that delegate calls to these implementations.
+
+Users interact with proxy addresses (not implementation addresses). Each validator has unique proxy addresses but shares the same implementation logic, enabling gas-efficient deployment and simultaneous upgrades across all staking pools.
+
+The constants distinguish between factory addresses (what users interact with) and implementation addresses (the logic sources used internally by the factory).
 
 ## Contract Interactions
 
@@ -51,10 +59,27 @@ Emergency controls provide additional layers of protection. Contracts can be pau
 
 Detailed documentation for each contract is available through the following reference materials. Each contract documentation provides comprehensive information about functions, events, errors, and usage patterns.
 
+### Factory Contracts (Deployed Instances)
+
+These are the actual deployed contracts that users and validators interact with:
+
 | Contract                        | Description                                             | Documentation                                               |
 | ------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
 | **StakingPoolContractsFactory** | Deployment mechanism for all staking pool contracts     | [View Documentation](contracts/StakingPoolContractsFactory) |
 | **StakingPool**                 | Main staking functionality and user interactions        | [View Documentation](contracts/StakingPool)                 |
 | **SmartOperator**               | Validator operations and Proof of Liquidity integration | [View Documentation](contracts/SmartOperator)               |
+| **IncentiveCollector**          | Incentive token collection and conversion               | [View Documentation](contracts/IncentiveCollector)          |
 | **WithdrawalVault**             | Withdrawal request processing and NFT-based tracking    | [View Documentation](contracts/WithdrawalVault)             |
-| **StBERA**                      | Base contract for stBERA token implementation           | [View Documentation](contracts/StBERA)                      |
+
+### Implementation Contracts (Logic Sources)
+
+These contracts contain the actual business logic that all proxy instances delegate to:
+
+| Contract                               | Description                                             | Bepolia Address                              |
+| -------------------------------------- | ------------------------------------------------------- | -------------------------------------------- |
+| **StakingPool Implementation**         | Core staking functionality and user interactions        | `0x5e474c2Df175863f7C45d12aBaacce2f952eff48` |
+| **SmartOperator Implementation**       | Validator operations and Proof of Liquidity integration | `0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4` |
+| **StakingRewardsVault Implementation** | Reward distribution and management                      | `0x149B894e4F40062616C07a6232911AC780d87b43` |
+| **IncentiveCollector Implementation**  | Incentive token collection and conversion               | `0x8F761B285870c3d1740a823eABd33D1c9bD30b9d` |
+
+> **Note**: Users and validators interact with proxy addresses (not implementation addresses). Implementation addresses are used internally by the factory for creating and upgrading staking pools.

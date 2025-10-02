@@ -249,13 +249,6 @@
       }
     },
     "stakingPools": {
-      "accountingOracle": {
-        "name": "AccountingOracle",
-        "mainnet-address": "",
-        "bepolia-address": "0xC6aF379515380BE6F72A3d7dE7681D1ae65EF871",
-        "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/AccountingOracle"
-      },
       "stakingPoolContractsFactory": {
         "name": "StakingPoolContractsFactory",
         "mainnet-address": "",
@@ -263,26 +256,42 @@
         "abi": "",
         "docsUrl": "/nodes/staking-pools/contracts/StakingPoolContractsFactory"
       },
-      "stakingPool": {
-        "name": "StakingPool",
-        "mainnet-address": "",
-        "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
-        "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/StakingPool"
-      },
-      "smartOperator": {
-        "name": "SmartOperator",
-        "mainnet-address": "",
-        "bepolia-address": "0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4",
-        "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/SmartOperator"
-      },
       "withdrawalVault": {
         "name": "WithdrawalVault",
         "mainnet-address": "",
         "bepolia-address": "0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4",
         "abi": "",
         "docsUrl": "/nodes/staking-pools/contracts/WithdrawalVault"
+      }
+    },
+    "stakingPoolImplementations": {
+      "stakingPoolImpl": {
+        "name": "StakingPool Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPool"
+      },
+      "smartOperatorImpl": {
+        "name": "SmartOperator Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/SmartOperator"
+      },
+      "stakingRewardsVaultImpl": {
+        "name": "StakingRewardsVault Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x149B894e4F40062616C07a6232911AC780d87b43",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingRewardsVault"
+      },
+      "incentiveCollectorImpl": {
+        "name": "IncentiveCollector Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x8F761B285870c3d1740a823eABd33D1c9bD30b9d",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/IncentiveCollector"
       }
     },
     "tokens": {
