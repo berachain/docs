@@ -609,7 +609,7 @@ forge script script/BingBongToken.s.sol --account MyBeraAccount --rpc-url {{conf
 
 > <b>NOTE:</b> In order for verification to work with Etherscan's V2 contract verification API, make sure that you have the latest version installed with `foundryup`.
 
-Make sure to get an Etherscan API Key from [https://etherscan.io/registerdocs](https://etherscan.io/register?utm_source=berachain_).
+Make sure to get an Etherscan API Key from [https://etherscan.io/register](https://etherscan.io/register?utm_source=berachain_docs).
 
 ```bash-vue
 # FROM ./create-erc20-contract-using-foundry
