@@ -50,7 +50,7 @@ Initiate `Hardhat` to build out the `viem` template with the following prompts:
 pnpm dlx hardhat --init;
 
 # [Expected Prompts]:
-# 
+#
 #  █████  █████                         ███  ███                  ███      ██████
 # ░░███  ░░███                         ░███ ░███                 ░███     ███░░███
 #  ░███   ░███   ██████  ████████   ███████ ░███████    ██████  ███████  ░░░  ░███
@@ -59,7 +59,7 @@ pnpm dlx hardhat --init;
 #  ░███   ░███  ███░░███ ░███     ░███ ░███ ░███ ░███  ███░░███  ░███ ███ ███ ░███
 #  █████  █████░░███████ █████    ░░███████ ████ █████░░███████  ░░█████ ░░██████
 # ░░░░░  ░░░░░  ░░░░░░░ ░░░░░      ░░░░░░░ ░░░░ ░░░░░  ░░░░░░░    ░░░░░   ░░░░░░
-#  
+#
 # 👷 Welcome to Hardhat v3.0.6 👷
 #
 # ✔ Which version of Hardhat would you like to use? · hardhat-3
@@ -69,16 +69,8 @@ pnpm dlx hardhat --init;
 # ✨ Template files copied ✨
 # ✔ You need to install the necessary dependencies using the following command:
 # pnpm add --save-dev "hardhat@^3.0.6" "@nomicfoundation/hardhat-toolbox-viem@^5.0.0" "@nomicfoundation/hardhat-ignition@^3.0.0" "@types/node@^22.8.5" "forge-std@foundry-rs/forge-std#v1.9.4" "typescript@~5.8.0" "viem@^2.30.0"
-# 
+#
 # Do you want to run it now? (Y/n) · true
-```
-
-We'll need one more dependency for our project, which is `dotenv` to take advantage of environment variables.
-
-```bash
-# FROM ./create-helloworld-contract-using-hardhat;
-
-pnpm add -D dotenv;
 ```
 
 ## Creating the HelloWorld Contract
@@ -193,7 +185,6 @@ Let's make this step a bit easier by adding this command to our `package.json`
     "@nomicfoundation/hardhat-ignition": "^3.0.3",
     "@nomicfoundation/hardhat-toolbox-viem": "^5.0.0",
     "@types/node": "^22.18.1",
-    "dotenv": "^17.2.2",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
     "hardhat": "^3.0.6",
     "typescript": "~5.8.3",
@@ -254,7 +245,7 @@ describe("HelloWorld", async () => {
     /**
      * Test initial deployment
      */
-    it("Should deploy with original message", async () => {  
+    it("Should deploy with original message", async () => {
       // Init + Expectations
       assert.equal(await contract.read.getGreeting(), "Hello World");
     });
@@ -282,15 +273,15 @@ With our new tests defined, let's run our tests with the following command:
 
 # [Expected Output]:
 # Compiling your Solidity contracts...
-# 
+#
 # Nothing to compile
-# 
+#
 # Running Solidity tests
-# 
+#
 #   0 passing
-# 
+#
 # Running node:test tests
-# 
+#
 #   HelloWorld
 #     Deployment
 #       ✔ Should deploy with original message
@@ -314,7 +305,6 @@ Let's make this step a bit easier again by adding this command to our `package.j
     "@nomicfoundation/hardhat-ignition": "^3.0.3",
     "@nomicfoundation/hardhat-toolbox-viem": "^5.0.0",
     "@types/node": "^22.18.1",
-    "dotenv": "^17.2.2",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
     "hardhat": "^3.0.6",
     "typescript": "~5.8.3",
@@ -335,10 +325,10 @@ Set the RPC.
 pnpm keystore:set BERACHAIN_RPC_URL;
 
 # 👷🔐 Hardhat Production Keystore 🔐👷
-# 
+#
 # This is the first time you are using the production keystore, please set a password.
 # The password must have at least 8 characters.
-# 
+#
 # [hardhat-keystore] Enter the password: **********
 # [hardhat-keystore] Please confirm your password: **********
 # [hardhat-keystore] Enter secret to store in the production keystore: **********************************
@@ -357,7 +347,11 @@ pnpm keystore:set WALLET_PRIVATE_KEY;
 # Key "WALLET_PRIVATE_KEY" set in the production keystore
 ```
 
-With our environment variable setup, we can now load them into our `hardhat.config.ts` with the following code:
+:::info
+NOTE: If ever you need to overwrite a new value for your keystore, use `./node_modules/.bin/hardhat keystore set YOUR_KEY --force`
+:::
+
+With our environment variables setup, we can now load them into our `hardhat.config.ts` with the following code:
 
 **File:** `./hardhat.config.ts`
 
@@ -375,41 +369,41 @@ const config: HardhatUserConfig = {
   solidity: {
     profiles: {
       default: {
-        version: "0.8.28",
+        version: "0.8.28"
       },
       production: {
         version: "0.8.28",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200,
-          },
-        },
-      },
-    },
+            runs: 200
+          }
+        }
+      }
+    }
   },
   networks: {
     berachainTestnet: {
       type: "http",
       chainType: "l1",
       url: configVariable("BERACHAIN_RPC_URL"),
-      accounts: [configVariable("WALLET_PRIVATE_KEY")],
+      accounts: [configVariable("WALLET_PRIVATE_KEY")]
     },
     hardhatMainnet: {
       type: "edr-simulated",
-      chainType: "l1",
+      chainType: "l1"
     },
     hardhatOp: {
       type: "edr-simulated",
-      chainType: "op",
+      chainType: "op"
     },
     sepolia: {
       type: "http",
       chainType: "l1",
       url: configVariable("SEPOLIA_RPC_URL"),
-      accounts: [configVariable("WALLET_PRIVATE_KEY")],
-    },
-  },
+      accounts: [configVariable("WALLET_PRIVATE_KEY")]
+    }
+  }
 };
 
 // Exports
@@ -434,11 +428,10 @@ But first, let's make it a bit easier by making some modifications to our `packa
     "keystore:set": "./node_modules/.bin/hardhat keystore set --",
     "node": "./node_modules/.bin/hardhat node", // [!code ++]
     "deploy:localhost": "./node_modules/.bin/hardhat ignition deploy --network localhost ignition/modules/HelloWorld.ts", // [!code ++]
-    "deploy:berachain": "./node_modules/.bin/hardhat ignition deploy --network berachainTestnet ignition/modules/HelloWorld.ts", // [!code ++]
+    "deploy:berachain": "./node_modules/.bin/hardhat ignition deploy --network berachainTestnet ignition/modules/HelloWorld.ts" // [!code ++]
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^1.0.0",
-    "dotenv": "^16.3.1",
     "hardhat": "^2.18.3"
   }
 }
@@ -503,21 +496,21 @@ pnpm deploy:localhost;
 # [Expected Similar Output]:
 # Hardhat Ignition starting for [ HelloWorldModule
 # Hardhat Ignition 🚀
-# 
+#
 # Deploying [ HelloWorldModule ]
-# 
+#
 # Batch #1
 #   Executed HelloWorldModule#HelloWorld
-# 
+#
 # Batch #2
 # Batch #2
 # Batch #2
 #   Executed HelloWorldModule#HelloWorld.setGreet
-# 
+#
 # [ HelloWorldModule ] successfully deployed 🚀
-# 
+#
 # Deployed Addresses
-# 
+#
 # HelloWorldModule#HelloWorld - 0x5FbDB2315678afecb367f032d93F642f64180aa3
 ```
 
@@ -532,19 +525,19 @@ pnpm deploy:berachain;
 # [hardhat-keystore] Enter the password: **********
 # ✔ Confirm deploy to network berachainTestnet (80069)? … yes
 # Hardhat Ignition 🚀
-# 
+#
 # Deploying [ HelloWorldModule ]
-# 
+#
 # Batch #1
 #   Executed HelloWorldModule#HelloWorld
-# 
+#
 # Batch #2
 #   Executed HelloWorldModule#HelloWorld.setGreet
-# 
+#
 # [ HelloWorldModule ] successfully deployed 🚀
-# 
+#
 # Deployed Addresses
-# 
+#
 # HelloWorldModule#HelloWorld - 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21  // [!code hl]
 ```
 
@@ -560,23 +553,30 @@ You'll see that our contract has been successfully deployed but not verified as 
 
 ## Verifying HelloWorld Contract
 
-To verify our contract, we'll need to install one depencency and configuration to our `hardhat.config.ts` file.
+Next, we'll be using Etherscan to verify our contract and for this we'll need to add an Etherscan API Key.
 
-```bash
-# FROM: /
-
-pnpm add -D @nomicfoundation/hardhat-verify;            
-```
-
-Then modify your hardhat to add your Etherscan API Key
-
-:::note
+:::info
 Etherscan API V2 now let's you use any Etherscan API key across multiple platforms at https://etherscan.io/login.
 :::
 
+Add the key by running:
+
+```bash
+# FROM ./create-helloworld-contract-using-hardhat;
+
+pnpm keystore:set ETHERSCAN_API_KEY;
+
+# [Expected Similar Output]:
+# [hardhat-keystore] Enter the password: **********
+# [hardhat-keystore] Enter secret to store in the production keystore: *********************************
+# Key "ETHERSCAN_API_KEY" set in the production keystore
+```
+
+Next, we'll need to modify our configuration file to allow for Bepolia testnet.
+
 **File:** `./hardhat.config.ts`
 
-```ts
+```ts-vue
 // Imports
 // ========================================================
 import type { HardhatUserConfig } from "hardhat/config";
@@ -629,6 +629,18 @@ const config: HardhatUserConfig = {
     etherscan: { // [!code ++]
       apiKey: configVariable("ETHERSCAN_API_KEY"), // [!code ++]
     }, // [!code ++]
+  }, // [!code ++]
+  chainDescriptors: { // [!code ++]
+    {{config.bepolia.chainId}}: { // [!code ++]
+      name: "{{config.bepolia.chainName}}", // [!code ++]
+      blockExplorers: { // [!code ++]
+        etherscan: { // [!code ++]
+          name: "{{config.bepolia.dapps.berascan.name}}", // [!code ++]
+          url: "{{config.bepolia.dapps.berascan.url}}", // [!code ++]
+          apiUrl: "{{config.bepolia.dapps.berascan.apiUrl}}", // [!code ++]
+        } // [!code ++]
+      } // [!code ++]
+    }, // [!code ++]
   } // [!code ++]
 };
 
@@ -655,31 +667,41 @@ Now that we have the configuration setup, let's add another run command to our `
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^1.0.0",
-    "dotenv": "^16.3.1",
     "hardhat": "^2.18.3"
   }
 }
 ```
 
-With our previously deploy contract address and taking into account that we deployed our contract with the initial argument of `"Hello From Deployed Contract"`, let's run the following to confirm our contract.
+With our previously deploy contract address and taking into account that we deployed our contract with the initial argument of `"Hello World"`, let's run the following to confirm our contract.
 
 ```bash-vue
 # FROM ./create-helloworld-contract-using-hardhat;
 
-# Equivalent to: npx hardhat verify 0x38f8423cc4390938c01616d7a9f761972e7f116a "Hello From Deployed Contract"
-pnpm verify 0x38f8423cc4390938c01616d7a9f761972e7f116a "Hello From Deployed Contract";
+# Equivalent to: npx hardhat verify 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
+pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
 
 # [Expected Output]:
+# === Etherscan ===
+# [hardhat-keystore] Enter the password: **********
 #
-# Successfully submitted source code for contract
-# contracts/HelloWorld.sol:HelloWorld at 0x38f8423cc4390938c01616d7a9f761972e7f116a
-# for verification on the block explorer. Waiting for verification result...
+# 📤 Submitted source code for verification on Berascan:
 #
-# Successfully verified contract HelloWorld on the block explorer.
-# {{config.mainnet.dapps.berascan.url}}address/0x38f8423cc4390938c01616d7a9f761972e7f116a#code
+#   contracts/HelloWorld.sol:HelloWorld
+#   Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+#
+# ⏳ Waiting for verification result...
+#
+# ✅ Contract verified successfully on Berascan!
+#
+#   contracts/HelloWorld.sol:HelloWorld
+#   Explorer: {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+#
+# === Blockscout ===
+# HHE80027: No Blockscout block explorer is configured for the 80069 chain in the chain descriptors.
+#  ELIFECYCLE  Command failed with exit code 1.
 ```
 
-We should now see on Beratail that the contract is verified and that the Solidity code is now showing.
+We should now see with the block explorer that the contract is verified and that the Solidity code is now showing.
 
 ## Full Code Repository
 
