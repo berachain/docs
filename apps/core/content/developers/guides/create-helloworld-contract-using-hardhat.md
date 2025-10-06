@@ -465,7 +465,7 @@ export default buildModule("HelloWorldModule", (m) => {
 });
 ```
 
-With our deployment script set, let's run a local node in one T$$erminal and deploy the contract in another Terminal.
+With our deployment script set, let's run a local node in one Terminal and deploy the contract in another Terminal.
 
 **Terminal 1**
 
