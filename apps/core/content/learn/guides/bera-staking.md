@@ -72,9 +72,9 @@ The more sWBERA you have compared to the total supply, the bigger your share of 
 
 To withdraw your staked BERA:
 
-1. **Initiate withdrawal** by calling `withdraw()`, `redeem()`, `queueRedeem()`, or `queueWithdraw()`
+1. **Initiate withdrawal** by calling `withdraw(amount, receiver)`, `redeem(shares, receiver)`, `queueRedeem(shares, recipient)`, or `queueWithdraw(amount, recipient)`
 2. **Wait 7 days** for the unbonding period to complete
-3. **Complete withdrawal** by calling `completeWithdrawal()` or `completeWithdrawal(requestId)`
+3. **Complete withdrawal** by calling `completeWithdrawal(isNative)` or `completeWithdrawal(isNative, requestId)`
 4. **Choose format**: Receive either native BERA or WBERA
 
 ### Withdrawal Options
