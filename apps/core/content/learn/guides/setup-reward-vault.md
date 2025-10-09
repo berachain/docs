@@ -25,16 +25,18 @@ Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/he
 
 You can get started by creating a Reward Vault using our <a :href="config.bepolia.dapps.playground.url + 'create-reward-vault'">{{config.bepolia.dapps.playground.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
 
+![Bepolia Playground Create Reward Vault](/assets/bepolia-playground-create-reward-vault.png)
+
 ### Using BeraScan
 
-Alternatively, you can create a Reward Vault directly through <a :href="config.bepolia.dapps.berascan.url">{{config.bepolia.dapps.berascan.name}}</a> by interacting with the <a :href="config.contracts.pol.rewardVaultFactory.docsUrl">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract.
+Alternatively, you can create a Reward Vault directly through <a :href="config.bepolia.dapps.berascan.url">{{config.bepolia.dapps.berascan.name}}</a> by interacting with the <a :href="config.contracts.pol.rewardVaultFactory.docsUrl">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8" target="_blank">0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8</a>.
 
 ![Create Reward Vault on BeraScan](/assets/create-reward-vault-berascan.png)
 
 To create a Reward Vault via BeraScan:
 
 1. **Connect your wallet** to BeraScan
-2. **Navigate to the Reward Vault Factory contract** at address `{{config.contracts.pol.rewardVaultFactory['bepolia-address']}}`
+2. **Click the contract link** to go directly to the <a href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8" target="_blank">Reward Vault Factory contract</a>
 3. **Invoke the `createRewardVault` function** with your staking token address as the parameter
 4. **Confirm the transaction** to deploy your Reward Vault
 
