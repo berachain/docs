@@ -32,8 +32,6 @@ These are a list of community developer guides for Berachain.
 | ---------------------------------------------------- | -------------------------------------------------------------------------- |
 | Bridging ERC20 Tokens to Berachain with LayerZero V2 | [GitHub](https://github.com/berachain/guides/tree/main/apps/layerzero-oft) |
 
-> **For token migration**: If you're interested in migrating a token from another chain to Berachain, see the [LayerZero OFT guide](https://github.com/berachain/guides/tree/main/apps/layerzero-oft) above for detailed instructions on cross-chain token migration.
-
 ## Smart Contract Deployment & Verification
 
 | Project Name                                    | Git Repository                                                                             |
