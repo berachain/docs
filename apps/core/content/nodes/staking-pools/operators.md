@@ -70,24 +70,17 @@ Once your staking pool is active, you'll want to configure various operational p
 
 ### Business Model and Commission Rates
 
-Staking pools provide validators with a revenue stream through commission on user rewards. You can set commission rates up to a maximum of 100% (10,000 basis points), allowing you to balance profitability with competitive positioning.
+Staking pools provide validators with a revenue stream through commission on incentive token distribution. You can set commission rates within the range defined by the BeraChef contract (0-20%), allowing you to balance profitability with competitive positioning.
 
-**Revenue Calculation Example:**
+**Commission on Incentive Tokens:**
 
-- Pool size: 1,000,000 BERA
-- Annual rewards: 100,000 BERA (10% APY)
-- Commission rate: 5%
-- Your annual revenue: 5,000 BERA
-- Users receive: 95,000 BERA (auto-compounded)
-
-**Commission Strategy Considerations:**
-
-- **Competitive Rates**: Lower commissions attract more users but reduce revenue per user
-- **Premium Positioning**: Higher commissions can work with strong community and performance
-- **Market Conditions**: Adjust rates based on network conditions and competition
+- Commission applies to the distribution of incentive tokens from Proof of Liquidity rewards
+- Range: 0-20% (set by BeraChef)
+- Setting commission > 0% guarantees users a yield, even if the validator maintains minimal boost and burns BGT to increase voting power
+- Incentive tokens are automatically sent to the SmartOperator when `distributeFor` runs for your validator
 
 ```solidity
-// Queue validator commission rate change (in basis points, max 10000 = 100%)
+// Queue validator commission rate change (in basis points, max 2000 = 20%)
 function queueValCommission(uint96 commission) external;
 ```
 
@@ -95,7 +88,7 @@ See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/SmartOper
 
 ### Configure Reward Allocations
 
-The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community. These operator‑level settings power the user experience shown in the [User Guide](/nodes/staking-pools/users).
+The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community. 
 
 ```solidity
 // Queue reward allocation for specific applications
@@ -146,9 +139,9 @@ When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which
 
 **PROTOCOL_FEE_MANAGER_ROLE:**
 
-- Controls the protocol fee percentage (up to 20%) charged on BGT operations
+- Controls the protocol fee percentage (up to 20%) charged on auction payout amounts
 - Can call `setProtocolFeePercentage()` to adjust fee rates
-- Important for managing operational costs
+- Important for managing operational costs and user experience
 
 **BGT_MANAGER_ROLE:**
 
@@ -171,7 +164,14 @@ This role system allows you to maintain operational flexibility while keeping yo
 The SmartOperator contract automatically manages BGT (Berachain Governance Token) operations to maximize your Proof of Liquidity performance. These operations are handled automatically based on the BGT balance in the contract - you don't need to manually manage BGT boosts or redemptions.
 
 **Protocol Fee System:**
-The protocol charges a fee on BGT boosts (up to 20% maximum). This fee is set by the protocol governance and applies specifically when BGT is boosted to enhance validator performance. The fee helps fund protocol development and maintenance.
+The protocol charges a fee on auction payout amounts (up to 20% maximum). This fee is separate from your validator commission and applies when users claim incentive tokens through the auction system. The fee helps fund protocol development and maintenance.
+
+**Incentive Token Flow:**
+1. **Distribution**: Incentive tokens are automatically sent to your SmartOperator when `distributeFor` runs for your validator
+2. **Transfer to IncentiveCollector**: You can transfer these tokens to the IncentiveCollector for auction by calling the permissionless `claimBoostRewards` function
+3. **Auction Process**: Users bid on incentive tokens through the auction system
+4. **Protocol Fee**: A fee is applied to the auction payout amount (separate from your commission)
+5. **Bot Assistance**: A bot is being developed to assist validators with this process
 
 **Automatic BGT Management:**
 The system automatically:
@@ -182,6 +182,29 @@ The system automatically:
 - Collects and distributes BGT-related rewards and fees
 
 While you can monitor these operations through various view functions, the actual BGT management is handled automatically by the smart contracts to ensure optimal performance without requiring manual intervention.
+
+### Commission vs Protocol Fees
+
+It's important to understand that **commission** and **protocol fees** are two separate fee structures that can be set independently:
+
+**Commission (0-20%):**
+- Applied to incentive token distribution from Proof of Liquidity rewards
+- Set by you as the validator operator
+- Guarantees users receive a yield even with minimal BGT boost
+- Collected when incentive tokens are distributed to your SmartOperator
+
+**Protocol Fee (0-20%):**
+- Applied to auction payout amounts when users claim incentive tokens
+- Set by protocol governance
+- Separate from your commission
+- Collected during the auction process
+
+**Example Configuration:**
+- Validator commission: 15% (on incentive token distribution)
+- Protocol fee: 5% (on auction payout amounts)
+- Both fees can be set independently and serve different purposes
+
+This dual fee structure allows you to optimize both your revenue model and the user experience while contributing to protocol sustainability.
 
 ## Pool Management
 
