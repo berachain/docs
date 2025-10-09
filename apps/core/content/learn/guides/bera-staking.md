@@ -82,15 +82,18 @@ To withdraw your staked BERA:
 The vault supports multiple withdrawal methods for enhanced flexibility:
 
 #### Standard Withdrawal Functions
+
 - `withdraw(amount, receiver)` - Withdraw a specific amount of BERA
 - `redeem(shares, receiver)` - Redeem a specific number of shares
 
 #### Enhanced Withdrawal Functions
+
 - `queueRedeem(shares, recipient)` - Queue a withdrawal based on the number of shares you want to redeem
 - `queueWithdraw(amount, recipient)` - Queue a withdrawal based on the exact amount of BERA you want to withdraw
 - `cancelQueuedWithdrawal(requestId)` - Cancel an existing queued withdrawal
 
 #### Completion Functions
+
 - `completeWithdrawal(isNative)` - Complete the most recent withdrawal request
 - `completeWithdrawal(isNative, requestId)` - Complete a specific withdrawal request by ID
 
