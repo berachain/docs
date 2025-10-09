@@ -17,7 +17,7 @@ head:
 
 # Berachain Bridge 🐻⛓️
 
-Berachain Bridge allows users to bridge select assets from many networks to Berachain, enabling seamless cross-chain asset transfers.
+Berachain Bridge allows users to bridge select assets from many networks to Berachain, enabling seamless cross-chain asset transfers. The bridge also supports wrapper asset bridging, which enables projects to migrate from Ethereum mainnet to Berachain.
 
 <a target="_blank" :href="config.mainnet.dapps.bridge.url">
 
@@ -27,18 +27,8 @@ Berachain Bridge allows users to bridge select assets from many networks to Bera
 
 > <a target="_blank" :href="config.mainnet.dapps.bridge.url">{{config.mainnet.dapps.bridge.url}}</a>
 
-## Features
+This is the official Berachain Bridge. It can be used to bridge select assets from a variety of chains into Berachain.
 
-The Berachain Bridge supports:
+## Wrapped Asset Bridge
 
-- **Multi-network bridging**: Bridge assets from various supported networks to Berachain
-- **Wrapper asset bridge**: Enables projects to migrate from Ethereum mainnet to Berachain
-- **Secure cross-chain transfers**: Reliable and secure asset bridging infrastructure
-
-## Project Migration
-
-For projects looking to migrate tokens from other chains to Berachain, the bridge provides essential infrastructure. If you're interested in migrating a token from another chain, check out the [LayerZero OFT guide](/developers/guides/community-guides#bridging) in our community guides for detailed migration instructions.
-
-## Supported Networks
-
-The bridge supports bridging from multiple networks, providing flexibility for users and projects looking to access Berachain's ecosystem.
+The wrapper asset bridge enables projects to migrate from Ethereum mainnet to Berachain. If you're interested in migrating a token from another chain to Berachain, check out the [LayerZero OFT guide](/developers/guides/community-guides#bridging) in our community guides for detailed migration instructions.
