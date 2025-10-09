@@ -28,6 +28,10 @@
       "honey": {
         "name": "Bepolia $HONEY Swap",
         "url": "https://bepolia.honey.berachain.com"
+      },
+      "playground": {
+        "name": "Bepolia Playground",
+        "url": "https://bepolia.playground.berachain.com/"
       }
     },
     "contracts": {}
