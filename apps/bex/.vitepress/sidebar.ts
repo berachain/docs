@@ -74,8 +74,7 @@ const SIDEBAR = {
     {
       text: "BEX For Devs",
       items: [
-        { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Migration Guide", link: "/developers/migration-guide" }
+        { text: "Deployed Contracts", link: "/developers/" }
       ]
     },
     {
