@@ -19,7 +19,7 @@ Berachain has multiple bridging options and uses LayerZero as its canonical brid
 
 ## LayerZero Bridging Deployment Options
 
-### 1. Token Team Deployment (Manual)
+### 1 - Manual Token Deployment
 
 Token teams can deploy and configure their own bridge contracts on both source chains and Berachain using LayerZero's documentation and tooling.
 
