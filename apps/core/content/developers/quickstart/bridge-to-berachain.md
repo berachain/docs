@@ -15,9 +15,9 @@ head:
 
 ## Overview
 
-Berachain uses LayerZero as its canonical bridge infrastructure for cross-chain token transfers. There are two ways to enable bridging between a source chain and Berachain.
+Berachain has multiple bridging options and uses LayerZero as its canonical bridge infrastructure for cross-chain token transfers . Using LayerZero, there are two ways to enable bridging between a source chain and Berachain.
 
-## Two Ways to Enable Bridging
+## LayerZero Bridging Deployment Options
 
 ### 1. Token Team Deployment (Manual)
 
@@ -28,15 +28,15 @@ Token teams can deploy and configure their own bridge contracts on both source c
 - Primary interfaces include Stargate and the Berachain Token Bridge
 - Stargate requires additional whitelisting procedures
 
-### 2. Permissionless Deployment (Ethereum ↔ Berachain only)
+### 2 - Permissionless Deployment
 
-Developers can create bridges between Ethereum and Berachain without permission using the [Deploy UI](https://bridge.berachain.com/deploy), which leverages pre-deployed wrapped asset bridge contracts.
+Permissionless deployment allows for easy utilization of the Deploy UI and leveraged the audited [WAB contract](Link to layerzero docs) to deploy ERC20 tokens from Ethereum to Beracahin.
+
+*Other WAB exist on other chains as well
 
 ![Berachain Wrapped Asset Bridge](/assets/berachain-wrapped-asset-bridge.png)
 
-- Assets automatically appear on the Token Bridge interface after deployment
-- Token logos require manual configuration in the codebase
-- Uses Berachain's wrapped asset bridge infrastructure
+...
 
 ## How WAB Works
 
