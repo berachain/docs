@@ -53,6 +53,7 @@
     "validatorActivationEpochDelay": 3,
     "blocksPerEpoch": 192,
     "stakeMinimumDeadlineEpoch": 1,
+    "votingPowerIncrement": "10,000",
     "minEffectiveBalance": "250,000",
     "maxEffectiveBalance": "10,000,000",
     "dapps": {
@@ -247,8 +248,68 @@
         "name": "Reward Vault",
         "mainnet-address": "",
         "bepolia-address": "",
-        "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/reward-vault"
+      }
+    },
+    "stakingPools": {
+      "stakingPoolContractsFactory": {
+        "name": "StakingPoolContractsFactory",
+        "mainnet-address": "",
+        "bepolia-address": "0x176c081E95C82CA68DEa20CA419C7506Aa063C24",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPoolContractsFactory"
+      },
+      "withdrawalVault": {
+        "name": "WithdrawalVault",
+        "mainnet-address": "",
+        "bepolia-address": "0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/WithdrawalVault"
+      }
+    },
+    "stakingPoolImplementations": {
+      "stakingPoolImpl": {
+        "name": "StakingPool Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPool"
+      },
+      "smartOperatorImpl": {
+        "name": "SmartOperator Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/SmartOperator"
+      },
+      "stakingRewardsVaultImpl": {
+        "name": "StakingRewardsVault Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x149B894e4F40062616C07a6232911AC780d87b43",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingRewardsVault"
+      },
+      "incentiveCollectorImpl": {
+        "name": "IncentiveCollector Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "0x8F761B285870c3d1740a823eABd33D1c9bD30b9d",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/IncentiveCollector"
+      },
+      "delegationHandlerImpl": {
+        "name": "DelegationHandler Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandler"
+      },
+      "delegationHandlerFactoryImpl": {
+        "name": "DelegationHandlerFactory Implementation",
+        "mainnet-address": "",
+        "bepolia-address": "",
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandlerFactory"
       }
     },
     "tokens": {

@@ -43,7 +43,7 @@ The minimum stake requirement depends on whether the active set is completely fu
 
 If the active set is not full, the minimum stake requirement is `{{config.mainnet.validatorDepositAmount.toLocaleString()}}` `$BERA`.
 
-If the active set is full, the minimum stake requirement is `1` `$BERA` more than the amount staked by the last validator in the active set.
+If the active set is full, the minimum stake requirement is `10,000` `$BERA` more than the amount staked by the last validator in the active set.
 
 It can take up to `{{config.mainnet.validatorActivationEpochDelay}}` epochs (`{{config.mainnet.blocksPerEpoch}}` blocks per epoch) for deposits to be processed and for a validator to be included in the active set.
 

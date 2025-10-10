@@ -204,7 +204,7 @@ The following traits denote a successful registration:
 
 ## Step 5 - Activation or top-up
 
-Having completed the registration, you can now deposit additional $BERA. The floor for becoming a validator is `{{ config.mainnet.minEffectiveBalance.toLocaleString() }} $BERA`, and you must be among the top `{{ config.mainnet.validatorActiveSetSize }}` validators, ordered by $BERA staked.
+Having completed the registration, you can now deposit additional $BERA. The floor for becoming a validator is `{{ config.mainnet.minEffectiveBalance }} $BERA`, and you must be among the top `{{ config.mainnet.validatorActiveSetSize }}` validators, ordered by $BERA staked.
 
 These subsequent deposits are done by calling the same `deposit` function, with only the **public key** required; the other elements may be zero, but must still be the right length.
 
