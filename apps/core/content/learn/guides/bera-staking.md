@@ -72,16 +72,36 @@ The more sWBERA you have compared to the total supply, the bigger your share of 
 
 To withdraw your staked BERA:
 
-1. **Initiate withdrawal** by calling `withdraw()` or `redeem()` on the vault
+1. **Initiate withdrawal** by calling `withdraw(amount, receiver)`, `redeem(shares, receiver)`, `queueRedeem(shares, recipient)`, or `queueWithdraw(amount, recipient)`
 2. **Wait 7 days** for the unbonding period to complete
-3. **Complete withdrawal** by calling `completeWithdrawal()`
+3. **Complete withdrawal** by calling `completeWithdrawal(isNative)` or `completeWithdrawal(isNative, requestId)`
 4. **Choose format**: Receive either native BERA or WBERA
+
+### Withdrawal Options
+
+The vault supports multiple withdrawal methods for enhanced flexibility:
+
+#### Standard Withdrawal Functions
+
+- `withdraw(amount, receiver)` - Withdraw a specific amount of BERA
+- `redeem(shares, receiver)` - Redeem a specific number of shares
+
+#### Enhanced Withdrawal Functions
+
+- `queueRedeem(shares, recipient)` - Queue a withdrawal based on the number of shares you want to redeem
+- `queueWithdraw(amount, recipient)` - Queue a withdrawal based on the exact amount of BERA you want to withdraw
+- `cancelQueuedWithdrawal(requestId)` - Cancel an existing queued withdrawal
+
+#### Completion Functions
+
+- `completeWithdrawal(isNative)` - Complete the most recent withdrawal request
+- `completeWithdrawal(isNative, requestId)` - Complete a specific withdrawal request by ID
 
 ### Important Notes
 
-- **Only one withdrawal request** can be active per address at a time
+- **Multiple requests**: You can have multiple withdrawal requests active simultaneously
+- **Cancellation**: Withdrawal requests can be cancelled before completion
 - **No rewards earned** during the unbonding period
-- **Cannot cancel** a withdrawal request once initiated
 - **Withdrawal requests expire** after 7 days if not completed
 
 ## Security Features
