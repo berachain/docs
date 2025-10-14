@@ -21,12 +21,13 @@ Berachain has multiple bridging options and uses LayerZero as its canonical brid
 
 ### 1 - Manual Token Deployment
 
-Token teams can deploy and configure their own bridge contracts on both source chains and Berachain using LayerZero's documentation and tooling.
+Token teams can deploy and configure their own bridge contracts using LayerZero's documentation and tooling. This involves deploying your own contract on the source and destination chain, choosing and configuring DVNs (Data Verification Networks), and executors.
 
-- Contact our DevRel team for assistance with the deployment process
-- After successful deployment, assets need to be listed on bridge interfaces
-- Primary interfaces include Stargate and the Berachain Token Bridge
-- Stargate requires additional whitelisting procedures
+::: warning
+This process requires ensuring your contract is audited before deployment.
+:::
+
+After successful deployment, assets need to be listed on bridge interfaces including Stargate and the Berachain Token Bridge, with Stargate requiring additional whitelisting procedures.
 
 ### 2 - Permissionless Deployment
 
