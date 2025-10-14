@@ -23,6 +23,8 @@ Berachain has multiple bridging options and uses LayerZero as its canonical brid
 
 Token teams can deploy and configure their own bridge contracts using LayerZero's documentation and tooling. This involves deploying your own contract on the source and destination chain, choosing and configuring DVNs (Data Verification Networks), and executors.
 
+For detailed implementation guidance, see the [LayerZero OFT Quickstart](https://docs.layerzero.network/v2/developers/evm/oft/quickstart) documentation.
+
 ::: warning
 This process requires ensuring your contract is audited before deployment.
 :::
@@ -33,7 +35,7 @@ After successful deployment, assets need to be listed on bridge interfaces inclu
 
 Permissionless deployment allows for easy utilization of the Deploy UI and leveraged the audited [WAB contract](Link to layerzero docs) to deploy ERC20 tokens from Ethereum to Beracahin.
 
-*Other WAB exist on other chains as well
+\*Other WAB exist on other chains as well
 
 ![Berachain Wrapped Asset Bridge](/assets/berachain-wrapped-asset-bridge.png)
 
