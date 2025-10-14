@@ -23,7 +23,13 @@ Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/he
 
 ## Create a Reward Vault
 
-You can get started by creating a Reward Vault using our <a :href="config.bepolia.dapps.playground.url + 'create-reward-vault'">{{config.bepolia.dapps.playground.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
+The primary way to create a Reward Vault is through the [Berachain Hub](https://hub.berachain.com/earn/create). This provides a user-friendly interface for deploying Reward Vaults on mainnet.
+
+![Hub Create Reward Vault](/assets/hub-create-reward-vault.png)
+
+### Alternative: Using the Playground
+
+For testing purposes, you can create a Reward Vault using our <a :href="config.bepolia.dapps.playground.url + 'create-reward-vault'">{{config.bepolia.dapps.playground.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
 
 ![Bepolia Playground Create Reward Vault](/assets/bepolia-playground-create-reward-vault.png)
 
