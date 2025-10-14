@@ -79,11 +79,11 @@ To withdraw your staked BERA:
 
 1. [**Navigate to the Staking Vault** interface](https://hub.berachain.com/stake/)
 2. Click **Unstake**. Enter the amount you wish to remove, or click 'MAX' to exit your position. Click the Unstake button to confirm.
-![Bera Staking Withdrawal](/assets/bera-stake-unstake.png)
+   ![Bera Staking Withdrawal](/assets/bera-stake-unstake.png)
 
 3. After you confirm the transaction, you will see your pending withdrawal in the interface with a countdown.
-3. **In 7 days,** return to the staking interface, then complete the withdrawal by clicking Withdraw. After you complete the withdrawal, you will receive WBERA.
-![Bera STaking Cooldown](/assets/bera-stake-cooldown.png)
+4. **In 7 days,** return to the staking interface, then complete the withdrawal by clicking Withdraw. After you complete the withdrawal, you will receive WBERA.
+   ![Bera STaking Cooldown](/assets/bera-stake-cooldown.png)
 
 ### Withdrawal Options
 
