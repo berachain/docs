@@ -24,7 +24,7 @@ On the **Boost** page, choose a validator you would like to boost.
 
 In order to Boost a Validator, the Boost must first be queued before it can be activated.
 
-Under the **Your Boosts** section, you can see the amount of BGT you have available to boost.  Click the **Boost** button.
+Under the **Your Boosts** section, you can see the amount of BGT you have available to boost. Click the **Boost** button.
 
 ![Validators](/assets/boost-validator-validator.png)
 
