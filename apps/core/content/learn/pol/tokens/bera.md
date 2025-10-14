@@ -26,13 +26,20 @@ head:
 
 `$BERA` serves as the native gas and staking token of Berachain, the first blockchain powered by Proof-of-Liquidity.
 
-## Role of BERA
+## Role of $BERA
 
 The `$BERA` token serves two main purposes on the Berachain network:
 
 ### Transaction Fees
 
-`$BERA` is used to pay for transactions on the Berachain network (hence its designation as the "gas token"). Tokens used for transaction fees are burned, removing them from the circulating supply.
+`$BERA` is used to pay for transactions on the Berachain network (hence its designation as the "gas token"). Tokens used for transaction fees are burned, removing them from the circulating supply. [Check out the hundreds of projects and dapps in the Berachain Ecosystem](https://ecosystem.berachain.com/).
+
+### Staking $BERA
+
+`$BERA` can be staked a number of ways.
+
+1. To provide liquidity in $BERA-denominated pools. The [complete list of pools approved by governance](https://hub.berachain.com/pools/) is shown on the hub. When you stake to pools, you earn a portion of the fees paid by users of that pool.
+2. Staking directly into the [$BERA POL Yield Vault](https://docs.berachain.com/learn/guides/bera-staking), where the yield is a share of all PoL incentives.
 
 ### Validator Staking
 
