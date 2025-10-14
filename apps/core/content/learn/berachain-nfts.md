@@ -36,7 +36,7 @@ See the [deployed contracts](/developers/deployed-contracts) for the relevant ad
 
 ## Bridge Your Bears
 
-All six official collections can be bridged from Ethereum to Berachain using the Berachain NFT bridge. 
+All six official collections can be bridged from Ethereum to Berachain using the Berachain NFT bridge.
 
 <a target="_blank" :href="config.mainnet.dapps.nftBridge.url">
 
