@@ -33,17 +33,22 @@ The BERA Yield Module uses the **[Staking Vault](/developers/contracts/wbera-sta
 ### Option 1: Native BERA Staking (Recommended)
 
 1. **Connect your wallet** to the Berachain network
-2. **Navigate to the Staking Vault** interface
-3. **Select "Deposit Native"** and enter the amount of BERA you want to stake
+2. [**Navigate to the Staking Vault** interface](https://hub.berachain.com/stake/)
+   ![Bera Staking Interface](/assets/bera-stake-overview.png)
+
+3. **Select "Stake"** and enter the amount of BERA you want to stake, then click **Stake BERA**.
+   ![Bera Staking in Action](/assets/bera-stake-staking.png)
+
 4. **Confirm the transaction** - your BERA will be automatically wrapped to WBERA and deposited
 5. **Receive sWBERA tokens** representing your staked position
 
 ### Option 2: WBERA Staking
 
-1. **Wrap your BERA** to WBERA first using the WBERA contract
-2. **Approve WBERA** for the Staking Vault
-3. **Deposit WBERA** into the vault
-4. **Receive sWBERA tokens** representing your staked position
+1. [**Navigate to the Staking Vault** interface](https://hub.berachain.com/stake/)
+2. **Select "Stake"** and click on the $BERA pulldown to reveal $WBERA as an option. Enter the amount of BERA you want to stake, then click **Stake BERA**.
+3. Confirm the **Approve WBERA for the Staking Vault** transaction.
+4. Confirm the **Deposit WBERA** transaction.
+5. **Receive sWBERA tokens** representing your staked position
 
 ## Understanding Your Position
 
@@ -72,10 +77,13 @@ The more sWBERA you have compared to the total supply, the bigger your share of 
 
 To withdraw your staked BERA:
 
-1. **Initiate withdrawal** by calling `withdraw(amount, receiver)`, `redeem(shares, receiver)`, `queueRedeem(shares, recipient)`, or `queueWithdraw(amount, recipient)`
-2. **Wait 7 days** for the unbonding period to complete
-3. **Complete withdrawal** by calling `completeWithdrawal(isNative)` or `completeWithdrawal(isNative, requestId)`
-4. **Choose format**: Receive either native BERA or WBERA
+1. [**Navigate to the Staking Vault** interface](https://hub.berachain.com/stake/)
+2. Click **Unstake**. Enter the amount you wish to remove, or click 'MAX' to exit your position. Click the Unstake button to confirm.
+![Bera Staking Withdrawal](/assets/bera-stake-unstake.png)
+
+3. After you confirm the transaction, you will see your pending withdrawal in the interface with a countdown.
+3. **In 7 days,** return to the staking interface, then complete the withdrawal by clicking Withdraw. After you complete the withdrawal, you will receive WBERA.
+![Bera STaking Cooldown](/assets/bera-stake-cooldown.png)
 
 ### Withdrawal Options
 
@@ -104,24 +112,6 @@ The vault supports multiple withdrawal methods for enhanced flexibility:
 - **No rewards earned** during the unbonding period
 - **Withdrawal requests expire** after 7 days if not completed
 
-## Security Features
-
-### Inflation Attack Protection
-
-The vault includes protection against inflation attacks through:
-
-- **Initial deposit mechanism** to establish proper exchange rates
-- **Reserved assets tracking** for pending withdrawals
-- **Careful accounting** of total assets vs. available assets
-
-### Emergency Controls
-
-The vault can be paused by authorized roles in emergency situations:
-
-- **PAUSER_ROLE**: Can pause the vault
-- **MANAGER_ROLE**: Can unpause the vault
-- **DEFAULT_ADMIN_ROLE**: Can upgrade the vault implementation
-
 ## Yield Sources
 
 ### PoL Incentive Redirection
@@ -140,14 +130,6 @@ Your rewards automatically compound:
 - **No manual claiming** needed
 - **Continuous yield growth** as more incentives come in
 - **Your share value keeps growing** over time
-
-## Integration with LSTs
-
-Future versions will support **Liquid Staking Tokens (LSTs)**:
-
-- **Dual yield**: Earn from both validator staking and PoL incentives
-- **Enhanced security**: Help secure the network while earning PoL yield
-- **Flexible liquidity**: Use LSTs in other DeFi protocols
 
 ## Best Practices
 
