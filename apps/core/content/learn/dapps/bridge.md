@@ -25,7 +25,7 @@ Berachain Bridge allows users to bridge select assets from many networks to Bera
 
 </a>
 
-> <a target="_blank" :href="config.mainnet.dapps.bridge.url">{{config.mainnet.dapps.bridge.url}}</a>
+> <a target="_blank" :href="config.mainnet.dapps.bridge.url + 'utm_source=docsCore'">{{config.mainnet.dapps.bridge.url}}</a>
 
 ## Wrapped Asset Bridge
 
