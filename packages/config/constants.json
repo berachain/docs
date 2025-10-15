@@ -89,6 +89,10 @@
       "safe": {
         "name": "Berachain SAFE",
         "url": "https://safe.berachain.com"
+      },
+      "bridge": {
+        "name": "Berachain Bridge",
+        "url": "https://bridge.berachain.com"
       }
     },
     "thirdparty": {
