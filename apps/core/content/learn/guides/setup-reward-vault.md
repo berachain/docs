@@ -42,7 +42,7 @@ Alternatively, you can create a Reward Vault directly through <a target="_blank"
 To create a Reward Vault via BeraScan:
 
 1. **Connect your wallet** to BeraScan
-2. **Click the contract link** to go directly to the <a href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8" target="_blank">Reward Vault Factory contract</a>
+2. **Click the contract link** to go directly to the <a target="_blank" href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8 + '?utm_source=docsCore'">Reward Vault Factory contract</a>
 3. **Invoke the `createRewardVault` function** with your staking token address as the parameter
 4. **Confirm the transaction** to deploy your Reward Vault
 
