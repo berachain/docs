@@ -19,7 +19,7 @@ head:
 
 Berachain Bridge allows users to bridge select assets from many networks to Berachain, enabling seamless cross-chain asset transfers. The bridge also supports wrapped asset bridging, which enables projects to migrate from Ethereum mainnet to Berachain.
 
-<a target="_blank" :href="config.mainnet.dapps.bridge.url">
+<a target="_blank" :href="config.mainnet.dapps.bridge.url + 'utm_source=docsCore'">
 
 ![Berachain Bridge dApp](/assets/berachain-bridge.png)
 
