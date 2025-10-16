@@ -28,7 +28,7 @@ Under the **Actions** section, find and click the action you wish to incentivize
 
 ### Step 2 - Add Incentive
 
-If the wallet you are connected as is the Incentive Token Manager, then you will see a section labeled "Add incentive to this reward vault".
+Anyone can add incentives to a reward vault, but only the vault manager can approve them. Incentives added by non-managers will show in pending status.
 Click the **Add** button.
 
 ![Add Incentive sTo Reward Vault](/assets/add-incentives-reward-vault.png)
