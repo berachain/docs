@@ -4,7 +4,7 @@
 
 # Setup Reward Vault
 
-Participating in Proof of Liquidity on Berachain requires the use of a Reward Vault to allow protocol users to earn BGT.
+Participating in Proof of Liquidity on Berachain requires the use of a Reward Vault to allow protocols to reward users for taking certain actions.
 Reward Vaults can be created via the <a :href="config.contracts.pol.rewardVaultFactory.docsUrl">{{config.contracts.pol.rewardVaultFactory.name}}</a> permissionlessly, but require some work to become operational.
 
 ![Reward Vault Section](/assets/add-incentives-vaults.png)
@@ -17,8 +17,38 @@ All of the following items should be completed for a fully featured reward vault
 Please see the full [Berachain Reward Vault Requirements & Guidelines](/learn/help/reward-vault-guidelines) for the application process.
 :::
 
+- [Create a Reward Vault](#create-a-reward-vault)
 - [Create a Reward Vault Request](#create-a-reward-vault-request)
 - [Configuring Your Reward Vault](#configuring-your-reward-vault)
+
+## Create a Reward Vault
+
+The primary way to create a Reward Vault is through the [Berachain Hub](https://hub.berachain.com/earn/create). This provides a user-friendly interface for deploying Reward Vaults on mainnet.
+
+![Hub Create Reward Vault](/assets/hub-create-reward-vault.png)
+
+### Alternative: Using the Playground
+
+For testing purposes, you can create a Reward Vault using our <a target="_blank" :href="config.bepolia.dapps.playground.url + '/create-reward-vault?utm_source=docsCore'">{{config.bepolia.dapps.playground.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
+
+![Bepolia Playground Create Reward Vault](/assets/bepolia-playground-create-reward-vault.png)
+
+### Using BeraScan
+
+Alternatively, you can create a Reward Vault directly through <a target="_blank" :href="config.bepolia.dapps.berascan.url + '?utm_source=docsCore'">{{config.bepolia.dapps.berascan.name}}</a> by interacting with the <a target="_blank" :href="config.contracts.pol.rewardVaultFactory.docsUrl + '?utm_source=docsCore'">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a target="_blank" :href="'https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8' + '?utm_source=docsCore'">0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8</a>.
+
+![Create Reward Vault on BeraScan](/assets/create-reward-vault-berascan.png)
+
+To create a Reward Vault via BeraScan:
+
+1. **Connect your wallet** to BeraScan
+2. **Click the contract link** to go directly to the <a target="_blank" href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8 + '?utm_source=docsCore'">Reward Vault Factory contract</a>
+3. **Invoke the `createRewardVault` function** with your staking token address as the parameter
+4. **Confirm the transaction** to deploy your Reward Vault
+
+### Using Solidity Scripts
+
+Alternatively, you can create a Reward Vault using a Solidity script with development frameworks such as Forge or Hardhat. This approach is ideal for developers who want to integrate Reward Vault creation into their deployment pipeline or create multiple vaults programmatically.
 
 ## Create a Reward Vault Request
 
@@ -45,9 +75,9 @@ As a result, for the best user experience and protocol or project discoverabilit
 - [Add Token Metadata](#add-token-metadata)
 - [Create Proof of Liquidity adapter](#create-proof-of-liquidity-adapter)
 
-Additionally, one of the following should be completed:
+Additionally, the following should be completed:
 
-- [Submit Beradata Form](#submit-beradata-form) **or** [Add Reward Vault Metadata](#add-reward-vault-metadata)
+- [Add Reward Vault Metadata](#add-reward-vault-metadata)
 
 ### Add Token Metadata
 
@@ -64,6 +94,8 @@ If you want to update your token information on Berascan (the block explorer), s
 A Proof of Liquidity adapter is used to help display a Reward Vault's BGT emission yield.
 If your Reward Vault stake token is a plain liquidity pool, you may be able to skip this.
 
+For detailed information on creating adapters, see the [Hub PoL Adapters repository](https://github.com/berachain/hub-pol-adapters).
+
 :::tip
 If you are uncertain if you need an adapter, you can read this checklist to help you decide:
 
@@ -72,28 +104,8 @@ If you are uncertain if you need an adapter, you can read this checklist to help
 
 Stake tokens such as ERC-4626 vaults or other custom implementations will require an adapter to help properly price these tokens.
 
-### Submit Beradata Form
-
-Submitting the [Beradata Form](http://betadata-form-webform.vercel.app/) is the simplest and easiest way to set the details of your new Reward Vault in the Hub.
-
-Filling out this form ensures the following information is available so that users can find your Reward Vault:
-
-- Protocol
-- Vault Name
-- Description
-- Logos
-- Links
-
-Using the form allows you to skip manually adding the Reward Vault metadata via a pull request.
-
-![Missing Metadata](/assets/add-incentives-reward-vault.png)
-
-:::warning
-If you do not submit Reward Vault metadata, The Hub will display only contract addresses and make your Reward Vault harder to find.
-:::
-
 ### Add Reward Vault Metadata
 
-Alternatively, if you are unable to or do not wish to use the form, Reward Vault metadata can be submitted via a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository.
+Reward Vault metadata can be submitted via a pull request to the [Berachain Metadata](https://github.com/berachain/metadata) repository.
 
 Follow the instructions provided in the [Contributing Guidelines](https://github.com/berachain/metadata/blob/main/CONTRIBUTING.md#adding-a-vault) to add new reward vaults.
