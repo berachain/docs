@@ -17,7 +17,7 @@ head:
 
 # WithdrawalVault
 
-> <small><span v-if="config.contracts.stakingPools.withdrawalVault['mainnet-address']"><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['mainnet-address']">{{config.contracts.stakingPools.withdrawalVault['mainnet-address']}}</a></span><span v-else>Mainnet address not yet deployed</span><span v-if="config.contracts.stakingPools.withdrawalVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.withdrawalVault.abi">ABI JSON</a></span></small>
+> <small><span v-if="config.contracts.stakingPools.withdrawalVault['mainnet-address']">Mainnet: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['mainnet-address']">{{config.contracts.stakingPools.withdrawalVault['mainnet-address']}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPools.withdrawalVault['bepolia-address']">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['bepolia-address']">{{config.contracts.stakingPools.withdrawalVault['bepolia-address']}}</a></span><span v-if="config.contracts.stakingPools.withdrawalVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.withdrawalVault.abi">ABI JSON</a></span></small>
 
 The WithdrawalVault contract manages withdrawal requests for staking pools. It creates NFTs representing withdrawal requests and handles the finalization process after a cooldown period. The contract also manages full exits from the consensus layer.
 
