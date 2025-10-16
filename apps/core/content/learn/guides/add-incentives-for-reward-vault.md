@@ -6,20 +6,6 @@
 
 The following guide will walk you through the process of adding Incentives to existing Berachain Whitelisted Reward Vault with a Whitelisted Incentive Token. If you'd like to understand additional mechanics, see the [Incentives](/learn/pol/incentives) section for more detials.
 
-## Requirements
-
-- Whitelisted Reward Vault with Whitelisted Incentive Token
-- Must be connected with [Token Manager](/learn/pol/incentives#incentive-token-managers) wallet
-
-:::tip Commission cap
-A validator's commission on incentive tokens is capped at **20 %** (`MAX_COMMISSION_RATE = 0.2e4`).  
-Queuing a commission above the cap **reverts**. If an older stored value exceeds 20 %, reads are **clamped** to the cap.
-:::
-
-## How To Add Incentives To A Reward Vault
-
-This will walk you through the process of adding Incentive Tokens to a Whitelisted Reward Vault through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.hub.name}}</a>.
-
 ### Step 1 - Choose your Action
 
 Under the **Actions** section, find and click the action you wish to incentivize.
@@ -29,12 +15,11 @@ Under the **Actions** section, find and click the action you wish to incentivize
 ### Step 2 - Add Incentive
 
 Anyone can add incentives to a reward vault, but only the vault manager can approve them. Incentives added by non-managers will show in pending status.
-Click the **Add** button.
+Click the **Add Incentives** button.
 
 ![Add Incentive sTo Reward Vault](/assets/add-incentives-reward-vault.png)
 
-A modal will appear, with the Incentive Tokens that your account manages.
-Choose the **Incentive Token**, specify an **Amount** you would like to supply, and a rate for the **Distribution Per BGT** you would like to offer.
+A modal will appear, with the Incentive Tokens that your account manages. If you are not the vault manager, you simply select the amount of tokens to transfer in for incentives. If you are the vault manager, you specify the amount and the distribution rate.
 
 ![Add Incentives Reward Vault Modal](/assets/add-incentives-reward-vault-modal.png)
 
