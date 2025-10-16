@@ -20,9 +20,9 @@ Queuing a commission above the cap **reverts**. If an older stored value exceeds
 
 This will walk you through the process of adding Incentive Tokens to a Whitelisted Reward Vault through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.hub.name}}</a>.
 
-### Step 1 - Choose Your Reward Vault
+### Step 1 - Choose your Action
 
-Under the **Vaults** section, find and click your Reward Vault.
+Under the **Actions** section, find and click the action you wish to incentivize.
 
 ![Find Reward Vault in Vault Section](/assets/add-incentives-vaults.png)
 
