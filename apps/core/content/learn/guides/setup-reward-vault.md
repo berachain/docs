@@ -29,13 +29,13 @@ The primary way to create a Reward Vault is through the [Berachain Hub](https://
 
 ### Alternative: Using the Playground
 
-For testing purposes, you can create a Reward Vault using our [Bepolia Playground Create Reward Vault tool](https://bepolia.playground.berachain.com/create-reward-vault). This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
+For testing purposes, you can create a Reward Vault using our <a target="_blank" :href="config.bepolia.dapps.playground.url + '/create-reward-vault?utm_source=docsCore'">{{config.bepolia.dapps.playground.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
 
 ![Bepolia Playground Create Reward Vault](/assets/bepolia-playground-create-reward-vault.png)
 
 ### Using BeraScan
 
-Alternatively, you can create a Reward Vault directly through <a target="_blank" :href="config.bepolia.dapps.berascan.url">{{config.bepolia.dapps.berascan.name}}</a> by interacting with the <a target="_blank" :href="config.contracts.pol.rewardVaultFactory.docsUrl">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a target="_blank" href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8">0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8</a>.
+Alternatively, you can create a Reward Vault directly through <a target="_blank" :href="config.bepolia.dapps.berascan.url + '?utm_source=docsCore'">{{config.bepolia.dapps.berascan.name}}</a> by interacting with the <a target="_blank" :href="config.contracts.pol.rewardVaultFactory.docsUrl + '?utm_source=docsCore'">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a target="_blank" :href="'https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8' + '?utm_source=docsCore'">0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8</a>.
 
 ![Create Reward Vault on BeraScan](/assets/create-reward-vault-berascan.png)
 
