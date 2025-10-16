@@ -88,7 +88,7 @@ See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/SmartOper
 
 ### Configure Reward Allocations
 
-The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community. 
+The reward allocation system allows you to direct Proof of Liquidity incentives to specific applications or use cases. This flexibility enables you to support particular ecosystem initiatives or community projects, creating opportunities to differentiate your pool and build stronger relationships with your staking community.
 
 ```solidity
 // Queue reward allocation for specific applications
@@ -127,7 +127,7 @@ When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which
 
 **COMMISSION_MANAGER_ROLE:**
 
-- Controls your validator commission rate (up to 100%)
+- Controls your validator commission rate (0-20% as set by BeraChef)
 - Can call `queueValCommission()` to adjust how much you earn from user rewards
 - Essential for managing your revenue model
 
@@ -139,9 +139,9 @@ When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which
 
 **PROTOCOL_FEE_MANAGER_ROLE:**
 
-- Controls the protocol fee percentage (up to 20%) charged on auction payout amounts
+- Controls the protocol fee percentage (up to 20%) charged on BGT balance growth
 - Can call `setProtocolFeePercentage()` to adjust fee rates
-- Important for managing operational costs and user experience
+- Important for managing operational costs
 
 **BGT_MANAGER_ROLE:**
 
@@ -161,50 +161,56 @@ This role system allows you to maintain operational flexibility while keeping yo
 
 ### BGT Operations and Protocol Fees
 
-The SmartOperator contract automatically manages BGT (Berachain Governance Token) operations to maximize your Proof of Liquidity performance. These operations are handled automatically based on the BGT balance in the contract - you don't need to manually manage BGT boosts or redemptions.
+The SmartOperator contract manages BGT (Berachain Governance Token) operations through role-based access controls. As a validator operator, you or your designated BGT manager will need to actively manage BGT operations to optimize your Proof of Liquidity performance.
 
-**Protocol Fee System:**
-The protocol charges a fee on auction payout amounts (up to 20% maximum). This fee is separate from your validator commission and applies when users claim incentive tokens through the auction system. The fee helps fund protocol development and maintenance.
+**BGT Management Operations:**
+
+BGT operations require the `BGT_MANAGER_ROLE` (which you as VALIDATOR_ADMIN can grant):
+
+- **Queue Drop Boost**: Enqueue a request to unboost a specific amount of BGT using `queueDropBoost()`
+- **Redeem BGT**: Convert BGT to BERA and send it to the staking rewards vault using `redeemBGT()`
+
+Public BGT operations (anyone can call):
+
+- **Queue Boost**: Any address can call `queueBoost()` to queue unboosted BGT for boosting to your validator
+- **Activate Boost**: Any address can call `activateBoost()` to activate a queued boost
+- **Drop Boost**: Any address can call `dropBoost()` to execute a queued drop boost
+
+**Protocol Fee on BGT Balance:**
+
+The `protocolFeePercentage` (up to 20% maximum) is charged on the SmartOperator's chargeable BGT balance. This fee is separate from your validator commission.
+
+- Controlled by addresses with `PROTOCOL_FEE_MANAGER_ROLE` (managed by VALIDATOR_ADMIN)
+- Charged on new BGT earned since last fee calculation
+- Fees are minted as stBERA shares to your validator (the default share recipient)
+- Call `accrueEarnedBGTFees()` to trigger fee calculation and minting
 
 **Incentive Token Flow:**
-1. **Distribution**: Incentive tokens are automatically sent to your SmartOperator when `distributeFor` runs for your validator
-2. **Transfer to IncentiveCollector**: You can transfer these tokens to the IncentiveCollector for auction by calling the permissionless `claimBoostRewards` function
-3. **Auction Process**: Users bid on incentive tokens through the auction system
-4. **Protocol Fee**: A fee is applied to the auction payout amount (separate from your commission)
-5. **Bot Assistance**: A bot is being developed to assist validators with this process
 
-**Automatic BGT Management:**
-The system automatically:
+1. **Distribution**: Incentive tokens are sent to your SmartOperator when `distributeFor` runs for your validator on BeraChef
+2. **Claiming**: Call `claimBoostRewards()` to transfer incentive tokens to the IncentiveCollector
+3. **User Claims**: Users pay the payout amount (in BERA) to claim their share of incentive tokens from the IncentiveCollector
+4. **Protocol Fee**: When BGT is earned, the protocol fee percentage is applied before rebasing shares
 
-- Queues BGT boosts when unboosted BGT is available
-- Activates queued boosts to enhance your validator's position
-- Manages boost drops and BGT redemptions as needed
-- Collects and distributes BGT-related rewards and fees
+**Validator Commission vs Protocol Fee:**
 
-While you can monitor these operations through various view functions, the actual BGT management is handled automatically by the smart contracts to ensure optimal performance without requiring manual intervention.
+These are two separate fee mechanisms that work independently:
 
-### Commission vs Protocol Fees
+**Validator Commission (0-100%):**
 
-It's important to understand that **commission** and **protocol fees** are two separate fee structures that can be set independently:
-
-**Commission (0-20%):**
+- Set on BeraChef, not SmartOperator
 - Applied to incentive token distribution from Proof of Liquidity rewards
-- Set by you as the validator operator
-- Guarantees users receive a yield even with minimal BGT boost
-- Collected when incentive tokens are distributed to your SmartOperator
+- Controlled by addresses with `COMMISSION_MANAGER_ROLE`
+- Use `queueValCommission()` to change commission rates
 
 **Protocol Fee (0-20%):**
-- Applied to auction payout amounts when users claim incentive tokens
-- Set by protocol governance
-- Separate from your commission
-- Collected during the auction process
 
-**Example Configuration:**
-- Validator commission: 15% (on incentive token distribution)
-- Protocol fee: 5% (on auction payout amounts)
-- Both fees can be set independently and serve different purposes
+- Set on SmartOperator via `setProtocolFeePercentage()`
+- Applied to the SmartOperator's BGT balance growth
+- Controlled by addresses with `PROTOCOL_FEE_MANAGER_ROLE`
+- Minted as shares to your validator
 
-This dual fee structure allows you to optimize both your revenue model and the user experience while contributing to protocol sustainability.
+Both fee structures can be configured independently based on your operational needs.
 
 ## Pool Management
 
@@ -289,18 +295,21 @@ The IncentiveCollector contract requires users to pay a specific amount when cla
 **Initial Payout Amount**: 100 BERA (set during deployment)
 
 **How It Works**:
+
 1. **Users** call `claim()` with the required payout amount (100 BERA)
 2. The contract transfers all ERC20 incentive tokens to the user
 3. The payout amount is distributed to the staking rewards vault (minus validator fees)
 4. This creates a sustainable reward cycle for the pool
 
 **Managing Payout Amounts**:
+
 ```solidity
 // Queue a new payout amount (requires INCENTIVE_COLLECTOR_MANAGER_ROLE)
 function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount) external;
 ```
 
 **Key Considerations for Operators**:
+
 - **User Experience**: Higher payout amounts may discourage small claims from your users
 - **Pool Sustainability**: The payout amount contributes to your pool's rewards
 - **Fee Structure**: Your validator fees are calculated on the payout amount
@@ -453,7 +462,7 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 **Debug Steps:**
 
 1. **Check Withdrawal Requests**: Use `getWithdrawalRequest(requestId)` to examine specific requests
-2. **Verify Processing Time**: Confirm 27-hour delay has passed for standard withdrawals
+2. **Verify Processing Time**: Confirm 3-day delay has passed (129,600 blocks) for standard withdrawals
 3. **Check Pool Buffer**: Verify sufficient funds available for short-circuit withdrawals
 4. **Monitor Withdrawal Events**: Watch for `WithdrawalRequested` and `WithdrawalRequestFinalized` events
 
@@ -463,8 +472,8 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 // Get withdrawal request details
 WithdrawalRequest memory request = withdrawalVault.getWithdrawalRequest(requestId);
 
-// Check if request is ready (27 hours passed)
-bool ready = block.number >= (request.requestBlock + 49152);
+// Check if request is ready (3 days / 129,600 blocks passed)
+bool ready = block.number >= (request.requestBlock + 129_600);
 ```
 
 ### Getting Help

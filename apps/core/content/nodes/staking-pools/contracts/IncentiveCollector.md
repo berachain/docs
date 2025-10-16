@@ -81,25 +81,6 @@ function claim(address[] calldata tokens) external payable;
 - Must send exactly the required payout amount
 - This function does NOT implement slippage protection - caller must check received amounts
 
-### recoverERC20
-
-Emergency function to recover ERC20 tokens from the incentive collector. Callable only by the admin.
-
-```solidity
-function recoverERC20(address[] calldata tokens, address receiver) external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
-**Parameters**
-
-| Name       | Type        | Description                                |
-| ---------- | ----------- | ------------------------------------------ |
-| `tokens`   | `address[]` | Array of ERC20 token addresses to recover. |
-| `receiver` | `address`   | The address to transfer the tokens to.     |
-
-**Requirements**
-
-- Must be called by DEFAULT_ADMIN_ROLE
-
 ## Events
 
 ### Donated

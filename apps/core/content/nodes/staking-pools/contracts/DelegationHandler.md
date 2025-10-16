@@ -67,6 +67,8 @@ Tracks which withdrawal requests are for yield redemption (validator admin) vers
 
 Creates a new staking pool with delegated funds.
 
+**Required Role**: `VALIDATOR_ADMIN_ROLE`
+
 ```solidity
 function createStakingPoolWithDelegatedFunds(
     bytes memory _pubkey,
@@ -89,6 +91,8 @@ function createStakingPoolWithDelegatedFunds(
 
 Deposits delegated funds into a staking pool.
 
+**Required Role**: `VALIDATOR_ADMIN_ROLE`
+
 ```solidity
 function depositDelegatedFunds(uint256 amount) external onlyRole(VALIDATOR_ADMIN_ROLE);
 ```
@@ -103,13 +107,17 @@ function depositDelegatedFunds(uint256 amount) external onlyRole(VALIDATOR_ADMIN
 
 Requests a yield withdrawal for delegated funds.
 
+**Required Role**: `VALIDATOR_ADMIN_ROLE`
+
 ```solidity
 function requestYieldWithdrawal() external payable onlyRole(VALIDATOR_ADMIN_ROLE) whenNotPaused;
 ```
 
 ### completeWithdrawal
 
-Completes a yield withdrawal request. Only validator admins can complete yield withdrawal requests.
+Completes a withdrawal request. Access control varies by request type: VALIDATOR_ADMIN_ROLE for yield withdrawals, DEFAULT_ADMIN_ROLE for principal withdrawals.
+
+**Required Role**: `VALIDATOR_ADMIN_ROLE` (for yield withdrawals) or `DEFAULT_ADMIN_ROLE` (for principal withdrawals)
 
 ```solidity
 function completeWithdrawal(uint256 requestId) external whenNotPaused auth(requestId);

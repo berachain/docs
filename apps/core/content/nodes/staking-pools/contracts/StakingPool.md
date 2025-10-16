@@ -206,22 +206,6 @@ Processes rewards from the staking rewards vault. Compound rewards from the stak
 function processRewards() external whenNotPaused;
 ```
 
-### pause
-
-Pauses deposits. Admin function.
-
-```solidity
-function pause() external onlyOwner;
-```
-
-### unpause
-
-Unpauses deposits. Admin function.
-
-```solidity
-function unpause() external onlyOwner;
-```
-
 ## Events
 
 ### StakingPoolActivated

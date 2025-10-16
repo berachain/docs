@@ -41,26 +41,6 @@ function withdrawRewards(uint256 amount) external;
 
 - Must be called by the staking pool contract
 
-### recoverERC20
-
-Recovers ERC20 tokens accidentally sent to the contract.
-
-```solidity
-function recoverERC20(address token, address to, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                 |
-| -------- | --------- | ------------------------------------------- |
-| `token`  | `address` | The address of the ERC20 token to recover   |
-| `to`     | `address` | The address to send the recovered tokens to |
-| `amount` | `uint256` | The amount of tokens to recover             |
-
-**Requirements**
-
-- Must be called by DEFAULT_ADMIN_ROLE
-
 ## Events
 
 ### RewardsReceived
@@ -90,22 +70,6 @@ event RewardsWithdrawn(uint256 amount);
 | Name     | Type      | Description                      |
 | -------- | --------- | -------------------------------- |
 | `amount` | `uint256` | The amount of rewards withdrawn. |
-
-### ERC20Recovered
-
-Emitted when ERC20 tokens are recovered from the vault.
-
-```solidity
-event ERC20Recovered(address token, address to, uint256 amount);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                |
-| -------- | --------- | ------------------------------------------ |
-| `token`  | `address` | The address of the ERC20 token recovered.  |
-| `to`     | `address` | The address to which the tokens were sent. |
-| `amount` | `uint256` | The amount of tokens recovered             |
 
 ## Errors
 

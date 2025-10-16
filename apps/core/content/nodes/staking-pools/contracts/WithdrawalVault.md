@@ -196,55 +196,7 @@ function notifyFullExitFromCL(bytes memory pubkey) external;
 | -------- | ------- | --------------------------- |
 | `pubkey` | `bytes` | The validator's public key. |
 
-### recoverERC20
-
-Recovers ERC20 tokens accidentally sent to the contract. Can only be called by DEFAULT_ADMIN_ROLE.
-
-```solidity
-function recoverERC20(address token, address to, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                  |
-| -------- | --------- | -------------------------------------------- |
-| `token`  | `address` | The address of the ERC20 token to recover.   |
-| `to`     | `address` | The address to send the recovered tokens to. |
-| `amount` | `uint256` | The amount of tokens to recover.             |
-
-### pause
-
-Emergency function. Pauses the withdrawal vault. Only callable by the DEFAULT_ADMIN_ROLE.
-
-```solidity
-function pause() external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
-### unpause
-
-Emergency function. Unpauses the withdrawal vault. Only callable by the DEFAULT_ADMIN_ROLE.
-
-```solidity
-function unpause() external onlyRole(DEFAULT_ADMIN_ROLE);
-```
-
 ## Events
-
-### ERC20Recovered
-
-```solidity
-event ERC20Recovered(address token, address to, uint256 amount);
-```
-
-Emitted when ERC20 tokens that were accidentally sent to the contract are recovered by the admin. This is an emergency recovery function for tokens sent to the wrong address.
-
-**Parameters**
-
-| Name     | Type      | Description                                |
-| -------- | --------- | ------------------------------------------ |
-| `token`  | `address` | The address of the token recovered.        |
-| `to`     | `address` | The address to which the tokens were sent. |
-| `amount` | `uint256` | The amount of tokens recovered.            |
 
 ### WithdrawalRequested
 

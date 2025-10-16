@@ -83,7 +83,9 @@ function getEarnedBGTFeeState()
 
 ### setRewardAllocator
 
-Sets the reward allocator for the validator key on the BeraChef contract. Can only be called by the validator admin role.
+Sets the reward allocator for the validator key on the BeraChef contract.
+
+**Required Role**: `VALIDATOR_ADMIN_ROLE`
 
 ```solidity
 function setRewardAllocator(address rewardAllocator) external;
@@ -119,7 +121,9 @@ function activateBoost() external;
 
 ### queueDropBoost
 
-Enqueues a drop boost request for a given amount. Can only be called by the BGT manager role.
+Enqueues a drop boost request for a given amount.
+
+**Required Role**: `BGT_MANAGER_ROLE`
 
 ```solidity
 function queueDropBoost(uint128 amount) external;
@@ -151,6 +155,8 @@ function dropBoost() external;
 
 Redeems a given amount of BGT for BERA. The protocol fee is deducted from the amount.
 
+**Required Role**: `BGT_MANAGER_ROLE`
+
 ```solidity
 function redeemBGT(uint256 amount) external whenNotFullyExited;
 ```
@@ -177,7 +183,9 @@ function fullExitRedeemBGT(address receiver) external;
 
 ### queueRewardsAllocation
 
-Queues a new rewards allocation for the validator key. Can only be called by the rewards allocation manager role.
+Queues a new rewards allocation for the validator key.
+
+**Required Role**: `REWARDS_ALLOCATION_MANAGER_ROLE`
 
 ```solidity
 function queueRewardsAllocation(
@@ -197,7 +205,9 @@ function queueRewardsAllocation(
 
 ### queueValCommission
 
-Queues a new validator commission for the validator key. Can only be called by the commission manager role.
+Queues a new validator commission for the validator key.
+
+**Required Role**: `COMMISSION_MANAGER_ROLE`
 
 ```solidity
 function queueValCommission(uint96 commission) external;
@@ -211,7 +221,9 @@ function queueValCommission(uint96 commission) external;
 
 ### setminActivationBalance
 
-Sets the minimum effective balance for the staking pool. Can only be called by the validator admin role.
+Sets the minimum effective balance for the staking pool.
+
+**Required Role**: `VALIDATOR_ADMIN_ROLE`
 
 ```solidity
 function setminActivationBalance(uint256 minActivationBalance) external;
@@ -225,7 +237,9 @@ function setminActivationBalance(uint256 minActivationBalance) external;
 
 ### queueIncentiveCollectorPayoutAmountChange
 
-Queues a payout amount change for the incentive collector. Can only be called by the incentive collector manager role.
+Queues a payout amount change for the incentive collector.
+
+**Required Role**: `INCENTIVE_COLLECTOR_MANAGER_ROLE`
 
 ```solidity
 function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount)
@@ -242,6 +256,8 @@ function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount)
 ### setProtocolFeePercentage
 
 Sets the protocol fee percentage for the smart operator.
+
+**Required Role**: `PROTOCOL_FEE_MANAGER_ROLE`
 
 ```solidity
 function setProtocolFeePercentage(uint96 protocolFeePercentage_)

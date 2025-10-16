@@ -41,7 +41,7 @@ The key benefits of staking pools include lower barriers to entry, as you can st
 
 ### Available Pools
 
-Staking pools are operated by individual validators, each offering their own unique approach to staking services. You can find pools through validator websites, community channels like Discord and Telegram, DeFi platforms with staking integrations, and community-maintained validator directories. Each pool provides information about the commission rate charged on your rewards (0-100%), total pool size and capacity limits, historical performance and uptime metrics, and active support channels and community engagement.
+Staking pools are operated by individual validators, each offering their own unique approach to staking services. You can find pools through validator websites, community channels like Discord and Telegram, DeFi platforms with staking integrations, and community-maintained validator directories. Each pool provides information about the commission rate charged on your rewards (0-20%), total pool size and capacity limits, historical performance and uptime metrics, and active support channels and community engagement.
 
 ### Choosing a Pool
 
@@ -107,14 +107,14 @@ Rewards accrue automatically and are reflected in your share value:
 
 The withdrawal system provides two processing paths depending on the pool's current state and available funds. When you request a withdrawal, the system first checks if sufficient funds are available in the pool's buffer. If the pool has enough buffered BERA and hasn't reached the active threshold, your withdrawal is processed immediately through the short-circuit path, transferring BERA directly to your wallet without any waiting period.
 
-However, if the pool has reached its active threshold or doesn't have sufficient buffered funds, your withdrawal follows the standard path through the consensus layer. This process requires approximately 27 hours (256 epochs) to complete, as the withdrawal must be processed by the consensus layer before the BERA becomes available in your wallet. Additionally, there is a cooldown period of approximately 3 days (129,600 blocks) after a validator reaches its active threshold, during which withdrawals are disabled to ensure network stability. The system automatically determines which path your withdrawal will take based on the pool's current state and available liquidity.
+However, if the pool has reached its active threshold or doesn't have sufficient buffered funds, your withdrawal follows the standard path through the consensus layer. This process requires approximately 3 days (129,600 blocks) to complete, as the withdrawal must be processed by the consensus layer before the BERA becomes available in your wallet. Additionally, there is a cooldown period of approximately 3 days (129,600 blocks) after a validator reaches its active threshold, during which withdrawals are disabled to ensure network stability. The system automatically determines which path your withdrawal will take based on the pool's current state and available liquidity.
 
 ### Step 1: Initiate Withdrawal Request
 
 When you want to exit your position, open the pool interface and choose Withdraw. You can withdraw by amount (BERA) or redeem by shares. Confirm in your wallet. Any required fees are shown before confirmation.
 
 **Example Withdrawal Request:**
-A typical withdrawal might involve 1,050 BERA (your original 1,000 BERA plus 50 BERA in rewards) with a withdrawal fee of 0.001 BERA for gas. Processing time is approximately 27 hours if consensus layer processing is required.
+A typical withdrawal might involve 1,050 BERA (your original 1,000 BERA plus 50 BERA in rewards) with a withdrawal fee of 0.001 BERA for gas. Processing time is approximately 3 days (129,600 blocks) if consensus layer processing is required.
 
 ### Step 2: Receive Withdrawal NFT
 
@@ -144,7 +144,7 @@ Withdrawals may incur fees:
 
 ### Validator Commission
 
-Validators may charge commission on your rewards. Commission is set and managed by the operator and is capped at 100% (10,000 basis points). You can view the current commission rate in the pool UI. See the [Operator Guide](/nodes/staking-pools/operators) for how operators configure commission.
+Validators may charge commission on your rewards. Commission is set and managed by the operator and is capped at 20% (2,000 basis points) as defined by BeraChef. You can view the current commission rate in the pool UI. See the [Operator Guide](/nodes/staking-pools/operators) for how operators configure commission.
 
 ## Pool Limits and Restrictions
 

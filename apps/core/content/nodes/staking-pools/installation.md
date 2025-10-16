@@ -236,7 +236,7 @@ The `ProofData` struct includes:
 
 ### Set Commission Rates
 
-Configure your validator commission rate (maximum 100%):
+Configure your validator commission rate (maximum 20% as defined by BeraChef):
 
 ```solidity
 function setValidatorCommissionRate(uint256 commissionRate) external;
