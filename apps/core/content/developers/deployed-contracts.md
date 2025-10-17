@@ -31,6 +31,7 @@ All audit reports are publicly available on [Github](https://github.com/berachai
 <script>
 const mainnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other
@@ -38,6 +39,7 @@ const mainnet_render_groups = {
 
 const testnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other
