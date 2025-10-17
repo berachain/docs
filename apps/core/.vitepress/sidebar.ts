@@ -21,7 +21,6 @@ const SIDEBAR = {
         { text: "What Is BeaconKit?", link: "/learn/what-is-beaconkit" },
         { text: "Connect To Berachain", link: "/learn/connect-to-berachain" },
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
-        { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
         { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
         { text: "Docs Changelog", link: "/learn/changelog" }
       ]

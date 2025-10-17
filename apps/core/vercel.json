@@ -111,6 +111,10 @@
     {
       "source": "/learn/concepts/governance",
       "destination": "/"
+    },
+    {
+      "source": "/learn/claim-bera-airdrop",
+      "destination": "/"
     }
   ]
 }
