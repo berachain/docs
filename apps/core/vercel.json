@@ -103,6 +103,10 @@
     {
       "source": "/learn/protocol/bgt-emissions",
       "destination": "/learn/pol/"
+    },
+    {
+      "source": "/learn/claim-bera-airdrop",
+      "destination": "/"
     }
   ]
 }
