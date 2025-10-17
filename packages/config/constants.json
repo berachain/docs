@@ -28,6 +28,10 @@
       "honey": {
         "name": "Bepolia $HONEY Swap",
         "url": "https://bepolia.honey.berachain.com"
+      },
+      "playground": {
+        "name": "Bepolia Playground",
+        "url": "https://bepolia.playground.berachain.com/"
       }
     },
     "contracts": {}
@@ -89,6 +93,10 @@
       "safe": {
         "name": "Berachain SAFE",
         "url": "https://safe.berachain.com"
+      },
+      "bridge": {
+        "name": "Berachain Bridge",
+        "url": "https://bridge.berachain.com"
       }
     },
     "thirdparty": {
@@ -415,6 +423,72 @@
         "mainnet-address": "0x71047aE39A7aA4f7d923542F459e50B974644Ef2",
         "bepolia-address": "0x1453b808C88AAa5e5965f8d86123921E96F045Aa",
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IAuthorizer.abi.json",
+        "docsUrl": ""
+      }
+    },
+    "safe": {
+      "safe": {
+        "name": "Safe",
+        "version": "1.4.1",
+        "bepolia-address": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+        "mainnet-address": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "safeProxyFactory": {
+        "name": "SafeProxyFactory",
+        "version": "1.4.1",
+        "bepolia-address": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+        "mainnet-address": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "multiSend": {
+        "name": "MultiSend",
+        "version": "1.4.1",
+        "bepolia-address": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+        "mainnet-address": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "multiSendCallOnly": {
+        "name": "MultiSendCallOnly",
+        "version": "1.4.1",
+        "bepolia-address": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+        "mainnet-address": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "compatibilityFallbackHandler": {
+        "name": "CompatibilityFallbackHandler",
+        "version": "1.4.1",
+        "bepolia-address": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+        "mainnet-address": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "signMessageLib": {
+        "name": "SignMessageLib",
+        "version": "1.4.1",
+        "bepolia-address": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+        "mainnet-address": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "simulateTxAccessor": {
+        "name": "SimulateTxAccessor",
+        "version": "1.4.1",
+        "bepolia-address": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+        "mainnet-address": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+        "abi": "",
+        "docsUrl": ""
+      },
+      "createCall": {
+        "name": "CreateCall",
+        "version": "1.4.1",
+        "bepolia-address": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+        "mainnet-address": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+        "abi": "",
         "docsUrl": ""
       }
     },

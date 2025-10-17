@@ -6,7 +6,7 @@
 
 The following guide will walk you through the process of boosting a Validator with $BGT to become eligible to claim any Incentives a Validator is rewarded by directing $BGT emissions to Reward Vaults.
 
-## Requiments
+## Requirements
 
 - A wallet that has accumulated $BGT
 
@@ -16,7 +16,7 @@ This will walk you through the process of boosting a Berachain Validator through
 
 ### Step 1 - Choose A Validator
 
-On the **Validators** page, choose a validator you would to boost.
+On the **Boost** page, choose a validator you would like to boost.
 
 ![Berachain Hub Validators](/assets/boost-validator-validators.png)
 
@@ -24,15 +24,17 @@ On the **Validators** page, choose a validator you would to boost.
 
 In order to Boost a Validator, the Boost must first be queued before it can be activated.
 
-Under the **Your Boosts** section click the **Boost** button.
+Under the **Your Boosts** section, you can see the amount of BGT you have available to boost. Click the **Boost** button.
 
 ![Validators](/assets/boost-validator-validator.png)
 
-Specify an amount of $BGT to Boost the Validator with and click **Queue Boost**.
-You will need to wait a certain period of time before you can active the Boost.
+Specify an amount of $BGT to Boost the Validator with and click **Queue Boost**. Approve the transaction in your wallet.
+You will need to wait a certain period of time before the boost is activated.
 
 ![Validator Queue Boost](/assets/boost-validator-queue-boost.png)
 
 ### Step 3 - Activate Boost
 
-Lastly, when the Boost queue is complete, click the **Activate** button to Boost the Validator.
+Boosts are automatically activated after the boost cooldown period has passed, and can be cancelled anytime before it activates.
+
+![Validator Boost Queued](/assets/boost-validator-queued.png)

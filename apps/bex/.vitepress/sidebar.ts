@@ -26,7 +26,6 @@ const SIDEBAR = {
       text: "Core Concepts",
       items: [
         { text: "AMMs", link: "/learn/concepts/amm" },
-        { text: "Governance", link: "/learn/concepts/governance" },
         { text: "Vault", link: "/learn/concepts/vault" },
         {
           text: "Pools",
@@ -73,10 +72,7 @@ const SIDEBAR = {
   DEVELOPERS: [
     {
       text: "BEX For Devs",
-      items: [
-        { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Migration Guide", link: "/developers/migration-guide" }
-      ]
+      items: [{ text: "Deployed Contracts", link: "/developers/" }]
     },
     {
       text: "Contract References",
