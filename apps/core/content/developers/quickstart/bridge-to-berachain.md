@@ -16,6 +16,7 @@ head:
 ## Overview
 
 Berachain offers multiple bridging options and uses LayerZero as its canonical bridge infrastructure for cross-chain token transfers. With LayerZero, there are two ways to enable bridging between a source chain and Berachain.
+
 ## LayerZero Bridging Deployment Options
 
 ### 1 - Manual Token Deployment
@@ -37,7 +38,6 @@ Permissionless deployment allows for easy utilization of the Deploy UI and lever
 Other WAB exist on other chains as well
 
 ![Berachain Wrapped Asset Bridge](/assets/berachain-wrapped-asset-bridge.png)
-
 
 ## How WAB Works
 
