@@ -371,12 +371,12 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/users"
         },
         {
-          text: "Delegation Guide",
-          link: "/nodes/staking-pools/delegators"
-        },
-        {
           text: "Installation Guide",
           link: "/nodes/staking-pools/installation"
+        },
+        {
+          text: "Delegation Guide",
+          link: "/nodes/staking-pools/delegators"
         },
         {
           text: "Smart Contract Reference",
