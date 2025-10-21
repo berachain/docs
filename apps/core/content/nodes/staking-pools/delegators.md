@@ -1,163 +1,82 @@
-# Delegation Guide
+# Delegation Guide (Validator Operators)
 
-The delegation system allows capital providers to fund validators without operating them directly. This enables **capital-light validator operations** where validators can focus on technical operations while delegators provide the required BERA capital.
+This guide shows validator operators how to use delegated capital to stand up and run a staking pool. It builds on the Installation guide and reuses the same helper scripts. It does not cover delegator actions; coordinate with your capital provider as needed.
 
-## How Delegation Works
+See Installation first: `/nodes/staking-pools/installation`.
 
-The delegation system separates **capital provision** from **validator operations** through two distinct roles:
+## Assumptions
 
-- **Delegators**: Provide BERA capital and can withdraw original delegated funds (in practice, primarily the Berachain Foundation)
-- **Validator Admins**: Operate validators and can withdraw staking rewards/yield
+- You completed the validator Installation steps (env configured, node synced).
+- Your delegator has prepared a DelegationHandler and delegated funds for your validator pubkey.
 
-This separation allows validators to operate without significant upfront capital while enabling delegators to provide capital for validator operations.
+You will only need the operator-facing helper scripts in `script/install-helpers/`.
 
-## Delegation Process
+## 1) Check readiness
 
-### 1. Deploy Delegation Handler
+Confirm the network, validator pubkey, and whether a delegated pool/handler is detected:
 
-A delegation handler must first be deployed for your validator's public key:
-
-```solidity
-// Deploy delegation handler for a specific validator
-address delegationHandler = delegationHandlerFactory.deployDelegationHandler(validatorPubkey);
+```bash
+./status.sh
 ```
 
-### 2. Delegator Sends Funds
+If a handler exists, the script displays delegated amounts and whether a pool already exists for your pubkey.
 
-The delegator sends BERA to the delegation handler contract:
+## 2) Create the pool with delegated funds (first 10,000 BERA)
 
-```solidity
-// Delegator sends BERA to the delegation handler
-// This is done through a regular ETH transfer to the contract address
+If the pool is not yet created, use the delegated creation script. It consumes the first 10,000 BERA from the handler to register the validator and writes a ready-to-run command file. This step is the delegated equivalent of the self‑funded flow’s deployment branch in `activate.sh` (it performs the 10,000 BERA deposit and deploys the pool contracts).
+
+```bash
+./delegated-create-pool.sh
 ```
 
-### 3. Delegate Funds
+Run the generated shell script to submit the transaction, then wait for confirmation.
 
-The delegator calls the delegate function to account for the funds:
+## 3) Activate the pool
 
-```solidity
-// Delegator delegates the sent funds
-delegationHandler.delegate(250_000 ether);
+Activation mirrors the Installation flow. After the validator is recognised as registered on the beacon chain, wait until the end of the next epoch (~192 blocks), then generate and execute the activation command with fresh proofs and a valid timestamp window. In delegated mode, `activate.sh` follows the “validator already registered” path; it emits only `activation-command.sh` (no deployment command):
+
+```bash
+./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
 ```
 
-**Requirements:**
+Execute the generated `activation-command.sh` within ~10 minutes.
 
-- The delegation handler must have sufficient BERA balance
-- Only one delegation is allowed per handler
+## 4) Deposit remaining delegated funds
 
-### 4. Grant Validator Admin Role
+After activation, deposit the remaining delegated funds to reach your target balance (for example, 250,000 BERA on Bepolia). The script writes a command file for you to execute.
 
-The delegator must grant the validator admin role to the validator operator:
+```bash
+./delegated-deposit.sh --amount 240000
+```
+f
+## 5) Verify status
 
-```solidity
-// Grant VALIDATOR_ADMIN_ROLE to the validator operator
-bytes32 validatorAdminRole = delegationHandler.VALIDATOR_ADMIN_ROLE();
-delegationHandler.grantRole(validatorAdminRole, validatorOperatorAddress);
+```bash
+./status.sh
 ```
 
-**Important**: The validator admin will also become the VALIDATOR_ADMIN on the staking pool contract.
+You should see contract addresses, the operator match on the beacon deposit contract, and the pool marked ACTIVE. The script also reports delegated amounts when a handler is present.
 
-### 5. Validator Creates Staking Pool
+## 6) Withdraw yield (operator)
 
-The validator admin creates a staking pool using the delegated funds:
+Operators can withdraw earned yield independently of principal. The helper script writes two commands (request, then complete after cooldown):
 
-```solidity
-// Validator admin creates staking pool with delegated funds
-delegationHandler.createStakingPoolWithDelegatedFunds(
-    validatorPubkey,
-    withdrawalCredentials,
-    signature
-);
+```bash
+./delegated-withdraw-yield.sh --pubkey 0xYOUR_VALIDATOR_PUBKEY
 ```
 
-This automatically:
+Follow the prompts to execute the generated request and completion scripts after the cooldown.
 
-- Deploys the core staking pool contracts
-- Uses 10,000 BERA from delegated funds for the initial deposit
-- Sets the delegation contract as `_defaultShareRecipient`
-- Reduces `delegatedAmountAvailable` by 10,000 BERA
+Principal withdrawals are controlled by the delegator and are out of scope here.
 
-**Important**: Staking pool activation must still be done through the StakingPoolContractsFactory.
+## Notes
 
-### 6. Additional Deposits
+- All helper scripts write `cast` commands to files; review and run them yourself. Transactions are never sent automatically.
+- Signing defaults to Ledger; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
+- If you are self-funded, use `stake.sh` from the Installation guide instead of the delegated deposit flow.
 
-The validator admin can deposit additional delegated funds to reach the minimum effective balance:
+## Where to next
 
-```solidity
-// Deposit more delegated funds to reach 250,000 BERA minimum
-delegationHandler.depositDelegatedFunds(240_000 ether);
-```
+- [Contract reference](/nodes/staking-pools/contracts.md) explains what you've deployed
+- [Operator Guide](/nodes/staking-pools/operators.md) explains what a Stake Pool operator can do.
 
-## Withdrawal Types
-
-The delegation system supports two distinct withdrawal types:
-
-### Principal Withdrawals (Delegator)
-
-Delegators can withdraw their original delegated funds, but this requires a two-step process:
-
-1. **Validator Admin Redeems Yield**: The validator admin must first redeem the yield to free up the delegated amount
-2. **Delegator Requests Withdrawal**: The delegator can then request withdrawal of the original delegated funds
-
-```solidity
-// Step 1: Validator admin redeems yield (leaves delegated value redeemable)
-delegationHandler.requestYieldWithdrawal{ value: fee }();
-
-// Step 2: Delegator requests withdrawal of original delegated funds
-delegationHandler.requestDelegatedFundsWithdrawal{ value: fee }();
-
-// Step 3: Both must complete their respective withdrawal processes
-delegationHandler.completeWithdrawal(requestId);
-```
-
-**Key Points:**
-
-- Only the delegator (DEFAULT_ADMIN_ROLE) can request principal withdrawals
-- Requires validator admin to first redeem yield to free up delegated funds
-- Partial undelegations are not supported
-- Both delegator and validator admin must complete the withdrawal process
-- After withdrawal completion, delegator can undelegate funds
-
-### Yield Withdrawals (Validator Admin)
-
-Validator admins can withdraw staking rewards and yield:
-
-```solidity
-// Request withdrawal of staking rewards/yield
-delegationHandler.requestYieldWithdrawal{ value: fee }();
-
-// Complete the withdrawal after cooldown period
-delegationHandler.completeWithdrawal(requestId);
-```
-
-**Key Points:**
-
-- Only the validator admin (VALIDATOR_ADMIN_ROLE) can request yield withdrawals
-- Withdrawn yield goes directly to the validator admin
-- Calculates yield as total shares minus locked shares (representing delegated principal)
-
-## Role Management
-
-### Delegator Role (DEFAULT_ADMIN_ROLE)
-
-- Delegate and undelegate funds
-- Withdraw unused funds
-- Request principal withdrawals
-- Pause/unpause the delegation handler
-- **Access Control**: Role-based access prevents unauthorized fund movements
-- **Fund Separation**: Can only withdraw original delegated capital, not earned rewards
-- **Withdrawal Cooldowns**: All withdrawals require a cooldown period (129,600 blocks ≈ 3 days) to prevent rapid withdrawal attacks
-
-### Validator Admin Role (VALIDATOR_ADMIN_ROLE)
-
-- Create staking pools with delegated funds
-- Deposit additional delegated funds
-- Request yield withdrawals
-- Complete withdrawal requests
-- **Access Control**: Role-based access prevents unauthorized fund movements
-- **Fund Separation**: Can only withdraw earned rewards/yield, not original delegated capital
-- **Withdrawal Cooldowns**: All withdrawals require a cooldown period (129,600 blocks ≈ 3 days) to prevent rapid withdrawal attacks
-
-## Contract Reference
-
-For detailed technical information, see the [DelegationHandler contract reference](/nodes/staking-pools/contracts/DelegationHandler) and [DelegationHandlerFactory contract reference](/nodes/staking-pools/contracts/DelegationHandlerFactory).

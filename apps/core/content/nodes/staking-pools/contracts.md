@@ -71,15 +71,5 @@ These are the actual deployed contracts that users and validators interact with:
 | **IncentiveCollector**          | Incentive token collection and conversion               | [View Documentation](contracts/IncentiveCollector)          |
 | **WithdrawalVault**             | Withdrawal request processing and NFT-based tracking    | [View Documentation](contracts/WithdrawalVault)             |
 
-### Implementation Contracts (Logic Sources)
-
-These contracts contain the actual business logic that all proxy instances delegate to:
-
-| Contract                               | Description                                             | Bepolia Address                              |
-| -------------------------------------- | ------------------------------------------------------- | -------------------------------------------- |
-| **StakingPool Implementation**         | Core staking functionality and user interactions        | `0x5e474c2Df175863f7C45d12aBaacce2f952eff48` |
-| **SmartOperator Implementation**       | Validator operations and Proof of Liquidity integration | `0xA2Cb78A7BfD465a61d490f083b196DC0c45bD2B4` |
-| **StakingRewardsVault Implementation** | Reward distribution and management                      | `0x149B894e4F40062616C07a6232911AC780d87b43` |
-| **IncentiveCollector Implementation**  | Incentive token collection and conversion               | `0x8F761B285870c3d1740a823eABd33D1c9bD30b9d` |
-
 > **Note**: Users and validators interact with proxy addresses (not implementation addresses). Implementation addresses are used internally by the factory for creating and upgrading staking pools.
+i 
