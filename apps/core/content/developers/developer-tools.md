@@ -66,7 +66,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Binance Web3 Wallet](https://www.binance.com/en/web3wallet)
 - [Keplr](https://keplr.app/)
 - [Rainbow Wallet](https://rainbow.me/en/)
-- [Safe](https://safe.berachain.com/welcome)
+- [Safe{Wallet}](https://app.safe.global)
 
 ## Authentication & Account Abstraction
 
