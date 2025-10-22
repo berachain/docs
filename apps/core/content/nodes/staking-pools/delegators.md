@@ -48,7 +48,9 @@ After activation, deposit the remaining delegated funds to reach your target bal
 ```bash
 ./delegated-deposit.sh --amount 240000
 ```
+
 f
+
 ## 5) Verify status
 
 ```bash
@@ -79,4 +81,3 @@ Principal withdrawals are controlled by the delegator and are out of scope here.
 
 - [Contract reference](/nodes/staking-pools/contracts.md) explains what you've deployed
 - [Operator Guide](/nodes/staking-pools/operators.md) explains what a Stake Pool operator can do.
-

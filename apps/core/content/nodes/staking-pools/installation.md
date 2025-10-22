@@ -17,7 +17,7 @@ head:
 
 # Staking Pools Installation Guide
 
-This guide walks validator operators through installing and activating a staking pool using the helper scripts. 
+This guide walks validator operators through installing and activating a staking pool using the helper scripts.
 
 ## What you’ll use
 
@@ -101,5 +101,3 @@ For capital delegation flows and operator workflows that use delegated funds, se
 
 - [Delegation guide](/nodes/staking-pools/delegators) explains how to receive a Foundation delegation
 - [Contract reference](/nodes/staking-pools/contracts.md) explains what you've deployed
-
-

@@ -72,4 +72,4 @@ These are the actual deployed contracts that users and validators interact with:
 | **WithdrawalVault**             | Withdrawal request processing and NFT-based tracking    | [View Documentation](contracts/WithdrawalVault)             |
 
 > **Note**: Users and validators interact with proxy addresses (not implementation addresses). Implementation addresses are used internally by the factory for creating and upgrading staking pools.
-i 
+> i

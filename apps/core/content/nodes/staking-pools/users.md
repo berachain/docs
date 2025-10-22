@@ -172,4 +172,3 @@ During full exit:
 - **Existing Stakes**: Continue earning rewards until exit completes
 - **Withdrawals**: Process normally
 - **BGT Management**: Automatic unboost and burn of BGT rewards
-
