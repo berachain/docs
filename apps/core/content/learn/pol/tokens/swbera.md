@@ -2,7 +2,7 @@
 head:
   - - meta
     - property: og:title
-      content: sWBERA Token
+      content: $sWBERA Token
   - - meta
     - name: description
       content: What Is the $sWBERA Token & How Does It Work
