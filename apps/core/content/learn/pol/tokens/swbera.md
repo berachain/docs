@@ -24,7 +24,7 @@ head:
   <Token title="$sWBERA" image="https://res.cloudinary.com/duv0g402y/image/upload/v1752588172/brand/swbera.png" />
 </ClientOnly>
 
-`$sWBERA` (Staked WBERA) is a yield-bearing token that represents your staked BERA position in the Staking Vault. It provides non-dilutive yield through Proof of Liquidity incentive redirection.
+`$swBERA` (Staked $WBERA) is a yield-bearing token that represents your staked $BERA position in the Staking Vault. It provides non-dilutive yield through Proof of Liquidity incentive redirection.
 
 ## How to Get $sWBERA
 
