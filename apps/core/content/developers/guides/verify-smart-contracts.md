@@ -160,7 +160,7 @@ Add a verification script to your `package.json`:
 
 Then verify your contract:
 
-```bash-vue
+````bash-vue
 # Replace with your contract address and constructor arguments
 pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
 
@@ -169,9 +169,9 @@ pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
 # 📤 Submitted source code for verification on Berascan:
 #   contracts/HelloWorld.sol:HelloWorld
 #   Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
-# 
+#
 # ⏳ Waiting for verification result...
-# 
+#
 # ✅ Contract verified successfully on Berascan!
 #   contracts/HelloWorld.sol:HelloWorld
 #   Explorer: # {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
@@ -199,8 +199,19 @@ forge verify-contract \
   <CONTRACT_ADDRESS> \
   src/YourContract.sol:YourContract \
   --verifier etherscan \
-  --etherscan-api-key <YOUR_ETHERSCAN_API_KEY>
+  --etherscan-api-key <YOUR_ETHERSCAN_API_KEY> \
+  --constructor-args $(cast abi-encode "constructor(string,string,uint256)" "BingBongToken" "BBT" 5678)
+````
+
+:::info Constructor Arguments
+If your contract has constructor parameters, you must include them using the `--constructor-args` flag. Use `cast abi-encode` to encode the constructor arguments:
+
+```bash
+cast abi-encode "constructor(type1,type2,...)" "arg1" "arg2" ...
 ```
+
+For contracts without constructor parameters, omit the `--constructor-args` flag entirely.
+:::
 
 ### Expected Output
 
