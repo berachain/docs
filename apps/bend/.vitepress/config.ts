@@ -55,7 +55,7 @@ export default defineConfig({
             content: "development"
           }
         ],
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }]
+      ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon-bend.svg" }]
   ],
   sitemap: {
     hostname: `${constants.websites.docsBend.url}`
