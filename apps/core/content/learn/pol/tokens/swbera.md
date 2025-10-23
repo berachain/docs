@@ -40,7 +40,7 @@ You can stake either native $BERA (which the system automatically wraps to $WBER
 
 ### Proof of Liquidity Incentive Redirection
 
-The yield comes from the **33% incentive tax** collected from PoL protocols. When protocols pay incentives to validators for directing BGT emissions, a 33% fee is collected during incentive distribution and sent to the Incentive Fee Collector. These fees are then auctioned for WBERA through automated market mechanisms, and the WBERA is distributed to Staking Vault stakers, increasing the value of `$sWBERA` tokens.
+The yield comes from the **33% incentive tax** collected from PoL protocols. When protocols pay incentives to validators for directing $BGT emissions, a 33% fee is collected during incentive distribution and sent to the Incentive Fee Collector. These fees are then auctioned for $WBERA through automated market mechanisms, and the $WBERA is distributed to Staking Vault stakers, increasing the value of `$sWBERA` tokens.
 
 ### Auto-Compounding
 
