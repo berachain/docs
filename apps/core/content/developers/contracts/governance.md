@@ -21,6 +21,10 @@ head:
 
 The Berachain Governance contract extends OpenZeppelin's governor contracts. It uses the $BGT token as its governance token, which determines voting power in the governance system. Users must hold $BGT tokens to participate in governance activities such as creating proposals and voting.
 
+:::tip
+Governance proposals, to be executed by this contract, should be submitted on the [Berachain Forums](https://hub.forum.berachain.com/c/reward-vaults/6).
+:::
+
 **Inherits:**
 Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl, GovernorPreventLateQuorum
 
