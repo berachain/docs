@@ -39,7 +39,7 @@ The `$BERA` token serves two main purposes on the Berachain network:
 `$BERA` can be staked a number of ways.
 
 1. To provide liquidity in $BERA-denominated pools. The [complete list of pools approved by governance](https://hub.berachain.com/pools/) is shown on the hub. When you stake to pools, you earn a portion of the fees paid by users of that pool.
-2. Staking directly into the [$BERA POL Yield Vault](https://docs.berachain.com/learn/guides/bera-staking), where the yield is a share of all PoL incentives. When you stake BERA in this vault, you receive [$sWBERA](/learn/pol/tokens/swbera) tokens representing your staked position.
+2. Staking directly into the [$BERA POL Yield Vault](https://docs.berachain.com/learn/guides/bera-staking), where the yield is a share of all PoL incentives. When you stake $BERA in this vault, you receive [$sWBERA](/learn/pol/tokens/swbera) tokens representing your staked position.
 
 ### Validator Staking
 
