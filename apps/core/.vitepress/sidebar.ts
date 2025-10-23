@@ -162,6 +162,10 @@ const SIDEBAR = {
           link: "/developers/guides/create-erc20-contract-using-foundry"
         },
         {
+          text: "Verify Smart Contracts",
+          link: "/developers/guides/verify-smart-contracts"
+        },
+        {
           text: "Deploy Contract Using NextJS & WalletConnect",
           link: "/developers/guides/deploy-contract-using-nextjs-walletconnect"
         },
