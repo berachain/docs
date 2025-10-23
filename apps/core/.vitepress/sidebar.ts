@@ -153,7 +153,7 @@ const SIDEBAR = {
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
         {
-          text: "Integrating with PoL",
+          text: "Building with Proof of Liquidity",
           link: "/developers/quickstart/pol-integration"
         }
       ]
