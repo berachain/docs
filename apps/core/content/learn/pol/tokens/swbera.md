@@ -8,7 +8,7 @@ head:
       content: What Is the sWBERA Token & How Does It Work
   - - meta
     - property: og:description
-      content: What Is the sWBERA Token & How Does It Work
+      content: What Is the $sWBERA Token & How Does It Work
 ---
 
 <script setup>
