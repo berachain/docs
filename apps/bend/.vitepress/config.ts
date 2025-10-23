@@ -55,7 +55,7 @@ export default defineConfig({
             content: "development"
           }
         ],
-      ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon-bend.svg" }]
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon-bend.svg" }]
   ],
   sitemap: {
     hostname: `${constants.websites.docsBend.url}`
@@ -177,12 +177,6 @@ export default defineConfig({
               "../node_modules/@berachain/ui/NavScreenMenuGroup.vue",
               import.meta.url
             )
-          )
-        },
-        {
-          find: /^.*\/VPFlyout\.vue$/,
-          replacement: fileURLToPath(
-            new URL("../node_modules/@berachain/ui/Flyout.vue", import.meta.url)
           )
         },
         {

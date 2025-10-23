@@ -39,7 +39,7 @@ layout: page
   />
   <Feature
     title="BEX Docs"
-    description="Berachain Core Docs"
+    description="Berachain BEX Docs"
     :link="config.websites.docsBex.url"
     image="/assets/BEX.png"
     type="alt"
