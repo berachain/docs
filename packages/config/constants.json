@@ -524,12 +524,20 @@
     "docsCore": {
       "name": "Berachain Core Docs",
       "url": "https://docs.berachain.com/",
-      "description": "Berachain protocol core docs for learning how the blockchain works, developer guides, and understanding how to manage nodes."
+      "description": "Berachain protocol core docs for learning how the blockchain works, developer guides, and understanding how to manage nodes.",
+      "utmSource": "docsCore"
     },
     "docsBex": {
       "name": "Berachain BEX Docs",
       "url": "https://docs.bex.berachain.com/",
-      "description": "Official documentation for BEX, Berachain's Decentralized Exchange."
+      "description": "Official documentation for BEX, Berachain's Decentralized Exchange.",
+      "utmSource": "docsBex"
+    },
+    "docsBend": {
+      "name": "Berachain Bend Docs",
+      "url": "https://docs.bend.berachain.com/",
+      "description": "Official documentation for Bend, Berachain's borrowing and lending protocol.",
+      "utmSource": "docsBend"
     },
     "careers": {
       "name": "Berachain Careers",
