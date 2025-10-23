@@ -28,7 +28,7 @@ head:
 
 ## How to Get $sWBERA
 
-`$sWBERA` tokens are issued when you stake BERA or WBERA in the Staking Vault. For detailed instructions on how to stake BERA and receive `$sWBERA` tokens, see the [BERA Staking Guide](/learn/guides/bera-staking).
+`$sWBERA` tokens are issued when you stake $BERA or $WBERA in the Staking Vault. For detailed instructions on how to stake BERA and receive `$sWBERA` tokens, see the [$BERA Staking Guide](/learn/guides/bera-staking).
 
 You can stake either native BERA (which the system automatically wraps to WBERA) or WBERA directly if you already have wrapped BERA tokens. Both methods result in receiving `$sWBERA` tokens representing your staked position.
 
