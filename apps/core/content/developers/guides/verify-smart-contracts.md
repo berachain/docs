@@ -160,25 +160,21 @@ Add a verification script to your `package.json`:
 
 Then verify your contract:
 
-```bash
-# Replace with your contract address and constructor arguments
-pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
-```
-
-### Expected Output
-
 ```bash-vue
-=== Etherscan ===
-📤 Submitted source code for verification on Berascan:
-  contracts/HelloWorld.sol:HelloWorld
-  Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+# Replace with your contract address and constructor arguments
+pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
 
-⏳ Waiting for verification result...
-
-✅ Contract verified successfully on Berascan!
-  contracts/HelloWorld.sol:HelloWorld
-  Explorer: {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
-```
+# [Expected Output]:
+# === Etherscan ===
+# 📤 Submitted source code for verification on Berascan:
+#   contracts/HelloWorld.sol:HelloWorld
+#   Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+# 
+# ⏳ Waiting for verification result...
+# 
+# ✅ Contract verified successfully on Berascan!
+#   contracts/HelloWorld.sol:HelloWorld
+#   Explorer: # {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
 
 :::tip Learn More About Hardhat
 For a complete Hardhat development workflow including deployment and verification, see our [Create HelloWorld Contract Using Hardhat](/developers/guides/create-helloworld-contract-using-hardhat) guide.
