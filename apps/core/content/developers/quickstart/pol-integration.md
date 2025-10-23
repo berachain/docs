@@ -5,7 +5,7 @@ head:
       content: Building with Proof-of-Liquidity
   - - meta
     - name: description
-      content: Learn how to integrate your dApp with Berachain's Proof of Liquidity system for incentivizing user activity
+      content: Learn how to integrate your dApp with Berachain's Proof-of-Liquidity system for incentivizing user activity
   - - meta
     - property: og:description
       content: Learn how to integrate your dApp with Berachain's Proof of Liquidity system for incentivizing user activity
