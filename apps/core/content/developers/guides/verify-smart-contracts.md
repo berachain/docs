@@ -26,7 +26,7 @@ We'll cover the following verification methods:
 - **Forge Verification** - Verification using Foundry's forge verify command
 - **Remix Verification** - Verification directly from the Remix IDE
 
-## Prerequisites
+## Requirements
 
 - An already deployed smart contract
 - Access to the contract's source code
@@ -107,7 +107,7 @@ For additional help, refer to Berascan's verification documentation or contact t
 
 Hardhat provides built-in contract verification capabilities that can automatically verify your contracts after deployment. This method is ideal for developers using Hardhat as their development framework.
 
-### Prerequisites
+### Requirements
 
 - Hardhat v3.0.0 or greater
 - Etherscan API key (V2 API supports multiple platforms)
@@ -123,7 +123,7 @@ pnpm keystore:set ETHERSCAN_API_KEY
 
 Next, configure your `hardhat.config.ts` to include verification settings:
 
-```ts
+```ts-vue
 const config: HardhatUserConfig = {
   // ... other config
   verify: {
@@ -167,7 +167,7 @@ pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
 
 ### Expected Output
 
-```bash
+```bash-vue
 === Etherscan ===
 📤 Submitted source code for verification on Berascan:
   contracts/HelloWorld.sol:HelloWorld
@@ -188,7 +188,7 @@ For a complete Hardhat development workflow including deployment and verificatio
 
 Foundry's `forge verify-contract` command provides a streamlined way to verify contracts directly from the command line. This method is perfect for developers using Foundry as their development framework.
 
-### Prerequisites
+### Requirements
 
 - Foundry v1.3.1 or greater (required for Etherscan V2 API)
 - Etherscan API key
@@ -196,7 +196,7 @@ Foundry's `forge verify-contract` command provides a streamlined way to verify c
 
 ### Verification Command
 
-```bash
+```bash-vue
 forge verify-contract \
   --watch \
   --chain {{config.bepolia.dapps.berascan.chainName}} \
@@ -208,7 +208,7 @@ forge verify-contract \
 
 ### Expected Output
 
-```bash
+```bash-vue
 Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.bepolia.dapps.berascan.chainName}}
 
 Submitting verification for [src/BingBongToken.sol:BingBongToken] 0xYOUR_DEPLOYED_CONTRACT_ADDRESS.
@@ -231,7 +231,7 @@ For a complete Foundry development workflow including deployment and verificatio
 
 Remix IDE provides a dedicated Contract Verification plugin that supports Berachain's block explorers. This method is ideal for developers who prefer a visual interface for contract verification.
 
-### Prerequisites
+### Requirements
 
 - Contract deployed on Berachain (public network)
 - Contract compiled in Remix IDE
@@ -247,6 +247,7 @@ Remix IDE provides a dedicated Contract Verification plugin that supports Berach
 ### Verification Services
 
 For Berachain, the plugin supports:
+
 - **Berascan** (Etherscan-based, requires API key)
 - **Beratrail** (Routescan-based, enabled by default)
 
@@ -263,6 +264,7 @@ For Berachain, the plugin supports:
 #### Proxy Contract Verification
 
 For contracts behind a proxy:
+
 1. Check "The deployed contract is behind a proxy" checkbox
 2. Provide the proxy contract address
 3. The plugin will verify both the implementation and proxy contracts
@@ -274,6 +276,7 @@ Proxy verification is only supported on Berascan (Etherscan-based service).
 #### Settings Configuration
 
 Configure verification services in the Settings page:
+
 - Add Etherscan API keys (mandatory for Berascan verification)
 - Configure custom API URLs for verification services
 - Settings are stored per chain
