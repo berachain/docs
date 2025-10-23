@@ -160,21 +160,25 @@ Add a verification script to your `package.json`:
 
 Then verify your contract:
 
-````bash-vue
+```bash-vue
 # Replace with your contract address and constructor arguments
-pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
+pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
+```
 
-# [Expected Output]:
-# === Etherscan ===
-# 📤 Submitted source code for verification on Berascan:
-#   contracts/HelloWorld.sol:HelloWorld
-#   Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
-#
-# ⏳ Waiting for verification result...
-#
-# ✅ Contract verified successfully on Berascan!
-#   contracts/HelloWorld.sol:HelloWorld
-#   Explorer: # {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+### Expected Output
+
+```bash-vue
+=== Etherscan ===
+📤 Submitted source code for verification on Berascan:
+  contracts/HelloWorld.sol:HelloWorld
+  Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+
+⏳ Waiting for verification result...
+
+✅ Contract verified successfully on Berascan!
+  contracts/HelloWorld.sol:HelloWorld
+  Explorer: {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+```
 
 :::tip Learn More About Hardhat
 For a complete Hardhat development workflow including deployment and verification, see our [Create HelloWorld Contract Using Hardhat](/developers/guides/create-helloworld-contract-using-hardhat) guide.
@@ -201,7 +205,7 @@ forge verify-contract \
   --verifier etherscan \
   --etherscan-api-key <YOUR_ETHERSCAN_API_KEY> \
   --constructor-args $(cast abi-encode "constructor(string,string,uint256)" "BingBongToken" "BBT" 5678)
-````
+```
 
 :::info Constructor Arguments
 If your contract has constructor parameters, you must include them using the `--constructor-args` flag. Use `cast abi-encode` to encode the constructor arguments:
