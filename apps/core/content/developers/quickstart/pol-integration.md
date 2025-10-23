@@ -17,7 +17,7 @@ head:
 
 # Building with Proof of Liquidity
 
-Proof of Liquidity (PoL) is Berachain's innovative consensus mechanism that rewards users for performing actions that protocols desire. This system enables developers to create sophisticated incentive structures that can drive user engagement and protocol growth by rewarding a wide range of activities - from providing liquidity and on-chain interactions to real-world actions that benefit the protocol.
+Proof of Liquidity (PoL) is Berachain's innovative reward distribution system that rewards users for performing actions that protocols desire. This system enables developers to create sophisticated incentive structures that can drive user engagement and protocol growth by rewarding a wide range of activities - from providing liquidity and on-chain interactions to real-world actions that benefit the protocol.
 
 PoL can be implemented in two primary ways: **base-level staking** where ERC20 tokens representing liquidity positions or other protocol interactions are staked to earn BGT rewards, or **direct action incentivization** where specific user behaviors are rewarded without requiring traditional staking mechanisms. This flexibility allows developers to design custom incentive models that align with their protocol's unique value proposition and user engagement goals.
 
