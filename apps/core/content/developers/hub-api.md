@@ -51,7 +51,7 @@ Retrieve detailed information about a specific pool.
 ```graphql
 query GetPool {
   poolGetPool(
-    id: "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
+    id: "0xdd70a5ef7d8cfe5c5134b5f9874b09fb5ce812b4000200000000000000000003"
     chain: BERACHAIN
   ) {
     id
@@ -96,52 +96,52 @@ query GetPool {
 {
   "data": {
     "poolGetPool": {
-      "id": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001",
-      "name": "USDC.e | HONEY",
-      "type": "STABLE",
+      "id": "0xdd70a5ef7d8cfe5c5134b5f9874b09fb5ce812b4000200000000000000000003",
+      "name": "WETH | WBERA",
+      "type": "WEIGHTED",
       "version": 3,
-      "address": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621",
+      "address": "0xdd70a5ef7d8cfe5c5134b5f9874b09fb5ce812b4",
       "protocolVersion": 3,
       "allTokens": [
         {
-          "address": "0x05D0dD5135E3eF3aDE32a9eF9Cb06e8D37A6795D",
-          "name": "USD Coin",
-          "symbol": "USDC.e",
-          "decimals": 6
+          "address": "0x2f6f07cdcf3588944bf4c42ac74ff24bf56e7590",
+          "name": "WETH",
+          "symbol": "WETH",
+          "decimals": 18
         },
         {
-          "address": "0x7EeCA4205fF31f947EdBd49195a7A88E6A91161B",
-          "name": "Honey",
-          "symbol": "HONEY",
+          "address": "0x6969696969696969696969696969696969696969",
+          "name": "Wrapped BERA",
+          "symbol": "WBERA",
           "decimals": 18
         }
       ],
       "poolTokens": [
         {
-          "address": "0x05D0dD5135E3eF3aDE32a9eF9Cb06e8D37A6795D",
-          "symbol": "USDC.e",
-          "balance": "265432.123456",
-          "balanceUSD": "265432.12",
-          "weight": null
+          "address": "0x2f6f07cdcf3588944bf4c42ac74ff24bf56e7590",
+          "symbol": "WETH",
+          "balance": "44.342716289422589615",
+          "balanceUSD": "174314.49",
+          "weight": "0.5"
         },
         {
-          "address": "0x7EeCA4205fF31f947EdBd49195a7A88E6A91161B",
-          "symbol": "HONEY",
-          "balance": "264987.456789123456789",
-          "balanceUSD": "264987.45",
-          "weight": null
+          "address": "0x6969696969696969696969696969696969696969",
+          "symbol": "WBERA",
+          "balance": "91356.306518276761264565",
+          "balanceUSD": "173963.03",
+          "weight": "0.5"
         }
       ],
       "dynamicData": {
-        "totalLiquidity": "529419.57",
-        "volume24h": "159234.82",
-        "fees24h": "159.23",
-        "swapFee": "0.001",
+        "totalLiquidity": "348050.79",
+        "volume24h": "20464.93",
+        "fees24h": "61.39",
+        "swapFee": "0.003",
         "aprItems": [
           {
             "title": "Swap fees APR",
             "type": "SWAP_FEE",
-            "apr": 10.98,
+            "apr": 6.45,
             "rewardTokenAddress": null,
             "rewardTokenSymbol": null
           }
@@ -152,7 +152,7 @@ query GetPool {
 }
 ```
 
-**Interpretation:** This stable pool holds approximately equal amounts of USDC.e ($265k) and HONEY ($265k) for a total liquidity of $529k. The pool processed $159k in swap volume over 24 hours, generating $159 in fees. With a 0.1% swap fee, the pool offers a 10.98% APR from swap fees alone.
+**Interpretation:** This 50/50 weighted pool balances WETH (44.34 tokens, $174k) and WBERA (91,356 tokens, $174k) for $348k total liquidity. The pool processed $20k in swap volume over 24 hours with a 0.3% swap fee, generating 6.45% APR from trading fees. This pool enables ETH <> BERA trading on Berachain.
 
 #### Query Multiple Pools
 
