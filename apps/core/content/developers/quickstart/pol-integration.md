@@ -15,7 +15,7 @@ head:
   import config from '@berachain/config/constants.json';
 </script>
 
-# Building with Proof of Liquidity
+# Building with Proof-of-Liquidity
 
 Proof of Liquidity (PoL) is Berachain's innovative reward distribution system that rewards users for performing actions that protocols desire. This system enables developers to create sophisticated incentive structures that can drive user engagement and protocol growth by rewarding a wide range of activities - from providing liquidity and on-chain interactions to real-world actions that benefit the protocol.
 
