@@ -29,7 +29,6 @@ The GraphQL API is available at:
 
 All requests are POST requests to the base URL with a JSON body containing your query. Explore the API interactively at [https://api.berachain.com](https://api.berachain.com).
 
-
 ```bash
 curl -X POST https://api.berachain.com \
   -H "Content-Type: application/json" \
@@ -233,6 +232,7 @@ query GetPools {
 **Interpretation:** This returns pools sorted by TVL (largest first) with at least $10,000 liquidity. The example shows a 50/50 WBERA-HONEY weighted pool with $1.24M TVL and $345k daily volume. The pool offers 12.45% APR from swap fees plus 8.32% from staking rewards for a combined 20.77% APR.
 
 **Filter options:**
+
 - `poolTypeIn/poolTypeNotIn`: Pool type (WEIGHTED, STABLE, COW_AMM, etc.)
 - `tokensIn/tokensNotIn`: Token addresses
 - `minTvl`: Minimum TVL
@@ -301,7 +301,7 @@ query GetPoolEvents {
         "type": "ADD",
         "timestamp": 1698764321,
         "tx": "0xdef789abc012...",
-        "valueUSD": 5000.00
+        "valueUSD": 5000.0
       }
     ]
   }
@@ -828,7 +828,7 @@ query GetRewardVaults {
             "name": "50WBERA-50HONEY"
           },
           "dynamicData": {
-            "tvl": 1245678.90,
+            "tvl": 1245678.9,
             "apr": 45.67,
             "projectedApr": 48.23,
             "activeIncentivesValueUsd": "125000.50",
@@ -918,7 +918,7 @@ query GetRewardVault {
         "decimals": 18
       },
       "dynamicData": {
-        "tvl": 1245678.90,
+        "tvl": 1245678.9,
         "apr": 45.67,
         "projectedApr": 48.23,
         "bgtCapturePercentage": "12.5",
@@ -1158,7 +1158,7 @@ query GetUserVaultDeposits {
               "name": "50WBERA-50HONEY"
             },
             "dynamicData": {
-              "tvl": 1245678.90,
+              "tvl": 1245678.9,
               "apr": 45.67
             }
           }
@@ -1172,7 +1172,7 @@ query GetUserVaultDeposits {
               "name": "HONEY-USDC"
             },
             "dynamicData": {
-              "tvl": 530000.00,
+              "tvl": 530000.0,
               "apr": 32.15
             }
           }
@@ -1376,59 +1376,61 @@ The Hub API exposes 50+ GraphQL queries:
 
 ### Pool Queries (9 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `poolGetPool` | Get a single pool by ID | `id`, `chain`, `userAddress?` | `GqlPoolBase` |
-| `poolGetPools` | Get multiple pools with filtering | `first?`, `orderBy?`, `where?` | `[GqlPoolBase]` |
-| `poolGetPoolsCount` | Count pools matching filter | `where?` | `Int` |
-| `poolGetEvents` | Get pool events (swaps, adds, removes) | `poolId`, `chain`, `range`, `typeIn?` | `[GqlPoolEvent]` |
-| `poolGetSnapshots` | Get historical pool snapshots | `id`, `chain`, `range` | `[GqlPoolSnapshot]` |
-| `poolGetFeaturedPools` | Get featured pools | `chains` | `[GqlPoolBase]` |
-| `poolGetAggregatorPools` | Get pools for aggregators | `first?`, `orderBy?`, `where?` | `[GqlPoolBase]` |
-| `poolGetUserBalances` | Get user balances for a pool | `chain`, `poolId`, `top?` | `[GqlUserBalance]` |
+| Query                    | Description                            | Key Parameters                        | Returns             |
+| ------------------------ | -------------------------------------- | ------------------------------------- | ------------------- |
+| `poolGetPool`            | Get a single pool by ID                | `id`, `chain`, `userAddress?`         | `GqlPoolBase`       |
+| `poolGetPools`           | Get multiple pools with filtering      | `first?`, `orderBy?`, `where?`        | `[GqlPoolBase]`     |
+| `poolGetPoolsCount`      | Count pools matching filter            | `where?`                              | `Int`               |
+| `poolGetEvents`          | Get pool events (swaps, adds, removes) | `poolId`, `chain`, `range`, `typeIn?` | `[GqlPoolEvent]`    |
+| `poolGetSnapshots`       | Get historical pool snapshots          | `id`, `chain`, `range`                | `[GqlPoolSnapshot]` |
+| `poolGetFeaturedPools`   | Get featured pools                     | `chains`                              | `[GqlPoolBase]`     |
+| `poolGetAggregatorPools` | Get pools for aggregators              | `first?`, `orderBy?`, `where?`        | `[GqlPoolBase]`     |
+| `poolGetUserBalances`    | Get user balances for a pool           | `chain`, `poolId`, `top?`             | `[GqlUserBalance]`  |
 
 **Additional Pool Ordering Options:**
+
 - `combinedApr` - Sort by combined APR
 - `userbalanceUsd` - Sort by user balance (when user address provided)
 
 ### Token Queries (8 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `tokenGetToken` | Get single token metadata | `address`, `chain` | `GqlToken` |
-| `tokenGetTokens` | Get all allowed tokens | `chains`, `addressIn?` | `[GqlToken]` |
-| `tokenGetCurrentPrice` | Get current price for a token | `address`, `chain` | `GqlTokenPrice` |
-| `tokenGetCurrentPrices` | Get current prices for multiple tokens | `chains`, `addressIn?` | `[GqlTokenPrice]` |
-| `tokenGetTokenDynamicData` | Get token market data | `address`, `chain` | `GqlTokenDynamicData` |
-| `tokenGetTokensDynamicData` | Get market data for multiple tokens | `addresses`, `chain` | `[GqlTokenDynamicData]` |
-| `tokenGetHistoricalPrices` | Get historical price data | `addresses`, `chain`, `range` | `[GqlHistoricalPrice]` |
-| `tokenGetRelativePriceChartData` | Get relative price between two tokens | `tokenIn`, `tokenOut`, `chain`, `range` | `[GqlPriceData]` |
+| Query                            | Description                            | Key Parameters                          | Returns                 |
+| -------------------------------- | -------------------------------------- | --------------------------------------- | ----------------------- |
+| `tokenGetToken`                  | Get single token metadata              | `address`, `chain`                      | `GqlToken`              |
+| `tokenGetTokens`                 | Get all allowed tokens                 | `chains`, `addressIn?`                  | `[GqlToken]`            |
+| `tokenGetCurrentPrice`           | Get current price for a token          | `address`, `chain`                      | `GqlTokenPrice`         |
+| `tokenGetCurrentPrices`          | Get current prices for multiple tokens | `chains`, `addressIn?`                  | `[GqlTokenPrice]`       |
+| `tokenGetTokenDynamicData`       | Get token market data                  | `address`, `chain`                      | `GqlTokenDynamicData`   |
+| `tokenGetTokensDynamicData`      | Get market data for multiple tokens    | `addresses`, `chain`                    | `[GqlTokenDynamicData]` |
+| `tokenGetHistoricalPrices`       | Get historical price data              | `addresses`, `chain`, `range`           | `[GqlHistoricalPrice]`  |
+| `tokenGetRelativePriceChartData` | Get relative price between two tokens  | `tokenIn`, `tokenOut`, `chain`, `range` | `[GqlPriceData]`        |
 
 ### Proof of Liquidity (PoL) Queries (18 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `polGetGlobalInfo` | Get global PoL statistics | `chain` | `GqlGlobalInfo` |
-| `polGetRewardVaults` | Get reward vaults with filtering | `chain`, `first?`, `orderBy?`, `where?` | `PaginatedRewardVaultsResponse` |
-| `polGetRewardVault` | Get single reward vault | `chain`, `vaultAddress` | `GqlRewardVault` |
-| `polGetRewardVaultSnapshots` | Get vault historical data | `chain`, `vaultAddress`, `range` | `[GqlSnapshot]` |
-| `polGetActiveIncentives` | Get active incentives | `chain`, `first?`, `orderBy?` | `PaginatedRewardVaultIncentivesResponse` |
-| `polGetValidators` | Get validators with filtering | `chain`, `first?`, `orderBy?`, `where?` | `PaginatedValidatorsResponse` |
-| `polGetValidator` | Get single validator | `chain`, `validatorId` or `operator` | `GqlValidator` |
-| `polGetValidatorBoosts` | Get user's validator boosts | `chain`, `userAddress`, `first?` | `PaginatedValidatorBoostsResponse` |
-| `polGetUserVaultDeposits` | Get user's vault deposits | `chain`, `userAddress`, `first?`, `orderBy?` | `PaginatedUserVaultDepositsResponse` |
-| `polGetDefaultRewardAllocations` | Get default reward allocations | `chain` | `GqlDefaultRewardAllocation` |
-| `polGetValidatorBlockUptimes` | Get validator uptime data | `chain`, `validatorId` | `[GqlBlockUptime]` |
-| `polGetValidatorBoostDelay` | Get boost activation delay | - | `GqlValidatorBoostDelay` |
-| `polGetValidatorCommissionDelay` | Get commission change delay | - | `GqlValidatorCommissionDelay` |
-| `polGetTopVaultDeposits` | Get top depositors for a vault | `chain`, `vaultAddress`, `top?` | `[GqlVaultDeposit]` |
-| `polGetVaultDurations` | Get stake duration options | - | `GqlVaultDurations` |
-| `polGetSWberaVaultMetadata` | Get staked WBERA vault metadata | `chain`, `resolution?` | `GqlSWberaVaultMetadata` |
-| `polGetSWberaVaultSnapshots` | Get staked WBERA vault snapshots | `chain`, `range` | `[GqlSnapshot]` |
-| `polGetStakeBeraVaultEarningsByOwner` | Get vault earnings for an owner | `owner` | `GqlStakeBeraVaultEarnings` |
-| `polGetStakeBeraVaultEventsByOwner` | Get vault events for an owner | `owner` | `[GqlVaultEvent]` |
+| Query                                 | Description                      | Key Parameters                               | Returns                                  |
+| ------------------------------------- | -------------------------------- | -------------------------------------------- | ---------------------------------------- |
+| `polGetGlobalInfo`                    | Get global PoL statistics        | `chain`                                      | `GqlGlobalInfo`                          |
+| `polGetRewardVaults`                  | Get reward vaults with filtering | `chain`, `first?`, `orderBy?`, `where?`      | `PaginatedRewardVaultsResponse`          |
+| `polGetRewardVault`                   | Get single reward vault          | `chain`, `vaultAddress`                      | `GqlRewardVault`                         |
+| `polGetRewardVaultSnapshots`          | Get vault historical data        | `chain`, `vaultAddress`, `range`             | `[GqlSnapshot]`                          |
+| `polGetActiveIncentives`              | Get active incentives            | `chain`, `first?`, `orderBy?`                | `PaginatedRewardVaultIncentivesResponse` |
+| `polGetValidators`                    | Get validators with filtering    | `chain`, `first?`, `orderBy?`, `where?`      | `PaginatedValidatorsResponse`            |
+| `polGetValidator`                     | Get single validator             | `chain`, `validatorId` or `operator`         | `GqlValidator`                           |
+| `polGetValidatorBoosts`               | Get user's validator boosts      | `chain`, `userAddress`, `first?`             | `PaginatedValidatorBoostsResponse`       |
+| `polGetUserVaultDeposits`             | Get user's vault deposits        | `chain`, `userAddress`, `first?`, `orderBy?` | `PaginatedUserVaultDepositsResponse`     |
+| `polGetDefaultRewardAllocations`      | Get default reward allocations   | `chain`                                      | `GqlDefaultRewardAllocation`             |
+| `polGetValidatorBlockUptimes`         | Get validator uptime data        | `chain`, `validatorId`                       | `[GqlBlockUptime]`                       |
+| `polGetValidatorBoostDelay`           | Get boost activation delay       | -                                            | `GqlValidatorBoostDelay`                 |
+| `polGetValidatorCommissionDelay`      | Get commission change delay      | -                                            | `GqlValidatorCommissionDelay`            |
+| `polGetTopVaultDeposits`              | Get top depositors for a vault   | `chain`, `vaultAddress`, `top?`              | `[GqlVaultDeposit]`                      |
+| `polGetVaultDurations`                | Get stake duration options       | -                                            | `GqlVaultDurations`                      |
+| `polGetSWberaVaultMetadata`           | Get staked WBERA vault metadata  | `chain`, `resolution?`                       | `GqlSWberaVaultMetadata`                 |
+| `polGetSWberaVaultSnapshots`          | Get staked WBERA vault snapshots | `chain`, `range`                             | `[GqlSnapshot]`                          |
+| `polGetStakeBeraVaultEarningsByOwner` | Get vault earnings for an owner  | `owner`                                      | `GqlStakeBeraVaultEarnings`              |
+| `polGetStakeBeraVaultEventsByOwner`   | Get vault events for an owner    | `owner`                                      | `[GqlVaultEvent]`                        |
 
 **Reward Vault Ordering Options:**
+
 - `apr` - Sort by APR
 - `apy` - Sort by APY
 - `projectedApr` - Sort by projected APR
@@ -1439,6 +1441,7 @@ The Hub API exposes 50+ GraphQL queries:
 - `last24hBGTReceived` - Sort by recent BGT
 
 **Validator Ordering Options:**
+
 - `activeBoostAmount` - Sort by active BGT boosts
 - `queuedBoostAmount` - Sort by queued boosts
 - `queuedDropBoostAmount` - Sort by queued drops
@@ -1457,12 +1460,13 @@ The Hub API exposes 50+ GraphQL queries:
 
 ### Smart Order Router (SOR) Queries (2 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `sorGetSwapPaths` | Get optimal swap route (V2) | `chain`, `tokenIn`, `tokenOut`, `swapType`, `swapAmount`, `callDataInput?` | `GqlSorGetSwapPaths` |
-| `sorGetSwaps` | Get swap quote (legacy + V2) | `chain`, `tokenIn`, `tokenOut`, `swapType`, `swapAmount`, `swapOptions?` | `GqlSorGetSwapsResponse` |
+| Query             | Description                  | Key Parameters                                                             | Returns                  |
+| ----------------- | ---------------------------- | -------------------------------------------------------------------------- | ------------------------ |
+| `sorGetSwapPaths` | Get optimal swap route (V2)  | `chain`, `tokenIn`, `tokenOut`, `swapType`, `swapAmount`, `callDataInput?` | `GqlSorGetSwapPaths`     |
+| `sorGetSwaps`     | Get swap quote (legacy + V2) | `chain`, `tokenIn`, `tokenOut`, `swapType`, `swapAmount`, `swapOptions?`   | `GqlSorGetSwapsResponse` |
 
 **SOR Response Includes:**
+
 - `routes[]` - Array of route options with individual hops
 - `returnAmount` - Expected output amount
 - `effectivePrice` - Effective exchange rate
@@ -1471,12 +1475,12 @@ The Hub API exposes 50+ GraphQL queries:
 
 ### User Queries (4 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `userGetPoolBalances` | Get user's pool balances | `address`, `chains` | `[GqlUserPoolBalance]` |
-| `userGetPoolJoinExits` | Get user's add/remove history (deprecated) | `address`, `chain`, `first?` | `[GqlJoinExit]` |
-| `userGetSwaps` | Get user's swap history (deprecated) | `address`, `chain`, `first?` | `[GqlSwap]` |
-| `userGetTopBGTBalance` | Get users with most BGT | `chain` | `[GqlUserBalance]` |
+| Query                  | Description                                | Key Parameters               | Returns                |
+| ---------------------- | ------------------------------------------ | ---------------------------- | ---------------------- |
+| `userGetPoolBalances`  | Get user's pool balances                   | `address`, `chains`          | `[GqlUserPoolBalance]` |
+| `userGetPoolJoinExits` | Get user's add/remove history (deprecated) | `address`, `chain`, `first?` | `[GqlJoinExit]`        |
+| `userGetSwaps`         | Get user's swap history (deprecated)       | `address`, `chain`, `first?` | `[GqlSwap]`            |
+| `userGetTopBGTBalance` | Get users with most BGT                    | `chain`                      | `[GqlUserBalance]`     |
 
 ::: info
 `userGetPoolJoinExits` and `userGetSwaps` are deprecated. Use `poolGetEvents` with appropriate filters instead.
@@ -1484,12 +1488,13 @@ The Hub API exposes 50+ GraphQL queries:
 
 ### Protocol Metrics Queries (2 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `protocolMetricsChain` | Get metrics for a chain | `chain` | `GqlProtocolMetricsChain` |
-| `protocolMetricsAggregated` | Get aggregated metrics | `chains` | `GqlProtocolMetricsAggregated` |
+| Query                       | Description             | Key Parameters | Returns                        |
+| --------------------------- | ----------------------- | -------------- | ------------------------------ |
+| `protocolMetricsChain`      | Get metrics for a chain | `chain`        | `GqlProtocolMetricsChain`      |
+| `protocolMetricsAggregated` | Get aggregated metrics  | `chains`       | `GqlProtocolMetricsAggregated` |
 
 **Protocol Metrics Include:**
+
 - `totalLiquidity` - Total value locked across all pools
 - `totalSwapVolume` - All-time swap volume
 - `totalSwapFee` - All-time fees collected
@@ -1500,21 +1505,21 @@ The Hub API exposes 50+ GraphQL queries:
 
 ### Blocks Queries (4 queries)
 
-| Query | Description | Returns |
-|-------|-------------|---------|
+| Query                       | Description            | Returns           |
+| --------------------------- | ---------------------- | ----------------- |
 | `blocksGetAverageBlockTime` | Get average block time | `Float` (seconds) |
-| `blocksGetBlocksPerDay` | Get blocks per day | `Float` |
-| `blocksGetBlocksPerSecond` | Get blocks per second | `Float` |
-| `blocksGetBlocksPerYear` | Get blocks per year | `Float` |
+| `blocksGetBlocksPerDay`     | Get blocks per day     | `Float`           |
+| `blocksGetBlocksPerSecond`  | Get blocks per second  | `Float`           |
+| `blocksGetBlocksPerYear`    | Get blocks per year    | `Float`           |
 
 ### Additional Queries (4 queries)
 
-| Query | Description | Key Parameters | Returns |
-|-------|-------------|----------------|---------|
-| `latestSyncedBlocks` | Get latest synced block numbers | - | `GqlLatestSyncedBlocks` |
-| `hooks` | Get pool hooks list | `chain` | `[GqlHook]` |
-| `contentGetNewsItems` | Get news items | `chain` | `[GqlNewsItem]` |
-| `bendVaults` | Get Bend protocol vaults | - | `BendVaultsResponse` |
+| Query                 | Description                     | Key Parameters | Returns                 |
+| --------------------- | ------------------------------- | -------------- | ----------------------- |
+| `latestSyncedBlocks`  | Get latest synced block numbers | -              | `GqlLatestSyncedBlocks` |
+| `hooks`               | Get pool hooks list             | `chain`        | `[GqlHook]`             |
+| `contentGetNewsItems` | Get news items                  | `chain`        | `[GqlNewsItem]`         |
+| `bendVaults`          | Get Bend protocol vaults        | -              | `BendVaultsResponse`    |
 
 ## Enum Reference
 
@@ -1532,15 +1537,18 @@ The Hub API exposes 50+ GraphQL queries:
 ### Data Range Options
 
 **GqlPoolEventsDataRange:**
+
 - `SEVEN_DAYS` - 7 days of event history
 - `THIRTY_DAYS` - 30 days of event history
 - `NINETY_DAYS` - 90 days of event history
 
 **GqlTokenChartDataRange:**
+
 - `SEVEN_DAY` - 7 days of price history
 - `THIRTY_DAY` - 30 days of price history
 
 **GqlPoolSnapshotDataRange:**
+
 - `THIRTY_DAYS`, `NINETY_DAYS`, `ONE_HUNDRED_EIGHTY_DAYS`, `ONE_YEAR`, `ALL_TIME`
 
 ### Event Types (GqlPoolEventType)
