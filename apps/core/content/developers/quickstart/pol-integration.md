@@ -39,7 +39,7 @@ Below are some examples of activities you can incentivize:
 
 While the activities marked with ❌ require more complex implementations, they are still fully supported by Berachain's PoL system. These non-basic PoL integrations work through contracts built on top of reward vaults to help facilitate distribution of rewards for more sophisticated incentive patterns. Berachain provides examples of these patterns on the <a target="_blank" :href="config.mainnet.dapps.playground.url">playground</a> if you're interested in understanding how to incentivize more complex actions to reward your users.
 
-## Basic Proof of Liquidity
+## Basic Proof-of-Liquidity
 
 The following examples show different RewardVault functions that developers commonly use for various integration patterns:
 
