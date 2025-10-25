@@ -351,7 +351,7 @@ function setFeeRecipient(address newFeeRecipient) external onlyOwner;
 
 Submits a `newGuardian`.
 
-In case there is no guardian, the gardian is set immediately.
+In case there is no guardian, the guardian is set immediately.
 
 ```solidity
 function submitGuardian(address newGuardian) external onlyOwner;
