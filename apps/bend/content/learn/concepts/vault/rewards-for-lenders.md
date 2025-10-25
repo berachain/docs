@@ -17,7 +17,7 @@ head:
 
 # Rewards For Lenders
 
-Bend offers a great place for additional yields on Berachain's native stablecoin <a target="_blank" :href="config.websites.docsCore.url + 'learn/pol/tokens/honey?utm_source=' + config.websites.docsBend.utmSource">$HONEY</a>. Each [Vautl](/learn/concepts/vault) is managed by [Curators](/learn/concepts/curator), who decide which [Markets](/learn/concepts/market) they want to offer \$HONEY as a loan for specific collateral (\$WETH, \$WBERA, \$WBTC, etc).
+Bend offers a great place for additional yields on Berachain's native stablecoin <a target="_blank" :href="config.websites.docsCore.url + 'learn/pol/tokens/honey?utm_source=' + config.websites.docsBend.utmSource">$HONEY</a>. Each [Vault](/learn/concepts/vault) is managed by [Curators](/learn/concepts/curator), who decide which [Markets](/learn/concepts/market) they want to offer \$HONEY as a loan for specific collateral (\$WETH, \$WBERA, \$WBTC, etc).
 
 ![Berachain Bend - Vaults](/assets/learn-concepts-rewardslenders-vaults.png)
 
