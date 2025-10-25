@@ -79,7 +79,7 @@ layout: page
     :icon="IconSearch"
     type="alt"
   />
-  <template v-if="config.bepolia.dapps?.faucet">
+  <template v-if="config.websites?.faucet">
   <Feature
     :title="config.websites.faucetBepolia.name"
     description="Get Bepolia Tokens"

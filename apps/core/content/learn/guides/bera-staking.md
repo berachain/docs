@@ -156,9 +156,9 @@ Your rewards automatically compound:
 
 ### Contract Information
 
-- **Staking Vault**: `{{ config.contracts.pol.wberaStakerVault['berachainBepolia'] }}`
+- **Staking Vault**: `{{ config.contracts.pol.wberaStakerVault.address.berachainBepolia }}`
 - **WBERA Token**: `0x6969696969696969696969696969696969696969`
-- **Incentive Fee Collector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector['berachainBepolia'] }}`
+- **Incentive Fee Collector**: `{{ config.contracts.pol.bgtIncentiveFeeCollector.address.berachainBepolia }}`
 
 :::tip
 For technical implementation details and function signatures, see the [WBERA Staker Vault contract documentation](/developers/contracts/wbera-staker-vault).

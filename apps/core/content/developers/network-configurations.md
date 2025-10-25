@@ -87,14 +87,32 @@ With the testnet, you can:
 
 ### Bepolia Testnet dApps
 
-<template v-for="(item) in config['bepolia']['dapps']">
-  <table>
-    <thead><tr><th>Name</th><th>URL</th></tr></thead>
-    <tbody>
-          <tr>
-            <td><a :href="item.url">{{ item.name }}</a></td>
-            <td>{{ item.url }}</td>
-          </tr>
-    </tbody>
-  </table>
-</template>
+<table>
+  <thead><tr><th>Name</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a :href="config.websites.hubBepolia.url">{{ config.websites.hubBepolia.name }}</a></td>
+      <td>{{ config.websites.hubBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.bexBepolia.url">{{ config.websites.bexBepolia.name }}</a></td>
+      <td>{{ config.websites.bexBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.berascanBepolia.url">{{ config.websites.berascanBepolia.name }}</a></td>
+      <td>{{ config.websites.berascanBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.beratrailBepolia.url">{{ config.websites.beratrailBepolia.name }}</a></td>
+      <td>{{ config.websites.beratrailBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.honeySwapBepolia.url">{{ config.websites.honeySwapBepolia.name }}</a></td>
+      <td>{{ config.websites.honeySwapBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.playgroundBepolia.url">{{ config.websites.playgroundBepolia.name }}</a></td>
+      <td>{{ config.websites.playgroundBepolia.url }}</td>
+    </tr>
+  </tbody>
+</table>

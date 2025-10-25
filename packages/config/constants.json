@@ -392,7 +392,6 @@
           "berachainMainnet": "0x549943e04f40284185054145c6E4e9568C1D3241",
           "berachainBepolia": ""
         },
-        "bepolia-address": "",
         "abi": "https://github.com/berachain/doc-abis/blob/main/misc/ERC20.json",
         "docsUrl": ""
       },
@@ -699,6 +698,10 @@
     "hub": {
       "name": "Berachain Hub",
       "url": "https://hub.berachain.com/"
+    },
+    "hubBepolia": {
+      "name": "Berachain Hub Bepolia",
+      "url": "https://bepolia.hub.berachain.com/"
     },
     "nftBridge": {
       "name": "Berachain NFT Bridge",
