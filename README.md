@@ -15,8 +15,8 @@ This Turborepo includes the following packages/apps:
 
 All docs are built with [Vitepress](https://vitepress.dev) - Vite & Vue Powered Static Site Generator.
 
-- `apps/bex`- Main docs repository for [https://docs.bex.berachain.com](https://docs.bex.berachain.com)
 - `apps/core`- Main docs repository for [https://docs.berachain.com](https://docs.berachain.com)
+- `apps/bex`- Main docs repository for [https://docs.bex.berachain.com](https://docs.bex.berachain.com)
 - `apps/bend` - Main docs repository for [https://docs.bend.berachain.com](https://docs.bend.berachain.com)
 
 ### Packages
@@ -45,7 +45,7 @@ pnpm dev;
 
 # @berachain/core:dev - http://localhost:5173
 # @berachain/bex:dev - http://localhost:5174
-# @berachain/bend:dev - http://localhost:5174
+# @berachain/bend:dev - http://localhost:5175
 ```
 
 If you'd like to run an individual app, run the following:
