@@ -39,14 +39,12 @@ layout: page
     link="/developers/"
     :icon="IconTerminal"
   />
-  <template v-if="config.bepolia.dapps?.faucet">
   <Feature
     :title="config.websites.faucetBepolia.name"
       description="Fund your testnet wallet with $BERA"
       :link="config.websites.faucetBepolia.url + '?utm_source=' + config.websites.docsBex.utmSource"
       :icon="IconDroplet"
     />
-  </template>
 </section>
 
 ## More Berachain Docs

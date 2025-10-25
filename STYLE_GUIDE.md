@@ -93,7 +93,7 @@ In some cases, links cannot be setup with traditional markdown, and here is the 
 <a :href="config.websites.foundation.url" target="_blank" rel="no-referrer">{{config.websites.foundation.name}}</a>
 
 ✅ Correct way combining variables
-<a :href="config.mainnet.dapps.bex.url + 'vault'" target="_blank" rel="no-referrer">{{config.mainnet.dapps.bex.name}}</a>
+<a :href="config.websites.bex.url + 'vault'" target="_blank" rel="no-referrer">{{config.websites.bex.name}}</a>
 ```
 
 ### Headings
@@ -456,8 +456,8 @@ In TypeScript files, such as `sidebar.ts` or other configuration files within `.
 
     ```typescript
     {
-      text: `${constants.mainnet.dapps.berascan.name}`,
-      link: `${constants.mainnet.dapps.berascan.url}`,
+      text: `${constants.website.berascan.name}`,
+      link: `${constants.website.berascan.url}`,
       target: "_blank",
       rel: "no-referrer",
     }

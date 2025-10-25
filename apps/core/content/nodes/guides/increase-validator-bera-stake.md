@@ -43,7 +43,7 @@ There are a few points to consider with staking:
 Before you begin, ensure you have the following:
 
 - A Validator that is already in the Active Set
-- A Validator's `pubkey` - PubKeys can be found at <a :href="config.websites.url + '/validators'" target="_blank">{{config.websites.hub.name}} Validators</a>
+- A Validator's `pubkey` - PubKeys can be found at <a :href="config.websites.hub.url + 'validators?utm_source=' + config.websites.docsCore.utmSource" target="_blank">{{config.websites.hub.name}} Validators</a>
 - A minimum of {{config.mainnet.stakeMinimumIncrease}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 

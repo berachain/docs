@@ -29,20 +29,20 @@ The primary way to create a Reward Vault is through the [Berachain Hub](https://
 
 ### Alternative: Using the Playground
 
-For testing purposes, you can create a Reward Vault using our <a target="_blank" :href="config.websites.playgroundBepolia.url + '/create-reward-vault?utm_source=docsCore'">{{config.websites.playgroundBepolia.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
+For testing purposes, you can create a Reward Vault using our <a target="_blank" :href="config.websites.playgroundBepolia.url + '/create-reward-vault?utm_source=' + config.websites.docsCore.utmSource">{{config.websites.playgroundBepolia.name}} Create Reward Vault tool</a>. This provides an easy-to-use interface for deploying a Reward Vault on Bepolia testnet.
 
 ![Bepolia Playground Create Reward Vault](/assets/bepolia-playground-create-reward-vault.png)
 
 ### Using BeraScan
 
-Alternatively, you can create a Reward Vault directly through <a target="_blank" :href="config.websites.berascanBepolia.url + '?utm_source=docsCore'">{{config.websites.berascanBepolia.name}}</a> by interacting with the <a target="_blank" :href="config.contracts.pol.rewardVaultFactory.docsUrl + '?utm_source=docsCore'">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a target="_blank" :href="'https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8' + '?utm_source=docsCore'">0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8</a>.
+Alternatively, you can create a Reward Vault directly through <a target="_blank" :href="config.websites.berascanBepolia.url + '?utm_source=' + config.websites.docsCore.utmSource">{{config.websites.berascanBepolia.name}}</a> by interacting with the <a target="_blank" :href="config.contracts.pol.rewardVaultFactory.docsUrl + '?utm_source=' + config.websites.docsCore.utmSource">{{config.contracts.pol.rewardVaultFactory.name}}</a> contract at <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory.address.berachainMainnet + '?utm_source=' + config.websites.docsCore.utmSource">{{config.contracts.pol.rewardVaultFactory.address.berachainMainnet}}</a>.
 
 ![Create Reward Vault on BeraScan](/assets/create-reward-vault-berascan.png)
 
 To create a Reward Vault via BeraScan:
 
 1. **Connect your wallet** to BeraScan
-2. **Click the contract link** to go directly to the <a target="_blank" href="https://berascan.com/address/0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8 + '?utm_source=docsCore'">Reward Vault Factory contract</a>
+2. **Click the contract link** to go directly to the <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.rewardVaultFactory.address.berachainMainnet + '?utm_source=' + config.websites.docsCore.utmSource">Reward Vault Factory contract</a>
 3. **Invoke the `createRewardVault` function** with your staking token address as the parameter
 4. **Confirm the transaction** to deploy your Reward Vault
 
