@@ -5,6 +5,14 @@ import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
+/**
+ * UTM Source for Core
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsCore.utmSource}`;
+
+/**
+ * Sidebar Configuration
+ */
 const SIDEBAR = {
   /**
    * Main section for both the root / and /learn
@@ -88,7 +96,7 @@ const SIDEBAR = {
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          link: `${constants.mainnet.dapps.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -127,13 +135,13 @@ const SIDEBAR = {
 
         {
           text: `${constants.bepolia.dapps.faucet.name}`,
-          link: `${constants.bepolia.dapps.faucet.url}`,
+          link: `${constants.bepolia.dapps.faucet.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          link: `${constants.mainnet.dapps.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -302,7 +310,7 @@ const SIDEBAR = {
         { text: "Monitoring", link: "/nodes/monitoring" },
         {
           text: "BeaconKit GitHub Repo",
-          link: "https://github.com/berachain/beacon-kit"
+          link: `${constants.websites.beaconkit.url}${UTMSOURCE}`
         }
       ]
     },

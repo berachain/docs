@@ -17,6 +17,7 @@ All docs are built with [Vitepress](https://vitepress.dev) - Vite & Vue Powered 
 
 - `apps/bex`- Main docs repository for [https://docs.bex.berachain.com](https://docs.bex.berachain.com)
 - `apps/core`- Main docs repository for [https://docs.berachain.com](https://docs.berachain.com)
+- `apps/bend` - Main docs repository for [https://docs.bend.berachain.com](https://docs.bend.berachain.com)
 
 ### Packages
 
@@ -42,8 +43,9 @@ If you'd like to run all apps at the same time, run the following:
 
 pnpm dev;
 
-# @berachain/bex:dev - http://localhost:5173
-# @berachain/core:dev - http://localhost:5176
+# @berachain/core:dev - http://localhost:5173
+# @berachain/bex:dev - http://localhost:5174
+# @berachain/bend:dev - http://localhost:5174
 ```
 
 If you'd like to run an individual app, run the following:

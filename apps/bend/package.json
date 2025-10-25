@@ -2,7 +2,7 @@
   "name": "@berachain/bend",
   "version": "1.1.5",
   "scripts": {
-    "dev": "vitepress dev --port 5174",
+    "dev": "vitepress dev --port 5175",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "clean": "rm -rf .turbo; rm -rf .vitepress/cache; rm -rf .vitepress/dist; rm -rf node_modules;",

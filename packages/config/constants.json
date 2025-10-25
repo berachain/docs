@@ -629,6 +629,11 @@
     }
   },
   "websites": {
+    "berascan": {
+      "name": "Berascan",
+      "url": "https://berascan.com/",
+      "utmSource": "berascan"
+    },
     "foundation": {
       "name": "Berachain Foundation",
       "url": "https://berachain.com/"
@@ -673,7 +678,7 @@
     "twitterDevs": "https://x.com/berachaindevs",
     "github": "https://github.com/berachain",
     "discord": "https://discord.gg/berachain",
-    "telegram": "https://t.me/BerachainPortal",
+    "telegram": "https://t.me/Berachain",
     "telegramBuilders": "https://t.me/BerachainEco"
   }
 }

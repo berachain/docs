@@ -5,6 +5,14 @@ import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
+/**
+ * UTM Source for BEX
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsBex.utmSource}`;
+
+/**
+ * Sidebar Configuration
+ */
 const SIDEBAR = {
   /**
    * Main section for both the root / and /learn
@@ -16,7 +24,7 @@ const SIDEBAR = {
         { text: "What is BEX?", link: "/learn/" },
         {
           text: "BEX dApp",
-          link: `${constants.mainnet.dapps.bex.url}`,
+          link: `${constants.mainnet.dapps.bex.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
