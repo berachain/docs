@@ -17,7 +17,7 @@ head:
 
 # Oracle
 
-Oracles are smart contracts that provide external data, particularly price information, to blockchain applications. In lending protocols like Bend, oracles provide price data needed to determine what one token is worth relative to another. For example, the oracle of a market is supposedly answering the question: "How many $USD is 1 \$BERA/\$WBERA worth right now?"
+Oracles are smart contracts that provide external data, particularly price information, to blockchain applications. In lending protocols like Bend, oracles provide price data needed to determine what one token is worth relative to another. For example, the oracle of a market is designed to answer the question: "How many $USD is 1 \$BERA/\$WBERA worth right now?"
 
 ## Oracles in Lending Markets
 
