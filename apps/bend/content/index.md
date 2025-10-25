@@ -48,14 +48,14 @@ layout: page
   <Feature
     title="Core Docs"
     description="Berachain Core Docs"
-    :link="config.websites.docsCore.url"
+    :link="config.websites.docsCore.url + '?utm_source=' + config.websites.docsBex.utmSource"
     image="/assets/BERA.png"
     type="alt"
   />
   <Feature
     title="BEX Docs"
     description="Berachain BEX Docs"
-    :link="config.websites.docsBex.url"
+    :link="config.websites.docsBex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     image="/assets/BEX.png"
     type="alt"
   />
@@ -67,7 +67,7 @@ layout: page
   <Feature
     title="BeaconKit"
     description="BeaconKit Repo"
-    link="https://github.com/berachain/beacon-kit"
+    :link="'https://github.com/berachain/beacon-kit?utm_source=' + config.websites.docsBend.utmSource"
     :icon="IconBrandGithub"
     type="alt"
   />
@@ -75,7 +75,7 @@ layout: page
     title="Berascan"
     target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.thirdparty.routescan.url"
+    :link="config.websites.berascan.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconSearch"
     type="alt"
   />
@@ -83,7 +83,7 @@ layout: page
   <Feature
     :title="config.bepolia.dapps.faucet.name"
     description="Get Bepolia Tokens"
-    :link="config.bepolia.dapps.faucet.url"
+    :link="config.bepolia.dapps.faucet.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconDroplet"
       type="alt"
     />
@@ -91,28 +91,28 @@ layout: page
   <Feature
     :title="config.mainnet.dapps.hub.name"
     description="Manage $BGT"
-    :link="config.mainnet.dapps.hub.url"
+    :link="config.mainnet.dapps.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconGavel"
     type="alt"
   />
   <Feature
     :title="config.mainnet.dapps.bex.name"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.bex.url"
+    :link="config.mainnet.dapps.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconRefresh"
     type="alt"
   />
   <Feature
     :title="config.mainnet.dapps.honeySwap.name"
     description="Berachain $HONEY Swapping"
-    :link="config.mainnet.dapps.honeySwap.url"
+    :link="config.mainnet.dapps.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconMoneybag"
     type="alt"
   />
   <Feature
     :title="config.mainnet.dapps.foundation.name"
     description="Main Foundation Website"
-    :link="config.mainnet.dapps.foundation.url"
+    :link="config.mainnet.dapps.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconWorld"
     type="alt"
   />
