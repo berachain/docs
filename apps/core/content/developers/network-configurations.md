@@ -31,7 +31,7 @@ Click the button below to add the network to your MetaMask.
     :nativeCurrencySymbol="config.mainnet.currencySymbol"
     :nativeCurrencyDecimals="config.mainnet.decimals"
     :rpcUrl="config.mainnet.rpcUrl"
-    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascan.url"
   />
 </ClientOnly>
 
@@ -39,13 +39,13 @@ Click the button below to add the network to your MetaMask.
 
 To add the network manually, enter the network details below into your wallet of choice:
 
-| Key                | Value                                                                                  |
-| ------------------ | -------------------------------------------------------------------------------------- |
-| Network Name       | {{config.mainnet.chainName}}                                                           |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>            |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
-| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
+| Key                | Value                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Network Name       | {{config.mainnet.chainName}}                                                       |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>         |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>        |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly> |
+| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.websites.berascan.url" /></ClientOnly>  |
 
 ### Mainnet RPC Providers
 
@@ -61,7 +61,7 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
     :nativeCurrencySymbol="config.bepolia.currencySymbol"
     :nativeCurrencyDecimals="config.bepolia.decimals"
     :rpcUrl="config.bepolia.rpcUrl"
-    :blockExplorerUrl="config.bepolia.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascanBepolia.url"
     :testnet="true"
   />
 </ClientOnly>

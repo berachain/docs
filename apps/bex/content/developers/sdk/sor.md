@@ -43,7 +43,7 @@ import {
 const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Create swap amount (e.g., 1 HONEY)
 const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, '1');

@@ -29,13 +29,13 @@ A market is a primitive lending pool that enables users to:
 
 Each market operates independently with its own parameters, ensuring that risks are contained within individual markets rather than spreading across the entire protocol.
 
-<a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">
+<a target="_blank" :href="config.websites.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">
 
 ![Bend - Markets Overview](/assets/learn-concept-market-overview.png)
 
 </a>
 
-> <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.url  + 'borrow'}}</a>
+> <a target="_blank" :href="config.websites.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.url  + 'borrow'}}</a>
 
 ## Key Characteristics
 
@@ -108,5 +108,5 @@ This approach differs from traditional lending platforms, which typically:
 In Bend, each market is created with its own immutable parameters—selected at the time of creation and persisting for the lifetime of the market. Specifically, the loan-to-value (LTV) ratio and interest rate model must be chosen from a set of options approved by Bend governance. This design ensures risk isolation, flexibility, and the ability to quickly support new asset integrations while maintaining protocol standards.
 
 :::info
-**NOTE:** For a market to appear on the Bend UI, applicants must submit a proposal to whitelist a vault that include its allocation via <a target="_blank" :href="config.mainnet.dapps.bend.formUrl + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.formUrl}}</a>.
+**NOTE:** For a market to appear on the Bend UI, applicants must submit a proposal to whitelist a vault that include its allocation via <a target="_blank" :href="config.websites.bend.formUrl + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.formUrl}}</a>.
 :::

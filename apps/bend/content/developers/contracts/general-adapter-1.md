@@ -17,7 +17,7 @@ head:
 
 # General Adapter 1
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.generalAdapter1.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.generalAdapter1.address}}</a> | [Git Source](https://github.com/morpho-org/bundler3/blob/main/src/adapters/GeneralAdapter1.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.generalAdapter1.address.berachainMainnet+ '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.generalAdapter1.address.berachainMainnet}}</a> | [Git Source](https://github.com/morpho-org/bundler3/blob/main/src/adapters/GeneralAdapter1.sol)</small>
 
 **Inherits:** [CoreAdapter](https://github.com/morpho-org/bundler3/blob/main/src/adapters/CoreAdapter.sol)
 

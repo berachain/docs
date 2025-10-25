@@ -17,7 +17,7 @@ head:
 
 # MorphoChainlinkOracleV2Factory
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morphoChainlinkOracleV2Factory.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.morphoChainlinkOracleV2Factory.address}}</a> | [Git Source](https://github.com/morpho-org/morpho-blue-oracles/blob/main/src/morpho-chainlink/MorphoChainlinkOracleV2Factory.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.morphoChainlinkOracleV2Factory.address.berachainMainnet+ '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.morphoChainlinkOracleV2Factory.address.berachainMainnet}}</a> | [Git Source](https://github.com/morpho-org/morpho-blue-oracles/blob/main/src/morpho-chainlink/MorphoChainlinkOracleV2Factory.sol)</small>
 
 **Inherits:** [IMorphoChainlinkOracleV2Factory](<[/Users/mannybera/Documents/github/morpho-blue-oracles/docs/src/src](https://github.com/morpho-org/morpho-blue-oracles/blob/main/src)/morpho-chainlink/interfaces/IMorphoChainlinkOracleV2Factory.sol>)
 

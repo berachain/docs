@@ -17,7 +17,7 @@ head:
 
 # Meta Fee Partitioner
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.metaFeePartitioner.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.metaFeePartitioner.address}}</a> | [Git Source](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/MetaFeePartitioner.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.metaFeePartitioner.address.berachainMainnet+ '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.metaFeePartitioner.address.berachainMainnet}}</a> | [Git Source](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/MetaFeePartitioner.sol)</small>
 
 **Inherits:** [IMetaFeePartitioner](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/interfaces/IMetaFeePartitioner.sol), Initializable, OwnableUpgradeable, UUPSUpgradeable
 

@@ -18,7 +18,7 @@ Queuing a commission above the cap **reverts**. If an older stored value exceeds
 
 ## How To Add Incentives To A Reward Vault
 
-This guide will walk you through the process of adding incentive tokens to a whitelisted reward vault using <a :href="config.mainnet.dapps.safe.url" target="_blank">{{config.mainnet.dapps.safe.name}}</a>.
+This guide will walk you through the process of adding incentive tokens to a whitelisted reward vault using <a :href="config.websites.safe.url" target="_blank">{{config.websites.safe.name}}</a>.
 
 ### Step 1 - Start a New Transaction
 

@@ -81,38 +81,38 @@ layout: page
   />
   <template v-if="config.bepolia.dapps?.faucet">
   <Feature
-    :title="config.bepolia.dapps.faucet.name"
+    :title="config.websites.faucetBepolia.name"
     description="Get Bepolia Tokens"
-    :link="config.bepolia.dapps.faucet.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.faucetBepolia.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconDroplet"
       type="alt"
     />
   </template>
   <Feature
-    :title="config.mainnet.dapps.hub.name"
+    :title="config.websites.hub.name"
     description="Manage $BGT"
-    :link="config.mainnet.dapps.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconGavel"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.bex.name"
+    :title="config.websites.bex.name"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconRefresh"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.honeySwap.name"
+    :title="config.websites.honeySwap.name"
     description="Berachain $HONEY Swapping"
-    :link="config.mainnet.dapps.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconMoneybag"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.foundation.name"
+    :title="config.websites.foundation.name"
     description="Main Foundation Website"
-    :link="config.mainnet.dapps.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconWorld"
     type="alt"
   />

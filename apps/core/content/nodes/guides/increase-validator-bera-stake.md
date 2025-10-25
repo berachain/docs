@@ -43,7 +43,7 @@ There are a few points to consider with staking:
 Before you begin, ensure you have the following:
 
 - A Validator that is already in the Active Set
-- A Validator's `pubkey` - PubKeys can be found at <a :href="config.mainnet.dapps.url + '/validators'" target="_blank">{{config.mainnet.dapps.hub.name}} Validators</a>
+- A Validator's `pubkey` - PubKeys can be found at <a :href="config.websites.url + '/validators'" target="_blank">{{config.websites.hub.name}} Validators</a>
 - A minimum of {{config.mainnet.stakeMinimumIncrease}} `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
@@ -62,7 +62,7 @@ YOUR_ETH_RPC_URL=<YOUR_ETH_RPC_URL>;
 YOUR_STAKED_AMOUNT=<NUMBER>ether;
 
 # The 0x0.. are NOT typos
-cast send "{{config.contracts.pol.beaconDeposit['mainnet-address']}}" \
+cast send "{{config.contracts.pol.beaconDeposit.address.berachainMainnet}}" \
 'deposit(bytes,bytes,bytes,address)' \
 "$VALIDATOR_PUB_KEY" \
 "0x0000000000000000000000000000000000000000000000000000000000000000" \

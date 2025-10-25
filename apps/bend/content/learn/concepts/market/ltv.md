@@ -19,7 +19,7 @@ head:
 
 When a user borrows from Bend, their position's safety is determined by the relationship between their collateral, their debt, and the market's risk parameters. Understanding and clearly displaying these metrics is one of the most critical responsibilities when building a lending integration.
 
-<a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">
+<a target="_blank" :href="config.websites.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">
 
 ![Bend - Markets Borrow](/assets/learn-concept-market-ltv.png)
 

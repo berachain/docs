@@ -17,7 +17,7 @@ head:
 
 # MetaMorphoFactoryV1_1
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.metaMorphoFactoryV1_1.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.metaMorphoFactoryV1_1.address}}</a> | [Git Source](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/MetaMorphoV1_1Factory.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.metaMorphoFactoryV1_1.address.berachainMainnet+ '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.metaMorphoFactoryV1_1.address.berachainMainnet}}</a> | [Git Source](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/MetaMorphoV1_1Factory.sol)</small>
 
 **Inherits:** [IMetaMorphoV1_1Factory](https://github.com/berachain/contracts-metamorpho-v1.1/blob/main/src/interfaces/IMetaMorphoV1_1Factory.sol)
 

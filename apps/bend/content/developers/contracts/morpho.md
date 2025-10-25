@@ -17,7 +17,7 @@ head:
 
 # Morpho
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morpho.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.morpho.address}}</a> | [Git Source](https://github.com/berachain/morpho-blue/blob/main/src/Morpho.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.morpho.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.morpho.address.berachainMainnet}}</a> | [Git Source](https://github.com/berachain/morpho-blue/blob/main/src/Morpho.sol)</small>
 
 **Inherits:** [IMorphoStaticTyping](https://github.com/berachain/morpho-blue/blob/main/src/interfaces/IMorpho.sol#L299)
 

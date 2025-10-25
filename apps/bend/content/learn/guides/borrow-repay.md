@@ -21,20 +21,20 @@ This guide will walk you through the process of providing collateral to borrow $
 
 ## Requirements
 
-- Wallet with collateral (WETH, WBERA, WBTC, etc) listed on <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.name}}</a>
+- Wallet with collateral (WETH, WBERA, WBTC, etc) listed on <a target="_blank" :href="config.websites.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.name}}</a>
 - Native $BERA to process transactions
 
 :::tip
-If you do not have have any of the collateral listed, you can use <a target="_blank" :href="config.mainnet.dapps.hub.url + 'swap' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.hub.name}}</a>.
+If you do not have have any of the collateral listed, you can use <a target="_blank" :href="config.websites.hub.url + 'swap' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.hub.name}}</a>.
 :::
 
 ## Supplying Collateral & Borrowing
 
-This will walk you through the steps of interacting with {{config.mainnet.dapps.bend.name}} supplying $WBERA as collateral to take out a loan in $HONEY.
+This will walk you through the steps of interacting with {{config.websites.bend.name}} supplying $WBERA as collateral to take out a loan in $HONEY.
 
 ### 1. Visit Bend & Connect Wallet
 
-Your first step is to go to <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.name}}</a> and connect your wallet.
+Your first step is to go to <a target="_blank" :href="config.websites.bend.url + 'borrow' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.name}}</a> and connect your wallet.
 
 ![Berachain Bend - Borrow & Connect Wallet](/assets/learn-guide-borrow-01.png)
 

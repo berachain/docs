@@ -39,11 +39,11 @@ import {
 const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
 const poolId =
-  "{{config.mainnet.dapps.bex.examplePoolId}}";
+  "{{config.websites.bex.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 // Prepare add liquidity input - note we're only adding one token for unbalanced
@@ -112,11 +112,11 @@ The three main helper classes we use from the SDK are:
 After initializing the `BalancerApi` class, we can fetch current pool data using `fetchPoolState`.
 
 ```js-vue
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
 const poolId =
-  "{{config.mainnet.dapps.bex.examplePoolId}}";
+  "{{config.websites.bex.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 ```

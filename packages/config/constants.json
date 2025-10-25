@@ -5,36 +5,7 @@
     "chainName": "Berachain Bepolia",
     "currencySymbol": "BERA",
     "currencyName": "Testnet BERA Token",
-    "decimals": 18,
-    "dapps": {
-      "faucet": {
-        "name": "Bepolia Testnet Faucet",
-        "url": "https://bepolia.faucet.berachain.com/"
-      },
-      "beratrail": {
-        "name": "Bepolia Block Explorer",
-        "url": "https://bepolia.beratrail.io/"
-      },
-      "berascan": {
-        "name": "BeraScan Block Explorer",
-        "url": "https://testnet.berascan.com/",
-        "apiUrl": "https://api.etherscan.io/v2/api",
-        "chainName": "berachain-bepolia"
-      },
-      "hub": {
-        "name": "Bepolia Hub",
-        "url": "https://bepolia.hub.berachain.com"
-      },
-      "honey": {
-        "name": "Bepolia $HONEY Swap",
-        "url": "https://bepolia.honey.berachain.com"
-      },
-      "playground": {
-        "name": "Bepolia Playground",
-        "url": "https://bepolia.playground.berachain.com/"
-      }
-    },
-    "contracts": {}
+    "decimals": 18
   },
   "mainnet": {
     "chainId": 80094,
@@ -58,207 +29,7 @@
     "blocksPerEpoch": 192,
     "stakeMinimumDeadlineEpoch": 1,
     "minEffectiveBalance": "250,000",
-    "maxEffectiveBalance": "10,000,000",
-    "dapps": {
-      "bex": {
-        "name": "Berachain BEX",
-        "url": "https://hub.berachain.com/swap",
-        "apiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
-        "balancerApiUrl": "https://api.berachain.com/",
-        "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
-      },
-      "bend": {
-        "name": "Berachain Bend",
-        "url": "https://bend.berachain.com/",
-        "utmSource": "docsbend",
-        "apiUrl": "https://bend.berachain.com/api/",
-        "formUrl": "https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW",
-        "marketIds": {
-          "wsrusdhoney": {
-            "name": "wsRUSD / HONEY",
-            "address": "0x04d3b8b00c6f3b75481492b76139473e2368339ee58587df65684fdb9103984e"
-          },
-          "wbtchoney": {
-            "name": "WBTC / HONEY",
-            "address": "0x950962c1cf2591f15806e938bfde9b5f9fbbfcc5fb640030952c08b536f1f167"
-          },
-          "susdehoney": {
-            "name": "sUSDe / HONEY",
-            "address": "0x1ba7904c73d337c39cb88b00180dffb215fc334a6ff47bbe829cd9ee2af00c97"
-          },
-          "wgberahoney": {
-            "name": "wgBERA / HONEY",
-            "address": "0x63c2a7c20192095c15d1d668ccce6912999b01ea60eeafcac66eca32015674dd"
-          },
-          "wethhoney": {
-            "name": "WETH / HONEY",
-            "address": "0x1f05d324f604bd1654ec040311d2ac4f5820ecfd1801a3d19d2c6f09d4f7a614"
-          },
-          "wberahoney": {
-            "name": "WBERA / HONEY",
-            "address": "0x147b032db82d765b9d971eac37c8176260dde0fe91f6a542f20cdd9ede1054df"
-          },
-          "iberahoney": {
-            "name": "iBERA / HONEY",
-            "address": "0x594de722a090f8d0df41087c23e2187fb69d9cd6b7b425c6dd56ddc1cff545f0"
-          }
-        },
-        "repositories": {
-          "contracts": {
-            "name": "Bend Contracts Repo",
-            "url": "https://github.com/berachain/contracts-metamorpho-v1.1"
-          }
-        }
-      },
-      "honeySwap": {
-        "name": "Berachain $HONEY Swap",
-        "url": "https://honey.berachain.com/"
-      },
-      "berascan": {
-        "name": "BeraScan Block Explorer",
-        "url": "https://berascan.com/",
-        "apiKey": "YOUR_API_KEY",
-        "apiUrl": "https://api.etherscan.io/v2/api",
-        "chainName": "berachain"
-      },
-      "foundation": {
-        "name": "Berachain Foundation",
-        "url": "https://www.berachain.com/"
-      },
-      "hub": {
-        "name": "Berachain Hub",
-        "url": "https://hub.berachain.com/"
-      },
-      "nftBridge": {
-        "name": "Berachain NFT Bridge",
-        "url": "https://nftbridge.berachain.com/"
-      },
-      "safe": {
-        "name": "Berachain SAFE",
-        "url": "https://safe.berachain.com"
-      },
-      "bridge": {
-        "name": "Berachain Bridge",
-        "url": "https://bridge.berachain.com"
-      }
-    },
-    "thirdparty": {
-      "routescan": {
-        "name": "Routescan",
-        "url": "https://beratrail.io/"
-      },
-      "quickNodeRpc": {
-        "name": "QuickNode RPC",
-        "url": "https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1"
-      },
-      "layerzero": {
-        "name": "LayerZero",
-        "url": "https://docs.layerzero.network/v2/developers/evm/technical-reference/deployed-contracts#bartio"
-      }
-    },
-    "contracts": {
-      "bend": {
-        "morpho": {
-          "name": "Morpho (Vault)",
-          "address": "0x24147243f9c08d835C218Cda1e135f8dFD0517D0",
-          "docsUrl": "/developers/contracts/morpho"
-        },
-        "adaptiveCurveIrm": {
-          "name": "Adaptive Curve IRM",
-          "address": "0xcf247Df3A2322Dea0D408f011c194906E77a6f62",
-          "docsUrl": "/developers/contracts/adaptive-curve-irm"
-        },
-        "bundler3": {
-          "name": "Bundler3",
-          "address": "0xF920140A65D0f412f2AB3e76C4fEAB5Eef0657ae",
-          "docsUrl": "/developers/contracts/bundler3"
-        },
-        "generalAdapter1": {
-          "name": "General Adapter 1",
-          "address": "0xd2B9667F5214115E27937C410cAeE83E3a901Df7",
-          "docsUrl": "/developers/contracts/general-adapter-1"
-        },
-        "metaMorphoV1_1": {
-          "name": "Meta Morpho V1.1",
-          "address": "",
-          "docsUrl": "/developers/contracts/meta-morpho-v1_1"
-        },
-        "metaMorphoFactoryV1_1": {
-          "name": "Meta Morpho Factory V1.1",
-          "address": "0x5EDd48C6ACBd565Eeb31702FD9fa9Cbc86fbE616",
-          "docsUrl": "/developers/contracts/meta-morpho-factory-v11"
-        },
-        "metaFeePartitioner": {
-          "name": "Meta Fee Partitioner",
-          "address": "0x80108Ee81A92091Db6B8B2326B1875ce9388f461",
-          "docsUrl": "/developers/contracts/meta-fee-partitioner"
-        },
-        "publicAllocator": {
-          "name": "Public Allocator",
-          "address": "0xB62F34Ab315eaDeAc698e8EaEB6Fc2650951BFe7",
-          "docsUrl": "/developers/contracts/public-allocator"
-        },
-        "morphoChainlinkOracleV2": {
-          "name": "Morpho Chainlink Oracle V2",
-          "address": "",
-          "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2"
-        },
-        "morphoChainlinkOracleV2Factory": {
-          "name": "Morpho Chainlink Oracle V2 Factory",
-          "address": "0xAf2FDC54f7bc9d6e8C2D2760E908f4e1beB04d9E",
-          "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2-factory"
-        },
-        "urd": {
-          "name": "Universal Reward Distributer (URD)",
-          "address": "",
-          "docsUrl": "/developers/contracts/urd"
-        },
-        "urdFactory": {
-          "name": "Universal Reward Distributer (URD) Factory",
-          "address": "0x46fE2bc33b661E01A8946BbC3Bf43F2B8382d802",
-          "docsUrl": "/developers/contracts/urd-factory"
-        },
-        "vaults": {
-          "re7HoneyVault": {
-            "name": "Re7 Honey Vault",
-            "address": "0x30BbA9CD9Eb8c95824aa42Faa1Bb397b07545bc1",
-            "docsUrl": "/developers/contracts/morpho"
-          }
-        }
-      },
-      "nfts": {
-        "bongBears": {
-          "name": "Bong Bears",
-          "ethereumAddress": "0x1897C001341F81Ca72154b75b882aE708e06bF48",
-          "berachainAddress": "0x141De07E5D4C4759EC9301DA106115D4841f66cD"
-        },
-        "bondBears": {
-          "name": "Bond Bears",
-          "ethereumAddress": "0x6b1C374105467d1fC1090C989BcbbCC172c8a89c",
-          "berachainAddress": "0xA0CF472E6132F6B822a944f6F31aA7b261c7c375"
-        },
-        "booBears": {
-          "name": "Boo Bears",
-          "ethereumAddress": "0x7591992F1a98636C6B7207f30382ca4Bec83D9Be",
-          "berachainAddress": "0xf49ec5db255854C4a567de5AB3826c9AAbaFc7cF"
-        },
-        "babyBears": {
-          "name": "Baby Bears",
-          "ethereumAddress": "0xc48C54e92d135B356DD0CbF50F803A8c8d38968b",
-          "berachainAddress": "0xDDeAf391c4be2d01ca52aBb8C159a06820ef078C"
-        },
-        "bandBears": {
-          "name": "Band Bears",
-          "ethereumAddress": "0x392Faa1b0EF108ded69897Ba5382E909C39Fc09e",
-          "berachainAddress": "0x7711B2Eb2451259dbF211e30157ceB7CFeb79a19"
-        },
-        "bitBears": {
-          "name": "Bit Bears",
-          "ethereumAddress": "0x3EB12398753eEd7E8747321c37C85De30d8E2e94",
-          "berachainAddress": "0x72D876D9cdf4001b836f8E47254d0551EdA2eebB"
-        }
-      }
-    }
+    "maxEffectiveBalance": "10,000,000"
   },
   "devnet": {
     "chainId": 80087,
@@ -267,106 +38,276 @@
     "currencyName": "BERA Token",
     "chainName": "Berachain Local Devnet",
     "name": "berachainLocalDevnet",
-    "decimals": 18,
-    "dapps": {
-      "blockExplorer": {
-        "name": "Devnet Blockscout",
-        "url": "http://127.0.0.1:53414",
-        "apiUrl": "https://localhost:4000/api ",
-        "apiKey": "xxxxx"
-      }
-    }
+    "decimals": 18
   },
   "contracts": {
+    "nfts": {
+      "bongBears": {
+        "name": "Bong Bears",
+        "address": {
+          "ethereumMainnet": "0x1897C001341F81Ca72154b75b882aE708e06bF48",
+          "berachainMainnet": "0x141De07E5D4C4759EC9301DA106115D4841f66cD"
+        }
+      },
+      "bondBears": {
+        "name": "Bond Bears",
+        "address": {
+          "ethereumMainnet": "0x6b1C374105467d1fC1090C989BcbbCC172c8a89c",
+          "berachainMainnet": "0xA0CF472E6132F6B822a944f6F31aA7b261c7c375"
+        }
+      },
+      "booBears": {
+        "name": "Boo Bears",
+        "address": {
+          "ethereumMainnet": "0x7591992F1a98636C6B7207f30382ca4Bec83D9Be",
+          "berachainMainnet": "0xf49ec5db255854C4a567de5AB3826c9AAbaFc7cF"
+        }
+      },
+      "babyBears": {
+        "name": "Baby Bears",
+        "address": {
+          "ethereumMainnet": "0xc48C54e92d135B356DD0CbF50F803A8c8d38968b",
+          "berachainMainnet": "0xDDeAf391c4be2d01ca52aBb8C159a06820ef078C"
+        }
+      },
+      "bandBears": {
+        "name": "Band Bears",
+        "address": {
+          "ethereumMainnet": "0x392Faa1b0EF108ded69897Ba5382E909C39Fc09e",
+          "berachainMainnet": "0x7711B2Eb2451259dbF211e30157ceB7CFeb79a19"
+        }
+      },
+      "bitBears": {
+        "name": "Bit Bears",
+        "address": {
+          "ethereumMainnet": "0x3EB12398753eEd7E8747321c37C85De30d8E2e94",
+          "berachainMainnet": "0x72D876D9cdf4001b836f8E47254d0551EdA2eebB"
+        }
+      }
+    },
+    "bend": {
+      "morpho": {
+        "name": "Morpho (Vault)",
+        "address": {
+          "berachainMainnet": "0x24147243f9c08d835C218Cda1e135f8dFD0517D0",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/morpho"
+      },
+      "adaptiveCurveIrm": {
+        "name": "Adaptive Curve IRM",
+        "address": {
+          "berachainMainnet": "0xcf247Df3A2322Dea0D408f011c194906E77a6f62",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/adaptive-curve-irm"
+      },
+      "bundler3": {
+        "name": "Bundler3",
+        "address": {
+          "berachainMainnet": "0xF920140A65D0f412f2AB3e76C4fEAB5Eef0657ae",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/bundler3"
+      },
+      "generalAdapter1": {
+        "name": "General Adapter 1",
+        "address": {
+          "berachainMainnet": "0xd2B9667F5214115E27937C410cAeE83E3a901Df7",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/general-adapter-1"
+      },
+      "metaMorphoV1_1": {
+        "name": "Meta Morpho V1.1",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/meta-morpho-v1_1"
+      },
+      "metaMorphoFactoryV1_1": {
+        "name": "Meta Morpho Factory V1.1",
+        "address": {
+          "berachainMainnet": "0x5EDd48C6ACBd565Eeb31702FD9fa9Cbc86fbE616",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/meta-morpho-factory-v11"
+      },
+      "metaFeePartitioner": {
+        "name": "Meta Fee Partitioner",
+        "address": {
+          "berachainMainnet": "0x80108Ee81A92091Db6B8B2326B1875ce9388f461",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/meta-fee-partitioner"
+      },
+      "publicAllocator": {
+        "name": "Public Allocator",
+        "address": {
+          "berachainMainnet": "0xB62F34Ab315eaDeAc698e8EaEB6Fc2650951BFe7",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/public-allocator"
+      },
+      "morphoChainlinkOracleV2": {
+        "name": "Morpho Chainlink Oracle V2",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2"
+      },
+      "morphoChainlinkOracleV2Factory": {
+        "name": "Morpho Chainlink Oracle V2 Factory",
+        "address": {
+          "berachainMainnet": "0xAf2FDC54f7bc9d6e8C2D2760E908f4e1beB04d9E",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2-factory"
+      },
+      "urd": {
+        "name": "Universal Reward Distributer (URD)",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/urd"
+      },
+      "urdFactory": {
+        "name": "Universal Reward Distributer (URD) Factory",
+        "address": {
+          "berachainMainnet": "0x46fE2bc33b661E01A8946BbC3Bf43F2B8382d802",
+          "berachainBepolia": ""
+        },
+        "docsUrl": "/developers/contracts/urd-factory"
+      },
+      "vaults": {
+        "re7HoneyVault": {
+          "name": "Re7 Honey Vault",
+          "address": {
+            "berachainMainnet": "0x30BbA9CD9Eb8c95824aa42Faa1Bb397b07545bc1",
+            "berachainBepolia": ""
+          },
+          "docsUrl": "/developers/contracts/morpho"
+        }
+      }
+    },
     "pol": {
       "bgtIncentiveDistributor": {
         "name": "BGTIncentiveDistributor",
-        "bepolia-address": "0xb0d005Fe83E3F1ec876C1a64700c5F0d6265d9E3",
-        "mainnet-address": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
+        "address": {
+          "berachainMainnet": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
+          "berachainBepolia": "0xb0d005Fe83E3F1ec876C1a64700c5F0d6265d9E3"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
       },
       "bgtIncentiveFeeCollector": {
         "name": "BGTIncentiveFeeCollector",
-        "bepolia-address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
-        "mainnet-address": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
+        "address": {
+          "berachainMainnet": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
+          "berachainBepolia": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveFeeCollector.json",
         "docsUrl": "/developers/contracts/bgt-incentive-fee-collector"
       },
       "wberaStakerVault": {
         "name": "WBERAStakerVault",
-        "bepolia-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
-        "mainnet-address": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
+        "address": {
+          "berachainMainnet": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
+          "berachainBepolia": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERAStakerVault.json",
         "docsUrl": "/developers/contracts/wbera-staker-vault"
       },
       "beaconDeposit": {
         "name": "BeaconDeposit",
-        "bepolia-address": "0x4242424242424242424242424242424242424242",
-        "mainnet-address": "0x4242424242424242424242424242424242424242",
+        "address": {
+          "berachainMainnet": "0x4242424242424242424242424242424242424242",
+          "berachainBepolia": "0x4242424242424242424242424242424242424242"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeaconDeposit.json",
         "docsUrl": "/developers/contracts/beacondeposit"
       },
       "berachef": {
         "name": "BeraChef",
-        "mainnet-address": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a",
-        "bepolia-address": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a",
+        "address": {
+          "berachainMainnet": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a",
+          "berachainBepolia": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BeraChef.json",
         "docsUrl": "/developers/contracts/berachef"
       },
       "blockRewardController": {
         "name": "Block Reward Controller",
-        "mainnet-address": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e",
-        "bepolia-address": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e",
+        "address": {
+          "berachainMainnet": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e",
+          "berachainBepolia": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BlockRewardController.json",
         "docsUrl": "/developers/contracts/block-reward-controller"
       },
       "distributor": {
         "name": "Distributor",
-        "mainnet-address": "0xD2f19a79b026Fb636A7c300bF5947df113940761",
-        "bepolia-address": "0xD2f19a79b026Fb636A7c300bF5947df113940761",
+        "address": {
+          "berachainMainnet": "0xD2f19a79b026Fb636A7c300bF5947df113940761",
+          "berachainBepolia": "0xD2f19a79b026Fb636A7c300bF5947df113940761"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/Distributor.json",
         "docsUrl": "/developers/contracts/distributor"
       },
       "rewardVaultFactory": {
         "name": "Reward Vault Factory",
-        "mainnet-address": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8",
-        "bepolia-address": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8",
+        "address": {
+          "berachainMainnet": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8",
+          "berachainBepolia": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVaultFactory.json",
         "docsUrl": "/developers/contracts/reward-vault-factory"
       },
       "bgtStaker": {
         "name": "BGT Staker",
-        "mainnet-address": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
-        "bepolia-address": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
+        "address": {
+          "berachainMainnet": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
+          "berachainBepolia": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTStaker.json",
         "docsUrl": "/developers/contracts/bgt-staker"
       },
       "feeCollector": {
         "name": "Fee Collector",
-        "mainnet-address": "0x7Bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650",
-        "bepolia-address": "0x7bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650",
+        "address": {
+          "berachainMainnet": "0x7Bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650",
+          "berachainBepolia": "0x7bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/FeeCollector.json",
         "docsUrl": "/developers/contracts/fee-collector"
       },
       "governance": {
         "name": "Governance",
-        "mainnet-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
-        "bepolia-address": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
+        "address": {
+          "berachainMainnet": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
+          "berachainBepolia": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/gov/Governance.json",
         "docsUrl": "/developers/contracts/governance"
       },
       "timelock": {
         "name": "TimeLock",
-        "mainnet-address": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
-        "bepolia-address": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
+        "address": {
+          "berachainMainnet": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
+          "berachainBepolia": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/gov/Timelock.json",
         "docsUrl": "/developers/contracts/timelock"
       },
       "rewardVault": {
         "name": "Reward Vault",
-        "mainnet-address": "",
-        "bepolia-address": "",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
         "docsUrl": "/developers/contracts/reward-vault"
       }
@@ -374,73 +315,102 @@
     "tokens": {
       "bgt": {
         "name": "BGT Token",
-        "bepolia-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
-        "mainnet-address": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
+        "address": {
+          "berachainMainnet": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
+          "berachainBepolia": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGT.json",
         "docsUrl": "/developers/contracts/bgt-token"
       },
       "honey": {
         "name": "HONEY Token",
-        "mainnet-address": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
-        "bepolia-address": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "address": {
+          "berachainMainnet": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+          "berachainBepolia": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/HONEY.json",
         "docsUrl": "/developers/contracts/honey-token"
       },
       "honeyFactory": {
         "name": "Honey Factory",
-        "mainnet-address": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
-        "bepolia-address": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
+        "address": {
+          "berachainMainnet": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
+          "berachainBepolia": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactory.json",
         "docsUrl": "/developers/contracts/honey-factory"
       },
       "honeyFactoryReader": {
         "name": "Honey Factory Reader",
-        "mainnet-address": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
-        "bepolia-address": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
+        "address": {
+          "berachainMainnet": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
+          "berachainBepolia": "0x285e147060CDc5ba902786d3A471224ee6cE0F91"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/HoneyFactoryReader.json",
         "docsUrl": "/developers/contracts/honey-factory-reader"
       },
       "wbera": {
         "name": "WBERA Token",
-        "bepolia-address": "0x6969696969696969696969696969696969696969",
-        "mainnet-address": "0x6969696969696969696969696969696969696969",
+        "address": {
+          "berachainMainnet": "0x6969696969696969696969696969696969696969",
+          "berachainBepolia": "0x6969696969696969696969696969696969696969"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERA.json",
         "docsUrl": "/developers/contracts/wbera-token"
       },
       "bbUSDC": {
         "name": "bbUSDC",
-        "bepolia-address": "0x6e8d0eCfCE5c2b7587263923e23d141F6364c7f9"
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": "0x6e8d0eCfCE5c2b7587263923e23d141F6364c7f9"
+        }
       },
       "bbBYUSDC": {
         "name": "bbBYUSDC",
-        "bepolia-address": "0xe0037233a4a21c6334CFa67895A4BeaDc87B2c40"
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": "0xe0037233a4a21c6334CFa67895A4BeaDc87B2c40"
+        }
       },
       "bbWETH": {
         "name": "bbWETH",
-        "bepolia-address": "0x4752428217c35c7779b077170529f8d10676f660"
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": "0x4752428217c35c7779b077170529f8d10676f660"
+        }
       },
       "bbWBTC": {
         "name": "bbWBTC",
-        "bepolia-address": "0xc7728Db26526Ae7fBc46b99f0EE667Eaba7E6bb9"
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": "0xc7728Db26526Ae7fBc46b99f0EE667Eaba7E6bb9"
+        }
       },
       "usdc": {
         "name": "USDC Token",
-        "mainnet-address": "0x549943e04f40284185054145c6E4e9568C1D3241",
+        "address": {
+          "berachainMainnet": "0x549943e04f40284185054145c6E4e9568C1D3241",
+          "berachainBepolia": ""
+        },
         "bepolia-address": "",
         "abi": "https://github.com/berachain/doc-abis/blob/main/misc/ERC20.json",
         "docsUrl": ""
       },
       "wbtc": {
         "name": "WBTC Token",
-        "mainnet-address": "0x0555E30da8f98308EdB960aa94C0Db47230d2B9c",
-        "bepolia-address": "",
+        "address": {
+          "berachainMainnet": "0x0555E30da8f98308EdB960aa94C0Db47230d2B9c",
+          "berachainBepolia": ""
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/misc/ERC20.json",
         "docsUrl": ""
       },
       "weth": {
         "name": "WETH Token",
-        "mainnet-address": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
-        "bepolia-address": "",
+        "address": {
+          "berachainMainnet": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
+          "berachainBepolia": ""
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/WBERA.json",
         "docsUrl": ""
       }
@@ -448,92 +418,118 @@
     "bex": {
       "vault": {
         "name": "Vault",
-        "mainnet-address": "0x4Be03f781C497A489E3cB0287833452cA9B9E80B",
-        "bepolia-address": "0x708cA656b68A6b7384a488A36aD33505a77241FE",
+        "address": {
+          "berachainMainnet": "0x4Be03f781C497A489E3cB0287833452cA9B9E80B",
+          "berachainBepolia": "0x708cA656b68A6b7384a488A36aD33505a77241FE"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IVault.abi.json",
         "docsUrl": "/developers/contracts/vault"
       },
       "protocolFeesCollector": {
         "name": "ProtocolFeesCollector",
-        "mainnet-address": "0xB8Cf46Cf1b1476E707619913a70B2085d26f1707",
-        "bepolia-address": "0x05A607aCf3548E84DD1E44c3706F850c849058Da",
+        "address": {
+          "berachainMainnet": "0xB8Cf46Cf1b1476E707619913a70B2085d26f1707",
+          "berachainBepolia": "0x05A607aCf3548E84DD1E44c3706F850c849058Da"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeesCollector.abi.json",
         "docsUrl": ""
       },
       "balancerHelpers": {
         "name": "BalancerHelpers",
-        "mainnet-address": "0x5083737EC75a728c265BE578C9d0d5333a2c5951",
-        "bepolia-address": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f",
+        "address": {
+          "berachainMainnet": "0x5083737EC75a728c265BE578C9d0d5333a2c5951",
+          "berachainBepolia": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerHelpers.abi.json",
         "docsUrl": ""
       },
       "poolCreationHelper": {
         "name": "PoolCreationHelper",
-        "mainnet-address": "0x55dccE8165C88aAd4403a15A9cE3A8E244657dD2",
-        "bepolia-address": "0x0dC9964F6CA33d9EF38DEB4925234766127C6B36",
+        "address": {
+          "berachainMainnet": "0x55dccE8165C88aAd4403a15A9cE3A8E244657dD2",
+          "berachainBepolia": "0x0dC9964F6CA33d9EF38DEB4925234766127C6B36"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IPoolCreationHelper.abi.json",
         "docsUrl": "/developers/contracts/factory/pool-creation-helper"
       },
       "protocolFeesWithdrawer": {
         "name": "ProtocolFeesWithdrawer",
-        "mainnet-address": "0x1635F0E1B3e8A6713d03aE155ba79458Ba3240C7",
-        "bepolia-address": "0x8c2D77f0CfcD4Af9cF41494EfE500FE324012c06",
+        "address": {
+          "berachainMainnet": "0x1635F0E1B3e8A6713d03aE155ba79458Ba3240C7",
+          "berachainBepolia": "0x8c2D77f0CfcD4Af9cF41494EfE500FE324012c06"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeesWithdrawer.abi.json",
         "docsUrl": ""
       },
       "stablePoolFactory": {
         "name": "ComposableStablePoolFactory",
-        "mainnet-address": "0xDfA30BDa0375d4763711AB0CC8D91B20bfCC87E1",
-        "bepolia-address": "0xB60DbBaCEaeC23486a64d12089F467ef949f1bb1",
+        "address": {
+          "berachainMainnet": "0xDfA30BDa0375d4763711AB0CC8D91B20bfCC87E1",
+          "berachainBepolia": "0xB60DbBaCEaeC23486a64d12089F467ef949f1bb1"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IComposableStablePoolFactory.abi.json",
         "docsUrl": "/developers/contracts/factory/stable-pool-factory"
       },
       "batchRelayerLibrary": {
         "name": "BatchRelayerLibrary",
-        "mainnet-address": "0xCB4AE3030bA06F7EEE54A7B96AfcA7457f9525cf",
-        "bepolia-address": "0xfD772657FC8c4Ed3884AfF151b680883814052FA",
+        "address": {
+          "berachainMainnet": "0xCB4AE3030bA06F7EEE54A7B96AfcA7457f9525cf",
+          "berachainBepolia": "0xfD772657FC8c4Ed3884AfF151b680883814052FA"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": ""
       },
       "batchRelayerQueryLibrary": {
         "name": "BatchRelayerQueryLibrary",
-        "mainnet-address": "0x4151083172b2CEFB83A33fD7FC9F6cBabb3Fd08d",
-        "bepolia-address": "0x263a1C5B2c5851beA2177eb8D6caefdfF2A25601",
+        "address": {
+          "berachainMainnet": "0x4151083172b2CEFB83A33fD7FC9F6cBabb3Fd08d",
+          "berachainBepolia": "0x263a1C5B2c5851beA2177eb8D6caefdfF2A25601"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": ""
       },
       "balancerRelayer": {
         "name": "BalancerRelayer",
-        "mainnet-address": "0x6044f181aB5E9C05A4ed9Ce295f3B178d2492EE7",
-        "bepolia-address": "0x343215E156Ff586711a5B8C49Fe3099BAF22624C",
+        "address": {
+          "berachainMainnet": "0x6044f181aB5E9C05A4ed9Ce295f3B178d2492EE7",
+          "berachainBepolia": "0x343215E156Ff586711a5B8C49Fe3099BAF22624C"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerRelayer.abi.json",
         "docsUrl": ""
       },
       "weightedPoolFactory": {
         "name": "WeightedPoolFactory",
-        "mainnet-address": "0xa966fA8F2d5B087FFFA499C0C1240589371Af409",
-        "bepolia-address": "0xf1d23276C7b271B2aC595C78977b2312E9954D57",
+        "address": {
+          "berachainMainnet": "0xa966fA8F2d5B087FFFA499C0C1240589371Af409",
+          "berachainBepolia": "0xf1d23276C7b271B2aC595C78977b2312E9954D57"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IWeightedPoolFactory.abi.json",
         "docsUrl": "/developers/contracts/factory/weighted-pool-factory"
       },
       "protocolFeePercentagesProvider": {
         "name": "ProtocolFeePercentagesProvider",
-        "mainnet-address": "0x33C88ffdEe710ed3908C791137Bd1D4421AabBBf",
-        "bepolia-address": "0x8119E412E00fe3c857739E95dB147817Bf615dB8",
+        "address": {
+          "berachainMainnet": "0x33C88ffdEe710ed3908C791137Bd1D4421AabBBf",
+          "berachainBepolia": "0x8119E412E00fe3c857739E95dB147817Bf615dB8"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IProtocolFeePercentagesProvider.abi.json",
         "docsUrl": ""
       },
       "balancerQueries": {
         "name": "BalancerQueries",
-        "mainnet-address": "0x3C612e132624f4Bd500eE1495F54565F0bcc9b59",
-        "bepolia-address": "0xE3723383a0EA73D5c0dE424BAA97F97f86f6cF92",
+        "address": {
+          "berachainMainnet": "0x3C612e132624f4Bd500eE1495F54565F0bcc9b59",
+          "berachainBepolia": "0xE3723383a0EA73D5c0dE424BAA97F97f86f6cF92"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IBalancerQueries.abi.json",
         "docsUrl": "/developers/contracts/query"
       },
       "authorizer": {
         "name": "Authorizer",
-        "mainnet-address": "0x71047aE39A7aA4f7d923542F459e50B974644Ef2",
-        "bepolia-address": "0x1453b808C88AAa5e5965f8d86123921E96F045Aa",
+        "address": {
+          "berachainMainnet": "0x71047aE39A7aA4f7d923542F459e50B974644Ef2",
+          "berachainBepolia": "0x1453b808C88AAa5e5965f8d86123921E96F045Aa"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IAuthorizer.abi.json",
         "docsUrl": ""
       }
@@ -542,64 +538,80 @@
       "safe": {
         "name": "Safe",
         "version": "1.4.1",
-        "bepolia-address": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
-        "mainnet-address": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+        "address": {
+          "berachainMainnet": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+          "berachainBepolia": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "safeProxyFactory": {
         "name": "SafeProxyFactory",
         "version": "1.4.1",
-        "bepolia-address": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
-        "mainnet-address": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+        "address": {
+          "berachainMainnet": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+          "berachainBepolia": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "multiSend": {
         "name": "MultiSend",
         "version": "1.4.1",
-        "bepolia-address": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
-        "mainnet-address": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+        "address": {
+          "berachainMainnet": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+          "berachainBepolia": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "multiSendCallOnly": {
         "name": "MultiSendCallOnly",
         "version": "1.4.1",
-        "bepolia-address": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
-        "mainnet-address": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+        "address": {
+          "berachainMainnet": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+          "berachainBepolia": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "compatibilityFallbackHandler": {
         "name": "CompatibilityFallbackHandler",
         "version": "1.4.1",
-        "bepolia-address": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
-        "mainnet-address": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+        "address": {
+          "berachainMainnet": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+          "berachainBepolia": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "signMessageLib": {
         "name": "SignMessageLib",
         "version": "1.4.1",
-        "bepolia-address": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
-        "mainnet-address": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+        "address": {
+          "berachainMainnet": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+          "berachainBepolia": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "simulateTxAccessor": {
         "name": "SimulateTxAccessor",
         "version": "1.4.1",
-        "bepolia-address": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
-        "mainnet-address": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+        "address": {
+          "berachainMainnet": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+          "berachainBepolia": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199"
+        },
         "abi": "",
         "docsUrl": ""
       },
       "createCall": {
         "name": "CreateCall",
         "version": "1.4.1",
-        "bepolia-address": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
-        "mainnet-address": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+        "address": {
+          "berachainMainnet": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+          "berachainBepolia": "0x9b35Af71d77eaf8d7e40252370304687390A1A52"
+        },
         "abi": "",
         "docsUrl": ""
       }
@@ -607,32 +619,144 @@
     "other": {
       "create2": {
         "name": "CREATE2",
-        "bepolia-address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
-        "mainnet-address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+        "address": {
+          "berachainMainnet": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+          "berachainBepolia": "0x4e59b44847b379578588920cA78FbF26c0B4956C"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": "/developers/contracts/create2"
       },
       "multicall3": {
         "name": "Multicall3",
-        "bepolia-address": "0xcA11bde05977b3631167028862bE2a173976CA11",
-        "mainnet-address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+        "address": {
+          "berachainMainnet": "0xcA11bde05977b3631167028862bE2a173976CA11",
+          "berachainBepolia": "0xcA11bde05977b3631167028862bE2a173976CA11"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/Multicall3.json",
         "docsUrl": "/developers/contracts/multicall3"
       },
       "permit2": {
         "name": "Permit2",
-        "mainnet-address": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
-        "bepolia-address": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+        "address": {
+          "berachainMainnet": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+          "berachainBepolia": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+        },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/BGTIncentiveDistributor.json",
         "docsUrl": "/developers/contracts/permit2"
       }
     }
   },
   "websites": {
+    "blockscoutDevnet": {
+      "name": "Blockscout Devnet",
+      "url": "http://127.0.0.1:53414",
+      "apiUrl": "https://localhost:4000/api ",
+      "apiKey": "xxxxx"
+    },
+    "bend": {
+      "name": "Berachain Bend",
+      "url": "https://bend.berachain.com/",
+      "utmSource": "docsbend",
+      "apiUrl": "https://bend.berachain.com/api/",
+      "formUrl": "https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW",
+      "marketIds": {
+        "wsrusdhoney": {
+          "name": "wsRUSD / HONEY",
+          "address": "0x04d3b8b00c6f3b75481492b76139473e2368339ee58587df65684fdb9103984e"
+        },
+        "wbtchoney": {
+          "name": "WBTC / HONEY",
+          "address": "0x950962c1cf2591f15806e938bfde9b5f9fbbfcc5fb640030952c08b536f1f167"
+        },
+        "susdehoney": {
+          "name": "sUSDe / HONEY",
+          "address": "0x1ba7904c73d337c39cb88b00180dffb215fc334a6ff47bbe829cd9ee2af00c97"
+        },
+        "wgberahoney": {
+          "name": "wgBERA / HONEY",
+          "address": "0x63c2a7c20192095c15d1d668ccce6912999b01ea60eeafcac66eca32015674dd"
+        },
+        "wethhoney": {
+          "name": "WETH / HONEY",
+          "address": "0x1f05d324f604bd1654ec040311d2ac4f5820ecfd1801a3d19d2c6f09d4f7a614"
+        },
+        "wberahoney": {
+          "name": "WBERA / HONEY",
+          "address": "0x147b032db82d765b9d971eac37c8176260dde0fe91f6a542f20cdd9ede1054df"
+        },
+        "iberahoney": {
+          "name": "iBERA / HONEY",
+          "address": "0x594de722a090f8d0df41087c23e2187fb69d9cd6b7b425c6dd56ddc1cff545f0"
+        }
+      },
+      "repositories": {
+        "contracts": {
+          "name": "Bend Contracts Repo",
+          "url": "https://github.com/berachain/contracts-metamorpho-v1.1"
+        }
+      }
+    },
+    "hub": {
+      "name": "Berachain Hub",
+      "url": "https://hub.berachain.com/"
+    },
+    "nftBridge": {
+      "name": "Berachain NFT Bridge",
+      "url": "https://nftbridge.berachain.com/"
+    },
+    "safe": {
+      "name": "Berachain SAFE",
+      "url": "https://safe.berachain.com"
+    },
+    "bridge": {
+      "name": "Berachain Bridge",
+      "url": "https://bridge.berachain.com"
+    },
+    "bex": {
+      "name": "Berachain BEX",
+      "url": "https://hub.berachain.com/swap",
+      "apiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
+      "balancerApiUrl": "https://api.berachain.com/",
+      "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
+    },
+    "bexBepolia": {
+      "name": "Berachain BEX Bepolia",
+      "url": "https://bepolia.hub.berachain.com/swap"
+    },
     "berascan": {
       "name": "Berascan",
       "url": "https://berascan.com/",
-      "utmSource": "berascan"
+      "apiKey": "YOUR_API_KEY",
+      "apiUrl": "https://api.etherscan.io/v2/api",
+      "chainName": "berachain"
+    },
+    "berascanBepolia": {
+      "name": "Berascan Bepolia",
+      "url": "https://testnet.berascan.com/"
+    },
+    "faucetBepolia": {
+      "name": "Berachain Bepolia Faucet",
+      "url": "https://bepolia.faucet.berachain.com/"
+    },
+    "beratrail": {
+      "name": "Bepolia Block Explorer",
+      "url": "https://bepolia.beratrail.io/"
+    },
+    "beratrailBepolia": {
+      "name": "Bepolia Block Explorer",
+      "url": "https://bepolia.beratrail.io/"
+    },
+    "honeySwap": {
+      "name": "Berachain $HONEY Swap",
+      "url": "https://honey.berachain.com/"
+    },
+    "honeySwapBepolia": {
+      "name": "Berachain $HONEY Swap Bepolia",
+      "url": "https://bepolia.honey.berachain.com/"
+    },
+    "playgroundBepolia": {
+      "name": "Berachain Playground Bepolia",
+      "url": "https://bepolia.playground.berachain.com/"
     },
     "foundation": {
       "name": "Berachain Foundation",

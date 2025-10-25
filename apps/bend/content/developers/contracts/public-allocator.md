@@ -17,7 +17,7 @@ head:
 
 # PublicAllocator
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.publicAllocator.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.publicAllocator.address}}</a> | [Git Source](https://github.com/morpho-org/public-allocator/blob/main/src/PublicAllocator.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.publicAllocator.address.berachainMainnet+ '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.publicAllocator.address.berachainMainnet}}</a> | [Git Source](https://github.com/morpho-org/public-allocator/blob/main/src/PublicAllocator.sol)</small>
 
 **Inherits:** [IPublicAllocatorStaticTyping](https://github.com/morpho-org/public-allocator/blob/main/src/interfaces/IPublicAllocator.sol)
 
