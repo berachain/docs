@@ -67,6 +67,49 @@
         "balancerApiUrl": "https://api.berachain.com/",
         "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
       },
+      "bend": {
+        "name": "Berachain Bend",
+        "url": "https://bend.berachain.com/",
+        "utmSource": "docsbend",
+        "apiUrl": "https://bend.berachain.com/api/",
+        "formUrl": "https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW",
+        "marketIds": {
+          "wsrusdhoney": {
+            "name": "wsRUSD / HONEY",
+            "address": "0x04d3b8b00c6f3b75481492b76139473e2368339ee58587df65684fdb9103984e"
+          },
+          "wbtchoney": {
+            "name": "WBTC / HONEY",
+            "address": "0x950962c1cf2591f15806e938bfde9b5f9fbbfcc5fb640030952c08b536f1f167"
+          },
+          "susdehoney": {
+            "name": "sUSDe / HONEY",
+            "address": "0x1ba7904c73d337c39cb88b00180dffb215fc334a6ff47bbe829cd9ee2af00c97"
+          },
+          "wgberahoney": {
+            "name": "wgBERA / HONEY",
+            "address": "0x63c2a7c20192095c15d1d668ccce6912999b01ea60eeafcac66eca32015674dd"
+          },
+          "wethhoney": {
+            "name": "WETH / HONEY",
+            "address": "0x1f05d324f604bd1654ec040311d2ac4f5820ecfd1801a3d19d2c6f09d4f7a614"
+          },
+          "wberahoney": {
+            "name": "WBERA / HONEY",
+            "address": "0x147b032db82d765b9d971eac37c8176260dde0fe91f6a542f20cdd9ede1054df"
+          },
+          "iberahoney": {
+            "name": "iBERA / HONEY",
+            "address": "0x594de722a090f8d0df41087c23e2187fb69d9cd6b7b425c6dd56ddc1cff545f0"
+          }
+        },
+        "repositories": {
+          "contracts": {
+            "name": "Bend Contracts Repo",
+            "url": "https://github.com/berachain/contracts-metamorpho-v1.1"
+          }
+        }
+      },
       "honeySwap": {
         "name": "Berachain $HONEY Swap",
         "url": "https://honey.berachain.com/"
@@ -114,6 +157,75 @@
       }
     },
     "contracts": {
+      "bend": {
+        "morpho": {
+          "name": "Morpho (Vault)",
+          "address": "0x24147243f9c08d835C218Cda1e135f8dFD0517D0",
+          "docsUrl": "/developers/contracts/morpho"
+        },
+        "adaptiveCurveIrm": {
+          "name": "Adaptive Curve IRM",
+          "address": "0xcf247Df3A2322Dea0D408f011c194906E77a6f62",
+          "docsUrl": "/developers/contracts/adaptive-curve-irm"
+        },
+        "bundler3": {
+          "name": "Bundler3",
+          "address": "0xF920140A65D0f412f2AB3e76C4fEAB5Eef0657ae",
+          "docsUrl": "/developers/contracts/bundler3"
+        },
+        "generalAdapter1": {
+          "name": "General Adapter 1",
+          "address": "0xd2B9667F5214115E27937C410cAeE83E3a901Df7",
+          "docsUrl": "/developers/contracts/general-adapter-1"
+        },
+        "metaMorphoV1_1": {
+          "name": "Meta Morpho V1.1",
+          "address": "",
+          "docsUrl": "/developers/contracts/meta-morpho-v1_1"
+        },
+        "metaMorphoFactoryV1_1": {
+          "name": "Meta Morpho Factory V1.1",
+          "address": "0x5EDd48C6ACBd565Eeb31702FD9fa9Cbc86fbE616",
+          "docsUrl": "/developers/contracts/meta-morpho-factory-v11"
+        },
+        "metaFeePartitioner": {
+          "name": "Meta Fee Partitioner",
+          "address": "0x80108Ee81A92091Db6B8B2326B1875ce9388f461",
+          "docsUrl": "/developers/contracts/meta-fee-partitioner"
+        },
+        "publicAllocator": {
+          "name": "Public Allocator",
+          "address": "0xB62F34Ab315eaDeAc698e8EaEB6Fc2650951BFe7",
+          "docsUrl": "/developers/contracts/public-allocator"
+        },
+        "morphoChainlinkOracleV2": {
+          "name": "Morpho Chainlink Oracle V2",
+          "address": "",
+          "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2"
+        },
+        "morphoChainlinkOracleV2Factory": {
+          "name": "Morpho Chainlink Oracle V2 Factory",
+          "address": "0xAf2FDC54f7bc9d6e8C2D2760E908f4e1beB04d9E",
+          "docsUrl": "/developers/contracts/morpho-chainlink-oracle-v2-factory"
+        },
+        "urd": {
+          "name": "Universal Reward Distributer (URD)",
+          "address": "",
+          "docsUrl": "/developers/contracts/urd"
+        },
+        "urdFactory": {
+          "name": "Universal Reward Distributer (URD) Factory",
+          "address": "0x46fE2bc33b661E01A8946BbC3Bf43F2B8382d802",
+          "docsUrl": "/developers/contracts/urd-factory"
+        },
+        "vaults": {
+          "re7HoneyVault": {
+            "name": "Re7 Honey Vault",
+            "address": "0x30BbA9CD9Eb8c95824aa42Faa1Bb397b07545bc1",
+            "docsUrl": "/developers/contracts/morpho"
+          }
+        }
+      },
       "nfts": {
         "bongBears": {
           "name": "Bong Bears",

@@ -86,6 +86,12 @@ export default defineConfig({
             link: `${constants.websites.docsCore.url}`
           }
         ]
+      },
+      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
+      {
+        text: "Developers",
+        link: "developers/index",
+        activeMatch: "/developers/"
       }
     ],
     outline: [2, 3],

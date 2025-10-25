@@ -6,7 +6,7 @@ layout: page
 <script setup>
   import Feature from '@berachain/ui/Feature';
   import config from '@berachain/config/constants.json';
-  import { IconMoneybag, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconWorld
+  import { IconMoneybag, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconWorld, IconTerminal, IconVocabulary
  } from '@tabler/icons-vue';
 </script>
 
@@ -25,6 +25,21 @@ layout: page
       <p class="description">{{config.websites.docsBend.description}}</p>
     </div>
   </div>
+</section>
+
+<section class="features">
+  <Feature
+    title="Learn About Bend"
+    description="Understand the fundamentals of Berachain's lending platform"
+    link="/learn/"
+    :icon="IconVocabulary"
+  />
+  <Feature
+    title="Developers"
+    description="Get up and running and building with Bend"
+    link="/developers/"
+    :icon="IconTerminal"
+  />
 </section>
 
 ## More Berachain Docs
