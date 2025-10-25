@@ -95,8 +95,8 @@ const SIDEBAR = {
         { text: "Bridge", link: "/learn/dapps/bridge" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}${UTMSOURCE}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -134,14 +134,14 @@ const SIDEBAR = {
         },
 
         {
-          text: `${constants.bepolia.dapps.faucet.name}`,
-          link: `${constants.bepolia.dapps.faucet.url}${UTMSOURCE}`,
+          text: `${constants.websites.faucetBepolia.name}`,
+          link: `${constants.websites.faucetBepolia.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}${UTMSOURCE}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }

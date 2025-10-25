@@ -222,7 +222,7 @@ $$
 
 ## Constants
 
-The values of the following constants are hardcoded into the <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morpho.address + '?utm_source=' + config.websites.docsBend.utmSource + '#code#F7#L1'">Morpho code deployed on Berachain</a>.
+The values of the following constants are hardcoded into the <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.morpho.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource + '#code#F7#L1'">Morpho code deployed on Berachain</a>.
 
 - WAD = Wei-based Decimal (WAD = 10¹⁸, meaning 1 WAD = 1.0)
 

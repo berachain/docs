@@ -38,10 +38,10 @@ See the [deployed contracts](/developers/deployed-contracts) for the relevant ad
 
 All six official collections can be bridged from Ethereum to Berachain using the Berachain NFT bridge.
 
-<a target="_blank" :href="config.mainnet.dapps.nftBridge.url">
+<a target="_blank" :href="config.websites.nftBridge.url">
 
 ![Bera NFT Bridge](/assets/nft-bridge.png)
 
 </a>
 
-> <a target="_blank" :href="config.mainnet.dapps.nftBridge.url">{{config.mainnet.dapps.nftBridge.url}}</a>
+> <a target="_blank" :href="config.websites.nftBridge.url">{{config.websites.nftBridge.url}}</a>

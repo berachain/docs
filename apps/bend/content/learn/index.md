@@ -21,13 +21,13 @@ head:
 
 Bend inherits the core architecture from **Morpho v1** vaults and markets, providing a familiar and battle-tested lending infrastructure while leveraging Berachain's unique Proof-of-Liquidity consensus mechanism.
 
-<a :href="config.mainnet.dapps.bend.url + '?utm_source=' + config.websites.docsBend.utmSource">
+<a :href="config.websites.bend.url + '?utm_source=' + config.websites.docsBend.utmSource">
 
 ![Bend - What is bend](/assets/learn-whatisbend.png)
 
 </a>
 
-> <a :href="config.mainnet.dapps.bend.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.url}}</a>
+> <a :href="config.websites.bend.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.url}}</a>
 
 ## How it Works
 
@@ -61,7 +61,7 @@ Bend serves various use cases including:
 
 To start using Bend, users can:
 
-1. Connect their wallet to <a :href="config.mainnet.dapps.bend.url + '?utm_source=' + config.websites.docsBend.utmSource" target="_blank">{{config.mainnet.dapps.bend.name}}</a>
+1. Connect their wallet to <a :href="config.websites.bend.url + '?utm_source=' + config.websites.docsBend.utmSource" target="_blank">{{config.websites.bend.name}}</a>
 2. Browse available lending markets
 3. Deposit assets to start earning interest
 4. Borrow assets by providing sufficient collateral

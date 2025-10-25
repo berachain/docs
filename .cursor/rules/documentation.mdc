@@ -47,7 +47,7 @@ The user can request to "refresh the autodocs". This means the following sequenc
 - Every file in the documentation autodocs should have a preamble like this at the top. In the preamble, the key to look up within config.contracts depends on the contract itself. Ask if you aren't sure which to use. You can update the ABI link in @constants.json if you find a new ABI in doc-abis repository. For the Git Source link, link to the contract under the github.com:berachain/contracts/ repository, presuming that the path you find in contracts-internal will eventually be merged into the contracts repository. 
 
 ```
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/BeraChef.sol)
 ```

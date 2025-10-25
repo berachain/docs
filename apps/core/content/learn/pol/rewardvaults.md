@@ -149,7 +149,7 @@ To understand why validators would choose to emit `$BGT` to one Reward Vault ove
 
 ## Vault Creation
 
-New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
+New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.websites.hub.url + 'vaults/create'">{{config.websites.hub.url}}vaults/create</a>.
 
 Protocols creating Reward Vaults must additionally [whitelist their vaults](/learn/governance/rewardvault) through `$BGT` governance to be eligible to receive emissions from validators.
 

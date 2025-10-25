@@ -18,7 +18,7 @@ head:
 
 # $HONEY
 
-<a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.tokens.honey.address.berachainMainnet">{{config.contracts.tokens.honey.address.berachainMainnet}}</a></small>
 
 <ClientOnly>
   <Token title="$HONEY" image="/assets/HONEY.png" />
@@ -28,7 +28,7 @@ head:
 
 ## How to Get $HONEY
 
-`$HONEY` can be minted by depositing whitelisted collateral into a vault and minting `$HONEY` against that collateral through the <a :href="config.mainnet.dapps.honeySwap.url">HoneySwap dApp</a>. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
+`$HONEY` can be minted by depositing whitelisted collateral into a vault and minting `$HONEY` against that collateral through the <a :href="config.websites.honeySwap.url">HoneySwap dApp</a>. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
 
 Alternatively, `$HONEY` can be obtained by swapping from other assets on [BEX](/learn/dapps/bex) or another decentralized exchange.
 

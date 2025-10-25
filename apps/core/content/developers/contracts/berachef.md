@@ -17,7 +17,7 @@ head:
 
 # BeraChef
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi && config.contracts.pol.berachef.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.berachef.address.berachainMainnet">{{config.contracts.pol.berachef.address.berachainMainnet}}</a><span v-if="config.contracts.pol.berachef.abi && config.contracts.pol.berachef.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
 
 The BeraChef contract is responsible for managing the reward allocations and the whitelisted vaults. Reward allocation is a list of weights that determine the percentage of rewards that goes to each reward vault. Each validator could have a custom reward allocation, if not, the default reward allocation is used.
 

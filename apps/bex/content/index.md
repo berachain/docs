@@ -39,14 +39,12 @@ layout: page
     link="/developers/"
     :icon="IconTerminal"
   />
-  <template v-if="config.bepolia.dapps?.faucet">
   <Feature
-    title="Berachain Bepolia Faucet"
+    :title="config.websites.faucetBepolia.name"
       description="Fund your testnet wallet with $BERA"
-      :link="config.bepolia.dapps.faucet.url + '?utm_source=' + config.websites.docsBex.utmSource"
+      :link="config.websites.faucetBepolia.url + '?utm_source=' + config.websites.docsBex.utmSource"
       :icon="IconDroplet"
     />
-  </template>
 </section>
 
 ## More Berachain Docs
@@ -89,35 +87,35 @@ layout: page
   <Feature
     title="Faucet"
     description="Get Bepolia Tokens"
-    :link="config.bepolia.dapps.faucet.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.faucetBepolia.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconDroplet"
       type="alt"
     />
   <Feature
     title="BGT Station"
     description="Manage $BGT"
-    :link="config.mainnet.dapps.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconGavel"
     type="alt"
   />
   <Feature
     title="BEX"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconRefresh"
     type="alt"
   />
   <Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
-    :link="config.mainnet.dapps.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconMoneybag"
     type="alt"
   />
   <Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
-    :link="config.mainnet.dapps.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
+    :link="config.websites.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconWorld"
     type="alt"
   />

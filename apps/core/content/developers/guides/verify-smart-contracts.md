@@ -136,9 +136,9 @@ const config: HardhatUserConfig = {
       name: "{{config.bepolia.chainName}}",
       blockExplorers: {
         etherscan: {
-          name: "{{config.bepolia.dapps.berascan.name}}",
-          url: "{{config.bepolia.dapps.berascan.url}}",
-          apiUrl: "{{config.bepolia.dapps.berascan.apiUrl}}",
+          name: "{{config.websites.berascanBepolia.name}}",
+          url: "{{config.websites.berascanBepolia.url}}",
+          apiUrl: "{{config.websites.berascanBepolia.apiUrl}}",
         }
       }
     },
@@ -177,7 +177,7 @@ pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
 
 ✅ Contract verified successfully on Berascan!
   contracts/HelloWorld.sol:HelloWorld
-  Explorer: {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+  Explorer: {{config.websites.berascanBepolia.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
 ```
 
 :::tip Learn More About Hardhat
@@ -199,7 +199,7 @@ Foundry's `forge verify-contract` command provides a streamlined way to verify c
 ```bash-vue
 forge verify-contract \
   --watch \
-  --chain {{config.bepolia.dapps.berascan.chainName}} \
+  --chain {{config.websites.berascanBepolia.chainName}} \
   <CONTRACT_ADDRESS> \
   src/YourContract.sol:YourContract \
   --verifier etherscan \
@@ -220,13 +220,13 @@ For contracts without constructor parameters, omit the `--constructor-args` flag
 ### Expected Output
 
 ```bash-vue
-Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.bepolia.dapps.berascan.chainName}}
+Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.websites.berascanBepolia.chainName}}
 
 Submitting verification for [src/BingBongToken.sol:BingBongToken] 0xYOUR_DEPLOYED_CONTRACT_ADDRESS.
 Submitted contract for verification:
         Response: `OK`
         GUID: `xtecz3j...`
-        URL: {{config.bepolia.dapps.berascan.url}}address/0xYOUR_DEPLOYED_CONTRACT_ADDRESS
+        URL: {{config.websites.berascanBepolia.url}}address/0xYOUR_DEPLOYED_CONTRACT_ADDRESS
 
 Contract verification status:
 Response: `OK`

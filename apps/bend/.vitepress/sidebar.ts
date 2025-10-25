@@ -24,7 +24,7 @@ const SIDEBAR = {
         { text: "What is Bend?", link: "/learn/" },
         {
           text: "Bend dApp",
-          link: `${constants.mainnet.dapps.bend.url}${UTMSOURCE}`,
+          link: `${constants.websites.bend.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -80,14 +80,14 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Deployed Markets", link: "/developers/deployed-markets" },
         {
-          text: `${constants.mainnet.dapps.bend.repositories.contracts.name}`,
-          link: `${constants.mainnet.dapps.bend.repositories.contracts.url}${UTMSOURCE}`,
+          text: `${constants.websites.bend.repositories.contracts.name}`,
+          link: `${constants.websites.bend.repositories.contracts.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         },
         {
           text: "BeraScan Block Explorer",
-          link: `${constants.mainnet.dapps.berascan.url}${UTMSOURCE}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }

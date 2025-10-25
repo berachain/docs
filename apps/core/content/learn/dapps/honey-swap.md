@@ -21,10 +21,10 @@ Honey Swap allows users to trade approved stables and assets for [$HONEY](https:
 
 Learn more about the mechanics of [$HONEY](/learn/pol/tokens/honey).
 
-<a :href="config.mainnet.dapps.honeySwap.url">
+<a :href="config.websites.honeySwap.url">
 
 ![Berachain Honey Swap dApp](/assets/honey_swap.png)
 
 </a>
 
-> <a :href="config.mainnet.dapps.honeySwap.url">{{config.mainnet.dapps.honeySwap.url}}</a>
+> <a :href="config.websites.honeySwap.url">{{config.websites.honeySwap.url}}</a>

@@ -46,17 +46,17 @@ This will walk you through the process of getting the current price of a collate
 
 ### 1. Get Market Id
 
-The Market Id can be found on <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.name}}</a>.
+The Market Id can be found on <a target="_blank" :href="config.websites.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.name}}</a>.
 
 ![Bend - Find Market Id](/assets/learn-concepts-oracle-marketid.png)
 
 ### 2. Find Oracle Address
 
-In <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morpho.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.berascan.name}}</a> look up the following `Morpho` address and click the address.
+In <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.morpho.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.berascan.name}}</a> look up the following `Morpho` address and click the address.
 
 ```bash-vue
-# {{config.mainnet.contracts.bend.morpho.name}}
-{{config.mainnet.contracts.bend.morpho.address}}
+# {{config.contracts.bend.morpho.name}}
+{{config.contracts.bend.morpho.address.berachainMainnet}}
 ```
 
 ![Berascan - Find Oracle Address](/assets/learn-concepts-oracle-morpho.png)

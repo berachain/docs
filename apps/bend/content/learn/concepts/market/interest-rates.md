@@ -47,19 +47,19 @@ To find the rate at target utilization for each market you will need to check 2 
 
 With the assumption that we'll use one of the following markets:
 
-| Market                                                   | MarketId                                                    |
-| -------------------------------------------------------- | ----------------------------------------------------------- |
-| {{config.mainnet.dapps.bend.marketIds.wsrusdhoney.name}} | {{config.mainnet.dapps.bend.marketIds.wsrusdhoney.address}} |
-| {{config.mainnet.dapps.bend.marketIds.wbtchoney.name}}   | {{config.mainnet.dapps.bend.marketIds.wbtchoney.address}}   |
-| {{config.mainnet.dapps.bend.marketIds.susdehoney.name}}  | {{config.mainnet.dapps.bend.marketIds.susdehoney.address}}  |
-| {{config.mainnet.dapps.bend.marketIds.wgberahoney.name}} | {{config.mainnet.dapps.bend.marketIds.wgberahoney.address}} |
-| {{config.mainnet.dapps.bend.marketIds.wethhoney.name}}   | {{config.mainnet.dapps.bend.marketIds.wethhoney.address}}   |
-| {{config.mainnet.dapps.bend.marketIds.wberahoney.name}}  | {{config.mainnet.dapps.bend.marketIds.wberahoney.address}}  |
-| {{config.mainnet.dapps.bend.marketIds.iberahoney.name}}  | {{config.mainnet.dapps.bend.marketIds.iberahoney.address}}  |
+| Market                                              | MarketId                                               |
+| --------------------------------------------------- | ------------------------------------------------------ |
+| {{config.websites.bend.marketIds.wsrusdhoney.name}} | {{config.websites.bend.marketIds.wsrusdhoney.address}} |
+| {{config.websites.bend.marketIds.wbtchoney.name}}   | {{config.websites.bend.marketIds.wbtchoney.address}}   |
+| {{config.websites.bend.marketIds.susdehoney.name}}  | {{config.websites.bend.marketIds.susdehoney.address}}  |
+| {{config.websites.bend.marketIds.wgberahoney.name}} | {{config.websites.bend.marketIds.wgberahoney.address}} |
+| {{config.websites.bend.marketIds.wethhoney.name}}   | {{config.websites.bend.marketIds.wethhoney.address}}   |
+| {{config.websites.bend.marketIds.wberahoney.name}}  | {{config.websites.bend.marketIds.wberahoney.address}}  |
+| {{config.websites.bend.marketIds.iberahoney.name}}  | {{config.websites.bend.marketIds.iberahoney.address}}  |
 
 #### Step 1 - Determined IRM Contract
 
-Go to <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morpho.address + '?utm_source=' + config.websites.docsBend.utmSource + '#readContract'">{{config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.morpho.address + '#readContract'}}</a> and enter one of the **MarketIds** from above in the `idToMarketParams` field.
+Go to <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.morpho.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource + '#readContract'">{{config.websites.berascan.url + 'address/' + config.contracts.bend.morpho.address.berachainMainnet + '#readContract'}}</a> and enter one of the **MarketIds** from above in the `idToMarketParams` field.
 
 ![Berascan - Determine IRM Contract Address](/assets/learn-concepts-market-interestrates-adaptivecurveirm-01.png)
 
@@ -73,7 +73,7 @@ Returned should provide something similar to the following:
 | irm             | address | 0x1d5376e532CcF25b740270624111D665830E5dB9 |
 | lltv            | uint256 | 945000000000000000                         |
 
-Take note of the `irm` address and go to that address on <a target="_blank" :href="config.mainnet.dapps.berascan.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.berascan.url}}</a>.
+Take note of the `irm` address and go to that address on <a target="_blank" :href="config.websites.berascan.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.berascan.url}}</a>.
 
 #### Step 2 - Determine Market Rate Target Utilization
 

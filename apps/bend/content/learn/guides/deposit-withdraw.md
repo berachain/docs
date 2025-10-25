@@ -27,16 +27,16 @@ See [Vault](/learn/concepts/vault/) for more context on how they work.
 - Native $BERA to process transactions
 
 :::tip
-If you do not have have $HONEY, you can use <a target="_blank" :href="config.mainnet.dapps.hub.url + 'swap' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.hub.name}}</a> or <a target="_blank" :href="config.mainnet.dapps.honeySwap.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.honeySwap.name}}</a>.
+If you do not have have $HONEY, you can use <a target="_blank" :href="config.websites.hub.url + 'swap' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.hub.name}}</a> or <a target="_blank" :href="config.websites.honeySwap.url + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.honeySwap.name}}</a>.
 :::
 
 ## Depositing Into Bend Vaults
 
-This will walk you through the steps of interacting with {{config.mainnet.dapps.bend.name}} and depositing $HONEY to gain native lending yields and additionally PoL $BGT yields.
+This will walk you through the steps of interacting with {{config.websites.bend.name}} and depositing $HONEY to gain native lending yields and additionally PoL $BGT yields.
 
 ### 1. Visit Bend & Connect Wallet
 
-Your first step is to go to <a target="_blank" :href="config.mainnet.dapps.bend.url + 'lend' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.name}}</a> and connect your wallet.
+Your first step is to go to <a target="_blank" :href="config.websites.bend.url + 'lend' + '?utm_source=' + config.websites.docsBend.utmSource">{{config.websites.bend.name}}</a> and connect your wallet.
 
 ![Berachain Bend - Connect Wallet](/assets/learn-guide-deposit-01.png)
 
@@ -83,7 +83,7 @@ You can also hover over the APY to see a breakdown of those yields.
 
 ## Withdrawing From Bend Vaults
 
-This will walk you through the steps of withdrawing your deposited and staked tokens with {{config.mainnet.dapps.bend.name}}.
+This will walk you through the steps of withdrawing your deposited and staked tokens with {{config.websites.bend.name}}.
 
 ### 1. Configure Withdrawal
 

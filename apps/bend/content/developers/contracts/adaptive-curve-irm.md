@@ -17,7 +17,7 @@ head:
 
 # AdaptiveCurveIrm
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.adaptiveCurveIrm.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.adaptiveCurveIrm.address}}</a> | [Git Source](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/AdaptiveCurveIrm.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.adaptiveCurveIrm.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.adaptiveCurveIrm.address.berachainMainnet}}</a> | [Git Source](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/AdaptiveCurveIrm.sol)</small>
 
 **Inherits:** [IAdaptiveCurveIrm](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/interfaces/IAdaptiveCurveIrm.sol)
 

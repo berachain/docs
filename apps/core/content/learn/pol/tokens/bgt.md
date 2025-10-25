@@ -18,7 +18,7 @@ head:
 
 # $BGT
 
-<a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.tokens.bgt.address.berachainMainnet">{{config.contracts.tokens.bgt.address.berachainMainnet}}</a></small>
 
 <ClientOnly>
   <Token title="$BGT" image="/assets/BGT.png" />
@@ -37,7 +37,7 @@ The typical flow is for users to supply liquidity and receive a receipt token fo
 - Depositing liquidity in the native BEX for an LP pair whitelisted to earn `$BGT` emissions
 - Supplying assets to a lending market and staking the interest-bearing receipt tokens in a reward vault
 
-Users can see available earning options at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">{{config.mainnet.dapps.hub.url}}pools</a>.
+Users can see available earning options at <a target="_blank" :href="config.websites.hub.url + 'pools'">{{config.websites.hub.url}}pools</a>.
 
 Users can claim accumulated `$BGT` from Berahub.
 
@@ -57,7 +57,7 @@ Users can select validators to "boost" with their `$BGT`, increasing the validat
 
 #### dApp Fees
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from {{config.mainnet.dapps.bex.name}} and {{config.mainnet.dapps.honeySwap.name}}. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
+Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from {{config.websites.bex.name}} and {{config.websites.honeySwap.name}}. This is done via the [`FeeCollector`](/developers/contracts/fee-collector) contract.
 
 At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
 

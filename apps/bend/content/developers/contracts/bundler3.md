@@ -17,7 +17,7 @@ head:
 
 # Bundler3
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.mainnet.contracts.bend.bundler3.address + '?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.contracts.bend.bundler3.address}}</a> | [Git Source](https://github.com/morpho-org/bundler3/blob/main/src/Bundler3.sol)</small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.bend.bundler3.address.berachainMainnet + '?utm_source=' + config.websites.docsBend.utmSource">{{config.contracts.bend.bundler3.address.berachainMainnet}}</a> | [Git Source](https://github.com/morpho-org/bundler3/blob/main/src/Bundler3.sol)</small>
 
 **Inherits:** [IBundler3](https://github.com/morpho-org/bundler3/blob/main/src/interfaces/IBundler3.sol)
 
