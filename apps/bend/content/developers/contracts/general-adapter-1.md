@@ -337,7 +337,7 @@ Either `assets` or `shares` should be zero. Most usecases should rely on `assets
 initiator is guaranteed to withdraw `assets` tokens, but the possibility to burn a specific amount of shares is
 given for full compatibility and precision.
 
-Initiator must have previously authorized the maodule to act on their behalf on Morpho.
+Initiator must have previously authorized the module to act on their behalf on Morpho.
 
 ```solidity
 function morphoWithdraw(
