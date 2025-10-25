@@ -100,7 +100,7 @@ You will notice that your balance is showing 0, that is because your current dep
 
 ### 2. Unstake Deposit
 
-Where you current balance of stake is show click the **Unstake** button.
+Where your current balance of stake is shown click the **Unstake** button.
 
 ![Berachain Bend - Unstake](/assets/learn-guide-withdraw-02.png)
 
