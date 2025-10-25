@@ -2,13 +2,13 @@
 head:
   - - meta
     - property: og:title
-      content: Bend Concepts - Intereset Rate Model
+      content: Bend Concepts - Interest Rate Model
   - - meta
     - name: description
-      content: What is a Bend Intereset Rate Model?
+      content: What is a Bend Interest Rate Model?
   - - meta
     - property: og:description
-      content: What is a Bend Intereset Rate Model?
+      content: What is a Bend Interest Rate Model?
 ---
 
 <script setup>
