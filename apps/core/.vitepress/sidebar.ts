@@ -47,7 +47,8 @@ const SIDEBAR = {
             { text: "Tokenomics", link: "/learn/pol/tokens/tokenomics" },
             { text: "BERA", link: "/learn/pol/tokens/bera" },
             { text: "BGT", link: "/learn/pol/tokens/bgt" },
-            { text: "HONEY", link: "/learn/pol/tokens/honey" }
+            { text: "HONEY", link: "/learn/pol/tokens/honey" },
+            { text: "sWBERA", link: "/learn/pol/tokens/swbera" }
           ]
         },
         { text: "PoL FAQs", link: "/learn/pol/faqs" }
