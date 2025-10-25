@@ -21,7 +21,7 @@ head:
 This is a list of market ids that have been deployed to Bend.
 
 :::info
-To see the most up to date deployed markets that have been whitelisted on {{config.mainnet.dapps.bend.name}}, pleaes see <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.url}}</a>
+To see the most up to date deployed markets that have been whitelisted on {{config.mainnet.dapps.bend.name}}, please see <a target="_blank" :href="config.mainnet.dapps.bend.url + 'borrow?utm_source=' + config.websites.docsBend.utmSource">{{config.mainnet.dapps.bend.url}}</a>
 :::
 
 ## Market Ids
