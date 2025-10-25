@@ -144,7 +144,7 @@ _Example:_
 
 ```
 ˋˋˋjs-vue
-const hello = "{{config.mainnet.dapps.berascan.name}}";
+const hello = "{{config.websites.berascan.name}}";
 ˋˋˋ
 ```
 
@@ -431,7 +431,7 @@ In Markdown files, `constants.json` can be imported and used within `<script set
     <Feature
       title="Berascan Block Explorer"
       description="Explore Berachain Mainnet transactions and blocks."
-      :link="config.mainnet.dapps.berascan.url"
+      :link="config.websites.berascan.url"
       target="_blank"
     />
 

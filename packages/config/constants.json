@@ -742,11 +742,11 @@
       "url": "https://bepolia.faucet.berachain.com/"
     },
     "beratrail": {
-      "name": "Bepolia Block Explorer",
-      "url": "https://bepolia.beratrail.io/"
+      "name": "Beratrail Block Explorer",
+      "url": "https://beratrail.io/"
     },
     "beratrailBepolia": {
-      "name": "Bepolia Block Explorer",
+      "name": "Bepolia Beratrail Block Explorer",
       "url": "https://bepolia.beratrail.io/"
     },
     "honeySwap": {
