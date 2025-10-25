@@ -15,7 +15,7 @@ layout: page
   <div class="container">
     <div>
       <div class="VPImageBackground"></div>
-      <img class="VPImage" src="/DocsBear.png" alt="BEX Docs" />
+      <img class="VPImage" src="/DocsBear.png" alt="Bend Docs" />
     </div>
     <div>
       <span class="logo">

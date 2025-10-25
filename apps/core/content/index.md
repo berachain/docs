@@ -53,8 +53,15 @@ layout: page
   <Feature
     title="BEX Docs"
     description="Berachain Native DEX Docs"
-    :link="config.websites.docsBex.url"
+    :link="config.websites.docsBex.url + '?utm_source=' + config.websites.docsCore.utmSource"
     image="/assets/BEX.png"
+    type="alt"
+  />
+  <Feature
+    title="Bend Docs"
+    description="Berachain Bend Docs"
+    :link="config.websites.docsBend.url + '?utm_source=' + config.websites.docsCore.utmSource"
+    image="/assets/BEND.png"
     type="alt"
   />
 </section>
@@ -65,7 +72,7 @@ layout: page
   <Feature
     title="BeaconKit"
     description="BeaconKit Repo"
-    link="https://github.com/berachain/beacon-kit"
+    :link="'https://github.com/berachain/beacon-kit?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconBrandGithub"
     type="alt"
   />
@@ -73,35 +80,35 @@ layout: page
     title="Berascan"
     target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.dapps.berascan.url"
+    :link="config.websites.berascan.url + '?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconSearch"
     type="alt"
   />
 <Feature
     title="Bera Hub"
     description="Manage $BGT"
-    :link="config.mainnet.dapps.hub.url"
+    :link="config.mainnet.dapps.hub.url + '?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconGavel"
       type="alt"
   />
 <Feature
     title="BEX"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.bex.url"
+    :link="config.mainnet.dapps.bex.url + '?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconRefresh"
       type="alt"
     />
 <Feature
     title="Honey Swap"
     description="Berachain $HONEY Swapping"
-    :link="config.mainnet.dapps.honeySwap.url"
+    :link="config.mainnet.dapps.honeySwap.url + '?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconMoneybag"
     type="alt"
     />
 <Feature
     title="Berachain Foundation"
     description="Main Foundation Website"
-    :link="config.mainnet.dapps.foundation.url"
+    :link="config.mainnet.dapps.foundation.url + '?utm_source=' + config.websites.docsCore.utmSource"
     :icon="IconWorld"
     type="alt"
   />
