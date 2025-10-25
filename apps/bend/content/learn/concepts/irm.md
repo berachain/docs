@@ -61,9 +61,9 @@ Each time a user interacts with the market—such as borrowing or repaying—the
 For instance, the following are sample utilization-to-rate relationships:
 
 | Utilization | Rate                |
-| ---------- | ------------------- |
-| 90%        | $r_{90\%}$          |
-| 100%       | $4 \times r_{90\%}$ |
+| ----------- | ------------------- |
+| 90%         | $r_{90\%}$          |
+| 100%        | $4 \times r_{90\%}$ |
 
 The Curve Mechanism is designed to respond to short-term fluctuations in utilization, helping maintain healthy market liquidity during periods of sudden borrowing or repayment.
 
