@@ -119,7 +119,7 @@ Confirm the repayment transaction.
 
 ![Berachain Bend - Successful Confirm Repay](/assets/learn-guide-repay-03.png)
 
-You should now see the successful repayment showing a zero belance.
+You should now see the successful repayment showing a zero balance.
 
 ![Berachain Bend - Successful Repay](/assets/learn-guide-repay-04.png)
 
