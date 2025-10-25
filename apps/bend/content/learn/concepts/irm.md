@@ -60,7 +60,7 @@ Each time a user interacts with the market—such as borrowing or repaying—the
 
 For instance, the following are sample utilization-to-rate relationships:
 
-| Utlization | Rate                |
+| Utilization | Rate                |
 | ---------- | ------------------- |
 | 90%        | $r_{90\%}$          |
 | 100%       | $4 \times r_{90\%}$ |
