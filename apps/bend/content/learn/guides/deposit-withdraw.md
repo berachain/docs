@@ -83,7 +83,7 @@ You can also hover over the APY to see a breakdown of those yields.
 
 ## Withdrawing From Bend Vaults
 
-This will walk you through the steps of withdrawing your desposited and staked tokens with {{config.mainnet.dapps.bend.name}}.
+This will walk you through the steps of withdrawing your deposited and staked tokens with {{config.mainnet.dapps.bend.name}}.
 
 ### 1. Configure Withdrawal
 
