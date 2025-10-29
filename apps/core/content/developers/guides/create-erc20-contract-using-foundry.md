@@ -25,7 +25,11 @@ This developer guide will walk you through setting up a new Solidity contract, c
 
 Before beginning, make sure you have the following installed or setup on your computer before hand.
 
-- [Foundry](https://book.getfoundry.sh/getting-started/installation)
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) `v1.3.1` or greater
+
+:::warning
+NOTE: forge v1.3.1 is absolutely needed to take advantage of Etherscan's V2 contract verification. Ensure that you have the latest version installed with `foundryup`.
+:::
 
 ## Creating ERC20 Project Code Setup
 
@@ -56,6 +60,7 @@ If templated correctly, we should see the following structure:
 # FROM: ./create-erc20-contract-using-foundry
 .
 ├── README.md
+├── foundry.lock
 ├── foundry.toml
 ├── lib
 │   └── forge-std
@@ -82,6 +87,17 @@ forge install OpenZeppelin/openzeppelin-contracts;
 #     Installed openzeppelin-contracts v5.0.0
 ```
 
+:::info
+NOTE: You may get the following error in your IDE `Source "@openzeppelin/contracts/token/ERC20/ERC20.sol" not found: File import callback not supported`. Run the following to help fix this error:
+
+```bash
+# FROM: ./create-erc20-contract-using-foundry
+
+echo 'remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]' >> foundry.toml;
+```
+
+:::
+
 ## Creating the ERC20 Contract
 
 To create our contract, convert the existing `src/Counter.sol` to a new `BingBongToken.sol` and replace the code with the following Solidity code:
@@ -98,7 +114,7 @@ mv src/Counter.sol src/BingBongToken.sol;
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract BingBongToken is ERC20 {
     /**
@@ -147,6 +163,48 @@ contract BingBongTokenTest is Test {
 }
 ```
 
+We'll also need to fix the script file to point the correct file as well.
+
+```bash
+# FROM: ./create-erc20-contract-using-foundry
+
+mv script/Counter.s.sol script/BingBongToken.s.sol;
+```
+
+Next, replace the existing code the following to handle importing the wallet private key, and deploying the contract.
+
+**File:** `./script/BingBongToken.s.sol`
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console2} from "forge-std/Script.sol";
+import {BingBongToken} from "../src/BingBongToken.sol";
+
+contract BingBongTokenScript is Script {
+    /**
+     * @dev Relevant source part starts here and spans across multiple lines
+     */
+    function setUp() public {
+    }
+
+    /**
+     * @dev Main deployment script
+     */
+    function run() public {
+        // Deploy
+        vm.startBroadcast();
+        BingBongToken bbt = new BingBongToken("BingBongToken", "BBT", 5678);
+        vm.stopBroadcast();
+
+        // Verify + End
+        console2.log('address:', address(bbt));
+        console2.log('totalSupply:', bbt.totalSupply());
+    }
+}
+```
+
 Now when running `forge compile` the following results should show up:
 
 ```bash
@@ -155,10 +213,9 @@ Now when running `forge compile` the following results should show up:
 forge compile;
 
 # [Expected Output]:
-# [⠢] Compiling...
-# [⠰] Compiling 27 files with 0.8.21
-# [⠃] Solc 0.8.21 finished in 6.25s
-# Compiler run successful!
+# [⠊] Compiling...
+# [⠔] Compiling 1 files with Solc 0.8.26
+# [⠒] Solc 0.8.26 finished in 461.24ms
 ```
 
 ## Testing the ERC20 Contract
@@ -400,50 +457,6 @@ forge test -vvv; # v stands for verbose and multiple vvv allow for more details 
 
 ## Configuring Foundry for Berachain Contract Deployment
 
-Now that the code and tests have all be defined, the next step is to create the deployment script needed to deploy the `BingBongToken.sol` file. To accomplish this, simply repurpose the script file `Course.s.sol` file as our new `BingBongToken.s.sol`.
-
-```bash
-# FROM: ./create-erc20-contract-using-foundry
-
-mv script/Counter.s.sol script/BingBongToken.s.sol;
-```
-
-Next, replace the existing code the following to handle importing the wallet private key, and deploying the contract.
-
-**File:** `./script/BingBongToken.s.sol`
-
-```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
-
-import {Script, console2} from "forge-std/Script.sol";
-import "../src/BingBongToken.sol";
-
-contract BingBongTokenScript is Script {
-    /**
-     * @dev Relevant source part starts here and spans across multiple lines
-     */
-    function setUp() public {
-    }
-
-    /**
-     * @dev Main deployment script
-     */
-    function run() public {
-        // Setup
-        uint256 deployerPrivateKey = vm.envUint("WALLET_PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-
-        // Deploy
-        BingBongToken bbt = new BingBongToken("BingBongToken", "BBT", 5678);
-
-        // Verify + End
-        console2.log(bbt.totalSupply());
-        vm.stopBroadcast();
-    }
-}
-```
-
 To verify that the contract can actually be deployed, test it with a local node by running `anvil`.
 Take note of the private key.
 
@@ -480,12 +493,18 @@ anvil;
 # ...
 ```
 
-With the provided private key, replace the `WALLET_PRIVATE_KEY` in `.env` file.
-
-**File:** `./.env`
+With the provided private key, we're going to import it into foundry's encrypted keystore system.
 
 ```bash
-WALLET_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+# FROM ./create-erc20-contract-using-foundry
+
+# If `Error: Keystore file already exists` you'll need to remove the file via `rm ~/path/to/.foundry/keystores/MyBeraAccount`
+cast wallet import MyBeraAccount  --interactive;
+
+# [Expected Similar Output]:
+# Enter private key:
+# Enter password:
+# `MyBeraAccount` keystore was saved successfully. Address: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
 ```
 
 **Terminal 2:**
@@ -495,61 +514,130 @@ In other terminal window, run the following command to deploy the contract to th
 ```bash
 # FROM ./create-erc20-contract-using-foundry
 
-forge script script/BingBongToken.s.sol --fork-url http://localhost:8545 --broadcast;
+forge script script/BingBongToken.s.sol --account MyBeraAccount --fork-url http://localhost:8545 --broadcast;
 
-# [Expected Output]:
-# Compiler run successful!
+# [Expected Similar Output]:
+# [⠊] Compiling...
+# No files changed, compilation skipped
+# Enter keystore password:
 # Script ran successfully.
 #
 # == Logs ==
-#   5678
-# ...
-# ✅  [Success]Hash: 0xc2b647051d11d8dbd88d131ff268ada417caa27e423747497b624cc3e9c75db8
+#   address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+#   totalSupply: 5678
+#
+# ## Setting up 1 EVM.
+# ==========================
+#
+# Chain 31337
+# Estimated gas price: 2.000000001 gwei
+# Estimated total gas used for script: 1233780
+# Estimated amount required: 0.00246756000123378 ETH
+# ==========================
+#
+# ##### anvil-hardhat
+# ✅  [Success] Hash: 0xd7e542342832543915f8f409135ba929bbe7de268d2c0ba29a4b7e3c6ccfe607
 # Contract Address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 # Block: 1
-# ...
+# Paid: 0.000949062000949062 ETH (949062 gas * 1.000000001 gwei)
+#
+# ✅ Sequence #1 on anvil-hardhat | Total Paid: 0.000949062000949062 ETH (949062 gas * avg 1.000000001 gwei)
+# ==========================
+#
+# ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+#
+# Transactions saved to: /path/to/create-erc20-contract-using-foundry/broadcast/BingBongToken.s.sol/31337/run-latest.json
+#
+# Sensitive values saved to: /path/to/create-erc20-contract-using-foundry/cache/BingBongToken.s.sol/31337/run-latest.json
 ```
 
 Success! Make sure to stop the `anvil` service in **Terminal 1** by using `ctrl + c`.
 
 ## Deploying ERC20 Contract
 
-> <b>NOTE:</b> For this step, make sure to have a wallet that contains `BERA` tokens to pay for the transaction and make sure to change the `WALLET_PRIVATE_KEY` the `.env` file.
+> <b>NOTE:</b> For this step, make sure to have a wallet that contains `BERA` tokens to pay for the transaction and make sure to change the wallet set via `cast wallet import MyBeraAccount  --interactive`.
 
 With a local node configure, the deployment to Berachain Testnet should be the same process, but with a specified RPC URL endpoint.
 
 ```bash-vue
 # FROM ./create-erc20-contract-using-foundry
 
-forge script script/BingBongToken.s.sol --rpc-url {{config.mainnet.rpcUrl}} --broadcast;
+forge script script/BingBongToken.s.sol --account MyBeraAccount --rpc-url {{config.bepolia.rpcUrl}} --broadcast;
 
 # [Expected Output]:
+# [⠊] Compiling...
+# [⠑] Compiling 1 files with Solc 0.8.26
+# [⠘] Solc 0.8.26 finished in 706.50ms
 # Compiler run successful!
+# Enter keystore password:
 # Script ran successfully.
 #
 # == Logs ==
-#   5678
-# ...
-# ✅  [Success]Hash: 0x69aeb8ee5084c44cce00cae2fda3563bd10efb9c8c663ec7b6a6929d6d48a50e
-# Contract Address: 0x01870EC5C7656723b31a884259537B183FE15Fa7
-# Block: 68764
-# ...
+#   address: 0x93aE8591e2013Aa50D68b9a4C5005b6440EE729C <-- 0xYOUR_DEPLOYED_CONTRACT_ADDRESS // [!code highlight]
+#   totalSupply: 5678
+#
+# ## Setting up 1 EVM.
+# ==========================
+#
+# Chain {{config.bepolia.chainId}}
+#
+# Estimated gas price: 20.000000094 gwei
+#
+# Estimated total gas used for script: 1233780
+#
+# Estimated amount required: 0.02467560011597532 BERA
+# ==========================
+#
+# ##### berachain-bepolia
+# ✅  [Success] Hash: 0x4863bd410073886419247125c9fb2729d31c400878dc4d64ec145efd0b3cbd47
+# Contract Address: 0x93aE8591e2013Aa50D68b9a4C5005b6440EE729C
+# Block: 10306287
+# Paid: 0.018981240044605914 BERA (949062 gas * 20.000000047 gwei)
+#
+# ✅ Sequence #1 on berachain-bepolia | Total Paid: 0.018981240044605914 BERA (949062 gas * avg 20.000000047 gwei)
+#
+# ==========================
+#
+# ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+#
+# Transactions saved to: /path/to/create-erc20-contract-using-foundry/broadcast/BingBongToken.s.sol/{{config.bepolia.chainId}}/run-latest.json
+#
+# Sensitive values saved to:/path/to/create-erc20-contract-using-foundry/cache/BingBongToken.s.sol/{{config.bepolia.chainId}}/run-latest.json
 ```
 
 ## Verifying ERC20 Contract
 
-> <b>NOTE:</b> Currently with forge `v0.2.0` there are some issues with verifying contracts that are preventing contract verification.
-> As soon as these are up and running, the following command should help with verifying the contract:
+> <b>NOTE:</b> In order for verification to work with Etherscan's V2 contract verification API, make sure that you have the latest version installed with `foundryup`.
+
+Make sure to get an Etherscan API Key from [https://etherscan.io/register](https://etherscan.io/register?utm_source=berachain_docs).
 
 ```bash-vue
 # FROM ./create-erc20-contract-using-foundry
 
-forge verify-contract 0xYOUR_DEPLOYED_CONTRACT_ADDRESS BingBongToken \
-    --etherscan-api-key={{config.mainnet.dapps.berascan.apiKey}} \
-    --watch \
-    --constructor-args $(cast abi-encode "constructor(string,string,uint256)" "BingBongToken" "BBT" 5678) \
-    --retries=2 \
-    --verifier-url={{config.mainnet.dapps.berascan.apiUrl}};
+forge verify-contract \
+  --watch \
+  --chain {{config.bepolia.dapps.berascan.chainName}} \
+  <0xYOUR_DEPLOYED_CONTRACT_ADDRESS> \
+  src/BingBongToken.sol:BingBongToken \
+  --verifier etherscan \
+  --etherscan-api-key <YOUR_ETHERSCAN_API_V2_KEY>;
+
+# [Expected Similar Output]:
+# Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.bepolia.dapps.berascan.chainName}}
+#
+# Submitting verification for [src/BingBongToken.sol:BingBongToken] 0xYOUR_DEPLOYED_CONTRACT_ADDRESS.
+# Submitted contract for verification:
+#         Response: `OK`
+#         GUID: `xtecz3j...`
+#         URL: {{config.bepolia.dapps.berascan.url}}address/0xYOUR_DEPLOYED_CONTRACT_ADDRESS
+# Contract verification status:
+# Response: `NOTOK`
+# Details: `Pending in queue`
+# Warning: Verification is still pending...; waiting 15 seconds before trying again (7 tries remaining)
+# Contract verification status:
+# Response: `OK`
+# Details: `Pass - Verified`
+# Contract successfully verified
 ```
 
 ## Full Code Repository

@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/developers/migration-guide",
+      "destination": "/"
+    },
+    {
       "source": "/developers/guides/migration-guide",
       "destination": "/developers"
     },
@@ -103,6 +107,10 @@
     {
       "source": "/learn/protocol/bgt-emissions",
       "destination": "/learn/pol/"
+    },
+    {
+      "source": "/learn/concepts/governance",
+      "destination": "/"
     }
   ]
 }

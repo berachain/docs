@@ -36,3 +36,9 @@ Click the **Claim Period** button to claim multiple Incentive Tokens.
 ![Berachain Hub Claim Modal](/assets/claim-incentives-claim-modal.png)
 
 Check back on this page every 24 hours to see the latest Incentive Tokens that are eligible to claim.
+
+## Claiming Incentives for Other Addresses
+
+You can claim incentive tokens on behalf of other addresses using BeraHub's account override feature. This is particularly useful for managing multiple accounts or helping others claim their rewards.
+
+For detailed instructions on using the account override feature, see the [Account Overriding section](/learn/dapps/berahub#account-overriding) in the BeraHub documentation.

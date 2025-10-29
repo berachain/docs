@@ -35,7 +35,7 @@ The active set is the set of validators that are currently participating in the 
 
 The current limit of validators in the active set is `{{config.mainnet.validatorActiveSetSize}}`.
 
-There is currently only one way a validator may be removed from the active set: if the active set is completely full, and the validator is the least staked validator in the active set, and a new node entering the active set stakes more than the validator in question.
+Validators can choose to leave the active set voluntarily — [learn how](/nodes/guides/withdraw-stake) — or be ejected from the set if the active set if a validator with more stake joins the active set.
 
 ## Validator Stake Requirements 🔑
 
@@ -63,8 +63,8 @@ If a validator is removed from the active set, all `$BERA` staked to that valida
 
 A validator can decide to become a validator again but will need to generate new CometBFT validator keys and start the deposit process again as if they were a new validator.
 
-:::danger
-Staking with a previously-used CometBFT identity — a validator that was removed from the active set — will result in the funds being burnt.
+:::warning
+Staking with a previously-used CometBFT identity — a validator that was removed from the active set — will result in the funds being returned to that validator's withdrawal address at the end of the current epoch. The validator can never be re-activated.
 :::
 
 ## Voluntary Withdrawals ⚠️

@@ -17,7 +17,9 @@
       },
       "berascan": {
         "name": "BeraScan Block Explorer",
-        "url": "https://testnet.berascan.com/"
+        "url": "https://testnet.berascan.com/",
+        "apiUrl": "https://api.etherscan.io/v2/api",
+        "chainName": "berachain-bepolia"
       },
       "hub": {
         "name": "Bepolia Hub",
@@ -69,8 +71,9 @@
       "berascan": {
         "name": "BeraScan Block Explorer",
         "url": "https://berascan.com/",
-        "apiUrl": "https://berascan.com/api",
-        "apiKey": "YOUR_API_KEY"
+        "apiKey": "YOUR_API_KEY",
+        "apiUrl": "https://api.etherscan.io/v2/api",
+        "chainName": "berachain"
       },
       "foundation": {
         "name": "Berachain Foundation",
@@ -87,6 +90,10 @@
       "safe": {
         "name": "Berachain SAFE",
         "url": "https://safe.berachain.com"
+      },
+      "bridge": {
+        "name": "Berachain Bridge",
+        "url": "https://bridge.berachain.com"
       }
     },
     "thirdparty": {

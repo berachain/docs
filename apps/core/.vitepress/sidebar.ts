@@ -60,6 +60,7 @@ const SIDEBAR = {
         { text: "BERA Staking", link: "/learn/guides/bera-staking" },
         { text: "Claim BGT Rewards", link: "/learn/guides/claim-bgt" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+        { text: "Berascan Token Update", link: "/learn/guides/berascan-token-update" },
         {
           text: "Setup Reward Vault",
           link: "/learn/guides/setup-reward-vault"
@@ -84,6 +85,7 @@ const SIDEBAR = {
       items: [
         { text: "BeraHub", link: "/learn/dapps/berahub" },
         { text: "BEX", link: "/learn/dapps/bex" },
+        { text: "Bridge", link: "/learn/dapps/bridge" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
           text: `${constants.mainnet.dapps.berascan.name}`,
@@ -307,7 +309,7 @@ const SIDEBAR = {
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
         { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "August 2025 Upgrade", link: "/nodes/guides/august-2025-upgrade" }
+        { text: "Bepto Upgrade", link: "/nodes/guides/bepto" }
       ]
     },
     {
@@ -324,10 +326,6 @@ const SIDEBAR = {
         {
           text: "Manage Reward Allocations",
           link: "/nodes/guides/reward-allocation"
-        },
-        {
-          text: "Distribute Block Rewards",
-          link: "/nodes/guides/distribute-block-rewards"
         },
         {
           text: "Increase Validator Stake",

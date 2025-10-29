@@ -48,8 +48,8 @@ The withdrawal API will silently adjust the withdrawal amount to **maintain a mi
 
 To exit your validator from the Active Set and return the entire stake, use the special withdrawal amount of `0`. Then, as described in [the lifecycle overview](/nodes/validator-lifecycle), your validator will immediately be queued to exit the active set and no longer produce blocks. The stake will be returned by the consensus layer on the above schedule.
 
-:::danger
-If you are removed from the Active Set, **future deposits to your CometBFT public key will be burnt**. If you want to [activate as a validator](/nodes/guides/validator) again, you must do so with a new CometBFT identity.
+:::warning
+If you are leave the Active Set, **future deposits to your CometBFT public key will be refunded to the withdrawal address**. If you want to [activate as a validator](/nodes/guides/validator) again, you must do so with a new CometBFT identity.
 :::
 
 ## How To Withdraw $BERA Stake

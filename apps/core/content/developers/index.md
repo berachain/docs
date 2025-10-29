@@ -19,10 +19,6 @@ The [Distributor](/developers/contracts/distributor) contract is the entry point
 - Distributes Validator commission of Incentives received for distributing $BGT emissions
 - Distirbutes remaining Incentives to `BGTIncentiveDistributor` for Validator Boosters to claim
 
-:::tip
-With the [August 2025 upgrade](/nodes/guides/august-2025-upgrade), distributions are now automatic.
-:::
-
 ### BlockRewardController
 
 The [BlockRewardController](/developers/contracts/block-reward-controller) contract is the only entity authorized to mint $BGT. It is entered through the `processRewards` function from the `Distributor` contract. The BlockRewardController then:
