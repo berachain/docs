@@ -269,7 +269,7 @@
       "stakingPoolImpl": {
         "name": "StakingPool Implementation",
         "mainnet-address": "",
-        "bepolia-address": "0x5e474c2Df175863f7C45d12aBaacce2f952eff48",
+        "bepolia-address": "0x8b472791aC2f9e9Bd85f8919401b8Ce3bdFd464c",
         "abi": "",
         "docsUrl": "/nodes/staking-pools/contracts/StakingPool"
       },

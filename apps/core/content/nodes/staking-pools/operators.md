@@ -29,7 +29,7 @@ Technical knowledge of smart contract interactions is important, as you'll be de
 Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
 :::
 
-## Validator Lifecycle Integration
+## Validator Lifecycle 
 
 Your staking pool integrates with Berachain's validator lifecycle, which follows these states:
 
@@ -37,13 +37,11 @@ Your staking pool integrates with Berachain's validator lifecycle, which follows
 - **Eligible**: After 1 epoch, your validator becomes eligible for activation (requires 250,000 BERA minimum effective balance)
 - **Active**: After another epoch, your validator joins the active set and can propose blocks
 - **Exited**: If capacity limits are reached, validators with lower priority are exited
-- **Withdrawn**: After 1 epoch in exited state, funds are returned to your withdrawal address
-
-The staking pool automatically manages your validator's progression through these states, handling deposits, activation, and any necessary exits based on network conditions.
+- **Withdrawn**: Funds become withdrawable when `withdrawable_epoch = exit_epoch + MIN_VALIDATOR_WITHDRAWABILITY_DELAY` (256 epochs). With 192 slots per epoch at ~2s block time, this is roughly 27 hours under normal conditions. After this delay, funds are returned to the withdrawal contract for eventual redemption.
 
 ## Overview of the Setup Process
 
-The setup process for staking pools follows a logical progression that ensures all components are properly configured before going live:
+The setup process for staking pools follows this progression:
 
 1. **Deploy and Initialize Your Staking Pool**: Deploy the staking pool contracts through the factory, obtain verification proofs from the beacon API, and activate your pool for user deposits.
 
@@ -266,8 +264,8 @@ The pool uses a sophisticated deposit calculation system that handles:
 
 The withdrawal system provides both immediate and delayed withdrawal options:
 
-1. **Short Circuit Withdrawals**: If sufficient buffered assets are available and the active threshold hasn't been reached, withdrawals are processed immediately
-2. **Standard Withdrawals**: Larger withdrawals or those after the active threshold require consensus layer processing
+1. **Short Circuit Withdrawals**: If the pool's `bufferedAssets()` can cover the request and the active threshold hasn't been reached, the withdrawal short‑circuits and pays out immediately from the buffer
+2. **Standard Withdrawals**: If the bufferred funds can cover the request or the active threshold has been reached, the request is handled immediately. 
 3. **Full Exit Triggers**: Automatic full exit when the pool falls below the minimum effective balance
 
 ### Reward Management
@@ -352,6 +350,8 @@ function finalizeWithdrawalRequest(uint256 requestId) external;
 // Finalize multiple withdrawal requests
 function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
 ```
+
+In normal network conditions, requests that cannot be short‑circuited by the pool buffer will be eligible to be exchanged for $BERA at the end of the 256th epoch after the withdrawal transaction.
 
 #### Full Exit Management
 
@@ -462,7 +462,7 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 **Debug Steps:**
 
 1. **Check Withdrawal Requests**: Use `getWithdrawalRequest(requestId)` to examine specific requests
-2. **Verify Processing Time**: Confirm 3-day delay has passed (129,600 blocks) for standard withdrawals
+2. **Verify Processing Time**: Confirm the finalization window has passed for standard withdrawals - 256 x 192 block complete epochs
 3. **Check Pool Buffer**: Verify sufficient funds available for short-circuit withdrawals
 4. **Monitor Withdrawal Events**: Watch for `WithdrawalRequested` and `WithdrawalRequestFinalized` events
 
@@ -471,9 +471,6 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 ```solidity
 // Get withdrawal request details
 WithdrawalRequest memory request = withdrawalVault.getWithdrawalRequest(requestId);
-
-// Check if request is ready (3 days / 129,600 blocks passed)
-bool ready = block.number >= (request.requestBlock + 129_600);
 ```
 
 ### Getting Help
