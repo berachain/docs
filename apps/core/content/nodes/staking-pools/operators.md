@@ -29,7 +29,7 @@ Technical knowledge of smart contract interactions is important, as you'll be de
 Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
 :::
 
-## Validator Lifecycle 
+## Validator Lifecycle
 
 Your staking pool integrates with Berachain's validator lifecycle, which follows these states:
 
@@ -265,7 +265,7 @@ The pool uses a sophisticated deposit calculation system that handles:
 The withdrawal system provides both immediate and delayed withdrawal options:
 
 1. **Short Circuit Withdrawals**: If the pool's `bufferedAssets()` can cover the request and the active threshold hasn't been reached, the withdrawal short‑circuits and pays out immediately from the buffer
-2. **Standard Withdrawals**: If the bufferred funds can cover the request or the active threshold has been reached, the request is handled immediately. 
+2. **Standard Withdrawals**: If the bufferred funds can cover the request or the active threshold has been reached, the request is handled immediately.
 3. **Full Exit Triggers**: Automatic full exit when the pool falls below the minimum effective balance
 
 ### Reward Management
