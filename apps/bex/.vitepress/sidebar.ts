@@ -167,23 +167,14 @@ const SIDEBAR = {
     {
       text: "Developer Guides",
       items: [
-        {
-          text: "Pool Creation",
-          link: "/developers/guides/pool-creation"
-        }
-      ]
-    },
-    {
-      text: "SDK",
-      items: [
         { text: "Introduction", link: "/developers/sdk" },
         {
-          text: "SDK API Reference",
-          link: "/developers/sdk/reference"
-        },
-        {
-          text: "SDK Guides",
+          text: "BEX Operations",
           items: [
+            {
+              text: "Pool Creation",
+              link: "/developers/guides/pool-creation"
+            },
             { text: "Add Liquidity", link: "/developers/sdk/add-liquidity" },
             {
               text: "Remove Liquidity",
@@ -192,12 +183,11 @@ const SIDEBAR = {
             { text: "Swap", link: "/developers/sdk/swap" },
             { text: "Smart Order Router", link: "/developers/sdk/sor" }
           ]
-        }
-      ]
-    },
-    {
-      text: "Help",
-      items: [
+        },
+        {
+          text: "SDK API Reference",
+          link: "/developers/sdk/reference"
+        },
         {
           text: "Error Codes",
           link: "/developers/help/error-codes"

@@ -22,6 +22,10 @@ Using the [BEX SDK](https://github.com/berachain/berancer-sdk), users can add li
 1. _Unbalanced_ - add liquidity with arbitrary amounts of each token
 2. _Proportional_ - add liquidity with proportional amount of both tokens
 
+:::tip Example Code
+For more comprehensive add liquidity examples, see the [add liquidity examples](https://github.com/berachain/bex-sdk/tree/main/examples/add-liquidity) in the BEX SDK repository. For price impact calculation examples, see the [price impact examples](https://github.com/berachain/bex-sdk/tree/main/examples/priceImpact).
+:::
+
 ## Example: Adding Unbalanced Liquidity
 
 In this example, we use the BEX SDK and [Ethers.js](https://docs.ethers.org/v6/) to add single-token `BERA` liquidity to a given pool.
@@ -33,6 +37,7 @@ import {
   AddLiquidity,
   AddLiquidityKind,
   Slippage,
+  PriceImpact,
 } from "@berachain-foundation/berancer-sdk";
 
 // Initialize provider and wallet
@@ -62,13 +67,17 @@ const addLiquidityInput = {
 
 const addLiquidity = new AddLiquidity();
 
-// Query expected BPT out
-const queryOutput = await addLiquidity.query(addLiquidityInput, poolState);
+// Query expected BPT out and calculate price impact in parallel
+const [queryOutput, priceImpact] = await Promise.all([
+  addLiquidity.query(addLiquidityInput, poolState),
+  PriceImpact.addLiquidity(addLiquidityInput, poolState)
+]);
 
 console.log(
   "Expected BPT Out:",
   ethers.formatUnits(queryOutput.bptOut.amount, 18)
 );
+console.log("Price Impact:", priceImpact.percentage, "%");
 
 // Build transaction with 1% slippage
 const slippage = Slippage.fromPercentage("1");
@@ -101,11 +110,12 @@ Below we breakdown the code example above.
 
 ### Helper Classes
 
-The three main helper classes we use from the SDK are:
+The main helper classes we use from the SDK are:
 
 - `BalancerApi` - to simplify retrieving pool data from the Pools API
 - `AddLiquidity` - to build addLiquidity queries and transactions
 - `Slippage` - to simplify creating limits with user defined slippage
+- `PriceImpact` - to calculate the price impact of unbalanced liquidity additions
 
 ### Fetching Pool Data
 
@@ -121,18 +131,27 @@ const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 ```
 
-### Simulation and Slippage Setting
+### Simulation and Price Impact
 
 The `AddLiquidity` class has a `query` method that allows us to simulate the add liquidity transaction. This is useful for estimating the expected output and slippage. It takes in the [`addLiquidityInput`](https://github.com/berachain/berancer-sdk/blob/main/src/entities/addLiquidity/types.ts#L42) and `poolState` as arguments.
 
-We also set the slippage to 1% meaning the transaction reverts if we receive less than 99% of the expected output.
+The `PriceImpact` class calculates the price impact of unbalanced liquidity operations. When adding liquidity with unbalanced amounts (adding only one token or different proportions than the pool), the pool's token ratios change, resulting in price impact. A [PriceImpactAmount](https://github.com/berachain/berancer-sdk/blob/main/src/entities/priceImpactAmount.ts#L4) is returned, with the price impact expressed in a number of different units.
 
 ```js
-// Query expected BPT out
-const queryOutput = await addLiquidity.query(addLiquidityInput, poolState);
+// Query expected BPT out and calculate price impact in parallel
+const [queryOutput, priceImpact] = await Promise.all([
+  addLiquidity.query(addLiquidityInput, poolState),
+  PriceImpact.addLiquidity(addLiquidityInput, poolState)
+]);
+
+console.log("Expected BPT Out:", ethers.formatUnits(queryOutput.bptOut.amount, 18));
+console.log("Price Impact:", priceImpact.percentage, "%");
+
 // Build transaction with 1% slippage
 const slippage = Slippage.fromPercentage("1");
 ```
+
+The price impact calculation is especially important for unbalanced liquidity additions, as they can significantly alter the pool's token ratios. Use this information to inform your slippage settings and warn users about potential price impacts.
 
 ### Building the Transaction
 

@@ -22,6 +22,10 @@ Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), users can r
 1. _Proportional_ - remove liquidity proportionally across all tokens
 2. _SingleTokenExactIn_ - remove liquidity and receive a single token
 
+:::tip Example Code
+For more comprehensive remove liquidity examples, see the [remove liquidity examples](https://github.com/berachain/bex-sdk/tree/main/examples/remove-liquidity) in the BEX SDK repository.
+:::
+
 ## Example: Single Token Exit
 
 In this example, we'll demonstrate how to remove liquidity and receive a single token (BERA) while calculating the price impact of the transaction.
