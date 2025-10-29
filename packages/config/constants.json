@@ -31,95 +31,9 @@
     "minEffectiveBalance": "250,000",
     "maxEffectiveBalance": "10,000,000",
     "dapps": {
-      "bex": {
-        "name": "Berachain BEX",
-        "url": "https://hub.berachain.com/swap",
-        "apiUrl": "https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/",
-        "balancerApiUrl": "https://api.berachain.com/",
-        "examplePoolId": "0xf961a8f6d8c69e7321e78d254ecafbcc3a637621000000000000000000000001"
-      },
-      "honeySwap": {
-        "name": "Berachain $HONEY Swap",
-        "url": "https://honey.berachain.com/"
-      },
-      "berascan": {
-        "name": "BeraScan Block Explorer",
-        "url": "https://berascan.com/",
-        "apiKey": "YOUR_API_KEY",
-        "apiUrl": "https://api.etherscan.io/v2/api",
-        "chainName": "berachain"
-      },
-      "foundation": {
-        "name": "Berachain Foundation",
-        "url": "https://www.berachain.com/"
-      },
-      "hub": {
-        "name": "Berachain Hub",
-        "url": "https://hub.berachain.com/"
-      },
-      "nftBridge": {
-        "name": "Berachain NFT Bridge",
-        "url": "https://nftbridge.berachain.com/"
-      },
-      "safe": {
-        "name": "Berachain SAFE",
-        "url": "https://safe.berachain.com"
-      },
-      "bridge": {
-        "name": "Berachain Bridge",
-        "url": "https://bridge.berachain.com"
-      },
       "playground": {
         "name": "Berachain Playground",
         "url": "https://playground.berachain.com/"
-      }
-    },
-    "thirdparty": {
-      "routescan": {
-        "name": "Routescan",
-        "url": "https://beratrail.io/"
-      },
-      "quickNodeRpc": {
-        "name": "QuickNode RPC",
-        "url": "https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1"
-      },
-      "layerzero": {
-        "name": "LayerZero",
-        "url": "https://docs.layerzero.network/v2/developers/evm/technical-reference/deployed-contracts#bartio"
-      }
-    },
-    "contracts": {
-      "nfts": {
-        "bongBears": {
-          "name": "Bong Bears",
-          "ethereumAddress": "0x1897C001341F81Ca72154b75b882aE708e06bF48",
-          "berachainAddress": "0x141De07E5D4C4759EC9301DA106115D4841f66cD"
-        },
-        "bondBears": {
-          "name": "Bond Bears",
-          "ethereumAddress": "0x6b1C374105467d1fC1090C989BcbbCC172c8a89c",
-          "berachainAddress": "0xA0CF472E6132F6B822a944f6F31aA7b261c7c375"
-        },
-        "booBears": {
-          "name": "Boo Bears",
-          "ethereumAddress": "0x7591992F1a98636C6B7207f30382ca4Bec83D9Be",
-          "berachainAddress": "0xf49ec5db255854C4a567de5AB3826c9AAbaFc7cF"
-        },
-        "babyBears": {
-          "name": "Baby Bears",
-          "ethereumAddress": "0xc48C54e92d135B356DD0CbF50F803A8c8d38968b",
-          "berachainAddress": "0xDDeAf391c4be2d01ca52aBb8C159a06820ef078C"
-        },
-        "bandBears": {
-          "name": "Band Bears",
-          "ethereumAddress": "0x392Faa1b0EF108ded69897Ba5382E909C39Fc09e",
-          "berachainAddress": "0x7711B2Eb2451259dbF211e30157ceB7CFeb79a19"
-        },
-        "bitBears": {
-          "name": "Bit Bears",
-          "ethereumAddress": "0x3EB12398753eEd7E8747321c37C85De30d8E2e94",
-          "berachainAddress": "0x72D876D9cdf4001b836f8E47254d0551EdA2eebB"
-        }
       }
     }
   },
