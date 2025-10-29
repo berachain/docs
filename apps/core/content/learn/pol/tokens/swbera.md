@@ -45,3 +45,22 @@ The yield comes from the **33% incentive tax** collected from PoL protocols. Whe
 ### Auto-Compounding
 
 Your rewards automatically compound without any manual intervention. No claiming is required as rewards are automatically reinvested, causing your `$sWBERA` tokens to increase in value over time.
+
+## Unstaking sWBERA
+
+### 7-Day Unbonding Period
+
+To convert your `$sWBERA` tokens back to $BERA or $WBERA, you'll need to unstake through the Staking Vault. The unstaking process has a **7-day unbonding period**:
+
+1. **Initiate withdrawal**: Queue a withdrawal request through the [Staking Vault interface](https://hub.berachain.com/stake/)
+2. **Wait 7 days**: Your withdrawal request enters a 7-day cooldown period
+3. **Complete withdrawal**: After the unbonding period ends, return to the interface to complete the withdrawal and receive your $WBERA tokens
+
+### Important Considerations
+
+- **No rewards earned** during the unbonding period
+- **Withdrawal requests expire** after 7 days if not completed
+- **Multiple requests**: You can have multiple withdrawal requests active simultaneously
+- **Cancellation**: Withdrawal requests can be cancelled before completion
+
+For detailed instructions on the unstaking process, see the [$BERA Staking Guide](/learn/guides/bera-staking#withdrawal-process).
