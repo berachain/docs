@@ -21,25 +21,16 @@ Proof-of-Liquidity (PoL) is Berachain's innovative reward distribution system th
 
 PoL can be implemented in two primary ways: **base-level staking** where ERC20 tokens representing liquidity positions or other protocol interactions are staked to earn BGT rewards, or **direct action incentivization** where specific user behaviors are rewarded without requiring traditional staking mechanisms. This flexibility allows developers to design custom incentive models that align with their protocol's unique value proposition and user engagement goals.
 
-## Incentivizing Your Users
+## PoL Implementation
 
-It is easy to incentivize users on-chain performing actions such as providing liquidity to a lending market or an AMM (DEX) or other actions that return a receipt token proportional to the action taken. These actions are easily rewarded with the basic staking implementation of the reward vault and are the traditional use case for Proof of Liquidity.
+### Easy
 
-Below are some examples of activities you can incentivize:
+Easy PoL implementations work with activities that naturally produce ERC20 receipt tokens proportional to the action taken. These implementations use the basic staking functionality of reward vaults and are the traditional use case for Proof of Liquidity.
 
-| Activity to incentivize | ERC20 minting logic                                  | Basic PoL |
-| ----------------------- | ---------------------------------------------------- | --------- |
-| Providing liquidity     | minting LP tokens proportional to liquidity provided | ✅        |
-| Lending assets          | minting receipt tokens proportional to assets lent   | ✅        |
-| Trading activity        | minting based on trading frequency/volume            | ❌        |
-| Content creation        | minting based on post engagement metrics             | ❌        |
-| Gaming                  | minting based on playtime/achievements               | ❌        |
-| NFT usage               | minting based on time NFTs are actively used         | ❌        |
-| Education               | minting based on course completion                   | ❌        |
+**Examples of easy-to-incentivize activities:**
 
-While the activities marked with ❌ require more complex implementations, they are still fully supported by Berachain's PoL system. These non-basic PoL integrations work through contracts built on top of reward vaults to help facilitate distribution of rewards for more sophisticated incentive patterns. Berachain provides examples of these patterns on the <a target="_blank" :href="config.mainnet.dapps.playground.url">playground</a> if you're interested in understanding how to incentivize more complex actions to reward your users.
-
-## Basic Proof-of-Liquidity
+- **Providing liquidity**: minting LP tokens proportional to liquidity provided
+- **Lending assets**: minting receipt tokens proportional to assets lent
 
 The following examples show different RewardVault functions that developers commonly use for various integration patterns:
 
@@ -130,12 +121,22 @@ Core Mechanics:
 - Awards points based on trading frequency and size
 - Automatic staking of newly minted tokens
 
-## Complex Proof of Liquidity Integrations
+### Moderate
 
-For more sophisticated incentive patterns, Berachain provides advanced examples on the playground that demonstrate how to build contracts on top of reward vaults to facilitate complex reward distribution. The playground includes live demos and interactive examples for immediate testing.
+Moderate PoL implementations are for activities that don't naturally produce ERC20 receipt tokens proportional to actions taken. These implementations require building contracts on top of reward vaults to facilitate more sophisticated incentive patterns and reward distribution mechanisms.
+
+**Examples of moderate-to-incentivize activities:**
+
+- **Trading activity**: minting based on trading frequency/volume
+- **Content creation**: minting based on post engagement metrics
+- **Gaming**: minting based on playtime/achievements
+- **NFT usage**: minting based on time NFTs are actively used
+- **Education**: minting based on course completion
+
+Berachain provides advanced examples on the playground that demonstrate these patterns with live demos and interactive examples for immediate testing.
 
 ::: tip Playground Deployment
-If you would like to try any of these complex integrations, the playground has wizards for deployment that allow for immediate testing and experimentation.
+If you would like to try any of these moderate integrations, the playground has wizards for deployment that allow for immediate testing and experimentation.
 :::
 
 ### Reward Vault Manager with Merkle Proofs
