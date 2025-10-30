@@ -68,6 +68,10 @@
       "bridge": {
         "name": "Berachain Bridge",
         "url": "https://bridge.berachain.com"
+      },
+      "playground": {
+        "name": "Berachain Playground",
+        "url": "https://playground.berachain.com/"
       }
     },
     "thirdparty": {
