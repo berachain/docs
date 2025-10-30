@@ -1,50 +1,40 @@
-# Integrating your dApp with Proof of Liquidity
+---
+head:
+  - - meta
+    - property: og:title
+      content: Building with Proof-of-Liquidity
+  - - meta
+    - name: description
+      content: Learn how to integrate your dApp with Berachain's Proof-of-Liquidity system for incentivizing user activity
+  - - meta
+    - property: og:description
+      content: Learn how to integrate your dApp with Berachain's Proof-of-Liquidity system for incentivizing user activity
+---
 
-This page showcases creative ways to leverage PoL for incentivizing user activity, illustrated with code samples:
+<script setup>
+  import config from '@berachain/config/constants.json';
+</script>
 
-- [Integrating your dApp with Proof of Liquidity](#integrating-your-dapp-with-proof-of-liquidity)
-  - [Flexible Design](#flexible-design)
-  - [Examples](#examples)
-    - [Example #1 - Activity-frequency rewards](#example-1---activity-frequency-rewards)
+# Building with Proof-of-Liquidity
 
-## Flexible Design
+Proof-of-Liquidity (PoL) is Berachain's innovative reward distribution system that rewards users for performing actions that protocols desire. This system enables developers to create sophisticated incentive structures that can drive user engagement and protocol growth by rewarding a wide range of activities - from providing liquidity and on-chain interactions to real-world actions that benefit the protocol.
 
-From the perspective of an application on Berachain, the PoL system is fundamentally a mechanism that works in the following way:
+PoL can be implemented in two primary ways: **base-level staking** where ERC20 tokens representing liquidity positions or other protocol interactions are staked to earn BGT rewards, or **direct action incentivization** where specific user behaviors are rewarded without requiring traditional staking mechanisms. This flexibility allows developers to design custom incentive models that align with their protocol's unique value proposition and user engagement goals.
 
-1. A [Reward Vault](../../learn/pol/rewardvaults.md) smart contract that targets an ERC20 token
-2. Users stake the designated ERC20 in this vault
-3. The vault distributes BGT rewards proportionally to its stakers
+## PoL Implementation
 
-The development work for all PoL integrations essentially boils down to:
+### Easy
 
-1. Deploying a Reward Vault from the [Factory](../contracts/reward-vault-factory.md)
-2. Designing an ERC20 token that is minted when users perform actions you would like to incentivize
-3. Having these ERC20 positions staked in your Reward Vault
+Easy PoL implementations work with activities that naturally produce ERC20 receipt tokens proportional to the action taken. These implementations use the basic staking functionality of reward vaults and are the traditional use case for Proof of Liquidity.
 
-All `RewardVault` contracts are deployed using the `RewardVaultFactory` contract and therefore follow a standardized implementation. Teams cannot modify the RewardVault logic. This means all reward customization needs to happen at the staking token level, **not the vault level**. Determining allocation of rewards must happen at the staking token level, fully defined by your app. The vault only uses the ERC20 balances of the staking token to distribute BGT proportionally.
+**Examples of easy-to-incentivize activities:**
 
-Below are some examples of this pattern. If you wanted to incentivize:
-
-| Activity to incentivize | ERC20 minting logic                          |
-| ----------------------- | -------------------------------------------- |
-| Trading activity        | minting based on trading frequency/volume    |
-| Content creation        | minting based on post engagement metrics     |
-| Gaming                  | minting based on playtime/achievements       |
-| NFT usage               | minting based on time NFTs are actively used |
-| Education               | minting based on course completion           |
-
-The creativity comes in:
-
-- What behavior you want to incentivize
-- How you design the ERC20's minting logic to accurately capture that behavior
-- How you prevent gaming of the system
-- How you make the rewards meaningful enough to drive behavior while being sustainable
-
-## Examples
+- **Providing liquidity**: minting LP tokens proportional to liquidity provided
+- **Lending assets**: minting receipt tokens proportional to assets lent
 
 The following examples show different RewardVault functions that developers commonly use for various integration patterns:
 
-### Example #1 - Basic User Staking (`stake`)
+### Basic User Staking (`stake`)
 
 **Use Case**: Users directly stake their own tokens to earn BGT rewards.
 
@@ -59,7 +49,7 @@ function stakeUserTokens(uint256 amount) external {
 
 **When to use**: Simple cases where users manage their own staking positions.
 
-### Example #2 - Protocol Staking for Users (`stakeOnBehalf`)
+### Protocol Staking for Users (`stakeOnBehalf`)
 
 **Use Case**: Automated staking services where protocols stake tokens for users without requiring delegation setup.
 
@@ -76,7 +66,7 @@ function autoStakeForUser(address user, uint256 amount) external onlyAuthorized 
 
 **When to use**: DeFi protocols, yield aggregators, or automated staking services.
 
-### Example #3 - Delegated Staking (`delegateStake`)
+### Delegated Staking (`delegateStake`)
 
 **Use Case**: Protocols that need to stake on behalf of users with more complex delegation logic.
 
@@ -93,7 +83,7 @@ function institutionalStake(address institution, uint256 amount) external {
 
 **When to use**: Institutional services, custody solutions, or complex delegation patterns. See the [advanced PoL guide](/developers/guides/advanced-pol) for details.
 
-### Example #4 - Streaming Rewards (`getPartialReward`)
+### Streaming Rewards (`getPartialReward`)
 
 **Use Case**: Streaming or vesting protocols that claim BGT gradually over time.
 
@@ -110,7 +100,7 @@ function claimStreamedRewards(address user) external {
 
 **When to use**: Vesting contracts, streaming protocols, or dollar-cost averaging strategies.
 
-### Example #5 - Activity-frequency rewards
+### Activity-frequency rewards
 
 **Use Case**: Incentivizing trading activity with automatic staking of newly minted tokens.
 
@@ -130,3 +120,39 @@ Core Mechanics:
 - Tracks trades within a 7-day rolling window
 - Awards points based on trading frequency and size
 - Automatic staking of newly minted tokens
+
+### Moderate
+
+Moderate PoL implementations are for activities that don't naturally produce ERC20 receipt tokens proportional to actions taken. These implementations require building contracts on top of reward vaults to facilitate more sophisticated incentive patterns and reward distribution mechanisms.
+
+**Examples of moderate-to-incentivize activities:**
+
+- **Trading activity**: minting based on trading frequency/volume
+- **Content creation**: minting based on post engagement metrics
+- **Gaming**: minting based on playtime/achievements
+- **NFT usage**: minting based on time NFTs are actively used
+- **Education**: minting based on course completion
+
+Berachain provides advanced examples on the playground that demonstrate these patterns with live demos and interactive examples for immediate testing.
+
+::: tip Playground Deployment
+If you would like to try any of these moderate integrations, the playground has wizards for deployment that allow for immediate testing and experimentation.
+:::
+
+### Reward Vault Manager with Merkle Proofs
+
+Advanced reward vault manager with Merkle proof-based distribution for efficient and verifiable reward allocation. This system enables gas-efficient distribution of rewards to large numbers of users through cryptographic proofs, making it ideal for airdrops, retroactive rewards, or any scenario requiring precise reward distribution to specific addresses.
+
+<a target="_blank" :href="config.mainnet.dapps.playground.url + 'reward-vault-manager-merkle'">Explore Merkle Manager →</a>
+
+### Reward Vault Loot Boxes
+
+NFT-based loot boxes using Pyth Entropy for provably fair randomness. This integration demonstrates how to create gamified reward mechanisms where users can earn randomized rewards through NFT-based loot boxes, combining the excitement of gaming with the utility of BGT rewards.
+
+<a target="_blank" :href="config.mainnet.dapps.playground.url + 'reward-vault-loot-boxes'">Explore Loot Boxes →</a>
+
+### Real-Time Rewards
+
+Deploy and manage real-time BGT rewards distribution with instant payout system. This system enables immediate reward distribution for actions that require instant gratification, such as gaming achievements, real-time trading rewards, or any activity where delayed rewards would diminish user experience.
+
+<a target="_blank" :href="config.mainnet.dapps.playground.url + 'real-time-rewards'">Explore Real-Time Rewards →</a>

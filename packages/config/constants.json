@@ -29,7 +29,13 @@
     "blocksPerEpoch": 192,
     "stakeMinimumDeadlineEpoch": 1,
     "minEffectiveBalance": "250,000",
-    "maxEffectiveBalance": "10,000,000"
+    "maxEffectiveBalance": "10,000,000",
+    "dapps": {
+      "playground": {
+        "name": "Berachain Playground",
+        "url": "https://playground.berachain.com/"
+      }
+    }
   },
   "devnet": {
     "chainId": 80087,
