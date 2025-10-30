@@ -149,7 +149,7 @@ To understand why validators would choose to emit `$BGT` to one Reward Vault ove
 
 ## Vault Creation
 
-New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults/create'">{{config.mainnet.dapps.hub.url}}vaults/create</a>.
+New Reward Vaults can be created permissionlessly at <a target="_blank" :href="config.websites.hub.url + 'vaults/create'">{{config.websites.hub.url}}vaults/create</a>.
 
 Protocols creating Reward Vaults must additionally [whitelist their vaults](/learn/governance/rewardvault) through `$BGT` governance to be eligible to receive emissions from validators.
 
@@ -158,7 +158,7 @@ Protocols creating Reward Vaults must additionally [whitelist their vaults](/lea
 As a user, if I want to manually verify the BGT APR for a given Reward Vault, the following information is available on chain to do so.
 The value calculated corresponds to the light blue `BGT APR` value found on the Hub frontend.
 
-![BGT APR Example](/public/assets/bgt-apr-example.png)
+![BGT APR Example](/assets/bgt-apr-example.png)
 
 The [RewardVault](/developers/contracts/reward-vault) APR is determined by several factors.
 The components of this APR calculation include:

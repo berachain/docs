@@ -17,7 +17,7 @@ head:
 
 # BGTIncentiveFeeCollector
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']">{{config.contracts.pol.bgtIncentiveFeeCollector['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveFeeCollector.abi && config.contracts.pol.bgtIncentiveFeeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveFeeCollector.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveFeeCollector.address.berachainMainnet">{{config.contracts.pol.bgtIncentiveFeeCollector.address.berachainMainnet}}</a><span v-if="config.contracts.pol.bgtIncentiveFeeCollector.abi && config.contracts.pol.bgtIncentiveFeeCollector.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveFeeCollector.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGTIncentiveFeeCollector.sol)
 

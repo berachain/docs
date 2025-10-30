@@ -203,7 +203,7 @@ Make sure to get an Etherscan API Key from [https://etherscan.io/registerdocs](h
 
 forge verify-contract \
   --watch \
-  --chain {{config.bepolia.dapps.berascan.chainName}} \
+  --chain {{config.websites.berascanBepolia.chainName}} \
   0x53E365fE5fDF332dD475E90bA8383B7F9853a49F \
   src/MyToken.sol:MyToken \
   --verifier etherscan \
@@ -217,9 +217,9 @@ forge verify-contract \
 # Submitted contract for verification:
 # Response: `OK`
 # GUID: `321091ec-e529-5a11-a75c-cf1ffc6987d7`
-# URL: {{config.mainnet.dapps.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# URL: {{config.websites.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 #
-# !NOTE: Should be {{config.mainnet.dapps.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# !NOTE: Should be {{config.websites.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 ```
 
 ## Next Steps

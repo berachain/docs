@@ -19,13 +19,13 @@ head:
 
 Berachain's native decentralized exchange (DEX), BEX, allows trading of any arbitrary pair of crypto assets via swapping and providing liquidity into [liquidity pools](/learn/help/glossary#liquidity-pool).
 
-<a target="_blank" :href="config.mainnet.dapps.bex.url ">
+<a target="_blank" :href="config.websites.bex.url ">
 
 ![Berachain BEX Native dApp](/assets/bex-dapp.png)
 
 </a>
 
-> <a target="_blank" :href="config.mainnet.dapps.bex.url">{{config.mainnet.dapps.bex.url}}</a>
+> <a target="_blank" :href="config.websites.bex.url">{{config.websites.bex.url}}</a>
 
 Pool deposits in BEX can become eligible for [$BGT](/learn/pol/tokens/bgt) emissions and incentivization by whitelisting associated [Reward Vaults](/learn/pol/rewardvaults) via governance.
 

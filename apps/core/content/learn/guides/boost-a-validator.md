@@ -12,7 +12,7 @@ The following guide will walk you through the process of boosting a Validator wi
 
 ## How To Boost A Validator With $BGT
 
-This will walk you through the process of boosting a Berachain Validator through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.hub.name}}</a>.
+This will walk you through the process of boosting a Berachain Validator through <a :href="config.websites.hub.url" target="_blank">{{config.websites.hub.name}}</a>.
 
 ### Step 1 - Choose A Validator
 

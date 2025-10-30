@@ -17,7 +17,7 @@ head:
 
 # Create2Deployer
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.create2['mainnet-address']">{{config.contracts.other.create2['mainnet-address']}}</a><span v-if="config.contracts.other.create2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.create2.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.other.create2.address.berachainMainnet">{{config.contracts.other.create2.address.berachainMainnet}}</a><span v-if="config.contracts.other.create2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.create2.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/base/Create2Deployer.sol)
 

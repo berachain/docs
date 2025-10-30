@@ -5,6 +5,14 @@ import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
+/**
+ * UTM Source for Core
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsCore.utmSource}`;
+
+/**
+ * Sidebar Configuration
+ */
 const SIDEBAR = {
   /**
    * Main section for both the root / and /learn
@@ -88,8 +96,8 @@ const SIDEBAR = {
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         { text: "Safe{Wallet}", link: "/learn/using-safe-wallet" },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -127,14 +135,14 @@ const SIDEBAR = {
         },
 
         {
-          text: `${constants.bepolia.dapps.faucet.name}`,
-          link: `${constants.bepolia.dapps.faucet.url}`,
+          text: `${constants.websites.faucetBepolia.name}`,
+          link: `${constants.websites.faucetBepolia.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -146,7 +154,7 @@ const SIDEBAR = {
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
         {
-          text: "Integrating with PoL",
+          text: "Building with Proof-of-Liquidity",
           link: "/developers/quickstart/pol-integration"
         }
       ]
@@ -161,6 +169,10 @@ const SIDEBAR = {
         {
           text: "Create ERC-20 Contract Using Foundry",
           link: "/developers/guides/create-erc20-contract-using-foundry"
+        },
+        {
+          text: "Verify Smart Contracts",
+          link: "/developers/guides/verify-smart-contracts"
         },
         {
           text: "Deploy Contract Using NextJS & WalletConnect",
@@ -299,7 +311,7 @@ const SIDEBAR = {
         { text: "Monitoring", link: "/nodes/monitoring" },
         {
           text: "BeaconKit GitHub Repo",
-          link: "https://github.com/berachain/beacon-kit"
+          link: `${constants.websites.beaconkit.url}${UTMSOURCE}`
         }
       ]
     },
