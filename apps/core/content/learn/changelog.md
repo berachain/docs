@@ -4,6 +4,16 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## October 2025
+
+**[Hub API documentation](/developers/hub-api)** – Added reference documentation for the Hub GraphQL API that powers hub.berachain.com. Includes 50+ queries for pools, tokens, validators, reward vaults, and smart order routing with tested examples and schema reference.
+
+**[Bend documentation](https://docs.bend.berachain.com)** – Launched dedicated documentation site for Bend, Berachain's borrowing and lending protocol. Includes market mechanics, developer guides, and contract references.
+
+**[Smart contract verification guide](/developers/guides/verify-smart-contracts)** – Added guide for verifying smart contracts on Berascan using Foundry, Hardhat, and manual verification methods with constructor parameter encoding examples.
+
+**[Safe contracts](/developers/deployed-contracts)** – Added Safe v1.4.1 contract addresses for multi-signature wallet deployments including SafeProxyFactory, MultiSend, and related contracts.
+
 ## September 2025
 
 **Bepto hardfork** [upgrade instructions](/nodes/guides/bepto) are posted.  Based on further community feedback, this upgrade removes the minimum base fee set as part of BRIP-0002. However, the base fee rate of change will remain the same as introduced in BRIP-0002.
