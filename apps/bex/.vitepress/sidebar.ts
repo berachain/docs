@@ -19,21 +19,10 @@ const SIDEBAR = {
    */
   LEARN: [
     {
-      text: "Introduction To BEX",
+      text: "Learn About BEX",
       items: [
         { text: "What is BEX?", link: "/learn/" },
-        {
-          text: "BEX dApp",
-          link: `${constants.websites.bex.url}${UTMSOURCE}`,
-          target: "_blank",
-          rel: "no-referrer"
-        }
-      ]
-    },
-    {
-      text: "Core Concepts",
-      items: [
-        { text: "AMMs", link: "/learn/concepts/amm" },
+        { text: "Decentralized Exchanges", link: "/learn/concepts/dex" },
         { text: "Vault", link: "/learn/concepts/vault" },
         {
           text: "Pools",
