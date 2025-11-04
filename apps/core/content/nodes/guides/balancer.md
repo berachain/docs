@@ -49,7 +49,7 @@ If you compile your own build, do so against the **recommended release branches*
 4. Start all clients.
 
 :::tip
-Previous instructions specified a `geth init` step. These are no longer needed.
+Previous instructions specified a `geth init` step. These are no longer needed, safe to skip, and will cause no harm if already done.
 :::
 
 ### Download links
