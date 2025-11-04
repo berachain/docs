@@ -316,7 +316,8 @@ const SIDEBAR = {
         {
           text: "BeaconKit GitHub Repo",
           link: `${constants.websites.beaconkit.url}${UTMSOURCE}`
-        }
+        },
+        { text: "Balancer Upgrade", link: "/nodes/guides/balancer" }
       ]
     },
     {
@@ -324,8 +325,7 @@ const SIDEBAR = {
       items: [
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
-        { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Bepto Upgrade", link: "/nodes/guides/bepto" }
+        { text: "API Reference", link: "/beacon-kit/api" }
       ]
     },
     {
