@@ -45,12 +45,12 @@ If you compile your own build, do so against the **recommended release branches*
 2. Install the recommended release version of Bera-Geth or Bera-Reth, linked below, into place.
 3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
    - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
-   - **Bera-Geth:** run `bera-geth init` against your Geth data directory with the supplied genesis file.
-     We recommend making this a permanent part of every `bera-geth` startup, especially in kubernetes. Our recommended [startup process](https://github.com/berachain/guides/tree/main/apps/node-scripts/run-geth.sh) now includes this.
-
-     `bera-geth init --datadir /path/to/geth/datadir /path/to/eth-genesis.json`
-
+   - **Bera-Geth:** no additional steps.
 4. Start all clients.
+
+:::tip
+Previous instructions specified a `geth init` step. These are no longer needed.
+:::
 
 ### Download links
 
