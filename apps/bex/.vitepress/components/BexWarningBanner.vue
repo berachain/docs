@@ -10,8 +10,7 @@ import config from '@berachain/config/constants.json';
   <div class="BexWarningBanner">
     <span class="BexWarningBannerIcon">⚠️</span>
     <span class="BexWarningBannerText">
-      <span class="BexWarningBannerMobile">BEX pools are paused.</span>
-      <span class="BexWarningBannerDesktop">BEX pools are paused until further notice.</span>
+      <span>BEX pools are paused until further notice.</span>
       <span class="BexWarningBannerFollow"> Follow the <a :href="config.socials.twitter" target="_blank" rel="noopener noreferrer">Berachain Foundation</a> for updates.</span>
     </span>
   </div>
@@ -65,19 +64,7 @@ import config from '@berachain/config/constants.json';
   opacity: 0.8;
 }
 
-.BexWarningBannerDesktop {
-  display: none;
-}
-
 @media (min-width: 768px) {
-  .BexWarningBannerMobile {
-    display: none;
-  }
-
-  .BexWarningBannerDesktop {
-    display: inline;
-  }
-
   .BexWarningBanner {
     font-size: 15px;
   }
