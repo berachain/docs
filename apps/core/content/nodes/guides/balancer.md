@@ -49,7 +49,9 @@ If you compile your own build, do so against the **recommended release branches*
 4. Start all clients.
 
 :::tip
-Previous instructions specified a `geth init` step. These are no longer needed, safe to skip, and will cause no harm if already done.
+Previous instructions specified a `geth init` step. These are no longer needed.
+
+If you performed a `geth init` step and obtained a warning "mismatching Prague3 fork", that can safely be ignored.
 :::
 
 ### Download links
