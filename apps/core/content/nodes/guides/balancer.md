@@ -58,7 +58,7 @@ If you performed a `geth init` step and obtained a warning "mismatching Prague3 
 
 | Chain   | Github release page                                                                      | Release date |
 | ------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mainnet | [Bera-Geth v1.011602.6](https://github.com/berachain/bera-geth/releases/tag/v1.011602.6) | Nov 4        |
+| Mainnet | [Bera-Geth v1.011602.7](https://github.com/berachain/bera-geth/releases/tag/v1.011602.7) | Nov 5        |
 | Mainnet | [Bera-Reth v1.2.0](https://github.com/berachain/bera-reth/releases/tag/v1.2.0)           | Nov 4        |
 
 | Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                                                           |

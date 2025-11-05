@@ -19,7 +19,7 @@ The following execution clients are recommended to go with our **required [Beaco
 
 | Language | Required Version (Mainnet & Bepolia)                                                     |
 | -------- | ---------------------------------------------------------------------------------------- |
-| Golang   | [Bera-Geth v1.011602.6](https://github.com/berachain/bera-geth/releases/tag/v1.011602.6) |
+| Golang   | [Bera-Geth v1.011602.7](https://github.com/berachain/bera-geth/releases/tag/v1.011602.7) |
 | Rust     | [Bera-Reth v1.2.0](https://github.com/berachain/bera-reth/releases/tag/v1.2.0)           |
 
 | Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                                                           |
