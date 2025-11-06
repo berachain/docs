@@ -49,3 +49,8 @@ translate.sh
 # other package manager lock files
 package-lock.json
 yarn.lock
+
+# temporary optimization files
+*.optimized.png
+*.optimized.jpg
+*.optimized.jpeg
