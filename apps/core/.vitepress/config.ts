@@ -8,6 +8,7 @@ import { constants } from "@berachain/config/constants";
 import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import llmsTxt from "vitepress-plugin-llms";
+import viteImagemin from "vite-plugin-imagemin";
 
 // Config
 // ========================================================
@@ -159,7 +160,37 @@ const config = withMermaid(
       }
     },
     vite: {
-      plugins: [vercelToolbar(), llmsTxt()],
+      plugins: [
+        vercelToolbar(),
+        llmsTxt(),
+        viteImagemin({
+          gifsicle: {
+            optimizationLevel: 7,
+            interlaced: false
+          },
+          optipng: {
+            optimizationLevel: 7
+          },
+          mozjpeg: {
+            quality: 85
+          },
+          pngquant: {
+            quality: [0.8, 0.9],
+            speed: 4
+          },
+          svgo: {
+            plugins: [
+              {
+                name: "removeViewBox"
+              },
+              {
+                name: "removeEmptyAttrs",
+                active: false
+              }
+            ]
+          }
+        })
+      ],
       resolve: {
         alias: [
           {
