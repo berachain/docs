@@ -23,7 +23,6 @@
     "mermaid": "^11.8.0",
     "prettier": "^3.6.2",
     "turbo": "^2.5.4",
-    "vite-plugin-imagemin": "^0.6.1",
     "vitepress-plugin-mermaid": "^2.0.17"
   },
   "packageManager": "pnpm@8.15.0",
