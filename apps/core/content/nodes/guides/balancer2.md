@@ -2,18 +2,18 @@
 head:
   - - meta
     - property: og:title
-      content: Berachain Balancer Upgrade
+      content: Berachain Balancer Upgrade the 2nd
   - - meta
     - name: description
-      content: Berachain Balancer Upgrade
+      content: Berachain Balancer Upgrade the 2nd
   - - meta
     - property: og:description
-      content: Berachain Balancer Upgrade
+      content: Berachain Balancer Upgrade the 2nd
 ---
 
-# Berachain Balancer Upgrade
+# Berachain Balancer Upgrade #2
 
-This upgrade disrupts the ability for funds dislodged by the Balancer exploit of November 3 to be transferred anywhere except the Berachain Foundation.
+This upgrade to Berachain Mainnet restores the ability to transfer ERC20 into or out of BEX Vaults.
 
 :::warning
 All node operators, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to the versions below to continue following the chain.
@@ -58,13 +58,13 @@ If you performed a `geth init` step and obtained a warning "mismatching Prague3 
 
 | Chain   | Github release page                                                                      | Release date |
 | ------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Mainnet | [Bera-Geth v1.011602.7](https://github.com/berachain/bera-geth/releases/tag/v1.011602.7) | Nov 5        |
-| Mainnet | [Bera-Reth v1.2.0](https://github.com/berachain/bera-reth/releases/tag/v1.2.0)           | Nov 4        |
+| Mainnet | [Bera-Geth v1.011607.0](https://github.com/berachain/bera-geth/releases/tag/v1.011607.0) | Nov 7        |
+| Mainnet | [Bera-Reth v1.3.0](https://github.com/berachain/bera-reth/releases/tag/v1.3.0)           | Nov 7        |
 
 | Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                                                           |
 | --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mainnet                     | Nov 4   | [c5060f8dc392192c43d74c5b33b93cde](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
-| Bepolia                     | —       | No Bepolia update required.                                                                                                                        |
+| Mainnet                     | Nov 7   | [6b333924b81a1935e51ac70e7d9d7cb0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| Bepolia                     | -       | No upgrade required                                                                                                                                |
 
 ## Confirm upgrade
 

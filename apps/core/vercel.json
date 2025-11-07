@@ -98,7 +98,6 @@
     },
     {
       "source": "/developers/beratrail-block-explorer",
-      "destination": "https://beratrail.io"
     },
     {
       "source": "/learn/pol/gauges",
@@ -115,6 +114,14 @@
     {
       "source": "/learn/claim-bera-airdrop",
       "destination": "/"
+    },
+    {
+      "source": "/nodes/guides/bectra",
+      "destination": "/nodes/evm-execution"
+    }
+    {
+      "source": "/nodes/guides/balancer",
+      "destination": "/nodes/evm-execution"
     }
   ]
 }
