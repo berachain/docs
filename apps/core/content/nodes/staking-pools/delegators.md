@@ -13,7 +13,7 @@ You will only need the operator-facing helper scripts in `script/install-helpers
 
 ## 1) Check readiness
 
-Confirm the network, validator pubkey, and whether a delegated pool/handler is detected:
+Confirm the chain, validator pubkey, and whether a delegated pool/handler is detected:
 
 ```bash
 ./status.sh
@@ -48,8 +48,6 @@ After activation, deposit the remaining delegated funds to reach your target bal
 ```bash
 ./delegated-deposit.sh --amount 240000
 ```
-
-f
 
 ## 5) Verify status
 

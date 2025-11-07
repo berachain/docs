@@ -57,8 +57,10 @@ Ensure the beacon node API is enabled in your `app.toml` (`[beacon-kit.node-api]
 Run `activate.sh` with your addresses:
 
 ```bash
-./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
+./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR [--chain mainnet|bepolia]
 ```
+
+If you need to specify the chain explicitly (e.g., when beacond detection fails), use the `--chain` option. Otherwise, the chain is auto-detected from your beacond configuration.
 
 - If your validator is not yet registered on the beacon chain, the script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Run it and wait for confirmation, then run `activate.sh` again.
 - Once registered, the script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
@@ -73,9 +75,33 @@ Use `status.sh` to check deployment, registration, and activation:
 ./status.sh
 ```
 
-You should see the SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses, confirmation that the beacon deposit operator matches your SmartOperator, and the pool’s active status. If the pool isn’t active yet, follow the prompt to run the activation step.
+You should see the SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses, confirmation that the beacon deposit operator matches your SmartOperator, and the pool's active status. If the pool isn't active yet, follow the prompt to run the activation step.
 
-## 4) (Optional) Stake additional BERA
+## 4) Set minimum effective balance
+
+**Critical Step:** The `minEffectiveBalance` parameter determines when your staking pool activates its validator on the consensus layer. The consensus layer has a floor of {{ config.mainnet.minEffectiveBalance }} BERA, but when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots occupied), the minimum stake required increases in {{ config.mainnet.stakeMinimumIncrement }} BERA increments.
+
+If you don't set this value correctly, your pool may accumulate deposits without ever activating. **You must set `minEffectiveBalance` to match the current minimum stake required if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA.**
+
+To determine the current minimum stake requirement:
+
+1. Check [Berachain Hub](https://hub.berachain.com/boost/) to see the current number of active validators
+2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
+3. Calculate the minimum required stake (lowest active stake, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment)
+
+Set the value using your SmartOperator contract:
+
+```bash
+cast send $SMART_OPERATOR_ADDRESS \
+  "setMinEffectiveBalance(uint256)" $CALCULATED_MIN_STAKE \
+  --ledger  # or --private-key $PRIVATE_KEY
+```
+
+Replace `$SMART_OPERATOR_ADDRESS` with your SmartOperator address and `$CALCULATED_MIN_STAKE` with the calculated minimum stake amount in wei (multiply BERA amount by 10^18).
+
+For more details on why this matters, see the [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) section in the operator guide.
+
+## 5) (Optional) Stake additional BERA
 
 Add stake to your pool and send stBERA to a receiver address:
 

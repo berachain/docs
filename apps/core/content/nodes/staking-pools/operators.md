@@ -240,6 +240,41 @@ function activeThresholdReached() external view returns (bool);
 
 See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#minEffectiveBalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
 
+### Setting Minimum Effective Balance
+
+The `minEffectiveBalance` parameter is critical for validator activation and maintaining active status. This value determines when your staking pool becomes eligible to activate its validator on the consensus layer and serves as a safeguard that triggers full exit if your pool's deposits fall below it.
+
+**How the Consensus Layer Minimum Works:**
+
+The consensus layer enforces a base minimum of {{ config.mainnet.minEffectiveBalance }} BERA for validator activation. However, when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots are occupied), the actual minimum stake required increases in increments of {{ config.mainnet.stakeMinimumIncrement }} BERA. This dynamic adjustment ensures that validators must compete for entry into the active set when capacity is reached.
+
+**Why This Matters:**
+
+If you set `minEffectiveBalance` to the default {{ config.mainnet.minEffectiveBalance }} BERA but the current minimum stake required is higher (due to a full validator set), your pool will not activate. The pool will only deposit to the consensus layer when `totalDeposits + bufferedAssets >= minEffectiveBalance()`. Setting this value too low means your pool may accumulate deposits but never trigger validator activation.
+
+**Setting the Correct Value:**
+
+You must set `minEffectiveBalance` to match the current minimum stake required on the consensus layer if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA. To determine the current requirement:
+
+1. Check the current number of validators on [Berachain Hub](https://hub.berachain.com/boost/)
+2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
+3. The minimum required stake will be that lowest amount, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment
+
+**Critical Operational Impact:**
+
+Once your validator reaches the activation threshold (when `activeThresholdReached` becomes true), a cooldown period begins during which withdrawals are disabled. This protection ensures commitment to staking operations. However, if withdrawals later cause `totalDeposits` to fall below `minEffectiveBalance()`, the pool automatically triggers a full exit. Setting `minEffectiveBalance` correctly from the start prevents your pool from exiting prematurely while ensuring activation occurs when sufficient stake is available.
+
+```solidity
+// Set minimum effective balance (can only be called by SmartOperator)
+function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
+```
+
+See: [SmartOperator.setMinEffectiveBalance](/nodes/staking-pools/contracts/SmartOperator.md#setmineffectivebalance)
+
+**Best Practice:**
+
+When setting up your pool, always verify the current minimum stake requirement and set `minEffectiveBalance` accordingly. If the validator set is full and you set this value too low, your pool will accumulate deposits without activating, potentially leading to user confusion and suboptimal capital allocation.
+
 ### Understanding Pool Operations
 
 The StakingPool contract manages several critical operational aspects that directly impact your pool's performance and user experience.
