@@ -317,7 +317,7 @@ const SIDEBAR = {
           text: "BeaconKit GitHub Repo",
           link: `${constants.websites.beaconkit.url}${UTMSOURCE}`
         },
-        { text: "Balancer Upgrade", link: "/nodes/guides/balancer" }
+        { text: "Balancer Upgrade #2", link: "/nodes/guides/balancer2" }
       ]
     },
     {

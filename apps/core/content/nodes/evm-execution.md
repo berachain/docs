@@ -19,12 +19,12 @@ The following execution clients are recommended to go with our **required [Beaco
 
 | Language | Required Version (Mainnet & Bepolia)                                                     |
 | -------- | ---------------------------------------------------------------------------------------- |
-| Golang   | [Bera-Geth v1.011602.7](https://github.com/berachain/bera-geth/releases/tag/v1.011602.7) |
-| Rust     | [Bera-Reth v1.2.0](https://github.com/berachain/bera-reth/releases/tag/v1.2.0)           |
+| Golang   | [Bera-Geth v1.011607.0](https://github.com/berachain/bera-geth/releases/tag/v1.011607.0) |
+| Rust     | [Bera-Reth v1.3.0](https://github.com/berachain/bera-reth/releases/tag/v1.3.0)           |
 
 | Bera-Reth/Geth Genesis File | Updated | Download link & md5 hash                                                                                                                           |
 | --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mainnet                     | Nov 3   | [c5060f8dc392192c43d74c5b33b93cde](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
+| Mainnet                     | Nov 7   | [6b333924b81a1935e51ac70e7d9d7cb0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
 | Bepolia                     | Sep 15  | [c27c1162af33f7f5401bcef974a64454](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.

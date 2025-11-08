@@ -14,14 +14,12 @@
     "changeset": "changeset"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.5",
-    "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@turbo/gen": "^2.5.4",
     "@types/node": "^24.0.10",
     "dotenv-cli": "^8.0.0",
     "eslint": "^9.30.1",
     "mermaid": "^11.8.0",
+    "patch-package": "^8.0.0",
     "prettier": "^3.6.2",
     "sharp": "^0.34.4",
     "turbo": "^2.5.4",
@@ -33,7 +31,6 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@vercel/toolbar": "^0.1.38",
-    "dayjs": "^1.11.13"
+    "@vercel/toolbar": "^0.1.38"
   }
 }
