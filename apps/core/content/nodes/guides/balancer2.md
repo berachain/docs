@@ -13,15 +13,21 @@ head:
 
 # Berachain Balancer Upgrade #2
 
-This upgrade to Berachain Mainnet restores the ability to transfer ERC20 into or out of BEX Vaults.
+This upgrade to Berachain Mainnet restores some functionality to BEX.
 
 :::warning
-All node operators, whether hosting an RPC or running a validator, **must upgrade** their Execution Client to the versions below to continue following the chain.
+All node operators, whether hosting an RPC or running a validator, **must upgrade** their execution client to the versions below in order to continue following the chain.
+:::
+
+:::info
+**Hardfork Date:** Wednesday, November 12 at 16:00 GMT / 11:00 EST.
+
+All nodes are expected to have their binaries and respective genesis files updated before this date, or risk having their node stop working.
 :::
 
 ## Upgrade Details
 
-Berachain released stand-alone executables and Docker images for Linux ARM and AMD64 architectures for Bera-Reth and Bera-Geth. All clients are easily compiled for other systems and architectures with a few minutes' time; review their respective READMEs for details.
+Berachain has released standalone executables and Docker images for Linux ARM and AMD64 architectures for both Bera-Reth and Bera-Geth. All clients can be easily compiled for other systems and architectures within a few minutes; please review their respective READMEs for details.
 
 **New genesis files** are required for Bera-Reth/Geth.
 
@@ -30,7 +36,7 @@ Berachain released stand-alone executables and Docker images for Linux ARM and A
 ## Upgrade Instructions
 
 :::tip
-If you duplicate your installation to test the upgrade — which is recommended — don't duplicate these identity files to avoid interfering with your production node's peering:
+If you duplicate your installation to test the upgrade—which is recommended—do not copy these identity files, as this could interfere with your production node's peering:
 
 - **Bera-Reth**: `discovery_secret`
 - **Bera-Geth**: `nodekey`
@@ -42,16 +48,16 @@ If you compile your own build, do so against the **recommended release branches*
 :::
 
 1. Stop all clients.
-2. Install the recommended release version of Bera-Geth or Bera-Reth, linked below, into place.
-3. Install the new Reth/Geth genesis files linked below into place, and verify the hash with `md5sum <file>`. Then:
-   - **Bera-Reth:** overwrite `$RETH_DATA/genesis.json`.
-   - **Bera-Geth:** no additional steps.
+2. Install the recommended release version of Bera-Geth or Bera-Reth, linked below, in place.
+3. Install the new Reth/Geth genesis files linked below, and verify the hash with `md5sum <file>`. Then:
+   - **Bera-Reth:** Overwrite `$RETH_DATA/genesis.json`.
+   - **Bera-Geth:** No additional steps are required.
 4. Start all clients.
 
 :::tip
-Previous instructions specified a `geth init` step. These are no longer needed.
+Previous instructions specified a `geth init` step. This is no longer necessary.
 
-If you performed a `geth init` step and obtained a warning "mismatching Prague3 fork", that can safely be ignored.
+If you performed a `geth init` step and received a "mismatching Prague3 fork" warning, it can safely be ignored.
 :::
 
 ### Download links

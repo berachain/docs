@@ -123,6 +123,10 @@
     {
       "source": "/nodes/guides/balancer",
       "destination": "/nodes/evm-execution"
+    },
+    {
+      "source": "/nodes/guides/balancer",
+      "destination": "/nodes/guides/balancer2"
     }
   ]
 }
