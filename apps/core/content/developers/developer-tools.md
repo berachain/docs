@@ -50,12 +50,10 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis)
-- [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
 - [Spectrum](https://spectrumnodes.com)
 - [Tatum RPC and Webhooks](https://tatum.io/berachain-and-tatum)
 - [Tenderly](https://dashboard.tenderly.co/)
 - [Thirdweb](https://thirdweb.com/chainlist)
-- [Validation Cloud](https://www.validationcloud.io/berachain-rpc)
 - [Winnie](https://www.henlo-winnie.dev/)
 
 ### Wallets & Multisigs
