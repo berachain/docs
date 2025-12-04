@@ -274,15 +274,25 @@ function accrueEarnedBGTFees() external whenNotFullyExited;
 
 ### claimBgtStakerReward
 
-Claims BGTStaker rewards and send them to the incentive collector.
+Claims accumulated HONEY token rewards from BGT staking and forwards them to the IncentiveCollector. HONEY rewards accumulate from protocol fees distributed to BGT stakers. Once forwarded to IncentiveCollector, these tokens become available for users to claim via the auction mechanism.
 
 ```solidity
 function claimBgtStakerReward() external returns (uint256);
 ```
 
+**Returns**
+
+| Name     | Type      | Description                                   |
+| -------- | --------- | --------------------------------------------- |
+| `<none>` | `uint256` | The amount of HONEY rewards claimed and sent. |
+
+**When to Use**
+
+Call this function when you want to forward HONEY rewards to IncentiveCollector. This function only handles HONEY rewards from BGT staking. To forward both HONEY rewards and incentive tokens from the boost program, use `claimBoostRewards()` instead.
+
 ### claimBoostRewards
 
-Claims BGTStaker and incentive program rewards and send them to the incentive collector.
+Claims both HONEY rewards from BGT staking and incentive tokens from the boost program, then forwards all accumulated tokens to the IncentiveCollector. Once tokens are in IncentiveCollector, they become available for anyone to claim via the permissionless auction mechanism by paying the required payout amount.
 
 ```solidity
 function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, address[] memory tokens) external;
@@ -290,10 +300,26 @@ function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, add
 
 **Parameters**
 
-| Name     | Type                               | Description                                       |
-| -------- | ---------------------------------- | ------------------------------------------------- |
-| `claims` | `IBGTIncentiveDistributor.Claim[]` | The claims for the incentive program rewards.     |
-| `tokens` | `address[]`                        | The tokens to be sent to the incentive collector. |
+| Name     | Type                               | Description                                                                                                                                  |
+| -------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `claims` | `IBGTIncentiveDistributor.Claim[]` | Array of merkle claims for incentive program rewards. Each claim includes an identifier, account, amount, and merkle proof for verification. |
+| `tokens` | `address[]`                        | Array of token addresses to forward to IncentiveCollector. All balances of these tokens held by SmartOperator will be transferred.           |
+
+**What Happens**
+
+- Claims any accumulated HONEY rewards from BGT staking
+- Claims incentive tokens from the boost program using the provided merkle claims
+- Transfers all balances of the specified tokens (including any HONEY claimed) from SmartOperator to IncentiveCollector
+- Tokens become available for users to claim via IncentiveCollector's auction mechanism
+
+**Token Sources**
+
+Tokens accumulate in SmartOperator from:
+
+- **Commission share**: Your validator's commission share of incentive tokens (sent automatically when RewardVault processes incentives)
+- **BGT staking rewards**: HONEY tokens from protocol fee distribution
+
+**Important**: Tokens must be manually forwarded to IncentiveCollector using this function or `claimBgtStakerReward()` before users can claim them. They do not automatically flow to IncentiveCollector.
 
 ## Events
 

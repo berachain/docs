@@ -19,7 +19,15 @@ head:
 
 > <small><span v-if="config.contracts.stakingPools.withdrawalVault['mainnet-address']">Mainnet: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['mainnet-address']">{{config.contracts.stakingPools.withdrawalVault['mainnet-address']}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPools.withdrawalVault['bepolia-address']">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['bepolia-address']">{{config.contracts.stakingPools.withdrawalVault['bepolia-address']}}</a></span><span v-if="config.contracts.stakingPools.withdrawalVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPools.withdrawalVault.abi">ABI JSON</a></span></small>
 
-The WithdrawalVault contract manages withdrawal requests for staking pools. It creates NFTs representing withdrawal requests and handles the finalization process after a cooldown period. The contract also manages full exits from the consensus layer.
+The WithdrawalVault contract manages withdrawal requests for staking pools. It implements ERC721Enumerable to create non-transferable NFTs representing withdrawal requests and handles the finalization process after a cooldown period. The contract also manages full exits from the consensus layer.
+
+**NFT Details:**
+
+- **Name**: "Berachain Staking Pool Withdrawal Request"
+- **Symbol**: "BSPWR"
+- **Token ID**: The `requestId` returned from `requestWithdrawal()` or `requestRedeem()` is the NFT token ID
+- **Non-Transferable**: NFTs cannot be transferred to other addresses
+- **Enumerable**: Supports standard ERC721Enumerable functions for querying owned NFTs
 
 ## State Variables
 
@@ -65,7 +73,7 @@ struct WithdrawalRequest {
 
 ### getWithdrawalRequest
 
-Gets a withdrawal request by ID
+Gets a withdrawal request by ID. The request ID is the same as the NFT token ID.
 
 ```solidity
 function getWithdrawalRequest(uint256 requestId) external view returns (WithdrawalRequest memory);
@@ -73,15 +81,22 @@ function getWithdrawalRequest(uint256 requestId) external view returns (Withdraw
 
 **Parameters**
 
-| Name        | Type      | Description                      |
-| ----------- | --------- | -------------------------------- |
-| `requestId` | `uint256` | The ID of the withdrawal request |
+| Name        | Type      | Description                                                                     |
+| ----------- | --------- | ------------------------------------------------------------------------------- |
+| `requestId` | `uint256` | The ID of the withdrawal request (this is also the ERC721 token ID for the NFT) |
 
 **Returns**
 
 | Name     | Type                | Description                   |
 | -------- | ------------------- | ----------------------------- |
 | `<none>` | `WithdrawalRequest` | The withdrawal request struct |
+
+**Note**: Since WithdrawalVault implements ERC721Enumerable, you can also use standard ERC721 functions:
+
+- `ownerOf(uint256 tokenId)` - Returns the owner of a withdrawal request NFT (the `requestId` is the `tokenId`)
+- `balanceOf(address owner)` - Returns the number of withdrawal request NFTs owned by an address
+- `tokenOfOwnerByIndex(address owner, uint256 index)` - Returns a token ID owned by an address at a given index
+- `totalSupply()` - Returns the total number of withdrawal request NFTs minted
 
 ## Functions
 

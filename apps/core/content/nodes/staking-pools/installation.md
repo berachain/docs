@@ -66,16 +66,14 @@ Ensure the beacon node API is enabled in your `app.toml` (`[beacon-kit.node-api]
 Run `activate.sh` with your addresses:
 
 ```bash
-./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR 
+./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
 ```
 
 1. The chain (mainnet or bepolia) is auto-detected from your beacond configuration.
-2.
-- If your validator is not yet registered on the beacon chain, the script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Review it. Simulate it if you want.   Then run it.   This should dump a successful transaction receipt.    
-3. Wait 192 blocks for the validator to be registered.   Then run `activate.sh` again.
+2. If your validator is not yet registered on the beacon chain, the script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Review it. Simulate it if you want. Then run it. This should dump a successful transaction receipt.
+3. Wait 192 blocks for the validator to be registered. Then run `activate.sh` again.
 4. The script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
-
-The script also predicts and shows your staking pool contract addresses ahead of time.
+5. The script also predicts and shows your staking pool contract addresses ahead of time.
 
 ## 3) Verify installation
 

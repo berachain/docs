@@ -27,7 +27,7 @@ If the pool is not yet created, use the delegated creation script. It consumes t
 ./delegated-create-pool.sh
 ```
 
-This will create a script with deployment commands. Review it.  Then run it to submit the transaction, then wait for confirmation.
+This will create a script with deployment commands. Review it. Then run it to submit the transaction, then wait for confirmation.
 
 ## 3) Activate the pool
 
@@ -65,7 +65,7 @@ Operators can withdraw earned yield independently of principal. The helper scrip
 
 Follow the prompts to execute the generated request and completion scripts after the cooldown.
 
-Principal withdrawals are controlled by the delegator and are out of scope here.  However, the idea is once you have attracted additional depsitors, the foundation can redeem its stake without causing your validator to exit.
+Principal withdrawals are controlled by the delegator and are out of scope here. However, the idea is once you have attracted additional depsitors, the foundation can redeem its stake without causing your validator to exit.
 
 ## Notes
 

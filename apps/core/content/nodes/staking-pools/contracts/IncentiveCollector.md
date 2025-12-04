@@ -64,7 +64,16 @@ function queuePayoutAmountChange(uint256 newPayoutAmount) external;
 
 ### claim
 
-Claims incentive tokens by paying the required payout amount. Transfers all balances of specified ERC20 tokens to the caller and forwards fees to the smart operator and the remaining payout amount to the staking rewards vault.
+Claims all accumulated incentive tokens by paying the required payout amount. This function implements a permissionless auction mechanism where anyone can pay the payout amount (default 100 BERA) to claim **all** accumulated tokens for the specified token addresses.
+
+**Important**: This is a winner-takes-all auction. The first caller to pay the payout amount receives all accumulated tokens. There is no partial claiming or proportional distribution.
+
+**What Happens:**
+
+- Caller receives all balances of the specified ERC20 tokens held by the contract
+- Protocol fee (based on `feePercentage`) is minted as shares to your validator operator
+- Remaining payout amount is sent to StakingRewardsVault for distribution to stakers
+- Any queued payout amount or fee percentage changes are applied
 
 ```solidity
 function claim(address[] calldata tokens) external payable;
@@ -72,14 +81,27 @@ function claim(address[] calldata tokens) external payable;
 
 **Parameters**
 
-| Name     | Type        | Description                                            |
-| -------- | ----------- | ------------------------------------------------------ |
-| `tokens` | `address[]` | Array of ERC20 token addresses to claim balances from. |
+| Name     | Type        | Description                                                                                                                                 |
+| -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens` | `address[]` | Array of ERC20 token addresses to claim balances from. All balances of these tokens held by the contract will be transferred to the caller. |
 
 **Requirements**
 
-- Must send exactly the required payout amount
-- This function does NOT implement slippage protection - caller must check received amounts
+- Must send exactly `payoutAmount` in native tokens (msg.value must equal `payoutAmount`)
+- Validator must not be fully exited
+- This function does NOT implement slippage protection - caller must verify that the value of tokens received exceeds the payout cost
+
+**Token Sources**
+
+Tokens accumulate in IncentiveCollector when you forward them from SmartOperator using `claimBgtStakerReward()` or `claimBoostRewards()`. Tokens may also accumulate from direct transfers if anyone sends tokens directly to the contract.
+
+**Example Flow:**
+
+1. Your validator earns commission on incentive tokens (automatically sent to SmartOperator)
+2. You call `claimBoostRewards()` to forward tokens to IncentiveCollector
+3. Tokens accumulate in IncentiveCollector
+4. Anyone can call `claim()` with the payout amount (default 100 BERA) to receive all accumulated tokens
+5. The payout amount (minus protocol fee) goes to StakingRewardsVault and is distributed to stakers
 
 ## Events
 
@@ -183,7 +205,7 @@ event IncentiveTokensClaimed(address indexed from, uint256 payoutAmount, uint256
 error InvalidSender(address sender, address expected);
 ```
 
-Thrown by `_validateSender()` when the sender is not the expected address.
+Thrown when a function is called by an unauthorized address.
 
 ### IncorrectPayoutAmount
 

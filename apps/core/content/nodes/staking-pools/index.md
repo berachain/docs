@@ -17,53 +17,157 @@ head:
 
 # Staking Pools Overview
 
-Staking Pools enable validators to offer liquid staking services to their communities, creating a more accessible and flexible way for users to participate in Berachain's network security. This system allows validators to build their own branded staking services while providing users with the benefits of liquid staking and automatic reward compounding.
+Staking Pools enable validators to offer liquid staking services to their communities. Users stake BERA through smart contracts and receive liquid shares that automatically grow in value as rewards accumulate. Validators earn commission on user rewards while building their own branded staking services.
 
 ## What Are Staking Pools?
 
-Staking Pools are validator-operated services that allow users to stake BERA through smart contracts, receiving liquid shares that represent their stake and automatically grow in value as rewards accumulate. Unlike traditional staking where users must run their own validator or delegate to a centralized service, staking pools give users the flexibility to stake any amount while maintaining control over their funds.
+Staking Pools are validator-operated services that allow users to stake BERA through smart contracts, receiving liquid shares (stBERA) that represent their stake and automatically grow in value as rewards accumulate. Unlike traditional staking where users must run their own validator, staking pools allow users to stake any amount while maintaining control over their funds.
 
-For validators, staking pools provide a way to build and monetize their own community of stakers, earning commission on user rewards while providing professional staking services. For users, staking pools offer lower barriers to entry, automatic reward reinvestment, and the ability to withdraw funds when needed.
+For validators, staking pools provide a way to build and monetize their own community of stakers, earning commission on user rewards. For users, staking pools offer lower barriers to entry, automatic reward reinvestment, and flexible withdrawals.
 
 ## How It Works
 
-The staking pool system uses smart contracts to automate the complex process of staking, reward distribution, and withdrawal management. When a validator creates a staking pool, the system deploys several interconnected contracts that handle different aspects of the operation.
+When a validator creates a staking pool, the system deploys several interconnected contracts. Each validator's pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an Accounting Oracle that provides consensus layer data updates.
 
-The system operates through a combination of core components deployed per validator and shared infrastructure used by all staking pools. Each validator's staking pool consists of a Staking Pool Contract that manages user deposits and tracks shares, a Smart Operator that automatically handles validator operations and Proof of Liquidity integration, and a Rewards Vault that collects and automatically reinvests all rewards. The shared infrastructure includes a centralized Withdrawal Vault that processes withdrawal requests, issues tracking NFTs, and manages withdrawal finalization for all staking pools, along with a permissionless Accounting Oracle that provides consensus layer data updates and validation.
-
-The system is designed to be fully automated, requiring minimal manual intervention from validators while providing users with a seamless staking experience. This automation eliminates the complexity of traditional staking while maintaining the security and transparency that users expect from decentralized systems.
+The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from validators while providing users with a seamless staking experience.
 
 ## User Experience
 
 ### For Users
 
-The user experience with staking pools is designed to be straightforward and accessible. Users begin by finding a validator-operated staking pool that aligns with their preferences, whether that's based on commission rates, community reputation, or specific reward allocation strategies. Once they've selected a pool, the process is remarkably simple: they deposit BERA directly to the pool and immediately receive liquid shares that represent their stake.
-
-The key advantage for users is the automatic compounding of rewards. As the validator earns rewards through their operations, these rewards are automatically reinvested into the pool, causing the value of each user's shares to increase over time. This means users don't need to manually claim or reinvest rewards - the system handles this automatically, maximizing their returns without any additional effort.
-
-Withdrawal flexibility is another significant benefit. Users can exit their position at any time by requesting a withdrawal, which will be processed through the consensus layer with predictable timing of approximately 3 days (129,600 blocks). The system also supports lower barriers to entry, allowing users to stake any amount without being constrained by validator minimums, while maintaining full transparency through on-chain verification of all operations.
+Users deposit BERA to a validator's staking pool and immediately receive liquid stBERA shares. Rewards automatically compound as the validator earns rewards, increasing the value of shares over time without manual claiming or reinvestment. Users can withdraw at any time; withdrawals process through the consensus layer in approximately 3 days (129,600 blocks). Users can stake any amount without validator minimums, with full transparency through on-chain verification.
 
 ### For Validators
 
-Validators operating staking pools benefit from a comprehensive system that handles the technical complexity while providing opportunities for community building and revenue generation. The setup process begins with deploying a staking pool through the factory contract, which creates all necessary smart contracts and automatically registers the validator with the consensus layer. Once deployed, validators configure their operational parameters, including commission rates that can be set up to 20% of user rewards as defined by BeraChef.
-
-The system provides validators with professional-grade staking services without requiring them to build the infrastructure from scratch. Validators can differentiate themselves through community engagement and strategic reward allocation, directing Proof of Liquidity incentives to specific applications or ecosystem initiatives. This creates opportunities to build stronger relationships with their staking communities while supporting particular projects or causes.
-
-Revenue generation happens automatically as the system collects commission on user rewards. For example, a validator operating a pool with 5% commission and 100,000 BERA in total deposits would automatically receive 500 BERA in commission from 10,000 BERA in annual rewards, while users receive the remaining 9,500 BERA in auto-compounded rewards. This automated revenue model allows validators to focus on community building and operational excellence rather than manual reward management.
+Validators deploy a staking pool through the factory contract, which creates all necessary contracts and registers the validator with the consensus layer. Validators configure commission rates (up to 20% of user rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on user rewards, allowing validators to focus on community building rather than manual reward management.
 
 ## Integration with Proof of Liquidity
 
-Staking pools are fully integrated with Berachain's Proof of Liquidity system, creating a symbiotic relationship between the staking infrastructure and the broader ecosystem. Pool BGT rewards automatically boost the validator's PoL performance, enhancing their position in the network's incentive structure.
+Staking pools integrate with Berachain's Proof of Liquidity system. Pool BGT rewards automatically boost the validator's PoL performance, and smart contracts automatically claim and distribute PoL incentives. Validators can direct rewards to specific applications or ecosystem initiatives.
 
-The smart contracts automatically claim and distribute Proof of Liquidity incentives, ensuring that validators and their stakers benefit from the full range of available rewards. Validators can set commission rates on user rewards, allowing them to monetize their staking pool operations while providing value to their community.
+## Provided Tools
 
-Additionally, validators have the flexibility to direct rewards to specific applications or use cases, enabling them to support particular ecosystem initiatives or community projects. This creates opportunities for validators to differentiate themselves and build stronger relationships with their staking communities.
+Berachain provides tools to help validators and users interact with staking pools. A React-based frontend interface allows users to connect wallets, deposit BERA, view positions, and request withdrawals. The Smart Operator Helper is an interactive Python CLI tool for validators to manage SmartOperator contracts, including BGT boosting, reward allocation, commission changes, and fee claims. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools).
 
 ## Getting Started
 
-For validators interested in setting up staking pools, the process begins with deploying a staking pool through the factory contract, followed by pool initialization and configuration of operational parameters. The system is designed to be straightforward for validators to implement while providing comprehensive functionality for their users. For a step‑by‑step setup, see the [Staking Pools Operator Guide](/nodes/staking-pools/operators) and the [Installation Guide](/nodes/staking-pools/installation).
+Validators can set up staking pools using the [Installation Guide](/nodes/staking-pools/installation) and manage operations with the [Operator Guide](/nodes/staking-pools/operators). Users can get started by finding a validator's staking pool and depositing BERA; see the [User Guide](/nodes/staking-pools/users) for details.
 
-Users can get started by finding a staking pool operated by a validator they trust, depositing BERA to begin earning rewards, and monitoring their position through the transparent on-chain system. The liquid nature of the shares means users can adjust their position or withdraw funds as their needs change. For a user‑focused walkthrough, see the [Staking Pools User Guide](/nodes/staking-pools/users).
+## Contract Addresses
+
+The staking pools system uses several deployed contracts across Berachain networks. These addresses are the primary interfaces for interacting with the staking pools system.
+
+### Factory Contracts
+
+Factory contracts are deployed instances that users and validators interact with directly:
+
+**StakingPoolContractsFactory**: The main factory contract that deploys all staking pool contracts for validators.
+
+<span v-if="config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']">{{config.contracts.stakingPools.stakingPoolContractsFactory['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPools.stakingPoolContractsFactory['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory['bepolia-address']">{{config.contracts.stakingPools.stakingPoolContractsFactory['bepolia-address']}}</a>
+</span>
+
+**WithdrawalVault**: The shared withdrawal vault that processes withdrawal requests for all staking pools.
+
+<span v-if="config.contracts.stakingPools.withdrawalVault['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['mainnet-address']">{{config.contracts.stakingPools.withdrawalVault['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPools.withdrawalVault['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault['bepolia-address']">{{config.contracts.stakingPools.withdrawalVault['bepolia-address']}}</a>
+</span>
+
+### Implementation Contracts
+
+Implementation contracts contain the business logic used by all staking pools. These addresses are used internally by the factory and proxies, but users interact with proxy addresses (not these implementation addresses).
+
+**StakingPool Implementation**: Core staking pool logic for managing deposits, shares, and user positions.
+
+<span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']}}</a>
+</span>
+
+**SmartOperator Implementation**: Validator operations and Proof of Liquidity integration logic.
+
+<span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.smartOperatorImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.smartOperatorImpl['bepolia-address']}}</a>
+</span>
+
+**StakingRewardsVault Implementation**: Reward collection and automatic reinvestment logic.
+
+<span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl['bepolia-address']}}</a>
+</span>
+
+**IncentiveCollector Implementation**: Incentive token collection and conversion logic.
+
+<span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']}}</a>
+</span>
+
+**DelegationHandler Implementation**: Delegation handling logic for capital providers.
+
+<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl['bepolia-address']}}</a>
+</span>
+<span v-else>
+  - **Bepolia**: Not yet deployed
+</span>
+
+**DelegationHandlerFactory Implementation**: Factory logic for deploying delegation handlers.
+
+<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['mainnet-address']">
+  - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['mainnet-address']}}</a>
+</span>
+<span v-else>
+  - **Mainnet**: Not yet deployed
+</span>
+<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['bepolia-address']">
+  - **Bepolia**: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl['bepolia-address']}}</a>
+</span>
+<span v-else>
+  - **Bepolia**: Not yet deployed
+</span>
+
+> **Note**: Individual validators have unique proxy addresses for their StakingPool, SmartOperator, StakingRewardsVault, and IncentiveCollector contracts. These proxy addresses are created when a validator deploys their staking pool through the factory. Users interact with these proxy addresses, not the implementation addresses listed above.
 
 ## Smart Contract Reference
 
