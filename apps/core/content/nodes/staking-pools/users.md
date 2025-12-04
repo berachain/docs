@@ -144,7 +144,7 @@ Withdrawals may incur fees:
 
 ### Validator Commission
 
-Validators may charge commission on your rewards. Commission is set and managed by the operator and is capped at 20% (2,000 basis points) as defined by BeraChef. You can view the current commission rate in the pool UI. See the [Operator Guide](/nodes/staking-pools/operators) for how operators configure commission.
+Validators may charge commission on your rewards. Commission is set and managed by the operator and is capped at 20% (2,000 basis points) as defined by BeraChef. You can view the current commission rate in the pool UI. 
 
 ## Pool Limits and Restrictions
 

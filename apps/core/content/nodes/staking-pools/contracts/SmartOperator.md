@@ -135,14 +135,6 @@ function queueDropBoost(uint128 amount) external;
 | -------- | --------- | ----------------------------- |
 | `amount` | `uint128` | The amount of BGT to unboost. |
 
-### fullExitQueueDropBoost
-
-Enqueues a drop boost request for the whole boosted amount. Can only be called by the staking pool when making a full withdraw.
-
-```solidity
-function fullExitQueueDropBoost() external;
-```
-
 ### dropBoost
 
 Executes the drop boost for this operator.
@@ -279,20 +271,6 @@ Accrues the base rate fees. Fees are accrued only on balance not yet charged.
 ```solidity
 function accrueEarnedBGTFees() external whenNotFullyExited;
 ```
-
-### accrueIncentivesFees
-
-Accrues the protocol fee for a given amount (payout amount). Can only be called by the incentive collector.
-
-```solidity
-function accrueIncentivesFees(uint256 amount) external;
-```
-
-**Parameters**
-
-| Name     | Type      | Description                                |
-| -------- | --------- | ------------------------------------------ |
-| `amount` | `uint256` | The amount to accrue the protocol fee for. |
 
 ### claimBgtStakerReward
 

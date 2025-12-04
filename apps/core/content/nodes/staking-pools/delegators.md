@@ -2,14 +2,12 @@
 
 This guide shows validator operators how to use delegated capital to stand up and run a staking pool. It builds on the Installation guide and reuses the same helper scripts. It does not cover delegator actions; coordinate with your capital provider as needed.
 
-See Installation first: `/nodes/staking-pools/installation`.
+See Installation first: `/nodes/staking-pools/installation`. At minimum, set up env.sh in `install-helpers/`.
 
 ## Assumptions
 
 - You completed the validator Installation steps (env configured, node synced).
-- Your delegator has prepared a DelegationHandler and delegated funds for your validator pubkey.
-
-You will only need the operator-facing helper scripts in `script/install-helpers/`.
+- The Berachain Foundation has prepared a DelegationHandler and delegated funds for your validator pubkey.
 
 ## 1) Check readiness
 
@@ -29,7 +27,7 @@ If the pool is not yet created, use the delegated creation script. It consumes t
 ./delegated-create-pool.sh
 ```
 
-Run the generated shell script to submit the transaction, then wait for confirmation.
+This will create a script with deployment commands. Review it.  Then run it to submit the transaction, then wait for confirmation.
 
 ## 3) Activate the pool
 
@@ -67,7 +65,7 @@ Operators can withdraw earned yield independently of principal. The helper scrip
 
 Follow the prompts to execute the generated request and completion scripts after the cooldown.
 
-Principal withdrawals are controlled by the delegator and are out of scope here.
+Principal withdrawals are controlled by the delegator and are out of scope here.  However, the idea is once you have attracted additional depsitors, the foundation can redeem its stake without causing your validator to exit.
 
 ## Notes
 

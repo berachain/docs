@@ -43,30 +43,12 @@ Your staking pool integrates with Berachain's validator lifecycle, which follows
 
 The setup process for staking pools follows this progression:
 
-1. **Deploy and Initialize Your Staking Pool**: Deploy the staking pool contracts through the factory, obtain verification proofs from the beacon API, and activate your pool for user deposits.
+1. **Deploy and Initialize Your Staking Pool**: See the [Installation Guide](/nodes/staking-pools/installation).
+Deploy the staking pool contracts through the factory, obtain verification proofs from the beacon API, and activate your pool for user deposits.
 
 2. **Configure Operations**: Set operational parameters such as commission rates and reward allocations to optimize your pool's performance.
 
-## Deploy and Initialize Your Staking Pool
-
-The deployment and initialization process involves several key steps that must be completed in sequence. This process deploys all necessary contracts, registers your validator with the consensus layer, and activates your pool for user deposits.
-
-**Key Steps:**
-
-1. **Deploy Contracts**: Use the factory to deploy all staking pool contracts with your validator data
-2. **Automatic Registration**: The deployment automatically registers your validator with the consensus layer
-3. **Obtain Proofs**: Gather verification proofs from the beacon API
-4. **Activate Pool**: Verify proofs and activate your pool for operations
-
-The deployment process uses the `StakingPoolContractsFactory` to create all necessary contracts in a single transaction. This factory approach ensures that all contracts are properly linked and configured, reducing the complexity of the setup process. The deployment function automatically performs the first deposit to the consensus layer, registering your validator immediately upon successful deployment.
-
-For detailed step-by-step instructions on deployment, contract verification, proof gathering, and activation, see the [Installation Guide](/nodes/staking-pools/installation).
-
-## Configure Operations
-
-Once your staking pool is active, you'll want to configure various operational parameters to optimize performance and align with your goals. These configurations allow you to customize how your pool operates and how rewards are distributed.
-
-### Business Model and Commission Rates
+## Business Model and Commission Rates
 
 Staking pools provide validators with a revenue stream through commission on incentive token distribution. You can set commission rates within the range defined by the BeraChef contract (0-20%), allowing you to balance profitability with competitive positioning.
 
@@ -248,19 +230,12 @@ The `minEffectiveBalance` parameter is critical for validator activation and mai
 
 The consensus layer enforces a base minimum of {{ config.mainnet.minEffectiveBalance }} BERA for validator activation. However, when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots are occupied), the actual minimum stake required increases in increments of {{ config.mainnet.stakeMinimumIncrement }} BERA. This dynamic adjustment ensures that validators must compete for entry into the active set when capacity is reached.
 
-**Why This Matters:**
-
-If you set `minEffectiveBalance` to the default {{ config.mainnet.minEffectiveBalance }} BERA but the current minimum stake required is higher (due to a full validator set), your pool will not activate. The pool will only deposit to the consensus layer when `totalDeposits + bufferedAssets >= minEffectiveBalance()`. Setting this value too low means your pool may accumulate deposits but never trigger validator activation.
-
-**Setting the Correct Value:**
-
 You must set `minEffectiveBalance` to match the current minimum stake required on the consensus layer if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA. To determine the current requirement:
 
 1. Check the current number of validators on [Berachain Hub](https://hub.berachain.com/boost/)
 2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
 3. The minimum required stake will be that lowest amount, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment
-
-**Critical Operational Impact:**
+4. You may, of course, choose to go higher
 
 Once your validator reaches the activation threshold (when `activeThresholdReached` becomes true), a cooldown period begins during which withdrawals are disabled. This protection ensures commitment to staking operations. However, if withdrawals later cause `totalDeposits` to fall below `minEffectiveBalance()`, the pool automatically triggers a full exit. Setting `minEffectiveBalance` correctly from the start prevents your pool from exiting prematurely while ensuring activation occurs when sufficient stake is available.
 
@@ -270,10 +245,6 @@ function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
 ```
 
 See: [SmartOperator.setMinEffectiveBalance](/nodes/staking-pools/contracts/SmartOperator.md#setmineffectivebalance)
-
-**Best Practice:**
-
-When setting up your pool, always verify the current minimum stake requirement and set `minEffectiveBalance` accordingly. If the validator set is full and you set this value too low, your pool will accumulate deposits without activating, potentially leading to user confusion and suboptimal capital allocation.
 
 ### Understanding Pool Operations
 
@@ -300,7 +271,6 @@ The pool uses a sophisticated deposit calculation system that handles:
 The withdrawal system provides both immediate and delayed withdrawal options:
 
 1. **Short Circuit Withdrawals**: If the pool's `bufferedAssets()` can cover the request and the active threshold hasn't been reached, the withdrawal short‑circuits and pays out immediately from the buffer
-2. **Standard Withdrawals**: If the bufferred funds can cover the request or the active threshold has been reached, the request is handled immediately.
 3. **Full Exit Triggers**: Automatic full exit when the pool falls below the minimum effective balance
 
 ### Reward Management
@@ -450,7 +420,8 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 1. **Check BGT Balance**: Call `unboostedBalance()` on SmartOperator
 2. **Verify Fee State**: Use `getEarnedBGTFeeState()` to check fee calculations
 3. **Monitor Boost Status**: Check if boosts are queued or active
-4. **Verify Protocol Fees**: Ensure protocol fee percentage is set correctly
+4. **Activate your boosts**: Nobody else will
+5. **Verify Protocol Fees**: Ensure protocol fee percentage is set correctly
 
 **Debugging Commands:**
 
@@ -464,30 +435,6 @@ uint256 unboosted = smartOperator.unboostedBalance();
 
 // Check rebaseable BGT amount
 uint256 rebaseable = smartOperator.rebaseableBgtAmount();
-```
-
-### Capacity and Performance Issues
-
-**Problem: Pool hitting capacity limits or performance issues**
-
-**Debug Steps:**
-
-1. **Check Capacity Status**: Monitor `activeThresholdReached()` and total assets
-2. **Verify Commission Rates**: Ensure rates are competitive and sustainable
-3. **Monitor User Deposits**: Track deposit patterns and user behavior
-4. **Check Pool Health**: Verify all contracts are functioning properly
-
-**Debugging Commands:**
-
-```solidity
-// Check if active threshold reached
-bool thresholdReached = stakingPool.activeThresholdReached();
-
-// Get total assets under management
-uint256 totalAssets = stakingPool.totalAssets();
-
-// Check minimum effective balance
-uint256 minBalance = stakingPool.minEffectiveBalance();
 ```
 
 ### Withdrawal Issues
@@ -508,47 +455,8 @@ uint256 minBalance = stakingPool.minEffectiveBalance();
 WithdrawalRequest memory request = withdrawalVault.getWithdrawalRequest(requestId);
 ```
 
-### Getting Help
-
-When technical issues require assistance:
-
-- **Contract Issues**: Use the debugging commands above to gather specific information
-- **Protocol Issues**: Contact Berachain technical support with contract addresses and transaction hashes
-- **Community Support**: Join validator Discord channels with specific error messages and contract states
-
 For detailed technical information about the smart contracts, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
 
 ## Delegation System
 
-The staking pools system includes a delegation mechanism that enables **capital-light validator operations** by separating capital provision from validator operations. This allows validators to operate without significant upfront capital while enabling passive staking for capital providers.
-
-### How Delegation Works
-
-Through the delegation system, capital providers (delegators) can fund validators directly, while validator operators maintain control over technical operations. This creates opportunities for both parties: validators can focus on operational excellence without capital constraints, while delegators can earn staking rewards through passive investment.
-
-The system maintains clear separation between principal (delegated capital) and yield (staking rewards), ensuring that delegators can withdraw their original funds while validator operators retain earned rewards.
-
-### For Validator Operators
-
-As a validator operator, you can work with delegators to fund your staking pool operations:
-
-1. **Deploy Delegation Handler**: A delegation handler is deployed for your validator's public key
-2. **Receive Delegated Funds**: Delegators provide BERA capital to the delegation handler
-3. **Create Staking Pool**: Use delegated funds to create your staking pool (requires 10,000 BERA minimum)
-4. **Manage Operations**: Deposit additional delegated funds and manage validator operations
-5. **Withdraw Yield**: You can withdraw staking rewards and yield earned from operations
-
-### Key Benefits
-
-- **Capital Efficiency**: Operate validators without significant upfront capital requirements
-- **Focus on Operations**: Concentrate on technical excellence rather than capital management
-- **Revenue Generation**: Earn commission on user rewards while delegators provide capital
-- **Clear Separation**: Distinct roles ensure proper fund management and accountability
-
-For detailed information about working with delegators, see the [Delegators Guide](/nodes/staking-pools/delegators) and the [DelegationHandler contract reference](/nodes/staking-pools/contracts/DelegationHandler).
-
-## Getting Started as a Validator
-
-Validators interested in operating staking pools should start by using the [StakingPoolContractsFactory](/nodes/staking-pools/contracts/StakingPoolContractsFactory.md) to deploy their contracts. Once deployed, validators need to configure their operations by setting up commission rates and reward allocation strategies. Ongoing management requires monitoring pool performance and user activity to ensure optimal operation. Understanding emergency procedures and controls is crucial for managing risk and protecting user funds.
-
-For developers looking to integrate with the staking pools, begin by reviewing the [StakingPool](/nodes/staking-pools/contracts/StakingPool.md) contract, which contains the core functionality that most applications will interact with. Understanding the overall architecture requires studying how the contracts interact and how data flows through the system. Testing integration through test contracts provides hands-on experience with the system's behavior, while monitoring contract events is essential for tracking state changes and building responsive applications.
+Some validators are issued a delegation of funds from the Berachain Foundation.  For detailed information about working with delegated funds, see the [Delegators Guide](/nodes/staking-pools/delegators) and the [DelegationHandler contract reference](/nodes/staking-pools/contracts/DelegationHandler).
