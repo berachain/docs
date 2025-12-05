@@ -18,7 +18,7 @@ head:
 
 # $sWBERA
 
-> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault['mainnet-address']">{{config.contracts.pol.wberaStakerVault['mainnet-address']}}</a></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault.address.berachainMainnet">{{config.contracts.pol.wberaStakerVault.address.berachainMainnet}}</a></small>
 
 <ClientOnly>
   <Token title="$sWBERA" image="https://res.cloudinary.com/duv0g402y/image/upload/v1752588172/brand/swbera.png" />
