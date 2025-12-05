@@ -45,7 +45,7 @@ Your staking pool integrates with Berachain's validator lifecycle, which follows
 
 The setup process for staking pools follows this progression:
 
-1. **Deploy and Initialize Your Staking Pool**: See the [Installation Guide](/nodes/staking-pools/installation). 
+1. **Deploy and Initialize Your Staking Pool**: See the [Installation Guide](/nodes/staking-pools/installation).
 
 2. **Configure Operations**: Set operational parameters such as commission rates and reward allocations to optimize your pool's performance.
 
@@ -314,7 +314,6 @@ To determine the current value available for claim, check token balances in the 
 ```solidity
 uint256 balance = IERC20(tokenAddress).balanceOf(address(incentiveCollector));
 ```
-
 
 **Managing Payout Amounts**:
 
