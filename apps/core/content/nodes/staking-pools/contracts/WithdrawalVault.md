@@ -61,13 +61,13 @@ struct WithdrawalRequest {
 
 **Properties**
 
-| Name              | Type      | Description                                            |
-| ----------------- | --------- | ------------------------------------------------------ |
-| `pubkey`          | `bytes`   | The validator's public key                             |
-| `assetsRequested` | `uint256` | The amount of BERA required for the withdrawal.        |
-| `sharesBurnt`     | `uint256` | The amount of shares burned for the withdrawal.        |
-| `user`            | `address` | The address of the user who requested the withdrawal.  |
-| `requestBlock`    | `uint256` | The block number when the withdrawal request was made. |
+| Name              | Type      | Description                                             |
+| ----------------- | --------- | ------------------------------------------------------- |
+| `pubkey`          | `bytes`   | The validator's public key                              |
+| `assetsRequested` | `uint256` | The amount of BERA required for the withdrawal.         |
+| `sharesBurnt`     | `uint256` | The amount of shares burned for the withdrawal.         |
+| `user`            | `address` | The address of the staker who requested the withdrawal. |
+| `requestBlock`    | `uint256` | The block number when the withdrawal request was made.  |
 
 ## View Functions
 
@@ -118,11 +118,11 @@ function requestRedeem(
 
 **Parameters**
 
-| Name          | Type      | Description                                                               |
-| ------------- | --------- | ------------------------------------------------------------------------- |
-| `pubkey`      | `bytes`   | The validator's public key.                                               |
-| `shares`      | `uint256` | The amount of shares to redeem.                                           |
-| `maxFeeToPay` | `uint256` | The maximum fee the user is willing to pay for the redemption (EIP-7002). |
+| Name          | Type      | Description                                                                 |
+| ------------- | --------- | --------------------------------------------------------------------------- |
+| `pubkey`      | `bytes`   | The validator's public key.                                                 |
+| `shares`      | `uint256` | The amount of shares to redeem.                                             |
+| `maxFeeToPay` | `uint256` | The maximum fee the staker is willing to pay for the redemption (EIP-7002). |
 
 **Requirements**
 
@@ -147,11 +147,11 @@ function requestWithdrawal(
 
 **Parameters**
 
-| Name           | Type      | Description                                                               |
-| -------------- | --------- | ------------------------------------------------------------------------- |
-| `pubkey`       | `bytes`   | The validator's public key.                                               |
-| `assetsInGWei` | `uint64`  | The amount of BERA to withdraw in GWei.                                   |
-| `maxFeeToPay`  | `uint256` | The maximum fee the user is willing to pay for the withdrawal (EIP-7002). |
+| Name           | Type      | Description                                                                 |
+| -------------- | --------- | --------------------------------------------------------------------------- |
+| `pubkey`       | `bytes`   | The validator's public key.                                                 |
+| `assetsInGWei` | `uint64`  | The amount of BERA to withdraw in GWei.                                     |
+| `maxFeeToPay`  | `uint256` | The maximum fee the staker is willing to pay for the withdrawal (EIP-7002). |
 
 **Requirements**
 
@@ -221,17 +221,17 @@ event WithdrawalRequested(
 );
 ```
 
-Emitted when a user creates a withdrawal request that will be processed through the consensus layer after a cooldown period. The request creates an NFT that must be used to finalize the withdrawal after the delay.
+Emitted when a staker creates a withdrawal request that will be processed through the consensus layer after a cooldown period. The request creates an NFT that must be used to finalize the withdrawal after the delay.
 
 **Parameters**
 
-| Name                 | Type      | Description                                           |
-| -------------------- | --------- | ----------------------------------------------------- |
-| `user`               | `address` | The address of the user who requested the withdrawal. |
-| `amountOfAsset`      | `uint256` | The amount of asset requested for withdrawal.         |
-| `amountOfShares`     | `uint256` | The amount of shares burned for the withdrawal.       |
-| `requestId`          | `uint256` | The ID of the withdrawal request.                     |
-| `isFullExitWithdraw` | `bool`    | Indicates if this is a full exit withdrawal.          |
+| Name                 | Type      | Description                                             |
+| -------------------- | --------- | ------------------------------------------------------- |
+| `user`               | `address` | The address of the staker who requested the withdrawal. |
+| `amountOfAsset`      | `uint256` | The amount of asset requested for withdrawal.           |
+| `amountOfShares`     | `uint256` | The amount of shares burned for the withdrawal.         |
+| `requestId`          | `uint256` | The ID of the withdrawal request.                       |
+| `isFullExitWithdraw` | `bool`    | Indicates if this is a full exit withdrawal.            |
 
 ### WithdrawalRequestFinalized
 

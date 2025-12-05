@@ -19,7 +19,7 @@ head:
 
 > <small><span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">Mainnet: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.stakingPoolImpl['bepolia-address']}}</a></span><span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.stakingPoolImpl.abi">ABI JSON</a></span></small>
 
-The StakingPool contract is the main liquid staking contract that allows users to deposit BERA and receive StBERA shares. It manages the validator's stake, processes deposits and withdrawals, and handles the transition between inactive and active validator states.
+The StakingPool contract is the main liquid staking contract that allows stakers to deposit BERA and receive StBERA shares. It manages your validator's stake, processes deposits and withdrawals, and handles the transition between inactive and active validator states.
 
 ## State Variables
 

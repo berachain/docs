@@ -17,41 +17,39 @@ head:
 
 # Staking Pools Overview
 
-Staking Pools enable validators to offer liquid staking services to their communities. Users stake BERA through smart contracts and receive liquid shares that automatically grow in value as rewards accumulate. Validators earn commission on user rewards while building their own branded staking services.
+Staking Pools enable validators to offer liquid staking services to their communities. As a validator, you can build and monetize your own community of stakers, earning commission on rewards. Your stakers deposit BERA through smart contracts and receive liquid shares (stBERA) that automatically grow in value as rewards accumulate.
 
 ## What Are Staking Pools?
 
-Staking Pools are validator-operated services that allow users to stake BERA through smart contracts, receiving liquid shares (stBERA) that represent their stake and automatically grow in value as rewards accumulate. Unlike traditional staking where users must run their own validator, staking pools allow users to stake any amount while maintaining control over their funds.
+Staking Pools are validator-operated services that allow your community members to stake BERA through smart contracts, receiving liquid shares (stBERA) that represent their stake and automatically grow in value as rewards accumulate. Stakers can stake any amount without running their own validator.
 
-For validators, staking pools provide a way to build and monetize their own community of stakers, earning commission on user rewards. For users, staking pools offer lower barriers to entry, automatic reward reinvestment, and flexible withdrawals.
+As a validator, staking pools provide you with a way to build and monetize your own community of stakers, earning commission on rewards. Your stakers benefit from lower barriers to entry, automatic reward reinvestment, and flexible withdrawals.
 
 ## How It Works
 
-When a validator creates a staking pool, the system deploys several interconnected contracts. Each validator's pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an Accounting Oracle that provides consensus layer data updates.
+When you create a staking pool, the system deploys several interconnected contracts. Your pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an Accounting Oracle that provides consensus layer data updates.
 
-The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from validators while providing users with a seamless staking experience.
+The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from you while providing your stakers with a seamless staking experience.
 
-## User Experience
+## Staker Experience
 
-### For Users
+When stakers interact with your staking pool, they deposit BERA and immediately receive liquid stBERA shares. Rewards automatically compound as you earn rewards, increasing the value of shares over time without manual claiming or reinvestment. Stakers can withdraw at any time; withdrawals process through the consensus layer in approximately 3 days (129,600 blocks). Stakers can stake any amount without validator minimums, with full transparency through on-chain verification.
 
-Users deposit BERA to a validator's staking pool and immediately receive liquid stBERA shares. Rewards automatically compound as the validator earns rewards, increasing the value of shares over time without manual claiming or reinvestment. Users can withdraw at any time; withdrawals process through the consensus layer in approximately 3 days (129,600 blocks). Users can stake any amount without validator minimums, with full transparency through on-chain verification.
+## Validator Operations
 
-### For Validators
-
-Validators deploy a staking pool through the factory contract, which creates all necessary contracts and registers the validator with the consensus layer. Validators configure commission rates (up to 20% of user rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on user rewards, allowing validators to focus on community building rather than manual reward management.
+You deploy a staking pool through the factory contract, which creates all necessary contracts and registers your validator with the consensus layer. You configure commission rates (up to 20% of staker rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on staker rewards, allowing you to focus on community building rather than manual reward management.
 
 ## Integration with Proof of Liquidity
 
-Staking pools integrate with Berachain's Proof of Liquidity system. Pool BGT rewards automatically boost the validator's PoL performance, and smart contracts automatically claim and distribute PoL incentives. Validators can direct rewards to specific applications or ecosystem initiatives.
+Staking pools integrate with Berachain's Proof of Liquidity system. Pool BGT rewards automatically boost your PoL performance, and smart contracts automatically claim and distribute PoL incentives. You can direct rewards to specific applications or ecosystem initiatives.
 
 ## Provided Tools
 
-Berachain provides tools to help validators and users interact with staking pools. A React-based frontend interface allows users to connect wallets, deposit BERA, view positions, and request withdrawals. The Smart Operator Helper is an interactive Python CLI tool for validators to manage SmartOperator contracts, including BGT boosting, reward allocation, commission changes, and fee claims. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools).
+Berachain provides tools to help you operate your staking pool. A React-based frontend template lets you build an interface where stakers can connect wallets, deposit BERA, view positions, and request withdrawals. The Smart Operator Helper is an interactive Python CLI tool for managing SmartOperator contracts, including BGT boosting, reward allocation, commission changes, and fee claims. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools).
 
 ## Getting Started
 
-Validators can set up staking pools using the [Installation Guide](/nodes/staking-pools/installation) and manage operations with the [Operator Guide](/nodes/staking-pools/operators). Users can get started by finding a validator's staking pool and depositing BERA; see the [User Guide](/nodes/staking-pools/users) for details.
+Validators can set up staking pools using the [Installation Guide](/nodes/staking-pools/installation) and manage operations with the [Operator Guide](/nodes/staking-pools/operators).
 
 ## Contract Addresses
 
@@ -59,7 +57,7 @@ The staking pools system uses several deployed contracts across Berachain networ
 
 ### Factory Contracts
 
-Factory contracts are deployed instances that users and validators interact with directly:
+Factory contracts are deployed instances that you interact with directly:
 
 **StakingPoolContractsFactory**: The main factory contract that deploys all staking pool contracts for validators.
 
@@ -87,9 +85,9 @@ Factory contracts are deployed instances that users and validators interact with
 
 ### Implementation Contracts
 
-Implementation contracts contain the business logic used by all staking pools. These addresses are used internally by the factory and proxies, but users interact with proxy addresses (not these implementation addresses).
+Implementation contracts contain the business logic used by all staking pools. These addresses are used internally by the factory and proxies. Your stakers interact with your pool's proxy addresses (not these implementation addresses).
 
-**StakingPool Implementation**: Core staking pool logic for managing deposits, shares, and user positions.
+**StakingPool Implementation**: Core staking pool logic for managing deposits, shares, and staker positions.
 
 <span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">
   - **Mainnet**: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.stakingPoolImpl['mainnet-address']}}</a>
@@ -167,11 +165,11 @@ Implementation contracts contain the business logic used by all staking pools. T
   - **Bepolia**: Not yet deployed
 </span>
 
-> **Note**: Individual validators have unique proxy addresses for their StakingPool, SmartOperator, StakingRewardsVault, and IncentiveCollector contracts. These proxy addresses are created when a validator deploys their staking pool through the factory. Users interact with these proxy addresses, not the implementation addresses listed above.
+> **Note**: You have unique proxy addresses for your StakingPool, SmartOperator, StakingRewardsVault, and IncentiveCollector contracts. These proxy addresses are created when you deploy your staking pool through the factory. Your stakers interact with these proxy addresses, not the implementation addresses listed above.
 
 ## Smart Contract Reference
 
-For detailed information about the smart contracts and their functions, see the [Smart Contract Reference](/nodes/staking-pools/contracts). This reference provides comprehensive documentation of all contract interfaces, functions, and operational details that developers and advanced users may need.
+For detailed information about the smart contracts and their functions, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
 
 ## Support and Resources
 

@@ -19,7 +19,7 @@ head:
 
 > <small><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']">Mainnet: <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl['mainnet-address']}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.bepolia.dapps.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl['bepolia-address']}}</a></span><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">ABI JSON</a></span></small>
 
-The IncentiveCollector contract manages incentive token collection for validators. It allows users to claim incentive tokens by paying a required payout amount, with fees going to the smart operator and the remaining amount to the staking rewards vault.
+The IncentiveCollector contract manages incentive token collection for validators. It allows anyone (operator, arbitrageur, or other addresses) to claim accumulated incentive tokens by paying a required payout amount, with fees going to the smart operator and the remaining amount to the staking rewards vault.
 
 ## State Variables
 
@@ -45,7 +45,7 @@ uint96 public feePercentage;
 
 ### queuePayoutAmountChange
 
-Queues a payout amount change. Callable only by the smart operator.
+Queues a payout amount change. The change takes effect on the next `claim()` call. This function can only be called by the SmartOperator contract, which requires the caller to have the `INCENTIVE_COLLECTOR_MANAGER_ROLE` on SmartOperator.
 
 ```solidity
 function queuePayoutAmountChange(uint256 newPayoutAmount) external;
@@ -59,21 +59,36 @@ function queuePayoutAmountChange(uint256 newPayoutAmount) external;
 
 **Requirements**
 
-- Must be called by the smart operator
+- Must be called by the SmartOperator contract
 - New payout amount must not be zero
+
+**How to Update:**
+
+To update the payout amount, call `queueIncentiveCollectorPayoutAmountChange()` on your SmartOperator contract (requires `INCENTIVE_COLLECTOR_MANAGER_ROLE`). The change is queued and will take effect automatically on the next `claim()` call.
 
 ### claim
 
-Claims all accumulated incentive tokens by paying the required payout amount. This function implements a permissionless auction mechanism where anyone can pay the payout amount (default 100 BERA) to claim **all** accumulated tokens for the specified token addresses.
+Claims all accumulated incentive tokens by paying the required payout amount. This function implements a permissionless incentive auction mechanism where **anyone** can pay the `payoutAmount` (initially 100 BERA) to claim **all** accumulated tokens for the specified token addresses. The buyer may be the validator operator, an arbitrageur monitoring the network, or any other address that finds the pool profitable.
 
-**Important**: This is a winner-takes-all auction. The first caller to pay the payout amount receives all accumulated tokens. There is no partial claiming or proportional distribution.
+**Important**: This is a winner-takes-all incentive auction. The first buyer to pay the payout amount receives all accumulated tokens. There is no partial claiming or proportional distribution. The incentive auction is completely permissionless—anyone can call this function.
 
 **What Happens:**
 
-- Caller receives all balances of the specified ERC20 tokens held by the contract
-- Protocol fee (based on `feePercentage`) is minted as shares to your validator operator
-- Remaining payout amount is sent to StakingRewardsVault for distribution to stakers
+- The buyer receives all balances of the specified ERC20 tokens held by the contract
+- Protocol fee (based on `feePercentage`) is deducted from the payout amount and minted as shares to the validator's `defaultShareRecipient`
+- Net payout amount (payoutAmount - fee) is sent to StakingRewardsVault for distribution to shareholders and auto-compounded
 - Any queued payout amount or fee percentage changes are applied
+
+**Checking Current Payout Available:**
+
+To determine the current value of tokens available for claim, check the balance of each token in the IncentiveCollector contract:
+
+```solidity
+// For each token address you want to check
+uint256 balance = IERC20(tokenAddress).balanceOf(address(incentiveCollector));
+```
+
+The buyer should verify that the total value of all token balances exceeds the `payoutAmount` before calling `claim()`. Validators should develop a scheme to sample payouts by monitoring token balances in their IncentiveCollector contract to ensure the `payoutAmount` remains appropriate relative to accumulated token values.
 
 ```solidity
 function claim(address[] calldata tokens) external payable;
@@ -81,15 +96,15 @@ function claim(address[] calldata tokens) external payable;
 
 **Parameters**
 
-| Name     | Type        | Description                                                                                                                                 |
-| -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens` | `address[]` | Array of ERC20 token addresses to claim balances from. All balances of these tokens held by the contract will be transferred to the caller. |
+| Name     | Type        | Description                                                                                                                                |
+| -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tokens` | `address[]` | Array of ERC20 token addresses to claim balances from. All balances of these tokens held by the contract will be transferred to the buyer. |
 
 **Requirements**
 
 - Must send exactly `payoutAmount` in native tokens (msg.value must equal `payoutAmount`)
 - Validator must not be fully exited
-- This function does NOT implement slippage protection - caller must verify that the value of tokens received exceeds the payout cost
+- This function does NOT implement slippage protection - the buyer must verify that the value of tokens received exceeds the payout cost
 
 **Token Sources**
 
@@ -100,8 +115,9 @@ Tokens accumulate in IncentiveCollector when you forward them from SmartOperator
 1. Your validator earns commission on incentive tokens (automatically sent to SmartOperator)
 2. You call `claimBoostRewards()` to forward tokens to IncentiveCollector
 3. Tokens accumulate in IncentiveCollector
-4. Anyone can call `claim()` with the payout amount (default 100 BERA) to receive all accumulated tokens
-5. The payout amount (minus protocol fee) goes to StakingRewardsVault and is distributed to stakers
+4. A buyer (operator, arbitrageur, or any address) checks token balances and determines the value exceeds the `payoutAmount`
+5. The buyer calls `claim()` with the payout amount (default 100 BERA) to receive all accumulated tokens
+6. The payout amount (minus protocol fee) goes to StakingRewardsVault and is distributed to stakers
 
 ## Events
 
