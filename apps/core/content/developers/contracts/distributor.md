@@ -17,7 +17,7 @@ head:
 
 # Distributor
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.distributor['mainnet-address']">{{config.contracts.pol.distributor['mainnet-address']}}</a><span v-if="config.contracts.pol.distributor.abi && config.contracts.pol.distributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.distributor.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.distributor.address.berachainMainnet">{{config.contracts.pol.distributor.address.berachainMainnet}}</a><span v-if="config.contracts.pol.distributor.abi && config.contracts.pol.distributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.distributor.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/Distributor.sol)
 

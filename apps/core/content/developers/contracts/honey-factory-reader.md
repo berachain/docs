@@ -17,7 +17,7 @@ head:
 
 # HoneyFactoryReader
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honeyFactoryReader['mainnet-address']">{{config.contracts.tokens.honeyFactoryReader['mainnet-address']}}</a><span v-if="config.contracts.tokens.honeyFactoryReader.abi && config.contracts.tokens.honeyFactoryReader.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactoryReader.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.tokens.honeyFactoryReader.address.berachainMainnet">{{config.contracts.tokens.honeyFactoryReader.address.berachainMainnet}}</a><span v-if="config.contracts.tokens.honeyFactoryReader.abi && config.contracts.tokens.honeyFactoryReader.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.honeyFactoryReader.abi">ABI JSON</a></span></small>
 
 The HoneyFactoryReader contract provides view functions for previewing minting and redeeming operations in the Honey stablecoin system. It enables efficient querying of HoneyFactory state without modifying it.
 

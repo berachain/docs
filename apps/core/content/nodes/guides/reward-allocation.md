@@ -44,7 +44,7 @@ Each validator can customize how their rewards are distributed across different 
 Start by checking your validator's current reward allocation:
 
 ```bash-vue
-cast call {{config.contracts.pol.berachef['mainnet-address']}} \
+cast call {{config.contracts.pol.berachef.address.berachainMainnet}} \
 "getActiveRewardAllocation(bytes)" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 --rpc-url {{config.mainnet.rpcUrl}};
@@ -78,7 +78,7 @@ The output is your validator's `RewardAllocation` struct, a tuple containing:
 An example command to queue a new allocation resembles the following:
 
 ```bash-vue
-cast send {{config.contracts.pol.berachef['mainnet-address']}} \
+cast send {{config.contracts.pol.berachef.address.berachainMainnet}} \
 "queueNewRewardAllocation(bytes,uint64,tuple(address,uint96)[])" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 "$START_BLOCK" \
@@ -96,7 +96,7 @@ Remember that your `START_BLOCK` must be greater than the current block number +
 Check your new pending allocation:
 
 ```bash-vue
-cast call {{config.contracts.pol.berachef['mainnet-address']}} \
+cast call {{config.contracts.pol.berachef.address.berachainMainnet}} \
 "getQueuedRewardAllocation(bytes)" \
 "<YOUR_VALIDATOR_PUBKEY>" \
 --rpc-url {{config.mainnet.rpcUrl}};
@@ -109,7 +109,7 @@ Once the `startBlock` is reached, the new allocation will be automatically activ
 You can also manage your reward allocations through the Berachain Dashboard:
 ![Reward Allocation](/assets/reward-allocation.png)
 
-1. Navigate to <a target="_blank" :href="config.mainnet.dapps.hub.url + 'validators'">Validator Dashboard</a> on {{config.mainnet.dapps.hub.name}}
+1. Navigate to <a target="_blank" :href="config.websites.hub.url + 'validators'">Validator Dashboard</a> on {{config.websites.hub.name}}
 2. Connect your validator operator wallet
 3. Click **Manage as a validator**
 4. Click the **Configuration** tab

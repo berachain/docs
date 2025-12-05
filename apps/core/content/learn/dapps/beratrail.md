@@ -17,12 +17,12 @@ head:
 
 # Beratrail Block Explorer 🐻⛓️
 
-<a :href="config.mainnet.dapps.berascan.url">
+<a :href="config.websites.berascan.url">
 
 ![Berachain Beratrail Block Explorer dApp](/assets/dapp-beratrail.png)
 
 </a>
 
-> <small><a :href="config.mainnet.dapps.berascan.url">{{config.mainnet.dapps.berascan.url}}</a></small>
+> <small><a :href="config.websites.berascan.url">{{config.websites.berascan.url}}</a></small>
 
 Beratrail is one of Berachain's main block explorers that allows for easy reviewing of transactions, contracts, wallets, code, contract interactions, and contract verification.

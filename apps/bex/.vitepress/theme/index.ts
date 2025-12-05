@@ -3,6 +3,7 @@
 import { h, onMounted } from "vue";
 import DefaultTheme from "vitepress/theme";
 import Fidget from "@berachain/ui/Fidget";
+import BexWarningBanner from "../components/BexWarningBanner.vue";
 import "@berachain/ui/style";
 import { mountVercelToolbar } from "@vercel/toolbar/vite";
 
@@ -18,6 +19,7 @@ export default {
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      "layout-top": () => h(BexWarningBanner),
       "sidebar-nav-after": () => h(Fidget)
     });
   },

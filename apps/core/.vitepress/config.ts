@@ -21,6 +21,10 @@ const ENABLED_FLAGS = ["testnet", "mainnet"];
  *
  */
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
+/**
+ * UTM Source for Core
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsCore.utmSource}`;
 
 // Main Configuration
 // ========================================================
@@ -87,7 +91,11 @@ const config = withMermaid(
           items: [
             {
               text: `${constants.websites.docsBex.name}`,
-              link: `${constants.websites.docsBex.url}`
+              link: `${constants.websites.docsBex.url}${UTMSOURCE}`
+            },
+            {
+              text: `${constants.websites.docsBend.name}`,
+              link: `${constants.websites.docsBend.url}${UTMSOURCE}`
             }
           ]
         },

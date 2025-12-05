@@ -31,7 +31,7 @@ Click the button below to add the network to your MetaMask.
     :nativeCurrencySymbol="config.mainnet.currencySymbol"
     :nativeCurrencyDecimals="config.mainnet.decimals"
     :rpcUrl="config.mainnet.rpcUrl"
-    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascan.url"
   />
 </ClientOnly>
 
@@ -39,13 +39,13 @@ Click the button below to add the network to your MetaMask.
 
 To add the network manually, enter the network details below into your wallet of choice:
 
-| Key                | Value                                                                                  |
-| ------------------ | -------------------------------------------------------------------------------------- |
-| Network Name       | {{config.mainnet.chainName}}                                                           |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>            |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
-| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
+| Key                | Value                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Network Name       | {{config.mainnet.chainName}}                                                       |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>         |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="config.mainnet.chainId" /></ClientOnly>        |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly> |
+| Block Explorer URL | <ClientOnly><CopyToClipboard :text="config.websites.berascan.url" /></ClientOnly>  |
 
 ### Mainnet RPC Providers
 
@@ -61,7 +61,7 @@ See our [RPC partners](/developers/developer-tools#rpc-providers) under Develope
     :nativeCurrencySymbol="config.bepolia.currencySymbol"
     :nativeCurrencyDecimals="config.bepolia.decimals"
     :rpcUrl="config.bepolia.rpcUrl"
-    :blockExplorerUrl="config.bepolia.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascanBepolia.url"
     :testnet="true"
   />
 </ClientOnly>
@@ -87,14 +87,32 @@ With the testnet, you can:
 
 ### Bepolia Testnet dApps
 
-<template v-for="(item) in config['bepolia']['dapps']">
-  <table>
-    <thead><tr><th>Name</th><th>URL</th></tr></thead>
-    <tbody>
-          <tr>
-            <td><a :href="item.url">{{ item.name }}</a></td>
-            <td>{{ item.url }}</td>
-          </tr>
-    </tbody>
-  </table>
-</template>
+<table>
+  <thead><tr><th>Name</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a :href="config.websites.hubBepolia.url">{{ config.websites.hubBepolia.name }}</a></td>
+      <td>{{ config.websites.hubBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.bexBepolia.url">{{ config.websites.bexBepolia.name }}</a></td>
+      <td>{{ config.websites.bexBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.berascanBepolia.url">{{ config.websites.berascanBepolia.name }}</a></td>
+      <td>{{ config.websites.berascanBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.beratrailBepolia.url">{{ config.websites.beratrailBepolia.name }}</a></td>
+      <td>{{ config.websites.beratrailBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.honeySwapBepolia.url">{{ config.websites.honeySwapBepolia.name }}</a></td>
+      <td>{{ config.websites.honeySwapBepolia.url }}</td>
+    </tr>
+    <tr>
+      <td><a :href="config.websites.playgroundBepolia.url">{{ config.websites.playgroundBepolia.name }}</a></td>
+      <td>{{ config.websites.playgroundBepolia.url }}</td>
+    </tr>
+  </tbody>
+</table>

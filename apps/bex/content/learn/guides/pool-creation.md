@@ -19,7 +19,7 @@ head:
 
 On BEX, any user can initialize a liquidity pool for an arbitrary pair of tokens. The user who initializes the pool has the ability to select the starting price ratio between the two tokens.
 
-Users can create new BEX liquidity pools here: {{config.mainnet.dapps.bex.url}}/pools/create
+Users can create new BEX liquidity pools here: {{config.websites.bex.url}}/pools/create
 
 To prevent spam and ensure the creation of meaningful pools, BEX requires users to permanently burn a small, economically insignificant quantity of both tokens when initializing a new pool.
 

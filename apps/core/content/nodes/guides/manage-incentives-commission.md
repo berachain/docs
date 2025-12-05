@@ -29,7 +29,7 @@ Before you begin, ensure you have the following:
 - `$BERA` to process the transaction
 - `Operator Address` of the validator wanting to change their commission
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
-- BeraChef Contract Address - <a :href="config.contracts.pol.berachef.docsUrl">`{{config.contracts.pol.berachef['mainnet-address']}}`</a>
+- BeraChef Contract Address - <a :href="config.contracts.pol.berachef.docsUrl">`{{config.contracts.pol.berachef.address.berachainMainnet}}`</a>
 
 ## How Validator Commissions Are Updated
 
@@ -49,7 +49,7 @@ The following will walk you through updating the Validator Commission rate via F
 
 ```bash-vue
 # Env Vars
-BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef['mainnet-address']}}
+BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef.address.berachainMainnet}}
 RPC_URL={{config.mainnet.rpcUrl}}
 VALIDATOR_PUBKEY_KEY=<0xYOUR_VALIDATOR_PUBKEY>
 
@@ -66,7 +66,7 @@ The first step will be to determine the amount you would like to queue:
 
 ```bash-vue
 # Env Vars
-BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef['mainnet-address']}}
+BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef.address.berachainMainnet}}
 RPC_URL={{config.mainnet.rpcUrl}}
 OPERATOR_WALLET_PRIVATE_KEY=<0xYOUR_OPERATOR_WALLET_PRIVATE_KEY>
 VALIDATOR_PUBKEY_KEY=<0xYOUR_VALIDATOR_PUBKEY>
@@ -85,7 +85,7 @@ cast send $BERACHEF_CONTRACT_ADDRESS \
 
 ```bash-vue
 # Env Vars
-BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef['mainnet-address']}}
+BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef.address.berachainMainnet}}
 RPC_URL={{config.mainnet.rpcUrl}}
 VALIDATOR_PUBKEY_KEY=<0xYOUR_VALIDATOR_PUBKEY>
 
@@ -104,7 +104,7 @@ This can only be done after `16,382 Blocks` have passed, and this **_can be exec
 
 ```bash-vue
 # Env Vars
-BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef['mainnet-address']}}
+BERACHEF_CONTRACT_ADDRESS={{config.contracts.pol.berachef.address.berachainMainnet}}
 RPC_URL={{config.mainnet.rpcUrl}}
 WALLET_PRIVATE_KEY=<0xYOUR_WALLET_PRIVATE_KEY>
 VALIDATOR_PUBKEY_KEY=<0xVALIDATOR_PUBKEY>

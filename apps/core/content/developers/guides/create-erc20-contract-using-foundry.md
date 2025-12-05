@@ -616,20 +616,20 @@ Make sure to get an Etherscan API Key from [https://etherscan.io/register](https
 
 forge verify-contract \
   --watch \
-  --chain {{config.bepolia.dapps.berascan.chainName}} \
+  --chain {{config.websites.berascanBepolia.chainName}} \
   <0xYOUR_DEPLOYED_CONTRACT_ADDRESS> \
   src/BingBongToken.sol:BingBongToken \
   --verifier etherscan \
   --etherscan-api-key <YOUR_ETHERSCAN_API_V2_KEY>;
 
 # [Expected Similar Output]:
-# Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.bepolia.dapps.berascan.chainName}}
+# Start verifying contract `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` deployed on {{config.websites.berascanBepolia.chainName}}
 #
 # Submitting verification for [src/BingBongToken.sol:BingBongToken] 0xYOUR_DEPLOYED_CONTRACT_ADDRESS.
 # Submitted contract for verification:
 #         Response: `OK`
 #         GUID: `xtecz3j...`
-#         URL: {{config.bepolia.dapps.berascan.url}}address/0xYOUR_DEPLOYED_CONTRACT_ADDRESS
+#         URL: {{config.websites.berascanBepolia.url}}address/0xYOUR_DEPLOYED_CONTRACT_ADDRESS
 # Contract verification status:
 # Response: `NOTOK`
 # Details: `Pending in queue`

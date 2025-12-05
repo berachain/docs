@@ -22,6 +22,10 @@ Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), users can r
 1. _Proportional_ - remove liquidity proportionally across all tokens
 2. _SingleTokenExactIn_ - remove liquidity and receive a single token
 
+:::tip Example Code
+For more comprehensive remove liquidity examples, see the [remove liquidity examples](https://github.com/berachain/bex-sdk/tree/main/examples/remove-liquidity) in the BEX SDK repository.
+:::
+
 ## Example: Single Token Exit
 
 In this example, we'll demonstrate how to remove liquidity and receive a single token (BERA) while calculating the price impact of the transaction.
@@ -40,10 +44,10 @@ import {
 const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
-const poolId = "{{config.mainnet.dapps.bex.examplePoolId}}";
+const poolId = "{{config.websites.bex.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 // Prepare remove liquidity input for single token exit
@@ -115,11 +119,11 @@ The main helper classes we use from the SDK are:
 After initializing the `BalancerApi` class, we can fetch current pool data using `fetchPoolState`.
 
 ```js-vue
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Get pool data
 const poolId =
-  "{{config.mainnet.dapps.bex.examplePoolId}}";
+  "{{config.websites.bex.examplePoolId}}";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 ```
 

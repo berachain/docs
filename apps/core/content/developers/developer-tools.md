@@ -43,7 +43,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [BlockPI](https://blockpi.io/)
 - [Chainstack](https://chainstack.com/build-better-with-berachain/)
-- [DRPC](https://drpc.org/chainlist/berachain)
+- [dRPC NodeCloud](https://drpc.org/chainlist/berachain)
 - [Grove](https://grove.city)
 - [Envio](https://envio.dev)
 - [Enigma](https://enigma-validator.com/services)

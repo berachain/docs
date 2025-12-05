@@ -38,11 +38,11 @@ The following is a list of contract address in order to interact with Berachain 
   <thead><tr><th>Name</th><th>Bepolia</th><th>ABI</th></tr></thead>
   <tbody>
     <template v-for="(contract, name) in config.contracts.bex">
-      <template v-if="contract['mainnet-address']">
+      <template v-if="contract['address']['berachainMainnet']">
         <tr>
           <td><template v-if="contract['docsUrl']"><a :href="contract.docsUrl">{{ contract.name }}</a></template><template v-else><b>{{ contract.name }}</b></template></td>
           <td>
-            <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + contract['mainnet-address']">{{contract['mainnet-address']}}</a>
+            <a target="_blank" :href="config.websites.berascan.url + 'address/' + contract['address']['berachainMainnet']">{{contract['address']['berachainMainnet']}}</a>
           </td> 
           <td><template v-if="contract?.abi"><a :href="contract.abi">ABI</a></template></td>
         </tr>
@@ -57,11 +57,11 @@ The following is a list of contract address in order to interact with Berachain 
   <thead><tr><th>Name</th><th>Bepolia</th><th>ABI</th></tr></thead>
   <tbody>
     <template v-for="(contract, name) in config.contracts.bex">
-      <template v-if="contract['bepolia-address']">
+      <template v-if="contract['address']['berachainBepolia']">
         <tr>
           <td><template v-if="contract['docsUrl']"><a :href="contract.docsUrl">{{ contract.name }}</a></template><template v-else><b>{{ contract.name }}</b></template></td>
           <td>
-            <a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + contract['bepolia-address']">{{contract['bepolia-address']}}</a>
+            <a target="_blank" :href="config.websites.berascan.url + 'address/' + contract['address']['berachainBepolia']">{{contract['address']['berachainBepolia']}}</a>
           </td> 
           <td><template v-if="contract?.abi"><a :href="contract.abi">ABI</a></template></td>
         </tr>

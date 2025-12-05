@@ -23,6 +23,10 @@ The [Berancer SDK](https://github.com/berachain/berancer-sdk) includes a Smart O
 2. Convert SOR output to batch swap parameters
 3. Execute multi-hop swaps using the Vault contract (via [batchSwap](/developers/contracts/swaps/batch_swap))
 
+:::tip Example Code
+For more comprehensive Smart Order Router examples, see the [SOR examples](https://github.com/berachain/bex-sdk/tree/main/examples/sor) in the BEX SDK repository.
+:::
+
 ## Example: Multi-Hop Swap Using SOR
 
 In this example, we use the Berancer SDK and [Ethers.js](https://docs.ethers.org/v6/) to perform a multi-hop swap from HONEY to WBTC using the optimal path.
@@ -43,7 +47,7 @@ import {
 const RPC_URL = "{{config.mainnet.rpcUrl}}";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("{{config.mainnet.dapps.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
+const balancerApi = new BalancerApi("{{config.websites.bex.balancerApiUrl}}", {{config.mainnet.chainId}});
 
 // Create swap amount (e.g., 1 HONEY)
 const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, '1');

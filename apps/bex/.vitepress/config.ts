@@ -20,6 +20,10 @@ const ENABLED_FLAGS = ["testnet", "mainnet"];
  *
  */
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
+/**
+ * UTM Source for BEX
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsBex.utmSource}`;
 
 // Main Configuration
 // ========================================================
@@ -79,7 +83,11 @@ export default defineConfig({
         items: [
           {
             text: `${constants.websites.docsCore.name}`,
-            link: `${constants.websites.docsCore.url}`
+            link: `${constants.websites.docsCore.url}${UTMSOURCE}`
+          },
+          {
+            text: `${constants.websites.docsBend.name}`,
+            link: `${constants.websites.docsBend.url}${UTMSOURCE}`
           }
         ]
       },

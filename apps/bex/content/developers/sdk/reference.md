@@ -29,10 +29,10 @@ The `BalancerApi` class provides helper functions for interacting with the Beran
 const balancerApi = new BalancerApi(apiUrl: string, chainId: ChainId);
 ```
 
-| Name    | Type   | Description                | Mainnet Value                               |
-| ------- | ------ | -------------------------- | ------------------------------------------- |
-| apiUrl  | string | Url of API                 | {{config.mainnet.dapps.bex.balancerApiUrl}} |
-| chainId | number | Chain that will be queried | {{config.mainnet.chainId}}                  |
+| Name    | Type   | Description                | Mainnet Value                          |
+| ------- | ------ | -------------------------- | -------------------------------------- |
+| apiUrl  | string | Url of API                 | {{config.websites.bex.balancerApiUrl}} |
+| chainId | number | Chain that will be queried | {{config.mainnet.chainId}}             |
 
 ### Properties
 

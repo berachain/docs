@@ -34,17 +34,17 @@ Quickly add Berachain's network to your wallet with one click.
     :nativeCurrencySymbol="config.mainnet.currencySymbol"
     :nativeCurrencyDecimals="config.mainnet.decimals"
     :rpcUrl="config.mainnet.rpcUrl"
-    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascan.url"
   />
  </ClientOnly>
 
-| Key                | Value                                                                                  |
-| ------------------ | -------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>          |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>             |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly>  |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>     |
-| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.mainnet.dapps.berascan.url" /></ClientOnly> |
+| Key                | Value                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.mainnet.chainName" /></ClientOnly>         |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.mainnet.rpcUrl" /></ClientOnly>            |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.mainnet.chainId + ''" /></ClientOnly> |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.mainnet.currencySymbol" /></ClientOnly>    |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.websites.berascan.url" /></ClientOnly>     |
 
 ## Berachain Bepolia Testnet RPC 🌐
 
@@ -60,17 +60,17 @@ Quickly add Berachain's network to your wallet with one click.
     :nativeCurrencySymbol="config.bepolia.currencySymbol"
     :nativeCurrencyDecimals="config.bepolia.decimals"
     :rpcUrl="config.bepolia.rpcUrl"
-    :blockExplorerUrl="config.bepolia.dapps.beratrail.url"
+    :blockExplorerUrl="config.websites.berascanBepolia.url"
   />
  </ClientOnly>
 
-| Key                | Value                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| Network            | <ClientOnly><CopyToClipboard :text="config.bepolia.chainName" /></ClientOnly>           |
-| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>              |
-| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.bepolia.chainId + ''" /></ClientOnly>   |
-| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>      |
-| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.bepolia.dapps.beratrail.url" /></ClientOnly> |
+| Key                | Value                                                                                    |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| Network            | <ClientOnly><CopyToClipboard :text="config.bepolia.chainName" /></ClientOnly>            |
+| RPC URL            | <ClientOnly><CopyToClipboard :text="config.bepolia.rpcUrl" /></ClientOnly>               |
+| Chain ID           | <ClientOnly><CopyToClipboard :text="'' + config.bepolia.chainId + ''" /></ClientOnly>    |
+| Currency symbol    | <ClientOnly><CopyToClipboard :text="config.bepolia.currencySymbol" /></ClientOnly>       |
+| Block explorer URL | <ClientOnly><CopyToClipboard :text="config.websites.berascanBepolia.url" /></ClientOnly> |
 
 ## Supported Wallets 👛
 
@@ -129,7 +129,7 @@ Click the button below to add the network to your MetaMask in one click.
     :nativeCurrencySymbol="config.mainnet.currencySymbol"
     :nativeCurrencyDecimals="config.mainnet.decimals"
     :rpcUrl="config.mainnet.rpcUrl"
-    :blockExplorerUrl="config.mainnet.dapps.berascan.url"
+    :blockExplorerUrl="config.websites.berascan.url"
   />
  </ClientOnly>
 

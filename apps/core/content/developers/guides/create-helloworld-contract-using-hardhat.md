@@ -544,7 +544,7 @@ pnpm deploy:berachain;
 We can also see our deployed contract in the Berachain Block Explorer by going to the following address:
 
 ```bash-vue
-open {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+open {{config.websites.berascanBepolia.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
 
 # [Expected Result Should Open Your Browser]
 ```
@@ -635,9 +635,9 @@ const config: HardhatUserConfig = {
       name: "{{config.bepolia.chainName}}", // [!code ++]
       blockExplorers: { // [!code ++]
         etherscan: { // [!code ++]
-          name: "{{config.bepolia.dapps.berascan.name}}", // [!code ++]
-          url: "{{config.bepolia.dapps.berascan.url}}", // [!code ++]
-          apiUrl: "{{config.bepolia.dapps.berascan.apiUrl}}", // [!code ++]
+          name: "{{config.websites.berascanBepolia.name}}", // [!code ++]
+          url: "{{config.websites.berascanBepolia.url}}", // [!code ++]
+          apiUrl: "{{config.websites.berascanBepolia.apiUrl}}", // [!code ++]
         } // [!code ++]
       } // [!code ++]
     }, // [!code ++]
@@ -694,7 +694,7 @@ pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World";
 # ✅ Contract verified successfully on Berascan!
 #
 #   contracts/HelloWorld.sol:HelloWorld
-#   Explorer: {{config.bepolia.dapps.berascan.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+#   Explorer: {{config.websites.berascanBepolia.url}}address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
 #
 # === Blockscout ===
 # HHE80027: No Blockscout block explorer is configured for the 80069 chain in the chain descriptors.

@@ -75,7 +75,7 @@ Then we have `setup-` and `run-` scripts for various execution clients and `beac
 # CHANGE THESE VALUES
 export CHAIN_SPEC=mainnet   # or "testnet"
 export MONIKER_NAME=camembera
-export WALLET_ADDRESS_FEE_RECIPIENT=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5
+export WALLET_ADDRESS_FEE_RECIPIENT=0x8b30eb59e9b2354825503d5e60845eb41d4caf36
 export EL_ARCHIVE_NODE=false # set to true if you want to run an archive node on CL and EL
 export MY_IP=`curl -s canhazip.com`
 

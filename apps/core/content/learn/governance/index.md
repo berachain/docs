@@ -49,7 +49,7 @@ Guardians act through a 5-of-9 multisig with elected signers.
 
 ## Creating your Governance Proposal
 
-Governance proposals can be discussed and created on <a :href="config.mainnet.dapps.hub.url + 'governance/general/'">
+Governance proposals can be discussed and created on <a :href="config.websites.hub.url + 'governance/general/'">
 BeraHub
 </a>. Creating a governance proposal on requires adhering to the following:
 

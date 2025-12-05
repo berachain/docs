@@ -19,7 +19,11 @@ head:
 
 This guide demonstrates how to create a new BEX pool using the [PoolCreationHelper](/developers/contracts/factory/pool-creation-helper) contract. The PoolCreationHelper is a [Relayer](/developers/contracts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
 
-## Prerequisites
+:::tip Example Code
+For more comprehensive pool creation examples, see the [pool creation examples](https://github.com/berachain/bex-sdk/tree/main/examples/pool-creation) in the BEX SDK repository.
+:::
+
+## Requirements
 
 Before creating a pool, you'll need the addresses of tokens you want to include in your pool and tokens to join the pool.
 

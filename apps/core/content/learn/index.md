@@ -19,7 +19,10 @@ head:
 
 <a :href="config.websites.foundation.url">
 
-![Berachain.com](/assets/berachaindotcom.png)
+<picture>
+  <source srcset="/assets/berachaindotcom.webp" type="image/webp">
+  <img src="/assets/berachaindotcom.png" alt="Berachain.com">
+</picture>
 
 </a>
 

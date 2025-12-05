@@ -4,9 +4,33 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## November 2025
+
+**Balancer Exploit Remediation** – Shipped [multiple upgrades to Bera-Geth and Bera-Reth](/nodes/evm-execution) to deal with the Balancer exploit.
+
+## October 2025
+
+**[Bend Protocol documentation](http://docs.bend.berachain.com/)** – Added documentation for [Bend](https://bend.berachain.com/), a new lending protocol on Berachain. Documentation includes developer guides, contract references, and user guides covering deposit/withdraw, borrow/repay, and protocol concepts including IRMs and oracles.
+
+**Smart contract verification guides** – Added guides for verifying smart contracts on Berachain using multiple methods including [Berascan verification](/developers/guides/verify-smart-contracts) and [contract verification using Berascan](/developers/guides/verify-contract-using-berascan). Includes step-by-step instructions with screenshots and code examples.
+
+**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/berachain-bridge) documentation.
+
+**Safe integration guide** – Added [Safe integration documentation](/learn/guides/safe-add-incentives-for-reward-vault) for integrating with Safe (formerly Gnosis Safe) on Berachain, including contract addresses and deployment information for secure multi-sig wallet functionality.
+
+**[BEX documentation updates](http://docs.bex.berachain.com/)** – Updated swap guides with enhanced price impact information and standardized terminology across all BEX documentation.
+
+**sWBERA token documentation** – Added [sWBERA token documentation](/learn/pol/tokens/swbera) including 7-day unstaking period details, integration patterns, and contract reference information.
+
+**PoL integration updates** – Updated [PoL integration quickstart](/developers/quickstart/pol-integration) with the [Incentivize Anything playground](https://playground.bepolia.berachain.com) examples.
+
 ## September 2025
 
 **Bepto hardfork** [upgrade instructions](/nodes/guides/bepto) are posted.  Based on further community feedback, this upgrade removes the minimum base fee set as part of BRIP-0002. However, the base fee rate of change will remain the same as introduced in BRIP-0002.
+
+**Node operator updates** – Updated [validator lifecycle guide](/nodes/validator-lifecycle) with enhanced details and improved voluntary exit documentation.
+
+**Honey token documentation** – Updated [HONEY token documentation](/learn/pol/tokens/honey) with improved precision and added [Berascan token update guide](/learn/guides/berascan-token-update).
 
 ## August 2025
 
@@ -18,7 +42,7 @@ Below are important changes shipped to Berachain.
 
 
 
-**Comprehensive contract documentation refresh** – Updated all contract reference documentation to follow the standard autodocs pattern with proper organization by function type (Constants → State Variables → Structs → View Functions → Functions → Events → Errors). All PoL contracts now follow consistent documentation standards including **[BGTStaker](/developers/contracts/bgt-staker)**, **[Reward Vault](/developers/contracts/reward-vault)**, **[BeraChef](/developers/contracts/berachef)**, **[BGT Token](/developers/contracts/bgt-token)**, **[BGT Incentive Distributor](/developers/contracts/bgtincentivedistributor)**, **[Block Reward Controller](/developers/contracts/block-reward-controller)**, **[Fee Collector](/developers/contracts/fee-collector)**, **[Governance](/developers/contracts/governance)**, **[Honey Factory](/developers/contracts/honey-factory)**, **[Honey Factory Reader](/developers/contracts/honey-factory-reader)**, **[WBERA Staker Vault](/developers/contracts/wbera-staker-vault)**, **[BeaconDeposit](/developers/contracts/beacondeposit)**, **[Create2](/developers/contracts/create2)**, **[Multicall3](/developers/contracts/multicall3)**, **[Permit2](/developers/contracts/permit2)**, **[Reward Vault Factory](/developers/contracts/reward-vault-factory)**, **[Timelock](/developers/contracts/timelock)**, and **[WBERA Token](/developers/contracts/wbera-token)**.
+**Contract documentation refresh** – Updated all contract reference documentation to follow the standard autodocs pattern with proper organization by function type (Constants → State Variables → Structs → View Functions → Functions → Events → Errors). All PoL contracts now follow consistent documentation standards including **[BGTStaker](/developers/contracts/bgt-staker)**, **[Reward Vault](/developers/contracts/reward-vault)**, **[BeraChef](/developers/contracts/berachef)**, **[BGT Token](/developers/contracts/bgt-token)**, **[BGT Incentive Distributor](/developers/contracts/bgtincentivedistributor)**, **[Block Reward Controller](/developers/contracts/block-reward-controller)**, **[Fee Collector](/developers/contracts/fee-collector)**, **[Governance](/developers/contracts/governance)**, **[Honey Factory](/developers/contracts/honey-factory)**, **[Honey Factory Reader](/developers/contracts/honey-factory-reader)**, **[WBERA Staker Vault](/developers/contracts/wbera-staker-vault)**, **[BeaconDeposit](/developers/contracts/beacondeposit)**, **[Create2](/developers/contracts/create2)**, **[Multicall3](/developers/contracts/multicall3)**, **[Permit2](/developers/contracts/permit2)**, **[Reward Vault Factory](/developers/contracts/reward-vault-factory)**, **[Timelock](/developers/contracts/timelock)**, and **[WBERA Token](/developers/contracts/wbera-token)**.
 - Updated [BGT claiming guide](/learn/guides/claim-bgt) with protocol claiming information
 - Enhanced [PoL integration quickstart](/developers/quickstart/pol-integration) highlighting new staking options
 

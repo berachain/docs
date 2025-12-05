@@ -19,24 +19,24 @@ head:
 
 BeraHub is the place to manage all things `$BGT` and access Berachain liquidity through BEX.
 
-<a target="_blank" :href="config.mainnet.dapps.hub.url">
+<a target="_blank" :href="config.websites.hub.url">
 
 ![Berachain BeraHub dApp](/assets/berahub.png)
 
 </a>
 
-> <a target="_blank" :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.url}}</a>
+> <a target="_blank" :href="config.websites.hub.url">{{config.websites.hub.url}}</a>
 
 On BeraHub, users can:
 
-1. Review active <a target="_blank" :href="config.mainnet.dapps.hub.url + 'vaults'">Reward Vaults</a>
-2. Review active <a target="_blank" :href="config.mainnet.dapps.hub.url + 'validators'">Validators</a>
-3. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'validators'">Boost</a> validators with `$BGT`
-4. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'redeem'">Redeem</a> `$BGT` for `$BERA`
-5. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'rewards'">Claim</a> earned `$BGT` rewards
-6. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'swap'">Swap</a> assets
-7. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'pools'">Provide</a> BEX liquidity
-8. <a target="_blank" :href="config.mainnet.dapps.hub.url + 'governance'">Participate</a> in Governance
+1. Review active <a target="_blank" :href="config.websites.hub.url + 'vaults'">Reward Vaults</a>
+2. Review active <a target="_blank" :href="config.websites.hub.url + 'validators'">Validators</a>
+3. <a target="_blank" :href="config.websites.hub.url + 'validators'">Boost</a> validators with `$BGT`
+4. <a target="_blank" :href="config.websites.hub.url + 'redeem'">Redeem</a> `$BGT` for `$BERA`
+5. <a target="_blank" :href="config.websites.hub.url + 'rewards'">Claim</a> earned `$BGT` rewards
+6. <a target="_blank" :href="config.websites.hub.url + 'swap'">Swap</a> assets
+7. <a target="_blank" :href="config.websites.hub.url + 'pools'">Provide</a> BEX liquidity
+8. <a target="_blank" :href="config.websites.hub.url + 'governance'">Participate</a> in Governance
 
 ## Account Overriding
 
@@ -52,7 +52,7 @@ The account overriding feature is designed to facilitate permissionless transact
 
 To use the account override feature:
 
-1. Navigate to <a target="_blank" :href="config.mainnet.dapps.hub.url">BeraHub</a>
+1. Navigate to <a target="_blank" :href="config.websites.hub.url">BeraHub</a>
 2. Access the settings toggle to enable account override
 3. Enter the target address you want to perform transactions for
 4. Follow the same process as you would for your own account

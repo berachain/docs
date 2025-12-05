@@ -32,13 +32,17 @@ BGT rewards accumulate in Reward Vaults as validators direct emissions to them. 
 
 ## How to Claim BGT Rewards
 
-**Via Berachain Hub:**
+1. [Navigate to the Hub's porfolio page](https://hub.berachain.com/portfolio/)
+2. Go to the **Earn Actions** section
+   ![Available BGT Claims](/assets/bgt-claim-index.png)
 
-1. Navigate to [hub.berachain.com](https://hub.berachain.com)
-2. Go to the **Stake** section
-3. Find your staked positions
-4. Click **"Claim Rewards"** to claim all accumulated BGT
-5. Confirm the transaction
+3. Click **Claim** to claim all accumulated BGT for each position
+   ![Claiming BGT](/assets/bgt-claim-progress.png)
+
+4. Confirm the transaction
+   ![BGT Claim Successful](/assets/bgt-claim-success.png)
+
+5. Follow the link to find validators to boost with your BGT.
 
 **What happens:**
 

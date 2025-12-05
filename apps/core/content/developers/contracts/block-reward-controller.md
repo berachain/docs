@@ -17,7 +17,7 @@ head:
 
 # BlockRewardController
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.blockRewardController['mainnet-address']">{{config.contracts.pol.blockRewardController['mainnet-address']}}</a><span v-if="config.contracts.pol.blockRewardController.abi && config.contracts.pol.blockRewardController.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.blockRewardController.address.berachainMainnet">{{config.contracts.pol.blockRewardController.address.berachainMainnet}}</a><span v-if="config.contracts.pol.blockRewardController.abi && config.contracts.pol.blockRewardController.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.blockRewardController.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/rewards/BlockRewardController.sol)
 

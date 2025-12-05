@@ -13,11 +13,11 @@ The following guide will walk you through the process of claiming Incentives fro
 
 ## How To Claim Incentive Tokens
 
-This will walk you through the process of claiming Incentives through <a :href="config.mainnet.dapps.hub.url" target="_blank">{{config.mainnet.dapps.hub.name}}</a>.
+This will walk you through the process of claiming Incentives through <a :href="config.websites.hub.url" target="_blank">{{config.websites.hub.name}}</a>.
 
 ### Step 1 - Find Portfolio
 
-On main {{config.mainnet.dapps.hub.name}}, in the top right section click **Portfolio**.
+On main {{config.websites.hub.name}}, in the top right section click **Portfolio**.
 
 ![Berachain Hub](/assets/claim-incentives-hub.png)
 

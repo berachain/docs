@@ -30,7 +30,7 @@ The process for earning `$BGT` through BEX involves three simple steps:
 2. **Stake LP Tokens in Reward Vault**: After providing liquidity, you'll receive LP tokens. Stake these tokens in the pool's staking contract
 
 You can view and manage your staked positions in the reward vaults here:
-{{config.mainnet.dapps.hub.url}}vault
+{{config.websites.hub.url}}vault
 
 ## Whitelisting Pools for PoL Rewards
 
