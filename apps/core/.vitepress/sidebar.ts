@@ -381,10 +381,6 @@ const SIDEBAR = {
           link: "/nodes/staking-pools/operators"
         },
         {
-          text: "User Guide",
-          link: "/nodes/staking-pools/users"
-        },
-        {
           text: "Installation Guide",
           link: "/nodes/staking-pools/installation"
         },
