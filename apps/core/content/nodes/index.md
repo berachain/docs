@@ -57,6 +57,10 @@ This means that validators will have to communicate how they handle funds when a
 Avoid staking to validators without knowing how they handle funds when a validator is removed from the active set.
 :::
 
+## Staking Pools
+
+Validators can also operate **staking pools**, which enable liquid staking services for their communities. Staking pools use smart contracts to manage deposits and withdrawals, allowing stakers to receive liquid shares (stBERA) that automatically grow in value as rewards accumulate. Staking pools provide validators with a way to build and monetize their own community of stakers while offering stakers lower barriers to entry and flexible withdrawals. For information about setting up and operating staking pools, see the [Staking Pools documentation](/nodes/staking-pools).
+
 ## Removed From Active Set ❌
 
 If a validator is removed from the active set, all `$BERA` staked to that validator will be returned to the validator's Withdrawal Credentials Address, which is set when the validator makes their first deposit.

@@ -211,21 +211,21 @@ function queueValCommission(uint96 commission) external;
 | ------------ | -------- | --------------------------------------------- |
 | `commission` | `uint96` | The new validator commission in basis points. |
 
-### setminActivationBalance
+### setMinEffectiveBalance
 
 Sets the minimum effective balance for the staking pool.
 
 **Required Role**: `VALIDATOR_ADMIN_ROLE`
 
 ```solidity
-function setminActivationBalance(uint256 minActivationBalance) external;
+function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
 ```
 
 **Parameters**
 
 | Name                   | Type      | Description                                                |
 | ---------------------- | --------- | ---------------------------------------------------------- |
-| `minActivationBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
+| `newMinEffectiveBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
 
 ### queueIncentiveCollectorPayoutAmountChange
 
@@ -276,6 +276,8 @@ function accrueEarnedBGTFees() external whenNotFullyExited;
 
 Claims accumulated HONEY token rewards from BGT staking and forwards them to the IncentiveCollector. HONEY rewards accumulate from protocol fees distributed to BGT stakers. Once forwarded to IncentiveCollector, these tokens become available for anyone to claim via the incentive auction mechanism.
 
+**Note:** This function does not need to be called manually. It is called internally by `claimBoostRewards()`, which handles both HONEY rewards and incentive tokens. Use `claimBoostRewards()` instead. See [claimBoostRewards](#claimboostrewards) for details.
+
 ```solidity
 function claimBgtStakerReward() external returns (uint256);
 ```
@@ -286,15 +288,11 @@ function claimBgtStakerReward() external returns (uint256);
 | -------- | --------- | --------------------------------------------- |
 | `<none>` | `uint256` | The amount of HONEY rewards claimed and sent. |
 
-**When to Use**
-
-Call this function when you want to forward only HONEY rewards from BGT staking to IncentiveCollector. However, `claimBoostRewards()` is sufficient for most use cases as it internally calls this function and also handles incentive tokens from the boost program. Use `claimBoostRewards()` instead unless you specifically need to forward only HONEY rewards without boost program tokens.
-
 ### claimBoostRewards
 
 Claims both HONEY rewards from BGT staking and incentive tokens from the boost program, then forwards all accumulated tokens to the IncentiveCollector. Once tokens are in IncentiveCollector, they become available for anyone to claim via the permissionless auction mechanism by paying the required payout amount.
 
-This function internally calls `claimBgtStakerReward()` to handle HONEY rewards, so calling `claimBoostRewards()` alone is sufficient to forward both HONEY rewards and incentive tokens. Validators should use this function rather than calling `claimBgtStakerReward()` separately.
+This function internally calls `claimBgtStakerReward()` to handle HONEY rewards, so calling this function alone is sufficient to forward both HONEY rewards and incentive tokens.
 
 ```solidity
 function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, address[] memory tokens) external;
@@ -309,7 +307,7 @@ function claimBoostRewards(IBGTIncentiveDistributor.Claim[] calldata claims, add
 
 **What Happens**
 
-- Claims any accumulated HONEY rewards from BGT staking (internally calls `claimBgtStakerReward()`)
+- Claims any accumulated HONEY rewards from BGT staking
 - Claims incentive tokens from the boost program using the provided merkle claims
 - Transfers all balances of the specified tokens (including any HONEY claimed) from SmartOperator to IncentiveCollector
 - Tokens become available for anyone to claim via IncentiveCollector's incentive auction mechanism

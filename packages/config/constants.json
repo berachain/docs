@@ -391,8 +391,7 @@
           "berachainMainnet": "",
           "berachainBepolia": ""
         },
-        "abi": "",
-        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandlerFactory"
+        "abi": ""
       }
     },
     "tokens": {

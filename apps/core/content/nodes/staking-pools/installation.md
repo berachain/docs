@@ -36,7 +36,7 @@ There are many useful scripts under `install-helpers/` which wrap multi-step ope
 - `status.sh`: Verifies deployment, registration, and activation status
 - `stake.sh`: Generates a staking transaction to add BERA to your pool
 
-All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not send transactions without your confirmation.
+**Important:** All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not send transactions without your confirmation. By default, scripts use Ledger for signing; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
 
 ## Requirements
 
@@ -44,7 +44,7 @@ All scripts write ready-to-run `cast` commands to files for you to review and ex
 - Foundry `cast` (`https://getfoundry.sh/`)
 - `jq`, `bc`, `curl`,
 - Ledger hardware wallet (default) or a private key set via `PRIVATE_KEY`
-- Funds: at least 10,000 BERA for the initial deposit; additional stake as desired (Bepolia typically targets 250,000 BERA total)
+- Funds: at least 10,000 BERA for the initial deposit; additional stake as desired
 
 ## 1) Configure environment
 
@@ -69,7 +69,7 @@ Run `activate.sh` with your addresses:
 ./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
 ```
 
-1. The chain (mainnet or bepolia) is auto-detected from your beacond configuration.
+1. The chain (mainnet or Bepolia) is auto-detected from your beacond configuration.
 2. If your validator is not yet registered on the beacon chain, the script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Review it. Simulate it if you want. Then run it. This should dump a successful transaction receipt.
 3. Wait 192 blocks for the validator to be registered. Then run `activate.sh` again.
 4. The script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
@@ -87,15 +87,7 @@ You should see the SmartOperator, StakingPool, StakingRewardsVault, and Incentiv
 
 ## 4) Set minimum effective balance
 
-**Critical Step:** The `minEffectiveBalance` parameter determines when your staking pool activates its validator on the consensus layer. The consensus layer has a floor of {{ config.mainnet.minEffectiveBalance }} BERA, but when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots occupied), the minimum stake required increases in {{ config.mainnet.stakeMinimumIncrement }} BERA increments.
-
-If you don't set this value correctly, your pool may accumulate deposits without ever activating. **You must set `minEffectiveBalance` to match the current minimum stake required if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA.**
-
-To determine the current minimum stake requirement:
-
-1. Check [Berachain Hub](https://hub.berachain.com/boost/) to see the current number of active validators
-2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
-3. Calculate the minimum required stake (lowest active stake, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment)
+**Critical Step:** The `minEffectiveBalance` parameter determines when your staking pool activates its validator on the consensus layer. If you don't set this value correctly, your pool may accumulate deposits without ever activating.
 
 Set the value using your SmartOperator contract:
 
@@ -107,7 +99,7 @@ cast send $SMART_OPERATOR_ADDRESS \
 
 Replace `$SMART_OPERATOR_ADDRESS` with your SmartOperator address and `$CALCULATED_MIN_STAKE` with the calculated minimum stake amount in wei (multiply BERA amount by 10^18).
 
-For more details on why this matters, see the [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) section in the operator guide.
+For details on why this matters, how to determine the correct value, and how the consensus layer minimum works, see the [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) section in the operator guide.
 
 ## 5) (Optional) Stake additional BERA
 
@@ -127,7 +119,6 @@ The script writes `stake-command.sh`. Review and execute the command to submit y
 
 - Node API not reachable: enable `[beacon-kit.node-api]` and confirm the address/port; or set `NODE_API_ADDRESS` in `env.sh`. The script will examine your files and tell you how to activate the API if it isn't enabled yet.
 - Missing tools: install Foundry (`cast`), `jq`, `bc`, and `curl` and ensure they are on your PATH.
-- Signing: by default the scripts use Ledger; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
 
 ## What’s next
 

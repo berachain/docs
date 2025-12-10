@@ -19,6 +19,38 @@ head:
 
 This guide helps validators set up and manage staking pools to offer liquid staking services to their communities.
 
+## Quick Reference
+
+### Key Parameters
+
+| Parameter | Range | Purpose |
+|-----------|-------|---------|
+| Validator Commission | 0-20% | Commission on incentive token distribution |
+| Protocol Fee | 0-20% | Fee on BGT balance growth |
+| Minimum Effective Balance | ≥ {{ config.mainnet.minEffectiveBalance }} BERA | Activation threshold and full exit safeguard |
+| Withdrawal Delay | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized |
+
+### Key Roles
+
+| Role | Controls | Function |
+|------|----------|----------|
+| `VALIDATOR_ADMIN_ROLE` | All other roles | Grant/revoke operational roles |
+| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | Direct PoL incentives to applications |
+| `COMMISSION_MANAGER_ROLE` | Commission rate | Adjust validator commission (0-20%) |
+| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount | Adjust incentive collector payout |
+| `BGT_MANAGER_ROLE` | BGT operations | Queue drop boost, redeem BGT |
+
+### Essential Functions
+
+| Function | Contract | Purpose |
+|----------|----------|---------|
+| `setMinEffectiveBalance()` | SmartOperator | Set activation threshold |
+| `queueValCommission()` | SmartOperator | Queue commission rate change |
+| `queueRewardsAllocation()` | SmartOperator | Queue reward allocation |
+| `claimBoostRewards()` | SmartOperator | Forward rewards to IncentiveCollector |
+| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate |
+
 ## Prerequisites
 
 Before setting up a staking pool, ensure you have a fully operational Berachain validator node. You'll need at least {{ config.mainnet.votingPowerIncrement }} $BERA to register the pool, though activation requires at least {{ config.mainnet.minEffectiveBalance }} $BERA.
@@ -31,31 +63,39 @@ Staking pools follow the standard Berachain validator lifecycle. After deploymen
 
 ## Validator Lifecycle
 
-Your staking pool integrates with Berachain's validator lifecycle, which follows these states:
+Your staking pool integrates with Berachain's validator lifecycle. For details on validator states (Deposited, Eligible, Active, Exited, Withdrawn) and transitions, see the [Validator Lifecycle documentation](/nodes/validator-lifecycle).
 
-- **Deposited**: Initial deposit establishes your validator identity (minimum 10,000 BERA to reach Deposited state)
-- **Eligible**: After 1 epoch, your validator becomes eligible for activation (requires 250,000 BERA minimum effective balance)
-- **Active**: After another epoch, your validator joins the active set and can propose blocks
-- **Exited**: If capacity limits are reached, validators with lower priority are exited
-- **Withdrawn**: Funds become withdrawable when `withdrawable_epoch = exit_epoch + MIN_VALIDATOR_WITHDRAWABILITY_DELAY` (256 epochs). With 192 slots per epoch at ~2s block time, this is roughly 27 hours under normal conditions. After this delay, funds are returned to the withdrawal contract for eventual redemption.
+The key consideration for staking pools is ensuring sufficient stake for activation. See [Setting Minimum Effective Balance](#setting-minimum-effective-balance) for details on how to configure this.
 
-## Getting Started
+## Key Terms and Concepts
 
-### Deployment and Installation
+**Active Threshold**: The point at which your pool has sufficient stake (`totalDeposits >= minEffectiveBalance`) to activate the validator. When `activeThresholdReached()` returns `true`, your validator enters a cooldown period before activation. This is separate from the consensus layer's activation queue.
 
-The setup process for staking pools follows this progression:
+**Minimum Effective Balance (`minEffectiveBalance`)**: The minimum stake amount required for validator activation and a safeguard that triggers full exit if deposits fall below it. This must match or exceed the current consensus layer minimum, which increases when the validator set is full.
 
-1. **Deploy and Initialize Your Staking Pool**: See the [Installation Guide](/nodes/staking-pools/installation).
+**Short-Circuit Withdrawal**: A withdrawal path where funds are immediately transferred from the pool's buffer to WithdrawalVault, but stakers still must wait the full withdrawal delay (129,600 blocks ≈ 3 days) before finalization. This occurs when the pool hasn't reached the active threshold and has sufficient buffered funds.
 
-2. **Configure Operations**: Set operational parameters such as commission rates and reward allocations to optimize your pool's performance.
+**Withdrawal Delay**: The time period (129,600 blocks ≈ 3 days at ~2s block time) that must pass after a withdrawal request before it can be finalized. This delay applies regardless of whether the withdrawal uses the short-circuit or standard path.
 
-### Business Model and Commission Rates
+**Cooldown Period**: After `activeThresholdReached()` becomes `true`, there is a cooldown period before the validator activates. During this time, withdrawals are still allowed, but the validator is not yet active on the consensus layer.
+
+**Relationship between `minEffectiveBalance` and `activeThresholdReached`**: 
+- `minEffectiveBalance` is the threshold you set (must match consensus layer requirements)
+- `activeThresholdReached()` returns `true` when `totalDeposits >= minEffectiveBalance()`
+- Once `activeThresholdReached()` is `true`, the validator enters cooldown and will activate after the delay
+- If `totalDeposits` later falls below `minEffectiveBalance()`, the pool triggers full exit
+
+## Configuration
+
+After deploying your staking pool, configure these essential parameters before accepting staker deposits.
+
+### Commission Rates
 
 Staking pools provide validators with a revenue stream through commission on incentive token distribution. You can set commission rates within the range defined by the BeraChef contract (0-20%), allowing you to balance profitability with competitive positioning.
 
-**Commission on Incentive Tokens:**
+Commission applies to the distribution of incentive tokens from Proof of Liquidity rewards. Setting commission greater than 0% guarantees stakers a yield, even if the validator maintains minimal boost and burns BGT to increase voting power. Incentive tokens are automatically sent to the SmartOperator when `distributeFor` runs for your validator.
 
-Commission applies to the distribution of incentive tokens from Proof of Liquidity rewards, with a range of 0-20% as set by BeraChef. Setting commission greater than 0% guarantees stakers a yield, even if the validator maintains minimal boost and burns BGT to increase voting power. Incentive tokens are automatically sent to the SmartOperator when `distributeFor` runs for your validator.
+For detailed instructions on managing validator commission rates, including how to queue and activate changes, see the [Manage Validator Incentives Commission Rate](/nodes/guides/manage-incentives-commission) guide.
 
 ```solidity
 // Queue validator commission rate change (in basis points, max 2000 = 20%)
@@ -64,9 +104,11 @@ function queueValCommission(uint96 commission) external;
 
 See: [SmartOperator.queueValCommission](/nodes/staking-pools/contracts/SmartOperator.md#queuevalcommission)
 
-### Configure Reward Allocations
+### Reward Allocations
 
 The reward allocation system lets you direct Proof of Liquidity incentives to specific applications or use cases, supporting ecosystem initiatives or community projects to differentiate your pool.
+
+For detailed instructions on managing reward allocations, including how to queue and activate changes, see the [Managing Validator Reward Allocations](/nodes/guides/reward-allocation) guide.
 
 ```solidity
 // Queue reward allocation for specific applications
@@ -78,7 +120,7 @@ function queueRewardsAllocation(
 
 See: [SmartOperator.queueRewardsAllocation](/nodes/staking-pools/contracts/SmartOperator.md#queuerewardsallocation)
 
-### Set Reward Allocator
+### Reward Allocator
 
 You can set a reward allocator address for your validator on the BeraChef contract. This allows you to delegate reward allocation management to a specific address or smart contract.
 
@@ -89,39 +131,71 @@ function setRewardAllocator(address rewardAllocator) external;
 
 See: [SmartOperator.setRewardAllocator](/nodes/staking-pools/contracts/SmartOperator.md#setrewardallocator)
 
-## Role Management and Access Control
+### Role Management
 
-The SmartOperator contract uses role-based access control to delegate operational responsibilities to different addresses, providing operational flexibility while maintaining security.
+The SmartOperator contract uses role-based access control to delegate operational responsibilities. When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which allows you to grant and revoke operational roles to other addresses.
 
-**Your Role as Validator Admin:**
+| Role | Controls | Key Functions |
+|------|----------|--------------|
+| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | `queueRewardsAllocation()` |
+| `COMMISSION_MANAGER_ROLE` | Commission rate (0-20%) | `queueValCommission()` |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amounts | `queueIncentiveCollectorPayoutAmountChange()` |
+| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee (0-20%) | `setProtocolFeePercentage()` |
+| `BGT_MANAGER_ROLE` | BGT operations | `queueDropBoost()`, `redeemBGT()` |
 
-When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which gives you the ability to grant and revoke the following operational roles to other addresses:
+**Role Assignment Strategy:** Assign roles based on your operational needs. For simplicity, grant all roles to your main validator wallet. Alternatively, grant specific roles to different team members, automated systems, or smart contracts for distributed management. This keeps validator keys secure and separate from day-to-day management.
 
-**REWARDS_ALLOCATION_MANAGER_ROLE:**
+### Setting Minimum Effective Balance
 
-This role controls where your Proof of Liquidity rewards are directed. Addresses with this role can call `queueRewardsAllocation()` to support specific DeFi protocols or applications, making it useful for supporting ecosystem initiatives or community projects.
+The `minEffectiveBalance` parameter is critical for validator activation and maintaining active status. This value determines when your staking pool becomes eligible to activate its validator on the consensus layer and serves as a safeguard that triggers full exit if your pool's deposits fall below it.
 
-**COMMISSION_MANAGER_ROLE:**
+**How the Consensus Layer Minimum Works:**
 
-This role controls your validator commission rate (0-20% as set by BeraChef). Addresses with this role can call `queueValCommission()` to adjust how much you earn from staker rewards, making it essential for managing your revenue model.
+The consensus layer enforces a base minimum of {{ config.mainnet.minEffectiveBalance }} BERA for validator activation. However, when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots are occupied), the actual minimum stake required increases in increments of {{ config.mainnet.stakeMinimumIncrement }} BERA. This dynamic adjustment ensures that validators must compete for entry into the active set when capacity is reached.
 
-**INCENTIVE_COLLECTOR_MANAGER_ROLE:**
+You must set `minEffectiveBalance` to match the current minimum stake required on the consensus layer if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA. To determine the current requirement:
 
-This role controls incentive collector payout amounts. Addresses with this role can call `queueIncentiveCollectorPayoutAmountChange()` to adjust staker incentive payouts, which is useful for optimizing staker experience and retention.
+1. Check the current number of validators on [Berachain Hub](https://hub.berachain.com/boost/)
+2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
+3. The minimum required stake will be that lowest amount, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment
+4. You may, of course, choose to go higher
 
-**PROTOCOL_FEE_MANAGER_ROLE:**
+Once your validator reaches the activation threshold (when `activeThresholdReached()` becomes `true`), a cooldown period begins. However, if withdrawals later cause `totalDeposits` to fall below `minEffectiveBalance()`, the pool automatically triggers a full exit (see [Full Exit Management](#full-exit-management)). Setting `minEffectiveBalance` correctly from the start prevents your pool from exiting prematurely while ensuring activation occurs when sufficient stake is available.
 
-This role controls the protocol fee percentage (up to 20%) charged on BGT balance growth. Addresses with this role can call `setProtocolFeePercentage()` to adjust fee rates, which is important for managing operational costs.
+```solidity
+// Set minimum effective balance (can only be called by SmartOperator)
+function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
+```
 
-**BGT_MANAGER_ROLE:**
+See: [SmartOperator.setMinEffectiveBalance](/nodes/staking-pools/contracts/SmartOperator.md#setmineffectivebalance)
 
-This role controls BGT boost and redemption operations. Addresses with this role can call `queueDropBoost()` and `redeemBGT()` for BGT management. This role can be granted by validator admins for BGT management operations.
+## Routine Operations
 
-**Role Assignment Strategy:**
+### Monitor Pool Status
 
-Assign roles based on your operational needs. For simplicity, grant all roles to your main validator wallet. Alternatively, grant specific roles to different team members, automated systems, or smart contracts for distributed management. This keeps validator keys secure and separate from day-to-day management.
+Check key metrics regularly: whether the pool is active, total assets under management, and buffered assets not yet staked.
 
-## Operations
+```solidity
+// Check if pool is active
+function isActive() external view returns (bool);
+
+// Get total assets under management
+function totalAssets() external view returns (uint256);
+
+// Get buffered assets (not yet staked)
+function bufferedAssets() external view returns (uint256);
+
+// Check if pool has fully exited
+function isFullyExited() external view returns (bool);
+
+// Get minimum effective balance threshold
+function minEffectiveBalance() external view returns (uint256);
+
+// Check if active threshold is reached
+function activeThresholdReached() external view returns (bool);
+```
+
+See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#minEffectiveBalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
 
 ### BGT Operations and Protocol Fees
 
@@ -164,11 +238,11 @@ The incentive token system involves multiple steps and two types of rewards:
 1. **Source**: Protocol fees collected from Berachain dApps (such as BEX trading fees) are auctioned for HONEY via the FeeCollector contract. Anyone can claim accumulated protocol fees by paying a fixed amount of HONEY (the payout amount).
 2. **Distribution**: When protocol fees are claimed, the HONEY payment is sent to BGTStaker, which distributes it proportionally to all BGT stakers based on their staked BGT balance.
 3. **Accumulation**: HONEY rewards accumulate in BGTStaker for your SmartOperator address (since SmartOperator holds BGT)
-4. **Claiming**: Handled automatically by `claimBoostRewards()` which internally calls `claimBgtStakerReward()`
+4. **Claiming**: Handled automatically by `claimBoostRewards()`
 
 **Forwarding to IncentiveCollector:**
 
-Tokens accumulate in SmartOperator and must be manually forwarded to IncentiveCollector before stakers can claim them. Use `claimBoostRewards()` to forward both HONEY rewards from BGT staking and incentive tokens from the boost program to IncentiveCollector in a single operation. This function internally calls `claimBgtStakerReward()` to handle HONEY rewards, so you only need to call `claimBoostRewards()` to handle both reward types.
+Tokens accumulate in SmartOperator and must be manually forwarded to IncentiveCollector before stakers can claim them. Use `claimBoostRewards()` to forward both HONEY rewards from BGT staking and incentive tokens from the boost program to IncentiveCollector in a single operation.
 
 **Incentive Auction Mechanism (Permissionless Claiming):**
 
@@ -177,107 +251,20 @@ Tokens accumulate in SmartOperator and must be manually forwarded to IncentiveCo
 3. **Distribution**: The net payout amount (payoutAmount - protocol fee) is sent to StakingRewardsVault for distribution to shareholders and auto-compounded
 4. **Protocol Fee**: A fee (based on `protocolFeePercentage`) is deducted from the payout amount and minted as shares to your validator's `defaultShareRecipient`
 
-**Checking Current Payout Available:**
-
-To determine the current value of tokens available for claim, check the balance of each token in the IncentiveCollector contract:
-
-```solidity
-// For each token address you want to check
-uint256 balance = IERC20(tokenAddress).balanceOf(address(incentiveCollector));
-```
-
-You should develop a scheme to sample payouts by monitoring token balances in your IncentiveCollector contract. This helps ensure the `payoutAmount` remains appropriate relative to accumulated token values. The buyer (whether operator or arbitrageur) should verify that the total value of all token balances exceeds the `payoutAmount` before calling `claim()`.
-
 **Key Points:**
 
-Tokens do not automatically flow to IncentiveCollector, so manual forwarding is required before they can be claimed. The incentive auction mechanism is winner-takes-all, meaning the first buyer to pay the payout amount receives all accumulated tokens. There is no partial claiming available. The payout amount contributes to your pool's rewards, creating a sustainable cycle where incentive collection benefits both the buyer and your pool.
+Tokens do not automatically flow to IncentiveCollector, so manual forwarding is required before they can be claimed. The incentive auction mechanism is winner-takes-all, meaning the first buyer to pay the payout amount receives all accumulated tokens. There is no partial claiming available. See [Incentive Collector Payout Requirements](#incentive-collector-payout-requirements) for details on managing payout amounts and checking available balances.
 
 **Validator Commission vs Protocol Fee:**
 
 These are two separate fee mechanisms that work independently:
 
-**Validator Commission (0-20%):**
-
-Validator commission is set on BeraChef, not SmartOperator, and is applied to incentive token distribution from Proof of Liquidity rewards. This commission is controlled by addresses with `COMMISSION_MANAGER_ROLE`, who can use `queueValCommission()` to change commission rates.
-
-**Protocol Fee (0-20%):**
-
-The protocol fee is set on SmartOperator via `setProtocolFeePercentage()` and is applied to the SmartOperator's BGT balance growth. This fee is controlled by addresses with `PROTOCOL_FEE_MANAGER_ROLE` and is minted as shares to your validator rather than being deducted from staker rewards.
+| Fee Type | Range | Where Set | What It Applies To | Controlled By |
+|----------|-------|-----------|-------------------|---------------|
+| **Validator Commission** | 0-20% | Configured via SmartOperator, enforced by BeraChef | Incentive token distribution from PoL rewards | `COMMISSION_MANAGER_ROLE` via `queueValCommission()` |
+| **Protocol Fee** | 0-20% | SmartOperator | BGT balance growth | `PROTOCOL_FEE_MANAGER_ROLE` via `setProtocolFeePercentage()` |
 
 Both fee structures can be configured independently based on your operational needs.
-
-## Pool Management
-
-Monitor your pool regularly to ensure smooth operation and identify optimization opportunities or potential issues early.
-
-### Monitor Pool Status
-
-Check key metrics regularly: whether the pool is active, total assets under management, and buffered assets not yet staked.
-
-```solidity
-// Check if pool is active
-function isActive() external view returns (bool);
-
-// Get total assets under management
-function totalAssets() external view returns (uint256);
-
-// Get buffered assets (not yet staked)
-function bufferedAssets() external view returns (uint256);
-
-// Check if pool has fully exited
-function isFullyExited() external view returns (bool);
-
-// Get minimum effective balance threshold
-function minEffectiveBalance() external view returns (uint256);
-
-// Check if active threshold is reached
-function activeThresholdReached() external view returns (bool);
-```
-
-See: [StakingPool.isActive](/nodes/staking-pools/contracts/StakingPool.md#isactive), [StakingPool.totalAssets](/nodes/staking-pools/contracts/StakingPool.md#totalassets), [StakingPool.bufferedAssets](/nodes/staking-pools/contracts/StakingPool.md#bufferedassets), [StakingPool.isFullyExited](/nodes/staking-pools/contracts/StakingPool.md#isfullyexited), [StakingPool.minEffectiveBalance](/nodes/staking-pools/contracts/StakingPool.md#minEffectiveBalance), and [StakingPool.activeThresholdReached](/nodes/staking-pools/contracts/StakingPool.md#activethresholdreached)
-
-### Setting Minimum Effective Balance
-
-The `minEffectiveBalance` parameter is critical for validator activation and maintaining active status. This value determines when your staking pool becomes eligible to activate its validator on the consensus layer and serves as a safeguard that triggers full exit if your pool's deposits fall below it.
-
-**How the Consensus Layer Minimum Works:**
-
-The consensus layer enforces a base minimum of {{ config.mainnet.minEffectiveBalance }} BERA for validator activation. However, when the validator set is full (all {{ config.mainnet.validatorActiveSetSize }} validator slots are occupied), the actual minimum stake required increases in increments of {{ config.mainnet.stakeMinimumIncrement }} BERA. This dynamic adjustment ensures that validators must compete for entry into the active set when capacity is reached.
-
-You must set `minEffectiveBalance` to match the current minimum stake required on the consensus layer if it exceeds {{ config.mainnet.minEffectiveBalance }} BERA. To determine the current requirement:
-
-1. Check the current number of validators on [Berachain Hub](https://hub.berachain.com/boost/)
-2. If the validator set is full ({{ config.mainnet.validatorActiveSetSize }} validators), identify the lowest stake amount among active validators
-3. The minimum required stake will be that lowest amount, rounded up to the nearest {{ config.mainnet.stakeMinimumIncrement }} BERA increment
-4. You may, of course, choose to go higher
-
-Once your validator reaches the activation threshold (when `activeThresholdReached` becomes true), a cooldown period begins during which withdrawals are disabled. This protection ensures commitment to staking operations. However, if withdrawals later cause `totalDeposits` to fall below `minEffectiveBalance()`, the pool automatically triggers a full exit. Setting `minEffectiveBalance` correctly from the start prevents your pool from exiting prematurely while ensuring activation occurs when sufficient stake is available.
-
-```solidity
-// Set minimum effective balance (can only be called by SmartOperator)
-function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
-```
-
-See: [SmartOperator.setMinEffectiveBalance](/nodes/staking-pools/contracts/SmartOperator.md#setmineffectivebalance)
-
-### Understanding Pool Operations
-
-The StakingPool contract manages critical operational aspects that impact your pool's performance and staker experience.
-
-#### Deposit Processing
-
-When stakers deposit BERA into your pool, the contract automatically handles several processes:
-
-1. **Share Minting**: Stakers receive stBERA shares proportional to their deposit
-2. **Buffer Management**: Deposits are added to the buffer until sufficient for consensus layer deposits
-3. **Reward Collection**: Rewards from incentive auctions are collected and added to the buffer if the total capacity is not reached
-4. **Automatic Staking**: When the buffer reaches the minimum deposit amount (10,000 BERA), funds are automatically staked to the consensus layer
-
-The pool handles deposits, automatically collects earned rewards, processes refunds for excess amounts, and maintains the optimal buffer size. When funds are deposited to the consensus layer, amounts are rounded down to the nearest 1 gwei (the consensus layer only accepts multiples of 1 gwei), with any remainder staying in the buffer for future deposits.
-
-#### Withdrawal Management
-
-The withdrawal system provides both immediate and delayed withdrawal options depending on the pool's current state. If the pool's `bufferedAssets()` can cover the withdrawal request and the active threshold hasn't been reached, the withdrawal short-circuits and pays out immediately from the buffer, providing stakers with instant access to their funds. However, if these conditions aren't met, withdrawals follow the standard consensus layer processing path. The system automatically triggers a full exit in two scenarios: when a withdrawal would cause total deposits to fall below the minimum effective balance, or when the withdrawal amount exceeds total deposits (which can occur when share values have appreciated significantly from accumulated rewards). This protects stakers from potential issues while ensuring orderly pool shutdown.
 
 ### Reward Management
 
@@ -293,52 +280,59 @@ function mintFeeShares(uint256 amount) external;
 
 Rewards are collected automatically from the consensus layer as they accrue. Validator fees are minted as shares to the default recipient. All rewards are automatically reinvested through auto-compounding, maximizing returns without manual intervention.
 
-#### Incentive Collector Payout Requirements
+### Incentive Collector Payout Requirements
 
-The IncentiveCollector contract requires the buyer to pay a specific amount when claiming incentive tokens. This mechanism ensures that buyers contribute to the pool's rewards while retrieving accumulated incentives.
+The IncentiveCollector contract requires buyers to pay a specific amount (default: 100 BERA) when claiming incentive tokens. This mechanism ensures buyers contribute to the pool's rewards while retrieving accumulated incentives.
 
-**Initial Payout Amount**: 100 BERA (set during deployment)
+**How It Works:**
 
-**How It Works**:
+1. Tokens accumulate in IncentiveCollector from SmartOperator forwarding operations
+2. Anyone can call `claim()` with the payout amount to claim **all** accumulated tokens
+3. Protocol fees are deducted from the payout and minted as shares to your validator
+4. The net payout amount is sent to StakingRewardsVault for distribution and auto-compounding
 
-1. A buyer (operator, arbitrageur, or any address) calls `claim()` with the required payout amount (100 BERA by default)
-2. The contract transfers all ERC20 incentive tokens to the buyer
-3. Protocol fees are deducted from the payout amount and minted as shares to your validator's `defaultShareRecipient`
-4. The net payout amount (payoutAmount - fee) is sent to StakingRewardsVault for distribution to shareholders and auto-compounded
-5. This creates a sustainable reward cycle for the pool
-
-**Checking Available Payout:**
-
-To determine the current value available for claim, check token balances in the IncentiveCollector contract:
-
-```solidity
-uint256 balance = IERC20(tokenAddress).balanceOf(address(incentiveCollector));
-```
-
-**Managing Payout Amounts**:
+**Managing Payout Amounts:**
 
 ```solidity
 // Queue a new payout amount (requires INCENTIVE_COLLECTOR_MANAGER_ROLE)
 function queueIncentiveCollectorPayoutAmountChange(uint256 newPayoutAmount) external;
 ```
 
-The payout amount change is queued and takes effect automatically on the next `claim()` call.
+**Key Considerations:** Balance your emissions versus `payoutAmount` to avoid selling valuable incentives for too little. Higher voting power produces more blocks and emissions. If `payoutAmount` is too low relative to emissions, you may sell valuable tokens below market value. Higher amounts may discourage buyers but contribute more to pool rewards.
 
-**Key Considerations for Operators**:
+**Helper Scripts:**
 
-Validators need to carefully balance their emissions versus the `payoutAmount` to avoid selling thousands of dollars worth of incentives for only a few BERAs. Higher voting power produces more blocks, which means more emissions. If `payoutAmount` is set too low relative to your emissions, you may end up in a situation where you sell valuable incentive tokens for far less than their market value.
+Additional helper scripts are available in the [install-helpers directory](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers) for operations like requesting withdrawals (`unstake.sh`), managing SmartOperator contracts interactively, and other utilities. See the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) for complete documentation of all available scripts, including detailed usage instructions for the Smart Operator Manager Python tool.
 
-Higher payout amounts may discourage buyers from claiming when token values are low, potentially leaving tokens unclaimed. However, the payout amount contributes to your pool's rewards, creating a balance between buyer accessibility and pool sustainability. Your validator fees are calculated on the payout amount, so adjusting the payout amount affects both buyer behavior and your revenue. Buyers should only claim when the incentive value exceeds the payout cost, so ensure your `payoutAmount` is set appropriately relative to typical token accumulation values.
+## Advanced Topics
 
-This payout mechanism ensures that incentive collection benefits both buyers (who receive the tokens) and your pool (which receives additional rewards from the payout amount). As an operator, you can adjust the payout amount to optimize the balance between buyer accessibility and pool sustainability.
+### Full Exit Management
 
-### Withdrawal Management
+When your validator fully exits, the withdrawal system handles the transition:
 
-The centralized WithdrawalVault contract handles all withdrawal operations for all staking pools. Understanding its operations helps you manage staker expectations and troubleshoot withdrawal issues.
+```solidity
+// Notify of full exit from consensus layer
+function notifyFullExitFromCL(bytes memory pubkey) external;
+```
 
-#### Withdrawal Processing
+The full exit process operates automatically once triggered. When your validator fully exits from the consensus layer, BGT tokens are automatically redeemed, queued boost operations are cancelled, and pending withdrawals continue processing normally. Once complete, the pool is marked as fully exited, preventing new deposits while allowing existing withdrawals to conclude.
 
-The withdrawal system provides two types of withdrawal requests:
+The system automatically triggers a full exit in two scenarios:
+- When a withdrawal would cause `totalDeposits` to fall below `minEffectiveBalance()`
+- When the withdrawal amount exceeds total deposits (which can occur when share values have appreciated significantly from accumulated rewards)
+
+### Withdrawal System
+
+The centralized WithdrawalVault contract handles all withdrawal operations for all staking pools. The withdrawal system provides two processing paths:
+
+| Path | When It Occurs | Processing Time |
+|------|----------------|-----------------|
+| **Short-Circuit** | Pool hasn't reached active threshold and has sufficient buffered funds | Funds immediately transferred to WithdrawalVault, but still requires full delay before finalization |
+| **Standard** | Pool has reached active threshold or lacks sufficient buffered funds | Requires consensus layer processing (256 epochs ≈ 27 hours) |
+
+**Important:** Regardless of which path is taken, stakers must wait the full withdrawal delay (129,600 blocks ≈ 3 days at ~2s block time) before finalization.
+
+**Withdrawal Functions:**
 
 ```solidity
 // Request withdrawal of specific BERA amount
@@ -354,13 +348,7 @@ function requestRedeem(
     uint256 shares,
     uint256 maxFeeToPay
 ) external payable returns (uint256);
-```
 
-#### Withdrawal Finalization
-
-Withdrawals are finalized through the consensus layer:
-
-```solidity
 // Finalize a single withdrawal request
 function finalizeWithdrawalRequest(uint256 requestId) external;
 
@@ -368,32 +356,13 @@ function finalizeWithdrawalRequest(uint256 requestId) external;
 function finalizeWithdrawalRequests(uint256[] calldata requestIds) external;
 ```
 
-In normal network conditions, requests that cannot be short‑circuited by the pool buffer will be eligible to be exchanged for $BERA at the end of the 256th epoch after the withdrawal transaction.
+**Withdrawal Request NFTs:** Each withdrawal request is represented by an ERC721Enumerable NFT ("Berachain Staking Pool Withdrawal Request", symbol "BSPWR"). The request ID returned from withdrawal functions is the same as the NFT token ID. These NFTs are non-transferable and serve as proof of the withdrawal request throughout its lifecycle.
 
-#### Full Exit Management
+### Building Your Front-End
 
-When your validator fully exits, the withdrawal system handles the transition:
+Your front-end should provide a seamless staking experience, abstracting technical details while clearly showing each staker's position and withdrawal status. The sections below describe the requirements your front-end must meet. Berachain provides a React-based example template in the [guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) that you can use as a starting point, but you should customize it for your needs.
 
-```solidity
-// Notify of full exit from consensus layer
-function notifyFullExitFromCL(bytes memory pubkey) external;
-```
-
-The full exit process operates automatically once triggered. The system detects when your validator has fully exited from the consensus layer and initiates automatic redemption of BGT tokens as part of the exit process. Any queued boost or drop boost operations are automatically cancelled during full exit to prevent edge cases. After BGT redemption completes, the BGT charged balance accounting is reset to zero, ensuring that view functions and helper functions operate correctly after the exit. Throughout the exit period, all pending withdrawals continue to process normally, ensuring stakers can still access their funds. Once the exit completes, the pool state is updated to mark it as fully exited, preventing new deposits while allowing existing operations to conclude.
-
-#### Withdrawal Request NFTs
-
-Each withdrawal request is represented by an ERC721Enumerable NFT that provides transparent tracking and proof of withdrawal requests. When stakers request a withdrawal, the system mints an NFT named "Berachain Staking Pool Withdrawal Request" (BSPWR) to their address. The request ID returned from withdrawal functions is the same as the NFT token ID, creating a direct link between the withdrawal request and its on-chain representation.
-
-These NFTs are non-transferable, ensuring only the original requester can finalize their withdrawal. Each NFT has a unique token ID that serves as both the withdrawal request identifier and the ERC721 token identifier. Use `ownerOf(requestId)` to verify ownership for troubleshooting.
-
-The NFT system supports standard ERC721Enumerable functionality. Stakers can query withdrawal NFTs using `balanceOf` and enumerate them using `tokenOfOwnerByIndex`. The NFT serves as proof of the withdrawal request throughout its lifecycle and is required for finalization.
-
-## Building Your Front-End
-
-Your front-end should provide a seamless staking experience, abstracting technical details while clearly showing each staker's position and withdrawal status.
-
-### Withdrawal Request Management
+#### Withdrawal Request Management
 
 When stakers request a withdrawal, they receive an ERC721 NFT (token name "Berachain Staking Pool Withdrawal Request", symbol "BSPWR") representing their withdrawal request. The withdrawal request ID returned from `requestWithdrawal()` or `requestRedeem()` is the same as the NFT token ID. Your front-end should:
 
@@ -403,7 +372,7 @@ When stakers request a withdrawal, they receive an ERC721 NFT (token name "Berac
 - Display the withdrawal amount and request timestamp
 - Calculate and display when each withdrawal will be ready to finalize
 - Use `getWithdrawalRequest(requestId)` to retrieve withdrawal details including the `requestBlock` field
-- Calculate readiness by checking if `block.number >= (request.requestBlock + 129600)` (129,600 blocks ≈ 3 days)
+- Calculate readiness by checking if `block.number >= (request.requestBlock + 129600)` (129,600 blocks ≈ 3 days at ~2s block time)
 - Show a countdown timer or status indicator for pending withdrawals
 
 **Handle Withdrawal Finalization:**
@@ -423,27 +392,9 @@ When stakers request a withdrawal, they receive an ERC721 NFT (token name "Berac
 - Display withdrawal NFTs in the staker's wallet if they use NFT-aware wallets
 - Note that these NFTs are non-transferable (they revert on transfer attempts)
 
-### Withdrawal Processing Paths
+Your front-end should handle both withdrawal processing paths transparently. See [Withdrawal System](#withdrawal-system) for details on short-circuit vs standard paths. Regardless of which path is taken, stakers must wait the full withdrawal delay (129,600 blocks ≈ 3 days at ~2s block time) before finalization.
 
-Your front-end should handle two withdrawal processing paths transparently:
-
-**Short-Circuit Path:**
-
-- Occurs when the pool hasn't reached the active threshold and has sufficient buffered funds
-- Funds are immediately transferred to the WithdrawalVault contract
-- Stakers still must wait the full 3-day delay period before finalization
-- The front-end should not indicate "instant" withdrawal, but can show that funds are already secured
-
-**Standard Path:**
-
-- Occurs when the pool has reached its active threshold or lacks sufficient buffered funds
-- Requires consensus layer processing
-- Takes approximately 3 days (129,600 blocks) to complete
-- Front-end should clearly communicate the processing time
-
-Regardless of which path is taken, stakers must wait the full delay period before finalization. Your interface should set appropriate expectations about timing.
-
-### Staker Balance and Position Display
+#### Staker Balance and Position Display
 
 Your front-end should clearly display:
 
@@ -455,15 +406,73 @@ Your front-end should clearly display:
 
 Use `previewRedeem(shares)` and `previewWithdraw(assets)` to show stakers what they'll receive before they initiate withdrawals.
 
-### Error Handling and Staker Communication
+**Calculating Total Rewards Earned:**
+
+Since rewards are automatically compounded into share price, calculate total rewards by comparing the current value of shares to original deposits. Track each deposit amount (which you'll need for transaction history anyway), then: `totalRewardsEarned = previewRedeem(currentShares) - sumOfAllDeposits`.
+
+#### Error Handling and Staker Communication
 
 Your front-end should handle and clearly communicate:
 
-- **Withdrawal Cooldown**: If withdrawals are disabled due to the validator recently reaching active threshold (cooldown period of ~3 days after activation)
-- **Insufficient Funds**: If the WithdrawalVault doesn't have enough funds when finalization is attempted
-- **Request Not Ready**: If a staker tries to finalize before the delay period completes
-- **Pool Capacity**: If deposits are paused due to capacity limits
-- **Full Exit Status**: If the pool has triggered full exit and what that means for stakers
+| Error | Condition | Front-End Action |
+|-------|----------|-----------------|
+| `RequestNotReady` | Staker tries to finalize before delay completes (129,600 blocks ≈ 3 days at ~2s block time) | Check `request.requestBlock + 129600 <= block.number` before allowing finalization |
+| `NotEnoughFunds` | WithdrawalVault doesn't have enough funds for finalization | Check vault balance before attempting finalization |
+| `MaxCapacityReached` | Pool has reached maximum capacity | Check if deposits are paused before allowing new deposits |
+| `StakingPoolFullExited` | Pool has triggered full exit | Deposits disabled, withdrawals continue normally |
+
+**Note**: Withdrawals are not disabled during the cooldown period after activation. Stakers can request withdrawals at any time, but they cannot finalize them until the delay period completes (129,600 blocks ≈ 3 days after the request was made).
+
+#### Using the Frontend Template
+
+Berachain provides a React-based example template to help you get started building your staking pool front-end. This template is a **starting point and example**—not a production-ready solution. You should customize it to match your branding, add additional features, and ensure it meets your security and UX requirements.
+
+The template is available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend). For detailed setup instructions, see the [frontend README](https://github.com/berachain/guides/blob/main/apps/staking-pools/frontend/README.md).
+
+**Quick Start:**
+
+1. Clone the repository and navigate to the frontend directory:
+   ```bash
+   git clone https://github.com/berachain/guides.git
+   cd guides/apps/staking-pools/frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure the frontend by editing `config.json` or using the helper script (see below).
+
+**Configuration:**
+
+The frontend requires a `config.json` file that specifies:
+- **Network settings**: `rpcUrl`, `chainId`, `explorerUrl`
+- **Contract addresses**: `withdrawalVault` (required), `stakingPoolFactory` (optional)
+- **Pool configuration**: One or more pools with `name`, `validatorPubkey`, `stakingPool`, `enabled`
+
+**Generate Configuration Automatically:**
+
+Use `generate-frontend-config.sh` from the `install-helpers` directory to automatically generate `config.json` from your environment and factory contract lookups:
+
+```bash
+cd ../install-helpers
+./generate-frontend-config.sh
+```
+
+This script reads your `env.sh` configuration and queries the factory contract to generate a complete `config.json` file for your frontend.
+
+**Development and Deployment:**
+
+- Start development server: `npm run dev`
+- Build for production: `npm run build`
+- Preview production build: `npm run preview`
+
+For external access, run: `npm run dev -- --host 0.0.0.0 --port 3000`
+
+**Tech Stack:**
+
+The template uses React 18, Vite, Viem, and MetaMask for wallet connections. You can modify or replace any of these components based on your needs.
 
 ## Troubleshooting
 
@@ -524,7 +533,7 @@ uint256 rebaseable = smartOperator.rebaseableBgtAmount();
 **Debug Steps:**
 
 1. **Check Withdrawal Requests**: Use `getWithdrawalRequest(requestId)` to examine specific requests
-2. **Verify Processing Time**: Confirm the finalization window has passed for standard withdrawals - 256 x 192 block complete epochs
+2. **Verify Processing Time**: Confirm the finalization window has passed for standard withdrawals (256 epochs × 192 blocks/epoch ≈ 27 hours, or 129,600 blocks ≈ 3 days at ~2s block time total delay)
 3. **Check Pool Buffer**: Verify sufficient funds available for short-circuit withdrawals
 4. **Monitor Withdrawal Events**: Watch for `WithdrawalRequested` and `WithdrawalRequestFinalized` events
 
@@ -562,7 +571,7 @@ Develop or deploy a staker-facing interface that supports:
 - **Deposits**: Allow stakers to deposit BERA and receive stBERA shares
 - **Position Display**: Show stakers their current BERA balance (including accrued rewards), share balance, share price, and total rewards earned
 - **Withdrawal Requests**: Enable stakers to request withdrawals by amount or by shares
-- **Withdrawal Finalization**: Display pending withdrawal requests, calculate when they're ready to finalize (after 129,600 blocks ≈ 3 days), and allow stakers to complete withdrawals
+- **Withdrawal Finalization**: Display pending withdrawal requests, calculate when they're ready to finalize (after 129,600 blocks ≈ 3 days at ~2s block time), and allow stakers to complete withdrawals
 
 For detailed front-end requirements, see the [Building Your Front-End](/nodes/staking-pools/operators#building-your-front-end) section.
 

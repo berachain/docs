@@ -31,9 +31,29 @@ When you create a staking pool, the system deploys several interconnected contra
 
 The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from you while providing your stakers with a seamless staking experience.
 
+### Contract Architecture
+
+The staking pools system uses a factory pattern where the **StakingPoolContractsFactory** serves as the deployment mechanism, creating and managing the complete suite of contracts needed for each validator's staking pool.
+
+The core functionality revolves around the **StakingPool** contract, which handles staker deposits, share management, and the fundamental operations of your staking pool. Stakers interact with this contract to stake their BERA tokens and receive stBERA shares in return. The StakingPool contract maintains the accounting for staker positions and manages the conversion between BERA and stBERA shares.
+
+Validator operations are coordinated through the **SmartOperator** contract, which manages the integration with Berachain's Proof of Liquidity system. This contract handles BGT boosting, reward allocation, commission management, and other validator-specific operations that require coordination with the broader Berachain ecosystem.
+
+The **StakingPool** contract inherits from the **StBERA** base contract, which provides the core token functionality for staked BERA shares, including share minting, burning, and conversion between assets and shares.
+
+### Security Model
+
+The staking pools system implements a security model designed to protect staker funds while maintaining operational flexibility for validators and administrators.
+
+Access control is managed through a role-based system that provides granular permissions for different types of operations. The `DEFAULT_ADMIN_ROLE` provides governance control over contract upgrades and emergency actions, ensuring that the system can be maintained and updated as needed. Validators receive the `VALIDATOR_ADMIN_ROLE`, which grants them operational control over their specific staking pool while preventing interference with other validators' operations.
+
+Specialized roles handle specific aspects of the system. The `REWARDS_ALLOCATION_MANAGER_ROLE` manages reward allocation to specific applications, while the `COMMISSION_MANAGER_ROLE` handles validator commission management. The `PROTOCOL_FEE_MANAGER_ROLE` controls protocol fee settings, and the `INCENTIVE_COLLECTOR_MANAGER_ROLE` manages incentive collector operations, ensuring that these critical functions are properly isolated and controlled.
+
+Emergency controls provide additional protection. Contracts can be paused in emergency situations. The system includes automatic full exit triggers that activate if the minimum balance threshold is breached, protecting stakers from potential losses.
+
 ## Staker Experience
 
-When stakers interact with your staking pool, they deposit BERA and immediately receive liquid stBERA shares. Rewards automatically compound as you earn rewards, increasing the value of shares over time without manual claiming or reinvestment. Stakers can withdraw at any time; withdrawals process through the consensus layer in approximately 3 days (129,600 blocks). Stakers can stake any amount without validator minimums, with full transparency through on-chain verification.
+When stakers interact with your staking pool, they deposit BERA and immediately receive liquid stBERA shares. Rewards automatically compound as you earn rewards, increasing the value of shares over time without manual claiming or reinvestment. Stakers can withdraw at any time; withdrawals process through the consensus layer in approximately 3 days (129,600 blocks at ~2s block time). Stakers can stake any amount without validator minimums, with full transparency through on-chain verification.
 
 ## Validator Operations
 
@@ -45,127 +65,11 @@ Staking pools integrate with Berachain's Proof of Liquidity system. Pool BGT rew
 
 ## Provided Tools
 
-Berachain provides tools to help you operate your staking pool. A React-based frontend template lets you build an interface where stakers can connect wallets, deposit BERA, view positions, and request withdrawals. The Smart Operator Helper is an interactive Python CLI tool for managing SmartOperator contracts, including BGT boosting, reward allocation, commission changes, and fee claims. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools).
+Berachain provides tools to help you operate your staking pool. A React-based **example frontend template** provides a starting point for building your staking interface. The template demonstrates how stakers can connect wallets, deposit BERA, view positions, and request withdrawals. See the [Building Your Front-End](/nodes/staking-pools/operators#building-your-front-end) section in the operator guide for requirements and template usage. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. An interactive Python CLI tool is available for managing SmartOperator contracts. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools), with detailed documentation in the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
 
 ## Getting Started
 
 Validators can set up staking pools using the [Installation Guide](/nodes/staking-pools/installation) and manage operations with the [Operator Guide](/nodes/staking-pools/operators).
-
-## Contract Addresses
-
-The staking pools system uses several deployed contracts across Berachain networks. These addresses are the primary interfaces for interacting with the staking pools system.
-
-### Factory Contracts
-
-Factory contracts are deployed instances that you interact with directly:
-
-**StakingPoolContractsFactory**: The main factory contract that deploys all staking pool contracts for validators.
-
-<span v-if="config.contracts.stakingPools.stakingPoolContractsFactory.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory.address.berachainMainnet">{{config.contracts.stakingPools.stakingPoolContractsFactory.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPools.stakingPoolContractsFactory.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPools.stakingPoolContractsFactory.address.berachainBepolia">{{config.contracts.stakingPools.stakingPoolContractsFactory.address.berachainBepolia}}</a>
-</span>
-
-**WithdrawalVault**: The shared withdrawal vault that processes withdrawal requests for all staking pools.
-
-<span v-if="config.contracts.stakingPools.withdrawalVault.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPools.withdrawalVault.address?.berachainMainnet">{{config.contracts.stakingPools.withdrawalVault.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPools.withdrawalVault.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPools.withdrawalVault.address?.berachainBepolia">{{config.contracts.stakingPools.withdrawalVault.address.berachainBepolia}}</a>
-</span>
-
-### Implementation Contracts
-
-Implementation contracts contain the business logic used by all staking pools. These addresses are used internally by the factory and proxies. Your stakers interact with your pool's proxy addresses (not these implementation addresses).
-
-**StakingPool Implementation**: Core staking pool logic for managing deposits, shares, and staker positions.
-
-<span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.stakingPoolImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.stakingPoolImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.stakingPoolImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.stakingPoolImpl.address.berachainBepolia}}</a>
-</span>
-
-**SmartOperator Implementation**: Validator operations and Proof of Liquidity integration logic.
-
-<span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainBepolia}}</a>
-</span>
-
-**StakingRewardsVault Implementation**: Reward collection and automatic reinvestment logic.
-
-<span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainBepolia}}</a>
-</span>
-
-**IncentiveCollector Implementation**: Incentive token collection and conversion logic.
-
-<span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainBepolia}}</a>
-</span>
-
-**DelegationHandler Implementation**: Delegation handling logic for capital providers.
-
-<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainBepolia}}</a>
-</span>
-<span v-else>
-  - **Bepolia**: Not yet deployed
-</span>
-
-**DelegationHandlerFactory Implementation**: Factory logic for deploying delegation handlers.
-
-<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address?.berachainMainnet">
-  - **Mainnet**: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address?.berachainMainnet">{{config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address.berachainMainnet}}</a>
-</span>
-<span v-else>
-  - **Mainnet**: Not yet deployed
-</span>
-<span v-if="config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address?.berachainBepolia">
-  - **Bepolia**: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address?.berachainBepolia">{{config.contracts.stakingPoolImplementations.delegationHandlerFactoryImpl.address.berachainBepolia}}</a>
-</span>
-<span v-else>
-  - **Bepolia**: Not yet deployed
-</span>
-
-> **Note**: You have unique proxy addresses for your StakingPool, SmartOperator, StakingRewardsVault, and IncentiveCollector contracts. These proxy addresses are created when you deploy your staking pool through the factory. Your stakers interact with these proxy addresses, not the implementation addresses listed above.
 
 ## Smart Contract Reference
 

@@ -4,6 +4,8 @@ This guide shows validator operators how to use delegated capital to stand up an
 
 See Installation first: `/nodes/staking-pools/installation`. At minimum, set up env.sh in `install-helpers/`.
 
+**Important:** All helper scripts write `cast` commands to files; review and run them yourself. Transactions are never sent automatically. Signing defaults to Ledger; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
+
 ## Assumptions
 
 - You completed the validator Installation steps (env configured, node synced).
@@ -67,11 +69,7 @@ Follow the prompts to execute the generated request and completion scripts after
 
 Principal withdrawals are controlled by the delegator and are out of scope here. However, the idea is once you have attracted additional depsitors, the foundation can redeem its stake without causing your validator to exit.
 
-## Notes
-
-- All helper scripts write `cast` commands to files; review and run them yourself. Transactions are never sent automatically.
-- Signing defaults to Ledger; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
-- If you are self-funded, use `stake.sh` from the Installation guide instead of the delegated deposit flow.
+**Note:** If you are self-funded, use `stake.sh` from the Installation guide instead of the delegated deposit flow.
 
 ## Where to next
 

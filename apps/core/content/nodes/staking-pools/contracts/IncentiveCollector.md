@@ -108,7 +108,7 @@ function claim(address[] calldata tokens) external payable;
 
 **Token Sources**
 
-Tokens accumulate in IncentiveCollector when you forward them from SmartOperator using `claimBgtStakerReward()` or `claimBoostRewards()`. Tokens may also accumulate from direct transfers if anyone sends tokens directly to the contract.
+Tokens accumulate in IncentiveCollector when you forward them from SmartOperator using `claimBoostRewards()`. Tokens may also accumulate from direct transfers if anyone sends tokens directly to the contract.
 
 **Example Flow:**
 
