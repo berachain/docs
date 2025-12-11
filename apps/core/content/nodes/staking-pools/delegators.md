@@ -23,7 +23,7 @@ If a handler exists, the script displays delegated amounts and whether a pool al
 
 ## 2) Create the pool with delegated funds (first 10,000 BERA)
 
-If the pool is not yet created, use the delegated creation script. It consumes the first 10,000 BERA from the handler to register the validator and writes a ready-to-run command file. This step is the delegated equivalent of the self‑funded flow’s deployment branch in `activate.sh` (it performs the 10,000 BERA deposit and deploys the pool contracts).
+If the pool is not yet created, use the delegated creation script. It consumes the first 10,000 BERA from the handler to register the validator and writes a ready-to-run command file. This step is the delegated equivalent of the self‑funded flow's `register.sh` (it performs the 10,000 BERA deposit and deploys the pool contracts).
 
 ```bash
 ./delegated-create-pool.sh
@@ -31,9 +31,19 @@ If the pool is not yet created, use the delegated creation script. It consumes t
 
 This will create a script with deployment commands. Review it. Then run it to submit the transaction, then wait for confirmation.
 
-## 3) Activate the pool
+## 3) Wait for validator registration
 
-Activation mirrors the Installation flow. After the validator is recognised as registered on the beacon chain, wait until the end of the next epoch (~192 blocks), then generate and execute the activation command with fresh proofs and a valid timestamp window. In delegated mode, `activate.sh` follows the “validator already registered” path; it emits only `activation-command.sh` (no deployment command):
+After deploying the contracts, wait for your validator to be registered on the beacon chain. You can check registration status with:
+
+```bash
+./status.sh
+```
+
+The validator must appear on the beacon chain before you can activate the pool.
+
+## 4) Activate the pool
+
+Activation mirrors the Installation flow. Once the validator is recognised as registered on the beacon chain, generate and execute the activation command with fresh proofs and a valid timestamp window. The `activate.sh` script emits `activation-command.sh`:
 
 ```bash
 ./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
@@ -41,7 +51,7 @@ Activation mirrors the Installation flow. After the validator is recognised as r
 
 Execute the generated `activation-command.sh` within ~10 minutes.
 
-## 4) Deposit remaining delegated funds
+## 5) Deposit remaining delegated funds
 
 After activation, deposit the remaining delegated funds to reach your target balance (for example, 250,000 BERA on Bepolia). The script writes a command file for you to execute.
 
@@ -49,7 +59,7 @@ After activation, deposit the remaining delegated funds to reach your target bal
 ./delegated-deposit.sh --amount 240000
 ```
 
-## 5) Verify status
+## 6) Verify status
 
 ```bash
 ./status.sh
@@ -57,7 +67,7 @@ After activation, deposit the remaining delegated funds to reach your target bal
 
 You should see contract addresses, the operator match on the beacon deposit contract, and the pool marked ACTIVE. The script also reports delegated amounts when a handler is present.
 
-## 6) Withdraw yield (operator)
+## 7) Withdraw yield (operator)
 
 Operators can withdraw earned yield independently of principal. The helper script writes two commands (request, then complete after cooldown):
 

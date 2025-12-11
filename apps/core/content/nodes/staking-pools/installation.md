@@ -32,7 +32,8 @@ frontend/   install-helpers/
 
 There are many useful scripts under `install-helpers/` which wrap multi-step operations into safe, review-first commands:
 
-- `activate.sh`: Deploys a new pool (when needed) and generates the activation command once the validator is registered
+- `register.sh`: Deploys (registers) staking pool contracts and generates the deployment transaction
+- `activate.sh`: Activates a deployed pool using validator proofs from the beacon chain
 - `status.sh`: Verifies deployment, registration, and activation status
 - `stake.sh`: Generates a staking transaction to add BERA to your pool
 
@@ -61,21 +62,41 @@ cp env.sh.template env.sh
 
 Ensure the beacon node API is enabled in your `app.toml` (`[beacon-kit.node-api]`) or provide `NODE_API_ADDRESS` in `env.sh`. The scripts will auto-detect when possible and verify connectivity before proceeding.
 
-## 2) Deploy and activate (validator-only)
+## 2) Register (deploy contracts)
 
-Run `activate.sh` with your addresses:
+Run `register.sh` with your addresses to deploy the staking pool contracts:
+
+```bash
+./register.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
+```
+
+1. The chain (mainnet or Bepolia) is auto-detected from your beacond configuration.
+2. The script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Review it. Simulate it if you want. Then run it. This should dump a successful transaction receipt.
+3. The script also predicts and shows your staking pool contract addresses ahead of time.
+
+## 3) Wait for validator registration
+
+After deploying the contracts, wait for your validator to be registered on the beacon chain. You can check registration status with:
+
+```bash
+./status.sh
+```
+
+The validator must appear on the beacon chain before you can activate the pool.
+
+## 4) Activate the pool
+
+Once your validator is registered, run `activate.sh` to activate the pool:
 
 ```bash
 ./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
 ```
 
-1. The chain (mainnet or Bepolia) is auto-detected from your beacond configuration.
-2. If your validator is not yet registered on the beacon chain, the script writes `deployment-command.sh` (includes the 10,000 BERA deposit). Review it. Simulate it if you want. Then run it. This should dump a successful transaction receipt.
-3. Wait 192 blocks for the validator to be registered. Then run `activate.sh` again.
-4. The script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
-5. The script also predicts and shows your staking pool contract addresses ahead of time.
+1. The script validates that the pool contract exists (error if not deployed).
+2. The script verifies that the validator is registered on the beacon chain (error if not registered).
+3. The script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
 
-## 3) Verify installation
+## 5) Verify installation
 
 Use `status.sh` to check deployment, registration, and activation:
 
@@ -85,7 +106,7 @@ Use `status.sh` to check deployment, registration, and activation:
 
 You should see the SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses, confirmation that the beacon deposit operator matches your SmartOperator, the pool's active status, and various telemetry.
 
-## 4) Set minimum effective balance
+## 6) Set minimum effective balance
 
 **Critical Step:** The `minEffectiveBalance` parameter determines when your staking pool activates its validator on the consensus layer. If you don't set this value correctly, your pool may accumulate deposits without ever activating.
 
@@ -101,7 +122,7 @@ Replace `$SMART_OPERATOR_ADDRESS` with your SmartOperator address and `$CALCULAT
 
 For details on why this matters, how to determine the correct value, and how the consensus layer minimum works, see the [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) section in the operator guide.
 
-## 5) (Optional) Stake additional BERA
+## 7) (Optional) Stake additional BERA
 
 Add stake to your pool and send stBERA to a receiver address:
 
