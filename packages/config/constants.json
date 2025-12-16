@@ -24,6 +24,8 @@
     "registrationMinimum": 10000,
     "stakeMinimumIncrement": 10000,
     "rewardDistributionTimeExpiration": 8191,
+    "rewardDistributionActivationDelayBlocks": 450,
+    "cuttingBoardExpirationBlocks": 302400,
     "validatorActiveSetSize": 69,
     "validatorActivationEpochDelay": 3,
     "blocksPerEpoch": 192,
