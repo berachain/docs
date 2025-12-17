@@ -42,7 +42,12 @@ The following are required to run both the execution and consensus clients:
 You need [Beacon Kit](https://github.com/berachain/beacon-kit/releases) and one of either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases). [Consult this page](/nodes/evm-execution) for the recommended versions of Beacon Kit and execution clients.
 
 These clients are easily compiled for experiments on a laptop.
+### Community RPC Providers
+To interact with the network without running your own full node, you can use community-supported endpoints:
 
+| Provider | Endpoint URL |
+| :--- | :--- |
+| **dRPC** | `https://berachain.drpc.org` |
 ## 1 - Download and Configure
 
 Make an area to work in. If you're a Unix traditionalist, choose `/opt/beranode`. Then, clone the berachain node scripts.
