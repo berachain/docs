@@ -23,33 +23,33 @@ This guide helps validators set up and manage staking pools to offer liquid stak
 
 ### Key Parameters
 
-| Parameter | Range | Purpose |
-|-----------|-------|---------|
-| Validator Commission | 0-20% | Commission on incentive token distribution |
-| Protocol Fee | 0-20% | Fee on BGT balance growth |
+| Parameter                 | Range                                           | Purpose                                      |
+| ------------------------- | ----------------------------------------------- | -------------------------------------------- |
+| Validator Commission      | 0-20%                                           | Commission on incentive token distribution   |
+| Protocol Fee              | 0-20%                                           | Fee on BGT balance growth                    |
 | Minimum Effective Balance | ≥ {{ config.mainnet.minEffectiveBalance }} BERA | Activation threshold and full exit safeguard |
-| Withdrawal Delay | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized |
+| Withdrawal Delay          | 129,600 blocks (≈3 days at ~2s block time)      | Time before withdrawals can be finalized     |
 
 ### Key Roles
 
-| Role | Controls | Function |
-|------|----------|----------|
-| `VALIDATOR_ADMIN_ROLE` | All other roles | Grant/revoke operational roles |
-| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | Direct PoL incentives to applications |
-| `COMMISSION_MANAGER_ROLE` | Commission rate | Adjust validator commission (0-20%) |
-| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee | Adjust protocol fee percentage (0-20%) |
-| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount | Adjust incentive collector payout |
-| `BGT_MANAGER_ROLE` | BGT operations | Queue drop boost, redeem BGT |
+| Role                               | Controls          | Function                               |
+| ---------------------------------- | ----------------- | -------------------------------------- |
+| `VALIDATOR_ADMIN_ROLE`             | All other roles   | Grant/revoke operational roles         |
+| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation | Direct PoL incentives to applications  |
+| `COMMISSION_MANAGER_ROLE`          | Commission rate   | Adjust validator commission (0-20%)    |
+| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee      | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount     | Adjust incentive collector payout      |
+| `BGT_MANAGER_ROLE`                 | BGT operations    | Queue drop boost, redeem BGT           |
 
 ### Essential Functions
 
-| Function | Contract | Purpose |
-|----------|----------|---------|
-| `setMinEffectiveBalance()` | SmartOperator | Set activation threshold |
-| `queueValCommission()` | SmartOperator | Queue commission rate change |
-| `queueRewardsAllocation()` | SmartOperator | Queue reward allocation |
-| `claimBoostRewards()` | SmartOperator | Forward rewards to IncentiveCollector |
-| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate |
+| Function                     | Contract      | Purpose                               |
+| ---------------------------- | ------------- | ------------------------------------- |
+| `setMinEffectiveBalance()`   | SmartOperator | Set activation threshold              |
+| `queueValCommission()`       | SmartOperator | Queue commission rate change          |
+| `queueRewardsAllocation()`   | SmartOperator | Queue reward allocation               |
+| `claimBoostRewards()`        | SmartOperator | Forward rewards to IncentiveCollector |
+| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate                 |
 
 ## Prerequisites
 
@@ -79,7 +79,8 @@ The key consideration for staking pools is ensuring sufficient stake for activat
 
 **Cooldown Period**: After `activeThresholdReached()` becomes `true`, there is a cooldown period before the validator activates. During this time, withdrawals are still allowed, but the validator is not yet active on the consensus layer.
 
-**Relationship between `minEffectiveBalance` and `activeThresholdReached`**: 
+**Relationship between `minEffectiveBalance` and `activeThresholdReached`**:
+
 - `minEffectiveBalance` is the threshold you set (must match consensus layer requirements)
 - `activeThresholdReached()` returns `true` when `totalDeposits >= minEffectiveBalance()`
 - Once `activeThresholdReached()` is `true`, the validator enters cooldown and will activate after the delay
@@ -135,13 +136,13 @@ See: [SmartOperator.setRewardAllocator](/nodes/staking-pools/contracts/SmartOper
 
 The SmartOperator contract uses role-based access control to delegate operational responsibilities. When you deploy your staking pool, you receive the `VALIDATOR_ADMIN_ROLE`, which allows you to grant and revoke operational roles to other addresses.
 
-| Role | Controls | Key Functions |
-|------|----------|--------------|
-| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | `queueRewardsAllocation()` |
-| `COMMISSION_MANAGER_ROLE` | Commission rate (0-20%) | `queueValCommission()` |
-| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amounts | `queueIncentiveCollectorPayoutAmountChange()` |
-| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee (0-20%) | `setProtocolFeePercentage()` |
-| `BGT_MANAGER_ROLE` | BGT operations | `queueDropBoost()`, `redeemBGT()` |
+| Role                               | Controls                | Key Functions                                 |
+| ---------------------------------- | ----------------------- | --------------------------------------------- |
+| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation       | `queueRewardsAllocation()`                    |
+| `COMMISSION_MANAGER_ROLE`          | Commission rate (0-20%) | `queueValCommission()`                        |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amounts          | `queueIncentiveCollectorPayoutAmountChange()` |
+| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee (0-20%)    | `setProtocolFeePercentage()`                  |
+| `BGT_MANAGER_ROLE`                 | BGT operations          | `queueDropBoost()`, `redeemBGT()`             |
 
 **Role Assignment Strategy:** Assign roles based on your operational needs. For simplicity, grant all roles to your main validator wallet. Alternatively, grant specific roles to different team members, automated systems, or smart contracts for distributed management. This keeps validator keys secure and separate from day-to-day management.
 
@@ -259,10 +260,10 @@ Tokens do not automatically flow to IncentiveCollector, so manual forwarding is 
 
 These are two separate fee mechanisms that work independently:
 
-| Fee Type | Range | Where Set | What It Applies To | Controlled By |
-|----------|-------|-----------|-------------------|---------------|
-| **Validator Commission** | 0-20% | Configured via SmartOperator, enforced by BeraChef | Incentive token distribution from PoL rewards | `COMMISSION_MANAGER_ROLE` via `queueValCommission()` |
-| **Protocol Fee** | 0-20% | SmartOperator | BGT balance growth | `PROTOCOL_FEE_MANAGER_ROLE` via `setProtocolFeePercentage()` |
+| Fee Type                 | Range | Where Set                                          | What It Applies To                            | Controlled By                                                |
+| ------------------------ | ----- | -------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| **Validator Commission** | 0-20% | Configured via SmartOperator, enforced by BeraChef | Incentive token distribution from PoL rewards | `COMMISSION_MANAGER_ROLE` via `queueValCommission()`         |
+| **Protocol Fee**         | 0-20% | SmartOperator                                      | BGT balance growth                            | `PROTOCOL_FEE_MANAGER_ROLE` via `setProtocolFeePercentage()` |
 
 Both fee structures can be configured independently based on your operational needs.
 
@@ -318,6 +319,7 @@ function notifyFullExitFromCL(bytes memory pubkey) external;
 The full exit process operates automatically once triggered. When your validator fully exits from the consensus layer, BGT tokens are automatically redeemed, queued boost operations are cancelled, and pending withdrawals continue processing normally. Once complete, the pool is marked as fully exited, preventing new deposits while allowing existing withdrawals to conclude.
 
 The system automatically triggers a full exit in two scenarios:
+
 - When a withdrawal would cause `totalDeposits` to fall below `minEffectiveBalance()`
 - When the withdrawal amount exceeds total deposits (which can occur when share values have appreciated significantly from accumulated rewards)
 
@@ -325,10 +327,10 @@ The system automatically triggers a full exit in two scenarios:
 
 The centralized WithdrawalVault contract handles all withdrawal operations for all staking pools. The withdrawal system provides two processing paths:
 
-| Path | When It Occurs | Processing Time |
-|------|----------------|-----------------|
+| Path              | When It Occurs                                                         | Processing Time                                                                                     |
+| ----------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **Short-Circuit** | Pool hasn't reached active threshold and has sufficient buffered funds | Funds immediately transferred to WithdrawalVault, but still requires full delay before finalization |
-| **Standard** | Pool has reached active threshold or lacks sufficient buffered funds | Requires consensus layer processing (256 epochs ≈ 27 hours) |
+| **Standard**      | Pool has reached active threshold or lacks sufficient buffered funds   | Requires consensus layer processing (256 epochs ≈ 27 hours)                                         |
 
 **Important:** Regardless of which path is taken, stakers must wait the full withdrawal delay (129,600 blocks ≈ 3 days at ~2s block time) before finalization.
 
@@ -414,12 +416,12 @@ Since rewards are automatically compounded into share price, calculate total rew
 
 Your front-end should handle and clearly communicate:
 
-| Error | Condition | Front-End Action |
-|-------|----------|-----------------|
-| `RequestNotReady` | Staker tries to finalize before delay completes (129,600 blocks ≈ 3 days at ~2s block time) | Check `request.requestBlock + 129600 <= block.number` before allowing finalization |
-| `NotEnoughFunds` | WithdrawalVault doesn't have enough funds for finalization | Check vault balance before attempting finalization |
-| `MaxCapacityReached` | Pool has reached maximum capacity | Check if deposits are paused before allowing new deposits |
-| `StakingPoolFullExited` | Pool has triggered full exit | Deposits disabled, withdrawals continue normally |
+| Error                   | Condition                                                                                   | Front-End Action                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `RequestNotReady`       | Staker tries to finalize before delay completes (129,600 blocks ≈ 3 days at ~2s block time) | Check `request.requestBlock + 129600 <= block.number` before allowing finalization |
+| `NotEnoughFunds`        | WithdrawalVault doesn't have enough funds for finalization                                  | Check vault balance before attempting finalization                                 |
+| `MaxCapacityReached`    | Pool has reached maximum capacity                                                           | Check if deposits are paused before allowing new deposits                          |
+| `StakingPoolFullExited` | Pool has triggered full exit                                                                | Deposits disabled, withdrawals continue normally                                   |
 
 **Note**: Withdrawals are not disabled during the cooldown period after activation. Stakers can request withdrawals at any time, but they cannot finalize them until the delay period completes (129,600 blocks ≈ 3 days after the request was made).
 
@@ -432,12 +434,14 @@ The template is available in the [Berachain guides repository](https://github.co
 **Quick Start:**
 
 1. Clone the repository and navigate to the frontend directory:
+
    ```bash
    git clone https://github.com/berachain/guides.git
    cd guides/apps/staking-pools/frontend
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -447,6 +451,7 @@ The template is available in the [Berachain guides repository](https://github.co
 **Configuration:**
 
 The frontend requires a `config.json` file that specifies:
+
 - **Network settings**: `rpcUrl`, `chainId`, `explorerUrl`
 - **Contract addresses**: `withdrawalVault` (required), `stakingPoolFactory` (optional)
 - **Pool configuration**: One or more pools with `name`, `validatorPubkey`, `stakingPool`, `enabled`

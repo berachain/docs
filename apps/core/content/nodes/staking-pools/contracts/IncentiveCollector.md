@@ -17,8 +17,6 @@ head:
 
 # IncentiveCollector
 
-> <small><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainMainnet">Mainnet: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainMainnet">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainMainnet}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address?.berachainBepolia">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainBepolia">{{config.contracts.stakingPoolImplementations.incentiveCollectorImpl.address.berachainBepolia}}</a></span><span v-if="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.incentiveCollectorImpl.abi">ABI JSON</a></span></small>
-
 The IncentiveCollector contract manages incentive token collection for validators. It allows anyone (operator, arbitrageur, or other addresses) to claim accumulated incentive tokens by paying a required payout amount, with fees going to the smart operator and the remaining amount to the staking rewards vault.
 
 ## State Variables

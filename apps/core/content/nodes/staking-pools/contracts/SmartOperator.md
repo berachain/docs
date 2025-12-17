@@ -17,8 +17,6 @@ head:
 
 # SmartOperator
 
-> <small><span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainMainnet">Mainnet: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainMainnet">{{config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainMainnet}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.address?.berachainBepolia">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainBepolia">{{config.contracts.stakingPoolImplementations.smartOperatorImpl.address.berachainBepolia}}</a></span><span v-if="config.contracts.stakingPoolImplementations.smartOperatorImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.smartOperatorImpl.abi">ABI JSON</a></span></small>
-
 The SmartOperator contract manages validator operations including BGT boosting, fee management, and reward allocation. It serves as the central controller for validator-related activities within the staking pool ecosystem.
 
 ## State Variables
@@ -223,8 +221,8 @@ function setMinEffectiveBalance(uint256 newMinEffectiveBalance) external;
 
 **Parameters**
 
-| Name                   | Type      | Description                                                |
-| ---------------------- | --------- | ---------------------------------------------------------- |
+| Name                     | Type      | Description                                                |
+| ------------------------ | --------- | ---------------------------------------------------------- |
 | `newMinEffectiveBalance` | `uint256` | The minimum effective balance to set for the staking pool. |
 
 ### queueIncentiveCollectorPayoutAmountChange

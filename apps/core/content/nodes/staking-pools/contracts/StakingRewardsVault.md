@@ -17,8 +17,6 @@ head:
 
 # StakingRewardsVault
 
-> <small><span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainMainnet">Mainnet: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainMainnet">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainMainnet}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address?.berachainBepolia">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainBepolia">{{config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.address.berachainBepolia}}</a></span><span v-if="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.stakingRewardsVaultImpl.abi">ABI JSON</a></span></small>
-
 The StakingRewardsVault contract holds execution layer rewards for validators. It receives BERA rewards from validator activities and allows the staking pool to withdraw these rewards when needed.
 
 ## Functions

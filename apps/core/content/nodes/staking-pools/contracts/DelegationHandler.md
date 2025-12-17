@@ -17,8 +17,6 @@ head:
 
 # DelegationHandler
 
-> <small><span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainMainnet">Mainnet: <a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainMainnet">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainMainnet}}</a></span><span v-else>Mainnet: Not yet deployed</span><span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl.address?.berachainBepolia">&nbsp;|&nbsp;Bepolia: <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainBepolia">{{config.contracts.stakingPoolImplementations.delegationHandlerImpl.address.berachainBepolia}}</a></span><span v-if="config.contracts.stakingPoolImplementations.delegationHandlerImpl.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.stakingPoolImplementations.delegationHandlerImpl.abi">ABI JSON</a></span></small>
-
 The DelegationHandler contract manages delegated funds for validators, allowing third parties to provide capital for staking pool operations while maintaining clear separation between fund providers and validator operators.
 
 ## State Variables
