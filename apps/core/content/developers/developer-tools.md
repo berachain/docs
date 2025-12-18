@@ -43,7 +43,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [BlockPI](https://blockpi.io/)
 - [Chainstack](https://chainstack.com/build-better-with-berachain/)
-- [DRPC](https://drpc.org/chainlist/berachain)
+- [dRPC NodeCloud](https://drpc.org/chainlist/berachain)
 - [Grove](https://grove.city)
 - [Envio](https://envio.dev)
 - [Enigma](https://enigma-validator.com/services)
@@ -82,7 +82,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 - [Goldsky](https://docs.goldsky.com/chains/berachain)
 - [Ghost Graph](https://ghostgraph.xyz)
-- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
+- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/chains/berachain)
 - [Envio](https://envio.dev)
 - [Tatum Indexed Data API](https://tatum.io/berachain-and-tatum)
 - [The Graph](https://thegraph.com/)

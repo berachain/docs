@@ -17,7 +17,7 @@ head:
 
 # BGTIncentiveDistributor
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveDistributor['mainnet-address']">{{config.contracts.pol.bgtIncentiveDistributor['mainnet-address']}}</a><span v-if="config.contracts.pol.bgtIncentiveDistributor.abi && config.contracts.pol.bgtIncentiveDistributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveDistributor.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.bgtIncentiveDistributor.address.berachainMainnet">{{config.contracts.pol.bgtIncentiveDistributor.address.berachainMainnet}}</a><span v-if="config.contracts.pol.bgtIncentiveDistributor.abi && config.contracts.pol.bgtIncentiveDistributor.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.bgtIncentiveDistributor.abi">ABI JSON</a></span></small>
 
 A contract that distributes POL incentives to BGT boosters using a merkle-based distribution system. When BGT holders boost a validator, they become eligible for a share of the incentives from reward vaults. These incentives are transferred to this contract and distributed based on off-chain computed merkle roots.
 

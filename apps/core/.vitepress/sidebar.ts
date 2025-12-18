@@ -5,6 +5,14 @@ import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
+/**
+ * UTM Source for Core
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsCore.utmSource}`;
+
+/**
+ * Sidebar Configuration
+ */
 const SIDEBAR = {
   /**
    * Main section for both the root / and /learn
@@ -21,7 +29,6 @@ const SIDEBAR = {
         { text: "What Is BeaconKit?", link: "/learn/what-is-beaconkit" },
         { text: "Connect To Berachain", link: "/learn/connect-to-berachain" },
         { text: "How To Get $BERA", link: "/learn/how-to-get-bera" },
-        { text: "Claim $BERA Airdrop", link: "/learn/claim-bera-airdrop" },
         { text: "Berachain NFTs", link: "/learn/berachain-nfts" },
         { text: "Docs Changelog", link: "/learn/changelog" }
       ]
@@ -40,7 +47,8 @@ const SIDEBAR = {
             { text: "Tokenomics", link: "/learn/pol/tokens/tokenomics" },
             { text: "BERA", link: "/learn/pol/tokens/bera" },
             { text: "BGT", link: "/learn/pol/tokens/bgt" },
-            { text: "HONEY", link: "/learn/pol/tokens/honey" }
+            { text: "HONEY", link: "/learn/pol/tokens/honey" },
+            { text: "sWBERA", link: "/learn/pol/tokens/swbera" }
           ]
         },
         { text: "PoL FAQs", link: "/learn/pol/faqs" }
@@ -60,6 +68,7 @@ const SIDEBAR = {
         { text: "BERA Staking", link: "/learn/guides/bera-staking" },
         { text: "Claim BGT Rewards", link: "/learn/guides/claim-bgt" },
         { text: "Claim Incentives", link: "/learn/guides/claim-incentives" },
+        { text: "Berascan Token Update", link: "/learn/guides/berascan-token-update" },
         {
           text: "Setup Reward Vault",
           link: "/learn/guides/setup-reward-vault"
@@ -84,10 +93,11 @@ const SIDEBAR = {
       items: [
         { text: "BeraHub", link: "/learn/dapps/berahub" },
         { text: "BEX", link: "/learn/dapps/bex" },
+        { text: "Bridge", link: "/learn/dapps/bridge" },
         { text: "Honey Swap", link: "/learn/dapps/honey-swap" },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -125,14 +135,14 @@ const SIDEBAR = {
         },
 
         {
-          text: `${constants.bepolia.dapps.faucet.name}`,
-          link: `${constants.bepolia.dapps.faucet.url}`,
+          text: `${constants.websites.faucetBepolia.name}`,
+          link: `${constants.websites.faucetBepolia.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         },
         {
-          text: `${constants.mainnet.dapps.berascan.name}`,
-          link: `${constants.mainnet.dapps.berascan.url}`,
+          text: `${constants.websites.berascan.name}`,
+          link: `${constants.websites.berascan.url}${UTMSOURCE}`,
           target: "_blank",
           rel: "no-referrer"
         }
@@ -144,7 +154,11 @@ const SIDEBAR = {
         { text: "Build A Smart Contract", link: "/developers/quickstart/" },
         { text: "Build A Frontend", link: "/developers/quickstart/frontend" },
         {
-          text: "Integrating with PoL",
+          text: "Bridge to Berachain",
+          link: "/developers/quickstart/bridge-to-berachain"
+        },
+        {
+          text: "Building with Proof-of-Liquidity",
           link: "/developers/quickstart/pol-integration"
         }
       ]
@@ -159,6 +173,10 @@ const SIDEBAR = {
         {
           text: "Create ERC-20 Contract Using Foundry",
           link: "/developers/guides/create-erc20-contract-using-foundry"
+        },
+        {
+          text: "Verify Smart Contracts",
+          link: "/developers/guides/verify-smart-contracts"
         },
         {
           text: "Deploy Contract Using NextJS & WalletConnect",
@@ -297,8 +315,9 @@ const SIDEBAR = {
         { text: "Monitoring", link: "/nodes/monitoring" },
         {
           text: "BeaconKit GitHub Repo",
-          link: "https://github.com/berachain/beacon-kit"
-        }
+          link: `${constants.websites.beaconkit.url}${UTMSOURCE}`
+        },
+        { text: "Balancer Upgrade #2", link: "/nodes/guides/balancer2" }
       ]
     },
     {
@@ -306,8 +325,7 @@ const SIDEBAR = {
       items: [
         { text: "CLI Reference", link: "/beacon-kit/cli" },
         { text: "Configuration Reference", link: "/beacon-kit/configuration" },
-        { text: "API Reference", link: "/beacon-kit/api" },
-        { text: "Bepto Upgrade", link: "/nodes/guides/bepto" }
+        { text: "API Reference", link: "/beacon-kit/api" }
       ]
     },
     {

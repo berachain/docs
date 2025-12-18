@@ -17,7 +17,7 @@ head:
 
 # BeraChef
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.berachef['mainnet-address']">{{config.contracts.pol.berachef['mainnet-address']}}</a><span v-if="config.contracts.pol.berachef.abi && config.contracts.pol.berachef.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.berachef.address.berachainMainnet">{{config.contracts.pol.berachef.address.berachainMainnet}}</a><span v-if="config.contracts.pol.berachef.abi && config.contracts.pol.berachef.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.berachef.abi">ABI JSON</a></span></small>
 
 The BeraChef contract is responsible for managing the reward allocations and the whitelisted vaults. Reward allocation is a list of weights that determine the percentage of rewards that goes to each reward vault. Each validator could have a custom reward allocation, if not, the default reward allocation is used.
 
@@ -457,9 +457,11 @@ function _authorizeUpgrade(address newImplementation) internal override onlyOwne
 
 ### queueNewRewardAllocation
 
-Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of existing queued reward allocation.
+Adds a new reward allocation to the queue for the validator with the given pubkey. Does not allow overwriting of an existing queued reward allocation.
 
-_The weights of the reward allocation must add up to 100% or 1e4. Only whitelisted pools may be used as well._
+For in-depth details on how reward allocations are determined and distributed per block, refer to [Block Production & Rewards](/learn/pol/blockrewards). For step-by-step instructions on setting and updating reward allocations, see [Managing Validator Reward Allocations](/nodes/guides/reward-allocation).
+
+_The weights of the reward allocation must add up to 100% or 1e4. Only whitelisted pools may be used._
 
 **Emits:**
 

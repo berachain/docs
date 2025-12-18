@@ -93,7 +93,7 @@ For a standard mainnet node with snapshots:
 sudo ./mkberanode.sh --chain mainnet --el reth --mode pruned
 ```
 
-For a Bepolia archive node based on bera-get synced from scratch from the first block:
+For a Bepolia archive node based on bera-geth synced from scratch from the first block:
 
 ```bash
 sudo ./mkberanode.sh --chain bepolia --el geth \

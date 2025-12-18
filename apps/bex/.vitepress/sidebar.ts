@@ -5,28 +5,24 @@ import { constants } from "@berachain/config/constants";
 
 // Constants
 // ========================================================
+/**
+ * UTM Source for BEX
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsBex.utmSource}`;
+
+/**
+ * Sidebar Configuration
+ */
 const SIDEBAR = {
   /**
    * Main section for both the root / and /learn
    */
   LEARN: [
     {
-      text: "Introduction To BEX",
+      text: "Learn About BEX",
       items: [
         { text: "What is BEX?", link: "/learn/" },
-        {
-          text: "BEX dApp",
-          link: `${constants.mainnet.dapps.bex.url}`,
-          target: "_blank",
-          rel: "no-referrer"
-        }
-      ]
-    },
-    {
-      text: "Core Concepts",
-      items: [
-        { text: "AMMs", link: "/learn/concepts/amm" },
-        { text: "Governance", link: "/learn/concepts/governance" },
+        { text: "Decentralized Exchanges", link: "/learn/concepts/dex" },
         { text: "Vault", link: "/learn/concepts/vault" },
         {
           text: "Pools",
@@ -73,10 +69,7 @@ const SIDEBAR = {
   DEVELOPERS: [
     {
       text: "BEX For Devs",
-      items: [
-        { text: "Deployed Contracts", link: "/developers/" },
-        { text: "Migration Guide", link: "/developers/migration-guide" }
-      ]
+      items: [{ text: "Deployed Contracts", link: "/developers/" }]
     },
     {
       text: "Contract References",
@@ -163,23 +156,14 @@ const SIDEBAR = {
     {
       text: "Developer Guides",
       items: [
-        {
-          text: "Pool Creation",
-          link: "/developers/guides/pool-creation"
-        }
-      ]
-    },
-    {
-      text: "SDK",
-      items: [
         { text: "Introduction", link: "/developers/sdk" },
         {
-          text: "SDK API Reference",
-          link: "/developers/sdk/reference"
-        },
-        {
-          text: "SDK Guides",
+          text: "BEX Operations",
           items: [
+            {
+              text: "Pool Creation",
+              link: "/developers/guides/pool-creation"
+            },
             { text: "Add Liquidity", link: "/developers/sdk/add-liquidity" },
             {
               text: "Remove Liquidity",
@@ -188,12 +172,11 @@ const SIDEBAR = {
             { text: "Swap", link: "/developers/sdk/swap" },
             { text: "Smart Order Router", link: "/developers/sdk/sor" }
           ]
-        }
-      ]
-    },
-    {
-      text: "Help",
-      items: [
+        },
+        {
+          text: "SDK API Reference",
+          link: "/developers/sdk/reference"
+        },
         {
           text: "Error Codes",
           link: "/developers/help/error-codes"

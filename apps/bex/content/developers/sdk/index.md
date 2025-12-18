@@ -9,6 +9,9 @@ head:
   - - meta
     - property: og:description
       content: BEX SDK Intro
+next:
+  text: SDK API Reference
+  link: /developers/sdk/reference
 ---
 
 # Berancer SDK
@@ -36,13 +39,3 @@ npm install @berachain-foundation/berancer-sdk
 ```
 
 :::
-
-## Guides and Examples
-
-For a detailed API reference, please see the [SDK API Reference](/developers/sdk/reference).
-
-The following SDK guides are available:
-
-- [Add Liquidity](/developers/sdk/add-liquidity)
-- [Remove Liquidity](/developers/sdk/remove-liquidity)
-- [Swap](/developers/sdk/swap)

@@ -17,7 +17,7 @@ head:
 
 # BGT
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.bgt['mainnet-address']">{{config.contracts.tokens.bgt['mainnet-address']}}</a><span v-if="config.contracts.tokens.bgt.abi && config.contracts.tokens.bgt.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.tokens.bgt.address.berachainMainnet">{{config.contracts.tokens.bgt.address.berachainMainnet}}</a><span v-if="config.contracts.tokens.bgt.abi && config.contracts.tokens.bgt.abi.length > 0">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.tokens.bgt.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/BGT.sol)
 

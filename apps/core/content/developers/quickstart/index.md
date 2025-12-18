@@ -194,8 +194,21 @@ forge create --rpc-url {{config.mainnet.rpcUrl}} --private-key <YOUR_PRIVATE_KEY
 
 The last step is now verify that contract that was successfully deployed.
 
+> <b>NOTE:</b> In order for verification to work with Etherscan's V2 contract verification API, make sure that you have the latest version installed with `foundryup`.
+
+Make sure to get an Etherscan API Key from [https://etherscan.io/registerdocs](https://etherscan.io/register?utm_source=berachain_).
+
 ```bash-vue
-forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol:MyToken --verifier-url '{{config.mainnet.dapps.berascan.apiUrl}}' --etherscan-api-key "verifyContract" --num-of-optimizations 200
+# FROM: ./my_token
+
+forge verify-contract \
+  --watch \
+  --chain {{config.websites.berascanBepolia.chainName}} \
+  0x53E365fE5fDF332dD475E90bA8383B7F9853a49F \
+  src/MyToken.sol:MyToken \
+  --verifier etherscan \
+  --etherscan-api-key <YOUR_ETHERSCAN_API_V2_KEY> \
+   --num-of-optimizations 200;
 
 # [Expected Output]:
 # Start verifying contract `0x53E365fE5fDF332dD475E90bA8383B7F9853a49F` deployed on mainnet
@@ -204,9 +217,9 @@ forge verify-contract 0x53E365fE5fDF332dD475E90bA8383B7F9853a49F src/MyToken.sol
 # Submitted contract for verification:
 # Response: `OK`
 # GUID: `321091ec-e529-5a11-a75c-cf1ffc6987d7`
-# URL: https://etherscan.io/address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# URL: {{config.websites.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 #
-# !NOTE: Should be {{config.mainnet.dapps.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
+# !NOTE: Should be {{config.websites.berascan.url}}address/0x53e365fe5fdf332dd475e90ba8383b7f9853a49f
 ```
 
 ## Next Steps

@@ -17,7 +17,7 @@ head:
 
 # Permit2
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.other.permit2['mainnet-address']">{{config.contracts.other.permit2['mainnet-address']}}</a><span v-if="config.contracts.other.permit2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.permit2.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.other.permit2.address.berachainMainnet">{{config.contracts.other.permit2.address.berachainMainnet}}</a><span v-if="config.contracts.other.permit2.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.other.permit2.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/Uniswap/permit2/blob/main/src/Permit2.sol)
 
