@@ -30,6 +30,7 @@
     "validatorActivationEpochDelay": 3,
     "blocksPerEpoch": 192,
     "stakeMinimumDeadlineEpoch": 1,
+    "votingPowerIncrement": "10,000",
     "minEffectiveBalance": "250,000",
     "maxEffectiveBalance": "10,000,000",
     "dapps": {
@@ -318,6 +319,35 @@
         },
         "abi": "https://github.com/berachain/doc-abis/blob/main/core/RewardVault.json",
         "docsUrl": "/developers/contracts/reward-vault"
+      }
+    },
+    "stakingPools": {
+      "stakingPoolContractsFactory": {
+        "name": "StakingPoolContractsFactory",
+        "address": {
+          "berachainMainnet": "0xa4Fd7E7771e5a752e6e05d4905843519E1df0885",
+          "berachainBepolia": "0x176c081E95C82CA68DEa20CA419C7506Aa063C24"
+        },
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/StakingPoolContractsFactory"
+      },
+      "withdrawalVault": {
+        "name": "WithdrawalVault",
+        "address": {
+          "berachainMainnet": "0xE858802Ed532C6DAD2D196AB5B1F2C15F9cb52b4",
+          "berachainBepolia": "0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4"
+        },
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/WithdrawalVault"
+      },
+      "delegationHandlerFactory": {
+        "name": "DelegationHandlerFactory",
+        "address": {
+          "berachainMainnet": "0xAd17932a5B1aaeEa73D277a6AE670623F176E0D0",
+          "berachainBepolia": "0x8b472791aC2f9e9Bd85f8919401b8Ce3bdFd464c"
+        },
+        "abi": "",
+        "docsUrl": "/nodes/staking-pools/contracts/DelegationHandlerFactory"
       }
     },
     "tokens": {

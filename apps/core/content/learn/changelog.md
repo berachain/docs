@@ -6,6 +6,8 @@ Below are important changes shipped to Berachain.
 
 ## December 2025
 
+**Staking pools documentation** – Added documentation for staking pools, enabling validators to offer liquid staking services to their communities. Includes [installation guide](/nodes/staking-pools/installation), [operator guide](/nodes/staking-pools/operators), [delegation guide](/nodes/staking-pools/delegators), and [smart contract reference](/nodes/staking-pools/contracts). Staking pools allow validators to build and monetize communities of stakers who deposit BERA and receive liquid shares (stBERA) that automatically grow in value. 
+
 **Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism. 
 
 ## November 2025
