@@ -33,13 +33,4 @@ Pool deposits in BEX can become eligible for [$BGT](/learn/pol/tokens/bgt) emiss
 
 ## Default Reward Allocation
 
-Each validator can customize how their rewards are distributed across different reward vaults. If no custom allocation is set, default allocations are used, benefitting key BEX liquidity pools. The default allocation is as follows:
-
-| Pool assets           | Type     | Weights | Allocation  | Fee   | Amplification |
-| --------------------- | -------- | ------- | ----------- | ----- | ------------- |
-| BERA - HONEY          | Weighted | 50-50   | 35.00%      | 0.30% | n.a.          |
-| BERA - WETH           | Weighted | 50-50   | 25.00%      | 0.30% | n.a.          |
-| BERA - WBTC           | Weighted | 50-50   | 25.00%      | 0.30% | n.a.          |
-| USDC - HONEY          | Stable   | 50-50   | 7.50%       | 0.01% | 2000          |
-| BYUSD (pyUSD) - HONEY | Stable   | 50-50   | 7.50%       | 0.01% | 1000          |
-| **Total**             |          |         | **100.00%** |       |               |
+Each validator can customize how their rewards are distributed across different reward vaults. If no custom allocation is set at least every {{ config.mainnet.cuttingBoardExpirationBlocks }} blocks (approximately 7 days), default allocations are used, benefitting economically efficient (and incentive-bearing) Berachain vaults.
