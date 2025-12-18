@@ -51,24 +51,21 @@ BeraChef is the core contract that manages how validators direct their BGT rewar
 BeraChef manages three key aspects of the reward system:
 
 1. **Reward Allocations** - Maintains lists of weights that determine the percentage of rewards going to each Reward Vault
-2. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
-3. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
+2. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
+3. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
 
 ### How Reward Allocations Work
 
-Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed across different Reward Vaults. If a validator doesn't set a custom allocation, a default allocation is used.
+Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed.
 
-**Reward Allocation Structure:**
+Reward Allocations are described by:
 
-- **Weights**: Percentage allocations to different vaults (must sum to 100%)
-- **Start Block**: When the allocation becomes effective
-- **Delay Period**: Time buffer before allocations can be changed
+1. A list of selected vaults and the percentage of a given block's BGT reward to send to each. The weights must sum to 100.
+2. The block number the allocation becomes effective.
 
-**Validator Control:**
+Validators exercise control over the BeraChef reward allocation subject to a delay of {{ config.mainnet.rewardDistributionActivationDelayBlocks }} blocks.
 
-- Queue new reward allocations with a specified delay
-- Modify commission rates on incentive tokens (capped at 20%)
-- Change allocations following governance-imposed delay periods
+**If a validator doesn't update its cutting board within {{ config.mainnet.cuttingBoardExpirationBlocks }} blocks (approximately 7 days),** BeraChef will begin to apply the _baseline_ cutting board. This _baseline_ allocation is chosen to direct emissions efficiently to reward vaults with active incentives. To maintain the same cutting board at all times, publish the same cutting board approximately every 6.5 days.
 
 ### Commission Management
 

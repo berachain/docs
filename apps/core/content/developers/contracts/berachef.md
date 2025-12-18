@@ -457,9 +457,11 @@ function _authorizeUpgrade(address newImplementation) internal override onlyOwne
 
 ### queueNewRewardAllocation
 
-Add a new reward allocation to the queue for validator with given pubkey. Does not allow overwriting of existing queued reward allocation.
+Adds a new reward allocation to the queue for the validator with the given pubkey. Does not allow overwriting of an existing queued reward allocation.
 
-_The weights of the reward allocation must add up to 100% or 1e4. Only whitelisted pools may be used as well._
+For in-depth details on how reward allocations are determined and distributed per block, refer to [Block Production & Rewards](/learn/pol/blockrewards). For step-by-step instructions on setting and updating reward allocations, see [Managing Validator Reward Allocations](/nodes/guides/reward-allocation).
+
+_The weights of the reward allocation must add up to 100% or 1e4. Only whitelisted pools may be used._
 
 **Emits:**
 
