@@ -6,7 +6,9 @@ Below are important changes shipped to Berachain.
 
 ## December 2025
 
-**Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism. 
+**Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism.
+
+**Beacon Kit API updates** – Added new proof endpoints and enhanced existing endpoints. See the [Beacon Kit API reference](/beacon-kit/api) for details. 
 
 ## November 2025
 
