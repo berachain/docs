@@ -122,7 +122,11 @@
     },
     {
       "source": "/nodes/guides/balancer",
-      "destination": "/nodes/guides/balancer2"
+      "destination": "/nodes/evm-execution"
+    },
+    {
+      "source": "/nodes/guides/balancer2",
+      "destination": "/nodes/evm-execution"
     }
   ]
 }
