@@ -4,11 +4,15 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
-## December 2025
+## January 2026
 
 **Staking pools documentation** – Added documentation for staking pools, enabling validators to offer liquid staking services to their communities. Includes [installation guide](/nodes/staking-pools/installation), [operator guide](/nodes/staking-pools/operators), [delegation guide](/nodes/staking-pools/delegators), and [smart contract reference](/nodes/staking-pools/contracts). Staking pools allow validators to build and monetize communities of stakers who deposit BERA and receive liquid shares (stBERA) that automatically grow in value. 
 
-**Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism. 
+## December 2025
+
+**Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism.
+
+**Beacon Kit API updates** – Added new proof endpoints and enhanced existing endpoints in the [Beacon Kit API](/beacon-kit/api) with [Beacon-Kit v1.3.5][/nodes/evm-execution].
 
 ## November 2025
 
