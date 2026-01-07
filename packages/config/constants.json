@@ -325,7 +325,7 @@
       "stakingPoolContractsFactory": {
         "name": "StakingPoolContractsFactory",
         "address": {
-          "berachainMainnet": "0xa4Fd7E7771e5a752e6e05d4905843519E1df0885",
+          "berachainMainnet": "0x41FDbC681475B85c3d9E15b10C691C61f66B510d",
           "berachainBepolia": "0x176c081E95C82CA68DEa20CA419C7506Aa063C24"
         },
         "abi": "",
