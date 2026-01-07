@@ -41,6 +41,42 @@ GET /bkit/v1/proof/block_proposer/{timestamp_id}
 curl -s http://localhost:3500/bkit/v1/proof/block_proposer/{timestamp_id}
 ```
 
+### Get Validator Pubkey Proof {#bkitv1proofvalidator_pubkeytimestamp_idvalidator_index}
+
+Returns a validator's public key for the given timestamp ID and validator index, along with a Merkle proof verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_pubkey/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_pubkey/{timestamp_id}/{validator_index}
+```
+
+### Get Validator Credentials Proof {#bkitv1proofvalidator_credentialstimestamp_idvalidator_index}
+
+Returns a validator's withdrawal credentials for the given timestamp ID and validator index, along with a Merkle proof verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_credentials/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_credentials/{timestamp_id}/{validator_index}
+```
+
+### Get Validator Balance Proof {#bkitv1proofvalidator_balancetimestamp_idvalidator_index}
+
+Returns a validator's balance for the given timestamp ID and validator index, along with a Merkle proof and balance leaf verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_balance/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_balance/{timestamp_id}/{validator_index}
+```
+
 ### Get Blob Sidecars {#ethv1beaconblob_sidecarsblock_id}
 
 Retrieves blob sidecars for the specified block ID. Optionally filters by blob indices.
@@ -71,7 +107,7 @@ curl -s http://localhost:3500/eth/v1/beacon/genesis
 
 ### Get Block Headers {#ethv1beaconheaders}
 
-Retrieves block headers matching the specified slot or parent root.
+Retrieves block headers matching the specified slot or parent root. Responses include block signatures in the `SignedBeaconBlockHeader` structure when available (signatures may not be available for blocks outside the availability window or genesis blocks).
 
 ```http
 GET /eth/v1/beacon/headers
@@ -87,7 +123,7 @@ curl -s "http://localhost:3500/eth/v1/beacon/headers?parent_root=0x..."
 
 ### Get Block Header by ID {#ethv1beaconheadersblock_id}
 
-Retrieves the block header for the specified block ID.
+Retrieves the block header for the specified block ID. Responses include block signatures in the `SignedBeaconBlockHeader` structure when available (signatures may not be available for blocks outside the availability window or genesis blocks).
 
 ```http
 GET /eth/v1/beacon/headers/{block_id}
@@ -131,6 +167,18 @@ GET /eth/v1/beacon/states/{state_id}/randao
 
 ```bash
 curl -s http://localhost:3500/eth/v1/beacon/states/head/randao
+```
+
+### Get Pending Partial Withdrawals {#ethv1beaconstatesstate_idpending_partial_withdrawals}
+
+Retrieves pending partial withdrawals for the specified state ID. This endpoint requires the Electra fork to be active and will return an error if called on chains that have not yet activated Electra.
+
+```http
+GET /eth/v1/beacon/states/{state_id}/pending_partial_withdrawals
+```
+
+```bash
+curl -s http://localhost:3500/eth/v1/beacon/states/head/pending_partial_withdrawals
 ```
 
 ### Get State Root {#ethv1beaconstatesstate_idroot}
