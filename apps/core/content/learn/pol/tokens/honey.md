@@ -104,12 +104,12 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 
 Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is the following:
 
-| Stablecoin | Mint $Fee | Redeem Fee |
-| ---------- | --------- | ---------- |
-| USDT       | 0.1%      | 0%         |
-| byUSD      | 0.1%      | 0%         |
-| USDC       | 0%        | 0.05%      |
-| USDe       | 0%        | 0.05%      |
+| Stablecoin | Mint Fee | Redeem Fee |
+| ---------- | -------- | ---------- |
+| USDT       | 0.1%     | 0%         |
+| byUSD      | 0.1%     | 0%         |
+| USDC       | 0%       | 0.05%      |
+| USDe       | 0%       | 0.05%      |
 
 ### Example
 
