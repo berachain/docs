@@ -15,7 +15,7 @@ head:
   import config from '@berachain/config/constants.json';
 </script>
 
-# BERA Staking Guide
+# BERA Staking Guide 🐻
 
 The PoL BERA Yield Module lets you stake `$BERA` directly and earn yield from Proof-of-Liquidity incentives. It's a simple way to earn yield on your BERA without diving into complex DeFi protocols.
 
