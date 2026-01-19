@@ -139,4 +139,4 @@ The process of exchanging one token for another on a decentralized exchange. Swa
 
 ## WBera Staking
 
-By staking into the [WBERA Staking Vault](/developers/contracts/wbera-staker-vault), BERA holders gain direct yield opportunities: 33% of protocol incentives are automatically collected as fees during the incentive distribution process and distributed to these stakers. [Read more about BERA Staking](/learn/guides/bera-staking).
+By staking into the [WBERA Staking Vault](/developers/contracts/wbera-staker-vault), BERA holders gain direct yield opportunities: 33% of protocol incentives are automatically redirected during the incentive distribution process and distributed to these stakers. [Read more about BERA Staking](/learn/guides/bera-staking).

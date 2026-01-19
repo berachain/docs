@@ -66,7 +66,7 @@ When you stake BERA, you receive **sWBERA** (Staked WBERA) tokens:
 Your yield depends on:
 
 1. **Your share** of the total vault assets
-2. **The amount of WBERA** distributed to the vault from incentive fees
+2. **The amount of WBERA** distributed to the vault from incentive redirection
 3. **Auto-compounding** of rewards over time
 
 The more sWBERA you have compared to the total supply, the bigger your share of the distributed rewards.
@@ -116,11 +116,11 @@ The vault supports multiple withdrawal methods for enhanced flexibility:
 
 ### PoL Incentive Redirection
 
-Your yield comes from the **33% incentive tax** collected from PoL protocols:
+Your yield comes from the **33% incentive redirection** from PoL protocols:
 
 1. **Protocols pay incentives** to validators for directing BGT emissions
-2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
-3. **Fees auctioned** for WBERA
+2. **33% redirected** during incentive distribution and sent to the [Incentive Collector](/developers/contracts/bgt-incentive-fee-collector)
+3. **Incentives auctioned** for WBERA
 4. **WBERA distributed** to Staking Vault stakers
 
 ### Auto-Compounding
