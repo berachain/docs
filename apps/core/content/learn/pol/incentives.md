@@ -85,8 +85,8 @@ Key takeaways are that Token Managers:
 - Can increase the Incentive Tokens by any number, keeping the same Incentive Rate.
 - Can increase the Incentive Rate when they deposit additional Incentive Tokens.
 - Can set a lower Incentive Rate only when the Incentive Tokens have been fully exhausted.
-- ❌ Cannot decrease the Incentive Rate while an existing Incentive is active.
-- ❌ Cannot reclaim or return the Incentive Tokens once they are added.
+- Cannot decrease the Incentive Rate while an existing Incentive is active.
+- Cannot reclaim or return the Incentive Tokens once they are added.
 
 ### Incentive Commission and Distribution
 
