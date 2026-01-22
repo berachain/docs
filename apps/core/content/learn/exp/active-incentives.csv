@@ -1,0 +1,72 @@
+Fetching active incentives...
+Found 40 active incentives across 35 vaults
+Fetching vault metadata...
+Error fetching vault 0xa63af00b73a4d995c9bb4c399a81708f0b026a62: HTTP error! status: 429
+Error fetching vault 0xd8291187a9a45e7509f81fec03a49982eb63427d: HTTP error! status: 429
+Error fetching vault 0xfbef3678faeb671e352b0f9ad87b402243beaf24: HTTP error! status: 429
+Error fetching vault 0x84cde2880f1c63253636501d757630c252678562: HTTP error! status: 429
+Error fetching vault 0x2461040526130a0ea1a0ed44b9c9d3331f3897ff: HTTP error! status: 429
+Error fetching vault 0xd5e32d4d7920a876417ef2ecbbafb58b38f717ac: HTTP error! status: 429
+Error fetching vault 0xcf4f3eafe6ee37b33c5047f0e6562f764285de9d: HTTP error! status: 429
+Error fetching vault 0x999008608dcf23d5dca29b3c863d4353f61de243: HTTP error! status: 429
+Error fetching vault 0x284f8d4b98fed32f154911102053a0c1ab621fc0: HTTP error! status: 429
+Error fetching vault 0xec54b5d168e7128bc1f06d12ef0e5ab6f4c59ed9: HTTP error! status: 429
+Error fetching vault 0xf10f34547f4b8659058f10d29759a89eb790aa80: HTTP error! status: 429
+Error fetching vault 0x193ff57dc9efa1dec154946c10332ba31c8e72b2: HTTP error! status: 429
+Error fetching vault 0xc6b923ae78b25aad4c8df319b332a3202b1daedc: HTTP error! status: 429
+Error fetching vault 0xf3bdf754b4691286090090d601f77384da9fb721: HTTP error! status: 429
+Error fetching vault 0x39b08ccbdfd9b0d3c45f1fd02e9b57b44c88ed71: HTTP error! status: 429
+Error fetching vault 0x9e4ff9f6f255ecb3fb3937e81439a2c69377f3af: HTTP error! status: 429
+Error fetching vault 0x6679f737923f0f99a50f7a1a3d4f8092be11795c: HTTP error! status: 429
+Error fetching vault 0x9136df2daabe52a97340cce8c53d4c1314d52c18: HTTP error! status: 429
+Error fetching vault 0xfe5fe99a4e5ae1f6212c1b32ed4ed6d1c1c6de57: HTTP error! status: 429
+Error fetching vault 0x04a0c721cf9c26d7ab12f599937cbf520465f028: HTTP error! status: 429
+Error fetching vault 0x8ee2627aff73e285f1a83b6e8bb7e9945f404a1b: HTTP error! status: 429
+Error fetching vault 0x6b9ae55362e65e2a615681824a6334cc3f29e658: HTTP error! status: 429
+Error fetching vault 0x66eb42c499372e897929efbf6026821b0a148119: HTTP error! status: 429
+Error fetching vault 0xedd27ce3793d655e3d15e29e297f4848de1ef092: HTTP error! status: 429
+Error fetching vault 0xc6dd0727f00cda3972be452f2009ec4973cd74d0: HTTP error! status: 429
+Error fetching vault 0x19ecf480652a7de3a60dd7fd7012daed6c79e3e9: HTTP error! status: 429
+Error fetching vault 0xc6e20d1cdc93a854ce373aed93653093ddb12e13: HTTP error! status: 429
+Error fetching vault 0xcd7c3b91de4a84942069201644b70d9570f2b9a9: HTTP error! status: 429
+Error fetching vault 0xe409272355d32a3dfcdde888ca275ac33146b854: HTTP error! status: 429
+Error fetching vault 0xcf77d23cfc561e34e3b6137c736ea5cb395bcda0: HTTP error! status: 429
+Vault Name,Dollar Value,Vault Link
+"Vault 0x39b0...ed71",36869.29,"https://hub.berachain.com/earn/0x39b08ccbdfd9b0d3c45f1fd02e9b57b44c88ed71"
+"Vault 0xa63a...6a62",34284.12,"https://hub.berachain.com/earn/0xa63af00b73a4d995c9bb4c399a81708f0b026a62"
+"Vault 0x6679...795c",29454.36,"https://hub.berachain.com/earn/0x6679f737923f0f99a50f7a1a3d4f8092be11795c"
+"Vault 0xcf4f...de9d",12355.88,"https://hub.berachain.com/earn/0xcf4f3eafe6ee37b33c5047f0e6562f764285de9d"
+"Vault 0xfbef...af24",10478.87,"https://hub.berachain.com/earn/0xfbef3678faeb671e352b0f9ad87b402243beaf24"
+"Vault 0xfe5f...de57",7607.90,"https://hub.berachain.com/earn/0xfe5fe99a4e5ae1f6212c1b32ed4ed6d1c1c6de57"
+"BVT-LRT on Batoshi",7173.36,"https://hub.berachain.com/earn/0x7eae500c0ff540c61d882524c79e4c3bf1a52938"
+"Henlo Incinerator",3970.31,"https://hub.berachain.com/earn/0x9ffec62263e8eaed5eaefb58ca9ea59ffa8039fc"
+"Vault 0x9136...2c18",1983.30,"https://hub.berachain.com/earn/0x9136df2daabe52a97340cce8c53d4c1314d52c18"
+"BakerDAO Bread Borrowing",1306.89,"https://hub.berachain.com/earn/0xbe703c50c176336602aefe48c74e9cc15426db97"
+"Vault 0x9e4f...f3af",1129.69,"https://hub.berachain.com/earn/0x9e4ff9f6f255ecb3fb3937e81439a2c69377f3af"
+"Vault 0x2461...97ff",1023.58,"https://hub.berachain.com/earn/0x2461040526130a0ea1a0ed44b9c9d3331f3897ff"
+"Vault 0x84cd...8562",994.44,"https://hub.berachain.com/earn/0x84cde2880f1c63253636501d757630c252678562"
+"Vault 0xcf77...cda0",913.78,"https://hub.berachain.com/earn/0xcf77d23cfc561e34e3b6137c736ea5cb395bcda0"
+"Vault 0xec54...9ed9",873.60,"https://hub.berachain.com/earn/0xec54b5d168e7128bc1f06d12ef0e5ab6f4c59ed9"
+"Vault 0x6b9a...e658",864.22,"https://hub.berachain.com/earn/0x6b9ae55362e65e2a615681824a6334cc3f29e658"
+"Vault 0xc6e2...2e13",773.63,"https://hub.berachain.com/earn/0xc6e20d1cdc93a854ce373aed93653093ddb12e13"
+"Vault 0xcd7c...b9a9",616.58,"https://hub.berachain.com/earn/0xcd7c3b91de4a84942069201644b70d9570f2b9a9"
+"Vault 0xf10f...aa80",593.52,"https://hub.berachain.com/earn/0xf10f34547f4b8659058f10d29759a89eb790aa80"
+"Vault 0x19ec...e3e9",421.50,"https://hub.berachain.com/earn/0x19ecf480652a7de3a60dd7fd7012daed6c79e3e9"
+"Vault 0x193f...72b2",418.40,"https://hub.berachain.com/earn/0x193ff57dc9efa1dec154946c10332ba31c8e72b2"
+"Vault 0xedd2...f092",404.92,"https://hub.berachain.com/earn/0xedd27ce3793d655e3d15e29e297f4848de1ef092"
+"Vault 0x9990...e243",372.63,"https://hub.berachain.com/earn/0x999008608dcf23d5dca29b3c863d4353f61de243"
+"Vault 0x04a0...f028",259.97,"https://hub.berachain.com/earn/0x04a0c721cf9c26d7ab12f599937cbf520465f028"
+"Vault 0x66eb...8119",202.00,"https://hub.berachain.com/earn/0x66eb42c499372e897929efbf6026821b0a148119"
+"Vault 0xc6b9...aedc",201.81,"https://hub.berachain.com/earn/0xc6b923ae78b25aad4c8df319b332a3202b1daedc"
+"Vault 0xc6dd...74d0",131.44,"https://hub.berachain.com/earn/0xc6dd0727f00cda3972be452f2009ec4973cd74d0"
+"Vault 0xf3bd...b721",118.81,"https://hub.berachain.com/earn/0xf3bdf754b4691286090090d601f77384da9fb721"
+"Vault 0x284f...1fc0",43.79,"https://hub.berachain.com/earn/0x284f8d4b98fed32f154911102053a0c1ab621fc0"
+"Vault 0x8ee2...4a1b",25.35,"https://hub.berachain.com/earn/0x8ee2627aff73e285f1a83b6e8bb7e9945f404a1b"
+"Kodiak - SOL | HONEY 0.3% Island",16.62,"https://hub.berachain.com/earn/0x0767038700605b50967eea1e6440d6fd6c92c237"
+"Bull Ish V3",1.21,"https://hub.berachain.com/earn/0x60b71ba339082eb1d21e45c6d5abf3efbc53cf09"
+"Vault 0xd5e3...17ac",0.61,"https://hub.berachain.com/earn/0xd5e32d4d7920a876417ef2ecbbafb58b38f717ac"
+"Vault 0xe409...b854",0.01,"https://hub.berachain.com/earn/0xe409272355d32a3dfcdde888ca275ac33146b854"
+"Vault 0xd829...427d",0.01,"https://hub.berachain.com/earn/0xd8291187a9a45e7509f81fec03a49982eb63427d"
+
+Total active incentives: $155886.41
+Number of vaults with active incentives: 35

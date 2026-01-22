@@ -31,6 +31,7 @@ All audit reports are publicly available on [Github](https://github.com/berachai
 <script>
 const mainnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other
@@ -38,6 +39,7 @@ const mainnet_render_groups = {
 
 const testnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other
@@ -51,7 +53,7 @@ const testnet_render_groups = {
     <thead><tr><th>Name</th><th>Mainnet</th><th>ABI</th></tr></thead>
     <tbody>
       <template v-for="(sc, key) in contracts">
-        <template v-if="sc['address']['berachainMainnet']">
+        <template v-if="sc['address']?.['berachainMainnet']">
           <tr>
             <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else><b>{{ sc.name }}</b></template></td>
             <td>
@@ -74,7 +76,7 @@ const testnet_render_groups = {
     <thead><tr><th>Name</th><th>Bepolia</th><th>ABI</th></tr></thead>
     <tbody>
       <template v-for="(sc, key) in contracts">
-        <template v-if="sc['address']['berachainBepolia']">
+        <template v-if="sc['address']?.['berachainBepolia']">
           <tr>
             <td><template v-if="sc['docsUrl']"><a :href="sc.docsUrl">{{ sc.name }}</a></template><template v-else><b>{{ sc.name }}</b></template></td>
             <td>

@@ -2,7 +2,7 @@
   "name": "@berachain/core",
   "version": "2.1.0",
   "scripts": {
-    "dev": "vitepress dev --port 5173",
+    "dev": "vitepress dev --host 0.0.0.0 --port 55173",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "clean": "rm -rf .turbo; rm -rf .vitepress/cache; rm -rf .vitepress/dist; rm -rf node_modules;",

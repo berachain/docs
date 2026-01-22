@@ -4,6 +4,10 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## January 2026
+
+**Staking pools documentation** – Added documentation for staking pools, enabling validators to offer liquid staking services to their communities. Includes [installation guide](/nodes/staking-pools/installation), [operator guide](/nodes/staking-pools/operators), [delegation guide](/nodes/staking-pools/delegators), and [smart contract reference](/nodes/staking-pools/contracts). Staking pools allow validators to build and monetize communities of stakers who deposit BERA and receive liquid shares (stBERA) that automatically grow in value. 
+
 ## December 2025
 
 **Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism.
@@ -20,7 +24,7 @@ Below are important changes shipped to Berachain.
 
 **Smart contract verification guides** – Added guides for verifying smart contracts on Berachain using multiple methods including [Berascan verification](/developers/guides/verify-smart-contracts) and [contract verification using Berascan](/developers/guides/verify-contract-using-berascan). Includes step-by-step instructions with screenshots and code examples.
 
-**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/berachain-bridge) documentation.
+**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/bridge) documentation.
 
 **Safe integration guide** – Added [Safe integration documentation](/learn/guides/safe-add-incentives-for-reward-vault) for integrating with Safe (formerly Gnosis Safe) on Berachain, including contract addresses and deployment information for secure multi-sig wallet functionality.
 
