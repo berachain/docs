@@ -20,6 +20,10 @@ const ENABLED_FLAGS = ["testnet", "mainnet"];
  *
  */
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
+/**
+ * UTM Source for Bend
+ */
+const UTMSOURCE = `?utm_source=${constants.websites.docsBend.utmSource}`;
 
 // Main Configuration
 // ========================================================
@@ -79,13 +83,19 @@ export default defineConfig({
         items: [
           {
             text: `${constants.websites.docsBex.name}`,
-            link: `${constants.websites.docsBex.url}`
+            link: `${constants.websites.docsBex.url}${UTMSOURCE}`
           },
           {
             text: `${constants.websites.docsCore.name}`,
-            link: `${constants.websites.docsCore.url}`
+            link: `${constants.websites.docsCore.url}${UTMSOURCE}`
           }
         ]
+      },
+      { text: "Learn", link: "learn/index", activeMatch: "/learn/" },
+      {
+        text: "Developers",
+        link: "developers/index",
+        activeMatch: "/developers/"
       }
     ],
     outline: [2, 3],

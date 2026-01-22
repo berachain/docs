@@ -22,7 +22,7 @@ The distribution of Incentives follows this process:
 4. When the $BGT block reward emissions are distributed:
    - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
    - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
-5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the [BGTIncentiveDistributor](/developers/contracts/bgtincentivedistributor) contract. All proof handling is done by interacting with <a :href="config.mainnet.dapps.hub.url">{{config.mainnet.dapps.hub.name}}</a>.
+5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the [BGTIncentiveDistributor](/developers/contracts/bgtincentivedistributor) contract. All proof handling is done by interacting with <a :href="config.websites.hub.url">{{config.websites.hub.name}}</a>.
 
 ### Incentives & Users
 
@@ -121,13 +121,13 @@ Validator commission cannot exceed **20 %** (`MAX_COMMISSION_RATE = 0.2e4`). Any
 The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/learn/pol/rewardvaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
 :::
 
-## Incentive Fees
+## Incentive Redirection
 
-A portion of protocol incentives is automatically collected as fees during the incentive distribution process for BERA stakers:
+A portion of protocol incentives is automatically redirected during the incentive distribution process for BERA stakers:
 
-- **Fee Rate**: 33% of the incentive amount
+- **Redirection Rate**: 33% of the incentive amount
 - **Collection Process**: Automatically deducted when incentives are distributed
-- **Distribution**: Fees are auctioned for WBERA and distributed to BERA stakers
+- **Distribution**: Redirected incentives are auctioned for WBERA and distributed to BERA stakers
 - **Remaining Amount**: Validators receive the remaining 67% of incentives
 
 This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.

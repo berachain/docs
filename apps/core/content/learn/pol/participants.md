@@ -63,17 +63,17 @@ The BERA Yield Module empowers `$BERA` holders to participate directly in the Pr
 BERA stakers use the **[Staking Vault](/developers/contracts/wbera-staker-vault)**, an ERC4626-compliant vault that:
 
 - Takes both native `$BERA` and wrapped `$WBERA` deposits
-- Earns yield from 33% of PoL protocol incentives
+- Earns yield from 33% incentive redirection of PoL protocol incentives
 - Has a 7-day unbonding period for withdrawals
 - Automatically compounds rewards for better yields
 
 ### Earning Yield Through PoL 📈
 
-BERA stakers earn yield through the incentive tax mechanism:
+BERA stakers earn yield through the incentive redirection mechanism:
 
 1. **Protocols pay incentives** to validators for directing BGT emissions
-2. **33% fee collected** during incentive distribution and sent to the [Incentive Fee Collector](/developers/contracts/bgt-incentive-fee-collector)
-3. **Fees auctioned** for WBERA
+2. **33% redirected** during incentive distribution and sent to the [Incentive Collector](/developers/contracts/bgt-incentive-fee-collector)
+3. **Incentives auctioned** for WBERA
 4. **WBERA distributed** to Staking Vault stakers
 
 The yield rate depends on:

@@ -34,7 +34,7 @@ To interface with a pool, you will need its `poolId`, which is its unique identi
 
 You can get a `poolId` from:
 
-- A pool's URL: <a target="_blank" :href="config.mainnet.dapps.hub.url + '/pools/' + config.mainnet.dapps.bex.examplePoolId + '/details/'">{{config.mainnet.dapps.hub.url + '/pools/' + config.mainnet.dapps.bex.examplePoolId + '/details/'}}</a>
+- A pool's URL: <a target="_blank" :href="config.websites.hub.url + 'pools/' + config.websites.bex.examplePoolId + '/details/'">{{config.websites.hub.url + 'pools/' + config.websites.bex.examplePoolId + '/details/'}}</a>
 - The [SDK](/developers/sdk)
 - Calling `getPoolId()` on the pool contract itself if you already have it
 

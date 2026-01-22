@@ -6,7 +6,7 @@ layout: page
 <script setup>
   import Feature from '@berachain/ui/Feature';
   import config from '@berachain/config/constants.json';
-  import { IconMoneybag, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconWorld
+  import { IconMoneybag, IconBrandGithub, IconSearch, IconDroplet, IconGavel, IconRefresh, IconWorld, IconTerminal, IconVocabulary
  } from '@tabler/icons-vue';
 </script>
 
@@ -15,7 +15,7 @@ layout: page
   <div class="container">
     <div>
       <div class="VPImageBackground"></div>
-      <img class="VPImage" src="/DocsBear.png" alt="BEX Docs" />
+      <img class="VPImage" src="/DocsBear.png" alt="Bend Docs" />
     </div>
     <div>
       <span class="logo">
@@ -27,20 +27,35 @@ layout: page
   </div>
 </section>
 
+<section class="features">
+  <Feature
+    title="Learn About Bend"
+    description="Understand the fundamentals of Berachain's lending platform"
+    link="/learn/"
+    :icon="IconVocabulary"
+  />
+  <Feature
+    title="Developers"
+    description="Get up and running and building with Bend"
+    link="/developers/"
+    :icon="IconTerminal"
+  />
+</section>
+
 ## More Berachain Docs
 
 <section class="features">
   <Feature
     title="Core Docs"
     description="Berachain Core Docs"
-    :link="config.websites.docsCore.url"
+    :link="config.websites.docsCore.url + '?utm_source=' + config.websites.docsBex.utmSource"
     image="/assets/BERA.png"
     type="alt"
   />
   <Feature
     title="BEX Docs"
     description="Berachain BEX Docs"
-    :link="config.websites.docsBex.url"
+    :link="config.websites.docsBex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     image="/assets/BEX.png"
     type="alt"
   />
@@ -52,7 +67,7 @@ layout: page
   <Feature
     title="BeaconKit"
     description="BeaconKit Repo"
-    link="https://github.com/berachain/beacon-kit"
+    :link="'https://github.com/berachain/beacon-kit?utm_source=' + config.websites.docsBend.utmSource"
     :icon="IconBrandGithub"
     type="alt"
   />
@@ -60,44 +75,44 @@ layout: page
     title="Berascan"
     target="_blank"
     description="Block Explorer"
-    :link="config.mainnet.thirdparty.routescan.url"
+    :link="config.websites.berascan.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconSearch"
     type="alt"
   />
-  <template v-if="config.bepolia.dapps?.faucet">
+  <template v-if="config.websites?.faucet">
   <Feature
-    :title="config.bepolia.dapps.faucet.name"
+    :title="config.websites.faucetBepolia.name"
     description="Get Bepolia Tokens"
-    :link="config.bepolia.dapps.faucet.url"
+    :link="config.websites.faucetBepolia.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconDroplet"
       type="alt"
     />
   </template>
   <Feature
-    :title="config.mainnet.dapps.hub.name"
+    :title="config.websites.hub.name"
     description="Manage $BGT"
-    :link="config.mainnet.dapps.hub.url"
+    :link="config.websites.hub.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconGavel"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.bex.name"
+    :title="config.websites.bex.name"
     description="Berachain Native DEX"
-    :link="config.mainnet.dapps.bex.url"
+    :link="config.websites.bex.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconRefresh"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.honeySwap.name"
+    :title="config.websites.honeySwap.name"
     description="Berachain $HONEY Swapping"
-    :link="config.mainnet.dapps.honeySwap.url"
+    :link="config.websites.honeySwap.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconMoneybag"
     type="alt"
   />
   <Feature
-    :title="config.mainnet.dapps.foundation.name"
+    :title="config.websites.foundation.name"
     description="Main Foundation Website"
-    :link="config.mainnet.dapps.foundation.url"
+    :link="config.websites.foundation.url + '?utm_source=' + config.websites.docsBex.utmSource"
     :icon="IconWorld"
     type="alt"
   />

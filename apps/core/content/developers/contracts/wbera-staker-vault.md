@@ -17,7 +17,7 @@ head:
 
 # WBERAStakerVault
 
-> <small><a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault['mainnet-address']">{{config.contracts.pol.wberaStakerVault['mainnet-address']}}</a><span v-if="config.contracts.pol.wberaStakerVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.wberaStakerVault.abi">ABI JSON</a></span></small>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.pol.wberaStakerVault.address.berachainMainnet">{{config.contracts.pol.wberaStakerVault.address.berachainMainnet}}</a><span v-if="config.contracts.pol.wberaStakerVault.abi">&nbsp;|&nbsp;<a target="_blank" :href="config.contracts.pol.wberaStakerVault.abi">ABI JSON</a></span></small>
 
 [Git Source](https://github.com/berachain/contracts/blob/main/src/pol/WBERAStakerVault.sol)
 

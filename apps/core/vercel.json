@@ -115,6 +115,18 @@
     {
       "source": "/learn/claim-bera-airdrop",
       "destination": "/"
+    },
+    {
+      "source": "/nodes/guides/bectra",
+      "destination": "/nodes/evm-execution"
+    },
+    {
+      "source": "/nodes/guides/balancer",
+      "destination": "/nodes/evm-execution"
+    },
+    {
+      "source": "/nodes/guides/balancer2",
+      "destination": "/nodes/evm-execution"
     }
   ]
 }

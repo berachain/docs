@@ -18,7 +18,7 @@ head:
 
 # $HONEY
 
-<a target="_blank" :href="config.mainnet.dapps.berascan.url + 'address/' + config.contracts.tokens.honey['mainnet-address']">{{config.contracts.tokens.honey['mainnet-address']}}</a>
+> <small><a target="_blank" :href="config.websites.berascan.url + 'address/' + config.contracts.tokens.honey.address.berachainMainnet">{{config.contracts.tokens.honey.address.berachainMainnet}}</a></small>
 
 <ClientOnly>
   <Token title="$HONEY" image="/assets/HONEY.png" />
@@ -28,7 +28,7 @@ head:
 
 ## How to Get $HONEY
 
-`$HONEY` can be minted by depositing whitelisted collateral into a vault and minting `$HONEY` against that collateral through the <a :href="config.mainnet.dapps.honeySwap.url">HoneySwap dApp</a>. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
+`$HONEY` can be minted by depositing whitelisted collateral into a vault and minting `$HONEY` against that collateral through the <a :href="config.websites.honeySwap.url">HoneySwap dApp</a>. The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
 
 Alternatively, `$HONEY` can be obtained by swapping from other assets on [BEX](/learn/dapps/bex) or another decentralized exchange.
 
@@ -102,14 +102,18 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 
 ## Fees
 
-Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is:
+Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is the following:
 
-- **Minting**: 0% fee
-- **Burning/Redeeming**: 0.05% fee
+| Stablecoin | Mint Fee | Redeem Fee |
+| ---------- | -------- | ---------- |
+| USDT       | 0.1%     | 0%         |
+| byUSD      | 0.1%     | 0%         |
+| USDC       | 0%       | 0.05%      |
+| USDe       | 0%       | 0.05%      |
 
 ### Example
 
-Let's walk through minting and burning `$HONEY` with `$USDC`:
+Let's walk through minting and redeeming `$HONEY` with `$USDC`:
 
 **Minting:**
 
@@ -117,8 +121,8 @@ Let's walk through minting and burning `$HONEY` with `$USDC`:
 - Receives `1,000 $HONEY` (0% fee)
 - No fees collected
 
-**Burning:**
+**Redeeming:**
 
-- User burns `1,000 $HONEY`
+- User redeems `1,000 $HONEY` for `$USDC`
 - Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
 - `0.5 $USDC` fee is distributed to `$BGT` holders

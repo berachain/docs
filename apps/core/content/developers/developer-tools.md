@@ -43,19 +43,17 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Alchemy](https://docs.alchemy.com/reference/berachain-api-quickstart)
 - [BlockPI](https://blockpi.io/)
 - [Chainstack](https://chainstack.com/build-better-with-berachain/)
-- [DRPC](https://drpc.org/chainlist/berachain)
+- [dRPC NodeCloud](https://drpc.org/chainlist/berachain)
 - [Grove](https://grove.city)
 - [Envio](https://envio.dev)
 - [Enigma](https://enigma-validator.com/services)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis)
-- [Staketab for RPC](https://bera-evm-rpc.staketab.org:443) and [separate websocket](wss://bera-evm-ws.staketab.org:443) service
 - [Spectrum](https://spectrumnodes.com)
 - [Tatum RPC and Webhooks](https://tatum.io/berachain-and-tatum)
 - [Tenderly](https://dashboard.tenderly.co/)
 - [Thirdweb](https://thirdweb.com/chainlist)
-- [Validation Cloud](https://www.validationcloud.io/berachain-rpc)
 - [Winnie](https://www.henlo-winnie.dev/)
 
 ### Wallets & Multisigs
@@ -66,7 +64,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [Binance Web3 Wallet](https://www.binance.com/en/web3wallet)
 - [Keplr](https://keplr.app/)
 - [Rainbow Wallet](https://rainbow.me/en/)
-- [Safe](https://safe.berachain.com/welcome)
+- [Safe{Wallet}](https://app.safe.global)
 
 ## Authentication & Account Abstraction
 
@@ -82,7 +80,7 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 - [Goldsky](https://docs.goldsky.com/chains/berachain)
 - [Ghost Graph](https://ghostgraph.xyz)
-- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/networks/berachain-testnet/)
+- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/chains/berachain)
 - [Envio](https://envio.dev)
 - [Tatum Indexed Data API](https://tatum.io/berachain-and-tatum)
 - [The Graph](https://thegraph.com/)

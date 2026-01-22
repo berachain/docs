@@ -9,7 +9,7 @@ The following guide will walk you through the process of adding incentives to an
 ## Requirements
 
 - Whitelisted Reward Vault with Whitelisted Incentive Token
-- Token Manager [Safe Multisig Wallet](https://safe.berachain.com)
+- Token Manager [Safe Multisig Wallet](https://app.safe.global)
 
 :::tip Commission cap
 A validator's commission on incentive tokens is capped at **20 %** (`MAX_COMMISSION_RATE = 0.2e4`).  
@@ -18,7 +18,7 @@ Queuing a commission above the cap **reverts**. If an older stored value exceeds
 
 ## How To Add Incentives To A Reward Vault
 
-This guide will walk you through the process of adding incentive tokens to a whitelisted reward vault using <a :href="config.mainnet.dapps.safe.url" target="_blank">{{config.mainnet.dapps.safe.name}}</a>.
+This guide will walk you through the process of adding incentive tokens to a whitelisted reward vault using <a :href="config.websites.safe.url" target="_blank">{{config.websites.safe.name}}</a>.
 
 ### Step 1 - Start a New Transaction
 
