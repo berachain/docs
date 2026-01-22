@@ -24,7 +24,7 @@ Below are important changes shipped to Berachain.
 
 **Smart contract verification guides** – Added guides for verifying smart contracts on Berachain using multiple methods including [Berascan verification](/developers/guides/verify-smart-contracts) and [contract verification using Berascan](/developers/guides/verify-contract-using-berascan). Includes step-by-step instructions with screenshots and code examples.
 
-**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/berachain-bridge) documentation.
+**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/bridge) documentation.
 
 **Safe integration guide** – Added [Safe integration documentation](/learn/guides/safe-add-incentives-for-reward-vault) for integrating with Safe (formerly Gnosis Safe) on Berachain, including contract addresses and deployment information for secure multi-sig wallet functionality.
 
