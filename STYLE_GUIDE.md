@@ -8,12 +8,12 @@ The documentation is built using [VitePress](https://vitepress.dev/). Familiarit
 
 ## 2. Directory Structure & File Naming
 
-- **Main Content:** All documentation content resides primarily within `bcdocs/apps/core/content/` and `bcdocs/apps/bex/content/`.
+- **Main Content:** All documentation content resides primarily within `apps/core/content/` and `apps/bex/content/`.
 - **Subdirectories:** Organize content into logical subdirectories based on topics (e.g., `learn/`, `developers/`, `nodes/`, `beacon-kit/`).
 - **File Naming:**
   - Use lowercase, hyphenated filenames (kebab-case). E.g., `proof-of-liquidity.md`.
   - `index.md` is the default file for a directory, serving as its landing page.
-- **Assets:** Static assets like images should be placed in the `public/assets/` directory (e.g., `bcdocs/apps/core/public/assets/`). Reference them in markdown using root-relative paths (e.g., `/assets/my-image.png`).
+- **Assets:** Static assets like images should be placed in the `public/assets/` directory (e.g., `apps/core/public/assets/`). Reference them in markdown using root-relative paths (e.g., `/assets/my-image.png`).
 
 Files must be formatted by running `pnpm format` before being checked in. The CI/CD process checks for potential format fixes (with `pnpm format:check`) and fails the build if there are any.
 
@@ -228,7 +228,7 @@ Use markdown tables for structured data. Keep them concise and readable.
 
 ## 4. Navigation & Sidebar (`sidebar.ts`)
 
-The main navigation is controlled by `bcdocs/apps/core/.vitepress/sidebar.ts` (and similar files for other apps like `bex`).
+The main navigation is controlled by `apps/core/.vitepress/sidebar.ts` (and similar files for other apps like `bex`).
 
 - **Structure:** The `SIDEBAR` constant contains objects for major sections like `LEARN`, `DEVELOPERS`, `NODES`.
 - **Items:** Each navigational item is an object:
@@ -243,7 +243,7 @@ The main navigation is controlled by `bcdocs/apps/core/.vitepress/sidebar.ts` (a
 
 ## 5. Homepage (`index.md`) Structure
 
-The `index.md` files (e.g., `bcdocs/apps/core/content/index.md`) serve as the main landing pages for a documentation set.
+The `index.md` files (e.g., `apps/core/content/index.md`) serve as the main landing pages for a documentation set.
 
 - **Layout:** Uses `layout: page` in the frontmatter.
 - **Custom Components:** Heavily relies on custom Vue components, particularly:
@@ -254,7 +254,7 @@ The `index.md` files (e.g., `bcdocs/apps/core/content/index.md`) serve as the ma
 
 ## 6. Documenting Console Interactions
 
-Refer to `bcdocs/apps/core/content/nodes/guides/docker-devnet.md` as a primary example.
+Refer to `apps/core/content/nodes/guides/docker-devnet.md` as a primary example.
 
 - **Clear Steps:** Break down procedures into numbered steps using H2 or H3 headings (e.g., "### Step 1 - Obtain & Build Source").
 - **Command Presentation:**
@@ -400,7 +400,7 @@ This style guide is a living document and will evolve. Please refer back to it a
 
 ## 9. Managing Configuration with `constants.json`
 
-A central configuration file, `constants.json`, located at `bcdocs/packages/config/constants.json`, is used to store values that are shared across multiple documentation pages or are subject to change. This practice ensures consistency and simplifies updates.
+A central configuration file, `constants.json`, located at `packages/config/constants.json`, is used to store values that are shared across multiple documentation pages or are subject to change. This practice ensures consistency and simplifies updates.
 
 ### Purpose
 
@@ -410,7 +410,7 @@ A central configuration file, `constants.json`, located at `bcdocs/packages/conf
 
 ### Location
 
-The file is located at: `bcdocs/packages/config/constants.json`
+The file is located at: `packages/config/constants.json`
 
 ### Usage in Markdown (`.md` files)
 

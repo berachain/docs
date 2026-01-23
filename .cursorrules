@@ -1,0 +1,7 @@
+---
+project: Berachain Documentation
+---
+
+# Berachain Docs
+
+Standards and rules are in `.agents/rules/`. Human-readable guides: `CONTRIBUTING.md`, `STYLE_GUIDE.md`.

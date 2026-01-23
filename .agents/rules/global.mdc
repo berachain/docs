@@ -31,8 +31,4 @@ alwaysApply: true
 - When adding new files, request permission 
 - Keep READMEs current and accurate
 - Use loose version numbers for minor upgrades
-- Remove temporary files when done.
-
-### Chains
-- Berachain has two chains, mainnet and bepolia. Mainnet RPC is at https://rpc.berachain.com/ and Bepolia RPC is at https://bepolia.rpc.berachain.com/ . Each chain has an execution layer and a consensus layer. You have to ask me for a consensus layer RPC URL if you need one.
-- One-off scripts against the chain are done with the keys in a file private-keys.txt .  Add any keys you generate to that file. Don't commit that file.   When I say to sweep up the funds, go through each account and return any money in it to the funding account.
+- Remove temporary files when done
