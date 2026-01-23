@@ -504,7 +504,7 @@
           "berachainMainnet": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
           "berachainBepolia": ""
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/WBERA.json",
+        "abi": "",
         "docsUrl": ""
       }
     },
@@ -635,7 +635,7 @@
           "berachainMainnet": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
           "berachainBepolia": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/safe.json",
         "docsUrl": ""
       },
       "safeProxyFactory": {
@@ -645,7 +645,7 @@
           "berachainMainnet": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
           "berachainBepolia": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/safe_proxy_factory.json",
         "docsUrl": ""
       },
       "multiSend": {
@@ -655,7 +655,7 @@
           "berachainMainnet": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
           "berachainBepolia": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/multi_send.json",
         "docsUrl": ""
       },
       "multiSendCallOnly": {
@@ -665,7 +665,7 @@
           "berachainMainnet": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
           "berachainBepolia": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/multi_send_call_only.json",
         "docsUrl": ""
       },
       "compatibilityFallbackHandler": {
@@ -675,7 +675,7 @@
           "berachainMainnet": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
           "berachainBepolia": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/compatibility_fallback_handler.json",
         "docsUrl": ""
       },
       "signMessageLib": {
@@ -685,7 +685,7 @@
           "berachainMainnet": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
           "berachainBepolia": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/sign_message_lib.json",
         "docsUrl": ""
       },
       "simulateTxAccessor": {
@@ -695,7 +695,7 @@
           "berachainMainnet": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
           "berachainBepolia": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/simulate_tx_accessor.json",
         "docsUrl": ""
       },
       "createCall": {
@@ -705,7 +705,7 @@
           "berachainMainnet": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
           "berachainBepolia": "0x9b35Af71d77eaf8d7e40252370304687390A1A52"
         },
-        "abi": "",
+        "abi": "https://github.com/safe-global/safe-deployments/blob/main/src/assets/v1.4.1/create_call.json",
         "docsUrl": ""
       }
     },
