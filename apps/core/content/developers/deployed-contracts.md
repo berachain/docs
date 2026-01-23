@@ -19,7 +19,10 @@ head:
 
 This is a list of addresses where contracts can be read from or written to.
 
-> A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
+> **Contract ABIs:**
+>
+> - **Mainnet ABIs:** [berachain/abis/tree/main/mainnet/contracts](https://github.com/berachain/abis/tree/main/mainnet/contracts)
+> - **Testnet ABIs:** [berachain/abis/tree/main/bepolia/contracts](https://github.com/berachain/abis/tree/main/bepolia/contracts)
 
 :::info
 Deployed contracts have received several audits from various parties.
