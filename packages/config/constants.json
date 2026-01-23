@@ -294,7 +294,7 @@
           "berachainMainnet": "0x77DA09bC82652f9A14d1b170a001e759640298e6",
           "berachainBepolia": "0xb0d005Fe83E3F1ec876C1a64700c5F0d6265d9E3"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveDistributor.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/BGTIncentiveDistributor.json",
         "docsUrl": "/developers/contracts/bgtincentivedistributor"
       },
       "bgtIncentiveFeeCollector": {
@@ -330,7 +330,7 @@
           "berachainMainnet": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a",
           "berachainBepolia": "0xdf960E8F3F19C481dDE769edEDD439ea1a63426a"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BeraChef.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/BeraChef.json",
         "docsUrl": "/developers/contracts/berachef"
       },
       "blockRewardController": {
@@ -339,7 +339,7 @@
           "berachainMainnet": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e",
           "berachainBepolia": "0x1AE7dD7AE06F6C58B4524d9c1f816094B1bcCD8e"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BlockRewardController.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/BlockRewardController.json",
         "docsUrl": "/developers/contracts/block-reward-controller"
       },
       "distributor": {
@@ -348,7 +348,7 @@
           "berachainMainnet": "0xD2f19a79b026Fb636A7c300bF5947df113940761",
           "berachainBepolia": "0xD2f19a79b026Fb636A7c300bF5947df113940761"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/Distributor.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/Distributor.json",
         "docsUrl": "/developers/contracts/distributor"
       },
       "rewardVaultFactory": {
@@ -357,7 +357,7 @@
           "berachainMainnet": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8",
           "berachainBepolia": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/RewardVaultFactory.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/RewardVaultFactory.json",
         "docsUrl": "/developers/contracts/reward-vault-factory"
       },
       "bgtStaker": {
@@ -384,7 +384,7 @@
           "berachainMainnet": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
           "berachainBepolia": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/Governance.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/BerachainGovernance.json",
         "docsUrl": "/developers/contracts/governance"
       },
       "timelock": {
@@ -393,7 +393,7 @@
           "berachainMainnet": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
           "berachainBepolia": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/Timelock.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/TimeLock.json",
         "docsUrl": "/developers/contracts/timelock"
       },
       "rewardVault": {
@@ -402,7 +402,7 @@
           "berachainMainnet": "",
           "berachainBepolia": ""
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/RewardVault.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/RewardVault.json",
         "docsUrl": "/developers/contracts/reward-vault"
       }
     },
@@ -422,7 +422,7 @@
           "berachainMainnet": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
           "berachainBepolia": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/HONEY.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/Honey.json",
         "docsUrl": "/developers/contracts/honey-token"
       },
       "honeyFactory": {
@@ -431,7 +431,7 @@
           "berachainMainnet": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
           "berachainBepolia": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/HoneyFactory.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/HoneyFactory.json",
         "docsUrl": "/developers/contracts/honey-factory"
       },
       "honeyFactoryReader": {
@@ -440,7 +440,7 @@
           "berachainMainnet": "0x285e147060CDc5ba902786d3A471224ee6cE0F91",
           "berachainBepolia": "0x285e147060CDc5ba902786d3A471224ee6cE0F91"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/HoneyFactoryReader.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/HoneyFactoryReader.json",
         "docsUrl": "/developers/contracts/honey-factory-reader"
       },
       "wbera": {
@@ -449,7 +449,7 @@
           "berachainMainnet": "0x6969696969696969696969696969696969696969",
           "berachainBepolia": "0x6969696969696969696969696969696969696969"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/WBERA.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/WBERA.json",
         "docsUrl": "/developers/contracts/wbera-token"
       },
       "bbUSDC": {
@@ -486,7 +486,7 @@
           "berachainMainnet": "0x549943e04f40284185054145c6E4e9568C1D3241",
           "berachainBepolia": ""
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/ERC20.json",
+        "abi": "",
         "docsUrl": ""
       },
       "wbtc": {
@@ -495,7 +495,7 @@
           "berachainMainnet": "0x0555E30da8f98308EdB960aa94C0Db47230d2B9c",
           "berachainBepolia": ""
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/ERC20.json",
+        "abi": "",
         "docsUrl": ""
       },
       "weth": {
@@ -504,7 +504,7 @@
           "berachainMainnet": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
           "berachainBepolia": ""
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/WBERA.json",
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/WBERA.json",
         "docsUrl": ""
       }
     },
@@ -515,7 +515,7 @@
           "berachainMainnet": "0x4Be03f781C497A489E3cB0287833452cA9B9E80B",
           "berachainBepolia": "0x708cA656b68A6b7384a488A36aD33505a77241FE"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IVault.abi.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/vault"
       },
       "protocolFeesCollector": {
@@ -524,7 +524,7 @@
           "berachainMainnet": "0xB8Cf46Cf1b1476E707619913a70B2085d26f1707",
           "berachainBepolia": "0x05A607aCf3548E84DD1E44c3706F850c849058Da"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IProtocolFeesCollector.abi.json",
+        "abi": "",
         "docsUrl": ""
       },
       "balancerHelpers": {
@@ -533,7 +533,7 @@
           "berachainMainnet": "0x5083737EC75a728c265BE578C9d0d5333a2c5951",
           "berachainBepolia": "0xC7c981ADcDC5d48fed0CD52807fb2bAB22676C8f"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IBalancerHelpers.abi.json",
+        "abi": "",
         "docsUrl": ""
       },
       "poolCreationHelper": {
@@ -542,7 +542,7 @@
           "berachainMainnet": "0x55dccE8165C88aAd4403a15A9cE3A8E244657dD2",
           "berachainBepolia": "0x0dC9964F6CA33d9EF38DEB4925234766127C6B36"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IPoolCreationHelper.abi.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/factory/pool-creation-helper"
       },
       "protocolFeesWithdrawer": {
@@ -551,7 +551,7 @@
           "berachainMainnet": "0x1635F0E1B3e8A6713d03aE155ba79458Ba3240C7",
           "berachainBepolia": "0x8c2D77f0CfcD4Af9cF41494EfE500FE324012c06"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IProtocolFeesWithdrawer.abi.json",
+        "abi": "",
         "docsUrl": ""
       },
       "stablePoolFactory": {
@@ -560,7 +560,7 @@
           "berachainMainnet": "0xDfA30BDa0375d4763711AB0CC8D91B20bfCC87E1",
           "berachainBepolia": "0xB60DbBaCEaeC23486a64d12089F467ef949f1bb1"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IComposableStablePoolFactory.abi.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/factory/stable-pool-factory"
       },
       "batchRelayerLibrary": {
@@ -569,7 +569,7 @@
           "berachainMainnet": "0xCB4AE3030bA06F7EEE54A7B96AfcA7457f9525cf",
           "berachainBepolia": "0xfD772657FC8c4Ed3884AfF151b680883814052FA"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveDistributor.json",
+        "abi": "",
         "docsUrl": ""
       },
       "batchRelayerQueryLibrary": {
@@ -578,7 +578,7 @@
           "berachainMainnet": "0x4151083172b2CEFB83A33fD7FC9F6cBabb3Fd08d",
           "berachainBepolia": "0x263a1C5B2c5851beA2177eb8D6caefdfF2A25601"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveDistributor.json",
+        "abi": "",
         "docsUrl": ""
       },
       "balancerRelayer": {
@@ -587,7 +587,7 @@
           "berachainMainnet": "0x6044f181aB5E9C05A4ed9Ce295f3B178d2492EE7",
           "berachainBepolia": "0x343215E156Ff586711a5B8C49Fe3099BAF22624C"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IBalancerRelayer.abi.json",
+        "abi": "",
         "docsUrl": ""
       },
       "weightedPoolFactory": {
@@ -596,7 +596,7 @@
           "berachainMainnet": "0xa966fA8F2d5B087FFFA499C0C1240589371Af409",
           "berachainBepolia": "0xf1d23276C7b271B2aC595C78977b2312E9954D57"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IWeightedPoolFactory.abi.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/factory/weighted-pool-factory"
       },
       "protocolFeePercentagesProvider": {
@@ -605,7 +605,7 @@
           "berachainMainnet": "0x33C88ffdEe710ed3908C791137Bd1D4421AabBBf",
           "berachainBepolia": "0x8119E412E00fe3c857739E95dB147817Bf615dB8"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IProtocolFeePercentagesProvider.abi.json",
+        "abi": "",
         "docsUrl": ""
       },
       "balancerQueries": {
@@ -614,7 +614,7 @@
           "berachainMainnet": "0x3C612e132624f4Bd500eE1495F54565F0bcc9b59",
           "berachainBepolia": "0xE3723383a0EA73D5c0dE424BAA97F97f86f6cF92"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IBalancerQueries.abi.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/query"
       },
       "authorizer": {
@@ -623,7 +623,7 @@
           "berachainMainnet": "0x71047aE39A7aA4f7d923542F459e50B974644Ef2",
           "berachainBepolia": "0x1453b808C88AAa5e5965f8d86123921E96F045Aa"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/base/bex/IAuthorizer.abi.json",
+        "abi": "",
         "docsUrl": ""
       }
     },
@@ -716,7 +716,7 @@
           "berachainMainnet": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
           "berachainBepolia": "0x4e59b44847b379578588920cA78FbF26c0B4956C"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveDistributor.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/create2"
       },
       "multicall3": {
@@ -725,7 +725,7 @@
           "berachainMainnet": "0xcA11bde05977b3631167028862bE2a173976CA11",
           "berachainBepolia": "0xcA11bde05977b3631167028862bE2a173976CA11"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/Multicall3.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/multicall3"
       },
       "permit2": {
@@ -734,7 +734,7 @@
           "berachainMainnet": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
           "berachainBepolia": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
         },
-        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveDistributor.json",
+        "abi": "",
         "docsUrl": "/developers/contracts/permit2"
       }
     }
