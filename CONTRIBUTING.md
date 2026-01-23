@@ -197,6 +197,10 @@ pnpm dev --filter @berachain/core;
 
 Review the [Style Guide](STYLE_GUIDE.md) for information on how to structure your documentation, and structure elements like code snippets and shell interactions.
 
+### Changelog
+
+Significant documentation changes should be recorded in the [user-facing changelog](apps/core/content/learn/changelog.md). This includes new features, API updates, contract changes, and major documentation additions. Entries are organized by month with a bold title and brief description.
+
 ### Writing components
 
 All components are shared with all sites via `./packages/ui` and are written in [Vuejs](https://vuejs.org).
