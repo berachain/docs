@@ -60,7 +60,7 @@ const testnet_render_groups = {
             <td>
               <a target="_blank" :href="config.websites.berascan.url + 'address/' + sc['address']['berachainMainnet']">{{sc['address']['berachainMainnet']}}</a>
             </td> 
-            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
+            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template><template v-else-if="sc?.abiNote">{{ sc.abiNote }}</template></td>
           </tr>
         </template>
       </template>
@@ -83,7 +83,7 @@ const testnet_render_groups = {
             <td>
               <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + sc['address']['berachainBepolia']">{{sc['address']['berachainBepolia']}}</a>
             </td> 
-            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
+            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template><template v-else-if="sc?.abiNote">{{ sc.abiNote }}</template></td>
           </tr>
         </template>
       </template>
