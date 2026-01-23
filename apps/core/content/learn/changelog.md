@@ -4,6 +4,10 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## January 2026
+
+**ABI repository migration** – Updated all contract ABI references from to the new [abis repository](https://github.com/berachain/abis). 
+
 ## December 2025
 
 **Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism.
