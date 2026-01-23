@@ -6,7 +6,7 @@ Below are important changes shipped to Berachain.
 
 ## January 2026
 
-**ABI repository migration** – Updated all contract ABI references from to the new [abis repository](https://github.com/berachain/abis). 
+**ABI repository migration** – Updated all contract ABI references to the new [abis repository](https://github.com/berachain/abis). See [Deployed Contracts](/developers/deployed-contracts) for the full list. 
 
 ## December 2025
 
