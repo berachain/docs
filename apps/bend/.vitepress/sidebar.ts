@@ -67,6 +67,15 @@ const SIDEBAR = {
         { text: "Deposit & Withdraw", link: "/learn/guides/deposit-withdraw" },
         { text: "Borrow & Repay", link: "/learn/guides/borrow-repay" }
       ]
+    },
+    {
+      text: "Help",
+      items: [
+        {
+          text: "Curator Application",
+          link: "/learn/help/curator-application"
+        }
+      ]
     }
   ],
   /**
