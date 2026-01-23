@@ -311,6 +311,7 @@ const SIDEBAR = {
         },
         { text: "EVM Execution Layer", link: "/nodes/evm-execution" },
         { text: "Quickstart: Run A Node", link: "/nodes/quickstart" },
+        { text: "Self-Hosted RPC Guide", link: "/nodes/self-hosted" },
         { text: "Production Checklist", link: "/nodes/production-checklist" },
         { text: "Monitoring", link: "/nodes/monitoring" },
         {
