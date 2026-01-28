@@ -23,11 +23,11 @@ A Berachain node consists of two clients running together: a **consensus client*
 
 ### Hardware
 
-| Component | Requirement |
-|-----------|-------------|
-| **OS** | Linux AMD64, Linux ARM64 |
-| **CPU / RAM** | 4 Physical Cores, 16GB RAM |
-| **Storage** | 1TB minimum (more for long-term); Local SSD or on-instance storage preferred; network volumes require at least 1000 IOPS |
+| Component     | Requirement                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **OS**        | Linux AMD64, Linux ARM64                                                                                                 |
+| **CPU / RAM** | 4 Physical Cores, 16GB RAM                                                                                               |
+| **Storage**   | 1TB minimum (more for long-term); Local SSD or on-instance storage preferred; network volumes require at least 1000 IOPS |
 
 ### Software
 
@@ -39,6 +39,7 @@ Install the required binaries before starting:
 See [EVM Execution Clients](/nodes/evm-execution) for recommended versions.
 
 Verify installation:
+
 ```bash
 beacond version
 bera-reth --version  # or bera-geth version
@@ -244,6 +245,7 @@ node fetch-berachain-snapshot.js --client geth --network testnet --type archive
 The script downloads snapshots to the `downloads/` directory. Both beacon-kit and execution layer snapshots are downloaded automatically. The download may take a while depending on your connection speed.
 
 Available options:
+
 - `--client` or `-c`: Execution client (`reth` or `geth`, default: `reth`)
 - `--network` or `-n`: Network (`mainnet` or `testnet`, default: `mainnet`)
 - `--type` or `-t`: Snapshot type (`pruned` or `archive`, default: `pruned`)
