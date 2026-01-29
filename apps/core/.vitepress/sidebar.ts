@@ -131,6 +131,10 @@ const SIDEBAR = {
         { text: "Deployed Contracts", link: "/developers/deployed-contracts" },
         { text: "Developer Tools", link: "/developers/developer-tools" },
         {
+          text: "Hub API",
+          link: "/developers/hub-api"
+        },
+        {
           text: "Claim API",
           link: "/developers/claim-api"
         },

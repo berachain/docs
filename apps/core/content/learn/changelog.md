@@ -16,19 +16,22 @@ Below are important changes shipped to Berachain.
 
 ## October 2025
 
-**[Bend Protocol documentation](http://docs.bend.berachain.com/)** – Added documentation for [Bend](https://bend.berachain.com/), a new lending protocol on Berachain. Documentation includes developer guides, contract references, and user guides covering deposit/withdraw, borrow/repay, and protocol concepts including IRMs and oracles.
+**[Hub API documentation](/developers/hub-api)** – Added reference documentation for the Hub GraphQL API that powers hub.berachain.com. Includes 50+ queries for pools, tokens, validators, reward vaults, and smart order routing with tested examples and schema reference.
 
-**Smart contract verification guides** – Added guides for verifying smart contracts on Berachain using multiple methods including [Berascan verification](/developers/guides/verify-smart-contracts) and [contract verification using Berascan](/developers/guides/verify-contract-using-berascan). Includes step-by-step instructions with screenshots and code examples.
+**[Bend documentation](https://docs.bend.berachain.com)** – Launched dedicated documentation site for Bend, Berachain's borrowing and lending protocol. Includes market mechanics, developer guides, and contract references.
 
-**Bridge to Berachain quickstart** – Added new [quickstart guide](/developers/quickstart/bridge-to-berachain) for bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/berachain-bridge) documentation.
+**[Smart contract verification guide](/developers/guides/verify-smart-contracts)** – Added guide for verifying smart contracts on Berascan using Foundry, Hardhat, and manual verification methods with constructor parameter encoding examples.
 
-**Safe integration guide** – Added [Safe integration documentation](/learn/guides/safe-add-incentives-for-reward-vault) for integrating with Safe (formerly Gnosis Safe) on Berachain, including contract addresses and deployment information for secure multi-sig wallet functionality.
+**[Safe contracts](/developers/deployed-contracts)** – Added Safe v1.4.1 contract addresses for multi-signature wallet deployments including SafeProxyFactory, MultiSend, and related contracts.
+
+**[PoL integration quickstart](/developers/quickstart/pol-integration)** – Updated the [Incentivize Anything playground](https://playground.bepolia.berachain.com) examples.
 
 **[BEX documentation updates](http://docs.bex.berachain.com/)** – Updated swap guides with enhanced price impact information and standardized terminology across all BEX documentation.
 
-**sWBERA token documentation** – Added [sWBERA token documentation](/learn/pol/tokens/swbera) including 7-day unstaking period details, integration patterns, and contract reference information.
+**[Bridge to Berachain quickstart guide](/developers/quickstart/bridge-to-berachain)** – Vor bridging assets to Berachain, including LayerZero OFT integration patterns and token team deployment workflows. Updated with [Berachain Bridge dApp](/learn/dapps/berachain-bridge) documentation.
 
-**PoL integration updates** – Updated [PoL integration quickstart](/developers/quickstart/pol-integration) with the [Incentivize Anything playground](https://playground.bepolia.berachain.com) examples.
+**[sWBERA token documentation](/learn/pol/tokens/swbera)** – Including 7-day unstaking period details, integration patterns, and contract reference information.
+
 
 ## September 2025
 
