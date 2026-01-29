@@ -43,7 +43,7 @@ The minimum stake requirement depends on whether the active set is completely fu
 
 If the active set is not full, the minimum stake requirement is `{{config.mainnet.validatorDepositAmount.toLocaleString()}}` `$BERA`.
 
-If the active set is full, the minimum stake requirement is `1` `$BERA` more than the amount staked by the last validator in the active set.
+If the active set is full, the minimum stake requirement is `10,000` `$BERA` more than the amount staked by the last validator in the active set.
 
 It can take up to `{{config.mainnet.validatorActivationEpochDelay}}` epochs (`{{config.mainnet.blocksPerEpoch}}` blocks per epoch) for deposits to be processed and for a validator to be included in the active set.
 
@@ -56,6 +56,10 @@ This means that validators will have to communicate how they handle funds when a
 :::warning
 Avoid staking to validators without knowing how they handle funds when a validator is removed from the active set.
 :::
+
+## Staking Pools
+
+Validators can also operate **staking pools**, which enable liquid staking services for their communities. Staking pools use smart contracts to manage deposits and withdrawals, allowing stakers to receive liquid shares (stBERA) that automatically grow in value as rewards accumulate. Staking pools provide validators with a way to build and monetize their own community of stakers while offering stakers lower barriers to entry and flexible withdrawals. For information about setting up and operating staking pools, see the [Staking Pools documentation](/nodes/staking-pools).
 
 ## Removed From Active Set ❌
 
