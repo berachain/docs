@@ -389,13 +389,34 @@ const SIDEBAR = {
           text: "Contracts",
           collapsed: true,
           items: [
-            { text: "StakingPoolContractsFactory", link: "/nodes/staking-pools/contracts/StakingPoolContractsFactory.md" },
-            { text: "StakingPool", link: "/nodes/staking-pools/contracts/StakingPool.md" },
-            { text: "SmartOperator", link: "/nodes/staking-pools/contracts/SmartOperator.md" },
-            { text: "IncentiveCollector", link: "/nodes/staking-pools/contracts/IncentiveCollector.md" },
-            { text: "StakingRewardsVault", link: "/nodes/staking-pools/contracts/StakingRewardsVault.md" },
-            { text: "WithdrawalVault", link: "/nodes/staking-pools/contracts/WithdrawalVault.md" },
-            { text: "DelegationHandler", link: "/nodes/staking-pools/contracts/DelegationHandler.md" }
+            {
+              text: "StakingPoolContractsFactory",
+              link: "/nodes/staking-pools/contracts/StakingPoolContractsFactory.md"
+            },
+            {
+              text: "StakingPool",
+              link: "/nodes/staking-pools/contracts/StakingPool.md"
+            },
+            {
+              text: "SmartOperator",
+              link: "/nodes/staking-pools/contracts/SmartOperator.md"
+            },
+            {
+              text: "IncentiveCollector",
+              link: "/nodes/staking-pools/contracts/IncentiveCollector.md"
+            },
+            {
+              text: "StakingRewardsVault",
+              link: "/nodes/staking-pools/contracts/StakingRewardsVault.md"
+            },
+            {
+              text: "WithdrawalVault",
+              link: "/nodes/staking-pools/contracts/WithdrawalVault.md"
+            },
+            {
+              text: "DelegationHandler",
+              link: "/nodes/staking-pools/contracts/DelegationHandler.md"
+            }
           ]
         }
       ]
