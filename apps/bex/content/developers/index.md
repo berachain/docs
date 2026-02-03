@@ -30,7 +30,11 @@ For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/
 
 The following is a list of contract address in order to interact with Berachain BEX.
 
-> A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
+> **Contract ABIs:**
+>
+> - **Mainnet ABIs:** [berachain/abis/tree/main/mainnet/contracts](https://github.com/berachain/abis/tree/main/mainnet/contracts)
+> - **Testnet ABIs:** [berachain/abis/tree/main/bepolia/contracts](https://github.com/berachain/abis/tree/main/bepolia/contracts)
+> - **Documentation ABIs:** [berachain/doc-abis](https://github.com/berachain/doc-abis)
 
 ## Mainnet Contracts
 

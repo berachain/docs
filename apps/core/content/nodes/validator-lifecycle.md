@@ -8,6 +8,8 @@
 
 A validator in Berachain is a participant responsible for proposing and attesting to new blocks, helping secure the network and maintain consensus. Validators stake a required amount of the network's native token ($BERA) as collateral, which serves both as an economic incentive to behave honestly and as a mechanism for penalizing malicious behavior.
 
+Validators can operate independently with direct staking, or they can operate **staking pools** that allow community members to stake BERA through smart contracts and receive liquid shares (stBERA). Staking pools follow the same validator lifecycle described in this document. For information about operating staking pools, see the [Staking Pools documentation](/nodes/staking-pools).
+
 Validators have several key responsibilities:
 
 - Proposing new blocks when selected
