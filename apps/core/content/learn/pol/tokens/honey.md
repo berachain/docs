@@ -100,6 +100,18 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 - In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
 - If one asset is depegged, you can mint only with the other asset
 
+### Why Proportional Redemptions
+
+Basket mode prevents selective exits when collateral becomes unstable. Redemptions are always proportional across all assets in the basket, so users cannot redeem only healthy collateral and leave depegged exposure to others. The protocol distributes depeg risk across the full collateral set.
+
+### Collateral Caps
+
+The HoneyFactory enforces global and relative caps on collateral weights. These limits apply to mint, redeem, recapitalize, and liquidate operations and keep the basket composition within configured bounds.
+
+Paused vaults remain included in cap calculations (except when marked as bad collateral). Users cannot mint or redeem paused collateral directly, but its weight can decrease when users mint with other collaterals outside basket mode. The `liquidate` function uses a separate weight calculation that filters bad collateral, so liquidation remains available even when paused collateral affects mint and redeem cap checks.
+
+On mainnet, caps are currently disabled by foundation configuration.
+
 ## Fees
 
 Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is the following:

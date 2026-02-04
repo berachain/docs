@@ -4,6 +4,10 @@ Berachain Improvement Proposals (BRIPs) are welcome from anyone, by [contributin
 
 Below are important changes shipped to Berachain.
 
+## February 2025
+
+**Honey basket mode clarifications** – Added [proportional redemption rationale](/learn/pol/tokens/honey#why-proportional-redemptions) and [collateral caps behaviour](/learn/pol/tokens/honey#collateral-caps) to HONEY documentation. Documented paused vault treatment in cap calculations, weight changes via minting with other collaterals, and liquidate's filtered weight check. Updated [HoneyFactory](/developers/contracts/honey-factory#liquidate) liquidate reference.
+
 ## December 2025
 
 **Reward allocation documentation updates** – Updated [BeraChef reward allocation documentation](/learn/pol/blockrewards#berachef-reward-allocation-management) to clarify the automated cutting board mechanism.

@@ -150,7 +150,7 @@ function redeem(
 
 ### liquidate
 
-Liquidates a bad collateral asset for a good one.
+Liquidates a bad collateral asset for a good one. Uses a filtered weight calculation for the bad collateral in its global cap check, distinct from mint/redeem.
 
 **Parameters:**
 
