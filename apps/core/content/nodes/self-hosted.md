@@ -29,11 +29,11 @@ In addition to regular JSON-RPC queries, a new category of RPC call becomes avai
 
 Putting this together, we can identify anti-patterns and what to replace them with:
 
-| Anti-pattern                             | Do this instead                              |
-| ---------------------------------------- | -------------------------------------------- |
+| Anti-pattern                                    | Do this instead                                 |
+| ----------------------------------------------- | ----------------------------------------------- |
 | Short-lived HTTP connections without keep-alive | Enable keep-alive or use a persistent WebSocket |
-| Polling `eth_blockNumber` for new blocks | `eth_subscribe` to `newHeads` over WebSocket |
-| Calling `eth_getLogs` frequently         | `eth_subscribe` for events over WebSocket    |
+| Polling `eth_blockNumber` for new blocks        | `eth_subscribe` to `newHeads` over WebSocket    |
+| Calling `eth_getLogs` frequently                | `eth_subscribe` for events over WebSocket       |
 
 Subscriptions provide immediate notification of new data and can dramatically reduce load compared to polling. They do not replace `eth_getLogs` for historical backfills, and they are not a delivery guarantee. Production consumers still need reconnect and resubscribe logic, plus a robust way to detect and repair gaps. A common pattern tracks the last processed block and uses `eth_getLogs` to reconcile after reconnects.
 
@@ -62,4 +62,3 @@ Paid providers build redundancy into their offerings. If you are stitching toget
 ## Summary
 
 Optimize your usage patterns before you spend money. Persistent WebSocket connections and `eth_subscribe` often reduce load and improve timeliness, but treat subscriptions as best-effort and reconcile after reconnects. For production traffic, use either a paid provider or a dedicated self-hosted node; if you self-host, treat it like a service: add [monitoring](/nodes/monitoring) and alerting, and consider a failover layer like eRPC.
-
