@@ -6,7 +6,9 @@ Below are important changes shipped to Berachain.
 
 ## January 2026
 
-**Staking pools documentation** – Added documentation for staking pools, enabling validators to offer liquid staking services to their communities. Includes [installation guide](/nodes/staking-pools/installation), [operator guide](/nodes/staking-pools/operators), [delegation guide](/nodes/staking-pools/delegators), and [smart contract reference](/nodes/staking-pools/contracts). Staking pools allow validators to build and monetize communities of stakers who deposit BERA and receive liquid shares (stBERA) that automatically grow in value. 
+**Staking pools documentation** – Added documentation for staking pools, enabling validators to offer liquid staking services to their communities. Includes [installation guide](/nodes/staking-pools/installation), [operator guide](/nodes/staking-pools/operators), [delegation guide](/nodes/staking-pools/delegators), and [smart contract reference](/nodes/staking-pools/contracts). Staking pools allow validators to build and monetize communities of stakers who deposit BERA and receive liquid shares (stBERA) that automatically grow in value.
+
+**ABI repository migration** – Updated all contract ABI references to the new [abis repository](https://github.com/berachain/abis). See [Deployed Contracts](/developers/deployed-contracts) for the full list.
 
 ## December 2025
 

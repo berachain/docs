@@ -23,7 +23,6 @@ This is a list of addresses where contracts can be read from or written to.
 >
 > - **Mainnet ABIs:** [berachain/abis/tree/main/mainnet/contracts](https://github.com/berachain/abis/tree/main/mainnet/contracts)
 > - **Testnet ABIs:** [berachain/abis/tree/main/bepolia/contracts](https://github.com/berachain/abis/tree/main/bepolia/contracts)
-> - **Documentation ABIs:** [berachain/doc-abis](https://github.com/berachain/doc-abis)
 
 :::info
 Deployed contracts have received several audits from various parties. All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).

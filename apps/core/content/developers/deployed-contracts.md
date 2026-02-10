@@ -23,7 +23,7 @@ This is a list of addresses where contracts can be read from or written to.
 >
 > - **Mainnet ABIs:** [berachain/abis/tree/main/mainnet/contracts](https://github.com/berachain/abis/tree/main/mainnet/contracts)
 > - **Testnet ABIs:** [berachain/abis/tree/main/bepolia/contracts](https://github.com/berachain/abis/tree/main/bepolia/contracts)
-> - **Documentation ABIs:** [berachain/doc-abis](https://github.com/berachain/doc-abis)
+> - **Staking Pools ABIs:** [berachain/abis/tree/main/mainnet/contracts-staking-pools](https://github.com/berachain/abis/tree/main/mainnet/contracts-staking-pools)
 
 :::info
 Deployed contracts have received several audits from various parties.
@@ -63,7 +63,7 @@ const testnet_render_groups = {
             <td>
               <a target="_blank" :href="config.websites.berascan.url + 'address/' + sc['address']['berachainMainnet']">{{sc['address']['berachainMainnet']}}</a>
             </td> 
-            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
+            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template><template v-else-if="sc?.abiNote">{{ sc.abiNote }}</template></td>
           </tr>
         </template>
       </template>
@@ -86,7 +86,7 @@ const testnet_render_groups = {
             <td>
               <a target="_blank" :href="config.websites.berascanBepolia.url + 'address/' + sc['address']['berachainBepolia']">{{sc['address']['berachainBepolia']}}</a>
             </td> 
-            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template></td>
+            <td><template v-if="sc?.abi"><a :href="sc.abi">ABI</a></template><template v-else-if="sc?.abiNote">{{ sc.abiNote }}</template></td>
           </tr>
         </template>
       </template>
