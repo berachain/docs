@@ -23,6 +23,7 @@ This is a list of addresses where contracts can be read from or written to.
 >
 > - **Mainnet ABIs:** [berachain/abis/tree/main/mainnet/contracts](https://github.com/berachain/abis/tree/main/mainnet/contracts)
 > - **Testnet ABIs:** [berachain/abis/tree/main/bepolia/contracts](https://github.com/berachain/abis/tree/main/bepolia/contracts)
+> - **Staking Pools ABIs:** [berachain/abis/tree/main/mainnet/contracts-staking-pools](https://github.com/berachain/abis/tree/main/mainnet/contracts-staking-pools)
 
 :::info
 Deployed contracts have received several audits from various parties.
@@ -34,6 +35,7 @@ All audit reports are publicly available on [Github](https://github.com/berachai
 <script>
 const mainnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other
@@ -41,6 +43,7 @@ const mainnet_render_groups = {
 
 const testnet_render_groups = {
   "Proof of Liquidity": config.contracts.pol,
+  "Staking Pools": config.contracts.stakingPools,
   "Tokens": config.contracts.tokens,
   "Safe": config.contracts.safe,
   "Other": config.contracts.other

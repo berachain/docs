@@ -406,6 +406,72 @@
         "docsUrl": "/developers/contracts/reward-vault"
       }
     },
+    "stakingPools": {
+      "stakingPoolContractsFactory": {
+        "name": "Staking Pool Contracts Factory",
+        "address": {
+          "berachainMainnet": "0xb79b43dBA821Cb67751276Ce050fF4111445fB99",
+          "berachainBepolia": "0x176c081E95C82CA68DEa20CA419C7506Aa063C24"
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/StakingPoolContractsFactory.json"
+      },
+      "delegationHandlerFactory": {
+        "name": "Delegation Handler Factory",
+        "address": {
+          "berachainMainnet": "0xAd17932a5B1aaeEa73D277a6AE670623F176E0D0",
+          "berachainBepolia": "0x8b472791aC2f9e9Bd85f8919401b8Ce3bdFd464c"
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/delegation/DelegationHandlerFactory.json"
+      },
+      "stakingPool": {
+        "name": "Staking Pool",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/core/StakingPool.json"
+      },
+      "withdrawalVault": {
+        "name": "Withdrawal Vault",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/WithdrawalVault.json"
+      },
+      "smartOperator": {
+        "name": "Smart Operator",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/core/SmartOperator.json"
+      },
+      "incentiveCollector": {
+        "name": "Incentive Collector",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/core/IncentiveCollector.json"
+      },
+      "stakingRewardsVault": {
+        "name": "Staking Rewards Vault",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/core/StakingRewardsVault.json"
+      },
+      "accountingOracle": {
+        "name": "Accounting Oracle",
+        "address": {
+          "berachainMainnet": "",
+          "berachainBepolia": ""
+        },
+        "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/AccountingOracle.json"
+      }
+    },
     "tokens": {
       "bgt": {
         "name": "BGT Token",
