@@ -1,0 +1,96 @@
+---
+title: "Market"
+description: "What is a Bend Market?"
+---
+
+A market in lending protocols represents a fundamental lending pool that pairs one collateral asset with one loan asset, creating a venue for lenders and borrowers to interact. Bend leverages [**Morpho Market V1**](https://docs.morpho.org/learn/concepts/market/#what-is-a-morpho-market-v1) as a base for its functionality.
+
+## What is a market?
+
+A market is a primitive lending pool that enables users to:
+
+- **Lend assets** and earn interest on their deposits
+- **Borrow assets** by providing collateral
+- **Trade positions** through various market mechanisms
+
+Each market operates independently with its own parameters, ensuring that risks are contained within individual markets rather than spreading across the entire protocol.
+
+<Frame>
+  <img src="/images/bend-market-overview.png" alt="Bend markets overview" />
+</Frame>
+
+Access Bend markets at [https://bend.berachain.com/borrow](https://bend.berachain.com/borrow)
+
+## Key characteristics
+
+### Isolated risk
+
+- Each market operates independently
+- Risks are contained within individual markets
+- No cross-market contamination of losses
+
+### Immutable parameters
+
+- Market rules are set at creation and cannot be changed
+- Provides predictable behavior for participants
+- Eliminates systematic risks from parameter changes
+
+### Asset pairing
+
+- One collateral asset paired with one loan asset
+- Clear separation of lending and borrowing activities
+- Simplified risk assessment and management
+
+## Market components
+
+### Core assets
+
+1. **Collateral Asset**: The asset users deposit to borrow against
+2. **Loan Asset**: The asset users can borrow from the market
+
+### Market parameters
+
+1. [**Loan-to-Value (LTV) Ratio**](/bend/learn/ltv): Value of loan against collateral
+2. **Liquidation Loan-to-Value (LLTV)**: The LTV at which positions become eligible for liquidation
+3. [**Interest Rate Model**](/bend/learn/irm): Formula determining borrowing costs and lending yields
+4. [**Oracle**](/bend/learn/oracle): Price feed for collateral valuation
+5. **Market Cap**: Maximum capacity for lending and borrowing
+
+## Market operations
+
+### For lenders
+
+<Note>
+Users cannot directly supply to a market. Instead they supply to a Vault that is managed by a [Curator](/bend/learn/curator) that distributes assets among different markets. See [Vault](/bend/learn/vault) for more information.
+</Note>
+
+- **Supply**: Deposit loan assets to earn interest
+- **Withdraw**: Remove supplied assets and accrued interest
+
+### For borrowers
+
+- **Borrow**: Take out loans against deposited collateral
+- **Repay**: Return borrowed assets to reclaim collateral
+- **Manage Position**: Monitor health ratio and add/remove collateral
+
+### For liquidators
+
+- **Liquidate**: Repay debt in exchange for discounted collateral
+- **Maintain Market Health**: Ensure borrowers maintain adequate collateralization
+
+## Market creation
+
+### Permissionless market creation
+
+A distinctive feature of Bend is permissionless market creation: the protocol enables users to create isolated markets, each defined by the five key parameters outlined above.
+
+This approach differs from traditional lending platforms, which typically:
+
+- Require governance approval for listing new assets or changing market parameters.
+- Pool assets into a single lending pool, resulting in shared risk across the protocol.
+
+In Bend, each market is created with its own immutable parameters—selected at the time of creation and persisting for the lifetime of the market. Specifically, the loan-to-value (LTV) ratio and interest rate model must be chosen from a set of options approved by Bend governance. This design ensures risk isolation, flexibility, and the ability to quickly support new asset integrations while maintaining protocol standards.
+
+<Note>
+For a market to appear on the Bend UI, applicants must submit a proposal to whitelist a vault that includes its allocation via [https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW](https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW).
+</Note>

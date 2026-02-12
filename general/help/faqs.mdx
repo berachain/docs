@@ -3,94 +3,96 @@ title: "Frequently Asked Questions"
 description: "Common questions about Berachain"
 ---
 
-## What do Berachain's performance metrics look like?
+<AccordionGroup>
+  <Accordion title="What do Berachain's performance metrics look like?">
+    Berachain has the following properties:
 
-Berachain has the following properties:
+    - Block time: Block times vary, check [Berascan](https://berascan.com) for the latest.
+    - Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
+    - Finality: single slot finality
+  </Accordion>
 
-- Block time: Block times vary, check [Berascan](https://berascan.com) for the latest.
-- Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
-- Finality: single slot finality
+  <Accordion title="What is a DEX?">
+    DEX stands for Decentralized Exchange. It is a place where you can buy and sell tokens directly on the chain instead of through any one centralized service. This means that all liquidity can be seen directly on-chain, and the smart contracts themselves verifiably own it. A DEX enables you to swap tokens directly from your wallet, as well as allowing anyone to launch their own tokens and provide liquidity.
+  </Accordion>
 
-## What is a DEX?
+  <Accordion title="What is a swap?">
+    A swap is the process of exchanging one token for another. This can be thought of as a buy or a sell, depending on which token you're looking at. For example, if you're looking to buy `$BERA` with `$ETH`, you would be swapping `$ETH` for `$BERA`. This is essentially "selling" `$ETH` and "buying" `$BERA`.
+  </Accordion>
 
-DEX stands for Decentralized Exchange. It is a place where you can buy and sell tokens that lives directly on the chain instead of being run by any one centralized service. This means that all liquidity can be seen directly on-chain, and is verifiably owned by the smart contracts themselves. A DEX enables you to swap tokens directly from your wallet, as well as allowing anyone to launch their own tokens and provide liquidity.
+  <Accordion title="How much does it cost to swap?">
+    Each swap has a fee that varies depending on the fee set when the pool was created. Common fees are 0.05%, 0.1%, 0.3% or 1% but you should always check when performing a swap to ensure you are okay with the fee on that pool.
+  </Accordion>
 
-## What is a swap?
+  <Accordion title="What is liquidity?">
+    Liquidity is the term for the amount of a token available to swap. The more liquidity a token has, the easier it is to swap that token.
+  </Accordion>
 
-A swap is the process of exchanging one token for another. This can be thought of as a buy or a sell, depending on which token you're looking at. For example, if you're looking to buy `$BERA` with `$ETH`, you would be swapping `$ETH` for `$BERA`. This is essentially "selling" `$ETH` and "buying" `$BERA`.
+  <Accordion title="What is a liquidity pool?">
+    Liquidity pools are pairings of 2 or more tokens that liquidity providers deposit tokens into. This enables DEX users to swap between any of the tokens in the pool.
+  </Accordion>
 
-## How much does it cost to swap?
+  <Accordion title="What is a liquidity provider?">
+    Liquidity providers deposit tokens into a liquidity pool. They earn a portion of the fees generated from swaps in the pool.
+  </Accordion>
 
-Each swap has a fee which varies depending on the fee that was set when the pool was created. Common fees are 0.05%, 0.1%, 0.3% or 1% but you should always check when performing a swap to ensure you are okay with the fee on that pool.
+  <Accordion title="What is APY?">
+    APY stands for annual percentage yield. In the context of BEX pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool.
+  </Accordion>
 
-## What is liquidity?
+  <Accordion title="What is $HONEY?">
+    `$HONEY` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed stablecoin, and is used throughout the Berachain ecosystem.
+  </Accordion>
 
-Liquidity is the term for the amount of a token that is available to be swapped. The more liquidity a token has, the easier it is to swap that token.
+  <Accordion title="Does it cost anything to mint or burn $HONEY?">
+    To ensure stability, there is a small fee on every mint and burn of `$HONEY`. Additionally, because minting & burning requires a transaction, there will be a small gas fee in `$BERA`.
+  </Accordion>
 
-## What is a liquidity pool?
+  <Accordion title="What is $BGT?">
+    $BGT is Berachain's staking & governance token. That means it is used to secure the network & earn rewards via Proof of Liquidity as well as to vote on governance proposals.
+  </Accordion>
 
-Liquidity pools are pairings of 2 or more tokens that liquidity providers deposit tokens into. This enables DEX users to swap between any of the tokens in the pool.
+  <Accordion title="What is a validator?">
+    A validator can refer to three things:
 
-## What is a liquidity provider?
+    1. A blockchain node that validates transactions, produces blocks, and comes to consensus with other validators in the network
+    2. The entity that owns and operates the validator node
+    3. The blend of points #1 and #2 that manages a portion of Proof of Liquidity & Governance votes
+  </Accordion>
 
-Liquidity providers are users who deposit tokens into a liquidity pool. They are rewarded with a portion of the fees that are generated from swaps in the pool.
+  <Accordion title="Why should you boost a validator with your $BGT?">
+    Delegating `$BGT` allows you to participate in Proof of Liquidity while helping secure the network.
+  </Accordion>
 
-## What is APY?
+  <Accordion title="Why should you boost your $BGT instead of burning it for $BERA?">
+    Rewards are the main reason. With Proof of Liquidity, you can earn many different types of rewards:
 
-APY stands for annual percentage yield. In the context of BEX pools, this refers to the current APY for a given pool. APY yield comes from fees collected on every swap made using that pool.
+    - A share of protocol-provided [incentives](/general/proof-of-liquidity/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
+    - A share of Berachain core dApp fees, namely fees from BEX and HoneySwap
+  </Accordion>
 
-## What is $HONEY?
+  <Accordion title="How do you get $BGT?">
+    You earn `$BGT` through Reward Vaults when validators direct `$BGT` emissions towards them. See [Earning $BGT](/general/tokens/bgt#earning-bgt) for more.
+  </Accordion>
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed stablecoin, and is used throughout the Berachain ecosystem.
+  <Accordion title="What is governance?">
+    Governance is the process by which the community decides what changes to make to the Berachain protocol. This includes how to upgrade the node and what parameters to set for various components on the chain.
+  </Accordion>
 
-## Does it cost anything to mint or burn $HONEY?
+  <Accordion title="Once you've provided liquidity into an eligible pool in BEX, how do you get $BGT?">
+    Each eligible (whitelisted) pool on BEX has an associated LP token. Once you deposit liquidity into a BEX pool, the pool issues an LP token relative to your total contribution percentage. You must then stake this LP token into its respective Reward Vault to become eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, you accumulate `$BGT` to claim. You must perform an additional action to claim `$BGT` — the protocol does _NOT_ automatically send it to you.
+  </Accordion>
 
-In order to ensure stability, there is a small fee taken on every mint and burn of `$HONEY`. Additionally, because minting & burning requires a transaction, there will be a small gas fee in `$BERA`.
+  <Accordion title="Can only validators vote on or create proposals?">
+    Anyone with the required minimum amounts of `$BGT` can propose and vote on proposals.
+  </Accordion>
 
-## What is $BGT?
+  <Accordion title="What is the actual staking token of the network, $BERA or $BGT?">
+    - Validators stake `$BERA`
+    - Network incentives come in `$BGT`
+  </Accordion>
 
-$BGT is Berachain's staking & governance token. That means it is used to secure the network & earn rewards via Proof of Liquidity as well as to vote on governance proposals.
-
-## What is a Validator?
-
-A validator can refer to three things:
-
-1. A blockchain node being run to validate transactions, produce blocks and come to consensus with other validators in the network
-2. The entity that owns and operates the validator node
-3. The blend of points #1 and #2 that manages a portion of Proof of Liquidity & Governance votes
-
-## Why should I boost a validator with my $BGT?
-
-Delegating `$BGT` allows you to participate in Proof of Liquidity while helping secure the network.
-
-## Why should I boost my $BGT instead of burning it for $BERA?
-
-Rewards are the main reason. With Proof of Liquidity, you can earn many different types of rewards:
-
-- A share of protocol-provided [incentives](/general/proof-of-liquidity/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
-- A share of Berachain core dApp fees, namely fees from BEX and HoneySwap
-
-## How do I get $BGT?
-
-`$BGT` is earned through Reward Vaults when validators direct `$BGT` emissions towards Reward Vaults. See [Earning $BGT](/general/tokens/bgt#earning-bgt) for more.
-
-## What is governance?
-
-Governance is the process by which the community decides what changes are made to the Berachain protocol. This includes how the node is upgraded and what parameters are set for various components on the chain.
-
-## Once you've provided liquidity into an eligible pool in BEX, how do you get $BGT?
-
-Each eligible (whitelisted) pool on BEX has an associated LP token. Once liquidity is deposited into a BEX pool, an LP token would be issued relative to the user's total contribution percentage to the pool. With this LP token, users must stake (take an additional action) them into their respective Reward Vaults in order to be eligible to receive `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, a user will accumulate `$BGT` to claim. Users must perform an additional action to claim `$BGT`, it is _NOT_ automatically sent to the user.
-
-## Can only Validators vote on or create proposals?
-
-Anyone with the required minimum amounts of `$BGT` can propose and vote on proposals.
-
-## What is the actual staking token of the network, $BERA or $BGT?
-
-- Validators stake `$BERA`
-- Network incentives are received in `$BGT`
-
-## Can validators with $BERA alone build blocks and what are the rewards?
-
-Yes, validators only need to stake `$BERA` within the designated min and max range of **250,000** and **10,000,000**, and once in the active set they will propose blocks. Validators receive rewards in `$BGT`.
+  <Accordion title="Can validators with $BERA alone build blocks and what are the rewards?">
+    Yes, validators only need to stake `$BERA` within the designated min and max range of **250,000** and **10,000,000**, and once in the active set they will propose blocks. Validators receive rewards in `$BGT`.
+  </Accordion>
+</AccordionGroup>

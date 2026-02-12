@@ -14,94 +14,121 @@ This guide will walk you through the process of providing collateral to borrow $
 If you do not have any of the collateral listed, you can use [Berachain Hub](https://hub.berachain.com/swap).
 </Tip>
 
-## Supplying Collateral & Borrowing
+## Supplying collateral and borrowing
 
 This will walk you through the steps of interacting with Bend, supplying $WBERA as collateral to take out a loan in $HONEY.
 
-### 1. Visit Bend & Connect Wallet
+<Steps>
+  <Step title="Visit Bend and connect wallet">
+    Your first step is to go to [Bend](https://bend.berachain.com/borrow) and connect your wallet.
 
-Your first step is to go to [Bend](https://bend.berachain.com/borrow) and connect your wallet.
+    <Frame>
+      <img src="/images/bend-borrow-connect-wallet.png" alt="Bend borrow connect wallet" />
+    </Frame>
+  </Step>
+  <Step title="Choose a market">
+    Choose a market that you can offer as collateral.
 
-![Berachain Bend - Borrow & Connect Wallet](/images/bend-borrow-connect-wallet.png)
+    This guide uses $WBERA.
 
-### 2. Choose A Market
+    <Frame>
+      <img src="/images/bend-borrow-choose-market.png" alt="Bend choose market" />
+    </Frame>
+  </Step>
+  <Step title="Configure borrow">
+    1. Make sure to select **Borrow**
+    2. Specify a $WBERA amount you'd like to deposit
+    3. Click **Review** to bring up a modal to confirm
 
-Choose a market that you can offer as collateral.
+    <Frame>
+      <img src="/images/bend-borrow-configure-borrow.png" alt="Bend configure borrow" />
+    </Frame>
+  </Step>
+  <Step title="Approve and supply">
+    1. Approve transfer of the $WBERA token to the market
+    2. Supply the $WBERA to the market as collateral
 
-For this guide, we'll be using $WBERA.
+    <Frame>
+      <img src="/images/bend-borrow-approve-supply.png" alt="Bend approve and supply" />
+    </Frame>
 
-![Berachain Bend - Choose Market](/images/bend-borrow-choose-market.png)
+    <Frame>
+      <img src="/images/bend-borrow-successful-approve-supply.png" alt="Bend successful approve and supply" />
+    </Frame>
 
-### 3. Configure Borrow
+    You should now see the successfully supplied collateral and total value in the market.
 
-1. Make sure to select **Borrow**
-2. Specify a $WBERA amount you'd like to deposit
-3. Click **Review** to bring up a modal to confirm
+    <Frame>
+      <img src="/images/bend-borrow-successful-supply.png" alt="Bend successful supply" />
+    </Frame>
+  </Step>
+  <Step title="Borrow">
+    1. Specify a $HONEY amount to borrow
+    2. Ensure that the borrow is below the LTV limit to avoid liquidation
+    3. Click **Review** to bring up a modal to confirm
 
-![Berachain Bend - Configure Borrow](/images/bend-borrow-configure-borrow.png)
+    <Frame>
+      <img src="/images/bend-borrow-borrow.png" alt="Bend borrow" />
+    </Frame>
+  </Step>
+  <Step title="Approve and borrow">
+    Approve the borrow of $HONEY.
 
-### 4. Approve & Supply
+    <Frame>
+      <img src="/images/bend-borrow-approve-borrow.png" alt="Bend approve borrow" />
+    </Frame>
 
-1. Approve transfer of the $WBERA token to the market
-2. Supply the $WBERA to the market as collateral
+    <Frame>
+      <img src="/images/bend-borrow-successful-approve-borrow.png" alt="Bend successful approve borrow" />
+    </Frame>
 
-![Berachain Bend - Approve & Supply](/images/bend-borrow-approve-supply.png)
+    You should now see the successfully borrowed $HONEY and its value reflected in the market.
 
-![Berachain Bend - Successful Approve & Supply](/images/bend-borrow-successful-approve-supply.png)
+    <Frame>
+      <img src="/images/bend-borrow-successful-borrow.png" alt="Bend successful borrow" />
+    </Frame>
+  </Step>
+  <Step title="Avoid liquidation">
+    Monitor your position carefully to ensure it is not liquidated if your LTV exceeds the Liquidation Loan-To-Value (LLTV).
 
-You should now see the successfully supplied collateral and total value in the market.
+    <Frame>
+      <img src="/images/bend-borrow-monitor-ltv-lltv.png" alt="Bend monitor LTV and LLTV" />
+    </Frame>
+  </Step>
+</Steps>
 
-![Berachain Bend - Successful Supply](/images/bend-borrow-successful-supply.png)
+## Repay and withdraw
 
-### 5. Borrow
+You can now repay your loan with $HONEY and withdraw your collateral in $WBERA.
 
-1. Specify a $HONEY amount to borrow
-2. Ensure that the borrow is below the LTV limit to avoid liquidation
-3. Click **Review** to bring up a modal to confirm
+<Steps>
+  <Step title="Configure repay">
+    1. Select the **Repay** section
+    2. Specify the amount of $HONEY you wish to repay
+    3. Specify the amount of $WBERA collateral you wish to withdraw
+    4. Click **Review** to open a confirmation modal
 
-![Berachain Bend - Borrow](/images/bend-borrow-borrow.png)
+    <Frame>
+      <img src="/images/bend-repay-configure-repay.png" alt="Bend configure repay" />
+    </Frame>
+  </Step>
+  <Step title="Confirm repay">
+    Confirm the repayment transaction.
 
-### 6. Approve & Borrow
+    <Frame>
+      <img src="/images/bend-repay-confirm-repay.png" alt="Bend confirm repay" />
+    </Frame>
 
-Approve the borrow of $HONEY.
+    <Frame>
+      <img src="/images/bend-repay-successful-confirm-repay.png" alt="Bend successful confirm repay" />
+    </Frame>
 
-![Berachain Bend - Approve Borrow](/images/bend-borrow-approve-borrow.png)
+    You should now see the successful repayment showing a zero balance.
 
-![Berachain Bend - Successful Approve Borrow](/images/bend-borrow-successful-approve-borrow.png)
-
-You should now see the successfully borrowed $HONEY and its value reflected in the market.
-
-![Berachain Bend - Successful Borrow](/images/bend-borrow-successful-borrow.png)
-
-### 7. Avoid Liquidation
-
-Monitor your position carefully to ensure it is not liquidated if your LTV exceeds the Liquidation Loan-To-Value (LLTV).
-
-![Berachain Bend - Monitor LTV/LLTV](/images/bend-borrow-monitor-ltv-lltv.png)
-
-## Repay & Withdraw
-
-We will now cover the process of repaying your loan with $HONEY and withdrawing your collateral in $WBERA.
-
-### 1. Configure Repay
-
-1. Select the **Repay** section
-2. Specify the amount of $HONEY you wish to repay
-3. Specify the amount of $WBERA collateral you wish to withdraw
-4. Click **Review** to open a confirmation modal
-
-![Berachain Bend - Configure Repay](/images/bend-repay-configure-repay.png)
-
-### 2. Confirm Repay
-
-Confirm the repayment transaction.
-
-![Berachain Bend - Confirm Repay](/images/bend-repay-confirm-repay.png)
-
-![Berachain Bend - Successful Confirm Repay](/images/bend-repay-successful-confirm-repay.png)
-
-You should now see the successful repayment showing a zero balance.
-
-![Berachain Bend - Successful Repay](/images/bend-repay-successful-repay.png)
+    <Frame>
+      <img src="/images/bend-repay-successful-repay.png" alt="Bend successful repay" />
+    </Frame>
+  </Step>
+</Steps>
 
 You have now successfully borrowed and repaid a $HONEY loan on Bend.

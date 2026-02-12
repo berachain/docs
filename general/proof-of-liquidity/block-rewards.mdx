@@ -5,7 +5,7 @@ description: "How block rewards and BGT emissions work in Berachain's Proof-of-L
 
 Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
 
-## Validator Selection
+## Validator selection
 
 The network maintains an active set of **69 validators** who are eligible for block production. Selection criteria include:
 
@@ -17,7 +17,7 @@ The network maintains an active set of **69 validators** who are eligible for bl
 
 A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
 
-## $BGT Emissions Structure
+## $BGT emissions structure
 
 When a validator produces a block, `$BGT` tokens are emitted through two emission components:
 
@@ -32,7 +32,7 @@ When a validator produces a block, `$BGT` tokens are emitted through two emissio
      - Proportional to weights configured in the validator's Reward Allocation
      - Validators receive [Incentives](/general/proof-of-liquidity/incentives) from projects based on amounts directed to their Reward Vaults
 
-## Validator Boosts
+## Validator boosts
 
 Boost is a crucial metric that determines a validator's reward emissions:
 
@@ -40,11 +40,11 @@ Boost is a crucial metric that determines a validator's reward emissions:
 - Expressed as a decimal between 0 and 1
 - Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%). Higher boost leads to higher reward emissions, subject to the emission formula.
 
-## BeraChef: Reward Allocation Management
+## BeraChef: Reward allocation management
 
 BeraChef is the core contract that manages how validators direct their BGT rewards across different Reward Vaults. It serves as the configuration layer that determines reward distribution based on validator preferences.
 
-### Core Responsibilities
+### Core responsibilities
 
 BeraChef manages three key aspects of the reward system:
 
@@ -52,7 +52,7 @@ BeraChef manages three key aspects of the reward system:
 2. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
 3. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
 
-### How Reward Allocations Work
+### How reward allocations work
 
 Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed.
 
@@ -65,7 +65,7 @@ Validators exercise control over the BeraChef reward allocation subject to a del
 
 **If a validator doesn't update its cutting board within 302,400 blocks (approximately 7 days),** BeraChef will begin to apply the _baseline_ cutting board. This _baseline_ allocation is chosen to direct emissions efficiently to reward vaults with active incentives.
 
-### Commission Management
+### Commission management
 
 BeraChef manages validator commission rates on incentive tokens with the following constraints:
 
@@ -73,7 +73,7 @@ BeraChef manages validator commission rates on incentive tokens with the followi
 - **Maximum Commission**: 20% hard cap enforced by the contract
 - **Change Delay**: Required waiting period before commission changes take effect
 
-## $BGT Emissions Per Block
+## $BGT emissions per block
 
 The total `$BGT` emitted per block is calculated using the following formula:
 
@@ -90,27 +90,29 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
 | m (minimum boosted reward rate) | Floor for reward vault emissions                               | Higher values benefit low-boost validators     |
 
-### Sample Emissions Chart
+### Sample emissions chart
 
-Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
+Using the following sample parameters, the chart below shows how emissions scale with `$BGT` delegation:
 
 $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
 
-![chart showing how emissions scale with BGT delegation](/images/emission-scale-bgt-delegation-chart.png)
+<Frame>
+  <img src="/images/emission-scale-bgt-delegation-chart.png" alt="Chart showing how emissions scale with BGT delegation" />
+</Frame>
 
-## Max Block Inflation
+## Max block inflation
 
 `$BGT` emissions grow with the amount of boost a validator has, up to a cap. The maximum theoretical block emission occurs at 100% boost:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 
-## $BGT Distribution
+## $BGT distribution
 
-`$BGT` is emitted to reward vaults on a per-block basis via the Distributor. Distributions for a given block are performed during processing for the following block. Distribution creates `$BGT` that is then claimable by Reward Vault stakers.
+The Distributor emits `$BGT` to reward vaults on a per-block basis. The network processes distributions for a given block during the following block. This creates `$BGT` that Reward Vault stakers can then claim.
 
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.** Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts. The reward window is reset each time new rewards are added.
+The network creates rewards on a per-block basis; however, it distributes them **over a three-day period.** Depositors receive rewards streamed linearly over this period, proportionally to their deposit amounts. The reward window resets each time new rewards arrive.
 
-### Distribution Example
+### Distribution example
 
 On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
 
@@ -119,7 +121,9 @@ A more real-world example with simplified numbers:
 - 3 `$BGT` distributed daily, for a total of 27 over 9 days
 - 1 depositor, owning all the deposits
 
-![Complex Example](/images/complex-emission.png)
+<Frame>
+  <img src="/images/complex-emission.png" alt="Diagram showing multi-validator BGT distribution example" />
+</Frame>
 
 **Legend**
 
@@ -131,10 +135,12 @@ This results in the depositor receiving an increasing amount of `$BGT` daily unt
 
 Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
 
-## Calculating Boost APR
+## Calculating boost APR
 
 Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
 
-![Boost APR Example](/images/boost-apr-example.png)
+<Frame>
+  <img src="/images/boost-apr-example.png" alt="Chart showing boost APR calculation example" />
+</Frame>
 
 Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).

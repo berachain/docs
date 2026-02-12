@@ -8,13 +8,13 @@ Berachain's Proof of Liquidity (PoL) mechanism can be broken down into two broad
 1. **BGT Distribution**: How $BGT is created from the block production process
 2. **Incentive Marketplace**: How protocols compete for validator $BGT allocations by issuing incentives
 
-## BGT Distribution
+## BGT distribution
 
 As discussed in [Block Rewards](/general/proof-of-liquidity/block-rewards), $BGT emissions stem from the block production process. The variable component of $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
 
 ### Distributor
 
-The Distributor contract is the entry point for BGT distribution. Distribution is built into our technology stack, so that block N includes transactions which perform distributions for block N-1. During that process, the Distributor:
+The Distributor contract is the entry point for BGT distribution. Distribution is built into the Berachain technology stack, so that block N includes transactions which perform distributions for block N-1. During that process, the Distributor:
 
 - Receives newly minted $BGT from the `BlockRewardController`
 - Processes rewards based on validator-specified allocations via `BeraChef`
@@ -33,7 +33,7 @@ The BlockRewardController contract is the only entity authorized to mint $BGT. I
 
 The BeraChef contract manages validator Reward Allocations. These preferences are set by the validator operator and can be updated following a short delay. The BeraChef contract then forwards these allocations to the `Distributor` contract for distribution to specified Reward Vaults.
 
-## Incentive Marketplace
+## Incentive marketplace
 
 The Incentive Marketplace creates a market-driven liquidity incentive system where protocols compete for validators' $BGT allocations.
 
@@ -48,7 +48,7 @@ RewardVaults act as the core PoL integration point. They:
 Validators are incentivized to allocate $BGT to vaults offering higher protocol incentives, as they receive these rewards proportionally to the $BGT allocated. This creates the "marketplace" dynamic where protocols compete by offering better incentives to attract more $BGT allocations.
 
 <Tip>
-RewardVault creation is permissionless, but vaults must be approved (whitelisted) by governance to be included in validators' reward allocations.
+RewardVault creation is permissionless, but governance must approve (whitelist) vaults to be included in validators' reward allocations.
 </Tip>
 
 The RewardVaultFactory contract deploys standardized RewardVault contracts and maintains a registry of approved vaults.

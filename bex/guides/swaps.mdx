@@ -3,27 +3,33 @@ title: "Swaps"
 description: "Learn about swapping tokens on BEX, including single-hop and multi-hop swaps, and intermediate tokens"
 ---
 
-The core functionality of BEX is to allow users to exchange one type of token for another. If liquidity exists for a given pair in the DEX contract, users will be able to swap between tokens. The BEX web app provides an interface for general-purpose swaps.
+The core functionality of BEX is to allow you to exchange one type of token for another. If liquidity exists for a given pair in the DEX contract, you can swap between tokens. The BEX web app provides an interface for general-purpose swaps.
 
-![BEX Swaps Modal](/images/bex-swaps-modal-route.png)
+<Frame>
+  <img src="/images/bex-swaps-modal-route.png" alt="BEX swap modal showing the selected token pair and swap route" />
+</Frame>
 
-## Single-Hop and Multi-Hop Swaps
+## Single-hop and multi-hop swaps
 
-If adequate liquidity exists in a given pair, a swap will most likely be executed as a _single hop_. Single-hop swaps incur less exchange and gas fees, making them the preferred method.
+If adequate liquidity exists in a given pair, BEX most likely executes the swap as a _single hop_. Single-hop swaps incur less exchange and gas fees, making them the preferred method.
 
 However, when a trade between the input and output token does not provide the best overall price (or the trading pair does not exist as a single pool), BEX can perform a _multi-hop swap_. Multi-hop swaps involve chaining swaps across multiple pools to find the best overall price. The process of finding a cost-efficient multi-hop path is called _routing_.
 
-### Intermediate Tokens
+### Intermediate tokens
 
 In a multi-hop swap, _intermediate tokens_ are the tokens held temporarily when swapping through a sequence of pairs. Intermediate tokens in BEX are never transferred because settlement occurs based on the net debit against the entire BEX protocol.
 
-![BEX Swaps Modal](/images/bex-swaps-multi-hop-route.png)
+<Frame>
+  <img src="/images/bex-swaps-multi-hop-route.png" alt="BEX swap modal showing a multi-hop route with intermediate tokens" />
+</Frame>
 
-## Swap Parameters
+## Swap parameters
 
-When initiating a swap, users can define the following parameters:
+When initiating a swap, you can define the following parameters:
 
 - **Quantity**: The amount of tokens to swap, which can be specified as either a fixed input quantity or a fixed output quantity.
-- **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact the user is willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert.
+- **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact you are willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert.
 
-![BEX Swaps Slippage](/images/bex-swaps-slippage-settings.png)
+<Frame>
+  <img src="/images/bex-swaps-slippage-settings.png" alt="BEX swap slippage settings panel for configuring maximum slippage tolerance" />
+</Frame>

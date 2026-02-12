@@ -1,0 +1,39 @@
+---
+title: "Stable pools"
+description: "Stable pools are optimized for assets expected to trade at or near parity, or at a predictable exchange rate"
+---
+
+Stable pools are optimized for assets expected to trade at or near parity, or at a predictable exchange rate. The stable swap algorithm provides swaps with minimal price impact, enhancing capital efficiency for correlated assets.
+
+## Use cases
+
+- **Pegged tokens**: Assets trading near 1:1, such as stablecoins of the same currency (e.g., DAI, USDC, USDT) or synthetic assets (e.g., wrapped versions of BTC)
+- **Correlated tokens**: Assets trading at slowly changing ratios, like certain derivatives (e.g., wstETH, WETH)
+
+## Composability
+
+Stable pools on BEX are composable with other pool types. Stable pool LP tokens can be "nested" into other pools, and swaps on that pool route through the underlying stable pool liquidity. This facilitates deeper liquidity and improved pricing.
+
+As an example:
+
+- There is a stable pool with `[HONEY, USDC, and DAI]`
+- You create a [weighted pool](/bex/learn/weighted-pools) pairing `WETH` against the `[HONEY, USDC, and DAI]` pool
+
+This results in deeper liquidity and eliminates the need to pair `WETH` against the individual stablecoins in separate pools.
+
+## Technical parameters
+
+### Amplification coefficient
+
+The amplification coefficient controls how tightly the pool maintains price parity between tokens. It has a minimum value of `1` and a maximum value of `5000`.
+
+- **Lower amplification**: More price flexibility, allowing for wider price swings
+- **Higher amplification**: More price stability, reducing price swings
+
+### Rate providers
+
+For tokens that should trade at non-1:1 ratios (e.g., `iBERA/BERA` or appreciating ERC4626 tokens), rate providers can supply the expected exchange rate between assets. The inclusion of a rate provider results in a metastable pool.
+
+## Pre-minting
+
+To facilitate gas efficiency, an effectively infinite amount of LP tokens (`2**111`) are minted at the time of pool creation and held in the [Vault](/bex/learn/vault) (and distributed to liquidity providers).

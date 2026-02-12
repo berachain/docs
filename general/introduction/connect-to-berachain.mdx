@@ -5,7 +5,7 @@ description: "Learn to quickly configure your crypto wallet with Berachain"
 
 Blockchain wallets allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
 
-## Berachain Mainnet RPC
+## Berachain mainnet RPC
 
 Copy and paste these values into any wallet that supports importing RPCs.
 
@@ -17,7 +17,7 @@ Copy and paste these values into any wallet that supports importing RPCs.
 | Currency symbol    | `BERA`                          |
 | Block explorer URL | `https://berascan.com`          |
 
-## Berachain Bepolia Testnet RPC
+## Berachain Bepolia testnet RPC
 
 | Key                | Value                                   |
 | ------------------ | --------------------------------------- |
@@ -27,7 +27,7 @@ Copy and paste these values into any wallet that supports importing RPCs.
 | Currency symbol    | `BERA`                                  |
 | Block explorer URL | `https://bepolia.berascan.com`          |
 
-## Supported Wallets
+## Supported wallets
 
 Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that allows RPC importing can be configured to work with Berachain.
 
@@ -40,58 +40,77 @@ Here are some examples of compatible wallets:
 - [Frame](https://frame.sh)
 - [Zerion](https://zerion.io/download?utm_source=berachain)
 
-## How To Set Up A MetaMask Wallet With Berachain
+## How to set up a MetaMask wallet with Berachain
 
 This will walk you through the steps of setting up and configuring a MetaMask wallet with Berachain.
 
-**NOTE:** It is recommended that you set this up through Chrome.
+<Note>It is recommended that you set this up through Chrome.</Note>
 
-### Step 1 - Install MetaMask
+<Steps>
+  <Step title="Install MetaMask">
+    Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
 
-Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
+    <Frame>
+      <img src="/images/metamask-chrome-store.png" alt="MetaMask extension in the Chrome Web Store" />
+    </Frame>
+  </Step>
+  <Step title="Create your wallet in MetaMask">
+    Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
 
-![Metamask Chrome Store](/images/metamask-chrome-store.png)
+    <Frame>
+      <img src="/images/metamask-get-started.png" alt="MetaMask get started screen with create wallet option" />
+    </Frame>
 
-### Step 2 - Create Your Wallet in MetaMask
+    This will ask you to first set a password. This is the password you will enter when you open up the MetaMask extension:
 
-Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
+    <Frame>
+      <img src="/images/metamask-create-password.png" alt="MetaMask password creation screen" />
+    </Frame>
 
-![Metamask Get Started](/images/metamask-get-started.png)
+    Next, follow the instructions to secure your wallet phrase. This step is very important as the wallet phrase proves that you own the assets in your wallet.
 
-This will ask you to first set a password. This is the password you will enter when you open up the MetaMask extension:
+    <Frame>
+      <img src="/images/metamask-recovery-phrase.png" alt="MetaMask recovery phrase backup screen" />
+    </Frame>
 
-![Metamask Create Password](/images/metamask-create-password.png)
+    Congratulations! You've set up your MetaMask wallet!
+  </Step>
+</Steps>
 
-Next, follow the instructions to secure your wallet phrase. This step is very important as the wallet phrase is what is used to prove that you own the assets in your wallet.
+## Add Berachain network to your wallet
 
-![Metamask Recovery Phrase](/images/metamask-recovery-phrase.png)
+Wallets can connect to various blockchains, with MetaMask setting Ethereum as its default blockchain. In order to connect to Berachain, you'll need to add the network to MetaMask and select it.
 
-Congratulations! You've set up your MetaMask wallet!
-
-## Add Berachain Network To Your Wallet
-
-Wallets can connect to various blockchains, with MetaMask setting Ethereum as its default blockchain. In order to connect to Berachain, we'll need to add the network to MetaMask and select it.
-
-### Add Berachain Network Manually
+### Add Berachain network manually
 
 To add the network manually, click the drop-down in the top-left of MetaMask.
 
-![Metamask Add Network Step 1](/images/metamask-add-network-01.png)
+<Frame>
+  <img src="/images/metamask-add-network-01.png" alt="MetaMask network dropdown menu" />
+</Frame>
 
 When the modal appears, click the `Add network` button.
 
-![Metamask Add Network Step 2](/images/metamask-add-network-02.png)
+<Frame>
+  <img src="/images/metamask-add-network-02.png" alt="MetaMask add network button in modal" />
+</Frame>
 
 At the bottom of the existing list, click `Add network manually`.
 
-![Metamask Add Network Step 3](/images/metamask-add-network-03.png)
+<Frame>
+  <img src="/images/metamask-add-network-03.png" alt="MetaMask add a network manually option at bottom of network list" />
+</Frame>
 
 Enter the following details into MetaMask to configure the network and connect to Berachain.
 
 Once the data is entered correctly, click `Save`.
 
-![Metamask Add Network Step 4](/images/metamask-add-network-04.png)
+<Frame>
+  <img src="/images/metamask-add-network-04.png" alt="MetaMask network configuration form with Berachain details" />
+</Frame>
 
 After saving the network configuration, you should be connected to Berachain!
 
-![Metamask Testnet](/images/metamask-testnet.png)
+<Frame>
+  <img src="/images/metamask-testnet.png" alt="MetaMask wallet connected to Berachain network" />
+</Frame>

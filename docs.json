@@ -100,16 +100,25 @@
               {
                 "group": "Learn",
                 "pages": [
-                  "bex/learn/overview"
+                  "bex/learn/overview",
+                  "bex/learn/dex",
+                  "bex/learn/vault",
+                  "bex/learn/pools",
+                  "bex/learn/weighted-pools",
+                  "bex/learn/stable-pools",
+                  "bex/learn/flash-loans"
                 ]
               },
               {
                 "group": "Guides",
                 "pages": [
+                  "bex/guides/add-token",
                   "bex/guides/swaps",
+                  "bex/guides/fees",
                   "bex/guides/liquidity",
+                  "bex/guides/proof-of-liquidity",
                   "bex/guides/pool-creation",
-                  "bex/guides/proof-of-liquidity"
+                  "bex/guides/pool-configuration"
                 ]
               }
             ]
@@ -124,10 +133,39 @@
                 ]
               },
               {
+                "group": "Market",
+                "pages": [
+                  "bend/learn/market",
+                  "bend/learn/ltv",
+                  "bend/learn/interest-rates",
+                  "bend/learn/public-allocator",
+                  "bend/learn/liquidation"
+                ]
+              },
+              {
+                "group": "Vault",
+                "pages": [
+                  "bend/learn/vault",
+                  "bend/learn/yield-fees",
+                  "bend/learn/rewards-for-lenders"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "pages": [
+                  "bend/learn/curator",
+                  "bend/learn/oracle",
+                  "bend/learn/irm",
+                  "bend/learn/bundlers",
+                  "bend/learn/flash-loans"
+                ]
+              },
+              {
                 "group": "Guides",
                 "pages": [
                   "bend/guides/deposit-withdraw",
-                  "bend/guides/borrow-repay"
+                  "bend/guides/borrow-repay",
+                  "bend/guides/curator-application"
                 ]
               }
             ]
@@ -141,6 +179,80 @@
                   "build/getting-started/overview",
                   "build/getting-started/network-configurations",
                   "build/getting-started/developer-tools"
+                ]
+              },
+              {
+                "group": "BEX",
+                "pages": [
+                  "build/bex/deployed-contracts",
+                  {
+                    "group": "Contract references",
+                    "pages": [
+                      "build/bex/contracts/vault",
+                      "build/bex/contracts/query",
+                      "build/bex/contracts/weighted-pool-factory",
+                      "build/bex/contracts/stable-pool-factory",
+                      "build/bex/contracts/pool-creation-helper"
+                    ]
+                  },
+                  {
+                    "group": "Concepts",
+                    "pages": [
+                      "build/bex/concepts/single-swap",
+                      "build/bex/concepts/batch-swap",
+                      "build/bex/concepts/pool-interfacing",
+                      "build/bex/concepts/pool-joins",
+                      "build/bex/concepts/pool-exits",
+                      "build/bex/concepts/lp-underlying",
+                      "build/bex/concepts/lp-valuing",
+                      "build/bex/concepts/relayers"
+                    ]
+                  },
+                  {
+                    "group": "SDK",
+                    "pages": [
+                      "build/bex/sdk/overview",
+                      "build/bex/sdk/swap",
+                      "build/bex/sdk/add-liquidity",
+                      "build/bex/sdk/remove-liquidity",
+                      "build/bex/sdk/sor",
+                      "build/bex/sdk/reference"
+                    ]
+                  },
+                  "build/bex/guides/pool-creation",
+                  "build/bex/help/error-codes"
+                ]
+              },
+              {
+                "group": "Bend",
+                "pages": [
+                  "build/bend/overview",
+                  "build/bend/deployed-contracts",
+                  "build/bend/deployed-markets"
+                ]
+              },
+              {
+                "group": "Bend Onchain Tools",
+                "pages": [
+                  "build/bend/onchain-bundlers",
+                  "build/bend/onchain-public-allocator"
+                ]
+              },
+              {
+                "group": "Bend Contract References",
+                "pages": [
+                  "build/bend/contract-morpho",
+                  "build/bend/contract-adaptive-curve-irm",
+                  "build/bend/contract-bundler3",
+                  "build/bend/contract-general-adapter-1",
+                  "build/bend/contract-meta-morpho-v1_1",
+                  "build/bend/contract-meta-morpho-factory-v1_1",
+                  "build/bend/contract-meta-fee-partitioner",
+                  "build/bend/contract-public-allocator",
+                  "build/bend/contract-morpho-chainlink-oracle-v2",
+                  "build/bend/contract-morpho-chainlink-oracle-v2-factory",
+                  "build/bend/contract-urd",
+                  "build/bend/contract-urd-factory"
                 ]
               }
             ]
@@ -157,7 +269,36 @@
               {
                 "group": "Architecture",
                 "pages": [
-                  "validators/architecture/validator-lifecycle"
+                  "validators/architecture/validator-lifecycle",
+                  "validators/architecture/beaconkit-consensus",
+                  "validators/architecture/evm-execution"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "validators/operations/quickstart",
+                  "validators/operations/production-checklist",
+                  "validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "validators/guides/become-a-validator",
+                  "validators/guides/change-operator-address",
+                  "validators/guides/manage-reward-allocations",
+                  "validators/guides/increase-validator-stake",
+                  "validators/guides/withdraw-stake",
+                  "validators/guides/local-devnet-docker",
+                  "validators/guides/local-devnet-kurtosis",
+                  "validators/guides/manage-incentives-commission"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "validators/help/faq"
                 ]
               }
             ]
@@ -221,16 +362,25 @@
               {
                 "group": "Learn",
                 "pages": [
-                  "cn/bex/learn/overview"
+                  "cn/bex/learn/overview",
+                  "cn/bex/learn/dex",
+                  "cn/bex/learn/vault",
+                  "cn/bex/learn/pools",
+                  "cn/bex/learn/weighted-pools",
+                  "cn/bex/learn/stable-pools",
+                  "cn/bex/learn/flash-loans"
                 ]
               },
               {
                 "group": "Guides",
                 "pages": [
+                  "cn/bex/guides/add-token",
                   "cn/bex/guides/swaps",
+                  "cn/bex/guides/fees",
                   "cn/bex/guides/liquidity",
+                  "cn/bex/guides/proof-of-liquidity",
                   "cn/bex/guides/pool-creation",
-                  "cn/bex/guides/proof-of-liquidity"
+                  "cn/bex/guides/pool-configuration"
                 ]
               }
             ]
@@ -263,6 +413,48 @@
                   "cn/build/getting-started/network-configurations",
                   "cn/build/getting-started/developer-tools"
                 ]
+              },
+              {
+                "group": "BEX",
+                "pages": [
+                  "cn/build/bex/deployed-contracts",
+                  {
+                    "group": "Contract references",
+                    "pages": [
+                      "cn/build/bex/contracts/vault",
+                      "cn/build/bex/contracts/query",
+                      "cn/build/bex/contracts/weighted-pool-factory",
+                      "cn/build/bex/contracts/stable-pool-factory",
+                      "cn/build/bex/contracts/pool-creation-helper"
+                    ]
+                  },
+                  {
+                    "group": "Concepts",
+                    "pages": [
+                      "cn/build/bex/concepts/single-swap",
+                      "cn/build/bex/concepts/batch-swap",
+                      "cn/build/bex/concepts/pool-interfacing",
+                      "cn/build/bex/concepts/pool-joins",
+                      "cn/build/bex/concepts/pool-exits",
+                      "cn/build/bex/concepts/lp-underlying",
+                      "cn/build/bex/concepts/lp-valuing",
+                      "cn/build/bex/concepts/relayers"
+                    ]
+                  },
+                  {
+                    "group": "SDK",
+                    "pages": [
+                      "cn/build/bex/sdk/overview",
+                      "cn/build/bex/sdk/swap",
+                      "cn/build/bex/sdk/add-liquidity",
+                      "cn/build/bex/sdk/remove-liquidity",
+                      "cn/build/bex/sdk/sor",
+                      "cn/build/bex/sdk/reference"
+                    ]
+                  },
+                  "cn/build/bex/guides/pool-creation",
+                  "cn/build/bex/help/error-codes"
+                ]
               }
             ]
           },
@@ -278,7 +470,36 @@
               {
                 "group": "Architecture",
                 "pages": [
-                  "cn/validators/architecture/validator-lifecycle"
+                  "cn/validators/architecture/validator-lifecycle",
+                  "cn/validators/architecture/beaconkit-consensus",
+                  "cn/validators/architecture/evm-execution"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "cn/validators/operations/quickstart",
+                  "cn/validators/operations/production-checklist",
+                  "cn/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "cn/validators/guides/become-a-validator",
+                  "cn/validators/guides/change-operator-address",
+                  "cn/validators/guides/manage-reward-allocations",
+                  "cn/validators/guides/increase-validator-stake",
+                  "cn/validators/guides/withdraw-stake",
+                  "cn/validators/guides/local-devnet-docker",
+                  "cn/validators/guides/local-devnet-kurtosis",
+                  "cn/validators/guides/manage-incentives-commission"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "cn/validators/help/faq"
                 ]
               }
             ]
@@ -342,16 +563,25 @@
               {
                 "group": "Learn",
                 "pages": [
-                  "ko/bex/learn/overview"
+                  "ko/bex/learn/overview",
+                  "ko/bex/learn/dex",
+                  "ko/bex/learn/vault",
+                  "ko/bex/learn/pools",
+                  "ko/bex/learn/weighted-pools",
+                  "ko/bex/learn/stable-pools",
+                  "ko/bex/learn/flash-loans"
                 ]
               },
               {
                 "group": "Guides",
                 "pages": [
+                  "ko/bex/guides/add-token",
                   "ko/bex/guides/swaps",
+                  "ko/bex/guides/fees",
                   "ko/bex/guides/liquidity",
+                  "ko/bex/guides/proof-of-liquidity",
                   "ko/bex/guides/pool-creation",
-                  "ko/bex/guides/proof-of-liquidity"
+                  "ko/bex/guides/pool-configuration"
                 ]
               }
             ]
@@ -384,6 +614,48 @@
                   "ko/build/getting-started/network-configurations",
                   "ko/build/getting-started/developer-tools"
                 ]
+              },
+              {
+                "group": "BEX",
+                "pages": [
+                  "ko/build/bex/deployed-contracts",
+                  {
+                    "group": "Contract references",
+                    "pages": [
+                      "ko/build/bex/contracts/vault",
+                      "ko/build/bex/contracts/query",
+                      "ko/build/bex/contracts/weighted-pool-factory",
+                      "ko/build/bex/contracts/stable-pool-factory",
+                      "ko/build/bex/contracts/pool-creation-helper"
+                    ]
+                  },
+                  {
+                    "group": "Concepts",
+                    "pages": [
+                      "ko/build/bex/concepts/single-swap",
+                      "ko/build/bex/concepts/batch-swap",
+                      "ko/build/bex/concepts/pool-interfacing",
+                      "ko/build/bex/concepts/pool-joins",
+                      "ko/build/bex/concepts/pool-exits",
+                      "ko/build/bex/concepts/lp-underlying",
+                      "ko/build/bex/concepts/lp-valuing",
+                      "ko/build/bex/concepts/relayers"
+                    ]
+                  },
+                  {
+                    "group": "SDK",
+                    "pages": [
+                      "ko/build/bex/sdk/overview",
+                      "ko/build/bex/sdk/swap",
+                      "ko/build/bex/sdk/add-liquidity",
+                      "ko/build/bex/sdk/remove-liquidity",
+                      "ko/build/bex/sdk/sor",
+                      "ko/build/bex/sdk/reference"
+                    ]
+                  },
+                  "ko/build/bex/guides/pool-creation",
+                  "ko/build/bex/help/error-codes"
+                ]
               }
             ]
           },
@@ -399,7 +671,36 @@
               {
                 "group": "Architecture",
                 "pages": [
-                  "ko/validators/architecture/validator-lifecycle"
+                  "ko/validators/architecture/validator-lifecycle",
+                  "ko/validators/architecture/beaconkit-consensus",
+                  "ko/validators/architecture/evm-execution"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "ko/validators/operations/quickstart",
+                  "ko/validators/operations/production-checklist",
+                  "ko/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "ko/validators/guides/become-a-validator",
+                  "ko/validators/guides/change-operator-address",
+                  "ko/validators/guides/manage-reward-allocations",
+                  "ko/validators/guides/increase-validator-stake",
+                  "ko/validators/guides/withdraw-stake",
+                  "ko/validators/guides/local-devnet-docker",
+                  "ko/validators/guides/local-devnet-kurtosis",
+                  "ko/validators/guides/manage-incentives-commission"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "ko/validators/help/faq"
                 ]
               }
             ]
@@ -463,16 +764,25 @@
               {
                 "group": "Learn",
                 "pages": [
-                  "vi/bex/learn/overview"
+                  "vi/bex/learn/overview",
+                  "vi/bex/learn/dex",
+                  "vi/bex/learn/vault",
+                  "vi/bex/learn/pools",
+                  "vi/bex/learn/weighted-pools",
+                  "vi/bex/learn/stable-pools",
+                  "vi/bex/learn/flash-loans"
                 ]
               },
               {
                 "group": "Guides",
                 "pages": [
+                  "vi/bex/guides/add-token",
                   "vi/bex/guides/swaps",
+                  "vi/bex/guides/fees",
                   "vi/bex/guides/liquidity",
+                  "vi/bex/guides/proof-of-liquidity",
                   "vi/bex/guides/pool-creation",
-                  "vi/bex/guides/proof-of-liquidity"
+                  "vi/bex/guides/pool-configuration"
                 ]
               }
             ]
@@ -505,6 +815,48 @@
                   "vi/build/getting-started/network-configurations",
                   "vi/build/getting-started/developer-tools"
                 ]
+              },
+              {
+                "group": "BEX",
+                "pages": [
+                  "vi/build/bex/deployed-contracts",
+                  {
+                    "group": "Contract references",
+                    "pages": [
+                      "vi/build/bex/contracts/vault",
+                      "vi/build/bex/contracts/query",
+                      "vi/build/bex/contracts/weighted-pool-factory",
+                      "vi/build/bex/contracts/stable-pool-factory",
+                      "vi/build/bex/contracts/pool-creation-helper"
+                    ]
+                  },
+                  {
+                    "group": "Concepts",
+                    "pages": [
+                      "vi/build/bex/concepts/single-swap",
+                      "vi/build/bex/concepts/batch-swap",
+                      "vi/build/bex/concepts/pool-interfacing",
+                      "vi/build/bex/concepts/pool-joins",
+                      "vi/build/bex/concepts/pool-exits",
+                      "vi/build/bex/concepts/lp-underlying",
+                      "vi/build/bex/concepts/lp-valuing",
+                      "vi/build/bex/concepts/relayers"
+                    ]
+                  },
+                  {
+                    "group": "SDK",
+                    "pages": [
+                      "vi/build/bex/sdk/overview",
+                      "vi/build/bex/sdk/swap",
+                      "vi/build/bex/sdk/add-liquidity",
+                      "vi/build/bex/sdk/remove-liquidity",
+                      "vi/build/bex/sdk/sor",
+                      "vi/build/bex/sdk/reference"
+                    ]
+                  },
+                  "vi/build/bex/guides/pool-creation",
+                  "vi/build/bex/help/error-codes"
+                ]
               }
             ]
           },
@@ -520,7 +872,36 @@
               {
                 "group": "Architecture",
                 "pages": [
-                  "vi/validators/architecture/validator-lifecycle"
+                  "vi/validators/architecture/validator-lifecycle",
+                  "vi/validators/architecture/beaconkit-consensus",
+                  "vi/validators/architecture/evm-execution"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "vi/validators/operations/quickstart",
+                  "vi/validators/operations/production-checklist",
+                  "vi/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "vi/validators/guides/become-a-validator",
+                  "vi/validators/guides/change-operator-address",
+                  "vi/validators/guides/manage-reward-allocations",
+                  "vi/validators/guides/increase-validator-stake",
+                  "vi/validators/guides/withdraw-stake",
+                  "vi/validators/guides/local-devnet-docker",
+                  "vi/validators/guides/local-devnet-kurtosis",
+                  "vi/validators/guides/manage-incentives-commission"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "vi/validators/help/faq"
                 ]
               }
             ]

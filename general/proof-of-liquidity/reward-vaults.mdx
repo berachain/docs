@@ -3,9 +3,9 @@ title: "Reward Vaults"
 description: "How Reward Vaults work in Berachain's Proof-of-Liquidity system"
 ---
 
-Reward Vaults are smart contracts in which users can stake their Proof-of-Liquidity (PoL) eligible assets to receive `$BGT` rewards. Reward Vaults are the only way anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
+Reward Vaults are smart contracts in which you can stake your Proof-of-Liquidity (PoL) eligible assets to receive `$BGT` rewards. Reward Vaults are the only way anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
 
-Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize users' actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
+Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
 
 <Info>
 Only Reward Vaults approved through governance are eligible to receive `$BGT` emissions from Validators.
@@ -13,11 +13,13 @@ Only Reward Vaults approved through governance are eligible to receive `$BGT` em
 Please see the full Berachain Reward Vault Requirements & Guidelines for the application process.
 </Info>
 
-## User Interactions
+## User interactions
 
-### Staking With A Reward Vault
+### Staking with a reward vault
 
-![Berachain Reward Vault Staking BEX](/images/berachain-reward-vault-staking-bex.png)
+<Frame>
+  <img src="/images/berachain-reward-vault-staking-bex.png" alt="Berachain reward vault staking flow with BEX" />
+</Frame>
 
 To receive `$BGT`, a user must stake the PoL-eligible asset in its Reward Vault. The protocol that deployed the Reward Vault decides how users acquire the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
 
@@ -53,15 +55,15 @@ The RewardVault supports **delegation**, which allows one address (the delegate)
 
 **Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
 
-## $BGT Flow
+## $BGT flow
 
 When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/general/proof-of-liquidity/block-rewards).
 
-## BGT Emission Modes
+## BGT emission modes
 
 Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward distribution timing**:
 
-### Duration-Based Mode (Legacy)
+### Duration-based mode (legacy)
 
 In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
 
@@ -69,7 +71,7 @@ Duration-based mode enforces the 3-7 day range: if switching from target rate mo
 
 **Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
 
-### Target Rate Mode
+### Target rate mode
 
 When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting the minimum duration limit.
 
@@ -81,17 +83,17 @@ period = max(minRewardDurationForTargetRate, totalReward / targetRate)
 
 This guarantees the duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
 
-### Switching Between Modes
+### Switching between modes
 
 - `setTargetRewardsPerSecond(x)` enables target rate mode
 - `setTargetRewardsPerSecond(0)` re-enables duration-based mode
 - Only the `rewardVaultManager` can switch modes
 
-## Incentive Management
+## Incentive management
 
 RewardVaults support **incentive tokens**, which are additional tokens that protocols can offer to BGT stakers beyond the base BGT rewards. This creates a powerful mechanism for protocols to attract liquidity and user engagement.
 
-### How Incentive Tokens Work
+### How incentive tokens work
 
 1. **Whitelisting**: Protocol tokens must first be whitelisted in the vault by governance
 2. **Exchange Rate Setting**: Protocol managers set exchange rates (e.g., "10 USDC per BGT earned")
@@ -102,7 +104,7 @@ RewardVaults support **incentive tokens**, which are additional tokens that prot
 
 To understand why validators would choose to emit `$BGT` to one Reward Vault over another, refer to [Incentives](/general/proof-of-liquidity/incentives) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
 
-## Vault Creation
+## Vault creation
 
 New Reward Vaults can be created permissionlessly at [Berachain Hub](https://hub.berachain.com/vaults/create).
 
@@ -123,7 +125,7 @@ The RewardVault APR is determined by several factors. The components of this APR
 If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT` APR is 0%.
 </Info>
 
-The units of `rewardRate` is denominated as `$BGT per second`. The above pieces of data allow us to calculate the APR on the Reward Vault in the following way:
+The units of `rewardRate` is denominated as `$BGT per second`. The above pieces of data allow you to calculate the APR on the Reward Vault in the following way:
 
 $$APR = \frac{rewardRate \times secondsPerYear \times priceOfBGT}{totalSupply \times priceOfStakeToken}$$
 

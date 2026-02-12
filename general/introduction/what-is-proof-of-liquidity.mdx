@@ -5,25 +5,29 @@ description: "What is Berachain's Proof-of-Liquidity and how does it work?"
 
 Proof-of-Liquidity (PoL) is a novel economic mechanism that uses network incentives to align the interests of ecosystem participants and bolster both the application-layer and chain security.
 
-## Two Token Model
+## Two token model
 
 Berachain's consensus borrows from the Proof-of-Stake (PoS) model and contains two key components:
 
 1. `$BERA` - Validators secure the chain by staking the native gas token
-2. `$BGT` - A soulbound governance token distributed by validators for proposing new blocks, which is ultimately rewarded to users who provide ecosystem liquidity (see [Reward Vaults](/general/proof-of-liquidity/reward-vaults))
+2. `$BGT` - A soulbound governance token distributed by validators for proposing new blocks, which is ultimately rewarded to those who provide ecosystem liquidity (see [Reward Vaults](/general/proof-of-liquidity/reward-vaults))
 
 A validator's `$BGT` emissions increase with the amount of `$BGT` delegated to them. Protocol-provided Incentives are received for these emissions, and validators pass these to their delegators after collecting a commission.
 
 This model creates meaningful economic alignment between previously isolated groups. Validators who return the maximum value to their `$BGT` delegators are likely to receive more delegations.
 
-![Proof-of-Liquidity Flywheel](/images/proof-of-liquidity-flywheel.png)
+<Frame>
+  <img src="/images/proof-of-liquidity-flywheel.png" alt="Diagram showing the Proof-of-Liquidity flywheel mechanism" />
+</Frame>
 
-### Separation of Concerns
+### Separation of concerns
 
 Significantly, Proof-of-Liquidity separates the token responsible for gas and security from the token used to govern chain rewards and economic incentives.
 
 The following diagram illustrates the roles of tokens in Berachain's PoL compared to Ethereum's PoS:
 
-![Proof-of-Stake vs Proof-of-Liquidity](/images/berachain-pos-vs-pol.png)
+<Frame>
+  <img src="/images/berachain-pos-vs-pol.png" alt="Comparison diagram of Proof-of-Stake versus Proof-of-Liquidity token roles" />
+</Frame>
 
 Read more in [Proof-of-Liquidity Overview](/general/proof-of-liquidity/overview).
