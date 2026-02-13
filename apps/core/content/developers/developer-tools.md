@@ -44,9 +44,10 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 - [BlockPI](https://blockpi.io/)
 - [Chainstack](https://chainstack.com/build-better-with-berachain/)
 - [dRPC NodeCloud](https://drpc.org/chainlist/berachain)
-- [Grove](https://grove.city)
-- [Envio](https://envio.dev)
 - [Enigma](https://enigma-validator.com/services)
+- [Envio](https://envio.dev)
+- [Goldsky Edge RPC](https://docs.goldsky.com/edge-rpc/introduction)
+- [Grove](https://grove.city)
 - [Nirvana](https://nirvanalabs.io/nodes/berachain)
 - [QuickNode RPC](https://quicknode.notion.site/QuickNode-Benefits-for-Berachain-Developers-175d54ec5d644f598fde797633add2c1?pvs=4)
 - [RhinoStake](https://rhinostake.com/resources/berachain-apis)
@@ -58,11 +59,11 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 ### Wallets & Multisigs
 
-- [Metamask](https://metamask.io/)
-- [Frame](https://frame.sh/)
-- [Rabby](https://rabby.io/)
 - [Binance Web3 Wallet](https://www.binance.com/en/web3wallet)
+- [Frame](https://frame.sh/)
 - [Keplr](https://keplr.app/)
+- [Metamask](https://metamask.io/)
+- [Rabby](https://rabby.io/)
 - [Rainbow Wallet](https://rainbow.me/en/)
 - [Safe{Wallet}](https://app.safe.global)
 
@@ -78,14 +79,14 @@ Since Berachain is EVM-compatible, if you're familiar with creating dApps on oth
 
 ### Subgraphs & Data Indexers
 
-- [Goldsky](https://docs.goldsky.com/chains/berachain)
-- [Ghost Graph](https://ghostgraph.xyz)
-- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/chains/berachain)
 - [Envio](https://envio.dev)
+- [Ghost Graph](https://ghostgraph.xyz)
+- [Goldsky](https://docs.goldsky.com/chains/berachain)
+- [GoldRush (powered by Covalent)](https://goldrush.dev/docs/chains/berachain)
+- [SubQuery](https://subquery.network)
 - [Tatum Indexed Data API](https://tatum.io/berachain-and-tatum)
 - [The Graph](https://thegraph.com/)
 - [Thirdweb](https://thirdweb.com/insight?ref=blog.thirdweb.com)
-- [SubQuery](https://subquery.network)
 
 ### Oracles
 
