@@ -101,7 +101,7 @@ Exit a $BERA/$HONEY pool to receive only $BERA:
 
 | Step | ExitKind                      | Assets        | Parameters                              | Description                                    |
 | ---- | ----------------------------- | ------------- | --------------------------------------- | ---------------------------------------------- |
-| 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br>exitTokenIndex: 0 | Send 100 LP tokens and receive estimated $BERA |
+| 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated $BERA |
 
 ### Example 2: Proportional exit (EXACT_LP_IN_FOR_TOKENS_OUT)
 
@@ -117,4 +117,4 @@ Exit a $BERA/$HONEY/$DAI pool for specific token amounts:
 
 | Step | ExitKind                   | Assets             | Parameters                                                        | Description                                       |
 | ---- | -------------------------- | ------------------ | ----------------------------------------------------------------- | ------------------------------------------------- |
-| 1    | LP_IN_FOR_EXACT_TOKENS_OUT | [BERA, HONEY, DAI] | amountsOut: [10 BERA, 100 HONEY, 50 DAI]<br>maxLPAmountIn: 200 LP | Receive exact token amounts, sending up to 200 LP |
+| 1    | LP_IN_FOR_EXACT_TOKENS_OUT | [BERA, HONEY, DAI] | amountsOut: [10 BERA, 100 HONEY, 50 DAI]<br />maxLPAmountIn: 200 LP | Receive exact token amounts, sending up to 200 LP |

@@ -14,7 +14,7 @@
   border-top: 1px solid rgba(128, 128, 128, 0.2);
 }
 
-/* Berachain branding - ensure logo displays in topbar */
+/* Ensure logo displays in topbar */
 #navbar .nav-logo img,
 [data-navbar] .nav-logo img {
   height: 28px !important;

@@ -62,9 +62,9 @@ Imagine an 80 \$BAL/20 \$WETH Pool with the following:
 
 | Calculation Steps                | Values                                                                                                       |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Step 1: Token Weights**        | $w_1 = 0.8$ (\$BAL)<br>$w_2 = 0.2$ (\$WETH)                                                                  |
-| **Step 2: Oracle Prices**        | $p_1 \approx \$4.53$ (\$BAL)<br>$p_2 \approx \$1090.82$ (\$WETH)                                             |
-| **Step 3: Pool Parameters**      | $k \approx 2,852,257.5$ (from `pool.getInvariant()`)<br>$s \approx 5,628,392.26$ (from `pool.totalSupply()`) |
+| **Step 1: Token Weights**        | $w_1 = 0.8$ (\$BAL)<br />$w_2 = 0.2$ (\$WETH)                                                                  |
+| **Step 2: Oracle Prices**        | $p_1 \approx \$4.53$ (\$BAL)<br />$p_2 \approx \$1090.82$ (\$WETH)                                             |
+| **Step 3: Pool Parameters**      | $k \approx 2,852,257.5$ (from `pool.getInvariant()`)<br />$s \approx 5,628,392.26$ (from `pool.totalSupply()`) |
 | **Step 4: Final LP Token Price** | $p_{LP} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i} \approx \$11.34$                    |
 
 ---
