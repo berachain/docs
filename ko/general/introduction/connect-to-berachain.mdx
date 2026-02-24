@@ -1,37 +1,73 @@
 ---
-title: "How to Connect a Wallet"
-description: "Learn to quickly configure your crypto wallet with Berachain"
+title: "Berachain에 연결"
+description: "지갑에 Berachain을 추가하고 네트워크를 전환하세요."
 ---
 
-Blockchain wallets allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
+export const addNetworkMainnet = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138de",
+    chainName: "Berachain",
+    nativeCurrency: { name: "BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://rpc.berachain.com/"],
+    blockExplorerUrls: ["https://berascan.com/"],
+  };
+  console.log("[AddNetwork] add mainnet", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-## Berachain Mainnet RPC
+export const addNetworkBepolia = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138c5",
+    chainName: "Berachain Bepolia",
+    nativeCurrency: { name: "Testnet BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://bepolia.rpc.berachain.com/"],
+    blockExplorerUrls: ["https://testnet.berascan.com/"],
+  };
+  console.log("[AddNetwork] add bepolia (testnet)", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-Copy and paste these values into any wallet that supports importing RPCs.
+블록체인 지갑을 통해 Berachain의 자산에 접근할 수 있습니다. 지갑은 토큰 거래, NFT 구매, 게임 플레이 등에서 소유권을 증명할 수 있도록 개인 키를 생성하고 저장합니다.
 
-| Key                | Value                           |
-| ------------------ | ------------------------------- |
-| Network            | `Berachain`                     |
-| RPC URL            | `https://rpc.berachain.com`     |
-| Chain ID           | `80094`                         |
-| Currency symbol    | `BERA`                          |
-| Block explorer URL | `https://berascan.com`          |
+## Berachain 메인넷 RPC
 
-## Berachain Bepolia Testnet RPC
+사용자 정의 RPC를 지원하는 모든 지갑에서 다음 값을 사용하세요. 원클릭으로 네트워크를 추가하거나 테이블에서 복사하세요:
 
-| Key                | Value                                   |
-| ------------------ | --------------------------------------- |
-| Network            | `Berachain Bepolia`                     |
-| RPC URL            | `https://bepolia.rpc.berachain.com`     |
-| Chain ID           | `80069`                                 |
-| Currency symbol    | `BERA`                                  |
-| Block explorer URL | `https://bepolia.berascan.com`          |
+<button type="button" onClick={() => addNetworkMainnet()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Berachain 추가</button>
 
-## Supported Wallets
+| 키                | 값                           |
+| ----------------- | ---------------------------- |
+| 네트워크          | `Berachain`                  |
+| RPC URL           | `https://rpc.berachain.com/` |
+| Chain ID          | `80094`                      |
+| 통화 기호         | `BERA`                       |
+| 블록 탐색기 URL   | `https://berascan.com/`      |
 
-Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that allows RPC importing can be configured to work with Berachain.
+## Berachain Bepolia 테스트넷 RPC
 
-Here are some examples of compatible wallets:
+테스트넷용 값입니다. 원클릭으로 추가하거나 테이블에서 복사하세요:
+
+<button type="button" onClick={() => addNetworkBepolia()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Berachain Bepolia 추가</button>
+
+| 키                | 값                                       |
+| ----------------- | ---------------------------------------- |
+| 네트워크          | `Berachain Bepolia`                      |
+| RPC URL           | `https://bepolia.rpc.berachain.com/`     |
+| Chain ID          | `80069`                                  |
+| 통화 기호         | `BERA`                                   |
+| 블록 탐색기 URL   | `https://testnet.berascan.com/`          |
+
+## 지원 지갑
+
+사용자 정의 RPC를 지원하는 [EVM 기반 지갑](https://ethereum.org/en/wallets/find-wallet/)은 Berachain에서 사용할 수 있습니다. 예:
 
 - [MetaMask](https://metamask.io)
 - [Rabby](https://rabby.io)
@@ -40,58 +76,67 @@ Here are some examples of compatible wallets:
 - [Frame](https://frame.sh)
 - [Zerion](https://zerion.io/download?utm_source=berachain)
 
-## How To Set Up A MetaMask Wallet With Berachain
+## MetaMask에 Berachain 설정
 
-This will walk you through the steps of setting up and configuring a MetaMask wallet with Berachain.
+<Note>Chrome 사용을 권장합니다.</Note>
 
-**NOTE:** It is recommended that you set this up through Chrome.
+<Steps>
+  <Step title="MetaMask 설치">
+    [metamask.io](https://metamask.io/)에서 브라우저 확장 프로그램을 다운로드하세요. `metamask.io`에서 제공하는지 확인하세요.
 
-### Step 1 - Install MetaMask
+    <Frame>
+      <img src="/images/general/metamask-chrome-store.png" alt="Chrome 웹 스토어의 MetaMask 확장 프로그램" />
+    </Frame>
+  </Step>
+  <Step title="지갑 만들기">
+    `새 지갑 만들기`를 클릭하세요. 비밀번호를 설정한 다음 복구 문구 백업 단계를 따르세요. 복구 문구는 지갑 소유를 증명합니다. 안전하게 보관하세요.
 
-Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
+    <Frame>
+      <img src="/images/general/metamask-get-started.png" alt="지갑 만들기 옵션이 있는 MetaMask 시작 화면" />
+    </Frame>
 
-![Metamask Chrome Store](/images/general/metamask-chrome-store.png)
+    <Frame>
+      <img src="/images/general/metamask-create-password.png" alt="MetaMask 비밀번호 생성 화면" />
+    </Frame>
 
-### Step 2 - Create Your Wallet in MetaMask
+    <Frame>
+      <img src="/images/general/metamask-recovery-phrase.png" alt="MetaMask 복구 문구 백업 화면" />
+    </Frame>
+  </Step>
+</Steps>
 
-Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
+## Berachain 네트워크 수동 추가
 
-![Metamask Get Started](/images/general/metamask-get-started.png)
+위의 원클릭 버튼을 사용하지 않으려면 MetaMask에서 수동으로 네트워크를 추가하세요:
 
-This will ask you to first set a password. This is the password you will enter when you open up the MetaMask extension:
+1. **네트워크 목록 열기** — MetaMask 왼쪽 상단의 드롭다운을 클릭하세요.
 
-![Metamask Create Password](/images/general/metamask-create-password.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-01.png" alt="MetaMask 네트워크 드롭다운 메뉴" />
+</Frame>
 
-Next, follow the instructions to secure your wallet phrase. This step is very important as the wallet phrase is what is used to prove that you own the assets in your wallet.
+2. **네트워크 추가** — 모달에서 `네트워크 추가`를 클릭하세요.
 
-![Metamask Recovery Phrase](/images/general/metamask-recovery-phrase.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-02.png" alt="모달의 MetaMask 네트워크 추가 버튼" />
+</Frame>
 
-Congratulations! You've set up your MetaMask wallet!
+3. **네트워크 수동 추가** — 목록 하단에서 `네트워크 수동 추가`를 클릭하세요.
 
-## Add Berachain Network To Your Wallet
+<Frame>
+  <img src="/images/general/metamask-add-network-03.png" alt="MetaMask 네트워크 수동 추가 옵션" />
+</Frame>
 
-Wallets can connect to various blockchains, with MetaMask setting Ethereum as its default blockchain. In order to connect to Berachain, we'll need to add the network to MetaMask and select it.
+4. **세부 정보 입력** — 위 [메인넷](#berachain-메인넷-rpc) 또는 [Bepolia 테스트넷](#berachain-bepolia-테스트넷-rpc) RPC 테이블의 값을 사용하세요.
 
-### Add Berachain Network Manually
+5. **저장** — `저장`을 클릭하세요.
 
-To add the network manually, click the drop-down in the top-left of MetaMask.
+<Frame>
+  <img src="/images/general/metamask-add-network-04.png" alt="Berachain 세부 정보가 있는 MetaMask 네트워크 구성 양식" />
+</Frame>
 
-![Metamask Add Network Step 1](/images/general/metamask-add-network-01.png)
+이제 Berachain 또는 Berachain Bepolia에 연결되어 있어야 합니다.
 
-When the modal appears, click the `Add network` button.
-
-![Metamask Add Network Step 2](/images/general/metamask-add-network-02.png)
-
-At the bottom of the existing list, click `Add network manually`.
-
-![Metamask Add Network Step 3](/images/general/metamask-add-network-03.png)
-
-Enter the following details into MetaMask to configure the network and connect to Berachain.
-
-Once the data is entered correctly, click `Save`.
-
-![Metamask Add Network Step 4](/images/general/metamask-add-network-04.png)
-
-After saving the network configuration, you should be connected to Berachain!
-
-![Metamask Testnet](/images/general/metamask-testnet.png)
+<Frame>
+  <img src="/images/general/metamask-testnet.png" alt="Berachain 네트워크에 연결된 MetaMask 지갑" />
+</Frame>

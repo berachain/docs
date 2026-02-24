@@ -1,50 +1,51 @@
 ---
-title: "Proof-of-Liquidity Overview"
-description: "An overview of Berachain's Proof-of-Liquidity consensus mechanism"
+title: "流动性证明概述"
+description: "双代币模型、参与者与激励一致。"
 ---
 
-Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives among validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`). Further information about our design goals for Proof of Liquidity are in the [Honeypaper](https://honeypaper.berachain.com/).
+流动性证明（PoL）是权益证明（PoS）的延伸，它重新对齐验证者、应用与用户之间的经济激励。这通过双代币模型实现——负责链安全的代币（`$BERA`）与负责治理与奖励的代币（`$BGT`）。关于流动性证明设计目标的更多信息见 [Honeypaper](https://honeypaper.berachain.com/)。
 
-## Core Components
+## 核心组成部分
 
-### Security Layer ($BERA)
+### 安全层（$BERA）
 
-Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of 250,000 `$BERA` and a maximum cap of 10,000,000 `$BERA`. The top 69 validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
+Berachain 的活跃验证者集（参与共识的验证者）由验证者的 `$BERA` 质押量决定，最低 250,000 `$BERA`，上限 10,000,000 `$BERA`。按质押量排序的前 69 名验证者组成活跃集。在活跃集内，验证者提议区块的概率与其质押的 `$BERA` 成正比——质押越多，提议区块的概率越高。
 
-### Reward Layer ($BGT)
+### 奖励层（$BGT）
 
-The size of a validator's `$BGT` block reward is determined by their Boost, which is a percentage calculated from the validator's `$BGT` boost divided by the total `$BGT` boosted to all validators. Boosts are obtained when `$BGT` holders delegate to validators.
+验证者的 `$BGT` 区块奖励规模由其 Boost 决定；Boost 是由验证者的 `$BGT` boost 除以所有验证者获得的总 `$BGT` boost 得出的百分比。`$BGT` 持有者通过委托给验证者来提供 boost。
 
-Learn more about how emissions are calculated on the [emissions page](/general/proof-of-liquidity/block-rewards).
+排放量计算方式详见[排放页面](/cn/general/proof-of-liquidity/block-rewards)。
 
-### Reward Allocation Management (BeraChef)
+### 奖励分配管理（BeraChef）
 
-BeraChef manages the configuration layer of PoL, controlling how validators direct their BGT rewards across different Reward Vaults. It handles validator reward allocation preferences, vault whitelisting, and commission management, ensuring that only governance-approved protocols can participate in the ecosystem.
+BeraChef 管理 PoL 的配置层，控制验证者如何将 BGT 奖励导向不同奖励金库。它处理验证者奖励分配偏好、金库白名单与佣金管理，确保只有经治理批准的协议才能参与生态。
 
-## PoL Lifecycle
+## PoL 生命周期
 
-![Berachain Proof-of-Liquidity Steps](/images/general/proof-of-liquidity-steps.png)
+<Frame>
+  <img src="/images/general/proof-of-liquidity-steps.png" alt="Berachain 流动性证明步骤图" />
+</Frame>
 
-### 1. Validator Lifecycle
+<Steps>
+  <Step title="验证者生命周期">
+    当潜在验证者将 `$BERA` 质押为安全保证金时，流程开始。验证者被选中提议区块的概率与其质押量成正比。每提议一个区块，验证者会获得基础排放和基于其 boost 百分比的可变奖励排放（见[排放](/cn/general/proof-of-liquidity/block-rewards)）。
 
-The journey begins when a Prospective Validator stakes their `$BERA` as a security bond. Validators are chosen to propose blocks with a probability proportional to their staked amount. For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (see [emissions](/general/proof-of-liquidity/block-rewards)).
+    **验证者**：了解验证者生命周期。
+  </Step>
+  <Step title="区块奖励分配">
+    验证者在为自己收取基础 `$BGT` 奖励后，将剩余可变 `$BGT` 奖励导向其选择的已白名单奖励金库。作为导向排放的回报，验证者从奖励金库获得协议提供的激励（`$BGT` 由向协议提供流动性的用户赚取）。
 
-**For Validators**: Learn about the validator lifecycle.
+    **验证者**：了解管理奖励分配与设置佣金率。
+  </Step>
+  <Step title="流动性提供者流程">
+    生态的流动性提供者（即用户）在 PoL 中扮演关键角色。您可向 BEX 等协议提供流动性并收到代表您贡献的收据代币。这些收据代币随后质押在奖励金库中，您按在金库中的份额比例赚取 `$BGT`。
 
-### 2. Block Reward Distribution
+    了解[与 Berachain 激励体系集成](/cn/general/proof-of-liquidity/incentives)与[奖励金库设计](/cn/general/proof-of-liquidity/reward-vaults)。
+  </Step>
+  <Step title="委托周期">
+    随着 `$BGT` 持有者积累代币，他们可将代币委托给验证者，直接影响验证者的 boost。这形成良性循环：委托越多，验证者 boost 越高，该验证者提议区块时的 `$BGT` 排放越大。验证者有动力将获得的协议激励与委托者分享以吸引更多 boost，促进协作生态。
 
-After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted Reward Vaults of their choosing. In exchange for directing their emissions, validators receive protocol-provided Incentives from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
-
-**For Validators**: Learn about managing your reward allocations and setting commission rates.
-
-### 3. Liquidity Provider Flow
-
-The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. Users can provide liquidity to protocols like BEX and receive receipt tokens as proof of their contribution. These receipt tokens are then staked in Reward Vaults, where users earn `$BGT` proportional to their share of the vault.
-
-Learn about [integrating with Berachain's incentive system](/general/proof-of-liquidity/incentives) and [Reward Vault design](/general/proof-of-liquidity/reward-vaults).
-
-### 4. Delegation Cycle
-
-As `$BGT` Holders accumulate tokens, they can delegate them to validators, directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
-
-**For BGT Holders**: Learn how to boost a validator with BGT to participate in the delegation cycle.
+    **$BGT 持有者**：了解如何用 BGT 提升验证者以参与委托周期。
+  </Step>
+</Steps>

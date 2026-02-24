@@ -1,115 +1,117 @@
 ---
-title: "Incentive Marketplace"
-description: "How the Incentive Marketplace works in Berachain's Proof-of-Liquidity"
+title: "인센티브 마켓플레이스"
+description: "프로토콜이 검증자 BGT 배출에 입찰하는 방법."
 ---
 
-Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct their `$BGT` emissions to a protocol's Reward Vault using whitelisted Incentive tokens. In doing so, protocols attract users to their protocol with `$BGT` rewards.
+유동성 증명(PoL)을 통해 프로토콜은 화이트리스트된 인센티브 토큰을 사용하여 검증자가 프로토콜의 보상 볼트로 `$BGT` 배출을 전달하도록 장려할 수 있습니다. 이를 통해 프로토콜은 `$BGT` 보상으로 사용자를 유치합니다.
 
-## How Incentives Work
+## 인센티브 작동 방식
 
-Validators can capture Incentives offered by Whitelisted Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
+검증자는 $BGT 배출을 해당 볼트로 전달하여 화이트리스트된 보상 볼트가 제공하는 인센티브를 포착할 수 있으며, 이는 검증자의 보상 할당에 따라 정의됩니다. 검증자가 $BGT 배출의 비율을 전달하는 보상 볼트 목록입니다.
 
-![Berachain Reward Vault Incentive Marketplace](/images/general/berachain-incentive-marketplace.png)
+<Frame>
+  <img src="/images/general/berachain-incentive-marketplace.png" alt="Berachain 보상 볼트 인센티브 마켓플레이스 흐름 다이어그램" />
+</Frame>
 
-### Incentive Distribution Flow
+### 인센티브 분배 흐름
 
-The distribution of Incentives follows this process:
+인센티브 분배는 다음 프로세스를 따릅니다:
 
-1. A **User** Boosts (by associating their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
-2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [$BGT Emissions Per Block](/general/proof-of-liquidity/block-rewards)), and directs emissions toward Whitelisted Reward Vaults chosen by the validator.
-3. A **Protocol** can offer up to two different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
-4. When the $BGT block reward emissions are distributed:
-   - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
-   - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
-5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the BGTIncentiveDistributor contract. All proof handling is done by interacting with [Berachain Hub](https://hub.berachain.com).
+1. **사용자**가 Boost(검증자와 $BGT 연결)하여 검증자가 블록 제안 시 받는 $BGT 배출을 증가시킵니다.
+2. **검증자**는 $BGT 배출 형태로 블록 보상을 받으며, 금액은 Boost의 영향을 받습니다 ([블록당 $BGT 배출](/ko/general/proof-of-liquidity/block-rewards) 참조). 검증자가 선택한 화이트리스트 보상 볼트로 배출을 전달합니다.
+3. **프로토콜**은 검증자가 $BGT 배출을 보상 볼트로 전달하도록 장려하기 위해 최대 2개의 서로 다른 인센티브 토큰을 제공할 수 있습니다.
+4. $BGT 블록 보상 배출이 분배될 때:
+   - 검증자의 운영자 주소가 수수료(포착된 모든 인센티브 토큰의 비율)를 받습니다.
+   - 검증자를 부스트한 사람을 위한 나머지 인센티브는 이 토큰의 분배 및 청구를 관리하는 컨트랙트 및 백엔드 서비스로 전송됩니다. 백엔드 API는 24시간마다 인센티브 토큰 청구 권한 증명을 업데이트합니다. 이 자격은 만료되지 않습니다.
+5. 인센티브 토큰 보상을 청구하려면 이 증명을 검색하고 BGTIncentiveDistributor 컨트랙트를 통해 청구하세요. 모든 증명 처리는 [Berachain Hub](https://hub.berachain.com)와 상호작용하여 수행됩니다.
 
-### Incentives & Users
+### 인센티브와 사용자
 
-As an overview, Incentives involve 3 different parties:
+개요로서 인센티브에는 3가지 당사자가 관여합니다:
 
-| User      | Description & Motivation                                                                                                                                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Any user that boosts a validator with $BGT. This increases a validator's $BGT emissions, allowing them to capture more Incentives from Reward Vaults. Boosters receive a portion of these Incentives.                                         |
-| Validator | A node in the Active Set that directs $BGT emissions to different Reward Vaults defined by their Reward Allocation distribution, captures Incentives from Reward Vaults, and takes a percentage (Commission Rate) of the Incentives captured. |
-| Protocol  | An entity, group, or organization that offers Incentive tokens for their respective Reward Vault with the goal of capturing $BGT emissions for their protocol and/or users.                                                                   |
+| 사용자     | 설명 및 동기                                                                                                                                                                                                                       |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Booster    | $BGT로 검증자를 부스트하는 모든 사용자. 검증자의 $BGT 배출을 증가시켜 보상 볼트에서 더 많은 인센티브를 포착할 수 있게 합니다. 부스터는 이 인센티브의 일부를 받습니다.                                                                   |
+| Validator  | 활성 세트의 노드로, 보상 할당 분배에 정의된 다양한 보상 볼트로 $BGT 배출을 전달하고, 보상 볼트에서 인센티브를 포착하며, 포착한 인센티브의 비율(수수료율)을 가져갑니다.                                                              |
+| Protocol   | 각각의 보상 볼트에 대한 인센티브 토큰을 제공하여 프로토콜 및/또는 사용자를 위한 $BGT 배출을 포착하는 것이 목표인 실체, 그룹 또는 조직.                                                                                              |
 
-## Incentive Mechanics
+## 인센티브 메커니즘
 
-Behind Incentives, there are additional mechanics to consider beyond the high-level overview of how distribution works.
+인센티브 뒤에는 분배 작동 방식의 상위 수준 개요를 넘어 고려할 추가 메커니즘이 있습니다.
 
-### Whitelisting Incentive Tokens
+### 인센티브 토큰 화이트리스트
 
-Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a Token Manager.
+화이트리스트된 보상 볼트만 인센티브를 제공할 수 있습니다. 거버넌스 프로세스를 통해 각 인센티브 토큰을 화이트리스트해야 하며, 제안자는 토큰과 토큰 매니저를 모두 지정해야 합니다.
 
-A Reward Vault can have up to two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
+보상 볼트는 최대 2개의 고유 인센티브 토큰을 화이트리스트할 수 있습니다. 토큰 추가 또는 교체에는 거버넌스 제안 통과가 필요합니다.
 
-### Incentive Token Managers
+### 인센티브 토큰 매니저
 
-Only Incentive Token Managers of a Reward Vault can offer Incentives. One wallet address is responsible for offering an Incentive Token. The same wallet address can be set as a Token Manager for multiple Incentive Tokens.
+보상 볼트의 인센티브 토큰 매니저만 인센티브를 제공할 수 있습니다. 하나의 지갑 주소가 인센티브 토큰 제공을 담당합니다. 동일한 지갑 주소를 여러 인센티브 토큰의 토큰 매니저로 설정할 수 있습니다.
 
-A Governance proposal will specify Token Managers when proposing an Incentive Token. Changing a Token or Token Manager requires passing a governance proposal.
+거버넌스 제안은 인센티브 토큰을 제안할 때 토큰 매니저를 지정합니다. 토큰 또는 토큰 매니저 변경에는 거버넌스 제안 통과가 필요합니다.
 
-### Offering Incentives
+### 인센티브 제공
 
-A Reward Vault can offer up to two Incentive Tokens simultaneously. The offered amount cannot be withdrawn or revoked.
+보상 볼트는 동시에 최대 2개의 인센티브 토큰을 제공할 수 있습니다. 제공된 금액은 인출하거나 취소할 수 없습니다.
 
-The Incentive Token Manager must define an **Incentive Rate** (the exchange rate of incentive tokens per individual BGT), which must be greater than the minimum approved in the Governance proposal. This rate determines how many incentive tokens are distributed for each BGT received by the vault, regardless of BGT emission timing.
+인센티브 토큰 매니저는 **인센티브 요율**(개별 BGT당 인센티브 토큰의 환율)을 정의해야 하며, 거버넌스 제안에서 승인된 최소값보다 커야 합니다. 이 요율은 BGT 배출 타이밍과 관계없이 볼트가 받는 각 BGT에 대해 분배되는 인센티브 토큰 수를 결정합니다.
 
-Key aspects of incentive rates:
+인센티브 요율의 주요 측면:
 
-- **Exchange Rate Formula**: `incentiveTokens = bgtReceived × incentiveRate`
-- **Rate Constraints**: Cannot decrease the rate until the supply of Incentive Tokens has been exhausted
-- **Rate Updates**: Can increase the rate when depositing additional tokens
-- **Independent of BGT Timing**: The exchange rate operates the same whether BGT is distributed over 3 days or 7 days
+- **환율 공식**: `incentiveTokens = bgtReceived × incentiveRate`
+- **요율 제약**: 인센티브 토큰 공급이 소진될 때까지 요율을 낮출 수 없음
+- **요율 업데이트**: 추가 토큰 예치 시 요율 인상 가능
+- **BGT 타이밍과 무관**: 환율은 BGT가 3일 또는 7일에 걸쳐 분배되든 동일하게 작동
 
-Key takeaways are that Token Managers:
+핵심 요약: 토큰 매니저는:
 
-- Can increase the Incentive Tokens by any number, keeping the same Incentive Rate.
-- Can increase the Incentive Rate when they deposit additional Incentive Tokens.
-- Can set a lower Incentive Rate only when the Incentive Tokens have been fully exhausted.
-- Cannot decrease the Incentive Rate while an existing Incentive is active.
-- Cannot reclaim or return the Incentive Tokens once they are added.
+- 동일한 인센티브 요율을 유지하면서 인센티브 토큰을 임의의 수만큼 증가시킬 수 있습니다.
+- 추가 인센티브 토큰을 예치할 때 인센티브 요율을 인상할 수 있습니다.
+- 인센티브 토큰이 완전히 소진된 경우에만 더 낮은 인센티브 요율을 설정할 수 있습니다.
+- 기존 인센티브가 활성화된 동안 인센티브 요율을 낮출 수 없습니다.
+- 인센티브 토큰이 추가되면 회수하거나 반환할 수 없습니다.
 
-### Incentive Commission and Distribution
+### 인센티브 수수료 및 분배
 
-Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
+각 검증자는 다양한 인센티브를 제공하는 보상 볼트로 $BGT 배출을 전달하는 대가로 받는 모든 인센티브 토큰에 대해 가져가는 비율을 설정할 수 있습니다. $BGT 블록 보상이 분배될 때마다 검증자는 인센티브 토큰의 수수료율을 받습니다.
 
-Validator commission cannot exceed **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+검증자 수수료는 **20%**(`MAX_COMMISSION_RATE = 0.2e4`)를 초과할 수 없습니다. 더 높은 값을 큐에 넣으려는 시도는 되돌되고, 상한을 초과하는 저장 값은 읽을 때 클램핑됩니다.
 
-**Example:**
+**예시:**
 
-| Incentive Tokens | Incentive Rate |
+| 인센티브 토큰 | 인센티브 요율 |
 | ---------------- | -------------- |
 | 100 $USDC        | 100 /$BGT      |
 
-Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions toward the Reward Vault.
+검증자 A는 인센티브 수수료가 `5%`이며 보상 볼트로 1 $BGT 배출을 전달합니다.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator.
+`100 $USDC`에서 검증자는 수수료에 따라 `5 $USDC`를 받고, 검증자를 부스트한 사람을 위해 `95 $USDC`가 남습니다.
 
-| Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
-| ----------- | ------------------: | ---------------: | -------------------------------: |
-| Validator A |             20 $BGT |              25% | .05 × 100 + .25 × 95 = 28.75 $USDC |
-| Manny       |             40 $BGT |              50% |            .5 × 95 = 47.50 $USDC |
-| Cami        |             10 $BGT |            12.5% |         .125 × 95 = 11.875 $USDC |
-| Jintao      |             10 $BGT |            12.5% |         .125 × 95 = 11.875 $USDC |
+| 당사자       | Val A에 대한 $BGT 부스트 | 총 부스트의 % | 총 인센티브 토큰 보상        |
+| ------------ | ----------------------- | ------------- | ---------------------------- |
+| Validator A  | 20 $BGT                 | 25%           | .05 × 100 + .25 × 95 = 28.75 $USDC |
+| Manny        | 40 $BGT                 | 50%           | .5 × 95 = 47.50 $USDC       |
+| Cami         | 10 $BGT                 | 12.5%         | .125 × 95 = 11.875 $USDC     |
+| Jintao       | 10 $BGT                 | 12.5%         | .125 × 95 = 11.875 $USDC     |
 
-A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
+검증자는 먼저 다가오는 변경을 사용자에게 알리기 위해 요율을 큐에 넣고, `16,382` 블록을 기다린 다음 누구나 검증자에 대한 새 요율을 활성화할 수 있습니다.
 
 <Tip>
-Validator commission cannot exceed **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+검증자 수수료는 **20%**(`MAX_COMMISSION_RATE = 0.2e4`)를 초과할 수 없습니다. 더 높은 값을 큐에 넣으려는 시도는 되돌되고, 상한을 초과하는 저장 값은 읽을 때 클램핑됩니다.
 </Tip>
 
 <Info>
-The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/general/proof-of-liquidity/reward-vaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
+BGT 배출의 **타이밍**(인센티브 분배를 트리거)은 보상 볼트의 배출 모드에 의해 제어됩니다. 인센티브 토큰 환율은 프로토콜 토큰 매니저가 설정하지만 분배 타이밍은 별도로 관리됩니다. 기간 기반 및 목표 요율 모드에 대한 자세한 내용은 [BGT 배출 모드](/ko/general/proof-of-liquidity/reward-vaults#bgt-emission-modes)를 참조하세요.
 </Info>
 
-## Incentive Redirection
+## 인센티브 리다이렉션
 
-A portion of protocol incentives is automatically redirected during the incentive distribution process for BERA stakers:
+프로토콜 인센티브의 일부는 BERA 스테이커를 위한 인센티브 분배 프로세스 중에 자동으로 리다이렉트됩니다:
 
-- **Redirection Rate**: 33% of the incentive amount
-- **Collection Process**: Automatically deducted when incentives are distributed
-- **Distribution**: Redirected incentives are auctioned for WBERA and distributed to BERA stakers
-- **Remaining Amount**: Validators receive the remaining 67% of incentives
+- **리다이렉션 비율**: 인센티브 금액의 33%
+- **수집 프로세스**: 인센티브가 분배될 때 자동으로 공제됨
+- **분배**: 리다이렉트된 인센티브는 WBERA로 경매되어 BERA 스테이커에게 분배됨
+- **잔여 금액**: 검증자는 나머지 67%의 인센티브를 받음
 
-This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.
+이 메커니즘은 경쟁적인 인센티브 마켓플레이스를 유지하면서 BERA 스테이커가 PoL 인센티브에서 직접 수익을 받도록 합니다.

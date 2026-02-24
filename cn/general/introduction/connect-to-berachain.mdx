@@ -1,37 +1,73 @@
 ---
-title: "How to Connect a Wallet"
-description: "Learn to quickly configure your crypto wallet with Berachain"
+title: "连接至 Berachain"
+description: "将 Berachain 添加到钱包并切换网络。"
 ---
 
-Blockchain wallets allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
+export const addNetworkMainnet = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138de",
+    chainName: "Berachain",
+    nativeCurrency: { name: "BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://rpc.berachain.com/"],
+    blockExplorerUrls: ["https://berascan.com/"],
+  };
+  console.log("[AddNetwork] add mainnet", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-## Berachain Mainnet RPC
+export const addNetworkBepolia = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138c5",
+    chainName: "Berachain Bepolia",
+    nativeCurrency: { name: "Testnet BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://bepolia.rpc.berachain.com/"],
+    blockExplorerUrls: ["https://testnet.berascan.com/"],
+  };
+  console.log("[AddNetwork] add bepolia (testnet)", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-Copy and paste these values into any wallet that supports importing RPCs.
+区块链钱包让您访问在 Berachain 上的资产。钱包创建并保存您的私钥，以便您在交易代币、购买 NFT、玩游戏等时证明所有权。
 
-| Key                | Value                           |
-| ------------------ | ------------------------------- |
-| Network            | `Berachain`                     |
-| RPC URL            | `https://rpc.berachain.com`     |
-| Chain ID           | `80094`                         |
-| Currency symbol    | `BERA`                          |
-| Block explorer URL | `https://berascan.com`          |
+## Berachain 主网 RPC
 
-## Berachain Bepolia Testnet RPC
+在支持自定义 RPC 的任何钱包中使用以下参数。一键添加网络，或从下表复制：
 
-| Key                | Value                                   |
-| ------------------ | --------------------------------------- |
-| Network            | `Berachain Bepolia`                     |
-| RPC URL            | `https://bepolia.rpc.berachain.com`     |
-| Chain ID           | `80069`                                 |
-| Currency symbol    | `BERA`                                  |
-| Block explorer URL | `https://bepolia.berascan.com`          |
+<button type="button" onClick={() => addNetworkMainnet()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>添加 Berachain</button>
 
-## Supported Wallets
+| 键         | 值                           |
+| ---------- | ---------------------------- |
+| 网络名称   | `Berachain`                  |
+| RPC URL    | `https://rpc.berachain.com/` |
+| Chain ID   | `80094`                      |
+| 货币符号   | `BERA`                       |
+| 区块浏览器 | `https://berascan.com/`      |
 
-Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that allows RPC importing can be configured to work with Berachain.
+## Berachain Bepolia 测试网 RPC
 
-Here are some examples of compatible wallets:
+测试网使用以下参数。一键添加或从下表复制：
+
+<button type="button" onClick={() => addNetworkBepolia()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>添加 Berachain Bepolia</button>
+
+| 键         | 值                                       |
+| ---------- | ---------------------------------------- |
+| 网络名称   | `Berachain Bepolia`                      |
+| RPC URL    | `https://bepolia.rpc.berachain.com/`     |
+| Chain ID   | `80069`                                  |
+| 货币符号   | `BERA`                                   |
+| 区块浏览器 | `https://testnet.berascan.com/`          |
+
+## 支持的钱包
+
+任何支持自定义 RPC 的 [EVM 钱包](https://ethereum.org/en/wallets/find-wallet/)均可用于 Berachain。例如：
 
 - [MetaMask](https://metamask.io)
 - [Rabby](https://rabby.io)
@@ -40,58 +76,67 @@ Here are some examples of compatible wallets:
 - [Frame](https://frame.sh)
 - [Zerion](https://zerion.io/download?utm_source=berachain)
 
-## How To Set Up A MetaMask Wallet With Berachain
+## 在 MetaMask 中设置 Berachain
 
-This will walk you through the steps of setting up and configuring a MetaMask wallet with Berachain.
+<Note>推荐使用 Chrome。</Note>
 
-**NOTE:** It is recommended that you set this up through Chrome.
+<Steps>
+  <Step title="安装 MetaMask">
+    在 [metamask.io](https://metamask.io/) 下载浏览器扩展。确认来自 `metamask.io`。
 
-### Step 1 - Install MetaMask
+    <Frame>
+      <img src="/images/general/metamask-chrome-store.png" alt="Chrome 网上应用店中的 MetaMask 扩展" />
+    </Frame>
+  </Step>
+  <Step title="创建钱包">
+    点击「创建新钱包」。设置密码，然后按步骤备份助记词。助记词是您拥有钱包的凭证，请妥善保管。
 
-Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
+    <Frame>
+      <img src="/images/general/metamask-get-started.png" alt="MetaMask 入门界面与创建钱包选项" />
+    </Frame>
 
-![Metamask Chrome Store](/images/general/metamask-chrome-store.png)
+    <Frame>
+      <img src="/images/general/metamask-create-password.png" alt="MetaMask 密码创建界面" />
+    </Frame>
 
-### Step 2 - Create Your Wallet in MetaMask
+    <Frame>
+      <img src="/images/general/metamask-recovery-phrase.png" alt="MetaMask 助记词备份界面" />
+    </Frame>
+  </Step>
+</Steps>
 
-Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
+## 手动添加 Berachain 网络
 
-![Metamask Get Started](/images/general/metamask-get-started.png)
+若不想使用上方一键按钮，可手动在 MetaMask 中添加网络：
 
-This will ask you to first set a password. This is the password you will enter when you open up the MetaMask extension:
+1. **打开网络列表** — 点击 MetaMask 左上角的下拉菜单。
 
-![Metamask Create Password](/images/general/metamask-create-password.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-01.png" alt="MetaMask 网络下拉菜单" />
+</Frame>
 
-Next, follow the instructions to secure your wallet phrase. This step is very important as the wallet phrase is what is used to prove that you own the assets in your wallet.
+2. **添加网络** — 在弹窗中点击「添加网络」。
 
-![Metamask Recovery Phrase](/images/general/metamask-recovery-phrase.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-02.png" alt="弹窗中的 MetaMask 添加网络按钮" />
+</Frame>
 
-Congratulations! You've set up your MetaMask wallet!
+3. **手动添加网络** — 在列表底部点击「手动添加网络」。
 
-## Add Berachain Network To Your Wallet
+<Frame>
+  <img src="/images/general/metamask-add-network-03.png" alt="MetaMask 手动添加网络选项" />
+</Frame>
 
-Wallets can connect to various blockchains, with MetaMask setting Ethereum as its default blockchain. In order to connect to Berachain, we'll need to add the network to MetaMask and select it.
+4. **填写参数** — 使用上方[主网](#berachain-主网-rpc)或[Bepolia 测试网](#berachain-bepolia-测试网-rpc) RPC 表中的参数。
 
-### Add Berachain Network Manually
+5. **保存** — 点击「保存」。
 
-To add the network manually, click the drop-down in the top-left of MetaMask.
+<Frame>
+  <img src="/images/general/metamask-add-network-04.png" alt="MetaMask 网络配置表单与 Berachain 参数" />
+</Frame>
 
-![Metamask Add Network Step 1](/images/general/metamask-add-network-01.png)
+此时您应已连接至 Berachain 或 Berachain Bepolia。
 
-When the modal appears, click the `Add network` button.
-
-![Metamask Add Network Step 2](/images/general/metamask-add-network-02.png)
-
-At the bottom of the existing list, click `Add network manually`.
-
-![Metamask Add Network Step 3](/images/general/metamask-add-network-03.png)
-
-Enter the following details into MetaMask to configure the network and connect to Berachain.
-
-Once the data is entered correctly, click `Save`.
-
-![Metamask Add Network Step 4](/images/general/metamask-add-network-04.png)
-
-After saving the network configuration, you should be connected to Berachain!
-
-![Metamask Testnet](/images/general/metamask-testnet.png)
+<Frame>
+  <img src="/images/general/metamask-testnet.png" alt="MetaMask 钱包已连接至 Berachain 网络" />
+</Frame>

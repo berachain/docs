@@ -1,45 +1,45 @@
 ---
-title: "$BGT Token"
-description: "What Is the BGT Token and how it works"
+title: "$BGT 토큰"
+description: "거버넌스 및 보상 토큰; 획득 및 위임."
 ---
 
-Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking and is additionally used for gas, governance, and economic incentives. `$BGT` and the two-token model bifurcate the first two functions from the latter two.
+지분 증명 블록체인은 일반적으로 스테이킹을 통해 네트워크를 보호하는 데 사용되는 단일 토큰을 가지며, 추가로 가스, 거버넌스 및 경제적 인센티브에 사용됩니다. `$BGT`와 이중 토큰 모델은 처음 두 기능을 후자의 두 기능과 분리합니다.
 
-Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into their own token - `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
+Berachain의 이중 토큰 유동성 증명(PoL) 모델을 통해 거버넌스 및 경제적 인센티브(배출 및 블록 보상)의 기능이 자체 토큰인 `$BGT`(Bera 거버넌스 토큰)로 분리됩니다. `$BGT`는 이전이 불가능하며 Berachain 생태계 내에서 생산적 활동에 참여해야만 획득할 수 있습니다.
 
-## Earning $BGT
+## $BGT 획득
 
-`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](/general/proof-of-liquidity/reward-vaults). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
+`$BGT`는 화이트리스트된 [보상 볼트](/ko/general/proof-of-liquidity/reward-vaults)가 있는 dApp에서 특정 행동을 수행하여 획득합니다. 대부분의 경우 유동성 공급과 관련되지만 이에 국한되지 않습니다. 보상 볼트 예치는 Berachain에서 어떤 형태의 생산적 활동에 해당합니다.
 
-The typical flow is for users to supply liquidity and receive a receipt token for that activity, which they can then stake in reward vaults to earn `$BGT`. Some examples include:
+일반적으로 유동성을 공급하고 해당 활동에 대한 영수증 토큰을 받은 다음 보상 볼트에 스테이킹하여 `$BGT`를 획득할 수 있습니다. 예시:
 
-- Depositing liquidity in the native BEX for an LP pair whitelisted to earn `$BGT` emissions
-- Supplying assets to a lending market and staking the interest-bearing receipt tokens in a reward vault
+- `$BGT` 배출 획득이 화이트리스트된 LP 쌍을 위해 네이티브 BEX에 유동성 예치
+- 대출 시장에 자산 공급 및 이자 bearing 영수증 토큰을 보상 볼트에 스테이킹
 
-Users can see available earning options at [Berachain Hub Pools](https://hub.berachain.com/pools).
+[Berachain Hub Pools](https://hub.berachain.com/pools)에서 사용 가능한 획득 옵션을 확인할 수 있습니다.
 
-Users can claim accumulated `$BGT` from Berahub.
+Berahub에서 누적된 `$BGT`를 청구할 수 있습니다.
 
-## What can you do with $BGT?
+## $BGT로 무엇을 할 수 있나요?
 
-### Governance
+### 거버넌스
 
-`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions (see [Reward Vault Governance](/general/governance/reward-vault-governance)).
+`$BGT`는 거버넌스 제안에 투표하는 데 사용됩니다. `$BGT` 보유자는 다양한 생태계 결정을 담당합니다 ([보상 볼트 거버넌스](/ko/general/governance/reward-vault-governance) 참조).
 
-`$BGT` holders can either vote on proposals themselves or delegate their voting power to another address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
+`$BGT` 보유자는 제안에 직접 투표하거나 다른 주소에 투표권을 위임할 수 있습니다. 이 거버넌스 위임은 `$BGT` 배출을 제어하기 위해 검증자를 부스트하는 것과 독립적으로 운영됩니다.
 
-### Earn
+### 수익
 
-#### Boost A Validator For Incentives
+#### 인센티브를 위한 검증자 부스트
 
-Users can select validators to "boost" with their `$BGT`, increasing the validator's [block rewards](/general/proof-of-liquidity/block-rewards). The amount of [Incentives](/general/proof-of-liquidity/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
+검증자를 선택하여 `$BGT`로 "부스트"하여 검증자의 [블록 보상](/ko/general/proof-of-liquidity/block-rewards)을 증가시킬 수 있습니다. 획득한 [인센티브](/ko/general/proof-of-liquidity/incentives) 금액은 검증자의 총 부스트에 의해 결정됩니다. 이러한 인센티브는 검증자를 부스트한 `$BGT` 보유자에게 반환됩니다.
 
-#### dApp Fees
+#### dApp 수수료
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BEX and HoneySwap. This is done via the `FeeCollector` contract.
+`$BGT`로 검증자를 부스트하면 BEX 및 HoneySwap 수수료인 Berachain 핵심 dApp 수수료의 몫을 획득합니다. 이는 `FeeCollector` 컨트랙트를 통해 수행됩니다.
 
-At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
+요약하면, `FeeCollector`는 dApp에서 수집한 수수료를 `$WBERA`로 경매한 다음 검증자를 부스트한 `$BGT` 보유자에게 비례 배분합니다.
 
-### Redeem $BGT For $BERA
+### $BGT를 $BERA로 상환
 
-`$BGT` can be redeemed (burned) 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
+`$BGT`는 1:1로 `$BERA`로 상환(소각)할 수 있습니다. 이는 일방향 기능이며 `$BERA`는 `$BGT`로 변환할 수 없습니다. 이는 체인의 경제적 인센티브 획득을 `$BGT` 보유자에게만 제한합니다.

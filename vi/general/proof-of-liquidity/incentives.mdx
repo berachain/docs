@@ -1,115 +1,117 @@
 ---
-title: "Incentive Marketplace"
-description: "How the Incentive Marketplace works in Berachain's Proof-of-Liquidity"
+title: "Chợ Incentive"
+description: "Cách protocol đấu thầu emission BGT của validator."
 ---
 
-Proof-of-Liquidity (PoL) enables protocols to encourage validators to direct their `$BGT` emissions to a protocol's Reward Vault using whitelisted Incentive tokens. In doing so, protocols attract users to their protocol with `$BGT` rewards.
+Proof-of-Liquidity (PoL) cho phép protocol khuyến khích validator hướng emission `$BGT` của họ tới Reward Vault của protocol bằng incentive token đã whitelist. Nhờ đó protocol thu hút người dùng bằng reward `$BGT`.
 
-## How Incentives Work
+## Incentive hoạt động thế nào
 
-Validators can capture Incentives offered by Whitelisted Reward Vaults by directing their $BGT emissions towards those Reward Vaults, defined by a validator's Reward Allocation - the list of Reward Vaults a validator directs percentages of its $BGT emissions to.
+Validator có thể nhận Incentive do Reward Vaults đã whitelist cung cấp bằng cách hướng emission $BGT của họ tới các vault đó, theo Reward Allocation của validator—danh sách Reward Vaults mà validator hướng phần trăm emission $BGT tới.
 
-![Berachain Reward Vault Incentive Marketplace](/images/general/berachain-incentive-marketplace.png)
+<Frame>
+  <img src="/images/general/berachain-incentive-marketplace.png" alt="Sơ đồ luồng chợ incentive reward vault Berachain" />
+</Frame>
 
-### Incentive Distribution Flow
+### Luồng phân phối Incentive
 
-The distribution of Incentives follows this process:
+Phân phối Incentive diễn ra như sau:
 
-1. A **User** Boosts (by associating their $BGT with a validator) to increase a validator's $BGT emissions they receive when proposing a block.
-2. A **Validator** receives block rewards in the form of $BGT emissions, where the amount is influenced by Boost (see [$BGT Emissions Per Block](/general/proof-of-liquidity/block-rewards)), and directs emissions toward Whitelisted Reward Vaults chosen by the validator.
-3. A **Protocol** can offer up to two different Incentive Tokens to encourage validators to direct $BGT emissions to their Reward Vault.
-4. When the $BGT block reward emissions are distributed:
-   - The validator's operator address receives a commission (percentage of all the Incentive Tokens captured).
-   - The remaining Incentives, for users who boosted the validator, are sent to a contract and backend service that manages the distribution and claiming of these tokens. The backend API updates proofs of the user's entitlement to Incentive tokens every 24 hours. This eligibility never expires.
-5. A user (Booster) wanting to claim their Incentive token rewards retrieves this proof and claims their incentive token rewards through the BGTIncentiveDistributor contract. All proof handling is done by interacting with [Berachain Hub](https://hub.berachain.com).
+1. **User** Boost (bằng cách gắn $BGT với validator) để tăng emission $BGT mà validator nhận khi đề xuất block.
+2. **Validator** nhận block reward dưới dạng emission $BGT, số lượng chịu ảnh hưởng bởi Boost (xem [Emission $BGT mỗi block](/vi/general/proof-of-liquidity/block-rewards)), và hướng emission tới Reward Vaults đã whitelist do validator chọn.
+3. **Protocol** có thể cung cấp tối đa hai Incentive Token để khuyến khích validator hướng emission $BGT tới Reward Vault của họ.
+4. Khi emission reward block $BGT được phân phối:
+   - Địa chỉ operator của validator nhận commission (phần trăm của tất cả Incentive Tokens thu được).
+   - Phần Incentive còn lại, cho những người đã boost validator, được gửi tới contract và dịch vụ backend quản lý phân phối và claim token này. API backend cập nhật bằng chứng quyền nhận incentive token mỗi 24 giờ. Đủ điều kiện này không bao giờ hết hạn.
+5. Để claim reward incentive token, bạn lấy bằng chứng này và claim qua contract BGTIncentiveDistributor. Mọi xử lý bằng chứng thực hiện qua tương tác với [Berachain Hub](https://hub.berachain.com).
 
-### Incentives & Users
+### Incentive và người dùng
 
-As an overview, Incentives involve 3 different parties:
+Tổng quan, Incentive liên quan 3 bên:
 
-| User      | Description & Motivation                                                                                                                                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Any user that boosts a validator with $BGT. This increases a validator's $BGT emissions, allowing them to capture more Incentives from Reward Vaults. Boosters receive a portion of these Incentives.                                         |
-| Validator | A node in the Active Set that directs $BGT emissions to different Reward Vaults defined by their Reward Allocation distribution, captures Incentives from Reward Vaults, and takes a percentage (Commission Rate) of the Incentives captured. |
-| Protocol  | An entity, group, or organization that offers Incentive tokens for their respective Reward Vault with the goal of capturing $BGT emissions for their protocol and/or users.                                                                   |
+| User      | Mô tả & Động lực                                                                                                                                                                                                                      |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Booster   | Bất kỳ user nào boost validator bằng $BGT. Điều này tăng emission $BGT của validator, cho phép họ thu thêm Incentive từ Reward Vaults. Booster nhận một phần Incentive này.                                                          |
+| Validator | Nút trong Active Set hướng emission $BGT tới các Reward Vaults khác nhau theo phân bổ Reward Allocation của họ, thu Incentive từ Reward Vaults và lấy một phần trăm (Commission Rate) trên Incentive thu được.                       |
+| Protocol  | Thực thể, nhóm hoặc tổ chức cung cấp incentive token cho Reward Vault tương ứng nhằm thu emission $BGT cho protocol và/hoặc người dùng của họ.                                                                                      |
 
-## Incentive Mechanics
+## Cơ chế Incentive
 
-Behind Incentives, there are additional mechanics to consider beyond the high-level overview of how distribution works.
+Đằng sau Incentive còn có các cơ chế bổ sung ngoài tổng quan phân phối cấp cao.
 
-### Whitelisting Incentive Tokens
+### Whitelist incentive token
 
-Only Whitelisted Reward Vaults can offer Incentives. A governance process must whitelist each Incentive Token, where the proposer needs to specify both the Token and a Token Manager.
+Chỉ Reward Vaults đã whitelist mới có thể cung cấp Incentive. Mỗi Incentive Token phải qua quy trình governance whitelist, người đề xuất cần chỉ rõ cả Token và Token Manager.
 
-A Reward Vault can have up to two unique Incentive Tokens whitelisted. Adding or replacing a token requires passing a governance proposal.
+Một Reward Vault có thể có tối đa hai Incentive Token riêng biệt được whitelist. Thêm hoặc thay token cần thông qua governance proposal.
 
-### Incentive Token Managers
+### Incentive token managers
 
-Only Incentive Token Managers of a Reward Vault can offer Incentives. One wallet address is responsible for offering an Incentive Token. The same wallet address can be set as a Token Manager for multiple Incentive Tokens.
+Chỉ Incentive Token Managers của Reward Vault mới có thể cung cấp Incentive. Một địa chỉ ví chịu trách nhiệm cung cấp một Incentive Token. Cùng địa chỉ ví có thể được đặt làm Token Manager cho nhiều Incentive Tokens.
 
-A Governance proposal will specify Token Managers when proposing an Incentive Token. Changing a Token or Token Manager requires passing a governance proposal.
+Governance proposal sẽ chỉ định Token Managers khi đề xuất Incentive Token. Thay đổi Token hoặc Token Manager cần thông qua governance proposal.
 
-### Offering Incentives
+### Cung cấp Incentive
 
-A Reward Vault can offer up to two Incentive Tokens simultaneously. The offered amount cannot be withdrawn or revoked.
+Một Reward Vault có thể cung cấp tối đa hai Incentive Tokens đồng thời. Số lượng cung cấp không thể rút hoặc thu hồi.
 
-The Incentive Token Manager must define an **Incentive Rate** (the exchange rate of incentive tokens per individual BGT), which must be greater than the minimum approved in the Governance proposal. This rate determines how many incentive tokens are distributed for each BGT received by the vault, regardless of BGT emission timing.
+Incentive Token Manager phải định nghĩa **Incentive Rate** (tỷ giá đổi incentive token trên từng BGT), phải lớn hơn mức tối thiểu được phê duyệt trong Governance proposal. Tỷ lệ này xác định có bao nhiêu incentive token được phân phối cho mỗi BGT vault nhận được, bất kể thời điểm emission BGT.
 
-Key aspects of incentive rates:
+Các khía cạnh chính của incentive rate:
 
-- **Exchange Rate Formula**: `incentiveTokens = bgtReceived × incentiveRate`
-- **Rate Constraints**: Cannot decrease the rate until the supply of Incentive Tokens has been exhausted
-- **Rate Updates**: Can increase the rate when depositing additional tokens
-- **Independent of BGT Timing**: The exchange rate operates the same whether BGT is distributed over 3 days or 7 days
+- **Công thức tỷ giá**: `incentiveTokens = bgtReceived × incentiveRate`
+- **Ràng buộc tỷ lệ**: Không thể giảm tỷ lệ cho đến khi nguồn cung Incentive Tokens đã cạn
+- **Cập nhật tỷ lệ**: Có thể tăng tỷ lệ khi deposit thêm token
+- **Độc lập với thời gian BGT**: Tỷ giá hoạt động giống nhau dù BGT phân phối trong 3 ngày hay 7 ngày
 
-Key takeaways are that Token Managers:
+Điểm chính: Token Managers:
 
-- Can increase the Incentive Tokens by any number, keeping the same Incentive Rate.
-- Can increase the Incentive Rate when they deposit additional Incentive Tokens.
-- Can set a lower Incentive Rate only when the Incentive Tokens have been fully exhausted.
-- Cannot decrease the Incentive Rate while an existing Incentive is active.
-- Cannot reclaim or return the Incentive Tokens once they are added.
+- Có thể tăng Incentive Tokens bất kỳ số lượng nào, giữ cùng Incentive Rate.
+- Có thể tăng Incentive Rate khi deposit thêm Incentive Tokens.
+- Chỉ có thể đặt Incentive Rate thấp hơn khi Incentive Tokens đã cạn hoàn toàn.
+- Không thể giảm Incentive Rate khi Incentive hiện có vẫn đang active.
+- Không thể thu hồi hoặc hoàn trả Incentive Tokens sau khi đã thêm.
 
-### Incentive Commission and Distribution
+### Commission và phân phối Incentive
 
-Each validator can set a percentage that they take as a commission of all Incentive Tokens received for directing $BGT emissions to different Reward Vaults offering Incentives. Every time $BGT block rewards are distributed, the validator will receive their commission rate of Incentive Tokens.
+Mỗi validator có thể đặt phần trăm họ nhận làm commission trên tất cả Incentive Tokens nhận được khi hướng emission $BGT tới các Reward Vaults khác nhau đang cung cấp Incentive. Mỗi khi reward block $BGT được phân phối, validator sẽ nhận tỷ lệ commission Incentive Tokens của họ.
 
-Validator commission cannot exceed **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+Commission validator không vượt quá **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Mọi nỗ lực queue giá trị cao hơn sẽ revert, và giá trị lưu trữ trên mức cap bị clamp khi đọc.
 
-**Example:**
+**Ví dụ:**
 
 | Incentive Tokens | Incentive Rate |
 | ---------------- | -------------- |
 | 100 $USDC        | 100 /$BGT      |
 
-Validator A has an Incentive Commission of `5%` and directs 1 $BGT of emissions toward the Reward Vault.
+Validator A có Incentive Commission `5%` và hướng 1 $BGT emission tới Reward Vault.
 
-From `100 $USDC`, the validator would get `5 $USDC`, based on their commission, leaving `95 $USDC` for anyone who boosted the validator.
+Từ `100 $USDC`, validator nhận `5 $USDC` theo commission, còn lại `95 $USDC` cho bất kỳ ai đã boost validator.
 
-| Party       | $BGT Boost To Val A | % of Total Boost |    Total Incentive Token Rewards |
-| ----------- | ------------------: | ---------------: | -------------------------------: |
-| Validator A |             20 $BGT |              25% | .05 × 100 + .25 × 95 = 28.75 $USDC |
-| Manny       |             40 $BGT |              50% |            .5 × 95 = 47.50 $USDC |
-| Cami        |             10 $BGT |            12.5% |         .125 × 95 = 11.875 $USDC |
-| Jintao      |             10 $BGT |            12.5% |         .125 × 95 = 11.875 $USDC |
+| Bên         | $BGT Boost Cho Val A | % Tổng Boost | Tổng Reward Incentive Token    |
+| ----------- | -------------------- | ----------- | ------------------------------ |
+| Validator A | 20 $BGT              | 25%         | .05 × 100 + .25 × 95 = 28.75 $USDC |
+| Manny       | 40 $BGT              | 50%         | .5 × 95 = 47.50 $USDC          |
+| Cami        | 10 $BGT              | 12.5%       | .125 × 95 = 11.875 $USDC       |
+| Jintao      | 10 $BGT              | 12.5%       | .125 × 95 = 11.875 $USDC       |
 
-A validator can change their commission percentage by first queueing the rate to notify users of the upcoming change, waiting `16,382` blocks, and then anyone may activate the new rate for the validator.
+Validator có thể thay đổi phần trăm commission bằng cách trước tiên queue tỷ lệ để thông báo cho người dùng về thay đổi sắp tới, chờ `16,382` block, sau đó bất kỳ ai có thể kích hoạt tỷ lệ mới cho validator.
 
 <Tip>
-Validator commission cannot exceed **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Any attempt to queue a higher value will revert, and stored values above the cap are clamped when read.
+Commission validator không vượt quá **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Mọi nỗ lực queue giá trị cao hơn sẽ revert, và giá trị lưu trữ trên mức cap bị clamp khi đọc.
 </Tip>
 
 <Info>
-The **timing** of BGT emissions (which triggers incentive distribution) is controlled by the Reward Vault's emission mode. While incentive token exchange rates are set by protocol token managers, the distribution timing is managed separately. See [BGT Emission Modes](/general/proof-of-liquidity/reward-vaults#bgt-emission-modes) for complete details on duration-based and target rate modes.
+**Thời điểm** emission BGT (kích hoạt phân phối incentive) do chế độ emission của Reward Vault điều khiển. Trong khi tỷ giá đổi incentive token do token manager của protocol đặt, thời điểm phân phối được quản lý riêng. Xem [Chế độ emission BGT](/vi/general/proof-of-liquidity/reward-vaults#bgt-emission-modes) để biết chi tiết đầy đủ về chế độ duration-based và target rate.
 </Info>
 
-## Incentive Redirection
+## Chuyển hướng Incentive
 
-A portion of protocol incentives is automatically redirected during the incentive distribution process for BERA stakers:
+Một phần incentive protocol được tự động chuyển hướng trong quá trình phân phối incentive cho người stake BERA:
 
-- **Redirection Rate**: 33% of the incentive amount
-- **Collection Process**: Automatically deducted when incentives are distributed
-- **Distribution**: Redirected incentives are auctioned for WBERA and distributed to BERA stakers
-- **Remaining Amount**: Validators receive the remaining 67% of incentives
+- **Tỷ lệ chuyển hướng**: 33% số incentive
+- **Quy trình thu**: Tự động khấu trừ khi incentive được phân phối
+- **Phân phối**: Incentive chuyển hướng được đấu giá lấy WBERA và phân phối cho người stake BERA
+- **Phần còn lại**: Validator nhận 67% incentive còn lại
 
-This mechanism ensures that BERA stakers receive direct yield from PoL incentives while maintaining the competitive incentive marketplace.
+Cơ chế này đảm bảo người stake BERA nhận yield trực tiếp từ incentive PoL trong khi duy trì chợ incentive cạnh tranh.

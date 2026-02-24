@@ -1,140 +1,146 @@
 ---
-title: "Block Production & Rewards"
-description: "How block rewards and BGT emissions work in Berachain's Proof-of-Liquidity"
+title: "Sản xuất block và Reward"
+description: "Sản xuất block, emission BGT và phân phối reward."
 ---
 
-Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
+Proof-of-Liquidity quản lý block reward và token emission trên Berachain bằng token `$BGT`. Trang này giải thích nguyên tắc toán học đằng sau lựa chọn validator, block reward và tính emission.
 
-## Validator Selection
+## Lựa chọn validator
 
-The network maintains an active set of **69 validators** who are eligible for block production. Selection criteria include:
+Mạng duy trì active set **69 validator** đủ điều kiện sản xuất block. Tiêu chí lựa chọn gồm:
 
-- Only top **69 validators** by `$BERA` stake are included in active set
-- Block proposal probability is proportional to staked `$BERA` and does not affect reward amounts
-- Stake limitations per validator:
-  - Minimum: 250,000 `$BERA`
-  - Maximum: 10,000,000 `$BERA`
+- Chỉ **69 validator** hàng đầu theo stake `$BERA` được đưa vào active set
+- Xác suất đề xuất block tỷ lệ với `$BERA` đã stake và không ảnh hưởng số lượng reward
+- Giới hạn stake mỗi validator:
+  - Tối thiểu: 250.000 `$BERA`
+  - Tối đa: 10.000.000 `$BERA`
 
-A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
+Xác suất một validator được chọn sản xuất block là tỷ trọng stake của validator so với tổng stake của active set.
 
-## $BGT Emissions Structure
+## Cấu trúc emission $BGT
 
-When a validator produces a block, `$BGT` tokens are emitted through two emission components:
+Khi validator sản xuất block, token `$BGT` được emit qua hai thành phần emission:
 
 1. Base Emission
-   - **Fixed amount** equal to a `base rate` parameter (B)
-   - Paid directly to block-producing validator
+   - **Số lượng cố định** bằng tham số `base rate` (B)
+   - Trả trực tiếp cho validator sản xuất block
 
 2. Reward Vault Emission
-   - **Variable amount** dependent on validator's boost (x)
-     - i.e. percentage of total `$BGT` delegated to the validator
-   - Distributed to [Reward Vaults](/general/proof-of-liquidity/reward-vaults) selected by validator
-     - Proportional to weights configured in the validator's Reward Allocation
-     - Validators receive [Incentives](/general/proof-of-liquidity/incentives) from projects based on amounts directed to their Reward Vaults
+   - **Số lượng biến đổi** phụ thuộc boost của validator (x)
+     - tức phần trăm tổng `$BGT` delegate cho validator
+   - Phân phối tới [Reward Vaults](/vi/general/proof-of-liquidity/reward-vaults) do validator chọn
+     - Tỷ lệ với trọng số cấu hình trong Reward Allocation của validator
+     - Validator nhận [Incentives](/vi/general/proof-of-liquidity/incentives) từ project theo số lượng hướng tới Reward Vaults của họ
 
-## Validator Boosts
+## Boost validator
 
-Boost is a crucial metric that determines a validator's reward emissions:
+Boost là chỉ số quyết định emission reward của validator:
 
-- Calculated as the percentage of `$BGT` delegation a validator has compared to the total `$BGT` delegated in the network
-- Expressed as a decimal between 0 and 1
-- Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%). Higher boost leads to higher reward emissions, subject to the emission formula.
+- Tính bằng phần trăm delegation `$BGT` của validator so với tổng `$BGT` delegate trong mạng
+- Biểu diễn bằng số thập phân từ 0 đến 1
+- Ví dụ: Nếu validator có 1000 `$BGT` delegate và mạng có tổng 10000 `$BGT` delegate, boost của họ là 0,1 (10%). Boost cao hơn dẫn tới emission reward cao hơn, theo công thức emission.
 
-## BeraChef: Reward Allocation Management
+## BeraChef: Quản lý phân bổ reward
 
-BeraChef is the core contract that manages how validators direct their BGT rewards across different Reward Vaults. It serves as the configuration layer that determines reward distribution based on validator preferences.
+BeraChef là contract cốt lõi quản lý cách validator hướng reward BGT của họ tới các Reward Vaults khác nhau. Nó đóng vai trò lớp cấu hình xác định phân phối reward theo preference của validator.
 
-### Core Responsibilities
+### Trách nhiệm cốt lõi
 
-BeraChef manages three key aspects of the reward system:
+BeraChef quản lý ba khía cạnh chính của hệ thống reward:
 
-1. **Reward Allocations** - Maintains lists of weights that determine the percentage of rewards going to each Reward Vault
-2. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
-3. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
+1. **Reward Allocations** — Duy trì danh sách trọng số xác định phần trăm reward tới mỗi Reward Vault
+2. **Validator Commission** — Quản lý tỷ lệ commission validator có thể thu trên incentive token
+3. **Vault Whitelisting** — Kiểm soát vault nào đủ điều kiện nhận reward BGT
 
-### How Reward Allocations Work
+### Cách reward allocations hoạt động
 
-Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed.
+Mỗi validator có thể đặt reward allocation tùy chỉnh chỉ rõ reward BGT của họ nên được phân phối thế nào.
 
-Reward Allocations are described by:
+Reward Allocations được mô tả bởi:
 
-1. A list of selected vaults and the percentage of a given block's BGT reward to send to each. The weights must sum to 100.
-2. The block number the allocation becomes effective.
+1. Danh sách vault được chọn và phần trăm reward BGT của block đó gửi cho mỗi vault. Tổng trọng số phải bằng 100.
+2. Số block khi allocation có hiệu lực.
 
-Validators exercise control over the BeraChef reward allocation subject to a delay of 450 blocks.
+Validator thực hiện quyền điều khiển reward allocation BeraChef với độ trễ 450 block.
 
-**If a validator doesn't update its cutting board within 302,400 blocks (approximately 7 days),** BeraChef will begin to apply the _baseline_ cutting board. This _baseline_ allocation is chosen to direct emissions efficiently to reward vaults with active incentives.
+**Nếu validator không cập nhật cutting board trong 302.400 block (khoảng 7 ngày),** BeraChef sẽ bắt đầu áp dụng cutting board _baseline_. Allocation _baseline_ này được chọn để hướng emission hiệu quả tới reward vaults có incentive đang active.
 
-### Commission Management
+### Quản lý commission
 
-BeraChef manages validator commission rates on incentive tokens with the following constraints:
+BeraChef quản lý tỷ lệ commission của validator trên incentive token với các ràng buộc sau:
 
-- **Default Commission**: 5% if not explicitly set
-- **Maximum Commission**: 20% hard cap enforced by the contract
-- **Change Delay**: Required waiting period before commission changes take effect
+- **Commission mặc định**: 5% nếu không đặt rõ
+- **Commission tối đa**: Hard cap 20% do contract thực thi
+- **Độ trễ thay đổi**: Thời gian chờ bắt buộc trước khi thay đổi commission có hiệu lực
 
-## $BGT Emissions Per Block
+## Emission $BGT mỗi block
 
-The total `$BGT` emitted per block is calculated using the following formula:
+Tổng `$BGT` emit mỗi block được tính bằng công thức:
 
 $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\right)\right]$$
 
-### Parameters
+### Tham số
 
-| Parameter                       | Description                                                    | Impact                                         |
-| ------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
-| x (boost)                       | Fraction of total `$BGT` delegated to validator (range: [0,1]) | Determines `$BGT` emissions to Reward Vaults   |
-| B (base rate)                   | Fixed amount of `$BGT` for block production                    | Determines baseline validator rewards          |
-| R (reward rate)                 | Base `$BGT` amount for reward vaults                           | Sets foundation for reward emissions           |
-| a (boost multiplier)            | Boost impact coefficient                                       | Higher values increase boost importance        |
-| b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
-| m (minimum boosted reward rate) | Floor for reward vault emissions                               | Higher values benefit low-boost validators     |
+| Tham số                       | Mô tả                                                    | Tác động                                         |
+| ----------------------------- | -------------------------------------------------------- | ------------------------------------------------- |
+| x (boost)                     | Phần trăm tổng `$BGT` delegate cho validator (khoảng: [0,1]) | Xác định emission `$BGT` tới Reward Vaults      |
+| B (base rate)                 | Số lượng `$BGT` cố định cho sản xuất block               | Xác định reward validator cơ sở                  |
+| R (reward rate)               | Số lượng `$BGT` cơ sở cho reward vaults                 | Đặt nền tảng cho emission reward                  |
+| a (boost multiplier)          | Hệ số tác động boost                                    | Giá trị cao hơn tăng tầm quan trọng của boost    |
+| b (convexity parameter)       | Độ dốc đường cong tác động boost                        | Giá trị cao hơn phạt nặng hơn với boost thấp     |
+| m (minimum boosted reward rate) | Sàn emission reward vault                              | Giá trị cao hơn có lợi cho validator boost thấp  |
 
-### Sample Emissions Chart
+### Biểu đồ emission mẫu
 
-Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
+Với các tham số mẫu sau, biểu đồ dưới cho thấy emission scale theo delegation `$BGT`:
 
 $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
 
-![chart showing how emissions scale with BGT delegation](/images/general/emission-scale-bgt-delegation-chart.png)
+<Frame>
+  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="Biểu đồ emission scale theo delegation BGT" />
+</Frame>
 
-## Max Block Inflation
+## Lạm phát block tối đa
 
-`$BGT` emissions grow with the amount of boost a validator has, up to a cap. The maximum theoretical block emission occurs at 100% boost:
+Emission `$BGT` tăng theo lượng boost validator có, tới một giới hạn. Emission block lý thuyết tối đa xảy ra ở 100% boost:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 
-## $BGT Distribution
+## Phân phối $BGT
 
-`$BGT` is emitted to reward vaults on a per-block basis via the Distributor. Distributions for a given block are performed during processing for the following block. Distribution creates `$BGT` that is then claimable by Reward Vault stakers.
+Distributor emit `$BGT` tới reward vaults theo từng block. Mạng xử lý phân phối cho block đã cho trong block tiếp theo. Điều này tạo ra `$BGT` mà Reward Vault staker sau đó có thể claim.
 
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.** Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts. The reward window is reset each time new rewards are added.
+Mạng tạo reward theo từng block; tuy nhiên phân phối chúng **trong khoảng thời gian ba ngày.** Người deposit nhận reward stream tuyến tính trong khoảng thời gian này, tỷ lệ với số tiền deposit. Cửa sổ reward reset mỗi khi reward mới đến.
 
-### Distribution Example
+### Ví dụ phân phối
 
-On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
+Trên Berachain, `$BGT` được phân phối theo block, nghĩa là khoảng thời gian phân phối ba ngày liên tục bị "đẩy" để "bắt đầu" ở block hiện tại. Do đó khoảng thời gian này nên được xem như sliding window dựa trên emission tại bất kỳ thời điểm nào trong ba ngày trước.
 
-A more real-world example with simplified numbers:
+Ví dụ thực tế hơn với số đơn giản hóa:
 
-- 3 `$BGT` distributed daily, for a total of 27 over 9 days
-- 1 depositor, owning all the deposits
+- 3 `$BGT` phân phối mỗi ngày, tổng 27 trong 9 ngày
+- 1 người deposit, sở hữu toàn bộ deposit
 
-![Complex Example](/images/general/complex-emission.png)
+<Frame>
+  <img src="/images/general/complex-emission.png" alt="Sơ đồ ví dụ phân phối BGT đa validator" />
+</Frame>
 
-**Legend**
+**Chú thích**
 
-- Emitted: Total number of `$BGT` distributed and available
-- Claimable: Total number of `$BGT` able to be claimed by depositors
-- Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
+- Emitted: Tổng số `$BGT` phân phối và có sẵn
+- Claimable: Tổng số `$BGT` người deposit có thể claim
+- Daily Reward: Số `$BGT` hàng ngày được đánh dấu claimable dựa trên unlock token emitted
 
-This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after three days where all rewards are actively being distributed.
+Kết quả là người deposit nhận lượng `$BGT` tăng dần mỗi ngày cho đến khi reward đạt điểm bão hòa sau ba ngày, khi mọi reward đang được phân phối tích cực.
 
-Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
+Các khoảng duration reward khuyến khích sự căn chỉnh hệ sinh thái với người deposit qua cơ chế phân phối này thay vì cho phép reward được claim ngay lập tức.
 
-## Calculating Boost APR
+## Tính APR Boost
 
-Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
+APR Boost được hiển thị trên [Berachain Hub](https://hub.berachain.com).
 
-![Boost APR Example](/images/general/boost-apr-example.png)
+<Frame>
+  <img src="/images/general/boost-apr-example.png" alt="Biểu đồ ví dụ tính APR boost" />
+</Frame>
 
-Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).
+Phần trăm APR Boost được tính bằng các khoảng block, xác định bởi block bắt đầu và block kết thúc. Tại thời điểm tính phần trăm, máy tính APR lấy mẫu giá của tất cả token (tính bằng $BERA).
