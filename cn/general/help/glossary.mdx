@@ -1,125 +1,125 @@
 ---
-title: "Glossary"
-description: "A full glossary of technical terms"
+title: "术语表"
+description: "Berachain 文档中使用的技术术语。"
 ---
 
 ## BeaconKit
 
-BeaconKit is a modular and customizable consensus layer framework that leverages the CometBFT consensus algorithm for building Ethereum-based blockchains.
+BeaconKit 是模块化、可定制的共识层框架，利用 CometBFT 共识算法构建基于以太坊的区块链。
 
-## BERA Token
+## BERA 代币
 
-`$BERA` is the native gas token of Berachain's L1 and serves multiple purposes:
+`$BERA` 是 Berachain L1 的原生 gas 代币，用途包括：
 
-- Used for paying transaction fees
-- Initial validator staking token to secure the network
-  - More BERA staked = more blocks proposed
-  - Validators earn base emissions and transaction fees (i.e. MEV) for each block proposed
-- Can be obtained by burning BGT (one-way conversion)
+- 支付交易手续费
+- 作为初始验证者质押代币以保障网络
+  - 质押的 BERA 越多，提议的区块越多
+  - 验证者每提议一个区块可获得基础排放与交易费（如 MEV）
+- 可通过销毁 BGT 获得（单向转换）
 
-Read more in [Tokens - $BERA](/general/tokens/bera).
+更多见[代币 - $BERA](/cn/general/tokens/bera)。
 
 ## BEX
 
-Berachain's native decentralized exchange. Read more in [BEX Overview](/bex/learn/overview).
+Berachain 的原生去中心化交易所。更多见[BEX 概述](/cn/bex/learn/overview)。
 
-## BGT (Bera Governance Token)
+## BGT（Bera 治理代币）
 
-`$BGT` is Berachain's staking and governance token, which is non-transferrable and can only be earned by participating in Proof of Liquidity (PoL):
+`$BGT` 是 Berachain 的质押与治理代币，不可转让，只能通过参与流动性证明（PoL）获得：
 
-- Validator delegation and rewards
-  - More BGT delegated = more reward emissions for reward vaults
-- Governance participation (proposals and voting)
-- Can be burned for `$BERA` (one-way conversion)
-- Can only be earned through participating in Proof of Liquidity
+- 验证者委托与奖励
+  - 委托的 BGT 越多，奖励金库的奖励排放越多
+- 参与治理（提案与投票）
+- 可销毁换 `$BERA`（单向转换）
+- 只能通过参与流动性证明获得
 
-Read more in [Tokens - $BGT](/general/tokens/bgt).
+更多见[代币 - $BGT](/cn/general/tokens/bgt)。
 
-## Block
+## Block（区块）
 
-A data unit containing a list of transactions that is permanently added to the blockchain in a sequential manner.
+按顺序永久写入区块链、包含交易列表的数据单元。
 
-## Block Time
+## Block time（出块时间）
 
-The time it takes to create a new block on the blockchain. Berachain has an average block time of < 3 seconds. Note that block time can increase depending on network congestion.
+在区块链上产生新区块所需的时间。Berachain 平均出块时间小于 3 秒。注意出块时间可能随网络拥堵增加。
 
 ## CometBFT
 
-A general-purpose blockchain consensus engine used by Berachain to achieve high throughput and fast finality in transactions. Read more at [Cometbft.com](https://cometbft.com).
+Berachain 使用的通用区块链共识引擎，用于实现高吞吐与快速最终性。更多见 [Cometbft.com](https://cometbft.com)。
 
-## Consensus Client
+## Consensus client（共识客户端）
 
-The consensus client is a piece of software responsible for achieving agreement among network nodes about the current state of the blockchain. It handles the process of validating transactions and blocks, ensuring they adhere to network rules, and deciding which blocks get added to the blockchain.
+共识客户端是负责在网络节点间就区块链当前状态达成一致的软件，负责验证交易与区块、确保其符合网络规则并决定哪些区块被加入链。
 
-## Consensus Mechanism
+## Consensus mechanism（共识机制）
 
-The protocol by which nodes in the Berachain network agree on the state of the blockchain. Berachain uses Proof-of-Liquidity to select validators based on their provided liquidity.
+Berachain 网络节点就区块链状态达成一致的协议。Berachain 使用流动性证明，根据提供的流动性选择验证者。
 
-## Delegation
+## Delegation（委托）
 
-The process by which a token holder grants voting or validation power to another participant in the network.
+代币持有者将投票或验证权授予网络中其他参与者的过程。
 
-## DEX (Decentralized Exchange)
+## DEX（去中心化交易所）
 
-A platform that enables the buying and selling of tokens directly on the blockchain without a centralized intermediary. All liquidity is verifiably owned by smart contracts.
+在区块链上直接买卖代币、无需中心化中介的平台。所有流动性由智能合约可验证地持有。
 
 ## Engine API
 
-The Engine API is the interface that allows communication between the execution and consensus layers of an EVM node. BeaconKit, as a consensus layer, leverages this to be easily paired with any execution client.
+Engine API 是 EVM 节点执行层与共识层之间通信的接口。BeaconKit 作为共识层利用该接口便于与任意执行客户端配对。
 
-## Execution Client
+## Execution client（执行客户端）
 
-An EVM (Ethereum Virtual Machine) execution client is a software application responsible for the actual computation of transactions within blocks. It interprets and executes the code of smart contracts using the EVM, manages state changes, and executes the transaction logic.
+EVM（以太坊虚拟机）执行客户端是负责在区块内实际执行交易计算的软件，使用 EVM 解释并执行智能合约代码、管理状态变更并执行交易逻辑。
 
-Supported EVM Execution Clients:
+支持的 EVM 执行客户端：
 
-- **Bera-Geth:** Berachain's fork of the official Go implementation of the Ethereum protocol
-- **Bera-Reth:** Berachain's fork of a popular Rust-based client focusing on performance and reliability
+- **Bera-Geth**：Berachain 对以太坊官方 Go 实现的 fork
+- **Bera-Reth**：Berachain 对注重性能与可靠性的流行 Rust 客户端的 fork
 
-## Finality
+## Finality（最终性）
 
-The assurance that once a transaction is confirmed on the blockchain, it cannot be altered or reversed. Berachain provides instant finality for transactions.
+交易在区块链上确认后不可更改或撤销的保证。Berachain 为交易提供即时最终性。
 
-## Governance
+## Governance（治理）
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, HoneySwap) using BGT tokens for participation.
+Berachain 生态内做决策的体系。治理包括提案、投票以及使用 BGT 参与 PoL 与 Berachain 原生 dApp（BEX、HoneySwap）的变更实施。
 
 ## HONEY
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - $HONEY](/general/tokens/honey).
+`$HONEY` 是 Berachain 生态的原生稳定币，软锚定 1 USDC。在 Berachain 生态中广泛使用，涉及铸造与销毁费用。更多见[代币 - $HONEY](/cn/general/tokens/honey)。
 
-## Liquidity
+## Liquidity（流动性）
 
-The availability of liquid assets to facilitate trading on the Berachain network. Liquidity is often provided by users through liquidity pools.
+Berachain 网络上可用于促进交易的流动资产的可获得性。流动性通常由用户通过流动性池提供。
 
-## Liquidity Pool
+## Liquidity pool（流动性池）
 
-A collection of funds locked in smart contracts, used to facilitate trading on decentralized exchanges and other DeFi services.
+锁定在智能合约中的资金集合，用于在去中心化交易所及其他 DeFi 服务上促进交易。
 
-## Liquidity Provider
+## Liquidity provider（流动性提供者）
 
-A user who deposits tokens into a liquidity pool, earning a portion of fees generated from swaps in the pool, as well as other potential rewards (from PoL or otherwise).
+将代币存入流动性池的用户，从池内 swap 产生的手续费中获得一部分，以及可能来自 PoL 或其他来源的奖励。
 
-## Mainnet
+## Mainnet（主网）
 
-The primary network where transactions comprising real value occur on the Berachain blockchain, as opposed to test networks used for development.
+Berachain 区块链上发生真实价值交易的主要网络，与用于开发的测试网相对。
 
-## Proof-of-Liquidity
+## Proof-of-Liquidity（流动性证明）
 
-A consensus mechanism that aligns economic incentives between validators, applications, and users. Premised on a two-token model, validators have varying probabilities of being selected based on the amount of `$BERA` they have staked. Block rewards are distributed as `$BGT` tokens, the amount of which is influenced by the amount of `$BGT` delegated to them by users.
+一种共识机制，使验证者、应用与用户的经济激励一致。基于双代币模型，验证者被选中的概率与其质押的 `$BERA` 数量相关。区块奖励以 `$BGT` 形式发放，数量受用户委托给验证者的 `$BGT` 影响。
 
-## Single Slot Finality
+## Single slot finality（单槽最终性）
 
-A process where finality is achieved in the same block proposed. Sometimes also referred to as _Instant Finality_.
+在同一提议区块内达成最终性的过程。有时也称为_即时最终性_。
 
-## Staking
+## Staking（质押）
 
-The process of locking up tokens to support the operations of a blockchain network. In Berachain, staking is used to secure the network and participate in governance.
+锁定代币以支持区块链网络运行的过程。在 Berachain 中，质押用于保障网络并参与治理。
 
-## Swap
+## Swap（兑换）
 
-The process of exchanging one token for another on a decentralized exchange. Swaps involve a fee, which varies depending on the pool's settings.
+在去中心化交易所将一种代币兑换成另一种的过程。Swap 会产生费用，具体取决于池的设置。
 
-## WBera Staking
+## WBera staking（WBERA 质押）
 
-By staking into the WBERA Staking Vault, BERA holders gain direct yield opportunities: 33% of protocol incentives are automatically redirected during the incentive distribution process and distributed to these stakers.
+通过存入 WBERA 质押金库，BERA 持有者获得直接收益机会：在激励分配过程中，协议激励的 33% 会自动重定向并分发给这些质押者。

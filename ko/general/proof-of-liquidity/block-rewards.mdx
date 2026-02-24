@@ -1,140 +1,146 @@
 ---
-title: "Block Production & Rewards"
-description: "How block rewards and BGT emissions work in Berachain's Proof-of-Liquidity"
+title: "블록 생산 및 보상"
+description: "블록 생산, BGT 배출, 보상 분배."
 ---
 
-Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
+유동성 증명은 `$BGT` 토큰을 사용하여 Berachain의 블록 보상 및 토큰 배출을 관리합니다. 이 페이지에서는 검증자 선택, 블록 보상, 배출 계산의 수학적 원리를 설명합니다.
 
-## Validator Selection
+## 검증자 선택
 
-The network maintains an active set of **69 validators** who are eligible for block production. Selection criteria include:
+네트워크는 블록 생산 자격이 있는 **69명의 검증자**의 활성 세트를 유지합니다. 선택 기준에는 다음이 포함됩니다:
 
-- Only top **69 validators** by `$BERA` stake are included in active set
-- Block proposal probability is proportional to staked `$BERA` and does not affect reward amounts
-- Stake limitations per validator:
-  - Minimum: 250,000 `$BERA`
-  - Maximum: 10,000,000 `$BERA`
+- `$BERA` 스테이크 순 상위 **69명의 검증자**만 활성 세트에 포함
+- 블록 제안 확률은 스테이킹된 `$BERA`에 비례하며 보상 금액에는 영향을 주지 않음
+- 검증자당 스테이크 제한:
+  - 최소: 250,000 `$BERA`
+  - 최대: 10,000,000 `$BERA`
 
-A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
+주어진 검증자가 블록 생산을 위해 선택될 확률은 활성 세트의 총 스테이크에 대한 해당 검증자 스테이크 비중입니다.
 
-## $BGT Emissions Structure
+## $BGT 배출 구조
 
-When a validator produces a block, `$BGT` tokens are emitted through two emission components:
+검증자가 블록을 생산할 때 `$BGT` 토큰은 두 가지 배출 구성 요소를 통해 배출됩니다:
 
-1. Base Emission
-   - **Fixed amount** equal to a `base rate` parameter (B)
-   - Paid directly to block-producing validator
+1. 기본 배출
+   - `base rate` 파라미터(B)와 동일한 **고정 금액**
+   - 블록 생산 검증자에게 직접 지급
 
-2. Reward Vault Emission
-   - **Variable amount** dependent on validator's boost (x)
-     - i.e. percentage of total `$BGT` delegated to the validator
-   - Distributed to [Reward Vaults](/general/proof-of-liquidity/reward-vaults) selected by validator
-     - Proportional to weights configured in the validator's Reward Allocation
-     - Validators receive [Incentives](/general/proof-of-liquidity/incentives) from projects based on amounts directed to their Reward Vaults
+2. 보상 볼트 배출
+   - 검증자의 boost(x)에 따른 **변동 금액**
+     - 즉, 검증자에게 위임된 총 `$BGT`의 비율
+   - 검증자가 선택한 [보상 볼트](/ko/general/proof-of-liquidity/reward-vaults)에 분배됨
+     - 검증자의 보상 할당에 구성된 가중치에 비례
+     - 검증자는 보상 볼트로 전달한 금액에 따라 프로젝트로부터 [인센티브](/ko/general/proof-of-liquidity/incentives)를 받음
 
-## Validator Boosts
+## 검증자 부스트
 
-Boost is a crucial metric that determines a validator's reward emissions:
+Boost는 검증자의 보상 배출을 결정하는 중요한 지표입니다:
 
-- Calculated as the percentage of `$BGT` delegation a validator has compared to the total `$BGT` delegated in the network
-- Expressed as a decimal between 0 and 1
-- Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%). Higher boost leads to higher reward emissions, subject to the emission formula.
+- 네트워크에 위임된 총 `$BGT` 대비 검증자가 위임받은 `$BGT`의 비율로 계산
+- 0과 1 사이의 소수로 표현
+- 예: 검증자에게 1000 `$BGT`가 위임되고 네트워크에 총 10000 `$BGT`가 위임된 경우 boost는 0.1(10%). 더 높은 boost는 배출 공식에 따라 더 높은 보상 배출로 이어짐
 
-## BeraChef: Reward Allocation Management
+## BeraChef: 보상 할당 관리
 
-BeraChef is the core contract that manages how validators direct their BGT rewards across different Reward Vaults. It serves as the configuration layer that determines reward distribution based on validator preferences.
+BeraChef는 검증자가 BGT 보상을 다양한 보상 볼트로 어떻게 전달하는지 관리하는 핵심 컨트랙트입니다. 검증자 선호도에 기반한 보상 분배를 결정하는 구성 레이어 역할을 합니다.
 
-### Core Responsibilities
+### 핵심 책임
 
-BeraChef manages three key aspects of the reward system:
+BeraChef는 보상 시스템의 세 가지 핵심 측면을 관리합니다:
 
-1. **Reward Allocations** - Maintains lists of weights that determine the percentage of rewards going to each Reward Vault
-2. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
-3. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
+1. **보상 할당** - 각 보상 볼트로 가는 보상 비율을 결정하는 가중치 목록 유지
+2. **검증자 수수료** - 검증자가 인센티브 토큰에 부과할 수 있는 수수료율 관리
+3. **볼트 화이트리스트** - BGT 보상을 받을 자격이 있는 볼트 제어
 
-### How Reward Allocations Work
+### 보상 할당 작동 방식
 
-Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed.
+각 검증자는 BGT 보상이 어떻게 분배되어야 하는지 지정하는 사용자 정의 보상 할당을 설정할 수 있습니다.
 
-Reward Allocations are described by:
+보상 할당은 다음으로 설명됩니다:
 
-1. A list of selected vaults and the percentage of a given block's BGT reward to send to each. The weights must sum to 100.
-2. The block number the allocation becomes effective.
+1. 선택된 볼트 목록과 주어진 블록의 BGT 보상 중 각 볼트로 보낼 비율. 가중치의 합은 100이어야 합니다.
+2. 할당이 효력이 발생하는 블록 번호.
 
-Validators exercise control over the BeraChef reward allocation subject to a delay of 450 blocks.
+검증자는 450블록의 지연을 조건으로 BeraChef 보상 할당에 대한 제어를 행사합니다.
 
-**If a validator doesn't update its cutting board within 302,400 blocks (approximately 7 days),** BeraChef will begin to apply the _baseline_ cutting board. This _baseline_ allocation is chosen to direct emissions efficiently to reward vaults with active incentives.
+**검증자가 302,400블록(약 7일) 내에 커팅 보드를 업데이트하지 않으면** BeraChef는 _baseline_ 커팅 보드를 적용하기 시작합니다. 이 _baseline_ 할당은 활성 인센티브가 있는 보상 볼트로 배출을 효율적으로 전달하도록 선택됩니다.
 
-### Commission Management
+### 수수료 관리
 
-BeraChef manages validator commission rates on incentive tokens with the following constraints:
+BeraChef는 다음 제약 조건으로 검증자 인센티브 토큰 수수료율을 관리합니다:
 
-- **Default Commission**: 5% if not explicitly set
-- **Maximum Commission**: 20% hard cap enforced by the contract
-- **Change Delay**: Required waiting period before commission changes take effect
+- **기본 수수료**: 명시적으로 설정하지 않으면 5%
+- **최대 수수료**: 컨트랙트가 적용하는 20% 하드 캡
+- **변경 지연**: 수수료 변경이 효력이 발생하기 전 필요한 대기 기간
 
-## $BGT Emissions Per Block
+## 블록당 $BGT 배출
 
-The total `$BGT` emitted per block is calculated using the following formula:
+블록당 배출되는 총 `$BGT`는 다음 공식을 사용하여 계산됩니다:
 
 $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\right)\right]$$
 
-### Parameters
+### 파라미터
 
-| Parameter                       | Description                                                    | Impact                                         |
-| ------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
-| x (boost)                       | Fraction of total `$BGT` delegated to validator (range: [0,1]) | Determines `$BGT` emissions to Reward Vaults   |
-| B (base rate)                   | Fixed amount of `$BGT` for block production                    | Determines baseline validator rewards          |
-| R (reward rate)                 | Base `$BGT` amount for reward vaults                           | Sets foundation for reward emissions           |
-| a (boost multiplier)            | Boost impact coefficient                                       | Higher values increase boost importance        |
-| b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
-| m (minimum boosted reward rate) | Floor for reward vault emissions                               | Higher values benefit low-boost validators     |
+| 파라미터                       | 설명                                                    | 영향                                         |
+| ----------------------------- | ------------------------------------------------------- | -------------------------------------------- |
+| x (boost)                     | 검증자에게 위임된 총 `$BGT`의 비율(범위: [0,1])         | 보상 볼트에 대한 `$BGT` 배출 결정            |
+| B (base rate)                 | 블록 생산을 위한 `$BGT` 고정 금액                        | 기준 검증자 보상 결정                        |
+| R (reward rate)               | 보상 볼트를 위한 기본 `$BGT` 금액                        | 보상 배출의 기반 설정                        |
+| a (boost multiplier)         | Boost 영향 계수                                         | 값이 높을수록 boost 중요성 증가              |
+| b (convexity parameter)      | Boost 영향 곡선 가파름                                  | 값이 높을수록 낮은 boost에 더 큰 불이익      |
+| m (minimum boosted reward rate) | 보상 볼트 배출의 최저선                               | 값이 높을수록 낮은 boost 검증자에게 유리     |
 
-### Sample Emissions Chart
+### 샘플 배출 차트
 
-Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
+다음 샘플 파라미터를 사용하여 아래 차트는 `$BGT` 위임에 따라 배출이 어떻게 확장되는지 보여줍니다:
 
 $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
 
-![chart showing how emissions scale with BGT delegation](/images/general/emission-scale-bgt-delegation-chart.png)
+<Frame>
+  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="BGT 위임에 따른 배출 확장 차트" />
+</Frame>
 
-## Max Block Inflation
+## 최대 블록 인플레이션
 
-`$BGT` emissions grow with the amount of boost a validator has, up to a cap. The maximum theoretical block emission occurs at 100% boost:
+`$BGT` 배출은 검증자가 가진 boost 양에 따라 상한까지 증가합니다. 최대 이론적 블록 배출은 100% boost에서 발생합니다:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 
-## $BGT Distribution
+## $BGT 분배
 
-`$BGT` is emitted to reward vaults on a per-block basis via the Distributor. Distributions for a given block are performed during processing for the following block. Distribution creates `$BGT` that is then claimable by Reward Vault stakers.
+Distributor는 블록 단위로 보상 볼트에 `$BGT`를 배출합니다. 네트워크는 주어진 블록에 대한 분배를 다음 블록 동안 처리합니다. 이를 통해 보상 볼트 스테이커가 청구할 수 있는 `$BGT`가 생성됩니다.
 
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.** Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts. The reward window is reset each time new rewards are added.
+네트워크는 블록 단위로 보상을 생성하지만 **3일 동안** 분배합니다. 예치자는 예치 금액에 비례하여 이 기간에 걸쳐 선형으로 스트리밍되는 보상을 받습니다. 보상 창은 새 보상이 도착할 때마다 재설정됩니다.
 
-### Distribution Example
+### 분배 예시
 
-On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
+Berachain에서 `$BGT`는 블록 단위로 분배되므로, 3일 분배 기간은 지속적으로 "시작"이 현재 블록으로 밀리는 것으로 봐야 합니다. 따라서 이 기간은 이전 3일 동안 어느 시점의 배출을 기반으로 한 슬라이딩 윈도우로 봐야 합니다.
 
-A more real-world example with simplified numbers:
+간소화된 숫자로 더 현실적인 예시:
 
-- 3 `$BGT` distributed daily, for a total of 27 over 9 days
-- 1 depositor, owning all the deposits
+- 3일간 매일 3 `$BGT` 분배, 9일간 총 27
+- 1명의 예치자, 모든 예치 소유
 
-![Complex Example](/images/general/complex-emission.png)
+<Frame>
+  <img src="/images/general/complex-emission.png" alt="다중 검증자 BGT 분배 예시 다이어그램" />
+</Frame>
 
-**Legend**
+**범례**
 
-- Emitted: Total number of `$BGT` distributed and available
-- Claimable: Total number of `$BGT` able to be claimed by depositors
-- Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
+- Emitted: 분배되고 사용 가능한 총 `$BGT` 수
+- Claimable: 예치자가 청구할 수 있는 총 `$BGT` 수
+- Daily Reward: 배출 토큰 잠금 해제를 기반으로 청구 가능으로 표시된 일일 `$BGT` 수
 
-This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after three days where all rewards are actively being distributed.
+이를 통해 예치자는 3일 후 보상이 포화점에 도달할 때까지 매일 증가하는 양의 `$BGT`를 받게 되며, 그 시점부터 모든 보상이 적극적으로 분배됩니다.
 
-Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
+보상 기간은 보상을 즉시 청구할 수 있게 하는 대신 이 분배 메커니즘을 통해 예치자와 생태계 일치를 인센티브합니다.
 
-## Calculating Boost APR
+## Boost APR 계산
 
-Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
+Boost APR은 [Berachain Hub](https://hub.berachain.com) 전반에 표시됩니다.
 
-![Boost APR Example](/images/general/boost-apr-example.png)
+<Frame>
+  <img src="/images/general/boost-apr-example.png" alt="Boost APR 계산 예시 차트" />
+</Frame>
 
-Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).
+Boost APR %는 시작 블록과 종료 블록으로 정의된 블록 범위를 사용하여 계산됩니다. 백분율이 계산되는 시점에 APR 계산기는 모든 토큰의 가격을 ($BERA 기준) 샘플링합니다.

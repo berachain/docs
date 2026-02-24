@@ -1,30 +1,32 @@
 ---
-title: "What is Berachain?"
-description: "Berachain is a high-performance EVM-compatible blockchain built on Proof-of-Liquidity consensus"
+title: "Berachain là gì?"
+description: "L1 EVM giống hệt, đồng thuận Proof-of-Liquidity và BeaconKit."
 ---
 
-![Berachain](/images/general/berachain-website-homepage.png)
+<Frame>
+  <img src="/images/general/berachain-website-homepage.png" alt="Trang chủ website Berachain" />
+</Frame>
 
-Berachain is a high-performance EVM-Identical Layer 1 blockchain utilizing Proof-of-Liquidity (PoL) and built on top of the modular EVM-focused consensus client framework BeaconKit.
+Berachain là Layer 1 [EVM giống hệt](/vi/general/introduction/what-is-berachain#evm-identical), xây dựng trên [Proof-of-Liquidity](/vi/general/introduction/what-is-berachain#proof-of-liquidity) (PoL) và framework đồng thuận mô-đun [BeaconKit](/vi/general/introduction/what-is-berachain#beaconkit). Nó mang lại hiệu năng cao trong khi vẫn tương thích đầy đủ với công cụ và nâng cấp Ethereum.
 
-## EVM Identical
+## EVM giống hệt
 
-Berachain's execution runtime environment is identical to the Ethereum Virtual Machine (EVM) as seen on Ethereum Mainnet. We use very lightly modified forks of popular execution clients like Geth and Reth to handle executing smart contracts. We support all the usual tooling that are familiar to EVM developers.
+Môi trường thực thi runtime của Berachain giống hệt Máy ảo Ethereum (EVM) như trên Ethereum Mainnet. Berachain dùng các bản fork chỉnh sửa rất nhẹ của các [client thực thi](/vi/general/help/glossary#execution-client) phổ biến như Geth và Reth để thực thi smart contract. Berachain hỗ trợ mọi [công cụ quen thuộc](/vi/build/getting-started/developer-tools) với nhà phát triển EVM.
 
-Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints, and any improvements made to execution clients can be applied immediately to Berachain.
+Giống hệt nghĩa là mỗi khi EVM nâng cấp, Berachain có thể áp dụng phiên bản mới nhất—ví dụ Dencun—ngay lập tức. Điều này bao gồm tương thích với mọi namespace và endpoint RPC, và mọi cải tiến cho client thực thi đều có thể áp dụng ngay cho Berachain.
 
 ## Proof-of-Liquidity
 
-Proof-of-Liquidity radically changes the way L1 economics are structured, prioritizing users and applications over validator rewards at baseline. Network incentives go towards enriching ecosystem liquidity, contributing to efficient trading, price stability, securing the chain, and increasing network/user growth.
+Proof-of-Liquidity thay đổi căn bản cách tổ chức kinh tế L1, ưu tiên người dùng và ứng dụng hơn phần thưởng validator ở mức cơ sở. Incentive mạng dùng để làm giàu thanh khoản hệ sinh thái, góp phần vào giao dịch hiệu quả, ổn định giá, bảo mật chain và tăng trưởng mạng/người dùng.
 
-PoL strongly aligns the incentives of network participants (validators, protocols, users) and contributes to the overall long-term health of the chain.
+PoL căn chỉnh mạnh mẽ incentive của [thành viên mạng](/vi/general/proof-of-liquidity/participants) (validator, protocol, người dùng) và góp phần vào sức khỏe dài hạn của chain.
 
-Beyond providing seamless day-one utility, the native dApps, such as BEX, serve as reference implementations of how developers can build on top of Proof-of-Liquidity.
+Ngoài việc cung cấp tiện ích ngay từ ngày đầu, các dApp gốc như [BEX](/vi/bex/learn/overview) đóng vai trò triển khai tham chiếu cho cách nhà phát triển xây dựng trên Proof-of-Liquidity.
 
-Read more in [What Is Proof-of-Liquidity](/general/introduction/what-is-proof-of-liquidity).
+Đọc thêm tại [Proof-of-Liquidity là gì](/vi/general/introduction/what-is-proof-of-liquidity).
 
 ## BeaconKit
 
-BeaconKit is a modular framework developed by Berachain for building EVM consensus clients. It integrates the benefits of CometBFT consensus, including increased composability, single slot finality (SSF), and more.
+BeaconKit là framework mô-đun do Berachain phát triển để xây dựng [client đồng thuận](/vi/general/help/glossary#consensus-client) EVM. Nó tích hợp lợi ích của đồng thuận CometBFT, bao gồm khả năng kết hợp cao hơn, [single slot finality (SSF)](https://ethereum.org/en/roadmap/single-slot-finality/) và hơn nữa.
 
-Read more in [What Is BeaconKit](/validators/beaconkit/overview).
+Đọc thêm tại [BeaconKit là gì](/vi/validators/beaconkit/overview).

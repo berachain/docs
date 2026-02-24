@@ -1,45 +1,45 @@
 ---
-title: "$BGT Token"
-description: "What Is the BGT Token and how it works"
+title: "Token $BGT"
+description: "Token quản trị và reward; kiếm và delegate."
 ---
 
-Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking and is additionally used for gas, governance, and economic incentives. `$BGT` and the two-token model bifurcate the first two functions from the latter two.
+Blockchain Proof-of-Stake thường có một token dùng để bảo mật mạng qua staking và còn dùng cho gas, quản trị và incentive kinh tế. `$BGT` và mô hình hai token tách hai chức năng đầu (bảo mật, gas) khỏi hai chức năng sau (quản trị, incentive).
 
-Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into their own token - `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
+Qua mô hình hai token Proof-of-Liquidity (PoL) của Berachain, chức năng quản trị và incentive kinh tế (emission & block reward) được tách thành token riêng—`$BGT` (Bera Governance Token). `$BGT` không chuyển nhượng được và chỉ có thể có được bằng cách tham gia hoạt động có ích trong hệ sinh thái Berachain.
 
-## Earning $BGT
+## Kiếm $BGT
 
-`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](/general/proof-of-liquidity/reward-vaults). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
+`$BGT` được kiếm bằng cách thực hiện một số hành động nhất định trong dApp có [Reward Vaults](/vi/general/proof-of-liquidity/reward-vaults) đã whitelist. Phần lớn liên quan đến cung cấp thanh khoản nhưng không giới hạn. Deposit Reward Vault tương ứng với một dạng hoạt động có ích trên Berachain.
 
-The typical flow is for users to supply liquidity and receive a receipt token for that activity, which they can then stake in reward vaults to earn `$BGT`. Some examples include:
+Thông thường bạn cung cấp thanh khoản và nhận receipt token cho hoạt động đó, sau đó stake receipt token trong reward vaults để kiếm `$BGT`. Một số ví dụ:
 
-- Depositing liquidity in the native BEX for an LP pair whitelisted to earn `$BGT` emissions
-- Supplying assets to a lending market and staking the interest-bearing receipt tokens in a reward vault
+- Deposit thanh khoản vào BEX gốc cho cặp LP được whitelist để kiếm emission `$BGT`
+- Cung cấp tài sản cho thị trường cho vay và stake receipt token sinh lãi trong reward vault
 
-Users can see available earning options at [Berachain Hub Pools](https://hub.berachain.com/pools).
+Bạn có thể xem các tùy chọn kiếm có sẵn tại [Berachain Hub Pools](https://hub.berachain.com/pools).
 
-Users can claim accumulated `$BGT` from Berahub.
+Bạn có thể claim `$BGT` tích lũy từ Berahub.
 
-## What can you do with $BGT?
+## Bạn có thể làm gì với $BGT?
 
-### Governance
+### Quản trị
 
-`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions (see [Reward Vault Governance](/general/governance/reward-vault-governance)).
+`$BGT` dùng để bỏ phiếu cho governance proposal. Người nắm giữ `$BGT` chịu trách nhiệm về nhiều quyết định hệ sinh thái (xem [Reward Vault Governance](/vi/general/governance/reward-vault-governance)).
 
-`$BGT` holders can either vote on proposals themselves or delegate their voting power to another address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
+Người nắm giữ `$BGT` có thể tự bỏ phiếu cho proposal hoặc delegate quyền bỏ phiếu cho địa chỉ khác. Delegation quản trị này hoạt động độc lập với việc boost validator để kiểm soát emission `$BGT` của họ.
 
-### Earn
+### Kiếm
 
-#### Boost A Validator For Incentives
+#### Boost validator để nhận incentive
 
-Users can select validators to "boost" with their `$BGT`, increasing the validator's [block rewards](/general/proof-of-liquidity/block-rewards). The amount of [Incentives](/general/proof-of-liquidity/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
+Bạn có thể chọn validator để "boost" bằng `$BGT` của bạn, tăng [block reward](/vi/general/proof-of-liquidity/block-rewards) của validator. Số [Incentives](/vi/general/proof-of-liquidity/incentives) kiếm được do tổng boost của validator quyết định. Các incentive này được trả lại cho người nắm giữ `$BGT` đã boost validator.
 
-#### dApp Fees
+#### Phí dApp
 
-Users who are boosting validators with their `$BGT` earn a share of Berachain core dApp fees, namely fees from BEX and HoneySwap. This is done via the `FeeCollector` contract.
+Nếu bạn boost validator bằng `$BGT`, bạn kiếm được phần phí dApp core Berachain, cụ thể là phí từ BEX và HoneySwap. Điều này thực hiện qua contract `FeeCollector`.
 
-At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
+Ở mức cao, FeeCollector đấu giá phí thu từ dApp lấy `$WBERA` rồi phân phối theo tỷ lệ cho người nắm giữ `$BGT` đã boost validator.
 
-### Redeem $BGT For $BERA
+### Đổi $BGT lấy $BERA
 
-`$BGT` can be redeemed (burned) 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
+`$BGT` có thể được đổi (đốt) 1:1 lấy `$BERA`. Đây là hàm một chiều; `$BERA` không thể chuyển thành `$BGT`. Điều này giới hạn việc kiếm incentive kinh tế của chain chỉ cho người nắm giữ `$BGT`.

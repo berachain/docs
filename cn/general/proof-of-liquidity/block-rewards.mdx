@@ -1,140 +1,146 @@
 ---
-title: "Block Production & Rewards"
-description: "How block rewards and BGT emissions work in Berachain's Proof-of-Liquidity"
+title: "区块生产与奖励"
+description: "区块生产、BGT 排放与奖励分配。"
 ---
 
-Proof-of-Liquidity governs block rewards and token emissions on Berachain using the `$BGT` token. This page explains the mathematical principles behind validator selection, block rewards, and emissions calculations.
+流动性证明使用 `$BGT` 代币管理 Berachain 的区块奖励与代币排放。本页说明验证者选择、区块奖励与排放计算的数学原理。
 
-## Validator Selection
+## 验证者选择
 
-The network maintains an active set of **69 validators** who are eligible for block production. Selection criteria include:
+网络维持有资格参与区块生产的**69 名验证者**的活跃集。选择条件包括：
 
-- Only top **69 validators** by `$BERA` stake are included in active set
-- Block proposal probability is proportional to staked `$BERA` and does not affect reward amounts
-- Stake limitations per validator:
-  - Minimum: 250,000 `$BERA`
-  - Maximum: 10,000,000 `$BERA`
+- 仅按 `$BERA` 质押量排序的**前 69 名验证者**进入活跃集
+- 提议区块的概率与质押的 `$BERA` 成正比，不影响奖励金额
+- 每验证者质押上下限：
+  - 最低：250,000 `$BERA`
+  - 最高：10,000,000 `$BERA`
 
-A given Validator's probability of being selected to produce a block is the proportion of its stake's weight to the total stakes of the active set.
+某验证者被选中生产区块的概率等于其质押在活跃集总质押中的权重比例。
 
-## $BGT Emissions Structure
+## $BGT 排放结构
 
-When a validator produces a block, `$BGT` tokens are emitted through two emission components:
+当验证者生产区块时，`$BGT` 通过两个排放组成部分发放：
 
-1. Base Emission
-   - **Fixed amount** equal to a `base rate` parameter (B)
-   - Paid directly to block-producing validator
+1. 基础排放
+   - 等于 `base rate` 参数（B）的**固定数量**
+   - 直接支付给生产区块的验证者
 
-2. Reward Vault Emission
-   - **Variable amount** dependent on validator's boost (x)
-     - i.e. percentage of total `$BGT` delegated to the validator
-   - Distributed to [Reward Vaults](/general/proof-of-liquidity/reward-vaults) selected by validator
-     - Proportional to weights configured in the validator's Reward Allocation
-     - Validators receive [Incentives](/general/proof-of-liquidity/incentives) from projects based on amounts directed to their Reward Vaults
+2. 奖励金库排放
+   - 取决于验证者 boost（x）的**可变数量**
+     - 即委托给该验证者的总 `$BGT` 占比
+   - 分配给验证者选择的[奖励金库](/cn/general/proof-of-liquidity/reward-vaults)
+     - 按验证者奖励分配中配置的权重比例
+     - 验证者根据导向其奖励金库的数量从项目获得[激励](/cn/general/proof-of-liquidity/incentives)
 
-## Validator Boosts
+## 验证者 Boost
 
-Boost is a crucial metric that determines a validator's reward emissions:
+Boost 是决定验证者奖励排放的关键指标：
 
-- Calculated as the percentage of `$BGT` delegation a validator has compared to the total `$BGT` delegated in the network
-- Expressed as a decimal between 0 and 1
-- Example: If a validator has 1000 `$BGT` delegated and the network has 10000 total `$BGT` delegated, their boost would be 0.1 (10%). Higher boost leads to higher reward emissions, subject to the emission formula.
+- 计算为验证者被委托的 `$BGT` 占网络中委托的总 `$BGT` 的百分比
+- 用 0 到 1 之间的小数表示
+- 例：若验证者被委托 1000 `$BGT` 而网络总委托为 10000 `$BGT`，则其 boost 为 0.1（10%）。Boost 越高，奖励排放越高（受排放公式约束）
 
-## BeraChef: Reward Allocation Management
+## BeraChef：奖励分配管理
 
-BeraChef is the core contract that manages how validators direct their BGT rewards across different Reward Vaults. It serves as the configuration layer that determines reward distribution based on validator preferences.
+BeraChef 是管理验证者如何将 BGT 奖励导向不同奖励金库的核心合约，作为根据验证者偏好决定奖励分配的配置层。
 
-### Core Responsibilities
+### 核心职责
 
-BeraChef manages three key aspects of the reward system:
+BeraChef 管理奖励系统的三个关键方面：
 
-1. **Reward Allocations** - Maintains lists of weights that determine the percentage of rewards going to each Reward Vault
-2. **Validator Commission** - Manages commission rates that validators can charge on incentive tokens
-3. **Vault Whitelisting** - Controls which vaults are eligible to receive BGT rewards
+1. **奖励分配** — 维护决定分配给各奖励金库比例的权重列表
+2. **验证者佣金** — 管理验证者对激励代币收取的佣金比例
+3. **金库白名单** — 控制哪些金库有资格接收 BGT 奖励
 
-### How Reward Allocations Work
+### 奖励分配如何运作
 
-Each validator can set a custom reward allocation that specifies how their BGT rewards should be distributed.
+每位验证者可设置自定义奖励分配，指定其 BGT 奖励应如何分配。
 
-Reward Allocations are described by:
+奖励分配由以下描述：
 
-1. A list of selected vaults and the percentage of a given block's BGT reward to send to each. The weights must sum to 100.
-2. The block number the allocation becomes effective.
+1. 所选金库列表及发送给每个金库的该区块 BGT 奖励比例。权重之和须为 100。
+2. 分配生效的区块号。
 
-Validators exercise control over the BeraChef reward allocation subject to a delay of 450 blocks.
+验证者在 450 个区块的延迟条件下对 BeraChef 奖励分配进行控制。
 
-**If a validator doesn't update its cutting board within 302,400 blocks (approximately 7 days),** BeraChef will begin to apply the _baseline_ cutting board. This _baseline_ allocation is chosen to direct emissions efficiently to reward vaults with active incentives.
+**若验证者在 302,400 个区块（约 7 天）内未更新其 cutting board**，BeraChef 将开始应用 _baseline_ cutting board。该 _baseline_ 分配旨在将排放高效导向有活跃激励的奖励金库。
 
-### Commission Management
+### 佣金管理
 
-BeraChef manages validator commission rates on incentive tokens with the following constraints:
+BeraChef 在下列约束下管理验证者激励代币佣金比例：
 
-- **Default Commission**: 5% if not explicitly set
-- **Maximum Commission**: 20% hard cap enforced by the contract
-- **Change Delay**: Required waiting period before commission changes take effect
+- **默认佣金**：未显式设置时为 5%
+- **最高佣金**：合约强制 20% 硬顶
+- **变更延迟**：佣金变更生效前须经过的等待期
 
-## $BGT Emissions Per Block
+## 每区块 $BGT 排放
 
-The total `$BGT` emitted per block is calculated using the following formula:
+每区块发放的 `$BGT` 总量由以下公式计算：
 
 $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\right)\right]$$
 
-### Parameters
+### 参数
 
-| Parameter                       | Description                                                    | Impact                                         |
-| ------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
-| x (boost)                       | Fraction of total `$BGT` delegated to validator (range: [0,1]) | Determines `$BGT` emissions to Reward Vaults   |
-| B (base rate)                   | Fixed amount of `$BGT` for block production                    | Determines baseline validator rewards          |
-| R (reward rate)                 | Base `$BGT` amount for reward vaults                           | Sets foundation for reward emissions           |
-| a (boost multiplier)            | Boost impact coefficient                                       | Higher values increase boost importance        |
-| b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
-| m (minimum boosted reward rate) | Floor for reward vault emissions                               | Higher values benefit low-boost validators     |
+| 参数                       | 描述                                                    | 影响                                         |
+| -------------------------- | ------------------------------------------------------- | -------------------------------------------- |
+| x (boost)                  | 委托给验证者的总 `$BGT` 占比（范围：[0,1]）             | 决定流向奖励金库的 `$BGT` 排放               |
+| B (base rate)              | 区块生产的基础 `$BGT` 固定量                            | 决定验证者基础奖励                           |
+| R (reward rate)            | 奖励金库的基础 `$BGT` 数量                              | 设定奖励排放基础                             |
+| a (boost multiplier)       | Boost 影响系数                                         | 值越大 boost 越重要                          |
+| b (convexity parameter)    | Boost 影响曲线陡峭度                                   | 值越大对低 boost 惩罚越重                    |
+| m (minimum boosted reward rate) | 奖励金库排放下限                                 | 值越大对低 boost 验证者越有利                |
 
-### Sample Emissions Chart
+### 示例排放图
 
-Using the following sample parameters, we can visualize how emissions scale with `$BGT` delegation:
+使用下列示例参数，下图展示排放如何随 `$BGT` 委托变化：
 
 $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
 
-![chart showing how emissions scale with BGT delegation](/images/general/emission-scale-bgt-delegation-chart.png)
+<Frame>
+  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="BGT 委托与排放规模关系图" />
+</Frame>
 
-## Max Block Inflation
+## 最大区块通胀
 
-`$BGT` emissions grow with the amount of boost a validator has, up to a cap. The maximum theoretical block emission occurs at 100% boost:
+`$BGT` 排放随验证者 boost 增加而增加，直至上限。100% boost 时达到最大理论区块排放：
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
 
-## $BGT Distribution
+## $BGT 分配
 
-`$BGT` is emitted to reward vaults on a per-block basis via the Distributor. Distributions for a given block are performed during processing for the following block. Distribution creates `$BGT` that is then claimable by Reward Vault stakers.
+Distributor 按区块向奖励金库发放 `$BGT`。网络在下一区块处理该区块的分配，从而产生奖励金库质押者可领取的 `$BGT`。
 
-Rewards are created on a per-block basis; however, the distribution of rewards is done **over a three-day period.** Rewards are streamed linearly over this period to depositors proportionally to their deposit amounts. The reward window is reset each time new rewards are added.
+网络按区块生成奖励，但在**三天内**线性分配。存入者按其存入比例在这段时间内线性获得奖励。每次有新奖励到达时奖励窗口会重置。
 
-### Distribution Example
+### 分配示例
 
-On Berachain, `$BGT` is distributed per block, meaning that the three-day distribution period is consistently being pushed to "start" on the current block. Thus, this period should be viewed as a sliding window based on the emissions at any given time during the previous three days.
+在 Berachain 上，`$BGT` 按区块分配，即三天分配期会不断被“推”到从当前区块“开始”。因此应将其视为基于过去三天任意时刻排放的滑动窗口。
 
-A more real-world example with simplified numbers:
+用简化数字的示例：
 
-- 3 `$BGT` distributed daily, for a total of 27 over 9 days
-- 1 depositor, owning all the deposits
+- 每天分配 3 `$BGT`，9 天共 27
+- 1 名存入者，拥有全部存入
 
-![Complex Example](/images/general/complex-emission.png)
+<Frame>
+  <img src="/images/general/complex-emission.png" alt="多验证者 BGT 分配示例图" />
+</Frame>
 
-**Legend**
+**图例**
 
-- Emitted: Total number of `$BGT` distributed and available
-- Claimable: Total number of `$BGT` able to be claimed by depositors
-- Daily Reward: Daily number of `$BGT` marked as claimable based on emitted tokens unlocks
+- Emitted：已分配且可用的 `$BGT` 总数
+- Claimable：存入者可领取的 `$BGT` 总数
+- Daily Reward：根据已发放代币解锁记为可领取的每日 `$BGT` 数
 
-This results in the depositor receiving an increasing amount of `$BGT` daily until rewards reach a saturation point after three days where all rewards are actively being distributed.
+结果是存入者在三天后奖励达到饱和点之前，每天收到的 `$BGT` 递增；之后所有奖励都在持续分配。
 
-Reward duration periods incentivize ecosystem alignment with depositors via this distribution mechanism rather than allowing rewards to be instantly claimed.
+奖励期限通过该分配机制激励存入者与生态一致，而不是允许奖励被立即领取。
 
-## Calculating Boost APR
+## 计算 Boost APR
 
-Boost APR is shown throughout the [Berachain Hub](https://hub.berachain.com).
+Boost APR 在 [Berachain Hub](https://hub.berachain.com) 各处展示。
 
-![Boost APR Example](/images/general/boost-apr-example.png)
+<Frame>
+  <img src="/images/general/boost-apr-example.png" alt="Boost APR 计算示例图" />
+</Frame>
 
-Boost APR % is calculated using ranges of blocks, defined by a starting block and an ending block. At the time the percentages are calculated, the APR calculator samples the prices of all tokens (in $BERA).
+Boost APR % 使用由起始区块与结束区块定义的区块范围计算。在计算百分比时，APR 计算器对所有代币价格（以 $BERA 计）进行采样。

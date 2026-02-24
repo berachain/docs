@@ -1,34 +1,34 @@
 ---
-title: "$HONEY Stablecoin"
-description: "What Is $HONEY Stablecoin"
+title: "Stablecoin $HONEY"
+description: "Mint, redeem, collateral và chế độ basket."
 ---
 
-`$HONEY` is Berachain's native stablecoin, designed to provide a stable and reliable means of exchange within the Berachain ecosystem and beyond. `$HONEY` is fully collateralized and soft-pegged to the US Dollar.
+`$HONEY` là stablecoin gốc của Berachain, được thiết kế để cung cấp phương tiện trao đổi ổn định và đáng tin cậy trong và ngoài hệ sinh thái Berachain. `$HONEY` được thế chấp đầy đủ và soft-pegged với Đô la Mỹ.
 
-## How to Get $HONEY
+## Cách lấy $HONEY
 
-`$HONEY` can be minted by depositing whitelisted collateral into a vault and minting `$HONEY` against that collateral through the [HoneySwap dApp](https://honey.berachain.com). The minting rates of `$HONEY` are configurable by `$BGT` governance for each different collateral asset.
+`$HONEY` có thể được mint bằng cách deposit collateral đã whitelist vào vault và mint `$HONEY` chống lại collateral đó qua [dApp HoneySwap](https://honey.berachain.com). Tỷ lệ mint `$HONEY` có thể được cấu hình bởi governance `$BGT` cho từng tài sản collateral khác nhau.
 
-Alternatively, `$HONEY` can be obtained by swapping from other assets on BEX or another decentralized exchange.
+Ngoài ra có thể lấy `$HONEY` bằng cách swap từ tài sản khác trên BEX hoặc sàn phi tập trung khác.
 
-### Collateral Assets
+### Tài sản collateral
 
-The following assets can be used as collateral to mint `$HONEY`:
+Các tài sản sau có thể dùng làm collateral để mint `$HONEY`:
 
 - `$USDC`
 - `$BYUSD` (`$pyUSD`)
 - `$USDT0`
 - `$USDE`
 
-New assets used to mint `$HONEY` can be added through governance.
+Tài sản mới dùng để mint `$HONEY` có thể được thêm qua governance.
 
-## How is $HONEY Used?
+## $HONEY dùng để làm gì?
 
-`$HONEY` shares the same uses as other stablecoins, such as for payments/remittances and as a hedge against market volatility. `$HONEY` can also be used within the Berachain DeFi ecosystem.
+`$HONEY` dùng giống các stablecoin khác, chẳng hạn thanh toán/chuyển tiền và phòng ngừa biến động thị trường. `$HONEY` cũng có thể dùng trong hệ sinh thái DeFi Berachain.
 
-## $HONEY Architecture
+## Kiến trúc $HONEY
 
-A flow diagram of the `$HONEY` minting process and associated contracts is shown below:
+Sơ đồ luồng quy trình mint `$HONEY` và các contract liên quan:
 
 ```mermaid
 graph LR
@@ -48,56 +48,56 @@ graph LR
     USDEVault -->|Shares| HoneyFactory
 ```
 
-### $HONEY Vaults
+### Các vault $HONEY
 
-`$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type. Currently, all vaults use the same conversion rates: 100% mint rate (0% mint fee) and 99.95% redeem rate (0.05% redeem fee).
+`$HONEY` được mint bằng cách deposit collateral đủ điều kiện vào các contract vault chuyên dụng. Mỗi vault tương ứng với một loại collateral. Hiện tất cả vault dùng cùng tỷ lệ chuyển đổi: 100% tỷ lệ mint (0% phí mint) và 99,95% tỷ lệ redeem (0,05% phí redeem).
 
 ### HoneyFactory
 
-At the heart of the `$HONEY` minting process is the HoneyFactory contract. This contract acts as a central hub, connecting all the different `$HONEY` Vaults and is responsible for minting new `$HONEY` tokens.
+Trung tâm quy trình mint `$HONEY` là contract HoneyFactory. Contract này đóng vai trò hub trung tâm, kết nối tất cả vault `$HONEY` và chịu trách nhiệm mint token `$HONEY` mới.
 
-As shown in the diagram, users' deposits are routed through the `HoneyFactory` contract to the appropriate vault. The `HoneyFactory` custodies the shares minted by the vault (corresponding to users' deposits) and mints `$HONEY` tokens to the user.
+Như trong sơ đồ, deposit của bạn được định tuyến qua contract HoneyFactory tới vault tương ứng. HoneyFactory giữ shares do vault mint (tương ứng deposit của bạn) và mint token `$HONEY` cho bạn.
 
-## Depegging and Basket Mode
+## Depeg và chế độ basket
 
-Basket Mode is a safety mechanism that activates when collateral assets become unstable. It affects both minting and redemption of `$HONEY` in specific ways:
+Basket Mode là cơ chế an toàn kích hoạt khi tài sản collateral trở nên không ổn định. Nó ảnh hưởng cả mint và redeem `$HONEY` theo cách cụ thể:
 
-**Redemption:**
+**Redeem:**
 
-- When ANY collateral asset depegs, Basket Mode automatically activates
-- In this mode, users can't choose which asset they redeem their `$HONEY` for
-- Instead, users redeem for a proportional share of ALL collateral assets in the basket
-- For example, if you redeem 1 `$HONEY` token with Basket Mode active, you'll get some of each collateral asset based on their relative proportion as collateral
+- Khi BẤT KỲ tài sản collateral nào depeg, Basket Mode tự động kích hoạt
+- Ở chế độ này bạn không thể chọn redeem `$HONEY` lấy tài sản nào
+- Thay vào đó bạn redeem lấy phần tỷ lệ của TẤT CẢ tài sản collateral trong basket
+- Ví dụ: nếu redeem 1 token `$HONEY` khi Basket Mode active, bạn nhận một ít mỗi tài sản collateral theo tỷ lệ tương đối của chúng làm collateral
 
-**Minting:**
+**Mint:**
 
-- Basket Mode for minting is considered an edge case that only occurs if ALL collateral assets are either depegged or blacklisted. Depegged assets cannot be used to mint `$HONEY`
-- In this situation, to mint `$HONEY`, users must provide proportional amounts of all collateral assets in the basket, rather than choosing a single asset
-- If one asset is depegged, you can mint only with the other asset
+- Basket Mode cho mint được xem là edge case chỉ xảy ra nếu TẤT CẢ tài sản collateral đều depeg hoặc bị blacklist. Tài sản depeg không thể dùng để mint `$HONEY`
+- Trong tình huống đó, để mint `$HONEY` bạn phải cung cấp lượng tỷ lệ của tất cả tài sản collateral trong basket, thay vì chọn một tài sản
+- Nếu một tài sản depeg, bạn chỉ có thể mint bằng tài sản còn lại
 
-## Fees
+## Phí
 
-Fees collected from minting and redeeming `$HONEY` are distributed to `$BGT` holders. The current fee structure is the following:
+Người nắm giữ `$BGT` nhận phí thu từ mint và redeem `$HONEY`. Cấu trúc phí hiện tại:
 
-| Stablecoin | Mint Fee | Redeem Fee |
+| Stablecoin | Phí Mint | Phí Redeem |
 | ---------- | -------- | ---------- |
-| USDT       | 0.1%     | 0%         |
-| byUSD      | 0.1%     | 0%         |
-| USDC       | 0%       | 0.05%      |
-| USDe       | 0%       | 0.05%      |
+| USDT       | 0,1%     | 0%         |
+| byUSD      | 0,1%     | 0%         |
+| USDC       | 0%       | 0,05%      |
+| USDe       | 0%       | 0,05%      |
 
-### Example
+### Ví dụ
 
-Let's walk through minting and redeeming `$HONEY` with `$USDC`:
+Mint và redeem `$HONEY` với `$USDC`:
 
-**Minting:**
+**Mint:**
 
-- User deposits `1,000 $USDC`
-- Receives `1,000 $HONEY` (0% fee)
-- No fees collected
+- User deposit `1.000 $USDC`
+- Nhận `1.000 $HONEY` (0% phí)
+- Không thu phí
 
-**Redeeming:**
+**Redeem:**
 
-- User redeems `1,000 $HONEY` for `$USDC`
-- Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
-- `0.5 $USDC` fee is distributed to `$BGT` holders
+- User redeem `1.000 $HONEY` lấy `$USDC`
+- Nhận `999,5 $USDC` (0,05% phí = 0,5 $USDC)
+- Phí `0,5 $USDC` được phân phối cho người nắm giữ `$BGT`

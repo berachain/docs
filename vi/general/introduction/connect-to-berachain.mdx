@@ -1,37 +1,73 @@
 ---
-title: "How to Connect a Wallet"
-description: "Learn to quickly configure your crypto wallet with Berachain"
+title: "Kết nối với Berachain"
+description: "Thêm Berachain vào ví và chuyển mạng."
 ---
 
-Blockchain wallets allow you, and only you, to access your assets on Berachain. Wallets enable this by allowing you to create and store your private keys, which can then be used to prove that you can access the assets in the wallet to do things such as trade tokens, buy NFTs, play games, and more.
+export const addNetworkMainnet = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138de",
+    chainName: "Berachain",
+    nativeCurrency: { name: "BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://rpc.berachain.com/"],
+    blockExplorerUrls: ["https://berascan.com/"],
+  };
+  console.log("[AddNetwork] add mainnet", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-## Berachain Mainnet RPC
+export const addNetworkBepolia = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.warn("[AddNetwork] No wallet detected");
+    return;
+  }
+  const params = {
+    chainId: "0x138c5",
+    chainName: "Berachain Bepolia",
+    nativeCurrency: { name: "Testnet BERA Token", symbol: "BERA", decimals: 18 },
+    rpcUrls: ["https://bepolia.rpc.berachain.com/"],
+    blockExplorerUrls: ["https://testnet.berascan.com/"],
+  };
+  console.log("[AddNetwork] add bepolia (testnet)", params);
+  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+};
 
-Copy and paste these values into any wallet that supports importing RPCs.
+Ví blockchain cho phép bạn truy cập tài sản trên Berachain. Chúng tạo và lưu private key để bạn chứng minh quyền sở hữu khi giao dịch token, mua NFT, chơi game, v.v.
 
-| Key                | Value                           |
-| ------------------ | ------------------------------- |
-| Network            | `Berachain`                     |
-| RPC URL            | `https://rpc.berachain.com`     |
-| Chain ID           | `80094`                         |
-| Currency symbol    | `BERA`                          |
-| Block explorer URL | `https://berascan.com`          |
+## RPC Berachain Mainnet
 
-## Berachain Bepolia Testnet RPC
+Dùng các giá trị sau trong bất kỳ ví nào hỗ trợ RPC tùy chỉnh. Thêm mạng bằng một cú nhấp hoặc sao chép từ bảng:
 
-| Key                | Value                                   |
-| ------------------ | --------------------------------------- |
-| Network            | `Berachain Bepolia`                     |
-| RPC URL            | `https://bepolia.rpc.berachain.com`     |
-| Chain ID           | `80069`                                 |
-| Currency symbol    | `BERA`                                  |
-| Block explorer URL | `https://bepolia.berascan.com`          |
+<button type="button" onClick={() => addNetworkMainnet()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Thêm Berachain</button>
 
-## Supported Wallets
+| Khóa             | Giá trị                         |
+| ---------------- | ------------------------------- |
+| Network          | `Berachain`                     |
+| RPC URL          | `https://rpc.berachain.com/`   |
+| Chain ID         | `80094`                         |
+| Currency symbol  | `BERA`                          |
+| Block explorer   | `https://berascan.com/`         |
 
-Currently, any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that allows RPC importing can be configured to work with Berachain.
+## RPC Berachain Bepolia Testnet
 
-Here are some examples of compatible wallets:
+Dùng các giá trị sau cho testnet. Thêm bằng một cú nhấp hoặc sao chép từ bảng:
+
+<button type="button" onClick={() => addNetworkBepolia()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Thêm Berachain Bepolia</button>
+
+| Khóa             | Giá trị                                   |
+| ---------------- | ----------------------------------------- |
+| Network          | `Berachain Bepolia`                       |
+| RPC URL          | `https://bepolia.rpc.berachain.com/`      |
+| Chain ID         | `80069`                                   |
+| Currency symbol  | `BERA`                                    |
+| Block explorer   | `https://testnet.berascan.com/`           |
+
+## Ví được hỗ trợ
+
+Mọi [ví dựa trên EVM](https://ethereum.org/en/wallets/find-wallet/) hỗ trợ RPC tùy chỉnh đều dùng được với Berachain. Ví dụ:
 
 - [MetaMask](https://metamask.io)
 - [Rabby](https://rabby.io)
@@ -40,58 +76,67 @@ Here are some examples of compatible wallets:
 - [Frame](https://frame.sh)
 - [Zerion](https://zerion.io/download?utm_source=berachain)
 
-## How To Set Up A MetaMask Wallet With Berachain
+## Thiết lập MetaMask với Berachain
 
-This will walk you through the steps of setting up and configuring a MetaMask wallet with Berachain.
+<Note>Nên dùng Chrome.</Note>
 
-**NOTE:** It is recommended that you set this up through Chrome.
+<Steps>
+  <Step title="Cài MetaMask">
+    Trên [metamask.io](https://metamask.io/), tải tiện ích mở rộng trình duyệt. Xác nhận nguồn là `metamask.io`.
 
-### Step 1 - Install MetaMask
+    <Frame>
+      <img src="/images/general/metamask-chrome-store.png" alt="Tiện ích MetaMask trên Chrome Web Store" />
+    </Frame>
+  </Step>
+  <Step title="Tạo ví">
+    Nhấp `Create a new wallet`. Đặt mật khẩu, rồi làm theo các bước sao lưu cụm khôi phục. Cụm từ này chứng minh bạn sở hữu ví—lưu trữ an toàn.
 
-Go to MetaMask's [website](https://metamask.io/) and click to download the browser extension for your browser of choice. Make sure the extension is being offered by `metamask.io`.
+    <Frame>
+      <img src="/images/general/metamask-get-started.png" alt="Màn hình bắt đầu MetaMask với tùy chọn tạo ví" />
+    </Frame>
 
-![Metamask Chrome Store](/images/general/metamask-chrome-store.png)
+    <Frame>
+      <img src="/images/general/metamask-create-password.png" alt="Màn hình tạo mật khẩu MetaMask" />
+    </Frame>
 
-### Step 2 - Create Your Wallet in MetaMask
+    <Frame>
+      <img src="/images/general/metamask-recovery-phrase.png" alt="Màn hình sao lưu cụm khôi phục MetaMask" />
+    </Frame>
+  </Step>
+</Steps>
 
-Once MetaMask finishes installing as a Chrome extension, the initial prompt will show up. Click the `Create a new wallet` button to start the process.
+## Thêm mạng Berachain thủ công
 
-![Metamask Get Started](/images/general/metamask-get-started.png)
+Nếu không dùng nút một cú nhấp ở trên, thêm mạng trong MetaMask thủ công:
 
-This will ask you to first set a password. This is the password you will enter when you open up the MetaMask extension:
+1. **Mở danh sách mạng** — Nhấp vào menu thả xuống ở góc trái trên MetaMask.
 
-![Metamask Create Password](/images/general/metamask-create-password.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-01.png" alt="Menu thả xuống mạng MetaMask" />
+</Frame>
 
-Next, follow the instructions to secure your wallet phrase. This step is very important as the wallet phrase is what is used to prove that you own the assets in your wallet.
+2. **Thêm mạng** — Nhấp `Add network` trong hộp thoại.
 
-![Metamask Recovery Phrase](/images/general/metamask-recovery-phrase.png)
+<Frame>
+  <img src="/images/general/metamask-add-network-02.png" alt="Nút thêm mạng MetaMask trong hộp thoại" />
+</Frame>
 
-Congratulations! You've set up your MetaMask wallet!
+3. **Thêm mạng thủ công** — Ở cuối danh sách, nhấp `Add network manually`.
 
-## Add Berachain Network To Your Wallet
+<Frame>
+  <img src="/images/general/metamask-add-network-03.png" alt="Tùy chọn thêm mạng thủ công MetaMask" />
+</Frame>
 
-Wallets can connect to various blockchains, with MetaMask setting Ethereum as its default blockchain. In order to connect to Berachain, we'll need to add the network to MetaMask and select it.
+4. **Nhập thông tin** — Dùng giá trị từ bảng RPC [Mainnet](#berachain-mainnet-rpc) hoặc [Bepolia Testnet](#berachain-bepolia-testnet-rpc) ở trên.
 
-### Add Berachain Network Manually
+5. **Lưu** — Nhấp `Save`.
 
-To add the network manually, click the drop-down in the top-left of MetaMask.
+<Frame>
+  <img src="/images/general/metamask-add-network-04.png" alt="Biểu mẫu cấu hình mạng MetaMask với thông tin Berachain" />
+</Frame>
 
-![Metamask Add Network Step 1](/images/general/metamask-add-network-01.png)
+Bạn sẽ đã kết nối Berachain hoặc Berachain Bepolia.
 
-When the modal appears, click the `Add network` button.
-
-![Metamask Add Network Step 2](/images/general/metamask-add-network-02.png)
-
-At the bottom of the existing list, click `Add network manually`.
-
-![Metamask Add Network Step 3](/images/general/metamask-add-network-03.png)
-
-Enter the following details into MetaMask to configure the network and connect to Berachain.
-
-Once the data is entered correctly, click `Save`.
-
-![Metamask Add Network Step 4](/images/general/metamask-add-network-04.png)
-
-After saving the network configuration, you should be connected to Berachain!
-
-![Metamask Testnet](/images/general/metamask-testnet.png)
+<Frame>
+  <img src="/images/general/metamask-testnet.png" alt="Ví MetaMask đã kết nối mạng Berachain" />
+</Frame>

@@ -1,284 +1,111 @@
 # Berachain Documentation
 
-Welcome to the unified Berachain documentation! This repository contains comprehensive documentation for Berachain and its native protocols: BEX and Bend.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Contributors](https://img.shields.io/github/contributors/berachain/mintlify-docs)](https://github.com/berachain/mintlify-docs/graphs/contributors)
+[![Docs](https://img.shields.io/badge/docs-docs.berachain.com-8B5CF6)](https://docs.berachain.com)
+[![Mintlify](https://img.shields.io/badge/docs-Mintlify-00DF80)](https://mintlify.com)
 
-## Documentation Structure
+Unified documentation for [Berachain](https://www.berachain.com/) and its native protocols: **BEX** (DEX) and **Bend** (lending). Built with [Mintlify](https://mintlify.com).
 
-This documentation is organized into three main tabs:
+We welcome contributions from the community. Whether you're fixing a typo, clarifying a section, or adding a new guide, your help makes our docs better for everyone.
 
-### Berachain (Core)
-Documentation for the Berachain L1 blockchain:
-- **Getting Started**: Introduction and overview
-- **Learn**: Deep dives into Proof-of-Liquidity, tokenomics, and architecture
-- **Developers**: Quickstart guides, API references, and development resources
-- **Infrastructure**: Node setup, validator guides, and network operations
+---
 
-### BEX (Decentralized Exchange)
-Native DEX protocol on Berachain:
-- **Overview**: Introduction to BEX and its features
-- **User Guides**: Trading, providing liquidity, and earning rewards
-- **Developers**: SDK integration, smart contract references, and examples
-- **Contracts**: Smart contract addresses and technical details
+## What’s in this repo
 
-### Bend (Lending Protocol)
-Native lending and borrowing protocol:
-- **Overview**: Introduction to Bend and its features
-- **User Guides**: Lending, borrowing, and position management
-- **Developers**: SDK integration, smart contract references, and examples
-- **Contracts**: Smart contract addresses and risk parameters
+- **Berachain (General)** — L1 overview, Proof-of-Liquidity, tokens, governance  
+- **Build** — Getting started, BEX, Bend, nodes, validators  
+- **Reference** — APIs, contracts, and technical reference
 
-## Quick Start
+Content is in MDX. Navigation and branding are configured in `docs.json`.
+
+---
+
+## Quick start
 
 ### Prerequisites
 
-- Node.js 16+
-- npm or yarn
+- **Node.js** 16+
+- **npm** or **yarn**
 
-### Installation
-
-Install the Berachain CLI:
+### Install Mintlify CLI
 
 ```bash
 npm i -g mint
 ```
 
-### Local Development
-
-Run the documentation locally:
+### Run locally
 
 ```bash
 mint dev
 ```
 
-View at `http://localhost:3000`
+Open [http://localhost:3000](http://localhost:3000).
 
-### Building for Production
+### Build for production
 
 ```bash
 mint build
 ```
 
-## Project Structure
-
-```
-mintlify-docs/
-├── berachain/              # Berachain core documentation
-│   ├── introduction.mdx
-│   ├── learn/
-│   │   ├── overview.mdx
-│   │   ├── proof-of-liquidity.mdx
-│   │   └── tokenomics.mdx
-│   ├── developers/
-│   │   └── quickstart.mdx
-│   ├── nodes/
-│   │   └── setup.mdx
-│   └── validators/
-│       └── overview.mdx
-│
-├── bex/                    # BEX DEX documentation
-│   ├── introduction.mdx
-│   ├── guides/
-│   │   ├── trading.mdx
-│   │   └── liquidity.mdx
-│   ├── developers/
-│   │   └── integration.mdx
-│   └── contracts/
-│       └── overview.mdx
-│
-├── bend/                   # Bend lending documentation
-│   ├── introduction.mdx
-│   ├── guides/
-│   │   ├── lending.mdx
-│   │   └── borrowing.mdx
-│   ├── developers/
-│   │   └── integration.mdx
-│   └── contracts/
-│       └── overview.mdx
-│
-├── docs.json              # Berachain configuration
-├── logo/
-│   ├── light.svg
-│   └── dark.svg
-└── images/
-```
-
-## Customization
-
-### Theme & Branding
-
-The documentation uses Berachain's brand colors (orange/brown theme). To customize:
-
-1. Edit `docs.json`
-2. Update colors in the `colors` section:
-```json
-{
-  "colors": {
-    "primary": "#E17726",
-    "light": "#F89D4E",
-    "dark": "#C96516"
-  }
-}
-```
-
-### Navigation
-
-Navigation is configured in `docs.json` under the `navigation.tabs` section. Each tab represents a major section (Berachain, BEX, Bend).
-
-To add a new page:
-1. Create the `.mdx` file in the appropriate directory
-2. Add the page path to `docs.json` under the relevant group
-
-Example:
-```json
-{
-  "group": "User Guides",
-  "pages": [
-    "bex/guides/trading",
-    "bex/guides/liquidity",
-    "bex/guides/your-new-page"  // Add here
-  ]
-}
-```
-
-### Logos
-
-Replace the logo files in `/logo/`:
-- `light.svg` - Logo for light mode
-- `dark.svg` - Logo for dark mode
-
-## Content Guidelines
-
-### MDX Features
-
-This documentation uses Berachain's extended MDX features:
-
-#### Cards
-```mdx
-<Card title="Title" icon="icon-name" href="/path">
-  Description
-</Card>
-```
-
-#### Card Groups
-```mdx
-<CardGroup cols={2}>
-  <Card>...</Card>
-  <Card>...</Card>
-</CardGroup>
-```
-
-#### Steps
-```mdx
-<Steps>
-  <Step title="First Step">Content</Step>
-  <Step title="Second Step">Content</Step>
-</Steps>
-```
-
-#### Callouts
-```mdx
-<Note>Important information</Note>
-<Tip>Helpful tip</Tip>
-<Warning>Warning message</Warning>
-<Check>Success message</Check>
-```
-
-#### Code Blocks
-```mdx
-\`\`\`javascript
-// Your code here
-\`\`\`
-```
-
-#### Accordions
-```mdx
-<AccordionGroup>
-  <Accordion title="Question">
-    Answer
-  </Accordion>
-</AccordionGroup>
-```
-
-## Links & Resources
-
-### Berachain Ecosystem
-
-- **Website**: [berachain.com](https://berachain.com)
-- **GitHub**: [github.com/berachain](https://github.com/berachain)
-- **Discord**: [discord.gg/berachain](https://discord.gg/berachain)
-- **Twitter**: [@berachain](https://x.com/berachain)
-
-### Products
-
-- **BEX**: [bex.berachain.com](https://bex.berachain.com)
-- **Bend**: [bend.berachain.com](https://bend.berachain.com)
-- **Faucet**: [faucet.berachain.com](https://faucet.berachain.com)
-- **Explorer**: [artio.beratrail.io](https://artio.beratrail.io)
+---
 
 ## Contributing
 
-We welcome contributions! To contribute:
+We use a single **main** branch. All changes come in via pull requests and go through the same review process, whether from the core team or the community.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test locally with `mint dev`
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to set up your environment, add or edit content, and open a PR  
+- **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** — How we work together and what we expect from everyone
 
-### Content Contributions
+### Ways to contribute
 
-When adding new documentation:
-- Follow existing content structure and style
-- Use Berachain components appropriately
-- Include code examples where relevant
-- Add cross-references to related pages
-- Test all links and code snippets
+- Fix typos or unclear wording  
+- Add or improve guides and examples  
+- Report missing or incorrect docs via [GitHub Issues](https://github.com/berachain/mintlify-docs/issues)  
+- Suggest improvements in issues before larger changes  
 
-## License
-
-This documentation is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Support
-
-Need help?
-
-- **Documentation Issues**: Open an issue on GitHub
-- **Technical Support**: Join our [Discord](https://discord.gg/berachain)
-- **Developer Questions**: Visit the #developers channel on Discord
-
-## Updates
-
-This documentation is continuously updated. To stay current:
-
-1. **Watch** this repository for updates
-2. Join our Discord for announcements
-3. Follow [@berachain](https://x.com/berachain) on Twitter
-
-## Features
-
-- Unified documentation for Berachain, BEX, and Bend
-- Tab-based navigation at the top
-- Comprehensive user and developer guides
-- Code examples and integration tutorials
-- Smart contract references
-- Interactive components (cards, accordions, steps)
-- Search functionality
-- Dark/light mode support
-- Mobile responsive
-- SEO optimized
-
-## Roadmap
-
-- [ ] Add video tutorials
-- [ ] Expand API documentation
-- [ ] Add interactive code playgrounds
-- [ ] Multi-language support
-- [ ] Enhanced search with AI
-- [ ] More code examples
-- [ ] Community tutorials section
+If you’re new to open source, see [Your first pull request](CONTRIBUTING.md#your-first-pull-request) in CONTRIBUTING.
 
 ---
 
-Built by the Berachain team
+## Project layout
+
+```
+mintlify-docs/
+├── docs.json          # Site config, navigation, theme
+├── general/           # Berachain core docs
+├── build/             # BEX, Bend, nodes, validators
+├── reference/         # APIs, contracts
+├── logo/
+└── images/
+```
+
+New pages are added under the right folder and registered in `docs.json` under the right tab/group. See [CONTRIBUTING.md](CONTRIBUTING.md#adding-or-moving-pages) for the exact steps.
+
+---
+
+## Links
+
+| Resource | Link |
+|----------|------|
+| Website | [berachain.com](https://berachain.com) |
+| Docs (live) | [docs.berachain.com](https://docs.berachain.com) |
+| GitHub | [github.com/berachain](https://github.com/berachain) |
+| Discord | [discord.gg/berachain](https://discord.gg/berachain) |
+| BEX | [bex.berachain.com](https://bex.berachain.com) |
+| Bend | [bend.berachain.com](https://bend.berachain.com) |
+
+---
+
+## Support
+
+- **Docs bugs or suggestions** — [Open an issue](https://github.com/berachain/mintlify-docs/issues)  
+- **Technical or protocol questions** — [Discord](https://discord.gg/berachain)  
+- **Security** — Do not report security issues in public; see [CONTRIBUTING.md](CONTRIBUTING.md#security) for how to report them safely  
+
+---
+
+## License
+
+This documentation is licensed under the [MIT License](LICENSE).

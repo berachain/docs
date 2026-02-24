@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 const LOG_PREFIX = "[AddNetwork]";
 
 export const AddNetwork = (props) => {

@@ -1,50 +1,51 @@
 ---
-title: "Proof-of-Liquidity Overview"
-description: "An overview of Berachain's Proof-of-Liquidity consensus mechanism"
+title: "유동성 증명 개요"
+description: "이중 토큰 모델, 참여자, 인센티브 일치."
 ---
 
-Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives among validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`). Further information about our design goals for Proof of Liquidity are in the [Honeypaper](https://honeypaper.berachain.com/).
+유동성 증명(PoL)은 검증자, 애플리케이션, 사용자 간의 경제적 인센티브를 재조정하는 지분 증명(PoS)의 확장입니다. 이는 두 가지 토큰 모델을 통해 가능합니다. 체인 보안을 담당하는 토큰(`$BERA`)과 거버넌스 및 보상을 담당하는 토큰(`$BGT`). 유동성 증명의 설계 목표에 대한 자세한 내용은 [Honeypaper](https://honeypaper.berachain.com/)를 참조하세요.
 
-## Core Components
+## 핵심 구성 요소
 
-### Security Layer ($BERA)
+### 보안 레이어($BERA)
 
-Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of 250,000 `$BERA` and a maximum cap of 10,000,000 `$BERA`. The top 69 validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
+Berachain의 활성 검증자 세트(합의에 참여하는 검증자)는 검증자의 `$BERA` 스테이크에 의해 결정되며, 최소 250,000 `$BERA`, 최대 10,000,000 `$BERA`입니다. 스테이크 순으로 상위 69명의 검증자가 활성 세트에 포함됩니다. 활성 세트 내에서 검증자가 블록을 제안할 확률은 스테이킹된 `$BERA`에 비례합니다. 더 많은 `$BERA`를 스테이킹하면 블록 제안 가능성이 높아집니다.
 
-### Reward Layer ($BGT)
+### 보상 레이어($BGT)
 
-The size of a validator's `$BGT` block reward is determined by their Boost, which is a percentage calculated from the validator's `$BGT` boost divided by the total `$BGT` boosted to all validators. Boosts are obtained when `$BGT` holders delegate to validators.
+검증자의 `$BGT` 블록 보상 규모는 Boost에 의해 결정됩니다. Boost는 검증자의 `$BGT` boost를 모든 검증자에게 부스트된 총 `$BGT`로 나눈 백분율입니다. `$BGT` 보유자는 검증자에게 위임하여 boost를 제공합니다.
 
-Learn more about how emissions are calculated on the [emissions page](/general/proof-of-liquidity/block-rewards).
+배출량 계산 방법은 [배출 페이지](/ko/general/proof-of-liquidity/block-rewards)에서 자세히 알아보세요.
 
-### Reward Allocation Management (BeraChef)
+### 보상 할당 관리(BeraChef)
 
-BeraChef manages the configuration layer of PoL, controlling how validators direct their BGT rewards across different Reward Vaults. It handles validator reward allocation preferences, vault whitelisting, and commission management, ensuring that only governance-approved protocols can participate in the ecosystem.
+BeraChef는 PoL의 구성 레이어를 관리하며, 검증자가 BGT 보상을 다양한 보상 볼트로 어떻게 전달하는지 제어합니다. 검증자 보상 할당 선호도, 볼트 화이트리스트, 수수료 관리를 처리하여 거버넌스 승인 프로토콜만 생태계에 참여할 수 있도록 합니다.
 
-## PoL Lifecycle
+## PoL 생명주기
 
-![Berachain Proof-of-Liquidity Steps](/images/general/proof-of-liquidity-steps.png)
+<Frame>
+  <img src="/images/general/proof-of-liquidity-steps.png" alt="Berachain 유동성 증명 단계 다이어그램" />
+</Frame>
 
-### 1. Validator Lifecycle
+<Steps>
+  <Step title="검증자 생명주기">
+    잠재 검증자가 `$BERA`를 보안 채권으로 스테이킹할 때 여정이 시작됩니다. 검증자는 스테이킹된 금액에 비례하는 확률로 블록 제안을 위해 선택됩니다. 제안된 각 블록에 대해 검증자는 기본 배출과 boost 백분율에 기반한 변동 보상 배출을 모두 받습니다 ([배출](/ko/general/proof-of-liquidity/block-rewards) 참조).
 
-The journey begins when a Prospective Validator stakes their `$BERA` as a security bond. Validators are chosen to propose blocks with a probability proportional to their staked amount. For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (see [emissions](/general/proof-of-liquidity/block-rewards)).
+    **검증자**: 검증자 생명주기에 대해 알아보세요.
+  </Step>
+  <Step title="블록 보상 분배">
+    기본 `$BGT` 보상을 자신을 위해 수집한 후, 검증자는 선택한 화이트리스트 보상 볼트로 나머지 변동 `$BGT` 보상을 전달합니다. 배출을 전달하는 대가로 검증자는 보상 볼트에서 프로토콜 제공 인센티브를 받습니다(`$BGT`는 프로토콜에 유동성을 공급하는 사용자가 획득).
 
-**For Validators**: Learn about the validator lifecycle.
+    **검증자**: 보상 할당 관리 및 수수료율 설정에 대해 알아보세요.
+  </Step>
+  <Step title="유동성 공급자 흐름">
+    생태계의 유동성 공급자(즉, 사용자)는 PoL에서 중요한 역할을 합니다. BEX와 같은 프로토콜에 유동성을 공급하고 기여 증명으로 영수증 토큰을 받을 수 있습니다. 이러한 영수증 토큰은 보상 볼트에 스테이킹되어 볼트의 지분에 비례하여 `$BGT`를 획득합니다.
 
-### 2. Block Reward Distribution
+    [Berachain 인센티브 시스템 통합](/ko/general/proof-of-liquidity/incentives) 및 [보상 볼트 설계](/ko/general/proof-of-liquidity/reward-vaults)에 대해 알아보세요.
+  </Step>
+  <Step title="위임 사이클">
+    `$BGT` 보유자가 토큰을 축적하면 검증자에게 위임하여 검증자의 boost에 직접 영향을 미칠 수 있습니다. 이는 더 높은 위임이 증가된 검증자 boost로 이어지고, 해당 검증자가 블록을 제안할 때 더 큰 `$BGT` 배출로 이어지는 선순환을 만듭니다. 검증자는 더 많은 boost를 유치하기 위해 받은 프로토콜 인센티브를 위임자와 공유하도록 인센티브를 받아 협력적인 생태계를 조성합니다.
 
-After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted Reward Vaults of their choosing. In exchange for directing their emissions, validators receive protocol-provided Incentives from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
-
-**For Validators**: Learn about managing your reward allocations and setting commission rates.
-
-### 3. Liquidity Provider Flow
-
-The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. Users can provide liquidity to protocols like BEX and receive receipt tokens as proof of their contribution. These receipt tokens are then staked in Reward Vaults, where users earn `$BGT` proportional to their share of the vault.
-
-Learn about [integrating with Berachain's incentive system](/general/proof-of-liquidity/incentives) and [Reward Vault design](/general/proof-of-liquidity/reward-vaults).
-
-### 4. Delegation Cycle
-
-As `$BGT` Holders accumulate tokens, they can delegate them to validators, directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
-
-**For BGT Holders**: Learn how to boost a validator with BGT to participate in the delegation cycle.
+    **BGT 보유자**: 위임 사이클에 참여하기 위해 BGT로 검증자를 부스트하는 방법을 알아보세요.
+  </Step>
+</Steps>
