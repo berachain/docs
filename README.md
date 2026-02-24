@@ -26,8 +26,9 @@ Content is in MDX. Navigation and branding are configured in `docs.json`.
 
 ### Prerequisites
 
-- **Node.js** 16+
-- **npm** or **yarn**
+- **Node.js** v20.17.0+ (LTS recommended)
+- **Git**
+- **npm** or **pnpm**
 
 ### Install Mintlify CLI
 
@@ -43,10 +44,12 @@ mint dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-### Build for production
+### Validate before pushing
+
+Check that the docs build with no warnings or errors (recommended for CI and before opening a PR):
 
 ```bash
-mint build
+mint validate
 ```
 
 ---
