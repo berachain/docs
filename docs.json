@@ -98,7 +98,7 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "bex/learn/overview",
                   "bex/learn/dex",
@@ -110,7 +110,7 @@
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "bex/guides/add-token",
                   "bex/guides/swaps",
@@ -179,6 +179,12 @@
                   "build/getting-started/overview",
                   "build/getting-started/network-configurations",
                   "build/getting-started/developer-tools"
+                ]
+              },
+              {
+                "group": "BeaconKit",
+                "pages": [
+                  "build/beaconkit/overview"
                 ]
               },
               {
@@ -360,7 +366,7 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "cn/bex/learn/overview",
                   "cn/bex/learn/dex",
@@ -372,7 +378,7 @@
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "cn/bex/guides/add-token",
                   "cn/bex/guides/swaps",
@@ -412,6 +418,12 @@
                   "cn/build/getting-started/overview",
                   "cn/build/getting-started/network-configurations",
                   "cn/build/getting-started/developer-tools"
+                ]
+              },
+              {
+                "group": "BeaconKit",
+                "pages": [
+                  "build/beaconkit/overview"
                 ]
               },
               {
@@ -561,7 +573,7 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "ko/bex/learn/overview",
                   "ko/bex/learn/dex",
@@ -573,7 +585,7 @@
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "ko/bex/guides/add-token",
                   "ko/bex/guides/swaps",
@@ -613,6 +625,12 @@
                   "ko/build/getting-started/overview",
                   "ko/build/getting-started/network-configurations",
                   "ko/build/getting-started/developer-tools"
+                ]
+              },
+              {
+                "group": "BeaconKit",
+                "pages": [
+                  "build/beaconkit/overview"
                 ]
               },
               {
@@ -762,7 +780,7 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "vi/bex/learn/overview",
                   "vi/bex/learn/dex",
@@ -774,7 +792,7 @@
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "vi/bex/guides/add-token",
                   "vi/bex/guides/swaps",
@@ -814,6 +832,12 @@
                   "vi/build/getting-started/overview",
                   "vi/build/getting-started/network-configurations",
                   "vi/build/getting-started/developer-tools"
+                ]
+              },
+              {
+                "group": "BeaconKit",
+                "pages": [
+                  "build/beaconkit/overview"
                 ]
               },
               {

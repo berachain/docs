@@ -1,22 +1,20 @@
 ---
-title: "Pool configuration"
-description: "Learn how to configure different types of liquidity pools on BEX"
+title: "Pool Configuration"
+description: "Stable and weighted pool parameters, fee tiers, and example configurations."
 ---
 
-BEX offers two main types of pools, each optimized for different trading scenarios: stable pools and weighted composable pools. This guide helps you understand how to configure each type effectively.
+BEX offers two main types of pools, each optimized for different trading scenarios: stable pools and weighted composable pools.
 
 ## Stable pool configuration
 
 Stable pools are specifically designed for tokens that maintain similar values, such as stablecoins or wrapped versions of the same asset. They use specialized mathematics to provide optimal pricing and minimal slippage.
 
-### Configuration parameters
-
-**Token selection**
+### Token selection
 - Maximum of 5 tokens per pool
 - All tokens must have identical decimals
 - Tokens should maintain similar prices (e.g., USDC/USDT/DAI)
 
-**Swap fees**
+### Swap fees
 - Range: 0.01% to 0.1%
 - Recommended: 0.01% - 0.05% for highly stable pairs
 - Higher fees may be suitable for less stable pairs
@@ -34,18 +32,16 @@ If the values are significantly different, you may see an error warning about pr
 
 Weighted pools offer more flexibility and are suitable for tokens with different values and volatility profiles. They allow precise control over token weights and support up to 8 tokens.
 
-### Key configuration parameters
-
-**Token selection**
+### Token selection (weighted)
 - Maximum of 8 tokens per pool
 - No decimal restrictions
 - Can mix different types of tokens
 
-**Weight distribution**
+### Weight distribution
 - Range: 1% to 99% per token
 - Total weights must equal 100%
 
-**Swap fees**
+### Swap fees (weighted)
 - 0.3%: Standard fee (recommended for most pairs)
 - 0.5%: Medium fee (less liquid tokens)
 - 1.0%: High fee (exotic or volatile pairs)

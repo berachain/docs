@@ -1,17 +1,17 @@
 ---
 title: "What is Berachain?"
-description: "Overview of Berachain's architecture, EVM compatibility, and core concepts"
+description: "EVM-identical L1, Proof-of-Liquidity consensus, and BeaconKit."
 ---
 
 <Frame>
   <img src="/images/berachain-website-homepage.png" alt="Berachain website homepage" />
 </Frame>
 
-Berachain is an EVM-identical Layer 1 built on Proof-of-Liquidity (PoL) and the modular consensus framework BeaconKit. It delivers high performance while keeping full compatibility with Ethereum tooling and upgrades.
+Berachain is an [EVM-identical](/general/introduction/what-is-berachain#evm-identical) Layer 1 built on [Proof-of-Liquidity](/general/introduction/what-is-berachain#proof-of-liquidity) (PoL) and the modular consensus framework [BeaconKit](/general/introduction/what-is-berachain#beaconkit). It delivers high performance while keeping full compatibility with Ethereum tooling and upgrades.
 
 ## EVM Identical
 
-Berachain's execution runtime environment is identical to the Ethereum Virtual Machine (EVM) as seen on Ethereum Mainnet. Berachain uses very lightly modified forks of popular execution clients like Geth and Reth to handle executing smart contracts. Berachain supports all the usual tooling that is familiar to EVM developers.
+Berachain's execution runtime environment is identical to the Ethereum Virtual Machine (EVM) as seen on Ethereum Mainnet. Berachain uses very lightly modified forks of popular [execution clients](/general/help/glossary#execution-client) like Geth and Reth to handle executing smart contracts. Berachain supports all the [usual tooling](/build/getting-started/developer-tools) that is familiar to EVM developers.
 
 Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints, and any improvements made to execution clients can be applied immediately to Berachain.
 
@@ -19,14 +19,14 @@ Identical means that whenever the EVM is upgraded, Berachain can adopt the lates
 
 Proof-of-Liquidity radically changes the way L1 economics are structured, prioritizing users and applications over validator rewards at baseline. Network incentives go towards enriching ecosystem liquidity, contributing to efficient trading, price stability, securing the chain, and increasing network/user growth.
 
-PoL strongly aligns the incentives of network participants (validators, protocols, users) and contributes to the overall long-term health of the chain.
+PoL strongly aligns the incentives of [network participants](/general/proof-of-liquidity/participants) (validators, protocols, users) and contributes to the overall long-term health of the chain.
 
-Beyond providing seamless day-one utility, the native dApps, such as BEX, serve as reference implementations of how developers can build on top of Proof-of-Liquidity.
+Beyond providing seamless day-one utility, the native dApps, such as [BEX](/bex/learn/overview), serve as reference implementations of how developers can build on top of Proof-of-Liquidity.
 
 Read more in [What Is Proof-of-Liquidity](/general/introduction/what-is-proof-of-liquidity).
 
 ## BeaconKit
 
-BeaconKit is a modular framework developed by Berachain for building EVM consensus clients. It integrates the benefits of CometBFT consensus, including increased composability, single slot finality (SSF), and more.
+BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/general/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, [single slot finality (SSF)](https://ethereum.org/en/roadmap/single-slot-finality/), and more.
 
 Read more in [What Is BeaconKit](/build/beaconkit/overview).

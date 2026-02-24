@@ -1,12 +1,12 @@
 ---
 title: "Swaps"
-description: "Learn about swapping tokens on BEX, including single-hop and multi-hop swaps, and intermediate tokens"
+description: "Single-hop and multi-hop swaps, routing, and slippage settings."
 ---
 
 The core functionality of BEX is to allow you to exchange one type of token for another. If liquidity exists for a given pair in the DEX contract, you can swap between tokens. The BEX web app provides an interface for general-purpose swaps.
 
 <Frame>
-  <img src="/images/bex-swaps-modal-route.png" alt="BEX swap modal showing the selected token pair and swap route" />
+  <img src="/images/bex/bex-swaps-modal-route.png" alt="BEX swap modal showing the selected token pair and swap route" />
 </Frame>
 
 ## Single-hop and multi-hop swaps
@@ -20,7 +20,7 @@ However, when a trade between the input and output token does not provide the be
 In a multi-hop swap, _intermediate tokens_ are the tokens held temporarily when swapping through a sequence of pairs. Intermediate tokens in BEX are never transferred because settlement occurs based on the net debit against the entire BEX protocol.
 
 <Frame>
-  <img src="/images/bex-swaps-multi-hop-route.png" alt="BEX swap modal showing a multi-hop route with intermediate tokens" />
+  <img src="/images/bex/bex-swaps-multi-hop-route.png" alt="BEX swap modal showing a multi-hop route with intermediate tokens" />
 </Frame>
 
 ## Swap parameters
@@ -31,5 +31,5 @@ When initiating a swap, you can define the following parameters:
 - **Slippage**: The maximum acceptable difference between the expected and actual price of the trade. Slippage is expressed as a percentage and represents the worst-case price impact you are willing to accept. If the actual price impact exceeds this threshold, the swap transaction will revert.
 
 <Frame>
-  <img src="/images/bex-swaps-slippage-settings.png" alt="BEX swap slippage settings panel for configuring maximum slippage tolerance" />
+  <img src="/images/bex/bex-swaps-slippage-settings.png" alt="BEX swap slippage settings panel for configuring maximum slippage tolerance" />
 </Frame>

@@ -1,6 +1,6 @@
 ---
 title: "Vault"
-description: "The Vault is a smart contract that holds and manages all tokens in each BEX pool and serves as the portal for most BEX operations"
+description: "Unified contract that holds pool tokens and executes swaps, joins, and exits."
 ---
 
 The Vault contract is a central component of BEX (not to be confused with Reward Vaults in Proof-of-Liquidity), acting as a unified smart contract that manages all tokens across liquidity pools. It serves as the primary interface for most protocol operations, including swaps, joins, and exits.
@@ -8,6 +8,10 @@ The Vault contract is a central component of BEX (not to be confused with Reward
 ## Separating token accounting and pool logic
 
 BEX's Vault and Pool architecture separates the token accounting and management from the pool logic and AMM math. The responsibility for calculating amounts for swaps, joins, and exits is delegated to the pool contracts, while the Vault holds all of the tokens within the various pools (which can even be of different types).
+
+<Frame>
+  <img src="/images/bex/vault.png" alt="BEX Vault and pool architecture: token accounting in the Vault, pool logic in pool contracts" />
+</Frame>
 
 As a simplified example, a swap transaction involves the following steps:
 
