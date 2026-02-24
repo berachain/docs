@@ -82,9 +82,29 @@
                 ]
               },
               {
+                "group": "General Guides",
+                "pages": [
+                  "build/guides/verifying-smart-contracts"
+                ]
+              },
+              {
                 "group": "BEX",
                 "pages": [
+                  "build/bex/overview",
                   "build/bex/deployed-contracts",
+                  "build/bex/sdk/overview",
+                  {
+                    "group": "Guides",
+                    "pages": [
+                      "build/bex/sdk/swap",
+                      "build/bex/sdk/add-liquidity",
+                      "build/bex/sdk/remove-liquidity",
+                      "build/bex/sdk/sor",
+                      "build/bex/sdk/reference",
+                      "build/bex/guides/pool-creation",
+                      "build/bex/help/error-codes"
+                    ]
+                  },
                   {
                     "group": "Concepts",
                     "pages": [
@@ -97,20 +117,7 @@
                       "build/bex/concepts/lp-valuing",
                       "build/bex/concepts/relayers"
                     ]
-                  },
-                  {
-                    "group": "SDK",
-                    "pages": [
-                      "build/bex/sdk/overview",
-                      "build/bex/sdk/swap",
-                      "build/bex/sdk/add-liquidity",
-                      "build/bex/sdk/remove-liquidity",
-                      "build/bex/sdk/sor",
-                      "build/bex/sdk/reference"
-                    ]
-                  },
-                  "build/bex/guides/pool-creation",
-                  "build/bex/help/error-codes"
+                  }
                 ]
               },
               {

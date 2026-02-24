@@ -1,0 +1,301 @@
+---
+title: "Verifying Smart Contracts"
+description: "Verify smart contracts on Berachain using Berascan, Hardhat, Forge, and Remix."
+---
+
+This guide describes how to verify smart contracts on Berachain. Verification publishes source code to the block explorer so that users can read and audit it.
+
+The following methods are covered:
+
+- **Manual verification (Berascan)** — Verification via the block explorer UI
+- **Hardhat** — Verification using Hardhat’s Etherscan plugin
+- **Forge** — Verification using Foundry’s `forge verify-contract`
+- **Remix** — Verification from the Remix IDE Contract Verification plugin
+
+## Requirements
+
+- A deployed smart contract on Berachain
+- The contract’s source code
+- The contract address
+- Tooling for the chosen method (see sections below)
+
+<Tip>
+To deploy a contract first, see [Developer tools](/build/getting-started/developer-tools) for setup with Hardhat, Foundry, and other tooling.
+</Tip>
+
+## Manual Verification (Berascan)
+
+### Step 1: Open the contract on Berascan
+
+Open the block explorer and go to the contract’s page by searching for its address:
+
+- **Mainnet:** [berascan.com](https://berascan.com)
+- **Bepolia testnet:** [testnet.berascan.com](https://testnet.berascan.com)
+
+### Step 2: Start verification
+
+On the contract page, open the **Verify and Publish** link.
+
+You are taken to the verification form: [testnet.berascan.com/verifyContract](https://testnet.berascan.com/verifyContract) on Bepolia, or the mainnet equivalent on Berascan.
+
+### Step 3: Enter contract details
+
+Fill in the form:
+
+1. **Contract Address** — The deployed contract address (often pre-filled if opened from the contract page).
+2. **Compiler Type** — Choose **Solidity (Single file)** for a flattened contract.
+3. **Compiler Version** — The exact Solidity version used to compile the deployed contract (e.g. `v0.8.28+commit.7893614a`).
+4. **Open Source License Type** — e.g. MIT License.
+5. **Terms of Service** — Accept the terms.
+6. Click **Continue**.
+
+<Tip>
+For multi-file or dependency-heavy contracts, flatten the source into a single file and use the single-file option.
+</Tip>
+
+### Step 4: Upload source code
+
+On the **Verify & Publish** step:
+
+1. Confirm the shown contract address, compiler type (e.g. SINGLE FILE / CONCATENATED METHOD), and compiler version.
+2. Paste the flattened contract source into the source code field.
+3. Optionally set optimization, run count, and EVM version under Advanced Configuration.
+4. Click **Verify & Publish**.
+
+<Info>
+Contracts that compile in Remix typically compile here as well. Compilation is limited to about 45 seconds per contract. Contracts deployed by another contract (factory pattern) have limited support.
+</Info>
+
+### Step 5: Confirmation
+
+Berascan verifies the contract, usually within a few seconds. After success, the contract is readable on the explorer and can be interacted with from Berascan.
+
+## Troubleshooting
+
+If verification fails, confirm:
+
+- The compiler version matches the one used at deployment.
+- The source code is complete and matches the deployed bytecode (no edits after deployment).
+- Constructor arguments are correct and encoded as used at deployment.
+- The contract address is correct and deployed on the selected network.
+
+For more help, see Berascan’s verification docs or their support channels.
+
+## Hardhat Verification
+
+Use Hardhat’s Etherscan plugin to verify contracts from the command line or after deployment.
+
+### Requirements
+
+- Hardhat v3.0.0 or later
+- An [Etherscan API key](https://etherscan.io/apis) (V2 API; same key works for Berascan)
+- The deployed contract and its constructor arguments
+
+### Configuration
+
+Store the API key in Hardhat’s keystore (or use environment variables):
+
+```bash
+pnpm keystore:set ETHERSCAN_API_KEY
+```
+
+In `hardhat.config.ts`, add verification and chain descriptor entries. Merge the following into your existing config:
+
+```ts
+const config = {
+  // ... your existing config (networks, solidity, etc.)
+  verify: {
+    etherscan: {
+      apiKey: process.env.ETHERSCAN_API_KEY ?? "",
+    },
+  },
+  chainDescriptors: {
+    80069: {
+      name: "Berachain Bepolia",
+      blockExplorers: {
+        etherscan: {
+          name: "Berascan Bepolia",
+          url: "https://testnet.berascan.com",
+          apiUrl: "https://api.etherscan.io/v2/api",
+        },
+      },
+    },
+    80094: {
+      name: "Berachain",
+      blockExplorers: {
+        etherscan: {
+          name: "Berascan",
+          url: "https://berascan.com",
+          apiUrl: "https://api.etherscan.io/v2/api",
+        },
+      },
+    },
+  },
+};
+```
+
+Ensure your `networks` (or equivalent) use the same chain IDs (80069 for Bepolia, 80094 for mainnet) so the correct explorer is used.
+
+### Verification command
+
+Add a script in `package.json`:
+
+```json
+{
+  "scripts": {
+    "verify:berachain": "hardhat verify --network berachainTestnet --"
+  }
+}
+```
+
+Run verification with the contract address and constructor arguments in order:
+
+```bash
+pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 "Hello World"
+```
+
+For a contract with no constructor arguments, omit the extra arguments:
+
+```bash
+pnpm verify:berachain 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+```
+
+### Example output
+
+```text
+=== Etherscan ===
+Submitted source code for verification on Berascan:
+  contracts/HelloWorld.sol:HelloWorld
+  Address: 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+
+Waiting for verification result...
+
+Contract verified successfully on Berascan.
+  contracts/HelloWorld.sol:HelloWorld
+  Explorer: https://testnet.berascan.com/address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21#code
+```
+
+## Forge Verification
+
+Use Foundry’s `forge verify-contract` to verify contracts from the command line.
+
+### Requirements
+
+- Foundry v1.3.1 or later (Etherscan V2 API support)
+- [Etherscan API key](https://etherscan.io/apis)
+- The deployed contract and, if applicable, its constructor arguments
+
+### Verification command
+
+Encode constructor arguments with `cast abi-encode` and pass them to `forge verify-contract`. Use the chain name that Forge uses for Berachain (e.g. `Berachain Bepolia` for testnet). Set `ETHERSCAN_API_KEY` in your environment before running.
+
+**Bepolia (testnet):**
+
+```bash
+forge verify-contract \
+  --watch \
+  --chain "Berachain Bepolia" \
+  0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 \
+  src/HelloWorld.sol:HelloWorld \
+  --verifier etherscan \
+  --etherscan-api-key $ETHERSCAN_API_KEY \
+  --constructor-args $(cast abi-encode "constructor(string)" "Hello World")
+```
+
+**Mainnet:**
+
+```bash
+forge verify-contract \
+  --watch \
+  --chain Berachain \
+  0x2ACD9577B57Ff043F0203730683e8c7C881DcB21 \
+  src/HelloWorld.sol:HelloWorld \
+  --verifier etherscan \
+  --etherscan-api-key $ETHERSCAN_API_KEY \
+  --constructor-args $(cast abi-encode "constructor(string)" "Hello World")
+```
+
+<Info>
+For contracts with constructor parameters, encode them with `cast abi-encode "constructor(type1,type2,...)" "arg1" "arg2" ...` and pass the result to `--constructor-args`. For contracts with no constructor parameters, omit the `--constructor-args` flag.
+</Info>
+
+### Example output
+
+```text
+Start verifying contract `0x2ACD9577B57Ff043F0203730683e8c7C881DcB21` deployed on Berachain Bepolia
+
+Submitting verification for [src/HelloWorld.sol:HelloWorld] 0x2ACD9577B57Ff043F0203730683e8c7C881DcB21.
+Submitted contract for verification:
+        Response: `OK`
+        GUID: `xtecz3j...`
+        URL: https://testnet.berascan.com/address/0x2ACD9577B57Ff043F0203730683e8c7C881DcB21
+
+Contract verification status:
+Response: `OK`
+Details: `Pass - Verified`
+Contract successfully verified
+```
+
+## Remix Verification
+
+The Remix IDE Contract Verification plugin supports Berascan and Beratrail. Use it when you develop or deploy from Remix and want to verify in the same environment.
+
+### Requirements
+
+- Contract deployed on a public Berachain network (mainnet or Bepolia)
+- Contract compiled in Remix
+- Constructor arguments used at deployment (if any)
+- Etherscan API key for Berascan verification
+
+### Enabling the plugin
+
+1. Open [remix.ethereum.org](https://remix.ethereum.org).
+2. In the Plugin Manager, enable **CONTRACT VERIFICATION**.
+3. Open the Contract Verification plugin from the sidebar.
+
+### Supported explorers
+
+- **Berascan** — Etherscan-based; requires an Etherscan API key.
+- **Beratrail** — Routescan-based; enabled by default.
+
+### Verification steps
+
+1. Compile the contract in Remix.
+2. In the plugin, select the verification service (Beratrail and/or Berascan).
+3. Enter the deployed contract address.
+4. If the contract has constructor parameters, enter the constructor arguments in the format the plugin expects.
+5. Submit verification.
+
+### Proxy verification
+
+For a contract behind a proxy:
+
+1. Enable **The deployed contract is behind a proxy**.
+2. Enter the proxy contract address.
+3. Submit; the plugin verifies both proxy and implementation.
+
+<Info>
+Proxy verification is supported only with Berascan (Etherscan-based), not with Beratrail.
+</Info>
+
+### Settings
+
+In the plugin or Remix settings you can:
+
+- Add and store Etherscan API keys (required for Berascan).
+- Adjust API URLs for verification services.
+- Manage settings per chain.
+
+<Tip>
+The Etherscan V2 API is used, so one API key works for Berascan and many other chains supported by Remix.
+</Tip>
+
+### Verification results
+
+- **Receipts** — Verification status and result for each submission.
+- **Lookup** — Check whether a contract is verified and download source.
+- **Status indicators** — Hover for details when verification fails.
+
+<Info>
+For full plugin behavior and options, see the [Remix contract verification documentation](https://remix-ide.readthedocs.io/en/latest/contract_verification.html).
+</Info>
