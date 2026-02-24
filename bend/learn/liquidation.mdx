@@ -64,13 +64,13 @@ Using a market with an LLTV of 86%:
 \mathrm{LIF} = \min \left( 1.15,\ \frac{1}{(1 - 0.3) \times (1 - 0.86)} \right) = \min(1.15,\ 1.0434) \approx 1.0434
 \]
 
-- **Initial State**: A user has a position in a market with an LLTV of 86%. Their debt has grown to **$87,000**, while their collateral value has dropped to **$100,000**.
+- **Initial State**: A user has a position in a market with an LLTV of 86%. Their debt has grown to **\$87,000**, while their collateral value has dropped to **\$100,000**.
 - **Health Check**: The LTV is 87% (`87k / 100k`), which is greater than the 86% LLTV. The position is liquidatable.
-- **Liquidation**: A liquidator repays the full **$87,000** debt.
-- **Collateral Seized**: The liquidator seizes `$87,000 * 1.05` (LIF) = **$91,350** worth of the borrower's collateral.
+- **Liquidation**: A liquidator repays the full **\$87,000** debt.
+- **Collateral Seized**: The liquidator seizes `\$87,000 * 1.05` (LIF) = **\$91,350** worth of the borrower's collateral.
 - **Outcome**:
-  - **Borrower**: Their debt is cleared, but they lose $91,350 of their $100,000 collateral, incurring a loss of **$4,350**.
-  - **Liquidator**: Profits by **$4,350** (minus gas and transaction costs).
+  - **Borrower**: Their debt is cleared, but they lose \$91,350 of their \$100,000 collateral, incurring a loss of **\$4,350**.
+  - **Liquidator**: Profits by **\$4,350** (minus gas and transaction costs).
 
 ### Bad debt
 
