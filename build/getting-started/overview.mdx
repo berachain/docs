@@ -1,54 +1,37 @@
 ---
-title: "Developer Overview"
-description: "Getting started building on Berachain: tools, networks, and contracts."
+title: "Introduction"
+description: "Get started building on Berachain: networks, tools, BEX, Bend, and common developer resources."
 ---
 
-Berachain's Proof of Liquidity (PoL) mechanism can be broken down into two broad categories:
+<img
+  src="/images/general/docs-bear.png"
+  alt="Berachain Docs"
+  style={{ maxWidth: '280px', margin: '0 auto 1.5rem auto', display: 'block' }}
+/>
 
-1. **BGT Distribution**: How $BGT is created from the block production process
-2. **Incentive Marketplace**: How protocols compete for validator $BGT allocations by issuing incentives
+Berachain is EVM-identical, so you can build with the same tools and workflows you use on other EVM chains. Configure your network, pick your stack, and integrate with native protocols like BEX and Bend.
 
-## BGT distribution
+## Getting started
 
-As discussed in [Block Rewards](/general/proof-of-liquidity/block-rewards), $BGT emissions stem from the block production process. The variable component of $BGT emissions per block is determined by the proposing validator's $BGT delegation (also referred to as "boost").
+<CardGroup cols={2}>
+  <Card title="Connect to Berachain" href="/general/introduction/connect-to-berachain">
+    One-click add network, RPC details, chain IDs, and wallet setup for Mainnet and Bepolia.
+  </Card>
+  <Card title="Developer tools" href="/build/getting-started/developer-tools">
+    IDEs, SDKs, RPC providers, oracles, and tooling for building on Berachain.
+  </Card>
+  <Card title="Common resources" href="/build/getting-started/common-resources">
+    Quick links: block explorer, faucet, chain IDs, and key dApp URLs.
+  </Card>
+</CardGroup>
 
-### Distributor
+## Build with native protocols
 
-The Distributor contract is the entry point for BGT distribution. Distribution is built into the Berachain technology stack, so that block N includes transactions which perform distributions for block N-1. During that process, the Distributor:
-
-- Receives newly minted $BGT from the `BlockRewardController`
-- Processes rewards based on validator-specified allocations via `BeraChef`
-- Distributes $BGT to the validator's designated Reward Vaults - defined by the Reward Allocation
-- Distributes Validator commission of Incentives received for distributing $BGT emissions
-- Distributes remaining Incentives to `BGTIncentiveDistributor` for Validator Boosters to claim
-
-### BlockRewardController
-
-The BlockRewardController contract is the only entity authorized to mint $BGT. It is entered through the `processRewards` function from the `Distributor` contract. The BlockRewardController then:
-
-- Mints a base $BGT amount to the proposing validator's operator
-- Mints a variable $BGT amount based on the validator's boost which is sent to the `Distributor`
-
-### BeraChef
-
-The BeraChef contract manages validator Reward Allocations. These preferences are set by the validator operator and can be updated following a short delay. The BeraChef contract then forwards these allocations to the `Distributor` contract for distribution to specified Reward Vaults.
-
-## Incentive marketplace
-
-The Incentive Marketplace creates a market-driven liquidity incentive system where protocols compete for validators' $BGT allocations.
-
-### RewardVault
-
-RewardVaults act as the core PoL integration point. They:
-
-- Receive $BGT emissions from the `Distributor`
-- Allow protocols to add Incentive Tokens with a minimum incentive rate per 1 $BGT emitted
-- Manage token staking and $BGT distribution to liquidity providers/users
-
-Validators are incentivized to allocate $BGT to vaults offering higher protocol incentives, as they receive these rewards proportionally to the $BGT allocated. This creates the "marketplace" dynamic where protocols compete by offering better incentives to attract more $BGT allocations.
-
-<Tip>
-RewardVault creation is permissionless, but governance must approve (whitelist) vaults to be included in validators' reward allocations.
-</Tip>
-
-The RewardVaultFactory contract deploys standardized RewardVault contracts and maintains a registry of approved vaults.
+<CardGroup cols={2}>
+  <Card title="BEX" href="/build/bex/deployed-contracts">
+    Integrate with the native DEX: deployed contracts, pool concepts, SDK, and guides.
+  </Card>
+  <Card title="Bend" href="/build/bend/overview">
+    Integrate with the native lending protocol: contracts, markets, and onchain tooling.
+  </Card>
+</CardGroup>

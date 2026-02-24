@@ -23,7 +23,7 @@
             "tab": "General",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
                   "index",
                   "general/introduction/what-is-berachain",
@@ -69,11 +69,16 @@
             "tab": "Build",
             "groups": [
               {
+                "group": "Overview",
+                "pages": [
+                  "build/getting-started/overview"
+                ]
+              },
+              {
                 "group": "Getting Started",
                 "pages": [
-                  "build/getting-started/overview",
-                  "build/getting-started/network-configurations",
-                  "build/getting-started/developer-tools"
+                  "build/getting-started/developer-tools",
+                  "build/getting-started/common-resources"
                 ]
               },
               {
@@ -129,9 +134,10 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
-                  "bex/learn/overview"
+                  "bex/learn/overview",
+                  "bex/learn/what-is-bex"
                 ]
               },
               {
@@ -163,9 +169,10 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
-                  "bend/learn/overview"
+                  "bend/learn/overview",
+                  "bend/learn/what-is-bend"
                 ]
               },
               {
@@ -202,7 +209,8 @@
               {
                 "group": "Overview",
                 "pages": [
-                  "validators/overview/index"
+                  "validators/overview/index",
+                  "validators/overview/node-architecture"
                 ]
               },
               {
@@ -310,6 +318,10 @@
     }
   },
   "redirects": [
+    { "source": "/build/getting-started/network-configurations", "destination": "/general/introduction/connect-to-berachain" },
+    { "source": "/cn/build/getting-started/network-configurations", "destination": "/cn/general/introduction/connect-to-berachain" },
+    { "source": "/ko/build/getting-started/network-configurations", "destination": "/ko/general/introduction/connect-to-berachain" },
+    { "source": "/vi/build/getting-started/network-configurations", "destination": "/vi/general/introduction/connect-to-berachain" },
     { "source": "/build/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
     { "source": "/cn/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
     { "source": "/cn/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
