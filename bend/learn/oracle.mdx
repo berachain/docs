@@ -35,7 +35,7 @@ This walks you through the process of getting the current price of a collateral 
 The Market Id can be found on [Berachain Bend](https://bend.berachain.com/borrow).
 
 <Frame>
-  <img src="/images/bend-oracle-marketid.png" alt="Bend - Find Market Id" />
+  <img src="/images/bend/oracle-market-id.png" alt="Bend - Find Market Id" />
 </Frame>
 
 ### 2. Find Oracle address
@@ -48,7 +48,7 @@ In [BeraScan](https://berascan.com/) look up the following `Morpho` address and 
 ```
 
 <Frame>
-  <img src="/images/bend-oracle-morpho.png" alt="Berascan - Find Oracle Address" />
+  <img src="/images/bend/oracle-morpho.png" alt="Berascan - Find Oracle Address" />
 </Frame>
 
 ### 3. Get Base Feed address
@@ -56,7 +56,7 @@ In [BeraScan](https://berascan.com/) look up the following `Morpho` address and 
 In the oracle address, read the contract, select the **BASE_FEED_1** and click the address.
 
 <Frame>
-  <img src="/images/bend-oracle-feed.png" alt="Berascan - Find Base Feed Address" />
+  <img src="/images/bend/oracle-feed.png" alt="Berascan - Find Base Feed Address" />
 </Frame>
 
 ### 4. Get Latest Answer
@@ -64,7 +64,7 @@ In the oracle address, read the contract, select the **BASE_FEED_1** and click t
 In the base feed address, read the contract (or read proxy contract), and click `latestAnswer`.
 
 <Frame>
-  <img src="/images/bend-oracle-latestanswer.png" alt="Berascan - Latest Price Answer" />
+  <img src="/images/bend/oracle-latest-answer.png" alt="Berascan - Latest Price Answer" />
 </Frame>
 
 How many decimal places is this? The value returned by `latestAnswer` (for example, `202675951`) should be divided by `100000000`, which means the price uses 8 decimal places.

@@ -16,7 +16,7 @@ Validators have several key responsibilities:
 
 The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest **1 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
-![Validator Lifecycle](/images/validator-lifecycle.png)
+![Validator Lifecycle](/images/validators/validator-lifecycle.png)
 
 The labeled states are as follows:
 
@@ -91,6 +91,6 @@ Putting it all together, we have a complete picture of the Berachain validator l
 2. Potential forced exit due to ValidatorSetCap → **Exited** → 1 epoch → **Withdrawn**
 3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to ValidatorSetCap + balance too low → 1 epoch → **Withdrawn**
 
-![Validator Extended Lifecycle](/images/validator-extended-lifecycle.png)
+![Validator Extended Lifecycle](/images/validators/validator-extended-lifecycle.png)
 
 Note that transitions between states are done via a queue, on a FIFO basis, with a cap on the number of transitions in each state to limit excessive churn in the validator set.
