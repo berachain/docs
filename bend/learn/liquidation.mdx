@@ -1,77 +1,55 @@
 ---
 title: "Liquidation"
-description: "How liquidations protect lenders and when positions are liquidated."
+description: "When positions are liquidated, health factor and LLTV, liquidation process, and liquidator incentives."
 ---
 
-Liquidation is one of the core mechanisms in Bend. It protects lenders' capital by ensuring that undercollateralized loans are repaid, thereby maintaining the solvency of each market. For any developer integrating a borrowing feature, understanding and clearly communicating how liquidation works is paramount.
+Liquidation protects lenders by closing undercollateralized positions and keeping markets solvent. If you're integrating borrowing, you need to explain when and how liquidation works.
 
-When a borrower's position becomes too risky, the protocol allows a third party—a **liquidator**—to step in, repay the debt, and seize the borrower's collateral at a discount.
+When your position becomes too risky, a **liquidator** can repay your debt and seize your collateral at a discount.
 
-## When does liquidation occur?
+## When liquidation occurs
 
-A position becomes eligible for liquidation the moment its **Health Factor drops to 1 or below**.
+A position can be liquidated when its **health factor is 1 or below**—that is, when LTV meets or exceeds the market's **LLTV** (Liquidation Loan-to-Value).
 
-As a reminder, this happens when the Loan-to-Value (LTV) of a position meets or exceeds the market's immutable Liquidation Loan-to-Value (LLTV) threshold.
+**Debt value / Collateral value ≥ LLTV** → position is liquidatable.
 
-If Debt Value / Collateral Value >= LLTV, the position is liquidatable.
+Common causes:
 
-This can be caused by:
+- Collateral price falls
+- Debt grows from accrued interest
 
-- A decrease in the price of the collateral asset.
-- An increase in the value of the debt due to accrued interest.
+## Liquidation process
 
-## The liquidation process
+Bend liquidations are not auctions. The first liquidator to act repays debt and receives collateral at a discount in one transaction.
 
-Liquidation on Bend is a straightforward, economically-driven process. It is not an auction; it's a direct transaction executed by the first liquidator to act.
+1. **Unhealthy position**: A liquidator (often a bot) finds a position with health factor ≤ 1.
+2. **Repay debt**: The liquidator calls `liquidate` on the Bend contract and repays some or all of the debt in the loan asset.
+3. **Seize collateral**: The liquidator receives collateral worth the repaid amount times the **Liquidation Incentive Factor (LIF)**.
+4. **Position updated**: The borrower's debt and collateral are reduced accordingly.
 
-#### 1. An unhealthy position is identified
+### Liquidation Incentive Factor (LIF)
 
-A liquidator (typically an automated bot) detects a position where the Health Factor is less than or equal to 1.
+The **LIF** is the bonus a liquidator earns. It is derived from the market's LLTV; higher LLTV means a smaller bonus to limit cascades.
 
-#### 2. Liquidator repays the debt
+For **LLTV 86%**, **LIF ≈ 1.05** (about a **5%** bonus on seized collateral). The full incentive goes to the liquidator; Bend does not take a fee.
 
-The liquidator calls the `liquidate` function on the Bend contract, repaying a portion or all of the borrower's debt using the loan asset.
-
-#### 3. Liquidator seizes collateral at a discount
-
-In return for repaying the debt, the liquidator is allowed to seize an equivalent value of the borrower's collateral, plus a bonus. This bonus is the liquidator's incentive and profit.
-
-#### 4. The borrower's position is updated
-
-The borrower's debt is reduced or eliminated, and their collateral is reduced by the amount seized.
-
-### The Liquidation Incentive Factor (LIF)
-
-The "discount" or "bonus" a liquidator receives is determined by the **Liquidation Incentive Factor (LIF)**. This factor is calculated based on the market's LLTV, ensuring that riskier markets (with higher LLTVs) offer a smaller bonus to prevent cascading liquidations.
-
-For a market with an **LLTV of 86%**, the **LIF is approximately 1.05**, meaning the liquidator receives a **5% bonus** on the collateral they seize. This entire incentive goes to the liquidator; the Bend protocol takes no fee.
-
-The formula is calculated as:
+Formula:
 
 $$
 \mathrm{LIF} = \min \left( \mathrm{maxLIF},\ \frac{1}{(1 - \beta) \times (1 - \mathrm{LLTV})} \right)
 $$
 
-- `LLTV` - Liquidation Loan-to-Value threshold for that market (e.g., 0.86 = 86%)
-- `beta` = 0.3 (constant)
-- `maxLIF` = 1.15 (i.e., 115%)
+- **LLTV**: Market liquidation threshold (e.g. 0.86)
+- **β** = 0.3 (constant)
+- **maxLIF** = 1.15 (15% cap)
 
-### Example: A liquidation scenario
+### Example (LLTV 86%)
 
-Using a market with an LLTV of 86%:
-
-\[
-\mathrm{LIF} = \min \left( 1.15,\ \frac{1}{(1 - 0.3) \times (1 - 0.86)} \right) = \min(1.15,\ 1.0434) \approx 1.0434
-\]
-
-- **Initial State**: A user has a position in a market with an LLTV of 86%. Their debt has grown to **\$87,000**, while their collateral value has dropped to **\$100,000**.
-- **Health Check**: The LTV is 87% (`87k / 100k`), which is greater than the 86% LLTV. The position is liquidatable.
-- **Liquidation**: A liquidator repays the full **\$87,000** debt.
-- **Collateral Seized**: The liquidator seizes `\$87,000 * 1.05` (LIF) = **\$91,350** worth of the borrower's collateral.
-- **Outcome**:
-  - **Borrower**: Their debt is cleared, but they lose \$91,350 of their \$100,000 collateral, incurring a loss of **\$4,350**.
-  - **Liquidator**: Profits by **\$4,350** (minus gas and transaction costs).
+- **Before**: Debt **$87,000**, collateral **$100,000** → LTV 87% &gt; 86% → liquidatable.
+- **Liquidator** repays **$87,000** and receives **$87,000 × 1.05 = $91,350** of collateral.
+- **Borrower**: Debt cleared; **$4,350** loss (collateral drop).
+- **Liquidator**: **$4,350** profit (minus gas).
 
 ### Bad debt
 
-In extreme cases where the collateral's value drops so fast that it becomes less than the debt (`LTV > 100%`), a liquidation might not cover the full loan. The remaining unpaid debt is known as **bad debt**. This represents a loss for lenders in that market. Bend's design, including its risk-isolated markets and conservative LLTVs, aims to make this a rare event.
+If collateral value falls below the debt (LTV &gt; 100%), a liquidation may not cover the full loan. The shortfall is **bad debt** and is a loss to lenders in that market. Isolated markets and conservative LLTVs are designed to make this rare.

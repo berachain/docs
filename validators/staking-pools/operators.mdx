@@ -1,0 +1,103 @@
+---
+title: "Staking Pools Operator Guide"
+description: "Configure and operate a staking pool: roles, commission, reward allocation, min effective balance, BGT, and front-end."
+---
+
+This guide helps validators set up and manage staking pools to offer liquid staking services to their communities.
+
+## Quick reference
+
+### Key parameters
+
+| Parameter | Range | Purpose |
+| ------------------------- | ----------------------------------------------- | -------------------------------------------- |
+| Validator Commission | 0-20% | Commission on incentive token distribution |
+| Protocol Fee | 0-20% | Fee on BGT balance growth |
+| Minimum Effective Balance | ≥ 250,000 BERA | Activation threshold and full exit safeguard |
+| Withdrawal Delay | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized |
+
+### Key roles
+
+| Role | Controls | Function |
+| ---------------------------------- | ----------------- | -------------------------------------- |
+| `VALIDATOR_ADMIN_ROLE` | All other roles | Grant/revoke operational roles |
+| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | Direct PoL incentives to applications |
+| `COMMISSION_MANAGER_ROLE` | Commission rate | Adjust validator commission (0-20%) |
+| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount | Adjust incentive collector payout |
+| `BGT_MANAGER_ROLE` | BGT operations | Queue drop boost, redeem BGT |
+
+### Essential functions
+
+| Function | Contract | Purpose |
+| ---------------------------- | ------------- | ------------------------------------- |
+| `setMinEffectiveBalance()` | SmartOperator | Set activation threshold |
+| `queueValCommission()` | SmartOperator | Queue commission rate change |
+| `queueRewardsAllocation()` | SmartOperator | Queue reward allocation |
+| `claimBoostRewards()` | SmartOperator | Forward rewards to IncentiveCollector |
+| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate |
+
+## Prerequisites
+
+Before setting up a staking pool, ensure you have a fully operational Berachain validator node. You'll need at least 10,000 BERA to register the pool, though activation requires at least 250,000 BERA. See the [Validator Lifecycle](/validators/architecture/validator-lifecycle) and [Become a Validator](/validators/guides/become-a-validator) guides.
+
+<Warning>
+Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
+</Warning>
+
+## Validator lifecycle
+
+Your staking pool integrates with Berachain's validator lifecycle. For details on validator states (Deposited, Eligible, Active, Exited, Withdrawn) and transitions, see the [Validator Lifecycle documentation](/validators/architecture/validator-lifecycle).
+
+The key consideration for staking pools is ensuring sufficient stake for activation. See [Setting Minimum Effective Balance](#setting-minimum-effective-balance) below.
+
+## Key terms and concepts
+
+- **Active Threshold**: The point at which your pool has sufficient stake (`totalDeposits >= minEffectiveBalance`) to activate the validator. When `activeThresholdReached()` returns `true`, your validator enters a cooldown period before activation.
+- **Minimum Effective Balance (`minEffectiveBalance`)**: The minimum stake amount required for validator activation and a safeguard that triggers full exit if deposits fall below it. This must match or exceed the current consensus layer minimum (250,000 BERA when the set is not full; when the set is full, the minimum is 10,000 BERA more than the lowest active validator).
+- **Withdrawal Delay**: 129,600 blocks (≈3 days at ~2s block time) that must pass after a withdrawal request before it can be finalized.
+- **Cooldown Period**: After `activeThresholdReached()` becomes `true`, there is a cooldown period before the validator activates.
+
+## Configuration
+
+### Commission rates
+
+You can set commission rates within 0-20%. Commission applies to the distribution of incentive tokens from Proof of Liquidity rewards. For step-by-step instructions, see [Manage Validator Incentives Commission Rate](/validators/guides/manage-incentives-commission).
+
+### Reward allocations
+
+Direct PoL incentives to specific applications. For instructions, see [Managing Validator Reward Allocations](/validators/guides/manage-reward-allocations).
+
+### Setting minimum effective balance
+
+The `minEffectiveBalance` parameter is critical for validator activation. The consensus layer enforces a base minimum of **250,000 BERA**. When the validator set is full (69 validators), the minimum required increases in increments of **10,000 BERA**. Set `minEffectiveBalance` to match the current consensus layer requirement. You can check the current lowest active stake on [Berachain Hub](https://hub.berachain.com/boost/).
+
+## Routine operations
+
+- **Monitor pool status**: Use `isActive()`, `totalAssets()`, `bufferedAssets()`, `activeThresholdReached()` on your StakingPool and SmartOperator.
+- **BGT operations**: Use `queueDropBoost()`, `redeemBGT()`, `queueBoost()`, `activateBoost()` as needed. Forward rewards to IncentiveCollector by calling `claimBoostRewards()` on SmartOperator.
+- **Protocol fee**: Set via `setProtocolFeePercentage()` (up to 20%). Call `accrueEarnedBGTFees()` to trigger fee calculation and minting.
+
+## Withdrawal system
+
+The centralized WithdrawalVault handles all withdrawal operations. Withdrawals can use a **short-circuit** path (when the pool has not reached active threshold and has sufficient buffered funds) or the **standard** path (consensus layer processing). In both cases, stakers must wait the full withdrawal delay (129,600 blocks ≈ 3 days) before finalization.
+
+## Building your front-end
+
+Your front-end should:
+
+- Display withdrawal status and when each request can be finalized (use `getWithdrawalRequest(requestId)` and `requestBlock + 129600`).
+- Support batch finalization with `finalizeWithdrawalRequests([...])`.
+- Show staker balance, share price, and total rewards (e.g. via `previewRedeem(shares)`).
+
+Berachain provides a React-based example template in the [guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend). Use `generate-frontend-config.sh` from `install-helpers` to generate `config.json` from your environment.
+
+## Delegation
+
+If you have received a delegation from the Berachain Foundation, see the [Delegation Guide](/validators/staking-pools/delegators) and the [DelegationHandler](https://github.com/berachain/guides/tree/main/apps/staking-pools) contract reference.
+
+## More information
+
+- [Staking Pools Overview](/validators/staking-pools/overview)
+- [Smart Contract Reference](/validators/staking-pools/contracts)
+- [Install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md)

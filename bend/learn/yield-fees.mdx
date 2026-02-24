@@ -1,50 +1,36 @@
 ---
 title: "Yield & Fees"
-description: "How yield is generated and fees are applied in Bend vaults."
+description: "How vault yield is generated from lending markets and how fees are applied; share price and depositor interest."
 ---
 
-Understanding how yield is generated and fees are applied in Bend vaults is crucial for building accurate earn products and setting proper user expectations.
+Understanding how vault yield is generated and how fees are applied helps you build accurate earn products and set clear user expectations.
 
 ## Yield generation
 
-Bend vaults generate yield through capital allocation to various lending markets on Berachain.
+Bend vaults earn yield by supplying capital to lending markets on Berachain.
 
-### Where does the yield come from?
+### Yield sources
 
-#### Borrower interest
-
-Borrowers in underlying lending markets pay interest on their loans.
-
-#### Market distribution
-
-Interest flows to lenders in each market based on their supplied assets.
-
-#### Vault collection
-
-Vaults collect interest as lenders across multiple markets.
-
-#### Share price increase
-
-The vault's total assets increase, raising the share price for depositors.
-
-#### Depositor interest
-
-Depositors earn the interest paid by borrowers as their position's share value increases in token terms.
+1. **Borrower interest**: Borrowers in underlying markets pay interest.
+2. **Market distribution**: Interest is distributed to lenders in each market by supplied share.
+3. **Vault collection**: Vaults collect interest as lenders across multiple markets.
+4. **Share price increase**: Total vault assets grow, so share price rises.
+5. **Depositor interest**: You earn the interest paid by borrowers as your share value increases.
 
 ## Fee mechanism
 
-Bend vaults implement performance fees and platform fees. Both are taken as a cut on the native yield earned by lenders.
+Bend vaults charge **performance fees** and **platform fees**. Both are taken as a share of the native lending yield.
 
 <Note>
-The yield coming from Proof-of-Liquidity $BGT is not subject to any fee.
+Yield from Proof-of-Liquidity $BGT is not subject to any fee.
 </Note>
 
 ### Platform fee
 
-Platform fee is charged at the market level and retained by Berachain foundation.
+Charged at the market level and retained by the Berachain Foundation.
 
 ### Performance fee
 
-Performance fee is charged at the vault level and split between the foundation (0%)* and the curator (100%)*.
+Charged at the vault level and split between the foundation (0%)* and the curator (100%)*.
 
 > *Values are subject to change.

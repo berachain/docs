@@ -127,32 +127,22 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "bend/learn/overview"
                 ]
               },
               {
-                "group": "Market",
+                "group": "Concepts",
                 "pages": [
                   "bend/learn/market",
                   "bend/learn/ltv",
                   "bend/learn/interest-rates",
                   "bend/learn/public-allocator",
-                  "bend/learn/liquidation"
-                ]
-              },
-              {
-                "group": "Vault",
-                "pages": [
+                  "bend/learn/liquidation",
                   "bend/learn/vault",
                   "bend/learn/yield-fees",
-                  "bend/learn/rewards-for-lenders"
-                ]
-              },
-              {
-                "group": "Concepts",
-                "pages": [
+                  "bend/learn/rewards-for-lenders",
                   "bend/learn/curator",
                   "bend/learn/oracle",
                   "bend/learn/irm",
@@ -161,7 +151,7 @@
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "bend/guides/deposit-withdraw",
                   "bend/guides/borrow-repay",
@@ -284,8 +274,19 @@
                 "group": "Operations",
                 "pages": [
                   "validators/operations/quickstart",
+                  "validators/operations/self-hosted-rpc",
                   "validators/operations/production-checklist",
                   "validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Staking Pools",
+                "pages": [
+                  "validators/staking-pools/overview",
+                  "validators/staking-pools/installation",
+                  "validators/staking-pools/operators",
+                  "validators/staking-pools/delegators",
+                  "validators/staking-pools/contracts"
                 ]
               },
               {
@@ -395,13 +396,13 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "cn/bend/learn/overview"
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "cn/bend/guides/deposit-withdraw",
                   "cn/bend/guides/borrow-repay"
@@ -491,8 +492,19 @@
                 "group": "Operations",
                 "pages": [
                   "cn/validators/operations/quickstart",
+                  "cn/validators/operations/self-hosted-rpc",
                   "cn/validators/operations/production-checklist",
                   "cn/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Staking Pools",
+                "pages": [
+                  "cn/validators/staking-pools/overview",
+                  "cn/validators/staking-pools/installation",
+                  "cn/validators/staking-pools/operators",
+                  "cn/validators/staking-pools/delegators",
+                  "cn/validators/staking-pools/contracts"
                 ]
               },
               {
@@ -602,13 +614,13 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "ko/bend/learn/overview"
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "ko/bend/guides/deposit-withdraw",
                   "ko/bend/guides/borrow-repay"
@@ -698,8 +710,19 @@
                 "group": "Operations",
                 "pages": [
                   "ko/validators/operations/quickstart",
+                  "ko/validators/operations/self-hosted-rpc",
                   "ko/validators/operations/production-checklist",
                   "ko/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Staking Pools",
+                "pages": [
+                  "ko/validators/staking-pools/overview",
+                  "ko/validators/staking-pools/installation",
+                  "ko/validators/staking-pools/operators",
+                  "ko/validators/staking-pools/delegators",
+                  "ko/validators/staking-pools/contracts"
                 ]
               },
               {
@@ -809,13 +832,13 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Learn",
+                "group": "Introduction",
                 "pages": [
                   "vi/bend/learn/overview"
                 ]
               },
               {
-                "group": "Guides",
+                "group": "User Guides",
                 "pages": [
                   "vi/bend/guides/deposit-withdraw",
                   "vi/bend/guides/borrow-repay"
@@ -905,8 +928,19 @@
                 "group": "Operations",
                 "pages": [
                   "vi/validators/operations/quickstart",
+                  "vi/validators/operations/self-hosted-rpc",
                   "vi/validators/operations/production-checklist",
                   "vi/validators/operations/monitoring"
+                ]
+              },
+              {
+                "group": "Staking Pools",
+                "pages": [
+                  "vi/validators/staking-pools/overview",
+                  "vi/validators/staking-pools/installation",
+                  "vi/validators/staking-pools/operators",
+                  "vi/validators/staking-pools/delegators",
+                  "vi/validators/staking-pools/contracts"
                 ]
               },
               {
@@ -957,5 +991,25 @@
       "discord": "https://discord.gg/berachain",
       "telegram": "https://t.me/berachain"
     }
-  }
+  },
+  "redirects": [
+    { "source": "/cn/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
+    { "source": "/cn/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
+    { "source": "/cn/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
+    { "source": "/cn/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
+    { "source": "/cn/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
+    { "source": "/cn/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
+    { "source": "/ko/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
+    { "source": "/ko/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
+    { "source": "/ko/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
+    { "source": "/ko/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
+    { "source": "/ko/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
+    { "source": "/ko/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
+    { "source": "/vi/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
+    { "source": "/vi/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
+    { "source": "/vi/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
+    { "source": "/vi/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
+    { "source": "/vi/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
+    { "source": "/vi/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" }
+  ]
 }

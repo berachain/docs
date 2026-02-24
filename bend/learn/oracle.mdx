@@ -1,46 +1,44 @@
 ---
 title: "Oracle"
-description: "Price feeds and how oracles supply data to Bend markets."
+description: "Price feeds for Bend markets; oracle-agnostic design, compatible types, and how to query price data."
 ---
 
-Oracles are smart contracts that provide external data, particularly price information, to blockchain applications. In lending protocols like Bend, oracles provide price data needed to determine what one token is worth relative to another. For example, the oracle of a market is designed to answer the question: "How many $USD is 1 $BERA/$WBERA worth right now?"
+Oracles supply price data to the chain. In Bend, a market's oracle answers: "How many USD is 1 unit of this collateral worth?" so the protocol can value collateral, set borrowing capacity, and trigger liquidations.
 
-## Oracles in lending markets
+## Oracles in Bend markets
 
-Traditional lending protocols rely on oracles to:
+Oracles are used to:
 
-- Determine the value of collateral assets
-- Calculate borrowing capacity
-- Trigger liquidations when positions become undercollateralized
-- Enable accurate interest rate calculations
+- Value collateral
+- Compute borrowing capacity
+- Trigger liquidations when positions are undercollateralized
+- Support interest rate logic
 
-## Oracle implementation in Bend
+## Bend implementation
 
-Bend takes an **oracle-agnostic approach**, allowing market creators to select the most appropriate price feed mechanisms based on specific market requirements. Each Bend market specifies its oracle in the market parameters, ensuring that oracle implementations can be tailored to specific asset pairs.
+Bend is **oracle-agnostic**: each market specifies its oracle in its parameters. Market creators choose the feed that fits the asset (e.g. Chainlink, Redstone, API3, Pyth, Chronicle, or a custom implementation).
 
-## Types of oracles compatible with Bend
+## Compatible oracle types
 
-Various oracle implementations can be used with Bend markets:
+- **Price feed oracles**: External feeds for exchange rates (Chainlink, Redstone, API3, Pyth, Chronicle).
+- **Exchange rate oracles**: For wrapped or rebasing tokens with deterministic rates (e.g. wstETH/stETH).
+- **Fixed-price oracles**: For assets with a known peg (e.g. stablecoins).
 
-1. **Price Feed Oracles**: Utilize external price feeds (like Chainlink, Redstone, API3, Pyth, Chronicle) to calculate asset exchange rates.
-2. **Exchange Rate Oracles**: Specialized for wrapped tokens or rebasing tokens where the exchange rate is deterministic (like wstETH/stETH).
-3. **Fixed-Price Oracles**: Used for assets with known or predefined exchange rates, such as stablecoins pegged to the same value.
+## Getting price data
 
-## How to get price data
+Steps to get the current price of a collateral (e.g. $WBERA).
 
-This walks you through the process of getting the current price of a collateral ($WBERA).
+### 1. Get market ID
 
-### 1. Get Market Id
-
-The Market Id can be found on [Berachain Bend](https://bend.berachain.com/borrow).
+Find the Market ID on [Berachain Bend](https://bend.berachain.com/borrow).
 
 <Frame>
   <img src="/images/bend/oracle-market-id.png" alt="Bend - Find Market Id" />
 </Frame>
 
-### 2. Find Oracle address
+### 2. Find oracle address
 
-In [BeraScan](https://berascan.com/) look up the following `Morpho` address and click the address.
+In [BeraScan](https://berascan.com/) look up the Morpho (Vault) address and open it:
 
 ```
 # Morpho (Vault)
@@ -51,37 +49,33 @@ In [BeraScan](https://berascan.com/) look up the following `Morpho` address and 
   <img src="/images/bend/oracle-morpho.png" alt="Berascan - Find Oracle Address" />
 </Frame>
 
-### 3. Get Base Feed address
+### 3. Get base feed address
 
-In the oracle address, read the contract, select the **BASE_FEED_1** and click the address.
+In the oracle contract, read **BASE_FEED_1** and open the linked address.
 
 <Frame>
   <img src="/images/bend/oracle-feed.png" alt="Berascan - Find Base Feed Address" />
 </Frame>
 
-### 4. Get Latest Answer
+### 4. Get latest answer
 
-In the base feed address, read the contract (or read proxy contract), and click `latestAnswer`.
+In the base feed contract (or its proxy), call `latestAnswer`.
 
 <Frame>
   <img src="/images/bend/oracle-latest-answer.png" alt="Berascan - Latest Price Answer" />
 </Frame>
 
-How many decimal places is this? The value returned by `latestAnswer` (for example, `202675951`) should be divided by `100000000`, which means the price uses 8 decimal places.
-
-Resulting in:
+The value uses **8 decimals**. For example, `202675951` means **2.02675951 USD** (divide by `100000000`).
 
 ```
-# $BERA/$WBERA Price
+# $BERA/$WBERA price
 2.02675951 USD
 ```
 
-## Oracle security considerations
+## Oracle security
 
-The security of an oracle is critical to the safety of a Bend Market. Users should:
+Oracle choice is critical and **immutable** for a Bend market. Before using a market:
 
-- Verify the oracle implementation for any market they interact with
-- Understand the price sources being used
-- Consider potential manipulation vectors or failure modes
-
-The immutable nature of Bend Markets means oracle selection is a permanent decision that defines the market's risk profile.
+- Verify the oracle implementation
+- Understand the price sources
+- Consider manipulation or failure modes

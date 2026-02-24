@@ -1,68 +1,49 @@
 ---
-title: "What is Bend?"
-description: "Morpho-based lending and borrowing with native PoL on Berachain."
+title: "What Is Bend?"
+description: "Morpho-based lending and borrowing with native Proof-of-Liquidity on Berachain; vaults, markets, and key features."
 ---
 
-**Bend** is a decentralized lending protocol forked from Morpho, designed to enable efficient lending and borrowing with native Proof-of-Liquidity (PoL) on Berachain. As a lending primitive layer, Bend allows the creation of immutable and efficient lending markets in a permissionless way.
+**Bend** is a decentralized lending protocol forked from Morpho. It enables efficient lending and borrowing with native Proof-of-Liquidity (PoL) on Berachain. As a lending primitive, Bend allows permissionless creation of immutable, efficient lending markets.
 
-Bend inherits the core architecture from **Morpho v1** vaults and markets, providing a familiar and battle-tested lending infrastructure while leveraging Berachain's unique Proof-of-Liquidity consensus mechanism.
+Bend inherits the core architecture from **Morpho v1** vaults and markets—familiar, battle-tested infrastructure—and adds Berachain's Proof-of-Liquidity consensus.
 
 <Frame>
   <img src="/images/bend/overview.png" alt="Bend protocol overview" />
 </Frame>
 
-Access Bend at [https://bend.berachain.com](https://bend.berachain.com)
+Use Bend at [bend.berachain.com](https://bend.berachain.com).
 
 ## How it works
 
-Bend operates as a simple lending primitive layer that creates immutable and efficient lending markets through smart contracts. The protocol facilitates:
+Bend acts as a lending primitive layer. Smart contracts create immutable, efficient lending markets. The protocol supports:
 
-- **Lending**: You can deposit assets to earn interest and $BGT
-- **Borrowing**: You can borrow assets by providing collateral
-- **Market Creation**: Permissionless creation of new lending markets
-- **Interest Rate Dynamics**: Market-driven interest rates based on supply and demand
+- **Lending**: Deposit assets to earn interest and `$BGT`
+- **Borrowing**: Borrow assets by providing collateral
+- **Market creation**: Permissionless creation of new lending markets
+- **Interest rates**: Market-driven rates based on supply and demand
 
 ## Key features
 
-- **Collateralization**: You provide collateral to borrow assets
-- **Risk Protection**: Liquidation mechanisms protect the protocol through loan-to-value ratios
-- **Interest Accrual**: Dynamic interest rates based on market conditions
-- **Open Participation**: Anyone can lend or borrow through the protocol
-- **Non-custodial Design**: You maintain ownership of your assets at all times
-- **Vault System**: Inherited from Morpho v1 vault architecture
-- **Native PoL Support**: Leverages Berachain's Proof-of-Liquidity by incentivizing you to lend your assets to borrowers
+- **Collateralization**: Provide collateral to borrow assets
+- **Risk protection**: Liquidation and loan-to-value ratios protect the protocol
+- **Interest accrual**: Dynamic rates based on market conditions
+- **Open participation**: Anyone can lend or borrow
+- **Non-custodial**: You keep ownership of your assets
+- **Vault system**: Morpho v1 vault architecture
+- **Native PoL**: Berachain Proof-of-Liquidity rewards lending to borrowers
 
 ## Use cases
 
-Bend serves various use cases including:
-
-- **Lending**: Earning interest on deposited assets
-- **Borrowing**: Accessing liquidity while maintaining asset exposure
-- **DeFi Integration**: Building lending features into other applications
-- **Looping**: Taking leveraged exposure on yields and assets by employing looping strategies
+- **Lending**: Earn interest on deposited assets
+- **Borrowing**: Access liquidity while keeping asset exposure
+- **DeFi integration**: Build lending into other applications
+- **Looping**: Leveraged exposure on yields via looping strategies
 
 ## Getting started
 
-To start using Bend, you can:
+Go to [Bend](https://bend.berachain.com), connect your wallet, then choose an action:
 
-<Steps>
-  <Step title="Connect your wallet">
-    Connect your wallet to [Bend](https://bend.berachain.com).
-  </Step>
-  <Step title="Browse markets">
-    Browse available lending markets.
-  </Step>
-  <Step title="Deposit assets">
-    Deposit assets to start earning interest.
-  </Step>
-  <Step title="Borrow assets">
-    Borrow assets by providing sufficient collateral.
-  </Step>
-  <Step title="Monitor positions">
-    Monitor positions and manage risk.
-  </Step>
-</Steps>
+- **Lend**: [Deposit & Withdraw](/bend/guides/deposit-withdraw) — supply `$HONEY` to a vault and optionally stake for `$BGT`.
+- **Borrow**: [Borrow & Repay](/bend/guides/borrow-repay) — supply collateral and borrow `$HONEY`; monitor LTV to avoid liquidation.
 
-If you're familiar with Morpho, Bend provides a familiar lending experience while offering the benefits of Berachain's unique Proof-of-Liquidity and ecosystem.
-
-See our **Guides** section for more and start with the [Borrow & Repay Guide](/bend/guides/borrow-repay).
+If you use Morpho, Bend will feel familiar and adds Berachain Proof-of-Liquidity and ecosystem benefits. See the **Guides** section and start with [Borrow & Repay](/bend/guides/borrow-repay).

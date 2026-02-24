@@ -1,46 +1,46 @@
 ---
 title: "Deposit & Withdraw"
-description: "Depositing and withdrawing assets in Bend vaults."
+description: "Step-by-step: supply HONEY to a vault, stake for BGT yield, unstake, and withdraw from Bend."
 ---
 
-This guide will walk you through the process of contributing to a Bend Vault.
+Follow these steps to deposit into and withdraw from a Bend vault.
 
 ## Requirements
 
 - Wallet with $HONEY
-- Native $BERA to process transactions
+- Native $BERA for transaction fees
 
 <Tip>
-If you do not have $HONEY, you can use [Berachain Hub](https://hub.berachain.com/swap) or [HoneySwap](https://honey.berachain.com).
+If you don't have $HONEY, get it on [Berachain Hub](https://hub.berachain.com/swap) or [HoneySwap](https://honey.berachain.com).
 </Tip>
 
-## Depositing into Bend vaults
+## Depositing
 
-This will walk you through the steps of interacting with Bend and depositing $HONEY to gain native lending yields and additionally PoL $BGT yields.
+Deposit $HONEY to earn native lending yield and PoL $BGT yield.
 
 <Steps>
   <Step title="Visit Bend and connect wallet">
-    Your first step is to go to [Bend](https://bend.berachain.com/lend) and connect your wallet.
+    Go to [Bend](https://bend.berachain.com/lend) and connect your wallet.
 
     <Frame>
       <img src="/images/bend/deposit-connect-wallet.png" alt="Bend deposit connect wallet" />
     </Frame>
   </Step>
   <Step title="Choose a vault">
-    Choose a Vault that you would like to deposit your $HONEY with.
+    Choose a vault to deposit $HONEY into.
 
     <Frame>
       <img src="/images/bend/deposit-choose-vault.png" alt="Bend choose vault" />
     </Frame>
   </Step>
   <Step title="Configure deposit">
-    1. Make sure to select **Supply**
-    2. Specify a $HONEY amount you'd like to deposit
-    3. Choose if you'd like to **Stake** or **Supply & Stake** (recommended for PoL $BGT yields)
-    4. Click **Review** to bring up a modal to confirm
+    1. Select **Supply**
+    2. Enter the $HONEY amount to deposit
+    3. Choose **Stake** or **Supply & Stake** (recommended for PoL $BGT yield)
+    4. Click **Review** to open the confirmation modal
 
     <Tip>
-    If you do not enable **Supply & Stake** now, you can still do so later.
+    You can enable **Supply & Stake** later if you skip it now.
     </Tip>
 
     <Frame>
@@ -48,12 +48,12 @@ This will walk you through the steps of interacting with Bend and depositing $HO
     </Frame>
   </Step>
   <Step title="Approve, supply, and stake">
-    Your wallet prompts you to:
+    Your wallet will prompt you to:
 
-    1. Approve transfer of the $HONEY token for the Vault
-    2. Supply the $HONEY to the Vault
-    3. Receive receipt token
-    4. Stake receipt to a Berachain PoL Reward Vault for additional $BGT yields
+    1. Approve the vault to spend your $HONEY
+    2. Supply $HONEY to the vault
+    3. Receive receipt tokens
+    4. Stake the receipt tokens in a Berachain PoL Reward Vault for $BGT yield
 
     <Frame>
       <img src="/images/bend/deposit-supply-stake.png" alt="Bend supply and stake" />
@@ -63,13 +63,13 @@ This will walk you through the steps of interacting with Bend and depositing $HO
       <img src="/images/bend/deposit-successful-supply-stake.png" alt="Bend successful supply and stake" />
     </Frame>
 
-    You should now see the successfully deposited total value, both supplied and staked, along with the corresponding amount in receipt tokens.
+    You should see your deposited value (supplied and staked) and the receipt token amount.
 
     <Frame>
       <img src="/images/bend/deposit-staked-receipt-tokens.png" alt="Bend staked receipt tokens" />
     </Frame>
 
-    With your current deposit staked, this now makes your account eligible to claim $BGT yields.
+    With your deposit staked, you can claim $BGT yield.
 
     <Frame>
       <img src="/images/bend/deposit-yields.png" alt="Bend deposit yields" />
@@ -77,19 +77,19 @@ This will walk you through the steps of interacting with Bend and depositing $HO
   </Step>
 </Steps>
 
-## Withdrawing from Bend vaults
+## Withdrawing
 
-This will walk you through the steps of withdrawing your deposited and staked tokens with Bend.
+Unstake and withdraw your $HONEY.
 
 <Steps>
   <Step title="Configure withdrawal">
-    While in the Vault you'd like to withdraw from:
+    In the vault you want to withdraw from:
 
-    1. Make sure to select **Withdraw**
-    2. Specify a $HONEY amount you'd like to withdraw
+    1. Select **Withdraw**
+    2. Enter the $HONEY amount to withdraw
 
     <Tip>
-    You will notice that your balance is showing 0, that is because your current deposit is staked and will require it being unstaked before withdrawing.
+    If your balance shows 0, your deposit is staked. Unstake first, then withdraw.
     </Tip>
 
     <Frame>
@@ -97,13 +97,13 @@ This will walk you through the steps of withdrawing your deposited and staked to
     </Frame>
   </Step>
   <Step title="Unstake deposit">
-    Where your current balance of stake is shown click the **Unstake** button.
+    Where your staked balance is shown, click **Unstake**.
 
     <Frame>
       <img src="/images/bend/withdraw-unstake.png" alt="Bend unstake deposit" />
     </Frame>
 
-    You will be prompted to specify the amount you want to unstake and confirm.
+    Enter the amount to unstake and confirm.
 
     <Frame>
       <img src="/images/bend/withdraw-confirm-unstake.png" alt="Bend confirm unstake" />
@@ -114,22 +114,22 @@ This will walk you through the steps of withdrawing your deposited and staked to
     </Frame>
   </Step>
   <Step title="Withdraw deposit">
-    Now with your deposit unstaked, it is now shown in the **Deposited** section which allows you to withdraw your deposit.
+    After unstaking, your balance appears under **Deposited**. Withdraw from there.
 
-    1. Specify a $HONEY amount you'd like to withdraw
-    2. Make sure to select **Withdraw**
+    1. Enter the $HONEY amount to withdraw
+    2. Select **Withdraw**
 
     <Frame>
       <img src="/images/bend/withdraw-specify-amount.png" alt="Bend specify withdrawal amount" />
     </Frame>
 
-    You'll be prompted to confirm the withdrawal with your wallet.
+    Confirm the withdrawal in your wallet.
 
     <Frame>
       <img src="/images/bend/withdraw-confirm-withdrawal.png" alt="Bend confirm withdrawal" />
     </Frame>
 
-    Once complete, you will have successfully withdrawn your deposit.
+    When complete, your $HONEY is back in your wallet.
 
     <Frame>
       <img src="/images/bend/withdraw-successful-complete.png" alt="Bend successful withdrawal" />

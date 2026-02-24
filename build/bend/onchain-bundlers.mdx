@@ -1,33 +1,33 @@
 ---
 title: "Bundlers"
-description: "Group multiple Bend onchain operations into one atomic transaction."
+description: "Group multiple Bend onchain operations into one atomic transaction; Bundler3 integration and use cases."
 ---
 
-Bundlers are smart contracts designed to let developers group several onchain operations into a single, atomic transaction. Rather than requiring users to complete multiple steps—such as approvals, wrapping, supplying, or borrowing—each as a separate transaction, bundlers allow these actions to be executed together in one go. This approach streamlines the process and helps reduce gas costs.
+Bundlers let you run multiple onchain operations in **one atomic transaction**—approvals, wrapping, supply, borrow, and more—so users complete flows in a single step and you save gas.
 
-For building user-facing applications on Morpho, using a bundler is the preferred method.
+For user-facing apps on Morpho, using a bundler is the recommended approach.
 
 <Note>
-To see more details, see the [Bundler3 contract reference](/build/bend/contract-bundler3) section.
+For details, see the [Bundler3 contract reference](/build/bend/contract-bundler3).
 </Note>
 
 ## Why use bundlers
 
-- **Enhanced Simplicity:** Bundlers hide the underlying steps of DeFi operations, letting users perform complex actions—such as opening leveraged positions or making vault deposits—in a single, straightforward transaction.
-- **Lower Gas Costs:** By executing several operations together, bundlers help minimize total gas expenditure compared to running each step separately.
-- **Transactional Integrity:** Bundled transactions are all-or-nothing; if any part fails, the whole process is reverted. This ensures users never end up in incomplete or undesirable states (for example, with tokens approved but not deposited).
+- **Simpler UX**: Users can open leveraged positions or deposit into vaults in one transaction instead of many.
+- **Lower gas**: One transaction costs less than several separate ones.
+- **Atomicity**: If any step fails, the whole transaction reverts so users never end up in a half-complete state (e.g. tokens approved but not supplied).
 
-## Key features and capabilities
+## Supported operations
 
-Bundlers support a broad set of operations, such as:
+Bundlers support:
 
-- **Managing tokens:** Set ERC20 approvals (including via permit or permit2), wrap or unwrap native assets (like ETH to WETH), and transfer tokens.
-- **Bend market interactions**: Perform supply, supplyCollateral, borrow, repay, and withdraw actions.
-- **Bend vault operations**: Deposit into or withdraw from any vault that follows the ERC4626 standard.
-- **Public Allocator**: Initiate reallocateTo to shift liquidity as needed.
-- **Claiming rewards**: Collect rewards from the Universal Rewards Distributor (URD).
-- **Swapping on DEXs:** Carry out swaps using built-in DEX aggregators.
+- **Tokens**: ERC20 approvals (including permit/permit2), wrap/unwrap native assets, transfers
+- **Bend markets**: Supply, supplyCollateral, borrow, repay, withdraw
+- **Bend vaults**: Deposit and withdraw (ERC-4626 vaults)
+- **Public Allocator**: `reallocateTo` to move liquidity between markets
+- **Rewards**: Claim from the Universal Rewards Distributor (URD)
+- **Swaps**: DEX aggregator swaps
 
 <Warning>
-If Bundler3 is granted token approval, it is capable of executing any transaction on your behalf. For this reason, you should avoid granting Bundler3 approval—whether through a standard approval or a permit.
+If you grant Bundler3 token approval, it can execute any transaction on your behalf. Avoid granting Bundler3 approval (standard approval or permit).
 </Warning>

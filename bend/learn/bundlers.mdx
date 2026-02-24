@@ -1,25 +1,25 @@
 ---
 title: "Bundlers"
-description: "Combine multiple Bend actions into a single transaction."
+description: "Bundler3: combine supply, borrow, swap, and other Bend actions into a single atomic transaction; gas savings."
 ---
 
-Bundlers are smart contracts that allow you to combine multiple actions into a single transaction. Instead of executing several transactions in sequence—each requiring confirmation and gas fees—bundlers let you do everything at once.
+Bundlers let you run multiple Bend actions in **one transaction**. You avoid multiple confirmations and pay gas once.
 
 ## Bundler implementations
 
-Bundler3 is Morpho's most advanced bundler, integrated directly into the Morpho interface. This means users can perform complex operations with just one click.
+**Bundler3** is Morpho's main bundler and is built into the Morpho UI so you can run complex flows with one action.
 
-## What Bundler3 allows you to do
+## Bundler3 capabilities
 
-With Bundler3, you can:
+With Bundler3 you can:
 
-1. **Streamline Complex Workflows** - Complete lending, borrowing, swapping, and more in one transaction
-2. **Save on Gas Fees** - Pay for one transaction instead of many
-3. **Avoid Failed Transactions** - If any part of your operation would fail, the entire transaction reverts safely
-4. **Perform Advanced Operations** - Combine actions that normally require multiple steps
+1. **Combine workflows** — Supply, borrow, swap, and more in a single transaction
+2. **Save gas** — One transaction instead of many
+3. **Avoid partial failures** — If any step would fail, the whole transaction reverts
+4. **Run advanced flows** — Actions that normally need several steps in one go
 
-## Practical examples
+## Examples
 
-- **One-Click Leverage**: Convert $BERA to $WETH, deposit as collateral, and borrow $HONEY all in one transaction
-- **Instant Refinancing**: Borrow from one market, repay another, and adjust collateral positions simultaneously
-- **Portfolio Rebalancing**: Withdraw, swap, and redeposit assets across multiple markets without waiting for confirmations
+- **One-click leverage**: Convert $BERA to $WETH, supply as collateral, and borrow $HONEY in one transaction
+- **Refinancing**: Borrow from one market, repay another, and adjust collateral in one transaction
+- **Rebalancing**: Withdraw, swap, and redeposit across markets without waiting for separate confirmations

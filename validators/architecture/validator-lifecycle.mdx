@@ -1,11 +1,13 @@
 ---
 title: "Validator Lifecycle"
-description: "Phases from setup to active validation on Berachain."
+description: "Validator states and transitions: Deposited, Eligible, Active, Exited, and Withdrawn; activation queue and stake requirements."
 ---
 
 ## Overview
 
 A validator in Berachain is a participant responsible for proposing and attesting to new blocks, helping secure the network and maintain consensus. Validators stake a required amount of the network's native token ($BERA) as collateral, which serves both as an economic incentive to behave honestly and as a mechanism for penalizing malicious behavior.
+
+Validators can operate independently with direct staking, or they can operate **staking pools** that allow community members to stake BERA through smart contracts and receive liquid shares (stBERA). Staking pools follow the same validator lifecycle described in this document. For information about operating staking pools, see the [Staking Pools documentation](/validators/staking-pools/overview).
 
 Validators have several key responsibilities:
 
@@ -14,7 +16,7 @@ Validators have several key responsibilities:
 - Participating in consensus by voting on the canonical chain
 - Maintaining network security through their staked tokens
 
-The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest **1 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
+The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest **10,000 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
 <Frame>
   <img src="/images/validators/validator-lifecycle.png" alt="Diagram showing the Berachain validator lifecycle states: Deposited, Eligible, Active, Exited, and Withdrawn" />
@@ -74,7 +76,7 @@ Once **Active**:
 
 ## Exited state
 
-A Validator may choose to exit by withdrawing their complete stake. Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the ValidatorSetCap is reached and another validator with a higher priority enters. Higher priority is determined by:
+A Validator may choose to exit by [withdrawing their complete stake](/validators/guides/withdraw-stake). Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the ValidatorSetCap is reached and another validator with a higher priority enters. Higher priority is determined by:
 
 1. **Larger Effective Balance**
 2. **If Equal Effective Balance**, a lower-order pubKey (alphabetically).

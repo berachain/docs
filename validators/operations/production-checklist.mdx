@@ -1,11 +1,11 @@
 ---
 title: "Production Checklist"
-description: "Best practices for running Berachain nodes in production."
+description: "Pre-support checks: diagnosis script, client versions, peering, recommended options, and operational hygiene for production nodes."
 ---
 
 Before reaching out for support, here are some steps to check your installation.
 
-## Start with a quick diagnosis script
+## Quick diagnosis script
 
 Berachain distributes a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system and run:
 
@@ -58,7 +58,7 @@ For **Geth**, override the gas price lower limit to agree with Reth:
 
 For both clients, ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules. For Geth, exposing the `debug` API module enables highly destructive commands.
 
-## Let the team know who you are
+## Register with the team
 
 If you have launched a validator on the chain, it's in your interest to let the team know who you are, so they know who to contact in case there's trouble with on-chain performance.
 
@@ -67,7 +67,7 @@ Steps to do that:
 1. (Optional) Formulate a pull request to the [Validator Metadata repository](https://github.com/berachain/metadata) with a public handle for your validator. You can use an anon if you want. Provide a logo attached to the pull request if you would like it posted on your validator profile.
 2. Reach out on the `#node-support` channel on [Discord](https://discord.gg/berachain). The team will set you up with dedicated support, chat, and announcement channels for validators.
 
-## Hygiene
+## Operational hygiene
 
 Make sure Beacon Kit and your execution client are configured to start when your operating system starts.
 

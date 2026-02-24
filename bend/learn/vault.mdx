@@ -1,82 +1,82 @@
 ---
 title: "Vaults"
-description: "Yield-generating lending positions and vault structure."
+description: "Yield-generating vault structure, curator and allocator roles, supply/withdraw queues, and risk considerations."
 ---
 
-Vaults are yield-generating investment vehicles that allow users to deposit assets and earn returns through automated strategies. On Berachain, vaults provide a simplified way for users to access complex DeFi protocols while maintaining full control over their assets.
+Vaults are yield-generating contracts that pool deposits and allocate them across strategies. On Berachain, they give you a simple way to earn from lending while keeping control of your assets.
 
-## What are vaults?
+## Overview
 
-Vaults are smart contracts that pool user deposits and automatically allocate them across various yield-generating strategies. Users receive vault shares (ERC-4626 tokens) representing their proportional ownership of the underlying assets and accrued yield.
+Vaults pool your deposits and allocate them across lending markets. You receive vault shares (ERC-4626) representing your share of the underlying assets and yield.
 
-## Key benefits of vaults
+## Benefits
 
-### 1. Curated risk profiles
+### Curated risk profiles
 
-Unlike traditional lending platforms where users are exposed to all assets in a pool, vaults allow selective exposure to specific strategies based on risk preferences. Users can choose vaults that align with their investment goals and risk tolerance.
+You choose vaults that match your goals and risk tolerance. Unlike a single mixed pool, vaults expose you only to the strategies and markets the Curator has selected.
 
-### 2. Permissionless infrastructure
+### Permissionless infrastructure
 
-Any entity (individual, DAO, or protocol) can create and manage vaults with different risk parameters and allocation strategies. This creates a diverse ecosystem of investment options for users.
+Anyone (individual, DAO, or protocol) can create and manage vaults with different risk parameters and strategies, giving you many options.
 
-### 3. Non-custodial architecture
+### Non-custodial architecture
 
-All positions remain fully controlled by the user with transparent on-chain verification of allocations and immutable vault logic. Users maintain ownership of their assets while benefiting from professional management.
+You keep full control of your position. Allocations and vault logic are on-chain and transparent.
 
-### 4. Automated yield generation
+### Automated yield generation
 
-Vaults automatically reinvest yields and optimize strategies to maximize returns, eliminating the need for users to manually manage their positions.
+Vaults reinvest yield and rebalance within their strategy so you don't have to manage positions manually.
 
 ## How vaults work
 
-### 1. Curation and market selection
+### Curation and market selection
 
-The `Curator` handles risk curation for the vault. The Curator chooses which Morpho V1 markets fit the vault's strategy and sets an absolute supply cap for each selected market. This cap ensures the vault cannot exceed a certain level of exposure to any given market. All actions that alter risk settings are protected by a **timelock**.
+The **Curator** sets risk boundaries: which Morpho V1 markets the vault can use and a supply cap per market. All changes to these settings go through a **timelock**.
 
-### 2. Capital allocation
+### Capital allocation
 
-The `Allocator` oversees optimizing yield within the vault. They maintain two primary queues:
+The **Allocator** manages day-to-day allocation. They maintain:
 
-- **Supply Queue:** Specifies the sequence in which newly deposited capital is allocated to the enabled markets.
-- **Withdraw Queue:** Specifies the order in which capital is withdrawn from markets to satisfy user redemption requests. In addition, the allocator has the ability to `reallocate` funds between enabled markets to further enhance utilization and yield.
+1. **Supply queue**: Order in which new deposits are allocated to enabled markets.
+2. **Withdraw queue**: Order in which capital is pulled from markets to satisfy redemptions.
 
-### 3. User deposits and withdrawals
+The Allocator can also **reallocate** between enabled markets to improve utilization and yield.
 
-When users deposit, the vault directs assets into markets according to the `supplyQueue`, respecting each market's cap. For withdrawals, the vault sources liquidity from markets following the order specified in the `withdrawQueue`.
+### Deposits and withdrawals
+
+When you deposit, the vault allocates assets according to the supply queue and market caps. When you withdraw, it sources liquidity from markets in the order of the withdraw queue.
 
 ## Roles and responsibilities
 
-Morpho Vaults V1 organize control using a distinct set of roles, each with specific powers and responsibilities:
-
-- **Owner:** Holds the highest authority and may appoint the Curator and Allocators, as well as configure vault-wide settings such as fees.
-- **Curator:** Serves as the primary risk curator. The Curator selects which Morpho Markets V1 the vault can access and sets the supply cap for each market. All such changes are secured by a timelock for added safety.
-- **Allocator:** Acts as the portfolio allocator. The Allocator manages the supply and withdraw queues, and may also reallocate capital among approved markets to enhance yield and liquidity.
-- **Guardian:** Provides a safety function, empowered to revoke pending timelocked actions initiated by the Owner or Curator as a safeguard against potentially harmful or unintended changes.
+- **Owner**: Top authority; appoints Curator and Allocator; sets vault-wide settings (e.g. fees).
+- **Curator**: Selects which Morpho V1 markets the vault can use and sets supply caps. Changes are timelocked.
+- **Allocator**: Manages supply and withdraw queues and reallocates among approved markets.
+- **Guardian**: Can revoke pending timelocked actions from Owner or Curator as a safety check.
 
 ## Risk considerations
 
-A complete vault integration should help users understand:
+When integrating vaults, help users understand:
 
-### 1. Smart contract risk
+### Smart contract risk
 
-- **Vault Contract Risk:** Bugs in the vault smart contract could result in financial losses.
-- **Underlying Protocol Risk:** Morpho Markets that receive allocations from the vault could be susceptible to their own vulnerabilities.
-- **Upgradeability Risk:** Modifications to the vault or underlying protocol contracts may introduce new risks.
+- **Vault contract**: Bugs could cause loss.
+- **Underlying protocols**: Morpho markets the vault uses have their own risk.
+- **Upgradeability**: Changes to vault or protocol contracts can introduce new risk.
 
-### 2. Market risk
+### Market risk
 
-- **Asset Price Risk:** The price of the underlying asset could decrease in value.
-- **Interest Rate Risk:** Returns may vary as market-driven yield rates change.
-- **Liquidity Risk:** During times of high demand, it may be temporarily difficult to withdraw funds.
+- **Asset price**: Underlying assets can lose value.
+- **Interest rates**: Returns vary as market rates change.
+- **Liquidity**: Withdrawals may be delayed when demand is high.
 
-### 3. Curator risk
+### Curator risk
 
-- **Strategy Risk:** Suboptimal vault curator allocation choices could negatively impact performance.
-- **Concentration Risk:** Excessive allocation of assets to high-risk markets may expose users to greater losses.
-- **Governance Risk:** Vault curators acting incompetently or maliciously can introduce operational vulnerabilities.
+- **Strategy**: Poor Curator choices can hurt performance.
+- **Concentration**: Heavy allocation to riskier markets increases loss potential.
+- **Governance**: Incompetent or malicious Curators can create operational risk.
 
-### 4. Operational risk
+### Operational risk
 
-- **Oracle Risk:** There is a possibility of price feed manipulation or outages impacting vault operations.
-- **Liquidation Risk:** Leveraged strategies may be exposed to risks of liquidation within the underlying markets.
-- **Regulatory Risk:** Evolving regulations could impact the operation or availability of DeFi protocols.
+- **Oracle**: Price feed manipulation or outages can affect the vault.
+- **Liquidation**: Leveraged strategies may face liquidation in underlying markets.
+- **Regulatory**: Regulation may affect DeFi availability or operation.

@@ -1,19 +1,18 @@
 ---
 title: "Interest Rate Model"
-description: "How the AdaptiveCurveIRM determines supply and borrow rates."
+description: "AdaptiveCurveIRM: immutable IRM, target utilization, curve and adaptive mechanisms; supply and borrow rates."
 ---
 
-In Bend, the interest rate borrowers pay is determined by an external Interest Rate Model (IRM), which is selected at the time each market is created.
+In Bend, the interest rate you pay as a borrower is set by an **Interest Rate Model (IRM)** chosen when the market is created.
 
-Currently, the only IRM available for Bend markets is the [AdaptiveCurveIRM](/bend/learn/interest-rates#the-adaptivecurveirm). This model stands apart from traditional lending pool IRMs in two main ways:
+The only IRM used for Bend markets is the [AdaptiveCurveIRM](/bend/learn/interest-rates#the-adaptivecurveirm). It differs from typical pool IRMs in two ways:
 
-1. Whereas most lending pool IRMs can be changed or upgraded, the AdaptiveCurveIRM is immutable and cannot be altered. As a result, it must automatically respond to market conditions, including shifts in interest rates across other platforms.
+1. **Immutable**: The model cannot be changed or upgraded. It must respond automatically to market conditions, including rates on other platforms.
+2. **Higher target utilization**: Supplied assets in Bend are not used as collateral, so markets don't need to hold large buffers for liquidations. The protocol can target higher utilization and use gentler illiquidity penalties.
 
-2. In the Bend protocol, supplied assets are not used as collateral. This means markets do not need to maintain excessive liquidity for potential liquidations at all times. By eliminating this risk, the protocol can target a higher utilization of capital and impose less severe penalties for illiquidity, which leads to improved market efficiency.
+The AdaptiveCurveIRM keeps utilization near **90%**. In the short term it avoids utilization drifting too low or too high; over time the rate adapts to market conditions.
 
-The AdaptiveCurveIRM mechanism is built to keep utilization near its target—set at 90%. There are two overlapping timeframes: in the short-term, the protocol seeks to avoid utilization becoming too low or too high (to prevent liquidity disruptions), while over the medium and long term, the rate adapts to ongoing market changes.
-
-To maintain this balance, AdaptiveCurveIRM modifies incentives for users through two main mechanisms:
+Two mechanisms work together:
 
 - [The Curve Mechanism](#the-curve-mechanism)
 - [The Adaptive Mechanism](#the-adaptive-mechanism)
@@ -35,7 +34,7 @@ The curve is defined by the following features:
 
 > Image provided by [Morpho Docs](https://docs.morpho.org/get-started/resources/contracts/irm#the-curve-mechanism)
 
-Each time a user interacts with the market—such as borrowing or repaying—the utilization changes. This causes an immediate, stepwise shift in the rate as set by the curve.
+Each time you (or any user) interact with the market—e.g. borrow or repay—utilization changes and the rate updates along the curve.
 
 For instance, the following are sample utilization-to-rate relationships:
 
@@ -50,7 +49,7 @@ The Curve Mechanism is designed to respond to short-term fluctuations in utiliza
 
 This mechanism continuously shifts the curve to adjust to market conditions over time.
 
-Importantly, the interest rate adapts along with the curve itself, so it continually evolves based on market conditions—even in periods without any market activity.
+The curve shifts over time so the rate adapts to market conditions even when no one is borrowing or repaying.
 
 <Frame>
   <img src="/images/bend/irm-adaptive-mechanism.png" alt="Morpho - Adaptive Mechanism" />
@@ -67,7 +66,7 @@ The key value that moves the curve is \( {'r_{90\\%}'} \)—the rate at the targ
 
 The pace at which \( {'r_{90\\%}'} \) moves is recalculated whenever the market is updated (such as through borrowing or repaying). The greater the gap between current and target utilization, the faster \( {'r_{90\\%}'} \) (and thus the whole curve) moves in the appropriate direction.
 
-As an example: if utilization holds steady at 100% for five days, \( {'r_{90\\%}'} \) will, at maximum speed, approximately double over that time period.
+Example: if utilization stays at 100% for five days, \( {'r_{90\\%}'} \) can roughly double in that period (at maximum speed).
 
 <Tip>
 The values of some [constants](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/libraries/ConstantsLib.sol) are hardcoded into the code deployed on Berachain, such as `TARGET_UTILIZATION`, `INITIAL_RATE_AT_TARGET`, etc.
@@ -171,7 +170,7 @@ r(t) = r_T(t) \cdot \text{curve}(u(t))
 
 ## Calculations
 
-Annual Percentage Yield (APY) is a standardized metric that expresses the annualized return for suppliers and the annualized cost for borrowers, accounting for the effects of compounding interest over a one-year period. In Bend, APY enables participants to directly compare returns and costs across different protocols and asset markets.
+APY is the annualized return for suppliers and cost for borrowers, with compounding. In Bend you use it to compare returns and costs across markets.
 
 ### Borrow APY
 

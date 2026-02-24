@@ -1,11 +1,11 @@
 ---
 title: "Node Architecture"
-description: "Consensus and execution layers in a Berachain node."
+description: "Validator and RPC node architecture: consensus (BeaconKit) and execution clients, active set, staking, and block rewards."
 ---
 
 Berachain's network relies on validator nodes and RPC nodes. Each can be configured as a full node or archive node.
 
-Each of these types of nodes is a pair of both an execution client and a consensus client. Berachain is a Layer 1 EVM Identical chain, which means that for the execution layer, it supports any EVM execution client paired with a consensus client and framework built by Berachain called BeaconKit.
+Each of these types of nodes is a pair of both an [execution client](/general/help/glossary#execution-client) and a [consensus client](/general/help/glossary#consensus-client). Berachain is a Layer 1 EVM Identical chain, which means that for the execution layer, it supports any EVM execution client paired with a consensus client and framework built by Berachain called [BeaconKit](/validators/architecture/beaconkit-consensus).
 
 <Frame>
   <img src="/images/validators/berachain-node-architecture.png" alt="Berachain node architecture showing execution and consensus client pairs" />
@@ -15,7 +15,7 @@ Each of these types of nodes is a pair of both an execution client and a consens
 
 The main difference between an RPC node and a validator node is that a validator can propose blocks and receive block rewards.
 
-An RPC node can become a validator node by joining the Active Set through interaction with the `BeaconDeposit` contract by meeting the `$BERA` stake requirements.
+An RPC node can become a validator node by joining the [Active Set](#active-set) through interaction with the [BeaconDeposit](/build/contracts/beacondeposit) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements).
 
 ## Active set
 
@@ -23,7 +23,7 @@ The active set is the set of validators that are currently participating in the 
 
 The current limit of validators in the active set is **69**.
 
-Validators can choose to leave the active set voluntarily or be ejected from the set if a validator with more stake joins.
+Validators can choose to leave the active set voluntarily — [learn how](/validators/guides/withdraw-stake) — or be ejected from the set if a validator with more stake joins.
 
 ## Validator stake requirements
 
@@ -31,9 +31,9 @@ The minimum stake requirement depends on whether the active set is completely fu
 
 If the active set is not full, the minimum stake requirement is **250,000** `$BERA`.
 
-If the active set is full, the minimum stake requirement is **1** `$BERA` more than the amount staked by the last validator in the active set.
+If the active set is full, the minimum stake requirement is **10,000** `$BERA` more than the amount staked by the last validator in the active set.
 
-It can take up to **2** epochs (**128** blocks per epoch) for deposits to be processed and for a validator to be included in the active set.
+It can take up to **3** epochs (**192** blocks per epoch) for deposits to be processed and for a validator to be included in the active set.
 
 ## Direct staking
 
@@ -44,6 +44,10 @@ This means that validators will have to communicate how they handle funds when a
 <Warning>
 Avoid staking to validators without knowing how they handle funds when a validator is removed from the active set.
 </Warning>
+
+## Staking pools
+
+Validators can also operate **staking pools**, which enable liquid staking services for their communities. Staking pools use smart contracts to manage deposits and withdrawals, allowing stakers to receive liquid shares (stBERA) that automatically grow in value as rewards accumulate. Staking pools provide validators with a way to build and monetize their own community of stakers while offering stakers lower barriers to entry and flexible withdrawals. For information about setting up and operating staking pools, see the [Staking Pools documentation](/validators/staking-pools/overview).
 
 ## Removed from active set
 
@@ -57,10 +61,10 @@ Staking with a previously-used CometBFT identity — a validator that was remove
 
 ## Voluntary withdrawals
 
-A Validator can withdraw all or part of their stake.
+A Validator can [withdraw all or part of their stake](/validators/guides/withdraw-stake).
 
 ## Validator block rewards and distribution
 
 Block rewards are in the form of `$BGT`, with a base reward of **0.5** `$BGT` per block proposed.
 
-The network does not distribute rewards automatically. You must distribute block rewards through the `Distributor` contract. Distribution must occur before **86400** seconds have passed, or validators risk losing those rewards.
+The network does not distribute rewards automatically. You must distribute block rewards through the [Distributor](/build/contracts/distributor) contract. Distribution must occur before **8,191** seconds have passed, or validators risk losing those rewards.

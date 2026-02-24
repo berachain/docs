@@ -1,63 +1,61 @@
 ---
 title: "Flash Loans"
-description: "Uncollateralized single-transaction loans on Bend."
+description: "Uncollateralized borrow-and-repay within one transaction; flashLoan flow, callback, and implementation steps."
 ---
 
-Flash loans are a powerful DeFi primitive that allow users to borrow assets without collateral, as long as the borrowed amount is returned within the same transaction block.
+Flash loans let you **borrow without collateral** as long as you repay in the same transaction.
 
-## What are flash loans in Bend?
+## Flash loans in Bend
 
-Bend's flash loans are similar to other DeFi protocols where these:
+In Bend, flash loans:
 
-- Allow borrowing without prior collateral
-- Require repayment within the same transaction
-- Execute in a single block
-- Are primarily meant for developers and advanced users
+- Require no collateral
+- Must be repaid in the same transaction
+- Execute in one block
+- Are aimed at developers and advanced users
 
-## How Bend flash loans work
+## How they work
 
-The core flash loan functionality is implemented through the `flashLoan` function in the Morpho contract with a corresponding callback mechanism.
+The Morpho contract exposes `flashLoan` and uses a callback to complete the flow.
 
-### The flash loan flow in Bend
+### Flow
 
-1. **Initiation**: A user contract calls `morpho.flashLoan(token, amount, data)`
-2. **Asset Transfer**: Bend (Morpho) transfers the requested token amount to the calling contract
-3. **Callback Execution**: Bend (Morpho) calls `onMorphoFlashLoan(amount, data)` on the caller contract
-4. **Execution of Logic**: The user's contract executes its intended operations
-5. **Repayment**: The user's contract must approve Bend (Morpho) to pull back the borrowed amount
-6. **Completion**: Bend (Morpho) pulls the funds back from the caller contract
+1. **Initiate**: Your contract calls `morpho.flashLoan(token, amount, data)`.
+2. **Receive**: Morpho transfers the requested amount to your contract.
+3. **Callback**: Morpho calls `onMorphoFlashLoan(amount, data)` on your contract.
+4. **Logic**: Your contract runs its logic (arbitrage, swap, etc.).
+5. **Repay**: Your contract approves Morpho to pull back the borrowed amount.
+6. **Complete**: Morpho pulls the funds. If repayment fails, the whole transaction reverts.
 
-If at any point the flow fails (especially if the repayment fails), the entire transaction reverts.
+## Implementation
 
-## Implementing a flash loan in Bend
+To use flash loans:
 
-To use a flash loan with Bend, you need to:
+1. Implement a contract that conforms to `IMorphoFlashLoanCallback`.
+2. Implement `onMorphoFlashLoan` with your logic.
+3. In the callback, approve the Bend (Morpho) contract to pull the borrowed amount before returning.
 
-1. Create a contract that implements the `IMorphoFlashLoanCallback` interface
-2. Implement the `onMorphoFlashLoan` function that will handle your logic
-3. Ensure your callback function approves the Bend contract to pull back the borrowed amount
+## Use cases
 
-## Flash loan use cases with Bend
+- **Arbitrage**: Profit from price differences across protocols in one transaction
+- **Collateral swap**: Replace one collateral type with another in one transaction
+- **Self-liquidation**: Liquidate your own position to avoid third-party liquidation
+- **Flash actions**: Combine several Bend operations in one transaction
 
-1. **Arbitrage**: Execute trades across different protocols to profit from price discrepancies
-2. **Collateral Swaps**: Replace one collateral type with another in a single transaction
-3. **Self-Liquidation**: Liquidate your own position to avoid liquidation penalties
-4. **Flash Actions**: Combine multiple Bend operations in a single transaction
+## Security
 
-## Security considerations for Bend flash loans
+- **Atomicity**: If the callback doesn't approve repayment, the transaction reverts.
+- **Funds**: Don't leave funds in the flash loan contract after the callback.
+- **Reentrancy**: Be careful calling external contracts inside the callback.
+- **Gas**: Flash loan flows can use a lot of gas.
 
-1. **Transaction Atomicity**: If your callback fails to approve the repayment, the entire transaction will revert
-2. **Contract Security**: Never leave funds in your flash loan contract permanently
-3. **Reentrancy**: Be careful about calling external contracts within your flash loan logic
-4. **Gas Management**: Flash loans are complex operations that consume significant gas
+## Bend callbacks
 
-## Bend-specific callbacks
+Bend supports additional callbacks for richer flows:
 
-Bend implements a broader callback system:
+- `IMorphoLiquidateCallback`: Liquidations
+- `IMorphoRepayCallback`: Repayments
+- `IMorphoSupplyCallback`: Supply
+- `IMorphoSupplyCollateralCallback`: Supply collateral
 
-- `IMorphoLiquidateCallback`: For liquidation operations
-- `IMorphoRepayCallback`: For repayment operations
-- `IMorphoSupplyCallback`: For supply operations
-- `IMorphoSupplyCollateralCallback`: For supplying collateral
-
-This comprehensive callback system allows for more complex transaction patterns beyond simple flash loans, such as combining supply, borrow, repay, and withdraw operations in a single transaction flow.
+You can combine supply, borrow, repay, and withdraw in a single transaction using these callbacks.

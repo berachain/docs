@@ -1,27 +1,25 @@
 ---
 title: "Curator"
-description: "Role of curators in managing Bend vaults and risk curation."
+description: "Curator role: vault strategy, risk parameterization, market selection, caps, and timelock; distinct from Allocator."
 ---
 
-A **Curator** in the Bend ecosystem is an entity or individual who aims to optimize the risk-adjusted returns for depositors based on a given strategy.
+A **Curator** sets a vault's strategy and risk: which markets it can use and exposure caps. Curators do not allocate day-to-day; that is the Allocator's role.
 
-Curators are specifically responsible for the strategic curation of vaults, making key decisions about which markets to include, how capital is allocated, and how risk is curated within the vault structure. Their expertise directly impacts vault performance and security.
+Curators choose which markets a vault can supply to and set supply caps per market. Their choices drive vault performance and risk. Most important Curator actions are **timelocked** so depositors can exit if they disagree.
 
-## The Curator's responsibilities
+## Responsibilities
 
-A Curator's duties revolve around making high-level strategic decisions and managing risk.
+- **Strategy**: Define the vault's investment thesis and which markets (or asset types) are allowed.
+- **Risk**: Set and maintain exposure limits (caps) to protect depositors.
 
-- **Strategic Curation**: Defining the vault's overall investment thesis. This includes selecting which markets or asset types are permitted for allocation.
-- **Risk Parameterization**: Setting and maintaining the risk boundaries for the vault. This involves defining exposure limits (caps) to various risk factors to protect depositors' capital.
+Timelocks on major changes give depositors time to react.
 
-Crucially, nearly all of a Curator's significant actions are subject to a **timelock**, providing transparency and granting depositors a window to exit if they disagree with a proposed change.
+## Role system
 
-## Curation within the Vault role system
+Vault roles are separated:
 
-The Curator role is designed to be distinct from other vault management functions, creating a clear separation of duties.
+- **Owner**: Top-level control; appoints Curator and Allocator; sets vault-wide settings (e.g. fees).
+- **Curator**: Decides **what** is allowed—which markets and max exposure. Does not execute allocation.
+- **Allocator**: Decides **how** to allocate within those limits (supply/withdraw queues, reallocations). Can be the `PublicAllocator` contract if the owner configures it.
 
-- The **Owner** is the ultimate authority, with the power to appoint a `Curator`. The Owner's role is primarily administrative.
-- The **Curator** defines the _strategy_ and _risk boundaries_. They decide **what** is possible within the vault (which markets, what max exposure).
-- The **Allocator** is the _tactical portfolio manager_. Appointed by the Curator, the Allocator operates **within** the boundaries established by the Curator, deciding **how** to allocate capital among the permitted options to optimize yield. The `Allocator` role may also be assigned to the `PublicAllocator` contract after the vault owner has set the appropriate usage boundaries.
-
-This structure ensures that strategic risk curation is separate from daily portfolio management (Allocation), leading to a more robust and secure system.
+Strategy and risk (Curator) stay separate from day-to-day allocation (Allocator).

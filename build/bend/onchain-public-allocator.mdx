@@ -1,25 +1,25 @@
 ---
 title: "Public Allocator"
-description: "Programmatically reallocate liquidity between Bend markets."
+description: "Programmatically reallocate vault liquidity between Bend markets; just-in-time liquidity for borrowers."
 ---
 
-The Public Allocator is an onchain utility designed to address liquidity fragmentation across Bend's isolated markets. It enables developers to programmatically reallocate liquidity between markets as needed, so that user borrow transactions can proceed even if the destination market does not initially have enough available funds.
+The Public Allocator reallocates vault liquidity between Bend markets so borrows can succeed even when a market has insufficient supply. You call it to move liquidity from other markets into the target market in one transaction.
 
-This approach delivers the convenience of a unified, deep liquidity pool, while preserving the risk isolation that is central to Bend's market architecture.
+You get deep, unified liquidity while keeping Bend's isolated market risk. For concepts and flow, see [Public Allocator](/bend/learn/public-allocator).
 
 <Note>
-To see more details, see the [Public Allocator contract reference](/build/bend/contract-public-allocator) section.
+For the contract interface, see the [Public Allocator contract reference](/build/bend/contract-public-allocator).
 </Note>
 
 <Tip>
-Before getting started, we recommend reading the [Public Allocator Concepts](/bend/learn/public-allocator) page for a comprehensive overview of how the Public Allocator works and the benefits it provides.
+Read [Public Allocator](/bend/learn/public-allocator) for an overview of how it works and curator controls.
 </Tip>
 
 ## Core integration: `reallocateTo`
 
-The main entry point for using the Public Allocator is the `reallocateTo` function. This function enables you to move assets from several source markets within a vault and supply them to a single destination market, all within a single atomic transaction.
+Call `reallocateTo` to withdraw from one or more source markets in a vault and supply the total to a single destination market in one atomic transaction.
 
-### `reallocateTo` function signature
+### Function signature
 
 ```solidity
 function reallocateTo(
@@ -29,7 +29,7 @@ function reallocateTo(
 ) external payable;
 ```
 
-### `reallocateTo` parameters
+### Parameters
 
 ```solidity
 struct MarketParams {
@@ -41,62 +41,39 @@ struct MarketParams {
 }
 ```
 
-- `vault`: The MetaMorpho vault address from which liquidity will be sourced.
-- `withdrawals`: An array of `Withdrawal` structs, each indicating a specific source market and the amount to withdraw from it.
-  - `Withdrawal` - Struct
-    - `MarketParams marketParams` - The market from which to withdraw.
-      - `address loanToken`
-      - `address collateralToken`
-      - `address oracle`
-      - `address irm`
-      - `uint256 lltv`
-    - `uint128 amount` - The amount to withdraw
-- `supplyMarketParams`: A `MarketParams` struct that specifies the single destination market to receive the total withdrawn funds.
-  - `MarketParams` - (See above)
+- **vault**: MetaMorpho vault to withdraw from.
+- **withdrawals**: Array of `Withdrawal` (source market + amount). Must be **sorted by market ID ascending**.
+  - `Withdrawal`: `marketParams` (MarketParams for source market), `amount` (uint128).
+- **supplyMarketParams**: Destination market (single market) that receives the total withdrawn amount.
 
-### `reallocateTo` important requirements
+### Requirements
 
-To ensure a successful call to `reallocateTo`, please observe the following requirements:
+- **Sorted withdrawals**: `withdrawals` must be ordered by market ID ascending.
+- **Fee**: Send the required ETH as `msg.value`. Query the fee with `fee(vaultAddress)` on the Public Allocator.
+- **Flow caps**: Withdrawals and supply must not exceed the vault curator's `maxOut` and `maxIn` per market.
+- **Enabled markets**: All source and destination markets must be enabled for the vault.
+- **No self-supply**: The destination market must not appear in `withdrawals`.
 
-- **Withdrawals Must Be Sorted:** The `withdrawals` array must be ordered in ascending order by market ID.
-- **Fee Payment:** The transaction must include the appropriate ETH fee as `msg.value`. You can determine the required fee by calling the `fee(vaultAddress)` view function on the Public Allocator contract.
-- **Flow Cap Compliance:** Withdrawal and supply amounts must not exceed the `maxOut` and `maxIn` flow caps set by the vault curator for each market.
-- **Market Validity:** All source and destination markets must be enabled in the vault's configuration.
-- **No Self-Supply:** The destination market specified in `supplyMarketParams` cannot also appear in the `withdrawals` array.
-
-### `reallocateTo` example: Solidity integration
-
-Below is a basic example demonstrating how to prepare and invoke `reallocateTo` from within a smart contract.
+### Example
 
 ```solidity
 // Example assumes IPublicAllocator and IMetaMorpho interfaces are imported and available
 IPublicAllocator publicAllocator = IPublicAllocator(PA_ADDRESS);
 IMetaMorpho vault = IMetaMorpho(VAULT_ADDRESS);
 
-// Step 1: Confirm the allocator is registered with the vault and determine the required fee
+// Step 1: Confirm allocator is registered and get required fee
 require(vault.isAllocator(address(publicAllocator)), "PA: Not an allocator");
 uint256 requiredFee = publicAllocator.fee(address(vault));
 
-// Step 2: Construct the withdrawals array (ensure it is sorted by market ID in ascending order)
+// Step 2: Build withdrawals array (sorted by market ID ascending)
 Withdrawal[] memory withdrawals = new Withdrawal[](2);
+withdrawals[0] = Withdrawal({ marketParams: marketAParams, amount: 70 * 1e18 });
+withdrawals[1] = Withdrawal({ marketParams: marketBParams, amount: 800 * 1e18 }); // Market B ID > Market A ID
 
-// Withdraw from Market A (for example, an Idle Market)
-withdrawals[0] = Withdrawal({
-    marketParams: marketAParams, // Parameters for Market A
-    amount: 70 * 1e18
-});
+// Step 3: Destination market
+MarketParams memory supplyMarketParams = wBERAMarketParams;
 
-// Withdraw from Market B (for example, a wETH Market)
-// Note: Market B's ID must be greater than Market A's ID
-withdrawals[1] = Withdrawal({
-    marketParams: marketBParams, // Parameters for Market B
-    amount: 800 * 1e18
-});
-
-// Step 3: Specify the destination market for the reallocated liquidity
-MarketParams memory supplyMarketParams = wBERAMarketParams; // Parameters for wBERA Market
-
-// Step 4: Call reallocateTo on the Public Allocator contract, sending the required fee
+// Step 4: Call reallocateTo with fee
 publicAllocator.reallocateTo{value: requiredFee}(
     address(vault),
     withdrawals,

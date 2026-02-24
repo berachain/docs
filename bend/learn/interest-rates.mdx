@@ -1,32 +1,26 @@
 ---
 title: "Interest Rates"
-description: "How supply and borrow rates are determined in Bend markets."
+description: "How supply and borrow rates are set by the IRM and utilization; AdaptiveCurveIRM and target utilization."
 ---
 
-Understanding how interest rates are determined and how they affect a borrower's position is fundamental to building a safe and transparent borrow integration. In Bend, the interest a borrower pays is dictated by the market's **Interest Rate Model (IRM)**.
+Interest rates on Bend are set by each market's **Interest Rate Model (IRM)**. If you're building a borrow integration, you need to show how rates work and how they affect positions.
 
-## The role of the Interest Rate Model (IRM)
+## IRM role
 
-Each Bend Market is created with a specific, immutable IRM. This smart contract contains the logic that dynamically calculates the borrow interest rate based on market conditions, primarily the **utilization rate**.
+Each Bend market has a single, immutable IRM. That contract computes the borrow rate from market conditions, mainly **utilization** (total borrows / total supply). Only IRMs approved by Bend governance can be used; the main one is **AdaptiveCurveIRM**.
 
-- **Utilization Rate:** The ratio of total borrowed assets to total supplied assets in a market.
-  Utilization = Total Borrows / Total Supply
-- **Approved IRMs:** Only IRMs that have been approved by Bend Governance can be used to create new markets. Currently, the primary model is the `AdaptiveCurveIRM`.
+### AdaptiveCurveIRM
 
-### The AdaptiveCurveIRM
+AdaptiveCurveIRM targets **90% utilization**.
 
-The `AdaptiveCurveIRM` is designed to maintain market utilization around a target of **90%**.
+- **Below 90%**: Borrow rate falls to encourage borrowing.
+- **Above 90%**: Borrow rate rises to encourage repayments and more supply.
 
-- **When utilization < 90%:** The borrow rate gradually decreases to incentivize more borrowing.
-- **When utilization > 90%:** The borrow rate rapidly increases to encourage repayments and attract more supply.
+That keeps markets capital-efficient while keeping enough liquidity for withdrawals. For formulas and behavior, see [Interest Rate Model](/bend/learn/irm).
 
-This mechanism ensures that markets remain capital-efficient while having enough liquidity for withdrawals.
+### Finding the market rate
 
-For a deeper dive into the mathematical formulas and adaptive mechanics, see the [IRM Concept Page](/bend/learn/irm).
-
-### Determine Market AdaptiveCurveIRM
-
-To find the rate at target utilization for each market you need to check 2 contracts:
+To get the rate at a given utilization (e.g. 80%) for a market:
 
 - **Morpho Contract** - To retrieve IRM for market
 - **IRM Contract** - Query rate at utilization point (e.g. 80%)

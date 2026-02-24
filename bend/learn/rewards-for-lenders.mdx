@@ -1,9 +1,9 @@
 ---
 title: "Rewards for Lenders"
-description: "Earning rewards through Bend vaults and Proof-of-Liquidity."
+description: "Vault APY, native lending yield, and BGT yield from staking vault shares in PoL reward vaults."
 ---
 
-Bend offers a great place for additional yields on Berachain's native stablecoin [$HONEY](/general/tokens/honey). Each [Vault](/bend/learn/vault) is managed by [Curators](/bend/learn/curator), who decide which [Markets](/bend/learn/market) they want to offer $HONEY as a loan for specific collateral ($WETH, $WBERA, $WBTC, etc).
+Bend offers additional yield on Berachain's native stablecoin [$HONEY](/general/tokens/honey). Each [Vault](/bend/learn/vault) is managed by [Curators](/bend/learn/curator), who choose which [Markets](/bend/learn/market) supply $HONEY as a loan for specific collateral ($WETH, $WBERA, $WBTC, etc.).
 
 <Frame>
   <img src="/images/bend/rewards-vaults.png" alt="Berachain Bend vaults" />
@@ -11,12 +11,12 @@ Bend offers a great place for additional yields on Berachain's native stablecoin
 
 ## Vault APY yields
 
-Depending on the Vault, it may offer an APY of one or both of the following:
+A vault may offer one or both of:
 
-1. [Native APY](#native-apy) - Yield that is captured from lending out $HONEY to different markets.
-2. [$BGT Yield](#bgt-yield) - Yield that is captured for staking Vault shares into an eligible [Proof-of-Liquidity Reward Vault](/general/proof-of-liquidity/reward-vaults) in the form of $BGT.
+1. **[Native APY](#native-apy)** — Yield from lending $HONEY in the vault's markets.
+2. **[$BGT Yield](#bgt-yield)** — Yield from staking vault shares in an eligible [Proof-of-Liquidity Reward Vault](/general/proof-of-liquidity/reward-vaults) in the form of $BGT.
 
-Check out the [Deposit & Withdraw Guide](/bend/guides/deposit-withdraw) to see how to make a deposit.
+See the [Deposit & Withdraw Guide](/bend/guides/deposit-withdraw) to deposit.
 
 <Frame>
   <img src="/images/bend/rewards-yield-types.png" alt="Berachain Bend vault yield types" />
@@ -24,13 +24,13 @@ Check out the [Deposit & Withdraw Guide](/bend/guides/deposit-withdraw) to see h
 
 ### Native APY
 
-The native Annual Percentage Yield (APY) from Vaults comes from offering $HONEY as a loan to various eligible collateral assets chosen by the Curator of the Vault. The APY depends on both the borrow rates set by the Curator and the utilization of the supplied $HONEY—that is, how much has been borrowed relative to how much is available.
+Native APY comes from lending $HONEY to the collateral types the vault's Curator has enabled. APY depends on borrow rates and utilization—how much of the supplied $HONEY is borrowed.
 
 <Frame>
   <img src="/images/bend/rewards-native-yield.png" alt="Berachain Bend vault native yield" />
 </Frame>
 
-Each Vault has a breakdown of its allocation and its Supply Yield.
+Each vault shows its allocation and supply yield.
 
 <Frame>
   <img src="/images/bend/rewards-vault-rates.png" alt="Berachain Bend vault rates" />
@@ -38,13 +38,13 @@ Each Vault has a breakdown of its allocation and its Supply Yield.
 
 ### $BGT Yield
 
-$BGT yield comes from [validators directing $BGT emission / block rewards](/general/proof-of-liquidity/block-rewards) to a Bend Vault's whitelisted Reward Vault (eligible PoL Reward Vault that can receive $BGT emission). When a lender contributes $HONEY into a Vault, they receive shares for their contribution (Receipt Tokens). These Receipt Tokens can be staked into a whitelisted Reward Vault, which now makes their stake eligible to receive additional yields in the form of $BGT.
+$BGT yield comes from [validators directing $BGT emission / block rewards](/general/proof-of-liquidity/block-rewards) to a Bend vault's whitelisted Reward Vault. When you supply $HONEY to a vault, you receive receipt tokens (shares). Stake those receipt tokens in a whitelisted Reward Vault to become eligible for $BGT yield.
 
 <Frame>
   <img src="/images/bend/rewards-bgt-yield.png" alt="Berachain Bend BGT yield" />
 </Frame>
 
-It should be noted that to be eligible for $BGT yields, the lender must stake the Receipt Token and claim the $BGT.
+You must stake the receipt tokens and claim $BGT to receive $BGT yield.
 
 <Frame>
   <img src="/images/bend/rewards-stake-claim.png" alt="Berachain Bend stake and claim required" />

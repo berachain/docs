@@ -1,25 +1,25 @@
 ---
 title: "Market"
-description: "Markets, supply/borrow positions, and risk parameters."
+description: "Lending pool primitive: collateral/loan pairing, supply and borrow positions, risk parameters, and market creation."
 ---
 
-A market in lending protocols represents a fundamental lending pool that pairs one collateral asset with one loan asset, creating a venue for lenders and borrowers to interact. Bend leverages [**Morpho Market V1**](https://docs.morpho.org/learn/concepts/market/#what-is-a-morpho-market-v1) as a base for its functionality.
+A **market** is a lending pool that pairs one collateral asset with one loan asset. Lenders and borrowers interact in that single venue. Bend uses [Morpho Market V1](https://docs.morpho.org/learn/concepts/market/#what-is-a-morpho-market-v1) as its base.
 
-## What is a market?
+## Overview
 
-A market is a primitive lending pool that enables users to:
+In a market you can:
 
-- **Lend assets** and earn interest on their deposits
-- **Borrow assets** by providing collateral
-- **Trade positions** through various market mechanisms
+- **Lend assets** and earn interest on deposits
+- **Borrow assets** by posting collateral
+- **Trade positions** through market mechanisms
 
-Each market operates independently with its own parameters, ensuring that risks are contained within individual markets rather than spreading across the entire protocol.
+Each market has its own parameters and runs independently. Risk stays inside that market and does not spread across the protocol.
 
 <Frame>
   <img src="/images/bend/market-overview.png" alt="Bend markets overview" />
 </Frame>
 
-Access Bend markets at [https://bend.berachain.com/borrow](https://bend.berachain.com/borrow)
+Open [Bend markets](https://bend.berachain.com/borrow) to lend or borrow.
 
 ## Key characteristics
 
@@ -61,7 +61,7 @@ Access Bend markets at [https://bend.berachain.com/borrow](https://bend.berachai
 ### For lenders
 
 <Note>
-Users cannot directly supply to a market. Instead they supply to a Vault that is managed by a [Curator](/bend/learn/curator) that distributes assets among different markets. See [Vault](/bend/learn/vault) for more information.
+You cannot supply directly to a market. You supply to a [Vault](/bend/learn/vault) managed by a [Curator](/bend/learn/curator), which allocates assets across markets.
 </Note>
 
 - **Supply**: Deposit loan assets to earn interest
@@ -71,26 +71,26 @@ Users cannot directly supply to a market. Instead they supply to a Vault that is
 
 - **Borrow**: Take out loans against deposited collateral
 - **Repay**: Return borrowed assets to reclaim collateral
-- **Manage Position**: Monitor health ratio and add/remove collateral
+- **Manage position**: Monitor health factor and add or remove collateral
 
 ### For liquidators
 
 - **Liquidate**: Repay debt in exchange for discounted collateral
-- **Maintain Market Health**: Ensure borrowers maintain adequate collateralization
+- **Maintain market health**: Keep borrowers adequately collateralized
 
 ## Market creation
 
 ### Permissionless market creation
 
-A distinctive feature of Bend is permissionless market creation: the protocol enables users to create isolated markets, each defined by the five key parameters outlined above.
+Bend allows permissionless market creation. You can create isolated markets, each defined by the five key parameters above.
 
-This approach differs from traditional lending platforms, which typically:
+Traditional lending platforms often:
 
-- Require governance approval for listing new assets or changing market parameters.
-- Pool assets into a single lending pool, resulting in shared risk across the protocol.
+- Require governance approval to list assets or change parameters
+- Use a single lending pool, so risk is shared across the protocol
 
-In Bend, each market is created with its own immutable parameters—selected at the time of creation and persisting for the lifetime of the market. Specifically, the loan-to-value (LTV) ratio and interest rate model must be chosen from a set of options approved by Bend governance. This design ensures risk isolation, flexibility, and the ability to quickly support new asset integrations while maintaining protocol standards.
+On Bend, each market has immutable parameters set at creation. The loan-to-value (LTV) ratio and interest rate model must come from governance-approved options. This keeps risk isolated, supports new assets quickly, and keeps behavior predictable.
 
 <Note>
-For a market to appear on the Bend UI, applicants must submit a proposal to whitelist a vault that includes its allocation via [https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW](https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW).
+To list a market on the Bend UI, submit a vault whitelist proposal (including allocation) via the [curator application form](https://ufdx3v8g7qg.typeform.com/to/pg2P0ndW).
 </Note>

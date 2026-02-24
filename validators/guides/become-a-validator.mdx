@@ -1,6 +1,6 @@
 ---
 title: "Become a Validator"
-description: "Step-by-step guide to running a validator node on Berachain."
+description: "Register and activate a validator: beacond setup, deposit transaction, BeaconDeposit contract, operator and withdrawal address."
 ---
 
 This guide walks you through the process of becoming a validator node on Berachain.
@@ -55,7 +55,7 @@ If you sign a deposit without using the above genesis root, **the deposit will f
 - **RPC_URL**: The URL of the RPC endpoint you are using. You can use your own if you want.
 - **DEPOSIT_ADDR**: The address of the deposit contract.
 - **COMETBFT_PUB_KEY**: The public key of your validator from CometBFT (see below).
-- **OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as BeraChef.
+- **OPERATOR_ADDRESS**: The address of the ETH account (EOA) that will become your **operator address** on the execution layer. This is used to interact with contracts such as [BeraChef](/build/contracts/berachef).
 - **WITHDRAW_ADDRESS**: The address where your deposit stake is returned when you stop being a validator (state 'Exited' on the [lifecycle](/validators/architecture/validator-lifecycle)). This can be an address of your choice, or if you are staking money from investors, they will require a specific address.
 
 Your **CometBFT identity** was created by beacond when you did `beacond init`, and is held in the `priv_validator_key.json` file. You can view the corresponding public key for this identity with `beacond deposit validator-keys`:
@@ -132,7 +132,7 @@ You now have everything needed to deposit the initial 10,000 `$BERA`.
 
 ## Step 3 - Send registration transaction
 
-You will now send the above transaction onto the chain by calling the `deposit` function on the BeaconDeposit contract (`0x4242424242424242424242424242424242424242`):
+You will now send the above transaction onto the chain by calling the `deposit` function on the [BeaconDeposit](/build/contracts/beacondeposit) contract (`0x4242424242424242424242424242424242424242`):
 
 ```solidity
 function deposit(
