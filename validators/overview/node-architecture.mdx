@@ -15,7 +15,7 @@ Each of these types of nodes is a pair of both an [execution client](/general/he
 
 The main difference between an RPC node and a validator node is that a validator can propose blocks and receive block rewards.
 
-An RPC node can become a validator node by joining the [Active Set](#active-set) through interaction with the [BeaconDeposit](/build/contracts/beacondeposit) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements).
+An RPC node can become a validator node by joining the [Active Set](#active-set) through interaction with the [BeaconDeposit](/build/getting-started/deployed-contracts) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements).
 
 ## Active set
 
@@ -67,4 +67,4 @@ A Validator can [withdraw all or part of their stake](/validators/guides/withdra
 
 Block rewards are in the form of `$BGT`, with a base reward of **0.5** `$BGT` per block proposed.
 
-The network does not distribute rewards automatically. You must distribute block rewards through the [Distributor](/build/contracts/distributor) contract. Distribution must occur before **8,191** seconds have passed, or validators risk losing those rewards.
+The network does not distribute rewards automatically. You must distribute block rewards through the [Distributor](/build/getting-started/deployed-contracts) contract. Distribution must occur before **8,191** seconds have passed, or validators risk losing those rewards.

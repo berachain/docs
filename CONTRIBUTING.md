@@ -21,7 +21,7 @@ All work happens on GitHub. Core team and community contributors both submit pul
 
 ### Issues
 
-We use [GitHub Issues](https://github.com/berachain/mintlify-docs/issues) for bugs and documentation suggestions. Before opening a new issue, search existing issues to avoid duplicates.
+We use [GitHub Issues](https://github.com/berachain/docs/issues) for bugs and documentation suggestions. Before opening a new issue, search existing issues to avoid duplicates.
 
 When reporting a problem, please include:
 
@@ -45,7 +45,7 @@ If you want to change structure, add a new section, or rework a big part of the 
 
 New to open source or to this repo?
 
-1. Find an [open issue](https://github.com/berachain/mintlify-docs/issues) (or open one if your idea isn’t listed).
+1. Find an [open issue](https://github.com/berachain/docs/issues) (or open one if your idea isn’t listed).
 2. Comment that you’d like to work on it so others don’t duplicate effort.
 3. Follow the [Development Workflow](#development-workflow) below and open a PR.
 
@@ -57,13 +57,13 @@ You can also learn from this free series: [How to Contribute to an Open Source P
 
 ### 1. Fork and Clone
 
-- Fork the repo on GitHub: [berachain/mintlify-docs](https://github.com/berachain/mintlify-docs).
+- Fork the repo on GitHub: [berachain/docs](https://github.com/berachain/docs).
 - Clone your fork and add upstream:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mintlify-docs
-cd mintlify-docs
-git remote add upstream https://github.com/berachain/mintlify-docs
+git clone https://github.com/YOUR_USERNAME/docs
+cd docs
+git remote add upstream https://github.com/berachain/docs
 ```
 
 ### 2. Prerequisites
@@ -151,7 +151,7 @@ git push origin fix/your-change
 
 ### 11. Open a Pull Request
 
-- Open a PR from your branch to `berachain/mintlify-docs` **main**.
+- Open a PR from your branch to `berachain/docs` **main**.
 - Fill in the PR template (description, checklist).
 - If your PR fixes an issue, add “Closes #123” in the description.
 - Allow maintainers to edit your branch (checkbox on the PR).
