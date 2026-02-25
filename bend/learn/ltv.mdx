@@ -11,7 +11,7 @@ When you borrow on Bend, your position's safety depends on your collateral, your
 
 ## Collateral
 
-**Collateral** is the asset you supply to a lending market to secure your loan. In a $wBERA/$HONEY market, $wBERA is the collateral. It guarantees that the protocol can recover funds if you default.
+**Collateral** is the asset you supply to a lending market to secure your loan. In a `$wBERA`/`$HONEY` market, `$wBERA` is the collateral. It guarantees that the protocol can recover funds if you default.
 
 Your collateral is per market—not cross-margined. Supplying collateral does not generate yield.
 
@@ -62,15 +62,15 @@ Health factor &gt; 1.0 means the position is healthy. Below 1.0, it is eligible 
 
 Example with assumed values:
 
-- Borrowed amount: 150 $HONEY (150 × 10^18 base units)
-- Collateral amount: 100 $WBERA (100 × 10^18 base units)
-- Oracle price: 3 $HONEY per $WBERA (3 × 10^18)
+- Borrowed amount: 150 `$HONEY` (150 × 10^18 base units)
+- Collateral amount: 100 `$WBERA` (100 × 10^18 base units)
+- Oracle price: 3 `$HONEY` per `$WBERA` (3 × 10^18)
 - Oracle price scale: 10^18
 - LLTV: 86% (0.86 × 10^18 WAD)
 
 ### Step 1 — Collateral value in loan token
 
-Collateral value = 300 $HONEY.
+Collateral value = 300 `$HONEY`.
 
 ```javascript
 // All calculations use BigInt for precision
@@ -120,7 +120,7 @@ Health factor = 1.72, so the position is healthy with a 72% buffer before liquid
 | Status             | Healthy |
 | Liquidation buffer | 36.00%  |
 
-$WBERA (18 decimals, 3 $HONEY each) collateral against a $HONEY (18 decimals) loan, using WAD scaling for on-chain math.
+`$WBERA` (18 decimals, 3 `$HONEY` each) collateral against a `$HONEY` (18 decimals) loan, using WAD scaling for on-chain math.
 
 ## Oracles
 

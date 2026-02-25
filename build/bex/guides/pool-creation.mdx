@@ -3,7 +3,7 @@ title: "Pool Creation Guide"
 description: "Create BEX pools programmatically with the SDK."
 ---
 
-This guide demonstrates how to create a new BEX pool using the [PoolCreationHelper](/build/bex/contracts/pool-creation-helper) contract. The PoolCreationHelper is a [Relayer](/build/bex/concepts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
+This guide demonstrates how to create a new BEX pool using the PoolCreationHelper contract. The PoolCreationHelper is a [Relayer](/build/bex/concepts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
 
 <Tip>
 For more comprehensive pool creation examples, see the [pool creation examples](https://github.com/berachain/bex-sdk/tree/main/examples/pool-creation) in the BEX SDK repository.
@@ -81,7 +81,7 @@ for (const [i, tokenAddress] of createPoolTokens.entries()) {
 
 ### Step 3 - create and join pool
 
-Finally, create and join the pool in a single transaction. We leverage the function [`createAndJoinWeightedPool`](/build/bex/contracts/pool-creation-helper#createandjoinweightedpool).
+Finally, create and join the pool in a single transaction. We leverage the function `createAndJoinWeightedPool`.
 
 ```javascript
 const poolCreationHelper = new ethers.Contract(

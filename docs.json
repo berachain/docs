@@ -4,9 +4,9 @@
   "mode": "dark",
   "name": "Berachain",
   "colors": {
-    "primary": "#E17726",
-    "light": "#F89D4E",
-    "dark": "#C96516"
+    "primary": "#B45309",
+    "light": "#FBBF24",
+    "dark": "#D97706"
   },
   "favicon": {
     "light": "/favicon-core.svg",
@@ -23,7 +23,7 @@
             "tab": "General",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
                   "index",
                   "general/introduction/what-is-berachain",
@@ -69,17 +69,42 @@
             "tab": "Build",
             "groups": [
               {
+                "group": "Overview",
+                "pages": [
+                  "build/getting-started/overview"
+                ]
+              },
+              {
                 "group": "Getting Started",
                 "pages": [
-                  "build/getting-started/overview",
-                  "build/getting-started/network-configurations",
-                  "build/getting-started/developer-tools"
+                  "build/getting-started/developer-tools",
+                  "build/getting-started/common-resources"
+                ]
+              },
+              {
+                "group": "General Guides",
+                "pages": [
+                  "build/guides/verifying-smart-contracts"
                 ]
               },
               {
                 "group": "BEX",
                 "pages": [
+                  "build/bex/overview",
                   "build/bex/deployed-contracts",
+                  "build/bex/sdk/overview",
+                  {
+                    "group": "Guides",
+                    "pages": [
+                      "build/bex/sdk/swap",
+                      "build/bex/sdk/add-liquidity",
+                      "build/bex/sdk/remove-liquidity",
+                      "build/bex/sdk/sor",
+                      "build/bex/sdk/reference",
+                      "build/bex/guides/pool-creation",
+                      "build/bex/help/error-codes"
+                    ]
+                  },
                   {
                     "group": "Concepts",
                     "pages": [
@@ -92,20 +117,7 @@
                       "build/bex/concepts/lp-valuing",
                       "build/bex/concepts/relayers"
                     ]
-                  },
-                  {
-                    "group": "SDK",
-                    "pages": [
-                      "build/bex/sdk/overview",
-                      "build/bex/sdk/swap",
-                      "build/bex/sdk/add-liquidity",
-                      "build/bex/sdk/remove-liquidity",
-                      "build/bex/sdk/sor",
-                      "build/bex/sdk/reference"
-                    ]
-                  },
-                  "build/bex/guides/pool-creation",
-                  "build/bex/help/error-codes"
+                  }
                 ]
               },
               {
@@ -129,9 +141,10 @@
             "tab": "BEX",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
-                  "bex/learn/overview"
+                  "bex/learn/overview",
+                  "bex/learn/what-is-bex"
                 ]
               },
               {
@@ -163,9 +176,10 @@
             "tab": "Bend",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Overview",
                 "pages": [
-                  "bend/learn/overview"
+                  "bend/learn/overview",
+                  "bend/learn/what-is-bend"
                 ]
               },
               {
@@ -202,7 +216,8 @@
               {
                 "group": "Overview",
                 "pages": [
-                  "validators/overview/index"
+                  "validators/overview/index",
+                  "validators/overview/node-architecture"
                 ]
               },
               {
@@ -310,7 +325,14 @@
     }
   },
   "redirects": [
+    { "source": "/build/getting-started/network-configurations", "destination": "/general/introduction/connect-to-berachain" },
+    { "source": "/cn/build/getting-started/network-configurations", "destination": "/cn/general/introduction/connect-to-berachain" },
+    { "source": "/ko/build/getting-started/network-configurations", "destination": "/ko/general/introduction/connect-to-berachain" },
+    { "source": "/vi/build/getting-started/network-configurations", "destination": "/vi/general/introduction/connect-to-berachain" },
     { "source": "/build/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
+    { "source": "/cn/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
+    { "source": "/ko/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
+    { "source": "/vi/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
     { "source": "/cn/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
     { "source": "/cn/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
     { "source": "/cn/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },

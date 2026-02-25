@@ -97,15 +97,15 @@ enum ExitKind {
 
 ### Example 1: Single asset exit (EXACT_LP_IN_FOR_ONE_TOKEN_OUT)
 
-Exit a $BERA/$HONEY pool to receive only $BERA:
+Exit a `$BERA`/`$HONEY` pool to receive only `$BERA`:
 
 | Step | ExitKind                      | Assets        | Parameters                              | Description                                    |
 | ---- | ----------------------------- | ------------- | --------------------------------------- | ---------------------------------------------- |
-| 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated $BERA |
+| 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated `$BERA` |
 
 ### Example 2: Proportional exit (EXACT_LP_IN_FOR_TOKENS_OUT)
 
-Exit a $BERA/$HONEY pool proportionally:
+Exit a `$BERA`/`$HONEY` pool proportionally:
 
 | Step | ExitKind                   | Assets        | Parameters         | Description                                                        |
 | ---- | -------------------------- | ------------- | ------------------ | ------------------------------------------------------------------ |
@@ -113,7 +113,7 @@ Exit a $BERA/$HONEY pool proportionally:
 
 ### Example 3: Custom exit (LP_IN_FOR_EXACT_TOKENS_OUT)
 
-Exit a $BERA/$HONEY/$DAI pool for specific token amounts:
+Exit a `$BERA`/`$HONEY`/`$DAI` pool for specific token amounts:
 
 | Step | ExitKind                   | Assets             | Parameters                                                        | Description                                       |
 | ---- | -------------------------- | ------------------ | ----------------------------------------------------------------- | ------------------------------------------------- |
