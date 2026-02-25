@@ -1,0 +1,33 @@
+---
+title: "Hardhat Contract Verification"
+description: "Verify Hardhat-deployed contracts on Berascan using the Ethers v6 verification plugin."
+---
+
+Use this guide when you have **deployed a contract with Hardhat** and want to **verify the source** on Berachain's block explorer (Berascan).
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/hardhat-contract-verification](https://github.com/berachain/guides/tree/main/apps/hardhat-contract-verification)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/hardhat-contract-verification/README.md)
+
+## Requirements
+
+- Node, npm, Hardhat
+- Deployed contract address and constructor arguments (if any)
+- Same Solidity version and build settings as deployment
+
+## Stack
+
+Hardhat, Ethers v6, Solidity, Hardhat Etherscan/Verification plugin.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/hardhat-contract-verification
+   npm install
+   ```
+2. Configure Hardhat for Berachain (network and verify task); see README.
+3. Run the verify task, e.g. `npx hardhat verify --network berachainTestnet <ADDRESS> <CONSTRUCTOR_ARGS...>`.
+
+For exact verify command and config, fetch the [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/hardhat-contract-verification/README.md).

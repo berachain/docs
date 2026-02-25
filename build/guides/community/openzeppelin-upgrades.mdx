@@ -1,0 +1,32 @@
+---
+title: "Upgradeable Contracts (OpenZeppelin)"
+description: "Deploy upgradeable contracts on Berachain using OpenZeppelin Upgrades (proxy pattern)."
+---
+
+Use this guide when you want to **deploy upgradeable contracts** (proxy pattern) on Berachain using **OpenZeppelin's upgradeable contracts** and Hardhat/Foundry plugin.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/openzeppelin-upgrades](https://github.com/berachain/guides/tree/main/apps/openzeppelin-upgrades)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/openzeppelin-upgrades/README.md)
+
+## Requirements
+
+- Node, npm (if using Hardhat) or Foundry
+- Wallet with testnet $BERA
+
+## Stack
+
+Hardhat or Foundry, Solidity, OpenZeppelin Contracts Upgradeable, upgrade plugin.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/openzeppelin-upgrades
+   npm install
+   ```
+2. Configure network (Berachain) and deploy script. Use the plugin to deploy the proxy and implementation.
+3. Run deploy; upgrade later with the plugin’s upgrade task. Exact commands in README.
+
+For deploy and upgrade commands, fetch the [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/openzeppelin-upgrades/README.md).

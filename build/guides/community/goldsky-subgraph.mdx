@@ -1,0 +1,51 @@
+---
+title: "Index & Query with Goldsky"
+description: "Index Berachain data with Goldsky SDK; example subgraph for ERC20 balances. Build, deploy, query via GraphQL."
+---
+
+Use this guide when you want to **index Berachain blockchain data** (e.g. ERC20 balances) and **query it via GraphQL** using the **Goldsky** subgraph SDK.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/goldsky-subgraph](https://github.com/berachain/guides/tree/main/apps/goldsky-subgraph)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/goldsky-subgraph/README.md)
+
+## Official documentation
+
+- [Goldsky](https://goldsky.com/) — [developer docs](https://docs.goldsky.com/introduction)
+
+## Requirements
+
+- Node `v20.11.0` or greater, npm
+- [Goldsky account](https://app.goldsky.com) and API key
+- Goldsky CLI (install: `curl https://goldsky.com | sh`)
+
+## Stack
+
+Node.js, Goldsky CLI, GraphQL subgraph (schema + mappings).
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/goldsky-subgraph
+   npm install
+   ```
+2. **Goldsky setup:** Create account at [app.goldsky.com](https://app.goldsky.com), create API key, install CLI, run `goldsky login`.
+3. **Build subgraph**
+   ```bash
+   npm run codegen
+   npm run build
+   ```
+4. **Deploy**
+   ```bash
+   goldsky subgraph deploy erc20-subgraph/1.0.0 --path .
+   ```
+5. **Query** — After indexing, use the public GraphQL endpoint (see Goldsky dashboard). Example query for accounts and balances in README.
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| Subgraph config / schema | Project root (see README) |
+| Mappings | See README |

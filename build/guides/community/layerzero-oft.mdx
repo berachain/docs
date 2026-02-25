@@ -1,0 +1,57 @@
+---
+title: "Bridging ERC20 with LayerZero V2"
+description: "Bridge ERC20 tokens (e.g. $UNI) from Sepolia to Berachain using LayerZero V2 and the Omnichain Fungible Token (OFT) standard."
+---
+
+Use this guide when you want to **bridge an existing ERC20** from another chain (e.g. Sepolia) to Berachain using **LayerZero V2** and the **OFT** (Omnichain Fungible Token) standard.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/layerzero-oft](https://github.com/berachain/guides/tree/main/apps/layerzero-oft)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/layerzero-oft/README.md)
+
+## Official documentation
+
+- [LayerZero V2](https://docs.layerzero.network/v2) — concepts and OFT.
+
+## Requirements
+
+- Node `v20.11.0` or greater, npm
+- Wallet with Berachain testnet $BERA — [bArtio Faucet](https://bartio.faucet.berachain.com)
+- Wallet with Sepolia $UNI (or other source token) — see README for faucet/Uniswap
+- [Foundry](https://book.getfoundry.sh/getting-started/installation)
+
+## Stack
+
+Solidity, Foundry (Forge scripts), Node.js, LayerZero V2 OFT.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/layerzero-oft
+   npm install
+   ```
+2. **Create `.env`** with `PRIVATE_KEY`, `SEPOLIA_ADAPTER_ADDRESS`, `BERACHAIN_OFT_ADDRESS` (fill addresses after deploying).
+3. **Deploy adapter on Sepolia**
+   ```bash
+   forge script script/MyAdapter.s.sol --rpc-url https://rpc.sepolia.org/ --broadcast
+   ```
+   Set `SEPOLIA_ADAPTER_ADDRESS` in `.env`.
+4. **Deploy OFT on Berachain**
+   ```bash
+   forge script script/MyOFT.s.sol --rpc-url https://bartio.rpc.berachain.com/ --broadcast
+   ```
+   Set `BERACHAIN_OFT_ADDRESS` in `.env`.
+5. **Bridge tokens**
+   ```bash
+   forge script script/Bridge.s.sol --rpc-url https://rpc.sepolia.org/ --broadcast
+   ```
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| Source chain adapter | `script/MyAdapter.s.sol` (and source) |
+| Berachain OFT | `script/MyOFT.s.sol` (and source) |
+| Bridge script | `script/Bridge.s.sol` |
