@@ -9,9 +9,9 @@ Berachain operates public RPCs at https://rpc.berachain.com/. These serve normal
 
 ## Using RPC efficiently
 
-You can transmit queries through two common transports. The most common is JSON-RPC over HTTP or HTTPS. Well-behaved clients typically reuse connections with keep-alive enabled, but high request rates still pay per-request overhead from headers, request and response framing, and retry behaviour. That overhead can amplify tail latency.
+You can transmit queries through two common transports. The most common is JSON-RPC over HTTP or HTTPS. Well-behaved clients typically reuse connections with keep-alive enabled, but high request rates still pay per-request overhead from headers, request and response framing, and retry behavior. That overhead can amplify tail latency.
 
-Retry discipline matters at least as much as raw request volume. If you are seeing `429` rate limits or intermittent timeouts, avoid "retry immediately" loops: they create retry storms that make throttling worse and can turn partial degradation into a full outage. Use exponential backoff with jitter, honour `Retry-After` when present, and cap retries. When upstreams stay unhealthy, shed load by queueing work, degrading non-critical reads, or failing fast. Be especially careful retrying write flows; reads are typically safe to retry, but duplicate submissions can surprise you.
+Retry discipline matters at least as much as raw request volume. If you are seeing `429` rate limits or intermittent timeouts, avoid "retry immediately" loops: they create retry storms that make throttling worse and can turn partial degradation into a full outage. Use exponential backoff with jitter, honor `Retry-After` when present, and cap retries. When upstreams stay unhealthy, shed load by queueing work, degrading non-critical reads, or failing fast. Be especially careful retrying write flows; reads are typically safe to retry, but duplicate submissions can surprise you.
 
 If you need streaming updates or you are polling aggressively, [WebSockets](https://ethereum.org/developers/tutorials/using-websockets/) are often a better fit. WebSocket connections are long-lived, which makes push workflows viable and reduces churn from repeated connect/reconnect cycles.
 
