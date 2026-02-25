@@ -1,0 +1,50 @@
+---
+title: "HelloWorld with Hardhat & Viem"
+description: "Deploy and verify a HelloWorld contract on Berachain testnet with Hardhat and Viem. Includes local node and tests."
+---
+
+Use this guide when you want to **set up Hardhat with Viem** for Berachain, **deploy a simple contract**, **verify it on the block explorer**, and optionally run a **local Hardhat node** and **tests**.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/hardhat-viem-helloworld](https://github.com/berachain/guides/tree/main/apps/hardhat-viem-helloworld)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/hardhat-viem-helloworld/README.md)
+
+## Requirements
+
+- Node `v18.18.2+`, npm
+- MetaMask (or other wallet) with $BERA — use [Berachain testnet faucet](https://bartio.faucet.berachain.com) or similar
+
+## Stack
+
+Hardhat, Viem, Solidity, TypeScript.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/hardhat-viem-helloworld
+   npm install
+   cp .env.example .env
+   ```
+   Set `WALLET_PRIVATE_KEY` in `.env`.
+2. **Compile and deploy to Berachain testnet**
+   ```bash
+   npm run compile
+   npm run deploy:berachain
+   ```
+   (Uses `scripts/deploy.ts` and network `berachainTestnet`.)
+3. **Verify on block explorer**
+   ```bash
+   npm run verify <DEPLOYED_ADDRESS> "Hello From Deployed Contract"
+   ```
+4. **Optional — local node:** `npm run node` in one terminal, then `npm run deploy:localhost` in another.
+5. **Run tests:** `npm run test`
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| Contract | `contracts/HelloWorld.sol` |
+| Deploy script | `scripts/deploy.ts` |
+| Tests | `test/HelloWorld.test.ts` |

@@ -1,0 +1,32 @@
+---
+title: "ERC20 with Foundry"
+description: "Create and deploy an ERC20 token on Berachain using Foundry (Forge, Cast)."
+---
+
+Use this guide when you want to **create and deploy an ERC20 token** on Berachain using **Foundry** (Forge for build/deploy, Cast for calls).
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/foundry-erc20](https://github.com/berachain/guides/tree/main/apps/foundry-erc20)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/foundry-erc20/README.md)
+
+## Requirements
+
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) (`foundryup`)
+- Wallet with testnet $BERA (e.g. [Artio Faucet](https://artio.faucet.berachain.com))
+
+## Stack
+
+Foundry, Solidity, ERC20.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/foundry-erc20
+   forge build
+   ```
+2. Set `PRIVATE_KEY` and RPC (e.g. `https://bartio.rpc.berachain.com/`) in env or `--rpc-url`.
+3. Deploy with `forge create` or a script; use `cast` to interact. Exact commands are in the README.
+
+For full deploy and test commands, fetch the [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/foundry-erc20/README.md).

@@ -1,0 +1,44 @@
+---
+title: "NextJS WalletConnect WAGMI + Viem"
+description: "Deploy a contract from a Next.js frontend with WalletConnect, WAGMI, and Viem. Connect via QR with MetaMask Mobile."
+---
+
+Use this guide when you want a **Next.js dApp** that **connects wallets via WalletConnect** (e.g. MetaMask Mobile QR), uses **WAGMI** and **Viem**, and **deploys a contract** from the browser.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/walletconnect-nextjs](https://github.com/berachain/guides/tree/main/apps/walletconnect-nextjs)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/walletconnect-nextjs/README.md)
+
+## Requirements
+
+- Node `v20.11.0`, npm
+- [WalletConnect Project ID](https://cloud.walletconnect.com) — set in `.env` as `NEXT_PUBLIC_PROJECT_ID`
+- MetaMask Mobile (or other WalletConnect-compatible wallet) for QR flow
+
+## Stack
+
+Next.js 14, TypeScript, WalletConnect, WAGMI, Viem.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/walletconnect-nextjs
+   npm install
+   copy .env.example .env
+   ```
+   Add `NEXT_PUBLIC_PROJECT_ID` from [WalletConnect Cloud](https://cloud.walletconnect.com).
+2. **Run**
+   ```bash
+   npm run dev
+   ```
+3. In the app: **Connect Wallet** → **WalletConnect** → scan QR with MetaMask Mobile. Enter a greeting and click **Deploy** to deploy the contract; confirm in MetaMask.
+
+For RPC and chain config, see [Berachain docs](https://docs.berachain.com).
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| App / config | Next.js app in repo root (see README) |

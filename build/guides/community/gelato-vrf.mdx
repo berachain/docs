@@ -1,0 +1,53 @@
+---
+title: "Gelato VRF on Berachain"
+description: "Verifiable Random Function (VRF) on Berachain with Gelato. Deploy SimpleVRFContract, create a Gelato VRF task, request and fulfill randomness."
+---
+
+Use this guide when you need **verifiable on-chain randomness** (e.g. for games, NFTs, or randomized logic) on Berachain. Gelato VRF lets your contract request randomness and receive a fulfilled callback.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/gelato-vrf](https://github.com/berachain/guides/tree/main/apps/gelato-vrf)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/gelato-vrf/README.md)
+
+## Official documentation
+
+- [Gelato VRF](https://app.gelato.network/vrf) — deploy and manage VRF tasks.
+
+## Requirements
+
+- Node `v20.0.0` or greater, npm or yarn
+- Wallet with $BERA — [bArtio Faucet](https://bartio.faucet.berachain.com)
+- Hardhat
+
+## Stack
+
+Solidity, Hardhat, Node.js, Gelato VRF (requester + fulfillment).
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/gelato-vrf
+   npm install
+   ```
+2. **Configure `.env`** from `.env.example`: `PRIVATE_KEY`, `DEDICATED_MSG_SENDER`, and later `SC_ADDRESS` (your deployed contract).
+3. **Deploy**
+   ```bash
+   npx hardhat deploy --network berachain
+   ```
+   Note the deployed address from `deployments/` and set `SC_ADDRESS` in `.env`.
+4. **Create a Gelato VRF task** at [app.gelato.network/vrf](https://app.gelato.network/vrf): choose **Berachain bArtio**, enter your requester contract address, then launch the VRF instance.
+5. **Request randomness**
+   ```bash
+   npx hardhat run ./scripts/requestRandomness.ts --network berachain
+   ```
+   Monitor execution in the Gelato app.
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| VRF contract | Contracts in repo (see README) |
+| Deploy output | `deployments/` |
+| Request script | `scripts/requestRandomness.ts` |

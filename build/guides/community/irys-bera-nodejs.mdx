@@ -1,0 +1,41 @@
+---
+title: "Irys Upload with $BERA (Node.js)"
+description: "Upload files to Irys decentralized storage and pay with Berachain $BERA. Node.js script with Irys SDK."
+---
+
+Use this guide when you want to **upload files** (images, JSON, etc.) to **Irys** (decentralized storage) and **pay with Berachain $BERA** from a **Node.js** script.
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/irys-bera-nodejs](https://github.com/berachain/guides/tree/main/apps/irys-bera-nodejs)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/irys-bera-nodejs/README.md)
+
+## Requirements
+
+- Node `v20.11.0` or greater, npm
+- Wallet with **mainnet** $BERA (this example uses mainnet for payment)
+
+## Stack
+
+Node.js, JavaScript/TypeScript, Irys SDK, Berachain mainnet RPC.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/irys-bera-nodejs
+   npm install
+   cp .env.example .env
+   ```
+2. **Set `WALLET_PRIVATE_KEY`** in `.env` (wallet must hold mainnet $BERA).
+3. **Run upload**
+   ```bash
+   npm run dev
+   ```
+   Script reports file size, cost in $BERA, balance, and returns the Irys receipt and gateway URL (e.g. `https://gateway.irys.xyz/<id>`).
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| Upload script | See repo (e.g. `app/` or root script; README names exact entry) |

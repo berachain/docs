@@ -1,0 +1,54 @@
+---
+title: "Provably Fair NFTs with Pyth Entropy"
+description: "Use Pyth Entropy on Berachain for verifiable randomness and provably fair NFT minting. Includes setup, deploy EntropyNFT contract, and request randomness."
+---
+
+Use this guide when you need **on-chain verifiable randomness** or **provably fair NFT minting** on Berachain. Pyth Entropy lets you request secure random numbers and use them in smart contract callbacks (e.g. mint an NFT with a random trait).
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/pyth-entropy](https://github.com/berachain/guides/tree/main/apps/pyth-entropy)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/pyth-entropy/README.md) — an MCP or tool can fetch this for full steps.
+
+## Official documentation
+
+- [Pyth Entropy](https://docs.pyth.network/entropy) — concepts and API.
+
+## Requirements
+
+- Node `v20.11.0` or greater, npm
+- Wallet with Berachain testnet $BERA — [Artio Faucet](https://artio.faucet.berachain.com)
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) (`foundryup`)
+
+## Stack
+
+Solidity, Foundry (Forge), Node.js, `@pythnetwork/entropy-sdk-solidity`, OpenZeppelin contracts.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/pyth-entropy
+   npm install
+   ```
+   Add remappings to `foundry.toml` (see README).
+
+2. **Configure `.env`** at project root: `RPC_URL`, `PRIVATE_KEY`, `ENTROPY_ADDRESS`, `PROVIDER_ADDRESS` (values in README).
+
+3. **Deploy the NFT contract**
+   ```bash
+   forge create src/EntropyNFT.sol:EntropyNFT --private-key $PRIVATE_KEY --rpc-url $RPC_URL --constructor-args $ENTROPY_ADDRESS $PROVIDER_ADDRESS
+   ```
+   Set `ENTROPY_NFT_ADDRESS` in `.env` to the deployed address.
+
+4. **Request a mint** (script requests random number from Pyth and polls for the mint callback)
+   ```bash
+   node app/requestMint.js
+   ```
+
+## Key files
+
+| Purpose | Path |
+|--------|------|
+| NFT contract | `src/EntropyNFT.sol` |
+| Mint request script | `app/requestMint.js` |

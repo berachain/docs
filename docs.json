@@ -84,7 +84,33 @@
               {
                 "group": "General Guides",
                 "pages": [
-                  "build/guides/verifying-smart-contracts"
+                  "build/guides/verifying-smart-contracts",
+                  "build/guides/community-guides",
+                  {
+                    "group": "Guides",
+                    "pages": [
+                      "build/guides/community/walletconnect-nextjs",
+                      "build/guides/community/thirdweb-connectwallet-nextjs",
+                      "build/guides/community/particle-auth-core-vite",
+                      "build/guides/community/rainbowkit-vite",
+                      "build/guides/community/walletconnect-expo",
+                      "build/guides/community/layerzero-oft",
+                      "build/guides/community/ethers6-solc-helloworld",
+                      "build/guides/community/viem-solc-helloworld",
+                      "build/guides/community/hardhat-viem-helloworld",
+                      "build/guides/community/hardhat-contract-verification",
+                      "build/guides/community/hardhat-ethers6-erc1155",
+                      "build/guides/community/foundry-erc20",
+                      "build/guides/community/openzeppelin-upgrades",
+                      "build/guides/community/goldsky-subgraph",
+                      "build/guides/community/envio-indexer-erc20",
+                      "build/guides/community/gelato-vrf",
+                      "build/guides/community/pyth-entropy",
+                      "build/guides/community/pyth-oracle",
+                      "build/guides/community/berachain-governance-proposal",
+                      "build/guides/community/irys-bera-nodejs"
+                    ]
+                  }
                 ]
               },
               {

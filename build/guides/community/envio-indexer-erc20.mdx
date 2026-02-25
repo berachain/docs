@@ -1,0 +1,32 @@
+---
+title: "Envio Indexer ERC20"
+description: "Index ERC20 token data on Berachain using Envio's indexer framework. Schema and handlers for ERC20 events."
+---
+
+Use this guide when you want to **index ERC20 token data** (transfers, balances, etc.) on Berachain using **Envio's indexer** (schema + handlers).
+
+## Repository
+
+- **Code:** [github.com/berachain/guides/tree/main/apps/envio-indexer-erc20](https://github.com/berachain/guides/tree/main/apps/envio-indexer-erc20)
+- **README (raw):** [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/envio-indexer-erc20/README.md)
+
+## Requirements
+
+- Node (see README), npm
+- Envio CLI/config if deploying to Envio
+
+## Stack
+
+Envio, TypeScript/JavaScript, schema + event handlers.
+
+## Quick start
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/berachain/guides.git && cd guides/apps/envio-indexer-erc20
+   npm install
+   ```
+2. Configure Envio (chain: Berachain, contract addresses if fixed). See README for Envio workflow.
+3. Build and run/deploy the indexer; query indexed data per Envio docs.
+
+For full schema, handlers, and deploy steps, fetch the [raw README](https://raw.githubusercontent.com/berachain/guides/main/apps/envio-indexer-erc20/README.md).
