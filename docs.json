@@ -110,7 +110,8 @@
                       "build/guides/community/berachain-governance-proposal",
                       "build/guides/community/irys-bera-nodejs"
                     ]
-                  }
+                  },
+                  "build/guides/ai-developer"
                 ]
               },
               {
