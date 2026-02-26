@@ -3,6 +3,8 @@ title: "Staking Pool Contracts"
 description: "Addresses and ABIs for StakingPoolContractsFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
 ---
 
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
+
 This reference provides contract addresses and links to detailed documentation for each contract in the staking pools system. For an overview of how the contracts work together, see the [Staking Pools Overview](/validators/staking-pools/overview).
 
 ## Contract addresses
@@ -11,19 +13,7 @@ This reference provides contract addresses and links to detailed documentation f
 
 Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The other singletons below are shared infrastructure.
 
-#### Mainnet
-
-| Name | Address | ABI |
-|------|---------|-----|
-| **StakingPoolContractsFactory** | [`0xb79b43dBA821Cb67751276Ce050fF4111445fB99`](https://berascan.com/address/0xb79b43dBA821Cb67751276Ce050fF4111445fB99) | [ABI JSON](https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/StakingPoolContractsFactory.json) |
-| **WithdrawalVault** | [`0xE858802Ed532C6DAD2D196AB5B1F2C15F9cb52b4`](https://berascan.com/address/0xE858802Ed532C6DAD2D196AB5B1F2C15F9cb52b4) | [ABI JSON](https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/WithdrawalVault.json) |
-
-#### Bepolia
-
-| Name | Address | ABI |
-|------|---------|-----|
-| **StakingPoolContractsFactory** | [`0x176c081E95C82CA68DEa20CA419C7506Aa063C24`](https://testnet.berascan.com/address/0x176c081E95C82CA68DEa20CA419C7506Aa063C24) | [ABI JSON](https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/StakingPoolContractsFactory.json) |
-| **WithdrawalVault** | [`0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4`](https://testnet.berascan.com/address/0xAFAc2f11Cb39F0521b22494F6101002ce653D2f4) | [ABI JSON](https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/WithdrawalVault.json) |
+<StakingPoolSingletonsTable />
 
 ### Deployed contracts (per pool)
 
