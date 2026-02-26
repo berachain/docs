@@ -205,7 +205,7 @@ import CoreContractsTable from "/snippets/contracts/generated/core-contracts-tab
 
 This is a list of addresses where you can read from or write to these contracts.
 
-> A full list of Contract ABIs can be found at https://github.com/berachain/doc-abis
+> A full list of Contract ABIs can be found at https://github.com/berachain/abis
 
 <Info>
 Various parties have audited the deployed contracts.
