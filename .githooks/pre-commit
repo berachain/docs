@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+echo "pre-commit: checking generated contract docs are up to date..."
+node scripts/contracts/generate-pages.mjs --check
