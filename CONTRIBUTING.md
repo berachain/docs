@@ -120,15 +120,30 @@ Before opening a PR, run:
 mint validate
 ```
 
-If your change is broad (navigation changes, many links, structural edits), also run:
+Also run:
 
 ```bash
-mint build
+mint broken-links
+mint a11y
 ```
 
 Fix any errors before opening your PR.
 
-### 7. Commit and Push
+### 7. Contract Address Source Of Truth
+
+Contract addresses are managed through a single source of truth:
+
+- `data/contracts.json`
+
+Do not manually edit generated canonical address pages. Instead:
+
+```bash
+node scripts/contracts/generate-pages.mjs
+```
+
+This regenerates contract snippets and canonical deployed-contract pages from `data/contracts.json`.
+
+### 8. Commit and Push
 
 - Commit with a clear message, e.g. `Fix typo in BEX swap guide` or `Add section on pool exits`.
 - Keep the scope of each PR focused (one topic or one section is ideal).
@@ -139,7 +154,7 @@ git commit -m "Your message"
 git push origin fix/your-change
 ```
 
-### 8. Open a Pull Request
+### 9. Open a Pull Request
 
 - Open a PR from your branch to `berachain/docs` **main**.
 - Fill in the PR template (description, checklist).
