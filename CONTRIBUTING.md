@@ -141,7 +141,18 @@ Do not manually edit generated canonical address pages. Instead:
 node scripts/contracts/generate-pages.mjs
 ```
 
-This regenerates contract snippets and canonical deployed-contract pages from `data/contracts.json`.
+This regenerates:
+
+- snippets in `snippets/contracts/generated/`
+- canonical deployed-contract pages in:
+  - `build/getting-started/deployed-contracts.mdx`
+  - `build/bex/deployed-contracts.mdx`
+  - `build/bend/deployed-contracts.mdx`
+  - `build/bend/deployed-markets.mdx`
+
+Check in generated outputs with your `data/contracts.json` changes in the same PR.
+
+At the moment this generation step is manual (not CI-enforced), so treat regeneration + check-in as required whenever contract data changes.
 
 ### 8. Commit and Push
 
