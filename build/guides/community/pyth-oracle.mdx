@@ -18,7 +18,7 @@ Use this guide when you need **real-time price data** or **oracle feeds** on Ber
 
 - Node `v20.11.0` or greater, npm
 - [jq](https://jqlang.github.io/jq/download/)
-- Wallet with testnet $BERA — [Artio Faucet](https://artio.faucet.berachain.com)
+- Wallet with testnet $BERA — [Bepolia Faucet](https://bepolia.faucet.berachain.com)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
 ## Stack
@@ -32,18 +32,18 @@ Solidity, Foundry (Forge, Cast), Node.js, Pyth Hermes API (price payloads).
    git clone https://github.com/berachain/guides.git && cd guides/apps/pyth-oracle
    npm install
    ```
-2. **Import wallet** (Foundry keystore): `cast wallet import deployer --interactive`. Set `BERACHAIN_ARTIO_RPC` (e.g. `https://rpc.ankr.com/berachain_testnet`).
+2. **Import wallet** (Foundry keystore): `cast wallet import deployer --interactive`. Set `BERACHAIN_TESTNET_RPC` (e.g. `https://bepolia.rpc.berachain.com`).
 3. **Deploy consumer contract**
    ```bash
    forge build
-   forge create ./src/ConsumerContract.sol:ConsumerContract --rpc-url $BERACHAIN_ARTIO_RPC --account deployer
+   forge create ./src/ConsumerContract.sol:ConsumerContract --rpc-url $BERACHAIN_TESTNET_RPC --account deployer
    ```
 4. **Fetch price and update on-chain**
    ```bash
    curl -s "https://hermes.pyth.network/v2/updates/price/latest?&ids[]=0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace" | jq -r ".binary.data[0]" > price_update.txt
-   cast send <CONTRACT> --rpc-url $BERACHAIN_ARTIO_RPC "updatePrice(bytes[])" "[0x\`cat price_update.txt\`]" --account deployer --value 0.0001ether
+   cast send <CONTRACT> --rpc-url $BERACHAIN_TESTNET_RPC "updatePrice(bytes[])" "[0x\`cat price_update.txt\`]" --account deployer --value 0.0001ether
    ```
-5. **Read price:** `cast call <CONTRACT> --rpc-url $BERACHAIN_ARTIO_RPC "getPrice()"`
+5. **Read price:** `cast call <CONTRACT> --rpc-url $BERACHAIN_TESTNET_RPC "getPrice()"`
 
 **Troubleshooting:** `StalePrice` — re-run the update; `InsufficientFee` — increase `--value` (e.g. `0.0005ether`).
 
