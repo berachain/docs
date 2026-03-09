@@ -378,6 +378,15 @@
     { "source": "/vi/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
     { "source": "/vi/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
     { "source": "/vi/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
-    { "source": "/vi/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" }
+    { "source": "/vi/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
+    { "source": "/nodes/quickstart", "destination": "/validators/operations/quickstart" },
+    { "source": "/nodes/monitoring", "destination": "/validators/operations/monitoring" },
+    { "source": "/nodes/production-checklist", "destination": "/validators/operations/production-checklist" },
+    { "source": "/nodes/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
+    { "source": "/nodes/staking-pools/contracts/:slug*", "destination": "/validators/staking-pools/contracts" },
+    { "source": "/beacon-kit/api", "destination": "/validators/beaconkit/overview" },
+    { "source": "/beacon-kit/cli", "destination": "/validators/beaconkit/overview" },
+    { "source": "/beacon-kit/configuration", "destination": "/validators/beaconkit/overview" },
+    { "source": "/beacon-kit/what-is-beaconkit", "destination": "/validators/beaconkit/overview" }
   ]
 }
