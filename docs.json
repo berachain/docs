@@ -537,7 +537,6 @@
     { "source": "/learn/guides/deposit-withdraw", "destination": "/bend/guides/deposit-withdraw", "permanent": true },
     { "source": "/learn/guides/borrow-repay", "destination": "/bend/guides/borrow-repay", "permanent": true },
     { "source": "/learn/help/curator-application", "destination": "/bend/guides/curator-application", "permanent": true },
-    { "source": "/developers/deployed-contracts", "destination": "/build/bend/deployed-contracts", "permanent": true },
     { "source": "/developers/deployed-markets", "destination": "/build/bend/deployed-markets", "permanent": true },
     { "source": "/developers/onchain/bundlers", "destination": "/build/bend/onchain-bundlers", "permanent": true },
     { "source": "/developers/onchain/public-allocator", "destination": "/build/bend/onchain-public-allocator", "permanent": true },
