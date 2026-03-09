@@ -17,7 +17,7 @@ Use this guide when you want to **bridge an existing ERC20** from another chain 
 ## Requirements
 
 - Node `v20.11.0` or greater, npm
-- Wallet with Berachain testnet $BERA — [bArtio Faucet](https://bartio.faucet.berachain.com)
+- Wallet with Berachain testnet $BERA — [Bepolia Faucet](https://bepolia.faucet.berachain.com)
 - Wallet with Sepolia $UNI (or other source token) — see README for faucet/Uniswap
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
@@ -40,7 +40,7 @@ Solidity, Foundry (Forge scripts), Node.js, LayerZero V2 OFT.
    Set `SEPOLIA_ADAPTER_ADDRESS` in `.env`.
 4. **Deploy OFT on Berachain**
    ```bash
-   forge script script/MyOFT.s.sol --rpc-url https://bartio.rpc.berachain.com/ --broadcast
+   forge script script/MyOFT.s.sol --rpc-url https://bepolia.rpc.berachain.com/ --broadcast
    ```
    Set `BERACHAIN_OFT_ADDRESS` in `.env`.
 5. **Bridge tokens**

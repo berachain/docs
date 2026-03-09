@@ -17,7 +17,7 @@ Use this guide when you need **verifiable on-chain randomness** (e.g. for games,
 ## Requirements
 
 - Node `v20.0.0` or greater, npm or yarn
-- Wallet with $BERA — [bArtio Faucet](https://bartio.faucet.berachain.com)
+- Wallet with $BERA — [Bepolia Faucet](https://bepolia.faucet.berachain.com)
 - Hardhat
 
 ## Stack
@@ -37,7 +37,7 @@ Solidity, Hardhat, Node.js, Gelato VRF (requester + fulfillment).
    npx hardhat deploy --network berachain
    ```
    Note the deployed address from `deployments/` and set `SC_ADDRESS` in `.env`.
-4. **Create a Gelato VRF task** at [app.gelato.network/vrf](https://app.gelato.network/vrf): choose **Berachain bArtio**, enter your requester contract address, then launch the VRF instance.
+4. **Create a Gelato VRF task** at [app.gelato.network/vrf](https://app.gelato.network/vrf): choose **Berachain Bepolia**, enter your requester contract address, then launch the VRF instance.
 5. **Request randomness**
    ```bash
    npx hardhat run ./scripts/requestRandomness.ts --network berachain

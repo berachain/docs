@@ -2,6 +2,8 @@
 
 Thank you for considering contributing. This guide will help you get set up and submit changes.
 
+For environment setup and local tooling commands, use [README.md](README.md). `CONTRIBUTING.md` focuses on contribution workflow and review expectations.
+
 ## Code of Conduct
 
 Berachain has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its Code of Conduct. We expect everyone to follow it. Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
@@ -66,18 +68,9 @@ cd docs
 git remote add upstream https://github.com/berachain/docs
 ```
 
-### 2. Prerequisites
+Use the setup and local run instructions in [README.md](README.md).
 
-- **Node.js** 16 or newer
-- **npm** or **yarn**
-
-### 3. Install Mintlify CLI
-
-```bash
-npm i -g mint
-```
-
-### 4. Create a Branch
+### 2. Create a Branch
 
 Work on a branch (do not commit directly to `main`):
 
@@ -85,24 +78,14 @@ Work on a branch (do not commit directly to `main`):
 git checkout -b fix/your-change   # or feature/your-feature
 ```
 
-### 5. Run the Docs Locally
-
-From the repo root:
-
-```bash
-mint dev
-```
-
-Open [http://localhost:3000](http://localhost:3000). Check that your changes look correct and that existing pages still work.
-
-### 6. Add or Edit Content
+### 3. Add or Edit Content
 
 - **Editing:** Open the relevant `.mdx` file under `general/`, `build/`, or `reference/` and edit.
 - **New page:** Create the `.mdx` file in the right folder, then add it to `docs.json` (see [Adding or moving pages](#adding-or-moving-pages)).
 
 Use existing pages as a style reference. Prefer clear, concise language and short paragraphs. Use MDX components where they add value (see [Content guidelines](#content-guidelines)).
 
-### 7. Adding or Moving Pages
+### 4. Adding or Moving Pages
 
 Navigation is defined in `docs.json` under `navigation.tabs`. Each tab has `groups`; each group has a `group` name and a `pages` array of file paths (without `.mdx`).
 
@@ -120,25 +103,58 @@ To add a new page:
 
 To move or rename a page, update both the file path and every reference in `docs.json` and in other docs (links).
 
-### 8. Content Guidelines
+### 5. Content Guidelines
 
 - Follow the structure and tone of existing docs.
+- Use US English spelling in prose (`color`, `behavior`, `favor`, `labeled`).
 - Use Mintlify/MDX components where appropriate, e.g. `<Card>`, `<Steps>`, `<Note>`, `<Tip>`, `<Warning>`.
 - Use fenced code blocks with a language tag where you show code.
 - Link to related pages when it helps the reader.
-- After editing, run `mint dev` and click through to confirm links and formatting.
+- Validate your changes locally (see [README.md](README.md) for commands).
 
-### 9. Build Check
+### 6. Validation Before PR
 
-Before submitting, run a production build to catch broken links or invalid config:
+Before opening a PR, run:
 
 ```bash
-mint build
+mint validate
+```
+
+Also run:
+
+```bash
+mint broken-links
+mint a11y
 ```
 
 Fix any errors before opening your PR.
 
-### 10. Commit and Push
+### 7. Contract Address Source Of Truth
+
+Contract addresses are managed through a single source of truth:
+
+- `data/contracts.json`
+
+Do not manually edit generated canonical address pages. Instead:
+
+```bash
+node scripts/contracts/generate-pages.mjs
+```
+
+This regenerates:
+
+- snippets in `snippets/contracts/generated/`
+- canonical deployed-contract pages in:
+  - `build/getting-started/deployed-contracts.mdx`
+  - `build/bex/deployed-contracts.mdx`
+  - `build/bend/deployed-contracts.mdx`
+  - `build/bend/deployed-markets.mdx`
+
+Check in generated outputs with your `data/contracts.json` changes in the same PR.
+
+At the moment this generation step is manual (not CI-enforced), so treat regeneration + check-in as required whenever contract data changes.
+
+### 8. Commit and Push
 
 - Commit with a clear message, e.g. `Fix typo in BEX swap guide` or `Add section on pool exits`.
 - Keep the scope of each PR focused (one topic or one section is ideal).
@@ -149,7 +165,7 @@ git commit -m "Your message"
 git push origin fix/your-change
 ```
 
-### 11. Open a Pull Request
+### 9. Open a Pull Request
 
 - Open a PR from your branch to `berachain/docs` **main**.
 - Fill in the PR template (description, checklist).
