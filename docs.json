@@ -47,6 +47,7 @@
                 "pages": [
                   "general/tokens/bera",
                   "general/tokens/bgt",
+                  "general/tokens/tokenomics",
                   "general/tokens/honey"
                 ]
               },
