@@ -1,0 +1,21 @@
+---
+title: "Protocol Features"
+description: "Berachain-supported EIPs and chain-level capabilities for developers."
+---
+
+Berachain ships with support for several Ethereum Improvement Proposals that go beyond standard EVM compatibility. These guides cover the chain-specific features available to developers building on Berachain.
+
+## EIP-7702 — Set Code for EOA
+
+EIP-7702 allows externally owned accounts to temporarily behave like smart contracts within a single transaction. This unlocks batched calls, gas sponsorship, and other account-abstraction patterns without deploying a separate contract wallet.
+
+- [Basics](/build/protocol/eip7702-basics) — understand the fundamentals
+- [Batch Transactions](/build/protocol/eip7702-batch-transactions) — combine multiple calls into one transaction
+- [Gas Sponsorship](/build/protocol/eip7702-gas-sponsorship) — let a third party pay for gas
+
+## EIP-5792 — Wallet Batching Capabilities
+
+EIP-5792 introduces `wallet_sendCalls`, enabling applications to request wallets to process batches of on-chain write calls and check their status.
+
+- [Overview](/build/protocol/eip5792-overview) — how wallet batching works
+- [MetaMask Guide](/build/protocol/eip5792-metamask-guide) — integrate with MetaMask's implementation
