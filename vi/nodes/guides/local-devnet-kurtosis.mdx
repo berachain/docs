@@ -1,0 +1,208 @@
+---
+title: "Local Devnet with Kurtosis"
+description: "Set up a local Berachain devnet with Kurtosis for testing and development"
+---
+
+The following guide walks you through setting up a local Berachain devnet using Kurtosis.
+
+<Warning>
+Some features like native dApps, contracts, and more may still be a work in progress.
+</Warning>
+
+## Requirements
+
+Before starting, ensure that you have the following installed on your computer:
+
+- [Docker](https://docs.docker.com/get-docker/) `version 25.0.2` or greater
+- [Kurtosis](https://docs.kurtosis.com/install) `v0.90.1` or greater
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) `v1.0.0` or greater (for testing purposes)
+
+## Kurtosis local devnet
+
+Going through this process will set up and run multiple services, execution clients, block explorers, databases, and more.
+
+<Warning>
+This may require a decent amount of resources to run. If you run into limits, modify the yaml configuration file to limit the number of services.
+</Warning>
+
+If you run the default Kurtosis configuration, it will run the following:
+
+- 5 validator nodes
+- 3 full nodes
+- 6 additional services
+
+You can modify the [beaconkit-local.yaml](https://github.com/berachain/beacon-kit/blob/main/kurtosis/beaconkit-local.yaml) to fit your system requirements.
+
+### Step 1 - Clone repository and run nodes
+
+The first step is to clone the Beacon Kit repository.
+
+```bash
+git clone https://github.com/berachain/beacon-kit;
+cd beacon-kit;
+```
+
+After cloning the repository, run `make start-devnet`.
+
+<Tip>
+If you encounter issues, please see [Debugging Issues](#debugging-issues) below.
+</Tip>
+
+<Warning>
+It is highly recommended before running Kurtosis to disable `additional_services:` entirely for most use-cases. See [Node Setup](#node-setup) for details.
+</Warning>
+
+```bash
+# FROM: ~/beacon-kit (host OS)
+
+make start-devnet;
+
+# [Expected Output]:
+# Checking for Kurtosis installation...
+# Kurtosis is already installed
+# ...
+# INFO  ========================================================
+# INFO  ||          Created enclave: my-local-devnet          ||
+# INFO  ========================================================
+```
+
+### Step 2 - Configure wallet
+
+If you want to see a list of all defined wallet addresses and private keys, refer to [constants.star](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
+
+Start by adding the network to your MetaMask wallet.
+
+<Tip>
+Your port number will be different. Use the port number from the list of services output in Step 1. Look at using a JSON-RPC service with `el-full-reth-0` or other and use the `eth-json-rpc` port.
+</Tip>
+
+| Key             | Value |
+| --------------- | ----- |
+| Network         | Berachain Local Devnet |
+| RPC URL         | `http://127.0.0.1:51208` |
+| Chain ID        | `80087` |
+| Currency symbol | `BERA` |
+
+Next import one of the private keys defined in [constants.star](https://github.com/berachain/beacon-kit/blob/main/kurtosis/src/constants.star).
+
+### Step 3 - Deploy contract
+
+To demonstrate deploying a contract to the local devnet, you can use `forge create`:
+
+```bash
+# FROM: ~/beacon-kit (host OS)
+
+forge create --broadcast \
+  --private-key fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306 \
+  tmp/HelloWorld.sol:HelloWorld \
+  --rpc-url http://127.0.0.1:51208 \
+  --constructor-args "Initial greeting message";
+
+# [Expected Output]:
+# Deployer: 0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4
+# Deployed to: 0x459C653FaAE6E13b59cf8E005F5f709C7b2c2EB4
+# Transaction hash: 0xf18d36b5...
+```
+
+### Step 4 - Read contract
+
+Verify that the contract was deployed and the initial message was set:
+
+```bash
+cast call 0x459C653FaAE6E13b59cf8E005F5f709C7b2c2EB4 "getGreeting()(string)" --rpc-url http://127.0.0.1:51208;
+
+# [Expected Output]:
+# Initial greeting message
+```
+
+## Testing deposits
+
+In this section, you upgrade one of the full nodes from the default Kurtosis deployment to a full validator, following the process laid out in the [Become a Validator](/nodes/guides/become-a-validator) guide.
+
+### Node setup
+
+Revise `beaconkit-local.yml` to **remove all additional services**, then clean and re-launch:
+
+```bash
+# FROM: ~/beacon-kit (host OS)
+
+kurtosis clean -a ; docker rm -f $(docker ps -aq);
+make start-devnet;
+```
+
+Identify a full node from the list of activated containers using `kurtosis enclave inspect my-local-devnet`.
+
+### Collect registration transaction parameters
+
+Log into the beaconkit container:
+
+```bash
+kurtosis service shell my-local-devnet cl-full-beaconkit-0;
+```
+
+Obtain the validator keys and genesis root hash:
+
+```bash
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+beacond deposit validator-keys;
+beacond genesis validator-root ~/.beacond/config/genesis.json;
+```
+
+Load those values into environment variables and calculate the deposit signature:
+
+```bash
+# FROM: ~ (cl-full-beaconkit-0 container)
+
+COMETBFT_PUB_KEY=$(beacond deposit validator-keys|tail -1);
+GENESIS_ROOT=$(beacond genesis validator-root ~/.beacond/config/genesis.json);
+
+DEPOSIT_ADDR=0x4242424242424242424242424242424242424242;
+OPERATOR_ADDRESS=0x9BcaA41DC32627776b1A4D714Eef627E640b3EF5;
+WITHDRAW_ADDRESS=$OPERATOR_ADDRESS;
+STAKE_AMOUNT_GWEI=9000000000;
+PK=fffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306;
+RPC_URL=http://127.0.0.1:8547;
+
+GENERATE_DEPOSIT_SIGNATURE=$(beacond deposit create-validator $WITHDRAW_ADDRESS $STAKE_AMOUNT_GWEI -g $GENESIS_ROOT);
+WITHDRAW_CREDENTIAL=$(echo "$GENERATE_DEPOSIT_SIGNATURE" | sed -n 's/credentials: //p');
+DEPOSIT_SIGNATURE=$(echo "$GENERATE_DEPOSIT_SIGNATURE" | sed -n 's/signature: //p');
+```
+
+Verify the calculated signature:
+
+```bash
+beacond deposit validate $COMETBFT_PUB_KEY $WITHDRAW_CREDENTIAL $STAKE_AMOUNT_GWEI $DEPOSIT_SIGNATURE -g $GENESIS_ROOT;
+
+# [Expected Output]:
+# ✅ Deposit message is valid!
+```
+
+### Send registration and activation transactions
+
+Generate the command in the container and execute it from the host OS. Send the registration transaction first, then the activation transaction with the remaining stake. After 2 complete epochs, the validator status should change to `active_ongoing`.
+
+## Debugging issues
+
+If Docker stops working on MacOS, first try running `kurtosis clean -a`. If the problem persists, try removing all containers and restarting Docker.
+
+```bash
+docker rm -f $(docker ps -aq);
+```
+
+To watch logs for deposit activity:
+
+```bash
+kurtosis service logs my-local-devnet cl-full-beaconkit-0 -f | grep num_deposits;
+```
+
+## Teardown and cleanup
+
+To remove all services and clean up the environment:
+
+```bash
+# FROM: ~/beacon-kit (host OS)
+
+make stop-devnet;
+make rm-devnet;
+```

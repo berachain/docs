@@ -1,0 +1,172 @@
+---
+title: "Local Devnet with Docker"
+description: "Run a local Berachain devnet with Docker for testing validator flows and deposits."
+---
+
+This tutorial walks you through launching a private local network and promoting one of the nodes in that network to a full validator.
+
+<Tip>
+Some features like native dApps, contracts, and more are still a work in progress.
+</Tip>
+
+This guide results in a simple deployment of a few validators and one RPC. If you want more control over the network, and additional services such as block explorers and PoL backends, refer to [Local Devnet with Kurtosis](/nodes/guides/local-devnet-kurtosis).
+
+## Requirements
+
+Before starting, ensure that you have the following installed on your computer:
+
+- Have read and understood the [validator activation process](/nodes/guides/become-a-validator)
+- [Docker](https://docs.docker.com/get-docker/) `version 25.0.2` or greater
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) `v1.0.0` or greater
+- MacOS — This script is made for Mac but can be modified to work with Linux
+
+## Launch local devnet
+
+You will launch multiple Docker containers that contain execution and consensus clients for a test chain initialized from genesis.
+
+### Step 1 - Obtain and build source
+
+```bash
+# FROM: ~
+
+git clone https://github.com/berachain/guides;
+mv guides/apps/local-docker-devnet ./devnet;
+rm -rf guides;
+cd devnet;
+```
+
+Review the `env.sh` file, which contains important variables for running the docker-devnet and deposit testing.
+
+**CHAIN_SPEC and CHAIN_ID** are used to influence the configuration of the deployed `beacond`. Valid values for **CHAIN_SPEC** are `mainnet`, `testnet` and `file`. The `file` specification uses the `CHAIN_ID` to look up a chainspec file in `templates/beacond`.
+
+Build the Docker devnet images:
+
+```bash
+# FROM: ~/devnet
+
+./build.sh;
+
+# [Expected Result]:
+# ...
+# *** Build complete
+```
+
+### Step 2 - Start containers and monitor chain activity
+
+Start the devnet:
+
+```bash
+# FROM: ~/devnet
+
+./start.sh;
+
+# [Expected Output]:
+# Starting Beacond...
+# 0 - Creating config folders...
+# 1 - Creating node configurations...
+# ...
+# Started!
+```
+
+Use `docker ps` to view the launched containers and verify that the services are running:
+
+```bash
+docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}";
+
+# [Expected Output]:
+# NAMES           IMAGE            STATUS         PORTS
+# el-node-rpc-0   reth-docker      Up 2 minutes   0.0.0.0:8545-8546->8545-8546/tcp
+# el-node-val-2   reth-docker      Up 2 minutes
+# el-node-val-1   reth-docker      Up 2 minutes
+# el-node-val-0   reth-docker      Up 2 minutes
+# cl-node-rpc-0   beacond-docker   Up 2 minutes   0.0.0.0:3500->3500/tcp, 0.0.0.0:26657->26657/tcp
+# cl-node-val-2   beacond-docker   Up 2 minutes
+# cl-node-val-1   beacond-docker   Up 2 minutes
+# cl-node-val-0   beacond-docker   Up 2 minutes
+```
+
+**Monitor beacond logs for deposits, withdrawals, and blocks:**
+
+```bash
+docker logs -f cl-node-rpc-0 | egrep '(Commit|deposit|withdraw|exit)';
+
+# [Expected Output]:
+# INFO Committed state ... height=10
+# INFO Building block body ... num_deposits=1
+# INFO Processing partial withdrawal ...
+```
+
+### Step 3 - Generate deposit scripts
+
+Invoke the deposit script to generate the deposit transactions (but do not transmit them). The script provides two `cast` calls and a command to view the current validator set. There are two types of deposits: 1) initial registration and 2) top-up.
+
+```bash
+# FROM: ~/devnet
+
+./generate-deposit-tx.sh;
+
+# [Expected Output]:
+# Generating Signature for Parameters: ...
+#
+# Send this command to register the validator + deposit 10000 BERA:
+# cast send ..
+#
+# Send this command to activate the validator by depositing 240000 BERA:
+# cast send..
+```
+
+<Warning>
+Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis root differs from mainnet's, and the signature will be invalid on mainnet. Study the registration and activation process in `generate-deposit-tx` and the [Deposit Guide](/nodes/guides/become-a-validator) to understand how to apply this process to mainnet.
+</Warning>
+
+### Step 4 - Run registration deposit transaction
+
+Transmit the first `cast` call, which calls `deposit()` for the first time with an initial stake of 10,000 `$BERA`.
+
+### Step 5 - Run activation deposit transaction
+
+Send the second suggested `cast` call, which stakes an additional 240,000 `$BERA`, sufficient to put the validator into the activation queue.
+
+### Step 6 - Observe activation
+
+Continue to monitor the chain's progress for three complete 10-block epochs. Upon activation, the validator status will change to `active_ongoing` — fully active and eligible to propose blocks.
+
+### Step 7 - Send withdrawal transaction
+
+Generate the withdrawal transactions:
+
+```bash
+# FROM: ~/devnet
+
+./generate-withdraw-tx.sh
+
+# [Expected Output]:
+# RPC validator pubkey is 0xaee37...
+# Determined withdrawal fee: 1
+#
+# To send withdrawal request for 10000 BERA:
+# cast send ...
+#
+# To exit the validator and return BERA stake:
+# cast send ...
+```
+
+### Step 8 - Send exit transaction
+
+Using the provided call to exit the validator, you will see the validator state immediately changes to `exited_unslashed` state, meaning the validator can no longer produce blocks. After the required delay in epochs, the validator's remaining stake is returned, and the status rests at `withdrawal_done`.
+
+## Cleanup
+
+This action will destroy all running Docker containers on your system when executed.
+
+```bash
+# FROM: ~/devnet
+
+./clean.sh
+
+# [Example Similar Output]:
+# Shutting down docker containers:
+# el-node-val-0
+# cl-node-val-0
+# ...
+```
