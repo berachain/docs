@@ -1,0 +1,163 @@
+---
+title: "Berachain Claim API"
+description: "Berachain Claim JSON-RPC API"
+---
+
+# Claim API
+
+The Claim API provides endpoints for learning about available Incentive distributions, providing proofs on demand, and aggregated. This API is useful for developers in the Proof of Liquidity ecosystem.
+
+## Base URL
+
+The base URL for the API endpoints depends on which network you're interacting with:
+
+- **Testnet (Bepolia)**: `https://bepolia.api-claim.berachain.com`
+- **Mainnet**: `https://api-claim.berachain.com`
+
+## Rate Limiting, Pagination and Caching
+
+All endpoints are rate-limited to prevent abuse. Responses are also cached for optimal performance. If you receive a rate limit error, please wait before retrying your request or reconsider your software design.
+
+Some endpoints employ pagination, so all queries accept pagination parameters and always provide a response with pagination metadata. The pagination parameters are:
+
+- `page` — the page number beginning from 0
+- `per_page` — how many items to have on each page.
+
+APIs endpoints that return paginated results return pagination info with every reply:
+
+```json
+{
+  "pagination": {
+    "next": 2,
+    "previous": 0,
+    "record_per_page": 10,
+    "current_page": 1,
+    "total_page": 4
+  },
+  ... remainder of response here
+}
+```
+
+## Merkle Proofs
+
+The Claim API uses Merkle proofs to verify Incentive eligibility. These proofs are cryptographic evidence that a particular wallet address is entitled to specified amount of Incentives from a particular vault.
+
+### What are Merkle Proofs?
+
+Merkle proofs are a cryptographic method that allows for efficient and secure verification of data within a larger dataset without requiring the entire dataset. In the context of Incentive distributions:
+
+1. Each distribution creates a Merkle tree containing all eligible wallet addresses and their corresponding Incentives
+2. When a wallet requests their Incentives, the API provides a Merkle proof that cryptographically verifies their inclusion in the distribution
+3. This proof can be submitted on-chain to claim the Incentives
+
+### Using Merkle Proofs
+
+When you receive a Merkle proof from the API:
+
+1. Store the proof data securely
+2. Submit the proof to the [BGTIncentiveDistributor](/build/getting-started/deployed-contracts) smart contract when claiming Incentives
+3. The contract will verify the proof's validity before releasing the Incentives
+
+## Endpoints
+
+### Health Check
+
+Check if the API is operational.
+
+```http
+GET /health
+```
+
+### Validator Yields
+
+#### Get Latest Yield for Specific Validator
+
+Retrieve the most recent yield information for a specific validator.
+
+```http
+GET /api/v1/reward-distributions/validators/yield/{validator}
+```
+
+#### Get Latest Yields for All Validators
+
+```http
+GET /api/v1/reward-distributions/validators/yield
+```
+
+### Wallet Operations
+
+#### Get Incentive Distributions for Wallet
+
+```http
+GET /api/v1/wallets/{wallet}/reward-distributions
+```
+
+Retrieve all incentive distributions associated with a specific wallet.
+
+#### Get Proofs for Distribution
+
+Retrieve proofs for a specific distribution.
+
+```http
+GET /api/v1/wallets/{wallet}/proofs/distribution/{dist_id}
+```
+
+#### Get Proofs for Validator
+
+Retrieve all proofs associated with a specific validator for a wallet.
+
+```http
+GET /api/v1/wallets/{wallet}/proofs/validator/{validator}
+```
+
+#### Get Wallet Incentives
+
+Retrieve all Incentives for a specific wallet.
+
+```http
+GET /api/v1/wallets/{wallet}/rewards
+```
+
+#### Get Aggregated Unclaimed Incentives
+
+Retrieve aggregated unclaimed Incentives grouped by validators for a wallet.
+
+```http
+GET /api/v1/wallets/{wallet}/rewards/aggregation
+```
+
+#### Get Aggregated Unclaimed Incentives for Specific Validator
+
+Retrieve aggregated unclaimed Incentives for a specific validator and wallet.
+
+```http
+GET /api/v1/wallets/{wallet}/rewards/aggregation/{validator}
+```
+
+### Vault Operations
+
+#### Get Vault BGT Rate
+
+Retrieve the expected BGT ingestion rate per block for a specific vault.
+
+```http
+GET /api/v1/vaults/{vault}/bgt-rate
+```
+
+## Error Handling
+
+The API uses standard HTTP status codes:
+
+- `200`: Success
+- `400`: Bad Request
+- `404`: Not Found
+- `429`: Too Many Requests (Rate Limit Exceeded)
+- `500`: Internal Server Error
+
+Error responses will include a message explaining what went wrong:
+
+```json
+{
+  "error": "Error message description"
+}
+```

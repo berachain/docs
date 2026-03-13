@@ -80,16 +80,40 @@
                 "group": "Getting Started",
                 "pages": [
                   "build/getting-started/developer-tools",
-                  "build/getting-started/common-resources"
+                  "build/getting-started/common-resources",
+                  "build/getting-started/deployed-contracts"
                 ]
               },
               {
-                "group": "General Guides",
+                "group": "Guides",
                 "pages": [
+                  "build/guides/ai-developer",
                   "build/guides/verifying-smart-contracts",
-                  "build/guides/community-guides",
+                  "build/guides/berascan-token-update",
                   {
-                    "group": "Guides",
+                    "group": "Protocol Features",
+                    "root": "build/protocol/overview",
+                    "pages": [
+                      {
+                        "group": "EIP-7702 (Set Code for EOA)",
+                        "pages": [
+                          "build/protocol/eip7702-basics",
+                          "build/protocol/eip7702-batch-transactions",
+                          "build/protocol/eip7702-gas-sponsorship"
+                        ]
+                      },
+                      {
+                        "group": "EIP-5792 (Wallet Batching)",
+                        "pages": [
+                          "build/protocol/eip5792-overview",
+                          "build/protocol/eip5792-metamask-guide"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Community Guides",
+                    "root": "build/guides/community/overview",
                     "pages": [
                       "build/guides/community/walletconnect-nextjs",
                       "build/guides/community/thirdweb-connectwallet-nextjs",
@@ -112,56 +136,22 @@
                       "build/guides/community/berachain-governance-proposal",
                       "build/guides/community/irys-bera-nodejs"
                     ]
-                  },
-                  "build/guides/ai-developer"
-                ]
-              },
-              {
-                "group": "BEX",
-                "pages": [
-                  "build/bex/overview",
-                  "build/bex/deployed-contracts",
-                  "build/bex/sdk/overview",
-                  {
-                    "group": "Guides",
-                    "pages": [
-                      "build/bex/sdk/swap",
-                      "build/bex/sdk/add-liquidity",
-                      "build/bex/sdk/remove-liquidity",
-                      "build/bex/sdk/sor",
-                      "build/bex/sdk/reference",
-                      "build/bex/guides/pool-creation",
-                      "build/bex/help/error-codes"
-                    ]
-                  },
-                  {
-                    "group": "Concepts",
-                    "pages": [
-                      "build/bex/concepts/single-swap",
-                      "build/bex/concepts/batch-swap",
-                      "build/bex/concepts/pool-interfacing",
-                      "build/bex/concepts/pool-joins",
-                      "build/bex/concepts/pool-exits",
-                      "build/bex/concepts/lp-underlying",
-                      "build/bex/concepts/lp-valuing",
-                      "build/bex/concepts/relayers"
-                    ]
                   }
                 ]
               },
               {
-                "group": "Bend",
+                "group": "Proof of Liquidity",
                 "pages": [
-                  "build/bend/overview",
-                  "build/bend/deployed-contracts",
-                  "build/bend/deployed-markets",
-                  {
-                    "group": "Onchain Tools",
-                    "pages": [
-                      "build/bend/onchain-bundlers",
-                      "build/bend/onchain-public-allocator"
-                    ]
-                  }
+                  "build/pol/advanced-pol",
+                  "build/pol/partial-reward-claims",
+                  "build/pol/staking-for-other-accounts"
+                ]
+              },
+              {
+                "group": "APIs",
+                "pages": [
+                  "build/apis/hub-api",
+                  "build/apis/claim-api"
                 ]
               }
             ]
@@ -197,6 +187,44 @@
                   "bex/guides/proof-of-liquidity",
                   "bex/guides/pool-creation",
                   "bex/guides/pool-configuration"
+                ]
+              },
+              {
+                "group": "Developers",
+                "pages": [
+                  "build/bex/overview",
+                  "build/bex/deployed-contracts",
+                  "build/bex/sdk/overview",
+                  {
+                    "group": "SDK Guides",
+                    "pages": [
+                      "build/bex/sdk/swap",
+                      "build/bex/sdk/add-liquidity",
+                      "build/bex/sdk/remove-liquidity",
+                      "build/bex/sdk/sor",
+                      "build/bex/sdk/reference"
+                    ]
+                  },
+                  {
+                    "group": "Guides",
+                    "pages": [
+                      "build/bex/guides/pool-creation",
+                      "build/bex/help/error-codes"
+                    ]
+                  },
+                  {
+                    "group": "Concepts",
+                    "pages": [
+                      "build/bex/concepts/single-swap",
+                      "build/bex/concepts/batch-swap",
+                      "build/bex/concepts/pool-interfacing",
+                      "build/bex/concepts/pool-joins",
+                      "build/bex/concepts/pool-exits",
+                      "build/bex/concepts/lp-underlying",
+                      "build/bex/concepts/lp-valuing",
+                      "build/bex/concepts/relayers"
+                    ]
+                  }
                 ]
               }
             ]
@@ -235,6 +263,21 @@
                   "bend/guides/deposit-withdraw",
                   "bend/guides/borrow-repay",
                   "bend/guides/curator-application"
+                ]
+              },
+              {
+                "group": "Developers",
+                "pages": [
+                  "build/bend/overview",
+                  "build/bend/deployed-contracts",
+                  "build/bend/deployed-markets",
+                  {
+                    "group": "Onchain Tools",
+                    "pages": [
+                      "build/bend/onchain-bundlers",
+                      "build/bend/onchain-public-allocator"
+                    ]
+                  }
                 ]
               }
             ]
@@ -414,7 +457,7 @@
     { "source": "/learn/guides/bera-staking", "destination": "/general/tokens/bera", "permanent": true },
     { "source": "/learn/guides/claim-bgt", "destination": "/general/tokens/bgt", "permanent": true },
     { "source": "/learn/guides/claim-incentives", "destination": "/general/proof-of-liquidity/incentives", "permanent": true },
-    { "source": "/learn/guides/berascan-token-update", "destination": "/build/getting-started/developer-tools", "permanent": true },
+    { "source": "/learn/guides/berascan-token-update", "destination": "/build/guides/berascan-token-update", "permanent": true },
     { "source": "/learn/guides/setup-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
     { "source": "/learn/guides/add-incentives-for-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
     { "source": "/learn/guides/safe-add-incentives-for-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
@@ -430,25 +473,26 @@
     { "source": "/developers", "destination": "/build/getting-started/overview", "permanent": true },
     { "source": "/developers/deployed-contracts", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
     { "source": "/developers/developer-tools", "destination": "/build/getting-started/developer-tools", "permanent": true },
-    { "source": "/developers/hub-api", "destination": "/build/getting-started/common-resources", "permanent": true },
-    { "source": "/developers/claim-api", "destination": "/build/getting-started/common-resources", "permanent": true },
+    { "source": "/developers/hub-api", "destination": "/build/apis/hub-api", "permanent": true },
+    { "source": "/developers/claim-api", "destination": "/build/apis/claim-api", "permanent": true },
     { "source": "/developers/quickstart", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/quickstart/frontend", "destination": "/build/guides/community-guides", "permanent": true },
+    { "source": "/developers/quickstart/frontend", "destination": "/build/guides/community/overview", "permanent": true },
     { "source": "/developers/quickstart/bridge-to-berachain", "destination": "/build/guides/community/layerzero-oft", "permanent": true },
     { "source": "/developers/quickstart/pol-integration", "destination": "/build/getting-started/overview", "permanent": true },
     { "source": "/developers/guides/create-helloworld-contract-using-hardhat", "destination": "/build/guides/community/hardhat-viem-helloworld", "permanent": true },
     { "source": "/developers/guides/create-erc20-contract-using-foundry", "destination": "/build/guides/community/foundry-erc20", "permanent": true },
     { "source": "/developers/guides/verify-smart-contracts", "destination": "/build/guides/verifying-smart-contracts", "permanent": true },
     { "source": "/developers/guides/deploy-contract-using-nextjs-walletconnect", "destination": "/build/guides/community/walletconnect-nextjs", "permanent": true },
-    { "source": "/developers/guides/advanced-pol", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/guides/staking-for-other-accounts", "destination": "/general/tokens/bera", "permanent": true },
-    { "source": "/developers/guides/partial-reward-claims", "destination": "/general/proof-of-liquidity/incentives", "permanent": true },
-    { "source": "/developers/guides/eip7702-basics", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip7702-batch-transactions", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip7702-gas-sponsorship", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip-5792-overview", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip-5792-metamask-guide", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/community-guides", "destination": "/build/guides/community-guides", "permanent": true },
+    { "source": "/developers/guides/advanced-pol", "destination": "/build/pol/advanced-pol", "permanent": true },
+    { "source": "/developers/guides/staking-for-other-accounts", "destination": "/build/pol/staking-for-other-accounts", "permanent": true },
+    { "source": "/developers/guides/partial-reward-claims", "destination": "/build/pol/partial-reward-claims", "permanent": true },
+    { "source": "/developers/guides/eip7702-basics", "destination": "/build/protocol/eip7702-basics", "permanent": true },
+    { "source": "/developers/guides/eip7702-batch-transactions", "destination": "/build/protocol/eip7702-batch-transactions", "permanent": true },
+    { "source": "/developers/guides/eip7702-gas-sponsorship", "destination": "/build/protocol/eip7702-gas-sponsorship", "permanent": true },
+    { "source": "/developers/guides/eip-5792-overview", "destination": "/build/protocol/eip5792-overview", "permanent": true },
+    { "source": "/developers/guides/eip-5792-metamask-guide", "destination": "/build/protocol/eip5792-metamask-guide", "permanent": true },
+    { "source": "/developers/guides/community-guides", "destination": "/build/guides/community/overview", "permanent": true },
+    { "source": "/build/guides/community-guides", "destination": "/build/guides/community/overview", "permanent": true },
     { "source": "/developers/contracts/beacondeposit", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
     { "source": "/developers/contracts/berachef", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
     { "source": "/developers/contracts/bgtincentivedistributor", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
