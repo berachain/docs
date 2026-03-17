@@ -207,7 +207,6 @@
                 "group": "PoL Integration",
                 "root": "build/pol/integration-basics",
                 "pages": [
-                  "build/pol/integration-basics",
                   "build/guides/proof-of-liquidity/setup-reward-vault",
                   "build/guides/proof-of-liquidity/add-incentives",
                   "build/guides/proof-of-liquidity/add-incentives-safe",
