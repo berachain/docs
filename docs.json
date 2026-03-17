@@ -61,106 +61,8 @@
             "group": "Help",
             "pages": [
               "general/help/faqs",
-              "general/help/glossary"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Build",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "build/getting-started/overview"
-            ]
-          },
-          {
-            "group": "Getting Started",
-            "pages": [
-              "build/getting-started/developer-tools",
-              "build/getting-started/common-resources"
-            ]
-          },
-          {
-            "group": "General Guides",
-            "pages": [
-              "build/guides/verifying-smart-contracts",
-              "build/guides/community-guides",
-              {
-                "group": "Guides",
-                "pages": [
-                  "build/guides/community/walletconnect-nextjs",
-                  "build/guides/community/thirdweb-connectwallet-nextjs",
-                  "build/guides/community/particle-auth-core-vite",
-                  "build/guides/community/rainbowkit-vite",
-                  "build/guides/community/walletconnect-expo",
-                  "build/guides/community/layerzero-oft",
-                  "build/guides/community/ethers6-solc-helloworld",
-                  "build/guides/community/viem-solc-helloworld",
-                  "build/guides/community/hardhat-viem-helloworld",
-                  "build/guides/community/hardhat-contract-verification",
-                  "build/guides/community/hardhat-ethers6-erc1155",
-                  "build/guides/community/foundry-erc20",
-                  "build/guides/community/openzeppelin-upgrades",
-                  "build/guides/community/goldsky-subgraph",
-                  "build/guides/community/envio-indexer-erc20",
-                  "build/guides/community/gelato-vrf",
-                  "build/guides/community/pyth-entropy",
-                  "build/guides/community/pyth-oracle",
-                  "build/guides/community/berachain-governance-proposal",
-                  "build/guides/community/irys-bera-nodejs"
-                ]
-              },
-              "build/guides/ai-developer"
-            ]
-          },
-          {
-            "group": "BEX",
-            "pages": [
-              "build/bex/overview",
-              "build/bex/deployed-contracts",
-              "build/bex/sdk/overview",
-              {
-                "group": "Guides",
-                "pages": [
-                  "build/bex/sdk/swap",
-                  "build/bex/sdk/add-liquidity",
-                  "build/bex/sdk/remove-liquidity",
-                  "build/bex/sdk/sor",
-                  "build/bex/sdk/reference",
-                  "build/bex/guides/pool-creation",
-                  "build/bex/help/error-codes"
-                ]
-              },
-              {
-                "group": "Concepts",
-                "pages": [
-                  "build/bex/concepts/single-swap",
-                  "build/bex/concepts/batch-swap",
-                  "build/bex/concepts/pool-interfacing",
-                  "build/bex/concepts/pool-joins",
-                  "build/bex/concepts/pool-exits",
-                  "build/bex/concepts/lp-underlying",
-                  "build/bex/concepts/lp-valuing",
-                  "build/bex/concepts/relayers"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Bend",
-            "pages": [
-              "build/bend/overview",
-              "build/bend/deployed-contracts",
-              "build/bend/deployed-markets",
-              {
-                "group": "Onchain Tools",
-                "pages": [
-                  "build/bend/onchain-bundlers",
-                  "build/bend/onchain-public-allocator"
-                ]
-              }
+              "general/help/glossary",
+              "general/help/reward-vault-guidelines"
             ]
           }
         ]
@@ -239,65 +141,194 @@
         ]
       },
       {
+        "tab": "Build",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "build/getting-started/overview"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "build/getting-started/developer-tools",
+              "build/getting-started/common-resources",
+              "build/getting-started/deployed-contracts",
+              "build/guides/ai-developer",
+              "build/guides/verifying-smart-contracts",
+              {
+                "group": "Protocol Features",
+                "root": "build/protocol/overview",
+                "pages": [
+                  {
+                    "group": "EIP-7702 (Native Account Abstraction)",
+                    "root": "build/protocol/eip7702-basics",
+                    "pages": [
+                      "build/protocol/eip7702-batch-transactions",
+                      "build/protocol/eip7702-gas-sponsorship"
+                    ]
+                  },
+                  "build/protocol/eip5792-overview"
+                ]
+              },
+              {
+                "group": "Community Guides",
+                "root": "build/guides/community/overview",
+                "pages": [
+                  "build/guides/community/walletconnect-nextjs",
+                  "build/guides/community/thirdweb-connectwallet-nextjs",
+                  "build/guides/community/particle-auth-core-vite",
+                  "build/guides/community/rainbowkit-vite",
+                  "build/guides/community/walletconnect-expo",
+                  "build/guides/community/layerzero-oft",
+                  "build/guides/community/ethers6-solc-helloworld",
+                  "build/guides/community/viem-solc-helloworld",
+                  "build/guides/community/hardhat-viem-helloworld",
+                  "build/guides/community/hardhat-contract-verification",
+                  "build/guides/community/hardhat-ethers6-erc1155",
+                  "build/guides/community/foundry-erc20",
+                  "build/guides/community/openzeppelin-upgrades",
+                  "build/guides/community/goldsky-subgraph",
+                  "build/guides/community/envio-indexer-erc20",
+                  "build/guides/community/gelato-vrf",
+                  "build/guides/community/pyth-entropy",
+                  "build/guides/community/pyth-oracle",
+                  "build/guides/community/berachain-governance-proposal",
+                  "build/guides/community/irys-bera-nodejs"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Proof of Liquidity",
+            "pages": [
+              {
+                "group": "PoL Integration",
+                "root": "build/pol/integration-basics",
+                "pages": [
+                  "build/pol/integration-basics",
+                  "build/guides/proof-of-liquidity/setup-reward-vault",
+                  "build/guides/proof-of-liquidity/add-incentives",
+                  "build/guides/proof-of-liquidity/add-incentives-safe",
+                  "build/pol/advanced-pol",
+                  "build/pol/partial-reward-claims",
+                  "build/pol/staking-for-other-accounts",
+                  "build/guides/berascan-token-update"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "BEX",
+            "pages": [
+              "build/bex/overview",
+              "build/bex/deployed-contracts",
+              "build/bex/sdk/overview",
+              {
+                "group": "Guides",
+                "pages": [
+                  "build/bex/sdk/swap",
+                  "build/bex/sdk/add-liquidity",
+                  "build/bex/sdk/remove-liquidity",
+                  "build/bex/sdk/sor",
+                  "build/bex/sdk/reference",
+                  "build/bex/guides/pool-creation",
+                  "build/bex/help/error-codes"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "pages": [
+                  "build/bex/concepts/single-swap",
+                  "build/bex/concepts/batch-swap",
+                  "build/bex/concepts/pool-interfacing",
+                  "build/bex/concepts/pool-joins",
+                  "build/bex/concepts/pool-exits",
+                  "build/bex/concepts/lp-underlying",
+                  "build/bex/concepts/lp-valuing",
+                  "build/bex/concepts/relayers"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Bend",
+            "pages": [
+              "build/bend/overview",
+              "build/bend/deployed-contracts",
+              "build/bend/deployed-markets",
+              {
+                "group": "Onchain Tools",
+                "pages": [
+                  "build/bend/onchain-bundlers",
+                  "build/bend/onchain-public-allocator"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Nodes",
         "groups": [
           {
             "group": "Overview",
             "pages": [
-              "nodes/overview/index",
-              "nodes/overview/node-architecture"
+              "validators/overview/index",
+              "validators/overview/node-architecture"
             ]
           },
           {
             "group": "BeaconKit",
             "pages": [
-              "nodes/beaconkit/overview"
+              "validators/beaconkit/overview"
             ]
           },
           {
             "group": "Architecture",
             "pages": [
-              "nodes/architecture/validator-lifecycle",
-              "nodes/architecture/beaconkit-consensus",
-              "nodes/architecture/evm-execution"
+              "validators/architecture/validator-lifecycle",
+              "validators/architecture/beaconkit-consensus",
+              "validators/architecture/evm-execution"
             ]
           },
           {
             "group": "Operations",
             "pages": [
-              "nodes/operations/quickstart",
-              "nodes/operations/self-hosted-rpc",
-              "nodes/operations/production-checklist",
-              "nodes/operations/monitoring"
+              "validators/operations/quickstart",
+              "validators/operations/self-hosted-rpc",
+              "validators/operations/production-checklist",
+              "validators/operations/monitoring"
             ]
           },
           {
             "group": "Staking Pools",
             "pages": [
-              "nodes/staking-pools/overview",
-              "nodes/staking-pools/installation",
-              "nodes/staking-pools/operators",
-              "nodes/staking-pools/delegators",
-              "nodes/staking-pools/contracts"
+              "validators/staking-pools/overview",
+              "validators/staking-pools/installation",
+              "validators/staking-pools/operators",
+              "validators/staking-pools/delegators",
+              "validators/staking-pools/contracts"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "nodes/guides/become-a-validator",
-              "nodes/guides/change-operator-address",
-              "nodes/guides/manage-reward-allocations",
-              "nodes/guides/increase-validator-stake",
-              "nodes/guides/withdraw-stake",
-              "nodes/guides/local-devnet-docker",
-              "nodes/guides/local-devnet-kurtosis",
-              "nodes/guides/manage-incentives-commission"
+              "validators/guides/become-a-validator",
+              "validators/guides/change-operator-address",
+              "validators/guides/manage-reward-allocations",
+              "validators/guides/increase-validator-stake",
+              "validators/guides/withdraw-stake",
+              "validators/guides/local-devnet-docker",
+              "validators/guides/local-devnet-kurtosis",
+              "validators/guides/manage-incentives-commission"
             ]
           },
           {
             "group": "Help",
             "pages": [
-              "nodes/help/faq"
+              "validators/help/faq"
             ]
           }
         ]
@@ -371,424 +402,136 @@
     },
     {
       "source": "/build/beaconkit/overview",
-      "destination": "/nodes/beaconkit/overview"
+      "destination": "/validators/beaconkit/overview"
     },
     {
       "source": "/cn/validators/beaconkit/overview",
-      "destination": "/nodes/beaconkit/overview"
+      "destination": "/validators/beaconkit/overview"
     },
     {
       "source": "/ko/validators/beaconkit/overview",
-      "destination": "/nodes/beaconkit/overview"
+      "destination": "/validators/beaconkit/overview"
     },
     {
       "source": "/vi/validators/beaconkit/overview",
-      "destination": "/nodes/beaconkit/overview"
+      "destination": "/validators/beaconkit/overview"
     },
     {
       "source": "/cn/validators/operations/self-hosted-rpc",
-      "destination": "/nodes/operations/self-hosted-rpc"
+      "destination": "/validators/operations/self-hosted-rpc"
     },
     {
       "source": "/cn/validators/staking-pools/overview",
-      "destination": "/nodes/staking-pools/overview"
+      "destination": "/validators/staking-pools/overview"
     },
     {
       "source": "/cn/validators/staking-pools/installation",
-      "destination": "/nodes/staking-pools/installation"
+      "destination": "/validators/staking-pools/installation"
     },
     {
       "source": "/cn/validators/staking-pools/operators",
-      "destination": "/nodes/staking-pools/operators"
+      "destination": "/validators/staking-pools/operators"
     },
     {
       "source": "/cn/validators/staking-pools/delegators",
-      "destination": "/nodes/staking-pools/delegators"
+      "destination": "/validators/staking-pools/delegators"
     },
     {
       "source": "/cn/validators/staking-pools/contracts",
-      "destination": "/nodes/staking-pools/contracts"
+      "destination": "/validators/staking-pools/contracts"
     },
     {
       "source": "/ko/validators/operations/self-hosted-rpc",
-      "destination": "/nodes/operations/self-hosted-rpc"
+      "destination": "/validators/operations/self-hosted-rpc"
     },
     {
       "source": "/ko/validators/staking-pools/overview",
-      "destination": "/nodes/staking-pools/overview"
+      "destination": "/validators/staking-pools/overview"
     },
     {
       "source": "/ko/validators/staking-pools/installation",
-      "destination": "/nodes/staking-pools/installation"
+      "destination": "/validators/staking-pools/installation"
     },
     {
       "source": "/ko/validators/staking-pools/operators",
-      "destination": "/nodes/staking-pools/operators"
+      "destination": "/validators/staking-pools/operators"
     },
     {
       "source": "/ko/validators/staking-pools/delegators",
-      "destination": "/nodes/staking-pools/delegators"
+      "destination": "/validators/staking-pools/delegators"
     },
     {
       "source": "/ko/validators/staking-pools/contracts",
-      "destination": "/nodes/staking-pools/contracts"
+      "destination": "/validators/staking-pools/contracts"
     },
     {
       "source": "/vi/validators/operations/self-hosted-rpc",
-      "destination": "/nodes/operations/self-hosted-rpc"
+      "destination": "/validators/operations/self-hosted-rpc"
     },
     {
       "source": "/vi/validators/staking-pools/overview",
-      "destination": "/nodes/staking-pools/overview"
+      "destination": "/validators/staking-pools/overview"
     },
     {
       "source": "/vi/validators/staking-pools/installation",
-      "destination": "/nodes/staking-pools/installation"
+      "destination": "/validators/staking-pools/installation"
     },
     {
       "source": "/vi/validators/staking-pools/operators",
-      "destination": "/nodes/staking-pools/operators"
+      "destination": "/validators/staking-pools/operators"
     },
     {
       "source": "/vi/validators/staking-pools/delegators",
-      "destination": "/nodes/staking-pools/delegators"
+      "destination": "/validators/staking-pools/delegators"
     },
     {
       "source": "/vi/validators/staking-pools/contracts",
-      "destination": "/nodes/staking-pools/contracts"
+      "destination": "/validators/staking-pools/contracts"
     },
     {
       "source": "/nodes/quickstart",
-      "destination": "/nodes/operations/quickstart",
+      "destination": "/validators/operations/quickstart",
       "permanent": true
     },
     {
       "source": "/nodes/monitoring",
-      "destination": "/nodes/operations/monitoring",
+      "destination": "/validators/operations/monitoring",
       "permanent": true
     },
     {
       "source": "/nodes/production-checklist",
-      "destination": "/nodes/operations/production-checklist",
+      "destination": "/validators/operations/production-checklist",
       "permanent": true
     },
     {
       "source": "/nodes/self-hosted-rpc",
-      "destination": "/nodes/operations/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools/contracts/:slug*",
-      "destination": "/nodes/staking-pools/contracts",
+      "destination": "/validators/staking-pools/contracts",
       "permanent": true
     },
     {
       "source": "/beacon-kit/api",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/cli",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/configuration",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/what-is-beaconkit",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview",
       "permanent": true
-    },
-    {
-      "source": "/validators/overview/index",
-      "destination": "/nodes/overview/index"
-    },
-    {
-      "source": "/validators/overview/node-architecture",
-      "destination": "/nodes/overview/node-architecture"
-    },
-    {
-      "source": "/validators/beaconkit/overview",
-      "destination": "/nodes/beaconkit/overview"
-    },
-    {
-      "source": "/validators/architecture/validator-lifecycle",
-      "destination": "/nodes/architecture/validator-lifecycle"
-    },
-    {
-      "source": "/validators/architecture/beaconkit-consensus",
-      "destination": "/nodes/architecture/beaconkit-consensus"
-    },
-    {
-      "source": "/validators/architecture/evm-execution",
-      "destination": "/nodes/architecture/evm-execution"
-    },
-    {
-      "source": "/validators/operations/quickstart",
-      "destination": "/nodes/operations/quickstart"
-    },
-    {
-      "source": "/validators/operations/self-hosted-rpc",
-      "destination": "/nodes/operations/self-hosted-rpc"
-    },
-    {
-      "source": "/validators/operations/production-checklist",
-      "destination": "/nodes/operations/production-checklist"
-    },
-    {
-      "source": "/validators/operations/monitoring",
-      "destination": "/nodes/operations/monitoring"
-    },
-    {
-      "source": "/validators/staking-pools/overview",
-      "destination": "/nodes/staking-pools/overview"
-    },
-    {
-      "source": "/validators/staking-pools/installation",
-      "destination": "/nodes/staking-pools/installation"
-    },
-    {
-      "source": "/validators/staking-pools/operators",
-      "destination": "/nodes/staking-pools/operators"
-    },
-    {
-      "source": "/validators/staking-pools/delegators",
-      "destination": "/nodes/staking-pools/delegators"
-    },
-    {
-      "source": "/validators/staking-pools/contracts",
-      "destination": "/nodes/staking-pools/contracts"
-    },
-    {
-      "source": "/validators/guides/become-a-validator",
-      "destination": "/nodes/guides/become-a-validator"
-    },
-    {
-      "source": "/validators/guides/change-operator-address",
-      "destination": "/nodes/guides/change-operator-address"
-    },
-    {
-      "source": "/validators/guides/manage-reward-allocations",
-      "destination": "/nodes/guides/manage-reward-allocations"
-    },
-    {
-      "source": "/validators/guides/increase-validator-stake",
-      "destination": "/nodes/guides/increase-validator-stake"
-    },
-    {
-      "source": "/validators/guides/withdraw-stake",
-      "destination": "/nodes/guides/withdraw-stake"
-    },
-    {
-      "source": "/validators/guides/local-devnet-docker",
-      "destination": "/nodes/guides/local-devnet-docker"
-    },
-    {
-      "source": "/validators/guides/local-devnet-kurtosis",
-      "destination": "/nodes/guides/local-devnet-kurtosis"
-    },
-    {
-      "source": "/validators/guides/manage-incentives-commission",
-      "destination": "/nodes/guides/manage-incentives-commission"
-    },
-    {
-      "source": "/validators/help/faq",
-      "destination": "/nodes/help/faq"
-    },
-    {
-      "source": "/cn/validators/overview/index",
-      "destination": "/cn/nodes/overview/index"
-    },
-    {
-      "source": "/cn/validators/architecture/beaconkit-consensus",
-      "destination": "/cn/nodes/architecture/beaconkit-consensus"
-    },
-    {
-      "source": "/cn/validators/architecture/evm-execution",
-      "destination": "/cn/nodes/architecture/evm-execution"
-    },
-    {
-      "source": "/cn/validators/architecture/validator-lifecycle",
-      "destination": "/cn/nodes/architecture/validator-lifecycle"
-    },
-    {
-      "source": "/cn/validators/guides/become-a-validator",
-      "destination": "/cn/nodes/guides/become-a-validator"
-    },
-    {
-      "source": "/cn/validators/guides/change-operator-address",
-      "destination": "/cn/nodes/guides/change-operator-address"
-    },
-    {
-      "source": "/cn/validators/guides/increase-validator-stake",
-      "destination": "/cn/nodes/guides/increase-validator-stake"
-    },
-    {
-      "source": "/cn/validators/guides/local-devnet-docker",
-      "destination": "/cn/nodes/guides/local-devnet-docker"
-    },
-    {
-      "source": "/cn/validators/guides/local-devnet-kurtosis",
-      "destination": "/cn/nodes/guides/local-devnet-kurtosis"
-    },
-    {
-      "source": "/cn/validators/guides/manage-incentives-commission",
-      "destination": "/cn/nodes/guides/manage-incentives-commission"
-    },
-    {
-      "source": "/cn/validators/guides/manage-reward-allocations",
-      "destination": "/cn/nodes/guides/manage-reward-allocations"
-    },
-    {
-      "source": "/cn/validators/guides/withdraw-stake",
-      "destination": "/cn/nodes/guides/withdraw-stake"
-    },
-    {
-      "source": "/cn/validators/help/faq",
-      "destination": "/cn/nodes/help/faq"
-    },
-    {
-      "source": "/cn/validators/operations/monitoring",
-      "destination": "/cn/nodes/operations/monitoring"
-    },
-    {
-      "source": "/cn/validators/operations/production-checklist",
-      "destination": "/cn/nodes/operations/production-checklist"
-    },
-    {
-      "source": "/cn/validators/operations/quickstart",
-      "destination": "/cn/nodes/operations/quickstart"
-    },
-    {
-      "source": "/ko/validators/overview/index",
-      "destination": "/ko/nodes/overview/index"
-    },
-    {
-      "source": "/ko/validators/architecture/beaconkit-consensus",
-      "destination": "/ko/nodes/architecture/beaconkit-consensus"
-    },
-    {
-      "source": "/ko/validators/architecture/evm-execution",
-      "destination": "/ko/nodes/architecture/evm-execution"
-    },
-    {
-      "source": "/ko/validators/architecture/validator-lifecycle",
-      "destination": "/ko/nodes/architecture/validator-lifecycle"
-    },
-    {
-      "source": "/ko/validators/guides/become-a-validator",
-      "destination": "/ko/nodes/guides/become-a-validator"
-    },
-    {
-      "source": "/ko/validators/guides/change-operator-address",
-      "destination": "/ko/nodes/guides/change-operator-address"
-    },
-    {
-      "source": "/ko/validators/guides/increase-validator-stake",
-      "destination": "/ko/nodes/guides/increase-validator-stake"
-    },
-    {
-      "source": "/ko/validators/guides/local-devnet-docker",
-      "destination": "/ko/nodes/guides/local-devnet-docker"
-    },
-    {
-      "source": "/ko/validators/guides/local-devnet-kurtosis",
-      "destination": "/ko/nodes/guides/local-devnet-kurtosis"
-    },
-    {
-      "source": "/ko/validators/guides/manage-incentives-commission",
-      "destination": "/ko/nodes/guides/manage-incentives-commission"
-    },
-    {
-      "source": "/ko/validators/guides/manage-reward-allocations",
-      "destination": "/ko/nodes/guides/manage-reward-allocations"
-    },
-    {
-      "source": "/ko/validators/guides/withdraw-stake",
-      "destination": "/ko/nodes/guides/withdraw-stake"
-    },
-    {
-      "source": "/ko/validators/help/faq",
-      "destination": "/ko/nodes/help/faq"
-    },
-    {
-      "source": "/ko/validators/operations/monitoring",
-      "destination": "/ko/nodes/operations/monitoring"
-    },
-    {
-      "source": "/ko/validators/operations/production-checklist",
-      "destination": "/ko/nodes/operations/production-checklist"
-    },
-    {
-      "source": "/ko/validators/operations/quickstart",
-      "destination": "/ko/nodes/operations/quickstart"
-    },
-    {
-      "source": "/vi/validators/overview/index",
-      "destination": "/vi/nodes/overview/index"
-    },
-    {
-      "source": "/vi/validators/architecture/beaconkit-consensus",
-      "destination": "/vi/nodes/architecture/beaconkit-consensus"
-    },
-    {
-      "source": "/vi/validators/architecture/evm-execution",
-      "destination": "/vi/nodes/architecture/evm-execution"
-    },
-    {
-      "source": "/vi/validators/architecture/validator-lifecycle",
-      "destination": "/vi/nodes/architecture/validator-lifecycle"
-    },
-    {
-      "source": "/vi/validators/guides/become-a-validator",
-      "destination": "/vi/nodes/guides/become-a-validator"
-    },
-    {
-      "source": "/vi/validators/guides/change-operator-address",
-      "destination": "/vi/nodes/guides/change-operator-address"
-    },
-    {
-      "source": "/vi/validators/guides/increase-validator-stake",
-      "destination": "/vi/nodes/guides/increase-validator-stake"
-    },
-    {
-      "source": "/vi/validators/guides/local-devnet-docker",
-      "destination": "/vi/nodes/guides/local-devnet-docker"
-    },
-    {
-      "source": "/vi/validators/guides/local-devnet-kurtosis",
-      "destination": "/vi/nodes/guides/local-devnet-kurtosis"
-    },
-    {
-      "source": "/vi/validators/guides/manage-incentives-commission",
-      "destination": "/vi/nodes/guides/manage-incentives-commission"
-    },
-    {
-      "source": "/vi/validators/guides/manage-reward-allocations",
-      "destination": "/vi/nodes/guides/manage-reward-allocations"
-    },
-    {
-      "source": "/vi/validators/guides/withdraw-stake",
-      "destination": "/vi/nodes/guides/withdraw-stake"
-    },
-    {
-      "source": "/vi/validators/help/faq",
-      "destination": "/vi/nodes/help/faq"
-    },
-    {
-      "source": "/vi/validators/operations/monitoring",
-      "destination": "/vi/nodes/operations/monitoring"
-    },
-    {
-      "source": "/vi/validators/operations/production-checklist",
-      "destination": "/vi/nodes/operations/production-checklist"
-    },
-    {
-      "source": "/vi/validators/operations/quickstart",
-      "destination": "/vi/nodes/operations/quickstart"
     },
     {
       "source": "/learn",
@@ -802,7 +545,7 @@
     },
     {
       "source": "/learn/what-is-beaconkit",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview",
       "permanent": true
     },
     {
@@ -897,7 +640,7 @@
     },
     {
       "source": "/learn/guides/boost-a-validator",
-      "destination": "/nodes/guides/become-a-validator",
+      "destination": "/validators/guides/become-a-validator",
       "permanent": true
     },
     {
@@ -917,22 +660,22 @@
     },
     {
       "source": "/learn/guides/berascan-token-update",
-      "destination": "/build/getting-started/developer-tools",
+      "destination": "/build/guides/berascan-token-update",
       "permanent": true
     },
     {
       "source": "/learn/guides/setup-reward-vault",
-      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "destination": "/build/guides/proof-of-liquidity/setup-reward-vault",
       "permanent": true
     },
     {
       "source": "/learn/guides/add-incentives-for-reward-vault",
-      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "destination": "/build/guides/proof-of-liquidity/add-incentives",
       "permanent": true
     },
     {
       "source": "/learn/guides/safe-add-incentives-for-reward-vault",
-      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "destination": "/build/guides/proof-of-liquidity/add-incentives-safe",
       "permanent": true
     },
     {
@@ -997,12 +740,12 @@
     },
     {
       "source": "/developers/hub-api",
-      "destination": "/build/getting-started/common-resources",
+      "destination": "/build/apis/hub-api",
       "permanent": true
     },
     {
       "source": "/developers/claim-api",
-      "destination": "/build/getting-started/common-resources",
+      "destination": "/build/apis/claim-api",
       "permanent": true
     },
     {
@@ -1012,7 +755,7 @@
     },
     {
       "source": "/developers/quickstart/frontend",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/guides/community/overview",
       "permanent": true
     },
     {
@@ -1022,7 +765,7 @@
     },
     {
       "source": "/developers/quickstart/pol-integration",
-      "destination": "/build/getting-started/overview",
+      "destination": "/build/pol/integration-basics",
       "permanent": true
     },
     {
@@ -1047,47 +790,52 @@
     },
     {
       "source": "/developers/guides/advanced-pol",
-      "destination": "/build/getting-started/overview",
+      "destination": "/build/pol/advanced-pol",
       "permanent": true
     },
     {
       "source": "/developers/guides/staking-for-other-accounts",
-      "destination": "/general/tokens/bera",
+      "destination": "/build/pol/staking-for-other-accounts",
       "permanent": true
     },
     {
       "source": "/developers/guides/partial-reward-claims",
-      "destination": "/general/proof-of-liquidity/incentives",
+      "destination": "/build/pol/partial-reward-claims",
       "permanent": true
     },
     {
       "source": "/developers/guides/eip7702-basics",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/protocol/eip7702-basics",
       "permanent": true
     },
     {
       "source": "/developers/guides/eip7702-batch-transactions",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/protocol/eip7702-batch-transactions",
       "permanent": true
     },
     {
       "source": "/developers/guides/eip7702-gas-sponsorship",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/protocol/eip7702-gas-sponsorship",
       "permanent": true
     },
     {
       "source": "/developers/guides/eip-5792-overview",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/protocol/eip5792-overview",
       "permanent": true
     },
     {
       "source": "/developers/guides/eip-5792-metamask-guide",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/protocol/eip5792-overview",
       "permanent": true
     },
     {
       "source": "/developers/guides/community-guides",
-      "destination": "/build/guides/community-guides",
+      "destination": "/build/guides/community/overview",
+      "permanent": true
+    },
+    {
+      "source": "/build/guides/community-guides",
+      "destination": "/build/guides/community/overview",
       "permanent": true
     },
     {
@@ -1197,92 +945,92 @@
     },
     {
       "source": "/nodes",
-      "destination": "/nodes/overview/index",
+      "destination": "/validators/overview/index",
       "permanent": true
     },
     {
       "source": "/nodes/validator-lifecycle",
-      "destination": "/nodes/architecture/validator-lifecycle",
+      "destination": "/validators/architecture/validator-lifecycle",
       "permanent": true
     },
     {
       "source": "/nodes/beaconkit-consensus",
-      "destination": "/nodes/architecture/beaconkit-consensus",
+      "destination": "/validators/architecture/beaconkit-consensus",
       "permanent": true
     },
     {
       "source": "/nodes/evm-execution",
-      "destination": "/nodes/architecture/evm-execution",
+      "destination": "/validators/architecture/evm-execution",
       "permanent": true
     },
     {
       "source": "/nodes/faq",
-      "destination": "/nodes/help/faq",
+      "destination": "/validators/help/faq",
       "permanent": true
     },
     {
       "source": "/nodes/guides/validator",
-      "destination": "/nodes/guides/become-a-validator",
+      "destination": "/validators/guides/become-a-validator",
       "permanent": true
     },
     {
       "source": "/nodes/guides/operator-address",
-      "destination": "/nodes/guides/change-operator-address",
+      "destination": "/validators/guides/change-operator-address",
       "permanent": true
     },
     {
       "source": "/nodes/guides/reward-allocation",
-      "destination": "/nodes/guides/manage-reward-allocations",
+      "destination": "/validators/guides/manage-reward-allocations",
       "permanent": true
     },
     {
       "source": "/nodes/guides/increase-validator-bera-stake",
-      "destination": "/nodes/guides/increase-validator-stake",
+      "destination": "/validators/guides/increase-validator-stake",
       "permanent": true
     },
     {
       "source": "/nodes/guides/withdraw-stake",
-      "destination": "/nodes/guides/withdraw-stake",
+      "destination": "/validators/guides/withdraw-stake",
       "permanent": true
     },
     {
       "source": "/nodes/guides/docker-devnet",
-      "destination": "/nodes/guides/local-devnet-docker",
+      "destination": "/validators/guides/local-devnet-docker",
       "permanent": true
     },
     {
       "source": "/nodes/guides/kurtosis",
-      "destination": "/nodes/guides/local-devnet-kurtosis",
+      "destination": "/validators/guides/local-devnet-kurtosis",
       "permanent": true
     },
     {
       "source": "/nodes/guides/manage-incentives-commission",
-      "destination": "/nodes/guides/manage-incentives-commission",
+      "destination": "/validators/guides/manage-incentives-commission",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools",
-      "destination": "/nodes/staking-pools/overview",
+      "destination": "/validators/staking-pools/overview",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools/installation",
-      "destination": "/nodes/staking-pools/installation",
+      "destination": "/validators/staking-pools/installation",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools/operators",
-      "destination": "/nodes/staking-pools/operators",
+      "destination": "/validators/staking-pools/operators",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools/delegators",
-      "destination": "/nodes/staking-pools/delegators",
+      "destination": "/validators/staking-pools/delegators",
       "permanent": true
     },
     {
       "source": "/nodes/self-hosted",
-      "destination": "/nodes/operations/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc",
       "permanent": true
     },
     {
