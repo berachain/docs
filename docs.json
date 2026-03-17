@@ -48,6 +48,7 @@
                   "general/tokens/bera",
                   "general/tokens/bgt",
                   "general/tokens/tokenomics",
+                  "general/tokens/swbera",
                   "general/tokens/honey"
                 ]
               },
@@ -406,7 +407,7 @@
     { "source": "/learn/pol/tokens/bera", "destination": "/general/tokens/bera", "permanent": true },
     { "source": "/learn/pol/tokens/bgt", "destination": "/general/tokens/bgt", "permanent": true },
     { "source": "/learn/pol/tokens/honey", "destination": "/general/tokens/honey", "permanent": true },
-    { "source": "/learn/pol/tokens/swbera", "destination": "/general/tokens/tokenomics", "permanent": true },
+    { "source": "/learn/pol/tokens/swbera", "destination": "/general/tokens/swbera", "permanent": true },
     { "source": "/learn/pol/faqs", "destination": "/general/help/faqs", "permanent": true },
     { "source": "/learn/governance", "destination": "/general/governance/reward-vault-governance", "permanent": true },
     { "source": "/learn/governance/rewardvault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
