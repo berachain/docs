@@ -90,11 +90,13 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | b (convexity parameter)         | Boost impact curve steepness                                   | Higher values penalize low boost more severely |
 | m (minimum boosted reward rate) | Floor for reward vault emissions                               | Higher values benefit low-boost validators     |
 
+This formula describes the total variable emission for a block. If the [Dedicated emission stream](#dedicated-emission-stream) is active, a fraction is directed to DES vaults before the remainder reaches the validator's reward allocation.
+
 ### Sample emissions chart
 
-Using the following sample parameters, the chart below shows how emissions scale with `$BGT` delegation:
+Using the current on-chain parameters (as of February 2026), the chart below shows how emissions scale with `$BGT` delegation:
 
-$$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
+$$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 
 <Frame>
   <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="Chart showing how emissions scale with BGT delegation" />
@@ -105,6 +107,32 @@ $$B = 0.4, R = 1.1, a = 3.5, b = 0.4, m = 0$$
 `$BGT` emissions grow with the amount of boost a validator has, up to a cap. The maximum theoretical block emission occurs at 100% boost:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
+
+## Dedicated emission stream
+
+Before the validator's own reward allocation is applied, the Distributor may carve out a fraction of the variable emission and direct it to a governance-designated set of reward vaults. This mechanism is called the **Dedicated Emission Stream (DES)**.
+
+```mermaid
+flowchart TD
+    BlockReward["Variable emission"] --> DESCheck{"DES active?"}
+    DESCheck -->|Yes| DESCarveOut["DES carve-out"]
+    DESCarveOut --> DESVaults["DES Reward Vaults"]
+    DESCarveOut -->|"excess (cap reached)"| Remainder
+    DESCheck -->|No| Remainder["Remaining reward"]
+    Remainder --> ValidatorRA["Validator Reward Allocation"]
+```
+
+The `DedicatedEmissionStreamManager` contract controls three parameters, all set by governance:
+
+- **`emissionPerc`** — the percentage of each block's variable reward that is carved out, expressed in basis points out of 10,000. A value of 500 means 5%.
+- **`targetEmission`** — a per-vault cumulative cap. Once a vault has received its target amount of DES emissions, it stops receiving further distributions. Any excess is returned to the validator's own reward allocation for that block.
+- **Reward allocation weights** — a list of whitelisted reward vaults and the share each receives within the carve-out, following the same weight format used by BeraChef (percentages must sum to 100%).
+
+### Impact on validators
+
+The DES carve-out reduces the effective variable reward available for validator-directed allocation. If `emissionPerc` is set to 5%, a validator producing a block receives 95% of the variable emission to distribute according to its BeraChef reward allocation. The base emission (paid directly to the validator's operator) is unaffected.
+
+The current DES parameters — including the carve-out percentage, target vaults, and per-vault caps — can be read from the [`DedicatedEmissionStreamManager`](/build/getting-started/deployed-contracts) contract on-chain.
 
 ## $BGT distribution
 
