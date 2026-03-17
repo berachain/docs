@@ -4,7 +4,7 @@
   "mode": "dark",
   "name": "Berachain",
   "colors": {
-    "primary": "#B45309",
+    "primary": "#92400E",
     "light": "#FBBF24",
     "dark": "#D97706"
   },
@@ -275,60 +275,60 @@
           {
             "group": "Overview",
             "pages": [
-              "validators/overview/index",
-              "validators/overview/node-architecture"
+              "nodes/overview/index",
+              "nodes/overview/node-architecture"
             ]
           },
           {
             "group": "BeaconKit",
             "pages": [
-              "validators/beaconkit/overview"
+              "nodes/beaconkit/overview"
             ]
           },
           {
             "group": "Architecture",
             "pages": [
-              "validators/architecture/validator-lifecycle",
-              "validators/architecture/beaconkit-consensus",
-              "validators/architecture/evm-execution"
+              "nodes/architecture/validator-lifecycle",
+              "nodes/architecture/beaconkit-consensus",
+              "nodes/architecture/evm-execution"
             ]
           },
           {
             "group": "Operations",
             "pages": [
-              "validators/operations/quickstart",
-              "validators/operations/self-hosted-rpc",
-              "validators/operations/production-checklist",
-              "validators/operations/monitoring"
+              "nodes/operations/quickstart",
+              "nodes/operations/self-hosted-rpc",
+              "nodes/operations/production-checklist",
+              "nodes/operations/monitoring"
             ]
           },
           {
             "group": "Staking Pools",
             "pages": [
-              "validators/staking-pools/overview",
-              "validators/staking-pools/installation",
-              "validators/staking-pools/operators",
-              "validators/staking-pools/delegators",
-              "validators/staking-pools/contracts"
+              "nodes/staking-pools/overview",
+              "nodes/staking-pools/installation",
+              "nodes/staking-pools/operators",
+              "nodes/staking-pools/delegators",
+              "nodes/staking-pools/contracts"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "validators/guides/become-a-validator",
-              "validators/guides/change-operator-address",
-              "validators/guides/manage-reward-allocations",
-              "validators/guides/increase-validator-stake",
-              "validators/guides/withdraw-stake",
-              "validators/guides/local-devnet-docker",
-              "validators/guides/local-devnet-kurtosis",
-              "validators/guides/manage-incentives-commission"
+              "nodes/guides/become-a-validator",
+              "nodes/guides/change-operator-address",
+              "nodes/guides/manage-reward-allocations",
+              "nodes/guides/increase-validator-stake",
+              "nodes/guides/withdraw-stake",
+              "nodes/guides/local-devnet-docker",
+              "nodes/guides/local-devnet-kurtosis",
+              "nodes/guides/manage-incentives-commission"
             ]
           },
           {
             "group": "Help",
             "pages": [
-              "validators/help/faq"
+              "nodes/help/faq"
             ]
           }
         ]
