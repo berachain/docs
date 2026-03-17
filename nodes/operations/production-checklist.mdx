@@ -1,0 +1,82 @@
+---
+title: "Production Checklist"
+description: "Pre-support checks: diagnosis script, client versions, peering, recommended options, and operational hygiene for production nodes."
+---
+
+Before reaching out for support, here are some steps to check your installation.
+
+## Quick diagnosis script
+
+Berachain distributes a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system and run:
+
+```bash
+/path/to/node-diagnostic.sh -d /var/beacond/ -p /opt/bin/beacond
+```
+
+Substitute the path to your Beacon Kit data directory (containing `config` and `data` directories), and the path to the `beacond` binary (if not in your $PATH).
+
+This script produces clearly marked recommendations. Provide the output of this script when communicating with the team for support.
+
+## Beacon Kit version check
+
+Ensure you are running the latest version of [Beacon Kit](https://github.com/berachain/beacon-kit).
+
+## Execution client version check
+
+Check that you are running a supported version of your [execution client](/nodes/architecture/evm-execution). Note that Berachain doesn't _always_ support the latest version of a given client.
+
+## Peering
+
+There are several ingredients to successful peering. If you are running in a containerized environment, ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
+
+1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept the `--bootnodes` option. `beacond` has the boot node list baked into the distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
+2. **Check Execution Layer peering**: The execution layer needs excellent peering to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
+3. **Indicate your Execution Layer's external IP address**: Execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option.
+4. **Check beacond peering**: `beacond` needs good peering to organize and perform consensus actions. This is carried out over TCP port 26656. Also, correctly advertise your node's external IP with `p2p.external_address` in `config.toml`. To limit `beacond`'s memory consumption, **40 inbound + 10 outbound peers** is recommended:
+
+```toml
+max_num_inbound_peers = 40
+max_num_outbound_peers = 10
+```
+
+5. **No static or persistent peers**: Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network or business partners you want permanent connections to.
+
+## Recommended options
+
+For **Reth**, the following options are recommended in the Reth launch:
+
+```bash
+--engine.persistence-threshold 0
+--engine.memory-block-buffer-target 0
+```
+
+For **Geth**, override the gas price lower limit to agree with Reth:
+
+```bash
+--miner.gasprice 1
+```
+
+For both clients, ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules. For Geth, exposing the `debug` API module enables highly destructive commands.
+
+## Register with the team
+
+If you have launched a validator on the chain, it's in your interest to let the team know who you are, so they know who to contact in case there's trouble with on-chain performance.
+
+Steps to do that:
+
+1. (Optional) Formulate a pull request to the [Validator Metadata repository](https://github.com/berachain/metadata) with a public handle for your validator. You can use an anon if you want. Provide a logo attached to the pull request if you would like it posted on your validator profile.
+2. Reach out on the `#node-support` channel on [Discord](https://discord.gg/berachain). The team will set you up with dedicated support, chat, and announcement channels for validators.
+
+## Operational hygiene
+
+Make sure Beacon Kit and your execution client are configured to start when your operating system starts.
+
+Cause your operating system to rotate logs, and slim the log output.
+
+- Read the `beacond` config files to find log verbosity settings.
+- Consult the instructions for your chosen chain node to adjust logging settings.
+- Set up the `logrotate` service to rotate logs.
+
+Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable Prometheus metrics collection. Specify an internal IP address accessible only to your Prometheus server, or ensure this port is firewalled off from the internet.
+
+Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main) for references to other monitoring tools.
