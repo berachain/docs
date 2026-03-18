@@ -1,0 +1,58 @@
+---
+title: "Setup Reward Vault"
+description: "Create and configure a Reward Vault for PoL integration."
+---
+
+# Setup Reward Vault
+
+Protocols participate in PoL through a Reward Vault. This guide covers the practical setup path for creating a vault and making it ready for users.
+
+## Checklist
+
+- Create a Reward Vault
+- Submit/complete your Reward Vault request process
+- Configure token and vault metadata for discoverability
+- Add adapter support where needed
+
+## 1) Create a Reward Vault
+
+Recommended path:
+
+- Create via [Berachain Hub](https://hub.berachain.com/earn/create)
+
+Alternative paths:
+
+- Create from your deployment scripts
+- Call `createRewardVault` on the Reward Vault Factory directly
+
+Contract addresses and references:
+
+- [Deployed Contracts](/build/getting-started/deployed-contracts)
+
+## 2) Complete Reward Vault Request Process
+
+PoL rollout and whitelisting requirements can evolve by governance phase. Use the latest process docs:
+
+- [Reward Vault Governance](/general/governance/reward-vault-governance)
+- [Reward Vault Guidelines](/general/help/reward-vault-guidelines)
+
+## 3) Configure Metadata
+
+For a production-quality UX in Hub and explorers:
+
+- Submit token metadata to the Berachain metadata registry
+- Submit Reward Vault metadata to the same registry
+
+If you need explorer token metadata updates:
+
+- [Berascan Token Update Guide](/build/guides/berascan-token-update)
+
+## 4) Add Adapter Support (If Needed)
+
+If your staking token is not a plain LP/receipt token, you may need a PoL adapter for yield display and pricing.
+
+- [hub-pol-adapters](https://github.com/berachain/hub-pol-adapters)
+
+## Next Step
+
+- [Add Incentives](/build/guides/proof-of-liquidity/add-incentives)
