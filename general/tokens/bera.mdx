@@ -1,27 +1,73 @@
 ---
-title: "$BERA Token"
-description: "Gas token, staking, and how to get BERA."
+title: "BERA Token"
+description: "Gas token, staking, tokenomics, and how to get BERA."
 ---
 
-`$BERA` serves as the native gas and staking token of Berachain, the first blockchain powered by Proof-of-Liquidity.
+BERA serves as the native gas and staking token of Berachain, the first blockchain powered by Proof-of-Liquidity.
 
-## Role of `$BERA`
+## Role of BERA
 
-The `$BERA` token serves two main purposes on the Berachain network:
+The BERA token serves two main purposes on the Berachain network:
 
 ### Transaction fees
 
-`$BERA` is used to pay for transactions on the Berachain network (hence its designation as the "gas token"). Tokens used for transaction fees are burned, removing them from the circulating supply. [Check out the hundreds of projects and dapps in the Berachain Ecosystem](https://ecosystem.berachain.com/).
+BERA is used to pay for transactions on the Berachain network (hence its designation as the "gas token"). Tokens used for transaction fees are burned, removing them from the circulating supply. [Check out the hundreds of projects and dapps in the Berachain Ecosystem](https://ecosystem.berachain.com/).
 
-### Staking `$BERA`
+### Staking BERA {#staking-bera}
 
-`$BERA` can be staked a number of ways:
+BERA can be staked a number of ways:
 
-1. To provide liquidity in `$BERA`-denominated pools. The [complete list of pools approved by governance](https://hub.berachain.com/pools/) is shown on the hub. When you stake to pools, you earn a portion of the trading fees from that pool.
-2. Staking directly into the `$BERA` POL Yield Vault, where the yield is a share of all PoL incentives. When you stake `$BERA` in this vault, you receive [`$sWBERA`](/general/tokens/swbera) tokens representing your staked position.
+1. To provide liquidity in BERA-denominated pools. The [complete list of pools approved by governance](https://hub.berachain.com/pools/) is shown on the hub. When you stake to pools, you earn a portion of the trading fees from that pool.
+2. Staking directly into the BERA POL Yield Vault, where the yield is a share of all PoL incentives. When you stake BERA in this vault, you receive [sWBERA](/general/tokens/swbera) tokens representing your staked position.
 
 ### Validator staking
 
-Validators stake `$BERA` to operate a validator. Within the active set, the more `$BERA` a validator has staked, the more frequently they are chosen to propose blocks. A validator's probability of block production is directly proportional to their share of the total staked `$BERA`. The economic value of all staked `$BERA` tokens forms the economic security of the chain, with [`$BGT`](/general/tokens/bgt) dynamics controlling its inflation.
+Validators stake BERA to operate a validator. Within the active set, the more BERA a validator has staked, the more frequently they are chosen to propose blocks. A validator's probability of block production is directly proportional to their share of the total staked BERA. The economic value of all staked BERA tokens forms the economic security of the chain, with [BGT](/general/tokens/bgt) dynamics controlling its inflation.
 
-To learn more about how `$BERA` staking affects block production and emissions, see [Block Rewards](/general/proof-of-liquidity/block-rewards).
+To learn more about how BERA staking affects block production and emissions, see [Block Rewards](/general/proof-of-liquidity/block-rewards).
+
+## Tokenomics {#tokenomics}
+
+BGT governs emissions and economic incentives. The following documents the fixed supply, allocation, and release schedule for BERA.
+
+### Overview
+
+| Property                | Value |
+| ----------------------- | ----- |
+| Token name              | BERA  |
+| Total supply at genesis | 500,000,000 BERA |
+| Inflation               | ~5% annually via [BGT emissions](/general/proof-of-liquidity/block-rewards), subject to governance |
+| Decimals                | 18    |
+
+### Distribution and allocation
+
+The genesis supply of 500,000,000 BERA is allocated as follows:
+
+![BERA allocation](/images/tokens/bera-allocation.png)
+
+**Initial core contributors — 84,000,000 (16.8%)**  
+Allocated to advisors and members of Big Bera Labs, the core contributors to the Berachain blockchain.
+
+**Investors — 171,500,000 (34.3%)**  
+Allocated to Seed, Series A, and Series B investors.
+
+**Community allocations — 244,500,000 (48.9%)**
+
+**Airdrop — 79,000,000 (15.8%)**  
+Distributed to testnet users, Berachain and ecosystem NFT holders, social supporters, ecosystem dApps, and community builders. See the [Blog airdrop overview](https://blog.berachain.com/blog/berachain-airdrop-overview) for details.
+
+**Future community initiatives — 65,500,000 (13.1%)**  
+Reserved for incentive programs, grants, and other initiatives, with community input via Snapshots, RFPs, and similar mechanisms.
+
+**Ecosystem & R&D — 100,000,000 (20%)**  
+Used for ecosystem development, R&D, growth, and Berachain Foundation operations: developer programs ([Boyco](https://boyco.berachain.com/)), node operator delegations, and Proof-of-Liquidity evolution. At launch, 9.5% of total BERA supply from this bucket is unlocked for ecosystem growth, developer tooling, liquidity provisioning, and related uses.
+
+### Token release schedule
+
+All allocated parties share the same vesting terms:
+
+- **Cliff:** 1 year; no tokens unlock before the cliff.
+- **Initial unlock:** After the cliff, 1/6 of the allocated amount unlocks.
+- **Linear vesting:** The remaining 5/6 vests linearly over the following 24 months.
+
+![BERA inflation and vesting](/images/tokens/bera-inflation.png)

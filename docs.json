@@ -46,10 +46,9 @@
             "group": "Tokens",
             "pages": [
               "general/tokens/bera",
-              "general/tokens/bgt",
-              "general/tokens/tokenomics",
               "general/tokens/swbera",
-              "general/tokens/honey"
+              "general/tokens/honey",
+              "general/tokens/bgt"
             ]
           },
           {
@@ -600,7 +599,12 @@
     },
     {
       "source": "/learn/pol/tokens/tokenomics",
-      "destination": "/general/tokens/tokenomics",
+      "destination": "/general/tokens/bera#tokenomics",
+      "permanent": true
+    },
+    {
+      "source": "/general/tokens/tokenomics",
+      "destination": "/general/tokens/bera#tokenomics",
       "permanent": true
     },
     {
@@ -620,7 +624,7 @@
     },
     {
       "source": "/learn/pol/tokens/swbera",
-      "destination": "/general/tokens/tokenomics",
+      "destination": "/general/tokens/swbera",
       "permanent": true
     },
     {
