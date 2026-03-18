@@ -31,6 +31,13 @@
         "berachainBepolia": "0xD2f19a79b026Fb636A7c300bF5947df113940761"
       }
     },
+    "dedicatedEmissionStreamManager": {
+      "name": "DedicatedEmissionStreamManager",
+      "address": {
+        "berachainMainnet": "0x813dCdBa9197947792985c866cE98D6739cA821A",
+        "berachainBepolia": "0xfe83d31669b52B7a619119Bc71805fD29eeEB9Dd"
+      }
+    },
     "feeCollector": {
       "name": "FeeCollector",
       "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/FeeCollector.json",

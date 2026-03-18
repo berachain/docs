@@ -4,7 +4,7 @@
   "mode": "dark",
   "name": "Berachain",
   "colors": {
-    "primary": "#B45309",
+    "primary": "#92400E",
     "light": "#FBBF24",
     "dark": "#D97706"
   },
@@ -19,292 +19,321 @@
   },
   "navigation": {
     "tabs": [
+      {
+        "tab": "General",
+        "groups": [
           {
-            "tab": "General",
-            "groups": [
-              {
-                "group": "Overview",
-                "pages": [
-                  "index",
-                  "general/introduction/what-is-berachain",
-                  "general/introduction/what-is-proof-of-liquidity",
-                  "general/introduction/connect-to-berachain",
-                  "general/introduction/how-to-get-bera"
-                ]
-              },
-              {
-                "group": "Proof of Liquidity",
-                "pages": [
-                  "general/proof-of-liquidity/overview",
-                  "general/proof-of-liquidity/participants",
-                  "general/proof-of-liquidity/reward-vaults",
-                  "general/proof-of-liquidity/incentives",
-                  "general/proof-of-liquidity/block-rewards"
-                ]
-              },
-              {
-                "group": "Tokens",
-                "pages": [
-                  "general/tokens/bera",
-                  "general/tokens/bgt",
-                  "general/tokens/tokenomics",
-                  "general/tokens/swbera",
-                  "general/tokens/honey"
-                ]
-              },
-              {
-                "group": "Governance",
-                "pages": [
-                  "general/governance/reward-vault-governance"
-                ]
-              },
-              {
-                "group": "Help",
-                "pages": [
-                  "general/help/faqs",
-                  "general/help/glossary",
-                  "general/help/reward-vault-guidelines"
-                ]
-              }
+            "group": "Overview",
+            "pages": [
+              "index",
+              "general/introduction/what-is-berachain",
+              "general/introduction/what-is-proof-of-liquidity",
+              "general/introduction/connect-to-berachain",
+              "general/introduction/how-to-get-bera"
             ]
           },
           {
-            "tab": "Build",
-            "groups": [
+            "group": "Proof of Liquidity",
+            "pages": [
+              "general/proof-of-liquidity/overview",
+              "general/proof-of-liquidity/participants",
+              "general/proof-of-liquidity/reward-vaults",
+              "general/proof-of-liquidity/incentives",
+              "general/proof-of-liquidity/block-rewards"
+            ]
+          },
+          {
+            "group": "Tokens",
+            "pages": [
+              "general/tokens/bera",
+              "general/tokens/bgt",
+              "general/tokens/tokenomics",
+              "general/tokens/swbera",
+              "general/tokens/honey"
+            ]
+          },
+          {
+            "group": "Governance",
+            "pages": [
+              "general/governance/reward-vault-governance"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "general/help/faqs",
+              "general/help/glossary",
+              "general/help/reward-vault-guidelines"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "BEX",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "bex/learn/overview",
+              "bex/learn/what-is-bex"
+            ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "bex/learn/dex",
+              "bex/learn/vault",
+              "bex/learn/pools",
+              "bex/learn/weighted-pools",
+              "bex/learn/stable-pools",
+              "bex/learn/flash-loans"
+            ]
+          },
+          {
+            "group": "User Guides",
+            "pages": [
+              "bex/guides/add-token",
+              "bex/guides/swaps",
+              "bex/guides/fees",
+              "bex/guides/liquidity",
+              "bex/guides/proof-of-liquidity",
+              "bex/guides/pool-creation",
+              "bex/guides/pool-configuration"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Bend",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "bend/learn/overview",
+              "bend/learn/what-is-bend"
+            ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "bend/learn/market",
+              "bend/learn/ltv",
+              "bend/learn/interest-rates",
+              "bend/learn/public-allocator",
+              "bend/learn/liquidation",
+              "bend/learn/vault",
+              "bend/learn/yield-fees",
+              "bend/learn/rewards-for-lenders",
+              "bend/learn/curator",
+              "bend/learn/oracle",
+              "bend/learn/irm",
+              "bend/learn/bundlers",
+              "bend/learn/flash-loans"
+            ]
+          },
+          {
+            "group": "User Guides",
+            "pages": [
+              "bend/guides/deposit-withdraw",
+              "bend/guides/borrow-repay",
+              "bend/guides/curator-application"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Build",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "build/getting-started/overview"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "build/getting-started/developer-tools",
+              "build/getting-started/common-resources",
+              "build/getting-started/deployed-contracts",
+              "build/guides/ai-developer",
+              "build/guides/verifying-smart-contracts",
               {
-                "group": "Overview",
+                "group": "Protocol Features",
+                "root": "build/protocol/overview",
                 "pages": [
-                  "build/getting-started/overview"
-                ]
-              },
-              {
-                "group": "Getting Started",
-                "pages": [
-                  "build/getting-started/developer-tools",
-                  "build/getting-started/common-resources"
-                ]
-              },
-              {
-                "group": "General Guides",
-                "pages": [
-                  "build/guides/verifying-smart-contracts",
-                  "build/guides/community-guides",
                   {
-                    "group": "Guides",
+                    "group": "EIP-7702 (Native Account Abstraction)",
+                    "root": "build/protocol/eip7702-basics",
                     "pages": [
-                      "build/guides/community/walletconnect-nextjs",
-                      "build/guides/community/thirdweb-connectwallet-nextjs",
-                      "build/guides/community/particle-auth-core-vite",
-                      "build/guides/community/rainbowkit-vite",
-                      "build/guides/community/walletconnect-expo",
-                      "build/guides/community/layerzero-oft",
-                      "build/guides/community/ethers6-solc-helloworld",
-                      "build/guides/community/viem-solc-helloworld",
-                      "build/guides/community/hardhat-viem-helloworld",
-                      "build/guides/community/hardhat-contract-verification",
-                      "build/guides/community/hardhat-ethers6-erc1155",
-                      "build/guides/community/foundry-erc20",
-                      "build/guides/community/openzeppelin-upgrades",
-                      "build/guides/community/goldsky-subgraph",
-                      "build/guides/community/envio-indexer-erc20",
-                      "build/guides/community/gelato-vrf",
-                      "build/guides/community/pyth-entropy",
-                      "build/guides/community/pyth-oracle",
-                      "build/guides/community/berachain-governance-proposal",
-                      "build/guides/community/irys-bera-nodejs"
+                      "build/protocol/eip7702-batch-transactions",
+                      "build/protocol/eip7702-gas-sponsorship"
                     ]
                   },
-                  "build/guides/ai-developer"
+                  "build/protocol/eip5792-overview"
                 ]
               },
               {
-                "group": "BEX",
+                "group": "Community Guides",
+                "root": "build/guides/community/overview",
                 "pages": [
-                  "build/bex/overview",
-                  "build/bex/deployed-contracts",
-                  "build/bex/sdk/overview",
-                  {
-                    "group": "Guides",
-                    "pages": [
-                      "build/bex/sdk/swap",
-                      "build/bex/sdk/add-liquidity",
-                      "build/bex/sdk/remove-liquidity",
-                      "build/bex/sdk/sor",
-                      "build/bex/sdk/reference",
-                      "build/bex/guides/pool-creation",
-                      "build/bex/help/error-codes"
-                    ]
-                  },
-                  {
-                    "group": "Concepts",
-                    "pages": [
-                      "build/bex/concepts/single-swap",
-                      "build/bex/concepts/batch-swap",
-                      "build/bex/concepts/pool-interfacing",
-                      "build/bex/concepts/pool-joins",
-                      "build/bex/concepts/pool-exits",
-                      "build/bex/concepts/lp-underlying",
-                      "build/bex/concepts/lp-valuing",
-                      "build/bex/concepts/relayers"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Bend",
-                "pages": [
-                  "build/bend/overview",
-                  "build/bend/deployed-contracts",
-                  "build/bend/deployed-markets",
-                  {
-                    "group": "Onchain Tools",
-                    "pages": [
-                      "build/bend/onchain-bundlers",
-                      "build/bend/onchain-public-allocator"
-                    ]
-                  }
+                  "build/guides/community/walletconnect-nextjs",
+                  "build/guides/community/thirdweb-connectwallet-nextjs",
+                  "build/guides/community/particle-auth-core-vite",
+                  "build/guides/community/rainbowkit-vite",
+                  "build/guides/community/walletconnect-expo",
+                  "build/guides/community/layerzero-oft",
+                  "build/guides/community/ethers6-solc-helloworld",
+                  "build/guides/community/viem-solc-helloworld",
+                  "build/guides/community/hardhat-viem-helloworld",
+                  "build/guides/community/hardhat-contract-verification",
+                  "build/guides/community/hardhat-ethers6-erc1155",
+                  "build/guides/community/foundry-erc20",
+                  "build/guides/community/openzeppelin-upgrades",
+                  "build/guides/community/goldsky-subgraph",
+                  "build/guides/community/envio-indexer-erc20",
+                  "build/guides/community/gelato-vrf",
+                  "build/guides/community/pyth-entropy",
+                  "build/guides/community/pyth-oracle",
+                  "build/guides/community/berachain-governance-proposal",
+                  "build/guides/community/irys-bera-nodejs"
                 ]
               }
             ]
           },
           {
-            "tab": "BEX",
-            "groups": [
+            "group": "Proof of Liquidity",
+            "pages": [
               {
-                "group": "Overview",
+                "group": "PoL Integration",
+                "root": "build/pol/integration-basics",
                 "pages": [
-                  "bex/learn/overview",
-                  "bex/learn/what-is-bex"
-                ]
-              },
-              {
-                "group": "Concepts",
-                "pages": [
-                  "bex/learn/dex",
-                  "bex/learn/vault",
-                  "bex/learn/pools",
-                  "bex/learn/weighted-pools",
-                  "bex/learn/stable-pools",
-                  "bex/learn/flash-loans"
-                ]
-              },
-              {
-                "group": "User Guides",
-                "pages": [
-                  "bex/guides/add-token",
-                  "bex/guides/swaps",
-                  "bex/guides/fees",
-                  "bex/guides/liquidity",
-                  "bex/guides/proof-of-liquidity",
-                  "bex/guides/pool-creation",
-                  "bex/guides/pool-configuration"
+                  "build/guides/proof-of-liquidity/setup-reward-vault",
+                  "build/guides/proof-of-liquidity/add-incentives",
+                  "build/guides/proof-of-liquidity/add-incentives-safe",
+                  "build/pol/advanced-pol",
+                  "build/pol/partial-reward-claims",
+                  "build/pol/staking-for-other-accounts",
+                  "build/guides/berascan-token-update"
                 ]
               }
             ]
           },
           {
-            "tab": "Bend",
-            "groups": [
-              {
-                "group": "Overview",
-                "pages": [
-                  "bend/learn/overview",
-                  "bend/learn/what-is-bend"
-                ]
-              },
-              {
-                "group": "Concepts",
-                "pages": [
-                  "bend/learn/market",
-                  "bend/learn/ltv",
-                  "bend/learn/interest-rates",
-                  "bend/learn/public-allocator",
-                  "bend/learn/liquidation",
-                  "bend/learn/vault",
-                  "bend/learn/yield-fees",
-                  "bend/learn/rewards-for-lenders",
-                  "bend/learn/curator",
-                  "bend/learn/oracle",
-                  "bend/learn/irm",
-                  "bend/learn/bundlers",
-                  "bend/learn/flash-loans"
-                ]
-              },
-              {
-                "group": "User Guides",
-                "pages": [
-                  "bend/guides/deposit-withdraw",
-                  "bend/guides/borrow-repay",
-                  "bend/guides/curator-application"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "Nodes",
-            "groups": [
-              {
-                "group": "Overview",
-                "pages": [
-                  "validators/overview/index",
-                  "validators/overview/node-architecture"
-                ]
-              },
-              {
-                "group": "BeaconKit",
-                "pages": [
-                  "validators/beaconkit/overview"
-                ]
-              },
-              {
-                "group": "Architecture",
-                "pages": [
-                  "validators/architecture/validator-lifecycle",
-                  "validators/architecture/beaconkit-consensus",
-                  "validators/architecture/evm-execution"
-                ]
-              },
-              {
-                "group": "Operations",
-                "pages": [
-                  "validators/operations/quickstart",
-                  "validators/operations/self-hosted-rpc",
-                  "validators/operations/production-checklist",
-                  "validators/operations/monitoring"
-                ]
-              },
-              {
-                "group": "Staking Pools",
-                "pages": [
-                  "validators/staking-pools/overview",
-                  "validators/staking-pools/installation",
-                  "validators/staking-pools/operators",
-                  "validators/staking-pools/delegators",
-                  "validators/staking-pools/contracts"
-                ]
-              },
+            "group": "BEX",
+            "pages": [
+              "build/bex/overview",
+              "build/bex/deployed-contracts",
+              "build/bex/sdk/overview",
               {
                 "group": "Guides",
                 "pages": [
-                  "validators/guides/become-a-validator",
-                  "validators/guides/change-operator-address",
-                  "validators/guides/manage-reward-allocations",
-                  "validators/guides/increase-validator-stake",
-                  "validators/guides/withdraw-stake",
-                  "validators/guides/local-devnet-docker",
-                  "validators/guides/local-devnet-kurtosis",
-                  "validators/guides/manage-incentives-commission"
+                  "build/bex/sdk/swap",
+                  "build/bex/sdk/add-liquidity",
+                  "build/bex/sdk/remove-liquidity",
+                  "build/bex/sdk/sor",
+                  "build/bex/sdk/reference",
+                  "build/bex/guides/pool-creation",
+                  "build/bex/help/error-codes"
                 ]
               },
               {
-                "group": "Help",
+                "group": "Concepts",
                 "pages": [
-                  "validators/help/faq"
+                  "build/bex/concepts/single-swap",
+                  "build/bex/concepts/batch-swap",
+                  "build/bex/concepts/pool-interfacing",
+                  "build/bex/concepts/pool-joins",
+                  "build/bex/concepts/pool-exits",
+                  "build/bex/concepts/lp-underlying",
+                  "build/bex/concepts/lp-valuing",
+                  "build/bex/concepts/relayers"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Bend",
+            "pages": [
+              "build/bend/overview",
+              "build/bend/deployed-contracts",
+              "build/bend/deployed-markets",
+              {
+                "group": "Onchain Tools",
+                "pages": [
+                  "build/bend/onchain-bundlers",
+                  "build/bend/onchain-public-allocator"
                 ]
               }
             ]
           }
         ]
+      },
+      {
+        "tab": "Nodes",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "nodes/overview/index",
+              "nodes/overview/node-architecture"
+            ]
+          },
+          {
+            "group": "BeaconKit",
+            "pages": [
+              "nodes/beaconkit/overview"
+            ]
+          },
+          {
+            "group": "Architecture",
+            "pages": [
+              "nodes/architecture/validator-lifecycle",
+              "nodes/architecture/beaconkit-consensus",
+              "nodes/architecture/evm-execution"
+            ]
+          },
+          {
+            "group": "Operations",
+            "pages": [
+              "nodes/operations/quickstart",
+              "nodes/operations/self-hosted-rpc",
+              "nodes/operations/production-checklist",
+              "nodes/operations/monitoring"
+            ]
+          },
+          {
+            "group": "Staking Pools",
+            "pages": [
+              "nodes/staking-pools/overview",
+              "nodes/staking-pools/installation",
+              "nodes/staking-pools/operators",
+              "nodes/staking-pools/delegators",
+              "nodes/staking-pools/contracts"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "nodes/guides/become-a-validator",
+              "nodes/guides/change-operator-address",
+              "nodes/guides/manage-reward-allocations",
+              "nodes/guides/increase-validator-stake",
+              "nodes/guides/withdraw-stake",
+              "nodes/guides/local-devnet-docker",
+              "nodes/guides/local-devnet-kurtosis",
+              "nodes/guides/manage-incentives-commission"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "nodes/help/faq"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "navbar": {
     "links": [
@@ -355,203 +384,974 @@
     }
   },
   "redirects": [
-    { "source": "/build/getting-started/network-configurations", "destination": "/general/introduction/connect-to-berachain" },
-    { "source": "/cn/build/getting-started/network-configurations", "destination": "/cn/general/introduction/connect-to-berachain" },
-    { "source": "/ko/build/getting-started/network-configurations", "destination": "/ko/general/introduction/connect-to-berachain" },
-    { "source": "/vi/build/getting-started/network-configurations", "destination": "/vi/general/introduction/connect-to-berachain" },
-    { "source": "/build/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
-    { "source": "/cn/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
-    { "source": "/ko/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
-    { "source": "/vi/validators/beaconkit/overview", "destination": "/validators/beaconkit/overview" },
-    { "source": "/cn/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
-    { "source": "/cn/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
-    { "source": "/cn/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
-    { "source": "/cn/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
-    { "source": "/cn/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
-    { "source": "/cn/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
-    { "source": "/ko/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
-    { "source": "/ko/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
-    { "source": "/ko/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
-    { "source": "/ko/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
-    { "source": "/ko/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
-    { "source": "/ko/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
-    { "source": "/vi/validators/operations/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc" },
-    { "source": "/vi/validators/staking-pools/overview", "destination": "/validators/staking-pools/overview" },
-    { "source": "/vi/validators/staking-pools/installation", "destination": "/validators/staking-pools/installation" },
-    { "source": "/vi/validators/staking-pools/operators", "destination": "/validators/staking-pools/operators" },
-    { "source": "/vi/validators/staking-pools/delegators", "destination": "/validators/staking-pools/delegators" },
-    { "source": "/vi/validators/staking-pools/contracts", "destination": "/validators/staking-pools/contracts" },
-    { "source": "/nodes/quickstart", "destination": "/validators/operations/quickstart", "permanent": true },
-    { "source": "/nodes/monitoring", "destination": "/validators/operations/monitoring", "permanent": true },
-    { "source": "/nodes/production-checklist", "destination": "/validators/operations/production-checklist", "permanent": true },
-    { "source": "/nodes/self-hosted-rpc", "destination": "/validators/operations/self-hosted-rpc", "permanent": true },
-    { "source": "/nodes/staking-pools/contracts/:slug*", "destination": "/validators/staking-pools/contracts", "permanent": true },
-    { "source": "/beacon-kit/api", "destination": "/validators/beaconkit/overview", "permanent": true },
-    { "source": "/beacon-kit/cli", "destination": "/validators/beaconkit/overview", "permanent": true },
-    { "source": "/beacon-kit/configuration", "destination": "/validators/beaconkit/overview", "permanent": true },
-    { "source": "/beacon-kit/what-is-beaconkit", "destination": "/validators/beaconkit/overview", "permanent": true },
-    { "source": "/learn", "destination": "/general/introduction/what-is-berachain", "permanent": true },
-    { "source": "/learn/what-is-proof-of-liquidity", "destination": "/general/introduction/what-is-proof-of-liquidity", "permanent": true },
-    { "source": "/learn/what-is-beaconkit", "destination": "/validators/beaconkit/overview", "permanent": true },
-    { "source": "/learn/connect-to-berachain", "destination": "/general/introduction/connect-to-berachain", "permanent": true },
-    { "source": "/learn/how-to-get-bera", "destination": "/general/introduction/how-to-get-bera", "permanent": true },
-    { "source": "/learn/berachain-nfts", "destination": "/general/help/faqs", "permanent": true },
-    { "source": "/learn/changelog", "destination": "/general/introduction/what-is-berachain", "permanent": true },
-    { "source": "/learn/pol", "destination": "/general/proof-of-liquidity/overview", "permanent": true },
-    { "source": "/learn/pol/participants", "destination": "/general/proof-of-liquidity/participants", "permanent": true },
-    { "source": "/learn/pol/blockrewards", "destination": "/general/proof-of-liquidity/block-rewards", "permanent": true },
-    { "source": "/learn/pol/rewardvaults", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/pol/incentives", "destination": "/general/proof-of-liquidity/incentives", "permanent": true },
-    { "source": "/learn/pol/vaults", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/pol/tokens/tokenomics", "destination": "/general/tokens/tokenomics", "permanent": true },
-    { "source": "/learn/pol/tokens/bera", "destination": "/general/tokens/bera", "permanent": true },
-    { "source": "/learn/pol/tokens/bgt", "destination": "/general/tokens/bgt", "permanent": true },
-    { "source": "/learn/pol/tokens/honey", "destination": "/general/tokens/honey", "permanent": true },
-    { "source": "/learn/pol/tokens/swbera", "destination": "/general/tokens/swbera", "permanent": true },
-    { "source": "/learn/pol/faqs", "destination": "/general/help/faqs", "permanent": true },
-    { "source": "/learn/governance", "destination": "/general/governance/reward-vault-governance", "permanent": true },
-    { "source": "/learn/governance/rewardvault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/guides/boost-a-validator", "destination": "/validators/guides/become-a-validator", "permanent": true },
-    { "source": "/learn/guides/bera-staking", "destination": "/general/tokens/bera", "permanent": true },
-    { "source": "/learn/guides/claim-bgt", "destination": "/general/tokens/bgt", "permanent": true },
-    { "source": "/learn/guides/claim-incentives", "destination": "/general/proof-of-liquidity/incentives", "permanent": true },
-    { "source": "/learn/guides/berascan-token-update", "destination": "/build/getting-started/developer-tools", "permanent": true },
-    { "source": "/learn/guides/setup-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/guides/add-incentives-for-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/guides/safe-add-incentives-for-reward-vault", "destination": "/general/proof-of-liquidity/reward-vaults", "permanent": true },
-    { "source": "/learn/dapps/berahub", "destination": "/general/introduction/what-is-berachain", "permanent": true },
-    { "source": "/learn/dapps/bex", "destination": "/bex/learn/overview", "permanent": true },
-    { "source": "/learn/dapps/bridge", "destination": "/general/introduction/connect-to-berachain", "permanent": true },
-    { "source": "/learn/dapps/honey-swap", "destination": "/general/introduction/what-is-berachain", "permanent": true },
-    { "source": "/learn/dapps/beratrail", "destination": "/general/introduction/what-is-berachain", "permanent": true },
-    { "source": "/learn/using-safe-wallet", "destination": "/general/help/faqs", "permanent": true },
-    { "source": "/learn/help/faqs", "destination": "/general/help/faqs", "permanent": true },
-    { "source": "/learn/help/glossary", "destination": "/general/help/glossary", "permanent": true },
-    { "source": "/learn/help/reward-vault-guidelines", "destination": "/general/help/reward-vault-guidelines", "permanent": true },
-    { "source": "/developers", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/deployed-contracts", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/developer-tools", "destination": "/build/getting-started/developer-tools", "permanent": true },
-    { "source": "/developers/hub-api", "destination": "/build/getting-started/common-resources", "permanent": true },
-    { "source": "/developers/claim-api", "destination": "/build/getting-started/common-resources", "permanent": true },
-    { "source": "/developers/quickstart", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/quickstart/frontend", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/quickstart/bridge-to-berachain", "destination": "/build/guides/community/layerzero-oft", "permanent": true },
-    { "source": "/developers/quickstart/pol-integration", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/guides/create-helloworld-contract-using-hardhat", "destination": "/build/guides/community/hardhat-viem-helloworld", "permanent": true },
-    { "source": "/developers/guides/create-erc20-contract-using-foundry", "destination": "/build/guides/community/foundry-erc20", "permanent": true },
-    { "source": "/developers/guides/verify-smart-contracts", "destination": "/build/guides/verifying-smart-contracts", "permanent": true },
-    { "source": "/developers/guides/deploy-contract-using-nextjs-walletconnect", "destination": "/build/guides/community/walletconnect-nextjs", "permanent": true },
-    { "source": "/developers/guides/advanced-pol", "destination": "/build/getting-started/overview", "permanent": true },
-    { "source": "/developers/guides/staking-for-other-accounts", "destination": "/general/tokens/bera", "permanent": true },
-    { "source": "/developers/guides/partial-reward-claims", "destination": "/general/proof-of-liquidity/incentives", "permanent": true },
-    { "source": "/developers/guides/eip7702-basics", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip7702-batch-transactions", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip7702-gas-sponsorship", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip-5792-overview", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/eip-5792-metamask-guide", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/guides/community-guides", "destination": "/build/guides/community-guides", "permanent": true },
-    { "source": "/developers/contracts/beacondeposit", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/berachef", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/bgtincentivedistributor", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/bgt-incentive-fee-collector", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/bgt-staker", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/block-reward-controller", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/create2", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/distributor", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/fee-collector", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/multicall3", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/permit2", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/reward-vault", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/reward-vault-factory", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/wbera-staker-vault", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/governance", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/timelock", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/honey-factory", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/honey-factory-reader", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/bgt-token", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/honey-token", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/wbera-token", "destination": "/build/getting-started/deployed-contracts", "permanent": true },
-    { "source": "/nodes", "destination": "/validators/overview/index", "permanent": true },
-    { "source": "/nodes/validator-lifecycle", "destination": "/validators/architecture/validator-lifecycle", "permanent": true },
-    { "source": "/nodes/beaconkit-consensus", "destination": "/validators/architecture/beaconkit-consensus", "permanent": true },
-    { "source": "/nodes/evm-execution", "destination": "/validators/architecture/evm-execution", "permanent": true },
-    { "source": "/nodes/faq", "destination": "/validators/help/faq", "permanent": true },
-    { "source": "/nodes/guides/validator", "destination": "/validators/guides/become-a-validator", "permanent": true },
-    { "source": "/nodes/guides/operator-address", "destination": "/validators/guides/change-operator-address", "permanent": true },
-    { "source": "/nodes/guides/reward-allocation", "destination": "/validators/guides/manage-reward-allocations", "permanent": true },
-    { "source": "/nodes/guides/increase-validator-bera-stake", "destination": "/validators/guides/increase-validator-stake", "permanent": true },
-    { "source": "/nodes/guides/withdraw-stake", "destination": "/validators/guides/withdraw-stake", "permanent": true },
-    { "source": "/nodes/guides/docker-devnet", "destination": "/validators/guides/local-devnet-docker", "permanent": true },
-    { "source": "/nodes/guides/kurtosis", "destination": "/validators/guides/local-devnet-kurtosis", "permanent": true },
-    { "source": "/nodes/guides/manage-incentives-commission", "destination": "/validators/guides/manage-incentives-commission", "permanent": true },
-    { "source": "/nodes/staking-pools", "destination": "/validators/staking-pools/overview", "permanent": true },
-    { "source": "/nodes/staking-pools/installation", "destination": "/validators/staking-pools/installation", "permanent": true },
-    { "source": "/nodes/staking-pools/operators", "destination": "/validators/staking-pools/operators", "permanent": true },
-    { "source": "/nodes/staking-pools/delegators", "destination": "/validators/staking-pools/delegators", "permanent": true },
-    { "source": "/nodes/self-hosted", "destination": "/validators/operations/self-hosted-rpc", "permanent": true },
-    { "source": "/learn/concepts/dex", "destination": "/bex/learn/dex", "permanent": true },
-    { "source": "/learn/concepts/vault", "destination": "/bex/learn/vault", "permanent": true },
-    { "source": "/learn/concepts/pools", "destination": "/bex/learn/pools", "permanent": true },
-    { "source": "/learn/concepts/pools/weighted-pools", "destination": "/bex/learn/weighted-pools", "permanent": true },
-    { "source": "/learn/concepts/pools/stable-pools", "destination": "/bex/learn/stable-pools", "permanent": true },
-    { "source": "/learn/concepts/flash-loans", "destination": "/bex/learn/flash-loans", "permanent": true },
-    { "source": "/learn/guides/add-token", "destination": "/bex/guides/add-token", "permanent": true },
-    { "source": "/learn/guides/swaps", "destination": "/bex/guides/swaps", "permanent": true },
-    { "source": "/learn/guides/fees", "destination": "/bex/guides/fees", "permanent": true },
-    { "source": "/learn/guides/liquidity/intro", "destination": "/bex/guides/liquidity", "permanent": true },
-    { "source": "/learn/guides/liquidity/pol", "destination": "/bex/guides/proof-of-liquidity", "permanent": true },
-    { "source": "/learn/guides/pool-creation", "destination": "/bex/guides/pool-creation", "permanent": true },
-    { "source": "/learn/guides/pool-configuration", "destination": "/bex/guides/pool-configuration", "permanent": true },
-    { "source": "/developers/contracts/vault", "destination": "/build/bex/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/query", "destination": "/build/bex/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/factory/weighted-pool-factory", "destination": "/build/bex/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/factory/stable-pool-factory", "destination": "/build/bex/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/factory/pool-creation-helper", "destination": "/build/bex/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/swaps/single_swap", "destination": "/build/bex/concepts/single-swap", "permanent": true },
-    { "source": "/developers/contracts/swaps/batch_swap", "destination": "/build/bex/concepts/batch-swap", "permanent": true },
-    { "source": "/developers/contracts/pools/pool-interfacing", "destination": "/build/bex/concepts/pool-interfacing", "permanent": true },
-    { "source": "/developers/contracts/pools/joins", "destination": "/build/bex/concepts/pool-joins", "permanent": true },
-    { "source": "/developers/contracts/pools/exit", "destination": "/build/bex/concepts/pool-exits", "permanent": true },
-    { "source": "/developers/contracts/lp_tokens/underlying", "destination": "/build/bex/concepts/lp-underlying", "permanent": true },
-    { "source": "/developers/contracts/lp_tokens/valuing", "destination": "/build/bex/concepts/lp-valuing", "permanent": true },
-    { "source": "/developers/contracts/relayers", "destination": "/build/bex/concepts/relayers", "permanent": true },
-    { "source": "/developers/sdk", "destination": "/build/bex/sdk/overview", "permanent": true },
-    { "source": "/developers/sdk/add-liquidity", "destination": "/build/bex/sdk/add-liquidity", "permanent": true },
-    { "source": "/developers/sdk/remove-liquidity", "destination": "/build/bex/sdk/remove-liquidity", "permanent": true },
-    { "source": "/developers/sdk/swap", "destination": "/build/bex/sdk/swap", "permanent": true },
-    { "source": "/developers/sdk/sor", "destination": "/build/bex/sdk/sor", "permanent": true },
-    { "source": "/developers/sdk/reference", "destination": "/build/bex/sdk/reference", "permanent": true },
-    { "source": "/developers/guides/pool-creation", "destination": "/build/bex/guides/pool-creation", "permanent": true },
-    { "source": "/developers/help/error-codes", "destination": "/build/bex/help/error-codes", "permanent": true },
-    { "source": "/learn/concepts/market", "destination": "/bend/learn/market", "permanent": true },
-    { "source": "/learn/concepts/market/ltv", "destination": "/bend/learn/ltv", "permanent": true },
-    { "source": "/learn/concepts/market/interest-rates", "destination": "/bend/learn/interest-rates", "permanent": true },
-    { "source": "/learn/concepts/market/public-allocator", "destination": "/bend/learn/public-allocator", "permanent": true },
-    { "source": "/learn/concepts/market/liquidation", "destination": "/bend/learn/liquidation", "permanent": true },
-    { "source": "/learn/concepts/vault/yield-fees", "destination": "/bend/learn/yield-fees", "permanent": true },
-    { "source": "/learn/concepts/vault/rewards-for-lenders", "destination": "/bend/learn/rewards-for-lenders", "permanent": true },
-    { "source": "/learn/concepts/curator", "destination": "/bend/learn/curator", "permanent": true },
-    { "source": "/learn/concepts/oracle", "destination": "/bend/learn/oracle", "permanent": true },
-    { "source": "/learn/concepts/irm", "destination": "/bend/learn/irm", "permanent": true },
-    { "source": "/learn/concepts/bundlers", "destination": "/bend/learn/bundlers", "permanent": true },
-    { "source": "/learn/concepts/flashloans", "destination": "/bend/learn/flash-loans", "permanent": true },
-    { "source": "/learn/guides/deposit-withdraw", "destination": "/bend/guides/deposit-withdraw", "permanent": true },
-    { "source": "/learn/guides/borrow-repay", "destination": "/bend/guides/borrow-repay", "permanent": true },
-    { "source": "/learn/help/curator-application", "destination": "/bend/guides/curator-application", "permanent": true },
-    { "source": "/developers/deployed-markets", "destination": "/build/bend/deployed-markets", "permanent": true },
-    { "source": "/developers/onchain/bundlers", "destination": "/build/bend/onchain-bundlers", "permanent": true },
-    { "source": "/developers/onchain/public-allocator", "destination": "/build/bend/onchain-public-allocator", "permanent": true },
-    { "source": "/developers/contracts/morpho", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/adaptive-curve-irm", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/bundler3", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/general-adapter-1", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/meta-morpho-v1_1", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/meta-morpho-factory-v1_1", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/meta-fee-partitioner", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/public-allocator", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/morpho-chainlink-oracle-v2", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/morpho-chainlink-oracle-v2-factory", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/urd", "destination": "/build/bend/deployed-contracts", "permanent": true },
-    { "source": "/developers/contracts/urd-factory", "destination": "/build/bend/deployed-contracts", "permanent": true }
+    {
+      "source": "/build/getting-started/network-configurations",
+      "destination": "/general/introduction/connect-to-berachain"
+    },
+    {
+      "source": "/cn/build/getting-started/network-configurations",
+      "destination": "/cn/general/introduction/connect-to-berachain"
+    },
+    {
+      "source": "/ko/build/getting-started/network-configurations",
+      "destination": "/ko/general/introduction/connect-to-berachain"
+    },
+    {
+      "source": "/vi/build/getting-started/network-configurations",
+      "destination": "/vi/general/introduction/connect-to-berachain"
+    },
+    {
+      "source": "/build/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview"
+    },
+    {
+      "source": "/cn/validators/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview"
+    },
+    {
+      "source": "/ko/validators/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview"
+    },
+    {
+      "source": "/vi/validators/beaconkit/overview",
+      "destination": "/validators/beaconkit/overview"
+    },
+    {
+      "source": "/cn/validators/operations/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc"
+    },
+    {
+      "source": "/cn/validators/staking-pools/overview",
+      "destination": "/validators/staking-pools/overview"
+    },
+    {
+      "source": "/cn/validators/staking-pools/installation",
+      "destination": "/validators/staking-pools/installation"
+    },
+    {
+      "source": "/cn/validators/staking-pools/operators",
+      "destination": "/validators/staking-pools/operators"
+    },
+    {
+      "source": "/cn/validators/staking-pools/delegators",
+      "destination": "/validators/staking-pools/delegators"
+    },
+    {
+      "source": "/cn/validators/staking-pools/contracts",
+      "destination": "/validators/staking-pools/contracts"
+    },
+    {
+      "source": "/ko/validators/operations/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc"
+    },
+    {
+      "source": "/ko/validators/staking-pools/overview",
+      "destination": "/validators/staking-pools/overview"
+    },
+    {
+      "source": "/ko/validators/staking-pools/installation",
+      "destination": "/validators/staking-pools/installation"
+    },
+    {
+      "source": "/ko/validators/staking-pools/operators",
+      "destination": "/validators/staking-pools/operators"
+    },
+    {
+      "source": "/ko/validators/staking-pools/delegators",
+      "destination": "/validators/staking-pools/delegators"
+    },
+    {
+      "source": "/ko/validators/staking-pools/contracts",
+      "destination": "/validators/staking-pools/contracts"
+    },
+    {
+      "source": "/vi/validators/operations/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc"
+    },
+    {
+      "source": "/vi/validators/staking-pools/overview",
+      "destination": "/validators/staking-pools/overview"
+    },
+    {
+      "source": "/vi/validators/staking-pools/installation",
+      "destination": "/validators/staking-pools/installation"
+    },
+    {
+      "source": "/vi/validators/staking-pools/operators",
+      "destination": "/validators/staking-pools/operators"
+    },
+    {
+      "source": "/vi/validators/staking-pools/delegators",
+      "destination": "/validators/staking-pools/delegators"
+    },
+    {
+      "source": "/vi/validators/staking-pools/contracts",
+      "destination": "/validators/staking-pools/contracts"
+    },
+    {
+      "source": "/nodes/quickstart",
+      "destination": "/validators/operations/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/monitoring",
+      "destination": "/validators/operations/monitoring",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/production-checklist",
+      "destination": "/validators/operations/production-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/self-hosted-rpc",
+      "destination": "/validators/operations/self-hosted-rpc",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/contracts/:slug*",
+      "destination": "/validators/staking-pools/contracts",
+      "permanent": true
+    },
+    {
+      "source": "/beacon-kit/api",
+      "destination": "/validators/beaconkit/overview",
+      "permanent": true
+    },
+    {
+      "source": "/beacon-kit/cli",
+      "destination": "/validators/beaconkit/overview",
+      "permanent": true
+    },
+    {
+      "source": "/beacon-kit/configuration",
+      "destination": "/validators/beaconkit/overview",
+      "permanent": true
+    },
+    {
+      "source": "/beacon-kit/what-is-beaconkit",
+      "destination": "/validators/beaconkit/overview",
+      "permanent": true
+    },
+    {
+      "source": "/learn",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/what-is-proof-of-liquidity",
+      "destination": "/general/introduction/what-is-proof-of-liquidity",
+      "permanent": true
+    },
+    {
+      "source": "/learn/what-is-beaconkit",
+      "destination": "/validators/beaconkit/overview",
+      "permanent": true
+    },
+    {
+      "source": "/learn/connect-to-berachain",
+      "destination": "/general/introduction/connect-to-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/how-to-get-bera",
+      "destination": "/general/introduction/how-to-get-bera",
+      "permanent": true
+    },
+    {
+      "source": "/learn/berachain-nfts",
+      "destination": "/general/help/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/learn/changelog",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol",
+      "destination": "/general/proof-of-liquidity/overview",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/participants",
+      "destination": "/general/proof-of-liquidity/participants",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/blockrewards",
+      "destination": "/general/proof-of-liquidity/block-rewards",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/rewardvaults",
+      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/incentives",
+      "destination": "/general/proof-of-liquidity/incentives",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/vaults",
+      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/tokens/tokenomics",
+      "destination": "/general/tokens/tokenomics",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/tokens/bera",
+      "destination": "/general/tokens/bera",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/tokens/bgt",
+      "destination": "/general/tokens/bgt",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/tokens/honey",
+      "destination": "/general/tokens/honey",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/tokens/swbera",
+      "destination": "/general/tokens/tokenomics",
+      "permanent": true
+    },
+    {
+      "source": "/learn/pol/faqs",
+      "destination": "/general/help/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/learn/governance",
+      "destination": "/general/governance/reward-vault-governance",
+      "permanent": true
+    },
+    {
+      "source": "/learn/governance/rewardvault",
+      "destination": "/general/proof-of-liquidity/reward-vaults",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/boost-a-validator",
+      "destination": "/validators/guides/become-a-validator",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/bera-staking",
+      "destination": "/general/tokens/bera",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/claim-bgt",
+      "destination": "/general/tokens/bgt",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/claim-incentives",
+      "destination": "/general/proof-of-liquidity/incentives",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/berascan-token-update",
+      "destination": "/build/guides/berascan-token-update",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/setup-reward-vault",
+      "destination": "/build/guides/proof-of-liquidity/setup-reward-vault",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/add-incentives-for-reward-vault",
+      "destination": "/build/guides/proof-of-liquidity/add-incentives",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/safe-add-incentives-for-reward-vault",
+      "destination": "/build/guides/proof-of-liquidity/add-incentives-safe",
+      "permanent": true
+    },
+    {
+      "source": "/learn/dapps/berahub",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/dapps/bex",
+      "destination": "/bex/learn/overview",
+      "permanent": true
+    },
+    {
+      "source": "/learn/dapps/bridge",
+      "destination": "/general/introduction/connect-to-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/dapps/honey-swap",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/dapps/beratrail",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/using-safe-wallet",
+      "destination": "/general/help/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/learn/help/faqs",
+      "destination": "/general/help/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/learn/help/glossary",
+      "destination": "/general/help/glossary",
+      "permanent": true
+    },
+    {
+      "source": "/learn/help/reward-vault-guidelines",
+      "destination": "/general/help/reward-vault-guidelines",
+      "permanent": true
+    },
+    {
+      "source": "/developers",
+      "destination": "/build/getting-started/overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/deployed-contracts",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/developer-tools",
+      "destination": "/build/getting-started/developer-tools",
+      "permanent": true
+    },
+    {
+      "source": "/developers/hub-api",
+      "destination": "/build/apis/hub-api",
+      "permanent": true
+    },
+    {
+      "source": "/developers/claim-api",
+      "destination": "/build/apis/claim-api",
+      "permanent": true
+    },
+    {
+      "source": "/developers/quickstart",
+      "destination": "/build/getting-started/overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/quickstart/frontend",
+      "destination": "/build/guides/community/overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/quickstart/bridge-to-berachain",
+      "destination": "/build/guides/community/layerzero-oft",
+      "permanent": true
+    },
+    {
+      "source": "/developers/quickstart/pol-integration",
+      "destination": "/build/pol/integration-basics",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/create-helloworld-contract-using-hardhat",
+      "destination": "/build/guides/community/hardhat-viem-helloworld",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/create-erc20-contract-using-foundry",
+      "destination": "/build/guides/community/foundry-erc20",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/verify-smart-contracts",
+      "destination": "/build/guides/verifying-smart-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/deploy-contract-using-nextjs-walletconnect",
+      "destination": "/build/guides/community/walletconnect-nextjs",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/advanced-pol",
+      "destination": "/build/pol/advanced-pol",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/staking-for-other-accounts",
+      "destination": "/build/pol/staking-for-other-accounts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/partial-reward-claims",
+      "destination": "/build/pol/partial-reward-claims",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/eip7702-basics",
+      "destination": "/build/protocol/eip7702-basics",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/eip7702-batch-transactions",
+      "destination": "/build/protocol/eip7702-batch-transactions",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/eip7702-gas-sponsorship",
+      "destination": "/build/protocol/eip7702-gas-sponsorship",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/eip-5792-overview",
+      "destination": "/build/protocol/eip5792-overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/eip-5792-metamask-guide",
+      "destination": "/build/protocol/eip5792-overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/community-guides",
+      "destination": "/build/guides/community/overview",
+      "permanent": true
+    },
+    {
+      "source": "/build/guides/community-guides",
+      "destination": "/build/guides/community/overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/beacondeposit",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/berachef",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/bgtincentivedistributor",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/bgt-incentive-fee-collector",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/bgt-staker",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/block-reward-controller",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/create2",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/distributor",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/fee-collector",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/multicall3",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/permit2",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/reward-vault",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/reward-vault-factory",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/wbera-staker-vault",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/governance",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/timelock",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/honey-factory",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/honey-factory-reader",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/bgt-token",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/honey-token",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/wbera-token",
+      "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/nodes",
+      "destination": "/validators/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/validator-lifecycle",
+      "destination": "/validators/architecture/validator-lifecycle",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/beaconkit-consensus",
+      "destination": "/validators/architecture/beaconkit-consensus",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/evm-execution",
+      "destination": "/validators/architecture/evm-execution",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/faq",
+      "destination": "/validators/help/faq",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/validator",
+      "destination": "/validators/guides/become-a-validator",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/operator-address",
+      "destination": "/validators/guides/change-operator-address",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/reward-allocation",
+      "destination": "/validators/guides/manage-reward-allocations",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/increase-validator-bera-stake",
+      "destination": "/validators/guides/increase-validator-stake",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/withdraw-stake",
+      "destination": "/validators/guides/withdraw-stake",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/docker-devnet",
+      "destination": "/validators/guides/local-devnet-docker",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/kurtosis",
+      "destination": "/validators/guides/local-devnet-kurtosis",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/guides/manage-incentives-commission",
+      "destination": "/validators/guides/manage-incentives-commission",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools",
+      "destination": "/validators/staking-pools/overview",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/installation",
+      "destination": "/validators/staking-pools/installation",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/operators",
+      "destination": "/validators/staking-pools/operators",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/delegators",
+      "destination": "/validators/staking-pools/delegators",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/self-hosted",
+      "destination": "/validators/operations/self-hosted-rpc",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/dex",
+      "destination": "/bex/learn/dex",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/vault",
+      "destination": "/bex/learn/vault",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/pools",
+      "destination": "/bex/learn/pools",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/pools/weighted-pools",
+      "destination": "/bex/learn/weighted-pools",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/pools/stable-pools",
+      "destination": "/bex/learn/stable-pools",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/flash-loans",
+      "destination": "/bex/learn/flash-loans",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/add-token",
+      "destination": "/bex/guides/add-token",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/swaps",
+      "destination": "/bex/guides/swaps",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/fees",
+      "destination": "/bex/guides/fees",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/liquidity/intro",
+      "destination": "/bex/guides/liquidity",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/liquidity/pol",
+      "destination": "/bex/guides/proof-of-liquidity",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/pool-creation",
+      "destination": "/bex/guides/pool-creation",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/pool-configuration",
+      "destination": "/bex/guides/pool-configuration",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/vault",
+      "destination": "/build/bex/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/query",
+      "destination": "/build/bex/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/factory/weighted-pool-factory",
+      "destination": "/build/bex/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/factory/stable-pool-factory",
+      "destination": "/build/bex/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/factory/pool-creation-helper",
+      "destination": "/build/bex/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/swaps/single_swap",
+      "destination": "/build/bex/concepts/single-swap",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/swaps/batch_swap",
+      "destination": "/build/bex/concepts/batch-swap",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/pools/pool-interfacing",
+      "destination": "/build/bex/concepts/pool-interfacing",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/pools/joins",
+      "destination": "/build/bex/concepts/pool-joins",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/pools/exit",
+      "destination": "/build/bex/concepts/pool-exits",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/lp_tokens/underlying",
+      "destination": "/build/bex/concepts/lp-underlying",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/lp_tokens/valuing",
+      "destination": "/build/bex/concepts/lp-valuing",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/relayers",
+      "destination": "/build/bex/concepts/relayers",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk",
+      "destination": "/build/bex/sdk/overview",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk/add-liquidity",
+      "destination": "/build/bex/sdk/add-liquidity",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk/remove-liquidity",
+      "destination": "/build/bex/sdk/remove-liquidity",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk/swap",
+      "destination": "/build/bex/sdk/swap",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk/sor",
+      "destination": "/build/bex/sdk/sor",
+      "permanent": true
+    },
+    {
+      "source": "/developers/sdk/reference",
+      "destination": "/build/bex/sdk/reference",
+      "permanent": true
+    },
+    {
+      "source": "/developers/guides/pool-creation",
+      "destination": "/build/bex/guides/pool-creation",
+      "permanent": true
+    },
+    {
+      "source": "/developers/help/error-codes",
+      "destination": "/build/bex/help/error-codes",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/market",
+      "destination": "/bend/learn/market",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/market/ltv",
+      "destination": "/bend/learn/ltv",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/market/interest-rates",
+      "destination": "/bend/learn/interest-rates",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/market/public-allocator",
+      "destination": "/bend/learn/public-allocator",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/market/liquidation",
+      "destination": "/bend/learn/liquidation",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/vault/yield-fees",
+      "destination": "/bend/learn/yield-fees",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/vault/rewards-for-lenders",
+      "destination": "/bend/learn/rewards-for-lenders",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/curator",
+      "destination": "/bend/learn/curator",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/oracle",
+      "destination": "/bend/learn/oracle",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/irm",
+      "destination": "/bend/learn/irm",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/bundlers",
+      "destination": "/bend/learn/bundlers",
+      "permanent": true
+    },
+    {
+      "source": "/learn/concepts/flashloans",
+      "destination": "/bend/learn/flash-loans",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/deposit-withdraw",
+      "destination": "/bend/guides/deposit-withdraw",
+      "permanent": true
+    },
+    {
+      "source": "/learn/guides/borrow-repay",
+      "destination": "/bend/guides/borrow-repay",
+      "permanent": true
+    },
+    {
+      "source": "/learn/help/curator-application",
+      "destination": "/bend/guides/curator-application",
+      "permanent": true
+    },
+    {
+      "source": "/developers/deployed-markets",
+      "destination": "/build/bend/deployed-markets",
+      "permanent": true
+    },
+    {
+      "source": "/developers/onchain/bundlers",
+      "destination": "/build/bend/onchain-bundlers",
+      "permanent": true
+    },
+    {
+      "source": "/developers/onchain/public-allocator",
+      "destination": "/build/bend/onchain-public-allocator",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/morpho",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/adaptive-curve-irm",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/bundler3",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/general-adapter-1",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/meta-morpho-v1_1",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/meta-morpho-factory-v1_1",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/meta-fee-partitioner",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/public-allocator",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/morpho-chainlink-oracle-v2",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/morpho-chainlink-oracle-v2-factory",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/urd",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/contracts/urd-factory",
+      "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    }
   ]
 }

@@ -90,6 +90,8 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | b (convexity parameter)    | Boost 影响曲线陡峭度                                   | 值越大对低 boost 惩罚越重                    |
 | m (minimum boosted reward rate) | 奖励金库排放下限                                 | 值越大对低 boost 验证者越有利                |
 
+此公式描述一个区块的总可变排放量。若 [Dedicated emission stream](#dedicated-emission-stream) 处于活跃状态，其中一部分将先分配给 DES 金库，其余部分再进入验证者的奖励分配。
+
 ### 示例排放图
 
 使用下列示例参数，下图展示排放如何随 `$BGT` 委托变化：
@@ -105,6 +107,32 @@ $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 `$BGT` 排放随验证者 boost 增加而增加，直至上限。100% boost 时达到最大理论区块排放：
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
+
+## Dedicated emission stream
+
+在验证者自身的奖励分配之前，Distributor 可能会从可变排放中分出一部分，定向到治理指定的奖励金库。该机制称为 **Dedicated Emission Stream (DES)**。
+
+```mermaid
+flowchart TD
+    BlockReward["可变排放"] --> DESCheck{"DES 活跃?"}
+    DESCheck -->|Yes| DESCarveOut["DES 分出部分"]
+    DESCarveOut --> DESVaults["DES 奖励金库"]
+    DESCarveOut -->|"超出 (达到上限)"| Remainder
+    DESCheck -->|No| Remainder["剩余奖励"]
+    Remainder --> ValidatorRA["验证者奖励分配"]
+```
+
+`DedicatedEmissionStreamManager` 合约控制三个参数，均由治理设置：
+
+- **`emissionPerc`** — 每区块可变奖励中被分出的百分比，以 basis points 表示，满值为 10,000。500 表示 5%。
+- **`targetEmission`** — 每个金库的累计上限。当金库收到的 DES 排放达到目标量时，将停止接收后续分配。超出部分返回该区块验证者自身的奖励分配。
+- **奖励分配权重** — 白名单奖励金库列表及各金库在分出部分中的份额，使用与 BeraChef 相同的权重格式（百分比之和须为 100%）。
+
+### 对验证者的影响
+
+DES 分出部分减少了验证者可支配的有效可变奖励。若 `emissionPerc` 设为 5%，则产出区块的验证者获得可变排放的 95% 用于按其 BeraChef 奖励分配进行分发。基础排放（直接支付给验证者 operator）不受影响。
+
+当前 DES 参数（包括分出百分比、目标金库和每金库上限）可从链上 [`DedicatedEmissionStreamManager`](/build/getting-started/deployed-contracts) 合约读取。
 
 ## $BGT 分配
 

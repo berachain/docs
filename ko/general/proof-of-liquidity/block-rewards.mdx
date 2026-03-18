@@ -90,6 +90,8 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | b (convexity parameter)      | Boost 영향 곡선 가파름                                  | 값이 높을수록 낮은 boost에 더 큰 불이익      |
 | m (minimum boosted reward rate) | 보상 볼트 배출의 최저선                               | 값이 높을수록 낮은 boost 검증자에게 유리     |
 
+이 공식은 블록의 총 가변 배출량을 나타냅니다. [Dedicated emission stream](#dedicated-emission-stream)이 활성화되어 있으면 일부가 먼저 DES 볼트로 분배되고, 나머지가 검증자의 보상 할당에 적용됩니다.
+
 ### 샘플 배출 차트
 
 다음 샘플 파라미터를 사용하여 아래 차트는 `$BGT` 위임에 따라 배출이 어떻게 확장되는지 보여줍니다:
@@ -105,6 +107,32 @@ $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 `$BGT` 배출은 검증자가 가진 boost 양에 따라 상한까지 증가합니다. 최대 이론적 블록 배출은 100% boost에서 발생합니다:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
+
+## Dedicated emission stream
+
+검증자의 보상 할당이 적용되기 전에, Distributor는 가변 배출의 일부를 거버넌스가 지정한 보상 볼트에 배분할 수 있습니다. 이 메커니즘을 **Dedicated Emission Stream (DES)**이라고 합니다.
+
+```mermaid
+flowchart TD
+    BlockReward["가변 배출"] --> DESCheck{"DES 활성?"}
+    DESCheck -->|Yes| DESCarveOut["DES 배분"]
+    DESCarveOut --> DESVaults["DES 보상 볼트"]
+    DESCarveOut -->|"초과 (한도 도달)"| Remainder
+    DESCheck -->|No| Remainder["나머지 보상"]
+    Remainder --> ValidatorRA["검증자 보상 할당"]
+```
+
+`DedicatedEmissionStreamManager` 컨트랙트는 세 가지 파라미터를 제어하며, 모두 거버넌스에 의해 설정됩니다:
+
+- **`emissionPerc`** — 각 블록의 가변 보상에서 배분되는 비율로, basis points로 표시되며 만점은 10,000입니다. 500은 5%를 의미합니다.
+- **`targetEmission`** — 볼트별 누적 한도. 볼트가 목표 DES 배출량에 도달하면 추가 배분이 중단됩니다. 초과분은 해당 블록 검증자의 보상 할당으로 반환됩니다.
+- **보상 할당 가중치** — 화이트리스트된 보상 볼트 목록과 배분 내 각 볼트의 몫으로, BeraChef와 동일한 가중치 형식을 사용합니다 (비율의 합이 100%여야 합니다).
+
+### 검증자에 대한 영향
+
+DES 배분은 검증자가 지시할 수 있는 유효 가변 보상을 줄입니다. `emissionPerc`가 5%로 설정되면, 블록을 생성하는 검증자는 BeraChef 보상 할당에 따라 배분할 가변 배출의 95%를 받게 됩니다. 기본 배출(검증자 operator에게 직접 지급)은 영향을 받지 않습니다.
+
+현재 DES 파라미터(배분 비율, 대상 볼트, 볼트별 한도 포함)는 온체인 [`DedicatedEmissionStreamManager`](/build/getting-started/deployed-contracts) 컨트랙트에서 확인할 수 있습니다.
 
 ## $BGT 분배
 

@@ -90,6 +90,8 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 | b (convexity parameter)       | Độ dốc đường cong tác động boost                        | Giá trị cao hơn phạt nặng hơn với boost thấp     |
 | m (minimum boosted reward rate) | Sàn emission reward vault                              | Giá trị cao hơn có lợi cho validator boost thấp  |
 
+Công thức này mô tả tổng variable emission cho một block. Nếu [Dedicated emission stream](#dedicated-emission-stream) đang hoạt động, một phần sẽ được chuyển đến DES vault trước khi phần còn lại đến reward allocation của validator.
+
 ### Biểu đồ emission mẫu
 
 Với các tham số mẫu sau, biểu đồ dưới cho thấy emission scale theo delegation `$BGT`:
@@ -105,6 +107,32 @@ $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 Emission `$BGT` tăng theo lượng boost validator có, tới một giới hạn. Emission block lý thuyết tối đa xảy ra ở 100% boost:
 
 $$\max \mathbb{E}[\text{emission}] = \left[B + \max(m, aR)\right]$$
+
+## Dedicated emission stream
+
+Trước khi reward allocation của validator được áp dụng, Distributor có thể trích một phần variable emission và chuyển đến một tập reward vault được governance chỉ định. Cơ chế này gọi là **Dedicated Emission Stream (DES)**.
+
+```mermaid
+flowchart TD
+    BlockReward["Variable emission"] --> DESCheck{"DES hoạt động?"}
+    DESCheck -->|Yes| DESCarveOut["DES trích xuất"]
+    DESCarveOut --> DESVaults["DES Reward Vaults"]
+    DESCarveOut -->|"vượt mức (đạt giới hạn)"| Remainder
+    DESCheck -->|No| Remainder["Phần còn lại"]
+    Remainder --> ValidatorRA["Validator Reward Allocation"]
+```
+
+Contract `DedicatedEmissionStreamManager` kiểm soát ba tham số, tất cả được thiết lập bởi governance:
+
+- **`emissionPerc`** — tỷ lệ phần trăm variable reward mỗi block bị trích, tính bằng basis points trên tổng 10,000. Giá trị 500 nghĩa là 5%.
+- **`targetEmission`** — giới hạn tích lũy cho mỗi vault. Khi vault đã nhận đủ lượng DES emission mục tiêu, vault đó ngừng nhận thêm. Phần vượt mức được trả về reward allocation của validator cho block đó.
+- **Reward allocation weights** — danh sách reward vault trong whitelist và phần mỗi vault nhận trong phần trích, sử dụng cùng định dạng weight như BeraChef (tổng tỷ lệ phải bằng 100%).
+
+### Ảnh hưởng đến validator
+
+Phần DES trích xuất giảm effective variable reward mà validator có thể phân bổ. Nếu `emissionPerc` được đặt là 5%, validator tạo block sẽ nhận 95% variable emission để phân phối theo BeraChef reward allocation. Base emission (trả trực tiếp cho validator operator) không bị ảnh hưởng.
+
+Các tham số DES hiện tại — bao gồm tỷ lệ trích xuất, vault mục tiêu, và giới hạn mỗi vault — có thể đọc từ contract [`DedicatedEmissionStreamManager`](/build/getting-started/deployed-contracts) on-chain.
 
 ## Phân phối $BGT
 
