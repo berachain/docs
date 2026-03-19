@@ -1,0 +1,31 @@
+---
+title: "Add Incentives with Safe"
+description: "Queue and execute Reward Vault incentive transactions through Safe."
+---
+
+# Add Incentives with Safe
+
+Use this flow when the vault manager account is a Safe multisig and you need transaction review/signoff before execution.
+
+## Prerequisites
+
+- Existing whitelisted Reward Vault
+- Whitelisted incentive token
+- Safe configured as manager or authorized submitter
+
+## Flow
+
+1. Prepare the incentive transaction from Hub or your internal tooling.
+2. Send the transaction to Safe for multisig review.
+3. Collect required signatures in Safe.
+4. Execute the transaction onchain from Safe.
+
+## Operational Tips
+
+- Confirm chain/network in Safe before signing.
+- Verify token address, amount, and vault address in the calldata preview.
+- Use role-separated signers for stronger operational security.
+
+## Related
+
+- [Add Incentives to a Reward Vault](/build/guides/proof-of-liquidity/add-incentives)

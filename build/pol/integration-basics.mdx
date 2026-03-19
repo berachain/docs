@@ -1,0 +1,51 @@
+---
+title: "PoL Integration Overview"
+description: "Start here for PoL integration paths, setup flow, and guide map."
+---
+
+# PoL Integration Overview
+
+Proof of Liquidity (PoL) lets protocols reward user behavior with BGT through Reward Vaults. This page is the entry point for builders and links to the implementation guides for each step.
+
+## Need conceptual grounding first?
+
+If you are looking for PoL fundamentals before implementation details:
+
+- [PoL Overview](/general/proof-of-liquidity/overview)
+- [Reward Vaults](/general/proof-of-liquidity/reward-vaults)
+
+## Start Here
+
+Most teams should follow this order:
+
+1. Create and configure a vault: [Setup Reward Vault](/build/guides/proof-of-liquidity/setup-reward-vault)
+2. Fund emissions: [Add Incentives](/build/guides/proof-of-liquidity/add-incentives)
+3. If manager operations run through multisig: [Add Incentives with Safe](/build/guides/proof-of-liquidity/add-incentives-safe)
+
+## Choose Your Integration Path
+
+### Standard tokenized activity (LP/receipt token style)
+
+Your protocol already emits a stakeable ERC-20 that tracks user participation.
+
+- [Setup Reward Vault](/build/guides/proof-of-liquidity/setup-reward-vault)
+- [Add Incentives](/build/guides/proof-of-liquidity/add-incentives)
+- [Add Incentives with Safe](/build/guides/proof-of-liquidity/add-incentives-safe)
+
+### Protocol-operated staking patterns
+
+You need to execute staking flows on behalf of users.
+
+- [Staking for Other Accounts](/build/pol/staking-for-other-accounts)
+
+### Custom/non-ERC-20 accounting
+
+Your protocol tracks activity internally and does not naturally emit a stakeable token.
+
+- [Advanced PoL Integration](/build/pol/advanced-pol)
+
+### Advanced reward distribution behavior
+
+You want controlled claiming behavior such as partial claims, streaming, or vesting-style flows.
+
+- [Partial Reward Claims](/build/pol/partial-reward-claims)
