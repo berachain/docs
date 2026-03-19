@@ -7,13 +7,6 @@
     ]
   },
   "pol": {
-    "bgtToken": {
-      "name": "BGT Token",
-      "address": {
-        "berachainMainnet": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
-        "berachainBepolia": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba"
-      }
-    },
     "berachef": {
       "name": "BeraChef",
       "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/BeraChef.json",
@@ -69,24 +62,24 @@
         "berachainBepolia": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6"
       }
     },
-    "governance": {
-      "name": "Governance",
-      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/BerachainGovernance.json",
+    "honeyFactory": {
+      "name": "HoneyFactory",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/HoneyFactory.json",
       "address": {
-        "berachainMainnet": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
-        "berachainBepolia": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5"
-      }
-    },
-    "timelock": {
-      "name": "Timelock",
-      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/TimeLock.json",
-      "address": {
-        "berachainMainnet": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
-        "berachainBepolia": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a"
+        "berachainMainnet": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
+        "berachainBepolia": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401"
       }
     }
   },
   "tokens": {
+    "bgtToken": {
+      "name": "BGT Token",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGT.json",
+      "address": {
+        "berachainMainnet": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba",
+        "berachainBepolia": "0x656b95E550C07a9ffe548bd4085c72418Ceb1dba"
+      }
+    },
     "wbera": {
       "name": "WBERA",
       "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/WBERA.json",
@@ -103,12 +96,30 @@
         "berachainBepolia": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce"
       }
     },
-    "honeyFactory": {
-      "name": "HoneyFactory",
-      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/HoneyFactory.json",
+    "wberaStakerVault": {
+      "name": "WBERA Staker Vault (sWBERA)",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/WBERAStakerVault.json",
       "address": {
-        "berachainMainnet": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401",
-        "berachainBepolia": "0xA4aFef880F5cE1f63c9fb48F661E27F8B4216401"
+        "berachainMainnet": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a",
+        "berachainBepolia": "0x118D2cEeE9785eaf70C15Cd74CD84c9f8c3EeC9a"
+      }
+    }
+  },
+  "governance": {
+    "governance": {
+      "name": "Governance",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/BerachainGovernance.json",
+      "address": {
+        "berachainMainnet": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5",
+        "berachainBepolia": "0x4f4A5c2194B8e856b7a05B348F6ba3978FB6f6D5"
+      }
+    },
+    "timelock": {
+      "name": "Timelock",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/gov/TimeLock.json",
+      "address": {
+        "berachainMainnet": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a",
+        "berachainBepolia": "0xb5f2000b5744f207c931526cAE2134cAa8b6862a"
       }
     }
   },
