@@ -11,9 +11,7 @@ head:
       content: Guide to using stakeOnBehalf functionality in Berachain Reward Vaults
 ---
 
-<script setup>
-  import config from '@berachain/config/constants.json';
-</script>
+<script setup>import config from '@berachain/config/constants.json';</script>
 
 # Staking for Other Accounts
 
@@ -295,12 +293,12 @@ import { berachain } from "viem/chains";
 
 const publicClient = createPublicClient({
   chain: berachain,
-  transport: http()
+  transport: http(),
 });
 
 const walletClient = createWalletClient({
   chain: berachain,
-  transport: http()
+  transport: http(),
 });
 
 // Stake on behalf of a user
@@ -310,7 +308,7 @@ async function stakeOnBehalf(beneficiaryAddress: string, amount: bigint) {
     address: "0x...", // Staking token address
     abi: erc20Abi,
     functionName: "approve",
-    args: ["0x...", amount] // Reward Vault address, amount
+    args: ["0x...", amount], // Reward Vault address, amount
   });
 
   await walletClient.writeContract(approveRequest.request);
@@ -320,7 +318,7 @@ async function stakeOnBehalf(beneficiaryAddress: string, amount: bigint) {
     address: "0x...", // Reward Vault address
     abi: rewardVaultAbi,
     functionName: "stakeOnBehalf",
-    args: [beneficiaryAddress, amount]
+    args: [beneficiaryAddress, amount],
   });
 
   const hash = await walletClient.writeContract(stakeRequest.request);

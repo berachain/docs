@@ -11,6 +11,7 @@ Reward Vaults là hạ tầng then chốt cho phép protocol tận dụng PoL, g
 Chỉ Reward Vaults được phê duyệt qua governance mới đủ điều kiện nhận emission `$BGT` từ Validator.
 
 Vui lòng xem Berachain Reward Vault Requirements & Guidelines đầy đủ cho quy trình nộp đơn.
+
 </Info>
 
 ## Tương tác người dùng
@@ -18,7 +19,10 @@ Vui lòng xem Berachain Reward Vault Requirements & Guidelines đầy đủ cho 
 ### Stake với reward vault
 
 <Frame>
-  <img src="/images/general/berachain-reward-vault-staking-bex.png" alt="Luồng stake reward vault Berachain với BEX" />
+  <img
+    src="/images/general/berachain-reward-vault-staking-bex.png"
+    alt="Luồng stake reward vault Berachain với BEX"
+  />
 </Frame>
 
 Để nhận `$BGT`, người dùng phải stake tài sản đủ điều kiện PoL vào Reward Vault tương ứng. Protocol triển khai Reward Vault quyết định cách người dùng có được tài sản đủ điều kiện PoL để stake. Ý tưởng là protocol dùng điều này để thu hút thanh khoản hoặc kích thích hoạt động, và đổi lại trao cho người dùng tài sản có thể stake vào vault của họ.
@@ -122,7 +126,7 @@ APR RewardVault được xác định bởi một số yếu tố. Thành phần
 - Giá Stake Token
 
 <Info>
-Nếu timestamp `periodFinish` đã qua thì không còn reward được emit. Do đó APR `$BGT` là 0%.
+  Nếu timestamp `periodFinish` đã qua thì không còn reward được emit. Do đó APR `$BGT` là 0%.
 </Info>
 
 Đơn vị của `rewardRate` là `$BGT mỗi giây`. Các dữ liệu trên cho phép bạn tính APR Reward Vault như sau:
@@ -144,7 +148,8 @@ Là ví dụ cụ thể của công thức trên, có thể dùng reward vault v
 | Seconds per year     | 31,536,000                           | 31,536,000          |
 
 <Tip>
-`rewardRate` trả về ở dạng gwei và có thừa số chính xác `1e18`, nên effectively ở wei. Chuẩn hóa cần chia cho `1e36`.
+  `rewardRate` trả về ở dạng gwei và có thừa số chính xác `1e18`, nên effectively ở wei. Chuẩn hóa
+  cần chia cho `1e36`.
 </Tip>
 
 Dùng công thức trên:

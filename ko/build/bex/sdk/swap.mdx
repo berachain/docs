@@ -9,7 +9,9 @@ Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), you can exe
 2. _GivenOut_ - specify the exact output amount (you know how much you want to receive)
 
 <Tip>
-For more comprehensive swap examples, see the [swap examples](https://github.com/berachain/bex-sdk/tree/main/examples/swaps) in the BEX SDK repository.
+  For more comprehensive swap examples, see the [swap
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/swaps) in the BEX SDK
+  repository.
 </Tip>
 
 ## Understanding SwapKind
@@ -51,11 +53,11 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Initialize tokens
-const honeyToken = new Token(CHAIN_ID, HONEY_TOKEN, 18, 'HONEY');
-const usdcToken = new Token(CHAIN_ID, USDC_TOKEN, 6, 'USDC');
+const honeyToken = new Token(CHAIN_ID, HONEY_TOKEN, 18, "HONEY");
+const usdcToken = new Token(CHAIN_ID, USDC_TOKEN, 6, "USDC");
 
 // Create swap amount (e.g., 1 HONEY)
-const swapAmount = TokenAmount.fromHumanAmount(honeyToken, '1');
+const swapAmount = TokenAmount.fromHumanAmount(honeyToken, "1");
 
 // Fetch optimal swap paths
 const { paths: sorPaths } = await balancerApi.sorSwapPaths.fetchSorSwapPaths({
@@ -70,7 +72,7 @@ const swap = new Swap({
   chainId: CHAIN_ID,
   paths: sorPaths,
   swapKind: SwapKind.GivenIn,
-  userData: '0x',
+  userData: "0x",
 });
 
 // Query current rates
@@ -141,7 +143,7 @@ The `Swap` class provides a `query` method to simulate the swap and get current 
 const swap = new Swap({
   chainId: CHAIN_ID,
   paths: sorPaths,
-  swapKind: SwapKind.GivenIn
+  swapKind: SwapKind.GivenIn,
 });
 
 const queryOutput = await swap.query(RPC_URL);
@@ -162,7 +164,7 @@ const callData = swap.buildCall({
   queryOutput,
   sender: wallet.address,
   recipient: wallet.address,
-  wethIsEth: false
+  wethIsEth: false,
 });
 ```
 
@@ -194,11 +196,11 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Initialize tokens
-const usdcToken = new Token(CHAIN_ID, USDC_TOKEN, 6, 'USDC');
-const honeyToken = new Token(CHAIN_ID, HONEY_TOKEN, 18, 'HONEY');
+const usdcToken = new Token(CHAIN_ID, USDC_TOKEN, 6, "USDC");
+const honeyToken = new Token(CHAIN_ID, HONEY_TOKEN, 18, "HONEY");
 
 // Create desired output amount (e.g., want to receive exactly 1000 USDC)
-const desiredOutput = TokenAmount.fromHumanAmount(usdcToken, '1000');
+const desiredOutput = TokenAmount.fromHumanAmount(usdcToken, "1000");
 
 // Fetch optimal swap paths for exact output
 const { paths: sorPaths } = await balancerApi.sorSwapPaths.fetchSorSwapPaths({
@@ -213,7 +215,7 @@ const swap = new Swap({
   chainId: CHAIN_ID,
   paths: sorPaths,
   swapKind: SwapKind.GivenOut,
-  userData: '0x',
+  userData: "0x",
 });
 
 // Query to get the required input amount
@@ -236,7 +238,10 @@ const callData = swap.buildCall({
 const tokenAbi = ["function approve(address spender, uint256 amount) public returns (bool)"];
 const honeyContract = new ethers.Contract(honeyToken.address, tokenAbi, wallet);
 // Approve a slightly higher amount to account for slippage
-await honeyContract.approve(callData.to, queryOutput.inputAmount.amount * BigInt(110) / BigInt(100));
+await honeyContract.approve(
+  callData.to,
+  (queryOutput.inputAmount.amount * BigInt(110)) / BigInt(100)
+);
 
 // Send transaction
 const tx = await wallet.sendTransaction({

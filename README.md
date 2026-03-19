@@ -14,8 +14,8 @@ We welcome contributions from the community. Whether you're fixing a typo, clari
 
 ## What’s in this repo
 
-- **Berachain (General)** — L1 overview, Proof-of-Liquidity, tokens, governance  
-- **Build** — Getting started, BEX, Bend, nodes, validators  
+- **Berachain (General)** — L1 overview, Proof-of-Liquidity, tokens, governance
+- **Build** — Getting started, BEX, Bend, nodes, validators
 - **Reference** — APIs, contracts, and technical reference
 
 Content is in MDX. Navigation and branding are configured in `docs.json`.
@@ -58,15 +58,15 @@ mint validate
 
 We use a single **main** branch. All changes come in via pull requests and go through the same review process, whether from the core team or the community.
 
-- **[CONTRIBUTING.md](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md)** — How to set up your environment, add or edit content, and open a PR  
+- **[CONTRIBUTING.md](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md)** — How to set up your environment, add or edit content, and open a PR
 - **[CODE_OF_CONDUCT.md](https://github.com/berachain/docs/blob/main/CODE_OF_CONDUCT.md)** — How we work together and what we expect from everyone
 
 ### Ways to contribute
 
-- Fix typos or unclear wording  
-- Add or improve guides and examples  
-- Report missing or incorrect docs via [GitHub Issues](https://github.com/berachain/docs/issues)  
-- Suggest improvements in issues before larger changes  
+- Fix typos or unclear wording
+- Add or improve guides and examples
+- Report missing or incorrect docs via [GitHub Issues](https://github.com/berachain/docs/issues)
+- Suggest improvements in issues before larger changes
 
 If you’re new to open source, see [Your first pull request](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#your-first-pull-request) in CONTRIBUTING.
 
@@ -90,22 +90,22 @@ New pages are added under the right folder and registered in `docs.json` under t
 
 ## Links
 
-| Resource | Link |
-|----------|------|
-| Website | [berachain.com](https://berachain.com) |
-| Docs (live) | [docs.berachain.com](https://docs.berachain.com) |
-| GitHub | [github.com/berachain](https://github.com/berachain) |
-| Discord | [discord.gg/berachain](https://discord.gg/berachain) |
-| BEX | [bex.berachain.com](https://bex.berachain.com) |
-| Bend | [bend.berachain.com](https://bend.berachain.com) |
+| Resource    | Link                                                 |
+| ----------- | ---------------------------------------------------- |
+| Website     | [berachain.com](https://berachain.com)               |
+| Docs (live) | [docs.berachain.com](https://docs.berachain.com)     |
+| GitHub      | [github.com/berachain](https://github.com/berachain) |
+| Discord     | [discord.gg/berachain](https://discord.gg/berachain) |
+| BEX         | [bex.berachain.com](https://bex.berachain.com)       |
+| Bend        | [bend.berachain.com](https://bend.berachain.com)     |
 
 ---
 
 ## Support
 
-- **Docs bugs or suggestions** — [Open an issue](https://github.com/berachain/docs/issues)  
-- **Technical or protocol questions** — [Discord](https://discord.gg/berachain)  
-- **Security** — Do not report security issues in public; see [CONTRIBUTING.md](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#security) for how to report them safely  
+- **Docs bugs or suggestions** — [Open an issue](https://github.com/berachain/docs/issues)
+- **Technical or protocol questions** — [Discord](https://discord.gg/berachain)
+- **Security** — Do not report security issues in public; see [CONTRIBUTING.md](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#security) for how to report them safely
 
 ---
 

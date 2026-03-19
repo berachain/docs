@@ -11,6 +11,7 @@ description: "BGT 流向与协议如何接收排放。"
 只有经治理批准的奖励金库才有资格接收验证者的 `$BGT` 排放。
 
 申请流程请参阅完整的 Berachain 奖励金库要求与指南。
+
 </Info>
 
 ## 用户交互
@@ -18,7 +19,10 @@ description: "BGT 流向与协议如何接收排放。"
 ### 向奖励金库质押
 
 <Frame>
-  <img src="/images/general/berachain-reward-vault-staking-bex.png" alt="Berachain 奖励金库质押流程（BEX）" />
+  <img
+    src="/images/general/berachain-reward-vault-staking-bex.png"
+    alt="Berachain 奖励金库质押流程（BEX）"
+  />
 </Frame>
 
 要获得 `$BGT`，用户必须在对应奖励金库中质押 PoL 条件资产。部署该奖励金库的协议决定用户如何获取可质押的 PoL 条件资产。思路是协议借此吸引流动性或激励活动，并作为回报向用户发放可存入其金库的资产。
@@ -121,9 +125,7 @@ RewardVault 的 APR 由多个因素决定。APR 计算包含：
 - `$BGT`（`$BERA`）价格 — 假定 `$BGT` 价格等于 `$BERA` 价格
 - 质押代币价格
 
-<Info>
-若 `periodFinish` 时间戳已过，则不再发放奖励。因此 `$BGT` APR 为 0%。
-</Info>
+<Info>若 `periodFinish` 时间戳已过，则不再发放奖励。因此 `$BGT` APR 为 0%。</Info>
 
 `rewardRate` 单位为「每秒 $BGT」。根据上述数据可按以下方式计算奖励金库 APR：
 
@@ -135,16 +137,16 @@ $$APR = \frac{rewardRate \times secondsPerYear \times priceOfBGT}{totalSupply \t
 
 以上述公式为例，可使用具有下列取值的奖励金库：
 
-| 参数               | 值                                   | 归一化              |
-| :----------------- | :----------------------------------- | :------------------ |
-| Reward Rate        | 272490527103681170793308992914391673 | 0.27249052710368116 |
-| Price of `$BERA`   | $7.8                                | $7.8                |
-| Total Supply       | 598626940947001140289               | 598.6269409470011   |
-| Price of Stake Token | $223,845.58                       | $223,845.58         |
-| Seconds per year   | 31,536,000                          | 31,536,000          |
+| 参数                 | 值                                   | 归一化              |
+| :------------------- | :----------------------------------- | :------------------ |
+| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
+| Price of `$BERA`     | $7.8                                 | $7.8                |
+| Total Supply         | 598626940947001140289                | 598.6269409470011   |
+| Price of Stake Token | $223,845.58                          | $223,845.58         |
+| Seconds per year     | 31,536,000                           | 31,536,000          |
 
 <Tip>
-返回的 `rewardRate` 以 gwei 计且含额外精度因子 `1e18`，因此实际相当于 wei。归一化需除以 `1e36`。
+  返回的 `rewardRate` 以 gwei 计且含额外精度因子 `1e18`，因此实际相当于 wei。归一化需除以 `1e36`。
 </Tip>
 
 代入上式：

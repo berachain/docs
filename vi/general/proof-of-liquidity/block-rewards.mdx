@@ -81,14 +81,14 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 
 ### Tham số
 
-| Tham số                       | Mô tả                                                    | Tác động                                         |
-| ----------------------------- | -------------------------------------------------------- | ------------------------------------------------- |
-| x (boost)                     | Phần trăm tổng `$BGT` delegate cho validator (khoảng: [0,1]) | Xác định emission `$BGT` tới Reward Vaults      |
-| B (base rate)                 | Số lượng `$BGT` cố định cho sản xuất block               | Xác định reward validator cơ sở                  |
-| R (reward rate)               | Số lượng `$BGT` cơ sở cho reward vaults                 | Đặt nền tảng cho emission reward                  |
-| a (boost multiplier)          | Hệ số tác động boost                                    | Giá trị cao hơn tăng tầm quan trọng của boost    |
-| b (convexity parameter)       | Độ dốc đường cong tác động boost                        | Giá trị cao hơn phạt nặng hơn với boost thấp     |
-| m (minimum boosted reward rate) | Sàn emission reward vault                              | Giá trị cao hơn có lợi cho validator boost thấp  |
+| Tham số                         | Mô tả                                                        | Tác động                                        |
+| ------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
+| x (boost)                       | Phần trăm tổng `$BGT` delegate cho validator (khoảng: [0,1]) | Xác định emission `$BGT` tới Reward Vaults      |
+| B (base rate)                   | Số lượng `$BGT` cố định cho sản xuất block                   | Xác định reward validator cơ sở                 |
+| R (reward rate)                 | Số lượng `$BGT` cơ sở cho reward vaults                      | Đặt nền tảng cho emission reward                |
+| a (boost multiplier)            | Hệ số tác động boost                                         | Giá trị cao hơn tăng tầm quan trọng của boost   |
+| b (convexity parameter)         | Độ dốc đường cong tác động boost                             | Giá trị cao hơn phạt nặng hơn với boost thấp    |
+| m (minimum boosted reward rate) | Sàn emission reward vault                                    | Giá trị cao hơn có lợi cho validator boost thấp |
 
 Công thức này mô tả tổng variable emission cho một block. Nếu [Dedicated emission stream](#dedicated-emission-stream) đang hoạt động, một phần sẽ được chuyển đến DES vault trước khi phần còn lại đến reward allocation của validator.
 
@@ -99,7 +99,10 @@ Với các tham số mẫu sau, biểu đồ dưới cho thấy emission scale t
 $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 
 <Frame>
-  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="Biểu đồ emission scale theo delegation BGT" />
+  <img
+    src="/images/general/emission-scale-bgt-delegation-chart.png"
+    alt="Biểu đồ emission scale theo delegation BGT"
+  />
 </Frame>
 
 ## Lạm phát block tối đa

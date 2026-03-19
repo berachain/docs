@@ -24,7 +24,10 @@ BeraChef quản lý lớp cấu hình của PoL, điều khiển cách validator
 ## Vòng đời PoL
 
 <Frame>
-  <img src="/images/general/proof-of-liquidity-steps.png" alt="Sơ đồ các bước Proof-of-Liquidity Berachain" />
+  <img
+    src="/images/general/proof-of-liquidity-steps.png"
+    alt="Sơ đồ các bước Proof-of-Liquidity Berachain"
+  />
 </Frame>
 
 <Steps>
@@ -32,20 +35,24 @@ BeraChef quản lý lớp cấu hình của PoL, điều khiển cách validator
     Hành trình bắt đầu khi Prospective Validator stake `$BERA` của họ làm security bond. Validator được chọn đề xuất block với xác suất tỷ lệ với số lượng đã stake. Với mỗi block đề xuất, validator nhận cả emission cơ bản và emission reward biến đổi dựa trên phần trăm boost của họ (xem [emission](/vi/general/proof-of-liquidity/block-rewards)).
 
     **Cho Validator**: Tìm hiểu vòng đời validator.
+
   </Step>
   <Step title="Phân phối reward block">
     Sau khi thu base reward `$BGT` cho bản thân, validator hướng phần reward `$BGT` biến đổi còn lại tới các Reward Vault đã whitelist mà họ chọn. Đổi lại việc hướng emission của họ, validator nhận Incentive do protocol cung cấp từ Reward Vault (người dùng cung cấp thanh khoản cho protocol sẽ kiếm được `$BGT`).
 
     **Cho Validator**: Tìm hiểu quản lý phân bổ reward và thiết lập tỷ lệ commission.
+
   </Step>
   <Step title="Luồng liquidity provider">
     Liquidity provider của hệ sinh thái (tức người dùng) đóng vai trò quan trọng trong PoL. Bạn có thể cung cấp thanh khoản cho các protocol như BEX và nhận receipt token làm bằng chứng đóng góp. Các receipt token này sau đó được stake trong Reward Vault, nơi bạn kiếm `$BGT` tỷ lệ với phần chia của bạn trong vault.
 
     Tìm hiểu [tích hợp với hệ thống incentive của Berachain](/vi/general/proof-of-liquidity/incentives) và [thiết kế Reward Vault](/vi/general/proof-of-liquidity/reward-vaults).
+
   </Step>
   <Step title="Chu kỳ delegation">
     Khi người nắm giữ `$BGT` tích lũy token, họ có thể delegate cho validator, ảnh hưởng trực tiếp tới boost của validator. Điều này tạo chu kỳ tích cực: delegation cao hơn dẫn tới boost validator tăng, dẫn tới emission `$BGT` lớn hơn khi validator đó đề xuất block. Validator được khuyến khích chia sẻ Incentive nhận được từ protocol cho delegator để thu hút thêm boost, thúc đẩy hệ sinh thái hợp tác.
 
     **Cho người nắm giữ BGT**: Tìm hiểu cách boost validator bằng BGT để tham gia chu kỳ delegation.
+
   </Step>
 </Steps>

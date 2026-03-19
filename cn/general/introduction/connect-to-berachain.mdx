@@ -16,7 +16,10 @@ export const addNetworkMainnet = () => {
     blockExplorerUrls: ["https://berascan.com/"],
   };
   console.log("[AddNetwork] add mainnet", params);
-  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+  window.ethereum
+    .request({ method: "wallet_addEthereumChain", params: [params] })
+    .then((r) => console.log("[AddNetwork] result", r))
+    .catch((e) => console.error("[AddNetwork] error", e));
 };
 
 export const addNetworkBepolia = () => {
@@ -32,7 +35,10 @@ export const addNetworkBepolia = () => {
     blockExplorerUrls: ["https://testnet.berascan.com/"],
   };
   console.log("[AddNetwork] add bepolia (testnet)", params);
-  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+  window.ethereum
+    .request({ method: "wallet_addEthereumChain", params: [params] })
+    .then((r) => console.log("[AddNetwork] result", r))
+    .catch((e) => console.error("[AddNetwork] error", e));
 };
 
 区块链钱包让您访问在 Berachain 上的资产。钱包创建并保存您的私钥，以便您在交易代币、购买 NFT、玩游戏等时证明所有权。
@@ -41,7 +47,26 @@ export const addNetworkBepolia = () => {
 
 在支持自定义 RPC 的任何钱包中使用以下参数。一键添加网络，或从下表复制：
 
-<button type="button" onClick={() => addNetworkMainnet()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>添加 Berachain</button>
+<button
+  type="button"
+  onClick={() => addNetworkMainnet()}
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "140px",
+    height: "44px",
+    padding: "0 16px",
+    borderRadius: "8px",
+    border: "2px solid #c96516",
+    backgroundColor: "#E17726",
+    color: "#1a1a1a",
+    fontWeight: 600,
+    cursor: "pointer",
+  }}
+>
+  添加 Berachain
+</button>
 
 | 键         | 值                           |
 | ---------- | ---------------------------- |
@@ -55,15 +80,34 @@ export const addNetworkBepolia = () => {
 
 测试网使用以下参数。一键添加或从下表复制：
 
-<button type="button" onClick={() => addNetworkBepolia()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>添加 Berachain Bepolia</button>
+<button
+  type="button"
+  onClick={() => addNetworkBepolia()}
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "140px",
+    height: "44px",
+    padding: "0 16px",
+    borderRadius: "8px",
+    border: "2px solid #c96516",
+    backgroundColor: "#E17726",
+    color: "#1a1a1a",
+    fontWeight: 600,
+    cursor: "pointer",
+  }}
+>
+  添加 Berachain Bepolia
+</button>
 
-| 键         | 值                                       |
-| ---------- | ---------------------------------------- |
-| 网络名称   | `Berachain Bepolia`                      |
-| RPC URL    | `https://bepolia.rpc.berachain.com/`     |
-| Chain ID   | `80069`                                  |
-| 货币符号   | `BERA`                                   |
-| 区块浏览器 | `https://testnet.berascan.com/`          |
+| 键         | 值                                   |
+| ---------- | ------------------------------------ |
+| 网络名称   | `Berachain Bepolia`                  |
+| RPC URL    | `https://bepolia.rpc.berachain.com/` |
+| Chain ID   | `80069`                              |
+| 货币符号   | `BERA`                               |
+| 区块浏览器 | `https://testnet.berascan.com/`      |
 
 ## 支持的钱包
 
@@ -87,6 +131,7 @@ export const addNetworkBepolia = () => {
     <Frame>
       <img src="/images/general/metamask-chrome-store.png" alt="Chrome 网上应用店中的 MetaMask 扩展" />
     </Frame>
+
   </Step>
   <Step title="创建钱包">
     点击「创建新钱包」。设置密码，然后按步骤备份助记词。助记词是您拥有钱包的凭证，请妥善保管。
@@ -102,6 +147,7 @@ export const addNetworkBepolia = () => {
     <Frame>
       <img src="/images/general/metamask-recovery-phrase.png" alt="MetaMask 助记词备份界面" />
     </Frame>
+
   </Step>
 </Steps>
 
@@ -132,7 +178,10 @@ export const addNetworkBepolia = () => {
 5. **保存** — 点击「保存」。
 
 <Frame>
-  <img src="/images/general/metamask-add-network-04.png" alt="MetaMask 网络配置表单与 Berachain 参数" />
+  <img
+    src="/images/general/metamask-add-network-04.png"
+    alt="MetaMask 网络配置表单与 Berachain 参数"
+  />
 </Frame>
 
 此时您应已连接至 Berachain 或 Berachain Bepolia。

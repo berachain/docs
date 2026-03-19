@@ -81,14 +81,14 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 
 ### 参数
 
-| 参数                       | 描述                                                    | 影响                                         |
-| -------------------------- | ------------------------------------------------------- | -------------------------------------------- |
-| x (boost)                  | 委托给验证者的总 `$BGT` 占比（范围：[0,1]）             | 决定流向奖励金库的 `$BGT` 排放               |
-| B (base rate)              | 区块生产的基础 `$BGT` 固定量                            | 决定验证者基础奖励                           |
-| R (reward rate)            | 奖励金库的基础 `$BGT` 数量                              | 设定奖励排放基础                             |
-| a (boost multiplier)       | Boost 影响系数                                         | 值越大 boost 越重要                          |
-| b (convexity parameter)    | Boost 影响曲线陡峭度                                   | 值越大对低 boost 惩罚越重                    |
-| m (minimum boosted reward rate) | 奖励金库排放下限                                 | 值越大对低 boost 验证者越有利                |
+| 参数                            | 描述                                        | 影响                           |
+| ------------------------------- | ------------------------------------------- | ------------------------------ |
+| x (boost)                       | 委托给验证者的总 `$BGT` 占比（范围：[0,1]） | 决定流向奖励金库的 `$BGT` 排放 |
+| B (base rate)                   | 区块生产的基础 `$BGT` 固定量                | 决定验证者基础奖励             |
+| R (reward rate)                 | 奖励金库的基础 `$BGT` 数量                  | 设定奖励排放基础               |
+| a (boost multiplier)            | Boost 影响系数                              | 值越大 boost 越重要            |
+| b (convexity parameter)         | Boost 影响曲线陡峭度                        | 值越大对低 boost 惩罚越重      |
+| m (minimum boosted reward rate) | 奖励金库排放下限                            | 值越大对低 boost 验证者越有利  |
 
 此公式描述一个区块的总可变排放量。若 [Dedicated emission stream](#dedicated-emission-stream) 处于活跃状态，其中一部分将先分配给 DES 金库，其余部分再进入验证者的奖励分配。
 
@@ -99,7 +99,10 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 
 <Frame>
-  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="BGT 委托与排放规模关系图" />
+  <img
+    src="/images/general/emission-scale-bgt-delegation-chart.png"
+    alt="BGT 委托与排放规模关系图"
+  />
 </Frame>
 
 ## 最大区块通胀

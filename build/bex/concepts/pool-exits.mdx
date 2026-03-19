@@ -4,7 +4,8 @@ description: "Remove liquidity from BEX pools via the Vault exitPool function."
 ---
 
 <Warning>
-Calls to `exitPool()` must be made on the BEX Vault contract. You cannot send this command directly to a pool.
+  Calls to `exitPool()` must be made on the BEX Vault contract. You cannot send this command
+  directly to a pool.
 </Warning>
 
 ## exitPool function
@@ -64,7 +65,8 @@ Best practice:
 The `userData` field encodes the exit type and parameters. Different pool types support different exit kinds.
 
 <Info>
-When encoding `userData` for pools that include their own LP token as part of the pool's tokens, the LP tokens are not included in the `userData`.
+  When encoding `userData` for pools that include their own LP token as part of the pool's tokens,
+  the LP tokens are not included in the `userData`.
 </Info>
 
 ## ExitKind enum
@@ -99,8 +101,8 @@ enum ExitKind {
 
 Exit a `$BERA`/`$HONEY` pool to receive only `$BERA`:
 
-| Step | ExitKind                      | Assets        | Parameters                              | Description                                    |
-| ---- | ----------------------------- | ------------- | --------------------------------------- | ---------------------------------------------- |
+| Step | ExitKind                      | Assets        | Parameters                                | Description                                      |
+| ---- | ----------------------------- | ------------- | ----------------------------------------- | ------------------------------------------------ |
 | 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated `$BERA` |
 
 ### Example 2: Proportional exit (EXACT_LP_IN_FOR_TOKENS_OUT)
@@ -115,6 +117,6 @@ Exit a `$BERA`/`$HONEY` pool proportionally:
 
 Exit a `$BERA`/`$HONEY`/`$DAI` pool for specific token amounts:
 
-| Step | ExitKind                   | Assets             | Parameters                                                        | Description                                       |
-| ---- | -------------------------- | ------------------ | ----------------------------------------------------------------- | ------------------------------------------------- |
+| Step | ExitKind                   | Assets             | Parameters                                                          | Description                                       |
+| ---- | -------------------------- | ------------------ | ------------------------------------------------------------------- | ------------------------------------------------- |
 | 1    | LP_IN_FOR_EXACT_TOKENS_OUT | [BERA, HONEY, DAI] | amountsOut: [10 BERA, 100 HONEY, 50 DAI]<br />maxLPAmountIn: 200 LP | Receive exact token amounts, sending up to 200 LP |

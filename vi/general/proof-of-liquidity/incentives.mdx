@@ -10,7 +10,10 @@ Proof-of-Liquidity (PoL) cho phép protocol khuyến khích validator hướng e
 Validator có thể nhận Incentive do Reward Vaults đã whitelist cung cấp bằng cách hướng emission $BGT của họ tới các vault đó, theo Reward Allocation của validator—danh sách Reward Vaults mà validator hướng phần trăm emission $BGT tới.
 
 <Frame>
-  <img src="/images/general/berachain-incentive-marketplace.png" alt="Sơ đồ luồng chợ incentive reward vault Berachain" />
+  <img
+    src="/images/general/berachain-incentive-marketplace.png"
+    alt="Sơ đồ luồng chợ incentive reward vault Berachain"
+  />
 </Frame>
 
 ### Luồng phân phối Incentive
@@ -29,11 +32,11 @@ Phân phối Incentive diễn ra như sau:
 
 Tổng quan, Incentive liên quan 3 bên:
 
-| User      | Mô tả & Động lực                                                                                                                                                                                                                      |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Booster   | Bất kỳ user nào boost validator bằng $BGT. Điều này tăng emission $BGT của validator, cho phép họ thu thêm Incentive từ Reward Vaults. Booster nhận một phần Incentive này.                                                          |
-| Validator | Nút trong Active Set hướng emission $BGT tới các Reward Vaults khác nhau theo phân bổ Reward Allocation của họ, thu Incentive từ Reward Vaults và lấy một phần trăm (Commission Rate) trên Incentive thu được.                       |
-| Protocol  | Thực thể, nhóm hoặc tổ chức cung cấp incentive token cho Reward Vault tương ứng nhằm thu emission $BGT cho protocol và/hoặc người dùng của họ.                                                                                      |
+| User      | Mô tả & Động lực                                                                                                                                                                                               |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Booster   | Bất kỳ user nào boost validator bằng $BGT. Điều này tăng emission $BGT của validator, cho phép họ thu thêm Incentive từ Reward Vaults. Booster nhận một phần Incentive này.                                    |
+| Validator | Nút trong Active Set hướng emission $BGT tới các Reward Vaults khác nhau theo phân bổ Reward Allocation của họ, thu Incentive từ Reward Vaults và lấy một phần trăm (Commission Rate) trên Incentive thu được. |
+| Protocol  | Thực thể, nhóm hoặc tổ chức cung cấp incentive token cho Reward Vault tương ứng nhằm thu emission $BGT cho protocol và/hoặc người dùng của họ.                                                                 |
 
 ## Cơ chế Incentive
 
@@ -88,21 +91,26 @@ Validator A có Incentive Commission `5%` và hướng 1 $BGT emission tới Rew
 
 Từ `100 $USDC`, validator nhận `5 $USDC` theo commission, còn lại `95 $USDC` cho bất kỳ ai đã boost validator.
 
-| Bên         | $BGT Boost Cho Val A | % Tổng Boost | Tổng Reward Incentive Token    |
-| ----------- | -------------------- | ----------- | ------------------------------ |
-| Validator A | 20 $BGT              | 25%         | .05 × 100 + .25 × 95 = 28.75 $USDC |
-| Manny       | 40 $BGT              | 50%         | .5 × 95 = 47.50 $USDC          |
-| Cami        | 10 $BGT              | 12.5%       | .125 × 95 = 11.875 $USDC       |
-| Jintao      | 10 $BGT              | 12.5%       | .125 × 95 = 11.875 $USDC       |
+| Bên         | $BGT Boost Cho Val A | % Tổng Boost | Tổng Reward Incentive Token        |
+| ----------- | -------------------- | ------------ | ---------------------------------- |
+| Validator A | 20 $BGT              | 25%          | .05 × 100 + .25 × 95 = 28.75 $USDC |
+| Manny       | 40 $BGT              | 50%          | .5 × 95 = 47.50 $USDC              |
+| Cami        | 10 $BGT              | 12.5%        | .125 × 95 = 11.875 $USDC           |
+| Jintao      | 10 $BGT              | 12.5%        | .125 × 95 = 11.875 $USDC           |
 
 Validator có thể thay đổi phần trăm commission bằng cách trước tiên queue tỷ lệ để thông báo cho người dùng về thay đổi sắp tới, chờ `16,382` block, sau đó bất kỳ ai có thể kích hoạt tỷ lệ mới cho validator.
 
 <Tip>
-Commission validator không vượt quá **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Mọi nỗ lực queue giá trị cao hơn sẽ revert, và giá trị lưu trữ trên mức cap bị clamp khi đọc.
+  Commission validator không vượt quá **20%** (`MAX_COMMISSION_RATE = 0.2e4`). Mọi nỗ lực queue giá
+  trị cao hơn sẽ revert, và giá trị lưu trữ trên mức cap bị clamp khi đọc.
 </Tip>
 
 <Info>
-**Thời điểm** emission BGT (kích hoạt phân phối incentive) do chế độ emission của Reward Vault điều khiển. Trong khi tỷ giá đổi incentive token do token manager của protocol đặt, thời điểm phân phối được quản lý riêng. Xem [Chế độ emission BGT](/vi/general/proof-of-liquidity/reward-vaults#bgt-emission-modes) để biết chi tiết đầy đủ về chế độ duration-based và target rate.
+  **Thời điểm** emission BGT (kích hoạt phân phối incentive) do chế độ emission của Reward Vault
+  điều khiển. Trong khi tỷ giá đổi incentive token do token manager của protocol đặt, thời điểm phân
+  phối được quản lý riêng. Xem [Chế độ emission
+  BGT](/vi/general/proof-of-liquidity/reward-vaults#bgt-emission-modes) để biết chi tiết đầy đủ về
+  chế độ duration-based và target rate.
 </Info>
 
 ## Chuyển hướng Incentive

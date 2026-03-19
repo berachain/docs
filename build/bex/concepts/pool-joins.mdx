@@ -4,7 +4,8 @@ description: "Add liquidity to BEX pools via the Vault joinPool function."
 ---
 
 <Warning>
-Calls to `joinPool()` must be made on the BEX Vault contract. You cannot send this command directly to a pool.
+  Calls to `joinPool()` must be made on the BEX Vault contract. You cannot send this command
+  directly to a pool.
 </Warning>
 
 To add liquidity to a pool, you must call the `joinPool` function on the BEX Vault.
@@ -84,7 +85,8 @@ enum JoinKind {
 | ALL_TOKENS_IN_FOR_EXACT_LP_OUT | Send estimated token quantities proportionally, receive precise LP tokens |
 
 <Info>
-When encoding `userData` for pools that include their own LP token, the LP tokens are not included except for `INIT` joins.
+  When encoding `userData` for pools that include their own LP token, the LP tokens are not included
+  except for `INIT` joins.
 </Info>
 
 ## userData encoding

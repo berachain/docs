@@ -9,10 +9,10 @@ A Berachain node consists of two clients running together: a **consensus client*
 
 ### Hardware
 
-| Component     | Requirement |
-| ------------- | ----------- |
-| **OS**        | Linux AMD64, Linux ARM64 |
-| **CPU / RAM** | 4 Physical Cores, 16GB RAM |
+| Component     | Requirement                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **OS**        | Linux AMD64, Linux ARM64                                                                                                 |
+| **CPU / RAM** | 4 Physical Cores, 16GB RAM                                                                                               |
 | **Storage**   | 1TB minimum (more for long-term); Local SSD or on-instance storage preferred; network volumes require at least 1000 IOPS |
 
 ### Software
@@ -45,16 +45,18 @@ bera-reth --version  # or bera-geth version
 Optional step 9 covers testing your node's RPC endpoints.
 
 <Tip>
-For production deployments, consider [docker images](https://github.com/berachain/beacon-kit/pkgs/container/beacon-kit) or [community-maintained Ansible playbooks](https://github.com/RhinoStake/ansible-berachain) that deploy docker containers. For local experimentation with validator mechanics, see [Local Devnet with Kurtosis](/nodes/guides/local-devnet-kurtosis).
+  For production deployments, consider [docker
+  images](https://github.com/berachain/beacon-kit/pkgs/container/beacon-kit) or
+  [community-maintained Ansible playbooks](https://github.com/RhinoStake/ansible-berachain) that
+  deploy docker containers. For local experimentation with validator mechanics, see [Local Devnet
+  with Kurtosis](/nodes/guides/local-devnet-kurtosis).
 </Tip>
 
 ## Step 1 - Download scripts
 
 Make an area to work in, then clone the Berachain node scripts. These scripts handle configuration, parameter fetching, and client startup.
 
-<Info>
-If you're a Unix traditionalist, use `/opt/beranode` as your working directory.
-</Info>
+<Info>If you're a Unix traditionalist, use `/opt/beranode` as your working directory.</Info>
 
 ```bash
 # FROM: $HOME
@@ -190,7 +192,8 @@ Your genesis block hash **must** agree with the above for your chosen chain.
 Snapshots are collections of files from a node's backend that represent its state at a specific time. Restoring a snapshot is much faster than syncing from the network, so this step can dramatically speed up your initial sync on a new node.
 
 <Info>
-Do this step **before** starting your clients (Step 8). If you've already started syncing, you'll need to stop the clients, clean the data directories, then restore snapshots.
+  Do this step **before** starting your clients (Step 8). If you've already started syncing, you'll
+  need to stop the clients, clean the data directories, then restore snapshots.
 </Info>
 
 Snapshots can be applied to both the consensus (beacond) and execution clients. Restoring both snapshots simultaneously provides the fastest sync.
@@ -343,16 +346,16 @@ In the second, run the execution client. Here it is for Bera-Reth:
 Initially this will not appear to respond, but within a minute blocks should begin flowing. There should not be a significant number of error messages, except for occasional minor complaints about disconnecting or slow peers.
 
 <Tip>
-Both clients are running and will begin syncing with the network. The node will continue syncing in the background. You can proceed to the optional testing steps below, or leave the clients running to complete their sync.
+  Both clients are running and will begin syncing with the network. The node will continue syncing
+  in the background. You can proceed to the optional testing steps below, or leave the clients
+  running to complete their sync.
 </Tip>
 
 ## Step 9 - Testing your node (optional)
 
 Now that your RPC is running, verify that the network is working by performing a few RPC requests.
 
-<Tip>
-Make sure that your node is fully synced before proceeding with these steps.
-</Tip>
+<Tip>Make sure that your node is fully synced before proceeding with these steps.</Tip>
 
 ### Check sync status
 

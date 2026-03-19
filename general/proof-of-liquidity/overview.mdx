@@ -24,7 +24,10 @@ BeraChef manages the configuration layer of PoL, controlling how validators dire
 ## PoL lifecycle
 
 <Frame>
-  <img src="/images/general/proof-of-liquidity-steps.png" alt="Berachain Proof-of-Liquidity steps diagram" />
+  <img
+    src="/images/general/proof-of-liquidity-steps.png"
+    alt="Berachain Proof-of-Liquidity steps diagram"
+  />
 </Frame>
 
 <Steps>
@@ -32,20 +35,24 @@ BeraChef manages the configuration layer of PoL, controlling how validators dire
     The journey begins when a Prospective Validator stakes their `$BERA` as a security bond. Validators are chosen to propose blocks with a probability proportional to their staked amount. For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (see [emissions](/general/proof-of-liquidity/block-rewards)).
 
     **For Validators**: Learn about the validator lifecycle.
+
   </Step>
   <Step title="Block reward distribution">
     After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted Reward Vaults of their choosing. In exchange for directing their emissions, validators receive protocol-provided Incentives from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
 
     **For Validators**: Learn about managing your reward allocations and setting commission rates.
+
   </Step>
   <Step title="Liquidity provider flow">
     The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. You can provide liquidity to protocols like BEX and receive receipt tokens as proof of your contribution. These receipt tokens are then staked in Reward Vaults, where you earn `$BGT` proportional to your share of the vault.
 
     Learn about [integrating with Berachain's incentive system](/general/proof-of-liquidity/incentives) and [Reward Vault design](/general/proof-of-liquidity/reward-vaults).
+
   </Step>
   <Step title="Delegation cycle">
     As `$BGT` Holders accumulate tokens, they can delegate them to validators, directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
 
     **For BGT Holders**: Learn how to boost a validator with BGT to participate in the delegation cycle.
+
   </Step>
 </Steps>

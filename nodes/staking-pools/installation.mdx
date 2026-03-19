@@ -24,7 +24,9 @@ There are many useful scripts under `install-helpers/` which wrap multi-step ope
 - **stake.sh**: Generates a staking transaction to add BERA to your pool
 
 <Warning>
-All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not send transactions without your confirmation. By default, scripts use Ledger for signing; set `PRIVATE_KEY` in `env.sh` if you prefer a local key.
+  All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not
+  send transactions without your confirmation. By default, scripts use Ledger for signing; set
+  `PRIVATE_KEY` in `env.sh` if you prefer a local key.
 </Warning>
 
 ## Requirements
@@ -97,7 +99,9 @@ You should see the SmartOperator, StakingPool, StakingRewardsVault, and Incentiv
 ## 6. Set minimum effective balance
 
 <Warning>
-The `minEffectiveBalance` parameter determines when your staking pool activates its validator on the consensus layer. If you don't set this value correctly, your pool may accumulate deposits without ever activating.
+  The `minEffectiveBalance` parameter determines when your staking pool activates its validator on
+  the consensus layer. If you don't set this value correctly, your pool may accumulate deposits
+  without ever activating.
 </Warning>
 
 Set the value using your SmartOperator contract:

@@ -15,10 +15,10 @@ The `BalancerApi` class provides helper functions for interacting with the Beran
 const balancerApi = new BalancerApi(apiUrl: string, chainId: ChainId);
 ```
 
-| Name    | Type   | Description                | Mainnet Value                          |
-| ------- | ------ | -------------------------- | -------------------------------------- |
+| Name    | Type   | Description                | Mainnet Value                                    |
+| ------- | ------ | -------------------------- | ------------------------------------------------ |
 | apiUrl  | string | Url of API                 | `https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/` |
-| chainId | number | Chain that will be queried | `80094`             |
+| chainId | number | Chain that will be queried | `80094`                                          |
 
 ### Properties
 
@@ -197,7 +197,7 @@ AddLiquidityBuildCallOutput;
 Builds the addLiquidity transaction using user defined slippage and Permit2 signature for token approval.
 
 <Info>
-Check out the [Permit2 Helper section](#permit2-helper) on how to generate a Permit2 signature.
+  Check out the [Permit2 Helper section](#permit2-helper) on how to generate a Permit2 signature.
 </Info>
 
 ```typescript
@@ -324,7 +324,7 @@ RemoveLiquidityBuildCallOutput;
 Builds the removeLiquidity transaction using user defined slippage and Permit signature for token approval.
 
 <Info>
-Check out the [Permit Helper section](#permit-helper) on how to generate a Permit signature.
+  Check out the [Permit Helper section](#permit-helper) on how to generate a Permit signature.
 </Info>
 
 ```typescript
@@ -432,7 +432,7 @@ SwapBuildOutputExactIn | SwapBuildOutputExactOut;
 Builds the swap transaction using user defined slippage and Permit2 signature for token approval.
 
 <Info>
-Check out the [Permit2 Helper section](#permit2-helper) on how to generate a Permit2 signature.
+  Check out the [Permit2 Helper section](#permit2-helper) on how to generate a Permit2 signature.
 </Info>
 
 ```typescript

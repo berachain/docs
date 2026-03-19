@@ -33,6 +33,7 @@ Berachain/
 ```
 
 **Key Pages**:
+
 - `/berachain/introduction.mdx` - Main landing page
 - `/berachain/learn/proof-of-liquidity.mdx` - Core innovation
 - `/berachain/developers/quickstart.mdx` - Developer onboarding
@@ -58,6 +59,7 @@ BEX/
 ```
 
 **Key Pages**:
+
 - `/bex/introduction.mdx` - BEX overview
 - `/bex/guides/trading.mdx` - How to trade
 - `/bex/developers/integration.mdx` - SDK integration
@@ -83,6 +85,7 @@ Bend/
 ```
 
 **Key Pages**:
+
 - `/bend/introduction.mdx` - Bend overview
 - `/bend/guides/lending.mdx` - How to lend
 - `/bend/developers/integration.mdx` - SDK integration
@@ -92,6 +95,7 @@ Bend/
 ### User Journey Examples
 
 #### New User Learning About Berachain:
+
 ```
 1. Click "Berachain" tab
 2. Read Introduction
@@ -100,6 +104,7 @@ Bend/
 ```
 
 #### Trader Using BEX:
+
 ```
 1. Click "BEX" tab
 2. Read Introduction
@@ -108,6 +113,7 @@ Bend/
 ```
 
 #### Developer Building with Bend:
+
 ```
 1. Click "Bend" tab
 2. Read Introduction
@@ -118,18 +124,21 @@ Bend/
 ## Global Navigation Elements
 
 ### Top Navbar Links:
+
 - **BEX** → External link to https://bex.berachain.com
 - **Bend** → External link to https://bend.berachain.com
 - **Faucet** → External link to https://faucet.berachain.com
 - **Launch App** (button) → https://berachain.com
 
 ### Sidebar Anchors (visible on all tabs):
+
 - **Website** → https://berachain.com
 - **GitHub** → https://github.com/berachain
 - **Discord** → https://discord.gg/berachain
 - **Blog** → https://blog.berachain.com
 
 ### Footer Social Links:
+
 - Twitter (X)
 - GitHub
 - Discord
@@ -168,16 +177,19 @@ All navigation is configured in `docs.json`:
 Documentation frequently cross-references between tabs:
 
 ### Example 1: Berachain → BEX
+
 ```mdx
 Learn how to trade on [BEX](/bex/guides/trading)
 ```
 
 ### Example 2: BEX → Bend
+
 ```mdx
 Use your LP tokens as collateral in [Bend](/bend/guides/borrowing)
 ```
 
 ### Example 3: Bend → Berachain
+
 ```mdx
 Understand [Proof-of-Liquidity](/berachain/learn/proof-of-liquidity) to maximize BGT rewards
 ```
@@ -185,14 +197,18 @@ Understand [Proof-of-Liquidity](/berachain/learn/proof-of-liquidity) to maximize
 ## Content Patterns
 
 ### Introduction Pages
+
 Each tab has an introduction that includes:
+
 - Overview of the product
 - Key features (CardGroup)
 - Quick navigation cards
 - Links to getting started guides
 
 ### Guide Pages
+
 User-facing guides include:
+
 - Step-by-step instructions (Steps component)
 - Visual examples
 - Code snippets where relevant
@@ -200,7 +216,9 @@ User-facing guides include:
 - Next steps section
 
 ### Developer Pages
+
 Technical integration guides include:
+
 - Installation instructions (CodeGroup)
 - SDK examples
 - Direct contract interaction
@@ -209,7 +227,9 @@ Technical integration guides include:
 - Best practices
 
 ### Contract Pages
+
 Smart contract documentation includes:
+
 - Contract addresses (tables)
 - Key functions
 - Security audits
@@ -218,16 +238,19 @@ Smart contract documentation includes:
 ## Visual Design Elements
 
 ### Color Scheme
+
 - **Primary**: `#E17726` (Berachain orange)
 - **Light**: `#F89D4E`
 - **Dark**: `#C96516`
 
 ### Icons
+
 - **Berachain**: cube
 - **BEX**: arrow-right-arrow-left
 - **Bend**: hand-holding-dollar
 
 ### Components Used
+
 - `<Card>` - Navigation and feature highlights
 - `<CardGroup>` - Grouped navigation
 - `<Steps>` - Step-by-step instructions
@@ -248,11 +271,13 @@ Smart contract documentation includes:
 ### To add a new page under Berachain:
 
 1. Create the file:
+
 ```bash
 touch berachain/learn/new-topic.mdx
 ```
 
 2. Add to `docs.json`:
+
 ```json
 {
   "group": "Learn",
@@ -260,12 +285,13 @@ touch berachain/learn/new-topic.mdx
     "berachain/learn/overview",
     "berachain/learn/proof-of-liquidity",
     "berachain/learn/tokenomics",
-    "berachain/learn/new-topic"  // Add here
+    "berachain/learn/new-topic" // Add here
   ]
 }
 ```
 
 3. Add frontmatter to the file:
+
 ```mdx
 ---
 title: "New Topic"
@@ -283,10 +309,7 @@ description: "Description of new topic"
   "groups": [
     {
       "group": "New Group Name",
-      "pages": [
-        "berachain/new-group/page1",
-        "berachain/new-group/page2"
-      ]
+      "pages": ["berachain/new-group/page1", "berachain/new-group/page2"]
     }
   ]
 }
@@ -295,6 +318,7 @@ description: "Description of new topic"
 ## URLs and Paths
 
 ### URL Structure:
+
 ```
 https://docs.berachain.com/berachain/learn/proof-of-liquidity
                          └─tab─┘ └─group┘ └────page────┘
@@ -307,6 +331,7 @@ https://docs.berachain.com/bend/developers/integration
 ```
 
 ### Internal Links:
+
 ```mdx
 [Link text](/berachain/learn/proof-of-liquidity)
 [Link text](/bex/guides/trading)
@@ -320,6 +345,7 @@ Search is enabled by default and indexes all content across all three tabs. User
 ## Mobile Experience
 
 The tab navigation adapts to mobile:
+
 - Tabs become a dropdown selector on mobile
 - Sidebar navigation is collapsible
 - All components are responsive
@@ -338,4 +364,3 @@ The tab navigation adapts to mobile:
 ---
 
 This structure allows users to easily navigate between Berachain core documentation, BEX (DEX), and Bend (Lending) all within one unified documentation site!
-

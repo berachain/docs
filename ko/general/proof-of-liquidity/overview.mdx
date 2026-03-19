@@ -24,7 +24,10 @@ BeraChef는 PoL의 구성 레이어를 관리하며, 검증자가 BGT 보상을 
 ## PoL 생명주기
 
 <Frame>
-  <img src="/images/general/proof-of-liquidity-steps.png" alt="Berachain 유동성 증명 단계 다이어그램" />
+  <img
+    src="/images/general/proof-of-liquidity-steps.png"
+    alt="Berachain 유동성 증명 단계 다이어그램"
+  />
 </Frame>
 
 <Steps>
@@ -32,20 +35,24 @@ BeraChef는 PoL의 구성 레이어를 관리하며, 검증자가 BGT 보상을 
     잠재 검증자가 `$BERA`를 보안 채권으로 스테이킹할 때 여정이 시작됩니다. 검증자는 스테이킹된 금액에 비례하는 확률로 블록 제안을 위해 선택됩니다. 제안된 각 블록에 대해 검증자는 기본 배출과 boost 백분율에 기반한 변동 보상 배출을 모두 받습니다 ([배출](/ko/general/proof-of-liquidity/block-rewards) 참조).
 
     **검증자**: 검증자 생명주기에 대해 알아보세요.
+
   </Step>
   <Step title="블록 보상 분배">
     기본 `$BGT` 보상을 자신을 위해 수집한 후, 검증자는 선택한 화이트리스트 보상 볼트로 나머지 변동 `$BGT` 보상을 전달합니다. 배출을 전달하는 대가로 검증자는 보상 볼트에서 프로토콜 제공 인센티브를 받습니다(`$BGT`는 프로토콜에 유동성을 공급하는 사용자가 획득).
 
     **검증자**: 보상 할당 관리 및 수수료율 설정에 대해 알아보세요.
+
   </Step>
   <Step title="유동성 공급자 흐름">
     생태계의 유동성 공급자(즉, 사용자)는 PoL에서 중요한 역할을 합니다. BEX와 같은 프로토콜에 유동성을 공급하고 기여 증명으로 영수증 토큰을 받을 수 있습니다. 이러한 영수증 토큰은 보상 볼트에 스테이킹되어 볼트의 지분에 비례하여 `$BGT`를 획득합니다.
 
     [Berachain 인센티브 시스템 통합](/ko/general/proof-of-liquidity/incentives) 및 [보상 볼트 설계](/ko/general/proof-of-liquidity/reward-vaults)에 대해 알아보세요.
+
   </Step>
   <Step title="위임 사이클">
     `$BGT` 보유자가 토큰을 축적하면 검증자에게 위임하여 검증자의 boost에 직접 영향을 미칠 수 있습니다. 이는 더 높은 위임이 증가된 검증자 boost로 이어지고, 해당 검증자가 블록을 제안할 때 더 큰 `$BGT` 배출로 이어지는 선순환을 만듭니다. 검증자는 더 많은 boost를 유치하기 위해 받은 프로토콜 인센티브를 위임자와 공유하도록 인센티브를 받아 협력적인 생태계를 조성합니다.
 
     **BGT 보유자**: 위임 사이클에 참여하기 위해 BGT로 검증자를 부스트하는 방법을 알아보세요.
+
   </Step>
 </Steps>

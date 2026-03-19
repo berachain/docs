@@ -10,47 +10,60 @@ description: "Các câu hỏi phổ biến về Berachain."
     - Thời gian block: Thay đổi, kiểm tra [Berascan](https://berascan.com) để biết mới nhất.
     - Giao dịch mỗi giây (TPS): Có thể thay đổi nhưng công thức sau giúp ước tính: (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
     - Finality: single slot finality
+
   </Accordion>
 
-  <Accordion title="DEX là gì?">
-    DEX là Sàn giao dịch phi tập trung. Đó là nơi bạn có thể mua bán token trực tiếp trên chain thay vì qua bất kỳ dịch vụ tập trung nào. Nghĩa là mọi thanh khoản có thể xem trực tiếp on-chain và do chính smart contract sở hữu một cách có thể xác minh. DEX cho phép bạn swap token trực tiếp từ ví, cũng như cho phép bất kỳ ai phát hành token riêng và cung cấp thanh khoản.
-  </Accordion>
+<Accordion title="DEX là gì?">
+  DEX là Sàn giao dịch phi tập trung. Đó là nơi bạn có thể mua bán token trực tiếp trên chain thay
+  vì qua bất kỳ dịch vụ tập trung nào. Nghĩa là mọi thanh khoản có thể xem trực tiếp on-chain và do
+  chính smart contract sở hữu một cách có thể xác minh. DEX cho phép bạn swap token trực tiếp từ ví,
+  cũng như cho phép bất kỳ ai phát hành token riêng và cung cấp thanh khoản.
+</Accordion>
 
-  <Accordion title="Swap là gì?">
-    Swap là quá trình đổi một token lấy token khác. Có thể coi là mua hoặc bán tùy token bạn đang xem. Ví dụ nếu bạn muốn mua `$BERA` bằng `$ETH`, bạn sẽ swap `$ETH` lấy `$BERA`. Về bản chất là "bán" `$ETH` và "mua" `$BERA`.
-  </Accordion>
+<Accordion title="Swap là gì?">
+  Swap là quá trình đổi một token lấy token khác. Có thể coi là mua hoặc bán tùy token bạn đang xem.
+  Ví dụ nếu bạn muốn mua `$BERA` bằng `$ETH`, bạn sẽ swap `$ETH` lấy `$BERA`. Về bản chất là "bán"
+  `$ETH` và "mua" `$BERA`.
+</Accordion>
 
-  <Accordion title="Swap tốn bao nhiêu?">
-    Mỗi swap có phí thay đổi tùy theo phí đặt khi tạo pool. Phí thường gặp là 0,05%, 0,1%, 0,3% hoặc 1% nhưng bạn nên luôn kiểm tra khi swap để đảm bảo chấp nhận được phí của pool đó.
-  </Accordion>
+<Accordion title="Swap tốn bao nhiêu?">
+  Mỗi swap có phí thay đổi tùy theo phí đặt khi tạo pool. Phí thường gặp là 0,05%, 0,1%, 0,3% hoặc
+  1% nhưng bạn nên luôn kiểm tra khi swap để đảm bảo chấp nhận được phí của pool đó.
+</Accordion>
 
-  <Accordion title="Thanh khoản là gì?">
-    Thanh khoản là thuật ngữ chỉ lượng token có sẵn để swap. Token càng nhiều thanh khoản thì càng dễ swap.
-  </Accordion>
+<Accordion title="Thanh khoản là gì?">
+  Thanh khoản là thuật ngữ chỉ lượng token có sẵn để swap. Token càng nhiều thanh khoản thì càng dễ
+  swap.
+</Accordion>
 
-  <Accordion title="Liquidity pool là gì?">
-    Liquidity pool là cặp 2 hoặc nhiều token mà liquidity provider deposit token vào. Điều này cho phép người dùng DEX swap giữa bất kỳ token nào trong pool.
-  </Accordion>
+<Accordion title="Liquidity pool là gì?">
+  Liquidity pool là cặp 2 hoặc nhiều token mà liquidity provider deposit token vào. Điều này cho
+  phép người dùng DEX swap giữa bất kỳ token nào trong pool.
+</Accordion>
 
-  <Accordion title="Liquidity provider là gì?">
-    Liquidity provider deposit token vào liquidity pool. Họ nhận một phần phí từ swap trong pool.
-  </Accordion>
+<Accordion title="Liquidity provider là gì?">
+  Liquidity provider deposit token vào liquidity pool. Họ nhận một phần phí từ swap trong pool.
+</Accordion>
 
-  <Accordion title="APY là gì?">
-    APY là lợi suất phần trăm hàng năm. Trong ngữ cảnh pool BEX, đây là APY hiện tại của pool. Yield APY đến từ phí thu trên mỗi swap dùng pool đó.
-  </Accordion>
+<Accordion title="APY là gì?">
+  APY là lợi suất phần trăm hàng năm. Trong ngữ cảnh pool BEX, đây là APY hiện tại của pool. Yield
+  APY đến từ phí thu trên mỗi swap dùng pool đó.
+</Accordion>
 
-  <Accordion title="$HONEY là gì?">
-    `$HONEY` là stablecoin gốc của hệ sinh thái Berachain. Đó là stablecoin đa collateral và được dùng trong toàn bộ hệ sinh thái Berachain.
-  </Accordion>
+<Accordion title="$HONEY là gì?">
+  `$HONEY` là stablecoin gốc của hệ sinh thái Berachain. Đó là stablecoin đa collateral và được dùng
+  trong toàn bộ hệ sinh thái Berachain.
+</Accordion>
 
-  <Accordion title="Mint hoặc burn $HONEY có tốn phí không?">
-    Để đảm bảo ổn định, có phí nhỏ trên mỗi lần mint và burn `$HONEY`. Ngoài ra vì mint & burn cần giao dịch nên sẽ có phí gas nhỏ bằng `$BERA`.
-  </Accordion>
+<Accordion title="Mint hoặc burn $HONEY có tốn phí không?">
+  Để đảm bảo ổn định, có phí nhỏ trên mỗi lần mint và burn `$HONEY`. Ngoài ra vì mint & burn cần
+  giao dịch nên sẽ có phí gas nhỏ bằng `$BERA`.
+</Accordion>
 
-  <Accordion title="$BGT là gì?">
-    $BGT là token staking & quản trị của Berachain. Nghĩa là nó dùng để bảo mật mạng & kiếm reward qua Proof of Liquidity cũng như bỏ phiếu cho governance proposal.
-  </Accordion>
+<Accordion title="$BGT là gì?">
+  $BGT là token staking & quản trị của Berachain. Nghĩa là nó dùng để bảo mật mạng & kiếm reward qua
+  Proof of Liquidity cũng như bỏ phiếu cho governance proposal.
+</Accordion>
 
   <Accordion title="Validator là gì?">
     Validator có thể chỉ ba điều:
@@ -58,39 +71,46 @@ description: "Các câu hỏi phổ biến về Berachain."
     1. Nút blockchain xác thực giao dịch, tạo block và đồng thuận với validator khác trong mạng
     2. Thực thể sở hữu và vận hành nút validator
     3. Sự kết hợp #1 và #2 quản lý một phần Proof of Liquidity & phiếu Governance
+
   </Accordion>
 
-  <Accordion title="Tại sao nên boost validator bằng $BGT?">
-    Delegating `$BGT` cho phép bạn tham gia Proof of Liquidity đồng thời giúp bảo mật mạng.
-  </Accordion>
+<Accordion title="Tại sao nên boost validator bằng $BGT?">
+  Delegating `$BGT` cho phép bạn tham gia Proof of Liquidity đồng thời giúp bảo mật mạng.
+</Accordion>
 
   <Accordion title="Tại sao nên boost $BGT thay vì burn lấy $BERA?">
     Lý do chính là reward. Với Proof of Liquidity bạn có thể kiếm nhiều loại reward:
 
     - Phần [incentive](/vi/general/proof-of-liquidity/incentives) do protocol cung cấp, đổi lấy emission `$BGT` hướng tới Reward Vaults của protocol đó
     - Phần phí dApp core Berachain, cụ thể phí từ BEX và HoneySwap
+
   </Accordion>
 
-  <Accordion title="Làm sao để có $BGT?">
-    Bạn kiếm `$BGT` qua Reward Vaults khi validator hướng emission `$BGT` tới chúng. Xem thêm [Kiếm $BGT](/vi/general/tokens/bgt#earning-bgt).
-  </Accordion>
+<Accordion title="Làm sao để có $BGT?">
+  Bạn kiếm `$BGT` qua Reward Vaults khi validator hướng emission `$BGT` tới chúng. Xem thêm [Kiếm
+  $BGT](/vi/general/tokens/bgt#earning-bgt).
+</Accordion>
 
-  <Accordion title="Governance là gì?">
-    Governance là quy trình cộng đồng quyết định thay đổi gì đối với protocol Berachain. Bao gồm cách nâng cấp node và tham số đặt cho các thành phần khác nhau trên chain.
-  </Accordion>
+<Accordion title="Governance là gì?">
+  Governance là quy trình cộng đồng quyết định thay đổi gì đối với protocol Berachain. Bao gồm cách
+  nâng cấp node và tham số đặt cho các thành phần khác nhau trên chain.
+</Accordion>
 
-  <Accordion title="Sau khi cung cấp thanh khoản vào pool đủ điều kiện trên BEX, làm sao nhận $BGT?">
-    Mỗi pool đủ điều kiện (whitelist) trên BEX có LP token liên kết. Khi deposit thanh khoản vào pool BEX, pool phát hành LP token tương ứng với tỷ lệ đóng góp tổng của bạn. Bạn phải stake LP token này vào Reward Vault tương ứng để đủ điều kiện nhận `$BGT`. Khi validator hướng emission `$BGT` tới Reward Vaults, bạn tích lũy `$BGT` để claim. Bạn phải thực hiện thao tác bổ sung để claim `$BGT`—protocol _KHÔNG_ tự động gửi cho bạn.
-  </Accordion>
+<Accordion title="Sau khi cung cấp thanh khoản vào pool đủ điều kiện trên BEX, làm sao nhận $BGT?">
+  Mỗi pool đủ điều kiện (whitelist) trên BEX có LP token liên kết. Khi deposit thanh khoản vào pool
+  BEX, pool phát hành LP token tương ứng với tỷ lệ đóng góp tổng của bạn. Bạn phải stake LP token
+  này vào Reward Vault tương ứng để đủ điều kiện nhận `$BGT`. Khi validator hướng emission `$BGT`
+  tới Reward Vaults, bạn tích lũy `$BGT` để claim. Bạn phải thực hiện thao tác bổ sung để claim
+  `$BGT`—protocol _KHÔNG_ tự động gửi cho bạn.
+</Accordion>
 
-  <Accordion title="Chỉ validator mới bỏ phiếu hoặc tạo proposal?">
-    Bất kỳ ai có số lượng `$BGT` tối thiểu theo yêu cầu đều có thể đề xuất và bỏ phiếu cho proposal.
-  </Accordion>
+<Accordion title="Chỉ validator mới bỏ phiếu hoặc tạo proposal?">
+  Bất kỳ ai có số lượng `$BGT` tối thiểu theo yêu cầu đều có thể đề xuất và bỏ phiếu cho proposal.
+</Accordion>
 
-  <Accordion title="Token staking thực sự của mạng là $BERA hay $BGT?">
-    - Validator stake `$BERA`
-    - Incentive mạng đến bằng `$BGT`
-  </Accordion>
+<Accordion title="Token staking thực sự của mạng là $BERA hay $BGT?">
+  - Validator stake `$BERA` - Incentive mạng đến bằng `$BGT`
+</Accordion>
 
   <Accordion title="Validator chỉ với $BERA có thể tạo block không và reward là gì?">
     Có. Validator chỉ cần stake `$BERA` trong khoảng min–max **250.000** và **10.000.000**, vào active set thì sẽ đề xuất block. Validator nhận reward bằng `$BGT`.

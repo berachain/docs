@@ -6,7 +6,9 @@ description: "Create BEX pools programmatically with the SDK."
 This guide demonstrates how to create a new BEX pool using the PoolCreationHelper contract. The PoolCreationHelper is a [Relayer](/build/bex/concepts/relayers) allowing pools to be created and joined in a single transaction, simplifying the pool creation process.
 
 <Tip>
-For more comprehensive pool creation examples, see the [pool creation examples](https://github.com/berachain/bex-sdk/tree/main/examples/pool-creation) in the BEX SDK repository.
+  For more comprehensive pool creation examples, see the [pool creation
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/pool-creation) in the BEX SDK
+  repository.
 </Tip>
 
 ## Requirements
@@ -27,21 +29,17 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 // Pool parameters
 const poolName = "HONEY-WBTC-WEIGHTED";
 const poolSymbol = "50HONEY-50WBTC";
-const createPoolTokens = [
-  honeyToken.address,
-  wbtcToken.address
-].sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+const createPoolTokens = [honeyToken.address, wbtcToken.address].sort((a, b) =>
+  a.toLowerCase() < b.toLowerCase() ? -1 : 1
+);
 
 // 50-50 weights (must add up to 1e18)
-const normalizedWeights = [
-  ethers.parseUnits('0.5', 18),
-  ethers.parseUnits('0.5', 18)
-];
+const normalizedWeights = [ethers.parseUnits("0.5", 18), ethers.parseUnits("0.5", 18)];
 
 // Initial liquidity amounts
 const amountsIn = [
-  ethers.parseUnits('1', 18),     // 1 HONEY (18 decimals)
-  ethers.parseUnits('0.0001', 8)  // 0.0001 WBTC (8 decimals)
+  ethers.parseUnits("1", 18), // 1 HONEY (18 decimals)
+  ethers.parseUnits("0.0001", 8), // 0.0001 WBTC (8 decimals)
 ];
 ```
 

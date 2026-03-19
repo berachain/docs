@@ -11,6 +11,7 @@ Reward Vaults are key infrastructure that allows protocols to leverage PoL, enab
 Only Reward Vaults approved through governance are eligible to receive `$BGT` emissions from Validators.
 
 Please see the full [Reward Vault Requirements and Guidelines](/general/help/reward-vault-guidelines) for the application process.
+
 </Info>
 
 ## User interactions
@@ -18,7 +19,10 @@ Please see the full [Reward Vault Requirements and Guidelines](/general/help/rew
 ### Staking with a reward vault
 
 <Frame>
-  <img src="/images/general/berachain-reward-vault-staking-bex.png" alt="Berachain reward vault staking flow with BEX" />
+  <img
+    src="/images/general/berachain-reward-vault-staking-bex.png"
+    alt="Berachain reward vault staking flow with BEX"
+  />
 </Frame>
 
 To receive `$BGT`, a user must stake the PoL-eligible asset in its Reward Vault. The protocol that deployed the Reward Vault decides how users acquire the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
@@ -122,7 +126,8 @@ The RewardVault APR is determined by several factors. The components of this APR
 - Price of Stake Token
 
 <Info>
-If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT` APR is 0%.
+  If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT`
+  APR is 0%.
 </Info>
 
 The units of `rewardRate` is denominated as `$BGT per second`. The above pieces of data allow you to calculate the APR on the Reward Vault in the following way:
@@ -144,7 +149,8 @@ As a concrete example of the above formula, a reward vault with the following va
 | Seconds per year     | 31,536,000                           | 31,536,000          |
 
 <Tip>
-The `rewardRate` returned is in gwei and includes an extra precision factor of `1e18`, so is effectively in wei. Normalizing it requires dividing by `1e36`.
+  The `rewardRate` returned is in gwei and includes an extra precision factor of `1e18`, so is
+  effectively in wei. Normalizing it requires dividing by `1e36`.
 </Tip>
 
 Using the formula above:

@@ -10,7 +10,8 @@ The [Berancer SDK](https://github.com/berachain/berancer-sdk) includes a Smart O
 3. Execute multi-hop swaps using the Vault contract (via [batchSwap](/build/bex/concepts/batch-swap))
 
 <Tip>
-For more comprehensive Smart Order Router examples, see the [SOR examples](https://github.com/berachain/bex-sdk/tree/main/examples/sor) in the BEX SDK repository.
+  For more comprehensive Smart Order Router examples, see the [SOR
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/sor) in the BEX SDK repository.
 </Tip>
 
 ## Example: multi-hop swap using SOR
@@ -26,7 +27,7 @@ import {
   SwapKind,
   TokenAmount,
   VAULT,
-  vaultV2Abi
+  vaultV2Abi,
 } from "@berachain-foundation/berancer-sdk";
 
 // Initialize provider and wallet
@@ -36,7 +37,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Create swap amount (e.g., 1 HONEY)
-const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, '1');
+const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, "1");
 
 // Fetch optimal swap paths
 const { paths: sorPaths, routes } = await balancerApi.sorSwapPaths.fetchSorSwapPaths({
@@ -50,28 +51,29 @@ const { paths: sorPaths, routes } = await balancerApi.sorSwapPaths.fetchSorSwapP
 // Convert SOR paths to batchSwap parameters
 const batchSwapParams = {
   kind: SwapKind.GivenIn,
-  swaps: routes.flatMap(route =>
+  swaps: routes.flatMap((route) =>
     route.hops.map((hop, index) => ({
       poolId: hop.poolId,
       assetInIndex: assets.indexOf(hop.tokenIn),
       assetOutIndex: assets.indexOf(hop.tokenOut),
-      amount: index === 0 ? tokenAmount.amount : '0',
-      userData: '0x'
+      amount: index === 0 ? tokenAmount.amount : "0",
+      userData: "0x",
     }))
   ),
-  assets: Array.from(new Set(routes.flatMap(route =>
-    route.hops.flatMap(hop => [hop.tokenIn, hop.tokenOut])
-  ))),
+  assets: Array.from(
+    new Set(routes.flatMap((route) => route.hops.flatMap((hop) => [hop.tokenIn, hop.tokenOut])))
+  ),
   funds: {
     sender: wallet.address,
     recipient: wallet.address,
     fromInternalBalance: false,
-    toInternalBalance: false
+    toInternalBalance: false,
   },
-  limits: assets.map((_, i) =>
-    i === 0
-      ? tokenAmount.amount.toString()  // Exact input amount for first token
-      : ethers.MaxInt256.toString()    // Max int256 for all other tokens
+  limits: assets.map(
+    (_, i) =>
+      i === 0
+        ? tokenAmount.amount.toString() // Exact input amount for first token
+        : ethers.MaxInt256.toString() // Max int256 for all other tokens
   ),
   deadline: BigInt(Math.floor(Date.now() / 1000) + 3600),
 };

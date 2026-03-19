@@ -81,14 +81,14 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 
 ### 파라미터
 
-| 파라미터                       | 설명                                                    | 영향                                         |
-| ----------------------------- | ------------------------------------------------------- | -------------------------------------------- |
-| x (boost)                     | 검증자에게 위임된 총 `$BGT`의 비율(범위: [0,1])         | 보상 볼트에 대한 `$BGT` 배출 결정            |
-| B (base rate)                 | 블록 생산을 위한 `$BGT` 고정 금액                        | 기준 검증자 보상 결정                        |
-| R (reward rate)               | 보상 볼트를 위한 기본 `$BGT` 금액                        | 보상 배출의 기반 설정                        |
-| a (boost multiplier)         | Boost 영향 계수                                         | 값이 높을수록 boost 중요성 증가              |
-| b (convexity parameter)      | Boost 영향 곡선 가파름                                  | 값이 높을수록 낮은 boost에 더 큰 불이익      |
-| m (minimum boosted reward rate) | 보상 볼트 배출의 최저선                               | 값이 높을수록 낮은 boost 검증자에게 유리     |
+| 파라미터                        | 설명                                            | 영향                                     |
+| ------------------------------- | ----------------------------------------------- | ---------------------------------------- |
+| x (boost)                       | 검증자에게 위임된 총 `$BGT`의 비율(범위: [0,1]) | 보상 볼트에 대한 `$BGT` 배출 결정        |
+| B (base rate)                   | 블록 생산을 위한 `$BGT` 고정 금액               | 기준 검증자 보상 결정                    |
+| R (reward rate)                 | 보상 볼트를 위한 기본 `$BGT` 금액               | 보상 배출의 기반 설정                    |
+| a (boost multiplier)            | Boost 영향 계수                                 | 값이 높을수록 boost 중요성 증가          |
+| b (convexity parameter)         | Boost 영향 곡선 가파름                          | 값이 높을수록 낮은 boost에 더 큰 불이익  |
+| m (minimum boosted reward rate) | 보상 볼트 배출의 최저선                         | 값이 높을수록 낮은 boost 검증자에게 유리 |
 
 이 공식은 블록의 총 가변 배출량을 나타냅니다. [Dedicated emission stream](#dedicated-emission-stream)이 활성화되어 있으면 일부가 먼저 DES 볼트로 분배되고, 나머지가 검증자의 보상 할당에 적용됩니다.
 
@@ -99,7 +99,10 @@ $$emission = \left[B + \max\left(m, (a + 1)\left(1 - \frac{1}{1 + ax^b}\right)R\
 $$B = 0.4, R = 0.65, a = 3.5, b = 0.4, m = 0$$
 
 <Frame>
-  <img src="/images/general/emission-scale-bgt-delegation-chart.png" alt="BGT 위임에 따른 배출 확장 차트" />
+  <img
+    src="/images/general/emission-scale-bgt-delegation-chart.png"
+    alt="BGT 위임에 따른 배출 확장 차트"
+  />
 </Frame>
 
 ## 최대 블록 인플레이션
