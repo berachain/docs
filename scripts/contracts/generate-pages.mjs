@@ -73,10 +73,12 @@ ${rows}`;
 function renderGettingStartedSnippet() {
   const polItems = Object.values(contracts.pol);
   const tokenItems = Object.values(contracts.tokens);
+  const governanceItems = Object.values(contracts.governance ?? {});
   const otherItems = Object.values(contracts.other);
   const mainSections = [
     renderAddressCategory("Proof of Liquidity", polItems, "berachainMainnet"),
     renderAddressCategory("Tokens", tokenItems, "berachainMainnet"),
+    renderAddressCategory("Governance", governanceItems, "berachainMainnet"),
     renderAddressCategory("Other", otherItems, "berachainMainnet")
   ]
     .filter(Boolean)
@@ -84,6 +86,7 @@ function renderGettingStartedSnippet() {
   const bepSections = [
     renderAddressCategory("Proof of Liquidity", polItems, "berachainBepolia"),
     renderAddressCategory("Tokens", tokenItems, "berachainBepolia"),
+    renderAddressCategory("Governance", governanceItems, "berachainBepolia"),
     renderAddressCategory("Other", otherItems, "berachainBepolia")
   ]
     .filter(Boolean)
