@@ -7,7 +7,7 @@ Berachain nodes operate as a joined pair of execution layer and consensus layer.
 
 ## What are Prometheus and Grafana?
 
-Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It functions as a time series database that collects and stores metrics from monitored targets at regular intervals. Prometheus works on a pull-based model, where it scrapes HTTP endpoints exposed by services like `beacond` or `geth`. These services listen on dedicated ports and respond with metrics in a simple text-based format. For Berachain nodes, Prometheus is essential for tracking performance metrics, resource utilization, and operational health over time.
+Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It functions as a time series database that collects and stores metrics from monitored targets at regular intervals. Prometheus works on a pull-based model, where it scrapes HTTP endpoints exposed by services like `beacond` or `reth`. These services listen on dedicated ports and respond with metrics in a simple text-based format. For Berachain nodes, Prometheus is essential for tracking performance metrics, resource utilization, and operational health over time.
 
 Grafana is a visualization and analytics platform often paired with Prometheus. While Prometheus collects and stores metrics, Grafana provides a powerful interface to query, visualize, and understand that data through customizable dashboards. It allows node operators to create graphs, charts, and alerts based on Prometheus metrics, making it easier to monitor node performance, identify issues, and track the health of Berachain nodes over time.
 
@@ -57,7 +57,7 @@ scrape_configs:
         replacement: 127.0.0.1:9115
 ```
 
-In the above configuration, monitoring is set up to ensure port 26656 (a beacond instance) and 30303 (a reth/geth instance) are listening.
+In the above configuration, monitoring is set up to ensure port 26656 (a beacond instance) and 30303 (a reth instance) are listening.
 
 When you restart Prometheus with this configuration, it should begin publishing a `probe_success` metric with a 0 or 1 value to indicate DOWN or UP.
 
@@ -91,7 +91,7 @@ With this enabled, beacond exports a considerable number of metrics. Here are so
 
 ## Monitoring execution layer
 
-Both `geth` and `reth` allow you to enable metrics with identical command line options:
+`reth` allows you to enable metrics with the following command line options:
 
 ```bash
 --metrics
@@ -99,29 +99,17 @@ Both `geth` and `reth` allow you to enable metrics with identical command line o
 --metrics.addr 0.0.0.0
 ```
 
-The address should be either on a private network or not accessible to the public via firewall rule. `reth` publishes the metrics at `/metrics`, while `geth` uses `/debug/metrics/prometheus`.
+The address should be either on a private network or not accessible to the public via firewall rule. `reth` publishes the metrics at `/metrics`.
 
-After restarting your EL to begin publishing metrics at your chosen port, add this endpoint to Prometheus. **You only need the one which matches your EL client:**
+After restarting your EL to begin publishing metrics at your chosen port, add this endpoint to Prometheus:
 
 ```yaml /etc/prometheus/prometheus.yml
 scrape_configs:
-  - job_name: geth
-    metrics_path: /debug/metrics/prometheus
-    static_configs:
-      - targets: ["localhost:9108"]
-
   - job_name: reth
     metrics_path: /metrics
     static_configs:
       - targets: ["localhost:9108"]
 ```
-
-### Geth metrics
-
-- `chain_head_finalized` — the chain height for the `_finalized` sync step
-- `eth_db_chaindata_disk_size` — the on-disk size of the chain data
-- `p2p_peers_inbound` and `p2p_peers_outbound` — the number of connections propagating transactions and blocks
-- `irate(txpool_known[5m])` — the number of new transactions introduced to the pool in the last 5 minutes, an indicator of successful peering
 
 ### Reth metrics
 

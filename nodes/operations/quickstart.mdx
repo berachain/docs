@@ -1,9 +1,9 @@
 ---
 title: "Quickstart: Run a Node"
-description: "Prerequisites, scripts, and steps to run Beacon-Kit and an execution client (Bera-Reth or Bera-Geth) on Linux or Mac."
+description: "Prerequisites, scripts, and steps to run Beacon-Kit and Bera-Reth on Linux or Mac."
 ---
 
-A Berachain node consists of two clients running together: a **consensus client** (Beacon-Kit) and an **execution client** (Bera-Reth or Bera-Geth). This guide walks you through setting up both on a Linux or Mac computer.
+A Berachain node consists of two clients running together: a **consensus client** (Beacon-Kit) and an **execution client** (Bera-Reth). This guide walks you through setting up both on a Linux or Mac computer.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ A Berachain node consists of two clients running together: a **consensus client*
 Install the required binaries before starting:
 
 1. **Beacon-Kit**: Download the appropriate binary from the [releases page](https://github.com/berachain/beacon-kit/releases) for your OS and architecture. Make it executable and place it in your PATH (e.g., `~/.local/bin/`).
-2. **Execution client**: Choose either [Bera-Reth](https://github.com/berachain/bera-reth/releases) or [Bera-Geth](https://github.com/berachain/bera-geth/releases). Download the binary for your OS and architecture, make it executable, and place it in your PATH.
+2. **Execution client**: Download [Bera-Reth](https://github.com/berachain/bera-reth/releases) for your OS and architecture, make it executable, and place it in your PATH.
 
 See [EVM Execution Clients](/nodes/architecture/evm-execution) for recommended versions.
 
@@ -28,7 +28,7 @@ Verify installation:
 
 ```bash
 beacond version
-bera-reth --version  # or bera-geth version
+bera-reth --version
 ```
 
 ## What you'll do
@@ -37,7 +37,7 @@ bera-reth --version  # or bera-geth version
 2. **Configure environment** — set environment variables for your network (mainnet or Bepolia) and node identity
 3. **Fetch parameters** — download genesis files and network configuration
 4. **Set up Beacon-Kit** — initialize the consensus client and generate keys
-5. **Set up execution client** — initialize Reth or Geth with the genesis state
+5. **Set up execution client** — initialize Reth with the genesis state
 6. **Fetch snapshots (optional)** — restore snapshots to speed up initial sync
 7. **Fetch address book (optional)** — download peer list for faster startup
 8. **Run both clients** — launch them in separate terminals; they communicate via JWT auth
@@ -67,9 +67,9 @@ rm -r guides;
 ls;
 
 # [Expected output, edited for clarity]
-# README.md                     run-geth.sh     setup-geth.sh
-# env.sh                        run-reth.sh     setup-reth.sh
-# fetch-berachain-params.sh     run-beacond.sh  setup-beacond.sh
+# README.md                     run-reth.sh     setup-reth.sh
+# env.sh                        run-beacond.sh  setup-beacond.sh
+# fetch-berachain-params.sh
 ```
 
 The file `env.sh` contains environment variables used in the other scripts.
@@ -96,7 +96,6 @@ export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 export BEACOND_BIN=$(command -v beacond || echo $(pwd)/beacond)
 export BEACOND_DATA=$(pwd)/var/beacond
 export RETH_BIN=$(command -v bera-reth || echo $(pwd)/bera-reth)
-export GETH_BIN=$(command -v bera-geth || echo $(pwd)/bera-geth)
 ```
 
 You need to set these constants:
@@ -166,11 +165,9 @@ Your validator state root **must** agree with the value shown above for your cho
 
 ## Step 5 - Set up the execution client
 
-The `setup-reth` and `setup-geth` scripts create a runtime directory and configuration for their respective chain clients. The scripts configure the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
+The `setup-reth.sh` script creates a runtime directory and configuration for the execution client. The script configures the node with pruning settings according to the `EL_ARCHIVE_NODE` setting in `env.sh`.
 
-**If you're using Bera-Reth**, run `setup-reth.sh`. **If you're using Bera-Geth**, run `setup-geth.sh` instead.
-
-Here's an example using `setup-reth`:
+Run `setup-reth.sh`:
 
 ```bash
 # FROM: ~/beranode
@@ -210,7 +207,7 @@ Berachain and the community offer snapshots for Mainnet and Bepolia. You can dow
 node fetch-berachain-snapshot.js
 
 # Or specify options:
-node fetch-berachain-snapshot.js --client geth --network testnet --type archive
+node fetch-berachain-snapshot.js --network testnet --type archive
 
 # [Expected Output]:
 # Bera Snapshot Downloader
@@ -223,7 +220,7 @@ node fetch-berachain-snapshot.js --client geth --network testnet --type archive
 
 Available options:
 
-- `--client` or `-c`: Execution client (`reth` or `geth`, default: `reth`)
+- `--client` or `-c`: Execution client (default: `reth`)
 - `--network` or `-n`: Network (`mainnet` or `testnet`, default: `mainnet`)
 - `--type` or `-t`: Snapshot type (`pruned` or `archive`, default: `pruned`)
 - `--help` or `-h`: Show help message
@@ -274,13 +271,13 @@ lz4 -d "$BEACON_SNAPSHOT" | tar xv -C var/beacond/;
 
 ### 6e - Install execution layer snapshot
 
-Extract the execution layer snapshot. The example below uses `reth` (for `geth`, use `var/geth/` or `var/bera-geth/`):
+Extract the execution layer snapshot:
 
 ```bash
 # FROM: ~/beranode
 
 # Find the execution layer snapshot
-EL_SNAPSHOT=$(ls downloads/snapshot_reth-*.tar.lz4 downloads/snapshot_geth-*.tar.lz4 2>/dev/null | head -1)
+EL_SNAPSHOT=$(ls downloads/snapshot_reth-*.tar.lz4 2>/dev/null | head -1)
 lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/;
 
 # [Expected Output]:
