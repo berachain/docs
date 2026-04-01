@@ -68,7 +68,7 @@ We use a single **main** branch. All changes come in via pull requests and go th
 - Report missing or incorrect docs via [GitHub Issues](https://github.com/berachain/docs/issues)  
 - Suggest improvements in issues before larger changes  
 
-If you’re new to open source, see [Your first pull request](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#your-first-pull-request) in CONTRIBUTING.
+If you’re new to open source, see [Your first pull request](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md#your-first-pull-request) in CONTRIBUTING. All contributions, no matter how small, are greatly appreciated.
 
 ---
 
