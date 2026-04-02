@@ -16,7 +16,10 @@ export const addNetworkMainnet = () => {
     blockExplorerUrls: ["https://berascan.com/"],
   };
   console.log("[AddNetwork] add mainnet", params);
-  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+  window.ethereum
+    .request({ method: "wallet_addEthereumChain", params: [params] })
+    .then((r) => console.log("[AddNetwork] result", r))
+    .catch((e) => console.error("[AddNetwork] error", e));
 };
 
 export const addNetworkBepolia = () => {
@@ -32,7 +35,10 @@ export const addNetworkBepolia = () => {
     blockExplorerUrls: ["https://testnet.berascan.com/"],
   };
   console.log("[AddNetwork] add bepolia (testnet)", params);
-  window.ethereum.request({ method: "wallet_addEthereumChain", params: [params] }).then(r => console.log("[AddNetwork] result", r)).catch(e => console.error("[AddNetwork] error", e));
+  window.ethereum
+    .request({ method: "wallet_addEthereumChain", params: [params] })
+    .then((r) => console.log("[AddNetwork] result", r))
+    .catch((e) => console.error("[AddNetwork] error", e));
 };
 
 Blockchain wallets let you access your assets on Berachain. They create and store your private keys so you can prove ownership when you trade tokens, buy NFTs, play games, and more.
@@ -41,38 +47,76 @@ Blockchain wallets let you access your assets on Berachain. They create and stor
 
 Use these values in any wallet that supports custom RPCs. Add the network in one click, or copy from the table:
 
-<button type="button" onClick={() => addNetworkMainnet()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Add Berachain</button>
+<button
+  type="button"
+  onClick={() => addNetworkMainnet()}
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "140px",
+    height: "44px",
+    padding: "0 16px",
+    borderRadius: "8px",
+    border: "2px solid #c96516",
+    backgroundColor: "#E17726",
+    color: "#1a1a1a",
+    fontWeight: 600,
+    cursor: "pointer",
+  }}
+>
+  Add Berachain
+</button>
 
-| Key                | Value                       |
-| ------------------ | --------------------------- |
-| Network            | `Berachain`                 |
+| Key                | Value                        |
+| ------------------ | ---------------------------- |
+| Network            | `Berachain`                  |
 | RPC URL            | `https://rpc.berachain.com/` |
-| Chain ID           | `80094`                     |
-| Currency symbol    | `BERA`                      |
-| Block explorer URL | `https://berascan.com/`     |
+| Chain ID           | `80094`                      |
+| Currency symbol    | `BERA`                       |
+| Block explorer URL | `https://berascan.com/`      |
 
 ## Berachain Bepolia Testnet RPC
 
 Use these values for the testnet. Add in one click, or copy from the table:
 
-<button type="button" onClick={() => addNetworkBepolia()} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "140px", height: "44px", padding: "0 16px", borderRadius: "8px", border: "2px solid #c96516", backgroundColor: "#E17726", color: "#1a1a1a", fontWeight: 600, cursor: "pointer" }}>Add Berachain Bepolia</button>
+<button
+  type="button"
+  onClick={() => addNetworkBepolia()}
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "140px",
+    height: "44px",
+    padding: "0 16px",
+    borderRadius: "8px",
+    border: "2px solid #c96516",
+    backgroundColor: "#E17726",
+    color: "#1a1a1a",
+    fontWeight: 600,
+    cursor: "pointer",
+  }}
+>
+  Add Berachain Bepolia
+</button>
 
-| Key                | Value                                   |
-| ------------------ | --------------------------------------- |
-| Network            | `Berachain Bepolia`                     |
-| RPC URL            | `https://bepolia.rpc.berachain.com/`    |
-| Chain ID           | `80069`                                 |
-| Currency symbol    | `BERA`                                  |
-| Block explorer URL | `https://testnet.berascan.com/`         |
+| Key                | Value                                |
+| ------------------ | ------------------------------------ |
+| Network            | `Berachain Bepolia`                  |
+| RPC URL            | `https://bepolia.rpc.berachain.com/` |
+| Chain ID           | `80069`                              |
+| Currency symbol    | `BERA`                               |
+| Block explorer URL | `https://testnet.berascan.com/`      |
 
 ### Bepolia testnet dApps
 
-| App        | URL                                 |
-| ---------- | ----------------------------------- |
-| Hub        | https://bepolia.hub.berachain.com   |
-| BEX        | Not publicly available on Bepolia   |
-| Berascan   | https://bepolia.berascan.com        |
-| Honey      | https://bepolia.honey.berachain.com |
+| App      | URL                                 |
+| -------- | ----------------------------------- |
+| Hub      | https://bepolia.hub.berachain.com   |
+| BEX      | Not publicly available on Bepolia   |
+| Berascan | https://bepolia.berascan.com        |
+| Honey    | https://bepolia.honey.berachain.com |
 
 ## Supported Wallets
 
@@ -96,6 +140,7 @@ Any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that suppor
     <Frame>
       <img src="/images/general/metamask-chrome-store.png" alt="MetaMask extension in the Chrome Web Store" />
     </Frame>
+
   </Step>
   <Step title="Create your wallet">
     Click `Create a new wallet`. Set a password, then follow the steps to back up your recovery phrase. The phrase proves you own the wallet—store it safely.
@@ -111,6 +156,7 @@ Any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that suppor
     <Frame>
       <img src="/images/general/metamask-recovery-phrase.png" alt="MetaMask recovery phrase backup screen" />
     </Frame>
+
   </Step>
 </Steps>
 
@@ -127,13 +173,19 @@ If you prefer not to use the one-click buttons above, add the network in MetaMas
 2. **Add network** — Click `Add network` in the modal.
 
 <Frame>
-  <img src="/images/general/metamask-add-network-02.png" alt="MetaMask add network button in modal" />
+  <img
+    src="/images/general/metamask-add-network-02.png"
+    alt="MetaMask add network button in modal"
+  />
 </Frame>
 
 3. **Add network manually** — At the bottom of the list, click `Add network manually`.
 
 <Frame>
-  <img src="/images/general/metamask-add-network-03.png" alt="MetaMask add a network manually option" />
+  <img
+    src="/images/general/metamask-add-network-03.png"
+    alt="MetaMask add a network manually option"
+  />
 </Frame>
 
 4. **Enter details** — Use the values from the [Mainnet](#berachain-mainnet-rpc) or [Bepolia Testnet](#berachain-bepolia-testnet-rpc) RPC tables above.
@@ -141,11 +193,17 @@ If you prefer not to use the one-click buttons above, add the network in MetaMas
 5. **Save** — Click `Save`.
 
 <Frame>
-  <img src="/images/general/metamask-add-network-04.png" alt="MetaMask network configuration form with Berachain details" />
+  <img
+    src="/images/general/metamask-add-network-04.png"
+    alt="MetaMask network configuration form with Berachain details"
+  />
 </Frame>
 
 You should now be connected to Berachain or Berachain Bepolia.
 
 <Frame>
-  <img src="/images/general/metamask-testnet.png" alt="MetaMask wallet connected to Berachain network" />
+  <img
+    src="/images/general/metamask-testnet.png"
+    alt="MetaMask wallet connected to Berachain network"
+  />
 </Frame>

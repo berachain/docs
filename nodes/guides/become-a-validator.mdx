@@ -48,7 +48,8 @@ export GENESIS_ROOT=0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63
 The `0xdf6..0bda` hash output confirms that you have the right mainnet genesis file.
 
 <Warning>
-If you sign a deposit without using the above genesis root, **the deposit will fail and the funds will be burnt**.
+  If you sign a deposit without using the above genesis root, **the deposit will fail and the funds
+  will be burnt**.
 </Warning>
 
 - **BEACOND_HOME**: The path to your beacond data directory.
@@ -84,7 +85,10 @@ cast call $DEPOSIT_ADDR 'getOperator(bytes)' $COMETBFT_PUB_KEY -r $RPC_URL;
 ```
 
 <Warning>
-Do not change any parameters of your deposit transaction before sending them. Calculate the signature for the parameters _and deposit amount_ you are going to send to the deposit contract. If you change anything after calculating the signature, **the deposit will fail and the funds will be burnt**.
+  Do not change any parameters of your deposit transaction before sending them. Calculate the
+  signature for the parameters _and deposit amount_ you are going to send to the deposit contract.
+  If you change anything after calculating the signature, **the deposit will fail and the funds will
+  be burnt**.
 </Warning>
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `beacond deposit create-validator` which takes:
@@ -173,6 +177,7 @@ cast send $DEPOSIT_ADDR              \
 --value "${STAKE_AMOUNT_ETH}ether"   \
 -r $RPC_URL;
 ```
+
 </CodeGroup>
 
 ## Step 4 - Confirm successful registration
@@ -184,7 +189,9 @@ The following traits denote a successful registration:
 3. **Most importantly,** the validator's public key is present in the beacon state. The beacon state (available from your node's beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator's public key, likely at the end of the list.
 
 <Info>
-The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract transaction is processed. The beacon API must be enabled on your node (in `app.toml`: `[beacon-kit.node-api]`).
+  The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract
+  transaction is processed. The beacon API must be enabled on your node (in `app.toml`:
+  `[beacon-kit.node-api]`).
 </Info>
 
 ## Step 5 - Activation or top-up
@@ -208,7 +215,8 @@ cast send "0x4242424242424242424242424242424242424242" \
 --private-key $PK                    \
 --value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
-```
+
+````
 
 ```bash Ledger
 STAKE_AMOUNT_ETH=240000;
@@ -222,7 +230,8 @@ cast send "0x4242424242424242424242424242424242424242" \
 --ledger \
 --value "${STAKE_AMOUNT_ETH}ether" \
 -r $RPC_URL;
-```
+````
+
 </CodeGroup>
 
 ## Post-activation checks

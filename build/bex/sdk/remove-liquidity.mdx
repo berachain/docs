@@ -9,7 +9,9 @@ Using the [Berancer SDK](https://github.com/berachain/berancer-sdk), you can rem
 2. _SingleTokenExactIn_ - remove liquidity and receive a single token
 
 <Tip>
-For more comprehensive remove liquidity examples, see the [remove liquidity examples](https://github.com/berachain/bex-sdk/tree/main/examples/remove-liquidity) in the BEX SDK repository.
+  For more comprehensive remove liquidity examples, see the [remove liquidity
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/remove-liquidity) in the BEX SDK
+  repository.
 </Tip>
 
 ## Example: single token exit
@@ -46,7 +48,7 @@ const removeLiquidityInput = {
     decimals: 18,
     rawAmount: ethers.parseUnits("0.1", 18), // 0.1 BPT
   },
-  tokenOut: WBERA_TOKEN
+  tokenOut: WBERA_TOKEN,
 };
 
 const removeLiquidity = new RemoveLiquidity();
@@ -54,7 +56,7 @@ const removeLiquidity = new RemoveLiquidity();
 // Query expected outputs and calculate price impact in parallel
 const [queryOutput, priceImpact] = await Promise.all([
   removeLiquidity.query(removeLiquidityInput, poolState),
-  PriceImpact.removeLiquidity(removeLiquidityInput, poolState)
+  PriceImpact.removeLiquidity(removeLiquidityInput, poolState),
 ]);
 
 console.log(
@@ -108,8 +110,7 @@ After initializing the `BalancerApi` class, we can fetch current pool data using
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Get pool data
-const poolId =
-  "POOL_ID";
+const poolId = "POOL_ID";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 ```
 
@@ -122,7 +123,7 @@ Its use in the above example is informational, but can be used to provide detail
 ```javascript
 const [queryOutput, priceImpact] = await Promise.all([
   removeLiquidity.query(removeLiquidityInput, poolState),
-  PriceImpact.removeLiquidity(removeLiquidityInput, poolState)
+  PriceImpact.removeLiquidity(removeLiquidityInput, poolState),
 ]);
 
 const slippage = Slippage.fromPercentage("1");
@@ -140,6 +141,6 @@ const callData = removeLiquidity.buildCall({
   recipient: wallet.address,
   wethIsEth: true,
   slippage,
-  deadline
+  deadline,
 });
 ```

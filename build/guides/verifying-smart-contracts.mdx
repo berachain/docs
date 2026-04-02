@@ -20,7 +20,8 @@ The following methods are covered:
 - Tooling for the chosen method (see sections below)
 
 <Tip>
-To deploy a contract first, see [Developer tools](/build/getting-started/developer-tools) for setup with Hardhat, Foundry, and other tooling.
+  To deploy a contract first, see [Developer tools](/build/getting-started/developer-tools) for
+  setup with Hardhat, Foundry, and other tooling.
 </Tip>
 
 ## Manual Verification (Berascan)
@@ -50,7 +51,8 @@ Fill in the form:
 6. Click **Continue**.
 
 <Tip>
-For multi-file or dependency-heavy contracts, flatten the source into a single file and use the single-file option.
+  For multi-file or dependency-heavy contracts, flatten the source into a single file and use the
+  single-file option.
 </Tip>
 
 ### Step 4: Upload source code
@@ -63,7 +65,9 @@ On the **Verify & Publish** step:
 4. Click **Verify & Publish**.
 
 <Info>
-Contracts that compile in Remix typically compile here as well. Compilation is limited to about 45 seconds per contract. Contracts deployed by another contract (factory pattern) have limited support.
+  Contracts that compile in Remix typically compile here as well. Compilation is limited to about 45
+  seconds per contract. Contracts deployed by another contract (factory pattern) have limited
+  support.
 </Info>
 
 ### Step 5: Confirmation
@@ -216,7 +220,9 @@ forge verify-contract \
 ```
 
 <Info>
-For contracts with constructor parameters, encode them with `cast abi-encode "constructor(type1,type2,...)" "arg1" "arg2" ...` and pass the result to `--constructor-args`. For contracts with no constructor parameters, omit the `--constructor-args` flag.
+  For contracts with constructor parameters, encode them with `cast abi-encode
+  "constructor(type1,type2,...)" "arg1" "arg2" ...` and pass the result to `--constructor-args`. For
+  contracts with no constructor parameters, omit the `--constructor-args` flag.
 </Info>
 
 ### Example output
@@ -273,6 +279,9 @@ For a contract behind a proxy:
 2. Enter the proxy contract address.
 3. Submit; the plugin verifies both proxy and implementation.
 
+<Info>
+  Proxy verification is supported only with Berascan (Etherscan-based), not with Beratrail.
+</Info>
 
 ### Settings
 
@@ -283,7 +292,8 @@ In the plugin or Remix settings you can:
 - Manage settings per chain.
 
 <Tip>
-The Etherscan V2 API is used, so one API key works for Berascan and many other chains supported by Remix.
+  The Etherscan V2 API is used, so one API key works for Berascan and many other chains supported by
+  Remix.
 </Tip>
 
 ### Verification results
@@ -293,5 +303,6 @@ The Etherscan V2 API is used, so one API key works for Berascan and many other c
 - **Status indicators** — Hover for details when verification fails.
 
 <Info>
-For full plugin behavior and options, see the [Remix contract verification documentation](https://remix-ide.readthedocs.io/en/latest/contract_verification.html).
+  For full plugin behavior and options, see the [Remix contract verification
+  documentation](https://remix-ide.readthedocs.io/en/latest/contract_verification.html).
 </Info>

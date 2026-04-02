@@ -12,7 +12,8 @@ BEX LP tokens represent a share of a liquidity pool. Accurately valuing these to
 ### Informational (sum of balances)
 
 <Warning>
-This calculation is for informational purposes only and should NOT be used on-chain as it can be easily manipulated.
+  This calculation is for informational purposes only and should NOT be used on-chain as it can be
+  easily manipulated.
 </Warning>
 
 This method is suitable for off-chain, informational, or UI purposes. It is **not manipulation-resistant** and should not be used for on-chain or critical financial operations.
@@ -60,12 +61,12 @@ Weighted pools use a constant product invariant with custom weights. This method
 
 Imagine an 80 \$BAL/20 \$WETH Pool with the following:
 
-| Calculation Steps                | Values                                                                                                       |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Calculation Steps                | Values                                                                                                         |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **Step 1: Token Weights**        | $w_1 = 0.8$ (\$BAL)<br />$w_2 = 0.2$ (\$WETH)                                                                  |
 | **Step 2: Oracle Prices**        | $p_1 \approx$ \$4.53 (\$BAL)<br />$p_2 \approx$ \$1090.82 (\$WETH)                                             |
 | **Step 3: Pool Parameters**      | $k \approx 2,852,257.5$ (from `pool.getInvariant()`)<br />$s \approx 5,628,392.26$ (from `pool.totalSupply()`) |
-| **Step 4: Final LP Token Price** | $p_{LP} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i} \approx$ \$11.34                    |
+| **Step 4: Final LP Token Price** | $p_{LP} = \frac{k}{s} \cdot \prod_i \left( \frac{p_i}{w_i} \right)^{w_i} \approx$ \$11.34                      |
 
 ---
 

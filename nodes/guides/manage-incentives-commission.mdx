@@ -6,7 +6,10 @@ description: "Set and change the validator incentives commission rate (0–20%) 
 A validator can configure the commission taken on Incentives distributed to its `$BGT` boosters — users who Boost a validator with `$BGT`. In this guide, you'll walk through the process of changing a validator's commission.
 
 <Frame>
-  <img src="/images/nodes/berachain-change-validator-commission-rate-process.png" alt="Berachain change validator commission rate process flow" />
+  <img
+    src="/images/nodes/berachain-change-validator-commission-rate-process.png"
+    alt="Berachain change validator commission rate process flow"
+  />
 </Frame>
 
 ## Requirements
@@ -25,9 +28,7 @@ When Incentives are activated, all commission rates for Validator Incentives are
 
 For a validator to change their commission rate, they must first queue the change, wait for the `MAX_COMMISSION_CHANGE_DELAY` of **16,382 blocks**, and then activate the new commission. If a commission rate is already queued, it must be activated before a new commission rate can be proposed.
 
-<Tip>
-**Anyone** can activate a queued commission rate, not just the validator.
-</Tip>
+<Tip>**Anyone** can activate a queued commission rate, not just the validator.</Tip>
 
 ## Option A - Change validator commission using Foundry
 
@@ -87,7 +88,7 @@ cast call $BERACHEF_CONTRACT_ADDRESS \
 ### Step 4 - Activate queued validator commission rate
 
 <Info>
-This can only be done after **16,382 blocks** have passed, and this **can be executed by anyone**.
+  This can only be done after **16,382 blocks** have passed, and this **can be executed by anyone**.
 </Info>
 
 ```bash

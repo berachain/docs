@@ -27,18 +27,22 @@ Solidity, Foundry (Forge), Node.js, `@pythnetwork/entropy-sdk-solidity`, OpenZep
 ## Quick start
 
 1. **Clone and install**
+
    ```bash
    git clone https://github.com/berachain/guides.git && cd guides/apps/pyth-entropy
    npm install
    ```
+
    Add remappings to `foundry.toml` (see README).
 
 2. **Configure `.env`** at project root: `RPC_URL`, `PRIVATE_KEY`, `ENTROPY_ADDRESS`, `PROVIDER_ADDRESS` (values in README).
 
 3. **Deploy the NFT contract**
+
    ```bash
    forge create src/EntropyNFT.sol:EntropyNFT --private-key $PRIVATE_KEY --rpc-url $RPC_URL --constructor-args $ENTROPY_ADDRESS $PROVIDER_ADDRESS
    ```
+
    Set `ENTROPY_NFT_ADDRESS` in `.env` to the deployed address.
 
 4. **Request a mint** (script requests random number from Pyth and polls for the mint callback)
@@ -48,7 +52,7 @@ Solidity, Foundry (Forge), Node.js, `@pythnetwork/entropy-sdk-solidity`, OpenZep
 
 ## Key files
 
-| Purpose | Path |
-|--------|------|
-| NFT contract | `src/EntropyNFT.sol` |
+| Purpose             | Path                 |
+| ------------------- | -------------------- |
+| NFT contract        | `src/EntropyNFT.sol` |
 | Mint request script | `app/requestMint.js` |

@@ -1,4 +1,3 @@
-.PHONY: help dev check check-validate check-links check-assets check-a11y check-redirects contracts-generate mint-install
 
 help:
 	@echo "Common docs tasks:"
@@ -11,6 +10,8 @@ help:
 	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
 	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
 	@echo "  make contracts-generate # Regenerate contract pages/snippets from data/contracts.json"
+	@echo "  make format             # Reformat all .md and .mdx files with Prettier"
+	@echo "  make format-check       # Check formatting compliance without changes"
 	@echo "  make mint-install       # Install Mintlify CLI globally via npm"
 
 dev:
@@ -53,8 +54,15 @@ check-assets:
 	fi; \
 	echo "✅ No orphaned or missing asset references found."
 
+format:
+	prettier --write "**/*.{md,mdx}"
+
+format-check:
+	prettier --check "**/*.{md,mdx}"
+
 contracts-generate:
 	node scripts/contracts/generate-pages.mjs
 
 mint-install:
 	npm i -g mint
+

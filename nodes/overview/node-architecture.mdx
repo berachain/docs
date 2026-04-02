@@ -8,7 +8,10 @@ Berachain's network relies on validator nodes and RPC nodes. Each can be configu
 Each of these types of nodes is a pair of both an [execution client](/general/help/glossary#execution-client) and a [consensus client](/general/help/glossary#consensus-client). Berachain is a Layer 1 EVM Identical chain, which means that for the execution layer, it supports any EVM execution client paired with a consensus client and framework built by Berachain called [BeaconKit](/nodes/architecture/beaconkit-consensus).
 
 <Frame>
-  <img src="/images/nodes/berachain-node-architecture.png" alt="Berachain node architecture showing execution and consensus client pairs" />
+  <img
+    src="/images/nodes/berachain-node-architecture.png"
+    alt="Berachain node architecture showing execution and consensus client pairs"
+  />
 </Frame>
 
 ## RPC vs validator nodes
@@ -42,7 +45,8 @@ Berachain follows Proof-of-Stake (PoS) direct staking, which allows `$BERA` hold
 This means that validators will have to communicate how they handle funds when a validator is removed from the active set.
 
 <Warning>
-Avoid staking to validators without knowing how they handle funds when a validator is removed from the active set.
+  Avoid staking to validators without knowing how they handle funds when a validator is removed from
+  the active set.
 </Warning>
 
 ## Staking pools
@@ -56,7 +60,9 @@ If a validator is removed from the active set, all `$BERA` staked to that valida
 A validator can decide to become a validator again but will need to generate new CometBFT validator keys and start the deposit process again as if they were a new validator.
 
 <Warning>
-Staking with a previously-used CometBFT identity — a validator that was removed from the active set — will result in the funds being returned to that validator's withdrawal address at the end of the current epoch. The validator can never be re-activated.
+  Staking with a previously-used CometBFT identity — a validator that was removed from the active
+  set — will result in the funds being returned to that validator's withdrawal address at the end of
+  the current epoch. The validator can never be re-activated.
 </Warning>
 
 ## Voluntary withdrawals

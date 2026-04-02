@@ -69,25 +69,28 @@ The pace at which $r_{90\%}$ moves is recalculated whenever the market is update
 Example: if utilization stays at 100% for five days, $r_{90\%}$ can roughly double in that period (at maximum speed).
 
 <Tip>
-The values of some [constants](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/libraries/ConstantsLib.sol) are hardcoded into the code deployed on Berachain, such as `TARGET_UTILIZATION`, `INITIAL_RATE_AT_TARGET`, etc.
+  The values of some
+  [constants](https://github.com/morpho-org/morpho-blue-irm/blob/main/src/adaptive-curve-irm/libraries/ConstantsLib.sol)
+  are hardcoded into the code deployed on Berachain, such as `TARGET_UTILIZATION`,
+  `INITIAL_RATE_AT_TARGET`, etc.
 </Tip>
 
 ## Formula breakdown
 
-| Name                       | Description                                                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| $u$                        | _utilization_ - total assets borrowed divided by total assets supplied                                             |
-| $t$                        | _time_ - the specific moment at which utilization and other parameters are evaluated                               |
-| $u(t)$                     | Ratio of total borrow over total supply at time                                                                    |
-| $u_{\text{target}} = 0.9$   | Constant target value for utilization (set to 0.9) that the model aims to maintain.                                |
-| $\forall t$                | For all _time_                                                                                                     |
-| $e$                        | _error_ - Difference between the current utilization and the target utilization, divided by a normalization factor |
-| $k_{\text{d}}$             | Constant that controls how sharply the interest rate increases when utilization exceeds the target                 |
-| $H$                        | The time step (in seconds) between two interest rate updates                                                       |
-| $last$                     | Most recent interaction time before or at a specific time                                                          |
-| $speed(t)$                 | Factor controlling how quickly the interest rate evolves based on utilization changes over time                    |
-| $r$                        | Borrow rate                                                                                                        |
-| $r_{\text{T}}$             | Rate at target - Interest rate corresponding to the target utilization, updated over time using the speed factors  |
+| Name                      | Description                                                                                                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| $u$                       | _utilization_ - total assets borrowed divided by total assets supplied                                             |
+| $t$                       | _time_ - the specific moment at which utilization and other parameters are evaluated                               |
+| $u(t)$                    | Ratio of total borrow over total supply at time                                                                    |
+| $u_{\text{target}} = 0.9$ | Constant target value for utilization (set to 0.9) that the model aims to maintain.                                |
+| $\forall t$               | For all _time_                                                                                                     |
+| $e$                       | _error_ - Difference between the current utilization and the target utilization, divided by a normalization factor |
+| $k_{\text{d}}$            | Constant that controls how sharply the interest rate increases when utilization exceeds the target                 |
+| $H$                       | The time step (in seconds) between two interest rate updates                                                       |
+| $last$                    | Most recent interaction time before or at a specific time                                                          |
+| $speed(t)$                | Factor controlling how quickly the interest rate evolves based on utilization changes over time                    |
+| $r$                       | Borrow rate                                                                                                        |
+| $r_{\text{T}}$            | Rate at target - Interest rate corresponding to the target utilization, updated over time using the speed factors  |
 
 ### Utilization
 
@@ -208,8 +211,8 @@ The values of the following constants are hardcoded into the [Morpho code deploy
 
 - WAD = Wei-based Decimal (WAD = 10^18, meaning 1 WAD = 1.0)
 
-| Parameter            | Description                                   | Value                      |
-| -------------------- | --------------------------------------------- | -------------------------- |
+| Parameter                | Description                                       | Value                      |
+| ------------------------ | ------------------------------------------------- | -------------------------- |
 | `CURVE_STEEPNESS`        | Curve steepness (scaled by WAD)                   | 4                          |
 | `ADJUSTMENT_SPEED`       | Adjustment speed per second (scaled by WAD)       | 50/# of seconds per year   |
 | `TARGET_UTILIZATION`     | Target utilization (scaled by WAD)                | 90%                        |

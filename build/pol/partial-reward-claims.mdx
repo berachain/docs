@@ -11,9 +11,7 @@ head:
       content: Guide to using getPartialReward functionality for BGT splitting in Berachain Reward Vaults
 ---
 
-<script setup>
-  import config from '@berachain/config/constants.json';
-</script>
+<script setup>import config from '@berachain/config/constants.json';</script>
 
 # Partial Reward Claims (BGT Splitting)
 
@@ -566,12 +564,12 @@ import { berachain } from "viem/chains";
 
 const publicClient = createPublicClient({
   chain: berachain,
-  transport: http()
+  transport: http(),
 });
 
 const walletClient = createWalletClient({
   chain: berachain,
-  transport: http()
+  transport: http(),
 });
 
 // Check available rewards
@@ -579,7 +577,7 @@ const availableRewards = await publicClient.readContract({
   address: "0x...", // Reward Vault address
   abi: rewardVaultAbi,
   functionName: "earned",
-  args: [userAddress]
+  args: [userAddress],
 });
 
 // Claim 25% of available rewards
@@ -590,7 +588,7 @@ const { request } = await publicClient.simulateContract({
   address: "0x...", // Reward Vault address
   abi: rewardVaultAbi,
   functionName: "getPartialReward",
-  args: [userAddress, recipientAddress, claimAmount]
+  args: [userAddress, recipientAddress, claimAmount],
 });
 
 const hash = await walletClient.writeContract(request);

@@ -5,9 +5,7 @@ description: "Run a local Berachain devnet with Docker for testing validator flo
 
 This tutorial walks you through launching a private local network and promoting one of the nodes in that network to a full validator.
 
-<Tip>
-Some features like native dApps, contracts, and more are still a work in progress.
-</Tip>
+<Tip>Some features like native dApps, contracts, and more are still a work in progress.</Tip>
 
 This guide results in a simple deployment of a few validators and one RPC. If you want more control over the network, and additional services such as block explorers and PoL backends, refer to [Local Devnet with Kurtosis](/nodes/guides/local-devnet-kurtosis).
 
@@ -116,7 +114,10 @@ Invoke the deposit script to generate the deposit transactions (but do not trans
 ```
 
 <Warning>
-Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis root differs from mainnet's, and the signature will be invalid on mainnet. Study the registration and activation process in `generate-deposit-tx` and the [Deposit Guide](/nodes/guides/become-a-validator) to understand how to apply this process to mainnet.
+  Do not send these transactions as-is on mainnet, or you will burn your funds. The devnet genesis
+  root differs from mainnet's, and the signature will be invalid on mainnet. Study the registration
+  and activation process in `generate-deposit-tx` and the [Deposit
+  Guide](/nodes/guides/become-a-validator) to understand how to apply this process to mainnet.
 </Warning>
 
 ### Step 4 - Run registration deposit transaction

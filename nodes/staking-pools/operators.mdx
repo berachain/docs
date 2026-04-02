@@ -9,40 +9,42 @@ This guide helps validators set up and manage staking pools to offer liquid stak
 
 ### Key parameters
 
-| Parameter | Range | Purpose |
-| ------------------------- | ----------------------------------------------- | -------------------------------------------- |
-| Validator Commission | 0-20% | Commission on incentive token distribution |
-| Protocol Fee | 0-20% | Fee on BGT balance growth |
-| Minimum Effective Balance | ≥ 250,000 BERA | Activation threshold and full exit safeguard |
-| Withdrawal Delay | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized |
+| Parameter                 | Range                                      | Purpose                                      |
+| ------------------------- | ------------------------------------------ | -------------------------------------------- |
+| Validator Commission      | 0-20%                                      | Commission on incentive token distribution   |
+| Protocol Fee              | 0-20%                                      | Fee on BGT balance growth                    |
+| Minimum Effective Balance | ≥ 250,000 BERA                             | Activation threshold and full exit safeguard |
+| Withdrawal Delay          | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized     |
 
 ### Key roles
 
-| Role | Controls | Function |
+| Role                               | Controls          | Function                               |
 | ---------------------------------- | ----------------- | -------------------------------------- |
-| `VALIDATOR_ADMIN_ROLE` | All other roles | Grant/revoke operational roles |
-| `REWARDS_ALLOCATION_MANAGER_ROLE` | Reward allocation | Direct PoL incentives to applications |
-| `COMMISSION_MANAGER_ROLE` | Commission rate | Adjust validator commission (0-20%) |
-| `PROTOCOL_FEE_MANAGER_ROLE` | Protocol fee | Adjust protocol fee percentage (0-20%) |
-| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount | Adjust incentive collector payout |
-| `BGT_MANAGER_ROLE` | BGT operations | Queue drop boost, redeem BGT |
+| `VALIDATOR_ADMIN_ROLE`             | All other roles   | Grant/revoke operational roles         |
+| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation | Direct PoL incentives to applications  |
+| `COMMISSION_MANAGER_ROLE`          | Commission rate   | Adjust validator commission (0-20%)    |
+| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee      | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount     | Adjust incentive collector payout      |
+| `BGT_MANAGER_ROLE`                 | BGT operations    | Queue drop boost, redeem BGT           |
 
 ### Essential functions
 
-| Function | Contract | Purpose |
+| Function                     | Contract      | Purpose                               |
 | ---------------------------- | ------------- | ------------------------------------- |
-| `setMinEffectiveBalance()` | SmartOperator | Set activation threshold |
-| `queueValCommission()` | SmartOperator | Queue commission rate change |
-| `queueRewardsAllocation()` | SmartOperator | Queue reward allocation |
-| `claimBoostRewards()` | SmartOperator | Forward rewards to IncentiveCollector |
-| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate |
+| `setMinEffectiveBalance()`   | SmartOperator | Set activation threshold              |
+| `queueValCommission()`       | SmartOperator | Queue commission rate change          |
+| `queueRewardsAllocation()`   | SmartOperator | Queue reward allocation               |
+| `claimBoostRewards()`        | SmartOperator | Forward rewards to IncentiveCollector |
+| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate                 |
 
 ## Prerequisites
 
 Before setting up a staking pool, ensure you have a fully operational Berachain validator node. You'll need at least 10,000 BERA to register the pool, though activation requires at least 250,000 BERA. See the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) and [Become a Validator](/nodes/guides/become-a-validator) guides.
 
 <Warning>
-Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator will progress through the Deposited → Eligible states, but activation to the Active state depends on the ValidatorSetCap and your validator's priority relative to other validators.
+  Staking pools follow the standard Berachain validator lifecycle. After deployment, your validator
+  will progress through the Deposited → Eligible states, but activation to the Active state depends
+  on the ValidatorSetCap and your validator's priority relative to other validators.
 </Warning>
 
 ## Validator lifecycle

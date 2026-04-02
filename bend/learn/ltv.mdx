@@ -76,8 +76,7 @@ Collateral value = 300 `$HONEY`.
 // All calculations use BigInt for precision
 const ORACLE_PRICE_SCALE = 10n ** 18n;
 
-const collateralValueInLoanToken =
-  (collateralAmount * oraclePrice) / ORACLE_PRICE_SCALE;
+const collateralValueInLoanToken = (collateralAmount * oraclePrice) / ORACLE_PRICE_SCALE;
 // = (100n * 10n**18n * 3n * 10n**18n) / 10n**18n
 // = 300n * 10n**18n (300 HONEY in base units)
 ```

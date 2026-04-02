@@ -9,7 +9,10 @@ Using the [BEX SDK](https://github.com/berachain/berancer-sdk), you can add liqu
 2. _Proportional_ - add liquidity with proportional amount of both tokens
 
 <Tip>
-For more comprehensive add liquidity examples, see the [add liquidity examples](https://github.com/berachain/bex-sdk/tree/main/examples/add-liquidity) in the BEX SDK repository. For price impact calculation examples, see the [price impact examples](https://github.com/berachain/bex-sdk/tree/main/examples/priceImpact).
+  For more comprehensive add liquidity examples, see the [add liquidity
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/add-liquidity) in the BEX SDK
+  repository. For price impact calculation examples, see the [price impact
+  examples](https://github.com/berachain/bex-sdk/tree/main/examples/priceImpact).
 </Tip>
 
 ## Example: adding unbalanced liquidity
@@ -33,8 +36,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Get pool data
-const poolId =
-  "POOL_ID";
+const poolId = "POOL_ID";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 
 // Prepare add liquidity input - note we're only adding one token for unbalanced
@@ -56,13 +58,10 @@ const addLiquidity = new AddLiquidity();
 // Query expected BPT out and calculate price impact in parallel
 const [queryOutput, priceImpact] = await Promise.all([
   addLiquidity.query(addLiquidityInput, poolState),
-  PriceImpact.addLiquidity(addLiquidityInput, poolState)
+  PriceImpact.addLiquidity(addLiquidityInput, poolState),
 ]);
 
-console.log(
-  "Expected BPT Out:",
-  ethers.formatUnits(queryOutput.bptOut.amount, 18)
-);
+console.log("Expected BPT Out:", ethers.formatUnits(queryOutput.bptOut.amount, 18));
 console.log("Price Impact:", priceImpact.percentage, "%");
 
 // Build transaction with 1% slippage
@@ -111,8 +110,7 @@ After initializing the `BalancerApi` class, we can fetch current pool data using
 const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
 
 // Get pool data
-const poolId =
-  "POOL_ID";
+const poolId = "POOL_ID";
 const poolState = await balancerApi.pools.fetchPoolState(poolId);
 ```
 
@@ -126,7 +124,7 @@ The `PriceImpact` class calculates the price impact of unbalanced liquidity oper
 // Query expected BPT out and calculate price impact in parallel
 const [queryOutput, priceImpact] = await Promise.all([
   addLiquidity.query(addLiquidityInput, poolState),
-  PriceImpact.addLiquidity(addLiquidityInput, poolState)
+  PriceImpact.addLiquidity(addLiquidityInput, poolState),
 ]);
 
 console.log("Expected BPT Out:", ethers.formatUnits(queryOutput.bptOut.amount, 18));
@@ -149,7 +147,7 @@ const callData = addLiquidity.buildCall({
   recipient: wallet.address,
   wethIsEth: true,
   slippage,
-  deadline
+  deadline,
 });
 ```
 
@@ -159,13 +157,13 @@ Adding proportional liquidity is similar to adding unbalanced liquidity, but ins
 
 ```javascript
 addLiquidityInput = {
-    chainId,
-    kind: AddLiquidityKind.Proportional,
-    rpcUrl: RPC_URL,
-    referenceAmount: {
-        rawAmount: parseUnits(tokenAmount, tokenDecimals),
-        decimals: tokenDecimals,
-        address: tokenAddress,
-    },
+  chainId,
+  kind: AddLiquidityKind.Proportional,
+  rpcUrl: RPC_URL,
+  referenceAmount: {
+    rawAmount: parseUnits(tokenAmount, tokenDecimals),
+    decimals: tokenDecimals,
+    address: tokenAddress,
+  },
 };
 ```
