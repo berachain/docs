@@ -238,7 +238,7 @@ Contract successfully verified
 
 ## Remix Verification
 
-The Remix IDE Contract Verification plugin supports Berascan and Beratrail. Use it when you develop or deploy from Remix and want to verify in the same environment.
+The Remix IDE Contract Verification plugin supports Berascan. Use it when you develop or deploy from Remix and want to verify in the same environment.
 
 ### Requirements
 
@@ -256,12 +256,11 @@ The Remix IDE Contract Verification plugin supports Berascan and Beratrail. Use 
 ### Supported explorers
 
 - **Berascan** — Etherscan-based; requires an Etherscan API key.
-- **Beratrail** — Routescan-based; enabled by default.
 
 ### Verification steps
 
 1. Compile the contract in Remix.
-2. In the plugin, select the verification service (Beratrail and/or Berascan).
+2. In the plugin, select Berascan as the verification service.
 3. Enter the deployed contract address.
 4. If the contract has constructor parameters, enter the constructor arguments in the format the plugin expects.
 5. Submit verification.
@@ -274,9 +273,6 @@ For a contract behind a proxy:
 2. Enter the proxy contract address.
 3. Submit; the plugin verifies both proxy and implementation.
 
-<Info>
-Proxy verification is supported only with Berascan (Etherscan-based), not with Beratrail.
-</Info>
 
 ### Settings
 
