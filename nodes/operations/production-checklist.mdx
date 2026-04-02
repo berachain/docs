@@ -29,9 +29,9 @@ Check that you are running a supported version of your [execution client](/nodes
 
 There are several ingredients to successful peering. If you are running in a containerized environment, ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
 
-1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Both `geth` and `reth` accept the `--bootnodes` option. `beacond` has the boot node list baked into the distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
+1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Bera-Reth accepts the `--bootnodes` option. `beacond` has the boot node list baked into the distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
 2. **Check Execution Layer peering**: The execution layer needs excellent peering to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
-3. **Indicate your Execution Layer's external IP address**: Execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For `reth` and `geth`, this is done with the `--nat extip:<IP>` option.
+3. **Indicate your Execution Layer's external IP address**: Execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For Bera-Reth, this is done with the `--nat extip:<IP>` option.
 4. **Check beacond peering**: `beacond` needs good peering to organize and perform consensus actions. This is carried out over TCP port 26656. Also, correctly advertise your node's external IP with `p2p.external_address` in `config.toml`. To limit `beacond`'s memory consumption, **40 inbound + 10 outbound peers** is recommended:
 
 ```toml
@@ -50,13 +50,7 @@ For **Reth**, the following options are recommended in the Reth launch:
 --engine.memory-block-buffer-target 0
 ```
 
-For **Geth**, override the gas price lower limit to agree with Reth:
-
-```bash
---miner.gasprice 1
-```
-
-For both clients, ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules. For Geth, exposing the `debug` API module enables highly destructive commands.
+Ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules.
 
 ## Register with the team
 
