@@ -401,19 +401,19 @@
     },
     {
       "source": "/build/beaconkit/overview",
-      "destination": "/validators/beaconkit/overview"
+      "destination": "/nodes/beaconkit/overview"
     },
     {
       "source": "/cn/validators/beaconkit/overview",
-      "destination": "/validators/beaconkit/overview"
+      "destination": "/nodes/beaconkit/overview"
     },
     {
       "source": "/ko/validators/beaconkit/overview",
-      "destination": "/validators/beaconkit/overview"
+      "destination": "/nodes/beaconkit/overview"
     },
     {
       "source": "/vi/validators/beaconkit/overview",
-      "destination": "/validators/beaconkit/overview"
+      "destination": "/nodes/beaconkit/overview"
     },
     {
       "source": "/cn/validators/operations/self-hosted-rpc",
@@ -488,48 +488,53 @@
       "destination": "/validators/staking-pools/contracts"
     },
     {
+      "source": "/validators/:slug*",
+      "destination": "/nodes/:slug*",
+      "permanent": true
+    },
+    {
       "source": "/nodes/quickstart",
-      "destination": "/validators/operations/quickstart",
+      "destination": "/nodes/operations/quickstart",
       "permanent": true
     },
     {
       "source": "/nodes/monitoring",
-      "destination": "/validators/operations/monitoring",
+      "destination": "/nodes/operations/monitoring",
       "permanent": true
     },
     {
       "source": "/nodes/production-checklist",
-      "destination": "/validators/operations/production-checklist",
+      "destination": "/nodes/operations/production-checklist",
       "permanent": true
     },
     {
       "source": "/nodes/self-hosted-rpc",
-      "destination": "/validators/operations/self-hosted-rpc",
+      "destination": "/nodes/operations/self-hosted-rpc",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools/contracts/:slug*",
-      "destination": "/validators/staking-pools/contracts",
+      "destination": "/nodes/staking-pools/contracts",
       "permanent": true
     },
     {
       "source": "/beacon-kit/api",
-      "destination": "/validators/beaconkit/overview",
+      "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/cli",
-      "destination": "/validators/beaconkit/overview",
+      "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/configuration",
-      "destination": "/validators/beaconkit/overview",
+      "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/beacon-kit/what-is-beaconkit",
-      "destination": "/validators/beaconkit/overview",
+      "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
@@ -544,7 +549,7 @@
     },
     {
       "source": "/learn/what-is-beaconkit",
-      "destination": "/validators/beaconkit/overview",
+      "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
@@ -644,7 +649,7 @@
     },
     {
       "source": "/learn/guides/boost-a-validator",
-      "destination": "/validators/guides/become-a-validator",
+      "destination": "/nodes/guides/become-a-validator",
       "permanent": true
     },
     {
@@ -744,12 +749,12 @@
     },
     {
       "source": "/developers/hub-api",
-      "destination": "/build/apis/hub-api",
+      "destination": "/build/getting-started/developer-tools",
       "permanent": true
     },
     {
       "source": "/developers/claim-api",
-      "destination": "/build/apis/claim-api",
+      "destination": "/build/getting-started/developer-tools",
       "permanent": true
     },
     {
@@ -949,92 +954,67 @@
     },
     {
       "source": "/nodes",
-      "destination": "/validators/overview/index",
+      "destination": "/nodes/overview/index",
       "permanent": true
     },
     {
       "source": "/nodes/validator-lifecycle",
-      "destination": "/validators/architecture/validator-lifecycle",
+      "destination": "/nodes/architecture/validator-lifecycle",
       "permanent": true
     },
     {
       "source": "/nodes/beaconkit-consensus",
-      "destination": "/validators/architecture/beaconkit-consensus",
+      "destination": "/nodes/architecture/beaconkit-consensus",
       "permanent": true
     },
     {
       "source": "/nodes/evm-execution",
-      "destination": "/validators/architecture/evm-execution",
+      "destination": "/nodes/architecture/evm-execution",
       "permanent": true
     },
     {
       "source": "/nodes/faq",
-      "destination": "/validators/help/faq",
+      "destination": "/nodes/help/faq",
       "permanent": true
     },
     {
       "source": "/nodes/guides/validator",
-      "destination": "/validators/guides/become-a-validator",
+      "destination": "/nodes/guides/become-a-validator",
       "permanent": true
     },
     {
       "source": "/nodes/guides/operator-address",
-      "destination": "/validators/guides/change-operator-address",
+      "destination": "/nodes/guides/change-operator-address",
       "permanent": true
     },
     {
       "source": "/nodes/guides/reward-allocation",
-      "destination": "/validators/guides/manage-reward-allocations",
+      "destination": "/nodes/guides/manage-reward-allocations",
       "permanent": true
     },
     {
       "source": "/nodes/guides/increase-validator-bera-stake",
-      "destination": "/validators/guides/increase-validator-stake",
-      "permanent": true
-    },
-    {
-      "source": "/nodes/guides/withdraw-stake",
-      "destination": "/validators/guides/withdraw-stake",
+      "destination": "/nodes/guides/increase-validator-stake",
       "permanent": true
     },
     {
       "source": "/nodes/guides/docker-devnet",
-      "destination": "/validators/guides/local-devnet-docker",
+      "destination": "/nodes/guides/local-devnet-docker",
       "permanent": true
     },
     {
       "source": "/nodes/guides/kurtosis",
-      "destination": "/validators/guides/local-devnet-kurtosis",
-      "permanent": true
-    },
-    {
-      "source": "/nodes/guides/manage-incentives-commission",
-      "destination": "/validators/guides/manage-incentives-commission",
+      "destination": "/nodes/guides/local-devnet-kurtosis",
       "permanent": true
     },
     {
       "source": "/nodes/staking-pools",
-      "destination": "/validators/staking-pools/overview",
-      "permanent": true
-    },
-    {
-      "source": "/nodes/staking-pools/installation",
-      "destination": "/validators/staking-pools/installation",
-      "permanent": true
-    },
-    {
-      "source": "/nodes/staking-pools/operators",
-      "destination": "/validators/staking-pools/operators",
-      "permanent": true
-    },
-    {
-      "source": "/nodes/staking-pools/delegators",
-      "destination": "/validators/staking-pools/delegators",
+      "destination": "/nodes/staking-pools/overview",
       "permanent": true
     },
     {
       "source": "/nodes/self-hosted",
-      "destination": "/validators/operations/self-hosted-rpc",
+      "destination": "/nodes/operations/self-hosted-rpc",
       "permanent": true
     },
     {

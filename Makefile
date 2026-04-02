@@ -1,13 +1,14 @@
-.PHONY: help dev validate broken-links a11y check contracts-generate mint-install broken-assets format format-check
 
 help:
 	@echo "Common docs tasks:"
 	@echo "  make dev                # Run local Mintlify server (http://localhost:3000)"
-	@echo "  make validate           # Validate docs build"
-	@echo "  make broken-links       # Check for broken links"
-	@echo "  make broken-assets      # Check /assets for orphaned + missing refs"
-	@echo "  make a11y               # Run accessibility checks"
-	@echo "  make check              # Run validate + broken-links + a11y"
+	@echo "  make check              # Run all checks (validate, links, assets, a11y, redirects)"
+	@echo "  make check-validate     # Validate docs build"
+	@echo "  make check-links        # Check for broken links"
+	@echo "  make check-assets       # Check /images for orphaned + missing refs"
+	@echo "  make check-a11y         # Run accessibility checks"
+	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
+	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
 	@echo "  make contracts-generate # Regenerate contract pages/snippets from data/contracts.json"
 	@echo "  make format             # Reformat all .md and .mdx files with Prettier"
 	@echo "  make format-check       # Check formatting compliance without changes"
@@ -16,24 +17,21 @@ help:
 dev:
 	mint dev
 
-validate:
+check: check-validate check-links check-assets check-a11y check-redirects
+
+check-validate:
 	mint validate
 
-broken-links:
+check-links:
 	mint broken-links
 
-a11y:
+check-a11y:
 	mint a11y
 
-check: validate broken-links a11y
+check-redirects:
+	bash scripts/check-redirects.sh $${BASE_URL:-http://localhost:3000}
 
-contracts-generate:
-	node scripts/contracts/generate-pages.mjs
-
-mint-install:
-	npm i -g mint
-
-broken-assets:
+check-assets:
 	@assets_file_list="$$(mktemp)"; \
 	assets_ref_list="$$(mktemp)"; \
 	rg --files images | sed 's#^images#/images#' | sort -u > "$$assets_file_list"; \
@@ -61,3 +59,10 @@ format:
 
 format-check:
 	prettier --check "**/*.{md,mdx}"
+
+contracts-generate:
+	node scripts/contracts/generate-pages.mjs
+
+mint-install:
+	npm i -g mint
+
