@@ -39,10 +39,9 @@ bera-reth --version
 4. **Set up Beacon-Kit** — initialize the consensus client and generate keys
 5. **Set up execution client** — initialize Reth with the genesis state
 6. **Fetch snapshots (optional)** — restore snapshots to speed up initial sync
-7. **Fetch address book (optional)** — download peer list for faster startup
-8. **Run both clients** — launch them in separate terminals; they communicate via JWT auth
+7. **Run both clients** — launch them in separate terminals; they communicate via JWT auth
 
-Optional step 9 covers testing your node's RPC endpoints.
+Optional step 8 covers testing your node's RPC endpoints.
 
 <Tip>
   For production deployments, consider [docker
@@ -187,24 +186,20 @@ Your genesis block hash **must** agree with the above for your chosen chain.
 Snapshots are collections of files from a node's backend that represent its state at a specific time. Restoring a snapshot is much faster than syncing from the network, so this step can dramatically speed up your initial sync on a new node.
 
 <Info>
-  Do this step **before** starting your clients (Step 8). If you've already started syncing, you'll
+  Do this step **before** starting your clients (Step 7). If you've already started syncing, you'll
   need to stop the clients, clean the data directories, then restore snapshots.
 </Info>
 
 Snapshots can be applied to both the consensus (beacond) and execution clients. Restoring both snapshots simultaneously provides the fastest sync.
 
-### 6a - Obtain snapshot
+### 6a - Obtain snapshots
 
-Berachain and the community offer snapshots for Mainnet and Bepolia. You can download snapshots at the following links.
-
-- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
-
-- Or, use the `fetch-berachain-snapshot.js` script to download official Berachain snapshots. The script fetches the latest snapshots from `snapshots.berachain.com` and automatically downloads both the beacon-kit and execution layer snapshots matching your configuration.
+The `fetch-berachain-snapshot.js` script — already on disk from Step 1 — downloads the latest official Berachain snapshots for both the beacon-kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
 
 ```bash
 # FROM: ~/beranode
 
-# Default: reth, mainnet, pruned
+# Default: mainnet, pruned
 node fetch-berachain-snapshot.js
 
 # Or specify options:
@@ -212,18 +207,32 @@ node fetch-berachain-snapshot.js --network testnet --type archive
 
 # [Expected Output]:
 # Bera Snapshot Downloader
+# -------------------------
 # Network: mainnet | Client: reth | Type: pruned
-# Fetching snapshot index...
-# Will download: snapshot_beacon-kit-pruned_*.tar.lz4, snapshot_reth-pruned_*.tar.lz4
-# Downloading...
+#
+# Fetching snapshot index from:
+#   https://snapshots.berachain.com/index.csv
+#
+# Will download the following files:
+#   snapshot_beacon-kit-pruned_<block>.tar.lz4 (beacon)
+#   snapshot_reth-pruned_<block>.tar.lz4 (execution layer)
+#
 # ✓ All downloads completed!
 ```
 
 Available options:
 
-- `--network` or `-n`: Network (`mainnet` or `testnet`, default: `mainnet`)
-- `--type` or `-t`: Snapshot type (`pruned` or `archive`, default: `pruned`)
-- `--help` or `-h`: Show help message
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--network`, `-n` | `mainnet` or `testnet` | `mainnet` |
+| `--type`, `-t` | `pruned` or `archive` | `pruned` |
+| `--help`, `-h` | Show help message | — |
+
+<Info>
+  Community-operated snapshot mirrors are listed in
+  [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
+  These are a good alternative if you prefer a different download source.
+</Info>
 
 ### 6b - Stop clients
 
@@ -288,24 +297,7 @@ lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/;
 # ...
 ```
 
-## Step 7 - Fetch address book (optional)
-
-The `beacond` address book contains a list of nodes to communicate with. Starting with one dramatically improves startup time.
-
-```bash
-# FROM: ~/beranode
-
-# MAINNET
-wget https://storage.googleapis.com/bera-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json
-
-# TESTNET
-wget https://storage.googleapis.com/bera-testnet-snapshot-na/addrbook.json -O var/beacond/config/addrbook.json
-
-# [Expected Output]:
-#  'var/beacond/config/addrbook.json' saved
-```
-
-## Step 8 - Run both clients
+## Step 7 - Run both clients
 
 Launch two terminal windows. In the first, run the consensus client:
 
@@ -345,7 +337,7 @@ Initially this will not appear to respond, but within a minute blocks should beg
   running to complete their sync.
 </Tip>
 
-## Step 9 - Testing your node (optional)
+## Step 8 - Testing your node (optional)
 
 Now that your RPC is running, verify that the network is working by performing a few RPC requests.
 
