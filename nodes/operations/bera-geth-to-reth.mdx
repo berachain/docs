@@ -100,12 +100,24 @@ Choose this path when you want to land near head on disk instead of waiting for 
 
 1. **Download** — Official Bera snapshots are `.tar.lz4` files.  The [snapshot downloader](https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js) is a standlone Node.js 18+ script. It accepts `--help`.
 
+```Options:
+  -n, --network <network>     mainnet or testnet (default: mainnet)
+  -t, --type <type>           pruned or archive (default: pruned)
+  -o, --output <dir>          download directory (default: downloads)
+      --el-client <name>      execution row prefix in CSV (default: reth)
+      --beacon-only           beacon-kit snapshot only
+      --execution-only, --el-only
+                              execution-layer snapshot only
+  -h, --help                  show this help
+```
+
+Example:
 ```bash
 curl -sO https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js
 node fetch-berachain-snapshot.js --execution-only -o ./downloads
 ```
 
-Use `-n`, `-t`, and `-o` to match network, pruned vs archive, and output directory. Archive snapshots belong on archive nodes; pruned belongs on pruned nodes. Geth's database cannot be converted into these archives.
+Using a downloaded snapshot:
 
 1. **Stop** both `beacond` and the execution client before unpacking anything into the Reth datadir.
 
