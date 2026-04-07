@@ -194,45 +194,44 @@ Snapshots can be applied to both the consensus (beacond) and execution clients. 
 
 ### 6a - Obtain snapshots
 
-The `fetch-berachain-snapshot.js` script — already on disk from Step 1 — downloads the latest official Berachain snapshots for both the beacon-kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
+Berachain and the community offer snapshots for Mainnet and Bepolia. You can download snapshots at the following links.
+
+- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
+
+- Or, use the `fetch-berachain-snapshot.js` script — already on disk from Step 1 — downloads the latest official Berachain snapshots for both the beacon-kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
 
 ```bash
-# FROM: ~/beranode
+# FROM: ~/beranode (or any directory — use -o to change download folder)
 
 # Default: mainnet, pruned
 node fetch-berachain-snapshot.js
 
-# Or specify options:
+# Examples:
 node fetch-berachain-snapshot.js --network testnet --type archive
+node fetch-berachain-snapshot.js -o /var/snapshots --execution-only
 
 # [Expected Output]:
 # Bera Snapshot Downloader
 # -------------------------
-# Network: mainnet | Client: reth | Type: pruned
+# Network: mainnet
+# Client: reth
+# Type: pruned
 #
 # Fetching snapshot index from:
 #   https://snapshots.berachain.com/index.csv
-#
-# Will download the following files:
-#   snapshot_beacon-kit-pruned_<block>.tar.lz4 (beacon)
-#   snapshot_reth-pruned_<block>.tar.lz4 (execution layer)
-#
+# [...]
 # ✓ All downloads completed!
 ```
 
 Available options:
 
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--network`, `-n` | `mainnet` or `testnet` | `mainnet` |
-| `--type`, `-t` | `pruned` or `archive` | `pruned` |
-| `--help`, `-h` | Show help message | — |
-
-<Info>
-  Community-operated snapshot mirrors are listed in
-  [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
-  These are a good alternative if you prefer a different download source.
-</Info>
+- `--network` or `-n`: `mainnet` or `testnet` (default: `mainnet`; selects the snapshot index host as above)
+- `--type` or `-t`: `pruned` or `archive` (default: `pruned`)
+- `--output` or `-o`: Download directory (default: `downloads` in the current working directory)
+- `--el-client`: Execution snapshot type prefix in the CSV (default: `reth`)
+- `--beacon-only`: Beacon-kit snapshot only
+- `--execution-only` or `--el-only`: Execution-layer snapshot only
+- `--help` or `-h`: Show help message
 
 ### 6b - Stop clients
 
@@ -280,20 +279,20 @@ lz4 -d "$BEACON_SNAPSHOT" | tar xv -C var/beacond/;
 
 ### 6e - Install execution layer snapshot
 
-Extract the execution layer snapshot:
+Official Reth snapshot archives list **`db/`**, **`rocksdb/`**, and **`blobstore/`** at the **root** of the tarball (not under a `data/` directory). Your `bera-reth node --datadir` must be the directory that contains those folders. In this layout that is `var/reth/data` (see `setup-reth.sh` / `env.sh`), so pass **`-C var/reth/data`** to `tar`. Extracting into `var/reth/` would place `db/` next to `genesis.json` and would not match `--datadir`.
 
 ```bash
 # FROM: ~/beranode
 
 # Find the execution layer snapshot
 EL_SNAPSHOT=$(ls downloads/snapshot_reth-*.tar.lz4 | head -1)
-lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/;
+lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/data;
 
-# [Expected Output]:
-# x data/
-# x data/db/
-# x data/db/mdbx.dat
-# x data/static_files/
+# [Expected Output] (current official bundles):
+# x db/
+# x db/mdbx.dat
+# x rocksdb/
+# x blobstore/
 # ...
 ```
 
