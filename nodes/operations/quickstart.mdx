@@ -199,20 +199,22 @@ Berachain and the community offer snapshots for Mainnet and Bepolia. You can dow
 
 - [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
 
-- Or, use the `fetch-berachain-snapshot.js` script to download official Berachain snapshots. The script fetches the latest snapshots from `snapshots.berachain.com` and automatically downloads both the beacon-kit and execution layer snapshots matching your configuration.
+- Or, use the `fetch-berachain-snapshot.js` script to download official Berachain snapshots. The script is **standalone**: it does not read `env.sh` or any other local config. It uses Node.js 18+ built-ins only (no `curl`). It fetches the index from `snapshots.berachain.com` and downloads the latest beacon-kit and execution snapshots that match your flags.
 
 ```bash
-# FROM: ~/beranode
+# FROM: ~/beranode (or any directory — pass -o for output path)
 
-# Default: reth, mainnet, pruned
+# Default: reth, mainnet, pruned, writes to ./downloads
 node fetch-berachain-snapshot.js
 
-# Or specify options:
+# Or specify options (no env file required):
 node fetch-berachain-snapshot.js --network testnet --type archive
+node fetch-berachain-snapshot.js -o /var/snapshots --execution-only
 
 # [Expected Output]:
 # Bera Snapshot Downloader
 # Network: mainnet | Client: reth | Type: pruned
+# Output: /.../downloads
 # Fetching snapshot index...
 # Will download: snapshot_beacon-kit-pruned_*.tar.lz4, snapshot_reth-pruned_*.tar.lz4
 # Downloading...
@@ -223,6 +225,11 @@ Available options:
 
 - `--network` or `-n`: Network (`mainnet` or `testnet`, default: `mainnet`)
 - `--type` or `-t`: Snapshot type (`pruned` or `archive`, default: `pruned`)
+- `--output` or `-o`: Download directory (default: `downloads` in the current working directory)
+- `--index-url`: Override the snapshot index CSV URL (default: `https://snapshots.berachain.com/index.csv`)
+- `--el-client`: Execution snapshot type prefix in the index (default: `reth`)
+- `--beacon-only`: Beacon-kit snapshot only
+- `--execution-only` or `--el-only`: Execution-layer snapshot only
 - `--help` or `-h`: Show help message
 
 ### 6b - Stop clients

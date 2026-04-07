@@ -1,0 +1,129 @@
+---
+title: "Migrate from Bera-Geth to Bera-Reth"
+description: "Replace your execution client, match your old configuration, install a snapshot."
+---
+
+You are replacing the execution client only. Beacon-Kit (`beacond`) keeps the same validator identity, consensus history, and Engine API handshake with the EL. 
+
+Reth does not read Geth's chain database.  Plan to retire the Geth installation after Reth is healthy. 
+
+## Layout
+
+Below is an example layout on disk that we will reason with in this guide. Your installation can, of course, vary. The example below uses `/srv/bera` so systemd units, Compose files, and on-call runbooks all refer to the same paths. 
+
+**Suggested tree** (adjust names to match your host):
+
+```
+/srv/bera/
+├── beacond/                    # Consensus home
+│   ├── config/
+│   │   ├── app.toml
+│   │   ├── genesis.json        # CL genesis (already present)
+│   │   ├── jwt.hex             # Engine secret: same file Reth reads
+│   │   └── ...
+│   └── data/
+└── reth/
+    ├── genesis.json            # EL genesis for bera-reth --chain
+    └── data/                   # bera-reth node --datadir (empty until init or snapshot)
+```
+
+**Consensus home** is the directory you pass to `beacond` as `--home`. It always contains `config/` and `data/`. For a migration, the lowest-risk approach is to **take a filesystem copy of the entire `beacond` tree from the host that currently runs Geth, while `beacond` is stopped.** That copy preserves `priv_validator_key.json`, current `app.toml`, `config.toml`, address book, and CL chain data exactly as they were under Geth.
+
+**Reth datadir** is where reth configuration and chain data is. In later steps you will initialize Reth here or install a snapshot.
+
+1. **jwt.json **  is the shared secret so Beacon-Kit and Geth can communicate.  You only need one copy.  Set both `jwt-secret-path` in Beacon-Kit's `app.toml` and Reth's `--authrpc.jwtsecret` to that exact full path.
+
+2. **Execution genesis** — The execution genesis JSON is required. Your copy should be fine, or download the canonical `eth-genesis.json` from [berachain/beacon-kit](https://github.com/berachain/beacon-kit/tree/main/testing/networks), and place it in `reth/genesis.json`. 
+
+## Invocation
+
+**Collect launch options from Geth before you decommission it.** Open the unit file, Compose service, or shell wrapper that starts Geth today and note every path and port. Many of these are covered by reasonable Reth defaults.
+
+The guides [`run-reth.sh`](https://github.com/berachain/guides/blob/main/apps/node-scripts/run-reth.sh) is a worked example of flags that work with Beacon-Kit; treat it as a checklist against your own systemd or kubernetes pod.
+
+Bera-Reth inherits Reth's CLI. The full upstream option list for the node command is documented at **[reth node (CLI reference)](https://reth.rs/cli/reth/node/)**. Many flags are the same between Bera-Geth and Bera-Reth:
+
+| Geth (typical) | Reth equivalent |
+| -------------- | ---------------- |
+| `--datadir` | same |
+| `--chain /path/genesis.json` | same |
+| `--http`, `--http.addr`, `--http.port` | same |
+| `--authrpc.addr`, `--authrpc.port`, `--authrpc.jwtsecret` | same |
+| `--nat extip:IP` | same; this option is highly recommended |
+| `--port` (execution P2P) | `--port` and `--discovery.port` |
+| `--static-peers <peer,peer>` | `--trusted-peers <peer,peer>` |
+| Full node vs archive | Pruned-style: pass `--full`. Full archive: omit `--full` |
+
+
+Pass `--chain` with your EL genesis JSON path on every `bera-reth node` start, not only after `init`.
+
+**Bootnodes** — Use the current [mainnet](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt) or [Bepolia](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/el-bootnodes.txt) `el-bootnodes.txt` with `--bootnodes` (comma-separated `enode://` lines). 
+
+Typical Reth startup structure:
+```
+EL_BOOTNODES=$(grep '^enode://' "el-bootnodes.txt"|tr '\n' ','|sed 's/,$//')
+
+$RETH_BIN node                           \
+    --datadir $RETH_DATA                 \
+    --chain $RETH_GENESIS_PATH           \
+    --full                               \
+    --bootnodes $BOOTNODES_OPTION        \
+    --nat extip:$EXTERNAL_IP_ADDR        \
+    --authrpc.jwtsecret $JWT_PATH        \
+    --metrics 9101                       \
+    --http                               \
+    --http.addr 0.0.0.0                  \
+    --http.port 8545                     \
+    --ipcpath /tmp/reth.ipc              \
+    --log.file.directory $LOG_DIR        \
+    --engine.persistence-threshold 0     \
+    --engine.memory-block-buffer-target 0
+```
+
+## Option 1: Init and sync from genesis
+
+This path is appropriate when you accept a long execution-layer sync from genesis and want minimal moving parts.
+
+1. Remove or rename the Geth datadir so Reth never opens it by mistake.
+2. Ensure `eth-genesis.json` is at your EL genesis path ([EVM Execution](/nodes/architecture/evm-execution)).
+3. Initialize Reth's database directory:
+
+```bash
+bera-reth init --datadir /srv/bera/reth/data --chain /srv/bera/reth/genesis.json
+```
+
+5. After you **Start** (below), Reth syncs execution state from the network. Expect this to take much longer than restoring a snapshot unless you are very close to genesis.
+
+## Option 2: Install snapshot
+
+Choose this path when you want to land near head on disk instead of waiting for a full EL sync.
+
+1. **Download** — Official EL bundles are named like `snapshot_reth-*.tar.lz4`. The [snapshot downloader](https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js) is one Node.js 18+ file with no env file dependency.
+
+```bash
+curl -sO https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js
+node fetch-berachain-snapshot.js --execution-only -o ./downloads
+```
+
+Use `-n`, `-t`, and `-o` to match network, pruned vs archive, and output directory. Archive snapshots belong on archive nodes; pruned belongs on pruned nodes. Geth's database cannot be converted into these archives.
+
+1. **Stop** both `beacond` and the execution client before unpacking anything into the Reth datadir.
+
+2. **Extract** — Extract into the location of Reth's `--datadir`. For the suggested tree, datadir is `/srv/bera/reth/data`, so unpack like so:
+
+```bash
+lz4 -d mainnet-reth-archive*lz4 | tar xv -C /srv/bera/reth/data/
+```
+
+If Reth partially synced earlier, wipe `reth/data` before extracting.
+
+## Start
+
+Start `beacond` and `bera-reth` with whatever supervisor you already use. We recommend EL, then CL.
+Provided JWT path and the Reth authrpc port agrees with the Beacond `rpc-dial-url`, they should connect and begin following the chain.
+
+Watch `beacond` logs for a successful execution-client connection. Hit your configured HTTP RPC port on Reth (often `8545`) with a simple `eth_blockNumber` once you expect sync to move.
+
+When Reth is stable and you no longer need rollback to Geth, delete or archive the old Geth datadir to free space.
+
+For a brand-new node built entirely from the guides scripts, see [Quickstart: Run a Node](/nodes/operations/quickstart).

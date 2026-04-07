@@ -296,6 +296,7 @@
             "group": "Operations",
             "pages": [
               "nodes/operations/quickstart",
+              "nodes/operations/bera-geth-to-reth",
               "nodes/operations/self-hosted-rpc",
               "nodes/operations/production-checklist",
               "nodes/operations/monitoring"
