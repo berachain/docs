@@ -98,7 +98,7 @@ bera-reth init --datadir /srv/bera/reth/data --chain /srv/bera/reth/genesis.json
 
 Choose this path when you want to land near head on disk instead of waiting for a full EL sync.
 
-1. **Download** — Official EL bundles are named like `snapshot_reth-*.tar.lz4`. The [snapshot downloader](https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js) is one Node.js 18+ file with no env file dependency.
+1. **Download** — Official Bera snapshots are `.tar.lz4` files.  The [snapshot downloader](https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js) is a standlone Node.js 18+ script. It accepts `--help`.
 
 ```bash
 curl -sO https://raw.githubusercontent.com/berachain/guides/main/apps/node-scripts/fetch-berachain-snapshot.js
@@ -112,7 +112,7 @@ Use `-n`, `-t`, and `-o` to match network, pruned vs archive, and output directo
 2. **Extract** — Current official Reth snapshot archives place **`db/`**, **`rocksdb/`**, and **`blobstore/`** at the **tar root**, not under a `data/` folder. Point `tar` **`-C` at your `--datadir`** so those directories land directly inside it. For the suggested tree, `--datadir` is `/srv/bera/reth/data` and thus:
 
 ```bash
-EL_SNAPSHOT=$(ls /path/to/downloads/snapshot_reth-*.tar.lz4 | head -1)
+EL_SNAPSHOT=$(ls /path/to/downloads/*reth*.tar.lz4 | head -1)
 lz4 -d "$EL_SNAPSHOT" | tar xv -C /srv/bera/reth/data
 ```
 
