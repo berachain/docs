@@ -109,18 +109,18 @@ Use `-n`, `-t`, and `-o` to match network, pruned vs archive, and output directo
 
 1. **Stop** both `beacond` and the execution client before unpacking anything into the Reth datadir.
 
-2. **Extract** — Extract into the location of Reth's `--datadir`. For the suggested tree, datadir is `/srv/bera/reth/data`, so unpack like so:
+2. **Extract** — Current official Reth snapshot archives place **`db/`**, **`rocksdb/`**, and **`blobstore/`** at the **tar root**, not under a `data/` folder. Point `tar` **`-C` at your `--datadir`** so those directories land directly inside it. For the suggested tree, `--datadir` is `/srv/bera/reth/data` and thus:
 
 ```bash
-lz4 -d mainnet-reth-archive*lz4 | tar xv -C /srv/bera/reth/data/
+EL_SNAPSHOT=$(ls /path/to/downloads/snapshot_reth-*.tar.lz4 | head -1)
+lz4 -d "$EL_SNAPSHOT" | tar xv -C /srv/bera/reth/data
 ```
 
-If Reth partially synced earlier, wipe `reth/data` before extracting.
+If you ever see tarball paths prefixed with `data/` (e.g. `tar -tv` shows `data/db/...`), unpack with `-C` set to the **parent** of `--datadir` instead so `data/` becomes the datadir. If Reth partially synced earlier, empty `--datadir` before extracting.
 
 ## Start
 
-Start `beacond` and `bera-reth` with whatever supervisor you already use. We recommend EL, then CL.
-Provided JWT path and the Reth authrpc port agrees with the Beacond `rpc-dial-url`, they should connect and begin following the chain.
+Start `beacond` and `bera-reth` with whatever supervisor you already use. We recommend EL, then CL. Provided the JWT path and auth RPC port agrees between Reth and Beacon-Kit (see its `rpc-dial-url` setting),  they should connect and begin following the chain.
 
 Watch `beacond` logs for a successful execution-client connection. Hit your configured HTTP RPC port on Reth (often `8545`) with a simple `eth_blockNumber` once you expect sync to move.
 

@@ -199,22 +199,19 @@ Berachain and the community offer snapshots for Mainnet and Bepolia. You can dow
 
 - [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
 
-- Or, use the `fetch-berachain-snapshot.js` script to download official Berachain snapshots. The script is **standalone**: it does not read `env.sh` or any other local config. It uses Node.js 18+ built-ins only (no `curl`). It fetches the index from `snapshots.berachain.com` and downloads the latest beacon-kit and execution snapshots that match your flags.
+- Or, use the `fetch-berachain-snapshot.js` script to download official Berachain snapshots. The script does not read `env.sh`. It loads the snapshot **index CSV** with Node.js 18+ `fetch`, then runs **`curl`** (must be on your `PATH`) for each file so downloads can resume (`curl -C -`). By default, mainnet uses `https://snapshots.berachain.com/index.csv` and testnet (`-n testnet`) uses `https://bepolia.snapshots.berachain.com/index.csv`. The script picks the newest matching beacon-kit and reth rows and prefers `url_s3` from the CSV when present.
 
 ```bash
-# FROM: ~/beranode (or any directory — pass -o for output path)
+# FROM: ~/beranode (or any directory — use -o to change download folder)
 
-# Default: reth, mainnet, pruned, writes to ./downloads
+# Default: mainnet, pruned, writes to ./downloads
 node fetch-berachain-snapshot.js
 
-# Or specify options (no env file required):
+# Examples:
 node fetch-berachain-snapshot.js --network testnet --type archive
 node fetch-berachain-snapshot.js -o /var/snapshots --execution-only
 
 # [Expected Output]:
-# Bera Snapshot Downloader
-# Network: mainnet | Client: reth | Type: pruned
-# Output: /.../downloads
 # Fetching snapshot index...
 # Will download: snapshot_beacon-kit-pruned_*.tar.lz4, snapshot_reth-pruned_*.tar.lz4
 # Downloading...
@@ -223,11 +220,10 @@ node fetch-berachain-snapshot.js -o /var/snapshots --execution-only
 
 Available options:
 
-- `--network` or `-n`: Network (`mainnet` or `testnet`, default: `mainnet`)
-- `--type` or `-t`: Snapshot type (`pruned` or `archive`, default: `pruned`)
+- `--network` or `-n`: `mainnet` or `testnet` (default: `mainnet`; selects the snapshot index host as above)
+- `--type` or `-t`: `pruned` or `archive` (default: `pruned`)
 - `--output` or `-o`: Download directory (default: `downloads` in the current working directory)
-- `--index-url`: Override the snapshot index CSV URL (default: `https://snapshots.berachain.com/index.csv`)
-- `--el-client`: Execution snapshot type prefix in the index (default: `reth`)
+- `--el-client`: Execution snapshot type prefix in the CSV (default: `reth`)
 - `--beacon-only`: Beacon-kit snapshot only
 - `--execution-only` or `--el-only`: Execution-layer snapshot only
 - `--help` or `-h`: Show help message
@@ -278,22 +274,24 @@ lz4 -d "$BEACON_SNAPSHOT" | tar xv -C var/beacond/;
 
 ### 6e - Install execution layer snapshot
 
-Extract the execution layer snapshot:
+Official Reth snapshot archives list **`db/`**, **`rocksdb/`**, and **`blobstore/`** at the **root** of the tarball (not under a `data/` directory). Your `bera-reth node --datadir` must be the directory that contains those folders. In this layout that is `var/reth/data` (see `setup-reth.sh` / `env.sh`), so pass **`-C var/reth/data`** to `tar`. Extracting into `var/reth/` would place `db/` next to `genesis.json` and would not match `--datadir`.
 
 ```bash
 # FROM: ~/beranode
 
 # Find the execution layer snapshot
 EL_SNAPSHOT=$(ls downloads/snapshot_reth-*.tar.lz4 | head -1)
-lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/;
+lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/data;
 
-# [Expected Output]:
-# x data/
-# x data/db/
-# x data/db/mdbx.dat
-# x data/static_files/
+# [Expected Output] (current official bundles):
+# x db/
+# x db/mdbx.dat
+# x rocksdb/
+# x blobstore/
 # ...
 ```
+
+If `tar -tv` on your file shows paths starting with `data/` instead, unpack with `-C` set to the **parent** of `var/reth/data` (i.e. `var/reth/`) so the archive's `data/` directory becomes your datadir.
 
 ## Step 7 - Fetch address book (optional)
 
