@@ -1,76 +1,139 @@
 ---
 title: "Production Checklist"
-description: "Pre-support checks: diagnosis script, client versions, peering, recommended options, and operational hygiene for production nodes."
+description: "Actionable pre-support checks for Beacon Kit (beacond) and Bera-Reth: versions, peering, launch flags, and ops hygiene."
 ---
 
-Before reaching out for support, here are some steps to check your installation.
+## Recommended releases
 
-## Quick diagnosis script
+[Current versions of Beacon Kit and Bera-Reth are listed here.](/nodes/architecture/evm-execution)
 
-Berachain distributes a stand-alone [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh). Drop this into your Unix-based system and run:
+## Peering
+
+If you are running in a containerized environment, ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
+
+Both the CL and EL should have **no static or persistent peers** set up, unless they are for your internal network or business partners you want permanent connections to.
+
+Review the following sections for specific peering advice for Beacon-Kit and Bera-Reth.
+
+---
+
+## Beacon Kit (`beacond`)
+
+The [diagnosis script](https://github.com/berachain/guides/tree/main/apps/node-scripts/node-diagnostic.sh) inspects **`beacond`** only. It does not check Bera-Reth, JWT paths, or EL peering.
 
 ```bash
 /path/to/node-diagnostic.sh -d /var/beacond/ -p /opt/bin/beacond
 ```
 
-Substitute the path to your Beacon Kit data directory (containing `config` and `data` directories), and the path to the `beacond` binary (if not in your $PATH).
+Use your Beacon Kit home (the directory with `config/` and `data/` inside it) and your `beacond` binary. Attach the full output when asking for support.
 
-This script produces clearly marked recommendations. Provide the output of this script when communicating with the team for support.
+### Consensus-layer peering
 
-## Beacon Kit version check
-
-Ensure you are running the latest version of [Beacon Kit](https://github.com/berachain/beacon-kit).
-
-## Execution client version check
-
-Check that you are running a supported version of your [execution client](/nodes/architecture/evm-execution). Note that Berachain doesn't _always_ support the latest version of a given client.
-
-## Peering
-
-There are several ingredients to successful peering. If you are running in a containerized environment, ensure your services are properly advertising their real network address, and that traffic is being directed into the container, both for Beacon Kit and your execution client.
-
-1. **Check bootnodes for initial chain sync**: Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt). Bera-Reth accepts the `--bootnodes` option. `beacond` has the boot node list baked into the distributed [config](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml).
-2. **Check Execution Layer peering**: The execution layer needs excellent peering to ensure that transactions flow to your validator for sealing in blocks. Ensure port 30303 TCP (for transactions) and UDP (for peer exchange) is open. Check that you have a current list of [bootnodes](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt).
-3. **Indicate your Execution Layer's external IP address**: Execution clients need to know the publicly routable IP address they can be reached at. Most execution clients try to determine your public IP with UPnP, which is not available in cloud computing environments. Therefore, you must _tell your execution client_ what your external IP address is. For Bera-Reth, this is done with the `--nat extip:<IP>` option.
-4. **Check beacond peering**: `beacond` needs good peering to organize and perform consensus actions. This is carried out over TCP port 26656. Also, correctly advertise your node's external IP with `p2p.external_address` in `config.toml`. To limit `beacond`'s memory consumption, **40 inbound + 10 outbound peers** is recommended:
+| Topic                      | Action                                                                                                                                                                                                      |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Firewall**               | Open **TCP 26656** to the internet (or publish correctly through your load balancer / host networking).                                                                                                     |
+| **`p2p.external_address`** | Set in `config.toml` to the **routable** IP and port peers should dial. Required behind NAT or in containers; without it `beacond` advertises an internal address.                                          |
+| **Bootnodes**              | `beacond` uses the seed list in `config.toml`. Confirm you are on a current release with the [recommended list](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/config.toml#L199). |
+| **Peer limits**            | **40 inbound + 10 outbound** is recommended to cap memory use.                                                                                                                                              |
 
 ```toml
 max_num_inbound_peers = 40
 max_num_outbound_peers = 10
 ```
 
-5. **No static or persistent peers**: Both the CL and EL should have no static or persistent peers set up, unless they are for your internal network or business partners you want permanent connections to.
+---
 
-## Recommended options
+## Bera-Reth
 
-For **Reth**, the following options are recommended in the Reth launch:
+### Execution-layer peering
+
+The execution layer needs excellent peering so transactions reach your validator for block sealing. Open **TCP** and **UDP** on the devp2p port (default **30303**).
+
+| Topic                 | Action                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`--bootnodes`**     | Build from one current [mainnet `el-bootnodes.txt`](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt) or [Bepolia](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/el-bootnodes.txt). Do not merge legacy files or paste third-party **`enode://`** lines. Prefer an env var (**`BOOTNODES`**) and **`--bootnodes "$BOOTNODES"`**. |
+| **`--nat extip:`**    | Required on cloud or NAT hosts without UPnP (example: **`--nat extip:203.0.113.50`**). Value must be the IPv4 peers dial.                                                                                                                                                                                                                                                                            |
+| **`--trusted-peers`** | Omit unless you need a **private** mesh. Never duplicate public bootnodes here.                                                                                                                                                                                                                                                                                                                      |
+
+### Reth flags you need
+
+**Minimal example** — only flags you really should set. Relies on secure and reasonable Bera-Reth defaults (see table below). Set PUBLIC_IPV4 to your node's external address.
 
 ```bash
---engine.persistence-threshold 0
---engine.memory-block-buffer-target 0
+bera-reth node \
+  --chain /srv/bera/reth/genesis.json \
+  --datadir /srv/bera/reth/data \
+  --full \
+  --authrpc.jwtsecret /srv/bera/beacond/config/jwt.hex \
+  --log.file.directory /var/log/bera-reth \
+  --metrics 127.0.0.1:9090 \
+  --nat extip:PUBLIC_IPv4 \
+  --engine.persistence-threshold 0
 ```
 
-Ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules.
+**Full example** — every flag stated explicitly, useful when you need non-default ports or want a self-documenting unit file. \
 
-## Register with the team
+```
+bera-reth node \
+  --chain /srv/bera/reth/genesis.json \
+  --datadir /srv/bera/reth/data \
+  --full \
+  --port 30303 \
+  --discovery.port 30303 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 8545 \
+  --ipcpath /tmp/reth.ipc \
+  --authrpc.addr 127.0.0.1 \
+  --authrpc.port 8551 \
+  --authrpc.jwtsecret /srv/bera/beacond/config/jwt.hex \
+  --log.file.directory /var/log/bera-reth \
+  --metrics 127.0.0.1:9090 \
+  --nat extip:PUBLIC_IPv4
+```
 
-If you have launched a validator on the chain, it's in your interest to let the team know who you are, so they know who to contact in case there's trouble with on-chain performance.
+If a flag's default already matches your deployment, omit it. Shorter unit files are easier to audit and less likely to drift from upstream changes:
 
-Steps to do that:
+{/* prettier-ignore-start */}
 
-1. (Optional) Formulate a pull request to the [Validator Metadata repository](https://github.com/berachain/metadata) with a public handle for your validator. You can use an anon if you want. Provide a logo attached to the pull request if you would like it posted on your validator profile.
-2. Reach out on the `#node-support` channel on [Discord](https://discord.gg/berachain). The team will set you up with dedicated support, chat, and announcement channels for validators.
+| Flag(s) | Default | Verify |
+| --- | --- | --- |
+| **`--chain`** | `mainnet` | Must point at the EL genesis JSON for this network. Always set explicitly. |
+| **`--datadir`** | OS data dir | Must point at the datadir you initialized. Always set explicitly. |
+| **`--full`** | off (archive) | **Set** for pruned / non-archive validators. Omit only for a deliberate full-archive EL. |
+| **`--port`** | `30303` | Omit if 30303 is fine. Open **TCP+UDP** at the firewall. |
+| **`--discovery.port`** | same as **`--port`** | Omit unless you split discovery to a different UDP port. |
+| **`--http`** | off | **Set** to enable HTTP JSON-RPC. |
+| **`--http.addr`** | `127.0.0.1` | Default is safe. Only change if providing RPC service internally or externally. |
+| **`--http.port`** | `8545` | Omit if 8545 is fine. |
+| **`--ipcpath`** | `/tmp/reth.ipc` | Change when running multiple Reth instances. |
+| **`--authrpc.addr`** | `127.0.0.1` | Default is safe. Do not change unless you are splitting beacon and reth machines. |
+| **`--authrpc.port`** | `8551` | Must match Beacon Kit **`rpc-dial-url`**. Omit if 8551 matches. |
+| **`--authrpc.jwtsecret`** | none | **Always set.** Must be the same JWT file **`beacond`** uses. |
+| **`--log.file.directory`** | OS cache dir | **Set** to a path you manage with **`logrotate`** (or equivalent). Default buries logs in a platform cache directory. |
+| **`--metrics`** | off | **Set** to an interface and port that Prometheus can scrape. Do not expose publicly. See [Monitoring](/nodes/operations/monitoring). |
+| **`--nat`** | `any` (UPnP) | **Set `extip:`** on cloud/NAT hosts where UPnP does not work. Value must be the routable IPv4. |
+| **`--engine.persistence-threshold`** | `2` | **Set `0`** for Beacon Kit alignment. |
+| **`--engine.memory-block-buffer-target`** | `0` | Already correct. Omit or set explicitly for clarity. |
+
+### Reth flags you may not need
+
+| Optional flag | When to add |
+| --- | --- |
+| **`--bootnodes`** | Bera-Reth bakes in our recommended defaults. |
+| **`--trusted-peers`** | Omit unless you have a private mesh among multiple nodes you operate. |
+| **`--ws`** | Omit unless a local consumer needs WebSocket RPC. |
+| **`--http.corsdomain '*'`** | Only when you accept browser callers from any domain. |
+| **`--http.api`** | Default is secure and reasonable. Only override if you need to. Never put **`admin`** or **`debug`** on a publicly-reachable RPC. |
+
+{/* prettier-ignore-end */}
+
+---
+
+## Set your validator name and logo on the Hub
+
+Validators should identify themselves so ops can reach you. Send a PR to [Validator Metadata](https://github.com/berachain/metadata), then ping **`#node-support`** on [Discord](https://discord.gg/berachain) so we can let you into dedicated validator support channels.
 
 ## Operational hygiene
 
-Make sure Beacon Kit and your execution client are configured to start when your operating system starts.
-
-Cause your operating system to rotate logs, and slim the log output.
-
-- Read the `beacond` config files to find log verbosity settings.
-- Consult the instructions for your chosen chain node to adjust logging settings.
-- Set up the `logrotate` service to rotate logs.
-
-Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable Prometheus metrics collection. Specify an internal IP address accessible only to your Prometheus server, or ensure this port is firewalled off from the internet.
-
-Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main) for references to other monitoring tools.
+See **[Monitoring](/nodes/operations/monitoring)** for full Prometheus and Grafana setup.
