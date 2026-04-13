@@ -52,6 +52,8 @@ For **Reth**, the following options are recommended in the Reth launch:
 
 Ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules.
 
+**Open ports.** Two ports are required to be open: the Beacon Kit P2P port (26656) and the Bera-Reth P2P port (30303). These should be open to TCP and UDP traffic. It is not recommended to leave port 8545 and 8546 (JsonRPC and websocket RPC) open to the public.
+
 ## Register with the team
 
 If you have launched a validator on the chain, it's in your interest to let the team know who you are, so they know who to contact in case there's trouble with on-chain performance.
@@ -70,7 +72,4 @@ Cause your operating system to rotate logs, and slim the log output.
 - Read the `beacond` config files to find log verbosity settings.
 - Consult the instructions for your chosen chain node to adjust logging settings.
 - Set up the `logrotate` service to rotate logs.
-
-Monitor your node's disk space, memory consumption, and service availability. You can add `--metrics=<ip>:6060` to the reth invocation to enable Prometheus metrics collection. Specify an internal IP address accessible only to your Prometheus server, or ensure this port is firewalled off from the internet.
-
-Particularly if you are a validator, consult the guide to [Becoming an Awesome Validator](https://github.com/chuck-bear/awesome-berachain-validators/tree/main) for references to other monitoring tools.
+- Read our [monitoring guide](nodes/operations/monitoring#what-to-monitor).
