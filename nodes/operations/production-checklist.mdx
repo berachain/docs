@@ -52,7 +52,7 @@ For **Reth**, the following options are recommended in the Reth launch:
 
 Ensure the `debug` API is not enabled in the `--http.api` option. It is better to **remove** the `--http.api` option entirely and allow the secure default to apply, unless you have specific reasons to enable additional modules.
 
-**Open ports.** Two ports are required to be open: the Beacon Kit P2P port (26656) and the Bera-Reth P2P port (30303). These should be open to TCP and UDP traffic. It is not recommended to leave port 8545 and 8546 (JsonRPC and websocket RPC) open to the public.
+**Open ports.** Two ports are required to be open: the Beacon Kit P2P port (`26656/TCP`) and the Bera-Reth P2P port (`30303/TCP` and `30303/UDP` for discovery). It is not recommended to leave port 8545 and 8546 (JsonRPC and websocket RPC) open to the public.
 
 ## Register with the team
 
