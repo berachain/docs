@@ -53,11 +53,10 @@ The validator must appear on the beacon chain before you can activate the pool.
 Activation mirrors the Installation flow. Once the validator is recognised as registered on the beacon chain, run `activate.sh`:
 
 ```bash
-./activate.sh              # write generated/activation-command.sh for review
-./activate.sh --send       # fetch proofs and broadcast the activation tx in one shot
+./activate.sh
 ```
 
-`activate.sh` is a permissionless call keyed on your validator pubkey and no longer takes `--sr` or `--op`. It preflights the activation locally (pool deployed, pool not already active, operator and withdrawal-credentials match, proofs verify against a single pinned slot) before producing the command. Proofs are contract-checked against `MAX_TIMESTAMP_AGE` = 10 minutes; if you delay broadcasting beyond that window, re-run `activate.sh` to regenerate.
+`activate.sh` is a permissionless call keyed on your validator pubkey and no longer takes `--sr` or `--op`. It preflights the activation locally (pool deployed, pool not already active, operator and withdrawal-credentials match, proofs verify against a single pinned slot) and writes `generated/activation-command.sh` for you to review and execute. Proofs are contract-checked against `MAX_TIMESTAMP_AGE` = 10 minutes; if you delay broadcasting beyond that window, re-run `activate.sh` to regenerate.
 
 ## 5. Deposit remaining delegated funds
 
