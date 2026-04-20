@@ -440,7 +440,7 @@
       "name": "WithdrawalVault",
       "address": {
         "berachainMainnet": "0xE858802Ed532C6DAD2D196AB5B1F2C15F9cb52b4",
-        "berachainBepolia": "0xcf5F1B64c487b32F91fdAb86f705B3cc8630ebc4"
+        "berachainBepolia": "0xBBed2D94338cdE2926A8C0576432De32C05c66e9"
       },
       "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts-staking-pools/WithdrawalVault.json"
     }
