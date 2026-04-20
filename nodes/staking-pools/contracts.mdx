@@ -1,6 +1,6 @@
 ---
 title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
+description: "Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
 ---
 
 import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
@@ -11,7 +11,7 @@ This reference provides contract addresses and links to detailed documentation f
 
 ### Singleton contracts
 
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The other singletons below are shared infrastructure.
+Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
 
 <StakingPoolSingletonsTable />
 
