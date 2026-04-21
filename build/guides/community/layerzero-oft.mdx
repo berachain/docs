@@ -4,7 +4,11 @@ description: "Bridge ERC20 tokens (e.g. $UNI) from Sepolia to Berachain using La
 ---
 
 <Warning>
-  **Security advisory:** The permissionless WAB deployment configures its own DVN set at deploy time. Child bridges may have varying security assumptions. Before bridging significant value through a WAB child, users should verify the DVN configuration via `endpoint.getConfig(childAddress, sendLibrary, destinationEid, 2)`. Configurations with fewer than 2 required DVN attestations should be treated as single-point-of-failure risk.
+  **Security advisory:** The permissionless WAB deployment configures its own DVN set at deploy
+  time. Child bridges may have varying security assumptions. Before bridging significant value
+  through a WAB child, users should verify the DVN configuration via
+  `endpoint.getConfig(childAddress, sendLibrary, destinationEid, 2)`. Configurations with fewer than
+  2 required DVN attestations should be treated as single-point-of-failure risk.
 </Warning>
 
 Use this guide when you want to **bridge an existing ERC20** from another chain (e.g. Sepolia) to Berachain using **LayerZero V2** and the **OFT** (Omnichain Fungible Token) standard.
