@@ -79,12 +79,17 @@ The validator must appear on the beacon chain before you can activate the pool.
 Once your validator is registered, run `activate.sh` to activate the pool:
 
 ```bash
-./activate.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
+./activate.sh
 ```
 
-1. The script validates that the pool contract exists (error if not deployed).
-2. The script verifies that the validator is registered on the beacon chain (error if not registered).
-3. The script writes `activation-command.sh` with fresh proofs and a timestamp. Execute it within ~10 minutes.
+Activation is a permissionless on-chain call keyed by your validator pubkey, so `activate.sh` no longer takes `--sr` or `--op`; the pool's shares recipient and operator are already baked in from `register.sh`. The script:
+
+1. Verifies the pool contract is deployed and not already active (`isActive()`).
+2. Confirms `BeaconDeposit.getOperator(pubkey)` matches the pool's SmartOperator and that the validator's withdrawal credentials point at the pool's WithdrawalVault.
+3. Pins the beacon-chain head slot, fetches validator pubkey, withdrawal-credentials, and balance proofs at that single slot, and preflights `activateStakingPool()` locally so a bad proof or stale timestamp surfaces before you broadcast.
+4. Writes `generated/activation-command.sh` for you to review and execute.
+
+Proofs include a timestamp enforced by the contract (`MAX_TIMESTAMP_AGE` = 10 minutes). The generated script also hard-expires after that window; if you hit it, re-run `activate.sh` to regenerate.
 
 ## 5. Verify installation
 

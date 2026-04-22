@@ -201,10 +201,11 @@ ${items
 function renderGettingStartedPage() {
   return `---
 title: "Deployed Contract Addresses"
-description: "Berachain core contract addresses by network."
+description: "Berachain core and staking-pool contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 This is a list of addresses where you can read from or write to these contracts.
 
@@ -216,6 +217,48 @@ All audit reports are publicly available on [Github](https://github.com/berachai
 </Info>
 
 <CoreContractsTable />
+
+## Staking pool contracts
+
+Shared singleton addresses for staking pools are listed below. For per-pool proxies, behavior, and links to the guides repo, see [Staking pool contracts](/nodes/staking-pools/contracts).
+
+<StakingPoolSingletonsTable />
+`;
+}
+
+function renderStakingPoolsPage() {
+  return `---
+title: "Staking Pool Contracts"
+description: "Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
+---
+
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
+
+This reference provides contract addresses and links to detailed documentation for each contract in the staking pools system. For an overview of how the contracts work together, see the [Staking Pools Overview](/nodes/staking-pools/overview).
+
+## Contract addresses
+
+### Singleton contracts
+
+Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
+
+<StakingPoolSingletonsTable />
+
+### Deployed contracts (per pool)
+
+When you deploy a staking pool through the StakingPoolContractsFactory, the factory creates proxy contracts for your validator. These proxy contracts are what you and your stakers interact with directly. Each validator receives unique proxy addresses for these contracts when deploying their staking pool.
+
+The factory returns these proxy addresses when you call \`deployStakingPoolContracts\`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
+
+**Proxy contracts deployed with your pool:**
+
+- **StakingPool**: Main staking functionality and staker interactions. This is the contract address your stakers use to deposit BERA and receive stBERA shares.
+- **SmartOperator**: Validator operations and Proof of Liquidity integration. Use this contract to manage BGT operations, commission rates, reward allocations, and protocol fees.
+- **IncentiveCollector**: Incentive token collection and conversion. Handles the incentive auction mechanism where accumulated tokens can be claimed.
+- **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
+- **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
+
+For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
 `;
 }
 
@@ -287,42 +330,6 @@ To find a market ID, open [bend.berachain.com/borrow](https://bend.berachain.com
 `;
 }
 
-function renderStakingPoolsPage() {
-  return `---
-title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
----
-
-import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
-
-This reference provides contract addresses and links to detailed documentation for each contract in the staking pools system. For an overview of how the contracts work together, see the [Staking Pools Overview](/validators/staking-pools/overview).
-
-## Contract addresses
-
-### Singleton contracts
-
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The other singletons below are shared infrastructure.
-
-<StakingPoolSingletonsTable />
-
-### Deployed contracts (per pool)
-
-When you deploy a staking pool through the StakingPoolContractsFactory, the factory creates proxy contracts for your validator. These proxy contracts are what you and your stakers interact with directly. Each validator receives unique proxy addresses for these contracts when deploying their staking pool.
-
-The factory returns these proxy addresses when you call \`deployStakingPoolContracts\`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
-
-**Proxy contracts deployed with your pool:**
-
-- **StakingPool**: Main staking functionality and staker interactions. This is the contract address your stakers use to deposit BERA and receive stBERA shares.
-- **SmartOperator**: Validator operations and Proof of Liquidity integration. Use this contract to manage BGT operations, commission rates, reward allocations, and protocol fees.
-- **IncentiveCollector**: Incentive token collection and conversion. Handles the incentive auction mechanism where accumulated tokens can be claimed.
-- **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
-- **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
-
-For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
-`;
-}
-
 write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSnippet());
 write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
 write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
@@ -333,7 +340,7 @@ write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage()
 write("build/bex/deployed-contracts.mdx", renderBexPage());
 write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
 write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
-write("validators/staking-pools/contracts.mdx", renderStakingPoolsPage());
+write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
 
 if (checkMode) {
   if (changedCount > 0) {
