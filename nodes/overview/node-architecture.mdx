@@ -1,11 +1,11 @@
 ---
 title: "Node Architecture"
-description: "Validator and RPC node architecture: consensus (BeaconKit) and execution clients, active set, staking, and block rewards."
+description: "Validator and RPC node architecture: consensus and execution separation, Engine API, dual P2P networks, and Proof of Gossip."
 ---
 
 Berachain's network relies on validator nodes and RPC nodes. Each can be configured as a full node or archive node.
 
-Each of these types of nodes is a pair of both an [execution client](/general/help/glossary#execution-client) and a [consensus client](/general/help/glossary#consensus-client). Berachain is a Layer 1 EVM Identical chain, which means that for the execution layer, it supports any EVM execution client paired with a consensus client and framework built by Berachain called [BeaconKit](/nodes/architecture/beaconkit-consensus).
+Berachain follows a decoupled node architecture standard in modern Ethereum-equivalent networks. Every node consists of two separate software clients running in tandem: an **execution client** and a **consensus client**. Berachain supports any EVM execution client paired with [BeaconKit](/nodes/architecture/beaconkit-consensus), a consensus framework built by Berachain.
 
 <Frame>
   <img
@@ -14,63 +14,43 @@ Each of these types of nodes is a pair of both an [execution client](/general/he
   />
 </Frame>
 
-## RPC vs validator nodes
+## RPC vs Validator Nodes
 
-The main difference between an RPC node and a validator node is that a validator can propose blocks and receive block rewards.
+Architecturally, RPC nodes and validator nodes are nearly identical. Both maintain a complete copy of the blockchain state and participate in peer-to-peer gossip.
 
-An RPC node can become a validator node by joining the [Active Set](#active-set) through interaction with the [BeaconDeposit](/build/getting-started/deployed-contracts) contract by meeting the `$BERA` [stake requirements](#validator-stake-requirements).
+The only difference is that a **validator node** has been funded with a deposit and holds a private validator key. This key allows the consensus client to sign blocks and attestations, participate in consensus, and receive block rewards. To learn about the economics of becoming a validator, see the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) and the [Be A Validator](/nodes/guides/become-a-validator) guides.
 
-## Active set
+## Client Separation
 
-The active set is the set of validators that are currently participating in the consensus layer of the network.
+The separation of concerns between the two clients is strictly defined:
 
-The current limit of validators in the active set is **69**.
+- **Execution Client (e.g., Bera-Reth, Bera-Geth):** Responsible for transaction execution, managing the Ethereum Virtual Machine (EVM) state, maintaining the state trie, and serving user-facing JSON-RPC requests (like `eth_call` or `eth_sendRawTransaction`).
+- **Consensus Client (BeaconKit):** Responsible for the Proof-of-Stake consensus mechanism, determining the chain's head, managing the validator set, and proposing new blocks. It does _not_ execute transactions or hold EVM state.
 
-Validators can choose to leave the active set voluntarily — [learn how](/nodes/guides/withdraw-stake) — or be ejected from the set if a validator with more stake joins.
+Because these are separate databases, "archival" status usually refers to the execution client retaining historical EVM state, whereas the consensus client manages its own independent pruning settings.
 
-## Validator stake requirements
+## The Engine API and JWT
 
-The minimum stake requirement depends on whether the active set is completely full.
+The execution and consensus clients must communicate continuously to keep the node synced. They do this over a local HTTP interface called the **Engine API**.
 
-If the active set is not full, the minimum stake requirement is **250,000** `$BERA`.
+Because the Engine API allows the consensus client to command the execution client to build and execute blocks, this API must be highly secured. Communication is authenticated using a **JSON Web Token (JWT) secret**. Both clients must be configured to read the exact same `jwt.hex` file on disk to authorize communication.
 
-If the active set is full, the minimum stake requirement is **10,000** `$BERA` more than the amount staked by the last validator in the active set.
+## Dual P2P Networks
 
-It can take up to **3** epochs (**192** blocks per epoch) for deposits to be processed and for a validator to be included in the active set.
+Because the node is split into two clients, it participates in two entirely separate Peer-to-Peer (P2P) networks simultaneously:
 
-## Direct staking
+1. **Execution P2P (devp2p):** The execution client connects to other execution clients to gossip pending user transactions (the mempool).
+2. **Consensus P2P (CometBFT):** The consensus client connects to other consensus clients to gossip proposed blocks, validator attestations, and consensus votes.
 
-Berachain follows Proof-of-Stake (PoS) direct staking, which allows `$BERA` holders to directly stake their `$BERA` to a validator. However, note that if funds are withdrawn from a validator, currently all funds are returned to a single address: the validator's Withdrawal Credentials Address.
+For firewall and networking configurations, operators must ensure both P2P ports are open and publicly dialable. For more details on securing and optimizing these networks, see the [Production Checklist](/nodes/operations/production-checklist).
 
-This means that validators will have to communicate how they handle funds when a validator is removed from the active set.
+## Proof of Gossip
 
-<Warning>
-  Avoid staking to validators without knowing how they handle funds when a validator is removed from
-  the active set.
-</Warning>
+To manage the complexity of the execution P2P network, infrastructure operators can run **Proof of Gossip (PoG)**.
 
-## Staking pools
+PoG consists of two components:
 
-Validators can also operate **staking pools**, which enable liquid staking services for their communities. Staking pools use smart contracts to manage deposits and withdrawals, allowing stakers to receive liquid shares (stBERA) that automatically grow in value as rewards accumulate. Staking pools provide validators with a way to build and monetize their own community of stakers while offering stakers lower barriers to entry and flexible withdrawals. For information about setting up and operating staking pools, see the [Staking Pools documentation](/nodes/staking-pools/overview).
+- **Bera-Sentinel:** An operational fleet manager that orchestrates peer quality across your nodes.
+- **Bera-Reth (Execution Client):** Emits canary transactions to test whether specific devp2p peers are actively relaying transactions to the rest of the network.
 
-## Removed from active set
-
-If a validator is removed from the active set, all `$BERA` staked to that validator will be returned to the validator's Withdrawal Credentials Address, which is set when the validator makes their first deposit.
-
-A validator can decide to become a validator again but will need to generate new CometBFT validator keys and start the deposit process again as if they were a new validator.
-
-<Warning>
-  Staking with a previously-used CometBFT identity — a validator that was removed from the active
-  set — will result in the funds being returned to that validator's withdrawal address at the end of
-  the current epoch. The validator can never be re-activated.
-</Warning>
-
-## Voluntary withdrawals
-
-A Validator can [withdraw all or part of their stake](/nodes/guides/withdraw-stake).
-
-## Validator block rewards and distribution
-
-Block rewards are in the form of `$BGT`, with a base reward of **0.5** `$BGT` per block proposed.
-
-The network does not distribute rewards automatically. You must distribute block rewards through the [Distributor](/build/getting-started/deployed-contracts) contract. Distribution must occur before **8,191** seconds have passed, or validators risk losing those rewards.
+By using PoG, operators can actively drop "zombie" peers that aren't actually contributing to transaction inclusion. To learn more about deploying this sidecar, see the [Proof of Gossip](/nodes/proof-of-gossip/index) section.

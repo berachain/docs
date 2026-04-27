@@ -99,3 +99,11 @@ This project uses **Mintlify** for documentation (not VitePress like the submodu
 4. Maintain consistency with existing documentation in this repository
 5. Reference specific files in the submodule when asking for help or examples
 
+### Redirect Policy
+
+- When a live documentation URL would otherwise begin returning `404`, add a redirect in `docs.json`.
+- If a page is moved, redirect the old URL to the new canonical location.
+- If a page is removed without a direct replacement, choose the closest substitute page and get maintainer approval before adding the redirect destination.
+- Do not leave a previously live documentation URL to 404 without explicit maintainer agreement.
+- After changing redirects, run `make check-redirects` against a running docs server when practical.
+

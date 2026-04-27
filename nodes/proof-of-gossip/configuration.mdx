@@ -1,0 +1,172 @@
+---
+title: "Configuration Reference"
+description: "Reference for Proof of Gossip command-line options, console endpoint forms, and `sentinel.toml` fields."
+---
+
+This page is a dry reference for the PoG configuration surfaces that exist today.
+
+Use [Deployment](/nodes/proof-of-gossip/deployment) for the decision-making guide.
+
+## `bera-reth` node flag reference
+
+### `--bera.pog`
+
+Enables the PoG runtime in `bera-reth`.
+
+| Option       | Default | Required          | Description                                                              |
+| ------------ | ------- | ----------------- | ------------------------------------------------------------------------ |
+| `--bera.pog` | `false` | Yes for PoG nodes | Enables the `beradmin_*` PoG methods, the watcher, and related PoG state |
+
+### Logging
+
+PoG logging is controlled through the normal tracing filters on the **`bera-reth` process**.
+
+Example:
+
+```bash
+bera-reth node \
+  --bera.pog \
+  --log.stdout.filter="info,bera_reth::pog_probe=debug"
+```
+
+## `bera-reth console` endpoint reference
+
+`bera-reth console` accepts an optional positional `ENDPOINT` argument and an `--exec` mode. It currently only supports IPC connections.
+
+| Surface    | Type     | Required | Description                                               |
+| ---------- | -------- | -------- | --------------------------------------------------------- |
+| `ENDPOINT` | `string` | No       | IPC path; if omitted, defaults to the platform `reth.ipc` |
+| `--exec`   | `string` | No       | Runs one command and prints raw JSON                      |
+
+Examples:
+
+```bash
+bera-reth console
+bera-reth console /tmp/reth.ipc
+bera-reth console --exec 'beradmin_nodeStatus []'
+```
+
+## `bera-sentinel` CLI reference
+
+`bera-sentinel` currently exposes one CLI flag plus one environment fallback:
+
+| Option            | Type   | Default         | Required | Description                           |
+| ----------------- | ------ | --------------- | -------- | ------------------------------------- |
+| `--config`        | `path` | `sentinel.toml` | No       | Path to the TOML configuration file   |
+| `SENTINEL_CONFIG` | `env`  | —               | No       | Environment alternative to `--config` |
+
+## `sentinel.toml` top-level fields
+
+### Fleet and service settings
+
+| Field                | Type      | Default               | Required    | Description                                                                    |
+| -------------------- | --------- | --------------------- | ----------- | ------------------------------------------------------------------------------ |
+| `scope`              | `string`  | `""`                  | Recommended | Label injected into all Prometheus metrics                                     |
+| `poll_interval_secs` | `u64`     | `30`                  | No          | Seconds between poll cycles                                                    |
+| `metrics_addr`       | `string`  | `0.0.0.0:9090`        | No          | Prometheus metrics listener                                                    |
+| `ws_addr`            | `string`  | `0.0.0.0:8670`        | No          | HTTP/WebSocket listener for health, console, and APIs                          |
+| `ipc_path`           | `string?` | unset                 | No          | Optional sentinel admin IPC path                                               |
+| `history_db`         | `string`  | `sentinel_history.db` | No          | SQLite path for action/probe history                                           |
+| `registry_db`        | `string`  | `fleet_registry.db`   | No          | SQLite path for peer registry, overrides, capabilities, attribution aggregates |
+| `console_dir`        | `string?` | unset                 | No          | Static asset directory for the console UI                                      |
+| `reference_rpc`      | `string`  | `""`                  | No          | External JSON-RPC used for sentinel-side signer balance checks                 |
+
+### Probe and enforcement settings
+
+| Field                     | Type      | Default | Required             | Description                                                         |
+| ------------------------- | --------- | ------- | -------------------- | ------------------------------------------------------------------- |
+| `pog_probe_enabled`       | `bool`    | `false` | No                   | Turns on sentinel-side PoG probing logic                            |
+| `signing_key_file`        | `string?` | unset   | Required for probing | Path to the hex private key used for canary signing                 |
+| `probe_interval_secs`     | `u64`     | `60`    | No                   | Probe cadence                                                       |
+| `ban_threshold`           | `u32`     | `3`     | No                   | Consecutive failures before zombie classification / fleet ban logic |
+| `penalty_value`           | `i32`     | `-100`  | No                   | Value passed to `beradmin_penalizePeer`                             |
+| `subnet_zombie_threshold` | `f64`     | `0.5`   | No                   | `/24` zombie ratio threshold for subnet blocking analysis           |
+| `subnet_min_peers`        | `u32`     | `3`     | No                   | Minimum peers seen in a subnet before subnet analysis applies       |
+
+## `[[groups]]` reference
+
+| Field               | Type     | Default          | Required | Description                                                                                       |
+| ------------------- | -------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `name`              | `string` | —                | Yes      | Unique group name referenced by nodes                                                             |
+| `role`              | `string` | `infrastructure` | No       | Group role; use `validator` where validator-only attribution and valuable-peer logic should apply |
+| `intra_group_peers` | `u32`    | `0`              | No       | Target intra-group peer count                                                                     |
+| `probe_sharing`     | `bool`   | `true`           | No       | Whether one probe in a group can satisfy multiple nodes                                           |
+
+## `[[nodes]]` reference
+
+| Field               | Type     | Default   | Required | Description                                            |
+| ------------------- | -------- | --------- | -------- | ------------------------------------------------------ |
+| `name`              | `string` | —         | Yes      | Node label used in logs and metrics                    |
+| `exec`              | `string` | —         | Yes      | Shell command prefix used to reach `bera-reth console` |
+| `group`             | `string` | `default` | No       | Group name for this node                               |
+| `exec_timeout_secs` | `u64?`   | `10`      | No       | Per-node timeout for one exec request                  |
+
+Examples:
+
+```toml
+[[nodes]]
+name = "node-1"
+exec = "ssh reth@node-1 bera-reth console"
+group = "validators"
+exec_timeout_secs = 15
+```
+
+```toml
+[[nodes]]
+name = "node-1"
+exec = "kubectl exec -n berachain pod/node-1 -- bera-reth console"
+group = "validators"
+exec_timeout_secs = 15
+```
+
+```toml
+[[nodes]]
+name = "node-1"
+exec = "/path/to/bera-reth console /var/lib/reth/reth.ipc"
+group = "validators"
+exec_timeout_secs = 15
+```
+
+## Effective runtime configuration
+
+For many tunables, the live effective value is resolved through:
+
+1. runtime overrides
+2. SQLite operator baseline
+3. TOML defaults
+
+So changing `sentinel.toml` alone does not necessarily change the live runtime value once the registry has already been seeded.
+
+## Example `sentinel.toml`
+
+```toml
+scope = "mainnet"
+poll_interval_secs = 30
+metrics_addr = "0.0.0.0:9090"
+ws_addr = "0.0.0.0:8670"
+history_db = "sentinel_history.db"
+registry_db = "fleet_registry.db"
+console_dir = "/opt/sentinel/console"
+
+pog_probe_enabled = true
+signing_key_file = "/secrets/pog-key.txt"
+probe_interval_secs = 60
+reference_rpc = "https://rpc.berachain.com"
+
+[[groups]]
+name = "validators"
+role = "validator"
+intra_group_peers = 3
+
+[[nodes]]
+name = "val-1"
+exec = "ssh reth@val-1 bera-reth console"
+group = "validators"
+exec_timeout_secs = 10
+```
+
+## See also
+
+- [Deployment](/nodes/proof-of-gossip/deployment) — how to reach the node over IPC
+- [Using the Console](/nodes/proof-of-gossip/using-the-console) — runtime controls and live operator views
+- [Proof of Gossip](/nodes/proof-of-gossip) — overview, canary model, and current limits

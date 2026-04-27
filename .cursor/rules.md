@@ -343,7 +343,8 @@ Use updates for changelogs:
 
 - Fixed pagination issue with large datasets
 - Resolved authentication timeout problems
-  </Update>
+
+</Update>
 
 ## Required page structure
 
