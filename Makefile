@@ -1,4 +1,6 @@
 
+default: contracts-generate format check
+
 help:
 	@echo "Common docs tasks:"
 	@echo "  make dev                # Run local Mintlify server (http://localhost:3000)"

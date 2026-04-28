@@ -1,0 +1,130 @@
+---
+title: "BeaconKit API"
+---
+
+# Beacon Kit API Reference
+
+## Enabling the API
+
+Beacon Kit exposes two distinct APIs:
+
+1. **Consensus API**: An implementation of the standard Ethereum [Beacon Node API](https://ethereum.github.io/beacon-APIs/) for consensus clients.
+2. **Beacon Kit API**: A custom AvaPI (`bkit/v1`) specific to Berachain's implementation for validators and tooling.
+
+The API server is **default off** and must be enabled by revising your installation's `app.toml` file, in the `[beacon-kit.node-api]` section. When enabled, the suggested port is `3500`.
+
+Note that this API is different from the CometBFT RPC endpoint (also known as the CometBFT Consensus API), which is typically exposed on port `26657`.
+
+## Consensus API
+
+Beacon Kit implements a large surface area of the standard Ethereum Consensus API. For detailed request and response formats, please refer directly to the [official Ethereum Beacon API Specification](https://ethereum.github.io/beacon-APIs/).
+
+### Supported Endpoints
+
+The following namespaces and endpoints are actively supported by the Beacon Kit consensus implementation:
+
+- **Beacon (`/eth/v1/beacon/*` & `/eth/v2/beacon/*`)**:
+  - `genesis`, `headers`, `blocks`, `blinded_blocks`
+  - `states/{state_id}/root`, `fork`, `validators`, `validator_balances`, `committees`, `randao`, etc.
+  - `blob_sidecars/{block_id}`
+  - `rewards/blocks`, `rewards/attestations`, `rewards/sync_committee`
+  - `pool/attestations`, `pool/attester_slashings`, `pool/proposer_slashings`, `pool/voluntary_exits`, `pool/bls_to_execution_changes`
+  - `light_client/bootstrap`, `light_client/updates`, `light_client/finality_update`, `light_client/optimistic_update`
+
+- **Config (`/eth/v1/config/*`)**:
+  - `spec`, `fork_schedule`, `deposit_contract`
+
+- **Node (`/eth/v1/node/*`)**:
+  - `identity`, `peers`, `peer_count`, `syncing`, `version`, `health`
+
+- **Validator (`/eth/v1/validator/*`, `/eth/v2/validator/*`, `/eth/v3/validator/*`)**:
+  - `duties/attester`, `duties/proposer`, `duties/sync`
+  - `blocks/{slot}`
+  - `attestation_data`, `aggregate_attestation`, `aggregate_and_proofs`
+  - `beacon_committee_subscriptions`, `sync_committee_subscriptions`, `beacon_committee_selections`
+  - `sync_committee_contribution`, `contribution_and_proofs`
+  - `prepare_beacon_proposer`, `register_validator`
+  - `liveness/{epoch}`
+
+- **Builder (`/eth/v1/builder/*`)**:
+  - `states/{state_id}/expected_withdrawals`
+
+- **Events (`/eth/v1/events`)**: Event streaming
+
+- **Debug (`/eth/v1/debug/*`, `/eth/v2/debug/*`)**:
+  - `fork_choice`, `beacon/heads`, `beacon/states/{state_id}`
+
+---
+
+## Beacon Kit API (`bkit/v1`)
+
+The custom `bkit/v1` namespace exposes specialized endpoints that are unique to the Beacon Kit architecture.
+
+### API Values
+
+1. All balance values are returned in Gwei (1 ETH = 10^9 Gwei)
+2. Validator statuses include:
+   - `active_ongoing`
+   - `active_exiting`
+   - `active_slashed`
+   - `exited_unslashed`
+   - `exited_slashed`
+   - `pending_initialized`
+   - `pending_queued`
+   - `withdrawal_possible`
+   - `withdrawal_done`
+
+3. State IDs can be:
+   - `head`
+   - `genesis`
+   - `finalized`
+   - `justified`
+   - A specific slot number
+
+### Get Block Proposer Proof
+
+Returns the block proposer's public key for the given timestamp ID, along with Merkle proofs for the public key and proposer index, verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/block_proposer/{timestamp_id}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/block_proposer/{timestamp_id}
+```
+
+### Get Validator Pubkey Proof
+
+Returns a validator's public key for the given timestamp ID and validator index, along with a Merkle proof verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_pubkey/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_pubkey/{timestamp_id}/{validator_index}
+```
+
+### Get Validator Credentials Proof
+
+Returns a validator's withdrawal credentials for the given timestamp ID and validator index, along with a Merkle proof verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_credentials/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_credentials/{timestamp_id}/{validator_index}
+```
+
+### Get Validator Balance Proof
+
+Returns a validator's balance for the given timestamp ID and validator index, along with a Merkle proof and balance leaf verifiable against the beacon block root. Also returns the beacon block header and root.
+
+```http
+GET /bkit/v1/proof/validator_balance/{timestamp_id}/{validator_index}
+```
+
+```bash
+curl -s http://localhost:3500/bkit/v1/proof/validator_balance/{timestamp_id}/{validator_index}
+```
