@@ -99,3 +99,25 @@ This project uses **Mintlify** for documentation (not VitePress like the submodu
 4. Maintain consistency with existing documentation in this repository
 5. Reference specific files in the submodule when asking for help or examples
 
+## EVM execution page — Beacon Kit genesis (`nodes/architecture/evm-execution.mdx`)
+
+When editing this page (execution client versions and network genesis downloads):
+
+**If the intent is to bump** the recommended Beacon Kit and/or Bera-Reth version numbers, you can read candidate tags from GitHub `releases/latest` (still choose the pairing you intend to document; it may lag `latest` on purpose):
+
+```sh
+# Candidate: latest Beacon Kit release tag
+BEACON_KIT_TAG=$(curl -s https://api.github.com/repos/berachain/beacon-kit/releases/latest | jq -r .tag_name)
+
+# Candidate: latest Bera-Reth release tag
+BERA_RETH_TAG=$(curl -s https://api.github.com/repos/berachain/bera-reth/releases/latest | jq -r .tag_name)
+```
+
+After any bump, apply rules 1–3 for the tags actually written on the page.
+
+1. **Raw genesis URLs** must use the **same Beacon Kit git tag** as the release linked in the page copy (for example, page cites v1.3.9 → `https://raw.githubusercontent.com/berachain/beacon-kit/v1.3.9/testing/networks/<chainId>/eth-genesis.json`). **Do not** use `refs/heads/main` or a moving release branch for these downloads: operators need the exact tree that shipped with that Beacon Kit version.
+
+2. **MD5 values** in the table must match the **exact bytes** returned by the linked raw URL. After any URL or tag change, re-verify (for example `curl -fsSL '<url>' | md5`).
+
+3. **Coherence**: Keep the Beacon Kit **release tag** link, the Bera-Reth version row, and the **tag** embedded in genesis URLs aligned. When bumping Beacon Kit, update the tag in all genesis URLs, update Bera-Reth if required, recompute MD5s, and adjust the “Updated” column when the artifact at that URL meaningfully changes for operators.
+
