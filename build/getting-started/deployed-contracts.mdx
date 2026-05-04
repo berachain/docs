@@ -1,9 +1,10 @@
 ---
 title: "Deployed Contract Addresses"
-description: "Berachain core contract addresses by network."
+description: "Berachain core and staking-pool contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 This is a list of addresses where you can read from or write to these contracts.
 
@@ -15,3 +16,9 @@ This is a list of addresses where you can read from or write to these contracts.
 </Info>
 
 <CoreContractsTable />
+
+## Staking pool contracts
+
+Shared singleton addresses for staking pools are listed below. For per-pool proxies, behavior, and links to the guides repo, see [Staking pool contracts](/nodes/staking-pools/contracts).
+
+<StakingPoolSingletonsTable />
