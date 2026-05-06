@@ -1,0 +1,51 @@
+---
+title: "Fusaka Upgrade"
+description: "Validator and developer changes from the Fusaka upgrade on Berachain."
+---
+
+Fusaka is the Berachain upgrade that activates the [Fulu + Osaka EL/CL changes](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0010.md) shipped to [Ethereum](https://ethereum.org/roadmap/fusaka/) in December 2025.
+
+## Upgrade timing
+
+| Network         | Activation Date (UTC) | Binaries Available |
+| --------------- | --------------------- | ------------------ |
+| Bepolia Testnet | 4pm May 27, 2026      | May 11             |
+| Mainnet         | 4pm June 24, 2026     | June 8             |
+
+The official binaries will ship at Github ([Bera-Reth](https://github.com/berachain/bera-reth/releases), [BeaconKit](https://github.com/berachain/beacon-kit/releases)),
+with announcements posted to [Telegram](https://t.me/beranodes/) and [Discord](https://discord.gg/berachain/), along with updates to our [recommended versions](/nodes/architecture/evm-execution) page.
+
+## Bera-Geth Will Stop Working
+
+With this upgrade, Berachain is completing the **Bera-Geth deprecation** [previously announced](https://forum.berachain.com/t/brip-0009-deprecation-of-geth-execution-client/1564). After this fork, **Bera-Geth clients will stop following the chain**.
+
+Follow our [migration guide](/nodes/operations/bera-geth-to-reth) to install Bera-Reth.
+
+## For developers
+
+Bera-Reth in this upgrade bumps the upstream [Reth](https://github.com/paradigmxyz/reth) dependency to **v1.11.4**.
+
+**EIP-6110: Deposits process in the block they are submitted in.** Pre-Fusaka, deposits and withdrawals were processed every epoch (192 blocks). No longer. A deposit transaction emits its event, the execution client parses it into a deposit request, and the consensus client consumes that request — all in the same block. (A validator's _effective balance_, which determines voting power and activation status, is still only updated at the turn of an epoch.)
+
+Reference: [Become a validator](/nodes/guides/become-a-validator).
+
+**Additional EIPs being activated:**
+
+- **EIP-7951 (P-256 precompile):** Native verification of passkey and hardware-key signatures, usable for smart-account flows backed by WebAuthn, Apple Secure Enclave, Android Keystore, and HSMs.
+- **EIP-7939 (CLZ opcode):** A faster bit-math primitive that returns the position of the leading set bit in a single opcode.
+- **EIP-7823 & EIP-7883 (MODEXP repricing and bounds):** Repriced modular exponentiation, with an input-size bound (capped at 8,192 bits) that rejects oversized arguments outright.
+- **Code-size limits (EIP-7954 aligned):** Expanded contract code and initcode size limits (32 KB and 64 KB, respectively), raising the ceiling on what a single contract can deploy.
+- **EIP-7934 & EIP-7825 (Size caps):** Defense-in-depth caps on block size (10 MiB) and per-transaction gas (16.7M gas), sized well above current usage.
+
+Reference: [Protocol Features](/build/protocol/overview).
+
+## For validators
+
+**Effective balance updates respond more closely to actual stake.** The hysteresis buffers that govern when a balance change triggers an effective-balance update are tightened. A drop of -100 BERA or +1000 BERA will update the validator's voting power.
+
+Reference: [Validator lifecycle](/nodes/architecture/validator-lifecycle#effective-balance-and-hysteresis), [Increase validator stake](/nodes/guides/increase-validator-stake).
+
+## Where to go next
+
+- Running a validator: [Validator lifecycle](/nodes/architecture/validator-lifecycle) and the [validator guides](/nodes/guides/become-a-validator).
+- Building on Berachain: [Protocol Features](/build/protocol/overview).
