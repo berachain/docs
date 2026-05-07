@@ -50,7 +50,7 @@ import {
 const RPC_URL = "https://rpc.berachain.com/";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
+const balancerApi = new BalancerApi("https://api.berachain.com/", 80094);
 
 // Initialize tokens
 const honeyToken = new Token(CHAIN_ID, HONEY_TOKEN, 18, "HONEY");
@@ -193,7 +193,7 @@ import {
 const RPC_URL = "https://rpc.berachain.com/";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const balancerApi = new BalancerApi("https://chgbtcc9ffu7rbdw2kmu4urwy.stellate.sh/", 80094);
+const balancerApi = new BalancerApi("https://api.berachain.com/", 80094);
 
 // Initialize tokens
 const usdcToken = new Token(CHAIN_ID, USDC_TOKEN, 6, "USDC");
