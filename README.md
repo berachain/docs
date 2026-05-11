@@ -1,5 +1,7 @@
 # Berachain Documentation
 
+[![Tracked on web3-discover](https://web3-discover.vercel.app/badge/berachain-post-tge-incentives.svg)](https://web3-discover.vercel.app/airdrops/berachain-post-tge-incentives)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/berachain/docs/blob/main/CONTRIBUTING.md)
 [![Contributors](https://img.shields.io/github/contributors/berachain/docs)](https://github.com/berachain/docs/graphs/contributors)
