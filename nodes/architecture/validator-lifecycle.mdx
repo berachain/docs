@@ -40,7 +40,7 @@ The labeled states are as follows:
   The validator is marked for exit if the validator set cap (**69**) is hit and the validator has the lowest effective balance or a lower-order pubKey if it has the same effective balance as another validator.
 
 - **Withdrawn**  
-  Once the validator is marked as exited, after **256** epochs on mainnet (**32** on devnet), validator funds are fully withdrawn. All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address.
+  Once the validator is marked as exited, after **256** epochs on mainnet (**32** on Bepolia), validator funds are fully withdrawn. All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address.
 
 ## Deposited state
 
@@ -88,7 +88,7 @@ When the validator is evicted from the validator set, it is marked **Exited**.
 
 ## Withdrawn state
 
-Once the validator is marked **Exited** (say at epoch `M`), its funds are fully withdrawn at epoch **M + 256** on mainnet (**M + 32** on devnet). Because BeaconKit does not currently enforce a cap on validator churn, this finalizes the validator's lifecycle.
+Once the validator is marked **Exited** (say at epoch `M`), its funds are fully withdrawn at epoch **M + 256** on mainnet (**M + 32** on Bepolia). Because BeaconKit does not currently enforce a cap on validator churn, this finalizes the validator's lifecycle.
 
 ## Effective balance and hysteresis
 
@@ -108,8 +108,8 @@ These buffers are consensus chain spec parameters. See [BRIP-0008](https://githu
 Putting it all together, the following diagram shows the complete Berachain validator lifecycle:
 
 1. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Active**
-2. Potential forced exit due to the validator set cap (**69**) → **Exited** → **256** (mainnet) / **32** (devnet) → **Withdrawn**
-3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to the validator set cap (**69**) + balance too low → **256** (mainnet) / **32** (devnet) → **Withdrawn**
+2. Potential forced exit due to the validator set cap (**69**) → **Exited** → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
+3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to the validator set cap (**69**) + balance too low → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
 
 <Frame>
   <img
