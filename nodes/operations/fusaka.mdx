@@ -1,0 +1,67 @@
+---
+title: "Fusaka Upgrade"
+description: "Validator and developer changes from the Fusaka upgrade on Berachain."
+---
+
+Fusaka is the Berachain upgrade that activates the [Fulu + Osaka EL/CL changes](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0010.md) shipped to [Ethereum](https://ethereum.org/roadmap/fusaka/) in December 2025.
+
+## Upgrade timing
+
+| Network         | Activation Date (UTC) | Binaries Available |
+| --------------- | --------------------- | ------------------ |
+| Bepolia Testnet | 4pm May 27, 2026      | May 11             |
+| Mainnet         | 4pm June 24, 2026     | June 8             |
+
+The official binaries will ship at Github ([Bera-Reth](https://github.com/berachain/bera-reth/releases), [BeaconKit](https://github.com/berachain/beacon-kit/releases)),
+with announcements posted to [Telegram](https://t.me/beranodes/) and [Discord](https://discord.gg/berachain/), along with updates to our [recommended versions](/nodes/architecture/evm-execution) page.
+
+## Bera-Geth Will Stop Working
+
+With this upgrade, Berachain is completing the **Bera-Geth deprecation** [previously announced](https://forum.berachain.com/t/brip-0009-deprecation-of-geth-execution-client/1564). After this fork, **Bera-Geth clients will stop following the chain**.
+
+Follow our [migration guide](/nodes/operations/bera-geth-to-reth) to install Bera-Reth.
+
+## For developers
+
+Bera-Reth in this upgrade bumps the upstream [Reth](https://github.com/paradigmxyz/reth) dependency to **v1.11.4**.
+
+**EIP-6110: Deposits process in the block they are submitted in.** Pre-Fusaka, deposits and withdrawals were processed every epoch (192 blocks). No longer. A deposit transaction emits its event, the execution client parses it into a deposit request, and the consensus client consumes that request — all in the same block. (A validator's _effective balance_, which determines voting power and activation status, is still only updated at the turn of an epoch.)
+
+Reference: [Become a validator](/nodes/guides/become-a-validator).
+
+**Additional EIPs being activated:**
+
+- **EIP-7951 (P-256 precompile):** Native verification of passkey and hardware-key signatures, usable for smart-account flows backed by WebAuthn, Apple Secure Enclave, Android Keystore, and HSMs.
+- **EIP-7939 (CLZ opcode):** A faster bit-math primitive that returns the position of the leading set bit in a single opcode.
+- **EIP-7823 & EIP-7883 (MODEXP repricing and bounds):** Repriced modular exponentiation, with an input-size bound (capped at 8,192 bits) that rejects oversized arguments outright.
+- **Code-size limits (EIP-7954 aligned):** Expanded contract code and initcode size limits (32 KB and 64 KB, respectively), raising the ceiling on what a single contract can deploy.
+- **EIP-7934 & EIP-7825 (Size caps):** Defense-in-depth caps on block size (10 MiB) and per-transaction gas (16.7M gas), sized well above current usage.
+
+Reference: [Protocol Features](/build/protocol/overview).
+
+## For validators
+
+**Effective balance updates respond more closely to actual stake.** The hysteresis buffers that govern when a balance change triggers an effective-balance update are tightened. A drop of -100 BERA or +1000 BERA will update the validator's voting power.
+
+Reference: [Validator lifecycle](/nodes/architecture/validator-lifecycle#effective-balance-and-hysteresis), [Increase validator stake](/nodes/guides/increase-validator-stake).
+
+## Upgrade instructions
+
+This release of Bera-Reth introduces a major quality-of-life improvement for node operators: you can now specify the network chain directly with <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> or <span style={{ whiteSpace: "nowrap" }}>`--chain mainnet`</span>.
+
+With this approach, there is no longer any need to manually fetch or deploy updated genesis files when upgrading. Bera-Reth will select the correct built-in configuration based on your chosen network. In addition, when using the new `--chain` option, you do not need to provide `--bootnodes`; Bera-Reth will automatically use the appropriate bootnode list for the selected chain.
+
+The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/architecture/evm-execution).
+
+1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
+2. **DO NOT deploy this on a mainnet node** until 1.4.0 (non-rc) binaries designated for mainnet are released.
+3. Download the current releases of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
+4. Adjust Bera-Reth startup:
+   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes`</span>.
+   - OR download and fetch the current bepolia genesis file from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
+5. No changes are needed to BeaconKit options.
+6. Start the new `beacond` and `bera-reth` binaries.
+
+## Support
+
+If you have questions about this upgrade, the best place for support is our [Discord's](https://discord.gg/berachain) #node-support channel.
