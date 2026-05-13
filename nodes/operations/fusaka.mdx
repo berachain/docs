@@ -51,7 +51,7 @@ This release of Bera-Reth introduces a major quality-of-life improvement for nod
 
 With this approach, there is no longer any need to manually fetch or deploy updated genesis files when upgrading. Bera-Reth will select the correct built-in configuration based on your chosen network. In addition, when using the new `--chain` option, you do not need to provide `--bootnodes`; Bera-Reth will automatically use the appropriate bootnode list for the selected chain.
 
-The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/operations/evm-execution).
+The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/architecture/evm-execution).
 
 1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
 2. **DO NOT deploy this on a mainnet node** until 1.4.0 (non-rc) binaries designated for mainnet are released.
