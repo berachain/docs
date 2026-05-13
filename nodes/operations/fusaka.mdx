@@ -21,6 +21,13 @@ With this upgrade, Berachain is completing the **Bera-Geth deprecation** [previo
 
 Follow our [migration guide](/nodes/operations/bera-geth-to-reth) to install Bera-Reth.
 
+## For node operators
+
+Two quality-of-life changes land with this release of Bera-Reth, simplifying future upgrades.
+
+1. `--chain (bepolia|mainnet)` instead of a full path to the genesis file. You no longer have to deploy new genesis files. The usual style `--chain <path>` still works, but you are responsible for fetching and installing updated genesis files.
+2. If you use `--chain (bepolia|mainnet)`, then `--bootnodes BN1,BN2,...` can be removed. Bera-Reth knows which bootnodes to use based on the chain setting.
+
 ## For developers
 
 Bera-Reth in this upgrade bumps the upstream [Reth](https://github.com/paradigmxyz/reth) dependency to **v1.11.4**.
@@ -45,7 +52,18 @@ Reference: [Protocol Features](/build/protocol/overview).
 
 Reference: [Validator lifecycle](/nodes/architecture/validator-lifecycle#effective-balance-and-hysteresis), [Increase validator stake](/nodes/guides/increase-validator-stake).
 
-## Where to go next
+## Upgrade instructions
 
-- Running a validator: [Validator lifecycle](/nodes/architecture/validator-lifecycle) and the [validator guides](/nodes/guides/become-a-validator).
-- Building on Berachain: [Protocol Features](/build/protocol/overview).
+1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
+2. **DO NOT deploy this on a mainnet node** until 1.4.0 (non-rc) binaries designated for mainnet are released.
+3. Download the current releases of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
+4. Adjust Bera-Reth startup:
+   - Change your `--chain` option to `--chain bepolia`
+   - OR download and fetch the current bepolia genesis file from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
+   - You may also remove the `--bootnodes` option to Bera-Reth.
+5. No changes are needed to BeaconKit options.
+6. Start the new `beacond` and `bera-reth` binaries.
+
+## Support
+
+If you have questions about this upgrade, the best place for support is our [Discord's](https://discord.gg/berachain) #node-support channel.
