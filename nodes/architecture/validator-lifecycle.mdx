@@ -31,16 +31,16 @@ The labeled states are as follows:
   Deposit event captured by Beacon-kit and deposit message signature is verified.
 
 - **Eligible**  
-  Validator has been marked as `EligibleForActivationQueue`.
+  Validator has been marked as eligible for the activation queue.
 
 - **Active**  
   The validator is marked as Active after 1 epoch from the Eligible state. Currently, the Active Set consists of **69** Validators, which is the number of Validators that can propose blocks.
 
 - **Exited**  
-  The validator is marked for exit if the ValidatorSetCap limit is hit and the validator has the lowest effective balance or a lower-order pubKey if it has the same effective balance as another validator.
+  The validator is marked for exit if the validator set cap (**69**) is hit and the validator has the lowest effective balance or a lower-order pubKey if it has the same effective balance as another validator.
 
 - **Withdrawn**  
-  Once the validator is marked as exited, after a delay of 1 epoch, validator funds are fully withdrawn. All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address.
+  Once the validator is marked as exited, after **256** epochs on mainnet (**32** on Bepolia), validator funds are fully withdrawn. All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address.
 
 ## Deposited state
 
@@ -62,9 +62,9 @@ After remaining in the **Deposited** state for 1 epoch, the validator automatica
 
 ## Eligible state
 
-Once the validator enters the **Deposited** state at epoch `N`, the system marks it as `EligibleForActivationQueue` as soon as epoch `N+1` starts. This is guaranteed because there is no cap on the activation queue size.
+Once the validator enters the **Deposited** state at epoch `N`, the system marks it as eligible for the activation queue as soon as epoch `N+1` starts. This is guaranteed because there is no cap on the activation queue size.
 
-The validator remains in this **Eligible** state for 1 epoch. Afterward, it is added to the **Active** set, provided the ValidatorSetCap is not exceeded, or if the validator is of higher priority (i.e., higher effective balance or lower-order pubKey among equals).
+The validator remains in this **Eligible** state for 1 epoch. Afterward, it is added to the **Active** set, provided the validator set cap (**69**) is not exceeded, or if the validator is of higher priority (i.e., higher effective balance or lower-order pubKey among equals).
 
 ## Active state
 
@@ -75,11 +75,11 @@ A validator remains active indefinitely until it is forced out by a validator wi
 Once **Active**:
 
 - **CometBFT Consensus** will use the validator for block proposals, validations, and voting.
-- The higher a validator's `EffectiveBalance`, the higher its voting power—and thus, the more frequently it will be polled for block proposals.
+- The higher a validator's effective balance, the higher its voting power—and thus, the more frequently it will be polled for block proposals.
 
 ## Exited state
 
-A Validator may choose to exit by [withdrawing their complete stake](/nodes/guides/withdraw-stake). Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the ValidatorSetCap is reached and another validator with a higher priority enters. Higher priority is determined by:
+A Validator may choose to exit by [withdrawing their complete stake](/nodes/guides/withdraw-stake). Otherwise, the **only** reason for a validator to be evicted from the set (and have its funds returned) is if the validator set cap (**69**) is reached and another validator with a higher priority enters. Higher priority is determined by:
 
 1. **Larger Effective Balance**
 2. **If Equal Effective Balance**, a lower-order pubKey (alphabetically).
@@ -88,15 +88,28 @@ When the validator is evicted from the validator set, it is marked **Exited**.
 
 ## Withdrawn state
 
-Once the validator is marked **Exited** (say at epoch `M`), its funds are fully withdrawn at epoch `M+1`. Because BeaconKit does not currently enforce a cap on validator churn, this finalizes the validator's lifecycle.
+Once the validator is marked **Exited** (say at epoch `M`), its funds are fully withdrawn at epoch **M + 256** on mainnet (**M + 32** on Bepolia). Because BeaconKit does not currently enforce a cap on validator churn, this finalizes the validator's lifecycle.
+
+## Effective balance and hysteresis
+
+A validator's voting power is its **effective balance**, the actual stake rounded down to a 10,000 BERA increment. Effective balance updates lazily: the consensus state only moves it at the turn of an epoch when actual balance crosses an asymmetric buffer around the next increment, which prevents minor balance fluctuations from churning voting power.
+
+The buffer is asymmetric because protecting against unintentional drops matters more than keeping pace with top-ups:
+
+- **Downward buffer: 100 BERA.** Actual balance must fall more than 100 BERA below an increment boundary before effective balance steps down to the next-lower increment.
+- **Upward buffer: 1,000 BERA (~110% of the 10,000 BERA increment).** Actual balance must exceed an increment boundary by more than 1,000 BERA before effective balance steps up.
+
+For example, a validator who wants to lift effective balance from 250,000 to 260,000 BERA needs an actual balance of **261,000 BERA**: 260,000 BERA at the increment boundary plus 1,000 BERA over the upward buffer. The [Increase validator stake guide](/nodes/guides/increase-validator-stake#worked-example) walks through this.
+
+These buffers are consensus chain spec parameters. See [BRIP-0008](https://github.com/berachain/BRIPs/blob/main/meta/BRIP-0008.md) for the derivation.
 
 ## Extended validator lifecycle
 
 Putting it all together, the following diagram shows the complete Berachain validator lifecycle:
 
 1. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Active**
-2. Potential forced exit due to ValidatorSetCap → **Exited** → 1 epoch → **Withdrawn**
-3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to ValidatorSetCap + balance too low → 1 epoch → **Withdrawn**
+2. Potential forced exit due to the validator set cap (**69**) → **Exited** → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
+3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to the validator set cap (**69**) + balance too low → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
 
 <Frame>
   <img
