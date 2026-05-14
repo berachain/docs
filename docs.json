@@ -306,6 +306,7 @@
             "pages": [
               "nodes/operations/production-checklist",
               "nodes/operations/monitoring",
+              "nodes/operations/fusaka",
               "nodes/guides/become-a-validator",
               {
                 "group": "Being a Validator",

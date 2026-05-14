@@ -1,21 +1,27 @@
 ---
 title: "EVM Execution"
-description: "Recommended execution client (Bera-Reth), versions, and genesis files for mainnet and Bepolia."
+description: "Recommended versions and genesis files for mainnet and Bepolia."
 ---
+
+Berachain is 100% EVM-compatible, operating on a lightly modified Reth. We keep pace with Ethereum improvements, shipping [Protocol Upgrades](/build/protocol/overview) every 6 months.
 
 The execution layer consists of an EVM execution client. This client handles transactions, transaction gossiping, state management, and support for the Ethereum Virtual Machine — it is not responsible for block building.
 
 By using Bera-Reth, the execution client supports cutting-edge EVM features natively. For developers looking to understand what the execution client supports, check out the [Protocol Features](/build/protocol/overview) section in the Build tab, which includes overviews of [EIP-7702 (Native Account Abstraction)](/build/protocol/eip7702-basics) and [EIP-5792](/build/protocol/eip5792-overview).
 
-The following execution client is recommended to go with **[Beacon Kit v1.3.9](https://github.com/berachain/beacon-kit/releases/tag/v1.3.9)**.
+Recommended **[Beacon Kit](https://github.com/berachain/beacon-kit)** and **[Bera-Reth](https://github.com/berachain/bera-reth)** versions depend on the network:
 
-| Language | Required Version (Mainnet & Bepolia)                                           |
-| -------- | ------------------------------------------------------------------------------ |
-| Rust     | [Bera-Reth v1.3.3](https://github.com/berachain/bera-reth/releases/tag/v1.3.3) |
+| Network | Beacon Kit                                                                    | Bera-Reth                                                                    |
+| ------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Mainnet | [v1.3.9](https://github.com/berachain/beacon-kit/releases/tag/v1.3.9)         | [v1.3.3](https://github.com/berachain/bera-reth/releases/tag/v1.3.3)         |
+| Bepolia | [v1.4.0-rc3](https://github.com/berachain/beacon-kit/releases/tag/v1.4.0-rc3) | [v1.4.0-rc2](https://github.com/berachain/bera-reth/releases/tag/v1.4.0-rc2) |
 
-| Genesis File | Updated | Download link & md5 hash                                                                                                                           |
-| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mainnet      | Nov 7   | [6b333924b81a1935e51ac70e7d9d7cb0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80094/eth-genesis.json) |
-| Bepolia      | Sep 15  | [c27c1162af33f7f5401bcef974a64454](https://raw.githubusercontent.com/berachain/beacon-kit/refs/heads/main/testing/networks/80069/eth-genesis.json) |
+As of 1.4.0, Bera-Reth includes the genesis file, which can be used with the option `--chain (bepolia|mainnet)` instead of `--chain <path>`.  
+You can continue to specify the genesis file path, but be sure to verify its hash:
+
+| Genesis File | Updated      | Download link & md5 hash                                                                                                                      |
+| ------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mainnet      | Nov 7, 2025  | [6b333924b81a1935e51ac70e7d9d7cb0](https://raw.githubusercontent.com/berachain/beacon-kit/v1.3.9/testing/networks/80094/eth-genesis.json)     |
+| Bepolia      | May 13, 2026 | [dfa4cb7a11217c9eab6cf4b405368870](https://raw.githubusercontent.com/berachain/beacon-kit/v1.4.0-rc3/testing/networks/80069/eth-genesis.json) |
 
 Installing a more recent patch version — the `z` in a version number `x.y.z` — is generally safe.
