@@ -30,3 +30,13 @@ Some of the key benefits that come with BeaconKit:
     alt="Comparison of Berachain BeaconKit architecture versus Ethereum"
   />
 </Frame>
+
+## Deposit processing
+
+BeaconKit consumes deposits directly from the execution payload's request list (EIP-6110), one block at a time. Each EL block that includes deposit transactions surfaces them as a custom `Deposit(bytes,bytes,uint64,bytes,uint64)` event from the deposit contract; the CL parses that event into a 192-byte deposit request and applies it in the same block. There is no follow distance, no pre-fork queue, and no per-epoch processing window — once the EL block is finalized, the deposit is reflected in validator state.
+
+The wire formats and parser are documented in the EIP-6110 deposits specification.
+
+## EVM inflation parameters
+
+The CL chain spec carries the per-block inflation address and amount that the consensus layer mints to as a withdrawal each block. The Fulu fork introduces two new fields on the chain spec — `EVMInflationAddressFulu` and `EVMInflationPerBlockFulu`.

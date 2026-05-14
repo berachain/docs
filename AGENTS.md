@@ -3,6 +3,7 @@
 ## No Emoji Use
 
 Do not use emojis in any content. This applies to:
+
 - Documentation (MDX, Markdown)
 - Card titles and descriptions on the home page
 - Scripts, README, and all project files
@@ -16,6 +17,7 @@ The `berachain-docs` directory is a git submodule containing the official Berach
 ### Submodule Structure
 
 The `berachain-docs` submodule contains:
+
 - `apps/core/` - Main Berachain documentation (docs.berachain.com)
 - `apps/bex/` - BEX (Berachain Exchange) documentation (docs.bex.berachain.com)
 - `apps/bend/` - Bend (lending protocol) documentation (docs.bend.berachain.com)
@@ -48,6 +50,7 @@ When creating new documentation, refer to the following files in `berachain-docs
 ### Key Documentation Patterns
 
 #### Markdown Structure
+
 - Use YAML frontmatter with meta tags for SEO
 - Follow sentence case for headings
 - Use proper heading hierarchy (H1 for page title, H2 for major sections, etc.)
@@ -55,12 +58,14 @@ When creating new documentation, refer to the following files in `berachain-docs
 - Use callouts (:::tip, :::warning, :::danger) for important information
 
 #### Code Examples
+
 - Prefix shell commands with context: `# FROM: ./directory`
 - Show expected output with comments: `# [Expected Output]:`
 - Use proper language tags for code blocks
 - Include placeholders for user-specific values (e.g., `YOUR_VALIDATOR_ADDRESS`)
 
 #### API Documentation
+
 - Structure endpoints with clear headings and HTML IDs for deep linking
 - Include HTTP method, path, parameters, and responses
 - Provide example requests and responses
@@ -69,6 +74,7 @@ When creating new documentation, refer to the following files in `berachain-docs
 ### Current Project Context
 
 This project uses **Mintlify** for documentation (not VitePress like the submodule). Key differences:
+
 - Navigation is defined in `docs.json` (not `sidebar.ts`)
 - Files use `.mdx` extension (not `.md`)
 - Mintlify has its own component system and conventions
@@ -120,4 +126,3 @@ After any bump, apply rules 1–3 for the tags actually written on the page.
 2. **MD5 values** in the table must match the **exact bytes** returned by the linked raw URL. After any URL or tag change, re-verify (for example `curl -fsSL '<url>' | md5`).
 
 3. **Coherence**: Keep the Beacon Kit **release tag** link, the Bera-Reth version row, and the **tag** embedded in genesis URLs aligned. When bumping Beacon Kit, update the tag in all genesis URLs, update Bera-Reth if required, recompute MD5s, and adjust the “Updated” column when the artifact at that URL meaningfully changes for operators.
-
