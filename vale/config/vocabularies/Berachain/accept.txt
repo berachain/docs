@@ -19,6 +19,8 @@ Beacond
 beacond
 WBERA
 HONEY
+EIPs
+precompile
 CometBFT
 
 DedicatedEmissionStreamManager
@@ -26,6 +28,7 @@ BlockRewardController
 RewardVaultFactory
 BGTStaker
 FeeCollector
+BGTIncentiveFeeCollector
 Distributor
 ProtocolFeesCollector
 BalancerHelpers
@@ -56,12 +59,17 @@ defi
 tokenomics
 staking
 unstaking
+staker
+stakers
 validators
 validator
+delegator
+delegators
 nodes
 node
 mainnet
 testnet
+Ethereum
 RPC
 EVM
 consensus
@@ -96,6 +104,14 @@ Geth
 Reth
 Engine API
 SSF
+Fusaka
+Fulu
+Keystore
+HSM
+HSMs
+initcode
+Repo
+enablement
 
 Mintlify
 MDX

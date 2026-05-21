@@ -1,6 +1,6 @@
 ---
 title: "Staking Pools Operator Guide"
-description: "Configure and operate a staking pool: roles, commission, reward allocation, min effective balance, BGT, and front-end."
+description: "Configure and operate a staking pool: roles, commission, reward allocation, min effective balance, and front-end."
 ---
 
 This guide helps validators set up and manage staking pools to offer liquid staking services to their communities.
@@ -12,30 +12,52 @@ This guide helps validators set up and manage staking pools to offer liquid stak
 | Parameter                 | Range                                      | Purpose                                      |
 | ------------------------- | ------------------------------------------ | -------------------------------------------- |
 | Validator Commission      | 0-20%                                      | Commission on incentive token distribution   |
-| Protocol Fee              | 0-20%                                      | Fee on BGT balance growth                    |
+| Protocol Fee              | 0-20%                                      | Fee on eligible staking-pool reward growth   |
 | Minimum Effective Balance | ≥ 250,000 BERA                             | Activation threshold and full exit safeguard |
 | Withdrawal Delay          | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized     |
 
 ### Key roles
 
-| Role                               | Controls          | Function                               |
-| ---------------------------------- | ----------------- | -------------------------------------- |
-| `VALIDATOR_ADMIN_ROLE`             | All other roles   | Grant/revoke operational roles         |
-| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation | Direct PoL incentives to applications  |
-| `COMMISSION_MANAGER_ROLE`          | Commission rate   | Adjust validator commission (0-20%)    |
-| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee      | Adjust protocol fee percentage (0-20%) |
-| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount     | Adjust incentive collector payout      |
-| `BGT_MANAGER_ROLE`                 | BGT operations    | Queue drop boost, redeem BGT           |
+| Role                               | Controls              | Function                               |
+| ---------------------------------- | --------------------- | -------------------------------------- |
+| `VALIDATOR_ADMIN_ROLE`             | All other roles       | Grant/revoke operational roles         |
+| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation     | Direct PoL incentives to applications  |
+| `COMMISSION_MANAGER_ROLE`          | Commission rate       | Adjust validator commission (0-20%)    |
+| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee          | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount         | Adjust incentive collector payout      |
+| `DELEGATION_MANAGER_ROLE`          | Delegation operations | Manage delegations                     |
 
 ### Essential functions
 
-| Function                     | Contract      | Purpose                               |
-| ---------------------------- | ------------- | ------------------------------------- |
-| `setMinEffectiveBalance()`   | SmartOperator | Set activation threshold              |
-| `queueValCommission()`       | SmartOperator | Queue commission rate change          |
-| `queueRewardsAllocation()`   | SmartOperator | Queue reward allocation               |
-| `claimBoostRewards()`        | SmartOperator | Forward rewards to IncentiveCollector |
-| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate                 |
+Core lifecycle and PoL reward allocation:
+
+| Function                     | Contract      | Purpose                      |
+| ---------------------------- | ------------- | ---------------------------- |
+| `setMinEffectiveBalance()`   | SmartOperator | Set activation threshold     |
+| `queueValCommission()`       | SmartOperator | Queue commission rate change |
+| `queueRewardsAllocation()`   | SmartOperator | Queue reward allocation      |
+| `setProtocolFeePercentage()` | SmartOperator | Set protocol fee rate        |
+
+Protocol fee accrual (same percentage applies to both tracks during migration):
+
+| Function                  | Contract      | Purpose                                                                                                                        |
+| ------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `accrueEarnedWBERAFees()` | SmartOperator | Accrue protocol fees on **WBERA** balance growth — primary path after PoL vNext.                                               |
+| `accrueEarnedBGTFees()`   | SmartOperator | Accrue protocol fees on remaining **BGT** balance — **legacy / transitional** until BGT allowances are exhausted on your pool. |
+
+Manual lever for compounding operator WBERA into pool assets:
+
+| Function           | Contract    | Purpose                                                                                                       |
+| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| `processRewards()` | StakingPool | Pull buffered staking rewards and any operator-held WBERA into the pool. Permissionless; callable any caller. |
+
+Operator action is not required to make WBERA reach stakers. Compounding fires automatically inside any user `deposit()` and inside `processRewards()`; covering withdrawals from operator-side WBERA fires automatically inside `WithdrawalVault.requestWithdrawal()`. See [Automatic WBERA flows](#automatic-wbera-flows) below.
+
+Legacy incentive surface (kept for transition; see [Deprecated BGT entry points](#deprecated-bgt-entry-points)):
+
+| Function              | Contract      | Purpose                                                                                                                                                                 |
+| --------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `claimBoostRewards()` | SmartOperator | **Legacy:** forward **BGT-era** boost incentive claims toward **`IncentiveCollector`**. Prefer WBERA-native operator flows for ongoing activity; treat as transitional. |
 
 ## Prerequisites
 
@@ -60,6 +82,28 @@ The key consideration for staking pools is ensuring sufficient stake for activat
 - **Withdrawal Delay**: 129,600 blocks (≈3 days at ~2s block time) that must pass after a withdrawal request before it can be finalized.
 - **Cooldown Period**: After `activeThresholdReached()` becomes `true`, there is a cooldown period before the validator activates.
 
+## Yield model
+
+After the May 2026 PoL upgrade, per-block validator emission is a **flat fixed rate** (no boost curve).
+Pools no longer differentiate on attracted BGT delegation; what you control is:
+
+- **Validator reward allocation (cutting board)** — direct emissions to vaults you and your community care about. See [Manage Reward Allocations](/nodes/guides/manage-reward-allocations).
+- **Incentives attracted to vaults you allocate to** — protocols still incentivize specific Reward Vaults; a strong allocation strategy increases incentive yield to your stakers.
+- **Validator commission on incentive tokens** — capped at 20%, denominated in the WBERA-era incentive flow. See [Manage Validator Incentives Commission Rate](/nodes/guides/manage-incentives-commission).
+
+Validator emissions accrue as \$WBERA on your `SmartOperator`. Protocol fee accrual on the WBERA track uses `accrueEarnedWBERAFees()`. The same WBERA fee update also runs automatically inside `withdrawRewards`, `pullBeraToWithdrawalVault`, and `setProtocolFeePercentage()`, so calling `accrueEarnedWBERAFees()` directly is mostly a forced-settlement / monitoring tool. `accrueEarnedBGTFees()` is a no-op once chargeable BGT is exhausted.
+
+## Automatic WBERA flows
+
+`SmartOperator` exposes two state-changing entry points that move WBERA out of the operator: `withdrawRewards(uint256)` and `pullBeraToWithdrawalVault(uint256)`. Both are restricted by sender — `withdrawRewards` accepts the StakingPool only; `pullBeraToWithdrawalVault` accepts the WithdrawalVault only. Operators cannot call them directly, and no operator action is required to make WBERA reach stakers.
+
+- **Compounding into pool assets** — Any user `deposit()` and any call to `StakingPool.processRewards()` invokes `_collectRewards(...)`, which calls `SmartOperator.withdrawRewards(...)` on operator WBERA first, then drains the staking rewards vault. Operator WBERA is pulled first so `_getTotalAssets()` is correct before protocol fees mint staker shares via `mintFeeShares` during WBERA fee accrual. The unwrapped BERA lands in the pool, lifts `_getTotalAssets()`, and lifts share price for every staker.
+- **Deposit ordering and fee fairness** — Inside `_submit`, the pool mints the depositor's stBERA **before** calling `_collectRewards(...)`. The depositor's shares are priced against the pre-collection NAV (which already includes pending operator WBERA via `rebaseableWberaAmount()`), so they pay a fair price for the yield about to settle. The collection that follows charges WBERA-track protocol fees and mints fee shares to the default recipient against the post-deposit NAV, so the new depositor's principal is not taxed as if it were accrued yield. `processRewards()` runs the same `_collectRewards → bufferedAssets bump → _processDeposit` sequence without minting user shares.
+- **Covering withdrawals from operator liquidity** — `WithdrawalVault.requestWithdrawal()` precomputes `pulledFromOperator = min(amountInWei, availableWBERABalance)` and calls `pullBeraToWithdrawalVault(...)` on the normal partial-withdrawal branch. The execution-layer withdrawal request to the consensus layer is reduced to the uncovered remainder; if the operator covers in full, no consensus-layer request is issued and the EIP-7002 fee is refunded to the requester. Short-circuit (pool not yet at active threshold) and full-exit branches do not consume operator WBERA.
+- **Full exit sweep** — Triggering a full exit sweeps any idle operator WBERA into the pool before the pool forwards its native balance to the WithdrawalVault.
+
+For monitoring, watch `availableWBERABalance()`, `rebaseableWberaAmount()`, and `getEarnedWBERAFeeState()` on the SmartOperator. The only operator-side write you may want to invoke explicitly is `processRewards()` on the StakingPool (permissionless `whenNotPaused`) — it forces a compounding cycle without waiting for the next user deposit.
+
 ## Configuration
 
 ### Commission rates
@@ -76,13 +120,35 @@ The `minEffectiveBalance` parameter is critical for validator activation. The co
 
 ## Routine operations
 
-- **Monitor pool status**: Use `isActive()`, `totalAssets()`, `bufferedAssets()`, `activeThresholdReached()` on your StakingPool and SmartOperator.
-- **BGT operations**: Use `queueDropBoost()`, `redeemBGT()`, `queueBoost()`, `activateBoost()` as needed. Forward rewards to IncentiveCollector by calling `claimBoostRewards()` on SmartOperator.
-- **Protocol fee**: Set via `setProtocolFeePercentage()` (up to 20%). Call `accrueEarnedBGTFees()` to trigger fee calculation and minting.
+- **Monitor pool status**: Use `isActive()`, `totalAssets()`, `bufferedAssets()`, `activeThresholdReached()` on your StakingPool and SmartOperator. For operator-side liquidity, also watch **`availableWBERABalance()`**, **`rebaseableWberaAmount()`**, and **`getEarnedWBERAFeeState()`** on SmartOperator. See [Automatic WBERA flows](#automatic-wbera-flows) for how this liquidity moves.
+- **Delegation operations**: Manage delegations as needed. **PoL vNext:** validator emissions accrue as **\$WBERA** on **`SmartOperator`**. Accrue protocol fees on the WBERA track with **`accrueEarnedWBERAFees()`**; use **`accrueEarnedBGTFees()`** only while your pool still has chargeable **BGT** on the operator. **`claimBoostRewards()`** is a **legacy** entry point for the **BGT** incentive-distributor surface — confirm it still matches your deployed implementation before relying on it for new workflows.
+- **Emission token context**: PoL Reward Vault emissions are distributed in **\$WBERA**.
+- **Protocol fee**: Set via `setProtocolFeePercentage()` (up to 20%). The fee setter charges both tracks before applying the new rate. Call `accrueEarnedWBERAFees()` to force WBERA-track settlement; call `accrueEarnedBGTFees()` if you want to settle the legacy BGT track explicitly.
+
+## Deprecated BGT entry points
+
+The May 2026 PoL upgrade deprecates the BGT-era surface on `SmartOperator`. The following entry points stay callable for transition (all `whenNotFullyExited` where applicable) but become inert once chargeable BGT is exhausted on your operator:
+
+- `queueBoost()`, `activateBoost()`, `queueDropBoost(uint128)` — boost-management calls; per-block emission no longer scales with delegation, so these have no effect on yield.
+- `claimBgtStakerReward()` — BGT-staker reward forwarder.
+- `claimBoostRewards(IBGTIncentiveDistributor.Claim[], address[])` — BGT-era boost incentive distributor forwarder.
+- `accrueEarnedBGTFees()` — fee accrual on the BGT track; no-op when chargeable BGT is zero.
+
+Berachain recommends winding down BGT positions held on your `SmartOperator` (unboost, drop-boost, redeem) using the same calls during the transition window.
 
 ## Withdrawal system
 
-The centralized WithdrawalVault handles all withdrawal operations. Withdrawals can use a **short-circuit** path (when the pool has not reached active threshold and has sufficient buffered funds) or the **standard** path (consensus layer processing). In both cases, stakers must wait the full withdrawal delay (129,600 blocks ≈ 3 days) before finalization.
+The shared **`WithdrawalVault`** is a per-chain singleton (a single proxy + implementation) that finalizes withdrawal requests for every staking pool. Three sources of liquidity can satisfy a request:
+
+- **Short-circuit** — pool not yet at the active threshold. Liquidity comes only from the pool's on-chain **`bufferedAssets`**. BeaconKit honors EIP-7002 withdrawal requests only for **active** validators; a validator that has not activated cannot withdraw via the consensus layer, so this branch never issues a CL request. If the buffer cannot cover the request, the transaction reverts rather than falling through into post-threshold or full-exit logic.
+- **Standard consensus-layer withdrawal** — execution-layer request to the validator's pubkey.
+- **Operator-side WBERA cover** — at request time, the vault pulls from **`availableWBERABalance()`** on your pool's `SmartOperator`, unwraps to native BERA, and applies it to the request. Coverage may be **full** (the consensus-layer request is skipped and the EIP-7002 fee is refunded), **partial** (the remainder still exits via the consensus layer), or **none** when operator liquidity is empty.
+
+**Post-exit pools:** Once the validator has fully exited (`isFullyExited`), withdrawal handling skips the pre-threshold default-recipient gate and the post-threshold activation cooldown. BERA is already in the `WithdrawalVault`; requests proceed without re-entering activation-era guards.
+
+**Finalization delay:** `finalizeWithdrawalRequest` / `finalizeWithdrawalRequests` enforce `block.number >= requestBlock + WITHDRAWAL_REQUEST_FINALIZATION_BLOCK_DELAY` (currently **129,600** blocks, ≈3 days at ~2s block time) for every request. The cover source affects only **where the BERA comes from**; it does not shorten the cooldown. The pull from operator WBERA happens at **request** time, so covered BERA sits in the vault until the cooldown elapses.
+
+**Retrying a full exit (`retryFullExit`):** When a full exit is triggered, the pool marks the validator fully exited and the vault submits an EIP-7002 full-exit request (withdrawal amount **0**). If that consensus-layer request fails or is dropped, anyone can call **`retryFullExit(pubkey, maxFeeToPay)`** on the shared `WithdrawalVault` to re-submit — permissionless, sending the EIP-7002 **withdrawal fee** with the call (`maxFeeToPay` is the most you are willing to pay). The validator must already be marked fully exited (`NotFullyExited` otherwise). The call reverts with **`PendingWithdrawalInFlight`** if a partial withdrawal was requested within the last **49,153** blocks (`WITHDRAWAL_FLIGHT_BLOCK_DELAY`), giving in-flight partial exits time to settle before retrying a full exit. Success emits **`FullExitRequestRetried`**. This path is for recovering a stuck post-exit CL sweep; normal staker withdrawal requests do not use it.
 
 ## Building your front-end
 

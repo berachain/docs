@@ -1,0 +1,190 @@
+---
+title: "What's New"
+description: "Proof of Liquidity changes over time."
+---
+
+## May 2026 - PoL vNext
+
+The May 2026 Proof of Liquidity Next upgrade deeply simplifies Berachain token model.
+
+BGT added friction. Two tokens, boost mechanics, and a governance layer that confused traditional allocators more than it helped.
+
+PoL Next consolidates everything into \$sWBERA. All emissions become BERA. Boost and BGT are phased out. All incentives accrue into \$sWBERA. One token, one yield path, one value sink.
+
+Businesses integrate once. Users don’t need to learn PoL-specific concepts. Value flows through a single, predictable rail.
+
+**LST Staker Vault owners gain new powers from this upgrade.** They now have a direct, pro-rata, on-chain claim on the entire incentive-auction WBERA flow via the collector split. With an approved LSTStakerVault registered with the fee collector, WBERA paid during incentive auctions is automatically split pro-rata to their vault.
+
+**High-growth teams** receive guaranteed, multi-month dedicated emission streams sized to their stage and plan. For a validator operator who is also a business owner or partner in an ERA cohort, this changes the model from “bid every epoch for yield” to “underwrite and finance a company with protocol capital." It is closer to a growth-equity financing round than pure validator operations.
+
+This upgrade will deploy to the network approximately 24 hours before the [Fusaka upgrade](/nodes/operations/fusaka).
+
+### BGT is deprecated
+
+BGT no longer has a user-facing role in Proof of Liquidity. It no longer influences validator reward allocation weight, block rewards, or governance. The Hub UI helps users to redeem their BGT.
+
+**Reward emissions are paid in WBERA.** WBERA is the per-block emission token. Stakers see accrued rewards on the vault read in WBERA terms.
+
+**Stakers in reward vaults can claim rewards as \$sWBERA or native BERA.** The default reward token is \$WBERA, but a permissionless helper converts it atomically on claim so stakers receive \$sWBERA or native \$BERA without extra steps.
+
+**Incentives, net of validator commission, are auctioned for BERA and accrue into \$sWBERA.**
+
+**The boost curve is gone.** Per-block emission splits into fixed **`baseRate`** (**0.4 WBERA**) to the validator’s operator and **`rewardRate`** (**1.305 WBERA**) to the distributor for Reward Vaults. Per-block emission no longer scales with boosted BGT.
+
+**Residual BGT on existing vaults is settled automatically.** Any BGT allowance left on a vault from before the upgrade is converted to WBERA on the next claim from that vault, transparently to the staker. No vault-owner action is required, no claim is missed, no balance disappears.
+
+**Staking pools:** adjusted to correspond to the BGT deprecation; see [Staking pools — Post-BGT Deprecation](/nodes/staking-pools/overview#post-bgt-deprecation).
+
+References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquidity/reward-vaults), [BERA and WBERA](/general/tokens/bera), [Partial reward claims](/build/pol/partial-reward-claims), [RewardVaultHelper claim flow](/build/pol/reward-vault-helper-claim-flow), [\$sWBERA](/general/tokens/swbera), [Block rewards](/general/proof-of-liquidity/block-rewards).
+
+### Source code
+
+- [**PoL vNext ABIs**](/general/proof-of-liquidity/files/pol-vnext-abis.zip) — 89 JSON ABI files; 222 KB (updated 2026-05-14)
+- [**PoL vNext contract source**](/general/proof-of-liquidity/files/pol-vnext-contracts.zip) — 3.5 MB (updated 2026-05-14)
+
+### Change summary
+
+#### [PoL contracts](https://github.com/berachain/contracts) changes:
+
+- **`IBlockRewardController`**
+  - **Removed:** `boostMultiplier()`, `computeReward()`, `minBoostedRewardRate()`, `rewardConvexity()`, `setBaseRate(uint256)`, `setBoostMultiplier()`, `setMinBoostedRewardRate()`, `setRewardConvexity()`, `setRewardRate(uint256)`.
+  - **Removed events:** `MinBoostedRewardRateChanged`, `BoostMultiplierChanged`, `RewardConvexityChanged`.
+  - **Added:** `burnExceedingBalance()`, `getMaxEmissionPerBlock()`.
+  - **Added events:** `ExceedingBalanceBurnt`.
+- **`IDistributor`**
+  - **Added:** `EmissionTokenSet` event, `emissionToken()` getter, `setEmissionToken()` setter.
+- **`IRewardVault`**
+  - **Updated:** `whitelistIncentiveToken`, `exit`, `getReward`, `getPartialReward`, `addIncentive` (parameters and documentation updated to reflect the shift from BGT to the new emission token).
+  - **Renamed events:** `BGTBoosterIncentivesProcessed` → `IncentivesCollected`, `BGTBoosterIncentivesProcessFailed` → `IncentivesCollectionFailed`.
+  - **Updated events:** `IncentivesProcessed`, `IncentivesProcessFailed`, `IncentivesCollected`, and `IncentivesCollectionFailed` rename the `bgtEmitted` argument to `rewardsEmitted`.
+  - **Removed events:** `IncentiveFeeCollected`, `IncentiveFeeCollectionFailed`.
+  - **Added events:** `RewardTokenMigrated`.
+- **`IRewardVaultFactory`**
+  - **Removed:** `BGTIncentiveDistributorSet` event, `IncentiveFeeRateUpdated` event, `IncentiveFeeCollectorUpdated` event, `setBGTIncentiveDistributor()`, `setBGTIncentiveFeeRate()`, `setBGTIncentiveFeeCollector()`, `bgtIncentiveDistributor()`, `bgtIncentiveFeeRate()`, `bgtIncentiveFeeCollector()`, `getIncentiveFeeAmount()`.
+  - **Added:** `IncentiveTokensCollectorUpdated` event, `setIncentiveTokensCollector()`, `incentiveTokensCollector()`.
+- **`IRewardVaultHelper`**
+  - **Added:** `SWBERASet` event, `RewardsClaimed` event, `claimAllRewards(address[], address, address)` (new overload accepting an output token).
+- **`IWBERA`**
+  - **Added:** New interface for WBERA (`deposit()`, `withdraw()`).
+
+#### [Staking pools](https://github.com/berachain/contracts-staking-pools) changes:
+
+- **`ISmartOperator`**
+  - **Added:** `WBERADepositedToPool` event, `WBERASentToWithdrawalVault` event.
+  - **Added:** `accrueEarnedWBERAFees()`, `withdrawRewards(uint256)`, `pullBeraToWithdrawalVault(uint256)`, `rebaseableWberaAmount()`, `availableWBERABalance()`, `getEarnedWBERAFeeState()`.
+  - **Deprecated (retained for transition only):** `queueBoost()`, `activateBoost()`, `queueDropBoost(uint128)`, `claimBgtStakerReward()`, `claimBoostRewards(IBGTIncentiveDistributor.Claim[],address[])`. BGT-oriented entrypoints stay callable while residual BGT settles, then become inert.
+- **`IStakingPool`**
+  - No signature changes; `receiveRewards()` natspec updated (caller restriction lifted from `StakingRewardsVault`).
+- **`IWithdrawalVault`**
+  - **Added events:** `FullExitRequestRetried`.
+
+#### [GraphQL API](https://api.berachain.com) changes:
+
+**Reward vault dynamic data**
+
+- **Deprecated:** `apy`, `projectedApy`, `lastDayReceivedBGTAmount`, `allTimeReceivedBGTAmount`, `bgtCapturePercentage`, `bgtCapturePerBlock`.
+- **Added:** `apr` (`Float`), `projectedApr` (`Float`), `lastDayRewards`, `allTimeRewards`, `rewardCapturePercentage` (`Float!`), `rewardCapturePerBlock` (`Float!`). `apr` and `projectedApr` return the same values as the deprecated `apy` / `projectedApy`; the rename is cosmetic.
+
+**Reward vault ordering (`GqlRewardVaultOrderBy`)**
+
+- **Deprecated:** `last24hBGTReceived`, `bgtCapturePercentage`.
+- **Added:** `apr`, `projectedApr`, `rewardCapturePercentage`, `activeIncentivesValueUsd`, `activeIncentivesRateUsd`.
+
+**Validator dynamic data**
+
+- **Deprecated:** `allTimeDistributedBGTAmount`, `bgtCapturePercentage`, `bgtCapturePerBlock`, `boostApr` (prior POL boost APR model).
+- **Added:** `allTimeDistributedRewards`, `allTimeEarnedRewards`, `lastDayDistributedRewards`, `lastDayEarnedRewards`, `rewardCapturePercentage` (`Float!`), `rewardCapturePerBlock` (`Float!`), `rewardRate` (`String!`, per-validator reward rate), `commissionOnIncentives` (`Int!`). Existing `allTimeEarnedBGTAmount`, `lastDayDistributedBGTAmount`, and `lastDayEarnedBGTAmount` remain without deprecation in this schema revision; prefer the new `…Rewards` fields for updated integrations.
+
+**Validator (`GqlValidator`)**
+
+- **Deprecated:** `rewardAllocationStartBlock`.
+- **Added:** `incentives: [GqlValidatorIncentive!]!` (aggregated, per-validator), `valStats: GqlValidatorStats` (active-boost and staked-BERA percentages of the total). `valStats` is computed against a network-wide total, so select it only when you need the share-of-total figures.
+
+**Validator allocation weights (`GqlValidatorRewardAllocationWeight`)**
+
+- **Deprecated:** `percentageNumerator` (use `percentage`), `receivingVault`.
+- **Added:** `percentage` (`Float!`, equal to `percentageNumerator / 1e4`).
+
+**Validator ordering (`GqlValidatorOrderBy`)**
+
+- **Added:** `rewardRate`, `commissionOnIncentives`.
+
+**Global info**
+
+- **Deprecated:** `totalDistributedBGTAmount`, `annualizedBGTEmission`, `annualizedBGTInflation`.
+- **Added:** `totalDistributedRewards`, `annualizedPoLEmissions` (`Float!`), `annualizedInflation` (`Float!`).
+
+**Reward vault snapshots**
+
+- **Deprecated:** `bgtCapturePercentage` on snapshot rows.
+- **Added:** `rewardCapturePercentage` (`Float!`).
+
+**Pool sorting (`GqlPoolOrderBy`)**
+
+- **Deprecated:** `bgtApr`.
+- **Added:** `polApr`.
+
+**New queries and types**
+
+- **Queries:** `polGetTopVaultDeposits(chain, vaultAddress, top)`; `polGetSWberaVaultSnapshots(chain, range)`; `polGetSWberaVaultMetadata(chain, resolution)`.
+- **Types:** `GqlValidatorIncentive` (per-validator aggregated incentive, `incentiveRate`/`remainingAmount` plus USD-denominated variants), `GqlValidatorStats`, `GqlValidatorCommissionHistory`, `GqlValidatorInList`, `GqlSWberaVaultSnapshot`, `GqlSWberaVaultMetadata`.
+
+**Removed**
+
+- The **`GqlUserBGTBalance`** type (chain, user address, BGT balance breakdown) is no longer exposed.
+
+## February 2026
+
+**[Staking pools released](/nodes/staking-pools/overview)** — Validator-operated liquid staking went live. Validators can deploy a pool, offer **stBERA** liquid shares to their community, and earn commission on Proof of Liquidity incentives that flow through their validator. Stakers deposit any amount of BERA, receive auto-compounding stBERA, and withdraw via a shared `WithdrawalVault` with on-chain finalization delay.
+
+Alongside the contracts, Berachain ships an example operator stack in the [`berachain/guides`](https://github.com/berachain/guides/tree/main/apps/staking-pools) repo: a [React frontend template](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) you can fork as a staking UI, and [install helpers](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers) — bash scripts and a Python `smart-operator-manager` CLI — that generate the `cast` commands, configuration, and frontend env you need to bring a pool online and operate it day-to-day.
+
+See [Staking Pools Overview](/nodes/staking-pools/overview), [Operator Guide](/nodes/staking-pools/operators), and [Smart Contract Reference](/nodes/staking-pools/contracts).
+
+## December 2025
+
+**[Reward allocation documentation updates](/nodes/guides/manage-reward-allocations)** — Introduced automated BeraChef reward allocations for validators
+
+## October 2025
+
+**[Safe integration for reward vault incentives](/build/guides/proof-of-liquidity/add-incentives-safe)** — Added integration documentation for adding incentives to a reward vault from a Safe (formerly Gnosis Safe) multisig.
+
+**[\$sWBERA token documentation](/general/tokens/swbera)** — Added documentation, including 7-day unstaking period details and integration patterns.
+
+**[PoL integration updates](/build/pol/integration-basics)** — Updated with Incentivize Anything playground examples.
+
+## August 2025
+
+**[Reward vault enhanced functionality](/general/proof-of-liquidity/reward-vaults)** — Two staker-facing additions:
+
+- **Staking on behalf of another account** — Any account can stake tokens directly for another address without that address granting delegation permission. See [Staking for other accounts](/build/pol/staking-for-other-accounts).
+- **Partial reward claims** — Stakers can claim a specific amount of accumulated rewards instead of the full balance. See [Partial reward claims](/build/pol/partial-reward-claims).
+
+**[BRIP-0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md) — Enshrine PoL** — Each block automatically includes the reward distribution transaction for the previous block, removing the dependency on external bots to trigger payout. Shipped as part of the August 2025 hardfork.
+
+## July 2025
+
+**BERA staking** — Launched. Earn yield on BERA via [the Hub](https://hub.berachain.com/stake/). The WBERA staker vault and incentive fee collector contracts shipped alongside; PoL incentive fees flow through the collector to BERA stakers.
+
+**[Reward vault rate-based emissions](/general/proof-of-liquidity/reward-vaults#emission-modes)** — Reward vault managers can configure emissions to flow at a target per-second rate; the distribution period is computed automatically from the reward amount and target rate.
+
+**[Validator commission cap](/nodes/guides/manage-incentives-commission)** — Validator commission on incentive tokens is capped at **20%**. Existing validators with rates above 20% are automatically capped.
+
+## June 2025
+
+**[Reward allocation delay](/nodes/guides/manage-reward-allocations#understanding-reward-allocations)** — Reduced from 8,191 blocks to 500.
+
+## April 2025
+
+**[PoL updates](/general/proof-of-liquidity/overview):**
+
+1. New maximum of 3 incentives per reward vault. See [Incentives](/general/proof-of-liquidity/incentives).
+2. Block reward emissions modified in line with the targeted inflation rate of 10%. See [Block rewards](/general/proof-of-liquidity/block-rewards).
+3. Auto-Incentivizer: fees from default cutting board BEX reward vaults automatically offer incentives.
+4. Reward allocations limited to 30% share of emissions per reward vault. See [Manage reward allocations](/nodes/guides/manage-reward-allocations).
+
+## January 2025
+
+**[Proof of Liquidity launch](/general/proof-of-liquidity/overview)** — Public release of the [Honey Paper](https://honeypaper.berachain.com/) and Berachain mainnet.
+
+**BGT minting unlocked** — Beacon Kit v1.1.0 unlocked minting of tokens towards the BGT contract.
