@@ -148,3 +148,5 @@ Typescript
 JSON
 ABI
 ABIs
+nowrap
+bootnode
