@@ -42,7 +42,7 @@ Protocol fee accrual (same percentage applies to both tracks during migration):
 
 | Function                  | Contract      | Purpose                                                                                                                        |
 | ------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `accrueEarnedWBERAFees()` | SmartOperator | Accrue protocol fees on **WBERA** balance growth — primary path after PoL vNext.                                               |
+| `accrueEarnedWBERAFees()` | SmartOperator | Accrue protocol fees on **WBERA** balance growth — primary path after PoL Next.                                                |
 | `accrueEarnedBGTFees()`   | SmartOperator | Accrue protocol fees on remaining **BGT** balance — **legacy / transitional** until BGT allowances are exhausted on your pool. |
 
 Manual lever for compounding operator WBERA into pool assets:
@@ -121,7 +121,7 @@ The `minEffectiveBalance` parameter is critical for validator activation. The co
 ## Routine operations
 
 - **Monitor pool status**: Use `isActive()`, `totalAssets()`, `bufferedAssets()`, `activeThresholdReached()` on your StakingPool and SmartOperator. For operator-side liquidity, also watch **`availableWBERABalance()`**, **`rebaseableWberaAmount()`**, and **`getEarnedWBERAFeeState()`** on SmartOperator. See [Automatic WBERA flows](#automatic-wbera-flows) for how this liquidity moves.
-- **Delegation operations**: Manage delegations as needed. **PoL vNext:** validator emissions accrue as **\$WBERA** on **`SmartOperator`**. Accrue protocol fees on the WBERA track with **`accrueEarnedWBERAFees()`**; use **`accrueEarnedBGTFees()`** only while your pool still has chargeable **BGT** on the operator. **`claimBoostRewards()`** is a **legacy** entry point for the **BGT** incentive-distributor surface — confirm it still matches your deployed implementation before relying on it for new workflows.
+- **Delegation operations**: Manage delegations as needed. **PoL Next:** validator emissions accrue as **\$WBERA** on **`SmartOperator`**. Accrue protocol fees on the WBERA track with **`accrueEarnedWBERAFees()`**; use **`accrueEarnedBGTFees()`** only while your pool still has chargeable **BGT** on the operator. **`claimBoostRewards()`** is a **legacy** entry point for the **BGT** incentive-distributor surface — confirm it still matches your deployed implementation before relying on it for new workflows.
 - **Emission token context**: PoL Reward Vault emissions are distributed in **\$WBERA**.
 - **Protocol fee**: Set via `setProtocolFeePercentage()` (up to 20%). The fee setter charges both tracks before applying the new rate. Call `accrueEarnedWBERAFees()` to force WBERA-track settlement; call `accrueEarnedBGTFees()` if you want to settle the legacy BGT track explicitly.
 

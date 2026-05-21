@@ -10,7 +10,7 @@
 | **LST**    | A transferable ERC-20 token representing staked BERA, issued by an LST protocol. Can be staked into an `LSTStakerVault` for Incentive Auction yield. On mainnet, only **iBERA** (Infrared) has a registered vault. | stBERA (non-transferable pool shares are not LSTs)            |
 | **iBERA**  | Infrared's liquid staking token (`0x9b67…`). Transferable ERC-20. The only LST with a registered `LSTStakerVault` on mainnet.                                                                                      | —                                                             |
 | **stBERA** | Non-transferable pool shares issued by Berachain Staking Pools. No `transfer()`, `transferFrom()`, or `approve()`. Cannot be staked into an `LSTStakerVault`.                                                      | LST (stBERA is not liquid — it is soulbound to the depositor) |
-| **BGT**    | Deprecated governance token from the pre-vNext model. Can be redeemed 1:1 for BERA. No role in current PoL.                                                                                                        | —                                                             |
+| **BGT**    | Deprecated governance token from the pre-Next model. Can be redeemed 1:1 for BERA. No role in current PoL.                                                                                                         | —                                                             |
 
 ## Actors
 

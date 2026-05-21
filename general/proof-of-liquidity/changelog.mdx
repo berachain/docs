@@ -3,7 +3,7 @@ title: "What's New"
 description: "Proof of Liquidity changes over time."
 ---
 
-## May 2026 - PoL vNext
+## May 2026 - PoL Next
 
 The May 2026 Proof of Liquidity Next upgrade deeply simplifies Berachain token model.
 
@@ -37,10 +37,24 @@ BGT no longer has a user-facing role in Proof of Liquidity. It no longer influen
 
 References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquidity/reward-vaults), [BERA and WBERA](/general/tokens/bera), [Partial reward claims](/build/pol/partial-reward-claims), [RewardVaultHelper claim flow](/build/pol/reward-vault-helper-claim-flow), [\$sWBERA](/general/tokens/swbera), [Block rewards](/general/proof-of-liquidity/block-rewards).
 
-### Source code
+## What's next
 
-- [**PoL vNext ABIs**](/general/proof-of-liquidity/files/pol-vnext-abis.zip) — 89 JSON ABI files; 222 KB (updated 2026-05-14)
-- [**PoL vNext contract source**](/general/proof-of-liquidity/files/pol-vnext-contracts.zip) — 3.5 MB (updated 2026-05-14)
+**Timeline**: These changes to Proof of Liquidity will launch 24 hours before the upcoming [Fusaka hardfork](/nodes/operations/fusaka) - activating May 26 (Bepolia) and June 23 (mainnet).
+
+| User / Actor         | Expected Action                                                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| BGT holders          | Redeem BGT directly or migrate through the [Hub](https://hub.berachain.com) UI, after the fusaka fork activates ([timeline](/nodes/operations/fusaka)) |
+| Reward vault stakers | No action needed. Continue using eligible reward vaults. Rewards will shift to BERA and be claimable as either \$BERA or \$sWBERA                      |
+| Vault owners         | No action needed. Existing vaults do not require owner-side migration                                                                                  |
+| Validators           | Per-block emissions will become fixed, and boost mechanics will be removed.                                                                            |
+| Integrators          | Update integrations to remove dependencies on BGT LSTs, boost dynamics, and BGT-based reward assumptions                                               |
+
+### Source code & audits
+
+- [**PoL Next ABIs**](https://github.com/berachain/abis/tree/bepolia)
+- [**PoL Next contract source**](https://github.com/berachain/contracts/tree/bepolia)
+- [**PoL Next Audit by Zenith**](https://github.com/berachain/security-audits/blob/main/20260508-PoLNext-Zenith.pdf)
+- [**PoL Next Audit by Cantina**](https://github.com/berachain/security-audits/blob/main/20260425-PoLNext-Spearbit.pdf)
 
 ### Change summary
 
