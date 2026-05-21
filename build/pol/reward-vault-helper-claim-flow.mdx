@@ -1,0 +1,63 @@
+---
+title: "RewardVaultHelper Claim Flow"
+description: "Claim Reward Vault rewards as sWBERA or native BERA."
+---
+
+# RewardVaultHelper Claim Flow
+
+`RewardVaultHelper` lets a staker claim rewards from one or many vaults and choose the output token format.
+
+Supported output tokens:
+
+- `$sWBERA` (configured by admin)
+- Native `$BERA` (`address(0)` selector)
+
+The two-argument overload `claimAllRewards(vaults, receiver)` transfers accrued **\$WBERA** (the emission ERC-20) to `receiver` without wrapping or unwrapping.
+
+## Contract behavior
+
+- `claimAllRewards(vaults, receiver)` credits **\$WBERA** to `receiver`.
+- `claimAllRewards(vaults, receiver, outputToken)` routes output based on selector (`sWBERA` or native BERA).
+- For `$sWBERA`, helper approves WBERA to the sWBERA vault and calls `IERC4626.deposit`.
+- For native BERA, helper unwraps WBERA with `IWBERA.withdraw` and forwards ETH.
+
+## Permissions
+
+- `setSWBERA(address)` is gated by `DEFAULT_ADMIN_ROLE`.
+- Claim methods are permissionless for stakers.
+
+## Worked example (sWBERA and native BERA)
+
+```solidity
+pragma solidity ^0.8.26;
+
+interface IRewardVaultHelper {
+    function claimAllRewards(address[] memory vaults, address receiver) external;
+    function claimAllRewards(address[] memory vaults, address receiver, address outputToken) external;
+    function WBERA_ADDRESS() external view returns (address);
+    function sWBERA() external view returns (address);
+}
+
+contract HelperClaimExample {
+    IRewardVaultHelper public immutable helper;
+
+    constructor(address helper_) {
+        helper = IRewardVaultHelper(helper_);
+    }
+
+    function claimAsSWBERA(address[] memory vaults) external {
+        address sWbera = helper.sWBERA();
+        helper.claimAllRewards(vaults, msg.sender, sWbera);
+    }
+
+    function claimAsNativeBERA(address[] memory vaults) external {
+        helper.claimAllRewards(vaults, msg.sender, address(0));
+    }
+}
+```
+
+## Integration notes
+
+- The helper validates output selectors; unsupported tokens revert.
+- Prefer exposing **`$sWBERA`** and **native `$BERA`** as the staker-facing claim outputs.
+- Use [Partial Reward Claims](/build/pol/partial-reward-claims) for claim-size control.

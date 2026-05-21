@@ -84,6 +84,8 @@ Operators can withdraw earned yield independently of principal. The helper scrip
 
 Follow the prompts to execute the generated request and completion scripts after the cooldown.
 
+Yield withdrawal redeems only the **share excess** over the delegated principal still on the handler: the `DelegationHandler` computes `lockedShares = previewWithdraw(delegatedAmountUsed)` and excludes those shares from the redeemable amount. Any growth above the locked principal — protocol-fee shares accrued to the default recipient, reward-vault yield, operator-side WBERA — is freely redeemable; the delegated principal itself is not.
+
 Principal withdrawals are controlled by the delegator and are out of scope here. Once you have attracted additional depositors, the foundation can redeem its stake without causing your validator to exit.
 
 <Info>

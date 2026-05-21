@@ -1,39 +1,30 @@
 ---
-title: "What is Proof-of-Liquidity?"
-description: "Two-token model, validator incentives, and reward vaults."
+title: "What is Proof of Liquidity?"
+description: "Berachain’s economic coordination system for turning network emissions into productive liquidity, application growth, and ecosystem value."
 ---
 
-Proof-of-Liquidity (PoL) is a novel economic mechanism that uses network incentives to align the interests of ecosystem participants and bolster both the application-layer and chain security.
+Proof of Liquidity (PoL) is Berachain’s answer to the emissions problem. Most chains spend emissions like a faucet: tokens flow out to secure the network, subsidise activity, and attract applications, but little value flows back.
 
-## Two token model
+Berachain flips this model with Proof of Liquidity. Instead of treating emissions as a pure cost, PoL turns them into growth capital for applications building on the chain. Emissions are directed toward useful liquidity, application activity, and businesses that can generate value back into the ecosystem.
 
-Berachain's consensus borrows from the Proof-of-Stake (PoS) model and contains two key components:
+The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → $BERA strengthen → more businesses funded with emissions → repeat.
 
-1. `$BERA` - Validators secure the chain by staking the native gas token
-2. `$BGT` - A soulbound governance token distributed by validators for proposing new blocks, which is ultimately rewarded to those who provide ecosystem liquidity (see [Reward Vaults](/general/proof-of-liquidity/reward-vaults))
+![PoL value cycle](/images/proof-of-liquidity/pol-cycle.png)
 
-A validator's `$BGT` emissions increase with the amount of `$BGT` delegated to them. Protocol-provided Incentives are received for these emissions, and validators pass these to their delegators after collecting a commission.
+_The PoL value cycle: emissions fund businesses, businesses return revenue, revenue strengthens BERA, and a stronger BERA economy underwrites the next emissions._
 
-This model creates meaningful economic alignment between previously isolated groups. Validators who return the maximum value to their `$BGT` delegators are likely to receive more delegations.
+## How PoL works
 
-<Frame>
-  <img
-    src="/images/general/proof-of-liquidity-flywheel.png"
-    alt="Diagram showing the Proof-of-Liquidity flywheel mechanism"
-  />
-</Frame>
+PoL starts when validators stake \$BERA to secure the chain and produce blocks. When blocks are produced, the network emits \$WBERA.
 
-### Separation of concerns
+A portion of those emissions goes to validator operators. The rest flows through Berachain’s reward allocation system and is directed toward Reward Vaults, where applications connect useful liquidity and activity to network incentives.
 
-Significantly, Proof-of-Liquidity separates the token responsible for gas and security from the token used to govern chain rewards and economic incentives.
+Applications can fund incentives to attract emissions. Users can earn rewards by providing liquidity or activity through eligible vaults, or by participating through simpler staking paths such as \$sWBERA.
 
-The following diagram illustrates the roles of tokens in Berachain's PoL compared to Ethereum's PoS:
+Incentives earned through the system are converted into \$BERA and accrued into \$sWBERA, creating a cleaner value path for users and keeping rewards aligned with the broader $BERA economy.
 
-<Frame>
-  <img
-    src="/images/general/berachain-pos-vs-pol.png"
-    alt="Comparison diagram of Proof-of-Stake versus Proof-of-Liquidity token roles"
-  />
-</Frame>
+This creates a market for useful activity. Validators compete for stake, applications compete for emissions, and users choose where to supply liquidity or participate in staking.
 
-Read more in [Proof-of-Liquidity Overview](/general/proof-of-liquidity/overview).
+In addition to market-based allocation, selected businesses can receive [**Dedicated Emission Streams**](/general/proof-of-liquidity/dedicated-emission-stream): predictable emissions they can plan around and use for long-term growth. These businesses use emissions to grow, then return value to Berachain through premium repayments and long-term revenue sharing.
+
+For a comprehensive breakdown of all PoL components, roles, and pathways, continue to [Proof of Liquidity Overview](/general/proof-of-liquidity/overview). If you’re building on Berachain, start your integration journey with [Integration Basics](/build/pol/integration-basics).

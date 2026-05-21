@@ -1,58 +1,124 @@
 ---
 title: "Proof-of-Liquidity Overview"
-description: "Two-token model, participants, and incentive alignment."
+description: "How BERA stake, WBERA emissions, Reward Vaults, Dedicated Emission Streams, incentives, and sWBERA fit together."
 ---
 
-Proof-of-Liquidity (PoL) is an extension of Proof-of-Stake (PoS) that realigns economic incentives among validators, applications, and users. This is enabled through a two-token model - a token responsible for chain security (`$BERA`) and a token responsible for governance and rewards (`$BGT`). Further information about the design goals for Proof of Liquidity are in the [Honeypaper](https://honeypaper.berachain.com/).
+Proof of Liquidity (PoL) is Berachain’s system for directing network emissions toward useful economic activity. It rewards the participants who secure the chain, allocate emissions, provide liquidity, and build applications.
+
+PoL turns block rewards into a programmable emission-routing system. BERA stake secures the validator set and determines how often each validator can produce blocks. When a validator produces a block, WBERA emissions are split into two paths: one portion is routed through Dedicated Emission Streams to globally selected Reward Vaults, while the remainder is routed to Reward Vaults according to the validator’s selected reward allocation.
+
+Businesses can access PoL emissions in two ways: by **funding incentives** on Reward Vaults to compete for validator allocation, or by being included in a **Dedicated Emission Stream** for a more predictable long-term flow. See [Dedicated Emission Streams](/general/proof-of-liquidity/dedicated-emission-stream) for more details.
+
+Users participate by staking eligible assets in Reward Vaults, or by depositing \$BERA into the \$sWBERA Staking Vault.
+
+When a Reward Vault with active incentives receives emissions, those incentives are collected and split. A portion is paid to validators as commission for allocating emissions, while the remaining incentives are converted into \$BERA through the Incentive Auction and accrued into \$sWBERA.
+
+![PoL emission paths — from validator stake through Reward Vaults to user yield](/images/proof-of-liquidity/pol-emission-paths.png)
+
+_How one WBERA emission travels from validator stake through Reward Vaults to user yield. Deeper pages cover each segment in detail._
+
+## Lifecycle
+
+<Steps>
+  <Step title="Stake BERA">
+    Validators stake \$BERA to enter the active set. Additional stakers can increase a validator’s
+    stake directly or via [Staking Pools](/nodes/staking-pools/overview), impacting that validator’s
+    block-production probability.
+  </Step>
+  <Step title="Produce blocks">
+    Active validators propose blocks with probability proportional to their \$BERA stake.
+  </Step>
+  <Step title="Allocate WBERA">
+    Each proposed block creates a fixed \$WBERA Reward Vault emission. The Distributor applies any
+    active [Dedicated Emission
+    Stream](/general/proof-of-liquidity/block-rewards#dedicated-emission-stream-des) carve-out, then
+    allocates the remainder through validator reward allocation.
+  </Step>
+  <Step title="Compete with incentives">
+    Businesses fund Reward Vault incentives to attract validator reward allocation. When emissions
+    are routed to incentivised vaults, part of the incentives is paid to validators as commission
+    and the remainder is redirected to the Incentive Auction.
+  </Step>
+  <Step title="Accrue yield">
+    Redirected incentives are converted into $BERA through the Incentive Auction and accrued into
+    \$sWBERA.
+  </Step>
+  <Step title="Claim rewards">RewardVault stakers can claim \$WBERA rewards.</Step>
+</Steps>
 
 ## Core components
 
-### Security layer ($BERA)
+### \$BERA: security and block-production weight
 
-Berachain's Active Set of validators (validators participating in consensus) is determined by validators' `$BERA` stake, with a minimum of 250,000 `$BERA` and a maximum cap of 10,000,000 `$BERA`. The top 69 validators ranked by stake are in the Active Set. Within the Active Set, a validator's probability of proposing a block is proportional to their staked `$BERA` — more `$BERA` staked increases the likelihood of proposing a block.
+Validators join the active set based on staked \$BERA, subject to protocol minimum and maximum bounds. The active set contains the top 69 validators by stake. More stake increases block-production probability, which increases how often that validator’s reward allocation is applied.
 
-### Reward layer ($BGT)
+Validator operators configure that allocation through BeraChef; see [Manage Reward Allocations](/nodes/guides/manage-reward-allocations).
 
-The size of a validator's `$BGT` block reward is determined by their Boost, which is a percentage calculated from the validator's `$BGT` boost divided by the total `$BGT` boosted to all validators. `$BGT` holders provide boosts by delegating to validators.
+### Block Rewards
 
-Learn more about how emissions are calculated on the [emissions page](/general/proof-of-liquidity/block-rewards).
+Each per-block \$WBERA emission splits along two paths: a fixed `baseRate` payment to the validator operator, and a `rewardRate` stream that flows through Dedicated Emission Streams and BeraChef into Reward Vaults.
 
-### Reward allocation management (BeraChef)
+The `BlockRewardController` splits each block \$WBERA emission in `baseRate()` (0.4 WBERA) to the validator's operator and `rewardRate()` (1.305 WBERA) to the **Reward Vaults** of the validator's active reward allocation.
 
-BeraChef manages the configuration layer of PoL, controlling how validators direct their BGT rewards across different Reward Vaults. It handles validator reward allocation preferences, vault whitelisting, and commission management, ensuring that only governance-approved protocols can participate in the ecosystem.
+BeraChef manages validator reward allocations, vault whitelisting, and incentive commission. Validators choose how to split their emission across governance-whitelisted reward vaults; see [BeraChef](/general/proof-of-liquidity/block-rewards#berachef-reward-allocation).
 
-## PoL lifecycle
+See [Block rewards](/general/proof-of-liquidity/block-rewards) for the reward model and BeraChef allocation mechanics.
 
-<Frame>
-  <img
-    src="/images/general/proof-of-liquidity-steps.png"
-    alt="Berachain Proof-of-Liquidity steps diagram"
-  />
-</Frame>
+### Reward Vaults: where emissions land
 
-<Steps>
-  <Step title="Validator lifecycle">
-    The journey begins when a Prospective Validator stakes their `$BERA` as a security bond. Validators are chosen to propose blocks with a probability proportional to their staked amount. For each block proposed, the validator receives both a base emission and a variable reward emission based on their boost percentage (see [emissions](/general/proof-of-liquidity/block-rewards)).
+Reward Vaults receive allocated \$WBERA emissions from validator reward allocation and, where applicable, Dedicated Emission Streams. Users stake PoL-eligible receipt tokens in these vaults and claim rewards based on their share of vault stake.
 
-    **For Validators**: Learn about the validator lifecycle.
+See [Reward Vaults](/general/proof-of-liquidity/reward-vaults) for staking and delegated staking.
 
-  </Step>
-  <Step title="Block reward distribution">
-    After collecting the base `$BGT` rewards for themselves, validators direct the remaining variable `$BGT` rewards to whitelisted Reward Vaults of their choosing. In exchange for directing their emissions, validators receive protocol-provided Incentives from Reward Vaults (the `$BGT` is earned by users supplying liquidity to the protocol).
+### Incentives: why validators allocate
 
-    **For Validators**: Learn about managing your reward allocations and setting commission rates.
+Validators define their reward allocation of \$WBERA emissions toward the **Reward Vaults** of their interest to earn a commission in the form of the Protocol's incentive tokens.
 
-  </Step>
-  <Step title="Liquidity provider flow">
-    The ecosystem's liquidity providers (i.e., users) play a crucial role in PoL. You can provide liquidity to protocols like BEX and receive receipt tokens as proof of your contribution. These receipt tokens are then staked in Reward Vaults, where you earn `$BGT` proportional to your share of the vault.
+Validator allocations are the signal that directs network emissions toward applications the ecosystem values. Stronger allocations to vaults backed by active, valuable protocols compound the PoL loop: more emissions flow to liquidity that produces real demand, and the incentive market keeps validators accountable for which vaults are actually generating ecosystem value.
 
-    Learn about [integrating with Berachain's incentive system](/general/proof-of-liquidity/incentives) and [Reward Vault design](/general/proof-of-liquidity/reward-vaults).
+Incentive tokens not paid out as validator commission are redirected into the **Incentive Auction**, where buyers settle them by paying WBERA. That WBERA becomes yield for \$sWBERA stakers and registered LST stakers, closing the loop between protocol-funded incentives and the broader BERA economy.
 
-  </Step>
-  <Step title="Delegation cycle">
-    As `$BGT` Holders accumulate tokens, they can delegate them to validators, directly influencing the validator's boost. This creates a virtuous cycle where higher delegation leads to increased validator boost, resulting in larger `$BGT` emissions when that validator proposes blocks. Validators are incentivized to share their received protocol Incentives with delegators to attract more boosts, fostering a collaborative ecosystem.
+See [Incentive Marketplace](/general/proof-of-liquidity/incentives) for incentive rates, commission, and redirection.
 
-    **For BGT Holders**: Learn how to boost a validator with BGT to participate in the delegation cycle.
+### Dedicated Emission Streams
 
-  </Step>
-</Steps>
+In addition to validator-directed reward allocation, Berachain can route part of its emissions through Dedicated Emission Streams.
+
+Dedicated Emission Streams route predictable emissions to selected businesses and globally selected Reward Vaults outside the standard validator allocation market. This gives teams a clearer growth budget they can plan around, while keeping the remaining emissions available for validator allocation.
+
+See [Dedicated Emission Streams](/general/proof-of-liquidity/dedicated-emission-stream) for eligibility, parameters, repayment mechanics, and revenue-sharing details.
+
+### BGT: deprecated
+
+The previous dual-token PoL system based on \$BGT and \$BERA has been upgraded to a single-token model based on \$WBERA.
+
+The \$BGT token that previously acted as both governance and emission token has been deprecated.
+
+Contracts retain legacy handling so existing Reward Vaults with residual BGT allowance can settle that allowance automatically as \$WBERA during claims.
+
+Existing protocols and Reward Vaults do not need to redeploy. Validator emissions now route to vaults as \$WBERA directly, residual `$BGT` allowances are converted to \$WBERA at the claim path inside `RewardVault`. Protocols whose user-facing surfaces (claim UI, reward-token tags, indexers) referenced \$BGT should retag those surfaces to \$WBERA; no on-chain migration call is required.
+
+See [BGT Token](/general/tokens/bgt).
+
+## Roles at a glance
+
+PoL has distinct participant roles. The same wallet can play more than one role, but each role has a different job and yield path. The table below names each role and links to its canonical page.
+
+| Participant                                                       | Main job                                                                         | Main reason to care                                                             |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [Validators](/nodes/overview/index)                               | Stake \$BERA, produce blocks, allocate emissions towards Reward Vaults           | Earn base rewards and incentive commission                                      |
+| [BERA stakers](/general/tokens/bera#validator-staking)            | Deposit \$BERA to validators directly or through Staking Pools                   | Increase validator block-production probability                                 |
+| [Reward Vault stakers](/general/proof-of-liquidity/reward-vaults) | Stake Protocol's receipt tokens in Reward Vaults                                 | Earn allocated \$WBERA emissions                                                |
+| [\$sWBERA stakers](/general/tokens/swbera)                        | Deposit BERA or WBERA into the Staking Vault                                     | Earn WBERA yield from the Incentive Auction                                     |
+| [LST stakers](/build/pol/lst-integration)                         | Stake LST tokens into a registered `LSTStakerVault`                              | Earn WBERA yield from the Incentive Auction                                     |
+| [Staking pool depositors](/nodes/staking-pools/overview)          | Deposit BERA into a Staking Pool, receive non-transferable shares                | Earn \$WBERA yield from both base rate and auction of the incentives commission |
+| [Businesses / protocols](/build/pol/integration-basics)           | Create Reward Vaults, fund incentives, or receive Dedicated Emission Streams     | Attract emissions, liquidity, users, and long-term growth capital               |
+| [Governance](/general/governance/reward-vault-governance)         | Whitelist vaults and tokens, set system and Dedicated Emission Stream parameters | Keep PoL bounded and accountable                                                |
+
+## Where to go next
+
+From here you can drop into any specific piece of the system. [Reward Vaults](/general/proof-of-liquidity/reward-vaults) is where users actually stake to earn allocated \$WBERA, and [Incentive Marketplace](/general/proof-of-liquidity/incentives) is where protocol-funded incentives get split between validator commission and the auction that turns the rest into more \$WBERA yield for [\$sWBERA](/general/tokens/swbera) holders. [Block rewards](/general/proof-of-liquidity/block-rewards) is the rate model that sits behind all of it — how much the chain pays per block and how BeraChef divides it.
+
+If you build on Berachain, the integrator surface lives under the Build tab. [PoL Integration Basics](/build/pol/integration-basics) is the entry point; most protocols then move to [Set up a Reward Vault](/build/guides/proof-of-liquidity/setup-reward-vault) and [Add incentives](/build/guides/proof-of-liquidity/add-incentives). LST issuers should read [LST Integration](/build/pol/lst-integration) to plug into the same auction yield that flows to sWBERA. Validators and node operators looking at commission and reward-allocation controls should start at the [Nodes overview](/nodes/overview/index).
+
+Businesses can apply for a [Dedicated Emission Stream](/general/proof-of-liquidity/dedicated-emission-stream): predictable emissions in exchange for a premium-repayment obligation and long-term revenue sharing with the network.

@@ -1,0 +1,57 @@
+---
+title: "Dedicated Emission Stream (DES)"
+description: "Governance-guaranteed WBERA emission for strategically important vaults."
+---
+
+## Why DES exists
+
+Validator reward allocation is market-driven: validators route WBERA emissions toward vaults that offer the best incentive return. This works well for established vaults but can under-serve strategically important liquidity that the network needs regardless of short-term incentive rates.
+
+DES lets governance guarantee a minimum emission flow to specific vaults without relying on individual validator decisions. Use cases include:
+
+- **Bootstrapping new vaults** — seeding emission before incentive markets develop.
+- **Sustaining protocol-critical liquidity** — ensuring core trading pairs or lending markets receive steady emission even when competing incentives shift.
+- **Targeted growth programs** — time-limited emission to vaults aligned with ecosystem priorities, with per-vault caps that automatically sunset the stream.
+
+## How DES works
+
+Before each block's validator-specific allocation is applied, the Distributor carves out a governance-configured percentage of the WBERA Reward Vault emission and allocates it to DES-selected vaults.
+
+![DES routing — DES carve-out, per-vault cap, and excess return to validator allocation](/images/proof-of-liquidity/pol-des.png)
+
+_How the WBERA reward-rate splits between DES vaults and the validator-allocation path. When a DES vault hits its `targetEmission` cap, the excess returns to the remainder pool for validator allocation._
+
+When DES is active, each block:
+
+1. The Distributor computes `emissionPerc` of the Reward Vault emission as the DES share.
+2. The DES share is split across configured vaults according to their weight (must sum to 100%).
+3. Each vault tracks cumulative DES emission (`debt`). Once a vault's debt reaches its `targetEmission` cap, it stops receiving DES — excess flows back to the validator allocation path.
+4. The remainder (plus any returned excess) enters normal BeraChef validator allocation.
+
+## Governance parameters
+
+`DedicatedEmissionStreamManager` is controlled by two roles:
+
+| Role                              | Controls                                                       |
+| --------------------------------- | -------------------------------------------------------------- |
+| `DEFAULT_ADMIN_ROLE` (governance) | Distributor address, BeraChef reference, upgrades, role grants |
+| `ALLOCATION_MANAGER_ROLE`         | `emissionPerc`, vault weights, per-vault target caps           |
+
+### Parameters
+
+- **`emissionPerc`** — carve-out percentage in basis points (0–10,000). A value of 500 means 5% of the Reward Vault emission goes to DES before validator allocation.
+- **Reward allocation weights** — a `Weight[]` array specifying whitelisted vaults and their share of the DES carve-out. All receivers must be BeraChef-whitelisted. Weights must sum to 10,000 (100%). Updating this replaces the entire allocation atomically.
+- **`targetEmission[vault]`** — per-vault cumulative emission cap. Once reached, the vault's DES stream stops. Raising the target restarts the stream.
+
+DES emissions are denominated in \$WBERA (inherited from the Distributor's emission token).
+
+## Impact on validators
+
+The DES carve-out reduces the emission available for validator-directed allocation. If `emissionPerc` is 5%, validators control 95% of the Reward Vault emission per block. The base reward (0.4 WBERA to the validator operator) is unaffected.
+
+Validators can read the current DES parameters from the [`DedicatedEmissionStreamManager`](/build/getting-started/deployed-contracts) contract on-chain.
+
+## See also
+
+- [Block rewards](/general/proof-of-liquidity/block-rewards) — how base rate and reward rate are sized.
+- [PoL Governance](/general/governance/reward-vault-governance) — DES controls as a governance surface.

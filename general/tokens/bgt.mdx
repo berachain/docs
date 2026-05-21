@@ -1,45 +1,11 @@
 ---
 title: "BGT Token"
-description: "Governance and rewards token; earning and delegation."
 ---
 
-Proof-of-Stake blockchains typically have a single token that is used to secure the network through staking and is additionally used for gas, governance, and economic incentives. `$BGT` and the two-token model bifurcate the first two functions from the latter two.
+BGT is a legacy token that has been **deprecated**. It was used in earlier iterations of Proof of Liquidity for governance and reward routing.
 
-Through Berachain's two-token Proof-of-Liquidity (PoL) model, the functions of governance and economic incentives (emissions & block rewards) are separated into their own token - `$BGT` (Bera Governance Token). `$BGT` is non-transferrable and can only be acquired by engaging in productive activities within the Berachain ecosystem.
+It no longer influences validator reward allocation weight, block rewards, or ecosystem proposals. See [What's New](/general/proof-of-liquidity/changelog#bgt-is-deprecated) for the full deprecation context.
 
-## Earning `$BGT`
+## Redeem BGT for BERA
 
-`$BGT` is earned by performing certain actions in dApps with whitelisted [Reward Vaults](/general/proof-of-liquidity/reward-vaults). Most of the time, this is related to providing liquidity, but it is not limited to this. Reward Vault deposits correspond to some form of productive activity on Berachain.
-
-Typically, you supply liquidity and receive a receipt token for that activity, which you can then stake in reward vaults to earn `$BGT`. Some examples include:
-
-- Depositing liquidity in the native BEX for an LP pair whitelisted to earn `$BGT` emissions
-- Supplying assets to a lending market and staking the interest-bearing receipt tokens in a reward vault
-
-You can see available earning options at [Berachain Hub Pools](https://hub.berachain.com/pools).
-
-You can claim accumulated `$BGT` from Berahub.
-
-## What can you do with `$BGT`?
-
-### Governance
-
-`$BGT` is used to vote on governance proposals. `$BGT` holders are responsible for a wide variety of ecosystem decisions (see [Reward Vault Governance](/general/governance/reward-vault-governance)).
-
-`$BGT` holders can either vote on proposals themselves or delegate their voting power to another address. This governance delegation operates independently of boosting validators for controlling their `$BGT` emissions.
-
-### Earn
-
-#### Boost a validator for incentives
-
-You can select validators to "boost" with your `$BGT`, increasing the validator's [block rewards](/general/proof-of-liquidity/block-rewards). The amount of [Incentives](/general/proof-of-liquidity/incentives) earned is determined by validators' aggregate boost. These incentives are returned to the `$BGT` holders who boosted the validator.
-
-#### dApp fees
-
-If you boost validators with your `$BGT`, you earn a share of Berachain core dApp fees, namely fees from BEX and HoneySwap. This is done via the `FeeCollector` contract.
-
-At a high level, `FeeCollector` auctions fees collected from dApps for `$WBERA` and then distributes them pro rata to `$BGT` holders who have boosted validators.
-
-### Redeem `$BGT` for `$BERA`
-
-`$BGT` can be redeemed (burned) 1:1 for `$BERA`. This is a one-way function, and `$BERA` cannot be converted into `$BGT`. This limits the ability to earn the chain's economic incentives solely to `$BGT` holders.
+Users who still hold BGT can visit the [Berachain Hub](https://hub.berachain.com/), which will help you unboost your BGT, redeem it for BERA, and stake into \$sWBERA to continue earning yield for PoL incentives.

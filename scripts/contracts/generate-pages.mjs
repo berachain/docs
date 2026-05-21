@@ -8,12 +8,20 @@ const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts
 const generatedSnippetDir = "snippets/contracts/generated";
 const checkMode = process.argv.includes("--check");
 let changedCount = 0;
+let wroteCount = 0;
+let unchangedCount = 0;
 
 function write(relPath, content) {
   const abs = path.join(repoRoot, relPath);
   const next = `${content.trimEnd()}\n`;
   const prev = fs.existsSync(abs) ? fs.readFileSync(abs, "utf8") : null;
-  if (prev === next) return;
+  if (prev === next) {
+    unchangedCount += 1;
+    if (!checkMode) {
+      console.log(`Unchanged ${relPath}`);
+    }
+    return;
+  }
 
   changedCount += 1;
   if (checkMode) {
@@ -23,6 +31,7 @@ function write(relPath, content) {
 
   fs.mkdirSync(path.dirname(abs), { recursive: true });
   fs.writeFileSync(abs, next);
+  wroteCount += 1;
   console.log(`Generated ${relPath}`);
 }
 
@@ -207,12 +216,14 @@ description: "Berachain core and staking-pool contract addresses by network."
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
 import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
-This is a list of addresses where you can read from or write to these contracts.
+For **BEX** (DEX) addresses, see [BEX deployed contracts](/build/bex/deployed-contracts). For **Bend** (lending) addresses, see [Bend deployed contracts](/build/bend/deployed-contracts).
 
-> A full list of Contract ABIs can be found at https://github.com/berachain/abis
+All contracts are verified at the [block explorer](https://berascan.com).
+* ABI files: [berachain/abis](https://github.com/berachain/abis).
+* Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
+* Staking pools: [berachain/contracts-staking-pools](https://github.com/berachain/contracts-staking-pools).
 
 <Info>
-Various parties have audited the deployed contracts.
 All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).
 </Info>
 
@@ -223,6 +234,35 @@ All audit reports are publicly available on [Github](https://github.com/berachai
 Shared singleton addresses for staking pools are listed below. For per-pool proxies, behavior, and links to the guides repo, see [Staking pool contracts](/nodes/staking-pools/contracts).
 
 <StakingPoolSingletonsTable />
+`;
+}
+
+function renderBexDeployedContractsPage() {
+  return `---
+title: "Deployed Contracts"
+description: "Registry of deployed BEX contract addresses by network."
+---
+
+import BexContractsTable from "/snippets/contracts/generated/bex-contracts-table.mdx";
+
+<Warning>
+On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their V2 Vault implementation. BEX incorporates contract logic from Balancer V2 and shares the same vulnerability. Exercise additional caution when creating new pools, particularly when including **untrusted or newly-created tokens**.
+
+**Funds currently deposited in BEX are safe, and no action from LPs is needed.** The issue only potentially affects tokens that are not live on-chain today. Frontend warnings are displayed on BEX for potentially vulnerable tokens.
+
+Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
+
+For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
+</Warning>
+
+The following is a list of contract addresses for interacting with Berachain BEX.
+
+<Tip>
+  A full list of contract ABIs can be found at
+  [github.com/berachain/doc-abis](https://github.com/berachain/doc-abis).
+</Tip>
+
+<BexContractsTable />
 `;
 }
 
@@ -253,40 +293,12 @@ The factory returns these proxy addresses when you call \`deployStakingPoolContr
 **Proxy contracts deployed with your pool:**
 
 - **StakingPool**: Main staking functionality and staker interactions. This is the contract address your stakers use to deposit BERA and receive stBERA shares.
-- **SmartOperator**: Validator operations and Proof of Liquidity integration. Use this contract to manage BGT operations, commission rates, reward allocations, and protocol fees.
+- **SmartOperator**: Validator operations and Proof of Liquidity integration.
 - **IncentiveCollector**: Incentive token collection and conversion. Handles the incentive auction mechanism where accumulated tokens can be claimed.
 - **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
 - **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
 
 For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
-`;
-}
-
-function renderBexPage() {
-  return `---
-title: "Deployed Contracts"
-description: "Registry of deployed BEX contract addresses by network."
----
-
-import BexContractsTable from "/snippets/contracts/generated/bex-contracts-table.mdx";
-
-<Warning>
-On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their V2 Vault implementation. BEX incorporates contract logic from Balancer V2 and shares the same vulnerability. Exercise additional caution when creating new pools, particularly when including **untrusted or newly-created tokens**.
-
-**Funds currently deposited in BEX are safe, and no action from LPs is needed.** The issue only potentially affects tokens that are not live on-chain today. Frontend warnings are displayed on BEX for potentially vulnerable tokens.
-
-Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
-
-For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
-</Warning>
-
-The following is a list of contract addresses for interacting with Berachain BEX.
-
-<Tip>
-A full list of contract ABIs can be found at [github.com/berachain/doc-abis](https://github.com/berachain/doc-abis).
-</Tip>
-
-<BexContractsTable />
 `;
 }
 
@@ -298,7 +310,7 @@ description: "Bend smart contract addresses on Berachain; Morpho, IRM, oracles, 
 
 import BendContractsTable from "/snippets/contracts/generated/bend-contracts-table.mdx";
 
-Addresses for reading from or writing to Bend contracts. ABIs are in [berachain/doc-abis](https://github.com/berachain/doc-abis).
+Addresses for reading from or writing to Bend contracts.
 
 <Note>
 Deployed contracts have been audited by multiple parties. Reports are on [GitHub](https://github.com/berachain/security-audits).
@@ -337,10 +349,14 @@ write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet(
 write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippet());
 
 write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
-write("build/bex/deployed-contracts.mdx", renderBexPage());
+write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
 write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
 write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
 write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
+
+if (!checkMode) {
+  console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);
+}
 
 if (checkMode) {
   if (changedCount > 0) {
@@ -349,5 +365,5 @@ if (checkMode) {
     );
     process.exit(1);
   }
-  console.log("Generated contract docs are up to date.");
+  console.log(`Generated contract docs are up to date (${unchangedCount} file(s) unchanged).`);
 }
