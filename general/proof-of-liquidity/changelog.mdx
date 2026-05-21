@@ -37,7 +37,7 @@ BGT no longer has a user-facing role in Proof of Liquidity. It no longer influen
 
 References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquidity/reward-vaults), [BERA and WBERA](/general/tokens/bera), [Partial reward claims](/build/pol/partial-reward-claims), [RewardVaultHelper claim flow](/build/pol/reward-vault-helper-claim-flow), [\$sWBERA](/general/tokens/swbera), [Block rewards](/general/proof-of-liquidity/block-rewards).
 
-## What's next
+### What's next
 
 **Timeline**: These changes to Proof of Liquidity will launch 24 hours before the upcoming [Fusaka hardfork](/nodes/operations/fusaka) - activating May 26 (Bepolia) and June 23 (mainnet).
 
@@ -56,43 +56,102 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 - [**PoL Next Audit by Zenith**](https://github.com/berachain/security-audits/blob/main/20260508-PoLNext-Zenith.pdf)
 - [**PoL Next Audit by Cantina**](https://github.com/berachain/security-audits/blob/main/20260425-PoLNext-Spearbit.pdf)
 
-### Change summary
+### PoL Contract changes
 
-#### [PoL contracts](https://github.com/berachain/contracts) changes:
+#### Functions
 
-- **`IBlockRewardController`**
-  - **Removed:** `boostMultiplier()`, `computeReward()`, `minBoostedRewardRate()`, `rewardConvexity()`, `setBaseRate(uint256)`, `setBoostMultiplier()`, `setMinBoostedRewardRate()`, `setRewardConvexity()`, `setRewardRate(uint256)`.
-  - **Removed events:** `MinBoostedRewardRateChanged`, `BoostMultiplierChanged`, `RewardConvexityChanged`.
-  - **Added:** `burnExceedingBalance()`, `getMaxEmissionPerBlock()`.
-  - **Added events:** `ExceedingBalanceBurnt`.
-- **`IDistributor`**
-  - **Added:** `EmissionTokenSet` event, `emissionToken()` getter, `setEmissionToken()` setter.
-- **`IRewardVault`**
-  - **Updated:** `whitelistIncentiveToken`, `exit`, `getReward`, `getPartialReward`, `addIncentive` (parameters and documentation updated to reflect the shift from BGT to the new emission token).
-  - **Renamed events:** `BGTBoosterIncentivesProcessed` → `IncentivesCollected`, `BGTBoosterIncentivesProcessFailed` → `IncentivesCollectionFailed`.
-  - **Updated events:** `IncentivesProcessed`, `IncentivesProcessFailed`, `IncentivesCollected`, and `IncentivesCollectionFailed` rename the `bgtEmitted` argument to `rewardsEmitted`.
-  - **Removed events:** `IncentiveFeeCollected`, `IncentiveFeeCollectionFailed`.
-  - **Added events:** `RewardTokenMigrated`.
-- **`IRewardVaultFactory`**
-  - **Removed:** `BGTIncentiveDistributorSet` event, `IncentiveFeeRateUpdated` event, `IncentiveFeeCollectorUpdated` event, `setBGTIncentiveDistributor()`, `setBGTIncentiveFeeRate()`, `setBGTIncentiveFeeCollector()`, `bgtIncentiveDistributor()`, `bgtIncentiveFeeRate()`, `bgtIncentiveFeeCollector()`, `getIncentiveFeeAmount()`.
-  - **Added:** `IncentiveTokensCollectorUpdated` event, `setIncentiveTokensCollector()`, `incentiveTokensCollector()`.
-- **`IRewardVaultHelper`**
-  - **Added:** `SWBERASet` event, `RewardsClaimed` event, `claimAllRewards(address[], address, address)` (new overload accepting an output token).
-- **`IWBERA`**
-  - **Added:** New interface for WBERA (`deposit()`, `withdraw()`).
+| Interface added | What                                                |
+| --------------- | --------------------------------------------------- |
+| `IWBERA`        | New interface for WBERA (`deposit()`, `withdraw()`) |
 
-#### [Staking pools](https://github.com/berachain/contracts-staking-pools) changes:
+| Functions Added                                | Location                                                  |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| `getMaxEmissionPerBlock()`                     | `IBlockRewardController`, `BlockRewardController`         |
+| `burnExceedingBalance()`                       | `IBlockRewardController`, `BlockRewardController`         |
+| `baseRate()`                                   | `BlockRewardController` (was a setter; now a pure getter) |
+| `rewardRate()`                                 | `BlockRewardController` (was a setter; now a pure getter) |
+| `setEmissionToken()`                           | `IDistributor`, `Distributor`                             |
+| `emissionToken()`                              | `IDistributor`                                            |
+| `setIncentiveTokensCollector(address)`         | `IRewardVaultFactory`, `RewardVaultFactory`               |
+| `incentiveTokensCollector()`                   | `IRewardVaultFactory`                                     |
+| `setSWBERA(address)`                           | `Distributor`                                             |
+| `claimAllRewards(address[], address, address)` | `IBGTIncentiveDistributor`, `Distributor`                 |
+| `deposit()`                                    | `Distributor`                                             |
+| `withdraw(uint256)`                            | `Distributor`                                             |
+| `initialize()` (reinitializer)                 | `Distributor`                                             |
+| `rewardToken()`                                | `StakingRewards`, `RewardVault`                           |
 
-- **`ISmartOperator`**
-  - **Added:** `WBERADepositedToPool` event, `WBERASentToWithdrawalVault` event.
-  - **Added:** `accrueEarnedWBERAFees()`, `withdrawRewards(uint256)`, `pullBeraToWithdrawalVault(uint256)`, `rebaseableWberaAmount()`, `availableWBERABalance()`, `getEarnedWBERAFeeState()`.
-  - **Deprecated (retained for transition only):** `queueBoost()`, `activateBoost()`, `queueDropBoost(uint128)`, `claimBgtStakerReward()`, `claimBoostRewards(IBGTIncentiveDistributor.Claim[],address[])`. BGT-oriented entrypoints stay callable while residual BGT settles, then become inert.
-- **`IStakingPool`**
-  - No signature changes; `receiveRewards()` natspec updated (caller restriction lifted from `StakingRewardsVault`).
-- **`IWithdrawalVault`**
-  - **Added events:** `FullExitRequestRetried`.
+| Functions Removed                                  | Location                                          |
+| -------------------------------------------------- | ------------------------------------------------- |
+| `setBaseRate(uint256)`                             | `IBlockRewardController`, `BlockRewardController` |
+| `setRewardRate(uint256)`                           | `IBlockRewardController`, `BlockRewardController` |
+| `setMinBoostedRewardRate(uint256)`                 | `IBlockRewardController`, `BlockRewardController` |
+| `setBoostMultiplier(uint256)`                      | `IBlockRewardController`, `BlockRewardController` |
+| `setRewardConvexity(int256)`                       | `IBlockRewardController`, `BlockRewardController` |
+| `computeReward(uint256, uint256, uint256, int256)` | `IBlockRewardController`, `BlockRewardController` |
+| `minBoostedRewardRate()`                           | `IBlockRewardController`                          |
+| `boostMultiplier()`                                | `IBlockRewardController`                          |
+| `rewardConvexity()`                                | `IBlockRewardController`                          |
+| `setBGTIncentiveDistributor(address)`              | `IRewardVaultFactory`, `RewardVaultFactory`       |
+| `setBGTIncentiveFeeRate(uint256)`                  | `IRewardVaultFactory`, `RewardVaultFactory`       |
+| `setBGTIncentiveFeeCollector(address)`             | `IRewardVaultFactory`, `RewardVaultFactory`       |
+| `bgtIncentiveDistributor()`                        | `IRewardVaultFactory`                             |
+| `bgtIncentiveFeeRate()`                            | `IRewardVaultFactory`                             |
+| `bgtIncentiveFeeCollector()`                       | `IRewardVaultFactory`                             |
+| `getIncentiveFeeAmount(uint256)`                   | `IRewardVaultFactory`, `RewardVaultFactory`       |
 
-#### [GraphQL API](https://api.berachain.com) changes:
+| Function renamed from          | Renamed to                      | Location                                                  |
+| ------------------------------ | ------------------------------- | --------------------------------------------------------- |
+| `getBGTIncentiveDistributor()` | `getIncentiveTokensCollector()` | `FactoryOwnable`                                          |
+| `getMaxBGTPerBlock()`          | `getMaxEmissionPerBlock()`      | `BlockRewardController` (both exist; old name deprecated) |
+
+#### Events
+
+| Events Added                                                                               | Location                   |
+| ------------------------------------------------------------------------------------------ | -------------------------- |
+| `ExceedingBalanceBurnt(uint256 amount)`                                                    | `IBlockRewardController`   |
+| `EmissionTokenSet(address indexed emissionToken)`                                          | `IDistributor`             |
+| `IncentivesCollected(bytes pubkey, address token, uint256 rewardsEmitted, uint256 amount)` | `IRewardVault`             |
+| `IncentivesCollectionFailed(...)`                                                          | `IRewardVault`             |
+| `RewardTokenMigrated(address oldToken, address newToken)`                                  | `IRewardVault`             |
+| `IncentiveTokensCollectorUpdated(address newAddress, address oldAddress)`                  | `IRewardVaultFactory`      |
+| `SWBERASet(address sWBERA)`                                                                | `Distributor`              |
+| `RewardsClaimed(uint256 amount, address receiver, address outputToken)`                    | `IBGTIncentiveDistributor` |
+
+| Events Removed                                   | Location                 |
+| ------------------------------------------------ | ------------------------ |
+| `MinBoostedRewardRateChanged(uint256, uint256)`  | `IBlockRewardController` |
+| `BoostMultiplierChanged(uint256, uint256)`       | `IBlockRewardController` |
+| `RewardConvexityChanged(uint256, uint256)`       | `IBlockRewardController` |
+| `BGTBoosterIncentivesProcessed(...)`             | `IRewardVault`           |
+| `BGTBoosterIncentivesProcessFailed(...)`         | `IRewardVault`           |
+| `BGTIncentiveDistributorSet(...)`                | `IRewardVaultFactory`    |
+| `IncentiveFeeRateUpdated(uint256, uint256)`      | `IRewardVaultFactory`    |
+| `IncentiveFeeCollectorUpdated(address, address)` | `IRewardVaultFactory`    |
+
+| Events Renamed                                                     | Change                          |
+| ------------------------------------------------------------------ | ------------------------------- |
+| `IncentivesProcessed`                                              | `bgtEmitted` → `rewardsEmitted` |
+| `IncentivesProcessFailed`                                          | `bgtEmitted` → `rewardsEmitted` |
+| `IncentiveFeeCollected` → `IncentivesCollected`                    | Full rename + parameter rename  |
+| `IncentiveFeeCollectionFailed` → `IncentivesCollectionFailed`      | Full rename + parameter rename  |
+| `IncentiveFeeCollectorUpdated` → `IncentiveTokensCollectorUpdated` | Full rename                     |
+
+#### Errors
+
+**Removed** (all from `IPOLErrors`):
+
+- `ZeroPercentageWeight`
+- `InvalidIncentiveFeeRate`
+- `InvalidBaseRate`
+- `InvalidRewardRate`
+- `InvalidMinBoostedRewardRate`
+- `InvalidBoostMultiplier`
+- `InvalidRewardConvexity`
+- `NotRewardDurationManager`
+- `RewardDurationCoolDownPeriodNotPassed`
+
+### [GraphQL API](https://api.berachain.com) changes
 
 **Reward vault dynamic data**
 
