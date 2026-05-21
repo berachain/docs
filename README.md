@@ -6,7 +6,7 @@
 [![Docs](https://img.shields.io/badge/docs-docs.berachain.com-8B5CF6)](https://docs.berachain.com)
 [![Mintlify](https://img.shields.io/badge/docs-Mintlify-00DF80)](https://mintlify.com)
 
-Unified documentation for [Berachain](https://www.berachain.com/) and its native protocols: **BEX** (DEX) and **Bend** (lending). Built with [Mintlify](https://mintlify.com).
+Unified documentation for [Berachain](https://www.berachain.com/) and its native protocols: **BEX** (DEX) and **Bend** (lending). Built with [Mintlify](https://mintlify.com) and OOGA BOOGA.
 
 We welcome contributions from the community. Whether you're fixing a typo, clarifying a section, or adding a new guide, your help makes our docs better for everyone.
 
