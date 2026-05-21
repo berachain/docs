@@ -151,17 +151,6 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 - `NotRewardDurationManager`
 - `RewardDurationCoolDownPeriodNotPassed`
 
-### [Staking pools](https://github.com/berachain/contracts-staking-pools) changes
-
-- **`ISmartOperator`**
-  - **Added:** `WBERADepositedToPool` event, `WBERASentToWithdrawalVault` event.
-  - **Added:** `accrueEarnedWBERAFees()`, `withdrawRewards(uint256)`, `pullBeraToWithdrawalVault(uint256)`, `rebaseableWberaAmount()`, `availableWBERABalance()`, `getEarnedWBERAFeeState()`.
-  - **Deprecated (retained for transition only):** `queueBoost()`, `activateBoost()`, `queueDropBoost(uint128)`, `claimBgtStakerReward()`, `claimBoostRewards(IBGTIncentiveDistributor.Claim[],address[])`. BGT-oriented entrypoints stay callable while residual BGT settles, then become inert.
-- **`IStakingPool`**
-  - No signature changes; `receiveRewards()` natspec updated (caller restriction lifted from `StakingRewardsVault`).
-- **`IWithdrawalVault`**
-  - **Added events:** `FullExitRequestRetried`.
-
 ### [GraphQL API](https://api.berachain.com) changes
 
 **Reward vault dynamic data**
