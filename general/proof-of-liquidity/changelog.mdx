@@ -105,8 +105,6 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 | `getBGTIncentiveDistributor()` | `getIncentiveTokensCollector()` | `FactoryOwnable`                                          |
 | `getMaxBGTPerBlock()`          | `getMaxEmissionPerBlock()`      | `BlockRewardController` (both exist; old name deprecated) |
 
-**Modifier:** `claim()` on `BGTIncentiveDistributor` — `whenNotPaused` removed.
-
 #### Events
 
 | Events Added                                                                               | Location                   |
@@ -131,9 +129,7 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 | `IncentiveFeeRateUpdated(uint256, uint256)`      | `IRewardVaultFactory`    |
 | `IncentiveFeeCollectorUpdated(address, address)` | `IRewardVaultFactory`    |
 
-**Renamed**
-
-| Event                                                              | Change                          |
+| Events Renamed                                                     | Change                          |
 | ------------------------------------------------------------------ | ------------------------------- |
 | `IncentivesProcessed`                                              | `bgtEmitted` → `rewardsEmitted` |
 | `IncentivesProcessFailed`                                          | `bgtEmitted` → `rewardsEmitted` |
