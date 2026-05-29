@@ -9,11 +9,13 @@ This guide walks you through the process of becoming a validator node on Beracha
 
 - A fully-synced full node — See [Quickstart](/nodes/operations/quickstart)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
-- Berachain Wallet with a minimum of 250,000 `$BERA` (or the current minimum to meet the Active Set) + gas to process the transaction
+- Berachain Wallet with a minimum of 250,000 \$BERA (or the current minimum to meet the Active Set) + gas to process the transaction
 
 If you haven't already, please read through the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) overview that explains the lifecycle of a validator.
 
 **Your goal** is to deposit your stake and establish a connection between your **validator identity** on the consensus layer, your **operator identity** on the execution layer, and the **withdrawal address** where your stake is returned when you stop being a validator.
+
+The deposit contract emits a custom `Deposit(bytes,bytes,uint64,bytes,uint64)` event that the consensus client parses out of the execution payload directly; deposits land in validator state in the same block the transaction was included in. The deposit-contract address itself is also reported by the EL at the `eth_config` JSON-RPC endpoint if you need to discover it programmatically.
 
 If you would like to test this out locally, consult the guide to a [local Kurtosis-based devnet](/nodes/guides/local-devnet-kurtosis), which includes instructions on testing deposits.
 
@@ -93,7 +95,7 @@ cast call $DEPOSIT_ADDR 'getOperator(bytes)' $COMETBFT_PUB_KEY -r $RPC_URL;
 
 3. **Have `beacond` calculate the parameters** for the transaction you will send with `beacond deposit create-validator` which takes:
    - **withdrawal-addr**: as described in Step 1
-   - **stake-amount**: the initial stake amount (as GWei). It is strongly recommended to use the minimum — 10,000 `$BERA`.
+   - **stake-amount**: the initial stake amount (as GWei). It is strongly recommended to use the minimum — 10,000 \$BERA.
    - **genesis-root**: as confirmed in Step 1.
 
 ```bash
@@ -132,7 +134,7 @@ echo $?;
 # 0
 ```
 
-You now have everything needed to deposit the initial 10,000 `$BERA`.
+You now have everything needed to deposit the initial 10,000 \$BERA.
 
 ## Step 3 - Send registration transaction
 
@@ -185,18 +187,18 @@ cast send $DEPOSIT_ADDR              \
 The following traits denote a successful registration:
 
 1. The deposit contract tx was successful (check block explorer or observe the cast command's output).
-2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by the 10,000 `$BERA`.
+2. The balance in the funding account (wallet that sent the deposit contract tx) decreased by the 10,000 \$BERA.
 3. **Most importantly,** the validator's public key is present in the beacon state. The beacon state (available from your node's beacon API at `curl http://localhost:3500/eth/v1/beacon/states/head/validators | jq .data`) should show your validator's public key, likely at the end of the list.
 
 <Info>
-  The validator registration is reflected in the Beacon Chain 2 blocks after the deposit contract
-  transaction is processed. The beacon API must be enabled on your node (in `app.toml`:
+  The validator registration is reflected in beacon state once the EL block carrying the deposit
+  transaction is finalized. The beacon API must be enabled on your node (in `app.toml`:
   `[beacon-kit.node-api]`).
 </Info>
 
 ## Step 5 - Activation or top-up
 
-Having completed the registration, you can now deposit additional `$BERA`. The floor for becoming a validator is **250,000 `$BERA`**, and you must be among the top **69** validators, ordered by `$BERA` staked.
+Having completed the registration, you can now deposit additional \$BERA. The floor for becoming a validator is **250,000 \$BERA**, and you must be among the top **69** validators, ordered by \$BERA staked.
 
 These subsequent deposits are done by calling the same `deposit` function, with only the **public key** required; the other elements may be zero, but must still be the right length.
 
@@ -239,7 +241,7 @@ cast send "0x4242424242424242424242424242424242424242" \
 After 2+ epochs after your activation deposit, do the following checks:
 
 1. Run `beacond status`. Verify that the voting power is equal to the effective balance. If voting power is 0, the node is NOT active.
-2. Your operator address received `$BGT` when it produces blocks (this will take a few hours).
+2. Your operator address receives WBERA emissions when it produces blocks (this will take a few hours).
 3. The Comet API on the node will confirm your validator's presence in the set. Look for your validator's public key in the list of validators:
 
 ```bash

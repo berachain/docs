@@ -191,7 +191,7 @@ Use your LP tokens as collateral in [Bend](/bend/guides/borrowing)
 ### Example 3: Bend → Berachain
 
 ```mdx
-Understand [Proof-of-Liquidity](/berachain/learn/proof-of-liquidity) to maximize BGT rewards
+Understand [Proof-of-Liquidity](/berachain/learn/proof-of-liquidity) to maximize PoL rewards
 ```
 
 ## Content Patterns

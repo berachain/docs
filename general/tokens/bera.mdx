@@ -7,37 +7,38 @@ BERA serves as the native gas and staking token of Berachain, the first blockcha
 
 ## Role of BERA
 
-The BERA token serves two main purposes on the Berachain network:
+BERA is both the gas token and the PoL emission token (as WBERA):
 
 ### Transaction fees
 
-BERA is used to pay for transactions on the Berachain network (hence its designation as the "gas token"). Tokens used for transaction fees are burned, removing them from the circulating supply. [Check out the hundreds of projects and dapps in the Berachain Ecosystem](https://ecosystem.berachain.com/).
+BERA pays for transactions on Berachain. Fees are burned, reducing circulating supply. [Explore the Berachain Ecosystem](https://ecosystem.berachain.com/).
 
-### Staking BERA
+### PoL emissions
 
-BERA can be staked a number of ways:
-
-1. To provide liquidity in BERA-denominated pools. The [complete list of pools approved by governance](https://hub.berachain.com/pools/) is shown on the hub. When you stake to pools, you earn a portion of the trading fees from that pool.
-2. Staking directly into the BERA POL Yield Vault, where the yield is a share of all PoL incentives. When you stake BERA in this vault, you receive [sWBERA](/general/tokens/swbera) tokens representing your staked position.
+Block rewards are emitted as \$WBERA (wrapped BERA, 1:1). Each block emits a **base rate** (0.4 WBERA) to the validator operator and a **reward rate** (1.305 WBERA) routed through BeraChef to Reward Vaults. WBERA is the single emission token for Proof of Liquidity.
 
 ### Validator staking
 
-Validators stake BERA to operate a validator. Within the active set, the more BERA a validator has staked, the more frequently they are chosen to propose blocks. A validator's probability of block production is directly proportional to their share of the total staked BERA. The economic value of all staked BERA tokens forms the economic security of the chain, with [BGT](/general/tokens/bgt) dynamics controlling its inflation.
+Validators stake BERA to enter the active set (top 69 by stake). Block-production probability is proportional to staked BERA. Additional stakers can deposit BERA to a validator directly via `BeaconDeposit.deposit()` or through a [Staking Pool](/nodes/staking-pools/overview) via `submit()`.
 
-To learn more about how BERA staking affects block production and emissions, see [Block Rewards](/general/proof-of-liquidity/block-rewards).
+### \$sWBERA staking
+
+Depositing BERA or WBERA into the [Staking Vault](/general/tokens/swbera) yields \$sWBERA, which earns yield from the [Incentive Auction](/general/proof-of-liquidity/incentives#incentive-fee-settlement).
+
+See [Block Rewards](/general/proof-of-liquidity/block-rewards) for how BERA staking affects block production and emissions.
 
 ## Tokenomics
 
-BGT governs emissions and economic incentives. The following documents the fixed supply, allocation, and release schedule for BERA.
+The following documents the fixed supply, allocation, and release schedule for BERA.
 
 ### Overview
 
-| Property                | Value                                                                                              |
-| ----------------------- | -------------------------------------------------------------------------------------------------- |
-| Token name              | BERA                                                                                               |
-| Total supply at genesis | 500,000,000 BERA                                                                                   |
-| Inflation               | ~5% annually via [BGT emissions](/general/proof-of-liquidity/block-rewards), subject to governance |
-| Decimals                | 18                                                                                                 |
+| Property                | Value                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| Token name              | BERA                                                                                |
+| Total supply at genesis | 500,000,000 BERA                                                                    |
+| Inflation               | ~5% annually via PoL reward emissions (distributed as WBERA), subject to governance |
+| Decimals                | 18                                                                                  |
 
 ### Distribution and allocation
 

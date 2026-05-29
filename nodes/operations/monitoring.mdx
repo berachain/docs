@@ -1,6 +1,6 @@
 ---
 title: "Monitoring"
-description: "Set up Prometheus and Grafana to monitor Beacon-Kit and execution layer metrics, endpoints, and sample dashboards."
+description: "Set up Prometheus and Grafana to monitor BeaconKit and execution layer metrics, endpoints, and sample dashboards."
 ---
 
 Berachain nodes operate as a joined pair of execution layer and consensus layer. The healthy operation of these servers can be tracked by monitoring metrics exposed over Prometheus endpoints, which are collected by Prometheus and graphed with Grafana. This guide describes setting up monitoring of a Berachain node with Prometheus and Grafana.
@@ -61,9 +61,9 @@ In the above configuration, monitoring is set up to ensure port 26656 (a beacond
 
 When you restart Prometheus with this configuration, it should begin publishing a `probe_success` metric with a 0 or 1 value to indicate DOWN or UP.
 
-## Beacon-Kit metrics
+## BeaconKit metrics
 
-Beacon-Kit must have the Prometheus instrumentation enabled. To do this, revise the configuration:
+BeaconKit must have the Prometheus instrumentation enabled. To do this, revise the configuration:
 
 ```toml config.toml
 [instrumentation]
@@ -71,7 +71,7 @@ prometheus = true
 prometheus_listen_addr = "0.0.0.0:9107"
 ```
 
-This enables the Beacon-Kit client to listen on port 9107. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the address to your administrative network instead of `0.0.0.0`.
+This enables the BeaconKit client to listen on port 9107. As a precaution, ensure this port can't be reached by the public with a firewall or by scoping the address to your administrative network instead of `0.0.0.0`.
 
 Then, add this endpoint to Prometheus by referring to the metrics port:
 
