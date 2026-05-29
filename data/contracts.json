@@ -46,6 +46,14 @@
         "berachainBepolia": "0x7bb8DdaC7FbE3FFC0f4B3c73C4F158B06CF82650"
       }
     },
+    "bgtIncentiveFeeCollector": {
+      "name": "BGTIncentiveFeeCollector",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveFeeCollector.json",
+      "address": {
+        "berachainMainnet": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
+        "berachainBepolia": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B"
+      }
+    },
     "rewardVaultFactory": {
       "name": "RewardVaultFactory",
       "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/RewardVaultFactory.json",
@@ -54,12 +62,20 @@
         "berachainBepolia": "0x94Ad6Ac84f6C6FbA8b8CCbD71d9f4f101def52a8"
       }
     },
-    "bgtStaker": {
-      "name": "BGTStaker",
-      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTStaker.json",
+    "rewardVaultHelper": {
+      "name": "RewardVaultHelper",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/rewards/RewardVaultHelper.json",
       "address": {
-        "berachainMainnet": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6",
-        "berachainBepolia": "0x44F07Ce5AfeCbCC406e6beFD40cc2998eEb8c7C6"
+        "berachainMainnet": "0xEe233a69A36Db7fC10E03e921D90DEC52Cdce6e2",
+        "berachainBepolia": "0xEe233a69A36Db7fC10E03e921D90DEC52Cdce6e2"
+      }
+    },
+    "lstStakerVaultFactory": {
+      "name": "LSTStakerVaultFactory",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/lst/LSTStakerVaultFactory.json",
+      "address": {
+        "berachainMainnet": "0xc41bbD6695AB6bdc6D04701b15f4CE5EbA2e2500",
+        "berachainBepolia": "0xAf10B532cCC25B26a8e28913D5C4056a77e7a178"
       }
     },
     "honeyFactory": {
@@ -243,7 +259,7 @@
     },
     "stablePoolFactory": {
       "name": "ComposableStablePoolFactory",
-      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IComposableStablePoolFactory.abi.json",
+      "abi": "https://github.com/berachain/doc-abis/blob/main/bex/IComposableStablePoolFactoryCreateV6.abi.json",
       "address": {
         "berachainMainnet": "0xDfA30BDa0375d4763711AB0CC8D91B20bfCC87E1",
         "berachainBepolia": "0xB60DbBaCEaeC23486a64d12089F467ef949f1bb1"
@@ -251,7 +267,6 @@
     },
     "batchRelayerLibrary": {
       "name": "BatchRelayerLibrary",
-      "abi": "",
       "address": {
         "berachainMainnet": "0xCB4AE3030bA06F7EEE54A7B96AfcA7457f9525cf",
         "berachainBepolia": "0xfD772657FC8c4Ed3884AfF151b680883814052FA"
@@ -259,7 +274,6 @@
     },
     "batchRelayerQueryLibrary": {
       "name": "BatchRelayerQueryLibrary",
-      "abi": "",
       "address": {
         "berachainMainnet": "0x4151083172b2CEFB83A33fD7FC9F6cBabb3Fd08d",
         "berachainBepolia": "0x263a1C5B2c5851beA2177eb8D6caefdfF2A25601"

@@ -3,29 +3,89 @@ title: "Frequently Asked Questions"
 description: "Common questions about Berachain."
 ---
 
+## General & Network
+
 <AccordionGroup>
   <Accordion title="What do Berachain's performance metrics look like?">
     Berachain has the following properties:
 
-    - Block time: Block times vary, check [Berascan](https://berascan.com) for the latest.
+    - Block time: ~2 seconds.
     - Transactions per Second (TPS): This can vary but the following should help with the number of possible transactions (Block gas limit (30m) / Average gas limit per txn) / Block time (2s) = TPS.
     - Finality: single slot finality
+    - 100% EVM compatibility
 
   </Accordion>
 
-<Accordion title="What is a DEX?">
-  DEX stands for Decentralized Exchange. It is a place where you can buy and sell tokens directly on
-  the chain instead of through any one centralized service. This means that all liquidity can be
-  seen directly on-chain, and the smart contracts themselves verifiably own it. A DEX enables you to
-  swap tokens directly from your wallet, as well as allowing anyone to launch their own tokens and
-  provide liquidity.
+  <Accordion title="What is governance?">
+    Governance is the process by which the community decides what changes to make to the Berachain protocol. This includes how to upgrade the node and what parameters to set for various components on the chain.
+  </Accordion>
+</AccordionGroup>
+
+## Tokens
+
+<AccordionGroup>
+  <Accordion title="What is the actual staking token of the network?">
+    \$BERA is the single staking and emission token:
+    - **Validator staking**: Node operators stake \$BERA to run validators, produce blocks, and secure the chain. Additional stakers can deposit \$BERA to increase a validator's block-production probability.
+    - **PoL emissions**: Block rewards are emitted as \$WBERA (wrapped BERA). Validators receive a base rate; the remainder is routed through BeraChef reward allocation to Reward Vaults.
+    - **\$sWBERA**: Users deposit \$BERA or \$WBERA into the Staking Vault to receive \$sWBERA, which earns yield from the Incentive Auction.
+  </Accordion>
+
+<Accordion title="What is $HONEY?">
+  `$HONEY` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed
+  stablecoin, and is used throughout the Berachain ecosystem.
 </Accordion>
+
+<Accordion title="What was $BGT?">
+  It was previously used in early versions of Proof of Liquidity for governance and reward routing.
+  Users who still hold \$BGT should unstake it, redeem it 1:1 for native \$BERA, and stake their
+  \$BERA for \$sWBERA to participate in the current Proof of Liquidity system. See the [Berachain
+  Hub](https://hub.berachain.com/) which will walk you through the process.
+</Accordion>
+
+  <Accordion title="Does it cost anything to mint or burn $HONEY?">
+    To ensure stability, there is a small fee on every mint and burn of `$HONEY`. Additionally, because minting & burning requires a transaction, there will be a small gas fee in \$BERA.
+  </Accordion>
+</AccordionGroup>
+
+## Proof of Liquidity & Validators
+
+<AccordionGroup>
+  <Accordion title="What is a validator?">
+    A validator can refer to three things:
+
+    1. A blockchain node that validates transactions, produces blocks, and comes to consensus with other validators in the network
+    2. The entity that owns and operates the validator node
+    3. The blend of points #1 and #2 that manages a portion of Proof of Liquidity & Governance votes
+
+  </Accordion>
+
+<Accordion title="Why should I stake for $sWBERA?">
+  \$sWBERA earns yield from the Incentive Auction. Protocols fund incentive tokens to attract
+  validator reward allocation; after validator commission, the remaining incentive tokens are
+  redirected to `BGTIncentiveFeeCollector`. Auction buyers pay WBERA to claim those tokens, and that
+  WBERA is split pro-rata between the \$sWBERA Staking Vault and registered LST staker vaults.
+  Holding \$sWBERA gives you a share of that yield without needing to manage vault positions or
+  validator selection.
+</Accordion>
+
+  <Accordion title="Can validators with $BERA alone build blocks and what are the rewards?">
+    Yes, validators only need to stake \$BERA within the designated min and max range of **250,000** and **10,000,000**, and once in the active set they will propose blocks. Base rate reward is distributed in \$WBERA.
+  </Accordion>
+</AccordionGroup>
+
+## BEX & Liquidity
+
+<AccordionGroup>
+  <Accordion title="What is a DEX?">
+    DEX stands for Decentralized Exchange. It is a place where you can buy and sell tokens directly on the chain instead of through any one centralized service. This means that all liquidity can be seen directly on-chain, and the smart contracts themselves verifiably own it. A DEX enables you to swap tokens directly from your wallet, as well as allowing anyone to launch their own tokens and provide liquidity.
+  </Accordion>
 
 <Accordion title="What is a swap?">
   A swap is the process of exchanging one token for another. This can be thought of as a buy or a
-  sell, depending on which token you're looking at. For example, if you're looking to buy `$BERA`
-  with `$ETH`, you would be swapping `$ETH` for `$BERA`. This is essentially "selling" `$ETH` and
-  "buying" `$BERA`.
+  sell, depending on which token you're looking at. For example, if you're looking to buy \$BERA
+  with `$ETH`, you would be swapping `$ETH` for \$BERA. This is essentially "selling" `$ETH` and
+  "buying" \$BERA.
 </Accordion>
 
 <Accordion title="How much does it cost to swap?">
@@ -54,72 +114,7 @@ description: "Common questions about Berachain."
   APY for a given pool. APY yield comes from fees collected on every swap made using that pool.
 </Accordion>
 
-<Accordion title="What is $HONEY?">
-  `$HONEY` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed
-  stablecoin, and is used throughout the Berachain ecosystem.
-</Accordion>
-
-<Accordion title="Does it cost anything to mint or burn $HONEY?">
-  To ensure stability, there is a small fee on every mint and burn of `$HONEY`. Additionally,
-  because minting & burning requires a transaction, there will be a small gas fee in `$BERA`.
-</Accordion>
-
-<Accordion title="What is $BGT?">
-  $BGT is Berachain's staking & governance token. That means it is used to secure the network & earn
-  rewards via Proof of Liquidity as well as to vote on governance proposals.
-</Accordion>
-
-  <Accordion title="What is a validator?">
-    A validator can refer to three things:
-
-    1. A blockchain node that validates transactions, produces blocks, and comes to consensus with other validators in the network
-    2. The entity that owns and operates the validator node
-    3. The blend of points #1 and #2 that manages a portion of Proof of Liquidity & Governance votes
-
-  </Accordion>
-
-<Accordion title="Why should you boost a validator with your $BGT?">
-  Delegating `$BGT` allows you to participate in Proof of Liquidity while helping secure the
-  network.
-</Accordion>
-
-  <Accordion title="Why should you boost your $BGT instead of burning it for $BERA?">
-    Rewards are the main reason. With Proof of Liquidity, you can earn many different types of rewards:
-
-    - A share of protocol-provided [incentives](/general/proof-of-liquidity/incentives), provided in exchange for `$BGT` emissions directed to those protocols' Reward Vaults
-    - A share of Berachain core dApp fees, namely fees from BEX and HoneySwap
-
-  </Accordion>
-
-<Accordion title="How do you get $BGT?">
-  You earn `$BGT` through Reward Vaults when validators direct `$BGT` emissions towards them. See
-  [Earning $BGT](/general/tokens/bgt#earning-bgt) for more.
-</Accordion>
-
-<Accordion title="What is governance?">
-  Governance is the process by which the community decides what changes to make to the Berachain
-  protocol. This includes how to upgrade the node and what parameters to set for various components
-  on the chain.
-</Accordion>
-
-<Accordion title="Once you've provided liquidity into an eligible pool in BEX, how do you get $BGT?">
-  Each eligible (whitelisted) pool on BEX has an associated LP token. Once you deposit liquidity
-  into a BEX pool, the pool issues an LP token relative to your total contribution percentage. You
-  must then stake this LP token into its respective Reward Vault to become eligible to receive
-  `$BGT`. As validators direct `$BGT` emissions to Reward Vaults, you accumulate `$BGT` to claim.
-  You must perform an additional action to claim `$BGT` — the protocol does _NOT_ automatically send
-  it to you.
-</Accordion>
-
-<Accordion title="Can only validators vote on or create proposals?">
-  Anyone with the required minimum amounts of `$BGT` can propose and vote on proposals.
-</Accordion>
-
-<Accordion title="What is the actual staking token of the network, $BERA or $BGT?">
-  - Validators stake `$BERA` - Network incentives come in `$BGT`
-</Accordion>
-
-  <Accordion title="Can validators with $BERA alone build blocks and what are the rewards?">
-    Yes, validators only need to stake `$BERA` within the designated min and max range of **250,000** and **10,000,000**, and once in the active set they will propose blocks. Validators receive rewards in `$BGT`.
+  <Accordion title="Once I provide liquidity on BEX, how do I earn rewards?">
+    When you deposit liquidity into a BEX pool, you receive an LP token representing your share of the pool. To earn Proof of Liquidity emissions, you must take that LP token and stake it into its corresponding Reward Vault. As validators direct emissions to that vault, you will accumulate claimable rewards denominated in \$WBERA. You can claim \$WBERA directly from the vault or through the Reward Vault Helper as \$sWBERA or native BERA.
   </Accordion>
 </AccordionGroup>

@@ -1,9 +1,11 @@
 ---
 title: "Manage Reward Allocations"
-description: "Direct PoL incentives to applications via BeraChef: queue and activate reward allocation changes for your validator."
+description: "Direct PoL incentives to applications via BeraChef"
 ---
 
 This guide walks you through managing your validator's reward allocations using BeraChef via Foundry `cast` and the BeraHub UI.
+
+We often call a validator’s BeraChef weights the **cutting board**: the split of Reward Vault emissions across whitelisted vaults.
 
 ## Requirements
 
@@ -14,7 +16,7 @@ This guide walks you through managing your validator's reward allocations using 
 
 ## Understanding reward allocations
 
-Each validator can customize how their rewards are distributed across different reward vaults. If no custom allocation is set, a default allocation is used.
+Each validator can customize how their rewards are distributed across different reward vaults. Effective routing uses your activated allocation when it is **active** and **valid**. If not, the protocol falls back to a **baseline** allocation maintained network-wide, then to a governance-set **default** on BeraChef when needed. See [Baseline allocation, default fallback, and inactivity](#baseline-allocation-default-fallback-and-inactivity).
 
 **Key concepts:**
 
@@ -22,6 +24,19 @@ Each validator can customize how their rewards are distributed across different 
 - Only whitelisted vaults can receive allocations
 - Changes require queuing and a delay period before activation
 - Current delay: **500 blocks**
+- If you keep the same percentages, you still need to **queue and activate** a new allocation before the **inactivity window** passes (about **seven days** on mainnet today), or routing may switch to baseline
+
+## Baseline allocation, default fallback, and inactivity
+
+What you configure in this guide is your **custom** allocation on BeraChef. At distribution time, `getActiveRewardAllocation` resolves routing in layers:
+
+1. **Baseline allocation** — Held in `RewardAllocatorFactory` and updated by `ALLOCATION_SETTER_ROLE`. This is the network **baseline cutting board**: a fallback for validators who do not self-manage. It applies when you have **never** activated an allocation, or when your active allocation is **inactive** (below).
+
+2. **Default reward allocation on BeraChef** — Set by governance on `BeraChef`. If baseline weights are no longer valid (for example a vault is no longer whitelisted), routing falls back to this default.
+
+**Inactivity:** An allocation is inactive when `block.number` is greater than its `startBlock` plus `rewardAllocationInactivityBlockSpan`. On Berachain mainnet today that span is **302,400 blocks** (about **seven days** at ~2 second blocks). Activating a queued allocation advances `startBlock` and resets the window. Some validators may be exempt on-chain (`isValExemptedFromInactivity`); exemptions are operational exceptions.
+
+To keep your chosen vault weights, **re-queue and activate** before the window elapses—even if the percentages are unchanged.
 
 ## Option A - Using Foundry CLI
 
@@ -89,3 +104,7 @@ You can also manage your reward allocations through the Berachain Dashboard:
 4. Click the **Configuration** tab
 5. Select your vaults and choose desired allocation percentages (ensuring they add up to 100%)
 6. Click **Queue** and submit the transaction
+
+## See also
+
+- [Block production & rewards](/general/proof-of-liquidity/block-rewards) — How Reward Vault emission and allocations interact at distribution time.
