@@ -1,160 +1,205 @@
 ---
 title: "Reward Vaults"
-description: "Where BGT flows and how protocols receive emissions."
+description: "Where $WBERA emissions flow, how Reward Vault incentives work, and how vault rewards are claimed."
 ---
 
-Reward Vaults are smart contracts in which you can stake your Proof-of-Liquidity (PoL) eligible assets to receive `$BGT` rewards. Reward Vaults are the only way anyone can earn `$BGT` rewards, and therefore serve the important function of gating entry into the PoL ecosystem.
+Reward Vaults are the PoL contracts where users stake eligible receipt tokens and earn allocated \$WBERA rewards. Reward Vaults can receive emissions through validator allocation and, where applicable, Dedicated Emission Streams. Businesses and protocols attach incentive tokens to Reward Vaults to attract validator allocation. When a Reward Vault with active incentives receives emissions, those incentives are split between validator commission and the remaining incentives, which are converted through the Incentive Auction and accrued into \$sWBERA.
 
-Reward Vaults are key infrastructure that allows protocols to leverage PoL, enabling teams to incentivize actions in exchange for `$BGT`. A protocol can have multiple Reward Vaults, each with its own PoL-eligible asset to be staked. For example, BEX can have multiple pools earning `$BGT`, each with its own Reward Vault and respective PoL-eligible asset.
+Reward Vaults are key infrastructure for businesses and protocols to access PoL. A business or protocol can operate multiple vaults, each with its own PoL-eligible receipt asset — for example, separate BEX pools can each have their own Reward Vault.
 
 <Info>
-Only Reward Vaults approved through governance are eligible to receive `$BGT` emissions from Validators.
+Only governance-whitelisted Reward Vaults can receive PoL emissions. Depending on the route, emissions may be allocated through validator reward allocation or through Dedicated Emission Streams.
 
-Please see the full [Reward Vault Requirements and Guidelines](/general/help/reward-vault-guidelines) for the application process.
+See [Reward Vault Requirements and Guidelines](/general/help/reward-vault-guidelines) for whitelisting requirements.
+
+For staking on behalf of another address, see [Delegation](#delegation).
 
 </Info>
 
-## User interactions
+## Staking with a reward vault
 
-### Staking with a reward vault
+To earn allocated \$WBERA from a Reward Vault, a user stakes the PoL-eligible asset in that vault. The protocol that deployed the vault decides how users obtain the receipt token to stake—typically by providing liquidity.
 
-<Frame>
-  <img
-    src="/images/general/berachain-reward-vault-staking-bex.png"
-    alt="Berachain reward vault staking flow with BEX"
-  />
-</Frame>
+1. The user takes an action that yields a PoL-eligible receipt token.
+2. The user stakes that token in the corresponding Reward Vault.
+3. The user earns a pro-rata share of \$WBERA streamed to the vault, based on [emission timing](#wbera-emission-timing-modes) and vault rules.
 
-To receive `$BGT`, a user must stake the PoL-eligible asset in its Reward Vault. The protocol that deployed the Reward Vault decides how users acquire the PoL-eligible asset to stake. The idea is that protocols would leverage this to attract liquidity or stimulate activity, and in return award users with the asset they can stake in their vault.
+The \$WBERA amount a user earns from a Reward Vault depends on:
 
-1. The user takes some action that results in receiving a PoL-eligible asset, generally referred to as a receipt token.
-2. The user stakes the PoL-eligible asset in the corresponding vault.
-3. The user earns a portion of all the BGT emitted to that vault.
+1. The user’s share of total assets staked in the vault.
+2. The \$WBERA emission rate and timing for that vault (see [block rewards](/general/proof-of-liquidity/block-rewards) and [emission modes](#wbera-emission-timing-modes) below).
 
-### Earning BGT
+After staking, users can claim rewards, add to their deposit, or withdraw subject to the vault’s rules. Vault staking is designed to feel like familiar DeFi staking flows.
 
-The amount of `$BGT` rewards a user earns from a Reward Vault is a function of:
+Reward Vault emissions pay **\$WBERA**.
 
-1. The user's share of total assets staked in the Reward Vault
-2. The amount of `$BGT` rewards emitted to the Reward Vault
+<Note>
+  The [RewardVaultHelper](/build/pol/reward-vault-helper-claim-flow) is an optional UX component
+  that converts \$WBERA claims atomically into \$sWBERA or native \$BERA. Direct vault claims still
+  pay \$WBERA.
+</Note>
 
-After staking assets in a Reward Vault, users are free to claim their earned rewards, add to their deposits, or withdraw their assets whenever they wish.
+```mermaid actions={false}
+%%{init: { "sequence": { "actorFontWeight": "bold", "messageFontWeight": "bold" } } }%%
+sequenceDiagram
+  autonumber
+  participant U as 👤<br/>User
+  participant P as 🌊<br/>Protocol
+  participant RV as 🏦<br/>Reward Vault
+  participant V as 🖥️<br/>Validator
+  participant D as 💧<br/>Distributor
+  participant C as 🔁<br/>Incentive Auction
 
-`$BGT` farming with Reward Vaults is meant to resemble familiar DeFi actions, providing a low barrier to entry.
+  U->>P: Provide liquidity<br/>or protocol activity
+  P-->>U: Receipt token
+  U->>RV: Stake receipt token
+  P->>RV: Fund incentive<br/>tokens
+  V->>D: Produce block +<br/>emit allocation
+  D->>RV: Send WBERA emission
+  RV-->>U: Claim as sWBERA<br/>or native BERA
+  RV-->>V: Validator<br/>commission
+  RV-->>C: Redirected<br/>incentive tokens
+```
 
-## Delegation
+At the protocol level (numbered to match the diagram above):
 
-The RewardVault supports **delegation**, which allows one address (the delegate) to stake tokens on behalf of another address (the account holder). This enables use cases such as:
+1. The user provides liquidity to the protocol or performs another PoL-eligible action.
+2. The protocol issues the user a PoL-eligible receipt token.
+3. The user stakes the receipt token in the corresponding Reward Vault.
+4. The protocol funds the Reward Vault with incentive tokens to attract validator allocation.
+5. An active validator produces a block and the Distributor receives the per-block emission.
+6. The Distributor sends the \$WBERA Reward Vault emission to the vault.
+7. The user claims rewards as \$sWBERA or native \$BERA through [RewardVaultHelper](/build/pol/reward-vault-helper-claim-flow).
+8. The Reward Vault pays validator commission out of the funded incentive tokens.
+9. The Reward Vault redirects the remaining incentive tokens to the [Incentive Auction](/general/proof-of-liquidity/incentives#incentive-fee-settlement), where they are converted into \$BERA / \$WBERA yield and accrued into \$sWBERA.
 
-- **Custodial staking**: Exchanges or custodians staking on behalf of users
-- **Smart contract integration**: Protocols automatically staking user funds
-- **Managed staking services**: Third-party services handling staking operations
+After staking, users can claim rewards, add stake, or withdraw based on vault rules.
 
-**Key delegation concepts**:
+## Staking on behalf of another address
 
-- **Delegate**: The address that deposits/withdraws tokens (msg.sender)
-- **Account**: The address that owns the staked position and receives rewards
-- **Self-staked balance**: Tokens staked directly by the account holder
-- **Delegated balance**: Tokens staked by delegates on behalf of the account
+The RewardVault supports **delegation**: one address (the **delegate**) can stake on behalf of another (the **account**). Common patterns include:
 
-**Important**: Only the account holder can withdraw their self-staked tokens. Delegates can only withdraw tokens they deposited on behalf of the account.
+- **Custodial staking**: exchanges or custodians staking on behalf of users.
+- **Smart contract integration**: protocols that stake user funds automatically.
+- **Managed staking services**: third parties operating staking on behalf of accounts.
 
-## $BGT flow
+```mermaid actions={false}
+%%{init: { "sequence": { "actorMargin": 5, "actorFontSize": 18, "messageFontWeight": "bold" } } }%%
+sequenceDiagram
+  autonumber
+  participant D as 👤 Delegate
+  participant A as 👤 Account
+  participant RV as 🏦 Reward Vault
 
-When a validator is chosen to propose a block, they direct a portion of their `$BGT` emissions to specific Reward Vaults of their choice. To learn more about how `$BGT` is calculated in block production, check out the docs on [block rewards](/general/proof-of-liquidity/block-rewards).
+  D->>RV: Deposit stake credited to Account
+  RV-->>A: WBERA rewards accrue to Account
 
-## BGT emission modes
+  opt Withdraw self-staked (Account only)
+    A->>RV: Withdraw self-deposited stake
+  end
 
-Reward Vaults operate in one of two mutually-exclusive modes for **BGT reward distribution timing**:
+  opt Withdraw delegated (Delegate only)
+    D->>RV: Withdraw delegated stake they contributed
+  end
+```
 
-### Duration-based mode (legacy)
+**Key delegation concepts**
 
-In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3-7 days). Each time BGT rewards are added to the vault via `notifyRewardAmount`, the BGT is distributed evenly over this predetermined period.
+- **Delegate**: address that deposits and withdraws delegated stake (`msg.sender` for those actions).
+- **Account**: address that owns the position and receives rewards.
+- **Self-staked balance**: stake deposited directly by the account.
+- **Delegated balance**: stake deposited by delegates for that account.
 
-Duration-based mode enforces the 3-7 day range: if switching from target rate mode where the duration exceeded 7 days, the duration will be capped at 7 days.
+Only the account can withdraw self-staked balance. Delegates can withdraw only delegated stake they contributed.
 
-**Example**: If 100 BGT is added with a 5-day duration, the vault distributes 20 BGT per day to stakers.
+## WBERA emission timing modes
+
+Reward Vaults operate in one of two mutually exclusive modes for **WBERA reward distribution timing** (streamed rewards).
+
+### Duration-based mode
+
+In this mode, the `rewardDurationManager` sets a fixed `rewardsDuration` (typically 3–7 days). Each time \$WBERA rewards are added to the vault via `notifyRewardAmount`, the \$WBERA is distributed evenly over that period.
+
+Duration-based mode enforces the 3–7 day range: if you switch from target-rate mode where the computed duration exceeded 7 days, the duration is capped at 7 days.
+
+**Example:** If 100 \$WBERA is added with a 5-day duration, the vault distributes 20 \$WBERA per day to stakers.
 
 ### Target rate mode
 
-When `targetRewardsPerSecond` is set to a non-zero value, the vault automatically calculates the optimal distribution period for each BGT deposit. The vault ensures the emission rate never exceeds the target while respecting the minimum duration limit.
-
-The computation follows this formula:
+When `targetRewardsPerSecond` is set to a non-zero value, the vault computes the distribution period for each \$WBERA deposit. The vault keeps the effective emission rate from exceeding the target while respecting the minimum duration limit.
 
 ```text
 period = max(minRewardDurationForTargetRate, totalReward / targetRate)
 ```
 
-This guarantees the duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
+The duration is never shorter than the minimum (default 3 days), but can extend beyond 7 days if needed to maintain the target rate.
 
 ### Switching between modes
 
-- `setTargetRewardsPerSecond(x)` enables target rate mode
-- `setTargetRewardsPerSecond(0)` re-enables duration-based mode
-- Only the `rewardVaultManager` can switch modes
+The Reward Vault manager can switch between modes:
+
+- Set a positive target rate to keep WBERA streaming at that rate.
+- Set the target rate to zero to return to duration-based distribution.
 
 ## Incentive management
 
-RewardVaults support **incentive tokens**, which are additional tokens that protocols can offer to BGT stakers beyond the base BGT rewards. This creates a powerful mechanism for protocols to attract liquidity and user engagement.
+Reward Vaults support **incentive tokens**: additional tokens protocols attach so validators have a reason to allocate \$WBERA emissions toward the vault.
 
 ### How incentive tokens work
 
-1. **Whitelisting**: Protocol tokens must first be whitelisted in the vault by governance
-2. **Exchange Rate Setting**: Protocol managers set exchange rates (e.g., "10 USDC per BGT earned")
-3. **Token Deposits**: Protocols deposit their tokens into the vault
-4. **Automatic Distribution**: When users earn BGT, they automatically receive proportional incentive tokens
+1. **Whitelisting**: incentive tokens are allowed through governance for the vault (see [Incentive Marketplace](/general/proof-of-liquidity/incentives)).
+2. **Rate setting**: token managers set incentive rates per unit of allocated emission (`incentiveTokens = emissionAllocatedToVault * incentiveRate`).
+3. **Deposits**: protocols fund incentive inventory into the vault system through the token manager flow.
+4. **Distribution**: as \$WBERA emissions are allocated to the vault, funded incentive tokens follow the PoL split: validator commission to the validator operator and redirected incentives to the incentive tokens collector for [auction settlement](/general/proof-of-liquidity/incentives#incentive-fee-settlement).
 
 ## Incentives
 
-To understand why validators would choose to emit `$BGT` to one Reward Vault over another, refer to [Incentives](/general/proof-of-liquidity/incentives) in PoL, which discusses how protocols can influence validator behavior with economic incentives.
+To see why validators allocate \$WBERA toward one vault over another, read [Incentive Marketplace](/general/proof-of-liquidity/incentives): protocols compete for validator reward allocation with funded incentives, validator commission, and auction-settled yield.
 
 ## Vault creation
 
-New Reward Vaults can be created permissionlessly at [Berachain Hub](https://hub.berachain.com/vaults/create).
+New Reward Vaults can be created permissionlessly at [Berachain Hub](https://hub.berachain.com/earn/create).
 
-Protocols creating Reward Vaults must additionally whitelist their vaults through `$BGT` governance to be eligible to receive emissions from validators.
+Protocols must still **whitelist** new vaults through governance for validator-allocated \$WBERA emissions; see [Reward Vault Guidelines](/general/help/reward-vault-guidelines).
 
-## Calculating $BGT APR
+## Calculating WBERA APR
 
-The RewardVault APR is determined by several factors. The components of this APR calculation include:
+Reward Vault APR depends on several observable inputs:
 
-- `rewardRate` - The BGT amount added to Reward Vault Staker's total claims per second
-- `periodFinish` - The timestamp when the `rewardRate` expires
-- `stakeToken` - The token you stake into the Reward Vault
-- `totalSupply` - The total amount of `stakeToken` staked in the Reward Vault
-- Price of `$BGT` (`$BERA`) - The assumption is made the price of `$BGT` is equivalent the `$BERA` price
-- Price of Stake Token
+- Vault `rewardRate` — \$WBERA credited toward stakers’ claims per second (while active).
+- `periodFinish` — timestamp when the current vault reward period ends.
+- `stakeToken` — token staked into the Reward Vault.
+- `totalSupply` — total `stakeToken` amount staked in the vault.
+- Price of \$WBERA (equivalent to \$BERA) in USD.
+- Price of the stake token.
 
 <Info>
-  If the `periodFinish` timestamp has elapsed no rewards are being emitted. As a result, the `$BGT`
-  APR is 0%.
+  If `periodFinish` has passed, no rewards are being emitted for that period and **vault APR from
+  that stream is 0%** until new rewards are notified.
 </Info>
 
-The units of `rewardRate` is denominated as `$BGT per second`. The above pieces of data allow you to calculate the APR on the Reward Vault in the following way:
+Using the normalized vault reward rate in \$WBERA per second:
 
-$$APR = \frac{rewardRate \times secondsPerYear \times priceOfBGT}{totalSupply \times priceOfStakeToken}$$
+$$APR = \frac{(vaultRewardRate \times secondsPerYear \times priceOfWBERA)}{(totalSupply \times priceOfStakeToken)}$$
 
-This formula provides the current rate that the Reward Vault is crediting depositors with `$BGT`.
+This expresses the rate at which the vault credits depositors with \$WBERA for the active reward period.
 
 ### Example
 
-As a concrete example of the above formula, a reward vault with the following values can be used:
-
 | Parameter            | Value                                | Normalized          |
 | :------------------- | :----------------------------------- | :------------------ |
-| Reward Rate          | 272490527103681170793308992914391673 | 0.27249052710368116 |
-| Price of `$BERA`     | $7.8                                 | $7.8                |
-| Total Supply         | 598626940947001140289                | 598.6269409470011   |
-| Price of Stake Token | $223,845.58                          | $223,845.58         |
+| Vault reward rate    | 272490527103681170793308992914391673 | 0.27249052710368116 |
+| Price of \$WBERA     | $7.8                                 | $7.8                |
+| Total supply         | 598626940947001140289                | 598.6269409470011   |
+| Price of stake token | $223,845.58                          | $223,845.58         |
 | Seconds per year     | 31,536,000                           | 31,536,000          |
 
-<Tip>
-  The `rewardRate` returned is in gwei and includes an extra precision factor of `1e18`, so is
-  effectively in wei. Normalizing it requires dividing by `1e36`.
-</Tip>
+Use normalized vault values from Hub or your indexer when calculating APR by hand.
 
-Using the formula above:
+$$APR = \frac{0.27249052710368116 \times 31536000 \times 7.8}{598.6269409470011 \times 223845.58} \approx 0.5002 \approx 50.02\%$$
 
-$$APR = \frac{0.27249052710368116 \times 31536000 \times 7.8}{598.6269409470011 \times 223845.58} = 0.500204 = 50.02\%$$
+Vault metrics on [Hub Vaults](https://hub.berachain.com/vaults/) refresh on a short cadence (roughly every few minutes).
 
-These values are updated on the [Vaults](https://hub.berachain.com/vaults/) page roughly every five minutes.
+## Reward output
+
+Reward Vaults accrue \$WBERA by default. The [RewardVaultHelper](/build/pol/reward-vault-helper-claim-flow) converts \$WBERA atomically during claim, so stakers receive \$sWBERA or native \$BERA without a separate step.

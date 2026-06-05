@@ -105,6 +105,7 @@ To move or rename a page, update both the file path and every reference in `docs
 
 ### 5. Content Guidelines
 
+- Describe the **current** system and, where appropriate, **future (presented as if current)** behavior as of the time of writing. Do not preserve historical narratives, superseded explanations, or framing around past mistakes or obsolete docs in normative pages — update copy to the correct model. Time-ordered deltas belong in changelog-style pages when the repo has them, focused on outcomes of the change, not mechanics.
 - Follow the structure and tone of existing docs.
 - Use US English spelling in prose (`color`, `behavior`, `favor`, `labeled`).
 - Use Mintlify/MDX components where appropriate, e.g. `<Card>`, `<Steps>`, `<Note>`, `<Tip>`, `<Warning>`.
@@ -127,7 +128,17 @@ mint broken-links
 mint a11y
 ```
 
-Fix any errors before opening your PR.
+Run the prose linter on touched files:
+
+```bash
+brew install vale  # one-time install
+make check-vale    # default scope: the Fusaka release page
+VALE_PATHS="general/ build/your-changed-file.mdx" make check-vale  # override scope to your edits
+```
+
+The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects). Fix any errors before opening your PR.
+
+When vale flags a project term as misspelled, add it to `vale/config/vocabularies/Berachain/accept.txt` rather than rephrasing — the file is the single source of truth for terminology vale will accept.
 
 ### 7. Contract Address Source Of Truth
 

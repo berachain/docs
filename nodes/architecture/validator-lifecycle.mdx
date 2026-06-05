@@ -16,7 +16,7 @@ Validators have several key responsibilities:
 - Participating in consensus by voting on the canonical chain
 - Maintaining network security through their staked tokens
 
-The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest **10,000 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
+The Validator's Voting Power is the amount of \$BERA they have deposited, rounded down to the nearest **10,000 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
 <Frame>
   <img
@@ -34,7 +34,7 @@ The labeled states are as follows:
   Validator has been marked as eligible for the activation queue.
 
 - **Active**  
-  The validator is marked as Active after 1 epoch from the Eligible state. Currently, the Active Set consists of **69** Validators, which is the number of Validators that can propose blocks.
+  The validator is marked as Active after 1 epoch from the Eligible state. Currently, the Active Set is capped to a maximum of **69** Validators.
 
 - **Exited**  
   The validator is marked for exit if the validator set cap (**69**) is hit and the validator has the lowest effective balance or a lower-order pubKey if it has the same effective balance as another validator.
@@ -44,19 +44,22 @@ The labeled states are as follows:
 
 ## Deposited state
 
-The validator's journey begins with a deposit transaction on the **Execution Layer** (via the Deposit Contract). Once this deposit transaction is successful and emits an event, beacon-kit nodes capture it and process it for signature verification.
+The validator's journey begins with a deposit transaction on the **Execution Layer** to the deposit contract at `0x4242424242424242424242424242424242424242`. The deposit emits a custom deposit event; the consensus client parses that event from the execution payload's request list and processes the deposit in the **same block** the deposit transaction was included in.
 
 The initial deposit transaction establishes a connection between a validator's Consensus Layer identity and its Execution Layer identity and decides the withdrawal address for the $BERA stake.
 
-- **Verification Delay**  
-  It takes 2 ETH1 blocks (on the EVM layer) from the event emission to verify the event on the Consensus Layer. If the deposit event is processed at epoch `N`, the validator is then considered in the **Deposited** state, provided the validator's balance equals (or exceeds) the minimum required for staking.
+- **In-payload, per-block processing**
+  Deposits are included in execution payloads and processed by the CL in the same block. There is no follow distance, no pre-fork queue, and no per-epoch cadence. Once the EL block carrying the deposit transaction is finalized, the deposit is reflected in the validator state.
 
-- **Minimum Requirement**  
+- **Minimum requirement**
   A total of **250,000 BERA** is required for a validator to reach the Deposited state. (Multiple deposits can accumulate to this amount.)
 
-- **Signature Verification**
+- **Signature verification**
   - On the first deposit, the validator's signature is fully verified (similar to ETH2).
   - Subsequent deposits simply increase the validator's balance (no additional signature verification is done).
+
+- **Per-block deposit cap**
+  Up to **8192** deposits can land in a single block. With ~45,000 gas per deposit and a 30M gas block limit, the cap is unreachable in practice.
 
 After remaining in the **Deposited** state for 1 epoch, the validator automatically moves to the **Eligible** state and becomes eligible for activation.
 

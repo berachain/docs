@@ -7,9 +7,9 @@ description: "Minting, redemption, collateral, and basket mode."
 
 ## Using and minting `$HONEY`
 
-`$HONEY` serves the same role as other stablecoins — payments, remittances, hedging against volatility — and is widely used across Berachain DeFi as a base trading pair and lending asset. Minting and redeeming `$HONEY` against collateral happens through [BHoneySwap at honey.berachain.com](https://honey.berachain.com). You can also acquire it by swapping on BEX or another exchange.
+`$HONEY` serves the same role as other stablecoins — payments, remittances, hedging against volatility — and is widely used across Berachain DeFi as a base trading pair and lending asset. Minting and redeeming `$HONEY` against collateral happens through [honey.berachain.com](https://honey.berachain.com). You can also acquire it by swapping on BEX or another exchange.
 
-The lifecycle is straightforward: deposit a whitelisted collateral asset to mint `$HONEY`, use it however you like, and redeem it for collateral when you're done. Minting and redemption rates are configurable per collateral asset by `$BGT` governance.
+The lifecycle is straightforward: deposit a whitelisted collateral asset to mint `$HONEY`, use it however you like, and redeem it for collateral when you're done. Minting and redemption rates are configurable per collateral asset by governance.
 
 ### Collateral assets
 
@@ -26,33 +26,27 @@ New collateral assets can be added through governance.
 
 A flow diagram of the `$HONEY` minting process and associated contracts is shown below:
 
-```mermaid
+```mermaid actions={false}
 graph LR
-    User[User] -->|Asset| HoneyFactory[HoneyFactory]
-    HoneyFactory -->|Mint| User
+    User[User] -->|"collateral"| HoneyFactory[HoneyFactory]
+    HoneyFactory -->|"HONEY"| User
 
-    HoneyFactory -->|Shares| USDCVault[USDC Vault]
-    USDCVault -->|Shares| HoneyFactory
+    HoneyFactory -->|"collateral"| USDCVault[USDC Vault]
+    USDCVault -->|"shares"| HoneyFactory
 
-    HoneyFactory -->|Shares| BYUSDVault[BYUSD Vault]
-    BYUSDVault -->|Shares| HoneyFactory
+    HoneyFactory -->|"collateral"| BYUSDVault[BYUSD Vault]
+    BYUSDVault -->|"shares"| HoneyFactory
 
-    HoneyFactory -->|Shares| USDT0Vault[USDT0 Vault]
-    USDT0Vault -->|Shares| HoneyFactory
+    HoneyFactory -->|"collateral"| USDT0Vault[USDT0 Vault]
+    USDT0Vault -->|"shares"| HoneyFactory
 
-    HoneyFactory -->|Shares| USDEVault[USDE Vault]
-    USDEVault -->|Shares| HoneyFactory
+    HoneyFactory -->|"collateral"| USDEVault[USDE Vault]
+    USDEVault -->|"shares"| HoneyFactory
 ```
 
 ### `$HONEY` vaults
 
 `$HONEY` is minted by depositing eligible collateral into specialized vault contracts. Each vault is specific to a particular collateral type. Mint and redeem rates are configured independently per collateral asset — see [Fees](#fees) for the current values.
-
-### Collateral custody
-
-Governance can designate a vault as a custody vault by setting a custodian address. When custody is enabled for a vault, deposited collateral is automatically forwarded from the vault contract to the custodian. On redemption, collateral is pulled back from the custodian before being returned to the user. The vault's share accounting is unaffected — the 1:1 exchange rate between collateral and vault shares is maintained regardless of where the underlying assets are held.
-
-Custody can be removed by governance, which transfers all collateral back from the custodian to the vault contract.
 
 ### HoneyFactory
 
@@ -82,13 +76,13 @@ Basket Mode is a safety mechanism that activates when collateral assets become u
 `$HONEY` supports two ERC-20 extensions that allow transactions to be submitted by a third party on behalf of the token holder, removing the need for the holder to pay gas:
 
 - **EIP-2612 `permit`** — lets a holder sign an off-chain message authorizing a spender allowance. A relayer or contract can then submit the permit on-chain, so the holder never sends a transaction. This is the same interface used by USDC, DAI, and most modern ERC-20 tokens.
-- **EIP-3009 `transferWithAuthorization` / `receiveWithAuthorization`** — lets a holder sign an off-chain message authorizing a one-time transfer to a specific recipient. The recipient (or a relayer) submits it on-chain. Each authorization includes a unique nonce to prevent replay.
+- **EIP-3009 `transferWithAuthorization` / `receiveWithAuthorization`** — lets a holder sign an off-chain message authorizing a one-time transfer to a specific recipient. The recipient (or a relayer) submits it on-chain. Each authorization includes a unique nonce to prevent replay. This also enables support for [X402](https://www.x402.org/) payment-gated content.
 
 Both extensions use [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed structured data for signatures.
 
 ## Fees
 
-`$BGT` holders receive fees collected from minting and redeeming `$HONEY`. The current fee structure is the following:
+Fees are collected from minting and redeeming `$HONEY`. The current fee structure is the following:
 
 | Stablecoin | Mint Fee | Redeem Fee |
 | ---------- | -------- | ---------- |
@@ -109,4 +103,4 @@ Let's walk through minting and redeeming `$HONEY` with `$USDC`:
 
 - User redeems `1,000 $HONEY` for `$USDC`
 - Receives `999.5 $USDC` (0.05% fee = 0.5 $USDC)
-- `0.5 $USDC` fee is distributed to `$BGT` holders
+- The `0.5 $USDC` fee is split between polFeeCollector (BGTIncentiveFeeCollector, routing fees into sWBERA yield) and feeReceiver based on governance-configured polFeeCollectorFeeRate

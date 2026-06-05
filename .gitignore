@@ -2,3 +2,6 @@
 data/contracts-inline-decisions.json
 data/contracts-address-reconciliation.md
 .DS_Store
+
+# Local Helm identity (omit from repo for now)
+.cursor/rules/helm-local.mdc

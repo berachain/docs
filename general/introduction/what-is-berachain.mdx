@@ -7,26 +7,30 @@ description: "EVM-identical L1, Proof-of-Liquidity consensus, and BeaconKit."
   <img src="/images/general/berachain-website-homepage.png" alt="Berachain website homepage" />
 </Frame>
 
-Berachain is an [EVM-identical](/general/introduction/what-is-berachain#evm-identical) Layer 1 built on [Proof-of-Liquidity](/general/introduction/what-is-berachain#proof-of-liquidity) (PoL) and the modular consensus framework [BeaconKit](/general/introduction/what-is-berachain#beaconkit). It delivers high performance while keeping full compatibility with Ethereum tooling and upgrades.
+Berachain is an EVM-identical Layer 1 built around Proof of Liquidity, an incentive system designed to align the chain, applications, validators, and users around productive on-chain growth. Instead of treating emissions as a one-way cost to secure the network or subsidise activity, Berachain routes incentives toward liquidity, applications, and businesses that generate value back into the ecosystem.
+
+Under the hood, Berachain remains fully compatible with Ethereum tooling and upgrades, while BeaconKit provides the modular consensus framework that powers the network.
 
 ## EVM Identical
 
-Berachain's execution runtime environment is identical to the Ethereum Virtual Machine (EVM) as seen on Ethereum Mainnet. Berachain uses a lightly modified fork of the popular [execution client](/general/help/glossary#execution-client) Reth (Bera-Reth) to handle executing smart contracts. Berachain supports all the [usual tooling](/build/getting-started/developer-tools) that is familiar to EVM developers.
-
-Identical means that whenever the EVM is upgraded, Berachain can adopt the latest version—for example, Dencun—straight out of the box. This includes compatibility with all RPC namespaces and endpoints, and any improvements made to execution clients can be applied immediately to Berachain.
+Berachain's execution environment is identical to the Ethereum Virtual Machine as used on Ethereum Mainnet. Developers can deploy existing Solidity contracts, use familiar Ethereum tooling, and interact with the chain through standard EVM infrastructure. Berachain uses Bera-Reth, a lightly modified fork of Reth, to execute smart contracts while preserving compatibility with the EVM developer stack. This includes compatibility with all RPC namespaces and endpoints, and any improvements made to execution clients can be applied immediately to Berachain.
 
 ## Proof-of-Liquidity
 
-Proof-of-Liquidity radically changes the way L1 economics are structured, prioritizing users and applications over validator rewards at baseline. Network incentives go towards enriching ecosystem liquidity, contributing to efficient trading, price stability, securing the chain, and increasing network/user growth.
+Most chains spend emissions like a faucet: tokens flow out to secure the network, subsidise activity, and attract applications, but little value flows back.
 
-PoL strongly aligns the incentives of [network participants](/general/proof-of-liquidity/participants) (validators, protocols, users) and contributes to the overall long-term health of the chain.
+Berachain flips this model with Proof of Liquidity. Instead of treating emissions as a pure cost, Berachain turns them into growth capital for businesses building on the chain.
 
-Beyond providing seamless day-one utility, the native dApps, such as [BEX](/bex/learn/overview), serve as reference implementations of how developers can build on top of Proof-of-Liquidity.
+These emissions help teams bootstrap liquidity, grow usage, and generate value back into the ecosystem. The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain → stronger $BERA → more businesses funded → repeat.
+
+The objective is to make every emitted token work harder by supporting productive businesses, deepening liquidity, and strengthening the Berachain economy over time.
+
+Native applications such as BEX, Bend, and HONEY demonstrate how Proof of Liquidity can support core DeFi markets and create the foundation for broader business growth on Berachain.
 
 Read more in [What Is Proof-of-Liquidity](/general/introduction/what-is-proof-of-liquidity).
 
 ## BeaconKit
 
-BeaconKit is a modular framework developed by Berachain for building EVM [consensus clients](/general/help/glossary#consensus-client). It integrates the benefits of CometBFT consensus, including increased composability, [single slot finality (SSF)](https://ethereum.org/en/roadmap/single-slot-finality/), and more.
+BeaconKit is Berachain's modular framework for building EVM consensus clients. It combines EVM execution with CometBFT-based consensus, giving Berachain a flexible foundation for performance, finality, and future network upgrades. While Proof of Liquidity defines Berachain's economic model, BeaconKit provides the consensus architecture that allows the network to operate and evolve.
 
 Read more in [What Is BeaconKit](/nodes/beaconkit/overview).

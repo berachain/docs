@@ -79,7 +79,7 @@ In a custom implementation, it is feasible to utilize the results of earlier cal
 
 The architecture diagram below shows the high-level flow of batch transactions. Each component plays a crucial role in ensuring atomic execution and proper error handling.
 
-```mermaid
+```mermaid actions={false}
 flowchart TD
     A[User] -->|Submit Batch Transaction| B[EOA EIP-7702 Contract Code]
     B -->|Process Batch| C[Transaction Executor]
@@ -96,7 +96,7 @@ flowchart TD
 
 The sequence diagram below illustrates how batch transactions are processed, from submission to final result. Each step is crucial for maintaining atomicity and proper error handling. **Sponsorship is not implemented in this guide, but is possible with EIP-7702.**
 
-```mermaid
+```mermaid actions={false}
 sequenceDiagram
     actor User
     participant BatchContract
