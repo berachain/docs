@@ -331,14 +331,6 @@
               "nodes/beaconkit/api",
               "nodes/beaconkit/cli",
               "nodes/beaconkit/configuration"
-              "nodes/guides/become-a-validator",
-              "nodes/guides/manage-reward-allocations",
-              "nodes/guides/manage-incentives-commission",
-              "nodes/guides/change-operator-address",
-              "nodes/guides/increase-validator-stake",
-              "nodes/guides/withdraw-stake",
-              "nodes/guides/local-devnet-docker",
-              "nodes/guides/local-devnet-kurtosis"
             ]
           },
           {
