@@ -1,9 +1,9 @@
 ---
 title: "Quickstart: Run a Node"
-description: "Prerequisites, scripts, and steps to run Beacon-Kit and Bera-Reth on Linux or Mac."
+description: "Prerequisites, scripts, and steps to run BeaconKit and Bera-Reth on Linux or Mac."
 ---
 
-A Berachain node consists of two clients running together: a **consensus client** (Beacon-Kit) and an **execution client** (Bera-Reth). This guide walks you through setting up both on a Linux or Mac computer.
+A Berachain node consists of two clients running together: a **consensus client** (BeaconKit) and an **execution client** (Bera-Reth). This guide walks you through setting up both on a Linux or Mac computer.
 
 ## Prerequisites
 
@@ -12,14 +12,14 @@ A Berachain node consists of two clients running together: a **consensus client*
 | Component     | Requirement                                                                                                              |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | **OS**        | Linux AMD64, Linux ARM64                                                                                                 |
-| **CPU / RAM** | 4 Physical Cores, 16GB RAM                                                                                               |
+| **CPU / RAM** | 4 Physical Cores, 32GB RAM                                                                                               |
 | **Storage**   | 1TB minimum (more for long-term); Local SSD or on-instance storage preferred; network volumes require at least 1000 IOPS |
 
 ### Software
 
 Install the required binaries before starting:
 
-1. **Beacon-Kit**: Download the appropriate binary from the [releases page](https://github.com/berachain/beacon-kit/releases) for your OS and architecture. Make it executable and place it in your PATH (e.g., `~/.local/bin/`).
+1. **BeaconKit**: Download the appropriate binary from the [releases page](https://github.com/berachain/beacon-kit/releases) for your OS and architecture. Make it executable and place it in your PATH (e.g., `~/.local/bin/`).
 2. **Execution client**: Download [Bera-Reth](https://github.com/berachain/bera-reth/releases) for your OS and architecture. Make it executable and place it in your PATH.
 
 See [EVM Execution Clients](/nodes/architecture/evm-execution) for recommended versions.
@@ -36,7 +36,7 @@ bera-reth --version
 1. **Download scripts** — clone helper scripts that automate configuration
 2. **Configure environment** — set environment variables for your network (mainnet or Bepolia) and node identity
 3. **Fetch parameters** — download genesis files and network configuration
-4. **Set up Beacon-Kit** — initialize the consensus client and generate keys
+4. **Set up BeaconKit** — initialize the consensus client and generate keys
 5. **Set up execution client** — initialize Reth with the genesis state
 6. **Fetch snapshots (optional)** — restore snapshots to speed up initial sync
 7. **Run both clients** — launch them in separate terminals; they communicate via JWT auth
@@ -136,14 +136,21 @@ The `fetch-berachain-params.sh` script downloads the key network parameters for 
 
 Verify that the checksums for `genesis.json`, `eth-genesis.json`, and `kzg-trusted-setup.json` match the values above for your chosen network.
 
-## Step 4 - Set up Beacon-Kit
+<Tip>
+  Fusaka networks require the EL genesis JSON to include a `depositContractAddress` field under
+  `config`. The default Berachain `eth-genesis.json` for mainnet (`80094`) and bepolia (`80069`)
+  already includes this field; if you maintain a custom genesis template, add it as
+  `"depositContractAddress": "0x4242424242424242424242424242424242424242"`.
+</Tip>
+
+## Step 4 - Set up BeaconKit
 
 The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`. This script:
 
 1. Runs `beacond init` to create the file `var/beacond/config/priv_validator_key.json`. This contains your node's private key. Especially if you intend to become a validator, keep this file safe. It cannot be regenerated, and losing it means you will not be able to participate in the consensus process.
 2. Runs `beacond jwt generate` to create the file `jwt.hex`. This contains a secret shared between the consensus client and execution client so they can securely communicate. If you suspect it has been leaked, delete it then generate a new one with `beacond jwt generate -o $JWT_PATH`.
 3. Rewrites the `beacond` configuration files to reflect settings chosen in `env.sh`.
-4. Places the mainnet parameters where Beacon-Kit expects them and shows you an important hash from the genesis file.
+4. Places the mainnet parameters where BeaconKit expects them and shows you an important hash from the genesis file.
 
 ```bash
 # FROM: ~/beranode
@@ -159,7 +166,7 @@ The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`.
 # ✓ Config files in [...]beacond/config updated
 # [BEPOLIA] Genesis validator root: 0x3cbcf75b02fe4750c592f1c1ff8b5500a74406f80f038e9ff250e2e294c5615e
 # [MAINNET] Genesis validator root: 0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6ba63ff0bda
-# ✓ Beacon-Kit set up. Confirm genesis root is correct.
+# ✓ BeaconKit set up. Confirm genesis root is correct.
 ```
 
 Your validator state root **must** agree with the value shown above for your chosen chain.
@@ -259,7 +266,7 @@ ls var/reth;
 rm -r var/reth/data;
 ```
 
-### 6d - Install Beacon-Kit snapshot
+### 6d - Install BeaconKit snapshot
 
 The snapshots distributed by Berachain are designed to be installed in the beacond home directory, which contains both `config` and `data`:
 

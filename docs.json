@@ -36,11 +36,12 @@
             "group": "Proof of Liquidity",
             "pages": [
               "general/proof-of-liquidity/overview",
-              "general/proof-of-liquidity/participants",
               "general/proof-of-liquidity/reward-vaults",
               "general/proof-of-liquidity/incentives",
-              "general/proof-of-liquidity/block-rewards"
-            ]
+              "general/proof-of-liquidity/block-rewards",
+              "general/proof-of-liquidity/dedicated-emission-stream",
+              "general/proof-of-liquidity/changelog"
+            ] 
           },
           {
             "group": "Tokens",
@@ -61,6 +62,7 @@
             "group": "Help",
             "pages": [
               "general/help/faqs",
+              "general/help/honeypaper",
               "general/help/glossary",
               "general/help/reward-vault-guidelines"
             ]
@@ -212,7 +214,9 @@
                   "build/guides/proof-of-liquidity/add-incentives-safe",
                   "build/pol/advanced-pol",
                   "build/pol/partial-reward-claims",
+                  "build/pol/reward-vault-helper-claim-flow",
                   "build/pol/staking-for-other-accounts",
+                  "build/pol/lst-integration",
                   "build/guides/berascan-token-update"
                 ]
               }
@@ -327,6 +331,14 @@
               "nodes/beaconkit/api",
               "nodes/beaconkit/cli",
               "nodes/beaconkit/configuration"
+              "nodes/guides/become-a-validator",
+              "nodes/guides/manage-reward-allocations",
+              "nodes/guides/manage-incentives-commission",
+              "nodes/guides/change-operator-address",
+              "nodes/guides/increase-validator-stake",
+              "nodes/guides/withdraw-stake",
+              "nodes/guides/local-devnet-docker",
+              "nodes/guides/local-devnet-kurtosis"
             ]
           },
           {
@@ -394,15 +406,15 @@
     },
     {
       "source": "/cn/build/getting-started/network-configurations",
-      "destination": "/cn/general/introduction/connect-to-berachain"
+      "destination": "/general/introduction/connect-to-berachain"
     },
     {
       "source": "/ko/build/getting-started/network-configurations",
-      "destination": "/ko/general/introduction/connect-to-berachain"
+      "destination": "/general/introduction/connect-to-berachain"
     },
     {
       "source": "/vi/build/getting-started/network-configurations",
-      "destination": "/vi/general/introduction/connect-to-berachain"
+      "destination": "/general/introduction/connect-to-berachain"
     },
     {
       "source": "/build/beaconkit/overview",
@@ -1340,6 +1352,11 @@
     {
       "source": "/developers/contracts/urd-factory",
       "destination": "/build/bend/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/general/proof-of-liquidity/participants",
+      "destination": "/general/proof-of-liquidity/overview",
       "permanent": true
     }
   ]

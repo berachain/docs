@@ -3,7 +3,7 @@ title: "Increase Stake"
 description: "Add BERA to an existing validator via the BeaconDeposit contract to improve position in the active set."
 ---
 
-The following steps guide you through the process of increasing a Validator's `$BERA` stake to increase their stake weight and improve the probability of proposing blocks.
+The following steps guide you through the process of increasing a Validator's \$BERA stake to increase their stake weight and improve the probability of proposing blocks.
 
 This guide assumes that a Validator is already in the Active Set.
 
@@ -13,16 +13,21 @@ If you would like to test this out locally, consult the guide to a [local Kurtos
 
 Currently, the Active Set consists of **69** Validators, which is the number of Validators that can propose blocks.
 
-The Active Set is determined by the amount of `$BERA` staked, where the top stakers are included in the Active Set. To be included in the Active Set, a Validator must stake at least 10,000 `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater).
+The Active Set is determined by the amount of \$BERA staked, where the top stakers are included in the Active Set. To be included in the Active Set, a Validator must stake at least 10,000 \$BERA or 1 \$BERA more than the lowest staker in the Active Set (whichever is greater).
 
-If a Validator is removed from the Active Set, all `$BERA` staked to that Validator will be returned to the Validator's Withdrawal Credentials Address.
+If a Validator is removed from the Active Set, all \$BERA staked to that Validator will be returned to the Validator's Withdrawal Credentials Address.
 
 ## Staking considerations
 
 There are a few points to consider with staking:
 
-- **Stake returned to single address** — All `$BERA` staked to a Validator is returned to the Validator's Withdrawal Credentials Address. If there are multiple stakers, an agreement must be put in place with the Validator to ensure that the `$BERA` is returned to the correct addresses.
+- **Stake returned to single address** — All \$BERA staked to a Validator is returned to the Validator's Withdrawal Credentials Address. If there are multiple stakers, an agreement must be put in place with the Validator to ensure that the \$BERA is returned to the correct addresses.
 - **Liquid staking protocols** — Managing multiple stakers with a single Validator can be difficult. As an alternative, Liquid Staking Protocols are an option.
+- **Effective-balance updates lag actual balance** — Voting power tracks effective balance, which only moves when actual balance crosses a hysteresis threshold around the next 10,000 BERA increment. A top-up needs to clear the upward buffer of about 1,000 BERA above the next increment (~110% of the increment) before voting power steps up. See [Validator lifecycle](/nodes/architecture/validator-lifecycle#effective-balance-and-hysteresis) for the full mechanics.
+
+### Worked example
+
+Take a validator currently sitting at an effective balance of 250,000 BERA who wants to step up to 260,000 BERA. The next increment boundary is 260,000 BERA; the upward buffer is +1,000 BERA above that boundary. Actual balance must reach **261,000 BERA** before effective balance steps to 260,000 BERA. A top-up of 11,000 BERA from a 250,000 BERA actual balance is enough; 10,000 BERA is not.
 
 ## Requirements
 
@@ -30,7 +35,7 @@ Before you begin, ensure you have the following:
 
 - A Validator that is already in the Active Set
 - A Validator's `pubkey` — PubKeys can be found at [Berachain Hub Validators](https://hub.berachain.com/validators)
-- A minimum of 10,000 `$BERA` or 1 `$BERA` more than the lowest staker in the Active Set (whichever is greater)
+- A minimum of 10,000 \$BERA or 1 \$BERA more than the lowest staker in the Active Set (whichever is greater)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
 ## Steps to increase a validator's $BERA stake

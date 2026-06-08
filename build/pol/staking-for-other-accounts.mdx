@@ -1,4 +1,6 @@
 ---
+title: "Staking for Other Accounts"
+description: "Guide to using stakeOnBehalf functionality in Berachain Reward Vaults"
 head:
   - - meta
     - property: og:title
@@ -17,11 +19,7 @@ head:
 
 ## Introduction
 
-The `stakeOnBehalf` function in [Reward Vaults](/developers/contracts/reward-vault) allows any account to stake tokens directly for another account without requiring delegation permissions. This feature enables new integration patterns and simplifies certain protocol workflows.
-
-::: tip User Guide Available
-For end users wanting to understand how protocols can claim BGT on their behalf, see the [BGT claiming guide](/learn/guides/claim-bgt#protocol-claiming).
-:::
+The `stakeOnBehalf` function in [Reward Vaults](/general/proof-of-liquidity/reward-vaults) allows any account to stake tokens directly for another account without requiring delegation permissions. This feature enables new integration patterns and simplifies certain protocol workflows.
 
 ## Key Differences from Existing Staking Methods
 
@@ -468,15 +466,10 @@ contract StakeOnBehalfScript is Script {
 
 **Contract References:**
 
-- [Reward Vault Contract](/developers/contracts/reward-vault) - Complete API documentation
-- [`stakeOnBehalf` function](/developers/contracts/reward-vault#stakeonbehalf) - Function reference
+- [Reward Vaults](/general/proof-of-liquidity/reward-vaults) - Reward Vault overview and reference
 
 **Integration Guides:**
 
-- [Advanced PoL Integration](/developers/guides/advanced-pol) - Non-ERC20 protocols
-- [PoL Integration Quickstart](/developers/quickstart/pol-integration) - Getting started
-- [Partial Reward Claims](/developers/guides/partial-reward-claims) - Complementary feature
-
-**User Guides:**
-
-- [BGT Claiming Guide](/learn/guides/claim-bgt#protocol-claiming) - End user perspective on protocol claiming
+- [Advanced PoL Integration](/build/pol/advanced-pol) - Non-ERC20 protocols
+- [PoL Integration Quickstart](/build/pol/integration-basics) - Getting started
+- [Partial Reward Claims](/build/pol/partial-reward-claims) - Complementary feature

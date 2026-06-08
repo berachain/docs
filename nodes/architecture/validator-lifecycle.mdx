@@ -16,7 +16,7 @@ Validators have several key responsibilities:
 - Participating in consensus by voting on the canonical chain
 - Maintaining network security through their staked tokens
 
-The Validator's Voting Power is the amount of `$BERA` they have deposited, rounded down to the nearest **10,000 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
+The Validator's Voting Power is the amount of \$BERA they have deposited, rounded down to the nearest **10,000 BERA**. Their Voting Power, as a proportion of the total Voting Power among all validators, is their probability of being selected to propose a block.
 
 <Frame>
   <img
@@ -43,6 +43,8 @@ For step-by-step instructions on spinning up a validator, see the [Become a Vali
 
 Berachain follows Proof-of-Stake (PoS) direct staking, which allows `$BERA` holders to directly stake their `$BERA` to a validator.
 
+The validator's journey begins with a deposit transaction on the **Execution Layer** to the deposit contract at `0x4242424242424242424242424242424242424242`. The deposit emits a custom deposit event.
+
 When a validator makes their first deposit, they define a **Withdrawal Credentials Address**. If funds are withdrawn from a validator, or if the validator is evicted from the active set, _all_ funds are returned to this single address.
 
 This means that validators must communicate clearly with their delegators about how they will handle and manually return funds if the validator is removed from the active set.
@@ -65,6 +67,9 @@ The initial deposit transaction establishes a connection between a validator's C
 - **Verification Delay**: It takes 2 ETH1 blocks from the event emission to verify the event on the Consensus Layer. If the deposit event is processed at epoch `N`, the validator is then considered in the **Deposited** state, provided the validator's balance equals (or exceeds) the minimum required for staking.
 - **Minimum Requirement**: A total of **250,000 BERA** is required for a validator to reach the Deposited state. (Multiple deposits can accumulate to this amount.)
 - **Signature Verification**: On the first deposit, the validator's signature is fully verified. Subsequent deposits simply increase the validator's balance.
+
+- **Per-block deposit cap**
+  Up to **8192** deposits can land in a single block. With ~45,000 gas per deposit and a 30M gas block limit, the cap is unreachable in practice.
 
 After remaining in the **Deposited** state for 1 epoch, the validator automatically moves to the **Eligible** state and becomes eligible for activation.
 

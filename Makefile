@@ -4,11 +4,13 @@ default: contracts-generate format check
 help:
 	@echo "Common docs tasks:"
 	@echo "  make dev                # Run local Mintlify server (http://localhost:3000)"
-	@echo "  make check              # Run all checks (validate, links, assets, a11y, redirects)"
+	@echo "  make check              # Run all checks (validate, links, assets, a11y, vale, redirects)"
 	@echo "  make check-validate     # Validate docs build"
 	@echo "  make check-links        # Check for broken links"
 	@echo "  make check-assets       # Check /images for orphaned + missing refs"
 	@echo "  make check-a11y         # Run accessibility checks"
+	@echo "  make check-vale         # Run vale prose linter on .md / .mdx (release-page surfaces only by default)"
+	@echo "                          # Override scope: VALE_PATHS=\"general/ nodes/ build/\" make check-vale"
 	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
 	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
 	@echo "  make contracts-generate # Regenerate contract pages/snippets from data/contracts.json"
@@ -19,7 +21,7 @@ help:
 dev:
 	mint dev
 
-check: check-validate check-links check-assets check-a11y check-redirects
+check: check-validate check-links check-assets check-a11y check-vale check-redirects
 
 check-validate:
 	mint validate
@@ -29,6 +31,18 @@ check-links:
 
 check-a11y:
 	mint a11y
+
+# Vale prose linter. Vocabulary lives in vale/config/vocabularies/Berachain/.
+# Default scope is the Fusaka release page; the broader docs tree carries a
+# ~700-error vocab backlog and is excluded until that is swept. Override
+# scope by setting VALE_PATHS, e.g.:
+#   VALE_PATHS="general/ nodes/ build/" make check-vale
+check-vale:
+	@if ! command -v vale >/dev/null 2>&1; then \
+		echo "❌ vale not on PATH. Install with: brew install vale"; \
+		exit 1; \
+	fi
+	vale $${VALE_PATHS:-nodes/operations/fusaka.mdx}
 
 check-redirects:
 	bash scripts/check-redirects.sh $${BASE_URL:-http://localhost:3000}
@@ -64,6 +78,7 @@ format-check:
 
 contracts-generate:
 	node scripts/contracts/generate-pages.mjs
+	make format
 
 mint-install:
 	npm i -g mint

@@ -34,6 +34,12 @@ If you run the default Kurtosis configuration, it will run the following:
 
 You can modify the [beaconkit-local.yaml](https://github.com/berachain/beacon-kit/blob/main/kurtosis/beaconkit-local.yaml) to fit your system requirements.
 
+<Info>
+  The packaged Kurtosis EL genesis template already includes the `depositContractAddress` field that
+  Fusaka networks require. If you swap in a custom EL genesis, add `"depositContractAddress":
+  "0x4242424242424242424242424242424242424242"` under `config`.
+</Info>
+
 ### Step 1 - Clone repository and run nodes
 
 The first step is to clone the Beacon Kit repository.
