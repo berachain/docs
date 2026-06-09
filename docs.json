@@ -62,6 +62,7 @@
             "group": "Help",
             "pages": [
               "general/help/faqs",
+              "general/help/honeypaper",
               "general/help/glossary",
               "general/help/reward-vault-guidelines"
             ]

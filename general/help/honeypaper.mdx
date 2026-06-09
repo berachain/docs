@@ -1,0 +1,359 @@
+---
+title: "Honeypaper"
+description: "Berachain Proof of Liquidity honeypaper."
+---
+
+February 3, 2025
+
+<a
+  href="/images/general/honey-paper/the-honeypaper.pdf"
+  download
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "140px",
+    height: "44px",
+    padding: "0 16px",
+    borderRadius: "8px",
+    border: "2px solid #c96516",
+    backgroundColor: "#E17726",
+    color: "#1a1a1a",
+    fontWeight: 600,
+    textDecoration: "none",
+  }}
+>
+  Download as PDF
+</a>
+
+## 1. Modern Problems, Modern Solutions
+
+Over the past few years, new infrastructure has trended toward solving a single problem: improving the throughput and transaction costs of chains [\[1\]](#ref-1). This has given rise to a number of new virtual machines and consensus engines, all of which seek to make blockspace cheaper and more plentiful than ever before. While these products solve important bottlenecks for scaling, they fail to deliver any novel economic solutions to filling this blockspace.
+
+While the last few years have been dominated by the production of novel infrastructure layers, few to none of these solutions have gained meaningful adoption among developers, or even more importantly, among consumers. The blockchain industry, and crypto users as a whole, have come to see infrastructure layers as extractive, as opposed to value additive [\[2\]](#ref-2).
+
+It has also become increasingly obvious that a chain's utility (and blockspace occupancy) is directly correlated to the quality and quantity of applications that are built on top of it [\[3\]](#ref-3). The Berachain Protocol (Berachain) is the first L1 that has been purpose-built to drive value to the applications built on top of it, making it easier for applications to bootstrap their own liquidity, increase their capital efficiency, and reach escape velocity from a user adoption point of view.
+
+With this backdrop in mind, Berachain seeks to solve two crucial issues that nearly every chain faces.
+
+First, Berachain seeks to better align the value proposition between participants on the network, namely users, validators, and applications.
+
+Second, Berachain seeks to create a chain that mechanically derives its value from the applications built on it, rather than vice-versa.
+
+Proof of Stake L1s face a major headwind due to the lack of value normalization across the execution and consensus layers. Rewards for validators are largely dictated by a preset curve, where only staking rate meaningfully affects the outcome. Execution-side variables like MEV can impact returns, but only impact rates to the upside [\[4\]](#ref-4).
+
+Ideally, a chain should mechanically adjust the reward rate that validators receive for providing economic security based on demand for economic security. If demand for economic security among the execution layer - namely applications and users - is low relative to its supply, then the reward rate for validators is higher than it needs to be. This is a cost that is then borne by the chain in aggregate, as validators are effectively overpaid for their increasingly commoditized services.
+
+A simple example of this (that is far from uncommon among new L1 launches) is a new chain that launches with a \$5 billion FDV, \$250 million of TVL, and a 10% staking rate. The chain is issuing \$500 million a year in inflation to underwrite the security of \$250 million of assets, effectively paying out \$2 to secure \$1 worth of assets. Noting that chains require both security and liquidity to effectively scale, this imbalance speaks to the lack of effective alignment between these two factors at the network level.
+
+While there may be an argument that overpaying for economic security in the early days helps solve cold start problems, a better solution would allow validator rewards to be closely tied to demand for their services.
+
+Additionally, rewards spent on economic security necessarily become rewards that aren't used for bolstering growth of the network. This structure decreases the impetus for activity on the network, as the elevated rewards rate for stakers offers a low-risk alternative for users and applications on the network. This causes difficulty in creating the network effects needed for activity on a chain, forcing many chains to resort to long-running and inefficient grant programs.
+
+A better solution would seek to generate activity among users and applications as the primary target for chain inflation, and create a systematic way to reward validators for their economic security as demand for it naturally rises.
+
+## 2. Overview of Berachain
+
+To address the issues presented above, Berachain utilizes a novel solution: Proof of Liquidity (PoL).
+
+### 2.1 Two Token Model
+
+Proof of Stake blockchains often have a governance token that is used to secure the network through staking with validators. Oftentimes, this is the main network token and is used for gas, staking, governance, and economic incentives. To facilitate PoL, Berachain utilizes a two-token model, featuring BERA (the gas and staking token) and BGT (the governance and rewards token).
+
+BERA forms the basis for economic security on Berachain. It is used to pay for transactions on the network. It is also used to activate validator nodes. The economic value of all BERA tokens staked adds up to form the base layer of the security of the chain with BGT building on top of it for enhanced security.
+
+BGT is the non-transferable governance and rewards token of the network. All emissions on Berachain and block rewards are in the form of BGT. It may only be earned via staking BERA as a validator, or by staking a PoL eligible receipt token into a reward vault.
+
+1. Governance - BGT is used to vote on governance proposals for Berachain. Users can either vote directly on proposals, or delegate their voting power.
+2. Burn - BGT can be instantly redeemed 1:1 for BERA. However, BERA cannot be converted back to BGT. The only way to earn BGT is through staking in reward vaults.
+3. Economic Incentives - Users that boost a validator with their BGT are eligible to receive incentives from that validator, based on the validator's commission rate and ability to convert their BGT block rewards to application incentives.
+
+PoL radically changes the way L1 economics are structured, prioritizing users and applications over validator rewards at baseline.
+
+Berachain runs a Proof of Stake (PoS) model that features two components: Stake (in BERA) and Boost (in BGT). The Berachain active set is determined by a validator's stake; the top 69 validators by stake become part of the active set. Within the active set, each validator has a chance of winning a block proportional to their BERA stake, and the size of their block reward is determined by their BGT boost.
+
+Validators receive a small commission for proposing a successful new block, which is designed to cover the operational overhead of running infrastructure. This base block reward is present for any active validator, even those with zero boost.
+
+Validators will have a minimum and maximum BERA stake, with the minimum serving as the base requirement for activation, and participation within the active set dictated by the validators with the largest stake. Emissions scale concavely with validators' BGT boost, in order to promote decentralization - as a validator's boost increases, the marginal benefit of increasing boost further decreases.
+
+The remainder, and the majority, of the block reward instead must go to application reward vaults by default. Reward vaults, which are similar to Curve's gauges [\[5\]](#ref-5), are a key piece of infrastructure that allows applications to leverage PoL, enabling teams to incentivize users' actions in exchange for block rewards. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, a decentralized digital asset exchange (DEX) could have multiple pools earning block rewards, each with its own reward vault and respective PoL-eligible asset. By staking that PoL-eligible ERC20 LP token in BGT Station, a user may start earning BGT rewards from the validator set, as a reward for their liquidity provision.
+
+Applications with reward vaults are able to incentivize specific actions, through the use of stakeable ERC20 receipt tokens. These incentives can come in the form of the application's native token, or in any arbitrary ERC20, so long as they are governance approved. Applications also set the exchange rate of their incentive asset, allowing them to dictate the terms of their exchange. An exchange rate at or above the current market price of the incentive asset would generate positive ROI on spend relative to standard emissions. An exchange rate below the current market price of the incentive asset would allow an application to trade off efficiency of spend for improved distribution, as liquidity providers will generally prefer a chain asset relative to an application asset. Validators also have the ability to partially or fully fill any offered incentive in the marketplace.
+
+Validators are then largely rewarded through this mechanism, by which they release their block rewards to an application in exchange for an incentive from that project for doing so. Successful validators will be those that are able to:
+
+- Most effectively secure BGT boost, as this increases the value of the block rewards that they win, and
+- Most efficiently exchange their BGT block rewards for application incentives, as this dictates their return on the blocks they win.
+
+Finally, validators then take a commission on the incentives they receive in return for the block reward exchange. Taking into account the small commission designed to offset operational cost of validation, this effectively makes validator profitability a function of (1) size of BGT boost, (2) efficiency of exchange, and (3) validator commission rate on incentives.
+
+This model creates meaningful economic alignment between among previously isolated groups, relative to a traditional PoS system, as the validators that are most actively interfacing with users and applications will have a much better chance of securing BGT boost and efficient incentive exchanges.
+
+The amount that validators can earn in application incentives is determined by their BGT boost. Thus, validators that return the maximum value to their BGT boosters are likely to receive the most boost. This is most easily accomplished in the form of minimizing their commission rate and maximizing their distribution of block rewards towards highly utilized pools and pools with large incentives.
+
+As a result of this model, the majority of block rewards in a PoL-enabled chain go toward incentivizing user activity on the chain, whether through providing liquidity, or simply participating in an action that an application values.
+
+## 3. BERA & BGT Dynamics and Market Equilibrium
+
+The BERA and BGT relationship creates interesting dynamics around new issuance that accelerate adoption of the application layer from users. In periods where the value of application incentives exchanged for BGT block rewards is higher than the rate of issuance, economic incentives for BGT boosters will remain high. This increases the opportunity cost of redeeming BGT for BERA, and likely creates more liquidity in the system as users seek to participate in reward vaults to acquire new BGT. In turn, increases in liquidity drive system productivity and allow applications to scale.
+
+In periods where the incentives for BGT boosters grow at a rate below new issuance, or contract, users will likely choose to burn BGT for BERA. As redemption occurs, it also decreases the amount of BGT in circulation, which in turn lowers the number of claimants on the economic incentives generated. This allows the incentive rate for BGT holders to normalize, returning the system to equilibrium and creating new demand for BGT.
+
+An important distinction between Berachain and other loosely comparable systems like Curve or Solidly-style DEX is the source of inflation. Inflation in a DEX is exogenous to the operation of the application itself. Emissions in PoL are endogenous to the chain itself; a PoS chain needs some level of inflation to operate. The goal of PoL is to minimize that level of inflation unless the validator is successful in contributing to the network.
+
+Additionally, Berachain doesn't introduce new inflation to the system. The entirety of the BGT issued loosely follows a PoS emission schedule (with some variation based on the boost distribution). As a result, even if the entirety of BGT emitted were to burn to BERA, the system would effectively just end up back at PoS, with extra steps.
+
+## 4. Extensions of PoL
+
+The following are a few practical examples of how PoL works.
+
+### 4.1 AMM Decentralized Exchange
+
+Take, for instance, a theoretical enshrined DEX on Berachain. This DEX would have a permissionsless ability to spin up new Liquidity Pools (LPs), which could then go through governance to enable native-chain rewards on the user-generated pools with BGT incentives. This would allow a new application to create a liquidity pool, enabling onboarding and usage of the application's token. This project could then go through governance to instantiate a PoL-powered reward vault on top of the LP, incentivizing users to supply liquidity in exchange for their native asset, or any other governance-approved ERC20 for the vault.
+
+Applications would then incentivize validators in one of the reward vault accepting ERC20 tokens, which, if filled, would result in BGT emissions on the Liquidity Pool in BeraSwap. Users interested in receiving BGT would then supply liquidity on this exchange, and receive a pro-rata rate of BGT emissions based on their share of the pool.
+
+This helps applications solve cold start problems, or improve efficiency of spend, depending on where they are in their life cycle. A new application might choose to exchange at a rate below the fair market value of their incentive asset, as liquidity providers might prefer to earn BGT over a newer application asset. This would help increase the visibility of the liquidity in the new pair, potentially onboard more liquidity, and allow teams to focus on product cycles quickly. A well-established blue chip application might choose to incentivize at an exchange rate above the fair market value, as validators might be willing to accept slightly worse returns for higher-quality and/or more liquid assets. This allows applications valued by the network to scale effectively, improving distribution without having to increase spend, all while bringing more liquidity to Berachain and the PoL network.
+
+### 4.2 Real World Assets
+
+PoL isn't solely limited to DeFi use-cases. Any arbitrary action with an ERC20 receipt token can be effectively incentivized at the chain level. Take, for example, an asset issuer that takes offchain assets such as T-Bills or real estate and issues tokenized receipts for them on Berachain. This opens up the opportunity for native yield farming, fractionalized ownership of otherwise hard-to-acquire assets. The asset issuer could utilize PoL in a number of ways.
+
+For example, the asset issuer could utilize a reward vault to decentralize and scale their off-chain asset's liquidity profile. If a primary bottleneck for scaling the real-world asset (RWA) platform is finding quality teams to originate, generating a receipt token for issuers with a reward vault would allow the protocol to reward those teams mechanically at the chain level, increasing the value proposition for high-quality originators to onboard and tokenize their assets.
+
+If the primary bottleneck for the platform is integration and distribution of the RWA, they could issue receipt tokens for holding or utilization of the RWA. This would allow them to more effectively create secondary market liquidity for the RWA, increasing surface area for integrations and use-cases. Alternatively, simply incentivizing holders is also feasible, and can even be done with a portion of the tokenization platform's margin on yield of the asset. Given that these margins are generally in high-quality assets, like fiat, they would likely get positive ROI on validator incentives for the asset, meaning it's actually more efficient than simply passing through the full yield to users while also allowing them to maintain a margin on issuance.
+
+### 4.3 L2s
+
+While the network itself acts as a general purpose solution for a wide variety of smart contract applications, there may be developers looking to leverage Berachain and PoL in their own isolated setting. On the Ethereum network, these are commonly referred to as L2s. While Berachain does not necessarily need the side-chain ecosystem to achieve scale, L2s can be useful for many different applications including:
+
+- KYC enforced applications revolving around identity, traditional finance, and data
+- Privacy-first applications that need to encrypt user data to achieve their use-case
+- High throughput environments using novel scaling tools to allow for web2-like user experiences.
+
+Berachain offers an advantage over other networks for these types of applications through PoL, where as a developer, they can solve the common cold start bootstrapping problem by immediately tapping into the liquidity and security that Berachain offers. Indeed, L2s inherit the economic security of Berachain, based on the aggregate BERA value staked by validators.
+
+For example, a L2 network might launch on Berachain that enables native rewards for its users by taking advantage of the yield opportunities on Berachain mainnet. Users on Berachain can bridge to the L2, receive a synthetic token representing their deposit in the bridge, and have that token be yielding by default due to the L2's opt-in model to stake the underlying bridge deposits into PoL vaults. Alternatively, these bridge-generated rewards could also be utilized to incentivize a reward vault on Berachain mainnet for the application's native asset, improving ease of onboarding new users and use-cases for the section of the network with the highest density of applications.
+
+Alternatively, developers could build out a side-chain network to enable one specific use-case, but whitelist relevant assets and/or pools on Berachain Mainnet to receive BGT emissions. This would allow the network to not have to launch their own incentive token to get initial deposits, as they're able to solve cold start problems via the native bridge rewards. This solution is especially interesting, as it would allow for more accessible assets like USDC, wBERA, or wBTC to be utilized as the primary asset on the network. This allows users to onboard with assets they likely already have in their wallet, while also generating meaningful native rewards through the bridge contract as those assets also have a plethora of yield sources available on Berachain.
+
+## 5. Staking/Boost Logic & Implications
+
+Across PoL, the different parameters and incentives a user, application, or validator is optimizing for varies considerably. Users, like with any other PoS system, are often optimizing for the highest yield and highest trust rate when staking with a validator. Because of the ability to control inflation with validators, the way staking works must be modified at the beacon chain level with the validators themselves.
+
+Validators are searching for an industry-standard base bond of the native gas token to get their operation going, as with any other chain. In order to attract BGT boost to increase their weight over the staking pool, they will have to offer the market-rate or lower commission rates, offer the best uptimes, and create the strongest voting strategy in the market to beat out competition. Some things the validator optimizes for are:
+
+- Dollar sum of incentives available to claim
+- Liquidity of those incentives once claimed
+- Closing arbitrage rates between the average market return per vote and their average market return per vote
+
+In order to play this second side of PoL staking logic, the validators are not rent-seeking BERA (the token they bonded) but rather BGT, the governance token of the network. The more BGT the validator controls, the more BGT inflation they will be able to dictate, which means a higher chance of attracting boost.
+
+## 6. BERA/BGT Math
+
+The PoL model defines the rules of block production and emissions on Berachain. Its main objectives are promoting chain security and decentralization while capping inflation.
+
+### 6.1 Block Production
+
+The active validator set is a set of _N_ validators who are able to produce blocks. Only the top _N_ validators ordered by the number of BERA staked by each validator stay within the active set. The probability for a validator within the active set to be chosen to propose a block is proportional to its staked BERA. There is both a floor and a cap to a validator's stake.
+
+### 6.2 Emissions
+
+Every time a validator is chosen to propose a block, they emit a quantity of BGT. Emissions have two components:
+
+- _Base emission:_ this goes to the validator proposing the block. This is a fixed amount equal to the base rate parameter _B_.
+- _Reward emission:_ this is emitted towards vaults selected by the validator in their reward allocation, proportional to their weights. This is a variable amount that depends on the validator's boost _x_.
+
+This is the emission formula that represents how many BGT are created each block as a function of a validator's boost _x_, which is a number in the range [0,1] that indicates the percentage of total BGT directed to that validator out of the total number of BGT directed to validators.
+
+![Emission Formula](/images/general/honey-paper/6_2_emissions_formula_updated.png)
+
+#### Parameters
+
+- _B (base rate):_ this is the BGT amount a validator gets when producing a block.
+- _R (reward rate):_ this is the BGT amount a validator issues towards reward vaults before applying the boost multiplier.
+- _a (boost multiplier):_ this determines the impact of boost on the emissions towards reward vaults. High boost multiplier = boost is very important.
+- _b (convexity parameter):_ this determines how quickly boost impacts emissions towards reward vaults. High convexity = validators with low boost are penalized.
+- _m (minimum reward):_ this is the floor to emissions towards reward vaults. High minimum reward = more emissions for validators with low boost.
+
+![Emission per block graph](/images/general/honey-paper/6_2_emissions_graph.png)
+
+Figure 1: Sample parameters _B_ = 0.5, _R_ = 1.5, _a_ = 3.5, _b_ = 0.4, _m_ = 0
+
+### 6.3 Inflation
+
+In the proposed model, emissions grow with the amount of boost _x_ a validator has, up to a cap. The theoretical cap of BGT emitted in a block happens if a validator has 100% of the boost and is equal to:
+
+![Inflation Formula](/images/general/honey-paper/6_3_inflation_formula_updated.png)
+
+See Appendix A for the proof. The amount of BERA staked does not influence how many BGT are created every block, but just the frequency of a validator being chosen to propose a block.
+
+## 7. Incentives Marketplace
+
+In the proposed model, emissions grow with the amount of boost x a validator has, up to a cap. The theoretical cap of BGT emitted in a block happens if a validator has 100% of the boost and is equal to:
+
+### 7.1 Introduction
+
+Berachain introduces an incentives marketplace where protocols can bid for validators' emissions using any whitelisted token. Validators can choose to direct emissions towards the highest bidding protocol (or any arbitrary one) by including the protocol's reward vault into its own reward allocation. In order for a validator to select a reward vault, the vault needs to be whitelisted. Part or all incentives validators receive from protocols can be redistributed to BGT holders who boost that specific validator. Incentives distribution is handled off-chain.
+
+### 7.2 Whitelisting Vaults
+
+To whitelist a vault, a protocol/user must:
+
+- Base emission: this goes to the validator proposing the block. This is a fixed amount equal to the base rate parameter B.
+- Specify which token is accepted as the "staking token" for that vault. Only one vault can exist per staking token and cannot be changed.
+- Create a governance proposal to whitelist the vault. Once the proposal is accepted, the vault gets whitelisted and becomes eligible to receive emissions.
+
+### 7.3 Whitelisting Incentive Token
+
+To whitelist an incentive token, a protocol/user must create a governance proposal including:
+
+- The token to be whitelisted (address).
+- The "minIncentiveRate".
+- A manager for that specific incentive token.
+
+Each vault has its own whitelisted tokens, which can be removed from the whitelist through governance proposals. Moreover, it is possible to update the manager for a specific token via a governance proposal.
+
+### 7.4 Marketplace Functionality
+
+A vault's incentives manager is allowed to specify an incentive rate p and add an amount of tokens to sustain that rate for a certain period. For example, he can specify he's willing to pay 10 protocol tokens PT in exchange for 1 BGT (p = 10), then he adds 1000 PT tokens to the vault. The incentive manager can deposit multiple incentive tokens whitelisted by governance (vault-wide approval). Every time a validator emits an amount x of BGT towards the protocol's vault, a corresponding p · x amount of PT tokens will be transferred to the validator's operator. In the example above, if a validator emits 1 BGT towards the vault, he will receive 10 PT tokens in exchange. The manager can later bring additional tokens to continue paying the specified rate p or he can change the rate upon the following conditions:
+
+- If there is no remaining amount of incentive tokens, the rate can be updated to any value greater or equal to a minimum rate decided at incentive token whitelisting.
+- If there is a residual amount of incentive tokens, only a higher incentive rate p' > p can be set if enough incentive liquidity is provided along with the setter to support the new rate. It is not possible to reduce the incentive rate while residual tokens are still left in the vault.
+
+Validators are expected to distribute a portion of tokens from these incentives towards its boosters; rewarding them for their contributions to his BGT weight, and completing the alignment between validators, protocols, and users.
+
+## 8. Impacts on Decentralization & Risks
+
+L1 blockchains usually face centralization risks due to economic pressures. As Vitalik Buterin highlights in a blog post [\[6\]](#ref-6), this is due to economies-of-scale in participating in core proof-of-stake mechanisms, which naturally lead to large stakers dominating, and small stakers dropping out to join large pools [\[7\]](#ref-7). This leads to higher risk of 51% attacks, transaction censorship, and other crises. In addition to the centralization risk, there are also risks of value extraction: a small group capturing value that would otherwise go to L1 users.
+
+The PoL model is a variation of the PoS model and it therefore shares many of such risks. Moreover, PoL introduces many novelties such as different governance and gas tokens, emissions towards reward vaults and an incentives marketplace. These mechanisms can impact existing L1 risks as well as introduce new ones. PoL presents the first opportunity for validators on an L1 to express a variety of economic opinions at the network level, beyond their chosen commission rates. Each validator on Berachain has the opportunity to have its own distinct distribution of block rewards and incentives to applications on the chain, and its boosters, incentivizing increased stake decentralization as users and protocols choose their validator based on risk profiles and expected returns, both of which are downstream of their reward distribution choices. However, even in this system, PoL could lead to the emergence of economic risks for the blockchain. We address 2 key risks in PoL: (1) The end of PoL, (2) Centralization. There are also other risks such as Inefficient Liquidity, Low BERA staked, Parameters Changes, Low BGT Governance attacks.
+
+### 8.1 The End of PoL
+
+As long as protocols actively compete for emissions, PoL should work as intended; however, in certain conditions it is possible that different actors stop playing the PoL game.
+
+For example, validators could collude and set commissions on incentives to 100%, effectively making the BGT boosters APY zero. This would make many BGT boosters burn to BERA and would reduce protocols competition for BGT emissions, possibly causing the end of proof of liquidity and a migration to Proof of Stake. This scenario demonstrates a possible way for BERA stakers to 'censor' BGT holders and force them to burn to BERA. However, there is a strong incentive for a new validator to come in, set lower commissions and quickly take all the boost. The PoL model has been specifically calibrated to penalize validators with low boost, effectively invalidating all emissions towards pools. This should incentivize validators to actively fight for BGT boost by distributing a significant amount of incentives back to boosters.
+
+Another scenario is one where a strong demand to short BERA for hedging or a large anticipated airdrop causes a big jump in BERA lending rates. This would make validators unstake BERA and lend it, causing a drop in BERA staked. Also BGT boosters at some point might burn BGT for BERA in order to lend it at such high rates. As more BGT is burnt for BERA, remaining BGT holders will receive more incentives for each BGT used to boost. In addition, more BERA lent into the market would most likely lead to interest rate normalization over time, so the system would likely reach a new equilibrium where PoL goes back to working as expected.
+
+### 8.2 Centralization
+
+Similar to Lido on Ethereum [\[8\]](#ref-8), we could see the emergence of a large Liquid Staking provider on Berachain who may take control of a large percentage of the network by leveraging economies of scale [\[9\]](#ref-9). A LST protocol could create a xBERA/BERA pool and direct 100% of emissions towards it, enabling xBERA holders to receive emissions in addition to the staking rewards. As this LST protocol gains more and more BERA staked, incentives distributed to its BGT boosters keep growing, therefore attracting more boost. This process does not grow indefinitely since at some point, the LST protocol would hit the BERA staked cap and would need to spin up a new node, starting with zero BERA staked and boost, limiting the economies of scale. Even in the event of a large boost concentration within one or few validators, the boostMultiplier parameter determines the emissions cap towards protocols, further reducing economies of scale and keeping inflation under control even in high concentration scenarios. Moreover, using a concave function to determine the impact of BGT boost on emissions makes sure the marginal benefit of increasing boost decreases with each additional BGT boosted.
+
+### 8.3 Other Risks
+
+Other economic risks not exclusive to PoL may arise from insufficient staked value to secure the chain's Total Value Locked (TVL), PoL parameters changes enacted by the blockchain's governance and other governance attacks. The impact of these risks should be similar to other L1 blockchains.
+
+## 9. PoL Overview
+
+![PoL Life Cycle Diagram](/images/general/honey-paper/9_pol_overview.png)
+
+Figure 2: High level overview of the PoL life cycle
+
+PoL is an extension of the PoS system, and replaces the whole incentive mechanism. Therefore, there needs to be a link from the consensus layer to the execution layer where the rewards are being minted and distributed. The Prover is how Berachain achieves this, using the EIP-4788 specification [\[10\]](#ref-10). The execution layer has access to the Beacon block roots that the consensus layer posts to the execution layer each block. Since the block has access to the public keys of the validator and at which block that they proposed, the PoL system can credit them for being able to mine BGT rewards and distribute them.
+
+The life cycle above showcases the runtime of each block that block rewards are minted, the steps:
+
+1. Prove that the validator in question proposed a block using the beacon block root.
+2. The block rewards controller controls the inflation per block and matches with the BGT boost how much BGT to mint for the current validator.
+3. The validators have a choice of the set of reward vaults and their weighting.
+4. The weight-reward is then forwarded to the vault in question.
+5. Validators are now compensated with incentives that the ecosystem can set on reward vaults.
+
+## 10. Governance Overview
+
+Berachain governance is controlled by BGT. From genesis, the chain has on-chain token governance. The full scope of this governance are:
+
+- The token to be whitelisted (address).
+- Parameters on the PoL smart contracts.
+- Full governance over the application that makes Berachain.
+
+![Proposal Lifecycle Diagram](/images/general/honey-paper/10_governance_proposal_process.png)
+
+Figure 3: Proposal lifecycle
+
+The proposal lifecycle is shown as above, the main stages are the governance state where proposals are proposed and voted on and the timelock period. This ensures that there is time for users to view, vote, and censor malicious governance proposals/attacks.
+
+![Governance Flow Diagram](/images/general/honey-paper/10_governance_flow.png)
+
+Figure 4: Governance flow
+
+The diagram above walks through the safety mechanisms and processes that the governance system enforces. Guardians are an important mechanism to protect against governance attacks that could arise at the dApp level; these are chosen and implemented by overall chain governance. The main roles therefore are: **Holders**, **Proposers**, **Delegates**, and **Guardians**. The Governor is responsible for gating transactions to delegates/holders, and the timelock executor leaves time for the chain to censor transactions that are attacks on the target contract.
+
+## 11. BeaconKit Overview
+
+BeaconKit is a modular framework designed to streamline the development of Ethereum Virtual Machine (EVM) consensus clients. It enables developers to launch both L1 and L2 EVM-identical blockchains with full Ethereum Improvement Proposal (EIP) compatibility, single-slot finality, and enhanced performance. By utilizing the EngineAPI [\[11\]](#ref-11) to facilitate communication between the consensus and execution layers, BeaconKit decouples the EVM execution environment from consensus mechanisms like CometBFT [\[12\]](#ref-12), allowing for greater flexibility and modularity in blockchain design. This approach mirrors Ethereum's own consensus layer, providing a familiar environment for developers. BeaconKit supports integration with standard, unmodified execution clients, achieving 100% EVM identicality with the Ethereum mainnet. It has been tested with clients such as Geth, Erigon, Nethermind, Besu, Reth, and EthereumJS, ensuring broad compatibility and leveraging the robust tooling and community support these clients offer.
+
+## 12. BeaconKit for EVM Identicality
+
+One of the critical advantages of BeaconKit is its ability to deliver EVM identicality rather than mere compatibility. By allowing operators to run standard execution clients without modifications, developers can utilize the mature ecosystem of tools, libraries, and testing frameworks available for Ethereum. This eliminates the need for maintaining custom forks of execution clients, which can become unsustainable due to rapid updates and the complexity of supporting multiple programming languages. BeaconKit leverages a custom BeaconBlock on top of the standard CometBFT block to support immediate execution and optimistic payload building. Validators can sign over the proposed state root before accepting a block, significantly speeding up block verification and reducing block times by up to 40%. Immediate execution also simplifies the integration of EIP-4788, enabling permissionless verification and proof of consensus layer data on the execution layer.
+
+## 13. Implications of BeaconKit
+
+The introduction of BeaconKit has several significant implications for the blockchain landscape:
+
+1. **Improved Developer Experience:** Achieving EVM identicality allows developers to leverage existing Ethereum tools without modification, reducing the learning curve and accelerating development.
+2. **Enhanced Performance:** Immediate execution and optimistic payload building reduce block times and improve transaction throughput, addressing scalability challenges faced by previous implementations like Polaris.
+3. **Modularity and Flexibility:** BeaconKit's design eliminates reliance on standard Cosmos modules and Protobuf encoding, allowing developers to inject custom logic and implement custom block validity rules. This opens possibilities for innovative blockchain designs tailored to specific use cases.
+4. **Support for Advanced Features:** Inclusion of EIPs like EIP-4844 enables better support for rollups and L2 solutions, facilitating the creation of scalable and efficient blockchain networks.
+5. **Sustainability:** By decoupling from specific execution clients and eliminating the need for maintaining forks, BeaconKit offers a sustainable path forward for blockchain projects, reducing engineering overhead and improving client diversity [\[13\]](#ref-13).
+
+Overall, BeaconKit represents a significant advancement in blockchain development, providing the tools necessary to build high-performance, EVM-identical blockchains with greater ease and flexibility. Its introduction heralds a new era where developers can focus on innovation without being hindered by underlying technical complexities or the maintenance of cumbersome execution client forks.
+
+## 14. Conclusion
+
+1. Berachain is a novel EVM-identical L1 blockchain built using BeaconKit and powered by Proof of Liquidity, aligning liquidity and security at the network level.
+2. Berachain is secured by BERA, the gas and staking token of the network, with rewards and governance administered through BGT, the non-transferrable governance token of the network, obtained via providing liquidity or staking PoL-eligible receipt tokens in reward vaults.
+3. Users who provide liquidity or engage with applications on Berachain can participate in the network's Proof of Liquidity system by earning and delegating BGT to validators.
+4. Any variety of applications and scaling solutions may make use of Proof of Liquidity to increase their capital efficiency and distribution while contributing towards network security.
+5. Berachain aims to ultimately align incentives between validators, dApps, and users interacting in a network to serve as an accelerant for the application layer, and unlock the next generation of 0 to 1 blockchain primitives.
+
+## References
+
+- <strong id="ref-1">[1]</strong> Dinesh Kumar, Duraimutharasan, Shanthi, Vennila, Prabu Shankar and Senthil. _Comparative Analysis of Transaction Speed and Throughput in Blockchain and Hashgraph: A Performance Study for Distributed Ledger Technologies._ Journal of Machine and Computing, 3(4), 2023. [https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf](https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf)
+- <strong id="ref-2">[2]</strong> [https://blog.berachain.com/blog/the-pol-post](https://blog.berachain.com/blog/the-pol-post)
+- <strong id="ref-3">[3]</strong> [https://blog.berachain.com/blog/the-fat-bera-thesis](https://blog.berachain.com/blog/the-fat-bera-thesis)
+- <strong id="ref-4">[4]</strong> Urban J. Jermann. _A Macro Finance Model for Proof-of-Stake Ethereum._ National Bureau of Economic Research (NBER), 2023. [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835)
+- <strong id="ref-5">[5]</strong> [https://docs.curve.fi/assets/pdf/CurveDAO.pdf](https://docs.curve.fi/assets/pdf/CurveDAO.pdf)
+- <strong id="ref-6">[6]</strong> Vitalik Buterin. _Possible futures of the Ethereum protocol, part 3: The Scourge._ 2024. [https://vitalik.eth.limo/general/2024/10/20/futures3.html](https://vitalik.eth.limo/general/2024/10/20/futures3.html)
+- <strong id="ref-7">[7]</strong> Li Li. _Mitigating Challenges in Ethereum's Proof-of-Stake Consensus: Evaluating the Impact of EigenLayer and Lido._ 2024 [https://arxiv.org/abs/2410.23422](https://arxiv.org/abs/2410.23422)
+- <strong id="ref-8">[8]</strong> [https://research.lido.fi/t/is-lido-good-for-ethereum/5520](https://research.lido.fi/t/is-lido-good-for-ethereum/5520)
+- <strong id="ref-9">[9]</strong> [https://notes.ethereum.org/@djrtwo/risks-of-lsd](https://notes.ethereum.org/@djrtwo/risks-of-lsd) [https://www.mdpi.com/1099-4300/25/9/1320](https://www.mdpi.com/1099-4300/25/9/1320)
+- <strong id="ref-10">[10]</strong> Alex Stokes, Ansgar Dietrichs, Danny Ryan, Martin Holst Swende, light-client. _EIP-4788: Beacon block root in the EVM._ 2022 [https://eips.ethereum.org/EIPS/eip-4788](https://eips.ethereum.org/EIPS/eip-4788)
+- <strong id="ref-11">[11]</strong> [https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md)
+- <strong id="ref-12">[12]</strong> [https://docs.cometbft.com/v0.37/spec/abci/](https://docs.cometbft.com/v0.37/spec/abci/)
+- <strong id="ref-13">[13]</strong> [https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885](https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885)
+
+## Appendix
+
+The block emission formula is given by the following equation:
+
+![Block emission formula showing R = B + (1-m)(ax^b)](/images/general/honey-paper/appendix_block_emission_formula.png)
+
+Where:
+
+- **x**: validator boost
+- **a**: boost multiplier
+- **b**: convexity parameter
+- **B**: base rate
+- **R**: reward rate
+- **m**: minimum boosted reward rate
+
+It is straightforward to show that the theoretical maximum is given by the following expression:
+
+![Maximum emission formula](/images/general/honey-paper/appendix_max_block_emission_formula.png)
+
+### Proof
+
+Let us first introduce the notation:
+
+- **V**: validator set
+- **vᵢ ∈ V**: i-th validator, with i ∈ \{0, 1, ..., |V|\}
+- **xᵢ ∈ [0,1]**: boost of the i-th validator s.t. ∑ᵢ xᵢ = 1
+- **pᵢ ∈ [0,1]**: proposal probability for the i-th validator s.t. ∑ᵢ pᵢ = 1
+- **eᵢ**: BGT emission per block for the i-th validator
+
+Let e be the number of BGTs emitted for the next block proposal, then we have:
+
+![Proof equation showing the mathematical derivation](/images/general/honey-paper/appendix_proof_formula.png)
