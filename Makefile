@@ -13,7 +13,9 @@ help:
 	@echo "                          # Override scope: VALE_PATHS=\"general/ nodes/ build/\" make check-vale"
 	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
 	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
-	@echo "  make contracts-generate # Regenerate contract pages/snippets from data/contracts.json"
+	@echo "  make contracts-generate      # Regenerate contract pages/snippets from data/contracts.json"
+	@echo "  make check-pol-addresses     # POLAddresses vs contracts.json summary (fails if not_ok > 0)"
+	@echo "  make list-pol-addresses-not-ok # List all not_ok POL address rows"
 	@echo "  make format             # Reformat all .md and .mdx files with Prettier"
 	@echo "  make format-check       # Check formatting compliance without changes"
 	@echo "  make mint-install       # Install Mintlify CLI globally via npm"
@@ -21,7 +23,7 @@ help:
 dev:
 	mint dev
 
-check: check-validate check-links check-assets check-a11y check-vale check-redirects
+check: check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses
 
 check-validate:
 	mint validate
@@ -79,6 +81,24 @@ format-check:
 contracts-generate:
 	node scripts/contracts/generate-pages.mjs
 	make format
+
+POL_ADDRESSES_SOL := ../contracts-internal/script/pol/POLAddresses.sol
+
+check-pol-addresses:
+	@if [ ! -f "$(POL_ADDRESSES_SOL)" ]; then \
+		echo "⏭️  POL addresses: skipped ($(POL_ADDRESSES_SOL) not found; clone berachain/contracts-internal as sibling)"; \
+		exit 0; \
+	fi; \
+	line="$$(node scripts/contracts/verify-pol-addresses.mjs --summary)"; status=$$?; \
+	if [ $$status -eq 0 ]; then \
+		echo "✅ POL addresses: $$line"; \
+	else \
+		echo "❌ POL addresses: $$line"; \
+		exit $$status; \
+	fi
+
+list-pol-addresses-not-ok:
+	@node scripts/contracts/verify-pol-addresses.mjs --list-not-ok
 
 mint-install:
 	npm i -g mint
