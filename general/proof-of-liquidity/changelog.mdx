@@ -58,6 +58,14 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 
 ### PoL Contract changes
 
+#### Contracts & Interfaces Renamed
+
+| Renamed From                   | Renamed To                    |
+| ------------------------------ | ----------------------------- |
+| `BGTIncentiveFeeCollector`     | `IncentivesCollector`         |
+| `IBGTIncentiveFeeCollector`    | `IIncentivesCollector`        |
+| `BGTIncentiveFeeDeployer`      | `IncentivesCollectorDeployer` |
+
 #### Functions
 
 | Interface added | What                                                |
@@ -80,6 +88,7 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 | `withdraw(uint256)`                            | `Distributor`                                             |
 | `initialize()` (reinitializer)                 | `Distributor`                                             |
 | `rewardToken()`                                | `StakingRewards`, `RewardVault`                           |
+| `claim(address, address[])`                    | `IIncentivesCollector`, `IncentivesCollector`             |
 
 | Functions Removed                                  | Location                                          |
 | -------------------------------------------------- | ------------------------------------------------- |
@@ -136,6 +145,8 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 | `IncentiveFeeCollected` → `IncentivesCollected`                    | Full rename + parameter rename  |
 | `IncentiveFeeCollectionFailed` → `IncentivesCollectionFailed`      | Full rename + parameter rename  |
 | `IncentiveFeeCollectorUpdated` → `IncentiveTokensCollectorUpdated` | Full rename                     |
+| `IncentiveFeesClaimed` → `IncentivesClaimed`                       | Full rename                     |
+| `IncentiveFeeTokenClaimed` → `IncentiveTokenClaimed`               | Full rename                     |
 
 #### Errors
 
