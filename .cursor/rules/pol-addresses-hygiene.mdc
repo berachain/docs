@@ -1,0 +1,33 @@
+---
+description: POL contract address sync — POLAddresses.sol, mapping, contracts.json, and make check targets
+globs: data/contracts.json,data/pol-addresses-mapping.json,scripts/contracts/**,contracts-internal/**/POLAddresses.sol
+alwaysApply: false
+---
+
+# POL address hygiene
+
+When editing POL addresses or published contract data:
+
+## Layers (names must match across all four)
+
+1. `contracts-internal/script/pol/POLAddresses.sol` — struct fields + mainnet/bepolia literals
+2. `data/pol-addresses-mapping.json` — `published`, `contractsPath`, `polField`
+3. `data/contracts.json` — site addresses
+4. `make contracts-generate` — snippets + deployed-contract pages (do not hand-edit generated output)
+
+## Required checks
+
+```bash
+make check-pol-addresses        # ok / not_ok summary; fails if not_ok > 0 (included in make check)
+make list-pol-addresses-not-ok  # human list of not_ok rows
+```
+
+`not_ok` means action required (`address_changed`, `missing_in_contracts_json`, `publish_undecided`, mapping errors). `not_published` is intentional omission — not a failure.
+
+## Fix loop
+
+- Drift or missing docs row → `data/contracts.json` → `make contracts-generate` → commit generated files
+- Undecided publish → set `published: false` or complete mapping + json for `published: true`
+- Struct/literal/mapping mismatch → fix `POLAddresses.sol` and mapping together
+
+Status definitions: `scripts/contracts/verify-pol-addresses.mjs` file header. Contributor guide: `CONTRIBUTING.md` §7.
