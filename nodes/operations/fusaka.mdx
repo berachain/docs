@@ -10,7 +10,7 @@ Fusaka is the Berachain upgrade that activates the [Fulu + Osaka EL/CL changes](
 | Network         | Activation Date (UTC) | Binaries Available |
 | --------------- | --------------------- | ------------------ |
 | Bepolia Testnet | 4pm May 27, 2026      | May 11             |
-| Mainnet         | 4pm June 24, 2026     | June 8             |
+| Mainnet         | TBD coming soon       | soon               |
 
 The official binaries will ship at GitHub ([Bera-Reth](https://github.com/berachain/bera-reth/releases), [BeaconKit](https://github.com/berachain/beacon-kit/releases)),
 with announcements posted to [Telegram](https://t.me/beranodes/) and [Discord](https://discord.gg/berachain/), along with updates to our [recommended versions](/nodes/architecture/evm-execution) page.
@@ -54,10 +54,10 @@ With this approach, there is no longer any need to manually fetch or deploy upda
 The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/architecture/evm-execution).
 
 1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
-2. **DO NOT deploy this on a mainnet node** until 1.4.0 (non-rc) binaries designated for mainnet are released.
-3. Download the current releases of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
+2. **DO NOT deploy this on a mainnet node** until 1.4.1 binaries designated for mainnet are released - approx June 22.
+3. Once released, obtain release binaries of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
 4. Adjust Bera-Reth startup:
-   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes`</span>.
+   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes [enode-list]`</span>.
    - OR download and fetch the current bepolia genesis file from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
 5. No changes are needed to BeaconKit options.
 6. Start the new `beacond` and `bera-reth` binaries.

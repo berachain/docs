@@ -62,6 +62,7 @@
             "group": "Help",
             "pages": [
               "general/help/faqs",
+              "general/help/honeypaper",
               "general/help/glossary",
               "general/help/reward-vault-guidelines"
             ]
@@ -275,58 +276,61 @@
         "tab": "Nodes",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Concepts & Architecture",
             "pages": [
               "nodes/overview/index",
-              "nodes/overview/node-architecture"
-            ]
-          },
-          {
-            "group": "BeaconKit",
-            "pages": [
-              "nodes/beaconkit/overview"
-            ]
-          },
-          {
-            "group": "Architecture",
-            "pages": [
+              "nodes/overview/node-architecture",
               "nodes/architecture/validator-lifecycle",
               "nodes/architecture/beaconkit-consensus",
               "nodes/architecture/evm-execution"
             ]
           },
           {
-            "group": "Operations",
+            "group": "Setup & Deployment",
             "pages": [
               "nodes/operations/quickstart",
               "nodes/operations/bera-geth-to-reth",
               "nodes/operations/self-hosted-rpc",
+              "nodes/guides/local-devnet-docker",
+              "nodes/guides/local-devnet-kurtosis",
+              {
+                "group": "Staking Pools",
+                "root": "nodes/staking-pools/overview",
+                "pages": [
+                  "nodes/staking-pools/installation",
+                  "nodes/staking-pools/operators",
+                  "nodes/staking-pools/delegators",
+                  "nodes/staking-pools/contracts"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Day-2 Operations",
+            "pages": [
               "nodes/operations/production-checklist",
               "nodes/operations/monitoring",
-              "nodes/operations/fusaka"
-            ]
-          },
-          {
-            "group": "Staking Pools",
-            "pages": [
-              "nodes/staking-pools/overview",
-              "nodes/staking-pools/installation",
-              "nodes/staking-pools/operators",
-              "nodes/staking-pools/delegators",
-              "nodes/staking-pools/contracts"
-            ]
-          },
-          {
-            "group": "Guides",
-            "pages": [
+              "nodes/operations/fusaka",
               "nodes/guides/become-a-validator",
-              "nodes/guides/manage-reward-allocations",
-              "nodes/guides/manage-incentives-commission",
-              "nodes/guides/change-operator-address",
-              "nodes/guides/increase-validator-stake",
-              "nodes/guides/withdraw-stake",
-              "nodes/guides/local-devnet-docker",
-              "nodes/guides/local-devnet-kurtosis"
+              {
+                "group": "Being a Validator",
+                "pages": [
+                  "nodes/guides/change-operator-address",
+                  "nodes/guides/manage-reward-allocations",
+                  "nodes/guides/manage-incentives-commission",
+                  "nodes/guides/increase-validator-stake",
+                  "nodes/guides/withdraw-stake"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "nodes/beaconkit/overview",
+              "nodes/beaconkit/api",
+              "nodes/beaconkit/cli",
+              "nodes/beaconkit/configuration"
             ]
           },
           {
@@ -524,17 +528,17 @@
     },
     {
       "source": "/beacon-kit/api",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/nodes/beaconkit/api",
       "permanent": true
     },
     {
       "source": "/beacon-kit/cli",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/nodes/beaconkit/cli",
       "permanent": true
     },
     {
       "source": "/beacon-kit/configuration",
-      "destination": "/nodes/beaconkit/overview",
+      "destination": "/nodes/beaconkit/configuration",
       "permanent": true
     },
     {
