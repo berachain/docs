@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "description": "Maps each POLAddresses.sol field to its contracts.json home. published true = ok in verify-pol-addresses.mjs; published false = not_published; incomplete mapping = publish_undecided.",
+    "polAddressesRelativePath": "script/pol/POLAddresses.sol",
+    "contractsJsonRelativePath": "data/contracts.json",
+    "polNetworks": {
+      "mainnet": "berachainMainnet",
+      "testnet": "berachainBepolia"
+    },
+    "polFunctionNames": {
+      "mainnet": "_getMainnetPOLAddresses",
+      "testnet": "_getTestnetPOLAddresses"
+    }
+  },
+  "entries": [
+    { "polField": "beaconDeposit", "contractsPath": "other.beaconDeposit", "kind": "proxy", "published": true },
+    { "polField": "wbera", "contractsPath": "tokens.wbera", "kind": "proxy", "published": true },
+    { "polField": "bgt", "contractsPath": "tokens.bgtToken", "kind": "proxy", "published": true },
+    { "polField": "beraChef", "contractsPath": "pol.berachef", "kind": "proxy", "published": true },
+    { "polField": "beraChefImpl", "kind": "implementation", "published": false },
+    { "polField": "blockRewardController", "contractsPath": "pol.blockRewardController", "kind": "proxy", "published": true },
+    { "polField": "blockRewardControllerImpl", "kind": "implementation", "published": false },
+    { "polField": "distributor", "contractsPath": "pol.distributor", "kind": "proxy", "published": true },
+    { "polField": "distributorImpl", "kind": "implementation", "published": false },
+    { "polField": "rewardVaultFactory", "contractsPath": "pol.rewardVaultFactory", "kind": "proxy", "published": true },
+    { "polField": "rewardVaultFactoryImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "rewardVaultImpl",
+      "kind": "implementation",
+      "published": false,
+      "note": "RewardVault implementation for factory clones."
+    },
+    {
+      "polField": "bgtStaker",
+      "kind": "proxy",
+      "published": false,
+      "note": "Deprecated; omit from registry or publish with (deprecated) label."
+    },
+    { "polField": "bgtStakerImpl", "kind": "implementation", "published": false },
+    { "polField": "feeCollector", "contractsPath": "pol.feeCollector", "kind": "proxy", "published": true },
+    { "polField": "feeCollectorImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "bgtIncentiveDistributor",
+      "kind": "proxy",
+      "published": false,
+      "note": "Deprecated; omit from registry or publish with (deprecated) label."
+    },
+    { "polField": "bgtIncentiveDistributorImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "bgtIncentiveFeeCollector",
+      "contractsPath": "pol.bgtIncentiveFeeCollector",
+      "kind": "proxy",
+      "published": true
+    },
+    { "polField": "bgtIncentiveFeeCollectorImpl", "kind": "implementation", "published": false },
+    { "polField": "wberaStakerVault", "contractsPath": "tokens.wberaStakerVault", "kind": "proxy", "published": true },
+    { "polField": "wberaStakerVaultImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "wberaStakerVaultWithdrawalRequest",
+      "kind": "proxy",
+      "published": false,
+      "note": "Internal module; interact via wberaStakerVault."
+    },
+    { "polField": "wberaStakerVaultWithdrawalRequestImpl", "kind": "implementation", "published": false },
+    { "polField": "rewardVaultHelper", "contractsPath": "pol.rewardVaultHelper", "kind": "proxy", "published": true },
+    { "polField": "rewardVaultHelperImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "rewardAllocatorFactory",
+      "kind": "proxy",
+      "published": false,
+      "note": "Baseline store; validators use BeraChef only."
+    },
+    { "polField": "rewardAllocatorFactoryImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "lstStakerVaultFactory",
+      "contractsPath": "pol.lstStakerVaultFactory",
+      "kind": "proxy",
+      "published": true
+    },
+    { "polField": "lstStakerVaultFactoryImpl", "kind": "implementation", "published": false },
+    { "polField": "lstStakerVaultImpl", "kind": "implementation", "published": false },
+    { "polField": "lstStakerVaultWithdrawalRequestImpl", "kind": "implementation", "published": false },
+    {
+      "polField": "dedicatedEmissionStreamManager",
+      "contractsPath": "pol.dedicatedEmissionStreamManager",
+      "kind": "proxy",
+      "published": true
+    },
+    { "polField": "dedicatedEmissionStreamManagerImpl", "kind": "implementation", "published": false }
+  ],
+  "contractsWithoutPolSource": [
+    {
+      "contractsPath": "pol.honeyFactory",
+      "note": "Honey deployment; not present in POLAddresses.sol."
+    }
+  ]
+}
