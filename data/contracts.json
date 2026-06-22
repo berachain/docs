@@ -47,8 +47,8 @@
       }
     },
     "bgtIncentiveFeeCollector": {
-      "name": "BGTIncentiveFeeCollector",
-      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/BGTIncentiveFeeCollector.json",
+      "name": "IncentivesCollector",
+      "abi": "https://github.com/berachain/abis/blob/main/mainnet/contracts/pol/IncentivesCollector.json",
       "address": {
         "berachainMainnet": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B",
         "berachainBepolia": "0x1984Baf659607Cc5f206c55BB3B00eb3E180190B"

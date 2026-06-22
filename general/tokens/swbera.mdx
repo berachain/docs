@@ -19,7 +19,7 @@ You can stake either native BERA (which the system automatically wraps to WBERA)
 
 ### Incentive Auction yield
 
-Yield comes from the Incentive Auction. When Reward Vaults process funded incentive tokens, validator commission (default 5%, max 20%) goes to the validator operator and the remaining incentive tokens are redirected to `BGTIncentiveFeeCollector`. Auction buyers pay WBERA to claim those tokens; the \$sWBERA vault's share of that WBERA (pro-rata with registered LST staker vaults) increases the underlying WBERA per \$sWBERA.
+Yield comes from the Incentive Auction. When Reward Vaults process funded incentive tokens, validator commission (default 5%, max 20%) goes to the validator operator and the remaining incentive tokens are redirected to `IncentivesCollector`. Auction buyers pay WBERA to claim those tokens; the \$sWBERA vault's share of that WBERA (pro-rata with registered LST staker vaults) increases the underlying WBERA per \$sWBERA.
 
 For direct claim routing from Reward Vaults into \$sWBERA, see [RewardVaultHelper claim flow](/build/pol/reward-vault-helper-claim-flow).
 

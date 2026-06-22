@@ -28,15 +28,15 @@
 
 ## Contracts
 
-| Term                         | Definition                                                                                                                                             | Aliases to avoid                                           |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| **Incentive commission**     | Validator operator's share of incentive tokens: `(amount * commissionRate) / 1e4`. Max 20%, default 5%.                                                | Validator commission (acceptable shorthand)                |
-| **Incentive Auction**        | Settlement where a buyer pays WBERA to `BGTIncentiveFeeCollector` and receives accumulated redirected incentive tokens.                                | Fee collection                                             |
-| **BGTIncentiveFeeCollector** | Installed as `RewardVaultFactory.incentiveTokensCollector`. Splits auction WBERA pro-rata between `WBERAStakerVault` and registered `LSTStakerVault`s. | FeeCollector (different contract — pays BGTStaker, legacy) |
-| **IncentiveCollector**       | Pool-level contract that auctions operator commission incentive tokens for BERA, flowing to `StakingRewardsVault`.                                     | Not the same as BGTIncentiveFeeCollector                   |
-| **WBERAStakerVault**         | Issues sWBERA. Receives WBERA from the Incentive Auction.                                                                                              | Staking Vault (acceptable in user-facing docs)             |
-| **LSTStakerVault**           | Governance-registered vault that receives Incentive Auction WBERA (converted to LST via adapter).                                                      | Pool vault (these are not staking pool contracts)          |
-| **Staking Pool**             | Contract where users deposit BERA via `submit()` and receive non-transferable stBERA shares. Managed by a SmartOperator.                               | —                                                          |
+| Term                     | Definition                                                                                                                                             | Aliases to avoid                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| **Incentive commission** | Validator operator's share of incentive tokens: `(amount * commissionRate) / 1e4`. Max 20%, default 5%.                                                | Validator commission (acceptable shorthand)                |
+| **Incentive Auction**    | Settlement where a buyer pays WBERA to `IncentivesCollector` and receives accumulated redirected incentive tokens.                                     | Fee collection                                             |
+| **IncentivesCollector**  | Installed as `RewardVaultFactory.incentiveTokensCollector`. Splits auction WBERA pro-rata between `WBERAStakerVault` and registered `LSTStakerVault`s. | FeeCollector (different contract — pays BGTStaker, legacy) |
+| **IncentiveCollector**   | Pool-level contract that auctions operator commission incentive tokens for BERA, flowing to `StakingRewardsVault`.                                     | Not the same as IncentivesCollector                        |
+| **WBERAStakerVault**     | Issues sWBERA. Receives WBERA from the Incentive Auction.                                                                                              | Staking Vault (acceptable in user-facing docs)             |
+| **LSTStakerVault**       | Governance-registered vault that receives Incentive Auction WBERA (converted to LST via adapter).                                                      | Pool vault (these are not staking pool contracts)          |
+| **Staking Pool**         | Contract where users deposit BERA via `submit()` and receive non-transferable stBERA shares. Managed by a SmartOperator.                               | —                                                          |
 
 ## Yield paths
 
@@ -45,16 +45,16 @@
 | **Validator operator**     | Base rate (0.4 WBERA/block)                  | BlockRewardController → operator                                       |
 | **Validator operator**     | Incentive commission                         | RewardVault → operator                                                 |
 | **Vault staker**           | Allocated WBERA emissions                    | Distributor → RewardVault → claim                                      |
-| **sWBERA staker**          | Incentive Auction WBERA                      | BGTIncentiveFeeCollector → WBERAStakerVault                            |
-| **LST staker**             | Incentive Auction WBERA → LST                | BGTIncentiveFeeCollector → LSTAdapter → LSTStakerVault                 |
+| **sWBERA staker**          | Incentive Auction WBERA                      | IncentivesCollector → WBERAStakerVault                                 |
+| **LST staker**             | Incentive Auction WBERA → LST                | IncentivesCollector → LSTAdapter → LSTStakerVault                      |
 | **Staking pool depositor** | Operator WBERA + pool incentive auction BERA | SmartOperator + IncentiveCollector → StakingRewardsVault → pool rebase |
 
 ## Key relationships
 
 - **stBERA is not an LST.** Pool shares have no transfer surface. A staking pool depositor cannot stake stBERA anywhere.
 - **iBERA is an LST.** Infrared issues iBERA as a transferable ERC-20. Users stake iBERA into the registered LSTStakerVault (siBERA, `0xA350…`) to earn Incentive Auction yield.
-- **The core Incentive Auction does not pay staking pools.** BGTIncentiveFeeCollector sends WBERA to WBERAStakerVault and LSTStakerVaults only. Staking pools have their own IncentiveCollector — a separate auction system.
-- **sWBERA and LST staker yields come from the same auction.** BGTIncentiveFeeCollector splits WBERA pro-rata by WBERA-denominated totalAssets across both vault types.
+- **The core Incentive Auction does not pay staking pools.** IncentivesCollector sends WBERA to WBERAStakerVault and LSTStakerVaults only. Staking pools have their own IncentiveCollector — a separate auction system.
+- **sWBERA and LST staker yields come from the same auction.** IncentivesCollector splits WBERA pro-rata by WBERA-denominated totalAssets across both vault types.
 
 ## Example dialogue
 
@@ -68,10 +68,10 @@
 >
 > **Dev:** "What about gBERA?"
 >
-> **Domain expert:** "gBERA exists as a token but has no registered LSTStakerVault on the BGTIncentiveFeeCollector. It doesn't earn auction yield until governance registers a vault for it."
+> **Domain expert:** "gBERA exists as a token but has no registered LSTStakerVault on the IncentivesCollector. It doesn't earn auction yield until governance registers a vault for it."
 
 ## Flagged ambiguities
 
 - **"Delegator"**: No `delegate()` for BERA staking. Use **BERA staker**. `DelegationHandler` in contracts-staking-pools is Foundation capital management. `RewardVault.delegateStake()` is custodial receipt-token staking.
 - **"Staking pool staker" vs "LST staker"**: Distinct roles. Never hyphenate as one group. Pool depositors hold soulbound stBERA. LST stakers hold transferable tokens like iBERA.
-- **"FeeCollector" vs "BGTIncentiveFeeCollector"**: Different contracts. FeeCollector pays BGTStaker (legacy). BGTIncentiveFeeCollector splits to sWBERA + LST vaults. Use "incentive tokens collector" as the generic role name.
+- **"FeeCollector" vs "IncentivesCollector"**: Different contracts. FeeCollector pays BGTStaker (legacy). IncentivesCollector splits to sWBERA + LST vaults. Use "incentive tokens collector" as the generic role name.
