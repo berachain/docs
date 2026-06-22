@@ -136,20 +136,23 @@ make check-vale    # default scope: the Fusaka release page
 VALE_PATHS="general/ build/your-changed-file.mdx" make check-vale  # override scope to your edits
 ```
 
-The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects). Fix any errors before opening your PR.
+The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects, POL address sync). Fix any errors before opening your PR.
 
 When vale flags a project term as misspelled, add it to `vale/config/vocabularies/Berachain/accept.txt` rather than rephrasing — the file is the single source of truth for terminology vale will accept.
 
 ### 7. Contract Address Source Of Truth
 
-Contract addresses are managed through a single source of truth:
+Published POL contract addresses flow through four layers (field names must match exactly):
 
-- `data/contracts.json`
+1. `contracts-internal/script/pol/POLAddresses.sol` — struct + per-network literals (mainnet, bepolia)
+2. `data/pol-addresses-mapping.json` — whether each field is published and its `contractsPath`
+3. `data/contracts.json` — addresses shown on the docs site
+4. Generated pages/snippets from `make contracts-generate`
 
-Do not manually edit generated canonical address pages. Instead:
+Do not manually edit generated canonical address pages. After changing `data/contracts.json`, regenerate:
 
 ```bash
-node scripts/contracts/generate-pages.mjs
+make contracts-generate
 ```
 
 This regenerates:
@@ -163,7 +166,26 @@ This regenerates:
 
 Check in generated outputs with your `data/contracts.json` changes in the same PR.
 
-At the moment this generation step is manual (not CI-enforced), so treat regeneration + check-in as required whenever contract data changes.
+#### POL address hygiene check
+
+`make check-pol-addresses` compares `POLAddresses.sol`, the mapping file, and `contracts.json`. It prints summary counts (`ok`, `not_ok`, `not_published`) and **fails when `not_ok > 0`**. This target is part of `make check`.
+
+Clone [contracts-internal](https://github.com/berachain/contracts-internal) as a sibling of this repo (`../contracts-internal`) so the verifier can read `script/pol/POLAddresses.sol`. Without it, `make check-pol-addresses` skips (other `make check` steps still run).
+
+```bash
+make check-pol-addresses              # summary; fails if anything needs action
+make list-pol-addresses-not-ok        # list every not_ok row (field, network, reason)
+```
+
+Typical fixes:
+
+- `address_changed` or `missing_in_contracts_json` — update `data/contracts.json`, then `make contracts-generate`
+- `publish_undecided` — add or fix mapping rows (`published` + `contractsPath`) or mark `published: false` when docs should omit the address
+- `stale_mapping_field` / `missing_pol_literal` — align struct, literals, and mapping in `POLAddresses.sol`
+
+Full status taxonomy: header comment in `scripts/contracts/verify-pol-addresses.mjs`.
+
+At the moment generation and POL sync checks are local Makefile targets (not separate CI jobs), so run them whenever contract data or `POLAddresses.sol` changes.
 
 ### 8. Commit and Push
 
