@@ -19,7 +19,7 @@ Berachain follows a decoupled node architecture standard in modern Ethereum-equi
 Architecturally, RPC nodes and validator nodes are nearly identical. Both maintain a complete copy of the blockchain state and participate in peer-to-peer transaction gossip.
 
 An RPC node can become a validator node by joining the [Active Set](#active-set) through interaction with the [BeaconDeposit](/build/getting-started/deployed-contracts) contract by
-meeting the \$BERA [stake requirements](#validator-stake-requirements). To learn about the economics of becoming a validator, 
+meeting the \$BERA [stake requirements](#validator-stake-requirements). To learn about the economics of becoming a validator,
 see the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) and the [Be A Validator](/nodes/guides/become-a-validator) guides.
 
 ## Client Separation
@@ -47,6 +47,7 @@ Because the node is split into two clients, it participates in two entirely sepa
 For firewall and networking configurations, operators must ensure both P2P ports are open and publicly dialable. For more details on securing and optimizing these networks, see the [Production Checklist](/nodes/operations/production-checklist).
 
 ## Validator active set
+
 If the active set is not full, the minimum stake requirement is **250,000** \$BERA.
 
 If the active set is full, the minimum stake requirement is **10,000** \$BERA more than the amount staked by the last validator in the active set.
