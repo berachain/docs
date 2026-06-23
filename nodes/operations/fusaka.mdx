@@ -44,7 +44,7 @@ Reference: [Validator lifecycle](/nodes/architecture/validator-lifecycle#effecti
 
 ## Upgrade instructions
 
-This release of Bera-Reth introduces a major quality-of-life improvement for node operators: you can now specify the network chain directly with <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> or <span style={{ whiteSpace: "nowrap" }}>`--chain mainnet`</span>.
+This release of Bera-Reth introduces a major quality-of-life improvement for node operators: you can now specify the network chain directly with <span style={{ whiteSpace: "nowrap" }}>`--chain [bepolia|mainnet]`</span> or <span style={{ whiteSpace: "nowrap" }}>`--chain mainnet`</span>.
 
 With this approach, there is no longer any need to manually fetch or deploy updated genesis files when upgrading. Bera-Reth will select the correct built-in configuration based on your chosen network. In addition, when using the new `--chain` option, you do not need to provide `--bootnodes`; Bera-Reth will automatically use the appropriate bootnode list for the selected chain.
 
