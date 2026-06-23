@@ -10,10 +10,7 @@ Fusaka is the Berachain upgrade that activates the [Fulu + Osaka EL/CL changes](
 | Network         | Activation Date (UTC) | Binaries Available |
 | --------------- | --------------------- | ------------------ |
 | Bepolia Testnet | 4pm May 27, 2026      | May 11             |
-| Mainnet         | TBD coming soon       | soon               |
-
-The official binaries will ship at GitHub ([Bera-Reth](https://github.com/berachain/bera-reth/releases), [BeaconKit](https://github.com/berachain/beacon-kit/releases)),
-with announcements posted to [Telegram](https://t.me/beranodes/) and [Discord](https://discord.gg/berachain/), along with updates to our [recommended versions](/nodes/architecture/evm-execution) page.
+| Mainnet         | 4pm July 8, 2026      | June 23            |
 
 ## Bera-Geth Will Stop Working
 
@@ -54,7 +51,7 @@ With this approach, there is no longer any need to manually fetch or deploy upda
 The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/architecture/evm-execution).
 
 1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
-2. **DO NOT deploy this on a mainnet node** until 1.4.1 binaries designated for mainnet are released - approx June 22.
+2. Download the [recommended versions](/nodes/architecture/evm-execution).
 3. Once released, obtain release binaries of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
 4. Adjust Bera-Reth startup:
    - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes [enode-list]`</span>.
