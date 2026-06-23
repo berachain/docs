@@ -17,12 +17,10 @@ A Berachain node consists of two clients running together: a **consensus client*
 
 ### Software
 
-Install **Beacon Kit v1.4.1** and **Bera-Reth v1.4.1** (or later) before starting:
+Install the current recommended **Beacon Kit** and **Bera-Reth** releases for your network ([EVM Execution Clients](/nodes/architecture/evm-execution)) before starting:
 
 1. **BeaconKit**: Download the appropriate binary from the [releases page](https://github.com/berachain/beacon-kit/releases) for your OS and architecture. Make it executable and place it in your PATH (e.g., `~/.local/bin/`).
 2. **Execution client**: Download [Bera-Reth](https://github.com/berachain/bera-reth/releases) for your OS and architecture. Make it executable and place it in your PATH.
-
-See [EVM Execution Clients](/nodes/architecture/evm-execution) for recommended versions.
 
 Verify installation:
 
@@ -30,6 +28,8 @@ Verify installation:
 beacond version
 bera-reth --version
 ```
+
+Both commands should report the current release for your network on [EVM Execution Clients](/nodes/architecture/evm-execution).
 
 ## What you'll do
 
@@ -151,7 +151,7 @@ The script `setup-beacond.sh` invokes `beacond init` and `beacond jwt generate`.
 # [Expected Output]:
 # BEACOND_DATA: /.../var/beacond
 # BEACOND_BIN: /.../bin/beacond
-#   Version: v1.4.1
+#   Version: …
 # ✓ Private validator key generated in .../priv_validator_key.json
 # ✓ JWT secret generated at [...]config]/jwt.hex
 # ✓ Config files in [...]beacond/config updated
@@ -175,7 +175,7 @@ The `setup-reth.sh` script creates the Reth datadir and initializes it with `--c
 # RETH_DATA: /.../var/reth/data
 # RETH_BIN: /.../bin/bera-reth
 #   Chain: mainnet
-#   Version: v1.4.1
+#   Version: …
 # ✓ Reth set up.
 ```
 
@@ -307,7 +307,7 @@ Launch two terminal windows. In the first, run the consensus client:
 # [Expected Output]:
 # INFO Waiting for execution client to start... 🍺🕔
 # INFO Connected to execution client
-# INFO Reporting version v1.4.1
+# INFO Reporting version …
 # [AFTER BLOCKS START FLOWING]
 # INFO processExecutionPayload ... height=49 ...
 # INFO Finalized block ... height=49 ...
