@@ -53,7 +53,7 @@ The old style of `--chain <path>` still works, but you must be sure to fetch and
 1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
 2. Download the [recommended versions](/nodes/architecture/evm-execution).
 3. Adjust Bera-Reth startup:
-   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes [enode-list]`</span>.
+   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain (mainnet|bepolia)`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes [enode-list]`</span>.
    - OR download and fetch the current bepolia genesis file from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
 4. No changes are needed to BeaconKit options.
 5. Start the new `beacond` and `bera-reth` binaries.
