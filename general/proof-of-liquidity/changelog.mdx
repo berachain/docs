@@ -90,6 +90,8 @@ References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquid
 | `rewardToken()`                                | `StakingRewards`, `RewardVault`                           |
 | `claim(address, address[])`                    | `IIncentivesCollector`, `IncentivesCollector`             |
 
+`claimFees(address, address[])` remains exposed on `IIncentivesCollector` and `IncentivesCollector`; it delegates to the same settlement flow as `claim(address, address[])`.
+
 | Functions Removed                                  | Location                                          |
 | -------------------------------------------------- | ------------------------------------------------- |
 | `setBaseRate(uint256)`                             | `IBlockRewardController`, `BlockRewardController` |

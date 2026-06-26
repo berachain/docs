@@ -21,7 +21,7 @@ Stakers of a registered LST do not need to interact with PoL directly. As long a
 ## How auction yield reaches an LST vault
 
 1. Reward Vaults transfer redirected incentive tokens (incentives not paid as validator commission) into `IncentivesCollector`.
-2. An auction buyer calls `claimFees(recipient, feeTokens)` and pays WBERA into the collector.
+2. An auction buyer calls `claim(recipient, incentiveTokens)` and pays WBERA into the collector.
 3. The collector splits the paid WBERA pro-rata across the sWBERA Staking Vault and registered `LSTStakerVault`s, sized by each vault's WBERA-denominated total assets.
 4. For each registered LST vault, the collector calls the vault's registered **adapter** to convert that WBERA share into the vault's underlying LST, then credits the LST to the vault through `receiveRewards`.
 5. The vault's per-share value rises; its stakers earn the increment without taking any action.
