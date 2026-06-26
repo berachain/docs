@@ -10,10 +10,7 @@ Fusaka is the Berachain upgrade that activates the [Fulu + Osaka EL/CL changes](
 | Network         | Activation Date (UTC) | Binaries Available |
 | --------------- | --------------------- | ------------------ |
 | Bepolia Testnet | 4pm May 27, 2026      | May 11             |
-| Mainnet         | TBD coming soon       | soon               |
-
-The official binaries will ship at GitHub ([Bera-Reth](https://github.com/berachain/bera-reth/releases), [BeaconKit](https://github.com/berachain/beacon-kit/releases)),
-with announcements posted to [Telegram](https://t.me/beranodes/) and [Discord](https://discord.gg/berachain/), along with updates to our [recommended versions](/nodes/architecture/evm-execution) page.
+| Mainnet         | 4pm July 8, 2026      | June 23            |
 
 ## Bera-Geth Will Stop Working
 
@@ -47,13 +44,14 @@ Reference: [Validator lifecycle](/nodes/architecture/validator-lifecycle#effecti
 
 ## Upgrade instructions
 
-This release of Bera-Reth introduces a major quality-of-life improvement for node operators: you can now specify the network chain directly with <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> or <span style={{ whiteSpace: "nowrap" }}>`--chain mainnet`</span>.
+This release of Bera-Reth introduces a major quality-of-life improvement for node operators: you can now specify the network chain directly with <span style={{ whiteSpace: "nowrap" }}>`--chain [bepolia|mainnet]`</span> or <span style={{ whiteSpace: "nowrap" }}>`--chain mainnet`</span>.
 
 With this approach, there is no longer any need to manually fetch or deploy updated genesis files when upgrading. Bera-Reth will select the correct built-in configuration based on your chosen network. In addition, when using the new `--chain` option, you do not need to provide `--bootnodes`; Bera-Reth will automatically use the appropriate bootnode list for the selected chain.
 
 The old style of `--chain <path>` still works, but you must be sure to fetch and deploy the genesis files linked from our [release page](/nodes/architecture/evm-execution).
 
 1. **If you are running Bera-Geth, you [have to migrate to Bera-Reth](/nodes/operations/bera-geth-to-reth).**
+<<<<<<< docs/pol-incentives-collector-refactor
 2. **DO NOT deploy this on a mainnet node** until 1.4.1 binaries designated for mainnet are released - approx June 22.
 3. Once released, obtain release binaries of BeaconKit and Bera-Reth from the [recommended versions](/nodes/architecture/evm-execution) page.
 4. Adjust Bera-Reth startup:
@@ -61,6 +59,14 @@ The old style of `--chain <path>` still works, but you must be sure to fetch and
    - OR download and fetch the current genesis file for your network from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
 5. No changes are needed to BeaconKit options.
 6. Start the new `beacond` and `bera-reth` binaries.
+=======
+2. Download the [recommended versions](/nodes/architecture/evm-execution).
+3. Adjust Bera-Reth startup:
+   - Change your <span style={{ whiteSpace: "nowrap" }}>`--chain`</span> option to <span style={{ whiteSpace: "nowrap" }}>`--chain bepolia`</span> and remove <span style={{ whiteSpace: "nowrap" }}>`--bootnodes [enode-list]`</span>.
+   - OR download and fetch the current bepolia genesis file from the [recommended versions](/nodes/architecture/evm-execution) page, and overwrite your current genesis file with it.
+4. No changes are needed to BeaconKit options.
+5. Start the new `beacond` and `bera-reth` binaries.
+>>>>>>> main
 
 ## Support
 
