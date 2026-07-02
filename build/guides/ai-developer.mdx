@@ -3,7 +3,7 @@ title: "AI Developer"
 description: "Use Berachain docs with AI assistants and MCP. Server URL, stack coverage, and how to ask for the right doc."
 ---
 
-Use Berachain docs inside **AI assistants** and **MCP-compatible clients** (e.g. Cursor, Claude Code) by adding our MCP server. This page gives the server URL, what the docs cover, and how to ask so the AI uses the right content.
+Use Berachain docs inside **AI assistants** and **MCP-compatible clients** (e.g. Codex, Cursor, Claude Code) by adding our MCP server. This page gives the server URL, what the docs cover, and how to ask so the AI uses the right content.
 
 ## MCP server
 
@@ -12,6 +12,33 @@ Add the Berachain docs MCP server so the AI can read the latest docs instead of 
 **URL:** [https://docs.berachain.com/mcp](https://docs.berachain.com/mcp)
 
 Configure this in your MCP client; then the AI can query our pages, guides, and contract references directly.
+
+## Use with Codex
+
+Add the Berachain docs MCP server, then point Codex at the exact doc you want it to use.
+
+For contract lookups, try prompts like:
+
+- "Using the Berachain Deployed contracts page, list the mainnet core contract addresses."
+- "Using the Berachain Deployed contracts page, give me the Bepolia address and ABI repo link for the contract I need."
+
+## Use with Claude Code
+
+Add the same MCP server in Claude Code, then name the Berachain page you want as the source of truth.
+
+For contract lookups, try prompts like:
+
+- "Use the Berachain Deployed contracts page to find the mainnet address for this contract."
+- "Use the Berachain docs MCP and the Deployed contracts page, not training data."
+
+## Use with Cursor
+
+Add the MCP server in Cursor so the editor can pull current Berachain docs directly.
+
+For contract lookups, try prompts like:
+
+- "Using the Berachain Deployed contracts page, show me the contract address I need for mainnet."
+- "Using the Berachain docs MCP, find the right deployed address and link me to the ABI repo."
 
 ## What we have examples for
 
