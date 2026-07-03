@@ -78,7 +78,7 @@
 - [Irys Upload with $BERA (Node.js)](https://docs.berachain.com/build/guides/community/irys-bera-nodejs.md): Upload files to Irys decentralized storage and pay with Berachain $BERA. Node.js script with Irys SDK.
 - [Bridging ERC20 with LayerZero V2](https://docs.berachain.com/build/guides/community/layerzero-oft.md): Bridge ERC20 tokens (e.g. $UNI) from Sepolia to Berachain using LayerZero V2 and the Omnichain Fungible Token (OFT) standard.
 - [Upgradeable Contracts (OpenZeppelin)](https://docs.berachain.com/build/guides/community/openzeppelin-upgrades.md): Deploy upgradeable contracts on Berachain using OpenZeppelin Upgrades (proxy pattern).
-- [Overview](https://docs.berachain.com/build/guides/community/overview.md)
+- [Community Developer Guides](https://docs.berachain.com/build/guides/community/overview.md): Awesome List of Community Developer Guides
 - [Particle Auth Core Vite](https://docs.berachain.com/build/guides/community/particle-auth-core-vite.md): Wallet connection and auth on Berachain using Particle Auth in a Vite app.
 - [Provably Fair NFTs with Pyth Entropy](https://docs.berachain.com/build/guides/community/pyth-entropy.md): Use Pyth Entropy on Berachain for verifiable randomness and provably fair NFT minting. Includes setup, deploy EntropyNFT contract, and request randomness.
 - [Pyth Oracle on Berachain](https://docs.berachain.com/build/guides/community/pyth-oracle.md): Query Pyth Network price data on Berachain with on-demand updates. Deploy consumer contract, fetch price payload, call updatePrice and getPrice.
@@ -98,9 +98,9 @@
 - [RewardVaultHelper Claim Flow](https://docs.berachain.com/build/pol/reward-vault-helper-claim-flow.md): Claim Reward Vault rewards as sWBERA or native BERA.
 - [Staking for Other Accounts](https://docs.berachain.com/build/pol/staking-for-other-accounts.md): Guide to using stakeOnBehalf functionality in Berachain Reward Vaults
 - [EIP-5792 Introduction](https://docs.berachain.com/build/protocol/eip5792-overview.md): Learn about EIP-5792 and how it enables wallet batching capabilities for improved user experience
-- [Eip7702 basics](https://docs.berachain.com/build/protocol/eip7702-basics.md)
+- [Understand EIP7702 Basics](https://docs.berachain.com/build/protocol/eip7702-basics.md): Learn the basics on understanding EIP7702 by setting code for an EOA
 - [EIP-7702 Batch Transactions](https://docs.berachain.com/build/protocol/eip7702-batch-transactions.md): Guide to batch transactions using EIP-7702 on Berachain.
-- [Eip7702 gas sponsorship](https://docs.berachain.com/build/protocol/eip7702-gas-sponsorship.md)
+- [EIP-7702 Gas Sponsorship with Anvil](https://docs.berachain.com/build/protocol/eip7702-gas-sponsorship.md): Set up a quick demo showcasing gas sponsorship on an Anvil fork unlocked by EIP-7702
 - [Protocol Features](https://docs.berachain.com/build/protocol/overview.md): Berachain-supported EIPs and chain-level capabilities for developers.
 - [PoL Governance](https://docs.berachain.com/general/governance/reward-vault-governance.md): Governance controls for Proof of Liquidity: vault whitelisting, emission parameters, incentive fee routing, and DES.
 - [Frequently Asked Questions](https://docs.berachain.com/general/help/faqs.md): Common questions about Berachain.
@@ -118,15 +118,15 @@
 - [Proof-of-Liquidity Overview](https://docs.berachain.com/general/proof-of-liquidity/overview.md): How BERA stake, WBERA emissions, Reward Vaults, Dedicated Emission Streams, incentives, and sWBERA fit together.
 - [Reward Vaults](https://docs.berachain.com/general/proof-of-liquidity/reward-vaults.md): Where $WBERA emissions flow, how Reward Vault incentives work, and how vault rewards are claimed.
 - [BERA Token](https://docs.berachain.com/general/tokens/bera.md): Gas token, staking, tokenomics, and how to get BERA.
-- [BGT Token](https://docs.berachain.com/general/tokens/bgt.md)
+- [BGT Token](https://docs.berachain.com/general/tokens/bgt.md): BGT is a legacy token that is being deprecated. It was used in earlier iterations of Proof of Liquidity for governance and reward routing.
 - [HONEY Stablecoin](https://docs.berachain.com/general/tokens/honey.md): Minting, redemption, collateral, and basket mode.
 - [$sWBERA Token](https://docs.berachain.com/general/tokens/swbera.md): What is the $sWBERA token and how does it work.
-- [Introduction](https://docs.berachain.com/index.md): Official documentation for Berachain - the first blockchain powered by Proof-of-Liquidity
+- [Introduction](https://docs.berachain.com/index.md): Official Berachain documentation. Berachain is an EVM-identical L1 secured by Proof-of-Liquidity (PoL). Covers the BERA, BGT, WBERA, sWBERA, and HONEY tokens; reward vaults, incentives, boosts, block rewards, and the BeraChef, BlockRewardController, and Distributor contracts; BEX (the DEX) swaps, weighted and stable pools, liquidity provision, and the Smart Order Router (SOR); Bend lending, borrow/repay, collateral, LTV, liquidation, interest rate models, and oracles; running nodes and validators with Beacon Kit and Bera-Reth, staking pools, RPC endpoints, genesis, and snapshots; mainnet (chain ID 80094) and Bepolia testnet (80069); and building on Berachain with deployed contract addresses, ABIs, SDKs, Foundry, Hardhat, viem, and wagmi. Consult these docs for any Berachain, PoL, BGT, HONEY, BEX, Bend, or validator question.
 - [BeaconKit Consensus](https://docs.berachain.com/nodes/architecture/beaconkit-consensus.md): Consensus client and framework for EVM chains: CometBFT, Engine API, Eth2 modularity, and execution client diversity.
 - [EVM Execution](https://docs.berachain.com/nodes/architecture/evm-execution.md): Recommended versions and genesis files for mainnet and Bepolia.
 - [Validator Lifecycle](https://docs.berachain.com/nodes/architecture/validator-lifecycle.md): Validator states and transitions: Deposited, Eligible, Active, Exited, and Withdrawn; activation queue and stake requirements.
 - [BeaconKit API](https://docs.berachain.com/nodes/beaconkit/api.md)
-- [BeaconKit CLI](https://docs.berachain.com/nodes/beaconkit/cli.md)
+- [BeaconKit CLI](https://docs.berachain.com/nodes/beaconkit/cli.md): beacond, is an EVM consensus client implementation used as a basic beacon node for Berachain. See BeaconKit Consensus Layer for more details.
 - [BeaconKit Configuration](https://docs.berachain.com/nodes/beaconkit/configuration.md)
 - [What is BeaconKit?](https://docs.berachain.com/nodes/beaconkit/overview.md): Modular consensus layer for Ethereum-based chains.
 - [Becoming a Validator](https://docs.berachain.com/nodes/guides/become-a-validator.md): Register and activate a validator: beacond setup, deposit transaction, BeaconDeposit contract, operator and withdrawal address.
