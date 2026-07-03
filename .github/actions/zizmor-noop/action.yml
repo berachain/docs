@@ -1,0 +1,7 @@
+name: zizmor-noop
+description: No-op action to satisfy org-level zizmor input collection
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: ":"
