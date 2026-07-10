@@ -45,7 +45,7 @@ Rates can increase when the token manager deposits more inventory. Decreasing ra
 
 ## Commission and payouts
 
-Validator commission is capped at **20%**. Reward Vault incentive processing sends the validator commission to the validator operator and sends the remaining incentive tokens to `BGTIncentiveFeeCollector`.
+Validator commission is capped at **20%**. Reward Vault incentive processing sends the validator commission to the validator operator and sends the remaining incentive tokens to `IncentivesCollector`.
 
 ```mermaid actions={false}
 flowchart LR
@@ -58,10 +58,10 @@ flowchart LR
 
 ## Incentive fee settlement
 
-The redirected incentive share collects in `BGTIncentiveFeeCollector`, the shared settlement path for Reward Vault incentives. Incentive tokens accumulate in the collector,
+The redirected incentive share collects in `IncentivesCollector`, the shared settlement path for Reward Vault incentives. Incentive tokens accumulate in the collector,
 and WBERA paid into settlement becomes yield for \$sWBERA stakers and registered LST stakers.
 
-See [Deployed contract addresses](/build/getting-started/deployed-contracts) for the current **BGTIncentiveFeeCollector** address.
+See [Deployed contract addresses](/build/getting-started/deployed-contracts) for the current **IncentivesCollector** address.
 
 ### Settlement behavior
 

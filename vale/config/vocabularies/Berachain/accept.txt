@@ -28,7 +28,7 @@ BlockRewardController
 RewardVaultFactory
 BGTStaker
 FeeCollector
-BGTIncentiveFeeCollector
+IncentivesCollector
 Distributor
 ProtocolFeesCollector
 BalancerHelpers

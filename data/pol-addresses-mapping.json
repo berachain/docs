@@ -47,12 +47,12 @@
     },
     { "polField": "bgtIncentiveDistributorImpl", "kind": "implementation", "published": false },
     {
-      "polField": "bgtIncentiveFeeCollector",
+      "polField": "incentivesCollector",
       "contractsPath": "pol.bgtIncentiveFeeCollector",
       "kind": "proxy",
       "published": true
     },
-    { "polField": "bgtIncentiveFeeCollectorImpl", "kind": "implementation", "published": false },
+    { "polField": "incentivesCollectorImpl", "kind": "implementation", "published": false },
     { "polField": "wberaStakerVault", "contractsPath": "tokens.wberaStakerVault", "kind": "proxy", "published": true },
     { "polField": "wberaStakerVaultImpl", "kind": "implementation", "published": false },
     {

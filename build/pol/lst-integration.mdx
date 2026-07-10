@@ -3,13 +3,13 @@ title: "LST Integration for PoL Auction Yield"
 description: "Register an LSTStakerVault so your LST product earns a pro-rata share of WBERA paid through the PoL Incentive Auction."
 ---
 
-Liquid Staking Token (LST) issuers can plug their staked-LST product into the Berachain Proof of Liquidity (PoL) Incentive Auction. Once an `LSTStakerVault` and its adapter are registered on `BGTIncentiveFeeCollector`, the vault automatically receives a pro-rata share of every WBERA payment auction buyers make against redirected Reward Vault incentive tokens.
+Liquid Staking Token (LST) issuers can plug their staked-LST product into the Berachain Proof of Liquidity (PoL) Incentive Auction. Once an `LSTStakerVault` and its adapter are registered on `IncentivesCollector`, the vault automatically receives a pro-rata share of every WBERA payment auction buyers make against redirected Reward Vault incentive tokens.
 
 This page is the integrator-facing guide. For the auction mechanics from the protocol side, see [Incentive Marketplace — Incentive fee settlement](/general/proof-of-liquidity/incentives#incentive-fee-settlement).
 
 ## What registration enables
 
-When a buyer settles redirected incentive tokens through `BGTIncentiveFeeCollector`, the WBERA they pay is split **pro-rata, by WBERA-denominated total assets**, across:
+When a buyer settles redirected incentive tokens through `IncentivesCollector`, the WBERA they pay is split **pro-rata, by WBERA-denominated total assets**, across:
 
 - The shared `WBERAStakerVault` (sWBERA stakers).
 - Every registered `LSTStakerVault` whose LST has an adapter that converts WBERA into the underlying LST.
@@ -20,8 +20,8 @@ Stakers of a registered LST do not need to interact with PoL directly. As long a
 
 ## How auction yield reaches an LST vault
 
-1. Reward Vaults transfer redirected incentive tokens (incentives not paid as validator commission) into `BGTIncentiveFeeCollector`.
-2. An auction buyer calls `claimFees(recipient, feeTokens)` and pays WBERA into the collector.
+1. Reward Vaults transfer redirected incentive tokens (incentives not paid as validator commission) into `IncentivesCollector`.
+2. An auction buyer calls `claim(recipient, incentiveTokens)` and pays WBERA into the collector.
 3. The collector splits the paid WBERA pro-rata across the sWBERA Staking Vault and registered `LSTStakerVault`s, sized by each vault's WBERA-denominated total assets.
 4. For each registered LST vault, the collector calls the vault's registered **adapter** to convert that WBERA share into the vault's underlying LST, then credits the LST to the vault through `receiveRewards`.
 5. The vault's per-share value rises; its stakers earn the increment without taking any action.
@@ -51,7 +51,7 @@ The vault must implement `receiveRewards` so that the collector can credit conve
 
 The adapter is the contract that converts WBERA into your underlying LST during auction settlement. It must:
 
-- Accept WBERA from `BGTIncentiveFeeCollector`.
+- Accept WBERA from `IncentivesCollector`.
 - Convert that WBERA into the LST (through your protocol's mint, swap, or wrap path).
 - Hand the resulting LST to the registered `LSTStakerVault` via `receiveRewards`.
 
@@ -59,14 +59,14 @@ Adapter design is LST-specific. Refer to the iBERA adapter for a working pattern
 
 ### 3. Register the vault and adapter with governance
 
-Submit a governance proposal to call `addLstStakerVault` on `BGTIncentiveFeeCollector`, supplying:
+Submit a governance proposal to call `addLstStakerVault` on `IncentivesCollector`, supplying:
 
 - The deployed `LSTStakerVault` address.
 - The deployed adapter address.
 
 Once the registry write lands, the collector includes the new vault in every subsequent pro-rata split. The vault begins accruing WBERA-sourced LST yield on the next auction settlement.
 
-See [Deployed contract addresses](/build/getting-started/deployed-contracts) for the live `BGTIncentiveFeeCollector` and `LSTStakerVaultFactory` addresses on each network.
+See [Deployed contract addresses](/build/getting-started/deployed-contracts) for the live `IncentivesCollector` and `LSTStakerVaultFactory` addresses on each network.
 
 ## Operational notes
 
@@ -77,5 +77,5 @@ See [Deployed contract addresses](/build/getting-started/deployed-contracts) for
 
 - [Incentive Marketplace — Incentive fee settlement](/general/proof-of-liquidity/incentives#incentive-fee-settlement) — the auction mechanics from the protocol side.
 - [\$sWBERA Token](/general/tokens/swbera) — the sister product that shares the pro-rata WBERA split.
-- [Deployed contract addresses](/build/getting-started/deployed-contracts) — current `BGTIncentiveFeeCollector` and `LSTStakerVaultFactory` addresses.
+- [Deployed contract addresses](/build/getting-started/deployed-contracts) — current `IncentivesCollector` and `LSTStakerVaultFactory` addresses.
 - [Proof of Liquidity Overview](/general/proof-of-liquidity/overview) — the broader PoL picture.
