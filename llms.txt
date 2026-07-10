@@ -1,0 +1,153 @@
+# Berachain
+
+> Official Berachain documentation. Berachain is an EVM-identical L1 secured by Proof-of-Liquidity (PoL). Covers the BERA, BGT, WBERA, sWBERA, and HONEY tokens; reward vaults, incentives, boosts, block rewards, and the BeraChef, BlockRewardController, and Distributor contracts; BEX (the DEX) swaps, weighted and stable pools, liquidity provision, and the Smart Order Router (SOR); Bend lending, borrow/repay, collateral, LTV, liquidation, interest rate models, and oracles; running nodes and validators with Beacon Kit and Bera-Reth, staking pools, RPC endpoints, genesis, and snapshots; mainnet (chain ID 80094) and Bepolia testnet (80069); and building on Berachain with deployed contract addresses, ABIs, SDKs, Foundry, Hardhat, viem, and wagmi. Consult these docs for any Berachain, PoL, BGT, HONEY, BEX, Bend, or validator question.
+
+## Docs
+
+- [Borrow & Repay](https://docs.berachain.com/bend/guides/borrow-repay.md): Supply collateral, borrow HONEY, monitor LTV/LLTV, and repay to withdraw collateral on Bend.
+- [Curator Application](https://docs.berachain.com/bend/guides/curator-application.md): How curators apply to list a vault on the Bend UI; governance and application form.
+- [Deposit & Withdraw](https://docs.berachain.com/bend/guides/deposit-withdraw.md): Step-by-step: supply HONEY to a vault, stake for PoL rewards, unstake, and withdraw from Bend.
+- [Bundlers](https://docs.berachain.com/bend/learn/bundlers.md): Bundler3: combine supply, borrow, swap, and other Bend actions into a single atomic transaction; gas savings.
+- [Curator](https://docs.berachain.com/bend/learn/curator.md): Curator role: vault strategy, risk parameterization, market selection, caps, and timelock; distinct from Allocator.
+- [Flash Loans](https://docs.berachain.com/bend/learn/flash-loans.md): Uncollateralized borrow-and-repay within one transaction; flashLoan flow, callback, and implementation steps.
+- [Interest Rates](https://docs.berachain.com/bend/learn/interest-rates.md): How supply and borrow rates are set by the IRM and utilization; AdaptiveCurveIRM and target utilization.
+- [Interest Rate Model](https://docs.berachain.com/bend/learn/irm.md): AdaptiveCurveIRM: immutable IRM, target utilization, curve and adaptive mechanisms; supply and borrow rates.
+- [Liquidation](https://docs.berachain.com/bend/learn/liquidation.md): When positions are liquidated, health factor and LLTV, liquidation process, and liquidator incentives.
+- [Collateral, LTV & Health](https://docs.berachain.com/bend/learn/ltv.md): Collateral and debt relationship, LTV formula, health factor, and liquidation thresholds in Bend markets.
+- [Market](https://docs.berachain.com/bend/learn/market.md): Lending pool primitive: collateral/loan pairing, supply and borrow positions, risk parameters, and market creation.
+- [Oracle](https://docs.berachain.com/bend/learn/oracle.md): Price feeds for Bend markets; oracle-agnostic design, compatible types, and how to query price data.
+- [Introduction](https://docs.berachain.com/bend/learn/overview.md): Decentralized lending on Berachain. Get started with guides and concepts.
+- [Public Allocator](https://docs.berachain.com/bend/learn/public-allocator.md): Just-in-time liquidity reallocation between Bend markets; how borrowers get liquidity from multiple vault markets.
+- [Rewards for Lenders](https://docs.berachain.com/bend/learn/rewards-for-lenders.md): Vault APY, native lending yield, and PoL reward yield from staking vault shares.
+- [Vaults](https://docs.berachain.com/bend/learn/vault.md): Yield-generating vault structure, curator and allocator roles, supply/withdraw queues, and risk considerations.
+- [What Is Bend?](https://docs.berachain.com/bend/learn/what-is-bend.md): Morpho-based lending and borrowing with native Proof-of-Liquidity on Berachain; vaults, markets, and key features.
+- [Yield & Fees](https://docs.berachain.com/bend/learn/yield-fees.md): How vault yield is generated from lending markets and how fees are applied; share price and depositor interest.
+- [Add Token Metadata](https://docs.berachain.com/bex/guides/add-token.md): Submit token logo, CoinGecko ID, and metadata via the Berachain metadata repo.
+- [Fees](https://docs.berachain.com/bex/guides/fees.md): How trading fees are split between LPs and the protocol and compounded in pools.
+- [Liquidity Provision](https://docs.berachain.com/bex/guides/liquidity.md): Deposit tokens, mint LP positions, and manage or withdraw liquidity.
+- [Pool Configuration](https://docs.berachain.com/bex/guides/pool-configuration.md): Stable and weighted pool parameters, fee tiers, and example configurations.
+- [Pool Creation](https://docs.berachain.com/bex/guides/pool-creation.md): Create a new pool, set initial ratio, and add liquidity; token burn requirement.
+- [BEX and Proof of Liquidity](https://docs.berachain.com/bex/guides/proof-of-liquidity.md): Earn PoL rewards by providing liquidity and staking LP tokens in reward vaults.
+- [Swaps](https://docs.berachain.com/bex/guides/swaps.md): Single-hop and multi-hop swaps, routing, and slippage settings.
+- [Decentralized Exchanges](https://docs.berachain.com/bex/learn/dex.md): How DEXs and AMMs work and how BEX uses Balancer V2-style architecture.
+- [Flash Loans](https://docs.berachain.com/bex/learn/flash-loans.md): Uncollateralized same-transaction loans; currently disabled via protocol fees.
+- [Introduction](https://docs.berachain.com/bex/learn/overview.md): Native DEX on Berachain. Swap and provide liquidity via weighted and stable pools.
+- [Pools](https://docs.berachain.com/bex/learn/pools.md): Weighted and stable pool types, key parameters, and when to use each.
+- [Stable Pools](https://docs.berachain.com/bex/learn/stable-pools.md): Pools for stablecoins and correlated assets; composability and amplification.
+- [Vault](https://docs.berachain.com/bex/learn/vault.md): Unified contract that holds pool tokens and executes swaps, joins, and exits.
+- [Weighted Pools](https://docs.berachain.com/bex/learn/weighted-pools.md): Multi-token pools with configurable weights for uncorrelated assets; exposure and impermanent loss.
+- [What Is BEX?](https://docs.berachain.com/bex/learn/what-is-bex.md): Trade any token pair and provide liquidity via weighted and stable pools on Berachain.
+- [Deployed Contracts](https://docs.berachain.com/build/bend/deployed-contracts.md): Bend smart contract addresses on Berachain; Morpho, IRM, oracles, URD, and related contracts.
+- [Deployed Markets](https://docs.berachain.com/build/bend/deployed-markets.md): Market IDs and parameters for deployed Bend lending markets on Berachain.
+- [Bundlers](https://docs.berachain.com/build/bend/onchain-bundlers.md): Group multiple Bend onchain operations into one atomic transaction; Bundler3 integration and use cases.
+- [Public Allocator](https://docs.berachain.com/build/bend/onchain-public-allocator.md): Programmatically reallocate vault liquidity between Bend markets; just-in-time liquidity for borrowers.
+- [Overview](https://docs.berachain.com/build/bend/overview.md): Bend on Berachain: lending protocol built on Morpho, mainnet-only, with deployed contracts, markets, and onchain tooling.
+- [Batch Swap](https://docs.berachain.com/build/bex/concepts/batch-swap.md): Multi-hop swaps across BEX pools to optimize routes and pricing.
+- [Underlying Tokens](https://docs.berachain.com/build/bex/concepts/lp-underlying.md): Query underlying tokens for a BEX LP token and your pool share.
+- [Valuing LP Tokens](https://docs.berachain.com/build/bex/concepts/lp-valuing.md): Calculate BEX LP token value: informational and on-chain methods.
+- [Pool Exits](https://docs.berachain.com/build/bex/concepts/pool-exits.md): Remove liquidity from BEX pools via the Vault exitPool function.
+- [Pool Interfacing](https://docs.berachain.com/build/bex/concepts/pool-interfacing.md): Nuances of interacting with different BEX pool types.
+- [Pool Joins](https://docs.berachain.com/build/bex/concepts/pool-joins.md): Add liquidity to BEX pools via the Vault joinPool function.
+- [Relayers](https://docs.berachain.com/build/bex/concepts/relayers.md): Opt-in contracts that call the Vault on behalf of users for multi-step operations.
+- [Single Swap](https://docs.berachain.com/build/bex/concepts/single-swap.md): Exchange one token for another in a single BEX pool via the Vault.
+- [Deployed Contracts](https://docs.berachain.com/build/bex/deployed-contracts.md): Registry of deployed BEX contract addresses by network.
+- [Pool Creation Guide](https://docs.berachain.com/build/bex/guides/pool-creation.md): Create BEX pools programmatically with the SDK.
+- [Error Codes](https://docs.berachain.com/build/bex/help/error-codes.md): BEX smart contract error codes and meanings.
+- [Overview](https://docs.berachain.com/build/bex/overview.md): BEX on Berachain: native DEX, deployed contracts, SDK, pool concepts, and guides.
+- [Add Liquidity Guide](https://docs.berachain.com/build/bex/sdk/add-liquidity.md): Add liquidity to BEX pools with the SDK.
+- [Berancer SDK](https://docs.berachain.com/build/bex/sdk/overview.md): BEX SDK introduction, installation, and usage.
+- [SDK API Reference](https://docs.berachain.com/build/bex/sdk/reference.md): BEX SDK API reference documentation.
+- [Remove Liquidity Guide](https://docs.berachain.com/build/bex/sdk/remove-liquidity.md): Remove liquidity from BEX pools with the SDK.
+- [Smart Order Router (SOR) Guide](https://docs.berachain.com/build/bex/sdk/sor.md): Find optimal swap routes with the BEX SDK SOR.
+- [Swap Guide](https://docs.berachain.com/build/bex/sdk/swap.md): Swap tokens with the BEX SDK.
+- [Common Resources](https://docs.berachain.com/build/getting-started/common-resources.md): Quick reference for RPC, block explorer, faucet, chain IDs, and key dApp URLs when building on Berachain.
+- [Deployed Contract Addresses](https://docs.berachain.com/build/getting-started/deployed-contracts.md): Berachain core and staking-pool contract addresses by network.
+- [Developer Tools](https://docs.berachain.com/build/getting-started/developer-tools.md): IDEs, SDKs, and tooling for building on Berachain.
+- [Introduction](https://docs.berachain.com/build/getting-started/overview.md): Get started building on Berachain: networks, tools, BEX, Bend, and common developer resources.
+- [AI Developer](https://docs.berachain.com/build/guides/ai-developer.md): Use Berachain docs with AI assistants and MCP. Server URL, stack coverage, and how to ask for the right doc.
+- [Berascan Token Update Guide](https://docs.berachain.com/build/guides/berascan-token-update.md): Learn how to update token information on Berascan, the Berachain block explorer
+- [Governance Proposal for Reward Vaults](https://docs.berachain.com/build/guides/community/berachain-governance-proposal.md): Create and submit a governance proposal for Reward Vaults on Berachain (BRIP-style).
+- [Envio Indexer ERC20](https://docs.berachain.com/build/guides/community/envio-indexer-erc20.md): Index ERC20 token data on Berachain using Envio's indexer framework. Schema and handlers for ERC20 events.
+- [HelloWorld with Ethers6 & solc](https://docs.berachain.com/build/guides/community/ethers6-solc-helloworld.md): Deploy a HelloWorld-style contract to Berachain using Ethers.js v6 and the solc compiler (no Hardhat/Foundry).
+- [ERC20 with Foundry](https://docs.berachain.com/build/guides/community/foundry-erc20.md): Create and deploy an ERC20 token on Berachain using Foundry (Forge, Cast).
+- [Gelato VRF on Berachain](https://docs.berachain.com/build/guides/community/gelato-vrf.md): Verifiable Random Function (VRF) on Berachain with Gelato. Deploy SimpleVRFContract, create a Gelato VRF task, request and fulfill randomness.
+- [Index & Query with Goldsky](https://docs.berachain.com/build/guides/community/goldsky-subgraph.md): Index Berachain data with Goldsky SDK; example subgraph for ERC20 balances. Build, deploy, query via GraphQL.
+- [Hardhat Contract Verification](https://docs.berachain.com/build/guides/community/hardhat-contract-verification.md): Verify Hardhat-deployed contracts on Berascan using the Ethers v6 verification plugin.
+- [Hardhat Ethers6 ERC1155](https://docs.berachain.com/build/guides/community/hardhat-ethers6-erc1155.md): Deploy and interact with an ERC1155 multi-token contract on Berachain using Hardhat and Ethers v6.
+- [HelloWorld with Hardhat & Viem](https://docs.berachain.com/build/guides/community/hardhat-viem-helloworld.md): Deploy and verify a HelloWorld contract on Berachain testnet with Hardhat and Viem. Includes local node and tests.
+- [Irys Upload with $BERA (Node.js)](https://docs.berachain.com/build/guides/community/irys-bera-nodejs.md): Upload files to Irys decentralized storage and pay with Berachain $BERA. Node.js script with Irys SDK.
+- [Bridging ERC20 with LayerZero V2](https://docs.berachain.com/build/guides/community/layerzero-oft.md): Bridge ERC20 tokens (e.g. $UNI) from Sepolia to Berachain using LayerZero V2 and the Omnichain Fungible Token (OFT) standard.
+- [Upgradeable Contracts (OpenZeppelin)](https://docs.berachain.com/build/guides/community/openzeppelin-upgrades.md): Deploy upgradeable contracts on Berachain using OpenZeppelin Upgrades (proxy pattern).
+- [Community Developer Guides](https://docs.berachain.com/build/guides/community/overview.md): Awesome List of Community Developer Guides
+- [Particle Auth Core Vite](https://docs.berachain.com/build/guides/community/particle-auth-core-vite.md): Wallet connection and auth on Berachain using Particle Auth in a Vite app.
+- [Provably Fair NFTs with Pyth Entropy](https://docs.berachain.com/build/guides/community/pyth-entropy.md): Use Pyth Entropy on Berachain for verifiable randomness and provably fair NFT minting. Includes setup, deploy EntropyNFT contract, and request randomness.
+- [Pyth Oracle on Berachain](https://docs.berachain.com/build/guides/community/pyth-oracle.md): Query Pyth Network price data on Berachain with on-demand updates. Deploy consumer contract, fetch price payload, call updatePrice and getPrice.
+- [RainbowKit Vite](https://docs.berachain.com/build/guides/community/rainbowkit-vite.md): Minimal React + Vite app with RainbowKit for connecting wallets to Berachain.
+- [ThirdWeb ConnectWallet NextJS](https://docs.berachain.com/build/guides/community/thirdweb-connectwallet-nextjs.md): Connect wallet and interact with Berachain using ThirdWeb ConnectWallet and Next.js.
+- [HelloWorld with Viem & solc](https://docs.berachain.com/build/guides/community/viem-solc-helloworld.md): Deploy a HelloWorld-style contract to Berachain using Viem and the solc compiler.
+- [WalletConnect Expo](https://docs.berachain.com/build/guides/community/walletconnect-expo.md): Mobile app example using Expo and WalletConnect to connect to Berachain.
+- [NextJS WalletConnect WAGMI + Viem](https://docs.berachain.com/build/guides/community/walletconnect-nextjs.md): Deploy a contract from a Next.js frontend with WalletConnect, WAGMI, and Viem. Connect via QR with MetaMask Mobile.
+- [Add Incentives to a Reward Vault](https://docs.berachain.com/build/guides/proof-of-liquidity/add-incentives.md): Add incentive tokens to an existing Reward Vault.
+- [Add Incentives with Safe](https://docs.berachain.com/build/guides/proof-of-liquidity/add-incentives-safe.md): Queue and execute Reward Vault incentive transactions through Safe.
+- [Setup Reward Vault](https://docs.berachain.com/build/guides/proof-of-liquidity/setup-reward-vault.md): Create and configure a Reward Vault for PoL integration.
+- [Verifying Smart Contracts](https://docs.berachain.com/build/guides/verifying-smart-contracts.md): Verify smart contracts on Berachain using Berascan, Hardhat, Forge, and Remix.
+- [Advanced PoL Integration](https://docs.berachain.com/build/pol/advanced-pol.md): Proof of Liquidity Integration Guide for Non-ERC20 Protocols
+- [PoL Integration Overview](https://docs.berachain.com/build/pol/integration-basics.md): Start here for PoL integration paths, setup flow, and guide map.
+- [LST Integration for PoL Auction Yield](https://docs.berachain.com/build/pol/lst-integration.md): Register an LSTStakerVault so your LST product earns a pro-rata share of WBERA paid through the PoL Incentive Auction.
+- [Partial Reward Claims](https://docs.berachain.com/build/pol/partial-reward-claims.md): Guide to partial reward claiming in Reward Vaults with WBERA emissions.
+- [RewardVaultHelper Claim Flow](https://docs.berachain.com/build/pol/reward-vault-helper-claim-flow.md): Claim Reward Vault rewards as sWBERA or native BERA.
+- [Staking for Other Accounts](https://docs.berachain.com/build/pol/staking-for-other-accounts.md): Guide to using stakeOnBehalf functionality in Berachain Reward Vaults
+- [EIP-5792 Introduction](https://docs.berachain.com/build/protocol/eip5792-overview.md): Learn about EIP-5792 and how it enables wallet batching capabilities for improved user experience
+- [Understand EIP7702 Basics](https://docs.berachain.com/build/protocol/eip7702-basics.md): Learn the basics on understanding EIP7702 by setting code for an EOA
+- [EIP-7702 Batch Transactions](https://docs.berachain.com/build/protocol/eip7702-batch-transactions.md): Guide to batch transactions using EIP-7702 on Berachain.
+- [EIP-7702 Gas Sponsorship with Anvil](https://docs.berachain.com/build/protocol/eip7702-gas-sponsorship.md): Set up a quick demo showcasing gas sponsorship on an Anvil fork unlocked by EIP-7702
+- [Protocol Features](https://docs.berachain.com/build/protocol/overview.md): Berachain-supported EIPs and chain-level capabilities for developers.
+- [PoL Governance](https://docs.berachain.com/general/governance/reward-vault-governance.md): Governance controls for Proof of Liquidity: vault whitelisting, emission parameters, incentive fee routing, and DES.
+- [Frequently Asked Questions](https://docs.berachain.com/general/help/faqs.md): Common questions about Berachain.
+- [Glossary](https://docs.berachain.com/general/help/glossary.md): Technical terms used across Berachain docs.
+- [Honeypaper](https://docs.berachain.com/general/help/honeypaper.md): Berachain Proof of Liquidity honeypaper.
+- [Reward Vault Requirements and Guidelines](https://docs.berachain.com/general/help/reward-vault-guidelines.md): Ecosystem value, technical requirements, and governance rules for Reward Vault whitelisting and WBERA emissions.
+- [Connect to Berachain](https://docs.berachain.com/general/introduction/connect-to-berachain.md): Add Berachain to your wallet and switch networks.
+- [How to Get $BERA](https://docs.berachain.com/general/introduction/how-to-get-bera.md): Bridge, buy, or earn $BERA for gas and staking.
+- [What is Berachain?](https://docs.berachain.com/general/introduction/what-is-berachain.md): EVM-identical L1, Proof-of-Liquidity consensus, and BeaconKit.
+- [What is Proof of Liquidity?](https://docs.berachain.com/general/introduction/what-is-proof-of-liquidity.md): Berachain’s economic coordination system for turning network emissions into productive liquidity, application growth, and ecosystem value.
+- [Block Production & Rewards](https://docs.berachain.com/general/proof-of-liquidity/block-rewards.md): Block production, fixed WBERA reward rate, and reward distribution.
+- [What's New](https://docs.berachain.com/general/proof-of-liquidity/changelog.md): Proof of Liquidity changes over time.
+- [Dedicated Emission Stream (DES)](https://docs.berachain.com/general/proof-of-liquidity/dedicated-emission-stream.md): Governance-guaranteed WBERA emission for strategically important vaults.
+- [Incentive Marketplace](https://docs.berachain.com/general/proof-of-liquidity/incentives.md): How businesses and protocols bid for validator-allocated WBERA emissions.
+- [Proof-of-Liquidity Overview](https://docs.berachain.com/general/proof-of-liquidity/overview.md): How BERA stake, WBERA emissions, Reward Vaults, Dedicated Emission Streams, incentives, and sWBERA fit together.
+- [Reward Vaults](https://docs.berachain.com/general/proof-of-liquidity/reward-vaults.md): Where $WBERA emissions flow, how Reward Vault incentives work, and how vault rewards are claimed.
+- [BERA Token](https://docs.berachain.com/general/tokens/bera.md): Gas token, staking, tokenomics, and how to get BERA.
+- [BGT Token](https://docs.berachain.com/general/tokens/bgt.md): BGT is a legacy token that is being deprecated. It was used in earlier iterations of Proof of Liquidity for governance and reward routing.
+- [HONEY Stablecoin](https://docs.berachain.com/general/tokens/honey.md): Minting, redemption, collateral, and basket mode.
+- [$sWBERA Token](https://docs.berachain.com/general/tokens/swbera.md): What is the $sWBERA token and how does it work.
+- [Introduction](https://docs.berachain.com/index.md): Official Berachain documentation for Proof-of-Liquidity, BEX, Bend, nodes, and building on Berachain.
+- [BeaconKit Consensus](https://docs.berachain.com/nodes/architecture/beaconkit-consensus.md): Consensus client and framework for EVM chains: CometBFT, Engine API, Eth2 modularity, and execution client diversity.
+- [EVM Execution](https://docs.berachain.com/nodes/architecture/evm-execution.md): Recommended versions and genesis files for mainnet and Bepolia.
+- [Validator Lifecycle](https://docs.berachain.com/nodes/architecture/validator-lifecycle.md): Validator states and transitions: Deposited, Eligible, Active, Exited, and Withdrawn; activation queue and stake requirements.
+- [BeaconKit API](https://docs.berachain.com/nodes/beaconkit/api.md)
+- [BeaconKit CLI](https://docs.berachain.com/nodes/beaconkit/cli.md): beacond, is an EVM consensus client implementation used as a basic beacon node for Berachain. See BeaconKit Consensus Layer for more details.
+- [BeaconKit Configuration](https://docs.berachain.com/nodes/beaconkit/configuration.md)
+- [What is BeaconKit?](https://docs.berachain.com/nodes/beaconkit/overview.md): Modular consensus layer for Ethereum-based chains.
+- [Becoming a Validator](https://docs.berachain.com/nodes/guides/become-a-validator.md): Register and activate a validator: beacond setup, deposit transaction, BeaconDeposit contract, operator and withdrawal address.
+- [Change Operator Address](https://docs.berachain.com/nodes/guides/change-operator-address.md): Update the validator operator address on the execution layer (BeaconDeposit) for BeraChef and other contract interactions.
+- [Increase Stake](https://docs.berachain.com/nodes/guides/increase-validator-stake.md): Add BERA to an existing validator via the BeaconDeposit contract to improve position in the active set.
+- [Local Devnet with Docker](https://docs.berachain.com/nodes/guides/local-devnet-docker.md): Run a local Berachain devnet with Docker for testing validator flows and deposits.
+- [Local Devnet with Kurtosis](https://docs.berachain.com/nodes/guides/local-devnet-kurtosis.md): Run a local Berachain devnet with Kurtosis for development and testing validator deposits.
+- [Manage Incentives Commission](https://docs.berachain.com/nodes/guides/manage-incentives-commission.md): Set and change the validator incentives commission rate (0–20%) via BeraChef; queue and activation delay.
+- [Manage Reward Allocations](https://docs.berachain.com/nodes/guides/manage-reward-allocations.md): Direct PoL incentives to applications via BeraChef
+- [Withdraw Stake](https://docs.berachain.com/nodes/guides/withdraw-stake.md): Partial or full withdrawal of validator BERA: withdrawal credentials, fees, minimum stake, and finalization delay.
+- [Validator FAQ](https://docs.berachain.com/nodes/help/faq.md): Frequently asked questions: getting BERA, technical support, and where to get help for node operations.
+- [Migrate Bera-Geth -> Bera-Reth](https://docs.berachain.com/nodes/operations/bera-geth-to-reth.md): Replace your execution client, match your old configuration, install a snapshot.
+- [Fusaka Upgrade](https://docs.berachain.com/nodes/operations/fusaka.md): Validator and developer changes from the Fusaka upgrade on Berachain.
+- [Monitoring](https://docs.berachain.com/nodes/operations/monitoring.md): Set up Prometheus and Grafana to monitor BeaconKit and execution layer metrics, endpoints, and sample dashboards.
+- [Production Checklist](https://docs.berachain.com/nodes/operations/production-checklist.md): Actionable pre-support checks for Beacon Kit (beacond) and Bera-Reth: versions, peering, launch flags, and ops hygiene.
+- [Quickstart: Run a Node](https://docs.berachain.com/nodes/operations/quickstart.md): Prerequisites, scripts, and steps to run BeaconKit and Bera-Reth on Linux or Mac.
+- [Self-Hosted RPC](https://docs.berachain.com/nodes/operations/self-hosted-rpc.md): Use RPCs efficiently, choose paid or self-hosted nodes, and run your own node when you need isolation or predictable throughput.
+- [Introduction](https://docs.berachain.com/nodes/overview/index.md): Run validators and RPC nodes on Berachain: BeaconKit, architecture, operations, and staking pools.
+- [Node Architecture](https://docs.berachain.com/nodes/overview/node-architecture.md): Validator and RPC node architecture: consensus and execution separation, Engine API, and dual P2P networks.
+- [Staking Pool Contracts](https://docs.berachain.com/nodes/staking-pools/contracts.md): Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.).
+- [Delegation Guide](https://docs.berachain.com/nodes/staking-pools/delegators.md): Use Foundation-delegated capital to run a staking pool: delegated create, activate, deposit, and withdraw yield.
+- [Staking Pool Installation](https://docs.berachain.com/nodes/staking-pools/installation.md): Install and activate a staking pool with helper scripts: register, activate, set min effective balance, and optional stake.
+- [Staking Pools Operator Guide](https://docs.berachain.com/nodes/staking-pools/operators.md): Configure and operate a staking pool: roles, commission, reward allocation, min effective balance, and front-end.
+- [Staking Pools Overview](https://docs.berachain.com/nodes/staking-pools/overview.md): Validator-operated liquid staking: stBERA, contract architecture, security, staker experience, and PoL integration.

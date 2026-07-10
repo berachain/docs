@@ -1,5 +1,5 @@
 
-default: contracts-generate format check
+default: contracts-generate llms-generate format check
 
 help:
 	@echo "Common docs tasks:"
@@ -14,6 +14,8 @@ help:
 	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
 	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
 	@echo "  make contracts-generate      # Regenerate contract pages/snippets from data/contracts.json"
+	@echo "  make llms-generate           # Regenerate llms.txt from docs.json + page frontmatter"
+	@echo "  make llms-check              # Fail if llms.txt is stale"
 	@echo "  make check-pol-addresses     # POLAddresses vs contracts.json summary (fails if not_ok > 0)"
 	@echo "  make list-pol-addresses-not-ok # List all not_ok POL address rows"
 	@echo "  make format             # Reformat all .md and .mdx files with Prettier"
@@ -23,9 +25,9 @@ help:
 dev:
 	mint dev
 
-check: check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses
+check: llms-check check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses
 
-check-validate:
+check-validate: llms-check
 	mint validate
 
 check-links:
@@ -82,6 +84,12 @@ contracts-generate:
 	node scripts/contracts/generate-pages.mjs
 	make format
 
+llms-generate:
+	node scripts/generate-llms.mjs
+
+llms-check:
+	node scripts/generate-llms.mjs --check
+
 POL_ADDRESSES_SOL := ../contracts-internal/script/pol/POLAddresses.sol
 
 check-pol-addresses:
@@ -102,4 +110,3 @@ list-pol-addresses-not-ok:
 
 mint-install:
 	npm i -g mint
-

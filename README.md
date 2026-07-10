@@ -18,7 +18,7 @@ We welcome contributions from the community. Whether you're fixing a typo, clari
 - **Build** — Getting started, BEX, Bend, nodes, validators
 - **Reference** — APIs, contracts, and technical reference
 
-Content is in MDX. Navigation and branding are configured in `docs.json`.
+Content is in MDX. Navigation and branding are configured in `docs.json`. `llms.txt` is generated from navigation and page metadata; do not edit it by hand.
 
 ---
 
@@ -50,6 +50,12 @@ Check that the docs build with no warnings or errors (recommended for CI and bef
 
 ```bash
 mint validate
+```
+
+If page metadata or navigation changed, regenerate the committed LLM index too:
+
+```bash
+make llms-generate
 ```
 
 ---

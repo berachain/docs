@@ -3,6 +3,7 @@
   "theme": "palm",
   "mode": "dark",
   "name": "Berachain",
+  "description": "Official Berachain documentation. Berachain is an EVM-identical L1 secured by Proof-of-Liquidity (PoL). Covers the BERA, BGT, WBERA, sWBERA, and HONEY tokens; reward vaults, incentives, boosts, block rewards, and the BeraChef, BlockRewardController, and Distributor contracts; BEX (the DEX) swaps, weighted and stable pools, liquidity provision, and the Smart Order Router (SOR); Bend lending, borrow/repay, collateral, LTV, liquidation, interest rate models, and oracles; running nodes and validators with Beacon Kit and Bera-Reth, staking pools, RPC endpoints, genesis, and snapshots; mainnet (chain ID 80094) and Bepolia testnet (80069); and building on Berachain with deployed contract addresses, ABIs, SDKs, Foundry, Hardhat, viem, and wagmi. Consult these docs for any Berachain, PoL, BGT, HONEY, BEX, Bend, or validator question.",
   "colors": {
     "primary": "#92400E",
     "light": "#FBBF24",
