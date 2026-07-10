@@ -7,6 +7,7 @@ const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
 const checkMode = process.argv.includes("--check");
+const missingValue = "🤓";
 let changedCount = 0;
 let wroteCount = 0;
 let unchangedCount = 0;
@@ -36,7 +37,7 @@ function write(relPath, content) {
 }
 
 function berascanLink(address, network) {
-  if (!address) return "N/A";
+  if (!address) return missingValue;
   const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
   return `[\`${address}\`](${host}/address/${address})`;
 }
@@ -49,34 +50,126 @@ function hasAnyDeployment(items, network) {
   return items.some((item) => Boolean(addressFor(item, network)));
 }
 
-function networkRow(item, network, includeAbi = false, boldName = false) {
-  const address = berascanLink(addressFor(item, network), network);
-  const name = boldName ? `**${item.name}**` : item.name;
-  if (includeAbi) {
-    const abi = item.abi ? `[ABI](${item.abi})` : "N/A";
-    return `| ${name} | ${address} | ${abi} |`;
-  }
-  return `| ${name} | ${address} |`;
+function linkFor(item, key, network) {
+  const value = item?.[key];
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[network] ?? "";
 }
 
-function renderAddressCategory(title, items, network) {
-  if (!hasAnyDeployment(items, network)) return "";
-  const rows = items.map((item) => networkRow(item, network)).join("\n");
+function linkCell(item, key, network, label) {
+  const href = linkFor(item, key, network);
+  return href ? `[${label}](${href})` : missingValue;
+}
+
+function resourcesCell(item, network, abiLabel = "ABI") {
+  const resources = [
+    ["abi", abiLabel],
+    ["source", "Source"],
+    ["reference", "Reference"]
+  ]
+    .map(([key, label]) => {
+      const href = linkFor(item, key, network);
+      return href ? `[${label}](${href})` : "";
+    })
+    .filter(Boolean);
+
+  return resources.length ? resources.join(" · ") : missingValue;
+}
+
+function berascanUrl(address, network) {
+  if (!address) return "";
+  const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
+  return `${host}/address/${address}`;
+}
+
+function resourceLinks(item, network, abiLabel = "ABI") {
+  const address = addressFor(item, network);
+  const links = [
+    address ? `[Berascan](${berascanUrl(address, network)})` : "",
+    linkFor(item, "abi", network) ? `[${abiLabel}](${linkFor(item, "abi", network)})` : "",
+    linkFor(item, "source", network) ? `[Source](${linkFor(item, "source", network)})` : "",
+    linkFor(item, "reference", network) ? `[Reference](${linkFor(item, "reference", network)})` : ""
+  ].filter(Boolean);
+
+  return links.length ? links.join(" · ") : missingValue;
+}
+
+function codeBlock(value) {
+  return `\`\`\`text
+${value}
+\`\`\``;
+}
+
+function contractCard(item, network, abiLabel = "ABI") {
+  const address = addressFor(item, network);
+  if (!address) return "";
+  return `<Card title="${item.name}">
+
+${codeBlock(address)}
+
+${resourceLinks(item, network, abiLabel)}
+
+</Card>`;
+}
+
+function renderCardCategory(title, items, network, abiLabel = "ABI") {
+  const cards = items.map((item) => contractCard(item, network, abiLabel)).filter(Boolean);
+  if (!cards.length) return "";
   return `### ${title}
 
-| Name | Address |
-|------|---------|
+<CardGroup cols={2}>
+${cards.join("\n")}
+</CardGroup>`;
+}
+
+function contractCell(item, network, boldName = false) {
+  const address = berascanLink(addressFor(item, network), network);
+  const name = boldName ? `**${item.name}**` : item.name;
+  return `${name}<br />${address}`;
+}
+
+function networkRow(item, network, options = {}) {
+  const {
+    includeAbi = false,
+    includeSource = false,
+    includeResources = false,
+    combineNameAddress = false,
+    boldName = false,
+    abiLabel = "ABI"
+  } = options;
+  const columns = combineNameAddress
+    ? [contractCell(item, network, boldName)]
+    : [boldName ? `**${item.name}**` : item.name, berascanLink(addressFor(item, network), network)];
+  if (includeResources) columns.push(resourcesCell(item, network, abiLabel));
+  if (includeAbi) columns.push(linkCell(item, "abi", network, abiLabel));
+  if (includeSource) columns.push(linkCell(item, "source", network, "Source"));
+  return `| ${columns.join(" | ")} |`;
+}
+
+function renderAddressCategory(title, items, network, options = {}) {
+  if (!hasAnyDeployment(items, network)) return "";
+  const rows = items.map((item) => networkRow(item, network, options)).join("\n");
+  const header = options.combineNameAddress ? ["Contract"] : ["Name", "Address"];
+  if (options.includeResources) header.push("Resources");
+  if (options.includeAbi) header.push("ABI");
+  if (options.includeSource) header.push("Source");
+  return `### ${title}
+
+| ${header.join(" | ")} |
+| ${header.map(() => "---").join(" | ")} |
 ${rows}`;
 }
 
 function renderAbiCategory(title, items, network, boldName = false) {
   if (!hasAnyDeployment(items, network)) return "";
-  const rows = items.map((item) => networkRow(item, network, true, boldName)).join("\n");
+  void boldName;
+  const cards = items.map((item) => contractCard(item, network)).filter(Boolean);
   return `### ${title}
 
-| Name | Address | ABI |
-| --- | ------- | --- |
-${rows}`;
+<CardGroup cols={2}>
+${cards.join("\n")}
+</CardGroup>`;
 }
 
 function renderGettingStartedSnippet() {
@@ -84,19 +177,29 @@ function renderGettingStartedSnippet() {
   const tokenItems = Object.values(contracts.tokens);
   const governanceItems = Object.values(contracts.governance ?? {});
   const otherItems = Object.values(contracts.other);
+  const stakingPoolItems = Object.values(contracts.stakingPools);
+  const linkedColumns = { combineNameAddress: true, includeResources: true };
   const mainSections = [
-    renderAddressCategory("Proof of Liquidity", polItems, "berachainMainnet"),
-    renderAddressCategory("Tokens", tokenItems, "berachainMainnet"),
-    renderAddressCategory("Governance", governanceItems, "berachainMainnet"),
-    renderAddressCategory("Other", otherItems, "berachainMainnet")
+    renderAddressCategory("Proof of Liquidity", polItems, "berachainMainnet", linkedColumns),
+    renderAddressCategory("Tokens", tokenItems, "berachainMainnet", linkedColumns),
+    renderAddressCategory("Governance", governanceItems, "berachainMainnet", linkedColumns),
+    renderAddressCategory("Staking pools", stakingPoolItems, "berachainMainnet", {
+      ...linkedColumns,
+      abiLabel: "ABI JSON"
+    }),
+    renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns)
   ]
     .filter(Boolean)
     .join("\n\n");
   const bepSections = [
-    renderAddressCategory("Proof of Liquidity", polItems, "berachainBepolia"),
-    renderAddressCategory("Tokens", tokenItems, "berachainBepolia"),
-    renderAddressCategory("Governance", governanceItems, "berachainBepolia"),
-    renderAddressCategory("Other", otherItems, "berachainBepolia")
+    renderAddressCategory("Proof of Liquidity", polItems, "berachainBepolia", linkedColumns),
+    renderAddressCategory("Tokens", tokenItems, "berachainBepolia", linkedColumns),
+    renderAddressCategory("Governance", governanceItems, "berachainBepolia", linkedColumns),
+    renderAddressCategory("Staking pools", stakingPoolItems, "berachainBepolia", {
+      ...linkedColumns,
+      abiLabel: "ABI JSON"
+    }),
+    renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns)
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -105,17 +208,19 @@ function renderGettingStartedSnippet() {
     .map((item) => `| ${item.name} | \`${item.address.ethereumMainnet}\` | \`${item.address.berachainMainnet}\` |`)
     .join("\n");
 
-  return `## Mainnet contracts
-
-${mainSections}${bepSections ? `\n\n## Bepolia testnet contracts\n\n${bepSections}` : ""}
-
-### NFT contracts
+  const nftSection = `### NFT contracts
 
 Berachain NFT contract addresses on both Ethereum (via LayerZero adapters) and Berachain mainnet.
 
 | Collection | Ethereum Adapter | Berachain Address |
 |------------|------------------|-------------------|
-${nftRows}
+${nftRows}`;
+
+  return `## Mainnet contracts
+
+${mainSections}
+
+${nftSection}${bepSections ? `\n\n## Bepolia testnet contracts\n\n${bepSections}` : ""}
 `;
 }
 
@@ -124,16 +229,22 @@ function renderBexSnippet() {
   const mainSection = hasAnyDeployment(items, "berachainMainnet")
     ? `## Mainnet contracts
 
-| Name | Address | ABI |
-| ---- | ------- | --- |
-${items.map((item) => networkRow(item, "berachainMainnet", true)).join("\n")}`
+<CardGroup cols={2}>
+${items
+  .map((item) => contractCard(item, "berachainMainnet"))
+  .filter(Boolean)
+  .join("\n")}
+</CardGroup>`
     : "";
   const bepSection = hasAnyDeployment(items, "berachainBepolia")
     ? `## Bepolia testnet contracts
 
-| Name | Address | ABI |
-| ---- | ------- | --- |
-${items.map((item) => networkRow(item, "berachainBepolia", true)).join("\n")}`
+<CardGroup cols={2}>
+${items
+  .map((item) => contractCard(item, "berachainBepolia"))
+  .filter(Boolean)
+  .join("\n")}
+</CardGroup>`
     : "";
 
   return [mainSection, bepSection].filter(Boolean).join("\n\n");
@@ -188,20 +299,22 @@ function renderStakingPoolsSnippet() {
   const mainSection = hasAnyDeployment(items, "berachainMainnet")
     ? `#### Mainnet
 
-| Name | Address | ABI |
-|------|---------|-----|
+<CardGroup cols={2}>
 ${items
-  .map((item) => `| **${item.name}** | ${berascanLink(item.address.berachainMainnet, "berachainMainnet")} | [ABI JSON](${item.abi}) |`)
-  .join("\n")}`
+  .map((item) => contractCard(item, "berachainMainnet", "ABI JSON"))
+  .filter(Boolean)
+  .join("\n")}
+</CardGroup>`
     : "";
   const bepSection = hasAnyDeployment(items, "berachainBepolia")
     ? `#### Bepolia
 
-| Name | Address | ABI |
-|------|---------|-----|
+<CardGroup cols={2}>
 ${items
-  .map((item) => `| **${item.name}** | ${berascanLink(item.address.berachainBepolia, "berachainBepolia")} | [ABI JSON](${item.abi}) |`)
-  .join("\n")}`
+  .map((item) => contractCard(item, "berachainBepolia", "ABI JSON"))
+  .filter(Boolean)
+  .join("\n")}
+</CardGroup>`
     : "";
 
   return [mainSection, bepSection].filter(Boolean).join("\n\n");
@@ -214,26 +327,18 @@ description: "Berachain core and staking-pool contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
-import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 For **BEX** (DEX) addresses, see [BEX deployed contracts](/build/bex/deployed-contracts). For **Bend** (lending) addresses, see [Bend deployed contracts](/build/bend/deployed-contracts).
 
 All contracts are verified at the [block explorer](https://berascan.com).
 * ABI files: [berachain/abis](https://github.com/berachain/abis).
 * Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
-* Staking pools: [berachain/contracts-staking-pools](https://github.com/berachain/contracts-staking-pools).
 
 <Info>
 All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).
 </Info>
 
 <CoreContractsTable />
-
-## Staking pool contracts
-
-Shared singleton addresses for staking pools are listed below. For per-pool proxies, behavior, and links to the guides repo, see [Staking pool contracts](/nodes/staking-pools/contracts).
-
-<StakingPoolSingletonsTable />
 `;
 }
 
@@ -256,11 +361,6 @@ For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/
 </Warning>
 
 The following is a list of contract addresses for interacting with Berachain BEX.
-
-<Tip>
-  A full list of contract ABIs can be found at
-  [github.com/berachain/doc-abis](https://github.com/berachain/doc-abis).
-</Tip>
 
 <BexContractsTable />
 `;
