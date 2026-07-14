@@ -132,7 +132,7 @@ Run the prose linter on touched files:
 
 ```bash
 brew install vale  # one-time install
-make check-vale    # default scope: the Fusaka release page
+make check-vale    # default scope: the Osaka1 release page
 VALE_PATHS="general/ build/your-changed-file.mdx" make check-vale  # override scope to your edits
 ```
 

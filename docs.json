@@ -310,7 +310,6 @@
             "pages": [
               "nodes/operations/production-checklist",
               "nodes/operations/monitoring",
-              "nodes/operations/fusaka",
               "nodes/operations/osaka1",
               "nodes/guides/become-a-validator",
               {
