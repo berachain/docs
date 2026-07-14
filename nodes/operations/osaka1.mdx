@@ -3,18 +3,14 @@ title: "Osaka1 Upgrade"
 description: "Validator and developer changes from the Osaka1 upgrade on Berachain Bepolia."
 ---
 
-Osaka1 is a Berachain-specific execution-layer hardfork that floors the **minimum base fee** and **minimum blob base fee** at **1 gwei** each after activation, improving network resilience against fee spam. It is separate from (and follows) the [Fusaka upgrade features](/build/protocol/overview#fusaka-upgrade-features).
+Osaka1 is a Berachain-specific execution-layer hardfork that floors the **minimum base fee** and **minimum blob base fee** at **1 gwei** each after activation.
 
 ## Upgrade timing
 
 | Network         | Activation Date (UTC)   | Binaries Available |
 | --------------- | ------------------------ | ------------------ |
 | Bepolia Testnet | 4pm July 22, 2026        | July 14            |
-| Mainnet         | Not yet scheduled        | —                  |
-
-<Warning>
-  **DO NOT INSTALL THIS ON MAINNET NODES.** Mainnet still carries a placeholder Osaka1 activation time. Running a Bera-Reth Osaka1 build against Mainnet before Mainnet activation is configured will fork you off the network.
-</Warning>
+| Mainnet         | Placeholder activation time | —                |
 
 ## What changes
 
@@ -22,8 +18,6 @@ After the fork activates, Bera-Reth enforces configurable floors on the two EIP-
 
 - **Minimum base fee:** `1 gwei` (`1_000_000_000` wei). The next-block base fee can no longer decay below this value.
 - **Minimum blob base fee:** `1 gwei` (`1_000_000_000` wei). The EIP-4844 blob base fee is lifted to this floor, shifting the entire exponential curve baseline.
-
-These floors are anti-spam measures. Pre-Osaka1, Bepolia's Prague2 minimum base fee was `0 gwei`, allowing the base fee to decay to zero under low demand. Osaka1 closes that gap.
 
 ## Configuration
 
@@ -43,16 +37,8 @@ Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Ret
 
 1. Download the [recommended versions](/nodes/architecture/evm-execution) for Bepolia:
    - **Bera-Reth v1.4.3-rc.0**
-   - **Beacon-Kit v1.4.2-rc.0** (tagged for reference; no Beacon-Kit binary upgrade is required for the fork to activate, but we recommend running it for chainspec alignment).
+   - **Beacon-Kit v1.4.2-rc.0**
 2. If you use the built-in chain preset, keep your Bera-Reth startup as `--chain bepolia`. The preset carries Osaka1 automatically; no genesis file change is needed.
 3. If you use `--chain <path>`, fetch the [Bepolia genesis from Beacon-Kit v1.4.2-rc.0](https://github.com/berachain/beacon-kit/blob/v1.4.2-rc.0/testing/networks/80069/eth-genesis.json) and overwrite your current genesis file. Verify the md5: `f7d31d1039b0253f5f43336e55d28054`.
 4. No changes are needed to BeaconKit options.
 5. Start the new `beacond` and `bera-reth` binaries.
-
-<Info>
-  Bera-Geth cannot follow Osaka1. If you are still running Bera-Geth on Bepolia, follow our [migration guide](/nodes/operations/bera-geth-to-reth) to install Bera-Reth before the fork.
-</Info>
-
-## Support
-
-If you have questions about this upgrade, the best place for support is our [Discord's](https://discord.gg/berachain) #node-support channel.
