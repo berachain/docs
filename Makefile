@@ -35,16 +35,15 @@ check-a11y:
 	mint a11y
 
 # Vale prose linter. Vocabulary lives in vale/config/vocabularies/Berachain/.
-# Default scope is the Osaka1 release page; the broader docs tree carries a
-# ~700-error vocab backlog and is excluded until that is swept. Override
-# scope by setting VALE_PATHS, e.g.:
+# Lint the entire documentation tree by default. Set VALE_PATHS to lint a
+# narrower explicit scope, e.g.:
 #   VALE_PATHS="general/ nodes/ build/" make check-vale
 check-vale:
 	@if ! command -v vale >/dev/null 2>&1; then \
 		echo "❌ vale not on PATH. Install with: brew install vale"; \
 		exit 1; \
 	fi
-	vale $${VALE_PATHS:-nodes/operations/osaka1.mdx}
+	vale $${VALE_PATHS:-.}
 
 check-redirects:
 	bash scripts/check-redirects.sh $${BASE_URL:-http://localhost:3000}
