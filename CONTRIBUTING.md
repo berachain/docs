@@ -133,7 +133,6 @@ Run the prose linter on touched files:
 ```bash
 brew install vale  # one-time install
 make check-vale    # lint the full documentation tree
-VALE_PATHS="general/ build/your-changed-file.mdx" make check-vale  # lint an explicit narrower scope
 ```
 
 The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects, POL address sync). Fix any errors before opening your PR.

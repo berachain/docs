@@ -35,15 +35,12 @@ check-a11y:
 	mint a11y
 
 # Vale prose linter. Vocabulary lives in vale/config/vocabularies/Berachain/.
-# Lint the entire documentation tree by default. Set VALE_PATHS to lint a
-# narrower explicit scope, e.g.:
-#   VALE_PATHS="general/ nodes/ build/" make check-vale
 check-vale:
 	@if ! command -v vale >/dev/null 2>&1; then \
 		echo "❌ vale not on PATH. Install with: brew install vale"; \
 		exit 1; \
 	fi
-	vale $${VALE_PATHS:-.}
+	vale .
 
 check-redirects:
 	bash scripts/check-redirects.sh $${BASE_URL:-http://localhost:3000}
