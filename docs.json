@@ -1350,6 +1350,11 @@
       "source": "/general/proof-of-liquidity/participants",
       "destination": "/general/proof-of-liquidity/overview",
       "permanent": true
+    },
+    {
+      "source": "/nodes/operations/fusaka",
+      "destination": "/build/protocol/overview#fusaka-upgrade-features",
+      "permanent": true
     }
   ]
 }
