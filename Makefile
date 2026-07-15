@@ -37,7 +37,7 @@ check-a11y:
 # Vale prose linter. Vocabulary lives in vale/config/vocabularies/Berachain/.
 check-vale:
 	@if ! command -v vale >/dev/null 2>&1; then \
-		echo "❌ vale not on PATH. Install with: brew install vale"; \
+		echo "vale not on PATH. Install with: brew install vale"; \
 		exit 1; \
 	fi
 	vale .
