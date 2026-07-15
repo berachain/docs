@@ -17,7 +17,7 @@ Businesses integrate once. Users don’t need to learn PoL-specific concepts. Va
 
 **High-growth teams** receive guaranteed, multi-month dedicated emission streams sized to their stage and plan. For a validator operator who is also a business owner or partner in an ERA cohort, this changes the model from “bid every epoch for yield” to “underwrite and finance a company with protocol capital." It is closer to a growth-equity financing round than pure validator operations.
 
-This upgrade will deploy to the network approximately 24 hours before the [Fusaka upgrade](/nodes/operations/fusaka).
+This upgrade deployed to the network approximately 24 hours before the [Fusaka upgrade](/build/protocol/overview#fusaka-upgrade-features).
 
 ### BGT is deprecated
 
@@ -37,17 +37,17 @@ BGT no longer has a user-facing role in Proof of Liquidity. It no longer influen
 
 References: [BGT](/general/tokens/bgt), [Reward vaults](/general/proof-of-liquidity/reward-vaults), [BERA and WBERA](/general/tokens/bera), [Partial reward claims](/build/pol/partial-reward-claims), [RewardVaultHelper claim flow](/build/pol/reward-vault-helper-claim-flow), [\$sWBERA](/general/tokens/swbera), [Block rewards](/general/proof-of-liquidity/block-rewards).
 
-### What's next
+### Deployment timeline
 
-**Timeline**: These changes to Proof of Liquidity will launch 24 hours before the upcoming [Fusaka hardfork](/nodes/operations/fusaka).
+**Timeline**: These Proof of Liquidity changes deployed 24 hours before the [Fusaka hardfork](/build/protocol/overview#fusaka-upgrade-features).
 
-| User / Actor         | Expected Action                                                                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| BGT holders          | Redeem BGT directly or migrate through the [Hub](https://hub.berachain.com) UI, after the fusaka fork activates ([timeline](/nodes/operations/fusaka)) |
-| Reward vault stakers | No action needed. Continue using eligible reward vaults. Rewards will shift to BERA and be claimable as either \$BERA or \$sWBERA                      |
-| Vault owners         | No action needed. Existing vaults do not require owner-side migration                                                                                  |
-| Validators           | Per-block emissions will become fixed, and boost mechanics will be removed.                                                                            |
-| Integrators          | Update integrations to remove dependencies on BGT LSTs, boost dynamics, and BGT-based reward assumptions                                               |
+| User / Actor         | Expected Action                                                                                                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BGT holders          | Redeem BGT directly or migrate through the [Hub](https://hub.berachain.com) UI, following Fusaka activation ([timeline](/build/protocol/overview#fusaka-upgrade-features)) |
+| Reward vault stakers | No action needed. Continue using eligible reward vaults. Rewards will shift to BERA and be claimable as either \$BERA or \$sWBERA                                          |
+| Vault owners         | No action needed. Existing vaults do not require owner-side migration                                                                                                      |
+| Validators           | Per-block emissions will become fixed, and boost mechanics will be removed.                                                                                                |
+| Integrators          | Update integrations to remove dependencies on BGT LSTs, boost dynamics, and BGT-based reward assumptions                                                                   |
 
 ### Source code & audits
 

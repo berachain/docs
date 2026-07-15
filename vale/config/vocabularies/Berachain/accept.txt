@@ -150,3 +150,15 @@ ABI
 ABIs
 nowrap
 bootnode
+Makefile
+hardfork
+hardforks
+Pectra
+permissionless
+LSTs
+reinitializer
+env
+multisig
+gwei
+wei
+chainspec

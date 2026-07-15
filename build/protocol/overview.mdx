@@ -3,24 +3,24 @@ title: "Protocol Features"
 description: "Berachain-supported EIPs and chain-level capabilities for developers."
 ---
 
-Berachain supports core Ethereum upgrades plus newer transaction UX standards. This section is a high-level map of what is live onchain today, with detailed guides in the sidebar.
+Berachain supports core Ethereum upgrades plus newer transaction UX standards. This section is a high-level map of what is live on-chain today, with detailed guides in the sidebar.
 
 ## Upgrade Timeline
 
-| Upgrade                                            | Mainnet activation | Bepolia activation | Status      |
-| -------------------------------------------------- | ------------------ | ------------------ | ----------- |
-| Pre-merge hardforks (Frontier through GrayGlacier) | Genesis            | Genesis            | Live        |
-| Merge (Paris)                                      | Genesis            | Genesis            | Live        |
-| Shanghai                                           | Genesis            | Genesis            | Live        |
-| Cancun                                             | Genesis            | Genesis            | Live        |
-| Prague / Pectra                                    | 2025-06-04         | 2025-05-07         | Live        |
-| Berachain Prague1                                  | 2025-09-03         | 2025-08-06         | Live        |
-| Berachain Prague2                                  | 2025-09-30         | 2025-09-17         | Live        |
-| Fulu + Osaka = Fusaka                              | 2026-06-24         | 2026-05-27         | Coming soon |
+| Upgrade                                            | Mainnet activation | Bepolia activation | Status |
+| -------------------------------------------------- | ------------------ | ------------------ | ------ |
+| Pre-merge hardforks (Frontier through GrayGlacier) | Genesis            | Genesis            | Live   |
+| Merge (Paris)                                      | Genesis            | Genesis            | Live   |
+| Shanghai                                           | Genesis            | Genesis            | Live   |
+| Cancun                                             | Genesis            | Genesis            | Live   |
+| Prague / Pectra                                    | 2025-06-04         | 2025-05-07         | Live   |
+| Berachain Prague1                                  | 2025-09-03         | 2025-08-06         | Live   |
+| Berachain Prague2                                  | 2025-09-30         | 2025-09-17         | Live   |
+| Fulu + Osaka = Fusaka                              | 2026-06-24         | 2026-05-27         | Live   |
 
 ## Fusaka Upgrade Features
 
-The Fusaka upgrade activates several execution-layer features on the Berachain EVM:
+The Fusaka upgrade activated several execution-layer features on the Berachain EVM:
 
 - **EIP-6110 (in-payload deposits):** Deposit requests are included in execution payloads and consumed by consensus **in the same block**, replacing the eth1 follow-distance deposit queue. Berachain processes deposits **per block** and emits a chain-specific deposit event for tooling that monitors stake flows.
 - **EIP-7951 (P-256 precompile):** Native verification of passkey and hardware-key signatures, usable for smart-account flows backed by WebAuthn, Apple Secure Enclave, Android Keystore, and HSMs.

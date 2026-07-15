@@ -132,8 +132,7 @@ Run the prose linter on touched files:
 
 ```bash
 brew install vale  # one-time install
-make check-vale    # default scope: the Fusaka release page
-VALE_PATHS="general/ build/your-changed-file.mdx" make check-vale  # override scope to your edits
+make check-vale    # lint the full documentation tree
 ```
 
 The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects, POL address sync). Fix any errors before opening your PR.
