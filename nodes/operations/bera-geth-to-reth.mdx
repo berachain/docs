@@ -52,9 +52,15 @@ Bera-Reth inherits Reth's CLI. The full upstream option list for the node comman
 | `--nat extip:IP`                                          | same; this option is highly recommended                  |
 | `--port` (execution P2P)                                  | `--port` and `--discovery.port`                          |
 | `--static-peers <peer,peer>`                              | `--trusted-peers <peer,peer>`                            |
+| `--txpool.pricebump <N>`                                  | same                                                     |
+| `--txpool.accountslots <N>`                               | `--txpool.max-account-slots <N>`                         |
+| `--txpool.lifetime <duration>`                            | same (seconds; e.g. `10800`)                             |
+| `--miner.gasprice <wei>` / `--txpool.pricelimit <wei>`    | `--txpool.minimum-priority-fee <wei>`                    |
 | Full node vs archive                                      | Pruned-style: pass `--full`. Full archive: omit `--full` |
 
 Pass `--chain` with your EL genesis JSON path on every `bera-reth node` start, not only after `init`.
+
+**Enforcing a minimum priority fee.** If you set a floor on tips under Bera-Geth (typically via `--miner.gasprice` or `--txpool.pricelimit`), use `--txpool.minimum-priority-fee <wei>` on Bera-Reth. Transactions with a priority fee below this value are rejected from the pool. Omit the flag to accept any priority fee (Reth's default).
 
 **Bootnodes** — Use the current [mainnet](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80094/el-bootnodes.txt) or [Bepolia](https://github.com/berachain/beacon-kit/blob/main/testing/networks/80069/el-bootnodes.txt) `el-bootnodes.txt` with `--bootnodes` (comma-separated `enode://` lines).
 
