@@ -1,6 +1,6 @@
 ---
 title: "Osaka1 Upgrade"
-description: "Validator and developer changes from the Osaka1 upgrade on Berachain Bepolia."
+description: "Validator and developer changes from the Osaka1 upgrade on Berachain Mainnet & Bepolia."
 ---
 
 Osaka1 is a Berachain-specific execution-layer hardfork that floors the **minimum base fee** and **minimum blob base fee** at **1 gwei** each after activation.
@@ -21,7 +21,7 @@ After the fork activates, Bera-Reth enforces configurable floors on the two EIP-
 
 ## Configuration
 
-Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Reth v1.4.3-rc.0. The Berachain genesis `berachain.osaka1` block for Mainnet and Bepolia are:
+Osaka1 is carried in the built-in `--chain bepolia` and `--chain mainnet` presets shipped with Bera-Reth v1.4.3. The Berachain genesis `berachain.osaka1` block for Mainnet and Bepolia are:
 
 ### Mainnet
 
@@ -58,7 +58,7 @@ Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Ret
   ```
 </Warning>
 
-1. Download the [recommended versions](/nodes/architecture/evm-execution) for 
+1. Download the [recommended versions](/nodes/architecture/evm-execution) for
    1. Mainnet
       - **Bera-Reth v1.4.3**
       - **Beacon-Kit v1.4.1**
@@ -67,15 +67,15 @@ Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Ret
       - **Beacon-Kit v1.4.2-rc.0**
 2. If you use the built-in chain preset, keep your Bera-Reth startup as follows as the preset carries Osaka1 automatically; no genesis file change is needed.:
    1. Mainnet
-      1.  `--chain mainnet`
+      1. `--chain mainnet`
    2. Bepolia
-      1.  `--chain bepolia`.
+      1. `--chain bepolia`.
 3. If you use `--chain <path>`, fetch the genesis files for each respective chain:
    1. Mainnet
-      1. [Mainnet genesis from Beacon Kit main branch (or commit hash 2059e2...)](https://raw.githubusercontent.com/berachain/beacon-kit/2059e2abea2a42513a0617a38cd7f758d1a1e6a1/testing/networks/80094/eth-genesis.json) and overwrite your current genesis file. 
+      1. [Mainnet genesis from Beacon Kit main branch (or commit hash 2059e2...)](https://raw.githubusercontent.com/berachain/beacon-kit/2059e2abea2a42513a0617a38cd7f758d1a1e6a1/testing/networks/80094/eth-genesis.json) and overwrite your current genesis file.
       2. Verify the md5: `d367b133f368367c3e973636ad059c79`.
    2. Bepolia
-      1.  [Bepolia genesis from Beacon Kit v1.4.2-rc.0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.4.2-rc.0/testing/networks/80069/eth-genesis.json) and overwrite your current genesis file. 
+      1. [Bepolia genesis from Beacon Kit v1.4.2-rc.0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.4.2-rc.0/testing/networks/80069/eth-genesis.json) and overwrite your current genesis file.
       2. Verify the md5: `f7d31d1039b0253f5f43336e55d28054`.
 4. No changes are needed to BeaconKit options.
 5. Start the new `beacond` and `bera-reth` binaries.
