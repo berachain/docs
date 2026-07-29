@@ -1,16 +1,16 @@
 ---
 title: "Osaka1 Upgrade"
-description: "Validator and developer changes from the Osaka1 upgrade on Berachain Bepolia."
+description: "Validator and developer changes from the Osaka1 upgrade on Berachain Mainnet & Bepolia."
 ---
 
 Osaka1 is a Berachain-specific execution-layer hardfork that floors the **minimum base fee** and **minimum blob base fee** at **1 gwei** each after activation.
 
 ## Upgrade timing
 
-| Network         | Activation Date (UTC)       | Binaries Available |
-| --------------- | --------------------------- | ------------------ |
-| Bepolia Testnet | 4pm July 22, 2026           | July 14            |
-| Mainnet         | Placeholder activation time | —                  |
+| Network | Activation Date (UTC) | Binaries Available |
+| --- | --- | --- |
+| Bepolia Testnet | 4pm / 16:00 July 22, 2026 | July 14 |
+| Mainnet | 4pm / 16:00 August 5, 2026 | July 29 |
 
 ## What changes
 
@@ -21,7 +21,21 @@ After the fork activates, Bera-Reth enforces configurable floors on the two EIP-
 
 ## Configuration
 
-Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Reth v1.4.3-rc.0. The Berachain genesis `berachain.osaka1` block for Bepolia is:
+Osaka1 is carried in the built-in `--chain bepolia` and `--chain mainnet` presets shipped with Bera-Reth v1.4.3. The Berachain genesis `berachain.osaka1` block for Mainnet and Bepolia are:
+
+### Mainnet
+
+```json
+"osaka1": {
+  "time": 1785945600,
+  "minimumBaseFeeWei": 1000000000,
+  "minimumBlobBaseFeeWei": 1000000000
+}
+```
+
+`1785945600` is `2026-08-05 16:00:00 UTC`. The matching chainspec is [available in the Beacon Kit main branch (or commit hash 2059e2...) genesis file](https://raw.githubusercontent.com/berachain/beacon-kit/2059e2abea2a42513a0617a38cd7f758d1a1e6a1/testing/networks/80094/eth-genesis.json).
+
+### Bepolia
 
 ```json
 "osaka1": {
@@ -35,10 +49,33 @@ Osaka1 is carried in the built-in `--chain bepolia` preset shipped with Bera-Ret
 
 ## Upgrade instructions
 
-1. Download the [recommended versions](/nodes/architecture/evm-execution) for Bepolia:
-   - **Bera-Reth v1.4.3-rc.0**
-   - **Beacon-Kit v1.4.2-rc.0**
-2. If you use the built-in chain preset, keep your Bera-Reth startup as `--chain bepolia`. The preset carries Osaka1 automatically; no genesis file change is needed.
-3. If you use `--chain <path>`, fetch the [Bepolia genesis from Beacon Kit v1.4.2-rc.0](https://raw.githubusercontent.com/berachain/beacon-kit/v1.4.2-rc.0/testing/networks/80069/eth-genesis.json) and overwrite your current genesis file. Verify the md5: `f7d31d1039b0253f5f43336e55d28054`.
+<Warning>
+  **VALIDATORS:** Ensure that for `bera-reth` to no longer include and remove this flag:
+
+  ```shellscript
+  # REMOVE THIS
+  --txpool.minimum-priority-fee 1000000000
+  ```
+</Warning>
+
+1. Download the [recommended versions](/nodes/architecture/evm-execution) for
+   1. Mainnet
+      - **Bera-Reth v1.4.3**
+      - **Beacon-Kit v1.4.1**
+   2. Bepolia:
+      - **Bera-Reth v1.4.3**
+      - **Beacon-Kit v1.4.2-rc.0**
+2. If you use the built-in chain preset, keep your Bera-Reth startup as follows as the preset carries Osaka1 automatically; no genesis file change is needed.:
+   1. Mainnet
+      1. `--chain mainnet`
+   2. Bepolia
+      1. `--chain bepolia`.
+3. If you use `--chain <path>`, fetch the genesis files for each respective chain:
+   1. Mainnet
+      1. [Mainnet genesis from Beacon Kit main branch (or commit hash 2059e2...)](https://raw.githubusercontent.com/berachain/beacon-kit/2059e2abea2a42513a0617a38cd7f758d1a1e6a1/testing/networks/80094/eth-genesis.json) and overwrite your current genesis file.
+      2. Verify the md5: `d367b133f368367c3e973636ad059c79`.
+   2. Bepolia
+      1. [Bepolia genesis from Beacon Kit v1.4.2-rc.0](https://raw.githubusercontent.com/berachain/beacon-kit/refs/tags/v1.4.2-rc.0/testing/networks/80069/eth-genesis.json) and overwrite your current genesis file.
+      2. Verify the md5: `f7d31d1039b0253f5f43336e55d28054`.
 4. No changes are needed to BeaconKit options.
 5. Start the new `beacond` and `bera-reth` binaries.
