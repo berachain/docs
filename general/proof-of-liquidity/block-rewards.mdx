@@ -54,3 +54,13 @@ See [Dedicated Emission Stream](/general/proof-of-liquidity/dedicated-emission-s
 Distributor pushes emissions per block. Reward Vaults then stream claimable rewards across their configured duration window, often three days.
 
 This behaves like a rolling stream: each new block updates the amount entering the unlock schedule.
+
+## Enshrined reward distribution (system transaction)
+
+Since the August 2025 hardfork ([BRIP-0004](https://github.com/berachain/brips/blob/main/meta/BRIP-0004.md)), reward distribution is **enshrined** in the protocol. Payout no longer depends on external bots calling the Distributor.
+
+- Every block includes an **automatic system transaction that distributes rewards for the previous block**. This is the first transaction of the block, produced by the protocol itself rather than submitted by a user or external bot.
+- The system transaction invokes the Distributor, which pushes the previous block's `baseRate` to the validator's operator and `rewardRate` to the BeraChef → Reward Vault allocation.
+- Because distribution is guaranteed per block, `rewardRate` accrual to Reward Vaults is deterministic and cannot be delayed by a missing bot call.
+
+See the [PoL Changelog](/general/proof-of-liquidity/changelog#august-2025) for the hardfork entry.
