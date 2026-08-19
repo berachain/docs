@@ -10,13 +10,12 @@ The [Berancer SDK](https://github.com/berachain/berancer-sdk) includes a Smart O
 3. Execute multi-hop swaps using the Vault contract (via [batchSwap](/build/bex/concepts/batch-swap))
 
 <Tip>
-  For more comprehensive Smart Order Router examples, see the [SOR
-  examples](https://github.com/berachain/bex-sdk/tree/main/examples/sor) in the BEX SDK repository.
+  For more comprehensive Smart Order Router examples, see the [SOR examples](https://github.com/berachain/bex-sdk/tree/main/examples/sor) in the BEX SDK repository.
 </Tip>
 
 ## Example: multi-hop swap using SOR
 
-In this example, we use the Berancer SDK and [Ethers.js](https://docs.ethers.org/v6/) to perform a multi-hop swap from HONEY to WBTC using the optimal path.
+In this example, we use the Berancer SDK and [Ethers.js](https://docs.ethers.org/v6/) to perform a multi-hop swap from BUSD to WBTC using the optimal path.
 
 Note that the SOR is accessed via `balancerApi.sorSwapPaths.fetchSorSwapPaths`:
 
@@ -36,13 +35,13 @@ const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 const balancerApi = new BalancerApi("https://api.berachain.com/", 80094);
 
-// Create swap amount (e.g., 1 HONEY)
-const tokenAmount = TokenAmount.fromHumanAmount(honeyToken, "1");
+// Create swap amount (e.g., 1 BUSD)
+const tokenAmount = TokenAmount.fromHumanAmount(busdToken, "1");
 
 // Fetch optimal swap paths
 const { paths: sorPaths, routes } = await balancerApi.sorSwapPaths.fetchSorSwapPaths({
   chainId: CHAIN_ID,
-  tokenIn: honeyToken.address,
+  tokenIn: busdToken.address,
   tokenOut: wbtcToken.address,
   swapKind: SwapKind.GivenIn,
   swapAmount: tokenAmount,
@@ -92,7 +91,7 @@ const tx = await vaultContract.batchSwap(
 
 ### Understanding SOR output
 
-The SOR returns detailed routing information. For example, a HONEY to WBTC swap might route through multiple pools:
+The SOR returns detailed routing information. For example, a BUSD to WBTC swap might route through multiple pools:
 
 ```javascript
 {
@@ -102,8 +101,8 @@ The SOR returns detailed routing information. For example, a HONEY to WBTC swap 
   "hops": [
     {
       "poolId": "0x3ad1699...",
-      "pool": { "symbol": "50WBERA-50HONEY-WEIGHTED" },
-      "tokenIn": "HONEY",
+      "pool": { "symbol": "50WBERA-50BUSD-WEIGHTED" },
+      "tokenIn": "BUSD",
       "tokenOut": "WBERA",
       "tokenInAmount": "1",
       "tokenOutAmount": "0.98"

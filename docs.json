@@ -48,7 +48,6 @@
             "pages": [
               "general/tokens/bera",
               "general/tokens/swbera",
-              "general/tokens/honey",
               "general/tokens/bgt"
             ]
           },
@@ -350,8 +349,8 @@
         "href": "https://hub.berachain.com"
       },
       {
-        "label": "Honey Swap",
-        "href": "https://honey.berachain.com"
+        "label": "BUSD Swap",
+        "href": "https://busd.berachain.com"
       },
       {
         "label": "Bend",
@@ -1354,6 +1353,11 @@
     {
       "source": "/nodes/operations/fusaka",
       "destination": "/build/protocol/overview#fusaka-upgrade-features",
+      "permanent": true
+    },
+    {
+      "source": "/general/tokens/honey",
+      "destination": "/general/tokens/busd",
       "permanent": true
     }
   ]
