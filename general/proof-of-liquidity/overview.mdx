@@ -21,29 +21,23 @@ _How one WBERA emission travels from validator stake through Reward Vaults to us
 
 <Steps>
   <Step title="Stake BERA">
-    Validators stake \$BERA to enter the active set. Additional stakers can increase a validator’s
-    stake directly or via [Staking Pools](/nodes/staking-pools/overview), impacting that validator’s
-    block-production probability.
+    Validators stake \$BERA to enter the active set. Additional stakers can increase a validator’s stake directly or via [Staking Pools](/nodes/staking-pools/overview), impacting that validator’s block-production probability.
   </Step>
   <Step title="Produce blocks">
     Active validators propose blocks with probability proportional to their \$BERA stake.
   </Step>
   <Step title="Allocate WBERA">
-    Each proposed block creates a fixed \$WBERA Reward Vault emission. The Distributor applies any
-    active [Dedicated Emission
-    Stream](/general/proof-of-liquidity/block-rewards#dedicated-emission-stream-des) carve-out, then
-    allocates the remainder through validator reward allocation.
+    Each proposed block creates a fixed \$WBERA Reward Vault emission. The Distributor applies any active [Dedicated Emission Stream](/general/proof-of-liquidity/block-rewards#dedicated-emission-stream-des) carve-out, then allocates the remainder through validator reward allocation.
   </Step>
   <Step title="Compete with incentives">
-    Businesses fund Reward Vault incentives to attract validator reward allocation. When emissions
-    are routed to incentivised vaults, part of the incentives is paid to validators as commission
-    and the remainder is redirected to the Incentive Auction.
+    Businesses fund Reward Vault incentives to attract validator reward allocation. When emissions are routed to incentivised vaults, part of the incentives is paid to validators as commission and the remainder is redirected to the Incentive Auction.
   </Step>
   <Step title="Accrue yield">
-    Redirected incentives are converted into $BERA through the Incentive Auction and accrued into
-    \$sWBERA.
+    Redirected incentives are converted into \$\$BERA through the Incentive Auction and accrued into \$sWBERA.
   </Step>
-  <Step title="Claim rewards">RewardVault stakers can claim \$WBERA rewards.</Step>
+  <Step title="Claim rewards">
+    RewardVault stakers can claim \$WBERA rewards.
+  </Step>
 </Steps>
 
 ## Core components
@@ -104,21 +98,21 @@ See [BGT Token](/general/tokens/bgt).
 
 PoL has distinct participant roles. The same wallet can play more than one role, but each role has a different job and yield path. The table below names each role and links to its canonical page.
 
-| Participant                                                       | Main job                                                                         | Main reason to care                                                             |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [Validators](/nodes/overview/index)                               | Stake \$BERA, produce blocks, allocate emissions towards Reward Vaults           | Earn base rewards and incentive commission                                      |
-| [BERA stakers](/general/tokens/bera#validator-staking)            | Deposit \$BERA to validators directly or through Staking Pools                   | Increase validator block-production probability                                 |
-| [Reward Vault stakers](/general/proof-of-liquidity/reward-vaults) | Stake Protocol's receipt tokens in Reward Vaults                                 | Earn allocated \$WBERA emissions                                                |
-| [\$sWBERA stakers](/general/tokens/swbera)                        | Deposit BERA or WBERA into the Staking Vault                                     | Earn WBERA yield from the Incentive Auction                                     |
-| [LST stakers](/build/pol/lst-integration)                         | Stake LST tokens into a registered `LSTStakerVault`                              | Earn WBERA yield from the Incentive Auction                                     |
-| [Staking pool depositors](/nodes/staking-pools/overview)          | Deposit BERA into a Staking Pool, receive non-transferable shares                | Earn \$WBERA yield from both base rate and auction of the incentives commission |
-| [Businesses / protocols](/build/pol/integration-basics)           | Create Reward Vaults, fund incentives, or receive Dedicated Emission Streams     | Attract emissions, liquidity, users, and long-term growth capital               |
-| [Governance](/general/governance/reward-vault-governance)         | Whitelist vaults and tokens, set system and Dedicated Emission Stream parameters | Keep PoL bounded and accountable                                                |
+| Participant | Main job | Main reason to care |
+| --- | --- | --- |
+| [Validators](/nodes/overview/index) | Stake \$BERA, produce blocks, allocate emissions towards Reward Vaults | Earn base rewards and incentive commission |
+| [BERA stakers](/general/tokens/bera#validator-staking) | Deposit \$BERA to validators directly or through Staking Pools | Increase validator block-production probability |
+| [Reward Vault stakers](/general/proof-of-liquidity/reward-vaults) | Stake Protocol's receipt tokens in Reward Vaults | Earn allocated \$WBERA emissions |
+| [\$sWBERA stakers](/general/tokens/swbera) | Deposit BERA or WBERA into the Staking Vault | Earn WBERA yield from the Incentive Auction |
+| [LST stakers](/build/pol/lst-integration) | Stake LST tokens into a registered `LSTStakerVault` | Earn WBERA yield from the Incentive Auction |
+| [Staking pool depositors](/nodes/staking-pools/overview) | Deposit BERA into a Staking Pool, receive non-transferable shares | Earn \$WBERA yield from both base rate and auction of the incentives commission |
+| [Businesses / protocols](/build/pol/integration-basics) | Create Reward Vaults, fund incentives, or receive Dedicated Emission Streams | Attract emissions, liquidity, users, and long-term growth capital |
+| [Governance](/general/governance/reward-vault-governance) | Whitelist vaults and tokens, set system and Dedicated Emission Stream parameters | Keep PoL bounded and accountable |
 
 ## Where to go next
 
 From here you can drop into any specific piece of the system. [Reward Vaults](/general/proof-of-liquidity/reward-vaults) is where users actually stake to earn allocated \$WBERA, and [Incentive Marketplace](/general/proof-of-liquidity/incentives) is where protocol-funded incentives get split between validator commission and the auction that turns the rest into more \$WBERA yield for [\$sWBERA](/general/tokens/swbera) holders. [Block rewards](/general/proof-of-liquidity/block-rewards) is the rate model that sits behind all of it — how much the chain pays per block and how BeraChef divides it.
 
-If you build on Berachain, the integrator surface lives under the Build tab. [PoL Integration Basics](/build/pol/integration-basics) is the entry point; most protocols then move to [Set up a Reward Vault](/build/guides/proof-of-liquidity/setup-reward-vault) and [Add incentives](/build/guides/proof-of-liquidity/add-incentives). LST issuers should read [LST Integration](/build/pol/lst-integration) to plug into the same auction yield that flows to sWBERA. Validators and node operators looking at commission and reward-allocation controls should start at the [Nodes overview](/nodes/overview/index).
+If you build on Berachain, the integrator surface lives under the Build tab. [PoL Integration Basics](/build/pol/integration-basics) is the entry point; most protocols then move to [Set up a Reward Vault](/build/guides/proof-of-liquidity/setup-reward-vault) and [Add incentives](/build/guides/proof-of-liquidity/add-incentives). LST issuers should read [LST Integration](/build/pol/lst-integration) to plug into the same auction yield that flows to \$sWBERA. Validators and node operators looking at commission and reward-allocation controls should start at the [Nodes overview](/nodes/overview/index).
 
 Businesses can apply for a [Dedicated Emission Stream](/general/proof-of-liquidity/dedicated-emission-stream): predictable emissions in exchange for a premium-repayment obligation and long-term revenue sharing with the network.

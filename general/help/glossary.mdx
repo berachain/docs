@@ -33,7 +33,7 @@ A data unit containing a list of transactions that is permanently added to the b
 
 ## Block time
 
-The time it takes to create a new block on the blockchain. Berachain has an average block time of < 3 seconds. Note that block time can increase depending on network congestion.
+The time it takes to create a new block on the blockchain. Berachain has an average block time of \< 3 seconds. Note that block time can increase depending on network congestion.
 
 ## CometBFT
 
@@ -85,15 +85,19 @@ The assurance that once a transaction is confirmed on the blockchain, it cannot 
 
 ## Governance
 
-The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, HoneySwap). For PoL governance specifics, see [Reward vault governance](/general/governance/reward-vault-governance).
+The system by which decisions are made within the Berachain ecosystem. Governance involves proposals, voting, and the implementation of changes for PoL & Berachain's native dapps (BEX, BUSD Swap). For PoL governance specifics, see [Reward vault governance](/general/governance/reward-vault-governance).
 
 ## Hysteresis
 
 The buffer that decouples a validator's [effective balance](#effective-balance) from small movements in actual balance. Effective balance only steps up or down when actual balance crosses an asymmetric threshold around an increment boundary: actual balance must rise more than 1,000 BERA above the next 10,000 BERA increment to trigger an upward step (~110% of the increment), and must fall more than 100 BERA below an increment to trigger a downward step. See [Validator lifecycle](/nodes/architecture/validator-lifecycle#effective-balance-and-hysteresis) for the worked example.
 
-## HONEY
+## BUSD
 
-`$HONEY` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - `$HONEY`](/general/tokens/honey).
+<Info>
+  `$BUSD` was previously known as `$BUSD`. As of August 19, 2026 the token name and symbol have been updated to Bera USD and BUSD respectively. The contract address remains the same.
+</Info>
+
+`$BUSD` is the native stablecoin of the Berachain ecosystem, soft-pegged to 1 USDC. It is used throughout the Berachain ecosystem and involves minting and burning fees. Read more in [Tokens - `$BUSD`](/general/tokens/busd).
 
 ## Liquidity
 

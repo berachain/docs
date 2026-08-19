@@ -4,8 +4,7 @@ description: "Remove liquidity from BEX pools via the Vault exitPool function."
 ---
 
 <Warning>
-  Calls to `exitPool()` must be made on the BEX Vault contract. You cannot send this command
-  directly to a pool.
+  Calls to `exitPool()` must be made on the BEX Vault contract. You cannot send this command directly to a pool.
 </Warning>
 
 ## exitPool function
@@ -21,12 +20,12 @@ exitPool(
 
 ### Arguments explained
 
-| Parameter | Type            | Description                                |
-| --------- | --------------- | ------------------------------------------ |
-| poolId    | bytes32         | ID of the pool you're exiting              |
-| sender    | address         | Address sending LP tokens                  |
-| recipient | address         | Address receiving tokens                   |
-| request   | ExitPoolRequest | Struct containing exit details (see below) |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| poolId | bytes32 | ID of the pool you're exiting |
+| sender | address | Address sending LP tokens |
+| recipient | address | Address receiving tokens |
+| request | ExitPoolRequest | Struct containing exit details (see below) |
 
 ### ExitPoolRequest struct
 
@@ -39,12 +38,12 @@ struct ExitPoolRequest {
 }
 ```
 
-| Field             | Type      | Description                                                                                                                                          |
-| ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| assets            | address[] | Sorted list of all tokens in pool                                                                                                                    |
-| minAmountsOut     | uint256[] | Minimum token receive amounts                                                                                                                        |
-| userData          | bytes     | Custom bytes field for exit parameters                                                                                                               |
-| toInternalBalance | bool      | True to credit tokens to recipient's internal balance in the Vault (not available for BERA), false to transfer tokens directly to recipient's wallet |
+| Field | Type | Description |
+| --- | --- | --- |
+| assets | address\[\] | Sorted list of all tokens in pool |
+| minAmountsOut | uint256\[\] | Minimum token receive amounts |
+| userData | bytes | Custom bytes field for exit parameters |
+| toInternalBalance | bool | True to credit tokens to recipient's internal balance in the Vault (not available for BERA), false to transfer tokens directly to recipient's wallet |
 
 ### Token ordering
 
@@ -65,8 +64,7 @@ Best practice:
 The `userData` field encodes the exit type and parameters. Different pool types support different exit kinds.
 
 <Info>
-  When encoding `userData` for pools that include their own LP token as part of the pool's tokens,
-  the LP tokens are not included in the `userData`.
+  When encoding `userData` for pools that include their own LP token as part of the pool's tokens, the LP tokens are not included in the `userData`.
 </Info>
 
 ## ExitKind enum
@@ -81,42 +79,42 @@ enum ExitKind {
 
 ### Exit types explained
 
-| ExitKind                      | Description                                                           | Use Case                                  |
-| ----------------------------- | --------------------------------------------------------------------- | ----------------------------------------- |
-| EXACT_LP_IN_FOR_ONE_TOKEN_OUT | Send precise LP tokens, receive estimated single token                | When you want to exit to a specific token |
-| EXACT_LP_IN_FOR_TOKENS_OUT    | Send precise LP tokens, receive estimated amounts of all tokens       | When you want to exit proportionally      |
-| LP_IN_FOR_EXACT_TOKENS_OUT    | Send estimated LP tokens, receive precise amounts of specified tokens | When you need exact output amounts        |
+| ExitKind | Description | Use Case |
+| --- | --- | --- |
+| EXACT\_LP\_IN\_FOR\_ONE\_TOKEN\_OUT | Send precise LP tokens, receive estimated single token | When you want to exit to a specific token |
+| EXACT\_LP\_IN\_FOR\_TOKENS\_OUT | Send precise LP tokens, receive estimated amounts of all tokens | When you want to exit proportionally |
+| LP\_IN\_FOR\_EXACT\_TOKENS\_OUT | Send estimated LP tokens, receive precise amounts of specified tokens | When you need exact output amounts |
 
 ### userData encoding
 
-| Exit Type         | ABI                                   | userData                                                      |
-| ----------------- | ------------------------------------- | ------------------------------------------------------------- |
-| Single Asset Exit | `['uint256', 'uint256', 'uint256']`   | `[EXACT_LP_IN_FOR_ONE_TOKEN_OUT, lpAmountIn, exitTokenIndex]` |
-| Proportional Exit | `['uint256', 'uint256']`              | `[EXACT_LP_IN_FOR_TOKENS_OUT, lpAmountIn]`                    |
-| Custom Exit       | `['uint256', 'uint256[]', 'uint256']` | `[LP_IN_FOR_EXACT_TOKENS_OUT, amountsOut, maxLPAmountIn]`     |
+| Exit Type | ABI | userData |
+| --- | --- | --- |
+| Single Asset Exit | `['uint256', 'uint256', 'uint256']` | `[EXACT_LP_IN_FOR_ONE_TOKEN_OUT, lpAmountIn, exitTokenIndex]` |
+| Proportional Exit | `['uint256', 'uint256']` | `[EXACT_LP_IN_FOR_TOKENS_OUT, lpAmountIn]` |
+| Custom Exit | `['uint256', 'uint256[]', 'uint256']` | `[LP_IN_FOR_EXACT_TOKENS_OUT, amountsOut, maxLPAmountIn]` |
 
 ## Examples
 
-### Example 1: Single asset exit (EXACT_LP_IN_FOR_ONE_TOKEN_OUT)
+### Example 1: Single asset exit (EXACT\_LP\_IN\_FOR\_ONE\_TOKEN\_OUT)
 
-Exit a `$BERA`/`$HONEY` pool to receive only `$BERA`:
+Exit a `$BERA`/`$BUSD` pool to receive only `$BERA`:
 
-| Step | ExitKind                      | Assets        | Parameters                                | Description                                      |
-| ---- | ----------------------------- | ------------- | ----------------------------------------- | ------------------------------------------------ |
-| 1    | EXACT_LP_IN_FOR_ONE_TOKEN_OUT | [BERA, HONEY] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated `$BERA` |
+| Step | ExitKind | Assets | Parameters | Description |
+| --- | --- | --- | --- | --- |
+| 1 | EXACT\_LP\_IN\_FOR\_ONE\_TOKEN\_OUT | \[BERA, BUSD\] | lpAmountIn: 100 LP<br />exitTokenIndex: 0 | Send 100 LP tokens and receive estimated `$BERA` |
 
-### Example 2: Proportional exit (EXACT_LP_IN_FOR_TOKENS_OUT)
+### Example 2: Proportional exit (EXACT\_LP\_IN\_FOR\_TOKENS\_OUT)
 
-Exit a `$BERA`/`$HONEY` pool proportionally:
+Exit a `$BERA`/`$BUSD` pool proportionally:
 
-| Step | ExitKind                   | Assets        | Parameters         | Description                                                        |
-| ---- | -------------------------- | ------------- | ------------------ | ------------------------------------------------------------------ |
-| 1    | EXACT_LP_IN_FOR_TOKENS_OUT | [BERA, HONEY] | lpAmountIn: 100 LP | Send 100 LP tokens and receive proportional amounts of both tokens |
+| Step | ExitKind | Assets | Parameters | Description |
+| --- | --- | --- | --- | --- |
+| 1 | EXACT\_LP\_IN\_FOR\_TOKENS\_OUT | \[BERA, BUSD\] | lpAmountIn: 100 LP | Send 100 LP tokens and receive proportional amounts of both tokens |
 
-### Example 3: Custom exit (LP_IN_FOR_EXACT_TOKENS_OUT)
+### Example 3: Custom exit (LP\_IN\_FOR\_EXACT\_TOKENS\_OUT)
 
-Exit a `$BERA`/`$HONEY`/`$DAI` pool for specific token amounts:
+Exit a `$BERA`/`$BUSD`/`$DAI` pool for specific token amounts:
 
-| Step | ExitKind                   | Assets             | Parameters                                                          | Description                                       |
-| ---- | -------------------------- | ------------------ | ------------------------------------------------------------------- | ------------------------------------------------- |
-| 1    | LP_IN_FOR_EXACT_TOKENS_OUT | [BERA, HONEY, DAI] | amountsOut: [10 BERA, 100 HONEY, 50 DAI]<br />maxLPAmountIn: 200 LP | Receive exact token amounts, sending up to 200 LP |
+| Step | ExitKind | Assets | Parameters | Description |
+| --- | --- | --- | --- | --- |
+| 1 | LP\_IN\_FOR\_EXACT\_TOKENS\_OUT | \[BERA, BUSD, DAI\] | amountsOut: \[10 BERA, 100 BUSD, 50 DAI\]<br />maxLPAmountIn: 200 LP | Receive exact token amounts, sending up to 200 LP |
