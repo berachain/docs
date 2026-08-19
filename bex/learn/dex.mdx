@@ -31,7 +31,7 @@ BEX uses an AMM mechanism inspired by **Balancer V2**, which introduces several 
 - **Unified Vault architecture**: All pools share a single [Vault](/bex/learn/vault) contract for token accounting and transfers, while individual pools focus on swap math and liquidity management. This separation of concerns enables gas-efficient swaps through consolidated liquidity, improved security through independent pool balances, and flexibility in pool design.
 - **Gas optimization**: Centralized accounting in the Vault reduces gas costs for multi-hop swaps and batch operations.
 - **Flexible pool types**: BEX supports multiple pool types optimized for different trading scenarios:
-  - **[Weighted pools](/bex/learn/weighted-pools)**: Support 2-8 tokens with customizable weights (e.g., 80/20 HONEY/WETH or 33/33/33 HONEY/WETH/WBTC), unlike fixed 50/50 pairs
-  - **[Stable pools](/bex/learn/stable-pools)**: Optimized for tokens that trade at or near parity (e.g., stablecoins) or with predictable exchange rates
+  - [**Weighted pools**](/bex/learn/weighted-pools): Support 2-8 tokens with customizable weights (e.g., 80/20 BUSD/WETH or 33/33/33 BUSD/WETH/WBTC), unlike fixed 50/50 pairs
+  - [**Stable pools**](/bex/learn/stable-pools): Optimized for tokens that trade at or near parity (e.g., stablecoins) or with predictable exchange rates
 
 For detailed information about pool mechanics, see the [pools](/bex/learn/pools) overview and individual pool type pages.

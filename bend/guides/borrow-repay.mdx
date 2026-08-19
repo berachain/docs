@@ -1,139 +1,132 @@
 ---
 title: "Borrow & Repay"
-description: "Supply collateral, borrow HONEY, monitor LTV/LLTV, and repay to withdraw collateral on Bend."
+description: "Supply collateral, borrow BUSD, monitor LTV/LLTV, and repay to withdraw collateral on Bend."
 ---
 
-Follow these steps to supply collateral, borrow $HONEY, and repay to free your collateral.
+Follow these steps to supply collateral, borrow \$BUSD, and repay to free your collateral.
 
 ## Requirements
 
 - Wallet with collateral (WETH, WBERA, WBTC, etc.) listed on [Bend](https://bend.berachain.com/borrow)
-- Native $BERA for transaction fees
+- Native \$BERA for transaction fees
 
-<Tip>If you don't have collateral, swap on [Berachain Hub](https://hub.berachain.com/swap).</Tip>
+<Tip>
+  If you don't have collateral, swap on [Berachain Hub](https://hub.berachain.com/swap).
+</Tip>
 
 ## Supply collateral and borrow
 
-Supply $WBERA as collateral and borrow $HONEY.
+Supply \$\$WBERA as collateral and borrow \$BUSD.
 
 <Steps>
   <Step title="Visit Bend and connect wallet">
     Go to [Bend](https://bend.berachain.com/borrow) and connect your wallet.
 
     <Frame>
-      <img src="/images/bend/borrow-connect-wallet.png" alt="Bend borrow connect wallet" />
+      ![Bend borrow connect wallet](/images/bend/borrow-connect-wallet.png)
     </Frame>
-
   </Step>
   <Step title="Choose a market">
-    Choose a market where you can supply collateral. This guide uses $WBERA.
+    Choose a market where you can supply collateral. This guide uses \$WBERA.
 
     <Frame>
-      <img src="/images/bend/borrow-choose-market.png" alt="Bend choose market" />
+      ![Bend choose market](/images/bend/borrow-choose-market.png)
     </Frame>
-
   </Step>
   <Step title="Configure borrow">
     1. Select **Borrow**
-    2. Enter the $WBERA amount to supply as collateral
+    2. Enter the \$WBERA amount to supply as collateral
     3. Click **Review** to open the confirmation modal
 
     <Frame>
-      <img src="/images/bend/borrow-configure-borrow.png" alt="Bend configure borrow" />
+      ![Bend configure borrow](/images/bend/borrow-configure-borrow.png)
     </Frame>
-
   </Step>
   <Step title="Approve and supply">
-    1. Approve the market to spend your $WBERA
-    2. Supply $WBERA as collateral
+    1. Approve the market to spend your \$WBERA
+    2. Supply \$WBERA as collateral
 
     <Frame>
-      <img src="/images/bend/borrow-approve-supply.png" alt="Bend approve and supply" />
+      ![Bend approve and supply](/images/bend/borrow-approve-supply.png)
     </Frame>
 
     <Frame>
-      <img src="/images/bend/borrow-successful-approve-supply.png" alt="Bend successful approve and supply" />
+      ![Bend successful approve and supply](/images/bend/borrow-successful-approve-supply.png)
     </Frame>
 
     You should see your supplied collateral and total value in the market.
 
     <Frame>
-      <img src="/images/bend/borrow-successful-supply.png" alt="Bend successful supply" />
+      ![Bend successful supply](/images/bend/borrow-successful-supply.png)
     </Frame>
-
   </Step>
   <Step title="Borrow">
-    1. Enter the $HONEY amount to borrow
+    1. Enter the \$BUSD amount to borrow
     2. Keep borrow below the LTV limit to avoid liquidation
     3. Click **Review** to confirm
 
     <Frame>
-      <img src="/images/bend/borrow-borrow.png" alt="Bend borrow" />
+      ![Bend borrow](/images/bend/borrow-borrow.png)
     </Frame>
-
   </Step>
   <Step title="Approve and borrow">
     Approve the borrow in your wallet.
 
     <Frame>
-      <img src="/images/bend/borrow-approve-borrow.png" alt="Bend approve borrow" />
+      ![Bend approve borrow](/images/bend/borrow-approve-borrow.png)
     </Frame>
 
     <Frame>
-      <img src="/images/bend/borrow-successful-approve-borrow.png" alt="Bend successful approve borrow" />
+      ![Bend successful approve borrow](/images/bend/borrow-successful-approve-borrow.png)
     </Frame>
 
-    You should see your borrowed $HONEY and its value in the market.
+    You should see your borrowed \$BUSD and its value in the market.
 
     <Frame>
-      <img src="/images/bend/borrow-successful-borrow.png" alt="Bend successful borrow" />
+      ![Bend successful borrow](/images/bend/borrow-successful-borrow.png)
     </Frame>
-
   </Step>
   <Step title="Avoid liquidation">
     Monitor your position. If your LTV exceeds the Liquidation LTV (LLTV), your position can be liquidated.
 
     <Frame>
-      <img src="/images/bend/borrow-monitor-ltv-lltv.png" alt="Bend monitor LTV and LLTV" />
+      ![Bend monitor LTV and LLTV](/images/bend/borrow-monitor-ltv-lltv.png)
     </Frame>
-
   </Step>
 </Steps>
 
 ## Repay and withdraw
 
-Repay $HONEY and withdraw your $WBERA collateral.
+Repay \$BUSD and withdraw your \$\$WBERA collateral.
 
 <Steps>
   <Step title="Configure repay">
     1. Select **Repay**
-    2. Enter the $HONEY amount to repay
-    3. Enter the $WBERA amount to withdraw
+    2. Enter the \$BUSD amount to repay
+    3. Enter the \$WBERA amount to withdraw
     4. Click **Review** to open the confirmation modal
 
     <Frame>
-      <img src="/images/bend/repay-configure-repay.png" alt="Bend configure repay" />
+      ![Bend configure repay](/images/bend/repay-configure-repay.png)
     </Frame>
-
   </Step>
   <Step title="Confirm repay">
     Confirm the repayment in your wallet.
 
     <Frame>
-      <img src="/images/bend/repay-confirm-repay.png" alt="Bend confirm repay" />
+      ![Bend confirm repay](/images/bend/repay-confirm-repay.png)
     </Frame>
 
     <Frame>
-      <img src="/images/bend/repay-successful-confirm-repay.png" alt="Bend successful confirm repay" />
+      ![Bend successful confirm repay](/images/bend/repay-successful-confirm-repay.png)
     </Frame>
 
     You should see a zero balance after the repayment.
 
     <Frame>
-      <img src="/images/bend/repay-successful-repay.png" alt="Bend successful repay" />
+      ![Bend successful repay](/images/bend/repay-successful-repay.png)
     </Frame>
-
   </Step>
 </Steps>
 
-You have now supplied collateral, borrowed $HONEY, and repaid to withdraw your collateral on Bend.
+You have now supplied collateral, borrowed \$BUSD, and repaid to withdraw your collateral on Bend.

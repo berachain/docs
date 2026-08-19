@@ -5,7 +5,7 @@ BGT
 BERA
 Bepolia
 Berascan
-HoneySwap
+BUSDSwap
 BeaconKit
 BeraChef
 BeraHub
@@ -18,7 +18,7 @@ BeaconDeposit
 Beacond
 beacond
 WBERA
-HONEY
+BUSD
 EIPs
 precompile
 CometBFT
