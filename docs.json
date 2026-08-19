@@ -48,7 +48,6 @@
             "pages": [
               "general/tokens/bera",
               "general/tokens/swbera",
-              "general/tokens/honey",
               "general/tokens/bgt"
             ]
           },
@@ -1354,6 +1353,11 @@
     {
       "source": "/nodes/operations/fusaka",
       "destination": "/build/protocol/overview#fusaka-upgrade-features",
+      "permanent": true
+    },
+    {
+      "source": "/general/tokens/honey",
+      "destination": "/general/tokens/busd",
       "permanent": true
     }
   ]
