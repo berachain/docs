@@ -3,25 +3,29 @@ title: "Honeypaper"
 description: "Berachain Proof of Liquidity honeypaper."
 ---
 
+<Info>
+  As of July 8, 2026, Proof-of-Liquidity has been revised for PoL Next. See more details here: [https://x.com/berachain/status/2074901414149771549?s=20](https://x.com/berachain/status/2074901414149771549?s=20)
+</Info>
+
 February 3, 2025
 
 <a
   href="/images/general/honey-paper/the-honeypaper.pdf"
   download
   style={{
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: "140px",
-    height: "44px",
-    padding: "0 16px",
-    borderRadius: "8px",
-    border: "2px solid #c96516",
-    backgroundColor: "#E17726",
-    color: "#1a1a1a",
-    fontWeight: 600,
-    textDecoration: "none",
-  }}
+display: "inline-flex",
+alignItems: "center",
+justifyContent: "center",
+minWidth: "140px",
+height: "44px",
+padding: "0 16px",
+borderRadius: "8px",
+border: "2px solid #c96516",
+backgroundColor: "#E17726",
+color: "#1a1a1a",
+fontWeight: 600,
+textDecoration: "none",
+}}
 >
   Download as PDF
 </a>
@@ -164,7 +168,7 @@ Every time a validator is chosen to propose a block, they emit a quantity of BGT
 - _Base emission:_ this goes to the validator proposing the block. This is a fixed amount equal to the base rate parameter _B_.
 - _Reward emission:_ this is emitted towards vaults selected by the validator in their reward allocation, proportional to their weights. This is a variable amount that depends on the validator's boost _x_.
 
-This is the emission formula that represents how many BGT are created each block as a function of a validator's boost _x_, which is a number in the range [0,1] that indicates the percentage of total BGT directed to that validator out of the total number of BGT directed to validators.
+This is the emission formula that represents how many BGT are created each block as a function of a validator's boost _x_, which is a number in the range \[0,1\] that indicates the percentage of total BGT directed to that validator out of the total number of BGT directed to validators.
 
 ![Emission Formula](/images/general/honey-paper/6_2_emissions_formula_updated.png)
 
@@ -219,7 +223,7 @@ Each vault has its own whitelisted tokens, which can be removed from the whiteli
 A vault's incentives manager is allowed to specify an incentive rate p and add an amount of tokens to sustain that rate for a certain period. For example, he can specify he's willing to pay 10 protocol tokens PT in exchange for 1 BGT (p = 10), then he adds 1000 PT tokens to the vault. The incentive manager can deposit multiple incentive tokens whitelisted by governance (vault-wide approval). Every time a validator emits an amount x of BGT towards the protocol's vault, a corresponding p · x amount of PT tokens will be transferred to the validator's operator. In the example above, if a validator emits 1 BGT towards the vault, he will receive 10 PT tokens in exchange. The manager can later bring additional tokens to continue paying the specified rate p or he can change the rate upon the following conditions:
 
 - If there is no remaining amount of incentive tokens, the rate can be updated to any value greater or equal to a minimum rate decided at incentive token whitelisting.
-- If there is a residual amount of incentive tokens, only a higher incentive rate p' > p can be set if enough incentive liquidity is provided along with the setter to support the new rate. It is not possible to reduce the incentive rate while residual tokens are still left in the vault.
+- If there is a residual amount of incentive tokens, only a higher incentive rate p' \> p can be set if enough incentive liquidity is provided along with the setter to support the new rate. It is not possible to reduce the incentive rate while residual tokens are still left in the vault.
 
 Validators are expected to distribute a portion of tokens from these incentives towards its boosters; rewarding them for their contributions to his BGT weight, and completing the alignment between validators, protocols, and users.
 
@@ -311,46 +315,25 @@ Overall, BeaconKit represents a significant advancement in blockchain developmen
 
 ## References
 
-- <strong id="ref-1">[1]</strong> Dinesh Kumar, Duraimutharasan, Shanthi, Vennila, Prabu Shankar and
-  Senthil. _Comparative Analysis of Transaction Speed and Throughput in Blockchain and Hashgraph: A
-  Performance Study for Distributed Ledger Technologies._ Journal of Machine and Computing, 3(4),
-  2023.
-  [https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf](https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf)
-- <strong id="ref-2">[2]</strong>
-  [https://blog.berachain.com/blog/the-pol-post](https://blog.berachain.com/blog/the-pol-post)
-- <strong id="ref-3">[3]</strong>
-  [https://blog.berachain.com/blog/the-fat-bera-thesis](https://blog.berachain.com/blog/the-fat-bera-thesis)
-- <strong id="ref-4">[4]</strong> Urban J. Jermann. _A Macro Finance Model for Proof-of-Stake
-  Ethereum._ National Bureau of Economic Research (NBER), 2023.
-  [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835)
-- <strong id="ref-5">[5]</strong>
-  [https://docs.curve.fi/assets/pdf/CurveDAO.pdf](https://docs.curve.fi/assets/pdf/CurveDAO.pdf)
-- <strong id="ref-6">[6]</strong> Vitalik Buterin. _Possible futures of the Ethereum protocol, part
-  3: The Scourge._ 2024.
-  [https://vitalik.eth.limo/general/2024/10/20/futures3.html](https://vitalik.eth.limo/general/2024/10/20/futures3.html)
-- <strong id="ref-7">[7]</strong> Li Li. _Mitigating Challenges in Ethereum's Proof-of-Stake
-  Consensus: Evaluating the Impact of EigenLayer and Lido._ 2024
-  [https://arxiv.org/abs/2410.23422](https://arxiv.org/abs/2410.23422)
-- <strong id="ref-8">[8]</strong>
-  [https://research.lido.fi/t/is-lido-good-for-ethereum/5520](https://research.lido.fi/t/is-lido-good-for-ethereum/5520)
-- <strong id="ref-9">[9]</strong>
-  [https://notes.ethereum.org/@djrtwo/risks-of-lsd](https://notes.ethereum.org/@djrtwo/risks-of-lsd)
-  [https://www.mdpi.com/1099-4300/25/9/1320](https://www.mdpi.com/1099-4300/25/9/1320)
-- <strong id="ref-10">[10]</strong> Alex Stokes, Ansgar Dietrichs, Danny Ryan, Martin Holst Swende,
-  light-client. _EIP-4788: Beacon block root in the EVM._ 2022
-  [https://eips.ethereum.org/EIPS/eip-4788](https://eips.ethereum.org/EIPS/eip-4788)
-- <strong id="ref-11">[11]</strong>
-  [https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md)
-- <strong id="ref-12">[12]</strong>
-  [https://docs.cometbft.com/v0.37/spec/abci/](https://docs.cometbft.com/v0.37/spec/abci/)
-- <strong id="ref-13">[13]</strong>
-  [https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885](https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885)
+- <strong id="ref-1">[1]</strong> Dinesh Kumar, Duraimutharasan, Shanthi, Vennila, Prabu Shankar and Senthil. _Comparative Analysis of Transaction Speed and Throughput in Blockchain and Hashgraph: A Performance Study for Distributed Ledger Technologies._ Journal of Machine and Computing, 3(4), 2023. [https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf](https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf)
+- <strong id="ref-2">[2]</strong> [https://blog.berachain.com/blog/the-pol-post](https://blog.berachain.com/blog/the-pol-post)
+- <strong id="ref-3">[3]</strong> [https://blog.berachain.com/blog/the-fat-bera-thesis](https://blog.berachain.com/blog/the-fat-bera-thesis)
+- <strong id="ref-4">[4]</strong> Urban J. Jermann. _A Macro Finance Model for Proof-of-Stake Ethereum._ National Bureau of Economic Research (NBER), 2023. [https://papers.ssrn.com/sol3/papers.cfm?abstract\_id=4335835](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835)
+- <strong id="ref-5">[5]</strong> [https://docs.curve.fi/assets/pdf/CurveDAO.pdf](https://docs.curve.fi/assets/pdf/CurveDAO.pdf)
+- <strong id="ref-6">[6]</strong> Vitalik Buterin. _Possible futures of the Ethereum protocol, part 3: The Scourge._ 2024. [https://vitalik.eth.limo/general/2024/10/20/futures3.html](https://vitalik.eth.limo/general/2024/10/20/futures3.html)
+- <strong id="ref-7">[7]</strong> Li Li. _Mitigating Challenges in Ethereum's Proof-of-Stake Consensus: Evaluating the Impact of EigenLayer and Lido._ 2024 [https://arxiv.org/abs/2410.23422](https://arxiv.org/abs/2410.23422)
+- <strong id="ref-8">[8]</strong> [https://research.lido.fi/t/is-lido-good-for-ethereum/5520](https://research.lido.fi/t/is-lido-good-for-ethereum/5520)
+- <strong id="ref-9">[9]</strong> [https://notes.ethereum.org/@djrtwo/risks-of-lsd](https://notes.ethereum.org/@djrtwo/risks-of-lsd) [https://www.mdpi.com/1099-4300/25/9/1320](https://www.mdpi.com/1099-4300/25/9/1320)
+- <strong id="ref-10">[10]</strong> Alex Stokes, Ansgar Dietrichs, Danny Ryan, Martin Holst Swende, light-client. _EIP-4788: Beacon block root in the EVM._ 2022 [https://eips.ethereum.org/EIPS/eip-4788](https://eips.ethereum.org/EIPS/eip-4788)
+- <strong id="ref-11">[11]</strong> [https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md)
+- <strong id="ref-12">[12]</strong> [https://docs.cometbft.com/v0.37/spec/abci/](https://docs.cometbft.com/v0.37/spec/abci/)
+- <strong id="ref-13">[13]</strong> [https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885](https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885)
 
 ## Appendix
 
 The block emission formula is given by the following equation:
 
-![Block emission formula showing R = B + (1-m)(ax^b)](/images/general/honey-paper/appendix_block_emission_formula.png)
+![Block emission formula showing R = B \+ (1-m)(ax^b)](/images/general/honey-paper/appendix_block_emission_formula.png)
 
 Where:
 
@@ -371,8 +354,8 @@ Let us first introduce the notation:
 
 - **V**: validator set
 - **vᵢ ∈ V**: i-th validator, with i ∈ \{0, 1, ..., |V|\}
-- **xᵢ ∈ [0,1]**: boost of the i-th validator s.t. ∑ᵢ xᵢ = 1
-- **pᵢ ∈ [0,1]**: proposal probability for the i-th validator s.t. ∑ᵢ pᵢ = 1
+- **xᵢ ∈ \[0,1\]**: boost of the i-th validator s.t. ∑ᵢ xᵢ = 1
+- **pᵢ ∈ \[0,1\]**: proposal probability for the i-th validator s.t. ∑ᵢ pᵢ = 1
 - **eᵢ**: BGT emission per block for the i-th validator
 
 Let e be the number of BGTs emitted for the next block proposal, then we have:

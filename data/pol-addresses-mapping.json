@@ -90,8 +90,8 @@
   ],
   "contractsWithoutPolSource": [
     {
-      "contractsPath": "pol.honeyFactory",
-      "note": "Honey deployment; not present in POLAddresses.sol."
+      "contractsPath": "pol.busdFactory",
+      "note": "BUSD deployment; not present in POLAddresses.sol."
     }
   ]
 }

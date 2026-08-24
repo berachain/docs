@@ -2,7 +2,7 @@
   "mcpServers": {
     "berachain-docs": {
       "url": "https://bera.mintlify.app/mcp",
-      "description": "Berachain Documentation MCP Server - Access to POL, Integration guides, Block Rewards, Honey, BEX, and Bend documentation"
+      "description": "Berachain Documentation MCP Server - Access to POL, Integration guides, Block Rewards, BUSD, BEX, and Bend documentation"
     }
   }
 }
