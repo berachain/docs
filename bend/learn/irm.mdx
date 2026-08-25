@@ -5,7 +5,7 @@ description: "AdaptiveCurveIRM: immutable IRM, target utilization, curve and ada
 
 In Bend, the interest rate you pay as a borrower is set by an **Interest Rate Model (IRM)** chosen when the market is created.
 
-The only IRM used for Bend markets is the [AdaptiveCurveIRM](/bend/learn/interest-rates#the-adaptivecurveirm). It differs from typical pool IRMs in two ways:
+The only IRM used for Bend markets is the [AdaptiveCurveIRM](/bend/learn/interest-rates#adaptivecurveirm). It differs from typical pool IRMs in two ways:
 
 1. **Immutable**: The model cannot be changed or upgraded. It must respond automatically to market conditions, including rates on other platforms.
 2. **Higher target utilization**: Supplied assets in Bend are not used as collateral, so markets don't need to hold large buffers for liquidations. The protocol can target higher utilization and use gentler illiquidity penalties.
