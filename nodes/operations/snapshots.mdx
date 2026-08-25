@@ -1,0 +1,111 @@
+---
+title: "Snapshots"
+description: "Restore Beacon Kit and Bera-Reth from official storage v2 snapshots, or keep running on storage v1."
+---
+
+Snapshots skip most of initial sync. Official Berachain-distributed snapshots are **storage v2**: one `catalog.csv` generation, Beacon Kit `.tar.lz4` companions, and execution data via `bera-reth download --manifest-url`. Community snapshot makers may still publish **storage v1** whole-datadir tarballs. Those remain valid to run.
+
+<Info>
+  Do this **before** starting clients. If you already started syncing, stop both clients, wipe chain
+  data, then restore.
+</Info>
+
+## Storage v1 stays viable
+
+Nothing requires you to cut over. A v1 datadir keeps working. Community producers listed on [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) often still ship v1 tarballs with fast download.
+
+Official Berachain objects are storage v2. The v1 helper `fetch-berachain-snapshot.js` still reads `index.csv` and curls packed datadirs. Use that for **mainnet** today: there is no mainnet v2 catalog on the daily schedule. `fetch-berachain-snapshot-v2.js --network mainnet` fails closed and names the v1 script.
+
+## What Reth does with storage v2
+
+Reth persists the storage layout in the datadir metadata. **`--storage.v2` / `storage.v2` in config applies to a fresh init only.** An existing database keeps the layout it already has, even if you later change the flag.
+
+Consequence: restoring a storage v2 execution snapshot is the cutover. After `bera-reth download` finishes into that datadir, the node is on storage v2 regardless of the flag you pass on the next start.
+
+Dry-run the EL plan without writing objects:
+
+```bash
+bera-reth download --chain bepolia --datadir /tmp/el-plan \
+  --manifest-url https://bera-snapshots.fsn1.your-objectstorage.com/v2/bepolia/reth/manifest.json \
+  --minimal --print-plan-json
+```
+
+`--print-plan-json` resolves the manifest and exits. It does not extract. Use a throwaway `--datadir`. Pair `--minimal` or `--archive` with the restore you intend; a preset skips the interactive selector. Do not add `-y`.
+
+## Official v2 restore (Bepolia)
+
+[guides `fetch-berachain-snapshot-v2.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot-v2.js) is on disk after Quickstart Step 1. It reads
+
+`https://bera-snapshots.fsn1.your-objectstorage.com/v2/<network>/catalog.csv`
+
+creates **empty** named directories, restores CL with curl + lz4 + tar, and restores EL with `bera-reth download`. If a target directory exists and is not empty, the script exits non-zero.
+
+```bash
+# FROM: ~/beranode
+# Default network is mainnet (no v2 catalog). Bepolia is the live official v2 feed.
+
+node fetch-berachain-snapshot-v2.js --network bepolia --type pruned
+
+# Print commands only (no dirs, no fetch, no bera-reth):
+node fetch-berachain-snapshot-v2.js --network bepolia --type pruned --no-download
+
+# Archive EL preset, still cl-pruned unless you opt into full CL history:
+node fetch-berachain-snapshot-v2.js --network bepolia --type archive
+node fetch-berachain-snapshot-v2.js --network bepolia --type archive --full-cl
+```
+
+Named directories under `--output` (default `downloads`):
+
+| Path                           | Role                                                         |
+| ------------------------------ | ------------------------------------------------------------ |
+| `<output>/<network>-<type>-el` | Bera-Reth `--datadir`                                        |
+| `<output>/<network>-<type>-cl` | Beacon Kit **data** directory (not the whole `beacond` home) |
+
+`--type` selects the EL preset only. `--full-cl` is the only switch that selects `cl-archive` (orders of magnitude larger than pruned).
+
+| `--type`             | EL               | CL (default) |
+| -------------------- | ---------------- | ------------ |
+| `pruned`             | `--minimal`      | `cl-pruned`  |
+| `archive`            | `--archive`      | `cl-pruned`  |
+| either + `--full-cl` | same as `--type` | `cl-archive` |
+
+If `bera-reth` is not on `PATH` (and `--reth-bin` / `RETH_BIN` is unset), the script prints the EL command, skips EL, and still restores CL unless you passed `--no-download` or `--el-only`.
+
+### Place the restore into the Quickstart layout
+
+The script does not write `var/beacond` or `var/reth/data` directly. After a successful run, stop clients if they are running, reset chain data, then copy:
+
+```bash
+# FROM: ~/beranode
+source env.sh
+$BEACOND_BIN --home $BEACOND_HOME comet unsafe-reset-all
+rm -rf var/reth/data
+mkdir -p var/reth/data var/beacond/data
+
+# CL tarball members sit at the root of the named CL dir (application.db, …).
+# That is CometBFT data/, not the parent home that also holds config/.
+rsync -a downloads/bepolia-pruned-cl/ var/beacond/data/
+
+# EL named dir is already a Reth datadir.
+rsync -a downloads/bepolia-pruned-el/ var/reth/data/
+```
+
+Adjust the `bepolia-pruned-*` names if you used `--type archive`.
+
+v1 official tarballs used a `data/` prefix under the Beacon Kit home and packed `db/` / `rocksdb/` at the root of the EL archive. v2 CL has no `data/` prefix; v2 EL is not a tarball.
+
+## v1 official restore (Mainnet, or v1 community packs)
+
+```bash
+node fetch-berachain-snapshot.js --network mainnet --type pruned
+```
+
+Then extract as in older Quickstart notes: Beacon Kit tarball into `$BEACOND_HOME` (members include `data/`), EL tarball into `var/reth/data`. See [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) for other v1 sources.
+
+## Catalog shape
+
+One generation, three roles: `el-manifest`, `cl-pruned`, `cl-archive`. Header:
+
+`type,layer,profile,block_number,size_bytes,created_at,object_key,download_url,role`
+
+Browse objects at [bepolia.snapshots.berachain.com/v2/](https://bepolia.snapshots.berachain.com/v2/). Restore from catalog URLs, not by picking random keys under `v2/bepolia/reth/`.
