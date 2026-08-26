@@ -185,19 +185,14 @@ The `setup-reth.sh` script creates the Reth datadir and initializes it with `--c
 
 Restoring a snapshot is much faster than syncing from genesis. Do this **before** Step 7.
 
-Official Berachain snapshots are storage v2 (Bepolia live; mainnet still uses the v1 script). Storage v1 datadirs and community v1 packs remain valid. Full restore commands, Reth layout rules, and the catalog pairing live on [Snapshots](/nodes/operations/snapshots).
+Official Berachain snapshots are available for
+[Mainnet](https://snapshots.berachain.com) and [Bepolia](https://bepolia.snapshots.berachain.com/).  Full restore commands and documentation are available on [Snapshots](/nodes/operations/snapshots).
 
 ```bash
 # FROM: ~/beranode
 
-# Official v2 (Bepolia). Creates downloads/bepolia-pruned-{el,cl}
-node fetch-berachain-snapshot-v2.js --network bepolia --type pruned
-
-# Official v1 (Mainnet today), or any v1 index.csv pack
-node fetch-berachain-snapshot.js --network mainnet --type pruned
+node fetch-berachain-snapshot.js --network [mainnet|bepolia] --type pruned
 ```
-
-Community sources: [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
 
 ## Step 7 - Run both clients
 
