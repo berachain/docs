@@ -32,11 +32,11 @@ textDecoration: "none",
 
 ## 1. Modern Problems, Modern Solutions
 
-Over the past few years, new infrastructure has trended toward solving a single problem: improving the throughput and transaction costs of chains [\[1\]](#ref-1). This has given rise to a number of new virtual machines and consensus engines, all of which seek to make blockspace cheaper and more plentiful than ever before. While these products solve important bottlenecks for scaling, they fail to deliver any novel economic solutions to filling this blockspace.
+Over the past few years, new infrastructure has trended toward solving a single problem: improving the throughput and transaction costs of chains [\[1\]](#reference-1). This has given rise to a number of new virtual machines and consensus engines, all of which seek to make blockspace cheaper and more plentiful than ever before. While these products solve important bottlenecks for scaling, they fail to deliver any novel economic solutions to filling this blockspace.
 
-While the last few years have been dominated by the production of novel infrastructure layers, few to none of these solutions have gained meaningful adoption among developers, or even more importantly, among consumers. The blockchain industry, and crypto users as a whole, have come to see infrastructure layers as extractive, as opposed to value additive [\[2\]](#ref-2).
+While the last few years have been dominated by the production of novel infrastructure layers, few to none of these solutions have gained meaningful adoption among developers, or even more importantly, among consumers. The blockchain industry, and crypto users as a whole, have come to see infrastructure layers as extractive, as opposed to value additive [\[2\]](#reference-2).
 
-It has also become increasingly obvious that a chain's utility (and blockspace occupancy) is directly correlated to the quality and quantity of applications that are built on top of it [\[3\]](#ref-3). The Berachain Protocol (Berachain) is the first L1 that has been purpose-built to drive value to the applications built on top of it, making it easier for applications to bootstrap their own liquidity, increase their capital efficiency, and reach escape velocity from a user adoption point of view.
+It has also become increasingly obvious that a chain's utility (and blockspace occupancy) is directly correlated to the quality and quantity of applications that are built on top of it [\[3\]](#reference-3). The Berachain Protocol (Berachain) is the first L1 that has been purpose-built to drive value to the applications built on top of it, making it easier for applications to bootstrap their own liquidity, increase their capital efficiency, and reach escape velocity from a user adoption point of view.
 
 With this backdrop in mind, Berachain seeks to solve two crucial issues that nearly every chain faces.
 
@@ -44,7 +44,7 @@ First, Berachain seeks to better align the value proposition between participant
 
 Second, Berachain seeks to create a chain that mechanically derives its value from the applications built on it, rather than vice-versa.
 
-Proof of Stake L1s face a major headwind due to the lack of value normalization across the execution and consensus layers. Rewards for validators are largely dictated by a preset curve, where only staking rate meaningfully affects the outcome. Execution-side variables like MEV can impact returns, but only impact rates to the upside [\[4\]](#ref-4).
+Proof of Stake L1s face a major headwind due to the lack of value normalization across the execution and consensus layers. Rewards for validators are largely dictated by a preset curve, where only staking rate meaningfully affects the outcome. Execution-side variables like MEV can impact returns, but only impact rates to the upside [\[4\]](#reference-4).
 
 Ideally, a chain should mechanically adjust the reward rate that validators receive for providing economic security based on demand for economic security. If demand for economic security among the execution layer - namely applications and users - is low relative to its supply, then the reward rate for validators is higher than it needs to be. This is a cost that is then borne by the chain in aggregate, as validators are effectively overpaid for their increasingly commoditized services.
 
@@ -80,7 +80,7 @@ Validators receive a small commission for proposing a successful new block, whic
 
 Validators will have a minimum and maximum BERA stake, with the minimum serving as the base requirement for activation, and participation within the active set dictated by the validators with the largest stake. Emissions scale concavely with validators' BGT boost, in order to promote decentralization - as a validator's boost increases, the marginal benefit of increasing boost further decreases.
 
-The remainder, and the majority, of the block reward instead must go to application reward vaults by default. Reward vaults, which are similar to Curve's gauges [\[5\]](#ref-5), are a key piece of infrastructure that allows applications to leverage PoL, enabling teams to incentivize users' actions in exchange for block rewards. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, a decentralized digital asset exchange (DEX) could have multiple pools earning block rewards, each with its own reward vault and respective PoL-eligible asset. By staking that PoL-eligible ERC20 LP token in BGT Station, a user may start earning BGT rewards from the validator set, as a reward for their liquidity provision.
+The remainder, and the majority, of the block reward instead must go to application reward vaults by default. Reward vaults, which are similar to Curve's gauges [\[5\]](#reference-5), are a key piece of infrastructure that allows applications to leverage PoL, enabling teams to incentivize users' actions in exchange for block rewards. A protocol can have multiple reward vaults, each with its own PoL-eligible asset to be staked. For example, a decentralized digital asset exchange (DEX) could have multiple pools earning block rewards, each with its own reward vault and respective PoL-eligible asset. By staking that PoL-eligible ERC20 LP token in BGT Station, a user may start earning BGT rewards from the validator set, as a reward for their liquidity provision.
 
 Applications with reward vaults are able to incentivize specific actions, through the use of stakeable ERC20 receipt tokens. These incentives can come in the form of the application's native token, or in any arbitrary ERC20, so long as they are governance approved. Applications also set the exchange rate of their incentive asset, allowing them to dictate the terms of their exchange. An exchange rate at or above the current market price of the incentive asset would generate positive ROI on spend relative to standard emissions. An exchange rate below the current market price of the incentive asset would allow an application to trade off efficiency of spend for improved distribution, as liquidity providers will generally prefer a chain asset relative to an application asset. Validators also have the ability to partially or fully fill any offered incentive in the marketplace.
 
@@ -229,7 +229,7 @@ Validators are expected to distribute a portion of tokens from these incentives 
 
 ## 8. Impacts on Decentralization & Risks
 
-L1 blockchains usually face centralization risks due to economic pressures. As Vitalik Buterin highlights in a blog post [\[6\]](#ref-6), this is due to economies-of-scale in participating in core proof-of-stake mechanisms, which naturally lead to large stakers dominating, and small stakers dropping out to join large pools [\[7\]](#ref-7). This leads to higher risk of 51% attacks, transaction censorship, and other crises. In addition to the centralization risk, there are also risks of value extraction: a small group capturing value that would otherwise go to L1 users.
+L1 blockchains usually face centralization risks due to economic pressures. As Vitalik Buterin highlights in a blog post [\[6\]](#reference-6), this is due to economies-of-scale in participating in core proof-of-stake mechanisms, which naturally lead to large stakers dominating, and small stakers dropping out to join large pools [\[7\]](#reference-7). This leads to higher risk of 51% attacks, transaction censorship, and other crises. In addition to the centralization risk, there are also risks of value extraction: a small group capturing value that would otherwise go to L1 users.
 
 The PoL model is a variation of the PoS model and it therefore shares many of such risks. Moreover, PoL introduces many novelties such as different governance and gas tokens, emissions towards reward vaults and an incentives marketplace. These mechanisms can impact existing L1 risks as well as introduce new ones. PoL presents the first opportunity for validators on an L1 to express a variety of economic opinions at the network level, beyond their chosen commission rates. Each validator on Berachain has the opportunity to have its own distinct distribution of block rewards and incentives to applications on the chain, and its boosters, incentivizing increased stake decentralization as users and protocols choose their validator based on risk profiles and expected returns, both of which are downstream of their reward distribution choices. However, even in this system, PoL could lead to the emergence of economic risks for the blockchain. We address 2 key risks in PoL: (1) The end of PoL, (2) Centralization. There are also other risks such as Inefficient Liquidity, Low BERA staked, Parameters Changes, Low BGT Governance attacks.
 
@@ -243,7 +243,7 @@ Another scenario is one where a strong demand to short BERA for hedging or a lar
 
 ### 8.2 Centralization
 
-Similar to Lido on Ethereum [\[8\]](#ref-8), we could see the emergence of a large Liquid Staking provider on Berachain who may take control of a large percentage of the network by leveraging economies of scale [\[9\]](#ref-9). A LST protocol could create a xBERA/BERA pool and direct 100% of emissions towards it, enabling xBERA holders to receive emissions in addition to the staking rewards. As this LST protocol gains more and more BERA staked, incentives distributed to its BGT boosters keep growing, therefore attracting more boost. This process does not grow indefinitely since at some point, the LST protocol would hit the BERA staked cap and would need to spin up a new node, starting with zero BERA staked and boost, limiting the economies of scale. Even in the event of a large boost concentration within one or few validators, the boostMultiplier parameter determines the emissions cap towards protocols, further reducing economies of scale and keeping inflation under control even in high concentration scenarios. Moreover, using a concave function to determine the impact of BGT boost on emissions makes sure the marginal benefit of increasing boost decreases with each additional BGT boosted.
+Similar to Lido on Ethereum [\[8\]](#reference-8), we could see the emergence of a large Liquid Staking provider on Berachain who may take control of a large percentage of the network by leveraging economies of scale [\[9\]](#reference-9). A LST protocol could create a xBERA/BERA pool and direct 100% of emissions towards it, enabling xBERA holders to receive emissions in addition to the staking rewards. As this LST protocol gains more and more BERA staked, incentives distributed to its BGT boosters keep growing, therefore attracting more boost. This process does not grow indefinitely since at some point, the LST protocol would hit the BERA staked cap and would need to spin up a new node, starting with zero BERA staked and boost, limiting the economies of scale. Even in the event of a large boost concentration within one or few validators, the boostMultiplier parameter determines the emissions cap towards protocols, further reducing economies of scale and keeping inflation under control even in high concentration scenarios. Moreover, using a concave function to determine the impact of BGT boost on emissions makes sure the marginal benefit of increasing boost decreases with each additional BGT boosted.
 
 ### 8.3 Other Risks
 
@@ -255,7 +255,7 @@ Other economic risks not exclusive to PoL may arise from insufficient staked val
 
 Figure 2: High level overview of the PoL life cycle
 
-PoL is an extension of the PoS system, and replaces the whole incentive mechanism. Therefore, there needs to be a link from the consensus layer to the execution layer where the rewards are being minted and distributed. The Prover is how Berachain achieves this, using the EIP-4788 specification [\[10\]](#ref-10). The execution layer has access to the Beacon block roots that the consensus layer posts to the execution layer each block. Since the block has access to the public keys of the validator and at which block that they proposed, the PoL system can credit them for being able to mine BGT rewards and distribute them.
+PoL is an extension of the PoS system, and replaces the whole incentive mechanism. Therefore, there needs to be a link from the consensus layer to the execution layer where the rewards are being minted and distributed. The Prover is how Berachain achieves this, using the EIP-4788 specification [\[10\]](#reference-10). The execution layer has access to the Beacon block roots that the consensus layer posts to the execution layer each block. Since the block has access to the public keys of the validator and at which block that they proposed, the PoL system can credit them for being able to mine BGT rewards and distribute them.
 
 The life cycle above showcases the runtime of each block that block rewards are minted, the steps:
 
@@ -287,7 +287,7 @@ The diagram above walks through the safety mechanisms and processes that the gov
 
 ## 11. BeaconKit Overview
 
-BeaconKit is a modular framework designed to streamline the development of Ethereum Virtual Machine (EVM) consensus clients. It enables developers to launch both L1 and L2 EVM-identical blockchains with full Ethereum Improvement Proposal (EIP) compatibility, single-slot finality, and enhanced performance. By utilizing the EngineAPI [\[11\]](#ref-11) to facilitate communication between the consensus and execution layers, BeaconKit decouples the EVM execution environment from consensus mechanisms like CometBFT [\[12\]](#ref-12), allowing for greater flexibility and modularity in blockchain design. This approach mirrors Ethereum's own consensus layer, providing a familiar environment for developers. BeaconKit supports integration with standard, unmodified execution clients, achieving 100% EVM identicality with the Ethereum mainnet. It has been tested with clients such as Geth, Erigon, Nethermind, Besu, Reth, and EthereumJS, ensuring broad compatibility and leveraging the robust tooling and community support these clients offer.
+BeaconKit is a modular framework designed to streamline the development of Ethereum Virtual Machine (EVM) consensus clients. It enables developers to launch both L1 and L2 EVM-identical blockchains with full Ethereum Improvement Proposal (EIP) compatibility, single-slot finality, and enhanced performance. By utilizing the EngineAPI [\[11\]](#reference-11) to facilitate communication between the consensus and execution layers, BeaconKit decouples the EVM execution environment from consensus mechanisms like CometBFT [\[12\]](#reference-12), allowing for greater flexibility and modularity in blockchain design. This approach mirrors Ethereum's own consensus layer, providing a familiar environment for developers. BeaconKit supports integration with standard, unmodified execution clients, achieving 100% EVM identicality with the Ethereum mainnet. It has been tested with clients such as Geth, Erigon, Nethermind, Besu, Reth, and EthereumJS, ensuring broad compatibility and leveraging the robust tooling and community support these clients offer.
 
 ## 12. BeaconKit for EVM Identicality
 
@@ -301,7 +301,7 @@ The introduction of BeaconKit has several significant implications for the block
 2. **Enhanced Performance:** Immediate execution and optimistic payload building reduce block times and improve transaction throughput, addressing scalability challenges faced by previous implementations like Polaris.
 3. **Modularity and Flexibility:** BeaconKit's design eliminates reliance on standard Cosmos modules and Protobuf encoding, allowing developers to inject custom logic and implement custom block validity rules. This opens possibilities for innovative blockchain designs tailored to specific use cases.
 4. **Support for Advanced Features:** Inclusion of EIPs like EIP-4844 enables better support for rollups and L2 solutions, facilitating the creation of scalable and efficient blockchain networks.
-5. **Sustainability:** By decoupling from specific execution clients and eliminating the need for maintaining forks, BeaconKit offers a sustainable path forward for blockchain projects, reducing engineering overhead and improving client diversity [\[13\]](#ref-13).
+5. **Sustainability:** By decoupling from specific execution clients and eliminating the need for maintaining forks, BeaconKit offers a sustainable path forward for blockchain projects, reducing engineering overhead and improving client diversity [\[13\]](#reference-13).
 
 Overall, BeaconKit represents a significant advancement in blockchain development, providing the tools necessary to build high-performance, EVM-identical blockchains with greater ease and flexibility. Its introduction heralds a new era where developers can focus on innovation without being hindered by underlying technical complexities or the maintenance of cumbersome execution client forks.
 
@@ -315,19 +315,57 @@ Overall, BeaconKit represents a significant advancement in blockchain developmen
 
 ## References
 
-- <strong id="ref-1">[1]</strong> Dinesh Kumar, Duraimutharasan, Shanthi, Vennila, Prabu Shankar and Senthil. _Comparative Analysis of Transaction Speed and Throughput in Blockchain and Hashgraph: A Performance Study for Distributed Ledger Technologies._ Journal of Machine and Computing, 3(4), 2023. [https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf](https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf)
-- <strong id="ref-2">[2]</strong> [https://blog.berachain.com/blog/the-pol-post](https://blog.berachain.com/blog/the-pol-post)
-- <strong id="ref-3">[3]</strong> [https://blog.berachain.com/blog/the-fat-bera-thesis](https://blog.berachain.com/blog/the-fat-bera-thesis)
-- <strong id="ref-4">[4]</strong> Urban J. Jermann. _A Macro Finance Model for Proof-of-Stake Ethereum._ National Bureau of Economic Research (NBER), 2023. [https://papers.ssrn.com/sol3/papers.cfm?abstract\_id=4335835](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835)
-- <strong id="ref-5">[5]</strong> [https://docs.curve.fi/assets/pdf/CurveDAO.pdf](https://docs.curve.fi/assets/pdf/CurveDAO.pdf)
-- <strong id="ref-6">[6]</strong> Vitalik Buterin. _Possible futures of the Ethereum protocol, part 3: The Scourge._ 2024. [https://vitalik.eth.limo/general/2024/10/20/futures3.html](https://vitalik.eth.limo/general/2024/10/20/futures3.html)
-- <strong id="ref-7">[7]</strong> Li Li. _Mitigating Challenges in Ethereum's Proof-of-Stake Consensus: Evaluating the Impact of EigenLayer and Lido._ 2024 [https://arxiv.org/abs/2410.23422](https://arxiv.org/abs/2410.23422)
-- <strong id="ref-8">[8]</strong> [https://research.lido.fi/t/is-lido-good-for-ethereum/5520](https://research.lido.fi/t/is-lido-good-for-ethereum/5520)
-- <strong id="ref-9">[9]</strong> [https://notes.ethereum.org/@djrtwo/risks-of-lsd](https://notes.ethereum.org/@djrtwo/risks-of-lsd) [https://www.mdpi.com/1099-4300/25/9/1320](https://www.mdpi.com/1099-4300/25/9/1320)
-- <strong id="ref-10">[10]</strong> Alex Stokes, Ansgar Dietrichs, Danny Ryan, Martin Holst Swende, light-client. _EIP-4788: Beacon block root in the EVM._ 2022 [https://eips.ethereum.org/EIPS/eip-4788](https://eips.ethereum.org/EIPS/eip-4788)
-- <strong id="ref-11">[11]</strong> [https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md)
-- <strong id="ref-12">[12]</strong> [https://docs.cometbft.com/v0.37/spec/abci/](https://docs.cometbft.com/v0.37/spec/abci/)
-- <strong id="ref-13">[13]</strong> [https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885](https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885)
+#### Reference 1
+
+Dinesh Kumar, Duraimutharasan, Shanthi, Vennila, Prabu Shankar and Senthil. _Comparative Analysis of Transaction Speed and Throughput in Blockchain and Hashgraph: A Performance Study for Distributed Ledger Technologies._ Journal of Machine and Computing, 3(4), 2023. [https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf](https://pdfs.semanticscholar.org/2e97/1b66175ee27ed558fdcfafb3c645ddd3d68d.pdf)
+
+#### Reference 2
+
+[https://blog.berachain.com/blog/the-pol-post](https://blog.berachain.com/blog/the-pol-post)
+
+#### Reference 3
+
+[https://blog.berachain.com/blog/the-fat-bera-thesis](https://blog.berachain.com/blog/the-fat-bera-thesis)
+
+#### Reference 4
+
+Urban J. Jermann. _A Macro Finance Model for Proof-of-Stake Ethereum._ National Bureau of Economic Research (NBER), 2023. [https://papers.ssrn.com/sol3/papers.cfm?abstract\_id=4335835](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4335835)
+
+#### Reference 5
+
+[https://docs.curve.fi/assets/pdf/CurveDAO.pdf](https://docs.curve.fi/assets/pdf/CurveDAO.pdf)
+
+#### Reference 6
+
+Vitalik Buterin. _Possible futures of the Ethereum protocol, part 3: The Scourge._ 2024. [https://vitalik.eth.limo/general/2024/10/20/futures3.html](https://vitalik.eth.limo/general/2024/10/20/futures3.html)
+
+#### Reference 7
+
+Li Li. _Mitigating Challenges in Ethereum's Proof-of-Stake Consensus: Evaluating the Impact of EigenLayer and Lido._ 2024 [https://arxiv.org/abs/2410.23422](https://arxiv.org/abs/2410.23422)
+
+#### Reference 8
+
+[https://research.lido.fi/t/is-lido-good-for-ethereum/5520](https://research.lido.fi/t/is-lido-good-for-ethereum/5520)
+
+#### Reference 9
+
+[https://notes.ethereum.org/@djrtwo/risks-of-lsd](https://notes.ethereum.org/@djrtwo/risks-of-lsd) [https://www.mdpi.com/1099-4300/25/9/1320](https://www.mdpi.com/1099-4300/25/9/1320)
+
+#### Reference 10
+
+Alex Stokes, Ansgar Dietrichs, Danny Ryan, Martin Holst Swende, light-client. _EIP-4788: Beacon block root in the EVM._ 2022 [https://eips.ethereum.org/EIPS/eip-4788](https://eips.ethereum.org/EIPS/eip-4788)
+
+#### Reference 11
+
+[https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md](https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md)
+
+#### Reference 12
+
+[https://docs.cometbft.com/v0.37/spec/abci/](https://docs.cometbft.com/v0.37/spec/abci/)
+
+#### Reference 13
+
+[https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885](https://ethresear.ch/t/considering-client-diversity-through-the-lens-of-network-performance/18885)
 
 ## Appendix
 

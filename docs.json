@@ -289,7 +289,6 @@
             "group": "Setup & Deployment",
             "pages": [
               "nodes/operations/quickstart",
-              "nodes/operations/bera-geth-to-reth",
               "nodes/operations/self-hosted-rpc",
               "nodes/guides/local-devnet-docker",
               "nodes/guides/local-devnet-kurtosis",
@@ -310,7 +309,6 @@
             "pages": [
               "nodes/operations/production-checklist",
               "nodes/operations/monitoring",
-              "nodes/operations/osaka1",
               "nodes/guides/become-a-validator",
               {
                 "group": "Being a Validator",
@@ -1359,6 +1357,16 @@
     {
       "source": "/general/tokens/honey",
       "destination": "/general/tokens/busd",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/operations/bera-geth-to-reth",
+      "destination": "/nodes/operations/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/operations/osaka1",
+      "destination": "/build/protocol/overview#upgrade-timeline",
       "permanent": true
     }
   ]
