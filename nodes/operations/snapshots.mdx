@@ -31,8 +31,8 @@ This procedure only affects the execution layer. Beacon Kit and CometBFT storage
 
 Do these steps to move an existing node to storage v2:
 
-1. Stop the execution client. Do not stop `beacond`; this procedure does not touch the consensus layer.
-2. Delete the old Bera-Reth datadir (example: `var/reth/data`), or move it to a new location. A storage v1 datadir and a storage v2 datadir are not compatible with each other. Keep a copy of the old datadir only if you want a way back to storage v1.
+1. Stop the execution client. No need to stop `beacond`; this procedure does not touch the consensus layer.
+2. Delete or preserve the old Bera-Reth datadir (example: `var/reth/data`). A storage v1 datadir and a storage v2 datadir are not compatible with each other. Keep a copy of the old datadir only if you want a way back to storage v1.
 3. Restore a snapshot into the empty datadir; see [Restoring an official snapshot](#restoring-an-official-snapshot), below.
 4. Start the execution client. The node now uses storage v2. You do not need to change any configuration or startup options.
 
