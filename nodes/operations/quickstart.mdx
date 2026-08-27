@@ -72,7 +72,6 @@ ls;
 # env.sh                        run-beacond.sh  setup-beacond.sh
 # fetch-berachain-params.sh
 # fetch-berachain-snapshot.js
-# fetch-berachain-snapshot-v2.js
 ```
 
 The file `env.sh` contains environment variables used in the other scripts.
@@ -191,7 +190,8 @@ Official Berachain snapshots are available for
 ```bash
 # FROM: ~/beranode
 
-node fetch-berachain-snapshot.js --network [mainnet|bepolia] --type pruned
+node fetch-berachain-snapshot.js --network mainnet --type pruned
+node fetch-berachain-snapshot.js --network bepolia --type pruned
 ```
 
 ## Step 7 - Run both clients

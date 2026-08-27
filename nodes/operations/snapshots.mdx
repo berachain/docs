@@ -13,15 +13,13 @@ A snapshot lets you set up a new node in hours, not days. Berachain publishes a 
 
 Bera-Reth, Berachain's execution client, is built on the upstream Reth project. Reth v2 added storage v2, a new format for the on-disk database.
 
-Storage v2 keeps two kinds of data. The hot layer holds live state. The node reads and writes this data on every block. The cold layer holds history: headers, transactions, receipts, and change data. Bera-Reth stores the cold layer as separate files.
-
-The snapshot manifest lists a checksum for each file. Bera-Reth verifies this checksum after it extracts a file and before it declares the snapshot complete. If the checksum does not match, Bera-Reth deletes the file and downloads it again.
-
 Berachain's official snapshots use storage v2, for both Mainnet and Bepolia.
 
 It is not required, but is recommended, to change to storage v2. A storage v1 node still works as usual. Some community node operators still publish storage v1 snapshots; see [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
 
-Bera-Reth sets the storage format when it creates a new datadir, and does not change it later, even if you change a flag. Restoring a storage v2 snapshot into a new datadir **is** how you migrate to storage v2. There is no separate step.
+<Warning>
+  Bera-Reth sets the storage format when it creates a new datadir, and does not change it later, even if you change a flag. Restoring a storage v2 snapshot into a new datadir **is** how you migrate to storage v2. There is no separate step.
+</Warning>
 
 ## Migrating from storage v1 to v2
 
@@ -46,7 +44,10 @@ After it extracts each file, `bera-reth download` checks that file against the m
 
 - **`--chain <mainnet|bepolia>`**: chooses the network snapshot to download.
 - **`--datadir <dir>`**: the target directory. Do not point this at a running node's data or storage v1 data.
-- **`--manifest-url <url>`**: the `manifest.json` URL from the [Mainnet](https://snapshots.berachain.com/) or [Bepolia](https://bepolia.snapshots.berachain.com/) snapshot site.
+- **`--manifest-url <url>`**: the `manifest.json` URL from the snapshot site. Official examples:
+  `https://snapshots.berachain.com/reth/manifest.json` (Mainnet),
+  `https://bepolia.snapshots.berachain.com/reth/manifest.json` (Bepolia).
+  Use this flag for a third-party snapshot; copy that provider's `manifest.json` URL.
 
 **Pick exactly one preset:**
 
@@ -65,27 +66,29 @@ You can run this command again on a datadir with a partial or damaged restore. T
 ```bash
 # Restore a pruned Bepolia node
 bera-reth download --chain bepolia --datadir var/reth/data \
-  --manifest-url https://bera-snapshots.fsn1.your-objectstorage.com/v2/bepolia/reth/manifest.json \
+  --manifest-url https://bepolia.snapshots.berachain.com/reth/manifest.json \
+  --minimal
+
+# Restore a pruned Mainnet node
+bera-reth download --chain mainnet --datadir var/reth/data \
+  --manifest-url https://snapshots.berachain.com/reth/manifest.json \
   --minimal
 
 # Check a manifest without downloading anything
 bera-reth download --chain bepolia --datadir /tmp/plan-check \
-  --manifest-url <url> --minimal --print-plan-json
+  --manifest-url https://bepolia.snapshots.berachain.com/reth/manifest.json \
+  --minimal --print-plan-json
 ```
 
 ## Restoring an official snapshot
 
-The [`fetch-berachain-snapshot.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot.js) script is on disk after Quickstart Step 1. This script reads the catalog at
-
-`https://bera-snapshots.fsn1.your-objectstorage.com/v2/<network>/catalog.csv`
-
-then creates two new, empty directories: it restores the consensus layer with `curl`, `lz4`, and `tar`, and restores the execution layer with `bera-reth download`. If a target directory already exists and isn't empty, the script stops and returns an error.
+The [`fetch-berachain-snapshot.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot.js) script is on disk after Quickstart Step 1. This script reads the catalog on the [Mainnet](https://snapshots.berachain.com/) or [Bepolia](https://bepolia.snapshots.berachain.com/) snapshot site, then creates two new, empty directories: it restores the consensus layer with `curl`, `lz4`, and `tar`, and restores the execution layer with `bera-reth download`. If a target directory already exists and isn't empty, the script stops and returns an error.
 
 ```bash
 # FROM: ~/beranode
-# --network selects mainnet or bepolia; both are live official v2 feeds.
 
 node fetch-berachain-snapshot.js --network mainnet --type pruned
+node fetch-berachain-snapshot.js --network bepolia --type pruned
 
 # --no-download prints the restore commands, with no directories created, download, or bera-reth run:
 node fetch-berachain-snapshot.js --network mainnet --type pruned --no-download
