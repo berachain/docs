@@ -11,19 +11,35 @@ A snapshot lets you set up a new node in hours, not days. Berachain publishes a 
 
 ## Reth storage v1 vs v2
 
-Bera-Reth, Berachain's execution client, is built on the upstream Reth project. Reth v2 added storage v2, a new format for the on-disk database.
+Bera-Reth, Berachain's execution client, is built on the upstream Reth project. Reth v2 added storage v2, a new on-disk layout that splits data by how the node uses it instead of holding everything in one database.
 
-Berachain's official snapshots use storage v2, for both Mainnet and Bepolia.
+Storage v2 uses less disk. Upstream Reth measured these savings on Ethereum mainnet at block 24,396,823. No Berachain figures are published yet, so read them as indicative:
 
-It is not required, but is recommended, to change to storage v2. A storage v1 node still works as usual. Some community node operators still publish storage v1 snapshots; see [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
+| Node type   | Storage v1 | Storage v2 | Savings |
+| ----------- | ---------- | ---------- | ------- |
+| `--minimal` | 449 GB     | 224 GB     | -50%    |
+| `--full`    | 1.46 TB    | 1.02 TB    | -30%    |
+| `--archive` | 2.99 TB    | 2.31 TB    | -23%    |
+
+Storage v2 also writes finalized blocks to disk faster.
+
+It is also the direction Reth is moving. Reth 2.0 made storage v2 the default for new databases, and announced that storage v1 support will be removed in a future version, with the exact deprecation date to be communicated separately. A storage v1 node runs normally today, so treat this as a migration to plan rather than an emergency.
+
+For the layout itself, see [Reth's storage documentation](https://reth.rs/run/storage/).
+
+Berachain's official snapshots use storage v2, for both Mainnet and Bepolia. Some community node operators still publish storage v1 snapshots; see [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
+
+To check which layout a datadir already uses, run `bera-reth db --datadir <dir> settings`.
 
 <Warning>
-  Bera-Reth sets the storage format when it creates a new datadir, and does not change it later, even if you change a flag. Restoring a storage v2 snapshot into a new datadir **is** how you migrate to storage v2. There is no separate step.
+  Bera-Reth records the storage layout when it creates a datadir, and **does not change it later**.
+  Setting or clearing a flag on an existing datadir does not convert it. To move an existing node to
+  storage v2, restore a storage v2 snapshot into a new datadir.
 </Warning>
 
 ## Migrating from storage v1 to v2
 
-To use storage v2, you must restore a storage v2 snapshot into a new, empty datadir: the same procedure as a new node setup.
+Restore a storage v2 snapshot into a new, empty datadir: the same procedure as a new node setup. This is the recommended path, and the steps below cover it. Bera-Reth also ships an in-place converter, `bera-reth db migrate-v2`, documented in the Bera-Reth repository; it is the option for operators who cannot re-download a snapshot.
 
 This procedure only affects the execution layer. Beacon Kit and CometBFT storage formats have not changed. Your consensus-layer data and your validator keys are safe during this procedure.
 
