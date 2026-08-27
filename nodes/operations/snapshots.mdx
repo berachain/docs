@@ -44,10 +44,7 @@ After it extracts each file, `bera-reth download` checks that file against the m
 
 - **`--chain <mainnet|bepolia>`**: chooses the network snapshot to download.
 - **`--datadir <dir>`**: the target directory. Do not point this at a running node's data or storage v1 data.
-- **`--manifest-url <url>`**: the `manifest.json` URL from the snapshot site. Official examples:
-  `https://snapshots.berachain.com/reth/manifest.json` (Mainnet),
-  `https://bepolia.snapshots.berachain.com/reth/manifest.json` (Bepolia).
-  Use this flag for a third-party snapshot; copy that provider's `manifest.json` URL.
+- **`--manifest-url <url>`**: the `manifest.json` URL for the snapshot you want. Copy it from the [Mainnet](https://snapshots.berachain.com/) or [Bepolia](https://bepolia.snapshots.berachain.com/) snapshot site. For a third-party snapshot, copy the URL that provider publishes.
 
 **Pick exactly one preset:**
 
@@ -63,26 +60,25 @@ After it extracts each file, `bera-reth download` checks that file against the m
 
 You can run this command again on a datadir with a partial or damaged restore. This is safe, and often the fix: every file is checked against the manifest's checksum, and anything missing, wrong-sized, or failing that check is deleted and re-downloaded automatically. This check only covers the files in your chosen preset; restoring with `--minimal` doesn't check files outside it.
 
+Copy `<manifest-url>` from the snapshot site for your network before you run these.
+
 ```bash
 # Restore a pruned Bepolia node
 bera-reth download --chain bepolia --datadir var/reth/data \
-  --manifest-url https://bepolia.snapshots.berachain.com/reth/manifest.json \
-  --minimal
+  --manifest-url <manifest-url> --minimal
 
 # Restore a pruned Mainnet node
 bera-reth download --chain mainnet --datadir var/reth/data \
-  --manifest-url https://snapshots.berachain.com/reth/manifest.json \
-  --minimal
+  --manifest-url <manifest-url> --minimal
 
 # Check a manifest without downloading anything
 bera-reth download --chain bepolia --datadir /tmp/plan-check \
-  --manifest-url https://bepolia.snapshots.berachain.com/reth/manifest.json \
-  --minimal --print-plan-json
+  --manifest-url <manifest-url> --minimal --print-plan-json
 ```
 
 ## Restoring an official snapshot
 
-The [`fetch-berachain-snapshot.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot.js) script is on disk after Quickstart Step 1. This script reads the catalog on the [Mainnet](https://snapshots.berachain.com/) or [Bepolia](https://bepolia.snapshots.berachain.com/) snapshot site, then creates two new, empty directories: it restores the consensus layer with `curl`, `lz4`, and `tar`, and restores the execution layer with `bera-reth download`. If a target directory already exists and isn't empty, the script stops and returns an error.
+The [`fetch-berachain-snapshot.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot.js) script is on disk after Quickstart Step 1. This script resolves the current official snapshot for your network on its own, so you do not need to copy a URL. It then creates two new, empty directories: it restores the consensus layer with `curl`, `lz4`, and `tar`, and restores the execution layer with `bera-reth download`. If a target directory already exists and isn't empty, the script stops and returns an error.
 
 ```bash
 # FROM: ~/beranode
