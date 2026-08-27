@@ -9,23 +9,24 @@ This guide helps validators set up and manage staking pools to offer liquid stak
 
 ### Key parameters
 
-| Parameter                 | Range                                      | Purpose                                      |
-| ------------------------- | ------------------------------------------ | -------------------------------------------- |
-| Validator Commission      | 0-20%                                      | Commission on incentive token distribution   |
-| Protocol Fee              | 0-20%                                      | Fee on eligible staking-pool reward growth   |
-| Minimum Effective Balance | ≥ 250,000 BERA                             | Activation threshold and full exit safeguard |
-| Withdrawal Delay          | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized     |
+| Parameter                 | Range                                      | Purpose                                           |
+| ------------------------- | ------------------------------------------ | ------------------------------------------------- |
+| Validator Commission      | 0-20%                                      | Commission on incentive token distribution        |
+| Protocol Fee              | 0-20%                                      | Fee on eligible staking-pool reward growth        |
+| Minimum Effective Balance | ≥ `MIN_EFFECTIVE_BALANCE` (250,000 BERA)   | Activation threshold and full exit safeguard      |
+| Minimum CL Deposit        | `MIN_CL_DEPOSIT_AMOUNT` (10,000 BERA)      | Smallest consensus-layer deposit the pool batches |
+| Withdrawal Delay          | 129,600 blocks (≈3 days at ~2s block time) | Time before withdrawals can be finalized          |
 
 ### Key roles
 
-| Role                               | Controls              | Function                               |
-| ---------------------------------- | --------------------- | -------------------------------------- |
-| `VALIDATOR_ADMIN_ROLE`             | All other roles       | Grant/revoke operational roles         |
-| `REWARDS_ALLOCATION_MANAGER_ROLE`  | Reward allocation     | Direct PoL incentives to applications  |
-| `COMMISSION_MANAGER_ROLE`          | Commission rate       | Adjust validator commission (0-20%)    |
-| `PROTOCOL_FEE_MANAGER_ROLE`        | Protocol fee          | Adjust protocol fee percentage (0-20%) |
-| `INCENTIVE_COLLECTOR_MANAGER_ROLE` | Payout amount         | Adjust incentive collector payout      |
-| `DELEGATION_MANAGER_ROLE`          | Delegation operations | Manage delegations                     |
+| Role                                | Controls              | Function                               |
+| ----------------------------------- | --------------------- | -------------------------------------- |
+| `VALIDATOR_ADMIN_ROLE`              | All other roles       | Grant/revoke operational roles         |
+| `REWARDS_ALLOCATION_MANAGER_ROLE`   | Reward allocation     | Direct PoL incentives to applications  |
+| `COMMISSION_MANAGER_ROLE`           | Commission rate       | Adjust validator commission (0-20%)    |
+| `PROTOCOL_FEE_MANAGER_ROLE`         | Protocol fee          | Adjust protocol fee percentage (0-20%) |
+| `INCENTIVE_COLLECTOR_MANAGER_ROLE`  | Payout amount         | Adjust incentive collector payout      |
+| `VALIDATOR_ADMIN_ROLE` (delegation) | Delegation operations | Manage delegation handler actions      |
 
 ### Essential functions
 
@@ -51,7 +52,7 @@ Manual lever for compounding operator WBERA into pool assets:
 | ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
 | `processRewards()` | StakingPool | Pull buffered staking rewards and any operator-held WBERA into the pool. Permissionless; callable any caller. |
 
-Operator action is not required to make WBERA reach stakers. Compounding fires automatically inside any user `deposit()` and inside `processRewards()`; covering withdrawals from operator-side WBERA fires automatically inside `WithdrawalVault.requestWithdrawal()`. See [Automatic WBERA flows](#automatic-wbera-flows) below.
+Operator action is not required to make WBERA reach stakers. Compounding fires automatically inside any user `submit()` (or a plain BERA transfer to the pool) and inside `processRewards()`; covering withdrawals from operator-side WBERA fires automatically inside `WithdrawalVault.requestWithdrawal()`. See [Automatic WBERA flows](#automatic-wbera-flows) below.
 
 Legacy incentive surface (kept for transition; see [Deprecated BGT entry points](#deprecated-bgt-entry-points)):
 
@@ -82,6 +83,18 @@ The key consideration for staking pools is ensuring sufficient stake for activat
 - **Withdrawal Delay**: 129,600 blocks (≈3 days at ~2s block time) that must pass after a withdrawal request before it can be finalized.
 - **Cooldown Period**: After `activeThresholdReached()` becomes `true`, there is a cooldown period before the validator activates.
 
+## Pool valuation and the accounting oracle
+
+A pool's stBERA share price tracks `totalAssets()` on the `StakingPool`. Consensus-layer validator balance is the largest component of that NAV, but the execution layer does not read beacon state directly on every block.
+
+The shared **AccountingOracle** is the only path from a validator's consensus-layer balance to on-chain `totalDeposits`. An address with `FEEDER_ROLE` on the oracle calls `updateTotalDeposits` with a beacon block root, a pubkey proof, and a balance proof. The `StakingPoolContractsFactory` verifies those proofs before the oracle forwards the balance to the pool's `updateTotalDeposits(uint256 newTotalDeposits)`.
+
+The write is not a trusted push. The factory checks the pubkey and balance proofs against the reported beacon block root before any pool state changes.
+
+Between reports, `totalAssets()` reflects the **last verified** consensus-layer balance plus buffered execution-layer funds and pending operator WBERA. It does not track live beacon state in real time. Stakers should expect share price to move when a feeder publishes a new verified report, not on every consensus-layer slot.
+
+See [Smart Contract Reference](/nodes/staking-pools/contracts) for oracle addresses on each network.
+
 ## Yield model
 
 After the May 2026 PoL upgrade, per-block validator emission is a **flat fixed rate** (no boost curve).
@@ -97,7 +110,7 @@ Validator emissions accrue as \$WBERA on your `SmartOperator`. Protocol fee accr
 
 `SmartOperator` exposes two state-changing entry points that move WBERA out of the operator: `withdrawRewards(uint256)` and `pullBeraToWithdrawalVault(uint256)`. Both are restricted by sender — `withdrawRewards` accepts the StakingPool only; `pullBeraToWithdrawalVault` accepts the WithdrawalVault only. Operators cannot call them directly, and no operator action is required to make WBERA reach stakers.
 
-- **Compounding into pool assets** — Any user `deposit()` and any call to `StakingPool.processRewards()` invokes `_collectRewards(...)`, which calls `SmartOperator.withdrawRewards(...)` on operator WBERA first, then drains the staking rewards vault. Operator WBERA is pulled first so `_getTotalAssets()` is correct before protocol fees mint staker shares via `mintFeeShares` during WBERA fee accrual. The unwrapped BERA lands in the pool, lifts `_getTotalAssets()`, and lifts share price for every staker.
+- **Compounding into pool assets** — Any user `submit()` (or a payable transfer to the pool) and any call to `StakingPool.processRewards()` invokes `_collectRewards(...)`, which calls `SmartOperator.withdrawRewards(...)` on operator WBERA first, then drains the staking rewards vault. Operator WBERA is pulled first so `_getTotalAssets()` is correct before protocol fees mint staker shares via `mintFeeShares` during WBERA fee accrual. The unwrapped BERA lands in the pool, lifts `_getTotalAssets()`, and lifts share price for every staker.
 - **Deposit ordering and fee fairness** — Inside `_submit`, the pool mints the depositor's stBERA **before** calling `_collectRewards(...)`. The depositor's shares are priced against the pre-collection NAV (which already includes pending operator WBERA via `rebaseableWberaAmount()`), so they pay a fair price for the yield about to settle. The collection that follows charges WBERA-track protocol fees and mints fee shares to the default recipient against the post-deposit NAV, so the new depositor's principal is not taxed as if it were accrued yield. `processRewards()` runs the same `_collectRewards → bufferedAssets bump → _processDeposit` sequence without minting user shares.
 - **Covering withdrawals from operator liquidity** — `WithdrawalVault.requestWithdrawal()` precomputes `pulledFromOperator = min(amountInWei, availableWBERABalance)` and calls `pullBeraToWithdrawalVault(...)` on the normal partial-withdrawal branch. The execution-layer withdrawal request to the consensus layer is reduced to the uncovered remainder; if the operator covers in full, no consensus-layer request is issued and the EIP-7002 fee is refunded to the requester. Short-circuit (pool not yet at active threshold) and full-exit branches do not consume operator WBERA.
 - **Full exit sweep** — Triggering a full exit sweeps any idle operator WBERA into the pool before the pool forwards its native balance to the WithdrawalVault.
@@ -116,7 +129,7 @@ Direct PoL incentives to specific applications. For instructions, see [Managing 
 
 ### Setting minimum effective balance
 
-The `minEffectiveBalance` parameter is critical for validator activation. The consensus layer enforces a base minimum of **250,000 BERA**. When the validator set is full (69 validators), the minimum required increases in increments of **10,000 BERA**. Set `minEffectiveBalance` to match the current consensus layer requirement. You can check the current lowest active stake on [Berachain Hub](https://hub.berachain.com/boost/).
+The `minEffectiveBalance` parameter is critical for validator activation. On-chain, `StakingPool.MIN_EFFECTIVE_BALANCE` is **250,000 BERA** and is the floor for any custom `minEffectiveBalance` you set. When the validator set is full (69 validators), the consensus layer minimum increases in increments of **`MIN_CL_DEPOSIT_AMOUNT` (10,000 BERA)** above the lowest active validator. Set `minEffectiveBalance` to match the current consensus layer requirement. You can check the current lowest active stake on [Berachain Hub](https://hub.berachain.com/boost/).
 
 ## Routine operations
 
@@ -136,6 +149,19 @@ The May 2026 PoL upgrade deprecates the BGT-era surface on `SmartOperator`. The 
 
 Berachain recommends winding down BGT positions held on your `SmartOperator` (unboost, drop-boost, redeem) using the same calls during the transition window.
 
+## Deposits and the DepositSubmitted event
+
+Stakers fund the pool through `submit(address receiver)` or by sending native BERA to the pool. Each successful deposit emits `DepositSubmitted` with:
+
+- `receiver` — the address that receives minted stBERA shares
+- `userDepositAmount` — the BERA amount credited from this deposit
+- `shares` — stBERA shares minted to the receiver
+- `rewardsCollected` — staking-rewards vault balance swept during the deposit
+- `bufferedAssets` — execution-layer BERA waiting to batch to the consensus layer after the deposit
+- `totalDeposits` — the pool's consensus-layer deposit total after the deposit logic runs
+
+Front-ends can index this event to show deposit history without replaying internal accounting.
+
 ## Withdrawal system
 
 The shared **`WithdrawalVault`** is a per-chain singleton (a single proxy + implementation) that finalizes withdrawal requests for every staking pool. Three sources of liquidity can satisfy a request:
@@ -143,6 +169,8 @@ The shared **`WithdrawalVault`** is a per-chain singleton (a single proxy + impl
 - **Short-circuit** — pool not yet at the active threshold. Liquidity comes only from the pool's on-chain **`bufferedAssets`**. BeaconKit honors EIP-7002 withdrawal requests only for **active** validators; a validator that has not activated cannot withdraw via the consensus layer, so this branch never issues a CL request. If the buffer cannot cover the request, the transaction reverts rather than falling through into post-threshold or full-exit logic.
 - **Standard consensus-layer withdrawal** — execution-layer request to the validator's pubkey.
 - **Operator-side WBERA cover** — at request time, the vault pulls from **`availableWBERABalance()`** on your pool's `SmartOperator`, unwraps to native BERA, and applies it to the request. Coverage may be **full** (the consensus-layer request is skipped and the EIP-7002 fee is refunded), **partial** (the remainder still exits via the consensus layer), or **none** when operator liquidity is empty.
+
+**`coveredByOperator` accounting:** `WithdrawalVault.requestWithdrawal()` forwards a `coveredByOperator` amount into `StakingPool.notifyWithdrawalRequest(...)`. That value is the portion of the withdrawal satisfied from operator WBERA at request time. The pool decrements `totalDeposits` only by `assets - coveredByOperator`, because only the consensus-layer portion leaves the validator balance. Operator-covered BERA never counted as consensus-layer stake, so this keeps pool accounting aligned with actual CL outflow. The parameter is ignored on short-circuit and full-exit branches.
 
 **Post-exit pools:** Once the validator has fully exited (`isFullyExited`), withdrawal handling skips the pre-threshold default-recipient gate and the post-threshold activation cooldown. BERA is already in the `WithdrawalVault`; requests proceed without re-entering activation-era guards.
 

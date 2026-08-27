@@ -24,7 +24,7 @@ For broader PoL changes, see [What's New](/general/proof-of-liquidity/changelog)
 
 ## How it works
 
-When you create a staking pool, the system deploys several interconnected contracts. Your pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an Accounting Oracle that provides consensus layer data updates.
+When you create a staking pool, the system deploys several interconnected contracts. Your pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an AccountingOracle that publishes verified consensus-layer balances to each pool. See [Pool valuation and the accounting oracle](/nodes/staking-pools/operators#pool-valuation-and-the-accounting-oracle) for how stBERA share price tracks validator stake.
 
 The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from you while providing your stakers with a seamless staking experience.
 

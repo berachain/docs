@@ -25,6 +25,12 @@ dev:
 
 check: check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses
 
+test:
+	node --test scripts/contracts/test/*.test.mjs
+
+check-generate:
+	node scripts/contracts/generate-pages.mjs --check
+
 check-validate:
 	mint validate
 

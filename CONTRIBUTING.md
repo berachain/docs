@@ -162,8 +162,9 @@ This regenerates:
   - `build/bex/deployed-contracts.mdx`
   - `build/bend/deployed-contracts.mdx`
   - `build/bend/deployed-markets.mdx`
+  - `nodes/staking-pools/contracts.mdx`
 
-Check in generated outputs with your `data/contracts.json` changes in the same PR.
+Do not manually edit generated files listed above. After changing `data/contracts.json`, always run `make contracts-generate` and commit the regenerated outputs.
 
 #### POL address hygiene check
 

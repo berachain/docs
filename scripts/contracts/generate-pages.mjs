@@ -3,6 +3,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { renderStakingPoolsSnippet } from "./staking-pools-render.mjs";
+
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
@@ -294,30 +296,8 @@ ${rows}
 `;
 }
 
-function renderStakingPoolsSnippet() {
-  const items = Object.values(contracts.stakingPools);
-  const mainSection = hasAnyDeployment(items, "berachainMainnet")
-    ? `#### Mainnet
-
-<CardGroup cols={2}>
-${items
-  .map((item) => contractCard(item, "berachainMainnet", "ABI JSON"))
-  .filter(Boolean)
-  .join("\n")}
-</CardGroup>`
-    : "";
-  const bepSection = hasAnyDeployment(items, "berachainBepolia")
-    ? `#### Bepolia
-
-<CardGroup cols={2}>
-${items
-  .map((item) => contractCard(item, "berachainBepolia", "ABI JSON"))
-  .filter(Boolean)
-  .join("\n")}
-</CardGroup>`
-    : "";
-
-  return [mainSection, bepSection].filter(Boolean).join("\n\n");
+function renderStakingPoolsSnippetFromContracts() {
+  return renderStakingPoolsSnippet(contracts);
 }
 
 function renderGettingStartedPage() {
@@ -369,7 +349,7 @@ The following is a list of contract addresses for interacting with Berachain BEX
 function renderStakingPoolsPage() {
   return `---
 title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
+description: "Addresses and ABIs for StakingPoolContractsFactory, AccountingOracle, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
 ---
 
 import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
@@ -380,7 +360,7 @@ This reference provides contract addresses and links to detailed documentation f
 
 ### Singleton contracts
 
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
+Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **AccountingOracle** receives verified consensus-layer balance reports and updates each pool's \`totalDeposits\`. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
 
 <StakingPoolSingletonsTable />
 
@@ -446,7 +426,7 @@ write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSni
 write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
 write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
 write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
-write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippet());
+write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippetFromContracts());
 
 write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
 write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
