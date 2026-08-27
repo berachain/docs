@@ -67,6 +67,8 @@ You can run this command again on a datadir with a partial or damaged restore. T
 
 Copy `<manifest-url>` from the snapshot site for your network before you run these.
 
+## Restoring an official snapshot
+
 ```bash
 # Restore a pruned Bepolia node
 bera-reth download --chain bepolia --datadir var/reth/data \
@@ -76,42 +78,9 @@ bera-reth download --chain bepolia --datadir var/reth/data \
 bera-reth download --chain mainnet --datadir var/reth/data \
   --manifest-url <manifest-url> --minimal
 
-# Check a manifest without downloading anything
-bera-reth download --chain bepolia --datadir /tmp/plan-check \
+# Dry run - verifies snapshot files on disk
+bera-reth download --chain bepolia --datadir var/reth/data \
   --manifest-url <manifest-url> --minimal --print-plan-json
 ```
 
-## Restoring an official snapshot
 
-The [`fetch-berachain-snapshot.js`](https://github.com/berachain/guides/blob/main/apps/node-scripts/fetch-berachain-snapshot.js) script is on disk after Quickstart Step 1. This script resolves the current official snapshot for your network on its own, so you do not need to copy a URL. It then creates two new, empty directories: it restores the consensus layer with `curl`, `lz4`, and `tar`, and restores the execution layer with `bera-reth download`. If a target directory already exists and isn't empty, the script stops and returns an error.
-
-```bash
-# FROM: ~/beranode
-
-node fetch-berachain-snapshot.js --network mainnet --type pruned
-node fetch-berachain-snapshot.js --network bepolia --type pruned
-
-# --no-download prints the restore commands, with no directories created, download, or bera-reth run:
-node fetch-berachain-snapshot.js --network mainnet --type pruned --no-download
-
-# Archive execution-layer preset; still cl-pruned unless you opt into full CL history:
-node fetch-berachain-snapshot.js --network mainnet --type archive
-node fetch-berachain-snapshot.js --network mainnet --type archive --full-cl
-```
-
-Named directories under `--output` (default `downloads`):
-
-| Path                           | Role                                                         |
-| ------------------------------ | ------------------------------------------------------------ |
-| `<output>/<network>-<type>-el` | Bera-Reth `--datadir`                                        |
-| `<output>/<network>-<type>-cl` | Beacon Kit **data** directory (not the whole `beacond` home) |
-
-The `--type` flag sets the execution-layer preset only. `--full-cl` is the only flag that selects `cl-archive`; a `cl-archive` restore needs far more disk space than `cl-pruned`.
-
-| `--type`             | EL               | CL (default) |
-| -------------------- | ---------------- | ------------ |
-| `pruned`             | `--minimal`      | `cl-pruned`  |
-| `archive`            | `--archive`      | `cl-pruned`  |
-| either + `--full-cl` | same as `--type` | `cl-archive` |
-
-The script looks for `bera-reth` on your `PATH`, or at `--reth-bin` / `RETH_BIN` if you set one. If it can't find `bera-reth`, it prints the execution-layer command and skips that restore, but still restores the consensus layer, unless you passed `--no-download` or `--el-only`.
