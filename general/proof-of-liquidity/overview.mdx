@@ -13,6 +13,56 @@ Users participate by staking eligible assets in Reward Vaults, or by depositing 
 
 When a Reward Vault with active incentives receives emissions, those incentives are collected and split. A portion is paid to validators as commission for allocating emissions, while the remaining incentives are converted into \$BERA through the Incentive Auction and accrued into \$sWBERA.
 
+```mermaid actions={false}
+flowchart TD
+    stake["🐻 Stake BERA"]
+    production["📦 Block production"]
+    emission["✨ Block emission"]
+    validator["Validator operator"]
+    berachef["🧭 BeraChef allocation"]
+    protocols["Protocols"]
+    vaults["🏛️ Reward vaults"]
+    vaultStakers["Vault stakers"]
+    incentives["🎁 Incentive tokens"]
+    auction["🔄 Incentive auction"]
+    swbera["sWBERA stakers"]
+    lst["LST stakers"]
+    des["DES carve-out.<br/>see Dedicated Emissions Stream"]
+
+    stake --> production
+    production --> emission
+    emission -- "base rate" --> validator
+    emission -. "" .-> des
+    emission -- "reward rate" --> berachef
+    berachef --> vaults
+    protocols -- "incentive tokens" --> vaults
+    vaults -- "rewards" --> vaultStakers
+    vaults --> incentives
+    incentives -- "commissions" --> validator
+    incentives -- "redirected" --> auction
+    auction -- "yield" --> swbera
+    auction -- "yield" --> lst
+
+    classDef brown fill:#5c2e1a,stroke:#5c2e1a,color:#fff
+    classDef cream fill:#fdf3e7,stroke:#f0e0cc,color:#1a1a1a
+    classDef purple fill:#ece8fd,stroke:#d9d2fb,color:#4c3f9e
+    classDef dark fill:#3a332e,stroke:#3a332e,color:#fff
+    classDef ghost fill:none,stroke:none,color:#8a8078
+
+    class stake brown
+    class production,emission,berachef,vaults,auction cream
+    class validator,protocols,incentives purple
+    class vaultStakers,swbera,lst dark
+    class des ghost
+
+    linkStyle 2 stroke:#8a8078
+    linkStyle 3 stroke:#8a8078,stroke-dasharray:5 5
+    linkStyle 5 stroke:#7c6fd6
+    linkStyle 7 stroke:#7c6fd6
+    linkStyle 9 stroke:#7c6fd6
+    linkStyle 10 stroke:#7c6fd6
+```
+
 ![PoL emission paths — from validator stake through Reward Vaults to user yield](/images/proof-of-liquidity/pol-emission-paths.svg)
 
 _How one WBERA emission travels from validator stake through Reward Vaults to user yield. Deeper pages cover each segment in detail._
@@ -85,7 +135,7 @@ See [Dedicated Emission Streams](/general/proof-of-liquidity/dedicated-emission-
 ### BGT: Deprecated
 
 <Info>
-  BGT was deprecated on July 8, 2026. See the full post here: [https://x.com/berachain/status/2074901414149771549?s=20](https://x.com/berachain/status/2074901414149771549?s=20) 
+  BGT was deprecated on July 8, 2026. See the full post here: [https://x.com/berachain/status/2074901414149771549?s=20](https://x.com/berachain/status/2074901414149771549?s=20)
 </Info>
 
 The previous dual-token PoL system based on \$BGT and \$BERA has been upgraded to a single-token model based on \$WBERA.
