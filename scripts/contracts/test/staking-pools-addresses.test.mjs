@@ -5,7 +5,11 @@ import test from "node:test";
 
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../../..");
 const contractsJsonPath = path.join(repoRoot, "data/contracts.json");
-const addressBookPath = "/Users/camembearbera/src/documentation/contracts-staking-pools/script/StakingPoolAddresses.sol";
+const defaultAddressBookPath = path.resolve(
+  repoRoot,
+  "../contracts-staking-pools/script/StakingPoolAddresses.sol"
+);
+const addressBookPath = process.env.STAKING_POOL_ADDRESSES_SOL || defaultAddressBookPath;
 
 function readAccountingOracleAddress(sol, networkFn) {
   const re = new RegExp(
@@ -16,7 +20,14 @@ function readAccountingOracleAddress(sol, networkFn) {
   return match[1];
 }
 
-test("TP-8: AccountingOracle addresses and ABI URLs match the Solidity address book", () => {
+test("TP-8: AccountingOracle addresses and ABI URLs match the Solidity address book", (t) => {
+  if (!fs.existsSync(addressBookPath)) {
+    t.skip(
+      `StakingPoolAddresses.sol not found at ${addressBookPath}; clone berachain/contracts-staking-pools as a sibling (or set STAKING_POOL_ADDRESSES_SOL)`
+    );
+    return;
+  }
+
   const contracts = JSON.parse(fs.readFileSync(contractsJsonPath, "utf8"));
   const oracle = contracts.stakingPools?.accountingOracle;
   assert.ok(oracle, "data/contracts.json must include stakingPools.accountingOracle");
