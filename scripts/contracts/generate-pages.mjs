@@ -8,6 +8,10 @@ import { renderStakingPoolsSnippet } from "./staking-pools-render.mjs";
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
+const noTrailingNewlineOutputs = new Set([
+  `${generatedSnippetDir}/core-contracts-table.mdx`,
+  `${generatedSnippetDir}/bend-markets-table.mdx`
+]);
 const checkMode = process.argv.includes("--check");
 const missingValue = "🤓";
 let changedCount = 0;
@@ -16,7 +20,8 @@ let unchangedCount = 0;
 
 function write(relPath, content) {
   const abs = path.join(repoRoot, relPath);
-  const next = `${content.trimEnd()}\n`;
+  const trimmed = content.trimEnd();
+  const next = noTrailingNewlineOutputs.has(relPath) ? trimmed : `${trimmed}\n`;
   const prev = fs.existsSync(abs) ? fs.readFileSync(abs, "utf8") : null;
   if (prev === next) {
     unchangedCount += 1;
@@ -215,7 +220,7 @@ function renderGettingStartedSnippet() {
 Berachain NFT contract addresses on both Ethereum (via LayerZero adapters) and Berachain mainnet.
 
 | Collection | Ethereum Adapter | Berachain Address |
-|------------|------------------|-------------------|
+| --- | --- | --- |
 ${nftRows}`;
 
   return `## Mainnet contracts
@@ -266,7 +271,8 @@ function renderBendContractsSnippet() {
     const vaults = renderAbiCategory("Vaults", vaultItems, network, true);
     if (vaults) {
       parts.push(`<Note>
-More vaults may be deployed, please check [https://bend.berachain.com/lend](https://bend.berachain.com/lend) for the latest deployed vaults.
+  More vaults may be deployed, please check
+  [https://bend.berachain.com/lend](https://bend.berachain.com/lend) for the latest deployed vaults.
 </Note>
 
 ${vaults}`);
@@ -307,18 +313,30 @@ description: "Berachain core and staking-pool contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 For **BEX** (DEX) addresses, see [BEX deployed contracts](/build/bex/deployed-contracts). For **Bend** (lending) addresses, see [Bend deployed contracts](/build/bend/deployed-contracts).
 
 All contracts are verified at the [block explorer](https://berascan.com).
-* ABI files: [berachain/abis](https://github.com/berachain/abis).
-* Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
+
+- ABI files: [berachain/abis](https://github.com/berachain/abis).
+- Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
+- Staking pools: [berachain/contracts-staking-pools](https://github.com/berachain/contracts-staking-pools).
 
 <Info>
-All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).
+  All audit reports are publicly available on
+  [Github](https://github.com/berachain/security-audits). To report a security issue, use the
+  [Berachain bug bounty program on
+  Immunefi](https://immunefi.com/bug-bounty/berachain/information/).
 </Info>
 
 <CoreContractsTable />
+
+## Staking pool contracts
+
+Singleton addresses are listed below. See the [Staking pools overview](/nodes/staking-pools/overview) and [staking pool contracts](/nodes/staking-pools/contracts) reference.
+
+<StakingPoolSingletonsTable />
 `;
 }
 
@@ -338,6 +356,7 @@ On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their
 Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
 
 For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
+
 </Warning>
 
 The following is a list of contract addresses for interacting with Berachain BEX.
@@ -393,7 +412,10 @@ import BendContractsTable from "/snippets/contracts/generated/bend-contracts-tab
 Addresses for reading from or writing to Bend contracts.
 
 <Note>
-Deployed contracts have been audited by multiple parties. Reports are on [GitHub](https://github.com/berachain/security-audits).
+  Deployed contracts have been audited by multiple parties. Reports are on
+  [GitHub](https://github.com/berachain/security-audits). To report a security issue, use the
+  [Berachain bug bounty program on
+  Immunefi](https://immunefi.com/bug-bounty/berachain/information/).
 </Note>
 
 <BendContractsTable />
