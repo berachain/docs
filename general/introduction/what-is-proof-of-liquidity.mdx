@@ -19,13 +19,13 @@ flowchart TB
 
     Revenue["🍇 Revenue shared<br/>directly or via<br/>the incentive market"]:::pill
 
-    %% real cycle (clockwise): right side down, left side up
+    %% visible clockwise cycle: down the right, up the left
     Emissions --> Business
     Business --> Revenue
     Revenue --> BERA
     BERA --> Emissions
 
-    %% invisible edges to force the diamond layout
+    %% invisible scaffolding: compress the 4-cycle into 3 ranks
     Emissions ~~~ BERA
     Emissions ~~~ POL
     POL ~~~ Revenue
