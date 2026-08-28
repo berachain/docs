@@ -7,7 +7,57 @@ Proof of Liquidity (PoL) is Berachain’s answer to the emissions problem. Most 
 
 Berachain flips this model with Proof of Liquidity. Instead of treating emissions as a pure cost, PoL turns them into growth capital for applications building on the chain. Emissions are directed toward useful liquidity, application activity, and businesses that can generate value back into the ecosystem.
 
-The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → $BERA strengthen → more businesses funded with emissions → repeat.
+The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → \$BERA strengthen → more businesses funded with emissions → repeat.
+
+```mermaid actions={false}
+flowchart TD
+    stake["🐻 Stake BERA"]
+    production["📦 Block production"]
+    emission["✨ Block emission"]
+    validator["Validator operator"]
+    berachef["🧭 BeraChef allocation"]
+    protocols["Protocols"]
+    vaults["🏛️ Reward vaults"]
+    vaultStakers["Vault stakers"]
+    incentives["🎁 Incentive tokens"]
+    auction["🔄 Incentive auction"]
+    swbera["sWBERA stakers"]
+    lst["LST stakers"]
+    des["DES carve-out.<br/>see Dedicated Emissions Stream"]
+
+    stake --> production
+    production --> emission
+    emission -- "base rate" --> validator
+    emission --> des
+    emission -- "reward rate" --> berachef
+    berachef --> vaults
+    protocols -- "incentive tokens" --> vaults
+    vaults -- "rewards" --> vaultStakers
+    vaults --> incentives
+    incentives -- "commissions" --> validator
+    incentives -- "redirected" --> auction
+    auction -- "yield" --> swbera
+    auction -- "yield" --> lst
+
+    classDef brown fill:#5c2e1a,stroke:#5c2e1a,color:#fff
+    classDef cream fill:#fdf3e7,stroke:#f0e0cc,color:#1a1a1a
+    classDef purple fill:#ece8fd,stroke:#d9d2fb,color:#4c3f9e
+    classDef dark fill:#3a332e,stroke:#3a332e,color:#fff
+    classDef ghost fill:none,stroke:none,color:#8a8078
+
+    class stake brown
+    class production,emission,berachef,vaults,auction cream
+    class validator,protocols,incentives purple
+    class vaultStakers,swbera,lst dark
+    class des ghost
+
+    linkStyle 2 stroke:#8a8078
+    linkStyle 3 stroke:#8a8078,stroke-dasharray:5 5
+    linkStyle 5 stroke:#7c6fd6
+    linkStyle 7 stroke:#7c6fd6
+    linkStyle 9 stroke:#7c6fd6
+    linkStyle 10 stroke:#7c6fd6
+```
 
 ![PoL value cycle](/images/proof-of-liquidity/pol-cycle.svg)
 
@@ -21,7 +71,7 @@ A portion of those emissions goes to validator operators. The rest flows through
 
 Applications can fund incentives to attract emissions. Users can earn rewards by providing liquidity or activity through eligible vaults, or by participating through simpler staking paths such as \$sWBERA.
 
-Incentives earned through the system are converted into \$BERA and accrued into \$sWBERA, creating a cleaner value path for users and keeping rewards aligned with the broader $BERA economy.
+Incentives earned through the system are converted into \$BERA and accrued into \$sWBERA, creating a cleaner value path for users and keeping rewards aligned with the broader \$BERA economy.
 
 This creates a market for useful activity. Validators compete for stake, applications compete for emissions, and users choose where to supply liquidity or participate in staking.
 
