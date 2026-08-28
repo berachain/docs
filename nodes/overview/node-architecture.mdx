@@ -7,8 +7,9 @@ Berachain's network relies on validator nodes and RPC nodes. Each can be configu
 
 Berachain follows a decoupled node architecture standard in modern Ethereum-equivalent networks. Every node consists of two separate software clients running in tandem: an **execution client** and a **consensus client**. Berachain supports any EVM execution client paired with [BeaconKit](/nodes/architecture/beaconkit-consensus), a consensus framework built by Berachain.
 
-```mermaid
-flowchart TB
+<Frame>
+  ```mermaid
+  flowchart TB
   subgraph N1["🐻⛓️ Node"]
     direction TB
     R1["Bera Reth<br/><small>(Execution Client)</small>"]:::evm
@@ -18,7 +19,7 @@ flowchart TB
   subgraph N2["Node"]
     direction TB
     R2["Bera Reth<br/><small>(Execution Client)</small>"]:::evm
-    B2["Beacond<br/><small>(Light Node)</small>"]:::cons
+    B2["Beacond<br/><small>(Archive Node)</small>"]:::cons
     R2 <== "Engine API" ==> B2
   end
   subgraph N3["Node"]
@@ -34,10 +35,7 @@ flowchart TB
 
   classDef evm fill:#f7b733,stroke:#ba7517,stroke-width:2px,color:#412402
   classDef cons fill:#f26b1d,stroke:#a8410f,stroke-width:2px,color:#ffffff
-```
-
-<Frame>
-  ![Berachain node architecture showing execution and consensus client pairs](/images/nodes/berachain-node-architecture.png)
+  ```
 </Frame>
 
 ## RPC vs Validator Nodes
