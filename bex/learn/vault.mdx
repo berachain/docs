@@ -9,7 +9,11 @@ The Vault contract is a central component of BEX (not to be confused with Reward
 
 BEX's Vault and Pool architecture separates the token accounting and management from the pool logic and AMM math. The responsibility for calculating amounts for swaps, joins, and exits is delegated to the pool contracts, while the Vault holds all of the tokens within the various pools (which can even be of different types).
 
-```mermaid
+<Frame>
+  ```mermaid
+  ---
+title: BEX Vault and pool architecture: token accounting in the Vault, pool logic in pool contracts
+---
 flowchart TB
     StableA["🔧 Stable pool A<br/>Low-slippage swaps"]:::amber
     WeightedB["⚙️ Weighted pool B<br/>Custom asset weights"]:::green
@@ -23,10 +27,7 @@ flowchart TB
 
     linkStyle 0 stroke:#ba7517,stroke-width:2px
     linkStyle 1 stroke:#639922,stroke-width:2px
-```
-
-<Frame>
-  ![BEX Vault and pool architecture: token accounting in the Vault, pool logic in pool contracts](/images/bex/vault.png)
+  ```
 </Frame>
 
 As a simplified example, a swap transaction involves the following steps:
