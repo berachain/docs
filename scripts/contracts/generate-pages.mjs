@@ -1,27 +1,45 @@
 #!/usr/bin/env node
 
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { renderStakingPoolsSnippet } from "./staking-pools-render.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
+function resolvePrettierPackage() {
+  try {
+    return createRequire(import.meta.url).resolve("prettier");
+  } catch {
+    // This repo has no package.json; prettier is on PATH for `make format`.
+  }
+
+  let cli;
+  try {
+    cli = execFileSync("which", ["prettier"], { encoding: "utf8" }).trim();
+  } catch {
+    throw new Error("prettier is not on PATH; install it the same way `make format` expects");
+  }
+
+  return createRequire(pathToFileURL(fs.realpathSync(cli))).resolve("prettier");
+}
+
+const prettier = (await import(pathToFileURL(resolvePrettierPackage()).href)).default;
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
-const noTrailingNewlineOutputs = new Set([
-  `${generatedSnippetDir}/core-contracts-table.mdx`,
-  `${generatedSnippetDir}/bend-markets-table.mdx`
-]);
 const checkMode = process.argv.includes("--check");
 const missingValue = "🤓";
 let changedCount = 0;
 let wroteCount = 0;
 let unchangedCount = 0;
 
-function write(relPath, content) {
+async function write(relPath, content) {
   const abs = path.join(repoRoot, relPath);
-  const trimmed = content.trimEnd();
-  const next = noTrailingNewlineOutputs.has(relPath) ? trimmed : `${trimmed}\n`;
+  const config = await prettier.resolveConfig(abs);
+  const next = await prettier.format(content, { ...(config ?? {}), filepath: abs });
   const prev = fs.existsSync(abs) ? fs.readFileSync(abs, "utf8") : null;
   if (prev === next) {
     unchangedCount += 1;
@@ -444,28 +462,38 @@ To find a market ID, open [bend.berachain.com/borrow](https://bend.berachain.com
 `;
 }
 
-write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSnippet());
-write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
-write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
-write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
-write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippetFromContracts());
+async function generate() {
+  await write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSnippet());
+  await write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
+  await write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
+  await write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
+  await write(
+    `${generatedSnippetDir}/staking-pools-singletons-table.mdx`,
+    renderStakingPoolsSnippetFromContracts()
+  );
 
-write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
-write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
-write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
-write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
-write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
+  await write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
+  await write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
+  await write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
+  await write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
+  await write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
 
-if (!checkMode) {
-  console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);
+  if (!checkMode) {
+    console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);
+  }
+
+  if (checkMode) {
+    if (changedCount > 0) {
+      console.error(
+        `Generated contract docs are stale (${changedCount} file(s) would change). Run node scripts/contracts/generate-pages.mjs and commit the outputs.`
+      );
+      process.exit(1);
+    }
+    console.log(`Generated contract docs are up to date (${unchangedCount} file(s) unchanged).`);
+  }
 }
 
-if (checkMode) {
-  if (changedCount > 0) {
-    console.error(
-      `Generated contract docs are stale (${changedCount} file(s) would change). Run node scripts/contracts/generate-pages.mjs and commit the outputs.`
-    );
-    process.exit(1);
-  }
-  console.log(`Generated contract docs are up to date (${unchangedCount} file(s) unchanged).`);
+const thisFile = fileURLToPath(import.meta.url);
+if (process.argv[1] && path.resolve(process.argv[1]) === thisFile) {
+  await generate();
 }
