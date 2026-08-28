@@ -10,53 +10,33 @@ Berachain flips this model with Proof of Liquidity. Instead of treating emission
 The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → \$BERA strengthen → more businesses funded with emissions → repeat.
 
 ```mermaid actions={false}
-flowchart TD
-    stake["🐻 Stake BERA"]
-    production["📦 Block production"]
-    emission["✨ Block emission"]
-    validator["Validator operator"]
-    berachef["🧭 BeraChef allocation"]
-    protocols["Protocols"]
-    vaults["🏛️ Reward vaults"]
-    vaultStakers["Vault stakers"]
-    incentives["🎁 Incentive tokens"]
-    auction["🔄 Incentive auction"]
-    swbera["sWBERA stakers"]
-    lst["LST stakers"]
-    des["DES carve-out.<br/>see Dedicated Emissions Stream"]
+flowchart TB
+    Emissions["📦 Emissions<br/>WBERA per block"]:::pill
 
-    stake --> production
-    production --> emission
-    emission -- "base rate" --> validator
-    emission --> des
-    emission -- "reward rate" --> berachef
-    berachef --> vaults
-    protocols -- "incentive tokens" --> vaults
-    vaults -- "rewards" --> vaultStakers
-    vaults --> incentives
-    incentives -- "commissions" --> validator
-    incentives -- "redirected" --> auction
-    auction -- "yield" --> swbera
-    auction -- "yield" --> lst
+    BERA["🐻 BERA strengthens<br/>more business funded"]:::pill
+    POL(["✨ Proof of<br/>Liquidity"]):::center
+    Business["☀️ Business grow<br/>build with growth capital"]:::pill
 
-    classDef brown fill:#5c2e1a,stroke:#5c2e1a,color:#fff
-    classDef cream fill:#fdf3e7,stroke:#f0e0cc,color:#1a1a1a
-    classDef purple fill:#ece8fd,stroke:#d9d2fb,color:#4c3f9e
-    classDef dark fill:#3a332e,stroke:#3a332e,color:#fff
-    classDef ghost fill:none,stroke:none,color:#8a8078
+    Revenue["🍇 Revenue shared<br/>directly or via<br/>the incentive market"]:::pill
 
-    class stake brown
-    class production,emission,berachef,vaults,auction cream
-    class validator,protocols,incentives purple
-    class vaultStakers,swbera,lst dark
-    class des ghost
+    %% real cycle (clockwise): right side down, left side up
+    Emissions --> Business
+    Business --> Revenue
+    Revenue --> BERA
+    BERA --> Emissions
 
-    linkStyle 2 stroke:#8a8078
-    linkStyle 3 stroke:#8a8078,stroke-dasharray:5 5
-    linkStyle 5 stroke:#7c6fd6
-    linkStyle 7 stroke:#7c6fd6
-    linkStyle 9 stroke:#7c6fd6
-    linkStyle 10 stroke:#7c6fd6
+    %% invisible edges to force the diamond layout
+    Emissions ~~~ BERA
+    Emissions ~~~ POL
+    POL ~~~ Revenue
+
+    classDef pill fill:#fdf0e6,stroke:#fdf0e6,color:#2a2a2a
+    classDef center fill:none,stroke:none,color:#e8622c,font-weight:bold
+    class Emissions,BERA,Business,Revenue pill
+    class POL center
+
+    linkStyle 0,1,2,3 stroke:#e8622c,stroke-width:2px
+    linkStyle 4,5,6 stroke:none
 ```
 
 ![PoL value cycle](/images/proof-of-liquidity/pol-cycle.svg)
