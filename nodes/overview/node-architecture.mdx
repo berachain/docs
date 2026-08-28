@@ -7,20 +7,44 @@ Berachain's network relies on validator nodes and RPC nodes. Each can be configu
 
 Berachain follows a decoupled node architecture standard in modern Ethereum-equivalent networks. Every node consists of two separate software clients running in tandem: an **execution client** and a **consensus client**. Berachain supports any EVM execution client paired with [BeaconKit](/nodes/architecture/beaconkit-consensus), a consensus framework built by Berachain.
 
+```mermaid
+flowchart TB
+  subgraph N1["🐻⛓️ Node"]
+    direction TB
+    R1["Reth<br/><small>(Execution Client)</small>"]:::evm
+    B1["Beacond<br/><small>(Full Node)</small>"]:::cons
+    R1 <== "Engine API" ==> B1
+  end
+  subgraph N2["Node"]
+    direction TB
+    R2["Geth<br/><small>(Execution Client)</small>"]:::evm
+    B2["Beacond<br/><small>(Light Node)</small>"]:::cons
+    R2 <== "Engine API" ==> B2
+  end
+  subgraph N3["Node"]
+    direction TB
+    R3["..."]:::evm
+    B3["..."]:::cons
+    R3 <== "..." ==> B3
+  end
+  R1 <== "P2P" ==> R2
+  R2 <== "P2P" ==> R3
+  B1 <== "P2P" ==> B2
+  B2 <== "P2P" ==> B3
+
+  classDef evm fill:#f7b733,stroke:#ba7517,stroke-width:2px,color:#412402
+  classDef cons fill:#f26b1d,stroke:#a8410f,stroke-width:2px,color:#ffffff
+```
+
 <Frame>
-  <img
-    src="/images/nodes/berachain-node-architecture.png"
-    alt="Berachain node architecture showing execution and consensus client pairs"
-  />
+  ![Berachain node architecture showing execution and consensus client pairs](/images/nodes/berachain-node-architecture.png)
 </Frame>
 
 ## RPC vs Validator Nodes
 
 Architecturally, RPC nodes and validator nodes are nearly identical. Both maintain a complete copy of the blockchain state and participate in peer-to-peer transaction gossip.
 
-An RPC node can become a validator node by joining the [Active Set](#validator-active-set) through interaction with the [BeaconDeposit](/build/getting-started/deployed-contracts) contract by
-meeting the \$BERA [stake requirements](#validator-active-set). To learn about the economics of becoming a validator,
-see the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) and the [Be A Validator](/nodes/guides/become-a-validator) guides.
+An RPC node can become a validator node by joining the [Active Set](#validator-active-set) through interaction with the [BeaconDeposit](/build/getting-started/deployed-contracts) contract by meeting the \$BERA [stake requirements](#validator-active-set). To learn about the economics of becoming a validator, see the [Validator Lifecycle](/nodes/architecture/validator-lifecycle) and the [Be A Validator](/nodes/guides/become-a-validator) guides.
 
 ## Client Separation
 
@@ -57,8 +81,7 @@ Berachain follows Proof-of-Stake (PoS) direct staking, which allows \$BERA holde
 This means that validators will have to communicate how they handle funds when a validator is removed from the active set.
 
 <Warning>
-  Avoid staking to validators without knowing how they handle funds when a validator is removed from
-  the active set.
+  Avoid staking to validators without knowing how they handle funds when a validator is removed from the active set.
 </Warning>
 
 ## Staking pools
@@ -72,9 +95,7 @@ If a validator is removed from the active set, all \$BERA staked to that validat
 A validator can decide to become a validator again but will need to generate new CometBFT validator keys and start the deposit process again as if they were a new validator.
 
 <Warning>
-  Staking with a previously-used CometBFT identity — a validator that was removed from the active
-  set — will result in the funds being returned to that validator's withdrawal address at the end of
-  the current epoch. The validator can never be re-activated.
+  Staking with a previously-used CometBFT identity — a validator that was removed from the active set — will result in the funds being returned to that validator's withdrawal address at the end of the current epoch. The validator can never be re-activated.
 </Warning>
 
 ## Voluntary withdrawals
