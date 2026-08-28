@@ -26,7 +26,7 @@ There are many useful scripts under `install-helpers/` which wrap multi-step ope
 <Warning>
   All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not
   send transactions without your confirmation. By default, scripts use Ledger for signing; set
-  PRIVATE_KEY in env.sh if you prefer a local key.
+  `PRIVATE_KEY` in `env.sh` if you prefer a local key.
 </Warning>
 
 ## Requirements
@@ -34,7 +34,7 @@ There are many useful scripts under `install-helpers/` which wrap multi-step ope
 - beacond (validator client) running and synced with your validator keys **backed up somewhere safe**
 - Foundry `cast` ([getfoundry.sh](https://getfoundry.sh/))
 - `jq`, `bc`, `curl`
-- Ledger hardware wallet (default) or a private key set via PRIVATE_KEY in env.sh
+- Ledger hardware wallet (default) or a private key set via `PRIVATE_KEY` in `env.sh`
 - Funds: at least 10,000 BERA for the initial deposit; additional stake as desired
 
 ## 1. Configure environment
@@ -50,7 +50,7 @@ cp env.sh.template env.sh
 #   PRIVATE_KEY="0x..."            # Defaults to Ledger if unset
 ```
 
-Ensure the beacon node API is enabled in your app.toml (`[beacon-kit.node-api]`) or provide NODE_API_ADDRESS in env.sh. The scripts will auto-detect when possible and verify connectivity before proceeding.
+Ensure the beacon node API is enabled in your `app.toml` (`[beacon-kit.node-api]`) or provide `NODE_API_ADDRESS` in `env.sh`. The scripts will auto-detect when possible and verify connectivity before proceeding.
 
 ## 2. Register (deploy contracts)
 
@@ -85,7 +85,7 @@ Once your validator is registered, run `activate.sh` to activate the pool:
 Activation is a permissionless on-chain call keyed by your validator pubkey, so `activate.sh` no longer takes `--sr` or `--op`; the pool's shares recipient and operator are already baked in from `register.sh`. The script:
 
 1. Verifies the pool contract is deployed and not already active (`isActive()`).
-2. Confirms the operator address registered for your validator pubkey matches the pool's SmartOperator and that the validator's withdrawal credentials point at the pool's WithdrawalVault.
+2. Confirms `BeaconDeposit.getOperator(pubkey)` matches the pool's SmartOperator and that the validator's withdrawal credentials point at the pool's WithdrawalVault.
 3. Pins the beacon-chain head slot, fetches validator pubkey, withdrawal-credentials, and balance proofs at that single slot, and preflights `activateStakingPool()` locally so a bad proof or stale timestamp surfaces before you broadcast.
 4. Writes `generated/activation-command.sh` for you to review and execute.
 
@@ -137,7 +137,7 @@ The script writes `stake-command.sh`. Review and execute the command to submit y
 
 ## Troubleshooting (quick)
 
-- **Node API not reachable**: Enable `[beacon-kit.node-api]` and confirm the address/port; or set NODE_API_ADDRESS in env.sh. The script will examine your files and tell you how to activate the API if it isn't enabled yet.
+- **Node API not reachable**: Enable `[beacon-kit.node-api]` and confirm the address/port; or set `NODE_API_ADDRESS` in `env.sh`. The script will examine your files and tell you how to activate the API if it isn't enabled yet.
 - **Missing tools**: Install Foundry (`cast`), `jq`, `bc`, and `curl` and ensure they are on your PATH.
 
 ## What's next

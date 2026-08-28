@@ -50,8 +50,8 @@ Protocol fee accrual (same percentage applies to both tracks during migration):
 
 Manual lever for compounding operator WBERA into pool assets:
 
-| Function           | Contract    | Purpose                                                                                                       |
-| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| Function           | Contract    | Purpose                                                                                                      |
+| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------ |
 | `processRewards()` | StakingPool | Pull buffered staking rewards and any operator-held WBERA into the pool. Permissionless; callable by anyone. |
 
 Compounding also runs automatically when stakers deposit through the pool's public deposit path and when withdrawals pull from operator-side WBERA. See [Automatic WBERA flows](#automatic-wbera-flows) below.
