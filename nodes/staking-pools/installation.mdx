@@ -1,13 +1,11 @@
 ---
 title: "Staking Pool Installation"
-description: "Install and activate a staking pool on the validator host with the operator CLI."
+description: "Install and activate a staking pool on the validator host with the operator CLI. Includes a worked example and a full command reference."
 ---
 
 Run the operator CLI on the **validator host**. That host runs `beacond` and holds `BEACOND_HOME`. The CLI checks the deposit. It fetches proofs. It shows what each transaction will do. It then prints a `cast send` command. You copy that command to a **signing machine**. A signing machine is a laptop with a Ledger.
 
 Do not attach a Ledger to the validator host.
-
-Retail stake and unstake are not in this CLI. Use the [sample frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend).
 
 ## Get the CLI
 
@@ -23,8 +21,10 @@ Commands:
 | Command | Action |
 | --- | --- |
 | `deploy` | Deploy pool contracts and the 10,000 BERA deposit |
+| `status` | Read EL operator, beacon inclusion, and pool `isActive` |
 | `activate` | Activate the pool with beacon-chain proofs |
-| `status` | Read pool telemetry |
+| `stake` | Deposit BERA and mint stBERA to `--receiver` |
+| `unstake` | Request or finalize a withdrawal |
 | `set-min-balance` | Optional. Set `minEffectiveBalance` (default 250,000 BERA) |
 
 ## Requirements
@@ -41,9 +41,9 @@ You also need:
 - A signing machine with a Ledger, or a private key in `PRIVATE_KEY` on the validator host
 
 <Warning>
-  Set `BEACOND_HOME` to the beacond data directory. The CLI stops `deploy`, `activate`, and
-  `set-min-balance` if `BEACOND_HOME` is missing. It also stops if `beacond` cannot read the
-  validator keys.
+  Set `BEACOND_HOME` to the beacond data directory. The CLI stops `deploy`, `activate`,
+  `stake`, `unstake`, and `set-min-balance` if `BEACOND_HOME` is missing. It also stops if
+  `beacond` cannot read the validator keys.
 </Warning>
 
 Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own flag. Use `CLI_CHAIN` (`mainnet` or `bepolia`). If you omit `CLI_CHAIN`, the CLI detects the network from genesis.
@@ -71,26 +71,25 @@ Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own f
     node pool-cli.mjs deploy --op 0xOPERATOR --sr 0xSHARES_RECIPIENT
     ```
 
-    The CLI does this:
-
-    1. Detects mainnet or Bepolia from `CLI_CHAIN` or genesis.
-    2. Validates the `beacond` deposit.
-    3. Predicts the four pool contract addresses.
-    4. Runs `cast call` for `deployStakingPoolContracts`.
-    5. Shows the 10,000 BERA deposit.
-    6. Prints a `cast send` command. It does not broadcast.
+    `deploy` validates the `beacond` deposit, predicts the four pool contract addresses, and preflights the deploy call. It then prints a `cast send` command for the 10,000 BERA deposit. It does not broadcast. See [`deploy`](#deploy) for the full option list.
 
     Copy the printed command. Run it on the signing machine. The default printed command uses `--ledger`.
 
     To broadcast from the validator host, set `PRIVATE_KEY` and add `--execute`. The CLI refuses `--execute` without `PRIVATE_KEY`.
   </Step>
 
-  <Step title="Wait for beacon-chain registration">
+  <Step title="Wait until the beacon chain includes the validator">
     ```bash
     node pool-cli.mjs status
     ```
 
-    The validator must appear on the beacon chain before you activate the pool.
+    `status` reports three separate facts: the EL operator, beacon inclusion, and the pool's `isActive` flag. See [`status`](#status) for what each one means.
+
+    `isActive=false` is the expected value after deploy. It does not mean "run activate now."
+
+    Wait until `status` says the beacon has this validator and that the pool is ready for activation. Then go to the next step.
+
+    Set `CL_NODE_API_URL` to a Node API that can serve validator state and proofs.
   </Step>
 
   <Step title="Activate the pool">
@@ -100,18 +99,9 @@ Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own f
 
     Activation is a permissionless call keyed by the validator pubkey. You do not pass `--op` or `--sr`.
 
-    The CLI does this:
+    `activate` fetches beacon-chain proofs a few slots behind head, checks them against the pool's WithdrawalVault, and preflights `activateStakingPool`. See [`activate`](#activate) for the full sequence.
 
-    1. Checks that the pool is deployed and not already active.
-    2. Checks that the validator is registered on the beacon chain.
-    3. Pins the beacon head slot.
-    4. Fetches pubkey, withdrawal-credentials, and balance proofs at that slot.
-    5. Checks that withdrawal credentials match the pool WithdrawalVault.
-    6. Runs `cast call` for `activateStakingPool`. It names known reverts.
-    7. Refuses to print `cast send` if the proof is older than 10 minutes.
-    8. Prints a `cast send` command.
-
-    Copy the printed command to the signing machine. If the 10-minute window expires, run `activate` again to fetch new proofs.
+    Proofs expire 10 minutes after their timestamp. Copy the printed command to the signing machine before then. If the window expires, run `activate` again to fetch new proofs. Re-running `activate` is always safe: an already-active pool reports "Pool is already activated" and does nothing.
   </Step>
 
   <Step title="Check status">
@@ -119,7 +109,29 @@ Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own f
     node pool-cli.mjs status
     ```
 
-    You should see SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses. You should also see operator match, active state, and pool telemetry.
+    You should see SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses. You should also see operator match, `isActive=true`, and pool telemetry.
+  </Step>
+
+  <Step title="Stake additional BERA">
+    ```bash
+    node pool-cli.mjs stake --amount 100 --receiver 0xRECEIVER
+    ```
+
+    This calls `submit(address)` and sends `--amount` BERA. `--receiver` gets the stBERA. Copy the printed `cast send` to the signing machine.
+  </Step>
+
+  <Step title="Unstake">
+    Unstake is two transactions. The request mints a withdrawal NFT. After the on-chain delay, you finalize it.
+
+    ```bash
+    node pool-cli.mjs unstake --amount 100 --from 0xHOLDER
+    node pool-cli.mjs unstake --shares 50 --from 0xHOLDER
+    node pool-cli.mjs unstake --finalize REQUEST_ID --from 0xHOLDER
+    ```
+
+    Pass exactly one of `--amount`, `--shares`, or `--finalize`. `--from` is the address that holds stBERA. Copy each printed `cast send` to the signing machine.
+
+    The [sample frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) remains available. See [Building your front-end](/nodes/staking-pools/operators#building-your-front-end).
   </Step>
 
   <Step title="Set minimum effective balance (optional)">
@@ -138,15 +150,270 @@ Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own f
   </Step>
 </Steps>
 
-## Stake additional BERA
+## Example session
 
-The operator CLI does not stake or unstake. Use the [sample frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) for extra stake. See [Building your front-end](/nodes/staking-pools/operators#building-your-front-end).
+This section shows one full run on a Bepolia validator. The addresses, chain values, and figures are real. Most command output is not shown. Only the lines that show success or failure stay in.
+
+### Install and configure
+
+```bash
+git clone https://github.com/berachain/guides.git
+cd guides/apps/staking-pools/install-helpers
+
+curl -L https://getfoundry.sh/install | bash
+export PATH="$PATH:$HOME/.foundry/bin"
+foundryup
+```
+
+`foundryup` reports the installed version:
+
+```
+foundryup: cast verified ✓
+foundryup: done!
+```
+
+Set the environment and run the test suite once to confirm the CLI works on this host:
+
+```bash
+cp env.sh.template env.sh
+export BEACOND_HOME=/path/to/your/beacond/home
+export CLI_CHAIN=bepolia
+export EL_RPC_URL=http://127.0.0.1:8545
+
+node --test test/*.test.mjs
+```
+
+All tests pass.
+
+### Deploy
+
+```bash
+node pool-cli.mjs deploy --op 0x196802FFa2c463CADa5eb8d8F63F265610b574e9 --sr 0x196802FFa2c463CADa5eb8d8F63F265610b574e9
+```
+
+```
+[success] Deposit validation: OK
+[success] Preflight OK
+[info] Copy and run on your signing machine (ledger on laptop):
+```
+
+Copy the printed `cast send` and run it on the signing machine. Predicted addresses for this pubkey: SmartOperator `0x926EcD8E8ea200C2c66A26e031b3b112f96aD0De`, StakingPool `0x6dE5C7989cCAC160b47e7c8b015C87be4b540755`.
+
+### Wait for beacon inclusion
+
+Right after deploy, `status` reports that the beacon chain does not have the validator yet:
+
+```
+[info] Beacon: not in head state (queried http://127.0.0.1:3500)
+[info] EL operator is registered. Beacon head state does not include this validator yet.
+[info] Next: Wait until the beacon chain includes the validator. Re-run status. Do not run activate yet.
+```
+
+Re-run `status` until it reports:
+
+```
+[success] Beacon has this validator (index 36, status pending_initialized). Ready for activation.
+[info] Next: Run: node pool-cli.mjs activate
+```
+
+### Activate
+
+```bash
+node pool-cli.mjs activate
+```
+
+The execution client can lag behind the beacon chain by a block or two. If it has not yet produced the block the proof needs, `activate` reports the block as missing and does nothing else:
+
+```
+[error] Failed to read EL block 24527917 from http://127.0.0.1:8545: block not found
+```
+
+This is not a failed activation. Re-run `activate`:
+
+```
+[success] All proofs pinned to slot 24528070
+[success] EIP-4788 timestamp: 1787927174
+[success] Preflight OK — activateStakingPool would succeed at current head
+[info] Copy and run on your signing machine (ledger on laptop):
+```
+
+Copy the printed command to the signing machine and run it there.
+
+### Check status
+
+```bash
+node pool-cli.mjs status
+```
+
+```
+[info] EL operator: registered (0x926ecd8e8ea200c2c66a26e031b3b112f96ad0de)
+[info] Beacon: index 36, status pending_initialized
+[info] Pool isActive: true (factory activateStakingPool has been called)
+[success] Staking pool is ACTIVE
+```
+
+### Stake more BERA
+
+A first attempt without `--amount` shows the CLI's input checks. They run before any call to the chain:
+
+```bash
+node pool-cli.mjs stake --receiver 0x196802FFa2c463CADa5eb8d8F63F265610b574e9
+```
+
+```
+[error] --amount must be a positive number
+```
+
+Add `--amount` and run again, this time with `--execute` to broadcast from the validator host:
+
+```bash
+node pool-cli.mjs stake --receiver 0x196802FFa2c463CADa5eb8d8F63F265610b574e9 --amount 240000 --execute
+```
+
+```
+[success] Preflight OK — submit(0x196802ffa2c463cada5eb8d8f63f265610b574e9) value 240000ether
+[info] Broadcasting submit via cast send (hot key on validator)...
+[success] submit broadcast: 0xa3013dea6717d5896e4d67c1d3e0c76460f724fdbcf8e46edd0f55acc6f4a911
+```
+
+### Final status
+
+```bash
+node pool-cli.mjs status
+```
+
+```
+[success] Staking pool is ACTIVE
+  Total assets (BERA):    250000.000000000000000000
+  Total supply (stBERA):  250000.000000000000000000
+```
+
+10,000 BERA came from the deploy step. 240,000 BERA came from the stake step. The total matches.
+
+## Command reference
+
+Entry point: `node pool-cli.mjs <command> [options]`. Every state-changing command dry-runs with `cast call` first, then prints a `cast send` command. It does not broadcast unless you pass `--execute`.
+
+### Global options
+
+| Option | Effect |
+| --- | --- |
+| `--execute` | Broadcast from the validator host. Requires `PRIVATE_KEY`. Without it, `--execute` is refused and the CLI still prints the `cast send` command. |
+| `--help` | Show command help. |
+
+### Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `BEACOND_HOME` | beacond data directory. Required for every command. |
+| `BEACOND_BIN` | Override the beacond binary. Default: `beacond` on `PATH`. |
+| `CLI_CHAIN` | `mainnet` or `bepolia`. If unset, the CLI detects the network from genesis. |
+| `RPC_URL` / `EL_RPC_URL` | Override the execution RPC. Default: the public Berachain endpoint for the detected chain. |
+| `CL_NODE_API_URL` / `NODE_API_ADDRESS` | Beacon Node API for validator state and proofs. Default: `http://127.0.0.1:3500`. |
+| `PRIVATE_KEY` | Hot key on the validator host. Required for `--execute`. |
+
+<Warning>
+  Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own flag and rejects
+  values like `bepolia`. Use `CLI_CHAIN` instead.
+</Warning>
+
+### `deploy`
+
+```bash
+node pool-cli.mjs deploy --op 0xOPERATOR --sr 0xSHARES_RECIPIENT
+node pool-cli.mjs deploy --op 0xOPERATOR --sr 0xSHARES_RECIPIENT --execute
+```
+
+| Option | Value | Required |
+| --- | --- | --- |
+| `--op` | Operator address for the pool | Yes |
+| `--sr` | Shares-recipient address for the pool | Yes |
+
+`deploy` validates the deposit with `beacond`, predicts the four pool contract addresses, and preflights `deployStakingPoolContracts`. The deposit is fixed at 10,000 BERA.
+
+### `activate`
+
+```bash
+node pool-cli.mjs activate
+node pool-cli.mjs activate --execute
+```
+
+Activation takes no options besides `--execute`. The pubkey, operator, and shares recipient are already fixed by `deploy`.
+
+`activate` pins a beacon-chain slot a few slots behind head, so the paired execution-layer block already exists. It fetches the pubkey, withdrawal-credentials, and balance proofs at that slot, checks them against the pool's WithdrawalVault, and preflights `activateStakingPool`. The proof expires 10 minutes after its timestamp. The CLI refuses to print `cast send` past that window.
+
+### `status`
+
+```bash
+node pool-cli.mjs status
+```
+
+`status` takes no options. It reports three separate facts:
+
+1. **EL operator**: whether the beacon deposit contract's operator matches this pool.
+2. **Beacon inclusion**: whether the beacon chain has this validator, and its index and status.
+3. **Pool `isActive`**: whether `activateStakingPool` has been called.
+
+Once the pool is active, `status` also prints contract addresses, total assets and supply, buffered assets, the minimum effective balance, and WBERA and legacy BGT balances. If `PRIVATE_KEY` is set, it also prints that wallet's stBERA shares and withdrawal-NFT count.
+
+### `stake`
+
+```bash
+node pool-cli.mjs stake --amount 100 --receiver 0xRECEIVER
+node pool-cli.mjs stake --amount 100 --receiver 0xRECEIVER --execute
+```
+
+| Option | Value | Required |
+| --- | --- | --- |
+| `--amount` | BERA to deposit | Yes |
+| `--receiver` | Address that gets the minted stBERA | Yes |
+| `--from` | Address the dry-run simulates from | No. Default: `--receiver`. |
+| `--staking-pool` | Pool address | No. Default: looked up from the validator pubkey. |
+
+`stake` calls `StakingPool.submit(address)` with `--amount` as the transaction value.
+
+### `unstake`
+
+```bash
+node pool-cli.mjs unstake --amount 100 --from 0xHOLDER
+node pool-cli.mjs unstake --shares 50 --from 0xHOLDER
+node pool-cli.mjs unstake --finalize 42 --from 0xHOLDER
+```
+
+| Option | Value | Required |
+| --- | --- | --- |
+| `--amount` | BERA to withdraw, as assets | Exactly one of `--amount`, `--shares`, `--finalize` |
+| `--shares` | stBERA to redeem, as shares | Exactly one of `--amount`, `--shares`, `--finalize` |
+| `--finalize` | Request ID to finalize | Exactly one of `--amount`, `--shares`, `--finalize` |
+| `--from` | stBERA holder | No. Default: derived from `PRIVATE_KEY`. `--receiver` works as an alias. |
+| `--staking-pool` | Pool address | No. Default: looked up from the validator pubkey. |
+| `--max-fee` | EIP-7002 fee, in BERA | No. Default: the CLI probes candidate fees up to 0.01 BERA. |
+
+Withdrawal is two transactions. `--amount` calls `requestWithdrawal`. `--shares` calls `requestRedeem`. Either one mints a withdrawal NFT and returns a request ID. After the on-chain delay, `--finalize` calls `finalizeWithdrawalRequest` to release the funds. The pool must already be active.
+
+### `set-min-balance`
+
+```bash
+node pool-cli.mjs set-min-balance
+node pool-cli.mjs set-min-balance --amount 300000 --execute
+```
+
+| Option | Value | Required |
+| --- | --- | --- |
+| `--amount` | Minimum effective balance, in BERA | No. Default: 250,000 BERA. |
+
+This command is optional. See [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) for why the value matters and how to calculate it.
 
 ## Troubleshooting
 
 - **`BEACOND_HOME` is required.** Set it to the beacond data directory on this validator host.
 - **`cast` rejects `bepolia`.** Unset `CHAIN`. Set `CLI_CHAIN` if you need to force the network.
 - **Node API not reachable.** Enable `[beacon-kit.node-api]` or set `CL_NODE_API_URL`.
+- **Pool contracts are not deployed.** The deploy `cast send` has not landed for this pubkey. `isActive` is not available yet. Confirm the transaction hash on the explorer.
+- **Beacon head state does not include this validator.** The EL deposit can be in while the beacon chain has not included the validator. Wait. Re-run `status`. Do not run `activate` yet.
+- **Ready for activation.** `status` shows a beacon index and CL `status`. The pool `isActive` is still false. Run `activate`.
+- **`activate` cannot read an EL block.** The execution client has not produced the block the proof needs yet. Wait a few seconds and re-run `activate`.
+- **Pool is already activated.** `activate` is safe to re-run. Once active, it reports this and takes no action.
 - **Missing tools.** Install Node.js 22+, Foundry `cast`, and `beacond`. Put them on `PATH`.
 - **`--execute` refused.** Set `PRIVATE_KEY` on the validator host, or run the printed `cast send` on the signing machine.
 
