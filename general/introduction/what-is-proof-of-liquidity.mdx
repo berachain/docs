@@ -10,12 +10,14 @@ Berachain flips this model with Proof of Liquidity. Instead of treating emission
 The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → \$BERA strengthen → more businesses funded with emissions → repeat.
 
 ```mermaid actions={false}
-%%{init: {'flowchart': {'curve': 'cardinal', 'nodeSpacing': 90, 'rankSpacing': 90}}}%%
+---
+title: Proof of Liquidity
+---
+%%{init: {'flowchart': {'curve': 'basis'}}}%%
 flowchart TB
     Emissions["📦 Emissions<br/><small>WBERA per block</small>"]:::pill
 
     BERA["🐻 BERA strengthens<br/><small>more business funded</small>"]:::pill
-    POL((("✨ Proof of<br/><small>Liquidity</small>"))):::center
     Business["☀️ Business grow<br/><small>build with growth capital</small>"]:::pill
 
     Revenue["🍇 Revenue shared<br/><small>directly or via the incentive market</small>"]:::pill
@@ -25,17 +27,13 @@ flowchart TB
     Revenue --> BERA
     BERA --> Emissions
 
-    Emissions ~~~ BERA
-    Emissions ~~~ POL
-    POL ~~~ Revenue
+    BERA ~~~ Business
 
     classDef pill fill:#fdf0e6,stroke:#fdf0e6,color:#2a2a2a
-    classDef center fill:none,stroke:none,color:#e8622c,font-weight:bold
     class Emissions,BERA,Business,Revenue pill
-    class POL center
 
     linkStyle 0,1,2,3 stroke:#e8622c,stroke-width:2px
-    linkStyle 4,5,6 stroke:none
+    linkStyle 4 stroke:none
 ```
 
 ![PoL value cycle](/images/proof-of-liquidity/pol-cycle.svg)
