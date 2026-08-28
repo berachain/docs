@@ -379,7 +379,7 @@ This reference provides contract addresses and links to detailed documentation f
 
 ### Singleton contracts
 
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **AccountingOracle** receives verified consensus-layer balance reports and updates each pool's \`totalDeposits\`. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
+Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **AccountingOracle** is how verified consensus-layer balances reach what the pool reports as total assets. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
 
 <StakingPoolSingletonsTable />
 

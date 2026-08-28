@@ -31,8 +31,27 @@ for needle in AccountingOracle 0x89144B6342d8eB3DdC631a9c452A8414541426bb 0x7f3e
   rg -q "$needle" "$CONTRACTS_HTML"
 done
 
-for needle in updateTotalDeposits FEEDER_ROLE coveredByOperator DepositSubmitted queueBoost retryFullExit NotFullyExited PendingWithdrawalInFlight FullExitRequestRetried MIN_EFFECTIVE_BALANCE MIN_CL_DEPOSIT_AMOUNT; do
+for needle in \
+  "consensus-layer balance" \
+  "Between reports" \
+  "last verified" \
+  "operator-side WBERA" \
+  "Deprecated BGT" \
+  "queueBoost" \
+  "accrueEarnedWBERAFees" \
+  "retryFullExit" \
+  "fully exited" \
+  "250,000 BERA" \
+  "10,000 BERA" \
+  "setMinEffectiveBalance"; do
   rg -q "$needle" "$OPERATORS_HTML"
+done
+
+for banned in FEEDER_ROLE updateTotalDeposits DepositSubmitted _collectRewards _getTotalAssets NotFullyExited MIN_EFFECTIVE_BALANCE MIN_CL_DEPOSIT_AMOUNT; do
+  if rg -q "$banned" "$OPERATORS_HTML"; then
+    echo "VC-2 fail: operator guide still mentions $banned (implementation detail)" >&2
+    exit 1
+  fi
 done
 
 npx --yes playwright@1.49.1 install chromium >/tmp/bera-940-playwright-install.log 2>&1
