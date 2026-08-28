@@ -11,13 +11,13 @@ Berachain follows a decoupled node architecture standard in modern Ethereum-equi
 flowchart TB
   subgraph N1["🐻⛓️ Node"]
     direction TB
-    R1["Reth<br/><small>(Execution Client)</small>"]:::evm
+    R1["Bera Reth<br/><small>(Execution Client)</small>"]:::evm
     B1["Beacond<br/><small>(Full Node)</small>"]:::cons
     R1 <== "Engine API" ==> B1
   end
   subgraph N2["Node"]
     direction TB
-    R2["Geth<br/><small>(Execution Client)</small>"]:::evm
+    R2["Bera Reth<br/><small>(Execution Client)</small>"]:::evm
     B2["Beacond<br/><small>(Light Node)</small>"]:::cons
     R2 <== "Engine API" ==> B2
   end
