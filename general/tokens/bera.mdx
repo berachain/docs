@@ -44,8 +44,9 @@ The following documents the fixed supply, allocation, and release schedule for B
 
 The genesis supply of 500,000,000 BERA is allocated as follows:
 
-```mermaid actions={false}
-%%{init: {'theme':'base', 'themeVariables': {
+<Frame>
+  ```mermaid actions={false}
+  %%{init: {'theme':'base', 'themeVariables': {
     'pie1':'#a9763f',
     'pie2':'#5e3d1f',
     'pie3':'#cda678',
@@ -64,7 +65,8 @@ pie showData
     "Initial Core Contributors" : 16.8
     "Airdrop" : 15.8
     "Community Initiatives" : 13.1
-```
+  ```
+</Frame>
 
 **Initial core contributors — 84,000,000 (16.8%)**<br />Allocated to advisors and members of Big Bera Labs, the core contributors to the Berachain blockchain.
 
@@ -86,8 +88,9 @@ All allocated parties share the same vesting terms:
 - **Initial unlock:** After the cliff, 1/6 of the allocated amount unlocks.
 - **Linear vesting:** The remaining 5/6 vests linearly over the following 24 months.
 
-```mermaid actions={true}
-%%{init: {'theme':'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#3a2410, #5e3d1f, #7a4f28, #a9763f, #cda678'}}}}%%
+<Frame>
+  ```mermaid actions={true}
+  %%{init: {'theme':'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#3a2410, #5e3d1f, #7a4f28, #a9763f, #cda678'}}}}%%
 xychart
     title "Token Emissions Schedule (Millions)"
     x-axis "Month" [0, 12, 24, 36]
@@ -97,6 +100,7 @@ xychart
     line "Community Initiatives" [110, 140, 195, 245]
     line "Investors" [110, 168, 290, 415]
     line "Initial Core Contributors" [110, 180, 340, 500]
-```
+  ```
+</Frame>
 
 ![BERA inflation and vesting](/images/tokens/bera-inflation.png)

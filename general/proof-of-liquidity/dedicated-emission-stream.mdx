@@ -17,7 +17,11 @@ DES lets governance guarantee a minimum emission flow to specific vaults without
 
 Before each block's validator-specific allocation is applied, the Distributor carves out a governance-configured percentage of the WBERA Reward Vault emission and allocates it to DES-selected vaults.
 
-```mermaid actions={false}
+<Frame>
+  ```mermaid actions={false}
+  ---
+title: DES routing — DES carve-out, per-vault cap, and excess return to validator allocation
+---
 flowchart TD
     Emission["💧 Reward Vault<br/>emission in WBERA"]:::yellow
     Decision{"🎯 DES active?"}:::yellow
@@ -37,9 +41,8 @@ flowchart TD
     classDef gray fill:#e8e8ea,stroke:#8a8a8a,stroke-width:2px,color:#2a2a2a
 
     linkStyle default stroke:#d4741a,stroke-width:2.5px
-```
-
-![DES routing — DES carve-out, per-vault cap, and excess return to validator allocation](/images/proof-of-liquidity/pol-des.png)
+  ```
+</Frame>
 
 _How the WBERA reward-rate splits between DES vaults and the validator-allocation path. When a DES vault hits its `targetEmission` cap, the excess returns to the remainder pool for validator allocation._
 
