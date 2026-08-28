@@ -1,146 +1,156 @@
 ---
 title: "Staking Pool Installation"
-description: "Install and activate a staking pool with helper scripts: register, activate, set min effective balance, and optional stake."
+description: "Install and activate a staking pool on the validator host with the operator CLI."
 ---
 
-This guide walks validator operators through installing and activating a staking pool using the helper scripts.
+Run the operator CLI on the **validator host**. That host runs `beacond` and holds `BEACOND_HOME`. The CLI checks the deposit. It fetches proofs. It shows what each transaction will do. It then prints a `cast send` command. You copy that command to a **signing machine**. A signing machine is a laptop with a Ledger.
 
-## What you'll use
+Do not attach a Ledger to the validator host.
 
-The helper scripts are available through GitHub:
+Retail stake and unstake are not in this CLI. Use the [sample frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend).
+
+## Get the CLI
+
+Clone the CLI from the [guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers). The [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) lists commands and environment variables.
 
 ```bash
 git clone https://github.com/berachain/guides/
-cd guides/apps/staking-pools
-ls -F
-# frontend/   install-helpers/
+cd guides/apps/staking-pools/install-helpers
 ```
 
-There are many useful scripts under `install-helpers/` which wrap multi-step operations into safe, review-first commands:
+Commands:
 
-- **register.sh**: Deploys (registers) staking pool contracts and generates the deployment transaction
-- **activate.sh**: Activates a deployed pool using validator proofs from the beacon chain
-- **status.sh**: Verifies deployment, registration, and activation status
-- **stake.sh**: Generates a staking transaction to add BERA to your pool
-
-<Warning>
-  All scripts write ready-to-run `cast` commands to files for you to review and execute. They do not
-  send transactions without your confirmation. By default, scripts use Ledger for signing; set
-  `PRIVATE_KEY` in `env.sh` if you prefer a local key.
-</Warning>
+| Command | Action |
+| --- | --- |
+| `deploy` | Deploy pool contracts and the 10,000 BERA deposit |
+| `activate` | Activate the pool with beacon-chain proofs |
+| `status` | Read pool telemetry |
+| `set-min-balance` | Optional. Set `minEffectiveBalance` (default 250,000 BERA) |
 
 ## Requirements
 
-- beacond (validator client) running and synced with your validator keys **backed up somewhere safe**
+Install these tools on the validator host:
+
+- Node.js 22 or later
 - Foundry `cast` ([getfoundry.sh](https://getfoundry.sh/))
-- `jq`, `bc`, `curl`
-- Ledger hardware wallet (default) or a private key set via `PRIVATE_KEY`
-- Funds: at least 10,000 BERA for the initial deposit; additional stake as desired
+- `beacond`, synced, with validator keys backed up
 
-## 1. Configure environment
+You also need:
 
-In `install-helpers/`:
-
-```bash
-cp env.sh.template env.sh
-# Edit env.sh and set at minimum:
-#   BEACOND_HOME="/path/to/your/beacond/home"
-#   NODE_API_ADDRESS="127.0.0.1:3500"  # If not auto-detected from app.toml
-# Optionally set:
-#   PRIVATE_KEY="0x..."            # Defaults to Ledger if unset
-```
-
-Ensure the beacon node API is enabled in your `app.toml` (`[beacon-kit.node-api]`) or provide `NODE_API_ADDRESS` in `env.sh`. The scripts will auto-detect when possible and verify connectivity before proceeding.
-
-## 2. Register (deploy contracts)
-
-Run `register.sh` with your addresses to deploy the staking pool contracts:
-
-```bash
-./register.sh --sr 0xSHARES_RECIPIENT --op 0xOPERATOR
-```
-
-1. The chain (mainnet or Bepolia) is auto-detected from your beacond configuration.
-2. The initial stake is 10,000 BERA (fixed by the consensus layer). The script writes `deployment-command.sh` with this deposit. Review it. Simulate it if you want. Then run it. This should dump a successful transaction receipt.
-3. The script also predicts and shows your staking pool contract addresses ahead of time.
-
-## 3. Wait for validator registration
-
-After deploying the contracts, wait for your validator to be registered on the beacon chain. You can check registration status with:
-
-```bash
-./status.sh
-```
-
-The validator must appear on the beacon chain before you can activate the pool.
-
-## 4. Activate the pool
-
-Once your validator is registered, run `activate.sh` to activate the pool:
-
-```bash
-./activate.sh
-```
-
-Activation is a permissionless on-chain call keyed by your validator pubkey, so `activate.sh` no longer takes `--sr` or `--op`; the pool's shares recipient and operator are already baked in from `register.sh`. The script:
-
-1. Verifies the pool contract is deployed and not already active (`isActive()`).
-2. Confirms `BeaconDeposit.getOperator(pubkey)` matches the pool's SmartOperator and that the validator's withdrawal credentials point at the pool's WithdrawalVault.
-3. Pins the beacon-chain head slot, fetches validator pubkey, withdrawal-credentials, and balance proofs at that single slot, and preflights `activateStakingPool()` locally so a bad proof or stale timestamp surfaces before you broadcast.
-4. Writes `generated/activation-command.sh` for you to review and execute.
-
-Proofs include a timestamp enforced by the contract (`MAX_TIMESTAMP_AGE` = 10 minutes). The generated script also hard-expires after that window; if you hit it, re-run `activate.sh` to regenerate.
-
-## 5. Verify installation
-
-Use `status.sh` to check deployment, registration, and activation:
-
-```bash
-./status.sh
-```
-
-You should see the SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses, confirmation that the beacon deposit operator matches your SmartOperator, the pool's active status, and various telemetry.
-
-## 6. Set minimum effective balance
+- At least 10,000 BERA for the initial deposit
+- A signing machine with a Ledger, or a private key in `PRIVATE_KEY` on the validator host
 
 <Warning>
-  The `minEffectiveBalance` parameter determines when your staking pool activates its validator on
-  the consensus layer. If you don't set this value correctly, your pool may accumulate deposits
-  without ever activating.
+  Set `BEACOND_HOME` to the beacond data directory. The CLI stops `deploy`, `activate`, and
+  `set-min-balance` if `BEACOND_HOME` is missing. It also stops if `beacond` cannot read the
+  validator keys.
 </Warning>
 
-Set the value using your SmartOperator contract:
+Do not set `CHAIN` in the environment. Foundry `cast` reads `CHAIN` as its own flag. Use `CLI_CHAIN` (`mainnet` or `bepolia`). If you omit `CLI_CHAIN`, the CLI detects the network from genesis.
 
-```bash
-cast send $SMART_OPERATOR_ADDRESS \
-  "setMinEffectiveBalance(uint256)" $CALCULATED_MIN_STAKE \
-  --ledger  # or --private-key $PRIVATE_KEY
-```
+## Operator flow
 
-Replace `$SMART_OPERATOR_ADDRESS` with your SmartOperator address and `$CALCULATED_MIN_STAKE` with the calculated minimum stake amount in wei (multiply BERA amount by 10^18).
+<Steps>
+  <Step title="Set the environment">
+    Copy the template and set `BEACOND_HOME`:
 
-For details on why this matters, how to determine the correct value, and how the consensus layer minimum works, see the [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) section in the operator guide.
+    ```bash
+    cp env.sh.template env.sh
+    # Set BEACOND_HOME="/path/to/your/beacond/home"
+    # Optional: PRIVATE_KEY="0x..."  (private key on this host only)
+    source env.sh
+    ```
 
-## 7. (Optional) Stake additional BERA
+    The Node API defaults to `http://127.0.0.1:3500`. Override it with `CL_NODE_API_URL` or `NODE_API_ADDRESS` if your node uses another address.
 
-Add stake to your pool and send stBERA to a receiver address:
+    Enable the Node API in `app.toml` under `[beacon-kit.node-api]` if it is off.
+  </Step>
 
-```bash
-# With BEACOND_HOME configured (pool auto-detected):
-./stake.sh --amount 100 --receiver 0xRECEIVER
+  <Step title="Deploy the pool contracts">
+    ```bash
+    node pool-cli.mjs deploy --op 0xOPERATOR --sr 0xSHARES_RECIPIENT
+    ```
 
-# Or specify an explicit pool address:
-./stake.sh --amount 100 --receiver 0xRECEIVER --staking-pool 0xPOOL
-```
+    The CLI does this:
 
-The script writes `stake-command.sh`. Review and execute the command to submit your stake.
+    1. Detects mainnet or Bepolia from `CLI_CHAIN` or genesis.
+    2. Validates the `beacond` deposit.
+    3. Predicts the four pool contract addresses.
+    4. Runs `cast call` for `deployStakingPoolContracts`.
+    5. Shows the 10,000 BERA deposit.
+    6. Prints a `cast send` command. It does not broadcast.
 
-## Troubleshooting (quick)
+    Copy the printed command. Run it on the signing machine. The default printed command uses `--ledger`.
 
-- **Node API not reachable**: Enable `[beacon-kit.node-api]` and confirm the address/port; or set `NODE_API_ADDRESS` in `env.sh`. The script will examine your files and tell you how to activate the API if it isn't enabled yet.
-- **Missing tools**: Install Foundry (`cast`), `jq`, `bc`, and `curl` and ensure they are on your PATH.
+    To broadcast from the validator host, set `PRIVATE_KEY` and add `--execute`. The CLI refuses `--execute` without `PRIVATE_KEY`.
+  </Step>
+
+  <Step title="Wait for beacon-chain registration">
+    ```bash
+    node pool-cli.mjs status
+    ```
+
+    The validator must appear on the beacon chain before you activate the pool.
+  </Step>
+
+  <Step title="Activate the pool">
+    ```bash
+    node pool-cli.mjs activate
+    ```
+
+    Activation is a permissionless call keyed by the validator pubkey. You do not pass `--op` or `--sr`.
+
+    The CLI does this:
+
+    1. Checks that the pool is deployed and not already active.
+    2. Checks that the validator is registered on the beacon chain.
+    3. Pins the beacon head slot.
+    4. Fetches pubkey, withdrawal-credentials, and balance proofs at that slot.
+    5. Checks that withdrawal credentials match the pool WithdrawalVault.
+    6. Runs `cast call` for `activateStakingPool`. It names known reverts.
+    7. Refuses to print `cast send` if the proof is older than 10 minutes.
+    8. Prints a `cast send` command.
+
+    Copy the printed command to the signing machine. If the 10-minute window expires, run `activate` again to fetch new proofs.
+  </Step>
+
+  <Step title="Check status">
+    ```bash
+    node pool-cli.mjs status
+    ```
+
+    You should see SmartOperator, StakingPool, StakingRewardsVault, and IncentiveCollector addresses. You should also see operator match, active state, and pool telemetry.
+  </Step>
+
+  <Step title="Set minimum effective balance (optional)">
+    <Warning>
+      `minEffectiveBalance` controls when the pool activates the validator on the consensus layer.
+      If you set this value incorrectly, the pool can take deposits and never activate.
+    </Warning>
+
+    ```bash
+    node pool-cli.mjs set-min-balance
+    ```
+
+    The default amount is 250,000 BERA. Pass `--amount` to use another value. Copy the printed `cast send` to the signing machine.
+
+    See [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance) in the operator guide.
+  </Step>
+</Steps>
+
+## Stake additional BERA
+
+The operator CLI does not stake or unstake. Use the [sample frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) for extra stake. See [Building your front-end](/nodes/staking-pools/operators#building-your-front-end).
+
+## Troubleshooting
+
+- **`BEACOND_HOME` is required.** Set it to the beacond data directory on this validator host.
+- **`cast` rejects `bepolia`.** Unset `CHAIN`. Set `CLI_CHAIN` if you need to force the network.
+- **Node API not reachable.** Enable `[beacon-kit.node-api]` or set `CL_NODE_API_URL`.
+- **Missing tools.** Install Node.js 22+, Foundry `cast`, and `beacond`. Put them on `PATH`.
+- **`--execute` refused.** Set `PRIVATE_KEY` on the validator host, or run the printed `cast send` on the signing machine.
 
 ## What's next
 
-- [Contract reference](/nodes/staking-pools/contracts) explains what you've deployed
-- [Delegation guide](/nodes/staking-pools/delegators) explains how to receive a Foundation delegation, which is very similar to this flow
+- [Contract reference](/nodes/staking-pools/contracts) describes the contracts you deployed.
+- [Delegation guide](/nodes/staking-pools/delegators) describes a Foundation delegation. That flow is similar.
