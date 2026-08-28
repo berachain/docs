@@ -222,13 +222,7 @@ Re-run `status` until it reports:
 node pool-cli.mjs activate
 ```
 
-The execution client can lag behind the beacon chain by a block or two. If it has not yet produced the block the proof needs, `activate` reports the block as missing and does nothing else:
-
-```
-[error] Failed to read EL block 24527917 from http://127.0.0.1:8545: block not found
-```
-
-This is not a failed activation. Re-run `activate`:
+`activate` pins a slot 5 blocks behind head, so the execution-layer block the proof needs already exists:
 
 ```
 [success] All proofs pinned to slot 24528070
@@ -238,6 +232,11 @@ This is not a failed activation. Re-run `activate`:
 ```
 
 Copy the printed command to the signing machine and run it there.
+
+<Info>
+  On the validator host, set `PRIVATE_KEY` and append `--execute` to broadcast directly instead:
+  `node pool-cli.mjs activate --execute`. Every state-changing command accepts `--execute`.
+</Info>
 
 ### Check status
 
@@ -340,7 +339,7 @@ node pool-cli.mjs activate --execute
 
 Activation takes no options besides `--execute`. The pubkey, operator, and shares recipient are already fixed by `deploy`.
 
-`activate` pins a beacon-chain slot a few slots behind head, so the paired execution-layer block already exists. It fetches the pubkey, withdrawal-credentials, and balance proofs at that slot, checks them against the pool's WithdrawalVault, and preflights `activateStakingPool`. The proof expires 10 minutes after its timestamp. The CLI refuses to print `cast send` past that window.
+`activate` pins a beacon-chain slot 5 blocks behind head, so the paired execution-layer block already exists. The consensus and execution clients stay in lockstep on Berachain, so this margin should never run out in normal operation. `activate` fetches the pubkey, withdrawal-credentials, and balance proofs at that slot, checks them against the pool's WithdrawalVault, and preflights `activateStakingPool`. The proof expires 10 minutes after its timestamp. The CLI refuses to print `cast send` past that window.
 
 ### `status`
 
@@ -412,7 +411,7 @@ This command is optional. See [Setting Minimum Effective Balance](/nodes/staking
 - **Pool contracts are not deployed.** The deploy `cast send` has not landed for this pubkey. `isActive` is not available yet. Confirm the transaction hash on the explorer.
 - **Beacon head state does not include this validator.** The EL deposit can be in while the beacon chain has not included the validator. Wait. Re-run `status`. Do not run `activate` yet.
 - **Ready for activation.** `status` shows a beacon index and CL `status`. The pool `isActive` is still false. Run `activate`.
-- **`activate` cannot read an EL block.** The execution client has not produced the block the proof needs yet. Wait a few seconds and re-run `activate`.
+- **`activate` cannot read an EL block.** `activate` pins a slot 5 blocks behind head, so this should not happen on a healthy node. If it does, the execution client is unusually far behind. Wait and re-run `activate`.
 - **Pool is already activated.** `activate` is safe to re-run. Once active, it reports this and takes no action.
 - **Missing tools.** Install Node.js 22+, Foundry `cast`, and `beacond`. Put them on `PATH`.
 - **`--execute` refused.** Set `PRIVATE_KEY` on the validator host, or run the printed `cast send` on the signing machine.
