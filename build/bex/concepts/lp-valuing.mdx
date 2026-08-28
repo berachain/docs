@@ -25,8 +25,8 @@ $$
 
 **Where:**
 
-- **Balance<sub>i</sub>**: balance of token $$i$$ in the pool
-- **Price<sub>i</sub>**: market price of token $$i$$
+- **Balance<sub>i</sub>**: balance of token $i$ in the pool
+- **Price<sub>i</sub>**: market price of token $i$
 - **Supply<sub>LP\\ Tokens</sub>**: total supply of LP tokens
 
 **Example:**
@@ -40,8 +40,8 @@ Suppose a \$BERA/\$BUSD pool contains the following:
 | **Total Pool Value** |  |  | **\$20,000** |
 | **LP Token Supply** | **1,000** |  |  |
 
-- **Pool Value:** 1000 \$BERA $$\times$$ 10 USD \+ 10000 \$BUSD $$\times$$ 1 USD = 20000 USD
-- **LP Token Price:** 20000 USD $$/$$ 1000 \$LPTOKEN = 20 USD
+- **Pool Value:** 1000 \$BERA $\times$ 10 USD \+ 10000 \$BUSD $\times$ 1 USD = 20000 USD
+- **LP Token Price:** 20000 USD $/$ 1000 \$LPTOKEN = 20 USD
 
 ---
 
@@ -81,10 +81,10 @@ $$
 
 Where:
 
-- $$A$$ is the amplification parameter
-- $$n$$ is the number of tokens
-- $$x_i$$ are token balances
-- $$D$$ is the invariant
+- $A$ is the amplification parameter
+- $n$ is the number of tokens
+- $x_i$ are token balances
+- $D$ is the invariant
 
 **LP Token Price (using getRate):**
 
@@ -106,7 +106,7 @@ Where $$S$$ is the actual supply (use `getActualSupply()` for pre-minted pools).
 
 Suppose a USDC/DAI/USDT pool with $$getRate() = 1.01$$ and USD as the base asset:
 
-- **LP token price:** $$p_{LP} = 1.01 \times 1 = 1.01$$ USD per LP token
+- **LP token price:** $p_{LP} = 1.01 \times 1 = 1.01$ USD per LP token
 
 ---
 
@@ -140,7 +140,7 @@ Where $$S$$ is the virtual supply (use `getVirtualSupply()`).
 
 Suppose a wstETH/ETH pool with $$getRate() = 1.05$$ and ETH at $$2000$$:
 
-- **LP token price:** $$p_{LP} = 1.05 \times 2000 = 2100$$ USD per LP token
+- **LP token price:** $p_{LP} = 1.05 \times 2000 = 2100$ USD per LP token
 
 ## Special considerations
 
