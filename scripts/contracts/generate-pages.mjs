@@ -368,7 +368,7 @@ The following is a list of contract addresses for interacting with Berachain BEX
 function renderStakingPoolsPage() {
   return `---
 title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, AccountingOracle, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
+description: "Contract addresses and ABI links for the Berachain staking pool system, covering shared singleton contracts and per-pool proxies."
 ---
 
 import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
