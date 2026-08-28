@@ -11,22 +11,19 @@ BEX's Vault and Pool architecture separates the token accounting and management 
 
 <Frame>
   ```mermaid
-  ---
-title: BEX Vault and pool architecture: token accounting in the Vault, pool logic in pool contracts
----
-flowchart TB
-    StableA["🔧 Stable pool A<br/>Low-slippage swaps"]:::amber
-    WeightedB["⚙️ Weighted pool B<br/>Custom asset weights"]:::green
-    Vault["🏛️ Vault<br/>Shared token reserves<br/>🍯 HONEY · 🐻 BERA · Ξ ETH · ₿ BTC"]:::amber
+  flowchart TB
+  StableA["🔧 Stable pool A<br/>Low-slippage swaps"]:::amber
+  WeightedB["⚙️ Weighted pool B<br/>Custom asset weights"]:::green
+  Vault["🏛️ Vault<br/>Shared token reserves<br/>🍯 HONEY · 🐻 BERA · Ξ ETH · ₿ BTC"]:::amber
 
-    StableA <--> Vault
-    WeightedB <--> Vault
+  StableA <--> Vault
+  WeightedB <--> Vault
 
-    classDef amber fill:#faeeda,stroke:#ba7517,stroke-width:2px,color:#412402
-    classDef green fill:#eaf3de,stroke:#639922,stroke-width:2px,color:#173404
+  classDef amber fill:#faeeda,stroke:#ba7517,stroke-width:2px,color:#412402
+  classDef green fill:#eaf3de,stroke:#639922,stroke-width:2px,color:#173404
 
-    linkStyle 0 stroke:#ba7517,stroke-width:2px
-    linkStyle 1 stroke:#639922,stroke-width:2px
+  linkStyle 0 stroke:#ba7517,stroke-width:2px
+  linkStyle 1 stroke:#639922,stroke-width:2px
   ```
 </Frame>
 
