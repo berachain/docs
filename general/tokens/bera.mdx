@@ -21,7 +21,7 @@ Block rewards are emitted as \$WBERA (wrapped BERA, 1:1). Each block emits a **b
 
 Validators stake BERA to enter the active set (top 69 by stake). Block-production probability is proportional to staked BERA. Additional stakers can deposit BERA to a validator directly via `BeaconDeposit.deposit()` or through a [Staking Pool](/nodes/staking-pools/overview) via `submit()`.
 
-### \$sWBERA staking
+### Stake BERA for sWBERA
 
 Depositing BERA or WBERA into the [Staking Vault](/general/tokens/swbera) yields \$sWBERA, which earns yield from the [Incentive Auction](/general/proof-of-liquidity/incentives#incentive-fee-settlement).
 
@@ -33,35 +33,52 @@ The following documents the fixed supply, allocation, and release schedule for B
 
 ### Overview
 
-| Property                | Value                                                                               |
-| ----------------------- | ----------------------------------------------------------------------------------- |
-| Token name              | BERA                                                                                |
-| Total supply at genesis | 500,000,000 BERA                                                                    |
-| Inflation               | ~5% annually via PoL reward emissions (distributed as WBERA), subject to governance |
-| Decimals                | 18                                                                                  |
+| Property | Value |
+| --- | --- |
+| Token name | BERA |
+| Total supply at genesis | 500,000,000 BERA |
+| Inflation | ~5% annually via PoL reward emissions (distributed as WBERA), subject to governance |
+| Decimals | 18 |
 
 ### Distribution and allocation
 
 The genesis supply of 500,000,000 BERA is allocated as follows:
 
-![BERA allocation](/images/tokens/bera-allocation.png)
+<Frame>
+  ```mermaid actions={false}
+  %%{init: {'theme':'base', 'themeVariables': {
+    'pie1':'#a9763f',
+    'pie2':'#5e3d1f',
+    'pie3':'#cda678',
+    'pie4':'#7a4f28',
+    'pie5':'#9c6b3a',
+    'pieTitleTextSize':'20px',
+    'pieSectionTextColor':'#ffffff',
+    'pieStrokeColor':'#3a2410',
+    'pieStrokeWidth':'2px',
+    'pieOuterStrokeColor':'#3a2410'
+}}}%%
+pie showData
+    title BERA Token Allocation
+    "Investors" : 34.3
+    "Ecosystem & R&D" : 20
+    "Initial Core Contributors" : 16.8
+    "Airdrop" : 15.8
+    "Community Initiatives" : 13.1
+  ```
+</Frame>
 
-**Initial core contributors — 84,000,000 (16.8%)**  
-Allocated to advisors and members of Big Bera Labs, the core contributors to the Berachain blockchain.
+**Initial core contributors — 84,000,000 (16.8%)**<br />Allocated to advisors and members of Big Bera Labs, the core contributors to the Berachain blockchain.
 
-**Investors — 171,500,000 (34.3%)**  
-Allocated to Seed, Series A, and Series B investors.
+**Investors — 171,500,000 (34.3%)**<br />Allocated to Seed, Series A, and Series B investors.
 
 **Community allocations — 244,500,000 (48.9%)**
 
-**Airdrop — 79,000,000 (15.8%)**  
-Distributed to testnet users, Berachain and ecosystem NFT holders, social supporters, ecosystem dApps, and community builders. See the [Blog airdrop overview](https://blog.berachain.com/blog/berachain-airdrop-overview) for details.
+**Airdrop — 79,000,000 (15.8%)**<br />Distributed to testnet users, Berachain and ecosystem NFT holders, social supporters, ecosystem dApps, and community builders. See the [Blog airdrop overview](https://blog.berachain.com/blog/berachain-airdrop-overview) for details.
 
-**Future community initiatives — 65,500,000 (13.1%)**  
-Reserved for incentive programs, grants, and other initiatives, with community input via Snapshots, RFPs, and similar mechanisms.
+**Future community initiatives — 65,500,000 (13.1%)**<br />Reserved for incentive programs, grants, and other initiatives, with community input via Snapshots, RFPs, and similar mechanisms.
 
-**Ecosystem & R&D — 100,000,000 (20%)**  
-Used for ecosystem development, R&D, growth, and Berachain Foundation operations: developer programs ([Boyco](https://boyco.berachain.com/)), node operator delegations, and Proof-of-Liquidity evolution. At launch, 9.5% of total BERA supply from this bucket is unlocked for ecosystem growth, developer tooling, liquidity provisioning, and related uses.
+**Ecosystem & R&D — 100,000,000 (20%)**<br />Used for ecosystem development, R&D, growth, and Berachain Foundation operations: developer programs ([Boyco](https://boyco.berachain.com/)), node operator delegations, and Proof-of-Liquidity evolution. At launch, 9.5% of total BERA supply from this bucket is unlocked for ecosystem growth, developer tooling, liquidity provisioning, and related uses.
 
 ### Token release schedule
 
@@ -71,4 +88,17 @@ All allocated parties share the same vesting terms:
 - **Initial unlock:** After the cliff, 1/6 of the allocated amount unlocks.
 - **Linear vesting:** The remaining 5/6 vests linearly over the following 24 months.
 
-![BERA inflation and vesting](/images/tokens/bera-inflation.png)
+<Frame>
+  ```mermaid actions={true}
+  %%{init: {'theme':'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#3a2410, #5e3d1f, #7a4f28, #a9763f, #cda678'}}}}%%
+xychart
+    title "Token Emissions Schedule (Millions)"
+    x-axis "Month" [0, 12, 24, 36]
+    y-axis "Millions" 0 --> 500
+    line "Ecosystem and R&D" [50, 55, 78, 100]
+    line "Airdrop" [110, 120, 150, 180]
+    line "Community Initiatives" [110, 140, 195, 245]
+    line "Investors" [110, 168, 290, 415]
+    line "Initial Core Contributors" [110, 180, 340, 500]
+  ```
+</Frame>

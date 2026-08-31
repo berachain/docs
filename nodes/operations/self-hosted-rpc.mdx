@@ -35,7 +35,7 @@ If your pain is not reads, but user write flows, reduce round-trips per user act
 
 Paid services vary in their approach to pricing, but generally work on a model where you purchase API credits and providers price JSON-RPC calls according to their computational cost. Costs vary widely by request mix; simple reads are usually cheaper than log queries, and cacheability and archive access also matter. Treat any single "$X per 100,000 requests" number as an order-of-magnitude estimate, not a budget.
 
-We have a useful list of paid RPC providers on our [developer tools page](/build/getting-started/developer-tools#rpc-infrastructure-providers).
+We have a useful list of paid RPC providers on our [developer tools page](/build/getting-started/developer-tools#rpc-and-infrastructure-providers).
 
 ## Running your own RPC
 
@@ -45,7 +45,7 @@ If you need predictable throughput, hard isolation, or you cannot tolerate multi
 
 Berachain sets its public RPCs to commercially typical usage limits. These endpoints are designed for end users sending transactions, not for running the backend of a service. Commercial projects should provision their own infrastructure or use paid services.
 
-When choosing an RPC solution, you have several options. Free services from the Berachain community are available and listed on our [developer tools page](/build/getting-started/developer-tools#rpc-infrastructure-providers). Paid services usually price by request credits and redundancy tier; self-hosting shifts cost into compute, storage, and operational overhead. In practice, the "right" choice depends less on raw request count and more on your latency targets, failure tolerance, and whether your workload relies on expensive calls like log queries.
+When choosing an RPC solution, you have several options. Free services from the Berachain community are available and listed on our [developer tools page](/build/getting-started/developer-tools#rpc-and-infrastructure-providers). Paid services usually price by request credits and redundancy tier; self-hosting shifts cost into compute, storage, and operational overhead. In practice, the "right" choice depends less on raw request count and more on your latency targets, failure tolerance, and whether your workload relies on expensive calls like log queries.
 
 Paid providers build redundancy into their offerings. If you are stitching together multiple RPC backends yourself, whether for cost or redundancy, put a single proxy in front so your app talks to one endpoint and the proxy picks an upstream. [eRPC](https://github.com/erpc/erpc) is one option: it can automatically route around slow or erroring providers, retry some requests, and optionally cache common reads to reduce upstream load.
 

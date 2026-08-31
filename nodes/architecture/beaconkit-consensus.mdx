@@ -4,7 +4,7 @@ description: "Consensus client and framework for EVM chains: CometBFT, Engine AP
 ---
 
 <Frame>
-  <img src="/images/nodes/beaconkit-banner.png" alt="BeaconKit consensus layer banner" />
+  ![BeaconKit consensus layer banner](/images/nodes/beaconkit-banner.png)
 </Frame>
 
 [BeaconKit](https://github.com/berachain/beacon-kit) is both a consensus client and a framework for building EVM chains.
@@ -24,12 +24,12 @@ Some of the key benefits that come with BeaconKit:
 5. **Leverages EVM tooling** - The majority of all EVM tooling is supported
 6. **Modular** - BeaconKit is also a modular framework that can allow for the potential implementation of a custom block builder, rollup, data availability layer, and more
 
-<Frame>
-  <img
-    src="/images/nodes/berachain-ethereum-vs-beaconkit.png"
-    alt="Comparison of Berachain BeaconKit architecture versus Ethereum"
-  />
-</Frame>
+| Aspect | Ethereum | BeaconKit |
+| --- | --- | --- |
+| Execution Client | EVM (Geth, Reth, Erigon, ...) | EVM (Bera-Reth) |
+| Consensus Algorithm | Gasper PoS | CometBFT |
+| Finality | Casper FFG (~13 minutes) | Single Slot (Instant) |
+| Architecture | Modular | Modular |
 
 ## Deposit processing
 
