@@ -142,6 +142,7 @@ Putting it all together, the following diagram shows the complete Berachain vali
 2. Potential forced exit due to the validator set cap (**69**) → **Exited** → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
 3. **Deposited** → 1 epoch → **Eligible** → 1 epoch → **Exited** due to the validator set cap (**69**) \+ balance too low → **256** (mainnet) / **32** (Bepolia) → **Withdrawn**
 
+<Frame>
 ```mermaid
 flowchart TB
   subgraph EL1["Execution Layer"]
@@ -164,9 +165,6 @@ flowchart TB
   DC -. "2 ETH1 block delay" .-> DEP
   EXT -. "1 epoch delay<br/>All funds fully withdrawn" .-> WD
 ```
-
-<Frame>
-  ![Extended validator lifecycle diagram showing all state transitions including forced exits](/images/nodes/validator-extended-lifecycle.png)
 </Frame>
 
 Note that the system processes state transitions via a queue, on a FIFO basis, with a cap on the number of transitions in each state to limit excessive churn in the validator set.
