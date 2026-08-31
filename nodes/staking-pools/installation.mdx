@@ -17,7 +17,7 @@ git clone https://github.com/berachain/guides/
 cd guides/apps/staking-pools/install-helpers
 ```
 
-Requires Node.js 22+ and `beacond` on the validator host — nothing else. Cold-signing mode also needs a signing machine with `cast` and a Ledger or your own key.
+Requires Node.js 22+ and `beacond` on the validator host — nothing else. Cold-signing mode also needs a signing machine with `cast` and a Ledger or your own key. The CLI never asks which one you'll use — printed commands default to `--ledger`; pass `--signing-preference key` if you'd rather see your own key in the printed command.
 
 ## Requirements
 
