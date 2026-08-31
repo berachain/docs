@@ -3,12 +3,12 @@ title: "Staking Pool Installation"
 description: "Install and activate a staking pool with one command. The CLI runs on the validator host, checks funding, and either finishes the job itself or hands you exactly the cast commands it can't run for you."
 ---
 
-Run the CLI on the **validator host** — the machine running `beacond`, with `BEACOND_HOME` set. There are two ways to run it, chosen by whether you give it a private key:
+Run the CLI on the **validator host** — the machine running `beacond`, with `BEACOND_HOME` set.
 
-- **Hot-key mode** (`PRIVATE_KEY` set): the CLI signs and broadcasts every transaction itself. No Foundry, no `cast`, no `npm install`. You confirm the plan once; everything else is hands-off.
-- **Cold-signing mode** (no `PRIVATE_KEY`): the CLI never signs anything. It reads chain state itself, tells you exactly what it wants to do, and prints a `cast send` command for each transaction that genuinely needs a new signature. You run those on a separate machine — a laptop with a Ledger, or with your own key — while the CLI keeps watching the chain and moves on as soon as each one lands.
+- **Hot-key mode** (`PRIVATE_KEY` set): the CLI signs and broadcasts everything itself. No Foundry, no `cast`, no `npm install`. One confirmation, then hands-off.
+- **Cold-signing mode** (no `PRIVATE_KEY`): the CLI never signs anything. It prints a `cast send` for each transaction that needs a new signature, for you to run on a separate signing machine, and watches the chain for it to land.
 
-Both modes run the same installer, watch for the same on-chain facts, and are safe to kill and re-run at any point — the CLI figures out where you left off by reading the chain, not by remembering a file.
+Either way: kill it and re-run it any time. It reads the chain to know where it left off — it doesn't remember a file.
 
 ## Get the CLI
 
@@ -17,21 +17,16 @@ git clone https://github.com/berachain/guides/
 cd guides/apps/staking-pools/install-helpers
 ```
 
-Requires Node.js 22+ and `beacond` on the validator host. Nothing else — the CLI carries its own signing and chain-reading code; it does not call out to `cast`, `forge`, or any package manager at runtime.
-
-Cold-signing mode also needs a **signing machine**: any computer with `cast` installed, holding either a Ledger or a private key of your own. That machine never needs to touch the validator host.
+Requires Node.js 22+ and `beacond` on the validator host — nothing else. Cold-signing mode also needs a signing machine with `cast` and a Ledger or your own key.
 
 ## Requirements
 
-- At least 10,000 BERA for the initial deposit (the fixed consensus-layer deposit amount). More if you also want to stake past that.
-- `beacond`, synced, with validator keys backed up.
-- Hot-key mode: `PRIVATE_KEY` on the validator host, funded with the BERA above.
-- Cold-signing mode: the address that will hold the funds (so the CLI can check its balance), and a signing machine with `cast`.
+- At least 10,000 BERA for the deposit, more if you're staking past that.
+- `beacond`, synced, validator keys backed up.
 
 <Warning>
-  `PRIVATE_KEY` on the validator host is a hot key. Only set it if you're comfortable with that
-  key funding transactions directly from this machine. Otherwise, leave it unset and sign from a
-  separate machine.
+  `PRIVATE_KEY` on the validator host is a hot key. Leave it unset to sign from a separate
+  machine instead.
 </Warning>
 
 ## Run it
@@ -44,61 +39,26 @@ source env.sh
 node pool-cli.mjs install
 ```
 
-The installer asks for whatever it can't determine on its own, then confirms the whole plan before touching anything.
-
 <Steps>
-  <Step title="The CLI reads your setup">
-    It reads your validator pubkey from `beacond`, detects the network from genesis, and checks the funding wallet's balance.
-
-    - Hot-key mode: the funding wallet is the address behind `PRIVATE_KEY`.
-    - Cold-signing mode: pass `--funding-address 0x...`, or the CLI asks for it. It also asks once, up front, whether you're signing with a Ledger (press Enter) or your own key (type `key`) — this only changes the wording of the commands it prints later; it never reads a key itself.
-
-    If `--operator` / `--shares-recipient` are omitted, both default to the funding wallet's address.
-  </Step>
-
   <Step title="One confirmation">
-    The CLI shows the whole plan and asks once:
+    The CLI reads your pubkey, network, and funding balance, then shows the plan once:
 
     ```
     Network:            bepolia
-    Validator pubkey:   0x93be...a1
-    Predicted pool:      0x6dE5...0755
     Deposit:             10,000 BERA
     Additional stake:    240,000 BERA   (funding wallet holds enough)
-    Operator:            0x1968...9e (defaulted to funding wallet)
-    Shares recipient:    0x1968...9e (defaulted to funding wallet)
-
     Proceed? [y/N]
     ```
 
-    If the funding wallet can't cover the full deposit, the CLI says so here and stops — it does not partially deploy. If it can cover the deposit but not the additional stake, it says so and proceeds with deposit and activation only; run `stake` yourself later once more funds arrive.
-
-    This is the only question in hot-key mode. Everything past this point runs without asking again.
+    Not enough for the deposit → it stops here, nothing deployed. Enough for the deposit but not the stake → it proceeds through activation and leaves staking for later. This is the only question in hot-key mode.
   </Step>
 
-  <Step title="Deploy">
-    Deploys the pool contracts and the 10,000 BERA deposit.
-
-    - Hot-key mode: broadcasts immediately.
-    - Cold-signing mode: prints a `cast send` for you to run on your signing machine, then waits and watches the chain for it to land. Nothing else happens until it does.
-  </Step>
-
-  <Step title="Wait for validator registration">
-    The CLI polls the beacon chain on its own. This can take a while — there's nothing to run here, and nothing to watch unless you pass `--verbose`. If you kill the process now, re-running `node pool-cli.mjs install` picks up exactly here.
-  </Step>
-
-  <Step title="Activate">
-    Once the beacon chain includes the validator, the CLI fetches activation proofs and either broadcasts (hot-key) or prints the `cast send` and waits for it to land (cold-signing). Proofs expire 10 minutes after they're fetched; if a cold-signing operator takes longer than that to run the printed command, the CLI notices, fetches a fresh proof, and prints a new command — you don't have to ask for it.
-  </Step>
-
-  <Step title="Stake, if the funding wallet covers it">
-    If step 2's plan included additional stake, the CLI deposits it the same way (broadcast or print-and-wait) and mints stBERA to the shares recipient. If it didn't, the installer is done after activation — add stake later with `node pool-cli.mjs stake`.
+  <Step title="Deploy, wait, activate, stake">
+    Deploys the pool, waits for beacon-chain registration, activates, and stakes if funded — broadcasting itself (hot-key) or printing each `cast send` and waiting for it to land (cold-signing). Nothing to do here except wait, or run the printed commands.
   </Step>
 </Steps>
 
 ## Output
-
-Default output is a handful of lines — one per milestone, nothing you need to act on unless it stops and asks:
 
 ```
 Deployed. Predicted pool: 0x6dE5...0755
@@ -109,74 +69,22 @@ Staked 240,000 BERA.
 Done.
 ```
 
-Pass `--verbose` for the detail behind each line — transaction hashes, RPC calls, pinned slots, proof timestamps. Use it when something needs debugging; leave it off otherwise.
+That's the whole default output. Pass `--verbose` for tx hashes and RPC detail when debugging.
 
-## Resuming
+## Everything else
 
-`node pool-cli.mjs install` is safe to re-run at any point. It doesn't keep a run file — every time it starts, it reads the chain and `beacond` to work out which of deploy / wait / activate / stake is next, and continues from there. Re-running after the pool is already active and staked reports done and exits; it does not repeat a step.
-
-## Other commands
-
-Available on their own, independent of `install` — the same standalone commands the CLI has always had, useful for advanced or manual use, debugging, or picking up a single step without running the whole installer:
-
-| Command | Action |
-| --- | --- |
-| `deploy` | Just the deploy step (`install` calls this internally) |
-| `activate` | Just the activate step (`install` calls this internally) |
-| `set-min-balance` | Set `minEffectiveBalance` manually. Not part of `install`'s plan or confirmation — see the note below. |
-| `status` | Read EL operator, beacon inclusion, and pool `isActive`, plus telemetry once active |
-| `stake` | Deposit BERA and mint stBERA to `--receiver`, any time after activation |
-| `unstake` | Request or finalize a withdrawal |
-
-```bash
-node pool-cli.mjs status
-node pool-cli.mjs stake --amount 100 --receiver 0xRECEIVER
-node pool-cli.mjs unstake --amount 100 --from 0xHOLDER
-node pool-cli.mjs unstake --finalize 42 --from 0xHOLDER
-```
-
-`unstake` is always two transactions — request, then finalize after the on-chain delay — and always asks you to sign both separately (hot-key or cold-signing); there's no hands-off installer for it, since it's something a holder decides to do on their own schedule, not part of installation.
+`status`, `stake`, `unstake`, `deploy`, `activate`, and `set-min-balance` remain available as standalone commands — run `node pool-cli.mjs --help` or see the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) for the full command and environment-variable reference, plus troubleshooting.
 
 <Info>
-  `minEffectiveBalance` (the threshold that determines when your pool activates the validator on
-  the consensus layer) is not part of `install`'s plan, confirmation, or automatic behavior — run
-  `set-min-balance` yourself when you need it. See
-  [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance)
-  in the operator guide for why it matters and how to calculate a value.
+  `set-min-balance` is not part of `install` — run it yourself. See
+  [Setting Minimum Effective Balance](/nodes/staking-pools/operators#setting-minimum-effective-balance).
 </Info>
-
-## Environment variables
-
-| Variable | Purpose |
-| --- | --- |
-| `BEACOND_HOME` | beacond data directory. Required for every command. |
-| `BEACOND_BIN` | Override the beacond binary. Default: `beacond` on `PATH`. |
-| `CLI_CHAIN` | `mainnet` or `bepolia`. If unset, the CLI detects the network from genesis. |
-| `RPC_URL` / `EL_RPC_URL` | Override the execution RPC. Default: the public Berachain endpoint for the detected chain. |
-| `CL_NODE_API_URL` / `NODE_API_ADDRESS` | Beacon Node API for validator state and proofs. Default: `http://127.0.0.1:3500`. |
-| `PRIVATE_KEY` | Hot key on the validator host. Set it to run in hot-key mode; leave it unset for cold-signing mode. |
-
-<Warning>
-  Do not set `CHAIN` in the environment. Foundry `cast` (used only on the signing machine in
-  cold-signing mode) reads `CHAIN` as its own flag and rejects values like `bepolia`. Use
-  `CLI_CHAIN` instead.
-</Warning>
 
 ## Delegated pools
 
-A Foundation-delegated pool (funds delegated by someone else, installed by an operator holding `VALIDATOR_ADMIN_ROLE`) follows the same shape — deploy, wait, activate, deposit — against the `DelegationHandler` instead of your own funding wallet. See [Delegation guide](/nodes/staking-pools/delegators) for how a delegation gets set up; whether it's driven by this same `install` command or a dedicated one depends on what's shipped when you read this — check the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) for current command names.
-
-## Troubleshooting
-
-- **`BEACOND_HOME` is required.** Set it to the beacond data directory on this validator host.
-- **Funding wallet can't cover the deposit.** The installer stops before deploying. Fund the wallet (hot-key mode: the `PRIVATE_KEY` address; cold-signing mode: `--funding-address`) and re-run.
-- **`cast` rejects `bepolia`.** Unset `CHAIN` on the signing machine. Set `CLI_CHAIN` on the validator host if you need to force the network.
-- **Node API not reachable.** Enable `[beacon-kit.node-api]` in `app.toml`, or set `CL_NODE_API_URL`.
-- **A printed `cast send` expired before you ran it.** Only possible for `activate` (10-minute proof window). Re-run `node pool-cli.mjs install`; it fetches a fresh proof and prints a new command.
-- **A printed `cast send` failed or was rejected on the signing machine.** Re-run `node pool-cli.mjs install`. It checks the chain, sees nothing landed, and reprints the same command (or a refreshed one, for `activate`, if the proof also expired in the meantime) rather than assuming it succeeded.
-- **Missing tools.** Validator host needs Node.js 22+ and `beacond`. The signing machine (cold-signing mode only) needs Foundry `cast`.
+A Foundation-delegated pool follows the same shape against the `DelegationHandler` instead of your own wallet. See the [Delegation guide](/nodes/staking-pools/delegators) and the README for current command names.
 
 ## What's next
 
 - [Contract reference](/nodes/staking-pools/contracts) describes the contracts you deployed.
-- [Delegation guide](/nodes/staking-pools/delegators) describes a Foundation delegation. That flow is similar.
+- [Delegation guide](/nodes/staking-pools/delegators) describes a Foundation delegation.
