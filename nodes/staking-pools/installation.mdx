@@ -75,6 +75,8 @@ That's the whole default output. Pass `--verbose` for tx hashes and RPC detail w
 
 `status`, `stake`, `unstake`, `deploy`, `activate`, and `set-min-balance` remain available as standalone commands — run `node pool-cli.mjs --help` or see the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) for the full command and environment-variable reference, plus troubleshooting.
 
+`status`, `activate`, `set-min-balance`, `stake`, and `unstake` read the scenario file `install` already wrote in the working directory, so you don't need `BEACOND_HOME` on a remote validator to run them afterward — `--chain`/`--pubkey` still override it when passed. `deploy` is the one exception: it needs the deposit's `credentials`/`signature`/`amount`, which the scenario file deliberately doesn't carry, so it still requires a local validator or a full `--deposit`.
+
 `unstake --finalize --from 0xHOLDER` (no id) finalizes every withdrawal request that's past the finalization delay in one batch transaction; `unstake --finalize 42 --from 0xHOLDER` finalizes just request `42`.
 
 <Info>
