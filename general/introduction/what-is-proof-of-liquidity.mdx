@@ -7,9 +7,36 @@ Proof of Liquidity (PoL) is Berachain’s answer to the emissions problem. Most 
 
 Berachain flips this model with Proof of Liquidity. Instead of treating emissions as a pure cost, PoL turns them into growth capital for applications building on the chain. Emissions are directed toward useful liquidity, application activity, and businesses that can generate value back into the ecosystem.
 
-The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → $BERA strengthen → more businesses funded with emissions → repeat.
+The loop is simple: emissions to businesses → businesses grow and earn more → revenue is shared with the chain directly or through the incentive market → \$BERA strengthen → more businesses funded with emissions → repeat.
 
-![PoL value cycle](/images/proof-of-liquidity/pol-cycle.svg)
+<Frame>
+  ```mermaid actions={false}
+  ---
+title: Proof of Liquidity Value Cycle
+---
+%%{init: {'flowchart': {'curve': 'basis'}}}%%
+flowchart TB
+    Emissions["📦 Emissions<br/><small>WBERA per block</small>"]:::pill
+
+    BERA["🐻 BERA strengthens<br/><small>more business funded</small>"]:::pill
+    Business["☀️ Business grow<br/><small>build with growth capital</small>"]:::pill
+
+    Revenue["🍇 Revenue shared<br/><small>directly or via the incentive market</small>"]:::pill
+
+    Emissions --> Business
+    Business --> Revenue
+    Revenue --> BERA
+    BERA --> Emissions
+
+    BERA ~~~ Business
+
+    classDef pill fill:#fdf0e6,stroke:#fdf0e6,color:#2a2a2a
+    class Emissions,BERA,Business,Revenue pill
+
+    linkStyle 0,1,2,3 stroke:#e8622c,stroke-width:2px
+    linkStyle 4 stroke:none
+  ```
+</Frame>
 
 _The PoL value cycle: emissions fund businesses, businesses return revenue, revenue strengthens BERA, and a stronger BERA economy underwrites the next emissions._
 
@@ -21,7 +48,7 @@ A portion of those emissions goes to validator operators. The rest flows through
 
 Applications can fund incentives to attract emissions. Users can earn rewards by providing liquidity or activity through eligible vaults, or by participating through simpler staking paths such as \$sWBERA.
 
-Incentives earned through the system are converted into \$BERA and accrued into \$sWBERA, creating a cleaner value path for users and keeping rewards aligned with the broader $BERA economy.
+Incentives earned through the system are converted into \$BERA and accrued into \$sWBERA, creating a cleaner value path for users and keeping rewards aligned with the broader \$BERA economy.
 
 This creates a market for useful activity. Validators compete for stake, applications compete for emissions, and users choose where to supply liquidity or participate in staking.
 

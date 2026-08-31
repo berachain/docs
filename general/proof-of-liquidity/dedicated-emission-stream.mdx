@@ -17,7 +17,32 @@ DES lets governance guarantee a minimum emission flow to specific vaults without
 
 Before each block's validator-specific allocation is applied, the Distributor carves out a governance-configured percentage of the WBERA Reward Vault emission and allocates it to DES-selected vaults.
 
-![DES routing — DES carve-out, per-vault cap, and excess return to validator allocation](/images/proof-of-liquidity/pol-des.png)
+<Frame>
+  ```mermaid actions={false}
+  ---
+title: DES routing — DES carve-out, per-vault cap, and excess return to validator allocation
+---
+flowchart TD
+    Emission["💧 Reward Vault<br/>emission in WBERA"]:::yellow
+    Decision{"🎯 DES active?"}:::yellow
+    Carveout["DES carve-out"]:::gray
+    Remaining["Remaining<br/>WBERA"]:::yellow
+    Vault["🏛️ DES vault<br/>allocations"]:::yellow
+    Validator["🧭 Validator allocation"]:::gray
+
+    Emission --> Decision
+    Decision -- "yes" --> Carveout
+    Decision -- "no" --> Remaining
+    Carveout -- "allocate" --> Vault
+    Carveout -- "excess<br/>(target cap reached)" --> Remaining
+    Remaining --> Validator
+
+    classDef yellow fill:#fdeeb8,stroke:#e08a1e,stroke-width:2px,color:#5a3a10
+    classDef gray fill:#e8e8ea,stroke:#8a8a8a,stroke-width:2px,color:#2a2a2a
+
+    linkStyle default stroke:#d4741a,stroke-width:2.5px
+  ```
+</Frame>
 
 _How the WBERA reward-rate splits between DES vaults and the validator-allocation path. When a DES vault hits its `targetEmission` cap, the excess returns to the remainder pool for validator allocation._
 
@@ -32,10 +57,10 @@ When DES is active, each block:
 
 `DedicatedEmissionStreamManager` is controlled by two roles:
 
-| Role                              | Controls                                                       |
-| --------------------------------- | -------------------------------------------------------------- |
+| Role | Controls |
+| --- | --- |
 | `DEFAULT_ADMIN_ROLE` (governance) | Distributor address, BeraChef reference, upgrades, role grants |
-| `ALLOCATION_MANAGER_ROLE`         | `emissionPerc`, vault weights, per-vault target caps           |
+| `ALLOCATION_MANAGER_ROLE` | `emissionPerc`, vault weights, per-vault target caps |
 
 ### Parameters
 
