@@ -39,6 +39,10 @@ description: "Common questions about Berachain."
     `$BUSD` is the native stablecoin of the Berachain ecosystem. It is a multicollateral backed stablecoin, and is used throughout the Berachain ecosystem.
   </Accordion>
 
+  <Accordion title="Does $BERA have a maximum supply?">
+    No. \$BERA has no hard supply cap. The genesis total supply was 500,000,000 \$BERA, with ~5% annual inflation via Proof-of-Liquidity reward emissions (distributed as \$WBERA), subject to governance. Transaction fees are burned, which reduces circulating supply. See the [BERA token page](/general/tokens/bera) for the full allocation and release schedule.
+  </Accordion>
+
   <Accordion title="What was $BGT?">
     It was previously used in early versions of Proof of Liquidity for governance and reward routing. Users who still hold \$BGT should unstake it, redeem it 1:1 for native \$BERA, and stake their \$BERA for \$sWBERA to participate in the current Proof of Liquidity system. See the [Berachain Hub](https://hub.berachain.com/) which will walk you through the process.
   </Accordion>
@@ -65,6 +69,13 @@ description: "Common questions about Berachain."
 
   <Accordion title="Why should I stake for $sWBERA?">
     \$sWBERA earns yield from the Incentive Auction. Protocols fund incentive tokens to attract validator reward allocation; after validator commission, the remaining incentive tokens are redirected to `IncentivesCollector`. Auction buyers pay WBERA to claim those tokens, and that WBERA is split pro-rata between the \$sWBERA Staking Vault and registered LST staker vaults. Holding \$sWBERA gives you a share of that yield without needing to manage vault positions or validator selection.
+  </Accordion>
+
+  <Accordion title="How long does unstaking take?">
+    It depends on what you are unstaking:
+
+    - **\$sWBERA (Staking Vault)**: withdrawals have a [7-day unbonding period](/general/tokens/swbera#7-day-unbonding-period) after you queue a withdrawal request.
+    - **Staking pool withdrawals**: requests can be finalized after a delay of 129,600 blocks (≈3 days at ~2s block time). See the [staking pools operator guide](/nodes/staking-pools/operators) for details.
   </Accordion>
 
   <Accordion title="Can validators with $BERA alone build blocks and what are the rewards?">
