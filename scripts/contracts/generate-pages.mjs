@@ -2,19 +2,24 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
 const checkMode = process.argv.includes("--check");
-const missingValue = "🤓";
+const missingValue = "Not deployed";
 let changedCount = 0;
 let wroteCount = 0;
 let unchangedCount = 0;
 
 function write(relPath, content) {
   const abs = path.join(repoRoot, relPath);
-  const next = `${content.trimEnd()}\n`;
+  const next = execFileSync("prettier", ["--stdin-filepath", relPath], {
+    cwd: repoRoot,
+    encoding: "utf8",
+    input: `${content.trimEnd()}\n`,
+  });
   const prev = fs.existsSync(abs) ? fs.readFileSync(abs, "utf8") : null;
   if (prev === next) {
     unchangedCount += 1;
@@ -38,7 +43,8 @@ function write(relPath, content) {
 
 function berascanLink(address, network) {
   if (!address) return missingValue;
-  const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
+  const host =
+    network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
   return `[\`${address}\`](${host}/address/${address})`;
 }
 
@@ -66,7 +72,7 @@ function resourcesCell(item, network, abiLabel = "ABI") {
   const resources = [
     ["abi", abiLabel],
     ["source", "Source"],
-    ["reference", "Reference"]
+    ["reference", "Reference"],
   ]
     .map(([key, label]) => {
       const href = linkFor(item, key, network);
@@ -79,7 +85,8 @@ function resourcesCell(item, network, abiLabel = "ABI") {
 
 function berascanUrl(address, network) {
   if (!address) return "";
-  const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
+  const host =
+    network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
   return `${host}/address/${address}`;
 }
 
@@ -89,7 +96,9 @@ function resourceLinks(item, network, abiLabel = "ABI") {
     address ? `[Berascan](${berascanUrl(address, network)})` : "",
     linkFor(item, "abi", network) ? `[${abiLabel}](${linkFor(item, "abi", network)})` : "",
     linkFor(item, "source", network) ? `[Source](${linkFor(item, "source", network)})` : "",
-    linkFor(item, "reference", network) ? `[Reference](${linkFor(item, "reference", network)})` : ""
+    linkFor(item, "reference", network)
+      ? `[Reference](${linkFor(item, "reference", network)})`
+      : "",
   ].filter(Boolean);
 
   return links.length ? links.join(" · ") : missingValue;
@@ -136,7 +145,7 @@ function networkRow(item, network, options = {}) {
     includeResources = false,
     combineNameAddress = false,
     boldName = false,
-    abiLabel = "ABI"
+    abiLabel = "ABI",
   } = options;
   const columns = combineNameAddress
     ? [contractCell(item, network, boldName)]
@@ -185,9 +194,9 @@ function renderGettingStartedSnippet() {
     renderAddressCategory("Governance", governanceItems, "berachainMainnet", linkedColumns),
     renderAddressCategory("Staking pools", stakingPoolItems, "berachainMainnet", {
       ...linkedColumns,
-      abiLabel: "ABI JSON"
+      abiLabel: "ABI JSON",
     }),
-    renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns)
+    renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns),
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -197,15 +206,18 @@ function renderGettingStartedSnippet() {
     renderAddressCategory("Governance", governanceItems, "berachainBepolia", linkedColumns),
     renderAddressCategory("Staking pools", stakingPoolItems, "berachainBepolia", {
       ...linkedColumns,
-      abiLabel: "ABI JSON"
+      abiLabel: "ABI JSON",
     }),
-    renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns)
+    renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns),
   ]
     .filter(Boolean)
     .join("\n\n");
 
   const nftRows = Object.values(contracts.nfts)
-    .map((item) => `| ${item.name} | \`${item.address.ethereumMainnet}\` | \`${item.address.berachainMainnet}\` |`)
+    .map(
+      (item) =>
+        `| ${item.name} | \`${item.address.ethereumMainnet}\` | \`${item.address.berachainMainnet}\` |`
+    )
     .join("\n");
 
   const nftSection = `### NFT contracts
@@ -213,7 +225,7 @@ function renderGettingStartedSnippet() {
 Berachain NFT contract addresses on both Ethereum (via LayerZero adapters) and Berachain mainnet.
 
 | Collection | Ethereum Adapter | Berachain Address |
-|------------|------------------|-------------------|
+| --- | --- | --- |
 ${nftRows}`;
 
   return `## Mainnet contracts
@@ -264,7 +276,8 @@ function renderBendContractsSnippet() {
     const vaults = renderAbiCategory("Vaults", vaultItems, network, true);
     if (vaults) {
       parts.push(`<Note>
-More vaults may be deployed, please check [https://bend.berachain.com/lend](https://bend.berachain.com/lend) for the latest deployed vaults.
+  More vaults may be deployed, please check
+  [https://bend.berachain.com/lend](https://bend.berachain.com/lend) for the latest deployed vaults.
 </Note>
 
 ${vaults}`);
@@ -278,7 +291,7 @@ ${parts.join("\n\n")}`;
 
   return [
     renderBendNetworkSection("Mainnet contracts", "berachainMainnet"),
-    renderBendNetworkSection("Bepolia testnet contracts", "berachainBepolia")
+    renderBendNetworkSection("Bepolia testnet contracts", "berachainBepolia"),
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -327,18 +340,30 @@ description: "Berachain core and staking-pool contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
+import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 For **BEX** (DEX) addresses, see [BEX deployed contracts](/build/bex/deployed-contracts). For **Bend** (lending) addresses, see [Bend deployed contracts](/build/bend/deployed-contracts).
 
 All contracts are verified at the [block explorer](https://berascan.com).
-* ABI files: [berachain/abis](https://github.com/berachain/abis).
-* Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
+
+- ABI files: [berachain/abis](https://github.com/berachain/abis).
+- Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
+- Staking pools: [berachain/contracts-staking-pools](https://github.com/berachain/contracts-staking-pools).
 
 <Info>
-All audit reports are publicly available on [Github](https://github.com/berachain/security-audits).
+  All audit reports are publicly available on
+  [Github](https://github.com/berachain/security-audits). To report a security issue, use the
+  [Berachain bug bounty program on
+  Immunefi](https://immunefi.com/bug-bounty/berachain/information/).
 </Info>
 
 <CoreContractsTable />
+
+## Staking pool contracts
+
+Singleton addresses are listed below. See the [Staking pools overview](/nodes/staking-pools/overview) and [staking pool contracts](/nodes/staking-pools/contracts) reference.
+
+<StakingPoolSingletonsTable />
 `;
 }
 
@@ -358,6 +383,7 @@ On January 21st, 2025, Balancer disclosed a long-standing vulnerability in their
 Future plans include integrating the Balancer V3 codebase, which mitigates this vulnerability and is cross-compatible with current BEX pools.
 
 For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/balancer-v2-token-frontrun-vulnerability-disclosure/6309).
+
 </Warning>
 
 The following is a list of contract addresses for interacting with Berachain BEX.
@@ -413,7 +439,10 @@ import BendContractsTable from "/snippets/contracts/generated/bend-contracts-tab
 Addresses for reading from or writing to Bend contracts.
 
 <Note>
-Deployed contracts have been audited by multiple parties. Reports are on [GitHub](https://github.com/berachain/security-audits).
+  Deployed contracts have been audited by multiple parties. Reports are on
+  [GitHub](https://github.com/berachain/security-audits). To report a security issue, use the
+  [Berachain bug bounty program on
+  Immunefi](https://immunefi.com/bug-bounty/berachain/information/).
 </Note>
 
 <BendContractsTable />
