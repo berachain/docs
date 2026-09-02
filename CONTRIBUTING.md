@@ -108,17 +108,11 @@ To move or rename a page, update the file path, every reference in `docs.json`, 
 - Describe shipped behavior as it exists now. Do not present planned behavior as current. Put product intent in an explicitly labeled roadmap or proposal, not normative instructions. Time-ordered deltas belong in changelog pages when the repo has them.
 - Read the owning implementation from [SOURCE_MAP.md](SOURCE_MAP.md) before stating behavior. Confirm every named function, event, error, role, and constant with `rg`.
 - Use one content type per page. Follow [STRUCTURE.md](STRUCTURE.md) for placement.
-- Write the effect on the reader before implementation detail. State values as values rather than Solidity constant names.
+- State values as values rather than Solidity constant names.
 - Separate confirmed behavior from product intent and inference. Do not present an inference as shipped behavior.
-- Use active voice, present tense, and `you` for the reader. Use imperative steps. Put a condition before the action it controls.
-- Keep one instruction per sentence. Use one term for one thing throughout a procedure.
-- Cut filler (`very`, `just`, `really`, `simply`) and marketing claims (`easy`, `simple`, `quick`). Replace vague claims with a measured fact or remove them.
-- Avoid machine-written transitions that recap the previous paragraph, rhetorical questions, personified software, and generic framing that could appear on any page.
-- Use sentence case for headings. Open pages and major sections with a direct summary. Keep paragraphs focused on one idea.
 - Use US English spelling in prose (`color`, `behavior`, `favor`, `labeled`).
 - Use Mintlify/MDX components where appropriate, e.g. `<Card>`, `<Steps>`, `<Note>`, `<Tip>`, `<Warning>`.
 - Use fenced code blocks with a language tag where you show code.
-- Use descriptive link text, not bare URLs or “here.”
 - Prefer colons, commas, and periods over em dashes in new prose. Do not create punctuation-only cleanup diffs across unrelated pages.
 - Use [UBIQUITOUS_LANGUAGE.md](UBIQUITOUS_LANGUAGE.md) for project terms. Add real project terms to `vale/config/vocabularies/Berachain/accept.txt` instead of rephrasing around the linter.
 - Validate your changes locally (see [README.md](README.md) for commands).
