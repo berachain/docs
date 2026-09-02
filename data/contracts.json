@@ -189,16 +189,16 @@
     "honey": {
       "name": "BUSD",
       "abi": {
-        "berachainMainnet": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/Honey.json",
-        "berachainBepolia": "https://github.com/berachain/abis/blob/main/bepolia/contracts/honey/Honey.json"
+        "berachainMainnet": "https://github.com/berachain/abis/blob/main/mainnet/contracts/busd/BUSD.json",
+        "berachainBepolia": "https://github.com/berachain/abis/blob/main/bepolia/contracts/BUSD/BUSD.json"
       },
       "address": {
         "berachainMainnet": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
         "berachainBepolia": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce"
       },
       "source": {
-        "berachainMainnet": "https://github.com/berachain/contracts/blob/main/src/honey/Honey.sol",
-        "berachainBepolia": "https://github.com/berachain/contracts/blob/bepolia/src/honey/Honey.sol"
+        "berachainMainnet": "https://github.com/berachain/contracts/blob/main/src/busd/BUSD.sol",
+        "berachainBepolia": "https://github.com/berachain/contracts/blob/bepolia/src/BUSD/BUSD.sol"
       }
     },
     "wberaStakerVault": {
