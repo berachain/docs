@@ -1,25 +1,43 @@
 #!/usr/bin/env node
 
-import fs from "node:fs";
-import path from "node:path";
 import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
+function resolvePrettierPackage() {
+  try {
+    return createRequire(import.meta.url).resolve("prettier");
+  } catch {
+    // This repo has no package.json; prettier is on PATH for `make format`.
+  }
+
+  let cli;
+  try {
+    cli = execFileSync("which", ["prettier"], { encoding: "utf8" }).trim();
+  } catch {
+    throw new Error("prettier is not on PATH; install it the same way `make format` expects");
+  }
+
+  return createRequire(pathToFileURL(fs.realpathSync(cli))).resolve("prettier");
+}
+
+const prettier = (await import(pathToFileURL(resolvePrettierPackage()).href)).default;
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const contracts = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/contracts.json"), "utf8"));
 const generatedSnippetDir = "snippets/contracts/generated";
 const checkMode = process.argv.includes("--check");
-const missingValue = "Not deployed";
+const missingValue = "🤓";
 let changedCount = 0;
 let wroteCount = 0;
 let unchangedCount = 0;
 
-function write(relPath, content) {
+async function write(relPath, content) {
   const abs = path.join(repoRoot, relPath);
-  const next = execFileSync("prettier", ["--stdin-filepath", relPath], {
-    cwd: repoRoot,
-    encoding: "utf8",
-    input: `${content.trimEnd()}\n`,
-  });
+  const config = await prettier.resolveConfig(abs);
+  const next = await prettier.format(content, { ...(config ?? {}), filepath: abs });
   const prev = fs.existsSync(abs) ? fs.readFileSync(abs, "utf8") : null;
   if (prev === next) {
     unchangedCount += 1;
@@ -43,8 +61,7 @@ function write(relPath, content) {
 
 function berascanLink(address, network) {
   if (!address) return missingValue;
-  const host =
-    network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
+  const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
   return `[\`${address}\`](${host}/address/${address})`;
 }
 
@@ -72,7 +89,7 @@ function resourcesCell(item, network, abiLabel = "ABI") {
   const resources = [
     ["abi", abiLabel],
     ["source", "Source"],
-    ["reference", "Reference"],
+    ["reference", "Reference"]
   ]
     .map(([key, label]) => {
       const href = linkFor(item, key, network);
@@ -85,8 +102,7 @@ function resourcesCell(item, network, abiLabel = "ABI") {
 
 function berascanUrl(address, network) {
   if (!address) return "";
-  const host =
-    network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
+  const host = network === "berachainBepolia" ? "https://testnet.berascan.com" : "https://berascan.com";
   return `${host}/address/${address}`;
 }
 
@@ -96,9 +112,7 @@ function resourceLinks(item, network, abiLabel = "ABI") {
     address ? `[Berascan](${berascanUrl(address, network)})` : "",
     linkFor(item, "abi", network) ? `[${abiLabel}](${linkFor(item, "abi", network)})` : "",
     linkFor(item, "source", network) ? `[Source](${linkFor(item, "source", network)})` : "",
-    linkFor(item, "reference", network)
-      ? `[Reference](${linkFor(item, "reference", network)})`
-      : "",
+    linkFor(item, "reference", network) ? `[Reference](${linkFor(item, "reference", network)})` : ""
   ].filter(Boolean);
 
   return links.length ? links.join(" · ") : missingValue;
@@ -145,7 +159,7 @@ function networkRow(item, network, options = {}) {
     includeResources = false,
     combineNameAddress = false,
     boldName = false,
-    abiLabel = "ABI",
+    abiLabel = "ABI"
   } = options;
   const columns = combineNameAddress
     ? [contractCell(item, network, boldName)]
@@ -194,9 +208,9 @@ function renderGettingStartedSnippet() {
     renderAddressCategory("Governance", governanceItems, "berachainMainnet", linkedColumns),
     renderAddressCategory("Staking pools", stakingPoolItems, "berachainMainnet", {
       ...linkedColumns,
-      abiLabel: "ABI JSON",
+      abiLabel: "ABI JSON"
     }),
-    renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns),
+    renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns)
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -206,18 +220,15 @@ function renderGettingStartedSnippet() {
     renderAddressCategory("Governance", governanceItems, "berachainBepolia", linkedColumns),
     renderAddressCategory("Staking pools", stakingPoolItems, "berachainBepolia", {
       ...linkedColumns,
-      abiLabel: "ABI JSON",
+      abiLabel: "ABI JSON"
     }),
-    renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns),
+    renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns)
   ]
     .filter(Boolean)
     .join("\n\n");
 
   const nftRows = Object.values(contracts.nfts)
-    .map(
-      (item) =>
-        `| ${item.name} | \`${item.address.ethereumMainnet}\` | \`${item.address.berachainMainnet}\` |`
-    )
+    .map((item) => `| ${item.name} | \`${item.address.ethereumMainnet}\` | \`${item.address.berachainMainnet}\` |`)
     .join("\n");
 
   const nftSection = `### NFT contracts
@@ -291,7 +302,7 @@ ${parts.join("\n\n")}`;
 
   return [
     renderBendNetworkSection("Mainnet contracts", "berachainMainnet"),
-    renderBendNetworkSection("Bepolia testnet contracts", "berachainBepolia"),
+    renderBendNetworkSection("Bepolia testnet contracts", "berachainBepolia")
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -469,28 +480,35 @@ To find a market ID, open [bend.berachain.com/borrow](https://bend.berachain.com
 `;
 }
 
-write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSnippet());
-write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
-write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
-write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
-write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippet());
+async function generate() {
+  await write(`${generatedSnippetDir}/core-contracts-table.mdx`, renderGettingStartedSnippet());
+  await write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
+  await write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
+  await write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
+  await write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippet());
 
-write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
-write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
-write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
-write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
-write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
+  await write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
+  await write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
+  await write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
+  await write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
+  await write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
 
-if (!checkMode) {
-  console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);
+  if (!checkMode) {
+    console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);
+  }
+
+  if (checkMode) {
+    if (changedCount > 0) {
+      console.error(
+        `Generated contract docs are stale (${changedCount} file(s) would change). Run node scripts/contracts/generate-pages.mjs and commit the outputs.`
+      );
+      process.exit(1);
+    }
+    console.log(`Generated contract docs are up to date (${unchangedCount} file(s) unchanged).`);
+  }
 }
 
-if (checkMode) {
-  if (changedCount > 0) {
-    console.error(
-      `Generated contract docs are stale (${changedCount} file(s) would change). Run node scripts/contracts/generate-pages.mjs and commit the outputs.`
-    );
-    process.exit(1);
-  }
-  console.log(`Generated contract docs are up to date (${unchangedCount} file(s) unchanged).`);
+const thisFile = fileURLToPath(import.meta.url);
+if (process.argv[1] && path.resolve(process.argv[1]) === thisFile) {
+  await generate();
 }
