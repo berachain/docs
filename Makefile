@@ -76,7 +76,6 @@ format-check:
 
 contracts-generate:
 	node scripts/contracts/generate-pages.mjs
-	make format
 
 POL_ADDRESSES_SOL := ../contracts-internal/script/pol/POLAddresses.sol
 
