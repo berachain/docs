@@ -10,7 +10,7 @@ Read these files before changing documentation:
 
 Do not use a neighboring page as the source of a behavior claim. Read the owning implementation from `SOURCE_MAP.md`.
 
-Before handing off a change, start `make dev` and run the full `make check` gate from `CONTRIBUTING.md`. Treat a POL warning as unverified, not as proof that addresses match.
+Before handing off a change, start `make dev` and run the full `make check` gate from `CONTRIBUTING.md`.
 
 ## No emoji
 
