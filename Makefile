@@ -82,7 +82,7 @@ POL_ADDRESSES_SOL ?= $(PRIMARY_CHECKOUT)/../contracts-internal/script/pol/POLAdd
 
 check-pol-addresses:
 	@if [ ! -f "$(POL_ADDRESSES_SOL)" ]; then \
-		echo "ERROR: POL addresses not checked: $(POL_ADDRESSES_SOL) is missing. Clone berachain/contracts-internal as a sibling." >&2; \
+		echo "WARNING: POL addresses not checked: $(POL_ADDRESSES_SOL) is missing. Clone berachain/contracts-internal as a sibling." >&2; \
 		exit 1; \
 	fi; \
 	line="$$(node scripts/contracts/verify-pol-addresses.mjs --summary --pol-path "$(POL_ADDRESSES_SOL)")"; status=$$?; \
