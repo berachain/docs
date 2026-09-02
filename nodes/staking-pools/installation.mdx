@@ -1,176 +1,79 @@
 ---
 title: "Staking Pool Installation"
-description: "Install and activate a staking pool with one command."
+description: "Install and activate a staking pool from a remote machine with cast."
 ---
 
-Berachain provides staking pool installation scripts to assist with deploying your staking pool.
+Berachain provides **`install.sh`** in `guides/apps/staking-pools/installer/` to walk through staking pool deployment from a **remote machine** (your laptop or a bastion). The script does not run on the validator.
 
-There are important pre-requisites before you can attempt this:
-1. A fully synced Berachain node, with your validator identity (`priv_validator_key.json`) backed up. 
-2. A funding wallet, in the form of an EOA private key or a Ledger, with at least 10,000 BERA (plus a bit for gas). 
+## Prerequisites
 
-The installation tools support three deployment plans:
-- **Plan A: On the validator, funding wallet key provided.** This is the "press enter and wait" scenario. The installation tools will take care of everything.
-- **Plan B: On the validator, funding wallet in a Ledger.** The tools will figure out transactions you need to send (with Foundry's `cast`) from your local machine the Ledger is attached to.
-- **Plan C: Fully remote.** The tools will direct you to execute certain commands on the validator, then provide `cast` commands to be run locally, whether with a Ledger or the funding wallet's private key.
+1. A synced Berachain validator (your `priv_validator_key.json` backed up).
+2. **Self-funded:** a funding wallet with at least **10,000 BERA** for the deposit, plus gas.
+3. **Delegated:** the delegator has already formed the `DelegationHandler` and delegated capital (see [Delegation guide](/nodes/staking-pools/delegators)). You need gas only for activation txs.
+4. On the machine where you run the script: **bash**, [Foundry](https://book.getfoundry.sh/) (`cast`), `jq`, and `curl`.
+5. Reachable **EL JSON-RPC** and **Beacon Kit Node API** endpoints (Node API must be [enabled](https://docs.berachain.com/nodes/beaconkit/configuration#node-api-beacon-kit-node-api); it does not have to run on the validator host).
 
-If your funding wallet has enough to to activate the validator on the chain (250,000 BERA) the tools will offer to complete the activation; otherwise you have to attract enough stake to pass the activation threshold and begin producing blocks.
-
-The CLI also provides basic helpers to stake and unstake, though these are best done with the staking pool frontend (see [After install](#after-install)).
-
-The tools write two files in the working directory as they run. See [Generated files](#generated-files) for what each contains and how later commands use them.
-
-Re-run `install` to resume after a partial failure; keep the scenario and receipts files in place.
-
-## Get the CLI and configure the environment
+## Get the script
 
 ```bash
 git clone https://github.com/berachain/guides/
-cd guides/apps/staking-pools/install-helpers
+cd guides/apps/staking-pools/installer
 ```
 
-* Node.js 22+ required
-* `beacond` should be on your $PATH on every machine
-* `cast` should be on your $PATH where you plan to transact from
-* `EL_RPC_URL` should be the URL for the execution layer. Use `https://bepolia.rpc.berachain.com` or `https://rpc.berachain.com`, depending where you're activating your pool.
-* `CL_NODE_API_URL` should be a URL to a Beacon Kit Node API. Node API is disabled by default in Beacon-Kit and [must be enabled](https://docs.berachain.com/nodes/beaconkit/configuration#node-api-beacon-kit-node-api) for `install` and `status`. This *does not need to be* served by your validator. You can disable it after the pool is activated.
-* `PRIVATE_KEY` should be present on the system sending casts; if absent, the tools will assume you intend to use a Ledger.
-
-For **Plan A** or **Plan B**, set `BEACOND_HOME` to the Beacon-Kit data directory on your validator. For **Plan C**, leave it unset and run the CLI on a machine that can reach your EL and Node API endpoints.
-
-## Run it
-
-**Plan A** (hot key on the validator):
+## Configure the environment
 
 ```bash
-$ export BEACOND_HOME="/path/to/beacond/data"
-$ export EL_RPC_URL=http://bepolia.rpc.berachain.com/
-$ export CL_NODE_API_URL=http://127.0.0.1:3500
-$ export PRIVATE_KEY=0x...
-$ node pool-cli.mjs install
-Network:            bepolia
-Validator pubkey:   0xab8c...e140
-Predicted pool:      0x91ed...5dd5
-Deposit:             10,000 BERA
-Additional stake:    240,000 BERA   (funding wallet holds enough)
-Operator address [0x1968...74e9]: 
-Shares recipient [0x1968...74e9]: 
-Operator:            0x1968...74e9
-Shares recipient:    0x1968...74e9
-
-Proceed? [y/N] y
-Stake amount in whole BERA [240000]: 
-Stake target: 240,000 BERA.
-Deployed. Predicted pool: 0x91edb...
-Waiting for validator registration...
-Registered (index 37).
-Waiting for activation proofs...
-Activated.
-Staked 240,000 BERA.
-Done.
+export EL_RPC_URL=https://bepolia.rpc.berachain.com
+export CL_NODE_API_URL=http://127.0.0.1:3500
 ```
 
-**Plan B** (Ledger on another machine): same exports on the validator host, but leave `PRIVATE_KEY` unset. The CLI prints each `cast send` for you to run where the Ledger is attached.
+| Variable | Purpose |
+| --- | --- |
+| `EL_RPC_URL` | Execution-layer JSON-RPC. Network (`mainnet` / `bepolia`) is read from `eth_chainId` on this URL. |
+| `CL_NODE_API_URL` | Beacon Kit Node API base URL (`http://host:port`). |
+| `PRIVATE_KEY` | Optional. When set, the script can run `cast send` for you after confirmation. When unset, run each printed command on your Ledger machine and paste the transaction hash back. |
 
-**Plan C** (remote tool host): omit `BEACOND_HOME` and `PRIVATE_KEY`. The CLI asks for a deposit signature when it needs one; run `beacond deposit create-validator` on the validator and paste the output.
+## Run
 
-Network (`mainnet` or `bepolia`) comes from `eth_chainId` on the EL endpoint you give in `EL_RPC_URL`. You do not set the network separately.
+```bash
+./install.sh
+```
 
 <Steps>
-  <Step title="One confirmation">
-    The CLI reads your pubkey, the chain from your EL RPC, and your funding balance. It then asks you to accept or override the operator and shares-recipient addresses (defaults match the funding wallet on Plan A, or the funding address you typed on Plan B/C). After that it shows the plan once. If the wallet can stake past the activation threshold, the additional-stake suggestion is rounded down to the nearest 1,000 BERA. Type a different whole-BERA amount at the prompt to override it.
-
-    ```
-    Network:            bepolia
-    Deposit:             10,000 BERA
-    Additional stake:    240,000 BERA   (funding wallet holds enough)
-    Proceed? [y/N]
-    ```
-
-    Not enough for the 10,000 BERA deposit → it stops here, nothing deployed. Under **Plan A**, this is the only confirmation.
+  <Step title="Preflight">
+    The script verifies `cast`, `jq`, and `curl`, then checks that `EL_RPC_URL` and `CL_NODE_API_URL` respond.
   </Step>
 
-  <Step title="Deploy, wait, activate, stake">
-    Deploys the pool, waits for beacon-chain registration, activates, and stakes if funded. **Plan A** broadcasts itself. **Plan B** and **Plan C** print each `cast send` and wait for it to land on chain. Re-run `install` to resume after a partial failure.
+  <Step title="Pubkey and path">
+    Enter your validator pubkey. If a `DelegationHandler` exists for that pubkey with delegated funds and no pool yet, the script enters **delegated landing** mode (skips operator/shares prompts). Otherwise it warns that you are on the **self-funded** path (10,000 BERA from your wallet) and prompts for funding wallet, operator, and shares recipient.
+  </Step>
+
+  <Step title="Deposit signature">
+    On the validator, run `beacond deposit create-validator` (the script fills withdrawal vault, amount, and genesis root for your network). Run `beacond deposit validate` with the four output fields — it must exit 0 with no output. Paste the full `create-validator` output back. The script checks all four fields, pubkey match, amount (10,000 BERA), and runs `deposit validate` locally when `BEACOND_HOME` and `beacond` are on this host.
+  </Step>
+
+  <Step title="Create, wait, activate">
+    **Self-funded:** prints `deployStakingPoolContracts` on the factory (10,000 BERA). **Delegated:** prints `createStakingPoolWithDelegatedFunds` on the handler. Then waits for beacon registration, fetches activation proofs, and prints `activateStakingPool`.
+  </Step>
+
+  <Step title="Delegated deposit (optional)">
+    Delegated mode only: after activation, optionally deposit remaining delegated BERA via `depositDelegatedFunds` on the handler (for example 240,000 BERA to reach 250,000 BERA effective balance).
   </Step>
 </Steps>
 
-## Output
+Run `./install.sh` once per pool. It does not resume or skip completed steps.
 
-```
-Deployed. Predicted pool: 0x6dE5...0755
-Waiting for validator registration...
-Registered (index 36).
-Activated.
-Staked 240,000 BERA.
-Done.
-Receipts: ./staking-pool-receipts.jsonl
-Scenario: ./staking-pool-scenario.json
-```
+On success, the script prints the staking pool address. Confirmed transactions append to `staking-pool-receipts.jsonl` (JSON lines with `timestamp`, `action`, `hash`, and optional `amount` / `pool`). Actions include `deploy`, `delegated-create`, `activate`, and `delegated-deposit`.
 
-That is the default output for a full run. Pass `--verbose` for transaction hashes and RPC detail when debugging.
-
-## Generated files
-
-Both files land in the directory where you run `pool-cli.mjs` (typically `install-helpers/`). Back them up with your validator keys.
-
-### `staking-pool-scenario.json`
-
-Written at the start of `install`, before any on-chain step. Later commands read it so you do not re-enter network, pubkey, or pool identity.
-
-| Field | Meaning |
-| --- | --- |
-| `network` | `mainnet` or `bepolia` |
-| `locality` | `local` (validator host) or `remote` (Plan C tool host) |
-| `pubkey` | Your validator pubkey |
-| `operator` | EL operator address recorded for the pool |
-| `sharesRecipient` | Address that receives stBERA from staking |
-| `fundingAddress` | Wallet that paid the deposit and stake |
-
-`status`, `stake`, and `unstake` use this file. If it is missing, `status` refuses and tells you to run `install` first.
-
-Example:
-
-```json
-{
-  "network": "bepolia",
-  "locality": "local",
-  "pubkey": "0xab8c...e140",
-  "operator": "0x1968...74e9",
-  "sharesRecipient": "0x1968...74e9",
-  "fundingAddress": "0x1968...74e9"
-}
-```
-
-### `staking-pool-receipts.jsonl`
-
-Append-only log of **confirmed** transactions — one JSON object per line, written only after a transaction lands on chain (or after you broadcast a printed `cast send` in Plan B/C). Nothing is logged at print time.
-
-Typical `action` values from a full install:
-
-| `action` | When |
-| --- | --- |
-| `deploy` | Pool contracts deployed and 10,000 BERA deposit sent |
-| `activate` | Pool activated on chain |
-| `stake` | Additional BERA staked into the pool |
-
-Each line includes a `timestamp`, transaction `hash`, `amount` (BERA where relevant), and an `addresses` object (pool, factory, operator, and similar). Example deploy line:
-
-```json
-{"timestamp":"2026-09-01T18:59:03.186Z","action":"deploy","hash":"0x070a92b1...","addresses":{"pool":"0x91ed...5dd5","operator":"0x1968...74e9","factory":"0x24b8...1D4C"},"amount":"10000"}
-```
-
-On success, `install` prints the receipts path after `Done.` if at least one receipt was written. The file is an audit trail for your records.
-
-## After install
-
-The CLI has four commands: `install`, `status`, `stake`, and `unstake`. Only `--verbose` and `--help` are accepted as flags. `status` is read-only; run `install` first if there is no scenario file yet. Day-to-day staking is easier through the staking pool frontend; use `stake` and `unstake` when you need the CLI.
+Post-install ops on the validator use scripts in `install-helpers/` with your own `env.sh` (see `env.sh.template`).
 
 ## Delegated pools
 
-A Foundation-delegated pool follows the same shape against the `DelegationHandler` instead of your own wallet. See the [Delegation guide](/nodes/staking-pools/delegators) and the [install-helpers README](https://github.com/berachain/guides/blob/guides/staking-pool-operator-cli/apps/staking-pools/install-helpers/README.md) for delegated command names.
+**Forming** the handler (deploy, fund, delegate, grant role) is only [`delegator-delegate.sh`](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/delegator-delegate.sh). See the [Delegation guide](/nodes/staking-pools/delegators).
+
+**Landing** the pool (create with delegated funds, activate, deposit remainder) uses this same `./install.sh` when a handler is detected.
 
 ## What's next
 
-- [Contract reference](/nodes/staking-pools/contracts) describes the contracts you deployed.
-- [Delegation guide](/nodes/staking-pools/delegators) describes a Foundation delegation.
+- [Contract reference](/nodes/staking-pools/contracts)
+- [Operator guide](/nodes/staking-pools/operators)
