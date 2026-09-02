@@ -1,100 +1,72 @@
 ---
-title: "Staking Pool Installation"
-description: "Install and activate a staking pool from a remote machine with cast."
+title: "Install a staking pool"
+description: "Deploy and activate a staking pool from a remote machine with install.sh."
 ---
 
-Berachain provides **`install.sh`** in `guides/apps/staking-pools/install-helpers/` to walk through staking pool deployment from a **remote machine** (your laptop or a bastion). The script does not run on the validator.
+`install.sh` deploys and activates one staking pool from `guides/apps/staking-pools/install-helpers/`. Set the environment, run the script once, and read back the pool address and a receipt. The script uses Foundation-delegated funds when a DelegationHandler already exists for your validator. Otherwise it spends **10,000 BERA** plus gas from your funding wallet.
 
-## Prerequisites
+## What you need before you run install.sh
 
-1. A synced Berachain validator (your `priv_validator_key.json` backed up).
-2. **Self-funded:** a funding wallet with at least **10,000 BERA** for the deposit, plus gas.
-3. **Delegated:** the delegator has already formed the `DelegationHandler` and delegated capital (see [Delegation guide](/nodes/staking-pools/delegators)). You need gas only for activation txs.
-4. On the machine where you run the script: **bash**, [Foundry](https://book.getfoundry.sh/) (`cast`), `jq`, and `curl`.
-5. Reachable **EL JSON-RPC** and **Beacon Kit Node API** endpoints (Node API must be [enabled](https://docs.berachain.com/nodes/beaconkit/configuration#node-api-beacon-kit-node-api); it does not have to run on the validator host).
+You need a synced validator, the helper tools, and live endpoints:
 
-## Get the script
+- A synced Berachain validator
+- `bash`, [Foundry](https://book.getfoundry.sh/) (`cast`), `jq`, and `curl`
+- Reachable execution-layer JSON-RPC and consensus-layer Node API endpoints. [Enable the Node API](https://docs.berachain.com/nodes/beaconkit/configuration#node-api-beacon-kit-node-api). The Node API can run on any node; it doesn't have to be on the validator.
+
+
+You also need one funding path:
+
+- Self-funded: at least **10,000 BERA** plus gas in the funding wallet
+- Delegated: a DelegationHandler already formed and funded, plus gas (for example, 0.1 BERA) for activation
+
+A DelegationHandler is the Foundation contract that holds delegated capital for your validator. The Berachain Foundation creates it when they issue a delegation.
+
+## Clone install-helpers
+
+Clone the guides repo and enter the helper directory:
 
 ```bash
 git clone https://github.com/berachain/guides/
 cd guides/apps/staking-pools/install-helpers
 ```
 
-## Configure the environment
+## Set environment variables
 
-Copy the template and edit, or export variables directly:
+Copy `env.sh.template` to `env.sh` in that directory, then edit the copy. `install.sh` sources `env.sh` when the file is present.
 
 ```bash
 cp env.sh.template env.sh
-# edit env.sh — EL_RPC_URL, CL_NODE_API_URL, optional PRIVATE_KEY
 ```
 
-| Variable | Purpose |
-| --- | --- |
-| `EL_RPC_URL` | Execution-layer JSON-RPC. Network (`mainnet` / `bepolia`) is read from `eth_chainId` on this URL. |
-| `CL_NODE_API_URL` | Beacon Kit Node API base URL (`http://host:port`). `install.sh` only. |
-| `PRIVATE_KEY` | Optional. When set, scripts can run `cast send` for you after confirmation. When unset, run each printed command on your Ledger machine and paste the transaction hash back. |
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `EL_RPC_URL` | Yes | Execution-layer JSON-RPC. Network (`mainnet` or `bepolia`) is read from `eth_chainId` on this URL. |
+| `CL_NODE_API_URL` | Yes | Beacon Kit Node API base URL. |
+| `PRIVATE_KEY` | No | Signs `cast send` on this host when set. |
+| `VALIDATOR_PUBKEY` | No | Validator pubkey default. |
+| `FUNDING_ADDRESS` | No | Funding wallet on the self-funded path. Ignored when `PRIVATE_KEY` is set. |
+| `OPERATOR_ADDRESS` | No | Operator on the self-funded path. |
+| `SHARES_RECIPIENT` | No | Shares recipient on the self-funded path. |
 
-Optional defaults for `install.sh` (the script still asks; press Enter to accept the bracketed value):
+Use `./install.sh --help` for usage.
 
-| Variable | Purpose |
-| --- | --- |
-| `VALIDATOR_PUBKEY` | Validator pubkey |
-| `FUNDING_ADDRESS` | Funding wallet for self-funded deploy (cold signing; ignored when `PRIVATE_KEY` is set) |
-| `OPERATOR_ADDRESS` | Operator address on the self-funded path |
-| `SHARES_RECIPIENT` | Shares recipient on the self-funded path |
+## Run install.sh
 
-Optional defaults for `delegator-delegate.sh`:
-
-| Variable | Purpose |
-| --- | --- |
-| `VALIDATOR_PUBKEY` | Validator pubkey |
-| `DELEGATE_AMOUNT_BERA` | Whole BERA to delegate |
-| `VALIDATOR_ADMIN` | Operator address for `VALIDATOR_ADMIN_ROLE` |
-
-Both scripts source `env.sh` from this directory when present.
-
-## Run
+The script deploys and activates one pool and doesn't resume. Run it once per pool:
 
 ```bash
 ./install.sh
 ```
 
-<Steps>
-  <Step title="Preflight">
-    The script verifies `cast`, `jq`, and `curl`, then checks that `EL_RPC_URL` and `CL_NODE_API_URL` respond.
-  </Step>
+If a DelegationHandler with delegated funds exists for your pubkey, the script uses the delegated path. Otherwise it uses the self-funded path.
 
-  <Step title="Pubkey and path">
-    Enter your validator pubkey (or press Enter when `VALIDATOR_PUBKEY` is set in `env.sh`). If a `DelegationHandler` exists for that pubkey with delegated funds and no pool yet, the script enters **delegated landing** mode (skips operator/shares prompts). Otherwise it warns that you are on the **self-funded** path (10,000 BERA from your wallet) and prompts for funding wallet, operator, and shares recipient — each with an optional env default (`FUNDING_ADDRESS`, `OPERATOR_ADDRESS`, `SHARES_RECIPIENT`).
-  </Step>
+On success, the script prints the staking pool address. Confirmed transactions append to `staking-pool-receipts.jsonl`.
 
-  <Step title="Deposit signature">
-    On the validator, run `beacond deposit create-validator` (the script fills withdrawal vault, amount, and genesis root for your network). Run `beacond deposit validate` with the four output fields on the validator — it must exit 0 with no output. Paste the full `create-validator` output back. The script checks all four fields, pubkey match, and amount (10,000 BERA).
-  </Step>
-
-  <Step title="Create, wait, activate">
-    **Self-funded:** prints `deployStakingPoolContracts` on the factory (10,000 BERA). **Delegated:** prints `createStakingPoolWithDelegatedFunds` on the handler. Then waits for beacon registration, fetches activation proofs, and prints `activateStakingPool`.
-  </Step>
-
-  <Step title="Delegated deposit (optional)">
-    Delegated mode only: after activation, optionally deposit remaining delegated BERA via `depositDelegatedFunds` on the handler (for example 240,000 BERA to reach 250,000 BERA effective balance).
-  </Step>
-</Steps>
-
-Run `./install.sh` once per pool. It does not resume or skip completed steps.
-
-On success, the script prints the staking pool address. Confirmed transactions append to `staking-pool-receipts.jsonl` (JSON lines with `timestamp`, `action`, `hash`, and optional `amount` / `pool`). Actions include `deploy`, `delegated-create`, `activate`, and `delegated-deposit`.
-
-Post-install staker ops: use the [example frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) or `cast` against your pool contract.
-
-## Delegated pools
-
-**Forming** the handler (deploy, fund, delegate, grant role) is only [`delegator-delegate.sh`](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/delegator-delegate.sh). See the [Delegation guide](/nodes/staking-pools/delegators).
-
-**Landing** the pool (create with delegated funds, activate, deposit remainder) uses this same `./install.sh` when a handler is detected.
-
+Call the pool with `cast` for staker operations. The [Operator guide](/nodes/staking-pools/operators) covers day-two work. The [example frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) is a sample UI for end users.
 ## What's next
+
+Continue with:
 
 - [Contract reference](/nodes/staking-pools/contracts)
 - [Operator guide](/nodes/staking-pools/operators)
+- [Delegation guide](/nodes/staking-pools/delegators)
