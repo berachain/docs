@@ -1,29 +1,28 @@
 ---
-title: "Delegation Guide"
-description: "Use Foundation-delegated capital to run a staking pool: form the handler, then land the pool."
+title: "Run a pool with Foundation-delegated capital"
+description: "Form a DelegationHandler, then run install.sh so the pool activates on delegated funds."
 ---
 
-Delegated staking pools have two phases:
+A delegated staking pool has two phases. Form the handler first. Then run `install.sh` so the pool uses those funds.
 
-1. **Form** — `delegator-delegate.sh` deploys and funds the `DelegationHandler`, runs `delegate()`, and grants `VALIDATOR_ADMIN_ROLE`.
-2. **Land** — `install.sh` creates the pool with delegated funds, activates, and optionally deposits the remainder.
+A DelegationHandler is the Foundation contract that holds delegated capital for your validator.
 
-## 1. Form the handler
+## Form the handler
 
-From `guides/apps/staking-pools/install-helpers/` on a machine with RPC access (not the validator):
+Run this from `guides/apps/staking-pools/install-helpers/` on a machine with RPC access. It does not have to be the validator host:
 
 ```bash
 export EL_RPC_URL=https://bepolia.rpc.berachain.com
 ./delegator-delegate.sh
 ```
 
-The script prompts for pubkey, delegate amount, and validator-admin address. Set `VALIDATOR_PUBKEY`, `DELEGATE_AMOUNT_BERA`, and `VALIDATOR_ADMIN` in `env.sh` to pre-fill those prompts, or pass `--pubkey`, `--amount`, and `--validator-admin` to skip them.
+The script deploys and funds the DelegationHandler, runs `delegate()`, and grants `VALIDATOR_ADMIN_ROLE`. It prompts for pubkey, delegate amount, and validator-admin address. Set `VALIDATOR_PUBKEY`, `DELEGATE_AMOUNT_BERA`, and `VALIDATOR_ADMIN` in `env.sh` to pre-fill those prompts, or pass `--pubkey`, `--amount`, and `--validator-admin` to skip them.
 
-The script prints each `cast send` (or runs it when `PRIVATE_KEY` is set). Steps 3–4 (`delegate`, `grantRole`) require `DEFAULT_ADMIN_ROLE` on the handler — often the Foundation Safe.
+The script prints each `cast send` (or runs it when `PRIVATE_KEY` is set). `delegate` and `grantRole` need `DEFAULT_ADMIN_ROLE` on the handler, often the Foundation Safe.
 
-## 2. Land the pool (operator)
+## Install the pool after the handler exists
 
-From `guides/apps/staking-pools/install-helpers/` (same directory as `delegator-delegate.sh`):
+Use the same `install-helpers/` directory. `install.sh` needs the Node API as well as execution-layer RPC:
 
 ```bash
 export EL_RPC_URL=https://bepolia.rpc.berachain.com
@@ -31,10 +30,12 @@ export CL_NODE_API_URL=http://127.0.0.1:3500
 ./install.sh
 ```
 
-When a formed handler with delegated funds exists for your pubkey, `install.sh` lands the pool automatically. See [Installation](/nodes/staking-pools/installation).
+If a formed handler with delegated funds exists for your pubkey, `install.sh` uses the delegated path. See [Install a staking pool](/nodes/staking-pools/installation).
 
 ## What's next
 
-- [Installation](/nodes/staking-pools/installation)
-- [Contract reference](/nodes/staking-pools/contracts)
-- [Operator guide](/nodes/staking-pools/operators)
+Continue with:
+
+- [Install a staking pool](/nodes/staking-pools/installation)
+- [Look up staking pool contract addresses](/nodes/staking-pools/contracts)
+- [Operate a staking pool](/nodes/staking-pools/operators)

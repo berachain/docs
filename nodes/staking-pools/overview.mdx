@@ -1,84 +1,76 @@
 ---
-title: "Staking Pools Overview"
-description: "Validator-operated liquid staking: stBERA, contract architecture, security, staker experience, and PoL integration."
+title: "What staking pools do"
+description: "Validator-operated liquid staking: stBERA, contract layout, staker flow, and Proof of Liquidity."
 ---
 
-Staking Pools enable validators to offer liquid staking services to their communities. As a validator, you can build and monetize your own community of stakers, earning commission on rewards. Your stakers deposit BERA through smart contracts and receive liquid shares (stBERA) that automatically grow in value as rewards accumulate.
+A staking pool lets you offer liquid staking to your community. Stakers deposit BERA and receive stBERA shares that grow as rewards compound. You earn commission on those rewards.
 
-## What are staking pools?
+## How a pool is put together
 
-Staking Pools are validator-operated services that allow your community members to stake BERA through smart contracts, receiving liquid shares (stBERA) that represent their stake and automatically grow in value as rewards accumulate. Stakers can stake any amount without running their own validator.
+`StakingPoolContractsFactory` deploys the contracts for one validator. Each pool includes:
 
-As a validator, staking pools provide you with a way to build and monetize your own community of stakers, earning commission on rewards. Your stakers benefit from lower barriers to entry, automatic reward reinvestment, and flexible withdrawals.
+- **StakingPool**: deposits, share accounting, and the stBERA token. Stakers call this contract.
+- **SmartOperator**: validator operations and Proof of Liquidity.
+- **StakingRewardsVault**: consensus-layer rewards, compounded back into the pool.
 
-## Post-BGT Deprecation
+Shared across pools:
 
-The May 2026 Proof of Liquidity upgrade changes how staking pools earn and how stakers receive rewards. The contract surface and pool operations stay broadly the same.
+- **WithdrawalVault**: withdrawal requests for every pool
+- **AccountingOracle**: consensus-layer balances that feed `totalAssets`
 
-- **Reward emissions are paid in \$WBERA.** Validator emissions accrue as \$WBERA on the `SmartOperator`. Operator monitoring views and the automatic flows that compound this WBERA into pool assets and into withdrawal coverage are documented in the [Operator Guide](/nodes/staking-pools/operators#automatic-wbera-flows).
-- **Per-block emission is a flat fixed rate (no boost curve).** The pre-upgrade boost curve, which made BGT delegation a yield differentiator, is gone. Per-block emission no longer scales with delegation. Pools compete on **reward allocation strategy**, **attracted incentives**, and **commission rate** rather than boost.
-- **BGT is deprecated.** We recommend unboosting and burning the BGT held by your `SmartOperator`. The BGT-era entry points stay callable but become inert once chargeable BGT is exhausted; see [Deprecated BGT entry points](/nodes/staking-pools/operators#deprecated-bgt-entry-points).
-- **Withdrawals can be covered from operator-side WBERA.** The shared `WithdrawalVault` may pull from `availableWBERABalance()` on your `SmartOperator`, unwrap to native BERA, and apply that toward an outstanding request — fully, partially, or not at all when liquidity is insufficient. The standard consensus-layer withdrawal path remains for any uncovered remainder.
+`StakingPool` inherits stBERA share mint, burn, and asset conversion.
 
-For broader PoL changes, see [What's New](/general/proof-of-liquidity/changelog).
+## What changed after BGT deprecation
 
-## How it works
+The May 2026 Proof of Liquidity upgrade changed how pools earn. The contract surface stays largely the same.
 
-When you create a staking pool, the system deploys several interconnected contracts. Your pool includes a StakingPool contract that manages deposits and shares, a SmartOperator that handles validator operations and Proof of Liquidity integration, and a StakingRewardsVault that collects and reinvests rewards. Shared infrastructure includes a WithdrawalVault that processes withdrawal requests for all pools and an Accounting Oracle that provides consensus layer data updates.
+- **Reward emissions are paid in $WBERA.** Validator emissions accrue as $WBERA on `SmartOperator`. See [Automatic WBERA flows](/nodes/staking-pools/operators#automatic-wbera-flows).
+- **Per-block emission is a flat rate.** It no longer scales with BGT delegation. Pools compete on reward allocation, attracted incentives, and commission.
+- **BGT is deprecated.** Unboost and burn BGT held on your `SmartOperator`. BGT-era entry points stay callable until chargeable BGT is gone. See [Deprecated BGT entry points](/nodes/staking-pools/operators#deprecated-bgt-entry-points).
+- **Withdrawals can use operator WBERA.** `WithdrawalVault` may pull `availableWBERABalance()` from your `SmartOperator`, unwrap to BERA, and apply it in full, in part, or not at all. Uncovered remainder still exits through the consensus layer.
 
-The system automates staking, reward distribution, and withdrawal management, requiring minimal manual intervention from you while providing your stakers with a seamless staking experience.
+For the rest of the upgrade, see [What's New](/general/proof-of-liquidity/changelog).
 
-### Contract architecture
+## Who can do what
 
-The staking pools system uses a factory pattern where the **StakingPoolContractsFactory** serves as the deployment mechanism, creating and managing the complete suite of contracts needed for each validator's staking pool.
+`DEFAULT_ADMIN_ROLE` governs upgrades and emergency actions. `VALIDATOR_ADMIN_ROLE` is scoped to your pool.
 
-The core functionality revolves around the **StakingPool** contract, which handles staker deposits, share management, and the fundamental operations of your staking pool. Stakers interact with this contract to stake their BERA tokens and receive stBERA shares in return. The StakingPool contract maintains the accounting for staker positions and manages the conversion between BERA and stBERA shares.
+Other roles:
 
-Validator operations are coordinated through the **SmartOperator** contract, which manages integration with Berachain's Proof of Liquidity system. This contract handles reward allocation, commission management, and validator-specific PoL operations.
+- `REWARDS_ALLOCATION_MANAGER_ROLE`: reward allocation
+- `COMMISSION_MANAGER_ROLE`: commission
+- `PROTOCOL_FEE_MANAGER_ROLE`: protocol fee
+- `INCENTIVE_COLLECTOR_MANAGER_ROLE`: incentive collector
 
-The **StakingPool** contract inherits from the **stBERA** base contract, which provides the core token functionality for staked BERA shares, including share minting, burning, and conversion between assets and shares.
+Contracts can pause. If deposits fall below the minimum effective balance, the pool can trigger a full exit.
 
-### Security model
+## What stakers see
 
-The staking pools system implements a security model designed to protect staker funds while maintaining operational flexibility for validators and administrators.
+Stakers deposit BERA and receive stBERA immediately. Rewards compound into share price. They can withdraw without a validator minimum.
 
-Access control is managed through a role-based system that provides granular permissions for different types of operations. The `DEFAULT_ADMIN_ROLE` provides governance control over contract upgrades and emergency actions. Validators receive the `VALIDATOR_ADMIN_ROLE`, which grants them operational control over their specific staking pool while preventing interference with other validators' operations.
+Withdrawal liquidity can come from:
 
-Specialized roles handle specific aspects of the system. The `REWARDS_ALLOCATION_MANAGER_ROLE` manages reward allocation to specific applications, while the `COMMISSION_MANAGER_ROLE` handles validator commission management. The `PROTOCOL_FEE_MANAGER_ROLE` controls protocol fee settings, and the `INCENTIVE_COLLECTOR_MANAGER_ROLE` manages incentive collector operations.
+- the consensus layer
+- buffered funds on the pool before activation
+- WBERA on your `SmartOperator`, via `WithdrawalVault` (full, partial, or none)
 
-Emergency controls provide additional protection. Contracts can be paused in emergency situations. The system includes automatic full exit triggers that activate if the minimum balance threshold is breached, protecting stakers from potential losses.
-
-## Staker experience
-
-When stakers interact with your staking pool, they deposit BERA and immediately receive liquid stBERA shares. Rewards automatically compound as you earn rewards, increasing the value of shares over time without manual claiming or reinvestment. Stakers can withdraw at any time. **Withdrawal liquidity** can come from the **consensus layer**, from **buffered funds** on the pool before activation, and — after PoL Next on the staking-pools stack — from **WBERA held on your pool's `SmartOperator`**, which the shared **`WithdrawalVault`** may use to help satisfy requests (including **partial** coverage, with any remainder still exiting via the consensus layer). **Finalizing** a withdrawal request remains subject to the on-chain delay from the request block (commonly on the order of **three days** / **129,600** blocks at ~2s block time); see the [Operator Guide](/nodes/staking-pools/operators#withdrawal-system) for operator responsibilities and how coverage is sourced. Stakers can stake any amount without validator minimums, with full transparency through on-chain verification.
+Finalizing a request waits until `requestBlock + 129,600` blocks (about three days at ~2s). See the [Operator guide](/nodes/staking-pools/operators#withdrawal-system).
 
 <Note>
-  **Staking pool shares (stBERA) are not LSTs.** They cannot be registered with
-  `IncentivesCollector` as an `LSTStakerVault` asset and cannot be deposited into the \$sWBERA
-  Staking Vault. Pool-level yield reaches stBERA holders through the pool's own `SmartOperator` and
-  `IncentiveCollector` — a separate path from the PoL Incentive Auction yield.
+  stBERA is not an LST. It cannot be registered with `IncentivesCollector` as an `LSTStakerVault`
+  asset, and it cannot be deposited into the $sWBERA Staking Vault. Pool yield reaches holders
+  through this pool's `SmartOperator` and `IncentiveCollector`, not through the PoL Incentive
+  Auction.
 </Note>
 
-## Validator operations
+## What you operate
 
-You deploy a staking pool through the factory contract, which creates all necessary contracts and registers your validator with the consensus layer. You configure commission rates (up to 20% of staker rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on staker rewards, allowing you to focus on community building rather than manual reward management.
+You deploy through the factory, which registers the validator. Commission is up to 20% of staker rewards and collects automatically. You can direct Proof of Liquidity incentives to specific applications.
 
-## Integration with Proof of Liquidity
+## Tools
 
-Staking pools integrate with Berachain's Proof of Liquidity system. Pool reward flows route validator emissions to configured vault paths, and smart contracts claim and distribute PoL incentives. You can direct rewards to specific applications or ecosystem initiatives.
+Use [`install.sh`](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers/install.sh) and [`delegator-delegate.sh`](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers/delegator-delegate.sh) in `install-helpers/` to install a pool and form a delegated handler. A React [example frontend](/nodes/staking-pools/operators#building-your-front-end) covers post-install staker operations. The Python SmartOperator Manager CLI manages operator contracts on the validator.
 
-## Provided tools
+Start with [Install a staking pool](/nodes/staking-pools/installation). Day-two work is in the [Operator guide](/nodes/staking-pools/operators). Addresses and ABIs are in [Look up staking pool contract addresses](/nodes/staking-pools/contracts).
 
-Berachain provides [`install.sh`](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers/install.sh) and [`delegator-delegate.sh`](https://github.com/berachain/guides/tree/main/apps/staking-pools/install-helpers/delegator-delegate.sh) in `install-helpers/` for remote pool landing and delegated handler forming. A React-based **example frontend template** covers post-install staker ops. See [Building your front-end](/nodes/staking-pools/operators#building-your-front-end). The Python **SmartOperator Manager** CLI helps manage operator contracts on the validator.
-
-## Getting started
-
-Validators can set up staking pools using the [Installation Guide](/nodes/staking-pools/installation) and manage operations with the [Operator Guide](/nodes/staking-pools/operators).
-
-## Smart contract reference
-
-For detailed information about the smart contracts and their functions, see the [Smart Contract Reference](/nodes/staking-pools/contracts).
-
-## Support and resources
-
-If you don't have contact with Berachain Validator Relations, ask on our [Discord](https://discord.gg/berachain) **#node-support** channel.
+If you don't have Validator Relations contact, ask in the [Discord](https://discord.gg/berachain) **#node-support** channel.

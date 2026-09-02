@@ -13,7 +13,6 @@ You need a synced validator, the helper tools, and live endpoints:
 - `bash`, [Foundry](https://book.getfoundry.sh/) (`cast`), `jq`, and `curl`
 - Reachable execution-layer JSON-RPC and consensus-layer Node API endpoints. [Enable the Node API](https://docs.berachain.com/nodes/beaconkit/configuration#node-api-beacon-kit-node-api). The Node API can run on any node; it doesn't have to be on the validator.
 
-
 You also need one funding path:
 
 - Self-funded: at least **10,000 BERA** plus gas in the funding wallet
@@ -38,15 +37,15 @@ Copy `env.sh.template` to `env.sh` in that directory, then edit the copy. `insta
 cp env.sh.template env.sh
 ```
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `EL_RPC_URL` | Yes | Execution-layer JSON-RPC. Network (`mainnet` or `bepolia`) is read from `eth_chainId` on this URL. |
-| `CL_NODE_API_URL` | Yes | Beacon Kit Node API base URL. |
-| `PRIVATE_KEY` | No | Signs `cast send` on this host when set. |
-| `VALIDATOR_PUBKEY` | No | Validator pubkey default. |
-| `FUNDING_ADDRESS` | No | Funding wallet on the self-funded path. Ignored when `PRIVATE_KEY` is set. |
-| `OPERATOR_ADDRESS` | No | Operator on the self-funded path. |
-| `SHARES_RECIPIENT` | No | Shares recipient on the self-funded path. |
+| Variable           | Required | Purpose                                                                                            |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------- |
+| `EL_RPC_URL`       | Yes      | Execution-layer JSON-RPC. Network (`mainnet` or `bepolia`) is read from `eth_chainId` on this URL. |
+| `CL_NODE_API_URL`  | Yes      | Beacon Kit Node API base URL.                                                                      |
+| `PRIVATE_KEY`      | No       | Signs `cast send` on this host when set.                                                           |
+| `VALIDATOR_PUBKEY` | No       | Validator pubkey default.                                                                          |
+| `FUNDING_ADDRESS`  | No       | Funding wallet on the self-funded path. Ignored when `PRIVATE_KEY` is set.                         |
+| `OPERATOR_ADDRESS` | No       | Operator on the self-funded path.                                                                  |
+| `SHARES_RECIPIENT` | No       | Shares recipient on the self-funded path.                                                          |
 
 Use `./install.sh --help` for usage.
 
@@ -63,6 +62,7 @@ If a DelegationHandler with delegated funds exists for your pubkey, the script u
 On success, the script prints the staking pool address. Confirmed transactions append to `staking-pool-receipts.jsonl`.
 
 Call the pool with `cast` for staker operations. The [Operator guide](/nodes/staking-pools/operators) covers day-two work. The [example frontend](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend) is a sample UI for end users.
+
 ## What's next
 
 Continue with:
