@@ -6,7 +6,7 @@
 [![Docs](https://img.shields.io/badge/docs-docs.berachain.com-8B5CF6)](https://docs.berachain.com)
 [![Mintlify](https://img.shields.io/badge/docs-Mintlify-00DF80)](https://mintlify.com)
 
-Unified documentation for [Berachain](https://www.berachain.com/) and its native protocols: **BEX** (DEX) and **Bend** (lending). Built with [Mintlify](https://mintlify.com) and OOGA BOOGA.
+Documentation for [Berachain](https://www.berachain.com/), built with [Mintlify](https://mintlify.com).
 
 We welcome contributions from the community. Whether you're fixing a typo, clarifying a section, or adding a new guide, your help makes our docs better for everyone.
 
@@ -14,11 +14,13 @@ We welcome contributions from the community. Whether you're fixing a typo, clari
 
 ## What’s in this repo
 
-- **Berachain (General)** — L1 overview, Proof-of-Liquidity, tokens, governance
-- **Build** — Getting started, BEX, Bend, nodes, validators
-- **Reference** — APIs, contracts, and technical reference
+- **General**: Berachain concepts, Proof of Liquidity, tokens, governance, and help
+- **BEX**: deprecated exchange documentation
+- **Bend**: lending concepts and guides
+- **Build**: developer guides, integrations, and contract reference
+- **Nodes**: node architecture, setup, operations, staking pools, and Beacon Kit reference
 
-Content is in MDX. Navigation and branding are configured in `docs.json`.
+Content is in MDX. `docs.json` defines navigation and branding. [STRUCTURE.md](STRUCTURE.md) defines content placement.
 
 ---
 
@@ -46,10 +48,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Validate before pushing
 
-Check that the docs build with no warnings or errors (recommended for CI and before opening a PR):
+Run the full gate before opening a pull request. Start the local server in another terminal because the gate checks redirects:
 
 ```bash
-mint validate
+make dev
+make check
 ```
 
 ---
@@ -78,8 +81,13 @@ If you’re new to open source, see [Your first pull request](https://github.com
 docs/
 ├── docs.json          # Site config, navigation, theme
 ├── general/           # Berachain core docs
-├── build/             # BEX, Bend, nodes, validators
-├── reference/         # APIs, contracts
+├── bex/               # Deprecated BEX user docs
+├── bend/              # Bend user docs
+├── build/             # Developer docs
+├── nodes/             # Node and validator docs
+├── snippets/          # Shared and generated MDX
+├── data/              # Generator inputs
+├── scripts/           # Validation and generation
 ├── logo/
 └── images/
 ```
