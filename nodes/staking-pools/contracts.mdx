@@ -1,32 +1,30 @@
 ---
-title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
+title: "Look up staking pool contract addresses"
+description: "Singleton addresses and ABIs, plus the per-pool proxies StakingPoolContractsFactory deploys."
 ---
 
 import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
-This reference provides contract addresses and links to detailed documentation for each contract in the staking pools system. For an overview of how the contracts work together, see the [Staking Pools Overview](/nodes/staking-pools/overview).
+This page lists staking-pool contract addresses and ABI links. The [Staking pools overview](/nodes/staking-pools/overview) explains how the contracts fit together.
 
-## Contract addresses
+## Singleton contracts
 
-### Singleton contracts
-
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
+These contracts are deployed once and shared by every pool:
 
 <StakingPoolSingletonsTable />
 
-### Deployed contracts (per pool)
+Call `StakingPoolContractsFactory` to create and register a pool. Call `DelegationHandlerFactory` to deploy a per-validator handler proxy for Foundation delegation. The other rows are shared infrastructure.
 
-When you deploy a staking pool through the StakingPoolContractsFactory, the factory creates proxy contracts for your validator. These proxy contracts are what you and your stakers interact with directly. Each validator receives unique proxy addresses for these contracts when deploying their staking pool.
+## Per-pool proxy contracts
 
-The factory returns these proxy addresses when you call `deployStakingPoolContracts`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
+`deployStakingPoolContracts` returns proxy addresses for your validator. You and your stakers call those proxies. Store the addresses. Give stakers the StakingPool address for deposits.
 
-**Proxy contracts deployed with your pool:**
+Proxy contracts for each pool:
 
-- **StakingPool**: Main staking functionality and staker interactions. This is the contract address your stakers use to deposit BERA and receive stBERA shares.
-- **SmartOperator**: Validator operations and Proof of Liquidity integration.
-- **IncentiveCollector**: Incentive token collection and conversion. Handles the incentive auction mechanism where accumulated tokens can be claimed.
-- **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
-- **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
+- **StakingPool**: deposits, shares, and staker interactions. Stakers deposit BERA here and receive stBERA.
+- **SmartOperator**: validator operations and Proof of Liquidity integration.
+- **IncentiveCollector**: incentive token collection, conversion, and the incentive auction.
+- **StakingRewardsVault**: consensus-layer reward collection and compounding.
+- **DelegationHandler**: Foundation-delegated capital. Deployed only on the delegated path.
 
-For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
+ABI JSON for each singleton is in the table above. For install and operator flows, see [Install a staking pool](/nodes/staking-pools/installation) and the [Operator guide](/nodes/staking-pools/operators).
