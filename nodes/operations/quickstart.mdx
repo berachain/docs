@@ -68,13 +68,14 @@ rm -r guides;
 ls;
 
 # [Expected output, edited for clarity]
-# README.md                     run-reth.sh     setup-reth.sh
-# env.sh                        run-beacond.sh  setup-beacond.sh
-# fetch-berachain-params.sh
+# README.md                         run-reth.sh     setup-reth.sh
+# env.sh                            run-beacond.sh  setup-beacond.sh
+# fetch-berachain-params.sh         fetch-berachain-snapshot.sh
 ```
 
 The file `env.sh` contains environment variables used in the other scripts.
 `fetch-berachain-params.sh` downloads consensus-layer configuration files.
+`fetch-berachain-snapshot.sh` restores official snapshots into the client data directories.
 `setup-` and `run-` scripts start the execution client and `beacond`.
 
 ## Step 2 - Configure environment
@@ -89,13 +90,14 @@ export CHAIN=mainnet   # mainnet or bepolia
 export MONIKER_NAME=camembera
 export WALLET_ADDRESS_FEE_RECIPIENT=0x8b30eb59e9b2354825503d5e60845eb41d4caf36
 export EL_ARCHIVE_NODE=false # set to true if you want to run an archive node on CL and EL
-export MY_IP=`curl -s canhazip.com`
+export MY_IP=`curl -s ipv4.canhazip.com`
 
 # VALUES YOU MIGHT WANT TO CHANGE
 export LOG_DIR=$(pwd)/logs
-export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 export BEACOND_BIN=$(command -v beacond || echo $(pwd)/beacond)
 export BEACOND_DATA=$(pwd)/var/beacond
+export BEACOND_CONFIG=$BEACOND_DATA/config
+export JWT_PATH=$BEACOND_CONFIG/jwt.hex
 export RETH_BIN=$(command -v bera-reth || echo $(pwd)/bera-reth)
 ```
 
@@ -105,14 +107,29 @@ You need to set these constants:
 2. **MONIKER_NAME**: A name of your choice for your node.
 3. **WALLET_ADDRESS_FEE_RECIPIENT**: The address that receives priority fees for blocks sealed by your node. If your node will not be a validator, this won't matter.
 4. **EL_ARCHIVE_NODE**: Set to `true` if you want the execution client to be a full archive node.
-5. **MY_IP**: Sets the IP address your chain clients advertise to other peers on the network. In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl canhazip.com` to auto-detect it.
+5. **MY_IP**: Sets the IP address your chain clients advertise to other peers on the network. In a cloud environment such as AWS or GCP where you are behind a NAT gateway, you **must** specify this address or allow the default `curl ipv4.canhazip.com` to auto-detect it.
 
 You should verify these constants:
 
 - **LOG_DIR**: This directory stores log files.
 - **BEACOND_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
 - **BEACOND_DATA**: Set this to where the consensus data and config should be kept.
+- **BEACOND_CONFIG**: Derived from `BEACOND_DATA`. Do not change it.
 - **RETH_BIN**: Set this to the full path where you installed `bera-reth`. The expression provided finds it in your $PATH.
+
+### Port allocation
+
+When `PORT_BASE` is unset, the scripts use these defaults:
+
+| Port  | Client    | Use                              |
+| ----- | --------- | -------------------------------- |
+| 26657 | BeaconKit | Consensus RPC                    |
+| 26656 | BeaconKit | Consensus P2P                    |
+| 8545  | Bera-Reth | Execution RPC                    |
+| 8551  | Bera-Reth | Engine API (JWT)                 |
+| 30303 | Bera-Reth | Discovery and transaction gossip |
+
+Set `PORT_BASE=30000` in your shell before running the setup and run scripts only if those ports are already taken or undesirable. The scripts then listen on `PORT_BASE` through `PORT_BASE+7` (consensus RPC at `PORT_BASE`, execution RPC at `PORT_BASE+3`, execution P2P at `PORT_BASE+5`).
 
 ## Step 3 - Fetch parameters
 
@@ -184,116 +201,28 @@ The `setup-reth.sh` script creates the Reth datadir and initializes it with `--c
 Snapshots are collections of files from a node's backend that represent its state at a specific time. Restoring a snapshot is much faster than syncing from the network, so this step can dramatically speed up your initial sync on a new node.
 
 <Info>
-  Do this step **before** starting your clients (Step 7). If you've already started syncing, you'll
-  need to stop the clients, clean the data directories, then restore snapshots.
+  Do this step **before** starting your clients (Step 7). If you have already started syncing, stop
+  the clients, then run the restore again. The script replaces a fresh `setup-reth.sh` datadir. Pass
+  `--force` if the target directories contain unexpected files.
 </Info>
 
-Snapshots can be applied to both the consensus (beacond) and execution clients. Restoring both snapshots simultaneously provides the fastest sync.
-
-### 6a - Obtain snapshots
-
-Berachain and the community offer snapshots for Mainnet and Bepolia. You can download snapshots at the following links.
-
-- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
-
-- Or, use the `fetch-berachain-snapshot.js` script — already on disk from Step 1 — downloads the latest official Berachain snapshots for both the beacon-kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
+After steps 1 through 5, run `fetch-berachain-snapshot.sh`. The script needs `curl`, `lz4`, and `tar` on your PATH. It reads `CHAIN` and the data directories from `env.sh`, downloads the latest official pruned snapshots from `snapshots.berachain.com` (Mainnet) or `bepolia.snapshots.berachain.com` (Bepolia), and extracts them into those directories. It does not overwrite `config/priv_validator_key.json` or `config/jwt.hex`. If `data/priv_validator_state.json` is missing, it writes genesis state so `beacond` can start.
 
 ```bash
-# FROM: ~/beranode (or any directory — use -o to change download folder)
+# FROM: ~/beranode
 
-# Default: mainnet, pruned
-node fetch-berachain-snapshot.js
-
-# Examples:
-node fetch-berachain-snapshot.js --network bepolia --type archive
-node fetch-berachain-snapshot.js -o /var/snapshots --execution-only
+./fetch-berachain-snapshot.sh
 
 # [Expected Output]:
-# Bera Snapshot Downloader
+# Bera Snapshot Restore
 # -------------------------
 # Network: mainnet
-# Client: reth
 # Type: pruned
-#
-# Fetching snapshot index from:
-#   https://snapshots.berachain.com/index.csv
-# [...]
-# ✓ All downloads completed!
-```
-
-Available options:
-
-- `--network` or `-n`: `mainnet` or `bepolia` (default: `mainnet`)
-- `--type` or `-t`: `pruned` or `archive` (default: `pruned`)
-- `--output` or `-o`: Download directory (default: `downloads` in the current working directory)
-- `--el-client`: Execution snapshot type prefix in the CSV (default: `reth`)
-- `--beacon-only`: Beacon-kit snapshot only
-- `--execution-only` or `--el-only`: Execution-layer snapshot only
-- `--help` or `-h`: Show help message
-
-### 6b - Stop clients
-
-If you've already started your clients, shut down `beacond` and your execution client now. Otherwise, skip to 6c.
-
-### 6c - Clean existing chain data
-
-To clean the Beacon Kit and reth data store:
-
-```bash
-# FROM: ~/beranode
-
-source env.sh;
-$BEACOND_BIN --home $BEACOND_HOME comet unsafe-reset-all;
-
-# [Expected Output]:
-# Removed all blockchain history dir=var/beacond/data
-# Reset private validator file to genesis state key=..
-
-ls var/reth/data;
-
-# [Expected Output]:
-# (empty or prior db contents)
-
-rm -r var/reth/data;
-mkdir -p var/reth/data;
-```
-
-### 6d - Install BeaconKit snapshot
-
-The snapshots distributed by Berachain are designed to be installed in the beacond home directory, which contains both `config` and `data`:
-
-```bash
-# FROM: ~/beranode
-
-# Find the beacon-kit snapshot file (filename pattern: snapshot_beacon-kit-*)
-BEACON_SNAPSHOT=$(ls downloads/snapshot_beacon-kit-*.tar.lz4 | head -1)
-lz4 -d "$BEACON_SNAPSHOT" | tar xv -C var/beacond/;
-
-# [Expected Output]:
-# x data/
-# x data/cs.wal/
-# x data/cs.wal/wal.10416
 # ...
+# Snapshot restore complete.
 ```
 
-### 6e - Install execution layer snapshot
-
-Official Reth snapshot archives list **`db/`**, **`rocksdb/`**, and **`blobstore/`** at the **root** of the tarball (not under a `data/` directory). Your `bera-reth node --datadir` must be the directory that contains those folders. In this layout that is `var/reth/data` (see `setup-reth.sh` / `env.sh`), so pass **`-C var/reth/data`** to `tar`.
-
-```bash
-# FROM: ~/beranode
-
-# Find the execution layer snapshot
-EL_SNAPSHOT=$(ls downloads/snapshot_reth-*.tar.lz4 | head -1)
-lz4 -d "$EL_SNAPSHOT" | tar xv -C var/reth/data;
-
-# [Expected Output] (current official bundles):
-# x db/
-# x db/mdbx.dat
-# x rocksdb/
-# x blobstore/
-# ...
-```
+Pass `--network bepolia` when `CHAIN` in `env.sh` is not already `bepolia`. Pass `--type archive` for archive snapshots. `./fetch-berachain-snapshot.sh --help` lists the remaining flags.
 
 ## Step 7 - Run both clients
 
@@ -349,10 +278,9 @@ To check the sync status of the consensus layer, in another terminal run the fol
 # FROM: ~/beranode
 
 set -e
-. ./env.sh
 
 # Don't have jq? `brew install jq`
-$BEACOND_BIN --home=$BEACOND_DATA status | jq;
+beacond --home=var/beacond status | jq;
 
 # [Expected Output]:
 # {
