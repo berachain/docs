@@ -20,7 +20,7 @@ We welcome contributions from the community. Whether you're fixing a typo, clari
 - **Build**: developer guides, integrations, and contract reference
 - **Nodes**: node architecture, setup, operations, staking pools, and Beacon Kit reference
 
-Content is in MDX. `docs.json` defines navigation and branding. [STRUCTURE.md](STRUCTURE.md) defines content placement.
+Content is in MDX. `docs.json` defines navigation and branding. `STRUCTURE.md` defines content placement.
 
 ---
 
