@@ -1,10 +1,7 @@
 {
   "metadata": {
     "sourceOfTruth": "Single source for deployed contract references in docs",
-    "networks": [
-      "berachainMainnet",
-      "berachainBepolia"
-    ]
+    "networks": ["berachainMainnet", "berachainBepolia"]
   },
   "pol": {
     "berachef": {
@@ -190,7 +187,7 @@
       }
     },
     "honey": {
-      "name": "HONEY",
+      "name": "BUSD",
       "abi": {
         "berachainMainnet": "https://github.com/berachain/abis/blob/main/mainnet/contracts/honey/Honey.json",
         "berachainBepolia": "https://github.com/berachain/abis/blob/main/bepolia/contracts/honey/Honey.json"
@@ -522,27 +519,27 @@
     },
     "marketIds": {
       "wbtcHoney": {
-        "name": "WBTC / HONEY",
+        "name": "WBTC / BUSD",
         "id": "0x950962c1cf2591f15806e938bfde9b5f9fbbfcc5fb640030952c08b536f1f167"
       },
       "sUSDeHoney": {
-        "name": "sUSDe / HONEY",
+        "name": "sUSDe / BUSD",
         "id": "0x1ba7904c73d337c39cb88b00180dffb215fc334a6ff47bbe829cd9ee2af00c97"
       },
       "wgBERAHoney": {
-        "name": "wgBERA / HONEY",
+        "name": "wgBERA / BUSD",
         "id": "0x63c2a7c20192095c15d1d668ccce6912999b01ea60eeafcac66eca32015674dd"
       },
       "wethHoney": {
-        "name": "WETH / HONEY",
+        "name": "WETH / BUSD",
         "id": "0x1f05d324f604bd1654ec040311d2ac4f5820ecfd1801a3d19d2c6f09d4f7a614"
       },
       "wberaHoney": {
-        "name": "WBERA / HONEY",
+        "name": "WBERA / BUSD",
         "id": "0x147b032db82d765b9d971eac37c8176260dde0fe91f6a542f20cdd9ede1054df"
       },
       "iBERAHoney": {
-        "name": "iBERA / HONEY",
+        "name": "iBERA / BUSD",
         "id": "0x594de722a090f8d0df41087c23e2187fb69d9cd6b7b425c6dd56ddc1cff545f0"
       }
     }
