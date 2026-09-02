@@ -80,10 +80,10 @@ git checkout -b fix/your-change   # or feature/your-feature
 
 ### 3. Add or Edit Content
 
-- **Editing:** Open the relevant `.mdx` file under `general/`, `build/`, or `reference/` and edit.
+- **Editing:** Open the relevant `.mdx` file under `general/`, `bex/`, `bend/`, `build/`, or `nodes/` and edit.
 - **New page:** Create the `.mdx` file in the right folder, then add it to `docs.json` (see [Adding or moving pages](#adding-or-moving-pages)).
 
-Use existing pages as a style reference. Prefer clear, concise language and short paragraphs. Use MDX components where they add value (see [Content guidelines](#content-guidelines)).
+Classify new and substantially rewritten pages with [STRUCTURE.md](STRUCTURE.md). Resolve behavior claims to their implementation with [SOURCE_MAP.md](SOURCE_MAP.md).
 
 ### 4. Adding or Moving Pages
 
@@ -101,45 +101,43 @@ To add a new page:
 ]
 ```
 
-To move or rename a page, update both the file path and every reference in `docs.json` and in other docs (links).
+To move or rename a page, update the file path, every reference in `docs.json`, and links from other pages. Add a redirect from the previous live URL as required by `AGENTS.md`.
 
 ### 5. Content Guidelines
 
-- Describe the **current** system and, where appropriate, **future (presented as if current)** behavior as of the time of writing. Do not preserve historical narratives, superseded explanations, or framing around past mistakes or obsolete docs in normative pages — update copy to the correct model. Time-ordered deltas belong in changelog-style pages when the repo has them, focused on outcomes of the change, not mechanics.
-- Follow the structure and tone of existing docs.
+- Describe shipped behavior as it exists now. Do not present planned behavior as current. Put product intent in an explicitly labeled roadmap or proposal, not normative instructions. Time-ordered deltas belong in changelog pages when the repo has them.
+- Read the owning implementation from [SOURCE_MAP.md](SOURCE_MAP.md) before stating behavior. Confirm every named function, event, error, role, and constant with `rg`.
+- Use one content type per page. Follow [STRUCTURE.md](STRUCTURE.md) for placement.
+- Write the effect on the reader before implementation detail. State values as values rather than Solidity constant names.
+- Separate confirmed behavior from product intent and inference. Do not present an inference as shipped behavior.
+- Use active voice, present tense, and `you` for the reader. Use imperative steps. Put a condition before the action it controls.
+- Keep one instruction per sentence. Use one term for one thing throughout a procedure.
+- Cut filler (`very`, `just`, `really`, `simply`) and marketing claims (`easy`, `simple`, `quick`). Replace vague claims with a measured fact or remove them.
+- Avoid machine-written transitions that recap the previous paragraph, rhetorical questions, personified software, and generic framing that could appear on any page.
+- Use sentence case for headings. Open pages and major sections with a direct summary. Keep paragraphs focused on one idea.
 - Use US English spelling in prose (`color`, `behavior`, `favor`, `labeled`).
 - Use Mintlify/MDX components where appropriate, e.g. `<Card>`, `<Steps>`, `<Note>`, `<Tip>`, `<Warning>`.
 - Use fenced code blocks with a language tag where you show code.
-- Link to related pages when it helps the reader.
+- Use descriptive link text, not bare URLs or “here.”
+- Prefer colons, commas, and periods over em dashes in new prose. Do not create punctuation-only cleanup diffs across unrelated pages.
+- Use [UBIQUITOUS_LANGUAGE.md](UBIQUITOUS_LANGUAGE.md) for project terms. Add real project terms to `vale/config/vocabularies/Berachain/accept.txt` instead of rephrasing around the linter.
 - Validate your changes locally (see [README.md](README.md) for commands).
 
 ### 6. Validation Before PR
 
-Before opening a PR, run:
+Install Vale once with `brew install vale`. Start `make dev` in another terminal, then run `make check`.
 
-```bash
-mint validate
-```
+The gate covers validation, broken links, assets, accessibility, Vale, redirects, and POL address sync when the private source checkout is available. Fix every error before opening a PR. If the POL source is unavailable, `make check` prints a loud warning and continues; it does not prove address sync.
 
-Also run:
-
-```bash
-mint broken-links
-mint a11y
-```
-
-Run the prose linter on touched files:
-
-```bash
-brew install vale  # one-time install
-make check-vale    # lint the full documentation tree
-```
-
-The full quality gate is `make check` (validate, broken-links, assets, a11y, vale, redirects, POL address sync). Fix any errors before opening your PR.
+Format only files in your change (`prettier --write <paths>`). `make contracts-generate` does not reformat hand-authored pages.
 
 When vale flags a project term as misspelled, add it to `vale/config/vocabularies/Berachain/accept.txt` rather than rephrasing — the file is the single source of truth for terminology vale will accept.
 
-### 7. Contract Address Source Of Truth
+### 7. Contract address source of truth
+
+Classify the contract family before editing data. The source and verification differ.
+
+#### Proof of Liquidity addresses
 
 Published POL contract addresses flow through four layers (field names must match exactly):
 
@@ -148,28 +146,36 @@ Published POL contract addresses flow through four layers (field names must matc
 3. `data/contracts.json` — addresses shown on the docs site
 4. Generated pages/snippets from `make contracts-generate`
 
+Only PoL-owned fields belong under `pol` in `data/contracts.json`. Do not place staking-pool singletons in this section.
+
 Do not manually edit generated canonical address pages. After changing `data/contracts.json`, regenerate:
 
 ```bash
 make contracts-generate
 ```
 
-This regenerates:
+This regenerates exactly these files:
 
-- snippets in `snippets/contracts/generated/`
-- canonical deployed-contract pages in:
-  - `build/getting-started/deployed-contracts.mdx`
-  - `build/bex/deployed-contracts.mdx`
-  - `build/bend/deployed-contracts.mdx`
-  - `build/bend/deployed-markets.mdx`
+- `snippets/contracts/generated/core-contracts-table.mdx`
+- `snippets/contracts/generated/bex-contracts-table.mdx`
+- `snippets/contracts/generated/bend-contracts-table.mdx`
+- `snippets/contracts/generated/bend-markets-table.mdx`
+- `snippets/contracts/generated/staking-pools-singletons-table.mdx`
+- `build/getting-started/deployed-contracts.mdx`
+- `build/bex/deployed-contracts.mdx`
+- `build/bend/deployed-contracts.mdx`
+- `build/bend/deployed-markets.mdx`
+- `nodes/staking-pools/contracts.mdx`
 
 Check in generated outputs with your `data/contracts.json` changes in the same PR.
 
+If this list and the `write(` calls in `scripts/contracts/generate-pages.mjs` disagree, the generator is authoritative and this list must change in the same PR.
+
 #### POL address hygiene check
 
-`make check-pol-addresses` compares `POLAddresses.sol`, the mapping file, and `contracts.json`. It prints summary counts (`ok`, `not_ok`, `not_published`) and **fails when `not_ok > 0`**. This target is part of `make check`.
+`make check-pol-addresses` compares `POLAddresses.sol`, the mapping file, and `contracts.json`. It prints summary counts (`ok`, `not_ok`, `not_published`) and fails when `not_ok > 0` or the source file is missing.
 
-Clone [contracts-internal](https://github.com/berachain/contracts-internal) as a sibling of this repo (`../contracts-internal`) so the verifier can read `script/pol/POLAddresses.sol`. Without it, `make check-pol-addresses` skips (other `make check` steps still run).
+Maintainers can clone `contracts-internal` alongside the primary docs checkout so the verifier can read `script/pol/POLAddresses.sol`. `make check` tolerates a missing private checkout for cloud and public contributors, but prints an explicit warning that POL addresses were not verified.
 
 ```bash
 make check-pol-addresses              # summary; fails if anything needs action
@@ -184,7 +190,27 @@ Typical fixes:
 
 Full status taxonomy: header comment in `scripts/contracts/verify-pol-addresses.mjs`.
 
-At the moment generation and POL sync checks are local Makefile targets (not separate CI jobs), so run them whenever contract data or `POLAddresses.sol` changes.
+Generation and POL sync checks are local Makefile targets, not separate CI jobs. Run them whenever contract data or `POLAddresses.sol` changes.
+
+The Makefile finds `contracts-internal` beside the primary docs checkout, including when you run it from a git worktree. Set `POL_ADDRESSES_SOL` only for a nonstandard checkout layout:
+
+```bash
+make check-pol-addresses POL_ADDRESSES_SOL=/path/to/contracts-internal/script/pol/POLAddresses.sol
+```
+
+#### Staking pool addresses
+
+Staking pool singleton addresses flow through three layers:
+
+1. `contracts-staking-pools/script/StakingPoolAddresses.sol`
+2. `data/contracts.json` under `stakingPools`
+3. `nodes/staking-pools/contracts.mdx` and the generated snippets listed above
+
+Only staking-pool singleton fields belong under `stakingPools` in `data/contracts.json`. There is no automated source-to-data verifier for this pipeline. Compare each published mainnet and testnet address to the same-named field in `StakingPoolAddresses.sol`, confirm the corresponding ABI exists in `berachain/abis`, run `make contracts-generate`, run `node scripts/contracts/generate-pages.mjs --check`, and inspect the generated diff.
+
+#### Other contract families
+
+Use `SOURCE_MAP.md` to find the implementation and deployment source. BEX is deprecated and should not receive new behavior. For a correction to existing BEX or Bend contract data, cite the owning deployment source in the pull request. No automated source-to-data verifier covers these sections.
 
 ### 8. Commit and Push
 

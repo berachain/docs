@@ -4,17 +4,16 @@ default: contracts-generate format check
 help:
 	@echo "Common docs tasks:"
 	@echo "  make dev                # Run local Mintlify server (http://localhost:3000)"
-	@echo "  make check              # Run all checks (validate, links, assets, a11y, vale, redirects)"
+	@echo "  make check              # Run all available checks; warns if POL source is unavailable"
 	@echo "  make check-validate     # Validate docs build"
 	@echo "  make check-links        # Check for broken links"
 	@echo "  make check-assets       # Check /images for orphaned + missing refs"
 	@echo "  make check-a11y         # Run accessibility checks"
-	@echo "  make check-vale         # Run vale prose linter on .md / .mdx (release-page surfaces only by default)"
-	@echo "                          # Override scope: VALE_PATHS=\"general/ nodes/ build/\" make check-vale"
+	@echo "  make check-vale         # Run vale prose linter on all .md / .mdx files"
 	@echo "  make check-redirects    # Verify all redirects land on HTTP 200 (needs running server)"
 	@echo "                          # Override port: BASE_URL=http://localhost:3335 make check-redirects"
 	@echo "  make contracts-generate      # Regenerate contract pages/snippets from data/contracts.json"
-	@echo "  make check-pol-addresses     # POLAddresses vs contracts.json summary (fails if not_ok > 0)"
+	@echo "  make check-pol-addresses     # POLAddresses vs contracts.json; fails if unavailable or out of sync"
 	@echo "  make list-pol-addresses-not-ok # List all not_ok POL address rows"
 	@echo "  make format             # Reformat all .md and .mdx files with Prettier"
 	@echo "  make format-check       # Check formatting compliance without changes"
@@ -23,7 +22,7 @@ help:
 dev:
 	mint dev
 
-check: check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses
+check: check-validate check-links check-assets check-a11y check-vale check-redirects check-pol-addresses-if-available
 
 check-validate:
 	mint validate
@@ -54,19 +53,19 @@ check-assets:
 	missing="$$(comm -23 "$$assets_ref_list" "$$assets_file_list")"; \
 	rm -f "$$assets_file_list" "$$assets_ref_list"; \
 	if [ -n "$$orphans" ]; then \
-		echo "❌ Orphaned assets found:"; \
+		echo "ERROR: Orphaned assets found:"; \
 		printf '%s\n' "$$orphans"; \
 		failed=1; \
 	fi; \
 	if [ -n "$$missing" ]; then \
-		echo "❌ Missing asset references found:"; \
+		echo "ERROR: Missing asset references found:"; \
 		printf '%s\n' "$$missing"; \
 		failed=1; \
 	fi; \
 	if [ -n "$$failed" ]; then \
 		exit 1; \
 	fi; \
-	echo "✅ No orphaned or missing asset references found."
+	echo "No orphaned or missing asset references found."
 
 format:
 	prettier --write "**/*.{md,mdx}"
@@ -76,25 +75,33 @@ format-check:
 
 contracts-generate:
 	node scripts/contracts/generate-pages.mjs
-	make format
 
-POL_ADDRESSES_SOL := ../contracts-internal/script/pol/POLAddresses.sol
+GIT_COMMON_DIR := $(shell git rev-parse --git-common-dir 2>/dev/null)
+PRIMARY_CHECKOUT := $(abspath $(GIT_COMMON_DIR)/..)
+POL_ADDRESSES_SOL ?= $(PRIMARY_CHECKOUT)/../contracts-internal/script/pol/POLAddresses.sol
 
 check-pol-addresses:
 	@if [ ! -f "$(POL_ADDRESSES_SOL)" ]; then \
-		echo "⏭️  POL addresses: skipped ($(POL_ADDRESSES_SOL) not found; clone berachain/contracts-internal as sibling)"; \
-		exit 0; \
+		echo "ERROR: POL addresses not checked: $(POL_ADDRESSES_SOL) is missing. Clone berachain/contracts-internal as a sibling." >&2; \
+		exit 1; \
 	fi; \
-	line="$$(node scripts/contracts/verify-pol-addresses.mjs --summary)"; status=$$?; \
+	line="$$(node scripts/contracts/verify-pol-addresses.mjs --summary --pol-path "$(POL_ADDRESSES_SOL)")"; status=$$?; \
 	if [ $$status -eq 0 ]; then \
-		echo "✅ POL addresses: $$line"; \
+		echo "POL addresses: $$line"; \
 	else \
-		echo "❌ POL addresses: $$line"; \
+		echo "ERROR: POL addresses: $$line" >&2; \
 		exit $$status; \
 	fi
 
+check-pol-addresses-if-available:
+	@if [ ! -f "$(POL_ADDRESSES_SOL)" ]; then \
+		echo "WARNING: POL ADDRESSES WERE NOT VERIFIED. $(POL_ADDRESSES_SOL) is missing; cloud and public checkouts must treat this as an unverified check." >&2; \
+	else \
+		$(MAKE) --no-print-directory check-pol-addresses; \
+	fi
+
 list-pol-addresses-not-ok:
-	@node scripts/contracts/verify-pol-addresses.mjs --list-not-ok
+	@node scripts/contracts/verify-pol-addresses.mjs --list-not-ok --pol-path "$(POL_ADDRESSES_SOL)"
 
 mint-install:
 	npm i -g mint
