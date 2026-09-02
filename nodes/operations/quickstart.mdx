@@ -187,7 +187,7 @@ The `setup-reth.sh` script creates the Reth datadir and initializes it with `--c
 
 ## Step 6 - Fetch snapshots (optional)
 
-Restoring a snapshot is much faster than syncing from genesis. Do this **before** starting your clients (Step 7).
+Restoring a snapshot is much faster than syncing from genesis. Do this **before** starting your clients (Step 7). See [Restore a snapshot](/nodes/operations/snapshots) for storage v2 on Bepolia.
 
 `fetch-berachain-snapshot.js` downloads the latest official Berachain snapshots for Beacon Kit and Bera-Reth, then extracts them into `$BEACOND_DATA` and `$RETH_DATA`. Source `env.sh` first so the script reads `CHAIN` and those paths. The extract does not overwrite `config/priv_validator_key.json` or `config/jwt.hex`.
 

@@ -1,0 +1,38 @@
+---
+title: "Restore a snapshot"
+description: "Restore official Beacon Kit and Bera-Reth snapshots into the Quickstart datadirs."
+---
+
+Restoring a snapshot is much faster than syncing from genesis. Do this after [Quickstart](/nodes/operations/quickstart) steps 1 through 5, and **before** starting the clients.
+
+Both helpers read `CHAIN`, `$BEACOND_DATA`, and `$RETH_DATA` from `env.sh`. They extract into those datadirs. They do not overwrite `config/priv_validator_key.json` or `config/jwt.hex`.
+
+## Default (storage v1)
+
+This is the command on the Quickstart. It downloads the latest pruned Beacon Kit and Bera-Reth tarballs from `snapshots.berachain.com` (Mainnet) or `bepolia.snapshots.berachain.com` (Bepolia), then extracts them.
+
+```bash
+# FROM: ~/beranode
+
+. ./env.sh
+node fetch-berachain-snapshot.js
+```
+
+`--network` defaults to `$CHAIN`. `--type` defaults to `pruned`. Pass `--force` if the datadirs already contain chain data from a previous sync.
+
+## Storage v2 (Bepolia)
+
+Storage v2 restores the same datadirs with a different pipeline: Beacon Kit from a compressed tarball, Bera-Reth via `bera-reth download` (pruned uses `--minimal`).
+
+```bash
+# FROM: ~/beranode
+
+. ./env.sh
+node fetch-berachain-snapshot-v2.js
+```
+
+Use this on Bepolia today. The Mainnet command is the same and uses the same catalog URL shape (`v2/<network>/catalog.csv`). The Mainnet catalog is not published yet.
+
+Do not mix a v1 Beacon Kit snapshot with a v2 Bera-Reth datadir, or the reverse.
+
+Requires Node.js 18+, `curl`, `lz4`, `tar`, and a `bera-reth` that supports `download --manifest-url`. That flag is not in v1.4.4.
