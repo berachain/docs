@@ -1,39 +1,29 @@
 ---
 title: "Delegation Guide"
-description: "Use Foundation-delegated capital to run a staking pool: form the handler, land the pool, and withdraw yield."
+description: "Use Foundation-delegated capital to run a staking pool: form the handler, then land the pool."
 ---
 
-This guide covers **delegated staking pools** in two phases:
+Delegated staking pools have two phases:
 
-1. **Form** — deploy and fund the `DelegationHandler`, delegate capital, grant `VALIDATOR_ADMIN_ROLE` (delegator / Foundation scripts in `install-helpers/`).
-2. **Land** — operator creates the pool with delegated funds, activates, and deposits the remainder (`installer/install.sh` on a remote machine).
+1. **Form** — `delegator-delegate.sh` deploys and funds the `DelegationHandler`, runs `delegate()`, and grants `VALIDATOR_ADMIN_ROLE`.
+2. **Land** — `install.sh` creates the pool with delegated funds, activates, and optionally deposits the remainder.
 
-It does not cover delegator principal withdrawal; coordinate with your capital provider as needed.
+## 1. Form the handler
 
-<Warning>
-  Delegator **forming** scripts write `cast` commands to files under `generated/` for manual review. Operator **landing** uses `install.sh`, which prints each `cast send` and optionally runs it when `PRIVATE_KEY` is set.
-</Warning>
-
-## Assumptions
-
-- You have a synced validator and its pubkey.
-- For landing: the Foundation (or delegator) has already **formed** the handler and delegated funds for your pubkey.
-
-## 1. Form the handler (delegator)
-
-Run from `guides/apps/staking-pools/install-helpers/` on a machine with the delegator key (or generate Safe payloads for the Foundation):
+From `guides/apps/staking-pools/install-helpers/` on a machine with RPC access (not the validator):
 
 ```bash
-./delegator-delegate.sh --amount 500000 --pubkey 0x... --operator 0x...
+export EL_RPC_URL=https://bepolia.rpc.berachain.com
+./delegator-delegate.sh
 ```
 
-This deploys the `DelegationHandler` (if needed), funds it, and produces `delegate()` + `grantRole()` steps. The operator must hold `VALIDATOR_ADMIN_ROLE` before landing.
+The script prompts for pubkey, delegate amount, and validator-admin address. Set `VALIDATOR_PUBKEY`, `DELEGATE_AMOUNT_BERA`, and `VALIDATOR_ADMIN` in `env.sh` to pre-fill those prompts, or pass `--pubkey`, `--amount`, and `--validator-admin` to skip them.
 
-See `delegator-delegate.sh --help` for the forming flow.
+The script prints each `cast send` (or runs it when `PRIVATE_KEY` is set). Steps 3–4 (`delegate`, `grantRole`) require `DEFAULT_ADMIN_ROLE` on the handler — often the Foundation Safe.
 
 ## 2. Land the pool (operator)
 
-From `guides/apps/staking-pools/installer/` on a remote machine (not the validator):
+From `guides/apps/staking-pools/install-helpers/` (same directory as `delegator-delegate.sh`):
 
 ```bash
 export EL_RPC_URL=https://bepolia.rpc.berachain.com
@@ -41,28 +31,10 @@ export CL_NODE_API_URL=http://127.0.0.1:3500
 ./install.sh
 ```
 
-When your pubkey matches a formed handler with delegated funds, `install.sh` automatically:
+When a formed handler with delegated funds exists for your pubkey, `install.sh` lands the pool automatically. See [Installation](/nodes/staking-pools/installation).
 
-1. Creates the pool with the first 10,000 BERA of delegated funds (`createStakingPoolWithDelegatedFunds`).
-2. Waits for beacon registration.
-3. Activates the pool.
-4. Optionally deposits remaining delegated BERA (`depositDelegatedFunds`).
+## What's next
 
-Full step-by-step: [Installation](/nodes/staking-pools/installation).
-
-## 3. Withdraw yield (operator)
-
-After the pool is active, operators can withdraw earned yield (not delegated principal) with:
-
-```bash
-cd guides/apps/staking-pools/install-helpers
-./delegated-withdraw-yield.sh
-```
-
-Yield withdrawal redeems only the **share excess** over the delegated principal still on the handler. Principal withdrawals are controlled by the delegator.
-
-## Where to next
-
-- [Installation](/nodes/staking-pools/installation) — remote landing flow (self-funded and delegated)
+- [Installation](/nodes/staking-pools/installation)
 - [Contract reference](/nodes/staking-pools/contracts)
-- [Operator Guide](/nodes/staking-pools/operators)
+- [Operator guide](/nodes/staking-pools/operators)

@@ -158,7 +158,7 @@ Your front-end should:
 - Support batch finalization with `finalizeWithdrawalRequests([...])`.
 - Show staker balance, share price, and total rewards (e.g. via `previewRedeem(shares)`).
 
-Berachain provides a React-based example template in the [guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend). On the validator, run `generate-frontend-config.sh` from `install-helpers` (with `BEACOND_HOME` in `env.sh`) to write `config.draft.json`.
+Berachain provides a React-based example template in the [guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools/frontend). Copy `config.example.json`, set your pool address and validator pubkey (from `install.sh` output or factory `getCoreContracts`), and deploy.
 
 ## Delegation
 
@@ -168,5 +168,5 @@ If you have received a delegation from the Berachain Foundation, see the [Delega
 
 - [Staking Pools Overview](/nodes/staking-pools/overview)
 - [Smart Contract Reference](/nodes/staking-pools/contracts)
-- [Installer README](https://github.com/berachain/guides/blob/main/apps/staking-pools/installer/README.md) — remote landing
+- [Install helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) — `install.sh` and `delegator-delegate.sh`
 - [Install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md) — post-install and delegator scripts
