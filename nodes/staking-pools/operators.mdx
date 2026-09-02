@@ -5,8 +5,6 @@ description: "After install.sh: queue commission and allocation on SmartOperator
 
 After [Install a staking pool](/nodes/staking-pools/installation) you have a pool address. Day-two writes go through that pool's `SmartOperator`. BeraChef treats `SmartOperator` as the validator operator (`beaconDepositContract.getOperator`), so you do not call BeraChef with an EOA the way [Manage Incentives Commission](/nodes/guides/manage-incentives-commission) describes for a normal validator.
 
-If the Foundation issued a delegation, form the handler first: [Form the handler](/nodes/staking-pools/installation#form-the-handler).
-
 ## Set commission
 
 `COMMISSION_MANAGER_ROLE` calls `SmartOperator.queueValCommission(uint96 commission)`. That forwards to `BeraChef.queueValCommission(pubkey, commission)`. BeraChef rejects anything above `MAX_COMMISSION_RATE` (2000 bps, 20%).

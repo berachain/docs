@@ -1,6 +1,6 @@
 ---
 title: "Install a staking pool"
-description: "Deploy and activate a staking pool from a remote machine with install.sh, including Foundation-delegated capital."
+description: "Deploy and activate a staking pool from a remote machine with install.sh."
 ---
 
 `install.sh` deploys and activates one staking pool from `guides/apps/staking-pools/install-helpers/`. Set the environment, run the script once, and read back the pool address and a receipt. The script uses Foundation-delegated funds when a DelegationHandler already exists for your validator. Otherwise it spends **10,000 BERA** plus gas from your funding wallet.
@@ -16,9 +16,9 @@ You need a synced validator, the helper tools, and live endpoints:
 You also need one funding path:
 
 - Self-funded: at least **10,000 BERA** plus gas in the funding wallet
-- Delegated: a DelegationHandler already formed and funded, plus gas (for example, 0.1 BERA) for activation
+- Delegated: a DelegationHandler already formed and funded for your validator, plus gas (for example, 0.1 BERA) for activation
 
-A DelegationHandler is the Foundation contract that holds delegated capital for your validator. The Berachain Foundation creates it when they issue a delegation.
+The Berachain Foundation forms the DelegationHandler when they issue a delegation. That setup is internal; operators run `install.sh` once the handler exists.
 
 ## Clone install-helpers
 
@@ -48,21 +48,6 @@ cp env.sh.template env.sh
 | `SHARES_RECIPIENT` | No       | Shares recipient on the self-funded path.                                                          |
 
 Use `./install.sh --help` for usage.
-
-## Form the handler
-
-Skip this section on the self-funded path.
-
-On the delegated path, form the handler before you run `install.sh`. Run this from `install-helpers/` on a machine with RPC access. It does not have to be the validator host:
-
-```bash
-export EL_RPC_URL=https://bepolia.rpc.berachain.com
-./delegator-delegate.sh
-```
-
-The script deploys and funds the DelegationHandler, runs `delegate()`, and grants `VALIDATOR_ADMIN_ROLE`. It prompts for pubkey, delegate amount, and validator-admin address. Set `VALIDATOR_PUBKEY`, `DELEGATE_AMOUNT_BERA`, and `VALIDATOR_ADMIN` in `env.sh` to pre-fill those prompts, or pass `--pubkey`, `--amount`, and `--validator-admin` to skip them.
-
-The script prints each `cast send` (or runs it when `PRIVATE_KEY` is set). `delegate` and `grantRole` need `DEFAULT_ADMIN_ROLE` on the handler, often the Foundation Safe.
 
 ## Run install.sh
 
