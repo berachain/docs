@@ -30,6 +30,27 @@ The Fusaka upgrade activated several execution-layer features on the Berachain E
 - **Code-size limits (EIP-7954 aligned):** Expanded contract code and initcode size limits (32 KB and 64 KB, respectively), raising the ceiling on what a single contract can deploy.
 - **EIP-7934 & EIP-7825 (Size caps):** Defense-in-depth caps on block size (10 MiB) and per-transaction gas (16.7M gas), sized well above current usage.
 
+## Precompiled Contracts
+
+Berachain runs a lightly modified Reth ([Bera-Reth](https://github.com/berachain/bera-reth)), so all standard Ethereum precompiles are available at their canonical addresses. The set tracks the upgrade timeline above.
+
+| Address       | Precompile                                | Introduced by                                                            |
+| ------------- | ----------------------------------------- | ------------------------------------------------------------------------ |
+| `0x01`        | `ecRecover` (secp256k1 signature recovery) | Frontier                                                                 |
+| `0x02`        | `SHA2-256` hash                            | Frontier                                                                 |
+| `0x03`        | `RIPEMD-160` hash                          | Frontier                                                                 |
+| `0x04`        | Identity (data copy)                       | Frontier                                                                 |
+| `0x05`        | Modular exponentiation                     | Byzantium (repriced and bounded by EIP-7823 / EIP-7883 in Fusaka)        |
+| `0x06`        | BN254 elliptic curve addition              | Byzantium                                                                |
+| `0x07`        | BN254 elliptic curve scalar multiplication | Byzantium                                                                |
+| `0x08`        | BN254 pairing check                        | Byzantium                                                                |
+| `0x09`        | `BLAKE2f` compression                      | Istanbul                                                                 |
+| `0x0a`        | KZG point evaluation (EIP-4844)            | Cancun                                                                   |
+| `0x0b`–`0x11` | BLS12-381 operations (EIP-2537)            | Prague / Pectra                                                          |
+| `0x100`       | P-256 (secp256r1) signature verification (EIP-7951) | Fusaka                                                          |
+
+The P-256 precompile at `0x100` enables native verification of passkey and hardware-key signatures for smart-account flows. Berachain does not add custom precompiles beyond the standard Ethereum set.
+
 ## EIP-7702 — Native Account Abstraction
 
 EIP-7702 allows externally owned accounts to temporarily behave like smart contracts within a single transaction. This unlocks batched calls, gas sponsorship, and other account-abstraction patterns without deploying a separate contract wallet.
