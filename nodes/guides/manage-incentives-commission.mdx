@@ -6,10 +6,27 @@ description: "Set and change the validator incentives commission rate (0–20%) 
 A validator can configure the commission taken on Incentives distributed to its delegators — users who delegate to a validator with \$sWBERA. In this guide, you'll walk through the process of changing a validator's commission.
 
 <Frame>
-  <img
-    src="/images/nodes/berachain-change-validator-commission-rate-process.png"
-    alt="Berachain change validator commission rate process flow"
-  />
+  ```mermaid
+  ---
+title: Change Validator Commission Rate Process
+---
+flowchart LR
+  VAL(["👤 Validator"]):::actor
+  ANY(["👥 Anyone"]):::actor
+  Q["Queued<br/><small>7%</small>"]:::queued
+  R["Ready"]:::ready
+  A["Active<br/><small>New rate 7%</small>"]:::active
+
+  VAL -- "Set rate" --> Q
+  Q -- "⏱️ Wait block delay" --> R
+  ANY -- "Activate" --> R
+  R --> A
+
+  classDef actor fill:none,stroke:none,color:#3d3d3a,font-weight:bold
+  classDef queued fill:#f2b01e,stroke:#ba7517,stroke-width:2px,color:#5a3a10
+  classDef ready fill:#5e2f16,stroke:#3a1c0a,stroke-width:2px,color:#ffffff
+  classDef active fill:#3a9e4e,stroke:#27700a,stroke-width:2px,color:#ffffff
+  ```
 </Frame>
 
 ## Requirements
@@ -28,7 +45,9 @@ When Incentives are activated, all commission rates for Validator Incentives are
 
 For a validator to change their commission rate, they must first queue the change, wait for the `commissionChangeDelay` (which has a maximum of **16,382 blocks**), and then activate the new commission. If a commission rate is already queued, it must be activated before a new commission rate can be proposed.
 
-<Tip>**Anyone** can activate a queued commission rate, not just the validator.</Tip>
+<Tip>
+  **Anyone** can activate a queued commission rate, not just the validator.
+</Tip>
 
 ## Option A - Change validator commission using Foundry
 
@@ -88,8 +107,7 @@ cast call $BERACHEF_CONTRACT_ADDRESS \
 ### Step 4 - Activate queued validator commission rate
 
 <Info>
-  This can only be done after the **`commissionChangeDelay`** has passed, and this **can be executed
-  by anyone**.
+  This can only be done after the **`commissionChangeDelay`** has passed, and this **can be executed by anyone**.
 </Info>
 
 ```bash
