@@ -1,0 +1,86 @@
+---
+title: "Snapshots"
+---
+
+A snapshot lets you set up a new node in hours, not days. Berachain publishes a new snapshot once each day, for Mainnet and for Bepolia.
+
+<Info>
+  Do this step before you start the clients. If you already started to sync, do these steps first:
+  stop both clients, delete the chain data, then restore the snapshot.
+</Info>
+
+## Reth storage v1 vs v2
+
+Bera-Reth, Berachain's execution client, is built on the upstream Reth project. Reth v2 added storage v2, a new on-disk layout that splits data by how the node uses it instead of holding everything in one database.
+
+Storage v2 uses less disk (~20%), performs faster, and is the default for new installations.
+See [Reth's storage documentation](https://reth.rs/run/storage/).
+
+Berachain's official snapshots use storage v2, for both Mainnet and Bepolia. Some community node operators still publish storage v1 snapshots; see [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators).
+
+To check which layout a datadir already uses, run `bera-reth db --datadir <dir> settings`.
+
+<Warning>
+  Bera-Reth records the storage layout when it creates a datadir, and **does not change it later**.
+  Setting or clearing a flag on an existing datadir does not convert it. To move an existing node to
+  storage v2, restore a storage v2 snapshot into a new datadir.
+</Warning>
+
+## Migrating from storage v1 to v2
+
+Restore a storage v2 snapshot into a new, empty datadir: the same procedure as a new node setup. This is the recommended path, and the steps below cover it. 
+
+This procedure only affects the execution layer. Beacon Kit storage format has not changed. Your consensus-layer data and your validator keys are safe during this procedure.
+
+Do these steps to move an existing node to storage v2:
+
+1. Stop the execution client and Beacon-Kit.
+2. Delete or preserve the old Bera-Reth datadir (example: `var/reth/data`). A storage v1 datadir and a storage v2 datadir are not compatible with each other. Keep a copy of the old datadir only if you want a way back to storage v1.
+3. Restore a snapshot into the empty datadir; see [Restoring an official snapshot](#restoring-an-official-snapshot), below.
+4. You do not need to change any configuration or startup options.   Restart the Bera-Reth and Beacon-Kit.
+
+## `bera-reth download` and its options
+
+The `bera-reth download` command restores an execution-layer datadir from a storage v2 snapshot manifest. This is faster than a full network sync.
+
+After it extracts each file, `bera-reth download` checks that file against the manifest's checksum. If a file doesn't match, it deletes the file and downloads it again. A damaged or incomplete download can't leave you with a datadir that looks correct but isn't.
+
+**Required:**
+
+- **`--chain <mainnet|bepolia>`**: chooses the network snapshot to download.
+- **`--datadir <dir>`**: the target directory. Do not point this at a running node's data or storage v1 data.
+- **`--manifest-url <url>`**: the `manifest.json` URL for the snapshot you want. Copy it from the [Mainnet](https://snapshots.berachain.com/) or [Bepolia](https://bepolia.snapshots.berachain.com/) snapshot site. For a third-party snapshot, copy the URL that provider publishes.
+
+**Pick exactly one preset:**
+
+- **`--minimal`**: downloads the smallest working node. It can sync forward from the snapshot's block. Most operators should use this.
+- **`--archive`**: downloads everything in the manifest: full transaction, receipt, and state-history data. This needs far more disk space and download time than `--minimal`.
+- **`--full`**: downloads data matching a full, non-archive node's [default pruning settings](https://reth.rs/run/storage/pruning/). More than `--minimal` and far less than `--archive`.
+
+**Useful flags:**
+
+- **`--force`**: deletes the existing `db`, `rocksdb`, `static_files`, and `reth.toml` under `--datadir` first. Use this when the target directory already holds different or partial data.
+- **`--print-plan-json`**: reads the manifest and prints the download plan, without downloading or writing anything. Safe to run against a real `--datadir`. Use it to check a manifest URL or estimate the download size before you restore.
+- **`--download-concurrency <n>`**: how many downloads run at once (default 8). Raise it on a fast connection; lower it if the source throttles or drops connections.
+
+You can run this command again on a datadir with a partial or damaged restore. This is safe, and often the fix: every file is checked against the manifest's checksum, and anything missing, wrong-sized, or failing that check is deleted and re-downloaded automatically. This check only covers the files in your chosen preset; restoring with `--minimal` doesn't check files outside it.
+
+Copy `<manifest-url>` from the snapshot site for your network before you run these.
+
+## Restoring an official snapshot
+
+```bash
+# Restore a pruned Bepolia node
+bera-reth download --chain bepolia --datadir var/reth/data \
+  --manifest-url <manifest-url> --minimal
+
+# Restore a pruned Mainnet node
+bera-reth download --chain mainnet --datadir var/reth/data \
+  --manifest-url <manifest-url> --minimal
+
+# Dry run - verifies snapshot files on disk
+bera-reth download --chain bepolia --datadir var/reth/data \
+  --manifest-url <manifest-url> --minimal --print-plan-json
+```
+
+
