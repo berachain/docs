@@ -72,6 +72,7 @@ testnet
 Ethereum
 RPC
 EVM
+eRPC
 consensus
 faucet
 indexer
