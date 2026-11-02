@@ -31,11 +31,15 @@ Your rewards automatically compound without any manual intervention. No claiming
 
 ### 7-Day Unbonding Period
 
-To convert your \$sWBERA tokens back to BERA or WBERA, you'll need to unstake through the Staking Vault. The unstaking process has a **7-day unbonding period**:
+To convert your \$sWBERA tokens back to WBERA, you'll need to unstake through the Staking Vault. The unstaking process has a **7-day unbonding period**:
 
 1. **Initiate withdrawal**: Queue a withdrawal request through the [Staking Vault interface](https://hub.berachain.com/stake/)
 2. **Wait 7 days**: Your withdrawal request enters a 7-day cooldown period
 3. **Complete withdrawal**: After the unbonding period ends, return to the interface to complete the withdrawal and receive your WBERA tokens
+
+Nothing arrives in your wallet until you complete step 3. Queuing a withdrawal alone does not transfer any tokens.
+
+The completed withdrawal pays out **WBERA**, not native BERA. Look for WBERA in your wallet. To convert WBERA to native BERA at 1:1, unwrap it by calling `withdraw()` on the [WBERA contract](/build/getting-started/deployed-contracts) (`0x6969696969696969696969696969696969696969`).
 
 ### Important Considerations
 
@@ -44,4 +48,4 @@ To convert your \$sWBERA tokens back to BERA or WBERA, you'll need to unstake th
 - **Multiple requests**: You can have multiple withdrawal requests active simultaneously (each represented as an ERC-721 NFT).
 - **Cancellation**: Withdrawal requests can be cancelled at any time. On cancellation, new shares are minted at the current exchange rate, which may differ from the original rate if the vault compounded.
 
-For detailed instructions on the unstaking process, see the [BERA token page](/general/tokens/bera).
+For how staking BERA or WBERA into the vault works, see [Stake BERA for sWBERA](/general/tokens/bera#stake-bera-for-swbera).
