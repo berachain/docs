@@ -41,7 +41,7 @@
               "general/proof-of-liquidity/block-rewards",
               "general/proof-of-liquidity/dedicated-emission-stream",
               "general/proof-of-liquidity/changelog"
-            ] 
+            ]
           },
           {
             "group": "Tokens",
@@ -291,17 +291,7 @@
               "nodes/operations/quickstart",
               "nodes/operations/self-hosted-rpc",
               "nodes/guides/local-devnet-docker",
-              "nodes/guides/local-devnet-kurtosis",
-              {
-                "group": "Staking Pools",
-                "root": "nodes/staking-pools/overview",
-                "pages": [
-                  "nodes/staking-pools/installation",
-                  "nodes/staking-pools/operators",
-                  "nodes/staking-pools/delegators",
-                  "nodes/staking-pools/contracts"
-                ]
-              }
+              "nodes/guides/local-devnet-kurtosis"
             ]
           },
           {
@@ -428,23 +418,28 @@
     },
     {
       "source": "/cn/validators/staking-pools/overview",
-      "destination": "/validators/staking-pools/overview"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/cn/validators/staking-pools/installation",
-      "destination": "/validators/staking-pools/installation"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/cn/validators/staking-pools/operators",
-      "destination": "/validators/staking-pools/operators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/cn/validators/staking-pools/delegators",
-      "destination": "/validators/staking-pools/delegators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/cn/validators/staking-pools/contracts",
-      "destination": "/validators/staking-pools/contracts"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/ko/validators/operations/self-hosted-rpc",
@@ -452,23 +447,28 @@
     },
     {
       "source": "/ko/validators/staking-pools/overview",
-      "destination": "/validators/staking-pools/overview"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/ko/validators/staking-pools/installation",
-      "destination": "/validators/staking-pools/installation"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/ko/validators/staking-pools/operators",
-      "destination": "/validators/staking-pools/operators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/ko/validators/staking-pools/delegators",
-      "destination": "/validators/staking-pools/delegators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/ko/validators/staking-pools/contracts",
-      "destination": "/validators/staking-pools/contracts"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/vi/validators/operations/self-hosted-rpc",
@@ -476,23 +476,28 @@
     },
     {
       "source": "/vi/validators/staking-pools/overview",
-      "destination": "/validators/staking-pools/overview"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/vi/validators/staking-pools/installation",
-      "destination": "/validators/staking-pools/installation"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/vi/validators/staking-pools/operators",
-      "destination": "/validators/staking-pools/operators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/vi/validators/staking-pools/delegators",
-      "destination": "/validators/staking-pools/delegators"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/vi/validators/staking-pools/contracts",
-      "destination": "/validators/staking-pools/contracts"
+      "destination": "/nodes/overview/index",
+      "permanent": true
     },
     {
       "source": "/validators/:slug*",
@@ -521,7 +526,7 @@
     },
     {
       "source": "/nodes/staking-pools/contracts/:slug*",
-      "destination": "/nodes/staking-pools/contracts",
+      "destination": "/nodes/overview/index",
       "permanent": true
     },
     {
@@ -1016,7 +1021,7 @@
     },
     {
       "source": "/nodes/staking-pools",
-      "destination": "/nodes/staking-pools/overview",
+      "destination": "/nodes/overview/index",
       "permanent": true
     },
     {
@@ -1367,6 +1372,61 @@
     {
       "source": "/nodes/operations/osaka1",
       "destination": "/build/protocol/overview#upgrade-timeline",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/overview",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/installation",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/operators",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/delegators",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/nodes/staking-pools/contracts",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools/overview",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools/installation",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools/operators",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools/delegators",
+      "destination": "/nodes/overview/index",
+      "permanent": true
+    },
+    {
+      "source": "/validators/staking-pools/contracts",
+      "destination": "/nodes/overview/index",
       "permanent": true
     }
   ]

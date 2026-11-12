@@ -200,16 +200,11 @@ function renderGettingStartedSnippet() {
   const tokenItems = Object.values(contracts.tokens);
   const governanceItems = Object.values(contracts.governance ?? {});
   const otherItems = Object.values(contracts.other);
-  const stakingPoolItems = Object.values(contracts.stakingPools);
   const linkedColumns = { combineNameAddress: true, includeResources: true };
   const mainSections = [
     renderAddressCategory("Proof of Liquidity", polItems, "berachainMainnet", linkedColumns),
     renderAddressCategory("Tokens", tokenItems, "berachainMainnet", linkedColumns),
     renderAddressCategory("Governance", governanceItems, "berachainMainnet", linkedColumns),
-    renderAddressCategory("Staking pools", stakingPoolItems, "berachainMainnet", {
-      ...linkedColumns,
-      abiLabel: "ABI JSON"
-    }),
     renderAddressCategory("Other", otherItems, "berachainMainnet", linkedColumns)
   ]
     .filter(Boolean)
@@ -218,10 +213,6 @@ function renderGettingStartedSnippet() {
     renderAddressCategory("Proof of Liquidity", polItems, "berachainBepolia", linkedColumns),
     renderAddressCategory("Tokens", tokenItems, "berachainBepolia", linkedColumns),
     renderAddressCategory("Governance", governanceItems, "berachainBepolia", linkedColumns),
-    renderAddressCategory("Staking pools", stakingPoolItems, "berachainBepolia", {
-      ...linkedColumns,
-      abiLabel: "ABI JSON"
-    }),
     renderAddressCategory("Other", otherItems, "berachainBepolia", linkedColumns)
   ]
     .filter(Boolean)
@@ -318,40 +309,13 @@ ${rows}
 `;
 }
 
-function renderStakingPoolsSnippet() {
-  const items = Object.values(contracts.stakingPools);
-  const mainSection = hasAnyDeployment(items, "berachainMainnet")
-    ? `#### Mainnet
-
-<CardGroup cols={2}>
-${items
-  .map((item) => contractCard(item, "berachainMainnet", "ABI JSON"))
-  .filter(Boolean)
-  .join("\n")}
-</CardGroup>`
-    : "";
-  const bepSection = hasAnyDeployment(items, "berachainBepolia")
-    ? `#### Bepolia
-
-<CardGroup cols={2}>
-${items
-  .map((item) => contractCard(item, "berachainBepolia", "ABI JSON"))
-  .filter(Boolean)
-  .join("\n")}
-</CardGroup>`
-    : "";
-
-  return [mainSection, bepSection].filter(Boolean).join("\n\n");
-}
-
 function renderGettingStartedPage() {
   return `---
 title: "Deployed Contract Addresses"
-description: "Berachain core and staking-pool contract addresses by network."
+description: "Berachain core contract addresses by network."
 ---
 
 import CoreContractsTable from "/snippets/contracts/generated/core-contracts-table.mdx";
-import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
 
 For **BEX** (DEX) addresses, see [BEX deployed contracts](/build/bex/deployed-contracts). For **Bend** (lending) addresses, see [Bend deployed contracts](/build/bend/deployed-contracts).
 
@@ -359,7 +323,6 @@ All contracts are verified at the [block explorer](https://berascan.com).
 
 - ABI files: [berachain/abis](https://github.com/berachain/abis).
 - Core protocol: [berachain/contracts](https://github.com/berachain/contracts).
-- Staking pools: [berachain/contracts-staking-pools](https://github.com/berachain/contracts-staking-pools).
 
 <Info>
   All audit reports are publicly available on
@@ -369,12 +332,6 @@ All contracts are verified at the [block explorer](https://berascan.com).
 </Info>
 
 <CoreContractsTable />
-
-## Staking pool contracts
-
-Singleton addresses are listed below. See the [Staking pools overview](/nodes/staking-pools/overview) and [staking pool contracts](/nodes/staking-pools/contracts) reference.
-
-<StakingPoolSingletonsTable />
 `;
 }
 
@@ -400,42 +357,6 @@ For more information, see the [Balancer disclosure](https://forum.balancer.fi/t/
 The following is a list of contract addresses for interacting with Berachain BEX.
 
 <BexContractsTable />
-`;
-}
-
-function renderStakingPoolsPage() {
-  return `---
-title: "Staking Pool Contracts"
-description: "Addresses and ABIs for StakingPoolContractsFactory, DelegationHandlerFactory, WithdrawalVault, and per-pool proxies (StakingPool, SmartOperator, etc.)."
----
-
-import StakingPoolSingletonsTable from "/snippets/contracts/generated/staking-pools-singletons-table.mdx";
-
-This reference provides contract addresses and links to detailed documentation for each contract in the staking pools system. For an overview of how the contracts work together, see the [Staking Pools Overview](/nodes/staking-pools/overview).
-
-## Contract addresses
-
-### Singleton contracts
-
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
-
-<StakingPoolSingletonsTable />
-
-### Deployed contracts (per pool)
-
-When you deploy a staking pool through the StakingPoolContractsFactory, the factory creates proxy contracts for your validator. These proxy contracts are what you and your stakers interact with directly. Each validator receives unique proxy addresses for these contracts when deploying their staking pool.
-
-The factory returns these proxy addresses when you call \`deployStakingPoolContracts\`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
-
-**Proxy contracts deployed with your pool:**
-
-- **StakingPool**: Main staking functionality and staker interactions. This is the contract address your stakers use to deposit BERA and receive stBERA shares.
-- **SmartOperator**: Validator operations and Proof of Liquidity integration.
-- **IncentiveCollector**: Incentive token collection and conversion. Handles the incentive auction mechanism where accumulated tokens can be claimed.
-- **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
-- **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
-
-For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
 `;
 }
 
@@ -487,13 +408,11 @@ async function generate() {
   await write(`${generatedSnippetDir}/bex-contracts-table.mdx`, renderBexSnippet());
   await write(`${generatedSnippetDir}/bend-contracts-table.mdx`, renderBendContractsSnippet());
   await write(`${generatedSnippetDir}/bend-markets-table.mdx`, renderBendMarketsSnippet());
-  await write(`${generatedSnippetDir}/staking-pools-singletons-table.mdx`, renderStakingPoolsSnippet());
 
   await write("build/getting-started/deployed-contracts.mdx", renderGettingStartedPage());
   await write("build/bex/deployed-contracts.mdx", renderBexDeployedContractsPage());
   await write("build/bend/deployed-contracts.mdx", renderBendContractsPage());
   await write("build/bend/deployed-markets.mdx", renderBendMarketsPage());
-  await write("nodes/staking-pools/contracts.mdx", renderStakingPoolsPage());
 
   if (!checkMode) {
     console.log(`contracts-generate: wrote ${wroteCount} file(s), ${unchangedCount} unchanged.`);

@@ -40,9 +40,6 @@ BalancerRelayer
 BalancerQueries
 ProtocolFeesWithdrawer
 ProtocolFeePercentagesProvider
-StakingPoolContractsFactory
-WithdrawalVault
-SmartOperator
 Create2
 Multicall3
 Permit2
