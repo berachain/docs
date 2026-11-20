@@ -5,7 +5,9 @@ description: "Use Foundation-delegated capital to run a staking pool: delegated 
 
 <Warning>
   **This guide no longer works.** New staking pools can no longer be created or activated: the
-  factory reverts with `StakingPoolsDisabled()`, and the helper scripts were removed from the guides
+  factory reverts with `StakingPoolsDisabled()`, and so does
+  `DelegationHandler.createStakingPoolWithDelegatedFunds`, since it calls the factory. Delegated
+  funds stay recoverable via `undelegate` and `withdraw`. The helper scripts were removed from the guides
   repository (archived on the
   [`archive/staking-pools`](https://github.com/berachain/guides/tree/archive/staking-pools/apps/staking-pools)
   branch). It is kept for reference only.
