@@ -3,6 +3,12 @@ title: "Staking Pools Overview"
 description: "Validator-operated liquid staking: stBERA, contract architecture, security, staker experience, and PoL integration."
 ---
 
+<Warning>
+  **New staking pools can no longer be created.** The `StakingPoolContractsFactory` has been
+  upgraded so that `deployStakingPoolContracts` and `activateStakingPool` revert with
+  `StakingPoolsDisabled()`. Existing pools keep working, including staker withdrawals.
+</Warning>
+
 Staking Pools enable validators to offer liquid staking services to their communities. As a validator, you can build and monetize your own community of stakers, earning commission on rewards. Your stakers deposit BERA through smart contracts and receive liquid shares (stBERA) that automatically grow in value as rewards accumulate.
 
 ## What are staking pools?
@@ -61,7 +67,7 @@ When stakers interact with your staking pool, they deposit BERA and immediately 
 
 ## Validator operations
 
-You deploy a staking pool through the factory contract, which creates all necessary contracts and registers your validator with the consensus layer. You configure commission rates (up to 20% of staker rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on staker rewards, allowing you to focus on community building rather than manual reward management.
+Staking pools were deployed through the factory contract, which created all necessary contracts and registered the validator with the consensus layer; this is now disabled. You configure commission rates (up to 20% of staker rewards) and can direct Proof of Liquidity incentives to specific applications. Commission is collected automatically on staker rewards, allowing you to focus on community building rather than manual reward management.
 
 ## Integration with Proof of Liquidity
 
@@ -69,7 +75,7 @@ Staking pools integrate with Berachain's Proof of Liquidity system. Pool reward 
 
 ## Provided tools
 
-Berachain provides tools to help you operate your staking pool. A React-based **example frontend template** provides a starting point for building your staking interface. The template demonstrates how stakers can connect wallets, deposit BERA, view positions, and request withdrawals. See the [Building your front-end](/nodes/staking-pools/operators#building-your-front-end) section in the operator guide for requirements and template usage. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. An interactive Python CLI tool is available for managing SmartOperator contracts. These tools are available in the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools), with detailed documentation in the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
+Berachain provides tools to help you operate your staking pool. A React-based **example frontend template** provides a starting point for building your staking interface. The template demonstrates how stakers can connect wallets, deposit BERA, view positions, and request withdrawals. See the [Building your front-end](/nodes/staking-pools/operators#building-your-front-end) section in the operator guide for requirements and template usage. Bash scripts automate deployment and management operations, generating ready-to-review `cast` commands for safe execution. An interactive Python CLI tool is available for managing SmartOperator contracts. These tools are no longer maintained; the last version is kept on the `archive/staking-pools` branch of the [Berachain guides repository](https://github.com/berachain/guides/tree/archive/staking-pools/apps/staking-pools), with detailed documentation in the [install-helpers README](https://github.com/berachain/guides/blob/archive/staking-pools/apps/staking-pools/install-helpers/README.md).
 
 ## Getting started
 

@@ -417,7 +417,7 @@ This reference provides contract addresses and links to detailed documentation f
 
 ### Singleton contracts
 
-Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** is the entry point for deploying a staking pool: you call it to create and register your pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
+Singleton contracts are deployed once and shared across all staking pools. The **StakingPoolContractsFactory** was the entry point for deploying a staking pool; creating and activating new pools is now disabled (\`StakingPoolsDisabled()\`), while its getters still return each pool's contracts. The **DelegationHandlerFactory** deploys per-validator delegation handler proxies when using foundation delegation. The other singletons below are shared infrastructure.
 
 <StakingPoolSingletonsTable />
 
@@ -425,7 +425,7 @@ Singleton contracts are deployed once and shared across all staking pools. The *
 
 When you deploy a staking pool through the StakingPoolContractsFactory, the factory creates proxy contracts for your validator. These proxy contracts are what you and your stakers interact with directly. Each validator receives unique proxy addresses for these contracts when deploying their staking pool.
 
-The factory returns these proxy addresses when you call \`deployStakingPoolContracts\`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
+The factory returned these proxy addresses from \`deployStakingPoolContracts\`; you can still look them up with \`getCoreContracts(pubkey)\`. Store these addresses for your operations and provide the StakingPool address to your stakers for deposits.
 
 **Proxy contracts deployed with your pool:**
 
@@ -435,7 +435,7 @@ The factory returns these proxy addresses when you call \`deployStakingPoolContr
 - **StakingRewardsVault**: Reward collection and automatic reinvestment. Automatically compounds rewards from the consensus layer.
 - **DelegationHandler**: Delegation handling for capital providers. Only deployed if you're using delegated funds from the Berachain Foundation.
 
-For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/main/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/main/apps/staking-pools/install-helpers/README.md).
+For detailed technical documentation of each contract's functions and behavior, see the [Berachain guides repository](https://github.com/berachain/guides/tree/archive/staking-pools/apps/staking-pools) and the [install-helpers README](https://github.com/berachain/guides/blob/archive/staking-pools/apps/staking-pools/install-helpers/README.md).
 `;
 }
 
