@@ -140,7 +140,7 @@ Published POL contract addresses flow through four layers (field names must matc
 3. `data/contracts.json` — addresses shown on the docs site
 4. Generated pages/snippets from `make contracts-generate`
 
-Only PoL-owned fields belong under `pol` in `data/contracts.json`. Do not place staking-pool singletons in this section.
+Only PoL-owned fields belong under `pol` in `data/contracts.json`.
 
 Do not manually edit generated canonical address pages. After changing `data/contracts.json`, regenerate:
 
@@ -154,12 +154,10 @@ This regenerates exactly these files:
 - `snippets/contracts/generated/bex-contracts-table.mdx`
 - `snippets/contracts/generated/bend-contracts-table.mdx`
 - `snippets/contracts/generated/bend-markets-table.mdx`
-- `snippets/contracts/generated/staking-pools-singletons-table.mdx`
 - `build/getting-started/deployed-contracts.mdx`
 - `build/bex/deployed-contracts.mdx`
 - `build/bend/deployed-contracts.mdx`
 - `build/bend/deployed-markets.mdx`
-- `nodes/staking-pools/contracts.mdx`
 
 Check in generated outputs with your `data/contracts.json` changes in the same PR.
 
@@ -191,16 +189,6 @@ The Makefile finds `contracts-internal` beside the primary docs checkout, includ
 ```bash
 make check-pol-addresses POL_ADDRESSES_SOL=/path/to/contracts-internal/script/pol/POLAddresses.sol
 ```
-
-#### Staking pool addresses
-
-Staking pool singleton addresses flow through three layers:
-
-1. `contracts-staking-pools/script/StakingPoolAddresses.sol`
-2. `data/contracts.json` under `stakingPools`
-3. `nodes/staking-pools/contracts.mdx` and the generated snippets listed above
-
-Only staking-pool singleton fields belong under `stakingPools` in `data/contracts.json`. There is no automated source-to-data verifier for this pipeline. Compare each published mainnet and testnet address to the same-named field in `StakingPoolAddresses.sol`, confirm the corresponding ABI exists in `berachain/abis`, run `make contracts-generate`, run `node scripts/contracts/generate-pages.mjs --check`, and inspect the generated diff.
 
 #### Other contract families
 
