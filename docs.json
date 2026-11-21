@@ -289,6 +289,7 @@
             "group": "Setup & Deployment",
             "pages": [
               "nodes/operations/quickstart",
+              "nodes/operations/snapshots",
               "nodes/operations/self-hosted-rpc",
               "nodes/guides/local-devnet-docker",
               "nodes/guides/local-devnet-kurtosis",
