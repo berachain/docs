@@ -560,12 +560,22 @@
       "permanent": true
     },
     {
+      "source": "/learn/what-is-berachain",
+      "destination": "/general/introduction/what-is-berachain",
+      "permanent": true
+    },
+    {
       "source": "/learn/what-is-beaconkit",
       "destination": "/nodes/beaconkit/overview",
       "permanent": true
     },
     {
       "source": "/learn/connect-to-berachain",
+      "destination": "/general/introduction/connect-to-berachain",
+      "permanent": true
+    },
+    {
+      "source": "/learn/how-to-connect-a-wallet-with-berachain",
       "destination": "/general/introduction/connect-to-berachain",
       "permanent": true
     },
@@ -710,6 +720,11 @@
       "permanent": true
     },
     {
+      "source": "/learn/dapps/bend",
+      "destination": "/bend/learn/overview",
+      "permanent": true
+    },
+    {
       "source": "/learn/dapps/bridge",
       "destination": "/general/introduction/connect-to-berachain",
       "permanent": true
@@ -752,6 +767,11 @@
     {
       "source": "/developers/deployed-contracts",
       "destination": "/build/getting-started/deployed-contracts",
+      "permanent": true
+    },
+    {
+      "source": "/developers/network-configurations",
+      "destination": "/general/introduction/connect-to-berachain",
       "permanent": true
     },
     {
