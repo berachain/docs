@@ -18,7 +18,7 @@ We welcome contributions from the community. Whether you're fixing a typo, clari
 - **BEX**: deprecated exchange documentation
 - **Bend**: lending concepts and guides
 - **Build**: developer guides, integrations, and contract reference
-- **Nodes**: node architecture, setup, operations, staking pools, and Beacon Kit reference
+- **Nodes**: node architecture, setup, operations, and Beacon Kit reference
 
 Content is in MDX. `docs.json` defines navigation and branding. `STRUCTURE.md` defines content placement.
 
