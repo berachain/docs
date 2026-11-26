@@ -122,6 +122,7 @@ Kurtosis
 Despread
 Nirvana
 node101
+PublicNode
 Spectrum
 Uniblock
 
