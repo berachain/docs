@@ -148,7 +148,7 @@ Reward Vaults support **incentive tokens**: additional tokens protocols attach s
 ### How incentive tokens work
 
 1. **Whitelisting**: incentive tokens are allowed through governance for the vault (see [Incentive Marketplace](/general/proof-of-liquidity/incentives)).
-2. **Rate setting**: token managers set incentive rates per unit of allocated emission (`incentiveTokens = emissionAllocatedToVault * incentiveRate`).
+2. **Rate setting**: token managers set incentive rates per unit of allocated emission (`incentiveTokens = emissionAllocatedToVault * incentiveRate`). Every rate must clear a minimum worth 75% of the emission it buys (see [Minimum incentive rate](/general/proof-of-liquidity/incentives#minimum-incentive-rate)).
 3. **Deposits**: protocols fund incentive inventory into the vault system through the token manager flow.
 4. **Distribution**: as \$WBERA emissions are allocated to the vault, funded incentive tokens follow the PoL split: validator commission to the validator operator and redirected incentives to the incentive tokens collector for [auction settlement](/general/proof-of-liquidity/incentives#incentive-fee-settlement).
 

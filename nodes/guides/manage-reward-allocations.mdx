@@ -23,18 +23,23 @@ Each validator can customize how their rewards are distributed across different 
 - Reward allocations must total 100% (10000 basis points)
 - Only whitelisted vaults can receive allocations
 - Changes require queuing and a delay period before activation
-- Current delay: **500 blocks**
-- If you keep the same percentages, you still need to **queue and activate** a new allocation before the **inactivity window** passes (about **seven days** on mainnet today), or routing may switch to baseline
+- Current delay: **450 blocks**
+- If you keep the same percentages, you still need to **queue and activate** a new allocation before the **inactivity window** passes (about **one day** on mainnet today), or routing may switch to baseline
+- Every vault in your allocation needs an **active incentive**, or routing switches to baseline while any of them has none
 
 ## Baseline allocation, default fallback, and inactivity
 
 What you configure in this guide is your **custom** allocation on BeraChef. At distribution time, `getActiveRewardAllocation` resolves routing in layers:
 
-1. **Baseline allocation** — Held in `RewardAllocatorFactory` and updated by `ALLOCATION_SETTER_ROLE`. This is the network **baseline cutting board**: a fallback for validators who do not self-manage. It applies when you have **never** activated an allocation, or when your active allocation is **inactive** (below).
+1. **Baseline allocation** — Held in `RewardAllocatorFactory` and updated by `ALLOCATION_SETTER_ROLE`. This is the network **baseline cutting board**: a fallback for validators who do not self-manage. It applies when you have **never** activated an allocation, when your active allocation is **inactive**, or when a vault in it has **no active incentive** (both below).
 
 2. **Default reward allocation on BeraChef** — Set by governance on `BeraChef`. If baseline weights are no longer valid (for example a vault is no longer whitelisted), routing falls back to this default.
 
-**Inactivity:** An allocation is inactive when `block.number` is greater than its `startBlock` plus `rewardAllocationInactivityBlockSpan`. On Berachain mainnet today that span is **302,400 blocks** (about **seven days** at ~2 second blocks). Activating a queued allocation advances `startBlock` and resets the window. Some validators may be exempt on-chain (`isValExemptedFromInactivity`); exemptions are operational exceptions.
+**Inactivity:** An allocation is inactive when `block.number` is greater than its `startBlock` plus `rewardAllocationInactivityBlockSpan`. On Berachain mainnet today that span is **43,200 blocks** (about **one day** at ~2 second blocks). Activating a queued allocation advances `startBlock` and resets the window.
+
+**Active incentives:** Your allocation is also replaced by the baseline while **any** vault in it has no active incentive, meaning none of its whitelisted incentive tokens has a remaining balance. This is checked at every distribution, so your allocation is used again as soon as that vault is funded; you do not need to re-queue it. Check a vault with `isActiveIncentiveVault(address)` on BeraChef, and keep your allocation to vaults with funded incentives.
+
+Some validators may be exempt on-chain from both rules (`isValidatorExemptFromBaselineOverride`); exemptions are operational exceptions.
 
 To keep your chosen vault weights, **re-queue and activate** before the window elapses—even if the percentages are unchanged.
 
@@ -71,7 +76,7 @@ cast send 0xdf960E8F3F19C481dDE769edEDD439ea1a63426a \
 ```
 
 <Info>
-  Your `START_BLOCK` must be greater than the current block number + the block delay (500 blocks).
+  Your `START_BLOCK` must be greater than the current block number + the block delay (450 blocks).
 </Info>
 
 ### Step 3 - Check your queued allocation

@@ -41,7 +41,17 @@ Incentives use an exchange rate per unit of allocated emission:
 
 `incentiveTokens = emissionAllocatedToVault * incentiveRate`
 
-Rates can increase when the token manager deposits more inventory. Decreasing rates is restricted until existing inventory is exhausted.
+The token manager sets the rate when adding incentives (`addIncentive`) or on its own with `setIncentiveRate`. A rate can always be increased. It can only be decreased once the existing inventory is exhausted.
+
+### Minimum incentive rate
+
+Every rate must be worth at least **75% of the value of the \$WBERA emission it buys**. The Reward Vault computes this floor from the prices of \$WBERA and the incentive token, read from the price oracle set on the Reward Vault Factory. A rate below the floor is rejected, and so is any rate for a token without a usable price: if the oracle has no price for the token or for \$WBERA, or either price is older than 24 hours, the token cannot be funded until a price is available again. Without a usable \$WBERA price, or with no oracle set on the factory, no incentive token can be funded. `getIncentiveRateFloor(token)` on the Reward Vault returns the current floor.
+
+Each deposit must also be at least as large as the rate, so a top-up always covers at least one whole \$WBERA of emission.
+
+### Validator allocations
+
+Validators can only keep a custom allocation while every vault in it has an active incentive. See [Manage reward allocations](/nodes/guides/manage-reward-allocations#baseline-allocation-default-fallback-and-inactivity).
 
 ## Commission and payouts
 
