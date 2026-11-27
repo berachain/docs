@@ -192,11 +192,11 @@ Snapshots can be applied to both the consensus (beacond) and execution clients. 
 
 ### 6a - Obtain snapshots
 
-Berachain and the community offer snapshots for Mainnet and Bepolia. You can download snapshots at the following links.
+Berachain provides snapshots for Mainnet and Bepolia.
 
-- [Awesome Berachain Validators](https://github.com/chuck-bear/awesome-berachain-validators) is a community-maintained list; all of them have great download speed.
+- For direct downloads of the official Bera-Reth and Beacon Kit archives, see [Download archive snapshots](/nodes/operations/snapshots).
 
-- Or, use the `fetch-berachain-snapshot.js` script — already on disk from Step 1 — downloads the latest official Berachain snapshots for both the beacon-kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
+- The `fetch-berachain-snapshot.js` script from Step 1 downloads the latest official Berachain snapshots for both the Beacon Kit consensus layer and the execution layer. It reads the snapshot index at `snapshots.berachain.com`, picks the most recent files matching your options, and saves them to a `downloads/` directory.
 
 ```bash
 # FROM: ~/beranode (or any directory — use -o to change download folder)

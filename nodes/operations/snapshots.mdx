@@ -1,0 +1,48 @@
+---
+title: "Download archive snapshots"
+description: "Download and verify Bera-Reth execution and Beacon Kit consensus archives for Mainnet and Bepolia."
+---
+
+Download Berachain's archive snapshots directly from public Hetzner Object Storage. Choose the archive for your network and client.
+
+| Network | Execution                                                                                                   | Consensus                                                                                                       |
+| ------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Mainnet | [Bera-Reth archive](https://bera-snapshots.fsn1.your-objectstorage.com/mainnet-reth-archive-latest.tar.lz4) | [Beacon Kit archive](https://bera-snapshots.fsn1.your-objectstorage.com/mainnet-beacond-archive-latest.tar.lz4) |
+| Bepolia | [Bera-Reth archive](https://bera-snapshots.fsn1.your-objectstorage.com/bepolia-reth-archive-latest.tar.lz4) | [Beacon Kit archive](https://bera-snapshots.fsn1.your-objectstorage.com/bepolia-beacond-archive-latest.tar.lz4) |
+
+## Download an archive
+
+On Ubuntu or Debian, install `aria2c`:
+
+```bash
+sudo apt install aria2
+```
+
+From your download directory, set `SNAPSHOT_URL` to any of the four URLs above. This example uses the Mainnet execution archive.
+
+```bash
+SNAPSHOT_URL='https://bera-snapshots.fsn1.your-objectstorage.com/mainnet-reth-archive-latest.tar.lz4'
+curl -fsSI "$SNAPSHOT_URL"
+```
+
+Record the `ETag` and `x-amz-meta-md5` headers before downloading. The `ETag` identifies the object for resuming, and `x-amz-meta-md5` gives you the checksum to verify after downloading.
+
+```bash
+aria2c -c -x8 -s8 -k32M --file-allocation=none "$SNAPSHOT_URL"
+```
+
+Start with eight connections. To test more parallelism, use `-x16 -s16`, the `aria2c` limit for one download from a single server. Compare the reported `DL` rate once it stabilizes and use the faster setting for your connection.
+
+If the download is interrupted, check the `ETag` again with the same `curl` command. If it matches the recorded value, rerun `aria2c` with the same URL from the same directory. Keep the partial archive and its `.aria2` control file together. If the `ETag` has changed, start in an empty directory and record the new headers before downloading again.
+
+## Verify the archive before extracting
+
+Run `md5sum` on the downloaded archive.
+
+```bash
+md5sum "${SNAPSHOT_URL##*/}"
+```
+
+Extract the archive only if the checksum matches the `x-amz-meta-md5` value you recorded before downloading.
+
+If you’re restoring both layers, verify that the snapshots are for the same network and that the execution archive contains the block referenced by the consensus snapshot. Their `latest` URLs can update independently.
