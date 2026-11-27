@@ -117,6 +117,10 @@ Use these values for the testnet. Add in one click, or copy from the table:
 | Berascan | [https://testnet.berascan.com](https://testnet.berascan.com) |
 | BUSD Swap | [https://bepolia.busd.berachain.com](https://bepolia.busd.berachain.com) |
 
+<Note>
+The public RPC endpoints are shared and rate limited. If your app receives `429` responses or needs high request volume, see [Using RPC efficiently](/nodes/operations/self-hosted-rpc#using-rpc-efficiently). That section covers exponential backoff with jitter, honoring `Retry-After`, and when to use a paid or self-hosted RPC.
+</Note>
+
 ## Supported Wallets
 
 Any [EVM-based wallet](https://ethereum.org/en/wallets/find-wallet/) that supports custom RPCs works with Berachain. Examples:
