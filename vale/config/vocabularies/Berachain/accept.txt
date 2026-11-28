@@ -40,9 +40,6 @@ BalancerRelayer
 BalancerQueries
 ProtocolFeesWithdrawer
 ProtocolFeePercentagesProvider
-StakingPoolContractsFactory
-WithdrawalVault
-SmartOperator
 Create2
 Multicall3
 Permit2
@@ -125,6 +122,7 @@ Kurtosis
 Despread
 Nirvana
 node101
+PublicNode
 Spectrum
 Uniblock
 
