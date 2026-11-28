@@ -1,4 +1,5 @@
 Berachain
+Goldsky
 berachain
 BEX
 BGT
